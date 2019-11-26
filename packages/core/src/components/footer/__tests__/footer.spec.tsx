@@ -1,11 +1,11 @@
 import React from 'react';
 import '@testing-library/jest-dom/extend-expect';
 import { render } from '@testing-library/react';
-import { Header } from '../';
+import { Footer } from '../';
 
-describe('Header', () => {
+describe('Footer', () => {
   test('it renders correctly', () => {
-    const { getByText } = render(<Header />);
-    expect(getByText('header')).toBeInTheDocument();
+    const { getByText } = render(<Footer />);
+    expect(getByText('footer')).toBeInTheDocument();
   });
 });
