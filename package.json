@@ -1,0 +1,10 @@
+{
+  "name": "react-components",
+  "version": "1.0.0",
+  "main": "index.js",
+  "license": "MIT",
+  "devDependencies": {
+    "lerna": "^3.19.0",
+    "lerna-changelog": "^0.8.3"
+  }
+}

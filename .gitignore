@@ -1,0 +1,16 @@
+# General ignores
+node_modules
+*.log
+.changelog
+.vscode
+.netlify
+
+# Package specific
+packages/**/dist
+packages/**/yarn.lock
+package-lock.json
+
+# Demo specific
+demo/**/*
+!demo/index.html
+!demo/index.svg
