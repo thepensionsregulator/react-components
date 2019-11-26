@@ -1,16 +1,24 @@
-# General ignores
+# macOS
+.DS_Store
+
+# IDEA
+*.iml
+*.ipr
+*.iws
+.idea/
+
+# Node
 node_modules
-*.log
-.changelog
-.vscode
-.netlify
-
-# Package specific
-packages/**/dist
-packages/**/yarn.lock
+npm-debug.log*
+lerna-debug.log
 package-lock.json
+yarn-error.log
 
-# Demo specific
-demo/**/*
-!demo/index.html
-!demo/index.svg
+# TPR
+build
+dist
+lib
+generated
+coverage
+/docs
+docs-static/**/*.d.ts
