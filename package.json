@@ -1,5 +1,5 @@
 {
-  "name": "tpr-monorepo",
+  "name": "@tpr/monorepo",
   "license": "MIT",
   "scripts": {
     "postinstall": "lerna exec -- npm install --package-lock=false && lerna run prepare",
@@ -14,7 +14,7 @@
     "clean": "find . -name \"node_modules\" -exec rm -rf '{}' + && find . -name \"lib\" -exec rm -rf '{}' +"
   },
   "dependencies": {
-    "core": "file:packages/core"
+    "core": "file:packages/layout"
   },
   "devDependencies": {
     "@types/jest": "^24.0.23",

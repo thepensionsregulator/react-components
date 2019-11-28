@@ -1,6 +1,6 @@
 {
-  "name": "@tpr/core",
-  "version": "0.0.1-alpha.1",
+  "name": "@tpr/layout",
+  "version": "0.0.1-alpha.0",
   "description": "TPR Core components",
   "author": "David Alekna <david.alekna@tpr.gov.uk>",
   "license": "MIT",

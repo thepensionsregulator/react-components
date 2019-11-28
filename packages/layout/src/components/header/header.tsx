@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 
-const Toolbar = styled.div`
+const StyledHeader = styled.div`
   display: flex;
   flex: 0 0 auto;
   align-items: center;
@@ -12,5 +12,5 @@ const Toolbar = styled.div`
 `;
 
 export const Header: React.FC = () => {
-  return <Toolbar>header</Toolbar>;
+  return <StyledHeader>header</StyledHeader>;
 };

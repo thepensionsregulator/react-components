@@ -13,4 +13,4 @@ function Demo(args: any) {
   );
 }
 
-storiesOf('buttons', module).add('Demo', () => <Demo onSelectAll={action('onSelectAll')} />);
+storiesOf('Header', module).add('Basic', () => <Demo onSelectAll={action('onSelectAll')} />);
