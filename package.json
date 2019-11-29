@@ -1,37 +1,34 @@
 {
-  "name": "@tpr/monorepo",
-  "license": "MIT",
-  "scripts": {
-    "postinstall": "lerna exec -- npm install --package-lock=false && lerna run prepare",
-    "diff": "check-if-folder-contents-changed-in-git-commit-range",
-    "build": "lerna run build",
-    "test": "jest --verbose",
-    "test-ci": "npm run coverage -- --ci --maxWorkers=2 --reporters=default --reporters=jest-junit",
-    "filesize": "lerna run build && bundlesize",
-    "coverage": "jest --verbose --coverage",
-    "coverage:upload": "codecov",
-    "deploy": "lerna publish",
-    "clean": "find . -name \"node_modules\" -exec rm -rf '{}' + && find . -name \"lib\" -exec rm -rf '{}' +"
-  },
-  "dependencies": {
-    "core": "file:packages/layout"
-  },
-  "devDependencies": {
-    "@types/jest": "^24.0.23",
-    "lerna": "^3.19.0",
-    "lerna-changelog": "^0.8.3",
-    "rollup": "^1.27.5",
-    "rollup-plugin-commonjs": "^10.1.0",
-    "rollup-plugin-invariant": "^0.5.6",
-    "rollup-plugin-local-resolve": "^1.0.7",
-    "rollup-plugin-node-resolve": "^5.2.0",
-    "rollup-plugin-sourcemaps": "^0.4.2",
-    "rollup-plugin-terser": "^5.1.2",
-    "rollup-plugin-typescript2": "^0.25.2",
-    "ts-jest": "^24.2.0",
-    "typescript": "^3.7.2"
-  },
-  "workspaces": [
-    "packages/*"
-  ]
+	"name": "@tpr/monorepo",
+	"license": "MIT",
+	"scripts": {
+		"postinstall": "lerna exec -- npm install --package-lock=false && lerna run prepare",
+		"diff": "check-if-folder-contents-changed-in-git-commit-range",
+		"build": "lerna run build",
+		"test": "jest --verbose",
+		"test-ci": "npm run coverage -- --ci --maxWorkers=2 --reporters=default --reporters=jest-junit",
+		"filesize": "lerna run build && bundlesize",
+		"coverage": "jest --verbose --coverage",
+		"coverage:upload": "codecov",
+		"deploy": "lerna publish",
+		"clean": "find . -name \"node_modules\" -exec rm -rf '{}' + && find . -name \"lib\" -exec rm -rf '{}' +"
+	},
+	"dependencies": {
+		"core": "file:packages/layout"
+	},
+	"devDependencies": {
+		"@types/jest": "^24.0.23",
+		"lerna": "^3.19.0",
+		"lerna-changelog": "^0.8.3",
+		"rollup": "^1.27.5",
+		"rollup-plugin-commonjs": "^10.1.0",
+		"rollup-plugin-invariant": "^0.5.6",
+		"rollup-plugin-local-resolve": "^1.0.7",
+		"rollup-plugin-node-resolve": "^5.2.0",
+		"rollup-plugin-sourcemaps": "^0.4.2",
+		"rollup-plugin-terser": "^5.1.2",
+		"rollup-plugin-typescript2": "^0.25.2",
+		"ts-jest": "^24.2.0",
+		"typescript": "^3.7.2"
+	}
 }
