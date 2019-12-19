@@ -11,7 +11,7 @@ const config = {
   pathPrefix: '/',
 
   siteMetadata: {
-    title: 'Layout',
+    title: 'Core',
     description: 'TPR Core components',
   },
   plugins: [
@@ -44,7 +44,7 @@ const config = {
         open: false,
         'open-browser': false,
         root:
-          'C:\\Users\\aleknad\\Development\\tpr\\react-components\\packages\\layout\\.docz',
+          'C:\\Users\\aleknad\\Development\\tpr\\react-components\\packages\\core\\.docz',
         base: '/',
         source: './',
         src: './',
@@ -56,7 +56,7 @@ const config = {
         eb: 'master',
         'edit-branch': 'master',
         config: '',
-        title: 'Layout',
+        title: 'Core',
         description: 'TPR Core components',
         host: 'localhost',
         port: 3000,
@@ -64,35 +64,35 @@ const config = {
         separator: '-',
         paths: {
           root:
-            'C:\\Users\\aleknad\\Development\\tpr\\react-components\\packages\\layout',
+            'C:\\Users\\aleknad\\Development\\tpr\\react-components\\packages\\core',
           templates:
-            'C:\\Users\\aleknad\\Development\\tpr\\react-components\\packages\\layout\\node_modules\\docz-core\\dist\\templates',
+            'C:\\Users\\aleknad\\Development\\tpr\\react-components\\packages\\core\\node_modules\\docz-core\\dist\\templates',
           docz:
-            'C:\\Users\\aleknad\\Development\\tpr\\react-components\\packages\\layout\\.docz',
+            'C:\\Users\\aleknad\\Development\\tpr\\react-components\\packages\\core\\.docz',
           cache:
-            'C:\\Users\\aleknad\\Development\\tpr\\react-components\\packages\\layout\\.docz\\.cache',
+            'C:\\Users\\aleknad\\Development\\tpr\\react-components\\packages\\core\\.docz\\.cache',
           app:
-            'C:\\Users\\aleknad\\Development\\tpr\\react-components\\packages\\layout\\.docz\\app',
+            'C:\\Users\\aleknad\\Development\\tpr\\react-components\\packages\\core\\.docz\\app',
           appPackageJson:
-            'C:\\Users\\aleknad\\Development\\tpr\\react-components\\packages\\layout\\package.json',
+            'C:\\Users\\aleknad\\Development\\tpr\\react-components\\packages\\core\\package.json',
           gatsbyConfig:
-            'C:\\Users\\aleknad\\Development\\tpr\\react-components\\packages\\layout\\gatsby-config.js',
+            'C:\\Users\\aleknad\\Development\\tpr\\react-components\\packages\\core\\gatsby-config.js',
           gatsbyBrowser:
-            'C:\\Users\\aleknad\\Development\\tpr\\react-components\\packages\\layout\\gatsby-browser.js',
+            'C:\\Users\\aleknad\\Development\\tpr\\react-components\\packages\\core\\gatsby-browser.js',
           gatsbyNode:
-            'C:\\Users\\aleknad\\Development\\tpr\\react-components\\packages\\layout\\gatsby-node.js',
+            'C:\\Users\\aleknad\\Development\\tpr\\react-components\\packages\\core\\gatsby-node.js',
           gatsbySSR:
-            'C:\\Users\\aleknad\\Development\\tpr\\react-components\\packages\\layout\\gatsby-ssr.js',
+            'C:\\Users\\aleknad\\Development\\tpr\\react-components\\packages\\core\\gatsby-ssr.js',
           importsJs:
-            'C:\\Users\\aleknad\\Development\\tpr\\react-components\\packages\\layout\\.docz\\app\\imports.js',
+            'C:\\Users\\aleknad\\Development\\tpr\\react-components\\packages\\core\\.docz\\app\\imports.js',
           rootJs:
-            'C:\\Users\\aleknad\\Development\\tpr\\react-components\\packages\\layout\\.docz\\app\\root.jsx',
+            'C:\\Users\\aleknad\\Development\\tpr\\react-components\\packages\\core\\.docz\\app\\root.jsx',
           indexJs:
-            'C:\\Users\\aleknad\\Development\\tpr\\react-components\\packages\\layout\\.docz\\app\\index.jsx',
+            'C:\\Users\\aleknad\\Development\\tpr\\react-components\\packages\\core\\.docz\\app\\index.jsx',
           indexHtml:
-            'C:\\Users\\aleknad\\Development\\tpr\\react-components\\packages\\layout\\.docz\\app\\index.html',
+            'C:\\Users\\aleknad\\Development\\tpr\\react-components\\packages\\core\\.docz\\app\\index.html',
           db:
-            'C:\\Users\\aleknad\\Development\\tpr\\react-components\\packages\\layout\\.docz\\app\\db.json',
+            'C:\\Users\\aleknad\\Development\\tpr\\react-components\\packages\\core\\.docz\\app\\db.json',
         },
       },
     },

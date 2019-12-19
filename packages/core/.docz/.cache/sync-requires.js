@@ -5,9 +5,10 @@ const preferDefault = m => m && m.default || m
 
 
 exports.components = {
-  "component---cache-dev-404-page-js": hot(preferDefault(require("C:\\Users\\aleknad\\Development\\tpr\\react-components\\packages\\layout\\.docz\\.cache\\dev-404-page.js"))),
-  "component---src-components-header-header-mdx": hot(preferDefault(require("C:\\Users\\aleknad\\Development\\tpr\\react-components\\packages\\layout\\src\\components\\header\\header.mdx"))),
-  "component---readme-md": hot(preferDefault(require("C:\\Users\\aleknad\\Development\\tpr\\react-components\\packages\\layout\\README.md"))),
-  "component---src-pages-404-js": hot(preferDefault(require("C:\\Users\\aleknad\\Development\\tpr\\react-components\\packages\\layout\\.docz\\src\\pages\\404.js")))
+  "component---cache-dev-404-page-js": hot(preferDefault(require("C:\\Users\\aleknad\\Development\\tpr\\react-components\\packages\\core\\.docz\\.cache\\dev-404-page.js"))),
+  "component---readme-md": hot(preferDefault(require("C:\\Users\\aleknad\\Development\\tpr\\react-components\\packages\\core\\README.md"))),
+  "component---src-components-buttons-buttons-mdx": hot(preferDefault(require("C:\\Users\\aleknad\\Development\\tpr\\react-components\\packages\\core\\src\\components\\buttons\\buttons.mdx"))),
+  "component---src-components-header-header-mdx": hot(preferDefault(require("C:\\Users\\aleknad\\Development\\tpr\\react-components\\packages\\core\\src\\components\\header\\header.mdx"))),
+  "component---src-pages-404-js": hot(preferDefault(require("C:\\Users\\aleknad\\Development\\tpr\\react-components\\packages\\core\\.docz\\src\\pages\\404.js")))
 }
 

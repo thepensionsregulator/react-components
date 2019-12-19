@@ -14,12 +14,12 @@
 	],
 	"repository": {
 		"type": "git",
-		"url": "https://github.com/davidalekna/tpr-react-components.git"
+		"url": "https://dev.azure.com/thepensionsregulator/TPR/_git/react-components.git"
 	},
 	"bugs": {
-		"url": "https://github.com/davidalekna/tpr-react-components/issues"
+		"url": "https://dev.azure.com/thepensionsregulator/TPR/_git/react-components/issues"
 	},
-	"homepage": "https://github.com/davidalekna/tpr-react-components#readme",
+	"homepage": "https://dev.azure.com/thepensionsregulator/TPR/_git/react-components#readme",
 	"keywords": [
 		"tpr"
 	],
