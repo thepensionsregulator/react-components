@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { FunctionComponent } from 'react';
 import styled, { css, DefaultTheme } from 'styled-components';
 import { space } from 'styled-system';
 import { SpaceProps } from 'styled-system';
@@ -26,7 +26,7 @@ const scales = {
 
 const defaultAppearance = colors => {
 	return css`
-		background: white;
+		background: transparent;
 		box-shadow: none;
 		border: none;
 		color: ${colors?.[200]};
@@ -102,8 +102,8 @@ type ButtonConfigProps = {
 	appearance: Appearance;
 	scale: Scale;
 	isLoading: boolean;
-	iconBefore: string;
-	iconAfter: string;
+	iconBefore: FunctionComponent<{ style: any }>;
+	iconAfter: FunctionComponent<{ style: any }>;
 	disabled: boolean;
 };
 
@@ -122,12 +122,12 @@ const StyledButton = styled.button.attrs<ButtonProps>(({ type = 'button' }) => (
 	${space}
 `;
 
-export const Button: React.FC<ButtonProps> = ({ children, iconAfter: IconA, iconBefore: IconB, ...props }) => {
+export const Button: React.FC<ButtonProps> = ({ children, iconAfter, iconBefore, ...props }) => {
 	return (
 		<StyledButton disabled={props.isLoading} {...props}>
-			{IconB && <IconB />}
-			{children}
-			{IconA && <IconA />}
+			{iconBefore && iconBefore({ style: { marginRight: 10 } })}
+			<span>{children}</span>
+			{iconAfter && iconAfter({ style: { marginLeft: 10 } })}
 		</StyledButton>
 	);
 };
