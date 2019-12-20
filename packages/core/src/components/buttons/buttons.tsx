@@ -10,17 +10,17 @@ const scales = {
 	small: css`
 		height: 32px;
 		padding: 0 10px;
-		font-size: 15px;
+		font-size: 18px;
 	`,
 	normal: css`
 		height: 38px;
 		padding: 0 25px;
-		font-size: 18px;
+		font-size: 22px;
 	`,
 	big: css`
 		height: 48px;
 		padding: 0 30px;
-		font-size: 20px;
+		font-size: 32px;
 	`,
 };
 
@@ -36,12 +36,16 @@ const defaultAppearance = colors => {
 		padding-right: 0px;
 
 		&:hover {
+			background: #eaeaea;
 		}
 
 		&:focus {
 		}
 
 		&:disabled {
+		}
+
+		&:active {
 		}
 	`;
 };
@@ -62,6 +66,8 @@ const primaryAppearance = colors => {
 		}
 
 		&:disabled {
+			background: grey;
+			cursor: not-allowed;
 		}
 
 		&:active {
@@ -96,7 +102,6 @@ type ButtonConfigProps = {
 	appearance: Appearance;
 	scale: Scale;
 	isLoading: boolean;
-	isActive: boolean;
 	iconBefore: string;
 	iconAfter: string;
 	disabled: boolean;
@@ -110,15 +115,19 @@ const StyledButton = styled.button.attrs<ButtonProps>(({ type = 'button' }) => (
 	${getScale}
 	${getAppearance}
 
+	display: inline-block;
+	border-radius: 3px;
 	cursor: pointer;
 
 	${space}
 `;
 
-export const Button: React.FC<ButtonProps> = ({ children, ...props }) => {
+export const Button: React.FC<ButtonProps> = ({ children, iconAfter: IconA, iconBefore: IconB, ...props }) => {
 	return (
-		<StyledButton {...props} disabled={props.isLoading}>
+		<StyledButton disabled={props.isLoading} {...props}>
+			{IconB && <IconB />}
 			{children}
+			{IconA && <IconA />}
 		</StyledButton>
 	);
 };
