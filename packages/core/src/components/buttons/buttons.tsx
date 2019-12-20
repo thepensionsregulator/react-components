@@ -29,8 +29,11 @@ const defaultAppearance = colors => {
 		background: white;
 		box-shadow: none;
 		border: none;
-		color: ${colors[200]};
+		color: ${colors?.[200]};
 		border: none;
+		text-decoration: underline;
+		padding-left: 0px;
+		padding-right: 0px;
 
 		&:hover {
 		}
@@ -45,17 +48,25 @@ const defaultAppearance = colors => {
 
 const primaryAppearance = colors => {
 	return css`
-		background: ${colors[200]};
+		background: ${colors?.[200]};
 		color: white;
 		border: none;
+		box-shadow: 0 3px 0 0 #000;
+		outline: none;
 
 		&:hover {
+			background: ${colors?.[300]};
 		}
 
 		&:focus {
 		}
 
 		&:disabled {
+		}
+
+		&:active {
+			transform: translateY(3px);
+			box-shadow: none;
 		}
 	`;
 };
