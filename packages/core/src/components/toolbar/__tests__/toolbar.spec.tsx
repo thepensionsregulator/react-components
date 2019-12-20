@@ -1,11 +1,11 @@
 import React from 'react';
 import '@testing-library/jest-dom/extend-expect';
 import { render } from '@testing-library/react';
-import { Header } from '../';
+import { Toolbar } from '..';
 
-describe('Header', () => {
+describe('Toolbar', () => {
 	test('it renders correctly', () => {
-		const { getByText } = render(<Header title="TPR" />);
+		const { getByText } = render(<Toolbar title="TPR" />);
 		expect(getByText('TPR')).toBeInTheDocument();
 	});
 });

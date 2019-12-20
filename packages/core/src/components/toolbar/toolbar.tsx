@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 
-const StyledHeader = styled.div<{ bg?: string; color?: string }>`
+const StyledToolbar = styled.div<{ bg?: string; color?: string }>`
 	display: flex;
 	flex: 0 0 auto;
 	align-items: center;
@@ -12,18 +12,18 @@ const StyledHeader = styled.div<{ bg?: string; color?: string }>`
 	background: ${({ bg }) => (bg ? bg : 'grey')};
 `;
 
-type HeaderProps = {
+type ToolbarProps = {
 	title: string;
 	logo?: string;
 	bg?: string;
 	color?: string;
 };
 
-export const Header: React.FC<HeaderProps> = ({ title = 'TPR', logo, bg, color }) => {
+export const Toolbar: React.FC<ToolbarProps> = ({ title = 'TPR', logo, bg, color }) => {
 	return (
-		<StyledHeader bg={bg} color={color}>
+		<StyledToolbar bg={bg} color={color}>
 			{logo && logo}
 			{title}
-		</StyledHeader>
+		</StyledToolbar>
 	);
 };
