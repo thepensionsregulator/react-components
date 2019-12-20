@@ -1,12 +1,89 @@
 import React from 'react';
-import styled from 'styled-components';
+import styled, { css, DefaultTheme } from 'styled-components';
 import { space } from 'styled-system';
 import { SpaceProps } from 'styled-system';
 import { getObjectValueByString } from '../../utils';
 
+// TODO: get all params from the theme
+
+const scales = {
+	small: css`
+		height: 32px;
+		padding: 0 10px;
+		font-size: 15px;
+	`,
+	normal: css`
+		height: 38px;
+		padding: 0 25px;
+		font-size: 18px;
+	`,
+	big: css`
+		height: 48px;
+		padding: 0 30px;
+		font-size: 20px;
+	`,
+};
+
+const defaultAppearance = colors => {
+	return css`
+		background: white;
+		box-shadow: none;
+		border: none;
+		color: ${colors[200]};
+		border: none;
+
+		&:hover {
+		}
+
+		&:focus {
+		}
+
+		&:disabled {
+		}
+	`;
+};
+
+const primaryAppearance = colors => {
+	return css`
+		background: ${colors[200]};
+		color: white;
+		border: none;
+
+		&:hover {
+		}
+
+		&:focus {
+		}
+
+		&:disabled {
+		}
+	`;
+};
+
+function appearances(themeColors, intent: Intent) {
+	const colors = getObjectValueByString(themeColors, 'features.'.concat(intent === 'none' ? 'accents' : intent));
+	return {
+		default: defaultAppearance(colors),
+		primary: primaryAppearance(colors),
+	};
+}
+
+const getAppearance = <T extends ButtonConfigProps & { theme: DefaultTheme }>({
+	theme,
+	appearance = 'default',
+	intent = 'none',
+}: T) => appearances(theme.colors, intent)[appearance];
+
+const getScale = ({ scale = 'normal' }): string => scales[scale];
+
+type Intent = 'none' | 'success' | 'warning' | 'danger';
+type Appearance = 'default' | 'primary';
+type Scale = 'small' | 'normal' | 'big';
+
 type ButtonConfigProps = {
-	intent: 'none' | 'success' | 'warning' | 'danger';
-	appearance: 'default' | 'primary' | 'minimal';
+	intent: Intent;
+	appearance: Appearance;
+	scale: Scale;
 	isLoading: boolean;
 	isActive: boolean;
 	iconBefore: string;
@@ -16,27 +93,13 @@ type ButtonConfigProps = {
 
 type ButtonProps = Partial<ButtonConfigProps> & SpaceProps;
 
-const StyledButton = styled.button.attrs<ButtonProps>(
-	({ theme, appearance = 'default', intent = 'none', type = 'button' }) => ({
-		intent,
-		type,
-		scheme: getObjectValueByString(theme, 'colors.'.concat(appearance || 'accents.features')),
-	}),
-)`
-	background: transparent;
-	padding: 10px 20px;
-	border-radius: 4px;
-	border: 1px solid #eee;
+const StyledButton = styled.button.attrs<ButtonProps>(({ type = 'button' }) => ({
+	type,
+}))`
+	${getScale}
+	${getAppearance}
+
 	cursor: pointer;
-
-	&:focus {
-	}
-
-	&:hover {
-	}
-
-	&:disabled {
-	}
 
 	${space}
 `;
