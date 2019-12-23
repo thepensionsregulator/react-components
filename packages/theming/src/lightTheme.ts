@@ -7,6 +7,7 @@ const lightTheme = {
 			500: '#0b0c0c',
 		},
 		neutral: {
+			100: '#FFFFFF',
 			200: '#b1b4b6',
 			300: '#0b0c0c',
 		},

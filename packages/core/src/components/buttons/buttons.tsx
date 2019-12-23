@@ -36,7 +36,6 @@ const defaultAppearance = colors => {
 		padding-right: 0px;
 
 		&:hover {
-			background: #eaeaea;
 		}
 
 		&:focus {
@@ -55,7 +54,7 @@ const primaryAppearance = colors => {
 		background: ${colors?.[200]};
 		color: white;
 		border: none;
-		box-shadow: 0 3px 0 0 #000;
+		box-shadow: 0 2px 0 0 #000;
 		outline: none;
 
 		&:hover {
@@ -71,14 +70,14 @@ const primaryAppearance = colors => {
 		}
 
 		&:active {
-			transform: translateY(3px);
+			transform: translateY(2px);
 			box-shadow: none;
 		}
 	`;
 };
 
 function appearances(themeColors, intent: Intent) {
-	const colors = getObjectValueByString(themeColors, intent === 'none' ? 'accents' : intent);
+	const colors = themeColors[intent === 'none' ? 'neutral' : intent];
 	return {
 		default: defaultAppearance(colors),
 		primary: primaryAppearance(colors),
