@@ -6,6 +6,7 @@ exports.components = {
   "component---readme-md": () => import("../../README.md" /* webpackChunkName: "component---readme-md" */),
   "component---src-components-toolbar-toolbar-mdx": () => import("../../src/components/toolbar/toolbar.mdx" /* webpackChunkName: "component---src-components-toolbar-toolbar-mdx" */),
   "component---src-components-buttons-buttons-mdx": () => import("../../src/components/buttons/buttons.mdx" /* webpackChunkName: "component---src-components-buttons-buttons-mdx" */),
+  "component---src-components-typography-readme-md": () => import("../../src/components/typography/README.md" /* webpackChunkName: "component---src-components-typography-readme-md" */),
   "component---src-pages-404-js": () => import("../src/pages/404.js" /* webpackChunkName: "component---src-pages-404-js" */)
 }
 

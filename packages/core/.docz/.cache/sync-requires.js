@@ -9,6 +9,7 @@ exports.components = {
   "component---readme-md": hot(preferDefault(require("C:\\Users\\aleknad\\Development\\tpr\\react-components\\packages\\core\\README.md"))),
   "component---src-components-toolbar-toolbar-mdx": hot(preferDefault(require("C:\\Users\\aleknad\\Development\\tpr\\react-components\\packages\\core\\src\\components\\toolbar\\toolbar.mdx"))),
   "component---src-components-buttons-buttons-mdx": hot(preferDefault(require("C:\\Users\\aleknad\\Development\\tpr\\react-components\\packages\\core\\src\\components\\buttons\\buttons.mdx"))),
+  "component---src-components-typography-readme-md": hot(preferDefault(require("C:\\Users\\aleknad\\Development\\tpr\\react-components\\packages\\core\\src\\components\\typography\\README.md"))),
   "component---src-pages-404-js": hot(preferDefault(require("C:\\Users\\aleknad\\Development\\tpr\\react-components\\packages\\core\\.docz\\src\\pages\\404.js")))
 }
 

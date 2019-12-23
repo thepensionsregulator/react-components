@@ -28,6 +28,14 @@ the action that will occur when the user touches them.
 	<Button>Click me</Button>
 </Playground>
 
+## Usage with props
+
+<Playground>
+	<Button appearance="primary" intent="warning" scale="big" margin={30} iconBefore={() => `🎄`} iconAfter={() => `🎄`}>
+		Click me
+	</Button>
+</Playground>
+
 ## All variations
 
 ### With different sizes
@@ -39,6 +47,15 @@ the action that will occur when the user touches them.
 	Click me
 </Button>
 <Button mr={15} scale="big">
+	Click me
+</Button>
+<Button mr={15} appearance="primary" scale="small">
+	Click me
+</Button>
+<Button mr={15} appearance="primary" scale="normal">
+	Click me
+</Button>
+<Button mr={15} appearance="primary" scale="big">
 	Click me
 </Button>
 

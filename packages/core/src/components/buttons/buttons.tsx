@@ -1,26 +1,26 @@
 import React, { FunctionComponent } from 'react';
 import styled, { css, DefaultTheme } from 'styled-components';
-import { space } from 'styled-system';
-import { SpaceProps } from 'styled-system';
-import { getObjectValueByString } from '../../utils';
+import { space, layout } from 'styled-system';
+import { SpaceProps, LayoutProps } from 'styled-system';
+// import { getObjectValueByString } from '../../utils';
 
 // TODO: get all params from the theme
 
 const scales = {
 	small: css`
-		height: 32px;
-		padding: 0 10px;
-		font-size: 18px;
+		height: ${({ theme }) => theme.space[4]}px;
+		padding: 0 15px;
+		font-size: ${({ theme }) => theme.fontSizes[2]}px;
 	`,
 	normal: css`
-		height: 38px;
-		padding: 0 25px;
-		font-size: 22px;
+		height: ${({ theme }) => theme.space[5]}px;
+		padding: 0 32px;
+		font-size: ${({ theme }) => theme.fontSizes[4]}px;
 	`,
 	big: css`
-		height: 48px;
-		padding: 0 30px;
-		font-size: 32px;
+		height: ${({ theme }) => theme.space[6]}px;
+		padding: 0 38px;
+		font-size: ${({ theme }) => theme.fontSizes[5]}px;
 	`,
 };
 
@@ -36,6 +36,7 @@ const defaultAppearance = colors => {
 		padding-right: 0px;
 
 		&:hover {
+			color: ${colors?.[300]};
 		}
 
 		&:focus {
@@ -54,7 +55,7 @@ const primaryAppearance = colors => {
 		background: ${colors?.[200]};
 		color: white;
 		border: none;
-		box-shadow: 0 2px 0 0 #000;
+		box-shadow: 0 2px 0 0 #222;
 		outline: none;
 
 		&:hover {
@@ -106,7 +107,7 @@ type ButtonConfigProps = {
 	disabled: boolean;
 };
 
-type ButtonProps = Partial<ButtonConfigProps> & SpaceProps;
+type ButtonProps = Partial<ButtonConfigProps> & SpaceProps & LayoutProps;
 
 const StyledButton = styled.button.attrs<ButtonProps>(({ type = 'button' }) => ({
 	type,
@@ -115,10 +116,10 @@ const StyledButton = styled.button.attrs<ButtonProps>(({ type = 'button' }) => (
 	${getAppearance}
 
 	display: inline-block;
-	border-radius: 3px;
 	cursor: pointer;
 
 	${space}
+	${layout}
 `;
 
 export const Button: React.FC<ButtonProps> = ({ children, iconAfter, iconBefore, ...props }) => {
