@@ -7,15 +7,15 @@ const ThemeProviderContext = createContext({
 	setLight: () => {},
 });
 
-export const useTheme = () => {
-	const styledComponentsContext = useContext(ThemeContext);
-	const customContext = useContext(ThemeProviderContext);
+export const useThemeContext = () => {
+	const styledComponentsUtils = useContext(ThemeContext);
+	const themeControlsUtils = useContext(ThemeProviderContext);
 
-	if (!styledComponentsContext) {
-		throw new Error(`Form compound components cannot be rendered outside the Form component`);
+	if (!styledComponentsUtils || !themeControlsUtils) {
+		throw new Error(`Compound components cannot be rendered outside the ThemeProvider`);
 	}
 
-	return { ...styledComponentsContext, ...customContext };
+	return { ...styledComponentsUtils, ...themeControlsUtils };
 };
 
 type ThemeProviderProps = {
@@ -38,15 +38,11 @@ const ThemeProvider: React.FC<ThemeProviderProps> = ({
 	);
 	const [theme, setTheme] = useState(autoDetect && colorScheme === 'dark' ? finalDark : finalLight || finalLight);
 
-	function setDark() {
-		setTheme(finalDark);
-	}
-
-	function setLight() {
-		setTheme(finalLight);
-	}
+	const setLight = () => finalLight && setTheme(finalLight);
+	const setDark = () => finalDark && setTheme(finalDark);
 
 	const ui = typeof children === 'function' ? children({ setDark, setLight }) : children;
+
 	return (
 		<ThemeProviderContext.Provider value={{ setDark, setLight }}>
 			<StyledThemeProvider theme={theme}>{ui}</StyledThemeProvider>
@@ -55,5 +51,3 @@ const ThemeProvider: React.FC<ThemeProviderProps> = ({
 };
 
 export default ThemeProvider;
-
-// usage <ThemeProvider theme={[customTheme, componentsTheme]}>{...jsx}</ThemeProvider>

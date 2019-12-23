@@ -1,5 +1,5 @@
 import { mergeThemes } from './utils';
-import ThemeProvider from './theming';
+import ThemeProvider, { useThemeContext } from './theming';
 import lightTheme from './lightTheme';
 
-export { ThemeProvider as default, lightTheme, mergeThemes };
+export { ThemeProvider as default, useThemeContext, lightTheme, mergeThemes };

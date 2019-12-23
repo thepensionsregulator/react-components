@@ -78,7 +78,7 @@ const primaryAppearance = colors => {
 };
 
 function appearances(themeColors, intent: Intent) {
-	const colors = getObjectValueByString(themeColors, 'features.'.concat(intent === 'none' ? 'accents' : intent));
+	const colors = getObjectValueByString(themeColors, intent === 'none' ? 'accents' : intent);
 	return {
 		default: defaultAppearance(colors),
 		primary: primaryAppearance(colors),
