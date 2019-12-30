@@ -1,22 +1,19 @@
 import React from 'react';
 import { configure, addDecorator } from '@storybook/react';
+// import { withA11y } from '@storybook/addon-a11y';
 import { ThemeProvider } from 'styled-components';
 import GlobalStyle from './reset.css';
 import theme from './theme';
+// import 'storybook-chromatic';
 
-const req = require.context('../stories', true, /.*\.(stories|story)\.(js|ts|tsx)?$/);
-
-const loadStories = () => {
-  req.keys().forEach(filename => req(filename));
-};
-
+// addDecorator(withA11y);
 addDecorator(story => (
-  <ThemeProvider theme={theme}>
-    <>
-      <GlobalStyle />
-      {story()}
-    </>
-  </ThemeProvider>
+	<ThemeProvider theme={theme}>
+		<>
+			<GlobalStyle />
+			{story()}
+		</>
+	</ThemeProvider>
 ));
 
-configure(loadStories, module);
+configure(require.context('../src', true, /\.(stories|story)\.(ts|tsx)$/), module);
