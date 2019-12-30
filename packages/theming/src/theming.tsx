@@ -1,53 +1,52 @@
-import React, { useState, createContext, useContext, useMemo } from 'react';
-import { ThemeProvider as StyledThemeProvider, ThemeContext, DefaultTheme } from 'styled-components';
+import React, { useState, createContext, useContext, useMemo, ReactChildren } from 'react';
+import { ThemeProvider, DefaultTheme } from 'styled-components';
 import { mergeThemes } from './utils';
 
-const ThemeProviderContext = createContext({
+const ColorSchemeContext = createContext({
 	setDark: () => {},
 	setLight: () => {},
 });
 
-export const useThemeContext = () => {
-	const styledComponentsUtils = useContext(ThemeContext);
-	const themeControlsUtils = useContext(ThemeProviderContext);
-
-	if (!styledComponentsUtils || !themeControlsUtils) {
-		throw new Error(`Compound components cannot be rendered outside the ThemeProvider`);
+export const useColorSchemeContext = () => {
+	const utils = useContext(ColorSchemeContext);
+	if (!utils) {
+		throw new Error(`Compound components cannot be rendered outside the ColorScheme`);
 	}
-
-	return { ...styledComponentsUtils, ...themeControlsUtils };
+	return utils;
 };
 
-type ThemeProviderProps = {
-	lightTheme: DefaultTheme | DefaultTheme[];
-	darkTheme?: DefaultTheme | DefaultTheme[];
+type ColorSchemeProps<T> = {
+	light: T | T[];
+	dark?: T | T[];
 	autoDetect?: boolean;
+	children: ReactChildren | Function;
 };
 
-const ThemeProvider: React.FC<ThemeProviderProps> = ({
+const ColorScheme = <T extends DefaultTheme>({
 	children,
-	lightTheme: light,
-	darkTheme: dark,
+	light,
+	dark,
 	autoDetect = false,
-}) => {
+}: ColorSchemeProps<T>): JSX.Element => {
+	const prefersDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
+
 	const finalLight = useMemo(() => (typeof light === 'object' ? light : mergeThemes(light)), [light]);
 	const finalDark = useMemo(() => (typeof dark === 'object' ? dark : mergeThemes(dark)), [dark]);
 
-	const [colorScheme] = useState(
-		window.matchMedia ? (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light') : 'light',
-	);
-	const [theme, setTheme] = useState(autoDetect && colorScheme === 'dark' ? finalDark : finalLight || finalLight);
+	const [colorScheme] = useState(autoDetect ? (prefersDark ? 'dark' : 'light') : 'light');
+	const [theme, setTheme] = useState(colorScheme === 'light' ? finalLight : finalDark);
 
-	const setLight = () => finalLight && setTheme(finalLight);
-	const setDark = () => finalDark && setTheme(finalDark);
+	const setLight = () => setTheme(finalLight);
+	const setDark = () => autoDetect && finalDark && setTheme(finalDark);
 
-	const ui = typeof children === 'function' ? children({ setDark, setLight }) : children;
+	const utils = { setLight, setDark };
+	const ui = typeof children === 'function' ? children(utils) : children;
 
 	return (
-		<ThemeProviderContext.Provider value={{ setDark, setLight }}>
-			<StyledThemeProvider theme={theme}>{ui}</StyledThemeProvider>
-		</ThemeProviderContext.Provider>
+		<ColorSchemeContext.Provider value={utils}>
+			<ThemeProvider theme={theme}>{ui}</ThemeProvider>
+		</ColorSchemeContext.Provider>
 	);
 };
 
-export default ThemeProvider;
+export default ColorScheme;

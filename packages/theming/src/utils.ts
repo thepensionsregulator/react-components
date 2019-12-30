@@ -1,6 +1,7 @@
 import { mergeDeepLeft } from 'ramda';
+import { DefaultTheme } from 'styled-components';
 
-export const mergeThemes = <T extends object>(themes: T[] = []) => {
-	if (!themes) return undefined;
+export const mergeThemes = (themes: DefaultTheme[]): DefaultTheme => {
+	if (!Array.isArray(themes)) return undefined;
 	return mergeDeepLeft(themes);
 };
