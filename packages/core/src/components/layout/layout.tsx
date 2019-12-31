@@ -35,16 +35,24 @@ export const Container: React.FC<ContainerProps> = ({ children, ...rest }) => {
 const StyledFooter = styled.footer`
 	display: flex;
 	flex-direction: column;
-	background: #eee;
 `;
 
+type FooterLinkProps = {
+	title: string;
+	url: string;
+	size?: number;
+};
+
 interface FooterProps extends ContainerProps {
-	menus: object[][];
+	/** menus prop accepts 2d array of arrays with FooterLinkProps objects */
+	menus: FooterLinkProps[][];
+	/** links props accepts an array with FooterLinkProps objects */
+	links: FooterLinkProps[];
 }
 
 // NOTE: it might require all the text to be managed by SiteCore so
 // it might need to be rendered from props.
-export const Footer: React.FC<FooterProps> = ({ menus, ...props }) => {
+export const Footer: React.FC<FooterProps> = ({ menus, links, ...props }) => {
 	return (
 		<Container {...props}>
 			<StyledFooter>
@@ -53,10 +61,10 @@ export const Footer: React.FC<FooterProps> = ({ menus, ...props }) => {
 						logo
 					</Flex>
 					<Flex flex="1 1 auto" justifyContent="space-between">
-						{menus.map((menu, key) => (
-							<Flex key={key} flexDirection="column">
-								{menu.map(({ title, ...linkProps }: any, index: number) => (
-									<Link key={index} {...linkProps}>
+						{menus.map((menu, menuKey) => (
+							<Flex key={menuKey} flexDirection="column">
+								{menu.map(({ title, ...linkProps }, itemKey: number) => (
+									<Link key={itemKey} {...linkProps}>
 										{title}
 									</Link>
 								))}
@@ -66,13 +74,11 @@ export const Footer: React.FC<FooterProps> = ({ menus, ...props }) => {
 				</DocWidth>
 				<DocWidth borderTop="1px solid #CCC" justifyContent="space-between" p={20}>
 					<Flex>
-						<Link href="#" mr={10}>
-							Website help
-						</Link>
-						<Link href="#" mr={10}>
-							Cymraeg
-						</Link>
-						<Link href="#">Site map</Link>
+						{links.map(({ title, ...linkProps }, key) => (
+							<Link key={key} mr={15} {...linkProps}>
+								{title}
+							</Link>
+						))}
 					</Flex>
 					<Flex>
 						<P>© The Pensions Regulator</P>

@@ -8,19 +8,25 @@ import { Footer } from './layout';
 
 # Layout components
 
-- Footer
-- Header
+Layout components for tpr apps
 
-## Properties
+## Footer
+
+### Properties
 
 <Props of={Footer} />
 
-## Basic usage
+### Basic usage
 
 <Playground>
 	<Footer
 		bg="#eeeeee"
 		borderTop="5px solid #777"
+		links={[
+			{ title: 'Website help', url: '#' },
+			{ title: 'Cymraeg', url: '#' },
+			{ title: 'Site map', url: '#' },
+		]}
 		menus={[
 			[
 				{ title: 'Lorem ipsum dolor', url: '#' },

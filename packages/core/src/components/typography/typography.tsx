@@ -124,6 +124,7 @@ export const Link = styled('a')<SpaceProps>`
 	line-height: 1.4;
 	margin: 0;
 	padding: 0;
+	cursor: pointer;
 
 	${space};
 `;
