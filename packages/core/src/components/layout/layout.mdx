@@ -1,0 +1,48 @@
+---
+name: Layout
+route: layout
+---
+
+import { Playground, Props } from 'docz';
+import { Footer } from './layout';
+
+# Layout components
+
+- Footer
+- Header
+
+## Properties
+
+<Props of={Footer} />
+
+## Basic usage
+
+<Playground>
+	<Footer
+		bg="#eeeeee"
+		borderTop="5px solid #777"
+		menus={[
+			[
+				{ title: 'Lorem ipsum dolor', url: '#' },
+				{ title: 'Lorem ipsum dolor', url: '#' },
+				{ title: 'Lorem ipsum dolor', url: '#' },
+				{ title: 'Lorem ipsum dolor', url: '#' },
+				{ title: 'Lorem ipsum dolor', url: '#' },
+			],
+			[
+				{ title: 'Lorem ipsum dolor', url: '#' },
+				{ title: 'Lorem ipsum dolor', url: '#' },
+				{ title: 'Lorem ipsum dolor', url: '#' },
+				{ title: 'Lorem ipsum dolor', url: '#' },
+				{ title: 'Lorem ipsum dolor', url: '#' },
+			],
+			[
+				{ title: 'Lorem ipsum dolor', url: '#' },
+				{ title: 'Lorem ipsum dolor', url: '#' },
+				{ title: 'Lorem ipsum dolor', url: '#' },
+				{ title: 'Lorem ipsum dolor', url: '#' },
+				{ title: 'Lorem ipsum dolor', url: '#' },
+			],
+		]}
+	/>
+</Playground>

@@ -112,3 +112,18 @@ export const P = styled.p<HtmlHTagTypes>`
 	${typography};
 	${space};
 `;
+
+export const Link = styled('a')<SpaceProps>`
+	${fontStack};
+
+	font-weight: ${({ theme }) => theme.fontWeights[0]};
+	text-decoration: underline;
+	color: #1d70b8;
+	font-size: 16px;
+	letter-spacing: 0.9px;
+	line-height: 1.4;
+	margin: 0;
+	padding: 0;
+
+	${space};
+`;

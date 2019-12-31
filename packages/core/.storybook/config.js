@@ -1,5 +1,5 @@
 import React from 'react';
-import { configure, addDecorator } from '@storybook/react';
+import { configure, addDecorator, setAddon } from '@storybook/react';
 // import { withA11y } from '@storybook/addon-a11y';
 import { ThemeProvider } from 'styled-components';
 import GlobalStyle from './reset.css';
