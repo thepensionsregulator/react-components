@@ -7,7 +7,6 @@ const GlobalStyle = createGlobalStyle`
     -webkit-font-smoothing: antialiased;
     font-weight: inherit;
     margin: 0;
-    outline: 0;
     padding: 0;
     text-decoration: none;
     text-rendering: optimizeLegibility;

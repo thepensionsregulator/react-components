@@ -113,12 +113,18 @@ export const P = styled.p<HtmlHTagTypes>`
 	${space};
 `;
 
-export const Link = styled('a')<SpaceProps>`
+type LinkProps = {
+	appearance?: 'default' | 'primary';
+};
+
+export const Link = styled('a').attrs<LinkProps & SpaceProps>(({ theme, appearance = 'default' }) => ({
+	color: appearance === 'default' ? theme.colors.neutral[300] : theme.colors.primary[200],
+}))<LinkProps & SpaceProps>`
 	${fontStack};
 
 	font-weight: ${({ theme }) => theme.fontWeights[0]};
 	text-decoration: underline;
-	color: #1d70b8;
+	color: ${({ color }) => color};
 	font-size: 16px;
 	letter-spacing: 0.9px;
 	line-height: 1.4;

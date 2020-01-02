@@ -32,11 +32,6 @@ export const Container: React.FC<ContainerProps> = ({ children, ...rest }) => {
 	);
 };
 
-const StyledFooter = styled.footer`
-	display: flex;
-	flex-direction: column;
-`;
-
 type FooterLinkProps = {
 	title: string;
 	url: string;
@@ -44,25 +39,39 @@ type FooterLinkProps = {
 };
 
 interface FooterProps extends ContainerProps {
-	/** menus prop accepts 2d array of arrays of FooterLinkProps objects */
+	/** accepts 2d array of type FooterLinkProps objects, each array represents column in a footer */
 	menus: FooterLinkProps[][];
-	/** links props accepts an array of FooterLinkProps objects */
+	/** accepts an array of type FooterLinkProps objects */
 	links: FooterLinkProps[];
+	/** accepts a valid logo url, must be https */
+	logoUrl?: string;
 }
 
-export const Footer: React.FC<FooterProps> = ({ menus, links, ...props }) => {
+const Logo = styled('div')`
+	display: flex;
+	flex: 0 0 auto;
+	align-items: flex-start;
+	justify-content: flex-start;
+	margin-right: 100px;
+	width: 180px;
+
+	img {
+		width: 100%;
+	}
+`;
+
+export const Footer: React.FC<FooterProps> = ({ menus, links, logoUrl, ...props }) => {
 	return (
 		<Container {...props}>
-			<StyledFooter>
+			<Flex flexDirection="column">
 				<DocWidth justifyContent="space-between" py={50} px={20}>
-					<Flex flex="0 0 auto" width="140px" mr={100}>
-						logo
-					</Flex>
-					<Flex flex="1 1 auto" justifyContent="space-between">
+					<Logo>{logoUrl ? <img src={logoUrl} alt="TPR Logo" /> : 'logo'}</Logo>
+					<Flex flex="1 1 auto" />
+					<Flex justifyContent="space-around">
 						{menus.map((menu, menuKey) => (
-							<Flex key={menuKey} flexDirection="column">
-								{menu.map(({ title, ...linkProps }, itemKey: number) => (
-									<Link key={itemKey} {...linkProps}>
+							<Flex flex="0 1 auto" width="100%" pl={10} key={menuKey} flexDirection="column">
+								{menu.map(({ title, url, ...linkProps }, itemKey: number) => (
+									<Link key={itemKey} href={url} mb={15} {...linkProps}>
 										{title}
 									</Link>
 								))}
@@ -72,8 +81,8 @@ export const Footer: React.FC<FooterProps> = ({ menus, links, ...props }) => {
 				</DocWidth>
 				<DocWidth borderTop="1px solid #CCC" justifyContent="space-between" p={20}>
 					<Flex>
-						{links.map(({ title, ...linkProps }, key) => (
-							<Link key={key} mr={15} {...linkProps}>
+						{links.map(({ title, url, ...linkProps }, key) => (
+							<Link key={key} href={url} mr={15} {...linkProps}>
 								{title}
 							</Link>
 						))}
@@ -82,7 +91,7 @@ export const Footer: React.FC<FooterProps> = ({ menus, links, ...props }) => {
 						<P>© The Pensions Regulator</P>
 					</Flex>
 				</DocWidth>
-			</StyledFooter>
+			</Flex>
 		</Container>
 	);
 };
