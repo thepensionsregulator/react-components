@@ -45,6 +45,8 @@ interface FooterProps extends ContainerProps {
 	links: FooterLinkProps[];
 	/** accepts a valid logo url, must be https */
 	logoUrl?: string;
+	/** accepts copyright description */
+	copyright?: string;
 }
 
 const Logo = styled('div')`
@@ -60,18 +62,23 @@ const Logo = styled('div')`
 	}
 `;
 
-export const Footer: React.FC<FooterProps> = ({ menus, links, logoUrl, ...props }) => {
+export const Footer: React.FC<FooterProps> = ({
+	menus,
+	links,
+	logoUrl,
+	copyright = '© The Pensions Regulator',
+	...props
+}) => {
 	return (
 		<Container {...props}>
 			<Flex flexDirection="column">
-				<DocWidth justifyContent="space-between" py={50} px={20}>
-					<Logo>{logoUrl ? <img src={logoUrl} alt="TPR Logo" /> : 'logo'}</Logo>
-					<Flex flex="1 1 auto" />
-					<Flex justifyContent="space-around">
-						{menus.map((menu, menuKey) => (
-							<Flex flex="0 1 auto" width="100%" pl={10} key={menuKey} flexDirection="column">
-								{menu.map(({ title, url, ...linkProps }, itemKey: number) => (
-									<Link key={itemKey} href={url} mb={15} {...linkProps}>
+				<DocWidth justifyContent="space-between" py={6} px={2}>
+					<Logo>{logoUrl ? <img src={logoUrl} alt="TPR Logo" /> : 'logo placeholder'}</Logo>
+					<Flex flex="1 1 auto" justifyContent="flex-end">
+						{menus.map((menu, key: number) => (
+							<Flex key={key} flex="0 1 auto" width="100%" pl={2} flexDirection="column">
+								{menu.map(({ title, url, ...linkProps }, key: number) => (
+									<Link key={key} href={url} mb={1} {...linkProps}>
 										{title}
 									</Link>
 								))}
@@ -79,16 +86,16 @@ export const Footer: React.FC<FooterProps> = ({ menus, links, logoUrl, ...props 
 						))}
 					</Flex>
 				</DocWidth>
-				<DocWidth borderTop="1px solid #CCC" justifyContent="space-between" p={20}>
+				<DocWidth borderTop="1px solid #CCC" justifyContent="space-between" p={2}>
 					<Flex>
-						{links.map(({ title, url, ...linkProps }, key) => (
-							<Link key={key} href={url} mr={15} {...linkProps}>
+						{links.map(({ title, url, ...linkProps }, key: number) => (
+							<Link key={key} href={url} mr={1} {...linkProps}>
 								{title}
 							</Link>
 						))}
 					</Flex>
 					<Flex>
-						<P>© The Pensions Regulator</P>
+						<P>{copyright}</P>
 					</Flex>
 				</DocWidth>
 			</Flex>
