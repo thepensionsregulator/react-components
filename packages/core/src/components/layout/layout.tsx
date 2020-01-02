@@ -44,14 +44,12 @@ type FooterLinkProps = {
 };
 
 interface FooterProps extends ContainerProps {
-	/** menus prop accepts 2d array of arrays with FooterLinkProps objects */
+	/** menus prop accepts 2d array of arrays of FooterLinkProps objects */
 	menus: FooterLinkProps[][];
-	/** links props accepts an array with FooterLinkProps objects */
+	/** links props accepts an array of FooterLinkProps objects */
 	links: FooterLinkProps[];
 }
 
-// NOTE: it might require all the text to be managed by SiteCore so
-// it might need to be rendered from props.
 export const Footer: React.FC<FooterProps> = ({ menus, links, ...props }) => {
 	return (
 		<Container {...props}>
