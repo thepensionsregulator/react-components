@@ -33,7 +33,7 @@ const lightTheme = {
 	space: [10, 15, 20, 25, 30, 40, 50, 60],
 	fontSizes: [12, 14, 16, 18, 22, 30, 36],
 	fontWeights: [300, 400, 500, 700],
-	breakpoints: [768, 1024, 1440, 1824],
+	breakpoints: ['48em', '64em', '90em', '114em'],
 	letterSpacings: {
 		normal: 'normal',
 		tracked: '0.1em',

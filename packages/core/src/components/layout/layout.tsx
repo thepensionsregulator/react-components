@@ -1,5 +1,5 @@
 import React from 'react';
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 import { compose, space, color, border, layout, flexbox, typography } from 'styled-system';
 import { BorderProps, ColorProps, FlexboxProps, SpaceProps, LayoutProps, TypographyProps } from 'styled-system';
 import { P, Link } from '../typography';
@@ -62,6 +62,10 @@ const Logo = styled('div')`
 	}
 `;
 
+// TODO: make responsive
+// @media only screen and (min-width: ${({ theme }) => theme.breakpoints[0]}) {
+// }
+
 export const Footer: React.FC<FooterProps> = ({
 	menus,
 	links,
@@ -74,17 +78,16 @@ export const Footer: React.FC<FooterProps> = ({
 			<Flex flexDirection="column">
 				<DocWidth justifyContent="space-between" py={6} px={2}>
 					<Logo>{logoUrl ? <img src={logoUrl} alt="TPR Logo" /> : 'logo placeholder'}</Logo>
-					<Flex flex="1 1 auto" justifyContent="flex-end">
-						{menus.map((menu, key: number) => (
-							<Flex key={key} flex="0 1 auto" width="100%" pl={2} flexDirection="column">
-								{menu.map(({ title, url, ...linkProps }, key: number) => (
-									<Link key={key} href={url} mb={1} {...linkProps}>
-										{title}
-									</Link>
-								))}
-							</Flex>
-						))}
-					</Flex>
+					<Flex flex="1 1 auto" />
+					{menus.map((menu, key: number) => (
+						<Flex key={key} flex="0 0 auto" maxWidth="200px" pl={4} flexDirection="column">
+							{menu.map(({ title, url, ...linkProps }, key: number) => (
+								<Link key={key} href={url} mb={1} {...linkProps}>
+									{title}
+								</Link>
+							))}
+						</Flex>
+					))}
 				</DocWidth>
 				<DocWidth borderTop="1px solid #CCC" justifyContent="space-between" p={2}>
 					<Flex>
@@ -108,6 +111,15 @@ type FlexProps = FlexboxProps & SpaceProps & LayoutProps & TypographyProps & Col
 export const Flex = styled('div').attrs(() => ({
 	display: 'flex',
 }))<FlexProps>(compose(flexbox, space, layout, typography, color));
+
+// use box for responsivenes
+export const Box = styled(Flex)`
+	flex-direction: column;
+
+	@media only screen and (min-width: ${({ theme }) => theme.breakpoints[0]}) {
+		flex-direction: row;
+	}
+`;
 
 type TextProps = TypographyProps & SpaceProps & ColorProps;
 

@@ -1,7 +1,7 @@
-import { mergeDeepLeft } from 'ramda';
+import { merge } from 'lodash';
 import { DefaultTheme } from 'styled-components';
 
-export const mergeThemes = (themes: DefaultTheme[]): DefaultTheme => {
+export const mergeThemes = <T extends DefaultTheme>(themes: T[]): T => {
 	if (!Array.isArray(themes)) return undefined;
-	return mergeDeepLeft(themes);
+	return merge(themes);
 };

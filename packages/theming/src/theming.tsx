@@ -30,8 +30,8 @@ const ColorScheme = <T extends DefaultTheme>({
 }: ColorSchemeProps<T>): JSX.Element => {
 	const prefersDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
 
-	const finalLight = useMemo(() => (typeof light === 'object' ? light : mergeThemes(light)), [light]);
-	const finalDark = useMemo(() => (typeof dark === 'object' ? dark : mergeThemes(dark)), [dark]);
+	const finalLight = useMemo(() => (Array.isArray(light) ? mergeThemes(light) : light), [light]);
+	const finalDark = useMemo(() => (Array.isArray(dark) ? mergeThemes(dark) : dark), [dark]);
 
 	const [colorScheme] = useState(autoDetect ? (prefersDark ? 'dark' : 'light') : 'light');
 	const [theme, setTheme] = useState(colorScheme === 'light' ? finalLight : finalDark);
