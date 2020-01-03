@@ -1,5 +1,5 @@
-const lightTheme = {
+const darkTheme = {
 	colors: {},
 };
 
-export default lightTheme;
+export default darkTheme;

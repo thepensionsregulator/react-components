@@ -1,5 +1,5 @@
 import React from 'react';
-import styled, { css } from 'styled-components';
+import styled from 'styled-components';
 import { compose, space, color, border, layout, flexbox, typography } from 'styled-system';
 import { BorderProps, ColorProps, FlexboxProps, SpaceProps, LayoutProps, TypographyProps } from 'styled-system';
 import { P, Link } from '../typography';
@@ -62,9 +62,17 @@ const Logo = styled('div')`
 	}
 `;
 
-// TODO: make responsive
-// @media only screen and (min-width: ${({ theme }) => theme.breakpoints[0]}) {
-// }
+export const LevelOne = styled('div')`
+	display: flex;
+	flex-direction: column;
+	width: 100%;
+
+	${({ theme }) => theme.mediaQueries.sm`
+		flex-direction: row;
+		justify-content: space-between;
+		padding: ${theme.space[6]}px ${theme.space[2]}px;
+	`};
+`;
 
 export const Footer: React.FC<FooterProps> = ({
 	menus,
@@ -76,7 +84,7 @@ export const Footer: React.FC<FooterProps> = ({
 	return (
 		<Container {...props}>
 			<Flex flexDirection="column">
-				<DocWidth justifyContent="space-between" py={6} px={2}>
+				<LevelOne>
 					<Logo>{logoUrl ? <img src={logoUrl} alt="TPR Logo" /> : 'logo placeholder'}</Logo>
 					<Flex flex="1 1 auto" />
 					{menus.map((menu, key: number) => (
@@ -88,7 +96,7 @@ export const Footer: React.FC<FooterProps> = ({
 							))}
 						</Flex>
 					))}
-				</DocWidth>
+				</LevelOne>
 				<DocWidth borderTop="1px solid #CCC" justifyContent="space-between" p={2}>
 					<Flex>
 						{links.map(({ title, url, ...linkProps }, key: number) => (
@@ -111,15 +119,6 @@ type FlexProps = FlexboxProps & SpaceProps & LayoutProps & TypographyProps & Col
 export const Flex = styled('div').attrs(() => ({
 	display: 'flex',
 }))<FlexProps>(compose(flexbox, space, layout, typography, color));
-
-// use box for responsivenes
-export const Box = styled(Flex)`
-	flex-direction: column;
-
-	@media only screen and (min-width: ${({ theme }) => theme.breakpoints[0]}) {
-		flex-direction: row;
-	}
-`;
 
 type TextProps = TypographyProps & SpaceProps & ColorProps;
 

@@ -1,5 +1,5 @@
 import React, { useState, createContext, useContext, useMemo, ReactChildren } from 'react';
-import { ThemeProvider, DefaultTheme } from 'styled-components';
+import { ThemeProvider, DefaultTheme, css } from 'styled-components';
 import { mergeThemes } from './utils';
 
 const ColorSchemeContext = createContext({

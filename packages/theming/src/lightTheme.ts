@@ -1,3 +1,7 @@
+import { respondTo } from './utils';
+
+const breakpoints = ['48em', '64em', '90em', '114em'];
+
 const lightTheme = {
 	colors: {
 		primary: {
@@ -33,7 +37,13 @@ const lightTheme = {
 	space: [10, 15, 20, 25, 30, 40, 50, 60],
 	fontSizes: [12, 14, 16, 18, 22, 30, 36],
 	fontWeights: [300, 400, 500, 700],
-	breakpoints: ['48em', '64em', '90em', '114em'],
+	breakpoints,
+	mediaQueries: respondTo({
+		xs: breakpoints[0],
+		sm: breakpoints[1],
+		md: breakpoints[2],
+		lg: breakpoints[3],
+	}),
 	letterSpacings: {
 		normal: 'normal',
 		tracked: '0.1em',

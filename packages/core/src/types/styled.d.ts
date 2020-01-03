@@ -30,6 +30,12 @@ declare module 'styled-components' {
 		fontSizes: number[];
 		fontWeights: number[];
 		breakpoints: number[];
+		mediaQueries: {
+			xs: Function;
+			sm: Function;
+			md: Function;
+			lg: Function;
+		};
 		letterSpacings: {
 			normal: string;
 			tracked: string;
