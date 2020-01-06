@@ -6,8 +6,8 @@ export const mergeThemes = <T extends DefaultTheme>(themes: T[]): T => {
 	return merge(themes);
 };
 
-export const respondTo = sizes => {
-	return Object.keys(sizes).reduce((accumulator, label: 'xs' | 'sm' | 'md' | 'lg') => {
+export const respondTo = (sizes: { [key: string]: string }) => {
+	return Object.keys(sizes).reduce((accumulator, label: string) => {
 		return {
 			...accumulator,
 			[label]: (...args: any[]) => css`

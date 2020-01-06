@@ -54,12 +54,20 @@ const Logo = styled('div')`
 	flex: 0 0 auto;
 	align-items: flex-start;
 	justify-content: flex-start;
-	margin-right: 100px;
 	width: 180px;
+	margin: ${({ theme }) => theme.space[4]}px;
 
 	img {
 		width: 100%;
 	}
+
+	${({ theme }) => theme.mediaQueries.sm`
+		margin: 0px;
+	`};
+
+	${({ theme }) => theme.mediaQueries.md`
+		margin-right: 100px;
+	`};
 `;
 
 export const LevelOne = styled('div')`
@@ -97,7 +105,7 @@ export const Footer: React.FC<FooterProps> = ({
 						</Flex>
 					))}
 				</LevelOne>
-				<DocWidth borderTop="1px solid #CCC" justifyContent="space-between" p={2}>
+				<DocWidth borderTop="1px solid #CCC" flexWrap="wrap" justifyContent="space-between" p={2}>
 					<Flex>
 						{links.map(({ title, url, ...linkProps }, key: number) => (
 							<Link key={key} href={url} mr={1} {...linkProps}>
