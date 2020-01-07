@@ -1,17 +1,37 @@
 import qs from 'qs';
 import { getObjectValueByString } from 'utils';
 
-// TODO: define available field props
-type FieldProps = {
+export type FieldInputTypes =
+	| 'checkbox'
+	| 'color'
+	| 'date'
+	| 'email'
+	| 'file'
+	| 'number'
+	| 'password'
+	| 'radio'
+	| 'range'
+	| 'search'
+	| 'text'
+	| 'url';
+
+export type FieldProps = {
+	/** Field name, required for future ref. */
 	name: string;
+	/** HTML input type */
+	type: FieldInputTypes;
+	/** If defined, adds an input label above the input */
 	label?: string;
+	/** If defined, sets a default value on an input on initial load */
 	value?: any;
+	/** Error description as a string */
 	error?: string;
 };
 
 export function validate(formFields: FieldProps[]) {
+	/** Save fields with errors in memory to avoid filtering on every key stroke */
 	const fieldsWithErrors = formFields.filter(field => field.error);
-	return values => {
+	return (values: unknown) => {
 		const errors = {};
 
 		fieldsWithErrors.map(({ name, error }) => {
