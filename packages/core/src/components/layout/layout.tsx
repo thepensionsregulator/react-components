@@ -19,14 +19,9 @@ const AppWidth = styled.div`
 	max-width: 1000px;
 `;
 
-type ContainerProps = {
-	borderTop: string;
-	bg: string;
-};
-
-export const Container: React.FC<ContainerProps> = ({ children, ...rest }) => {
+export const Container: React.FC = ({ children, ...rest }) => {
 	return (
-		<DocWidth justifyContent="center" {...rest}>
+		<DocWidth justifyContent="center" bg="#eeeeee" borderTop="5px solid #777" {...rest}>
 			<AppWidth>{children}</AppWidth>
 		</DocWidth>
 	);
@@ -38,7 +33,7 @@ type FooterLinkProps = {
 	size?: number;
 };
 
-interface FooterProps extends ContainerProps {
+type FooterProps = {
 	/** accepts 2d array of type FooterLinkProps objects, each array represents column in a footer */
 	menus: FooterLinkProps[][];
 	/** accepts an array of type FooterLinkProps objects */
@@ -47,7 +42,7 @@ interface FooterProps extends ContainerProps {
 	logoUrl?: string;
 	/** accepts copyright description */
 	copyright?: string;
-}
+};
 
 const Logo = styled('div')`
 	display: flex;
@@ -146,7 +141,7 @@ const styledInfoTab = ({ important }: InfoProps) => {
 	`;
 };
 
-const StyledInfo = styled('div')<{ important: boolean }>`
+const StyledInfo = styled('div')<{ important?: boolean }>`
 	display: flex;
 	flex-direction: column;
 	padding: 30px;
@@ -158,21 +153,21 @@ const StyledInfo = styled('div')<{ important: boolean }>`
 `;
 
 type InfoProps = {
-	important: boolean;
+	important?: boolean;
 	title?: string;
 };
 
-export const Info: React.FC<InfoProps> = ({ children, title, important }) => {
+export const Info: React.FC<InfoProps> = ({ children, title, important = false }) => {
 	return (
 		<StyledInfo important={important}>
 			{title && <H2 mb={2}>{title}</H2>}
-			<P>{children}</P>
+			{children}
 		</StyledInfo>
 	);
 };
 
+// TODO: alert with like buttons theme colours
 export const StyledAlert = styled('div')``;
-
 export const Alert: React.FC = ({ children }) => {
 	return <StyledAlert>{children}</StyledAlert>;
 };

@@ -26,6 +26,8 @@ export type FieldProps = {
 	value?: any;
 	/** Error description as a string */
 	error?: string;
+	/** If required and has title, will display * next to the title */
+	required?: boolean;
 };
 
 export function validate(formFields: FieldProps[]) {

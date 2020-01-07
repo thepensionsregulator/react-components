@@ -113,6 +113,14 @@ export const P = styled.p<HtmlHTagTypes>`
 	${space};
 `;
 
+export const Span = styled.span<HtmlHTagTypes>`
+	${fontStack};
+
+	${color};
+	${typography};
+	${space};
+`;
+
 type LinkProps = {
 	appearance?: 'default' | 'primary';
 };
