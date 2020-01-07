@@ -1,8 +1,8 @@
 import React from 'react';
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 import { compose, space, color, border, layout, flexbox, typography } from 'styled-system';
 import { BorderProps, ColorProps, FlexboxProps, SpaceProps, LayoutProps, TypographyProps } from 'styled-system';
-import { P, Link } from '../typography';
+import { P, Link, H2 } from '../typography';
 
 const DocWidth = styled.div<BorderProps & ColorProps & FlexboxProps & SpaceProps>`
 	display: flex;
@@ -120,6 +120,61 @@ export const Footer: React.FC<FooterProps> = ({
 			</Flex>
 		</Container>
 	);
+};
+
+const styledInfoTab = ({ important }: InfoProps) => {
+	if (!important) return null;
+	return css`
+		margin-top: 46px;
+		position: relative;
+
+		&:before {
+			content: 'Important';
+			display: flex;
+			align-items: center;
+			justify-content: center;
+			font-weight: 300;
+			font-size: 18px;
+			position: absolute;
+			left: 0;
+			height: 46px;
+			top: -46px;
+			padding: 0 30px;
+			background: #333;
+			color: #fff;
+		}
+	`;
+};
+
+const StyledInfo = styled('div')<{ important: boolean }>`
+	display: flex;
+	flex-direction: column;
+	padding: 30px;
+	border-top: ${({ important }) => (important ? `6px solid #333` : null)};
+	background: #eee;
+	color: #333;
+
+	${styledInfoTab}
+`;
+
+type InfoProps = {
+	important: boolean;
+	title?: string;
+};
+
+export const Info: React.FC<InfoProps> = ({ children, title, important }) => {
+	return (
+		<StyledInfo important={important}>
+			{title && <H2 mb={2}>{title}</H2>}
+			<P>{children}</P>
+		</StyledInfo>
+	);
+};
+
+export const StyledAlert = styled('div')``;
+
+export const Alert: React.FC = ({ children }) => {
+	return <StyledAlert>{children}</StyledAlert>;
 };
 
 type FlexProps = FlexboxProps & SpaceProps & LayoutProps & TypographyProps & ColorProps;

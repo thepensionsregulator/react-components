@@ -1,12 +1,12 @@
 import React from 'react';
 import { Field, FieldRenderProps } from 'react-final-form';
-import { StyledInput, ErrorMessage, FormLabel, StyledLabel } from './styles';
+import { StyledInput, ErrorMessage, FormLabelText, StyledLabel } from './styles';
 import { FieldProps } from '../forms/validation';
 
 const InputText: React.FC<FieldRenderProps<string> & FieldProps> = ({ label, input, meta, ...props }) => {
 	return (
 		<StyledLabel>
-			{label && <FormLabel>{label}</FormLabel>}
+			{label && <FormLabelText>{label}</FormLabelText>}
 			<StyledInput aria-label={label} {...input} {...props} />
 			{meta && meta.touched && meta.error && <ErrorMessage>{meta.error}</ErrorMessage>}
 		</StyledLabel>

@@ -25,7 +25,7 @@ export const ErrorMessage = styled.div`
 	color: ${({ theme }) => theme.colors.danger[300]};
 `;
 
-export const FormLabel = styled.div`
+export const FormLabelText = styled.div`
 	color: ${({ theme }) => theme.colors.neutral['800']};
 	font-weight: 400;
 	margin: 5px;
