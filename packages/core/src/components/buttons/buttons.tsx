@@ -54,7 +54,6 @@ const primaryAppearance = colors => {
 		background: ${colors?.[200]};
 		color: white;
 		border: none;
-		box-shadow: 0 2px 0 0 #222;
 		outline: none;
 
 		&:hover {
@@ -70,7 +69,7 @@ const primaryAppearance = colors => {
 		}
 
 		&:active {
-			transform: translateY(2px);
+			background: ${colors?.[400]};
 			box-shadow: none;
 		}
 	`;
