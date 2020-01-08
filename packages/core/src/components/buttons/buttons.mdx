@@ -31,7 +31,7 @@ the action that will occur when the user touches them.
 ## Usage with props
 
 <Playground>
-	<Button appearance="primary" intent="warning" scale="big" margin={30} iconBefore={() => `🎄`} iconAfter={() => `🎄`}>
+	<Button intent="warning" scale="big" margin={30} iconBefore={() => `🎄`} iconAfter={() => `🎄`}>
 		Click me
 	</Button>
 </Playground>
@@ -49,42 +49,57 @@ the action that will occur when the user touches them.
 <Button mr={15} scale="big">
 	Click me
 </Button>
-<Button mr={15} appearance="primary" scale="small">
+<Button mr={15} appearance="link" scale="small">
 	Click me
 </Button>
-<Button mr={15} appearance="primary" scale="normal">
+<Button mr={15} appearance="link" scale="normal">
 	Click me
 </Button>
-<Button mr={15} appearance="primary" scale="big">
-	Click me
-</Button>
-
-### Default appearance
-
-<Button mr={15} appearance="default" intent="none">
-	Click me
-</Button>
-<Button mr={15} appearance="default" intent="success">
-	Click me
-</Button>
-<Button mr={15} appearance="default" intent="warning">
-	Click me
-</Button>
-<Button mr={15} appearance="default" intent="danger">
+<Button mr={15} appearance="link" scale="big">
 	Click me
 </Button>
 
 ### Primary appearance with intent
 
-<Button mr={15} appearance="primary" intent="none">
+<Button mr={15} intent="none">
 	Click me
 </Button>
-<Button mr={15} appearance="primary" intent="success">
+<Button mr={15} intent="success">
 	Click me
 </Button>
-<Button mr={15} appearance="primary" intent="warning">
+<Button mr={15} intent="warning">
 	Click me
 </Button>
-<Button mr={15} appearance="primary" intent="danger">
+<Button mr={15} intent="danger">
+	Click me
+</Button>
+
+### Outlined appearance with intent
+
+<Button mr={15} appearance="outlined" intent="none">
+	Click me
+</Button>
+<Button mr={15} appearance="outlined" intent="success">
+	Click me
+</Button>
+<Button mr={15} appearance="outlined" intent="warning">
+	Click me
+</Button>
+<Button mr={15} appearance="outlined" intent="danger">
+	Click me
+</Button>
+
+### Link appearance with intent
+
+<Button mr={15} appearance="link" intent="none">
+	Click me
+</Button>
+<Button mr={15} appearance="link" intent="success">
+	Click me
+</Button>
+<Button mr={15} appearance="link" intent="warning">
+	Click me
+</Button>
+<Button mr={15} appearance="link" intent="danger">
 	Click me
 </Button>

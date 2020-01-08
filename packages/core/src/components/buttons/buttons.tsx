@@ -24,19 +24,18 @@ const scales = {
 	`,
 };
 
-const defaultAppearance = colors => {
+const linkAppearance = colors => {
 	return css`
 		background: transparent;
 		box-shadow: none;
 		border: none;
 		color: ${colors?.[200]};
 		border: none;
-		text-decoration: underline;
-		padding-left: 0px;
-		padding-right: 0px;
+		text-decoration: none;
 
 		&:hover {
 			color: ${colors?.[300]};
+			text-decoration: underline;
 		}
 
 		&:focus {
@@ -77,32 +76,65 @@ const primaryAppearance = colors => {
 	`;
 };
 
+const outlinedAppearance = colors => {
+	return css`
+		background: transparent;
+		color: ${colors?.[200]};
+		border: 1px solid ${colors?.[200]};
+		outline: none;
+
+		&:hover {
+			color: white;
+			background: ${colors?.[200]};
+		}
+
+		&:focus {
+		}
+
+		&:disabled {
+			background: grey;
+			cursor: not-allowed;
+		}
+
+		&:active {
+			box-shadow: none;
+		}
+	`;
+};
+
 function appearances(themeColors, intent: Intent) {
-	const colors = themeColors[intent === 'none' ? 'neutral' : intent];
+	const colors = themeColors[intent === 'none' ? 'primary' : intent];
 	return {
-		default: defaultAppearance(colors),
 		primary: primaryAppearance(colors),
+		outlined: outlinedAppearance(colors),
+		link: linkAppearance(colors),
 	};
 }
 
 const getAppearance = <T extends ButtonConfigProps & { theme: DefaultTheme }>({
 	theme,
-	appearance = 'default',
+	appearance = 'primary',
 	intent = 'none',
 }: T) => appearances(theme.colors, intent)[appearance];
 
 const getScale = ({ scale = 'normal' }): string => scales[scale];
 
 type Intent = 'none' | 'success' | 'warning' | 'danger';
-type Appearance = 'default' | 'primary';
+type Appearance = 'primary' | 'link' | 'outlined';
 type Scale = 'small' | 'normal' | 'big';
 
 type ButtonConfigProps = {
+	/** determins button color from theme */
 	intent: Intent;
+	/** determins button style */
 	appearance: Appearance;
+	/** determins button size */
 	scale: Scale;
+	/** button loading state */
 	isLoading: boolean;
+	/** icon JSX component before text */
 	iconBefore: FunctionComponent<{ style: any }>;
+	/** icon JSX component after text */
 	iconAfter: FunctionComponent<{ style: any }>;
 	disabled: boolean;
 };
