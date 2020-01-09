@@ -1,0 +1,20 @@
+{
+	"extends": "../../config/tsconfig.base.json",
+	"compilerOptions": {
+		"rootDir": "src",
+		"baseUrl": "src",
+		"composite": false,
+		"outDir": "lib",
+		"jsx": "react",
+		"pretty": true,
+		"noImplicitAny": false,
+		"noUnusedLocals": false,
+		"noFallthroughCasesInSwitch": true,
+		"allowSyntheticDefaultImports": true,
+		"declarationMap": true,
+		"esModuleInterop": true,
+		"lib": ["es2018", "dom"]
+	},
+	"include": ["src/**/*"],
+	"exclude": ["node_modules", "lib", "**/__mocks__/**/*", "**/__tests__/**/*", "**/*.mdx"]
+}

@@ -1,5 +1,5 @@
 # fs
-.DS_Store
+.
 .rpt2_cache
 
 # Logs
@@ -46,6 +46,12 @@ npm
 .alm
 
 yarn.lock
+
+# Build Path of Test Fixtures
+test/**/public
+.gatsby-context.js
+.cache/
+.netlify
 
 # docs
 db.json

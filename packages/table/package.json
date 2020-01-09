@@ -1,0 +1,77 @@
+{
+	"name": "@tpr/table",
+	"version": "0.0.1-alpha.0",
+	"description": "TPR Table component and helpers",
+	"author": "David Alekna <david.alekna@tpr.gov.uk>",
+	"license": "MIT",
+	"main": "./lib/bundle.cjs.js",
+	"module": "./lib/bundle.esm.js",
+	"typings": "./lib/index.d.ts",
+	"sideEffects": false,
+	"files": [
+		"lib/bundle*",
+		"lib/*.d.ts"
+	],
+	"repository": {
+		"type": "git",
+		"url": "https://dev.azure.com/thepensionsregulator/TPR/_git/react-components.git"
+	},
+	"bugs": {
+		"url": "https://dev.azure.com/thepensionsregulator/TPR/_git/react-components/issues"
+	},
+	"homepage": "https://dev.azure.com/thepensionsregulator/TPR/_git/react-components#readme",
+	"keywords": [
+		"tpr"
+	],
+	"scripts": {
+		"prepare": "yarn build",
+		"dev": "yarn storybook",
+		"test": "jest --coverage",
+		"test:watch": "jest --watch",
+		"build": "yarn clean && tsc -b .",
+		"postbuild": "yarn bundle",
+		"bundle": "cross-env-shell \"../../node_modules/.bin/rollup\" -c rollup.config.js",
+		"clean": "rimraf lib storybook-static esm",
+		"report-coverage": "codecov",
+		"docz:dev": "docz dev",
+		"docz:build": "docz build",
+		"docz:serve": "docz build && docz serve"
+	},
+	"devDependencies": {
+		"@babel/core": "^7.7.7",
+		"@testing-library/jest-dom": "^4.2.4",
+		"@testing-library/react": "^9.3.2",
+		"@types/jest": "^24.0.25",
+		"@types/lodash": "^4.14.149",
+		"@types/prop-types": "^15.7.3",
+		"@types/react": "^16.9.13",
+		"@types/react-dom": "^16.9.4",
+		"@types/styled-components": "^4.4.2",
+		"babel-jest": "^24.9.0",
+		"babel-loader": "^8.0.6",
+		"codecov": "^3.6.1",
+		"cross-env": "^6.0.3",
+		"docz": "^2.2.0",
+		"jest": "^24.9.0",
+		"npm-run-all": "^4.1.5",
+		"react": "^16.12.0",
+		"react-docgen-typescript-loader": "^3.6.0",
+		"react-dom": "^16.12.0",
+		"semantic-release": "^15.13.31",
+		"styled-components": "^4.4.1",
+		"ts-jest": "^24.3.0",
+		"ts-loader": "^6.2.1",
+		"ts-node": "^8.5.2",
+		"tslib": "^1.10.0",
+		"typescript": "^3.7.2"
+	},
+	"peerDependencies": {
+		"react": "^16.12.0",
+		"react-dom": "^16.12.0",
+		"styled-components": "^4.4.1"
+	},
+	"dependencies": {
+		"@alekna/react-data-browser": "^1.0.6",
+		"lodash": "^4.17.15"
+	}
+}
