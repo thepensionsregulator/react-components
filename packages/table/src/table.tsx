@@ -38,7 +38,7 @@ export const TableBase: React.FC<TableBaseProps> = ({
 			viewType={'loading'}
 			{...rest}
 		>
-			{props => {
+			{() => {
 				return <Flex>this will be a re-usable table component</Flex>;
 			}}
 		</DataBrowser>

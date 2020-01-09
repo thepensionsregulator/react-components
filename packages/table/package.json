@@ -71,8 +71,8 @@
 		"styled-components": "^4.4.1"
 	},
 	"dependencies": {
+		"@alekna/react-data-browser": "^1.1.1",
 		"@tpr/core": "file:../core",
-		"@alekna/react-data-browser": "^1.0.6",
 		"lodash": "^4.17.15"
 	}
 }
