@@ -14,7 +14,8 @@
 		"clean": "find . -name \"node_modules\" -exec rm -rf '{}' + && find . -name \"lib\" -exec rm -rf '{}' +"
 	},
 	"dependencies": {
-		"core": "file:packages/core"
+		"core": "file:packages/core",
+		"table": "file:packages/table"
 	},
 	"devDependencies": {
 		"@types/jest": "^24.0.23",
