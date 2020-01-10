@@ -51,6 +51,7 @@ yarn.lock
 test/**/public
 .gatsby-context.js
 .cache/
+public/
 .netlify
 
 # docs

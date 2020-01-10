@@ -52,7 +52,7 @@ const config = {
         open: false,
         'open-browser': false,
         root:
-          '/Users/davidalekna/Development/tpr/react-components/packages/core/.docz',
+          'C:\\Users\\aleknad\\Development\\tpr\\react-components\\packages\\core\\.docz',
         base: '/',
         source: './',
         src: './',
@@ -72,35 +72,35 @@ const config = {
         separator: '-',
         paths: {
           root:
-            '/Users/davidalekna/Development/tpr/react-components/packages/core',
+            'C:\\Users\\aleknad\\Development\\tpr\\react-components\\packages\\core',
           templates:
-            '/Users/davidalekna/Development/tpr/react-components/packages/core/node_modules/docz-core/dist/templates',
+            'C:\\Users\\aleknad\\Development\\tpr\\react-components\\packages\\core\\node_modules\\docz-core\\dist\\templates',
           docz:
-            '/Users/davidalekna/Development/tpr/react-components/packages/core/.docz',
+            'C:\\Users\\aleknad\\Development\\tpr\\react-components\\packages\\core\\.docz',
           cache:
-            '/Users/davidalekna/Development/tpr/react-components/packages/core/.docz/.cache',
+            'C:\\Users\\aleknad\\Development\\tpr\\react-components\\packages\\core\\.docz\\.cache',
           app:
-            '/Users/davidalekna/Development/tpr/react-components/packages/core/.docz/app',
+            'C:\\Users\\aleknad\\Development\\tpr\\react-components\\packages\\core\\.docz\\app',
           appPackageJson:
-            '/Users/davidalekna/Development/tpr/react-components/packages/core/package.json',
+            'C:\\Users\\aleknad\\Development\\tpr\\react-components\\packages\\core\\package.json',
           gatsbyConfig:
-            '/Users/davidalekna/Development/tpr/react-components/packages/core/gatsby-config.js',
+            'C:\\Users\\aleknad\\Development\\tpr\\react-components\\packages\\core\\gatsby-config.js',
           gatsbyBrowser:
-            '/Users/davidalekna/Development/tpr/react-components/packages/core/gatsby-browser.js',
+            'C:\\Users\\aleknad\\Development\\tpr\\react-components\\packages\\core\\gatsby-browser.js',
           gatsbyNode:
-            '/Users/davidalekna/Development/tpr/react-components/packages/core/gatsby-node.js',
+            'C:\\Users\\aleknad\\Development\\tpr\\react-components\\packages\\core\\gatsby-node.js',
           gatsbySSR:
-            '/Users/davidalekna/Development/tpr/react-components/packages/core/gatsby-ssr.js',
+            'C:\\Users\\aleknad\\Development\\tpr\\react-components\\packages\\core\\gatsby-ssr.js',
           importsJs:
-            '/Users/davidalekna/Development/tpr/react-components/packages/core/.docz/app/imports.js',
+            'C:\\Users\\aleknad\\Development\\tpr\\react-components\\packages\\core\\.docz\\app\\imports.js',
           rootJs:
-            '/Users/davidalekna/Development/tpr/react-components/packages/core/.docz/app/root.jsx',
+            'C:\\Users\\aleknad\\Development\\tpr\\react-components\\packages\\core\\.docz\\app\\root.jsx',
           indexJs:
-            '/Users/davidalekna/Development/tpr/react-components/packages/core/.docz/app/index.jsx',
+            'C:\\Users\\aleknad\\Development\\tpr\\react-components\\packages\\core\\.docz\\app\\index.jsx',
           indexHtml:
-            '/Users/davidalekna/Development/tpr/react-components/packages/core/.docz/app/index.html',
+            'C:\\Users\\aleknad\\Development\\tpr\\react-components\\packages\\core\\.docz\\app\\index.html',
           db:
-            '/Users/davidalekna/Development/tpr/react-components/packages/core/.docz/app/db.json',
+            'C:\\Users\\aleknad\\Development\\tpr\\react-components\\packages\\core\\.docz\\app\\db.json',
         },
       },
     },

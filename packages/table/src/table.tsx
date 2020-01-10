@@ -1,13 +1,9 @@
 import React from 'react';
-import DataBrowser from '@alekna/react-data-browser';
+import DataBrowser, { DataBrowserProps } from '@alekna/react-data-browser';
 import { Flex } from '@tpr/core';
-
-// TODO: export typescript types from @alekna/react-data-browser
 
 type TableBaseProps = {
 	fixedColWidth: number;
-	columns: object[];
-	totalItems: number;
 	status: string;
 	data: object[];
 	isLoading: boolean;
@@ -17,7 +13,7 @@ type TableBaseProps = {
 	[key: string]: any;
 };
 
-export const TableBase: React.FC<TableBaseProps> = ({
+export const TableBase: React.FC<TableBaseProps & DataBrowserProps> = ({
 	fixedColWidth = 40,
 	columns,
 	totalItems,
@@ -38,7 +34,7 @@ export const TableBase: React.FC<TableBaseProps> = ({
 			viewType={'loading'}
 			{...rest}
 		>
-			{() => {
+			{utils => {
 				return <Flex>this will be a re-usable table component</Flex>;
 			}}
 		</DataBrowser>
