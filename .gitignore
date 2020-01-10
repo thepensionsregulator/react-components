@@ -51,14 +51,13 @@ yarn.lock
 test/**/public
 .gatsby-context.js
 .cache/
-public/
 .netlify
 
 # docs
 db.json
 docs.json
 *.log
-docs/public/*
+.docz/public/*
 .idea/
 
 junit.xml
