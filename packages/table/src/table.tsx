@@ -1,18 +1,18 @@
-import React from 'react';
+import React, { ReactElement } from 'react';
 import DataBrowser, { DataBrowserProps } from '@alekna/react-data-browser';
-import { Flex } from '@tpr/core';
-
-type TableBaseProps<T = object> = {
-	fixedColWidth: number;
-	status: string;
-	data: T[];
-	isLoading: boolean;
-};
 
 // ISSUE: can't find a way to pass a generic to TableBaseProps when using React.FC 🤔
 
+type TableBaseProps<T = object> = {
+	fixedColW: number;
+	status: 'pending' | 'idle' | 'refetching' | 'success' | 'failure';
+	data: T[];
+	isLoading: boolean;
+	children: any;
+};
+
 export const TableBase: React.FC<DataBrowserProps & TableBaseProps> = ({
-	fixedColWidth = 40,
+	fixedColW = 40,
 	status,
 	data,
 	children,
@@ -21,11 +21,44 @@ export const TableBase: React.FC<DataBrowserProps & TableBaseProps> = ({
 }) => {
 	const views = ['list', 'grid', 'loading', 'refetching'];
 	return (
-		<DataBrowser views={views} viewType={'loading'} {...dataBrowserProps}>
+		<DataBrowser views={views} viewType="loading" {...dataBrowserProps}>
 			{utils => {
 				console.log(utils);
-				return <Flex>this will be a re-usable table component</Flex>;
+				return (
+					<div>
+						<div>static table head</div>
+						{children(prepareRenderer({ status, isLoading, data, fixedColW }))}
+					</div>
+				);
 			}}
 		</DataBrowser>
 	);
+};
+
+type ViewSwitchProps<T = string> = {
+	fieldReducer: (fieldValue: unknown, fieldName: T, row: any) => ReactElement;
+	onRowClick?: (row: any) => void;
+	rowOptionsMenu?: (props: { toggleMenu: Function; row: any; history: any }) => ReactElement;
+	onBottomTouch?: Function;
+	fixedColW?: number;
+	refetching?: boolean;
+	maxHeight?: number;
+	data: any;
+	bottomTouchOffset?: number;
+	noDataMessage?: string;
+};
+
+const prepareRenderer = ({ isLoading, status }: Partial<TableBaseProps>): Function => {
+	return (_: ViewSwitchProps): ReactElement => {
+		if (isLoading) return <div>pending</div>;
+
+		switch (status) {
+			case String(status.match(new RegExp(`^pending|idle`))):
+				return <div>loading</div>;
+			case String(status.match(new RegExp(`^refetching|success`))):
+				return <div>table list ready to be rendered</div>;
+			default:
+				return null;
+		}
+	};
 };
