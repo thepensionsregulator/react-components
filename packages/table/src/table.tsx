@@ -22,12 +22,11 @@ export const TableBase: React.FC<DataBrowserProps & TableBaseProps> = ({
 	const views = ['list', 'grid', 'loading', 'refetching'];
 	return (
 		<DataBrowser views={views} viewType="loading" {...dataBrowserProps}>
-			{utils => {
-				console.log(utils);
+			{dataBrowserUtils => {
 				return (
 					<div>
 						<div>static table head</div>
-						{children(prepareRenderer({ status, isLoading, data, fixedColW }))}
+						{children(prepareRenderer({ status, isLoading, data, fixedColW, ...dataBrowserUtils }))}
 					</div>
 				);
 			}}
@@ -38,14 +37,14 @@ export const TableBase: React.FC<DataBrowserProps & TableBaseProps> = ({
 type ViewSwitchProps<T = string> = {
 	fieldReducer: (fieldValue: unknown, fieldName: T, row: any) => ReactElement;
 	onRowClick?: (row: any) => void;
-	rowOptionsMenu?: (props: { toggleMenu: Function; row: any; history: any }) => ReactElement;
-	onBottomTouch?: Function;
+	rowOptions?: (props: { toggleMenu: Function; row: any; history: any }) => ReactElement;
+	onBottomTouch?: () => void;
 	fixedColW?: number;
 	refetching?: boolean;
-	maxHeight?: number;
+	maxBodyHeight?: number;
 	data: any;
 	bottomTouchOffset?: number;
-	noDataMessage?: string;
+	emptyDataMessage?: string;
 };
 
 const prepareRenderer = ({ isLoading, status }: Partial<TableBaseProps>): Function => {
