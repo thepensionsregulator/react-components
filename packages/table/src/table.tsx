@@ -2,39 +2,28 @@ import React from 'react';
 import DataBrowser, { DataBrowserProps } from '@alekna/react-data-browser';
 import { Flex } from '@tpr/core';
 
-type TableBaseProps = {
+type TableBaseProps<T = object> = {
 	fixedColWidth: number;
 	status: string;
-	data: object[];
+	data: T[];
 	isLoading: boolean;
-	numberOfLoadingRows: number | void;
-	onTitleClick: Function;
-	currentSort: object;
-	[key: string]: any;
 };
 
-export const TableBase: React.FC<TableBaseProps & DataBrowserProps> = ({
+// ISSUE: can't find a way to pass a generic to TableBaseProps when using React.FC 🤔
+
+export const TableBase: React.FC<DataBrowserProps & TableBaseProps> = ({
 	fixedColWidth = 40,
-	columns,
-	totalItems,
 	status,
 	data,
 	children,
 	isLoading = false,
-	numberOfLoadingRows = undefined,
-	onTitleClick = () => {},
-	currentSort = {},
-	...rest
+	...dataBrowserProps
 }) => {
+	const views = ['list', 'grid', 'loading', 'refetching'];
 	return (
-		<DataBrowser
-			columns={columns}
-			totalItems={totalItems}
-			views={['list', 'grid', 'loading', 'refetching']}
-			viewType={'loading'}
-			{...rest}
-		>
+		<DataBrowser views={views} viewType={'loading'} {...dataBrowserProps}>
 			{utils => {
+				console.log(utils);
 				return <Flex>this will be a re-usable table component</Flex>;
 			}}
 		</DataBrowser>
