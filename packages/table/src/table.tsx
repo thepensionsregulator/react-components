@@ -5,11 +5,12 @@ import { NetworkStatus, ApolloError } from 'apollo-client';
 // ISSUE: can't find a way to pass a generic to TableBaseProps when using React.FC 🤔
 
 type TableBaseProps<T> = {
+	/** fixed column width for the first and last items in the row */
 	fixedColW: number;
 	data: T | T[];
 	error?: ApolloError;
-	networkStatus: NetworkStatus;
 	loading: boolean;
+	networkStatus: NetworkStatus;
 	children: (utils: ViewSwitchProps) => ReactElement;
 };
 
@@ -43,10 +44,7 @@ type ViewSwitchProps = {
 	onRowClick?: (row: any) => void;
 	rowOptions?: (props: { toggleMenu: Function; row: any; history: any }) => ReactElement;
 	onBottomTouch?: () => void;
-	fixedColW?: number;
-	refetching?: boolean;
 	maxBodyHeight?: number;
-	data: unknown | unknown[];
 	bottomTouchOffset?: number;
 	emptyDataMessage?: string;
 };
@@ -58,6 +56,8 @@ const body = <T extends {}>({
 	networkStatus,
 	...baseUtils
 }: Omit<TableBaseProps<T>, 'children'>): Function => {
+	// could have a state machine to control body states
+
 	return (_: DataBrowserProps) => (_: ViewSwitchProps): ReactElement => {
 		if (networkStatus === 3) return <div>fetch more in progress</div>;
 		if (networkStatus === 4) return <div>refetch in progress</div>;
