@@ -1,4 +1,5 @@
 {
+	"private": false,
 	"name": "@tpr/monorepo",
 	"license": "MIT",
 	"scripts": {
@@ -11,6 +12,7 @@
 		"coverage": "jest --verbose --coverage",
 		"coverage:upload": "codecov",
 		"deploy": "lerna publish",
+		"lerna": "lerna",
 		"clean": "find . -name \"node_modules\" -exec rm -rf '{}' + && find . -name \"lib\" -exec rm -rf '{}' +"
 	},
 	"dependencies": {
@@ -33,5 +35,6 @@
 		"rollup-plugin-typescript2": "^0.25.2",
 		"ts-jest": "^24.2.0",
 		"typescript": "^3.7.2"
-	}
+	},
+	"version": "0.0.0"
 }
