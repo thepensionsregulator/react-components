@@ -59,10 +59,19 @@ const body = <T extends {}>({
 	// could have a state machine to control body states
 
 	return (_: DataBrowserProps) => (_: ViewSwitchProps): ReactElement => {
-		if (networkStatus === 3) return <div>fetch more in progress</div>;
-		if (networkStatus === 4) return <div>refetch in progress</div>;
 		if (loading) return <div>loading</div>;
 		if (error) return <div>error</div>;
+
+		if (networkStatus === 3) return <div>fetch more in progress</div>;
+		if (networkStatus === 4) return <div>refetch in progress</div>;
+
+		// loading = 1,
+		// setVariables = 2,
+		// fetchMore = 3,
+		// refetch = 4,
+		// poll = 6,
+		// ready = 7,
+		// error = 8
 
 		return <div>data is ready</div>;
 	};

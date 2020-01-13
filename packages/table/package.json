@@ -75,5 +75,8 @@
 		"@alekna/react-data-browser": "^1.1.3",
 		"@tpr/core": "file:../core",
 		"lodash": "^4.17.15"
+	},
+	"publishConfig": {
+		"access": "public"
 	}
 }

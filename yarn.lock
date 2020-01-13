@@ -2,6 +2,13 @@
 # yarn lockfile v1
 
 
+"@alekna/react-data-browser@^1.1.3":
+  version "1.1.3"
+  resolved "https://registry.yarnpkg.com/@alekna/react-data-browser/-/react-data-browser-1.1.3.tgz#4117d946a2513c02fca41eb461d46a826cba2402"
+  integrity sha512-5XUyNYWZYjsh+P9tQmSRaTHFy7hSAex3FKMsP9LWgO93jCVPcfdpnM8cB/Wzw+gyuJ0bG+HOevnjxMqvkd2Hzg==
+  dependencies:
+    prop-types "^15.7.2"
+
 "@babel/code-frame@^7.0.0":
   version "7.5.5"
   resolved "https://registry.yarnpkg.com/@babel/code-frame/-/code-frame-7.5.5.tgz#bc0782f6d69f7b7d49531219699b988f669a8f9d"
@@ -846,6 +853,14 @@
   integrity sha512-StASIL2lgT3TRjxv17z9pAqbnI7HGu9DrJlg3sEBFfCLaMEqp+O3IQPUF6EZtQ4xkAu2ml6kMBBCtGxjvmtmuQ==
   dependencies:
     "@types/node" ">= 8"
+
+"@tpr/core@file:packages/core":
+  version "0.0.1-alpha.0"
+  dependencies:
+    final-form "^4.18.6"
+    prop-types "^15.7.2"
+    qs "^6.9.1"
+    react-final-form "^6.3.3"
 
 "@types/estree@*", "@types/estree@0.0.39":
   version "0.0.39"
@@ -5016,6 +5031,13 @@ supports-color@^6.1.0:
   dependencies:
     has-flag "^3.0.0"
 
+"table@file:packages/table":
+  version "0.0.1-alpha.0"
+  dependencies:
+    "@alekna/react-data-browser" "^1.1.3"
+    "@tpr/core" "file:../../../AppData/Local/Yarn/Cache/v6/npm-table-0.0.1-alpha.0-c5581364-a41f-4f30-a206-b094a2583bfa-1578913481895/node_modules/core"
+    lodash "^4.17.15"
+
 tar@^4.4.10, tar@^4.4.12, tar@^4.4.8:
   version "4.4.13"
   resolved "https://registry.yarnpkg.com/tar/-/tar-4.4.13.tgz#43b364bc52888d555298637b10d60790254ab525"
@@ -5059,6 +5081,11 @@ text-extensions@^1.0.0:
   version "1.9.0"
   resolved "https://registry.yarnpkg.com/text-extensions/-/text-extensions-1.9.0.tgz#1853e45fee39c945ce6f6c36b2d659b5aabc2a26"
   integrity sha512-wiBrwC1EhBelW12Zy26JeOUkQ5mRu+5o8rpsJk5+2t+Y5vE7e842qtZDQ2g1NpX/29HdyFeJ4nSIhI47ENSxlQ==
+
+"theming@file:packages/theming":
+  version "0.0.1-alpha.0"
+  dependencies:
+    lodash "^4.17.15"
 
 thenify-all@^1.0.0:
   version "1.6.0"

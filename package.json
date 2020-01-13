@@ -15,10 +15,12 @@
 	},
 	"dependencies": {
 		"core": "file:packages/core",
-		"table": "file:packages/table"
+		"table": "file:packages/table",
+		"theming": "file:packages/theming"
 	},
 	"devDependencies": {
 		"@types/jest": "^24.0.23",
+		"jest": "^24.9.0",
 		"lerna": "^3.19.0",
 		"lerna-changelog": "^0.8.3",
 		"rollup": "^1.27.5",

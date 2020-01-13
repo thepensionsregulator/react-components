@@ -1,0 +1,25 @@
+# more on node.js config -> https://docs.microsoft.com/azure/devops/pipelines/languages/javascript
+
+trigger:
+  - master
+  
+  pool:
+    vmImage: 'ubuntu-latest'
+  
+  steps:
+  - task: NodeTool@0
+    inputs:
+      versionSpec: '10.x'
+    displayName: 'installing NodeJS'
+  
+  - script: |
+      yarn install
+    displayName: 'yarn install and build'
+  
+  - script: |
+      yarn test-ci
+    displayName: 'running tests...'
+  
+  - script: |
+      yarn deploy
+    displayName: 'publishing to npm...'
