@@ -61,7 +61,7 @@ const body = <T extends {}>({
 	return (_: DataBrowserProps) => (_: ViewSwitchProps): ReactElement => {
 		if (loading) return <div>loading</div>;
 		if (error) return <div>error</div>;
-
+		console.log(baseUtils);
 		if (networkStatus === 3) return <div>fetch more in progress</div>;
 		if (networkStatus === 4) return <div>refetch in progress</div>;
 

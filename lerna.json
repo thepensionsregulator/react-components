@@ -1,14 +1,11 @@
 {
-	"lerna": "0.0.1",
 	"npmClient": "yarn",
 	"useWorkspaces": false,
-	"packages": [
-		"packages/*"
-	],
-	"version": null,
+	"packages": ["packages/*"],
+	"version": "independent",
 	"command": {
-		"publish": {
-			"registry": "https://registry.npmjs.org/"
+		"version": {
+			"allowBranch": ["master", "packages"]
 		}
 	}
 }
