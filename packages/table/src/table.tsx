@@ -1,32 +1,36 @@
 import React, { ReactElement } from 'react';
 import DataBrowser, { DataBrowserProps } from '@alekna/react-data-browser';
+import { NetworkStatus, ApolloError } from 'apollo-client';
 
 // ISSUE: can't find a way to pass a generic to TableBaseProps when using React.FC 🤔
 
-type TableBaseProps<T = object> = {
+type TableBaseProps<T> = {
 	fixedColW: number;
-	status: 'pending' | 'idle' | 'refetching' | 'success' | 'failure';
-	data: T[];
-	isLoading: boolean;
-	children: any;
+	data: T | T[];
+	error?: ApolloError;
+	networkStatus: NetworkStatus;
+	loading: boolean;
+	children: (utils: ViewSwitchProps) => ReactElement;
 };
 
-export const TableBase: React.FC<DataBrowserProps & TableBaseProps> = ({
+const views = ['list', 'error', 'loading', 'refetch', 'fetchMore'];
+export const TableBase = <T extends {}, K extends DataBrowserProps & TableBaseProps<T>>({
 	fixedColW = 40,
-	status,
 	data,
 	children,
-	isLoading = false,
+	networkStatus,
+	error,
+	loading = false,
 	...dataBrowserProps
-}) => {
-	const views = ['list', 'grid', 'loading', 'refetching'];
+}: K) => {
 	return (
 		<DataBrowser views={views} viewType="loading" {...dataBrowserProps}>
 			{dataBrowserUtils => {
+				const renderBody = body({ fixedColW, data, networkStatus, error, loading });
 				return (
 					<div>
 						<div>static table head</div>
-						{children(prepareRenderer({ status, isLoading, data, fixedColW, ...dataBrowserUtils }))}
+						{children(renderBody(dataBrowserUtils))}
 					</div>
 				);
 			}}
@@ -34,30 +38,32 @@ export const TableBase: React.FC<DataBrowserProps & TableBaseProps> = ({
 	);
 };
 
-type ViewSwitchProps<T = string> = {
-	fieldReducer: (fieldValue: unknown, fieldName: T, row: any) => ReactElement;
+type ViewSwitchProps = {
+	fieldReducer: (fieldValue: unknown, fieldName: string, row: any) => ReactElement;
 	onRowClick?: (row: any) => void;
 	rowOptions?: (props: { toggleMenu: Function; row: any; history: any }) => ReactElement;
 	onBottomTouch?: () => void;
 	fixedColW?: number;
 	refetching?: boolean;
 	maxBodyHeight?: number;
-	data: any;
+	data: unknown | unknown[];
 	bottomTouchOffset?: number;
 	emptyDataMessage?: string;
 };
 
-const prepareRenderer = ({ isLoading, status }: Partial<TableBaseProps>): Function => {
-	return (_: ViewSwitchProps): ReactElement => {
-		if (isLoading) return <div>pending</div>;
+/** This function will manage Apollo data fetching states and renders the body accordingly */
+const body = <T extends {}>({
+	loading,
+	error,
+	networkStatus,
+	...baseUtils
+}: Omit<TableBaseProps<T>, 'children'>): Function => {
+	return (_: DataBrowserProps) => (_: ViewSwitchProps): ReactElement => {
+		if (networkStatus === 3) return <div>fetch more in progress</div>;
+		if (networkStatus === 4) return <div>refetch in progress</div>;
+		if (loading) return <div>loading</div>;
+		if (error) return <div>error</div>;
 
-		switch (status) {
-			case String(status.match(new RegExp(`^pending|idle`))):
-				return <div>loading</div>;
-			case String(status.match(new RegExp(`^refetching|success`))):
-				return <div>table list ready to be rendered</div>;
-			default:
-				return null;
-		}
+		return <div>data is ready</div>;
 	};
 };
