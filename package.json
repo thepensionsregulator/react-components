@@ -3,8 +3,8 @@
 	"name": "@tpr/monorepo",
 	"license": "MIT",
 	"scripts": {
-		"temp-dupes-solution": "rimraf node_modules/@types/react-native",
-		"postinstall": "temp-dupes-solution && lerna exec -- yarn install --package-lock=false && lerna run prepare",
+		"remove-typing-dupes": "rimraf node_modules/@types/react-native",
+		"postinstall": "yarn remove-typing-dupes && lerna exec -- yarn install --package-lock=false && lerna run prepare",
 		"diff": "check-if-folder-contents-changed-in-git-commit-range",
 		"build": "lerna run build",
 		"test": "jest",
