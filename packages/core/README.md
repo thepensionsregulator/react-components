@@ -6,3 +6,11 @@ Currently it's hosted on Azure DevOps which means it's not open source. We could
 2. layout (sidebar, toolbar, expanding box area: accordion)
 3. table
 4. forms (text with title, select options, date entry from 3 input boxes)
+
+TODO:
+
+create project folders for the following
+
+/datetime
+/icons
+/select

@@ -6,13 +6,14 @@
 		"postinstall": "lerna exec -- npm install --package-lock=false && lerna run prepare",
 		"diff": "check-if-folder-contents-changed-in-git-commit-range",
 		"build": "lerna run build",
-		"test": "jest --verbose",
-		"test-ci": "npm run coverage -- --ci --maxWorkers=2 --reporters=default --reporters=jest-junit",
+		"test": "jest",
 		"coverage": "jest --verbose --coverage",
 		"coverage:upload": "codecov",
 		"codecov": "echo TODO...",
+		"lint": "prettier --list-different \"packages/*/src/**/*.{js,jsx,ts,tsx}\"",
+		"lint-fix": "prettier --write \"packages/*/src/**/*.{js,jsx,ts,tsx}\"",
+		"posttest": "npm run lint",
 		"deploy": "lerna publish",
-		"lerna": "lerna",
 		"clean": "find . -name \"node_modules\" -exec rm -rf '{}' + && find . -name \"lib\" -exec rm -rf '{}' +"
 	},
 	"dependencies": {
@@ -36,5 +37,20 @@
 		"ts-jest": "^24.2.0",
 		"typescript": "^3.7.2"
 	},
-	"version": "0.0.0"
+	"jest": {
+		"projects": [
+			"<rootDir>/packages/*"
+		]
+	},
+	"lint-staged": {
+		"*.{js,jsx,ts,tsx}": [
+			"prettier --write",
+			"git add"
+		]
+	},
+	"husky": {
+		"hooks": {
+			"pre-commit": "lint-staged"
+		}
+	}
 }

@@ -12,14 +12,8 @@ function renderFn(children) {
 
 describe('Button', () => {
 	test('it renders correctly', () => {
-		const { container } = renderFn(<Button />);
-		expect(container.firstChild).toMatchInlineSnapshot(`
-		<button
-		  class="sc-bdVaJa Hkyna"
-		  type="button"
-		>
-		  <span />
-		</button>
-	`);
+		const buttonText = 'click me';
+		const { getByText } = renderFn(<Button>{buttonText}</Button>);
+		expect(getByText(buttonText)).toHaveTextContent(buttonText);
 	});
 });
