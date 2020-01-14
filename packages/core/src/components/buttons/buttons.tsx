@@ -101,7 +101,7 @@ const outlinedAppearance = colors => {
 	`;
 };
 
-function appearances(themeColors, intent: Intent) {
+function appearances(themeColors: DefaultTheme['colors'], intent: Intent) {
 	const colors = themeColors[intent === 'none' ? 'primary' : intent];
 	return {
 		primary: primaryAppearance(colors),

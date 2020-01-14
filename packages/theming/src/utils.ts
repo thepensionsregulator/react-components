@@ -28,15 +28,15 @@ export const hexToRgb = (hex: string): number[] => {
 		.map(x => parseInt(x, 16));
 };
 
-export const textColorFromRgb = <T = '#FFFFFF', U = '#000000'>(
+export const textColorFromRgb = <T extends string, K extends string>(
 	[r, g, b]: number[],
-	lightColor?: T,
-	darkColor?: U,
-): T | U => {
-	if (r * 0.299 + g * 0.587 + b * 0.114 > 186) {
-		return darkColor;
-	}
+	lightColor: T = '#FFFFFF' as T,
+	darkColor: K = '#000000' as K,
+): T | K => {
+	const equation = (r * 299 + g * 587 + b * 114) / 1000;
+	if (equation >= 128) return darkColor;
 	return lightColor;
 };
 
-export const textColorFromHex = (hex: string): string => textColorFromRgb(hexToRgb(hex));
+export const textColorFromHex = (hex: string, light?: string, dark?: string): string =>
+	textColorFromRgb(hexToRgb(hex), light, dark);
