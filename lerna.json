@@ -2,6 +2,9 @@
 	"packages": ["packages/*"],
 	"version": "independent",
 	"command": {
+		"run": {
+			"npmClient": "yarn"
+		},
 		"publish": {
 			"message": "Release"
 		}

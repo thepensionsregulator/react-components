@@ -17,7 +17,7 @@ trigger:
     displayName: 'yarn install and build'
   
   - script: |
-      yarn test-ci
+      yarn test
     displayName: 'running tests...'
   
   - script: |

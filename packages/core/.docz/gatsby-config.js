@@ -74,7 +74,7 @@ const config = {
           root:
             'C:\\Users\\aleknad\\Development\\tpr\\react-components\\packages\\core',
           templates:
-            'C:\\Users\\aleknad\\Development\\tpr\\react-components\\packages\\core\\node_modules\\docz-core\\dist\\templates',
+            'C:\\Users\\aleknad\\Development\\tpr\\react-components\\node_modules\\docz-core\\dist\\templates',
           docz:
             'C:\\Users\\aleknad\\Development\\tpr\\react-components\\packages\\core\\.docz',
           cache:
