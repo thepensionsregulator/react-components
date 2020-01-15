@@ -3,13 +3,27 @@ name: Table
 route: table
 ---
 
-import { Playground } from 'docz';
+import { Playground, Props } from 'docz';
 import { TableBase } from './index';
 
 # Table
 
+## Props
+
+<Props of={TableBase} />
+
 ## Basic usage
 
 <Playground>
-	<TableBase />
+	<TableBase columns={[
+		{ label: '', sortField: 'icon', isLocked: true },
+		{ label: 'author', sortField: 'author' },
+		{ label: '', sortField: 'edit' },
+	]} data={[]} totalItems={10}>
+		{renderBody =>
+			renderBody({
+				fieldReducer: (fieldValue = '', fieldName, row) => fieldValue,
+			})
+		}
+	</TableBase>
 </Playground>

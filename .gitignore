@@ -57,7 +57,7 @@ test/**/public
 db.json
 docs.json
 *.log
-.docz/public/*
+.docz/public
 .idea/
 
 junit.xml

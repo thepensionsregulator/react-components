@@ -32,15 +32,13 @@
 		"postbuild": "yarn bundle",
 		"bundle": "cross-env-shell \"../../node_modules/.bin/rollup\" -c rollup.config.js",
 		"clean": "rimraf lib",
-		"report-coverage": "codecov",
-		"docz:dev": "docz dev",
-		"docz:build": "docz build",
-		"docz:serve": "docz build && docz serve"
+		"report-coverage": "codecov"
 	},
 	"peerDependencies": {
 		"react": "^16.12.0",
 		"react-dom": "^16.12.0",
-		"styled-components": "^4.4.1"
+		"styled-components": "^4.4.1",
+		"styled-system": "^5.1.4"
 	},
 	"dependencies": {
 		"final-form": "^4.18.6",

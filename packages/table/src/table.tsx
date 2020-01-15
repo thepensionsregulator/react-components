@@ -1,6 +1,9 @@
 import React, { ReactElement } from 'react';
 import DataBrowser, { DataBrowserProps } from '@alekna/react-data-browser';
 import { NetworkStatus, ApolloError } from 'apollo-client';
+import { TableContainer, TableHead, TableHeadRowItem } from './styles';
+import { TableListProps, TableList } from './views/table';
+import { H6 } from '@tpr/core';
 
 // ISSUE: can't find a way to pass a generic to TableBaseProps when using React.FC 🤔
 
@@ -11,7 +14,7 @@ type TableBaseProps<T> = {
 	error?: ApolloError;
 	loading: boolean;
 	networkStatus: NetworkStatus;
-	children: (utils: ViewSwitchProps) => ReactElement;
+	children: (utils: TableListProps) => ReactElement;
 };
 
 const views = ['list', 'error', 'loading', 'refetch', 'fetchMore'];
@@ -24,33 +27,36 @@ export const TableBase = <T extends {}, K extends DataBrowserProps & TableBasePr
 	loading = false,
 	...dataBrowserProps
 }: K) => {
+	const renderBody = tableBody({ fixedColW, data, networkStatus, error, loading });
 	return (
 		<DataBrowser views={views} viewType="loading" {...dataBrowserProps}>
-			{dataBrowserUtils => {
-				const renderBody = body({ fixedColW, data, networkStatus, error, loading });
-				return (
-					<div>
-						<div>static table head</div>
-						{children(renderBody(dataBrowserUtils))}
-					</div>
-				);
-			}}
+			{dbUtils => (
+				<TableContainer>
+					<TableHead>
+						{dbUtils.visibleColumns.map((cell, index) => {
+							return (
+								<TableHeadRowItem
+									key={index}
+									flex={dbUtils.columnFlex[index]}
+									isClickable={cell.sortByFieldName}
+									onClick={() => cell.sortByFieldName && console.log(cell)}
+								>
+									<H6 color="neutral.200" fontWeight={2}>
+										{cell.label}
+									</H6>
+								</TableHeadRowItem>
+							);
+						})}
+					</TableHead>
+					{children(renderBody({ data, ...dbUtils }))}
+				</TableContainer>
+			)}
 		</DataBrowser>
 	);
 };
 
-type ViewSwitchProps = {
-	fieldReducer: (fieldValue: unknown, fieldName: string, row: any) => ReactElement;
-	onRowClick?: (row: any) => void;
-	rowOptions?: (props: { toggleMenu: Function; row: any; history: any }) => ReactElement;
-	onBottomTouch?: () => void;
-	maxBodyHeight?: number;
-	bottomTouchOffset?: number;
-	emptyDataMessage?: string;
-};
-
 /** This function will manage Apollo data fetching states and renders the body accordingly */
-const body = <T extends {}>({
+const tableBody = <T extends {}>({
 	loading,
 	error,
 	networkStatus,
@@ -58,10 +64,9 @@ const body = <T extends {}>({
 }: Omit<TableBaseProps<T>, 'children'>): Function => {
 	// could have a state machine to control body states
 
-	return (_: DataBrowserProps) => (_: ViewSwitchProps): ReactElement => {
+	return (dbProps: DataBrowserProps) => (tlProps: TableListProps): ReactElement => {
 		if (loading) return <div>loading</div>;
 		if (error) return <div>error</div>;
-		console.log(baseUtils);
 		if (networkStatus === 3) return <div>fetch more in progress</div>;
 		if (networkStatus === 4) return <div>refetch in progress</div>;
 
@@ -73,6 +78,6 @@ const body = <T extends {}>({
 		// ready = 7,
 		// error = 8
 
-		return <div>data is ready</div>;
+		return <TableList {...baseUtils} {...dbProps} {...tlProps} />;
 	};
 };

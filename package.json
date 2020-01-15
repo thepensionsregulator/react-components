@@ -16,7 +16,10 @@
 		"lerna": "lerna",
 		"posttest": "yarn lint",
 		"deploy": "lerna publish",
-		"clean": "find . -name \"node_modules\" -exec rm -rf '{}' + && find . -name \"lib\" -exec rm -rf '{}' +"
+		"clean": "find . -name \"node_modules\" -exec rm -rf '{}' + && find . -name \"lib\" -exec rm -rf '{}' +",
+		"docz:dev": "docz dev",
+		"docz:build": "docz build",
+		"docz:serve": "docz build && docz serve"
 	},
 	"dependencies": {
 		"core": "file:packages/core",

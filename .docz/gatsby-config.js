@@ -19,8 +19,8 @@ const config = {
   pathPrefix: '/',
 
   siteMetadata: {
-    title: 'Table',
-    description: 'TPR Table component and helpers',
+    title: 'Monorepo',
+    description: 'My awesome app using docz',
   },
   plugins: [
     {
@@ -51,8 +51,7 @@ const config = {
         o: false,
         open: false,
         'open-browser': false,
-        root:
-          'C:\\Users\\aleknad\\Development\\tpr\\react-components\\packages\\table\\.docz',
+        root: '/Users/davidalekna/Development/tpr/react-components/.docz',
         base: '/',
         source: './',
         src: './',
@@ -64,43 +63,40 @@ const config = {
         eb: 'master',
         'edit-branch': 'master',
         config: '',
-        title: 'Table',
-        description: 'TPR Table component and helpers',
+        title: 'Monorepo',
+        description: 'My awesome app using docz',
         host: 'localhost',
         port: 3000,
         p: 3000,
         separator: '-',
         paths: {
-          root:
-            'C:\\Users\\aleknad\\Development\\tpr\\react-components\\packages\\table',
+          root: '/Users/davidalekna/Development/tpr/react-components',
           templates:
-            'C:\\Users\\aleknad\\Development\\tpr\\react-components\\packages\\table\\node_modules\\docz-core\\dist\\templates',
-          docz:
-            'C:\\Users\\aleknad\\Development\\tpr\\react-components\\packages\\table\\.docz',
+            '/Users/davidalekna/Development/tpr/react-components/node_modules/docz-core/dist/templates',
+          docz: '/Users/davidalekna/Development/tpr/react-components/.docz',
           cache:
-            'C:\\Users\\aleknad\\Development\\tpr\\react-components\\packages\\table\\.docz\\.cache',
-          app:
-            'C:\\Users\\aleknad\\Development\\tpr\\react-components\\packages\\table\\.docz\\app',
+            '/Users/davidalekna/Development/tpr/react-components/.docz/.cache',
+          app: '/Users/davidalekna/Development/tpr/react-components/.docz/app',
           appPackageJson:
-            'C:\\Users\\aleknad\\Development\\tpr\\react-components\\packages\\table\\package.json',
+            '/Users/davidalekna/Development/tpr/react-components/package.json',
           gatsbyConfig:
-            'C:\\Users\\aleknad\\Development\\tpr\\react-components\\packages\\table\\gatsby-config.js',
+            '/Users/davidalekna/Development/tpr/react-components/gatsby-config.js',
           gatsbyBrowser:
-            'C:\\Users\\aleknad\\Development\\tpr\\react-components\\packages\\table\\gatsby-browser.js',
+            '/Users/davidalekna/Development/tpr/react-components/gatsby-browser.js',
           gatsbyNode:
-            'C:\\Users\\aleknad\\Development\\tpr\\react-components\\packages\\table\\gatsby-node.js',
+            '/Users/davidalekna/Development/tpr/react-components/gatsby-node.js',
           gatsbySSR:
-            'C:\\Users\\aleknad\\Development\\tpr\\react-components\\packages\\table\\gatsby-ssr.js',
+            '/Users/davidalekna/Development/tpr/react-components/gatsby-ssr.js',
           importsJs:
-            'C:\\Users\\aleknad\\Development\\tpr\\react-components\\packages\\table\\.docz\\app\\imports.js',
+            '/Users/davidalekna/Development/tpr/react-components/.docz/app/imports.js',
           rootJs:
-            'C:\\Users\\aleknad\\Development\\tpr\\react-components\\packages\\table\\.docz\\app\\root.jsx',
+            '/Users/davidalekna/Development/tpr/react-components/.docz/app/root.jsx',
           indexJs:
-            'C:\\Users\\aleknad\\Development\\tpr\\react-components\\packages\\table\\.docz\\app\\index.jsx',
+            '/Users/davidalekna/Development/tpr/react-components/.docz/app/index.jsx',
           indexHtml:
-            'C:\\Users\\aleknad\\Development\\tpr\\react-components\\packages\\table\\.docz\\app\\index.html',
+            '/Users/davidalekna/Development/tpr/react-components/.docz/app/index.html',
           db:
-            'C:\\Users\\aleknad\\Development\\tpr\\react-components\\packages\\table\\.docz\\app\\db.json',
+            '/Users/davidalekna/Development/tpr/react-components/.docz/app/db.json',
         },
       },
     },
