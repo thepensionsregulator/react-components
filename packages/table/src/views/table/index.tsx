@@ -9,8 +9,9 @@ export type TableListProps = {
 	onRowClick?: (row: any) => void;
 	rowOptions?: (props: { toggleMenu: Function; row: any; history: any }) => ReactElement;
 	onBottomTouch?: () => void;
-	fixedColWidth?: number;
-	rowOptionsMenu?: boolean;
+	fixedColW?: number;
+	/** row options menu jsx */
+	options?: (props: any) => ReactElement;
 	isRefetching?: boolean;
 	maxBodyHeight?: number;
 	bottomTouchOffset?: number;
@@ -21,9 +22,9 @@ export type TableListProps = {
 
 export const TableList: React.FC<TableListProps> = ({
 	isRefetching,
-	fixedColWidth = 40,
+	fixedColW = 40,
 	maxBodyHeight,
-	rowOptionsMenu,
+	options: Options,
 	fieldReducer,
 	data = [],
 	onRowClick,
@@ -59,7 +60,9 @@ export const TableList: React.FC<TableListProps> = ({
 							{fieldReducer(getBySortField(row, sortField), sortField, row)}
 						</TableBodyRowItem>
 					))}
-					{rowOptionsMenu && <div>options</div>}
+					{fixedColW && (
+						<TableBodyRowItem flex="0 0 auto" style={{ width: fixedColW }} children={<Options {...row} />} />
+					)}
 				</TableBodyRow>
 			))}
 		</TableBody>

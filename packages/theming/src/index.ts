@@ -1,5 +1,5 @@
-import { mergeThemes, respondTo } from './utils';
-import ThemeProvider, { useColorSchemeContext } from './theming';
+import { mergeThemes } from './utils';
+import ColorScheme, { useColorSchemeContext } from './theming';
 import lightTheme from './lightTheme';
 
-export { ThemeProvider as default, useColorSchemeContext, lightTheme, mergeThemes, respondTo };
+export { ColorScheme as default, useColorSchemeContext, lightTheme, mergeThemes };

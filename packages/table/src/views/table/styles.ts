@@ -58,7 +58,7 @@ export const TableBodyRowItem = styled('div')<FlexProps & TableBodyRowItemProps>
 	height: ${({ height }) => (height ? height : '100px')};
 	align-items: center;
 	justify-content: flex-start;
-	padding: 0 ${({ theme }) => theme.spacing.padding / 2}px;
+	padding: 0 15px;
 	font-size: ${({ theme }) => theme.fontSizes[1]}px;
 	text-overflow: ellipsis;
 	overflow-wrap: break-word;

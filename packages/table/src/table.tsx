@@ -3,7 +3,7 @@ import DataBrowser, { DataBrowserProps } from '@alekna/react-data-browser';
 import { NetworkStatus, ApolloError } from 'apollo-client';
 import { TableContainer, TableHead, TableHeadRowItem } from './styles';
 import { TableListProps, TableList } from './views/table';
-import { H6 } from '@tpr/core';
+import { H3 } from '@tpr/core';
 
 // ISSUE: can't find a way to pass a generic to TableBaseProps when using React.FC 🤔
 
@@ -19,7 +19,7 @@ type TableBaseProps<T> = {
 
 const views = ['list', 'error', 'loading', 'refetch', 'fetchMore'];
 export const TableBase = <T extends {}, K extends DataBrowserProps & TableBaseProps<T>>({
-	fixedColW = 40,
+	fixedColW = 100,
 	data,
 	children,
 	networkStatus,
@@ -41,12 +41,13 @@ export const TableBase = <T extends {}, K extends DataBrowserProps & TableBasePr
 									isClickable={cell.sortByFieldName}
 									onClick={() => cell.sortByFieldName && console.log(cell)}
 								>
-									<H6 color="neutral.200" fontWeight={2}>
+									<H3 color="neutral.400" fontWeight={2}>
 										{cell.label}
-									</H6>
+									</H3>
 								</TableHeadRowItem>
 							);
 						})}
+						{fixedColW && <TableHeadRowItem flex="0 0 auto" style={{ width: fixedColW }} />}
 					</TableHead>
 					{children(renderBody({ data, ...dbUtils }))}
 				</TableContainer>
