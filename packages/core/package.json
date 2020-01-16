@@ -49,7 +49,6 @@
 	"publishConfig": {
 		"access": "public"
 	},
-	"devDependencies": {
-		"typescript": "^3.7.4"
-	}
+	"devDependencies": {},
+	"gitHead": "3a9e85be825e7800b53a47e519afe0b85d508bb1"
 }
