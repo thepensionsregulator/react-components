@@ -5,8 +5,6 @@ import { TableContainer, TableHead, TableHeadRowItem } from './styles';
 import { TableListProps, TableList } from './views/table';
 import { H3 } from '@tpr/core';
 
-// ISSUE: can't find a way to pass a generic to TableBaseProps when using React.FC 🤔
-
 type TableBaseProps<T> = {
 	/** fixed column width for the first and last items in the row */
 	fixedColW: number;
@@ -14,7 +12,7 @@ type TableBaseProps<T> = {
 	error?: ApolloError;
 	loading: boolean;
 	networkStatus: NetworkStatus;
-	children: (utils: TableListProps) => ReactElement;
+	children: (utils: TableListProps<T>) => ReactElement;
 };
 
 const views = ['list', 'error', 'loading', 'refetch', 'fetchMore'];
@@ -65,7 +63,7 @@ const tableBody = <T extends {}>({
 }: Omit<TableBaseProps<T>, 'children'>): Function => {
 	// could have a state machine to control body states
 
-	return (dbProps: DataBrowserProps) => (tlProps: TableListProps): ReactElement => {
+	return (dbProps: DataBrowserProps) => (tlProps: TableListProps<T>): ReactElement => {
 		if (loading) return <div>loading</div>;
 		if (error) return <div>error</div>;
 		if (networkStatus === 3) return <div>fetch more in progress</div>;
