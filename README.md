@@ -24,3 +24,14 @@ If you want to learn more about creating good readme files then refer the follow
 - [ASP.NET Core](https://github.com/aspnet/Home)
 - [Visual Studio Code](https://github.com/Microsoft/vscode)
 - [Chakra Core](https://github.com/Microsoft/ChakraCore)
+
+# Problems
+
+upon yarn install have to delete node_modules/@types/react-native to prevent duplicate declarations.
+https://github.com/DefinitelyTyped/DefinitelyTyped/issues/33311
+
+# Usage
+
+Run package in dev mode
+
+yarn lerna run --scope @tpr/core docz:dev --stream

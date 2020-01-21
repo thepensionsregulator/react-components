@@ -1,0 +1,116 @@
+---
+name: Button
+route: buttons
+---
+
+import { Playground, Props } from 'docz';
+import { Button } from './buttons';
+
+# Buttons
+
+Buttons make common actions more obvious and help users more easily perform them. Buttons use labels and sometimes icons to communicate
+the action that will occur when the user touches them.
+
+### Best practices
+
+- Group buttons logically into sets based on usage and importance.
+- Ensure that button actions are clear and consistent.
+- The main action of a group set can be a primary button.
+- Select a single button variation and do not mix them.
+
+## Properties
+
+<Props of={Button} />
+
+## Basic usage
+
+<Playground>
+	<Button>Click me</Button>
+</Playground>
+
+## Usage with props
+
+<Playground>
+	<Button intent="warning" scale="big" margin={30} iconBefore={() => `🎄`} iconAfter={() => `🎄`}>
+		Click me
+	</Button>
+</Playground>
+
+## All variations
+
+### With different sizes
+
+<Button mr={15} scale="small">
+	Click me
+</Button>
+<Button mr={15} scale="normal">
+	Click me
+</Button>
+<Button mr={15} scale="big">
+	Click me
+</Button>
+<Button mr={15} appearance="link" scale="small">
+	Click me
+</Button>
+<Button mr={15} appearance="link" scale="normal">
+	Click me
+</Button>
+<Button mr={15} appearance="link" scale="big">
+	Click me
+</Button>
+
+### Primary appearance with intent
+
+<Button mr={15} intent="none">
+	Click me
+</Button>
+<Button mr={15} intent="success">
+	Click me
+</Button>
+<Button mr={15} intent="warning">
+	Click me
+</Button>
+<Button mr={15} intent="danger">
+	Click me
+</Button>
+
+### Outlined appearance with intent
+
+<Button mr={15} appearance="outlined" intent="none">
+	Click me
+</Button>
+<Button mr={15} appearance="outlined" intent="success">
+	Click me
+</Button>
+<Button mr={15} appearance="outlined" intent="warning">
+	Click me
+</Button>
+<Button mr={15} appearance="outlined" intent="danger">
+	Click me
+</Button>
+
+### Link appearance with intent
+
+<Button mr={15} appearance="link" intent="none">
+	Click me
+</Button>
+<Button mr={15} appearance="link" intent="success">
+	Click me
+</Button>
+<Button mr={15} appearance="link" intent="warning">
+	Click me
+</Button>
+<Button mr={15} appearance="link" intent="danger">
+	Click me
+</Button>
+
+### Block level buttons
+
+<Button width="100%" intent="none" mb="10px">
+	Click me
+</Button>
+
+<Button width="100%" intent="none" disabled>
+	Click me
+</Button>
+

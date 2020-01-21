@@ -1,0 +1,54 @@
+---
+name: Table
+route: table
+---
+
+import { Playground,  } from 'docz';
+import { TableBase } from './index';
+
+# Table
+
+## Props
+
+## Basic usage
+
+<Playground>
+	<TableBase 
+		columns={[
+			{ label: 'Trustee', sortField: 'trustee' },
+			{ label: 'Dorrespondance Address', sortField: 'address' },
+			{ label: 'Contact Details', sortField: 'contact' },
+		]} 
+		data={[
+			{trustee: 'Fred Sandors', address: 'Napier House, Trafalgar Place, Brighton, BN1 4DW', contact: '01273', email: 'test@tpr.gov.uk'},
+			{trustee: 'Sally Fields', address: 'Napier House, Trafalgar Place, Brighton, BN1 4DW', contact: '01273 123 456', email: 'test@tpr.gov.uk'},
+			{trustee: 'Chandraprakasha Balakrishan', address: 'Napier House, Trafalgar Place, Brighton, BN1 4DW', contact: '01273 123 456', email: 'test@tpr.gov.uk'},
+		]}
+	>
+		{renderBody =>
+			renderBody({
+				fieldReducer: (fieldValue = '', fieldName, row) => {
+					switch(fieldName) {
+						case 'trustee': 
+							return (
+								<>
+									<div style={{width: "10px", height: '100%', background: 'green', marginRight: 10}} />
+									{fieldValue}
+								</>
+							)
+						case 'contact':
+							return (
+								<ul>
+									<li>{fieldValue}</li>
+									<li>{row.email}</li>
+								</ul>
+							)
+						default:
+							return fieldValue
+					}
+				},
+				options: () => <ul><li>Edit</li><li>Remove</li></ul>
+			})
+		}
+	</TableBase>
+</Playground>

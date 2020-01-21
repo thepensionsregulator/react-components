@@ -1,5 +1,5 @@
 # fs
-.DS_Store
+.
 .rpt2_cache
 
 # Logs
@@ -47,11 +47,17 @@ npm
 
 yarn.lock
 
+# Build Path of Test Fixtures
+test/**/public
+.gatsby-context.js
+.cache/
+.netlify
+
 # docs
 db.json
 docs.json
 *.log
-docs/public/*
+.docz/public
 .idea/
 
 junit.xml
@@ -59,3 +65,4 @@ junit.xml
 .rpt2_cache
 
 tsconfig.tsbuildinfo
+yarn.lock
