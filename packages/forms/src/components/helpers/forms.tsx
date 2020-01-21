@@ -1,5 +1,5 @@
 import React from 'react';
-import { FFInputText } from '../formElements';
+import { FFInputText } from '../elements';
 import { FieldProps } from './validation';
 
 export function renderFields(fields: FieldProps[] = []) {

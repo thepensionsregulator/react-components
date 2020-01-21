@@ -1,8 +1,8 @@
 import React from 'react';
 import { Field, FieldRenderProps } from 'react-final-form';
 import { StyledInput, ErrorMessage, FormLabelText, StyledLabel } from './styles';
-import { FieldProps } from '../forms/validation';
-import { Span } from '../typography';
+import { FieldProps } from '../helpers/validation';
+import { Span } from '@tpr/core';
 
 const InputText: React.FC<FieldRenderProps<string> & FieldProps> = ({ label, required, input, meta, ...props }) => {
 	return (

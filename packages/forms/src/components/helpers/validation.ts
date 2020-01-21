@@ -1,5 +1,5 @@
 import qs from 'qs';
-import { getObjectValueByString } from '../../utils';
+import { getObjectValueByString } from '@tpr/core';
 
 // export type FieldInputTypes =
 // 	| 'checkbox'
