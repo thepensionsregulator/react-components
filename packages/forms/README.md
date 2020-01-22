@@ -20,8 +20,8 @@ renderFields(fields: FieldProps[]): ReactElement
 
 ### ✅ Text
 
-- should have a title
-- title should have state if it is an optional input
+- should have a label
+- label should have a state if it is an optional input
 - should take custom validation function
 - should have a 100% or custom width option
 

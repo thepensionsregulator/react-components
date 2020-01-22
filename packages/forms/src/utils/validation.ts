@@ -1,5 +1,6 @@
 import qs from 'qs';
 import { getObjectValueByString } from '@tpr/core';
+import { FieldState } from 'final-form';
 
 // export type FieldInputTypes =
 // 	| 'checkbox'
@@ -28,11 +29,13 @@ export type FieldProps = {
 	error?: string;
 	/** If required and has title, will display * next to the title */
 	required?: boolean;
+	/** Accepts a validation function for custom validation */
+	validate?: (value: any, allValues: object, meta?: FieldState<any>) => any;
 };
 
 export function validate(formFields: FieldProps[]) {
 	/** Save fields with errors in memory to avoid filtering on every key stroke */
-	const fieldsWithErrors = formFields.filter(field => field.error);
+	const fieldsWithErrors = formFields.filter(field => !field.validate && field.error);
 	return <T extends object>(keyValuePairs: T): { [key: string]: any } => {
 		const errors = {};
 
