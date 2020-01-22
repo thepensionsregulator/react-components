@@ -1,1 +1,2 @@
-export * from './components/helpers';
+export * from './utils';
+export * from './components/text';

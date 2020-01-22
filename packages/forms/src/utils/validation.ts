@@ -33,7 +33,7 @@ export type FieldProps = {
 export function validate(formFields: FieldProps[]) {
 	/** Save fields with errors in memory to avoid filtering on every key stroke */
 	const fieldsWithErrors = formFields.filter(field => field.error);
-	return (keyValuePairs: { [key: string]: any }) => {
+	return <T extends object>(keyValuePairs: T): { [key: string]: any } => {
 		const errors = {};
 
 		fieldsWithErrors.map(({ name, error }) => {
