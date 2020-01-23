@@ -1,0 +1,43 @@
+---
+name: Trustee
+route: trustee
+---
+
+import { Playground, Props } from 'docz';
+import { Trustee } from './trustee';
+
+# Trustee
+
+Trustee for tpr apps
+
+## Properties
+
+<Props of={Trustee} />
+
+## Basic usage
+
+<Playground>
+	<Trustee
+		trustee={{
+			trustee: {
+				title: 'Mr',
+				firstName: 'Robin',
+				lastName: 'Hood',
+				trusteeType: 'member-nominated',
+				isProfesional: false,
+			},
+			company: {
+				name: 'The Pensions Regulator',
+				line1: 'Napier House',
+				line2: 'Trafalgar Pl',
+				city: 'Brighton',
+				county: '',
+				postCode: 'BN1 4DW',
+			},
+			contact: {
+				phoneNumber: '01273 000 111',
+				emailAddress: 'fred.sandoors@trp.gov.uk',
+			},
+		}}
+	/>
+</Playground>
