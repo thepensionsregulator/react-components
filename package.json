@@ -31,7 +31,6 @@
 		"@babel/core": "^7.8.3",
 		"@rollup/plugin-commonjs": "^11.0.1",
 		"@rollup/plugin-node-resolve": "^7.0.0",
-		"@rollup/plugin-typescript": "^2.1.0",
 		"@testing-library/jest-dom": "^5.0.0",
 		"@testing-library/react": "^9.4.0",
 		"@types/jest": "^24.0.23",
@@ -63,13 +62,14 @@
 		"rollup-plugin-local-resolve": "^1.0.7",
 		"rollup-plugin-sourcemaps": "^0.5.0",
 		"rollup-plugin-terser": "^5.1.2",
+		"rollup-plugin-typescript2": "^0.25.3",
 		"styled-components": "^5.0.0",
 		"styled-system": "^5.1.4",
 		"ts-jest": "^24.2.0",
 		"ts-loader": "^6.2.1",
 		"ts-node": "^8.5.2",
 		"tslib": "^1.10.0",
-		"typescript": "^3.7.4"
+		"typescript": "^3.7.5"
 	},
 	"resolutions": {
 		"@types/react": "16.9.17"

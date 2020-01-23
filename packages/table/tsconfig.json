@@ -3,7 +3,7 @@
 	"compilerOptions": {
 		"rootDir": "src",
 		"baseUrl": "src",
-		"composite": false,
+		"composite": true,
 		"outDir": "lib",
 		"jsx": "react",
 		"pretty": true,

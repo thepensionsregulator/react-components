@@ -3,7 +3,7 @@
 	"compilerOptions": {
 		"rootDir": "src",
 		"baseUrl": "src",
-		"composite": false,
+		"composite": true,
 		"outDir": "lib",
 		"jsx": "react",
 		"pretty": true,
@@ -16,5 +16,5 @@
 		"lib": ["es2018", "dom"]
 	},
 	"include": ["src/**/*"],
-	"exclude": ["node_modules", "lib", "**/__mocks__/**/*", "**/__tests__/**/*", "**/*.mdx"]
+	"exclude": ["node_modules", "**/__tests__/**/*", "**/*.mdx"]
 }
