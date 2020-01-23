@@ -5,7 +5,7 @@ import { TableBody, TableBodyRow, TableBodyRowItem, RefetchingData } from './sty
 import { Flex, Text } from '@tpr/core';
 
 export type TableListProps<T> = {
-	fieldReducer: <T1, T2, T3>(fieldValue: T1, fieldName: T2, row: T3) => ReactElement;
+	fieldReducer: <T>(fieldValue?: unknown, fieldName?: string, row?: T) => ReactElement;
 	onRowClick?: <T>(row: T) => void;
 	rowOptions?: (props: { toggleMenu: Function; row: any; history: any }) => ReactElement;
 	onBottomTouch?: () => void;
