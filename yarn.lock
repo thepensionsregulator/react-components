@@ -2897,6 +2897,11 @@
   dependencies:
     tslib "^1.9.3"
 
+"@xstate/react@^0.8.1":
+  version "0.8.1"
+  resolved "https://registry.yarnpkg.com/@xstate/react/-/react-0.8.1.tgz#df200547cca24c909572b7aef1ddab8bca3a0603"
+  integrity sha512-8voZm4GX3x70lNQVvoGedoObPYapkQIbgMhE+xOQEsm8Ait4Zto6R01SZ6WJD4qvLl8JPV6uq96OcFRdEsVESg==
+
 "@xtuc/ieee754@^1.2.0":
   version "1.2.0"
   resolved "https://registry.yarnpkg.com/@xtuc/ieee754/-/ieee754-1.2.0.tgz#eef014a3145ae477a1cbc00cd1e552336dceb790"
@@ -7297,7 +7302,7 @@ format@^0.2.2:
 "forms@file:packages/forms":
   version "1.0.0"
   dependencies:
-    "@tpr/core" "file:../../../.cache/yarn/v6/npm-forms-1.0.0-0a125089-b5bd-46e7-abfe-e728d53ac037-1579615338049/node_modules/core"
+    "@tpr/core" "file:../../../Library/Caches/Yarn/v6/npm-forms-1.0.0-ad396d87-fd14-49d4-bcf6-a088548b8385-1579776407507/node_modules/core"
     final-form "^4.18.6"
     qs "^6.9.1"
     react-final-form "^6.3.3"
@@ -15691,7 +15696,7 @@ table@^5.2.3:
   version "1.0.3"
   dependencies:
     "@alekna/react-data-browser" "^1.1.3"
-    "@tpr/core" "file:../../../.cache/yarn/v6/npm-table-1.0.3-7a81994e-6a41-4c73-9516-c984c416f2c1-1579615338056/node_modules/core"
+    "@tpr/core" "file:../../../Library/Caches/Yarn/v6/npm-table-1.0.3-48f48bed-a466-45d8-bf3f-5c7067f8787b-1579776407511/node_modules/core"
     lodash "^4.17.15"
     react-bottom-scroll-listener "^3.0.0"
 

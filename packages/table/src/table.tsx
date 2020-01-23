@@ -7,11 +7,11 @@ import { H3 } from '@tpr/core';
 
 type TableBaseProps<T> = {
 	/** fixed column width for the first and last items in the row */
-	fixedColW: number;
+	fixedColW?: number;
 	data: T | T[];
 	error?: ApolloError;
-	loading: boolean;
-	networkStatus: NetworkStatus;
+	loading?: boolean;
+	networkStatus?: NetworkStatus;
 	children: (utils: TableListProps<T>) => ReactElement;
 };
 
