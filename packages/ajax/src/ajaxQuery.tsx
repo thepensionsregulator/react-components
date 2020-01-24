@@ -1,8 +1,9 @@
-import { useEffect } from 'react';
-import { useSelector, useDispatch } from 'react-redux';
+import { useEffect, ReactElement, useState } from 'react';
 import { path, pathOr } from 'ramda';
-import { instance } from 'shared/api';
-import useSafeSetState from './useSafeSetState';
+import { useAjaxContext } from 'context';
+import { useSelector } from '@alekna/react-store';
+
+// NOTE: try to use xstate https://xstate.js.org
 
 type Request = {
 	name: string;
@@ -15,26 +16,32 @@ type QueryProps = {
 	type: 'get' | 'post';
 	headers?: object;
 	params?: object;
-	children: any;
+	/** store from the global store object and for the api uri */
+	store?: string;
 };
 
-export const AjaxQuery: React.FC<QueryProps> = ({
+const actions = (storeName: string, send: Function) => {
+	return {
+		status: (payload: any) => send({ type: `${storeName}@status`, payload }),
+	};
+};
+
+export const useQuery = ({
 	query = '',
 	type = 'get',
 	headers = { 'Content-Type': 'application/json' },
 	params,
-	children,
-}) => {
-	const config = useSelector((state: any) => state.config);
-	const dispatch = useDispatch();
-	const api = instance(config, dispatch);
-	const [refetch, setRefetch] = useSafeSetState(0);
-	const [state, safeSetState] = useSafeSetState({
-		data: undefined,
-		error: undefined,
-		loading: true,
-	});
-
+	store,
+}: QueryProps) => {
+	const { api: apis, dispatch } = useAjaxContext();
+	/** Will select first Endpoint in an array if store is undefined or not found */
+	const { instance } = apis.find(({ name }) => name === store) || apis[0];
+	/** Send actions to the store */
+	const send = actions(store, dispatch);
+	/** Selected from the Global State */
+	const state = useSelector(store, {});
+	/** refetch functionallity */
+	const [refetch, setRefetch] = useState(0);
 	const refetchQuery = () => setRefetch(refetch + 1);
 
 	/* eslint-disable */
@@ -46,7 +53,7 @@ export const AjaxQuery: React.FC<QueryProps> = ({
 					const data = await Promise.all(
 						query.map(async ({ name, type = 'get', params: variables }) => {
 							const q = { query: name, variables: variables || params };
-							return await api(type, q, headers).toPromise();
+							return await instance(type, q, headers).toPromise();
 						}),
 					);
 					safeSetState({
@@ -56,7 +63,7 @@ export const AjaxQuery: React.FC<QueryProps> = ({
 					});
 				} else {
 					const q = { query, variables: params };
-					const data = await api(type, q, headers).toPromise();
+					const data = await instance(type, q, headers).toPromise();
 					safeSetState({
 						data: pathOr({}, ['response', 'data'], data),
 						loading: false,
@@ -76,34 +83,10 @@ export const AjaxQuery: React.FC<QueryProps> = ({
 		fetchRequest();
 	}, [params, refetch]);
 
-	const mutate = ({
-		query,
-		variables = {},
-		headers = {
-			'Content-Type': 'application/json',
-		},
-	}: MutateFnProps = {}) => {
-		safeSetState({ loading: true, error: undefined });
-		const params = { query: query ? query : mutation, variables };
-		return api(type, params, headers)
-			.toPromise()
-			.then((resp: object) => {
-				const response = path(['response', 'data'], resp);
-				safeSetState({ loading: false });
-				return response;
-			})
-			.catch((err: any) => {
-				const errorMessage = pathOr(
-					{
-						detail: `Unkown error occured while processing your request: ${mutation}`,
-					},
-					['response', 'errors', 0],
-					err,
-				);
-				safeSetState({ error: errorMessage, loading: false });
-				throw Error(JSON.stringify(errorMessage));
-			});
-	};
-
-	return children({ ...state, refetchQuery });
+	return { ...state, refetchQuery };
 };
+
+interface AjaxQueryProps extends QueryProps {
+	children: (props: any) => ReactElement;
+}
+export const AjaxQuery = ({ children, ...rest }: AjaxQueryProps) => children(useQuery(rest));

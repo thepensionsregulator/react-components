@@ -6,7 +6,7 @@ import { throttleTime, tap } from 'rxjs/operators';
 
 // NOTE: consider SSR
 
-type Endpoint = { uri: string; name: string; instance: Observable<any> };
+type Endpoint = { name: string; instance: Function };
 type AjaxContextProps = { api: Endpoint[] };
 
 export const AjaxContext = createContext<AjaxContextProps>({
@@ -20,6 +20,7 @@ type Store = {
 
 interface AjaxProviderProps extends AjaxContextProps {
 	stores: Store[];
+	/** Use initialState to re-hidrate the store from localStorage */
 	initialState: any;
 }
 
@@ -62,7 +63,6 @@ const Persister = ({ children, persist }: { children: any; persist: string[] }) 
 	return children;
 };
 
-/** Use initialState to rehidrate the store from localStorage */
 export const AjaxProvider: React.FC<AjaxProviderProps> = ({ api, stores, initialState = undefined, children }) => {
 	const persist = stores.map(({ name, persist }) => persist && name);
 	const storeConfig = useMemo(() => {
