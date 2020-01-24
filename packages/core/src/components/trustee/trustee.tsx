@@ -1,6 +1,7 @@
 import React from 'react';
-import { StyledCard, StyledCardToolbar, StyledCardContainer } from './components/card';
+import { StyledCard, StyledCardToolbar } from './components/card';
 import { TrusteeProvider, useTrusteeContext, TrusteeProps } from './context';
+import { Flex } from '../layout';
 
 // NOTE: each view should hold its own Form with state, and in the end it should sync state with *state machine*
 // otherwise submit wont work and might be bad for Accessibility
@@ -15,6 +16,8 @@ const TrusteeBody: React.FC = () => {
 		return <div>edit.trusteeType</div>;
 	} else if (current.matches({ edit: 'trusteeWork' })) {
 		return <div>edit.trusteeWork</div>;
+	} else if (current.matches({ edit: 'trusteeCompanyDetails' })) {
+		return <div>edit.trusteeCompanyDetails</div>;
 	} else if (current.matches({ edit: 'trusteeContacts' })) {
 		return <div>edit.trusteeContacts</div>;
 	} else if (current.matches({ remove: 'reason' })) {
@@ -35,9 +38,9 @@ export const Trustee: React.FC<Omit<TrusteeProps, 'children'>> = ({ trustee }) =
 						<div>{`${context.trustee.firstName} ${context.trustee.lastName}`}</div>
 						<div>{context.complete ? 'No issues' : 'Incomplete'} | Remove</div>
 					</StyledCardToolbar>
-					<StyledCardContainer>
+					<Flex p="0 20px 20px 20px">
 						<TrusteeBody />
-					</StyledCardContainer>
+					</Flex>
 				</StyledCard>
 			)}
 		</TrusteeProvider>

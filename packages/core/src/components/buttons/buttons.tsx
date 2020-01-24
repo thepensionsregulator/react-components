@@ -1,4 +1,4 @@
-import React, { FunctionComponent } from 'react';
+import React, { FunctionComponent, ButtonHTMLAttributes } from 'react';
 import styled, { css, DefaultTheme } from 'styled-components';
 import { space, layout } from 'styled-system';
 import { SpaceProps, LayoutProps } from 'styled-system';
@@ -138,9 +138,13 @@ type ButtonConfigProps = {
 	disabled: boolean;
 };
 
-type ButtonProps = Partial<ButtonConfigProps> & SpaceProps & LayoutProps;
+interface ButtonProps
+	extends ButtonHTMLAttributes<HTMLButtonElement>,
+		Partial<ButtonConfigProps>,
+		SpaceProps,
+		LayoutProps {}
 
-const StyledButton = styled.button.attrs<ButtonProps>(({ type = 'button' }) => ({
+const StyledButton = styled('button').attrs<ButtonProps>(({ type = 'button' }) => ({
 	type,
 }))`
 	${getScale}

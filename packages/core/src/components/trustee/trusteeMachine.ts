@@ -8,12 +8,7 @@ interface TrusteeStates {
 				trusteeName: {};
 				trusteeType: {};
 				trusteeWork: {};
-				trusteeCompanyDetails: {
-					states: {
-						companySearch: {};
-						postcodeSearch: {};
-					};
-				};
+				trusteeCompanyDetails: {};
 				trusteeContacts: {};
 			};
 		};
@@ -120,20 +115,9 @@ const trusteeMachine = Machine<TrusteeContext, TrusteeStates, TrusteeEvents>({
 					},
 				},
 				trusteeCompanyDetails: {
-					initial: 'companySearch',
-					states: {
-						companySearch: {
-							on: {
-								COMPLETE: '#trusteeWork',
-								SAVE: '#preview',
-							},
-						},
-						postcodeSearch: {
-							on: {
-								COMPLETE: '#trusteeWork',
-								SAVE: '#preview',
-							},
-						},
+					on: {
+						COMPLETE: '#trusteeWork',
+						SAVE: '#preview',
 					},
 				},
 				trusteeContacts: {

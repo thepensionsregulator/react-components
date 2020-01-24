@@ -13,7 +13,8 @@ export const TrusteeContext = createContext<TrusteeContextProps>({
 	send: (_, __) => ({}),
 });
 
-export type TrusteeProps = { trustee: Partial<TC>; children?: (_: TrusteeContextProps) => ReactElement | ReactElement };
+type RenderProps = (_: TrusteeContextProps) => ReactElement;
+export type TrusteeProps = { trustee: Partial<TC>; children?: RenderProps | ReactElement };
 
 export const TrusteeProvider = ({ trustee, children }: TrusteeProps) => {
 	const [current, send] = useMachine(trusteeMachine, {
@@ -24,10 +25,10 @@ export const TrusteeProvider = ({ trustee, children }: TrusteeProps) => {
 	return <TrusteeContext.Provider value={{ current, send }}>{ui}</TrusteeContext.Provider>;
 };
 
-export function useTrusteeContext() {
+export const useTrusteeContext = (): TrusteeContextProps => {
 	const trusteeUtils = useContext(TrusteeContext);
 	if (!trusteeUtils) {
 		throw new Error(`Trustee compound components cannot be rendered outside the TrusteeProvider component`);
 	}
 	return trusteeUtils;
-}
+};

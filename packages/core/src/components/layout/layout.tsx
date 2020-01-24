@@ -1,5 +1,5 @@
 import React from 'react';
-import styled, { css } from 'styled-components';
+import styled from 'styled-components';
 import { compose, space, color, border, layout, flexbox, typography } from 'styled-system';
 import { BorderProps, ColorProps, FlexboxProps, SpaceProps, LayoutProps, TypographyProps } from 'styled-system';
 import { P, Link, H2 } from '../typography';
@@ -165,11 +165,11 @@ export const Alert: React.FC = ({ children }) => {
 	return <StyledAlert>{children}</StyledAlert>;
 };
 
-type FlexProps = FlexboxProps & SpaceProps & LayoutProps & TypographyProps & ColorProps;
+type FlexProps = FlexboxProps & SpaceProps & LayoutProps & TypographyProps & ColorProps & BorderProps;
 
 export const Flex = styled('div').attrs(() => ({
 	display: 'flex',
-}))<FlexProps>(compose(flexbox, space, layout, typography, color));
+}))<FlexProps>(compose(flexbox, space, layout, typography, color, border));
 
 type TextProps = TypographyProps & SpaceProps & ColorProps;
 
