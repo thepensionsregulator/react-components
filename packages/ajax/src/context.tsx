@@ -1,8 +1,7 @@
 import React, { createContext, useContext, useMemo } from 'react';
 import StoreProvider, { createStore, useStoreContext } from '@alekna/react-store';
-import reducer from 'reducer';
-import { Observable } from 'rxjs';
 import { throttleTime, tap } from 'rxjs/operators';
+import reducer from 'reducer';
 
 // NOTE: consider SSR
 
@@ -21,7 +20,8 @@ type Store = {
 interface AjaxProviderProps extends AjaxContextProps {
 	stores: Store[];
 	/** Use initialState to re-hidrate the store from localStorage */
-	initialState: any;
+	initialState?: any;
+	persistOnKey?: string;
 }
 
 const storeItem = (key: string, item: any) => {
@@ -35,7 +35,7 @@ const storeItem = (key: string, item: any) => {
 };
 
 /** Persister will continually persist selected state in localStorage */
-const Persister = ({ children, persist }: { children: any; persist: string[] }) => {
+const Persister = ({ children, persist, key }: { children: any; persist: string[]; key: string }) => {
 	const { stateChanges } = useStoreContext();
 
 	// TODO: check if it affects page rerenders on state changes.
@@ -46,12 +46,12 @@ const Persister = ({ children, persist }: { children: any; persist: string[] }) 
 				throttleTime(1000),
 				tap(state =>
 					storeItem(
-						'tpr',
-						persist.reduce((acc, key) => {
-							const value = state[key];
+						key,
+						persist.reduce((acc, k) => {
+							const value = state[k];
 							return {
 								...acc,
-								[key]: value,
+								[k]: value,
 							};
 						}, {}),
 					),
@@ -63,7 +63,13 @@ const Persister = ({ children, persist }: { children: any; persist: string[] }) 
 	return children;
 };
 
-export const AjaxProvider: React.FC<AjaxProviderProps> = ({ api, stores, initialState = undefined, children }) => {
+export const AjaxProvider: React.FC<AjaxProviderProps> = ({
+	api,
+	stores,
+	initialState = undefined,
+	persistOnKey = 'tpr',
+	children,
+}) => {
 	const persist = stores.map(({ name, persist }) => persist && name);
 	const storeConfig = useMemo(() => {
 		return createStore(
@@ -75,7 +81,9 @@ export const AjaxProvider: React.FC<AjaxProviderProps> = ({ api, stores, initial
 	return (
 		<StoreProvider store={storeConfig}>
 			<AjaxContext.Provider value={{ api }}>
-				<Persister persist={persist}>{children}</Persister>
+				<Persister persist={persist} key={persistOnKey}>
+					{children}
+				</Persister>
 			</AjaxContext.Provider>
 		</StoreProvider>
 	);
