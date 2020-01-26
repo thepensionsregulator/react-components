@@ -4,13 +4,15 @@ import { wait } from '@testing-library/react';
 
 describe('AjaxQuery', () => {
 	test('it renders correctly', async () => {
-		const [_, renderArg] = renderAjaxQuery({
+		const { result, waitForNextUpdate } = renderAjaxQuery({
 			query: 'users',
 			type: 'get',
 			store: 'users',
 		});
 
-		await wait(() => console.log(renderArg));
+		console.log(result.current);
+
+		await waitForNextUpdate();
 
 		expect(true).toBeTruthy();
 	});

@@ -1,18 +1,25 @@
 import React from 'react';
 import { render, RenderResult } from '@testing-library/react';
 import { AjaxProvider } from '../context';
-import { AjaxQuery } from '../ajaxQuery';
+import { AjaxQuery, useQuery } from '../ajaxQuery';
 import { NetworkStatus } from '../reducer';
-import { ajax } from 'rxjs/ajax';
+import { renderHook } from '@testing-library/react-hooks';
 
 const registryApi = {
 	name: 'registry',
 	instance: jest.fn((method: string, q: any, headers: any) => {
 		return {
 			toPromise: () => {
-				return Promise.resolve({
-					response: { data: [{ username: 'wolverine3000' }] },
-				});
+				return new Promise(res =>
+					res({
+						response: { data: [{ username: 'wolverine3000' }] },
+					}),
+				);
+
+				// return Promise.resolve({
+				// 	response: { data: [{ username: 'wolverine3000' }] },
+				// });
+
 				// return new Promise(resolve => {
 				// 	process.nextTick(() =>
 				// 		resolve({ data: [{ username: 'wolverine3000' }] }),
@@ -26,7 +33,6 @@ const registryApi = {
 const stores = [{ name: 'users', persist: false }];
 
 type RenderAjaxQuery = Partial<{
-	render: Function;
 	query: string;
 	type: 'get' | 'post';
 	headers: any;
@@ -46,8 +52,13 @@ type RenderArgsProps = Partial<{
 	refetch: Function;
 }>;
 
+const wrapper = ({ api, stores, children }) => (
+	<AjaxProvider api={api} stores={stores}>
+		{children}
+	</AjaxProvider>
+);
+
 export default function renderAjaxQuery({
-	render: renderFn = (_: any) => <div />,
 	query = 'users',
 	type = 'get',
 	headers,
@@ -55,28 +66,24 @@ export default function renderAjaxQuery({
 	store,
 	dataPath,
 	errorPath,
-}: RenderAjaxQuery = {}): [RenderResult, RenderArgsProps, any] {
-	let renderArg: RenderArgsProps;
-	const childrenSpy = jest.fn(controllerArg => {
-		renderArg = controllerArg;
-		return renderFn(controllerArg);
-	});
-
-	const utils = render(
-		<AjaxProvider api={[registryApi]} stores={stores}>
-			<AjaxQuery
-				query={query}
-				type={type}
-				headers={headers}
-				params={params}
-				store={store}
-				dataPath={dataPath}
-				errorPath={errorPath}
-			>
-				{childrenSpy}
-			</AjaxQuery>
-		</AjaxProvider>,
+}: RenderAjaxQuery = {}) {
+	const renderArg = renderHook(
+		() =>
+			useQuery({
+				query,
+				type,
+				headers,
+				params,
+				store,
+				dataPath,
+				errorPath,
+			}),
+		{
+			wrapper: ({ children }) => {
+				return wrapper({ api: [registryApi], stores: stores, children });
+			},
+		},
 	);
 
-	return [utils, renderArg, childrenSpy];
+	return renderArg;
 }
