@@ -1,7 +1,8 @@
-import { useEffect, ReactElement, useState } from 'react';
+import { useEffect, ReactElement } from 'react';
 import { path, pathOr } from 'ramda';
-import { useAjaxContext } from 'context';
+import { useAjaxContext } from './context';
 import { useSelector } from '@alekna/react-store';
+import { actions } from './reducer';
 
 // NOTE: try to use xstate https://xstate.js.org
 
@@ -17,13 +18,9 @@ type QueryProps = {
 	headers?: object;
 	params?: object;
 	/** store from the global store object and for the api uri */
-	store?: string;
-};
-
-const actions = (storeName: string, send: Function) => {
-	return {
-		status: (payload: any) => send({ type: `${storeName}@status`, payload }),
-	};
+	store: string;
+	dataPath?: any[];
+	errorPath?: any[];
 };
 
 export const useQuery = ({
@@ -32,23 +29,30 @@ export const useQuery = ({
 	headers = { 'Content-Type': 'application/json' },
 	params,
 	store,
+	dataPath = ['response', 'data'],
+	errorPath = ['response', 'data', 'errors', 0, 'detail'],
 }: QueryProps) => {
-	const { api: apis, dispatch } = useAjaxContext();
+	const { api, dispatch } = useAjaxContext();
 	/** Will select first Endpoint in an array if store is undefined or not found */
-	const { instance } = apis.find(({ name }) => name === store) || apis[0];
+	const { instance } = api.find(({ name }) => name === store) || api[0];
 	/** Send actions to the store */
 	const send = actions(store, dispatch);
 	/** Selected from the Global State */
-	const state = useSelector(store, {});
-	/** refetch functionallity */
-	const [refetch, setRefetch] = useState(0);
-	const refetchQuery = () => setRefetch(refetch + 1);
+	const state: any = useSelector(store, {});
+
+	const refetch = () => send.refetch();
+
+	const fetchMore = () => {
+		/** keeps original data in store and concats data to existing array */
+		return null;
+	};
 
 	/* eslint-disable */
 	useEffect(() => {
 		const fetchRequest = async () => {
-			safeSetState({ loading: true });
+			send.update({ networkStatus: 1, loading: true });
 			try {
+				/** If you want to execute multiple queries to server within a single request */
 				if (Array.isArray(query)) {
 					const data = await Promise.all(
 						query.map(async ({ name, type = 'get', params: variables }) => {
@@ -56,37 +60,41 @@ export const useQuery = ({
 							return await instance(type, q, headers).toPromise();
 						}),
 					);
-					safeSetState({
-						data: data.map(pathOr({}, ['response', 'data'])),
+					send.update({
+						networkStatus: 7,
+						data: data.map(pathOr({}, dataPath)),
 						error: undefined,
 						loading: false,
 					});
 				} else {
 					const q = { query, variables: params };
 					const data = await instance(type, q, headers).toPromise();
-					safeSetState({
-						data: pathOr({}, ['response', 'data'], data),
+					send.update({
+						networkStatus: 7,
+						data: pathOr({}, dataPath, data),
 						loading: false,
 						error: undefined,
 					});
 				}
 			} catch (error) {
-				const getError = path(['response', 'data', 'errors', 0, 'detail']);
-				safeSetState({
+				const getError = path(errorPath);
+				send.update({
+					networkStatus: 8,
 					data: undefined,
-					error: getError(error) || 'unknown error occurred',
 					loading: false,
+					error: getError(error) || 'unknown error occurred',
 				});
 			}
 		};
 
 		fetchRequest();
-	}, [params, refetch]);
+	}, [params, state.networkStatus]);
 
-	return { ...state, refetchQuery };
+	return { ...state, fetchMore, refetch };
 };
 
 interface AjaxQueryProps extends QueryProps {
 	children: (props: any) => ReactElement;
 }
-export const AjaxQuery = ({ children, ...rest }: AjaxQueryProps) => children(useQuery(rest));
+export const AjaxQuery = ({ children, ...rest }: AjaxQueryProps) =>
+	children(useQuery(rest));

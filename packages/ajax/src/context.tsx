@@ -1,7 +1,10 @@
 import React, { createContext, useContext, useMemo } from 'react';
-import StoreProvider, { createStore, useStoreContext } from '@alekna/react-store';
+import StoreProvider, {
+	createStore,
+	useStoreContext,
+} from '@alekna/react-store';
 import { throttleTime, tap } from 'rxjs/operators';
-import reducer from 'reducer';
+import reducer from './reducer';
 
 // NOTE: consider SSR
 
@@ -21,7 +24,7 @@ interface AjaxProviderProps extends AjaxContextProps {
 	stores: Store[];
 	/** Use initialState to re-hidrate the store from localStorage */
 	initialState?: any;
-	persistOnKey?: string;
+	persistKey?: string;
 }
 
 const storeItem = (key: string, item: any) => {
@@ -34,19 +37,24 @@ const storeItem = (key: string, item: any) => {
 	}
 };
 
+type PersisterProps = {
+	children: any;
+	persist: string[];
+	persistKey: string;
+};
+
 /** Persister will continually persist selected state in localStorage */
-const Persister = ({ children, persist, key }: { children: any; persist: string[]; key: string }) => {
+const Persister = ({ children, persist = [], persistKey }: PersisterProps) => {
 	const { stateChanges } = useStoreContext();
 
 	// TODO: check if it affects page rerenders on state changes.
-
 	if (persist.length > 0) {
 		stateChanges()
 			.pipe(
 				throttleTime(1000),
 				tap(state =>
 					storeItem(
-						key,
+						persistKey,
 						persist.reduce((acc, k) => {
 							const value = state[k];
 							return {
@@ -67,10 +75,12 @@ export const AjaxProvider: React.FC<AjaxProviderProps> = ({
 	api,
 	stores,
 	initialState = undefined,
-	persistOnKey = 'tpr',
+	persistKey = 'tpr',
 	children,
 }) => {
-	const persist = stores.map(({ name, persist }) => persist && name);
+	const persist = stores
+		.map(({ name, persist }) => persist && name)
+		.filter(Boolean);
 	const storeConfig = useMemo(() => {
 		return createStore(
 			stores.reduce((acc, { name }) => ({ ...acc, [name]: reducer(name) }), {}),
@@ -81,7 +91,7 @@ export const AjaxProvider: React.FC<AjaxProviderProps> = ({
 	return (
 		<StoreProvider store={storeConfig}>
 			<AjaxContext.Provider value={{ api }}>
-				<Persister persist={persist} key={persistOnKey}>
+				<Persister persist={persist} persistKey={persistKey}>
 					{children}
 				</Persister>
 			</AjaxContext.Provider>
@@ -93,7 +103,9 @@ export const useAjaxContext = () => {
 	const ajaxUtils = useContext(AjaxContext);
 	const storeUtils = useStoreContext();
 	if (!storeUtils) {
-		throw new Error(`Ajax compound components cannot be rendered outside the AjaxProvider component`);
+		throw new Error(
+			`Ajax compound components cannot be rendered outside the AjaxProvider component`,
+		);
 	}
 	return { ...ajaxUtils, ...storeUtils };
 };
