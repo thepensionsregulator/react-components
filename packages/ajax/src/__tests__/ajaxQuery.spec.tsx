@@ -1,60 +1,17 @@
-import React from 'react';
 import '@testing-library/jest-dom/extend-expect';
-import { render } from '@testing-library/react';
-import { AjaxProvider } from '../context';
-import { AjaxQuery } from '../ajaxQuery';
-
-const registryApi = {
-	name: 'registry',
-	instance: jest.fn(),
-};
-
-const stores = [{ name: 'users', persist: false }];
+import renderAjaxQuery from '../__mocks__/renderAjaxQuery';
+import { wait } from '@testing-library/react';
 
 describe('AjaxQuery', () => {
-	test('it renders correctly', () => {
-		const { getByText } = renderAjaxQuery({
+	test('it renders correctly', async () => {
+		const [_, renderArg] = renderAjaxQuery({
 			query: 'users',
 			type: 'get',
 			store: 'users',
 		});
-	});
 
-	expect(true).toBeTruthy();
+		await wait(() => console.log(renderArg));
+
+		expect(true).toBeTruthy();
+	});
 });
-
-// TODO: move to __mocks__
-function renderAjaxQuery({
-	render: renderFn = (_: any) => <div />,
-	query = 'users',
-	type = 'get',
-	headers,
-	params,
-	store,
-	dataPath,
-	errorPath,
-}: any = {}) {
-	let renderArg;
-	const childrenSpy = jest.fn(controllerArg => {
-		renderArg = controllerArg;
-		return renderFn(controllerArg);
-	});
-
-	const utils = render(
-		<AjaxProvider api={[registryApi]} stores={stores}>
-			<AjaxQuery
-				query={query}
-				type={type}
-				headers={headers}
-				params={params}
-				store={store}
-				dataPath={dataPath}
-				errorPath={errorPath}
-			>
-				{childrenSpy}
-			</AjaxQuery>
-		</AjaxProvider>,
-	);
-
-	return { childrenSpy, ...utils, ...renderArg };
-}

@@ -9,6 +9,8 @@ import { ReactElement } from 'react';
 type MutationProps = {
 	type: 'post' | 'put' | 'delete';
 	mutation: string;
+	dataPath?: any[];
+	errorPath?: any[];
 };
 
 type MutateProps = {
@@ -17,7 +19,12 @@ type MutateProps = {
 	headers?: object;
 };
 
-export const useMutation = ({ type = 'post', mutation = '' }: MutationProps) => {
+export const useMutation = ({
+	type = 'post',
+	mutation = '',
+	dataPath = ['response', 'data'],
+	errorPath = ['response', 'errors', 0],
+}: MutationProps) => {
 	const config = useSelector((state: any) => state.config);
 	const dispatch = useDispatch();
 	const api = instance(config, dispatch);
@@ -39,7 +46,7 @@ export const useMutation = ({ type = 'post', mutation = '' }: MutationProps) => 
 		return api(type, params, headers)
 			.toPromise()
 			.then((resp: object) => {
-				const response = path(['response', 'data'], resp);
+				const response = path(dataPath, resp);
 				safeSetState({ loading: false });
 				return response;
 			})
@@ -48,7 +55,7 @@ export const useMutation = ({ type = 'post', mutation = '' }: MutationProps) => 
 					{
 						detail: `Unkown error occured while processing your request: ${mutation}`,
 					},
-					['response', 'errors', 0],
+					errorPath,
 					err,
 				);
 				safeSetState({ error: errorMessage, loading: false });
@@ -62,4 +69,5 @@ export const useMutation = ({ type = 'post', mutation = '' }: MutationProps) => 
 interface AjaxMutationProps extends MutationProps {
 	children: (props: any) => ReactElement;
 }
-export const AjaxMutation = ({ children, ...rest }: AjaxMutationProps) => children(useMutation(rest));
+export const AjaxMutation = ({ children, ...rest }: AjaxMutationProps) =>
+	children(useMutation(rest));

@@ -69,6 +69,7 @@ export const useQuery = ({
 				} else {
 					const q = { query, variables: params };
 					const data = await instance(type, q, headers).toPromise();
+					// console.log(instance);
 					send.update({
 						networkStatus: 7,
 						data: pathOr({}, dataPath, data),
