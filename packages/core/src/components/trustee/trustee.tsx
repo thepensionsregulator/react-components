@@ -10,11 +10,11 @@ const TrusteeBody: React.FC = () => {
 	const { current } = useTrusteeContext();
 	if (current.matches('preview')) {
 		return <div>preview</div>;
-	} else if (current.matches({ edit: 'trusteeName' })) {
+	} else if (current.matches({ edit: { trustee: 'name' } })) {
 		return <div>edit.trusteeName</div>;
-	} else if (current.matches({ edit: 'trusteeType' })) {
+	} else if (current.matches({ edit: { trustee: 'type' } })) {
 		return <div>edit.trusteeType</div>;
-	} else if (current.matches({ edit: 'trusteeWork' })) {
+	} else if (current.matches({ edit: 'companyAddress' })) {
 		return <div>edit.trusteeWork</div>;
 	} else if (current.matches({ edit: 'trusteeCompanyDetails' })) {
 		return <div>edit.trusteeCompanyDetails</div>;
@@ -29,7 +29,9 @@ const TrusteeBody: React.FC = () => {
 	}
 };
 
-export const Trustee: React.FC<Omit<TrusteeProps, 'children'>> = ({ trustee }) => {
+export const Trustee: React.FC<Omit<TrusteeProps, 'children'>> = ({
+	trustee,
+}) => {
 	return (
 		<TrusteeProvider trustee={trustee}>
 			{({ current: { context } }) => (

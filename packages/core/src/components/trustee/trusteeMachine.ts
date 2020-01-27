@@ -5,9 +5,13 @@ interface TrusteeStates {
 		preview: {};
 		edit: {
 			states: {
-				trusteeName: {};
-				trusteeType: {};
-				trusteeWork: {};
+				trustee: {
+					states: {
+						name: {};
+						type: {};
+					};
+				};
+				companyAddress: {};
 				trusteeCompanyDetails: {};
 				trusteeContacts: {};
 			};
@@ -18,8 +22,6 @@ interface TrusteeStates {
 				confirm: {};
 			};
 		};
-		// NOTE: NOTE SURE IF *complete* IS NEEDED?
-		complete: {};
 	};
 }
 
@@ -81,49 +83,46 @@ const trusteeMachine = Machine<TrusteeContext, TrusteeStates, TrusteeEvents>({
 		preview: {
 			id: 'preview',
 			on: {
-				EDIT_NAME: 'edit',
-				EDIT_TYPE: 'edit.trusteeType',
-				EDIT_WORK: 'edit.trusteeWork',
+				EDIT_TRUSTEE: 'edit.trustee.name',
+				EDIT_ORG: 'edit.companyAddress',
 				EDIT_CONTACTS: 'edit.trusteeContacts',
-				COMPLETE: 'complete',
 				REMOVE: 'remove',
 			},
 		},
 		edit: {
-			initial: 'trusteeName',
+			initial: 'trustee',
 			states: {
-				trusteeName: {
-					on: {
-						CORRECT: 'trusteeType',
-						SAVE: '#preview',
+				trustee: {
+					initial: 'name',
+					states: {
+						name: {
+							on: {
+								NEXT: 'type',
+							},
+						},
+						type: {
+							on: {
+								SAVE: '#preview',
+								BACK: 'name',
+							},
+						},
 					},
 				},
-				trusteeType: {
+				companyAddress: {
+					id: 'companyAddress',
 					on: {
-						CORRECT: 'trusteeWork',
-						SAVE: '#preview',
-						BACK: 'trusteeName',
-					},
-				},
-				trusteeWork: {
-					id: 'trusteeWork',
-					on: {
-						CORRECT: 'trusteeContacts',
 						INCORRECT: 'trusteeCompanyDetails',
 						SAVE: '#preview',
-						BACK: 'trusteeType',
 					},
 				},
 				trusteeCompanyDetails: {
 					on: {
-						COMPLETE: '#trusteeWork',
-						SAVE: '#preview',
+						COMPLETE: '#companyAddress',
 					},
 				},
 				trusteeContacts: {
 					on: {
-						CORRECT: '#preview',
-						BACK: 'trusteeWork',
+						SAVE: '#preview',
 					},
 				},
 			},
@@ -139,15 +138,10 @@ const trusteeMachine = Machine<TrusteeContext, TrusteeStates, TrusteeEvents>({
 				},
 				confirm: {
 					on: {
-						CONFIRM: '#complete',
 						CANCEL: '#preview',
 					},
 				},
 			},
-		},
-		complete: {
-			id: 'complete',
-			type: 'final',
 		},
 	},
 });
