@@ -1,0 +1,518 @@
+
+{
+  "header": {
+    "reportVersion": 1,
+    "event": "Allocation failed - JavaScript heap out of memory",
+    "trigger": "FatalError",
+    "filename": "report.20200127.124301.9908.0.001.json",
+    "dumpEventTime": "2020-01-27T12:43:01Z",
+    "dumpEventTimeStamp": "1580128981144",
+    "processId": 9908,
+    "cwd": "/home/alekna/Development/tpr/react-components",
+    "commandLine": [
+      "/home/alekna/.nvm/versions/node/v13.6.0/bin/node",
+      "/home/alekna/Development/tpr/react-components/node_modules/jest-worker/build/workers/processChild.js"
+    ],
+    "nodejsVersion": "v13.6.0",
+    "glibcVersionRuntime": "2.23",
+    "glibcVersionCompiler": "2.17",
+    "wordSize": 64,
+    "arch": "x64",
+    "platform": "linux",
+    "componentVersions": {
+      "node": "13.6.0",
+      "v8": "7.9.317.25-node.26",
+      "uv": "1.34.0",
+      "zlib": "1.2.11",
+      "brotli": "1.0.7",
+      "ares": "1.15.0",
+      "modules": "79",
+      "nghttp2": "1.40.0",
+      "napi": "5",
+      "llhttp": "2.0.1",
+      "openssl": "1.1.1d",
+      "cldr": "36.0",
+      "icu": "65.1",
+      "tz": "2019c",
+      "unicode": "12.1"
+    },
+    "release": {
+      "name": "node",
+      "headersUrl": "https://nodejs.org/download/release/v13.6.0/node-v13.6.0-headers.tar.gz",
+      "sourceUrl": "https://nodejs.org/download/release/v13.6.0/node-v13.6.0.tar.gz"
+    },
+    "osName": "Linux",
+    "osRelease": "4.4.0-18362-Microsoft",
+    "osVersion": "#476-Microsoft Fri Nov 01 16:53:00 PST 2019",
+    "osMachine": "x86_64",
+    "cpus": [
+      {
+        "model": "Intel(R) Core(TM) i5-8365U CPU @ 1.60GHz",
+        "speed": 1896,
+        "user": 6013200,
+        "nice": 0,
+        "sys": 4767900,
+        "idle": 40265600,
+        "irq": 495000
+      },
+      {
+        "model": "Intel(R) Core(TM) i5-8365U CPU @ 1.60GHz",
+        "speed": 1896,
+        "user": 5011700,
+        "nice": 0,
+        "sys": 2736700,
+        "idle": 43298400,
+        "irq": 86800
+      },
+      {
+        "model": "Intel(R) Core(TM) i5-8365U CPU @ 1.60GHz",
+        "speed": 1896,
+        "user": 10846800,
+        "nice": 0,
+        "sys": 5802800,
+        "idle": 34397100,
+        "irq": 49600
+      },
+      {
+        "model": "Intel(R) Core(TM) i5-8365U CPU @ 1.60GHz",
+        "speed": 1896,
+        "user": 5783500,
+        "nice": 0,
+        "sys": 2873200,
+        "idle": 42390000,
+        "irq": 32900
+      },
+      {
+        "model": "Intel(R) Core(TM) i5-8365U CPU @ 1.60GHz",
+        "speed": 1896,
+        "user": 9004000,
+        "nice": 0,
+        "sys": 4663900,
+        "idle": 37378900,
+        "irq": 51200
+      },
+      {
+        "model": "Intel(R) Core(TM) i5-8365U CPU @ 1.60GHz",
+        "speed": 1896,
+        "user": 5283500,
+        "nice": 0,
+        "sys": 2592600,
+        "idle": 43170600,
+        "irq": 27800
+      },
+      {
+        "model": "Intel(R) Core(TM) i5-8365U CPU @ 1.60GHz",
+        "speed": 1896,
+        "user": 7391000,
+        "nice": 0,
+        "sys": 3891800,
+        "idle": 39763900,
+        "irq": 39600
+      },
+      {
+        "model": "Intel(R) Core(TM) i5-8365U CPU @ 1.60GHz",
+        "speed": 1896,
+        "user": 5556500,
+        "nice": 0,
+        "sys": 3026200,
+        "idle": 42464000,
+        "irq": 26500
+      }
+    ],
+    "networkInterfaces": [
+      {
+        "name": "eth2",
+        "internal": false,
+        "mac": "00:15:5d:98:3c:2c",
+        "address": "192.168.148.1",
+        "netmask": "255.255.255.240",
+        "family": "IPv4"
+      },
+      {
+        "name": "eth2",
+        "internal": false,
+        "mac": "00:15:5d:98:3c:2c",
+        "address": "fe80::ac5f:9744:44b8:8810",
+        "netmask": "ffff:ffff:ffff:ffff::",
+        "family": "IPv6",
+        "scopeid": 38
+      },
+      {
+        "name": "lo",
+        "internal": true,
+        "mac": "00:00:00:00:00:00",
+        "address": "127.0.0.1",
+        "netmask": "255.0.0.0",
+        "family": "IPv4"
+      },
+      {
+        "name": "lo",
+        "internal": true,
+        "mac": "00:00:00:00:00:00",
+        "address": "::1",
+        "netmask": "ffff:ffff:ffff:ffff:ffff:ffff:ffff:ffff",
+        "family": "IPv6",
+        "scopeid": 0
+      },
+      {
+        "name": "wifi0",
+        "internal": false,
+        "mac": "dc:71:96:ff:91:5a",
+        "address": "10.24.34.137",
+        "netmask": "255.255.255.0",
+        "family": "IPv4"
+      },
+      {
+        "name": "wifi0",
+        "internal": false,
+        "mac": "dc:71:96:ff:91:5a",
+        "address": "fe80::b92a:442c:b0fa:bc3d",
+        "netmask": "ffff:ffff:ffff:ffff::",
+        "family": "IPv6",
+        "scopeid": 9
+      },
+      {
+        "name": "eth5",
+        "internal": false,
+        "mac": "00:15:5d:51:06:c4",
+        "address": "172.18.80.1",
+        "netmask": "255.255.240.0",
+        "family": "IPv4"
+      },
+      {
+        "name": "eth5",
+        "internal": false,
+        "mac": "00:15:5d:51:06:c4",
+        "address": "fe80::b4b3:a122:43ba:fa53",
+        "netmask": "ffff:ffff:ffff:ffff::",
+        "family": "IPv6",
+        "scopeid": 75
+      }
+    ],
+    "host": "IT08031"
+  },
+  "javascriptStack": {
+    "message": "No stack.",
+    "stack": [
+      "Unavailable."
+    ]
+  },
+  "nativeStack": [
+    {
+      "pc": "0x0000000000bcff25",
+      "symbol": "report::TriggerNodeReport(v8::Isolate*, node::Environment*, char const*, char const*, std::string const&, v8::Local<v8::String>) [/home/alekna/.nvm/versions/node/v13.6.0/bin/node]"
+    },
+    {
+      "pc": "0x0000000000a9f4fc",
+      "symbol": "node::OnFatalError(char const*, char const*) [/home/alekna/.nvm/versions/node/v13.6.0/bin/node]"
+    },
+    {
+      "pc": "0x0000000000c06ffe",
+      "symbol": "v8::Utils::ReportOOMFailure(v8::internal::Isolate*, char const*, bool) [/home/alekna/.nvm/versions/node/v13.6.0/bin/node]"
+    },
+    {
+      "pc": "0x0000000000c07379",
+      "symbol": "v8::internal::V8::FatalProcessOutOfMemory(v8::internal::Isolate*, char const*, bool) [/home/alekna/.nvm/versions/node/v13.6.0/bin/node]"
+    },
+    {
+      "pc": "0x0000000000db55f5",
+      "symbol": " [/home/alekna/.nvm/versions/node/v13.6.0/bin/node]"
+    },
+    {
+      "pc": "0x0000000000db5c86",
+      "symbol": "v8::internal::Heap::RecomputeLimits(v8::internal::GarbageCollector) [/home/alekna/.nvm/versions/node/v13.6.0/bin/node]"
+    },
+    {
+      "pc": "0x0000000000dc44f9",
+      "symbol": "v8::internal::Heap::PerformGarbageCollection(v8::internal::GarbageCollector, v8::GCCallbackFlags) [/home/alekna/.nvm/versions/node/v13.6.0/bin/node]"
+    },
+    {
+      "pc": "0x0000000000dc5335",
+      "symbol": "v8::internal::Heap::CollectGarbage(v8::internal::AllocationSpace, v8::internal::GarbageCollectionReason, v8::GCCallbackFlags) [/home/alekna/.nvm/versions/node/v13.6.0/bin/node]"
+    },
+    {
+      "pc": "0x0000000000dc7e0c",
+      "symbol": "v8::internal::Heap::AllocateRawWithRetryOrFailSlowPath(int, v8::internal::AllocationType, v8::internal::AllocationOrigin, v8::internal::AllocationAlignment) [/home/alekna/.nvm/versions/node/v13.6.0/bin/node]"
+    },
+    {
+      "pc": "0x0000000000d8e9e4",
+      "symbol": "v8::internal::Factory::NewFillerObject(int, bool, v8::internal::AllocationType, v8::internal::AllocationOrigin) [/home/alekna/.nvm/versions/node/v13.6.0/bin/node]"
+    },
+    {
+      "pc": "0x00000000010dbd3e",
+      "symbol": "v8::internal::Runtime_AllocateInYoungGeneration(int, unsigned long*, v8::internal::Isolate*) [/home/alekna/.nvm/versions/node/v13.6.0/bin/node]"
+    },
+    {
+      "pc": "0x000000000145c3d9",
+      "symbol": " [/home/alekna/.nvm/versions/node/v13.6.0/bin/node]"
+    }
+  ],
+  "javascriptHeap": {
+    "totalMemory": 2168520704,
+    "totalCommittedMemory": 2167075960,
+    "usedMemory": 2065979560,
+    "availableMemory": 64621896,
+    "memoryLimit": 2197815296,
+    "heapSpaces": {
+      "read_only_space": {
+        "memorySize": 262144,
+        "committedMemory": 33328,
+        "capacity": 33040,
+        "used": 33040,
+        "available": 0
+      },
+      "new_space": {
+        "memorySize": 33554432,
+        "committedMemory": 33030720,
+        "capacity": 16758784,
+        "used": 424992,
+        "available": 16333792
+      },
+      "old_space": {
+        "memorySize": 2094145536,
+        "committedMemory": 2093667288,
+        "capacity": 2029161264,
+        "used": 2026926536,
+        "available": 2234728
+      },
+      "code_space": {
+        "memorySize": 1740800,
+        "committedMemory": 1527072,
+        "capacity": 1271424,
+        "used": 1271424,
+        "available": 0
+      },
+      "map_space": {
+        "memorySize": 3149824,
+        "committedMemory": 3149584,
+        "capacity": 1761440,
+        "used": 1761440,
+        "available": 0
+      },
+      "large_object_space": {
+        "memorySize": 35618816,
+        "committedMemory": 35618816,
+        "capacity": 35559344,
+        "used": 35559344,
+        "available": 0
+      },
+      "code_large_object_space": {
+        "memorySize": 49152,
+        "committedMemory": 49152,
+        "capacity": 2784,
+        "used": 2784,
+        "available": 0
+      },
+      "new_large_object_space": {
+        "memorySize": 0,
+        "committedMemory": 0,
+        "capacity": 16758784,
+        "used": 0,
+        "available": 16758784
+      }
+    }
+  },
+  "resourceUsage": {
+    "userCpuSeconds": 535.656,
+    "kernelCpuSeconds": 144.188,
+    "cpuConsumptionPercent": 130.488,
+    "maxRss": 2251010048,
+    "pageFaults": {
+      "IORequired": 0,
+      "IONotRequired": 832964
+    },
+    "fsActivity": {
+      "reads": 0,
+      "writes": 0
+    }
+  },
+  "uvthreadResourceUsage": {
+    "userCpuSeconds": 376.594,
+    "kernelCpuSeconds": 133.406,
+    "cpuConsumptionPercent": 97.8887,
+    "fsActivity": {
+      "reads": 0,
+      "writes": 0
+    }
+  },
+  "libuv": [
+  ],
+  "environmentVariables": {
+    "npm_package_devDependencies_ts_node": "^8.5.2",
+    "npm_package_devDependencies_rollup": "^1.27.5",
+    "npm_package_devDependencies__types_qs": "^6.9.0",
+    "USER": "alekna",
+    "npm_package_devDependencies_jest": "^24.9.0",
+    "npm_package_devDependencies__testing_library_jest_dom": "^5.0.0",
+    "npm_package_devDependencies__rollup_plugin_node_resolve": "^7.0.0",
+    "npm_config_version_commit_hooks": "true",
+    "npm_config_user_agent": "yarn/1.21.1 npm/? node/v13.6.0 linux x64",
+    "npm_config_bin_links": "true",
+    "npm_node_execpath": "/home/alekna/.nvm/versions/node/v13.6.0/bin/node",
+    "npm_config_init_version": "1.0.0",
+    "SHLVL": "1",
+    "npm_package_scripts_codecov": "echo TODO...",
+    "HOME": "/home/alekna",
+    "OLDPWD": "/home/alekna",
+    "LESS": "-R",
+    "npm_package_devDependencies_immutability_helper": "^3.0.1",
+    "NVM_BIN": "/home/alekna/.nvm/versions/node/v13.6.0/bin",
+    "npm_package_devDependencies__testing_library_react_hooks": "^3.2.1",
+    "ZSH": "/home/alekna/.oh-my-zsh",
+    "LSCOLORS": "Gxfxcxdxbxegedabagacad",
+    "npm_package_devDependencies_rollup_plugin_local_resolve": "^1.0.7",
+    "npm_config_init_license": "MIT",
+    "PAGER": "less",
+    "YARN_WRAP_OUTPUT": "false",
+    "npm_package_lint_staged____js_jsx_ts_tsx__0": "prettier --write",
+    "npm_package_devDependencies_apollo_client": "^2.6.8",
+    "npm_package_scripts_docz_build": "docz build",
+    "npm_config_version_tag_prefix": "v",
+    "npm_package_lint_staged____js_jsx_ts_tsx__1": "git add",
+    "npm_package_devDependencies_styled_components": "^5.0.0",
+    "npm_package_devDependencies_rimraf": "^3.0.0",
+    "npm_package_devDependencies__xstate_react": "^0.8.1",
+    "npm_package_scripts_lint_fix": "prettier --write \"packages/*/src/**/*.{js,jsx,ts,tsx}\"",
+    "npm_package_scripts_postinstall": "yarn remove-typing-dupes && lerna exec -- yarn install --yarn.lock=false && lerna run prepare",
+    "WSL_DISTRO_NAME": "Ubuntu-16.04",
+    "npm_package_description": "TODO: Give a short introduction of your project. Let this section explain the objectives or the motivation behind this project.",
+    "npm_package_devDependencies_typescript": "^3.7.5",
+    "npm_package_devDependencies_react_docgen_typescript_loader": "^3.6.0",
+    "npm_package_devDependencies_babel_loader": "^8.0.6",
+    "npm_package_scripts_posttest": "yarn lint",
+    "NVM_DIR": "/home/alekna/.nvm",
+    "npm_package_readmeFilename": "README.md",
+    "npm_package_devDependencies_react": "^16.12.0",
+    "npm_package_devDependencies__types_react_dom": "^16.9.4",
+    "npm_package_devDependencies_ts_loader": "^6.2.1",
+    "npm_package_devDependencies_babel_jest": "^24.9.0",
+    "npm_package_dependencies_core": "file:packages/core",
+    "LOGNAME": "alekna",
+    "npm_package_scripts_clean": "find . -name \"node_modules\" -exec rm -rf '{}' + && find . -name \"lib\" -exec rm -rf '{}' +",
+    "NAME": "IT08031",
+    "_": "/home/alekna/.nvm/versions/node/v13.6.0/bin/yarn",
+    "npm_package_devDependencies_ts_jest": "^24.2.0",
+    "npm_package_devDependencies_lerna": "^3.19.0",
+    "npm_package_devDependencies__types_jest": "^24.0.23",
+    "npm_package_devDependencies__rollup_plugin_commonjs": "^11.0.1",
+    "npm_package_private": "true",
+    "npm_package_devDependencies_rollup_plugin_typescript2": "^0.25.3",
+    "npm_package_scripts_lint": "prettier --list-different \"packages/*/src/**/*.{js,jsx,ts,tsx}\"",
+    "npm_config_registry": "https://registry.yarnpkg.com",
+    "TERM": "xterm-256color",
+    "npm_package_devDependencies__types_lodash": "^4.14.149",
+    "npm_package_devDependencies__babel_core": "^7.8.3",
+    "npm_config_ignore_scripts": "",
+    "npm_package_resolutions__types_react": "16.9.17",
+    "PATH": "/tmp/yarn--1580127141675-0.8573588622716568:/home/alekna/Development/tpr/react-components/node_modules/.bin:/home/alekna/.config/yarn/link/node_modules/.bin:/home/alekna/.yarn/bin:/home/alekna/.nvm/versions/node/v13.6.0/libexec/lib/node_modules/npm/bin/node-gyp-bin:/home/alekna/.nvm/versions/node/v13.6.0/lib/node_modules/npm/bin/node-gyp-bin:/home/alekna/.nvm/versions/node/v13.6.0/bin/node_modules/npm/bin/node-gyp-bin:/home/alekna/.nvm/versions/node/v13.6.0/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/mnt/c/Program Files/WindowsApps/CanonicalGroupLimited.Ubuntu16.04onWindows_1604.2019.523.0_x64__79rhkp1fndgsc:/mnt/c/Program Files (x86)/Microsoft SDKs/Azure/CLI2/wbin:/mnt/c/WINDOWS/system32:/mnt/c/WINDOWS:/mnt/c/WINDOWS/System32/Wbem:/mnt/c/WINDOWS/System32/WindowsPowerShell/v1.0/:/mnt/c/Program Files (x86)/Sennheiser/SoftphoneSDK/:/mnt/c/Program Files (x86)/Plantronics/Spokes3G/:/mnt/c/Program Files/Git/cmd:/mnt/c/Program Files/nodejs/:/mnt/c/Program Files/PuTTY/:/mnt/c/Program Files/Intel/WiFi/bin/:/mnt/c/Program Files/Common Files/Intel/WirelessCommon/:/mnt/c/WINDOWS/System32/OpenSSH/:/mnt/c/ProgramData/chocolatey/bin:/mnt/c/Program Files/Docker/Docker/resources/bin:/mnt/c/ProgramData/DockerDesktop/version-bin:/mnt/c/Users/aleknad/scoop/shims:/mnt/c/Users/aleknad/AppData/Local/Microsoft/WindowsApps:/mnt/c/Users/aleknad/AppData/Local/Programs/Microsoft VS Code/bin:/mnt/c/Users/aleknad/AppData/Roaming/npm:/mnt/c/Users/aleknad/AppData/Local/Yarn/bin:/mnt/c/Users/aleknad/AppData/Local/Microsoft/WindowsApps",
+    "NODE": "/home/alekna/.nvm/versions/node/v13.6.0/bin/node",
+    "npm_package_name": "@tpr/monorepo",
+    "npm_package_devDependencies_styled_system": "^5.1.4",
+    "npm_package_jest_projects_0": "<rootDir>/packages/*",
+    "npm_package_devDependencies_rollup_plugin_invariant": "^0.5.6",
+    "npm_package_dependencies_forms": "file:packages/forms",
+    "LANG": "en_US.UTF-8",
+    "npm_package_devDependencies_rollup_plugin_terser": "^5.1.2",
+    "npm_package_devDependencies_rollup_plugin_sourcemaps": "^0.5.0",
+    "npm_package_devDependencies_react_test_renderer": "^16.12.0",
+    "npm_package_devDependencies__types_styled_components": "^4.4.1",
+    "npm_package_devDependencies__types_prop_types": "^15.7.3",
+    "LS_COLORS": "rs=0:di=01;34:ln=01;36:mh=00:pi=40;33:so=01;35:do=01;35:bd=40;33;01:cd=40;33;01:or=40;31;01:mi=00:su=37;41:sg=30;43:ca=30;41:tw=30;42:ow=34;42:st=37;44:ex=01;32:*.tar=01;31:*.tgz=01;31:*.arc=01;31:*.arj=01;31:*.taz=01;31:*.lha=01;31:*.lz4=01;31:*.lzh=01;31:*.lzma=01;31:*.tlz=01;31:*.txz=01;31:*.tzo=01;31:*.t7z=01;31:*.zip=01;31:*.z=01;31:*.Z=01;31:*.dz=01;31:*.gz=01;31:*.lrz=01;31:*.lz=01;31:*.lzo=01;31:*.xz=01;31:*.bz2=01;31:*.bz=01;31:*.tbz=01;31:*.tbz2=01;31:*.tz=01;31:*.deb=01;31:*.rpm=01;31:*.jar=01;31:*.war=01;31:*.ear=01;31:*.sar=01;31:*.rar=01;31:*.alz=01;31:*.ace=01;31:*.zoo=01;31:*.cpio=01;31:*.7z=01;31:*.rz=01;31:*.cab=01;31:*.jpg=01;35:*.jpeg=01;35:*.gif=01;35:*.bmp=01;35:*.pbm=01;35:*.pgm=01;35:*.ppm=01;35:*.tga=01;35:*.xbm=01;35:*.xpm=01;35:*.tif=01;35:*.tiff=01;35:*.png=01;35:*.svg=01;35:*.svgz=01;35:*.mng=01;35:*.pcx=01;35:*.mov=01;35:*.mpg=01;35:*.mpeg=01;35:*.m2v=01;35:*.mkv=01;35:*.webm=01;35:*.ogm=01;35:*.mp4=01;35:*.m4v=01;35:*.mp4v=01;35:*.vob=01;35:*.qt=01;35:*.nuv=01;35:*.wmv=01;35:*.asf=01;35:*.rm=01;35:*.rmvb=01;35:*.flc=01;35:*.avi=01;35:*.fli=01;35:*.flv=01;35:*.gl=01;35:*.dl=01;35:*.xcf=01;35:*.xwd=01;35:*.yuv=01;35:*.cgm=01;35:*.emf=01;35:*.ogv=01;35:*.ogx=01;35:*.aac=00;36:*.au=00;36:*.flac=00;36:*.m4a=00;36:*.mid=00;36:*.midi=00;36:*.mka=00;36:*.mp3=00;36:*.mpc=00;36:*.ogg=00;36:*.ra=00;36:*.wav=00;36:*.oga=00;36:*.opus=00;36:*.spx=00;36:*.xspf=00;36:",
+    "npm_lifecycle_script": "jest",
+    "npm_package_dependencies_theming": "file:packages/theming",
+    "npm_package_scripts_test": "jest",
+    "npm_package_scripts_diff": "check-if-folder-contents-changed-in-git-commit-range",
+    "npm_config_version_git_message": "v%s",
+    "SHELL": "/usr/bin/zsh",
+    "npm_lifecycle_event": "test",
+    "npm_package_version": "",
+    "npm_package_husky_hooks_pre_commit": "lint-staged",
+    "npm_package_devDependencies__types_react": "^16.9.17",
+    "npm_package_devDependencies__testing_library_react": "^9.4.0",
+    "npm_config_argv": "{\"remain\":[],\"cooked\":[\"run\",\"test\"],\"original\":[\"test\",\"--watch\"]}",
+    "npm_package_devDependencies_tslib": "^1.10.0",
+    "npm_package_scripts_build": "lerna run build",
+    "npm_package_devDependencies_codecov": "^3.6.1",
+    "npm_package_scripts_docz_serve": "docz build && docz serve",
+    "npm_package_scripts_lerna": "lerna",
+    "npm_config_version_git_tag": "true",
+    "npm_config_version_git_sign": "",
+    "npm_package_dependencies_table": "file:packages/table",
+    "npm_package_scripts_coverage_upload": "codecov",
+    "npm_package_license": "MIT",
+    "npm_config_strict_ssl": "true",
+    "npm_package_scripts_coverage": "jest --verbose --coverage",
+    "PWD": "/home/alekna/Development/tpr/react-components",
+    "npm_execpath": "/home/alekna/.nvm/versions/node/v13.6.0/lib/node_modules/yarn/bin/yarn.js",
+    "npm_package_devDependencies_lerna_changelog": "^1.0.0",
+    "NVM_CD_FLAGS": "-q",
+    "npm_package_scripts_docz_dev": "docz dev",
+    "npm_package_devDependencies_docz": "^2.2.0",
+    "npm_package_devDependencies_cross_env": "^6.0.3",
+    "npm_package_scripts_remove_typing_dupes": "rimraf node_modules/@types/react-native",
+    "npm_config_save_prefix": "^",
+    "npm_config_ignore_optional": "",
+    "npm_package_devDependencies__types_styled_system": "^5.1.4",
+    "npm_package_scripts_deploy": "lerna publish",
+    "HOSTTYPE": "x86_64",
+    "npm_package_devDependencies_npm_run_all": "^4.1.5",
+    "INIT_CWD": "/home/alekna/Development/tpr/react-components",
+    "WSLENV": "",
+    "EDITOR": "mvim",
+    "npm_package_devDependencies_react_dom": "^16.12.0",
+    "NODE_ENV": "test",
+    "JEST_WORKER_ID": "1",
+    "FORCE_COLOR": "1"
+  },
+  "userLimits": {
+    "core_file_size_blocks": {
+      "soft": 0,
+      "hard": "unlimited"
+    },
+    "data_seg_size_kbytes": {
+      "soft": "unlimited",
+      "hard": "unlimited"
+    },
+    "file_size_blocks": {
+      "soft": "unlimited",
+      "hard": "unlimited"
+    },
+    "max_locked_memory_bytes": {
+      "soft": 65536,
+      "hard": 65536
+    },
+    "max_memory_size_kbytes": {
+      "soft": "unlimited",
+      "hard": "unlimited"
+    },
+    "open_files": {
+      "soft": 65536,
+      "hard": 65536
+    },
+    "stack_size_bytes": {
+      "soft": 8388608,
+      "hard": 8388608
+    },
+    "cpu_time_seconds": {
+      "soft": "unlimited",
+      "hard": "unlimited"
+    },
+    "max_user_processes": {
+      "soft": 7823,
+      "hard": 7823
+    },
+    "virtual_memory_kbytes": {
+      "soft": "unlimited",
+      "hard": "unlimited"
+    }
+  },
+  "sharedObjects": [
+    "/lib/x86_64-linux-gnu/libdl.so.2",
+    "/usr/lib/x86_64-linux-gnu/libstdc++.so.6",
+    "/lib/x86_64-linux-gnu/libm.so.6",
+    "/lib/x86_64-linux-gnu/libgcc_s.so.1",
+    "/lib/x86_64-linux-gnu/libpthread.so.0",
+    "/lib/x86_64-linux-gnu/libc.so.6",
+    "/lib64/ld-linux-x86-64.so.2"
+  ]
+}

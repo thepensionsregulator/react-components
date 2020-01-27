@@ -1,6 +1,6 @@
 import '@testing-library/jest-dom/extend-expect';
 import renderAjaxQuery from '../__mocks__/renderAjaxQuery';
-import { wait } from '@testing-library/react';
+import { act } from '@testing-library/react-hooks';
 
 describe('AjaxQuery', () => {
 	test('it renders correctly', async () => {
@@ -8,11 +8,22 @@ describe('AjaxQuery', () => {
 			query: 'users',
 			type: 'get',
 			store: 'users',
+			variables: {
+				page: 2,
+				total: 10,
+				sort: {
+					dob: 'asc',
+				},
+			},
 		});
 
-		console.log(result.current);
+		// act(() => {
+		// 	result.current.fetchMore();
+		// });
 
+		console.log(result.current);
 		await waitForNextUpdate();
+		console.log(result.current);
 
 		expect(true).toBeTruthy();
 	});

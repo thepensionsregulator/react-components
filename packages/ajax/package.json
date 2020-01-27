@@ -39,7 +39,7 @@
 		"xstate": "^4.7.6"
 	},
 	"dependencies": {
-		"@alekna/react-store": "^1.2.1",
+		"@alekna/react-store": "^1.2.5",
 		"ramda": "^0.26.1",
 		"rxjs": "^6.5.4"
 	},

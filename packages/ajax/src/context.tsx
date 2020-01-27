@@ -8,6 +8,11 @@ import reducer from './reducer';
 
 // NOTE: consider SSR
 
+// What is the point of having global fetched data context?
+// 1. can help with caching and
+// 2. accessing same data in other components
+// 3. refetching from stored variables that were initially used to fetch data | doesnt require global state though, could use xstate
+
 type Endpoint = { name: string; instance: Function };
 type AjaxContextProps = { api: Endpoint[] };
 

@@ -7,7 +7,8 @@ import { renderHook } from '@testing-library/react-hooks';
 
 const registryApi = {
 	name: 'registry',
-	instance: jest.fn((method: string, q: any, headers: any) => {
+	instance: (method: string, query: any, headers: any) => {
+		const uri = 'https://...';
 		return {
 			toPromise: () => {
 				return new Promise(res =>
@@ -15,19 +16,9 @@ const registryApi = {
 						response: { data: [{ username: 'wolverine3000' }] },
 					}),
 				);
-
-				// return Promise.resolve({
-				// 	response: { data: [{ username: 'wolverine3000' }] },
-				// });
-
-				// return new Promise(resolve => {
-				// 	process.nextTick(() =>
-				// 		resolve({ data: [{ username: 'wolverine3000' }] }),
-				// 	);
-				// });
 			},
 		};
-	}),
+	},
 };
 
 const stores = [{ name: 'users', persist: false }];
@@ -36,7 +27,7 @@ type RenderAjaxQuery = Partial<{
 	query: string;
 	type: 'get' | 'post';
 	headers: any;
-	params: any;
+	variables: any;
 	store: string;
 	dataPath: string[];
 	errorPath: string[];
@@ -59,10 +50,10 @@ const wrapper = ({ api, stores, children }) => (
 );
 
 export default function renderAjaxQuery({
-	query = 'users',
-	type = 'get',
+	query,
+	type,
 	headers,
-	params,
+	variables,
 	store,
 	dataPath,
 	errorPath,
@@ -73,7 +64,7 @@ export default function renderAjaxQuery({
 				query,
 				type,
 				headers,
-				params,
+				variables,
 				store,
 				dataPath,
 				errorPath,
