@@ -57,12 +57,20 @@ const initialState = {
 };
 
 const ajaxReducer = (store: string) => {
+	const STATUS = `${store}@status`;
 	const UPDATE = `${store}@update`;
 	const REFETCH = `${store}@refetch`;
 	const RESET = `${store}@reset`;
 
 	return (state: ReducerState = initialState, action: Action) => {
 		switch (action.type) {
+			case STATUS: {
+				return {
+					...state,
+					networkStatus: action.payload.status,
+					loading: action.payload.loading,
+				};
+			}
 			case UPDATE: {
 				return {
 					...state,
@@ -73,7 +81,6 @@ const ajaxReducer = (store: string) => {
 				return {
 					...state,
 					networkStatus: 4,
-					/** NOTE: should not switch to loading as we might want to keep existing data visible until new data arrives */
 					loading: true,
 				};
 			}
@@ -88,7 +95,7 @@ const ajaxReducer = (store: string) => {
 
 export const actions = (storeName: string, send: Function) => {
 	return {
-		update: (payload: any) => {
+		update: (payload: object) => {
 			send({ type: `${storeName}@update`, payload });
 		},
 		refetch: () => {

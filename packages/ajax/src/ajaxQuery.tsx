@@ -3,6 +3,8 @@ import { pathOr } from 'ramda';
 import { useAjaxContext } from './context';
 import { useSelector } from '@alekna/react-store';
 import { actions } from './reducer';
+import { distinctUntilChanged, tap } from 'rxjs/operators';
+import { isEqual } from 'lodash';
 
 type Request = {
 	name: string;
@@ -36,11 +38,14 @@ export const useQuery = ({
 	/** Send actions to the store */
 	const send = useMemo(() => actions(store, dispatch), [store, dispatch]);
 	/** Selected from the Global State */
-	const state = useSelector(store);
+	const state = useSelector(store, (stream: any) =>
+		stream.pipe(distinctUntilChanged(isEqual)),
+	);
 
 	useEffect(() => {
+		send.update({ networkStatus: 2, loading: true });
+
 		const fetchRequest = async () => {
-			send.update({ networkStatus: 2, loading: true });
 			try {
 				/** If you want to execute multiple queries to server within a single request */
 				// if (Array.isArray(query)) {
@@ -97,7 +102,7 @@ export const useQuery = ({
 	};
 
 	const fetchMore = () => {
-		/** TODO: keep original data in store and concats data to existing array */
+		/** TODO: keep original data in store and concat data with an existing array */
 		send.update({ networkStatus: 3, loading: true });
 	};
 
