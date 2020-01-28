@@ -2,6 +2,8 @@ import React from 'react';
 import { StyledCard, StyledCardToolbar } from './components/card';
 import { TrusteeProvider, useTrusteeContext, TrusteeProps } from './context';
 import { Flex } from '../layout';
+import { H2 } from '../typography';
+import Preview from './views/preview';
 
 // NOTE: each view should hold its own Form with state, and in the end it should sync state with *state machine*
 // otherwise submit wont work and might be bad for Accessibility
@@ -9,7 +11,7 @@ import { Flex } from '../layout';
 const TrusteeBody: React.FC = () => {
 	const { current } = useTrusteeContext();
 	if (current.matches('preview')) {
-		return <div>preview</div>;
+		return <Preview />;
 	} else if (current.matches({ edit: { trustee: 'name' } })) {
 		return <div>edit.trusteeName</div>;
 	} else if (current.matches({ edit: { trustee: 'type' } })) {
@@ -29,6 +31,8 @@ const TrusteeBody: React.FC = () => {
 	}
 };
 
+type TrusteeMoreProps = {};
+
 export const Trustee: React.FC<Omit<TrusteeProps, 'children'>> = ({
 	trustee,
 }) => {
@@ -37,7 +41,10 @@ export const Trustee: React.FC<Omit<TrusteeProps, 'children'>> = ({
 			{({ current: { context } }) => (
 				<StyledCard complete={context.complete}>
 					<StyledCardToolbar>
-						<div>{`${context.trustee.firstName} ${context.trustee.lastName}`}</div>
+						<Flex flexDirection="column">
+							<H2>Trustee {`🡾`}</H2>
+							<div>{`${context.trustee.firstName} ${context.trustee.lastName}`}</div>
+						</Flex>
 						<div>{context.complete ? 'No issues' : 'Incomplete'} | Remove</div>
 					</StyledCardToolbar>
 					<Flex p="0 20px 20px 20px">
