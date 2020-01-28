@@ -48,7 +48,7 @@ export const useQuery = ({
 
 	// send.update({ networkStatus: 2, loading: true });
 	// ERROR: for some reason there is one unnecessary re-render...
-	console.log(state);
+	console.log('HOOK', state);
 
 	useEffect(() => {
 		const fetchRequest = async () => {
