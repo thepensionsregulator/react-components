@@ -82,6 +82,7 @@ const ajaxReducer = (store: string) => {
 					...state,
 					networkStatus: 4,
 					loading: true,
+					data: {},
 				};
 			}
 			case RESET: {

@@ -31,13 +31,9 @@ const TrusteeBody: React.FC = () => {
 	}
 };
 
-type TrusteeMoreProps = {};
-
-export const Trustee: React.FC<Omit<TrusteeProps, 'children'>> = ({
-	trustee,
-}) => {
+export const Trustee: React.FC<Omit<TrusteeProps, 'children'>> = props => {
 	return (
-		<TrusteeProvider trustee={trustee}>
+		<TrusteeProvider {...props}>
 			{({ current: { context } }) => (
 				<StyledCard complete={context.complete}>
 					<StyledCardToolbar>

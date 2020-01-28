@@ -1,9 +1,9 @@
-import { useEffect, ReactElement, useMemo } from 'react';
+import { useEffect, useMemo } from 'react';
 import { pathOr } from 'ramda';
 import { useAjaxContext } from './context';
 import { useSelector } from '@alekna/react-store';
 import { actions } from './reducer';
-import { distinctUntilChanged, tap } from 'rxjs/operators';
+import { distinctUntilChanged } from 'rxjs/operators';
 import { isEqual } from 'lodash';
 
 type Request = {
@@ -29,50 +29,30 @@ export const useQuery = ({
 	headers = { 'Content-Type': 'application/json' },
 	variables,
 	store,
-	dataPath = ['response', 'data'],
+	dataPath = ['response'],
 	errorPath = ['response', 'data', 'errors', 0, 'detail'],
 }: QueryProps) => {
 	const { api, dispatch } = useAjaxContext();
 	/** Will select first Endpoint in an array if store is undefined or not found */
-	const { instance } = api.find(({ name }) => name === store) || api[0];
+	const { instance } = useMemo(
+		() => api.find(({ name }) => name === store) || api[0],
+		[api],
+	);
 	/** Send actions to the store */
 	const send = useMemo(() => actions(store, dispatch), [store, dispatch]);
 	/** Selected from the Global State */
-	const state = useSelector(store, (stream: any) =>
-		stream.pipe(distinctUntilChanged(isEqual)),
+	const state = useSelector(store, (obs: any) =>
+		obs.pipe(distinctUntilChanged(isEqual)),
 	);
+	const isRefetching = state.networkStatus === 4;
+
+	// send.update({ networkStatus: 2, loading: true });
+	// ERROR: for some reason there is one unnecessary re-render...
+	console.log(state);
 
 	useEffect(() => {
-		send.update({ networkStatus: 2, loading: true });
-
 		const fetchRequest = async () => {
 			try {
-				/** If you want to execute multiple queries to server within a single request */
-				// if (Array.isArray(query)) {
-				// 	const data = await Promise.all(
-				// 		query.map(async ({ name, type = 'get', variables: variables }) => {
-				// 			const q = { query: name, variables: variables || variables };
-				// 			return await instance(type, q, headers).toPromise();
-				// 		}),
-				// 	);
-				// 	send.update({
-				// 		networkStatus: 7,
-				// 		data: data.map(pathOr({}, dataPath)),
-				// 		error: undefined,
-				// 		loading: false,
-				// 	});
-				// } else {
-				// 	const q = { query, variables: variables };
-				// 	const data = await instance(type, q, headers).toPromise();
-				// 	// console.log(instance);
-				// 	send.update({
-				// 		networkStatus: 7,
-				// 		data: pathOr({}, dataPath, data),
-				// 		loading: false,
-				// 		error: undefined,
-				// 	});
-				// }
-
 				const q = { query, variables };
 				const data = await instance(type, q, headers).toPromise();
 				send.update({
@@ -95,9 +75,10 @@ export const useQuery = ({
 		};
 
 		fetchRequest();
-	}, [variables]);
+	}, [query, isRefetching]);
 
 	const refetch = () => {
+		console.log('REFETCHING');
 		send.refetch();
 	};
 
@@ -110,7 +91,7 @@ export const useQuery = ({
 };
 
 interface AjaxQueryProps extends QueryProps {
-	children: (props: any) => ReactElement;
+	children: (props: any) => JSX.Element;
 }
 export const AjaxQuery = ({ children, ...rest }: AjaxQueryProps) => {
 	return children(useQuery(rest));

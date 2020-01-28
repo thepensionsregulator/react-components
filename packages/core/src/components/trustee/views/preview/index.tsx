@@ -15,7 +15,7 @@ const Preview: React.FC = () => {
 				border="1px dashed grey"
 				mt={0}
 			>
-				<Flex width="100%" flexDirection="column">
+				<Flex width="100%" flexDirection="column" borderRight="1px solid grey">
 					<H2>Correspondance address</H2>
 					<ul>
 						<li>{company.name}</li>
