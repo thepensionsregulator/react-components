@@ -36,7 +36,10 @@ const ComponentTwo = () => {
 };
 
 const fakeInstance = () => {
-	return ajax('https://jsonplaceholder.typicode.com/todos');
+	return ajax({
+		method: 'get',
+		url: 'https://jsonplaceholder.typicode.com/todos',
+	});
 };
 
 export const TestEntry = () => {

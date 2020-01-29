@@ -1,8 +1,8 @@
 import React from 'react';
 import styled from 'styled-components';
-import { Flex } from '../../../layout';
-import { Button } from '../../../buttons';
-import { H2, H4 } from '../../../typography';
+import { Flex } from '../../layout';
+import { Button } from '../../buttons';
+import { H2, H4 } from '../../typography';
 
 type StyledCardProps = { complete?: boolean };
 
@@ -22,7 +22,7 @@ export const StyledCard = styled('div')<StyledCardProps>`
 export const StyledCardToolbar = styled('div')`
 	display: flex;
 	flex: 0 0 auto;
-	justify-content: space-between;
+	justify-content: space-evenly;
 	align-items: flex-start;
 	height: 80px;
 	padding: 20px 20px 0 20px;

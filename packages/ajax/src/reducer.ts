@@ -72,6 +72,8 @@ const ajaxReducer = (store: string) => {
 				};
 			}
 			case UPDATE: {
+				console.log('UPDATE', action.payload.networkStatus);
+
 				return {
 					...state,
 					...action.payload,

@@ -1,9 +1,10 @@
-import { useEffect, useMemo } from 'react';
+import { useEffect, useMemo, useRef, useLayoutEffect, useState } from 'react';
 import { pathOr } from 'ramda';
 import { useAjaxContext } from './context';
-import { useSelector } from '@alekna/react-store';
+// import { useSelector } from '@alekna/react-store';
+import useSelector from './useSelector';
 import { actions } from './reducer';
-import { distinctUntilChanged } from 'rxjs/operators';
+import { distinctUntilChanged, pluck } from 'rxjs/operators';
 import { isEqual } from 'lodash';
 
 type Request = {
@@ -41,23 +42,23 @@ export const useQuery = ({
 	/** Send actions to the store */
 	const send = useMemo(() => actions(store, dispatch), [store, dispatch]);
 	/** Selected from the Global State */
-	const state = useSelector(store, (obs: any) =>
+	const state = useSelector(store, obs =>
 		obs.pipe(distinctUntilChanged(isEqual)),
 	);
 	const isRefetching = state.networkStatus === 4;
 
-	// send.update({ networkStatus: 2, loading: true });
-	// ERROR: for some reason there is one unnecessary re-render...
-	console.log('HOOK', state);
-
 	useEffect(() => {
 		const fetchRequest = async () => {
+			// send.update({
+			// 	networkStatus: 2,
+			// 	loading: true,
+			// });
 			try {
 				const q = { query, variables };
 				const data = await instance(type, q, headers).toPromise();
 				send.update({
 					networkStatus: 7,
-					data: pathOr({}, dataPath, data),
+					data: pathOr({}, dataPath, data).slice(0, 10),
 					loading: false,
 					error: undefined,
 					variables,
@@ -75,7 +76,9 @@ export const useQuery = ({
 		};
 
 		fetchRequest();
-	}, [query, isRefetching]);
+	}, [query, store, isRefetching]);
+
+	//** METHODS */
 
 	const refetch = () => {
 		console.log('REFETCHING');

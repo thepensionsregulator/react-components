@@ -2,7 +2,7 @@ import React from 'react';
 import { StyledCard, StyledCardToolbar } from './components/card';
 import { TrusteeProvider, useTrusteeContext, TrusteeProps } from './context';
 import { Flex } from '../layout';
-import { Button } from '../buttons';
+import { Button } from './components/button';
 import Preview from './views/preview';
 import Name from './views/name';
 import Type from './views/type';
@@ -39,13 +39,13 @@ export const Trustee: React.FC<Omit<TrusteeProps, 'children'>> = props => {
 			{({ current: { context }, send }) => (
 				<StyledCard complete={context.complete}>
 					<StyledCardToolbar>
-						<Flex flexDirection="column">
-							<Button appearance="link" onClick={() => send('EDIT_TRUSTEE')}>
-								Trustee >
-							</Button>
+						<Flex width="100%" flexDirection="column">
+							<Button onClick={() => send('EDIT_TRUSTEE')}>Trustee ></Button>
 							<div>{`${context.trustee.firstName} ${context.trustee.lastName}`}</div>
 						</Flex>
-						<div>{context.complete ? 'No issues' : 'Incomplete'} | Remove</div>
+						<Flex width="100%" justifyContent="flex-end">
+							{context.complete ? 'No issues' : 'Incomplete'} | Remove
+						</Flex>
 					</StyledCardToolbar>
 					<Flex p="0 20px 20px 20px">
 						<TrusteeBody />
