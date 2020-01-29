@@ -3,6 +3,7 @@ import { Flex } from '../../../layout';
 import { H2, P } from '../../../typography';
 import { Footer } from '../../components/card';
 import { useTrusteeContext } from '../../context';
+import { Checkbox } from '@tpr/forms';
 
 const Preview: React.FC = () => {
 	const { current } = useTrusteeContext();
@@ -42,7 +43,18 @@ const Preview: React.FC = () => {
 					</ul>
 				</Flex>
 			</Flex>
-			<Footer onContinue={() => {}} onSave={() => {}} />
+			<Flex
+				flex="0 0 auto"
+				height={100}
+				alignItems="center"
+				justifyContent="flex-start"
+			>
+				<Checkbox
+					input={{ value: true }}
+					onChange={input => !input.value}
+					label="All details are correct"
+				/>
+			</Flex>
 		</Flex>
 	);
 };
