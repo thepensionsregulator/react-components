@@ -2,8 +2,10 @@ import React from 'react';
 import { StyledCard, StyledCardToolbar } from './components/card';
 import { TrusteeProvider, useTrusteeContext, TrusteeProps } from './context';
 import { Flex } from '../layout';
-import { H2 } from '../typography';
+import { Button } from '../buttons';
 import Preview from './views/preview';
+import Name from './views/name';
+import Type from './views/type';
 
 // NOTE: each view should hold its own Form with state, and in the end it should sync state with *state machine*
 // otherwise submit wont work and might be bad for Accessibility
@@ -13,9 +15,9 @@ const TrusteeBody: React.FC = () => {
 	if (current.matches('preview')) {
 		return <Preview />;
 	} else if (current.matches({ edit: { trustee: 'name' } })) {
-		return <div>edit.trusteeName</div>;
+		return <Name />;
 	} else if (current.matches({ edit: { trustee: 'type' } })) {
-		return <div>edit.trusteeType</div>;
+		return <Type />;
 	} else if (current.matches({ edit: 'companyAddress' })) {
 		return <div>edit.trusteeWork</div>;
 	} else if (current.matches({ edit: 'trusteeCompanyDetails' })) {
@@ -34,11 +36,13 @@ const TrusteeBody: React.FC = () => {
 export const Trustee: React.FC<Omit<TrusteeProps, 'children'>> = props => {
 	return (
 		<TrusteeProvider {...props}>
-			{({ current: { context } }) => (
+			{({ current: { context }, send }) => (
 				<StyledCard complete={context.complete}>
 					<StyledCardToolbar>
 						<Flex flexDirection="column">
-							<H2>Trustee {`🡾`}</H2>
+							<Button appearance="link" onClick={() => send('EDIT_TRUSTEE')}>
+								Trustee >
+							</Button>
 							<div>{`${context.trustee.firstName} ${context.trustee.lastName}`}</div>
 						</Flex>
 						<div>{context.complete ? 'No issues' : 'Incomplete'} | Remove</div>

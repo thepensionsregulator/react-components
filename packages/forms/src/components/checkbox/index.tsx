@@ -49,7 +49,6 @@ export const Checkbox: React.FC<CheckboxProps> = ({
 	input,
 	onChange,
 }) => {
-	console.log(input.value);
 	return (
 		<Flex width="300px" flex="0 0 auto" p={0} backgroundColor="#eee">
 			<CheckboxIcon

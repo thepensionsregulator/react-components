@@ -1,7 +1,6 @@
 import React from 'react';
 import { Flex } from '../../../layout';
 import { H2, P } from '../../../typography';
-import { Footer } from '../../components/card';
 import { useTrusteeContext } from '../../context';
 import { Checkbox } from '@tpr/forms';
 
@@ -43,16 +42,12 @@ const Preview: React.FC = () => {
 					</ul>
 				</Flex>
 			</Flex>
-			<Flex
-				flex="0 0 auto"
-				height={100}
-				alignItems="center"
-				justifyContent="flex-start"
-			>
+			<Flex flex="0 0 auto" justifyContent="flex-start" mt={2}>
 				<Checkbox
 					input={{ value: true }}
 					onChange={input => !input.value}
 					label="All details are correct"
+					disabled
 				/>
 			</Flex>
 		</Flex>
