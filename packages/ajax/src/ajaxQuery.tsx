@@ -45,6 +45,8 @@ export const useQuery = ({
 		[api],
 	);
 	/** Selected from the Global State */
+	// ERROR: initially, initialState is always initialState, even if there were actions
+	// produced and new instance loaded, it will have old initialState
 	const state = useSelector<StoreState>(store, state$ =>
 		state$.pipe(distinctUntilChanged(isEqual)),
 	);
