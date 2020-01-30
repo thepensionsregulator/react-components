@@ -1,10 +1,12 @@
 import React, { createContext, useContext, useMemo } from 'react';
-import StoreProvider, {
-	createStore,
-	useStoreContext,
-} from '@alekna/react-store';
-import { throttleTime, tap } from 'rxjs/operators';
+// import StoreProvider, {
+// 	createStore,
+// 	useStoreContext,
+// } from '@alekna/react-store';
+import { StoreProvider, createStore, useStoreContext } from './store/store';
+import { tap, mergeMapTo, shareReplay, debounceTime } from 'rxjs/operators';
 import reducer from './reducer';
+import { of } from 'rxjs';
 
 // NOTE: consider SSR
 
@@ -56,7 +58,8 @@ const Persister = ({ children, persist = [], persistKey }: PersisterProps) => {
 	if (persist.length > 0) {
 		stateChanges()
 			.pipe(
-				throttleTime(1000),
+				debounceTime(1000),
+				tap(() => console.log('save')),
 				tap(state =>
 					storeItem(
 						persistKey,
@@ -93,9 +96,25 @@ export const AjaxProvider: React.FC<AjaxProviderProps> = ({
 		);
 	}, [stores]);
 
+	const sharedApi = useMemo(() => {
+		/** share reply with late subscribers without sending multiple network requests.
+		 * Instead send latest value received from network within 10s. Otherwise make
+		 * a new request.
+		 */
+		return api.map(apiSettings => ({
+			...apiSettings,
+			instance: (...args) => {
+				return of({}).pipe(
+					mergeMapTo(apiSettings.instance(...args)),
+					shareReplay(1),
+				);
+			},
+		}));
+	}, [api]);
+
 	return (
 		<StoreProvider store={storeConfig}>
-			<AjaxContext.Provider value={{ api }}>
+			<AjaxContext.Provider value={{ api: sharedApi }}>
 				<Persister persist={persist} persistKey={persistKey}>
 					{children}
 				</Persister>

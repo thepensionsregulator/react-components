@@ -35,7 +35,7 @@ export enum NetworkStatus {
 	error = 8,
 }
 
-type ReducerState = {
+export type StoreState = {
 	data: any;
 	loading: boolean;
 	error: any;
@@ -57,34 +57,15 @@ const initialState = {
 };
 
 const ajaxReducer = (store: string) => {
-	const STATUS = `${store}@status`;
 	const UPDATE = `${store}@update`;
-	const REFETCH = `${store}@refetch`;
 	const RESET = `${store}@reset`;
 
-	return (state: ReducerState = initialState, action: Action) => {
+	return (state: StoreState = initialState, action: Action) => {
 		switch (action.type) {
-			case STATUS: {
-				return {
-					...state,
-					networkStatus: action.payload.status,
-					loading: action.payload.loading,
-				};
-			}
 			case UPDATE: {
-				console.log('UPDATE', action.payload.networkStatus);
-
 				return {
 					...state,
 					...action.payload,
-				};
-			}
-			case REFETCH: {
-				return {
-					...state,
-					networkStatus: 4,
-					loading: true,
-					data: {},
 				};
 			}
 			case RESET: {
@@ -96,15 +77,8 @@ const ajaxReducer = (store: string) => {
 	};
 };
 
-export const actions = (storeName: string, send: Function) => {
-	return {
-		update: (payload: object) => {
-			send({ type: `${storeName}@update`, payload });
-		},
-		refetch: () => {
-			send({ type: `${storeName}@refetch` });
-		},
-	};
-};
+export const actions = (storeName: string, send: Function) => (
+	payload: object,
+) => send({ type: `${storeName}@update`, payload });
 
 export default ajaxReducer;
