@@ -32,6 +32,7 @@ These instructions will get you a copy of the project up and running on your loc
   - [dataPath](#datapath)
   - [errorPath](#errorpath)
   - [mergeData](#mergedata)
+- [AjaxProvider Render Props](#ajaxprovider-render-props)
 
 <!-- END doctoc generated TOC please keep comment here to allow auto update -->
 
@@ -44,7 +45,7 @@ should be installed as one of your project's `dependencies`:
 npm i @tpr/ajax
 ```
 
-> This package also depends on react, react-dom, xstate and @xstate/react. Please make sure you have it installed as well.
+> This package also depends on react, react-dom, xstate and @xstate/react. Please make sure you have those installed as well.
 
 ## Usage
 
@@ -69,21 +70,21 @@ const App = () => {
 
 ```js
 const ListOfTrustees = () => {
-	return (
-		<AjaxQuery
-			endpoint="users"
-			store="trustees"
-			variables={{
-				page: 1,
-				total: 10,
-				sort: {
-					firstName: 'asc',
-				},
-			}}
+  return (
+    <AjaxQuery
+      endpoint="users"
+      store="trustees"
+      variables={{
+        page: 1,
+        total: 10,
+        sort: {
+          firstName: 'asc',
+        },
+      }}
 		>
-			{(...dataUtilities) => ...jsx}
-		</AjaxQuery>
-	);
+      {(...dataUtilities) => ...jsx}
+    </AjaxQuery>
+  );
 };
 ```
 
@@ -172,3 +173,7 @@ Define path to the error that comes back from the server from network request.
 > `(first: any, second: any) => [...first, ...second]` _optional_
 
 Provide a method to merge data for `fetchMore` function
+
+## AjaxProvider Render Props
+
+TODO: ...
