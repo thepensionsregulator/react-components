@@ -1,13 +1,13 @@
 import React, { useState } from 'react';
 import { AjaxProvider } from './context';
-import { AjaxQuery } from './ajaxQuery';
+import { AjaxQuery, useQuery } from './ajaxQuery';
 import { ajax } from 'rxjs/ajax';
 import { Flex, Button } from '@tpr/core';
 
 const ComponentOne = () => {
 	return (
 		<AjaxQuery
-			endpoint="users"
+			endpoint="registry"
 			store="users"
 			variables={{
 				page: 2,
@@ -39,7 +39,7 @@ const ComponentOne = () => {
 									{props.networkStatus === 7 && 'fetch success'}
 									{props.networkStatus === 8 && 'fetch failed'}
 								</div>
-								<Flex mr={0}>total: {props.data.length}</Flex>
+								<Flex mr={0}>total: {props.data?.length}</Flex>
 							</Flex>
 						</Flex>
 						<pre>{JSON.stringify(props, undefined, 2)}</pre>
@@ -64,6 +64,48 @@ const ComponentThree = () => {
 			<button onClick={() => setOpen(!open)}>open copy</button>
 			{open ? <ComponentOne /> : null}
 		</>
+	);
+};
+
+const ComponentFour = () => {
+	console.log('component 4 triggered');
+	const { refetch, fetchMore, ...props } = useQuery({
+		endpoint: 'registry',
+		store: 'users',
+		variables: {
+			page: 2,
+			total: 10,
+			sort: {
+				dob: 'asc',
+			},
+		},
+	});
+
+	return (
+		<div>
+			<Flex bg="#eee" p={2} justifyContent="space-between">
+				<Flex>
+					<Button mr={0} onClick={() => refetch()}>
+						refetch
+					</Button>
+					<Button onClick={() => fetchMore({ page: 3, total: 20 })}>
+						fetchMore
+					</Button>
+				</Flex>
+				<Flex>
+					<div>
+						{props.networkStatus === 1 && 'initializing'}
+						{props.networkStatus === 2 && 'setting variables'}
+						{props.networkStatus === 3 && 'fetch more'}
+						{props.networkStatus === 4 && 're-fetching'}
+						{props.networkStatus === 7 && 'fetch success'}
+						{props.networkStatus === 8 && 'fetch failed'}
+					</div>
+					<Flex mr={0}>total: {props.data?.length}</Flex>
+				</Flex>
+			</Flex>
+			<pre>{JSON.stringify(props, undefined, 2)}</pre>
+		</div>
 	);
 };
 
@@ -94,6 +136,7 @@ export const TestEntry = () => {
 			<ComponentOne />
 			<ComponentTwo />
 			<ComponentThree />
+			{/* <ComponentFour /> */}
 		</AjaxProvider>
 	);
 };

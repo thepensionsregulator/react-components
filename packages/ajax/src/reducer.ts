@@ -49,7 +49,7 @@ type Action = {
 };
 
 const initialState = {
-	data: {},
+	data: undefined,
 	loading: true,
 	error: undefined,
 	variables: undefined,

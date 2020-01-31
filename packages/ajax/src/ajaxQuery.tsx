@@ -9,7 +9,7 @@ import { StoreState } from './reducer';
 import { of } from 'rxjs';
 import { stringifyEndpoint } from './utils';
 
-type QueryProps = {
+export type QueryProps = {
 	endpoint: string;
 	method?: 'get' | 'post';
 	headers?: object;
