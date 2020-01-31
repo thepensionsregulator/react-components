@@ -51,8 +51,14 @@ export const Toolbar: React.FC<ToolbarProps> = ({ title, subtitle }) => {
 };
 
 type FooterProps = {
-	onContinue?: () => void;
-	onSave?: () => void;
+	onContinue?: {
+		title?: string;
+		fn?: () => void;
+	};
+	onSave?: {
+		title?: string;
+		fn?: () => void;
+	};
 	isDisabled?: boolean;
 };
 
@@ -68,14 +74,14 @@ export const Footer: React.FC<FooterProps> = ({
 			alignItems="center"
 			justifyContent="flex-start"
 		>
-			{typeof onContinue === 'function' && (
-				<Button onClick={onContinue} disabled={isDisabled}>
-					Continue >
+			{onContinue && (
+				<Button onClick={onContinue.fn} disabled={isDisabled}>
+					{onContinue.title}
 				</Button>
 			)}
-			{typeof onSave === 'function' && (
-				<Button onClick={onSave} disabled={isDisabled}>
-					Save and close ^
+			{onSave && (
+				<Button onClick={onSave.fn} disabled={isDisabled}>
+					{onSave.title}
 				</Button>
 			)}
 		</Flex>

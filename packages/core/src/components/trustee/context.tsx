@@ -6,20 +6,20 @@ import { State, EventData } from 'xstate';
 type TrusteeContextProps = {
 	current: Partial<State<TC, any, any, any>>;
 	send: (event: any, payload?: EventData) => Partial<State<TC, any, any, any>>;
-	onDetailsConfirm?: () => void;
+	onToggleCorrect?: () => void;
 };
 
 export const TrusteeContext = createContext<TrusteeContextProps>({
 	current: {},
 	send: (_, __) => ({}),
-	onDetailsConfirm: () => {},
+	onToggleCorrect: () => {},
 });
 
 type RenderProps = (_: TrusteeContextProps) => ReactElement;
 export type TrusteeProps = {
 	trustee: Partial<TC>;
 	children?: RenderProps | ReactElement;
-	onDetailsConfirm?: () => void;
+	onToggleCorrect?: () => void;
 };
 
 export const TrusteeProvider = ({

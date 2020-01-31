@@ -9,7 +9,7 @@ const Name: React.FC = () => {
 	return (
 		<Flex flex="1 1 auto" flexDirection="column">
 			<div>Edit Trustee Name</div>
-			<Footer onContinue={() => send('NEXT')} />
+			<Footer onContinue={{ title: 'Continue', fn: () => send('NEXT') }} />
 		</Flex>
 	);
 };

@@ -9,7 +9,7 @@ const Contacts: React.FC = () => {
 	return (
 		<Flex flex="1 1 auto" flexDirection="column">
 			<div>Contacts</div>
-			<Footer onSave={() => send('SAVE')} />
+			<Footer onSave={{ title: 'Save', fn: () => send('SAVE') }} />
 		</Flex>
 	);
 };

@@ -10,8 +10,10 @@ const RemoveConfirm: React.FC = () => {
 		<Flex flex="1 1 auto" flexDirection="column">
 			<div>Remove Confirm</div>
 			<div>This can't be undone.</div>
-			<button>remove</button>
-			<Footer onContinue={() => send('CANCEL')} />
+			<Footer
+				onContinue={{ title: 'Remove', fn: () => console.log('remove') }}
+				onSave={{ title: 'Cancel', fn: () => send('CANCEL') }}
+			/>
 		</Flex>
 	);
 };
