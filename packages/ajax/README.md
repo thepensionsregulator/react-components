@@ -29,7 +29,7 @@ These instructions will get you a copy of the project up and running on your loc
   - [type](#type)
   - [headers](#headers)
   - [variables](#variables)
-  - [store: string;](#store-string)
+  - [store](#store)
   - [dataPath](#datapath)
   - [errorPath](#errorpath)
   - [mergeData](#mergedata)
@@ -124,7 +124,7 @@ Store = {
 
 > `{}` _optional_
 
-Use initialState to re-hidrate the store from the `localStorage`
+Use initialState to rehydrate the store from the `localStorage`
 
 ### persistKey
 
@@ -150,7 +150,7 @@ If store is persisted, it will be persisted on this key in the `localStorage`
 
 > `object` _optional_
 
-### store: string;
+### store
 
 > `string` _required_
 
