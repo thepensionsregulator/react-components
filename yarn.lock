@@ -2385,10 +2385,23 @@
 "@tpr/core@file:packages/core":
   version "1.0.5"
   dependencies:
+    "@tpr/forms" "file:../../../.cache/yarn/v6/npm-@tpr-core-1.0.5-ba3aa4c2-0c20-4cfe-bb09-f5e99abc61c9-1580466505615/node_modules/@tpr/forms"
     final-form "^4.18.6"
     prop-types "^15.7.2"
     qs "^6.9.1"
     react-final-form "^6.3.3"
+
+"@tpr/forms@file:packages/forms":
+  version "1.0.2"
+  dependencies:
+    "@tpr/core" "file:../../../.cache/yarn/v6/npm-@tpr-forms-1.0.2-550f7553-0ff4-442c-96a4-443f4f296aa5-1580466505614/node_modules/@tpr/core"
+    "@tpr/icons" "file:../../../.cache/yarn/v6/npm-@tpr-forms-1.0.2-550f7553-0ff4-442c-96a4-443f4f296aa5-1580466505614/node_modules/@tpr/icons"
+    final-form "^4.18.6"
+    qs "^6.9.1"
+    react-final-form "^6.3.3"
+
+"@tpr/icons@file:packages/icons":
+  version "1.0.0"
 
 "@types/babel__core@^7.1.0":
   version "7.1.3"
@@ -2570,6 +2583,13 @@
   version "6.9.0"
   resolved "https://registry.yarnpkg.com/@types/qs/-/qs-6.9.0.tgz#2a5fa918786d07d3725726f7f650527e1cfeaffd"
   integrity sha512-c4zji5CjWv1tJxIZkz1oUtGcdOlsH3aza28Nqmm+uNDWBRHoMsjooBEN4czZp1V3iXPihE/VRUOBqg+4Xq0W4g==
+
+"@types/ramda@^0.26.40":
+  version "0.26.40"
+  resolved "https://registry.yarnpkg.com/@types/ramda/-/ramda-0.26.40.tgz#4fbd3bd6a8583e2aa0830b8942fbace44ecd070a"
+  integrity sha512-CUmROm0dxHfg5wcB/n1+sEJQxvmdOhJiZiIcCKgWVi1Hd6ffhG6BE0Ej4nHe2vfKGTOkqcTNBjdVfLTJdlH6Hw==
+  dependencies:
+    ts-toolbelt "^4.12.0"
 
 "@types/reach__router@^1.2.6":
   version "1.2.6"
@@ -5216,6 +5236,7 @@ core-util-is@1.0.2, core-util-is@~1.0.0:
 "core@file:packages/core":
   version "1.0.5"
   dependencies:
+    "@tpr/forms" "file:../../../.cache/yarn/v6/npm-core-1.0.5-27d9d3c7-222f-461c-9ae3-35b898f080f4-1580466505607/node_modules/forms"
     final-form "^4.18.6"
     prop-types "^15.7.2"
     qs "^6.9.1"
@@ -7326,7 +7347,8 @@ format@^0.2.2:
 "forms@file:packages/forms":
   version "1.0.2"
   dependencies:
-    "@tpr/core" "file:../../../Library/Caches/Yarn/v6/npm-forms-1.0.2-f5751dcc-aa64-480a-ab48-ff42a0bb81de-1580062332627/node_modules/core"
+    "@tpr/core" "file:../../../.cache/yarn/v6/npm-forms-1.0.2-9e2590bf-d5ce-42bf-a0e0-eb95d0d6ab9a-1580466505619/node_modules/core"
+    "@tpr/icons" "file:../../../.cache/yarn/v6/npm-forms-1.0.2-9e2590bf-d5ce-42bf-a0e0-eb95d0d6ab9a-1580466505619/node_modules/icons"
     final-form "^4.18.6"
     qs "^6.9.1"
     react-final-form "^6.3.3"
@@ -15762,7 +15784,7 @@ table@^5.2.3:
   version "1.0.5"
   dependencies:
     "@alekna/react-data-browser" "^1.1.3"
-    "@tpr/core" "file:../../../Library/Caches/Yarn/v6/npm-table-1.0.5-950a7182-9e27-4d2d-a7b7-abc4d33d1b7b-1580062332630/node_modules/core"
+    "@tpr/core" "file:../../../.cache/yarn/v6/npm-table-1.0.5-b0ff7d58-dfc4-4bcf-8e92-b709a00ea5a5-1580466505622/node_modules/core"
     lodash "^4.17.15"
     react-bottom-scroll-listener "^3.0.0"
 
@@ -16188,6 +16210,11 @@ ts-pnp@^1.1.2:
   version "1.1.5"
   resolved "https://registry.yarnpkg.com/ts-pnp/-/ts-pnp-1.1.5.tgz#840e0739c89fce5f3abd9037bb091dbff16d9dec"
   integrity sha512-ti7OGMOUOzo66wLF3liskw6YQIaSsBgc4GOAlWRnIEj8htCxJUxskanMUoJOD6MDCRAXo36goXJZch+nOS0VMA==
+
+ts-toolbelt@^4.12.0:
+  version "4.14.6"
+  resolved "https://registry.yarnpkg.com/ts-toolbelt/-/ts-toolbelt-4.14.6.tgz#9a232f62276caeee4fa9e81e0c4bffa047de0765"
+  integrity sha512-SONcnRd93+LuYGfn/CZg5A5qhCODohZslAVZKHHu5bnwUxoXLqd2k2VIdwRUXYfKnY+UCeNbI2pTPz+Dno6Mpg==
 
 tslib@1.10.0, tslib@^1.10.0, tslib@^1.6.0, tslib@^1.8.1, tslib@^1.9.0, tslib@^1.9.3:
   version "1.10.0"

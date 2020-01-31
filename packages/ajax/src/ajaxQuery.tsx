@@ -1,12 +1,14 @@
 import { useEffect, useMemo, useState } from 'react';
 import { pathOr } from 'ramda';
 import { useAjaxContext } from './context';
-import { useSelector } from './store/store';
+import { useSelector } from '@alekna/react-store';
 import { actions } from './reducer';
 import { distinctUntilChanged, tap, catchError } from 'rxjs/operators';
 import { isEqual } from 'lodash';
 import { StoreState } from './reducer';
 import { of } from 'rxjs';
+
+// TODO: add variables on the end of the `endpoint`
 
 type Request = {
 	name: string;
@@ -15,7 +17,7 @@ type Request = {
 };
 
 type QueryProps = {
-	query: string | Request[];
+	endpoint: string | Request[];
 	type?: 'get' | 'post';
 	headers?: object;
 	variables?: object;
@@ -28,7 +30,7 @@ type QueryProps = {
 };
 
 export const useQuery = ({
-	query = '',
+	endpoint = '',
 	type = 'get',
 	headers = { 'Content-Type': 'application/json' },
 	variables,
@@ -65,7 +67,7 @@ export const useQuery = ({
 			return;
 		}
 
-		const sub = instance(type, { query, variables }, headers)
+		const sub = instance(type, { endpoint, variables }, headers)
 			.pipe(
 				tap(() => {
 					if (state.networkStatus === 1) {
@@ -92,7 +94,7 @@ export const useQuery = ({
 				}),
 			)
 			.subscribe(response => {
-				let data = pathOr({}, dataPath, response).slice(0, 10);
+				let data = pathOr([], dataPath, response).slice(0, 10);
 
 				if (state.networkStatus === 3) {
 					data = mergeData(state.data, data);
@@ -109,7 +111,7 @@ export const useQuery = ({
 		return () => {
 			sub.unsubscribe();
 		};
-	}, [query, store, refresh]);
+	}, [endpoint, store, refresh]);
 
 	//** METHODS */
 

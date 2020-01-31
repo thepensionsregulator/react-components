@@ -1,9 +1,8 @@
 import React, { createContext, useContext, useMemo } from 'react';
-// import StoreProvider, {
-// 	createStore,
-// 	useStoreContext,
-// } from '@alekna/react-store';
-import { StoreProvider, createStore, useStoreContext } from './store/store';
+import StoreProvider, {
+	createStore,
+	useStoreContext,
+} from '@alekna/react-store';
 import { tap, mergeMapTo, shareReplay, debounceTime } from 'rxjs/operators';
 import reducer from './reducer';
 import { of } from 'rxjs';

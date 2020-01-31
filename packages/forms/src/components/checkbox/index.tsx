@@ -42,7 +42,9 @@ export const CheckboxIcon: React.FC<CheckboxIconProps> = props => {
 	);
 };
 
-type CheckboxProps = Partial<FieldRenderProps<string> & FieldProps>;
+type CheckboxProps = Partial<
+	FieldRenderProps<string> & FieldProps & CheckboxIconProps
+>;
 
 export const Checkbox: React.FC<CheckboxProps> = ({
 	label,

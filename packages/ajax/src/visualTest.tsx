@@ -7,7 +7,7 @@ import { Flex, Button } from '@tpr/core';
 const ComponentOne = () => {
 	return (
 		<AjaxQuery
-			query="users"
+			endpoint="users"
 			store="users"
 			variables={{
 				page: 2,
