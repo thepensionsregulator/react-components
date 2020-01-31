@@ -13,7 +13,6 @@ These instructions will get you a copy of the project up and running on your loc
 <!-- START doctoc generated TOC please keep comment here to allow auto update -->
 <!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
 
-
 - [Installation](#installation)
 - [Usage](#usage)
   - [Usage of AjaxProvider to initialize the App](#usage-of-ajaxprovider-to-initialize-the-app)
@@ -38,7 +37,7 @@ These instructions will get you a copy of the project up and running on your loc
 
 ## Installation
 
-This module is distributed via [npm][https://www.npmjs.com] which is bundled with [node][https://nodejs.org] and
+This module is distributed via [npm](https://www.npmjs.com) which is bundled with [node](https://nodejs.org) and
 should be installed as one of your project's `dependencies`:
 
 ```
