@@ -22,8 +22,8 @@ These instructions will get you a copy of the project up and running on your loc
   - [children](#children)
   - [api](#api)
   - [stores](#stores)
-  - [initialState?: any;](#initialstate-any)
-  - [persistKey?: string;](#persistkey-string)
+  - [initialState](#initialstate)
+  - [persistKey](#persistkey)
 - [AjaxQuery Props](#ajaxquery-props)
   - [endpoint](#endpoint)
   - [type](#type)
@@ -54,12 +54,10 @@ npm i @tpr/ajax
 ### Usage of AjaxProvider to initialize the App
 
 ```js
-const instance = ajax();
-
 const App = () => {
 	return (
 		<AjaxProvider
-			api={[{ name: 'registry', instance }]}
+			api={[{ name: 'registry', instance: fetch }]}
 			stores={[{ name: 'trustees' }]}
 		>
 			{...JSX}
@@ -102,19 +100,33 @@ const ListOfTrustees = () => {
 
 Accepts objects of type `Endpoint`, at least one is required. First `Endpoint` will be the default.
 
+```
+Endpoint = {
+	name: string;
+	instance: Observable
+}
+```
+
 ### stores
 
 > `Store[]` _required_
 
 Accepts a configuration of stores where the data will be persisted.
 
-### initialState?: any;
+```
+Store = {
+	name: string;
+	persist?: boolean
+}
+```
+
+### initialState
 
 > `{}` _optional_
 
 Use initialState to re-hidrate the store from the `localStorage`
 
-### persistKey?: string;
+### persistKey
 
 > `string`: _optional_
 
