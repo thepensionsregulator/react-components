@@ -88,7 +88,7 @@ const ListOfTrustees = () => {
 };
 ```
 
-## AjaxProvider Props
+## `AjaxProvider` Props
 
 ### children
 
@@ -136,7 +136,7 @@ If store is persisted, it will be persisted on this key in the `localStorage`
 
 ### endpoint
 
-> `string | Request[]` _required_
+> `string` _required_
 
 ### type
 
@@ -174,6 +174,6 @@ Define path to the error that comes back from the server from network request.
 
 Provide a method to merge data for `fetchMore` function
 
-## AjaxProvider Render Props
+## `AjaxQuery` Render Props
 
 TODO: ...
