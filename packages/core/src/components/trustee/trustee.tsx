@@ -6,6 +6,10 @@ import { Button } from './components/button';
 import Preview from './views/preview';
 import Name from './views/name';
 import Type from './views/type';
+import Address from './views/address';
+import Contacts from './views/contacts';
+import RemoveReason from './views/remove/reason';
+import RemoveConfirm from './views/remove/confirm';
 
 // NOTE: each view should hold its own Form with state, and in the end it should sync state with *state machine*
 // otherwise submit wont work and might be bad for Accessibility
@@ -19,15 +23,15 @@ const TrusteeBody: React.FC = () => {
 	} else if (current.matches({ edit: { trustee: 'type' } })) {
 		return <Type />;
 	} else if (current.matches({ edit: 'companyAddress' })) {
-		return <div>edit.trusteeWork</div>;
+		return <Address />;
 	} else if (current.matches({ edit: 'trusteeCompanyDetails' })) {
 		return <div>edit.trusteeCompanyDetails</div>;
 	} else if (current.matches({ edit: 'trusteeContacts' })) {
-		return <div>edit.trusteeContacts</div>;
+		return <Contacts />;
 	} else if (current.matches({ remove: 'reason' })) {
-		return <div>remove.reason</div>;
+		return <RemoveReason />;
 	} else if (current.matches({ remove: 'confirm' })) {
-		return <div>remove.confirm</div>;
+		return <RemoveConfirm />;
 	} else {
 		return null;
 	}
@@ -44,7 +48,8 @@ export const Trustee: React.FC<Omit<TrusteeProps, 'children'>> = props => {
 							<div>{`${context.trustee.firstName} ${context.trustee.lastName}`}</div>
 						</Flex>
 						<Flex width="100%" justifyContent="flex-end">
-							{context.complete ? 'No issues' : 'Incomplete'} | Remove
+							{context.complete ? 'No issues' : 'Incomplete'} |{' '}
+							<button onClick={() => send('REMOVE')}>Remove</button>
 						</Flex>
 					</StyledCardToolbar>
 					<Flex p="0 20px 20px 20px">

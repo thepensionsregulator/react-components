@@ -74,7 +74,7 @@ export const Footer: React.FC<FooterProps> = ({
 				</Button>
 			)}
 			{typeof onSave === 'function' && (
-				<Button onClick={onSave} appearance="link" disabled={isDisabled}>
+				<Button onClick={onSave} disabled={isDisabled}>
 					Save and close ^
 				</Button>
 			)}
