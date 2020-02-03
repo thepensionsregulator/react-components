@@ -35,8 +35,14 @@ export enum NetworkStatus {
 	error = 8,
 }
 
+type CacheObject = {
+	variables: string;
+	response: any;
+};
+
 export type StoreState = {
 	data: any;
+	cache?: CacheObject[];
 	loading: boolean;
 	error: any;
 	variables: any;
@@ -59,6 +65,7 @@ const initialState = {
 const ajaxReducer = (store: string) => {
 	const UPDATE = `${store}@update`;
 	const RESET = `${store}@reset`;
+	const REFETCH = `${store}@refetch`;
 
 	return (state: StoreState = initialState, action: Action) => {
 		switch (action.type) {
@@ -70,6 +77,12 @@ const ajaxReducer = (store: string) => {
 			}
 			case RESET: {
 				return initialState;
+			}
+			case REFETCH: {
+				return {
+					...state,
+					networkStatus: 4,
+				};
 			}
 			default:
 				return state;

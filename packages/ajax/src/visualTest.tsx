@@ -62,7 +62,7 @@ const ComponentThree = () => {
 	return (
 		<>
 			<button onClick={() => setOpen(!open)}>open copy</button>
-			{open ? <ComponentOne /> : null}
+			{open ? <ComponentFour /> : null}
 		</>
 	);
 };

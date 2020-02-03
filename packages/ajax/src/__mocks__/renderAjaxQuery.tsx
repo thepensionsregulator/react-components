@@ -1,9 +1,9 @@
-import React from 'react';
+import React, { ReactNode } from 'react';
 import { AjaxProvider } from '../context';
 import { useQuery } from '../ajaxQuery';
-import { renderHook } from '@testing-library/react-hooks';
+import { renderHook, HookResult } from '@testing-library/react-hooks';
 import { QueryProps } from '../ajaxQuery';
-import { of, from } from 'rxjs';
+import { from } from 'rxjs';
 
 const registryApi = {
 	name: 'registry',
@@ -17,38 +17,19 @@ const registryApi = {
 
 const stores = [{ name: 'users', persist: false }];
 
-const wrapper = ({ api, stores, children }) => (
+const provider = ({ api, stores, children }) => (
 	<AjaxProvider api={api} stores={stores}>
 		{children}
 	</AjaxProvider>
 );
 
-export default function renderAjaxQuery({
-	endpoint,
-	method,
-	headers,
-	variables,
-	store,
-	dataPath,
-	errorPath,
-}: Partial<QueryProps> = {}) {
-	const renderArg = renderHook(
-		() =>
-			useQuery({
-				endpoint,
-				method,
-				headers,
-				variables,
-				store,
-				dataPath,
-				errorPath,
-			}),
-		{
-			wrapper: ({ children }) => {
-				return wrapper({ api: [registryApi], stores: stores, children });
-			},
+export function useQuerySetup({ props }: Partial<{ props: QueryProps }> = {}) {
+	const renderArg = renderHook(useQuery, {
+		initialProps: props,
+		wrapper: ({ children }) => {
+			return provider({ api: [registryApi], stores, children });
 		},
-	);
+	});
 
 	return renderArg;
 }

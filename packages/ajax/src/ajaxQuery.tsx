@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useState } from 'react';
+import { useEffect, useMemo } from 'react';
 import { pathOr } from 'ramda';
 import { useAjaxContext } from './context';
 import { useSelector } from '@alekna/react-store';
@@ -15,6 +15,7 @@ export type QueryProps = {
 	headers?: object;
 	variables?: object;
 	/** store from the global store object and for the api uri */
+	api?: string;
 	store: string;
 	dataPath?: any[];
 	errorPath?: any[];
@@ -27,37 +28,45 @@ export const useQuery = ({
 	method = 'get',
 	headers = { 'Content-Type': 'application/json' },
 	variables,
+	api,
 	store,
 	dataPath = ['response'],
 	errorPath = ['response', 'data', 'errors', 0, 'detail'],
 	mergeData = (f, s) => [...f, ...s],
 	fetchPolicy = 'network-only',
 }: QueryProps) => {
-	const { api, dispatch } = useAjaxContext();
+	const { api: apis, dispatch } = useAjaxContext();
 	/** Will select first Endpoint in an array if store is undefined or not found */
 	const { instance } = useMemo(
-		() => api.find(({ name }) => name === store) || api[0],
-		[api],
+		() => apis.find(({ name }) => name === api) || apis[0],
+		[apis],
 	);
 	/** Select state from the global state efficiently. Update only if
 	 * prev state does not match new state */
 	const state = useSelector<StoreState>(store, state$ =>
 		state$.pipe(distinctUntilChanged(isEqual)),
 	);
+	/** status matches the networkStatus  */
+	const statusMaches = (n: number) => state.networkStatus === n;
 	/** Send actions to the store */
 	const send = actions(store, dispatch);
-	/** Refresh state if number changed. Helps to refetch on a number
-	 * change rather than boolean change. If we watch a boolean change
-	 * it will refetch if it changes to true or false and might endup
-	 * where it refetches multiple times instead of only refetching once. */
-	const [refresh, setRefresh] = useState(0);
 
 	useEffect(() => {
-		if (state.networkStatus === 7) {
-			/** State already has data in it and is ready to be rendered.
-			 * Most likely store was rehidrated from the localStorage or another
-			 * component that was previously loaded. */
-			return;
+		/** Set the variables for the first time. */
+		if (statusMaches(1)) {
+			send({
+				networkStatus: 2,
+				loading: true,
+				variables,
+			});
+			return undefined;
+		}
+
+		/** State already has data in it and is ready to be rendered.
+		 * Most likely store was rehidrated from the localStorage or another
+		 * component that was previously loaded. */
+		if (statusMaches(7)) {
+			return undefined;
 		}
 
 		const params = {
@@ -67,16 +76,6 @@ export const useQuery = ({
 
 		const sub = instance(method, params, headers)
 			.pipe(
-				tap(() => {
-					if (state.networkStatus === 1) {
-						/** Set the variables for the first time. */
-						send({
-							networkStatus: 2,
-							loading: true,
-							variables,
-						});
-					}
-				}),
 				catchError(err => {
 					/** Catch the error if there was any, extract it from the object
 					 * and pass it on to the store */
@@ -93,7 +92,7 @@ export const useQuery = ({
 					);
 				}),
 			)
-			.subscribe(response => {
+			.subscribe((response: unknown) => {
 				/** Response was successfull. Update the store with new state */
 				let data = pathOr([], dataPath, response).slice(0, 10);
 
@@ -113,18 +112,16 @@ export const useQuery = ({
 			/** Cleanup the subscription when component unmounts. */
 			sub.unsubscribe();
 		};
-	}, [endpoint, store, refresh]);
+	}, [endpoint, store, state.networkStatus]);
 
 	//** METHODS */
 
 	const refetch = () => {
 		send({ networkStatus: 4, loading: true });
-		setRefresh(refresh + 1);
 	};
 
 	const fetchMore = (vars = {}) => {
 		send({ networkStatus: 3, variables: { ...variables, ...vars } });
-		setRefresh(refresh + 1);
 	};
 
 	return { ...state, fetchMore, refetch };
