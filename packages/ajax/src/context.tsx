@@ -103,7 +103,7 @@ export const AjaxProvider: React.FC<AjaxProviderProps> = ({
 		return api.map(apiSettings => ({
 			...apiSettings,
 			instance: (...args) => {
-				return of({}).pipe(
+				return of(undefined).pipe(
 					mergeMapTo(apiSettings.instance(...args)),
 					shareReplay(1),
 				);
