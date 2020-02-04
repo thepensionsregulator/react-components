@@ -3,22 +3,27 @@ import { AjaxProvider } from './context';
 import { AjaxQuery, useQuery } from './ajaxQuery';
 import { ajax } from 'rxjs/ajax';
 import { Flex, Button } from '@tpr/core';
+import { getItemFromStorage } from './localStorage';
+import { timeout } from 'rxjs/operators';
 
-const ComponentOne = () => {
+const People = () => {
 	return (
 		<AjaxQuery
-			endpoint="registry"
-			store="users"
+			endpoint="people/"
+			store="people"
+			dataPath={['response']}
 			variables={{
-				page: 2,
-				total: 10,
-				sort: {
-					dob: 'asc',
-				},
+				page: 1,
+			}}
+			mergeData={(parent, next) => {
+				return {
+					...next,
+					results: [...parent.results, ...next.results],
+				};
 			}}
 		>
 			{({ refetch, fetchMore, ...props }) => {
-				console.log('component 1 triggered');
+				console.log('people 1');
 				return (
 					<div>
 						<Flex bg="#eee" p={2} justifyContent="space-between">
@@ -26,7 +31,9 @@ const ComponentOne = () => {
 								<Button mr={0} onClick={() => refetch()}>
 									refetch
 								</Button>
-								<Button onClick={() => fetchMore({ page: 3, total: 20 })}>
+								<Button
+									onClick={() => fetchMore(vars => ({ page: vars.page + 1 }))}
+								>
 									fetchMore
 								</Button>
 							</Flex>
@@ -39,7 +46,7 @@ const ComponentOne = () => {
 									{props.networkStatus === 7 && 'fetch success'}
 									{props.networkStatus === 8 && 'fetch failed'}
 								</div>
-								<Flex mr={0}>total: {props.data?.length}</Flex>
+								<Flex mr={0}>total: {props.data?.results?.length}</Flex>
 							</Flex>
 						</Flex>
 						<pre>{JSON.stringify(props, undefined, 2)}</pre>
@@ -51,33 +58,30 @@ const ComponentOne = () => {
 };
 
 const ComponentTwo = () => {
-	console.log('component 2 triggered');
-	return null;
+	console.log('component 2');
+	return <People />;
 };
 
 const ComponentThree = () => {
 	const [open, setOpen] = useState(false);
-	console.log('component 3 triggered');
+	console.log('component 3');
 	/** CURRENT ERROR: data is being refetch from network rather than already stored in memory. Fix that */
 	return (
 		<>
 			<button onClick={() => setOpen(!open)}>open copy</button>
-			{open ? <ComponentFour /> : null}
+			{open ? <Planets /> : null}
 		</>
 	);
 };
 
-const ComponentFour = () => {
-	console.log('component 4 triggered');
+const Planets = () => {
+	console.log('planets 4');
 	const { refetch, fetchMore, ...props } = useQuery({
-		endpoint: 'registry',
-		store: 'users',
+		endpoint: 'planets/',
+		store: 'planets',
+		dataPath: ['response'],
 		variables: {
 			page: 2,
-			total: 10,
-			sort: {
-				dob: 'asc',
-			},
 		},
 	});
 
@@ -88,7 +92,7 @@ const ComponentFour = () => {
 					<Button mr={0} onClick={() => refetch()}>
 						refetch
 					</Button>
-					<Button onClick={() => fetchMore({ page: 3, total: 20 })}>
+					<Button onClick={() => fetchMore(vars => ({ page: vars.page + 1 }))}>
 						fetchMore
 					</Button>
 				</Flex>
@@ -109,34 +113,27 @@ const ComponentFour = () => {
 	);
 };
 
-const fakeInstance = () => {
+const fakeInstance = dispatch => (method, { endpoint }) => {
 	return ajax({
-		method: 'get',
-		url: 'https://jsonplaceholder.typicode.com/todos',
-	});
-};
-
-const getItemFromStorage = key => {
-	if (!localStorage) return;
-
-	try {
-		return JSON.parse(localStorage.getItem(key));
-	} catch (err) {
-		console.error(`Error getting item ${key} from localStoragee`, err);
-	}
+		method: method,
+		url: `https://swapi.co/api/${endpoint}`,
+	}).pipe(timeout(10000));
 };
 
 export const TestEntry = () => {
 	return (
 		<AjaxProvider
 			api={[{ name: 'registry', instance: fakeInstance }]}
-			stores={[{ name: 'users', persist: false }]}
+			stores={[
+				{ name: 'planets', persist: false },
+				{ name: 'people', persist: false },
+			]}
 			// initialState={getItemFromStorage('tpr')}
+			// persistOn="tpr"
 		>
-			<ComponentOne />
+			<People />
 			<ComponentTwo />
 			<ComponentThree />
-			{/* <ComponentFour /> */}
 		</AjaxProvider>
 	);
 };

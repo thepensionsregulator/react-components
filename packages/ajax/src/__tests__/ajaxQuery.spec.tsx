@@ -1,4 +1,4 @@
-import { useQuerySetup } from '../__mocks__/renderAjaxQuery';
+import { useQuerySetup } from '../__mocks__/setup';
 import { act } from '@testing-library/react-hooks';
 
 // NOTE: can't test networkStatus 1 for some reason.

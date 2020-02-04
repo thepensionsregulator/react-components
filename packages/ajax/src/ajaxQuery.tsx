@@ -3,11 +3,17 @@ import { pathOr } from 'ramda';
 import { useAjaxContext } from './context';
 import { useSelector } from '@alekna/react-store';
 import { actions } from './reducer';
-import { distinctUntilChanged, tap, catchError } from 'rxjs/operators';
+import {
+	distinctUntilChanged,
+	catchError,
+	retryWhen,
+	tap,
+} from 'rxjs/operators';
 import { isEqual } from 'lodash';
 import { StoreState } from './reducer';
-import { of } from 'rxjs';
+import { throwError } from 'rxjs';
 import { stringifyEndpoint } from './utils';
+import { genericRetryStrategy } from './retryStrategy';
 
 export type QueryProps = {
 	endpoint: string;
@@ -31,7 +37,7 @@ export const useQuery = ({
 	api,
 	store,
 	dataPath = ['response'],
-	errorPath = ['response', 'data', 'errors', 0, 'detail'],
+	errorPath = ['response', 'message'],
 	mergeData = (f, s) => [...f, ...s],
 	fetchPolicy = 'network-only',
 }: QueryProps) => {
@@ -41,6 +47,8 @@ export const useQuery = ({
 		() => apis.find(({ name }) => name === api) || apis[0],
 		[apis],
 	);
+	const ajax = instance(dispatch);
+	// const fetch$ = instance(dispatch);
 	/** Select state from the global state efficiently. Update only if
 	 * prev state does not match new state */
 	const state = useSelector<StoreState>(store, state$ =>
@@ -70,31 +78,35 @@ export const useQuery = ({
 		}
 
 		const params = {
-			endpoint: stringifyEndpoint(method, endpoint, variables),
-			variables,
+			endpoint: stringifyEndpoint(method, endpoint, state.variables),
+			variables: state.variables,
 		};
 
-		const sub = instance(method, params, headers)
+		const sub = ajax(method, params, headers)
 			.pipe(
+				/** Retry multiple times upon failure */
+				retryWhen(
+					genericRetryStrategy({
+						maxRetryAttempts: 5,
+						excludedStatusCodes: [500],
+					}),
+				),
+				/** Catch a error if there was any, extract it from the object
+				 * and pass it on to the store to notify client */
 				catchError(err => {
-					/** Catch the error if there was any, extract it from the object
-					 * and pass it on to the store */
 					const getError = pathOr('unknown error occurred', errorPath);
-					return of(getError(err)).pipe(
-						tap(error =>
-							send({
-								networkStatus: 8,
-								data: undefined,
-								loading: false,
-								error,
-							}),
-						),
-					);
+					send({
+						networkStatus: 8,
+						data: undefined,
+						loading: false,
+						error: getError(err),
+					});
+					return throwError(getError(err));
 				}),
 			)
 			.subscribe((response: unknown) => {
 				/** Response was successfull. Update the store with new state */
-				let data = pathOr([], dataPath, response).slice(0, 10);
+				let data = pathOr([], dataPath, response);
 
 				if (state.networkStatus === 3) {
 					data = mergeData(state.data, data);
@@ -120,8 +132,11 @@ export const useQuery = ({
 		send({ networkStatus: 4, loading: true });
 	};
 
-	const fetchMore = (vars = {}) => {
-		send({ networkStatus: 3, variables: { ...variables, ...vars } });
+	const fetchMore = (callback: (_: any) => { [key: string]: any }) => {
+		send({
+			networkStatus: 3,
+			variables: { ...state.variables, ...callback(state.variables) },
+		});
 	};
 
 	return { ...state, fetchMore, refetch };

@@ -1,7 +1,5 @@
-import { useMutationSetup } from '../__mocks__/renderAjaxQuery';
+import { useMutationSetup } from '../__mocks__/setup';
 import { act } from '@testing-library/react-hooks';
-
-// NOTE: can't test networkStatus 1 for some reason.
 
 describe('AjaxQuery', () => {
 	test('it can post data', async () => {

@@ -25,7 +25,7 @@ export const useMutation = ({
 	errorPath = ['response', 'errors', 0],
 }: MutationProps) => {
 	/** use context to get values from the Provider */
-	const { api: apis, dispatch, stateChanges }: any = useAjaxContext();
+	const { api: apis, dispatch } = useAjaxContext();
 	/** Will select first Endpoint in an array if store is undefined or not found */
 	const { instance, name } = useMemo(
 		() => apis.find(({ name }) => name === api) || apis[0],
@@ -78,6 +78,6 @@ export const useMutation = ({
 interface AjaxQueryProps extends MutationProps {
 	children: (props: any) => JSX.Element;
 }
-export const AjaxQuery = ({ children, ...rest }: AjaxQueryProps) => {
+export const AjaxMutation = ({ children, ...rest }: AjaxQueryProps) => {
 	return children(useMutation(rest));
 };
