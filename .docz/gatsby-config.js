@@ -56,7 +56,7 @@ const config = {
         o: false,
         open: false,
         'open-browser': false,
-        root: '/home/alekna/Development/tpr/react-components/.docz',
+        root: '/Users/davidalekna/Development/tpr/react-components/.docz',
         base: '/',
         source: './',
         src: './',
@@ -75,31 +75,33 @@ const config = {
         p: 3000,
         separator: '-',
         paths: {
-          root: '/home/alekna/Development/tpr/react-components',
+          root: '/Users/davidalekna/Development/tpr/react-components',
           templates:
-            '/home/alekna/Development/tpr/react-components/node_modules/docz-core/dist/templates',
-          docz: '/home/alekna/Development/tpr/react-components/.docz',
-          cache: '/home/alekna/Development/tpr/react-components/.docz/.cache',
-          app: '/home/alekna/Development/tpr/react-components/.docz/app',
+            '/Users/davidalekna/Development/tpr/react-components/node_modules/docz-core/dist/templates',
+          docz: '/Users/davidalekna/Development/tpr/react-components/.docz',
+          cache:
+            '/Users/davidalekna/Development/tpr/react-components/.docz/.cache',
+          app: '/Users/davidalekna/Development/tpr/react-components/.docz/app',
           appPackageJson:
-            '/home/alekna/Development/tpr/react-components/package.json',
+            '/Users/davidalekna/Development/tpr/react-components/package.json',
           gatsbyConfig:
-            '/home/alekna/Development/tpr/react-components/gatsby-config.js',
+            '/Users/davidalekna/Development/tpr/react-components/gatsby-config.js',
           gatsbyBrowser:
-            '/home/alekna/Development/tpr/react-components/gatsby-browser.js',
+            '/Users/davidalekna/Development/tpr/react-components/gatsby-browser.js',
           gatsbyNode:
-            '/home/alekna/Development/tpr/react-components/gatsby-node.js',
+            '/Users/davidalekna/Development/tpr/react-components/gatsby-node.js',
           gatsbySSR:
-            '/home/alekna/Development/tpr/react-components/gatsby-ssr.js',
+            '/Users/davidalekna/Development/tpr/react-components/gatsby-ssr.js',
           importsJs:
-            '/home/alekna/Development/tpr/react-components/.docz/app/imports.js',
+            '/Users/davidalekna/Development/tpr/react-components/.docz/app/imports.js',
           rootJs:
-            '/home/alekna/Development/tpr/react-components/.docz/app/root.jsx',
+            '/Users/davidalekna/Development/tpr/react-components/.docz/app/root.jsx',
           indexJs:
-            '/home/alekna/Development/tpr/react-components/.docz/app/index.jsx',
+            '/Users/davidalekna/Development/tpr/react-components/.docz/app/index.jsx',
           indexHtml:
-            '/home/alekna/Development/tpr/react-components/.docz/app/index.html',
-          db: '/home/alekna/Development/tpr/react-components/.docz/app/db.json',
+            '/Users/davidalekna/Development/tpr/react-components/.docz/app/index.html',
+          db:
+            '/Users/davidalekna/Development/tpr/react-components/.docz/app/db.json',
         },
       },
     },

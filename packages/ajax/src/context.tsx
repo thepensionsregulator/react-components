@@ -4,18 +4,17 @@ import StoreProvider, {
 	useStoreContext,
 } from '@alekna/react-store';
 import {
-	mergeMapTo,
 	shareReplay,
 	debounceTime,
 	switchMap,
 	tap,
 	mergeMap,
 	distinctUntilChanged,
-	finalize,
 	startWith,
+	filter,
 } from 'rxjs/operators';
 import reducer from './reducer';
-import { of, iif, BehaviorSubject, AsyncSubject } from 'rxjs';
+import { of, iif, Subject } from 'rxjs';
 import { removeItemFromStorage, storeItem } from './localStorage';
 import { isEqual } from 'lodash';
 
@@ -109,21 +108,12 @@ export const AjaxProvider: React.FC<AjaxProviderProps> = ({
 		 */
 
 		return api.map(({ instance, ...apiSettings }) => {
-			console.log('INIT INSTANCE');
-
-			// TODO: should make a single instance for react hooks that refer to this.
-			// then we should filter out same requests so that only 1 call is made
-			// to the server
-
-			// const inst$ = of({}).pipe(tap(console.log));
-			const inst$ = of().pipe(tap(console.log));
-
+			// TODO: workout the args to be passed on in the most convinient way.
 			return {
 				...apiSettings,
 				instance: (...args1) => (...args2) => {
-					return inst$.pipe(
-						startWith([args1, ...args2]),
-						distinctUntilChanged((prev, next) => isEqual(prev[2], next[2])),
+					return of([args1, ...args2]).pipe(
+						distinctUntilChanged(isEqual),
 						mergeMap(([dispatch, ...args]) => instance(dispatch)(...args)),
 						shareReplay(1),
 					);
