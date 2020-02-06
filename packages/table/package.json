@@ -1,0 +1,52 @@
+{
+	"name": "@tpr/table",
+	"version": "1.0.5",
+	"description": "TPR Table component and helpers",
+	"author": "David Alekna <david.alekna@tpr.gov.uk>",
+	"license": "MIT",
+	"main": "./lib/bundle.cjs.js",
+	"module": "./lib/bundle.esm.js",
+	"typings": "./lib/index.d.ts",
+	"sideEffects": false,
+	"files": [
+		"lib/bundle*",
+		"lib/*.d.ts"
+	],
+	"repository": {
+		"type": "git",
+		"url": "https://dev.azure.com/thepensionsregulator/TPR/_git/react-components.git"
+	},
+	"bugs": {
+		"url": "https://dev.azure.com/thepensionsregulator/TPR/_git/react-components/issues"
+	},
+	"homepage": "https://dev.azure.com/thepensionsregulator/TPR/_git/react-components#readme",
+	"keywords": [
+		"tpr"
+	],
+	"scripts": {
+		"prepare": "yarn build",
+		"dev": "yarn storybook",
+		"test": "jest --coverage",
+		"test:watch": "jest --watch",
+		"build": "cross-env-shell \"../../node_modules/.bin/rollup\" -c rollup.config.js",
+		"clean": "rimraf lib",
+		"report-coverage": "codecov"
+	},
+	"peerDependencies": {
+		"apollo-client": "^2.6.8",
+		"react": "^16.12.0",
+		"react-dom": "^16.12.0",
+		"styled-components": "^4.4.1",
+		"styled-system": "^5.1.4"
+	},
+	"dependencies": {
+		"@alekna/react-data-browser": "^1.1.3",
+		"@tpr/core": "file:../core",
+		"lodash": "^4.17.15",
+		"react-bottom-scroll-listener": "^3.0.0"
+	},
+	"publishConfig": {
+		"access": "public"
+	},
+	"gitHead": "3a9e85be825e7800b53a47e519afe0b85d508bb1"
+}

@@ -1,0 +1,21 @@
+---
+name: Forms
+route: forms
+---
+
+import { Playground, Props } from 'docz';
+import { Checkbox } from '../components/checkbox';
+
+# Forms
+
+Forms for TPR apps
+
+## Checkbox
+
+<Playground>
+	<Checkbox
+		input={{ value: true }}
+		onChange={input => !input.value}
+		label="All details are correct"
+	/>
+</Playground>

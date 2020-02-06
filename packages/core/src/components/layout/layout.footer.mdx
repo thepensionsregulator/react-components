@@ -1,0 +1,51 @@
+---
+name: Footer
+route: layout/footer
+---
+
+import { Playground, Props } from 'docz';
+import { Footer } from './layout';
+
+# Footer
+
+Footer for tpr apps
+
+## Properties
+
+<Props of={Footer} />
+
+## Basic usage
+
+<Playground>
+	<Footer
+		logoUrl="https://www.thepensionsregulator.gov.uk/-/media/thepensionsregulator/images/logo/tpr-logo-footer.ashx"
+		links={[
+			{ title: 'Website help', url: '#' },
+			{ title: 'Cymraeg', url: '#' },
+			{ title: 'Site map', url: '#' },
+		]}
+		menus={[
+			[
+				{ title: 'Public service pension schemes', url: '#' },
+				{ title: 'Lorem ipsum dolor', url: '#' },
+				{ title: 'Lorem ipsum dolor', url: '#' },
+				{ title: 'Lorem ipsum dolor', url: '#' },
+				{ title: 'Lorem ipsum dolor', url: '#' },
+			],
+			[
+				{ title: 'Lorem ipsum dolor', url: '#' },
+				{ title: 'Lorem ipsum dolor', url: '#' },
+				{ title: 'Lorem ipsum dolor', url: '#' },
+				{ title: 'Lorem ipsum dolor', url: '#' },
+				{ title: 'Lorem ipsum dolor', url: '#' },
+			],
+			[
+				{ title: 'Lorem ipsum dolor', url: '#' },
+				{ title: 'Lorem ipsum dolor', url: '#' },
+				{ title: 'Lorem ipsum dolor', url: '#' },
+				{ title: 'Lorem ipsum dolor', url: '#' },
+				{ title: 'Lorem ipsum dolor', url: '#' },
+			],
+		]}
+	/>
+</Playground>
