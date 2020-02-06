@@ -19,7 +19,9 @@ type RenderProps = (_: TrusteeContextProps) => ReactElement;
 export type TrusteeProps = {
 	trustee: Partial<TC>;
 	children?: RenderProps | ReactElement;
-	onToggleCorrect?: () => void;
+	onCorrect?: (...args: any[]) => void;
+	onRemove?: (...args: any[]) => void;
+	onSave?: (...args: any[]) => void;
 };
 
 export const TrusteeProvider = ({

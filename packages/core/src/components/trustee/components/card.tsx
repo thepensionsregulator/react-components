@@ -24,7 +24,6 @@ export const StyledCardToolbar = styled('div')`
 	flex: 0 0 auto;
 	justify-content: space-evenly;
 	align-items: flex-start;
-	height: 80px;
 	padding: 20px 20px 0 20px;
 `;
 

@@ -1,8 +1,5 @@
 import styled from 'styled-components';
 
-// TODO: transform Buttons to have text aligned to left and underline to be border?
-// should use button from buttons rather than this new button...
-
 export const Button = styled('button')`
 	text-align: left;
 	background: transparent;
@@ -13,7 +10,8 @@ export const Button = styled('button')`
 
 	width: 100%;
 	height: ${({ theme }) => theme.space[4]}px;
-	font-size: ${({ theme }) => theme.fontSizes[4]}px;
+	font-size: ${({ theme }) => theme.fontSizes[3]}px;
+	font-weight: ${({ theme }) => theme.fontWeights[2]};
 	cursor: pointer;
 
 	&:hover {
@@ -25,6 +23,9 @@ export const Button = styled('button')`
 	}
 
 	&:disabled {
+		color: ${({ theme }) => theme.colors.neutral[300]};
+		border-bottom: 2px solid ${({ theme }) => theme.colors.neutral[300]};
+		cursor: not-allowed;
 	}
 
 	&:active {
