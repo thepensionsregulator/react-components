@@ -7,7 +7,7 @@ import { from } from 'rxjs';
 
 const registryApi = ({ returnData }) => ({
 	name: 'registry',
-	instance: (method: string, query: any, headers: any) => {
+	instance: ({}: any) => {
 		const uri = 'https://...';
 		return from(Promise.resolve({ response: { data: returnData } }));
 	},

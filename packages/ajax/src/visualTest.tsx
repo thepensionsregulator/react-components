@@ -5,6 +5,7 @@ import { ajax } from 'rxjs/ajax';
 import { Flex, Button } from '@tpr/core';
 import { getItemFromStorage } from './localStorage';
 import { timeout } from 'rxjs/operators';
+import { from } from 'rxjs';
 
 const People = () => {
 	return (
@@ -38,18 +39,38 @@ const People = () => {
 								</Button>
 							</Flex>
 							<Flex>
-								<div>
-									{props.networkStatus === 1 && 'initializing'}
-									{props.networkStatus === 2 && 'setting variables'}
-									{props.networkStatus === 3 && 'fetch more'}
-									{props.networkStatus === 4 && 're-fetching'}
-									{props.networkStatus === 7 && 'fetch success'}
-									{props.networkStatus === 8 && 'fetch failed'}
-								</div>
-								<Flex mr={0}>total: {props.data?.results?.length}</Flex>
+								<Flex>
+									networkStatus:
+									<Flex ml={0}>
+										{props.networkStatus === 1 && 'initializing'}
+										{props.networkStatus === 2 && 'setting variables'}
+										{props.networkStatus === 3 && 'fetch more'}
+										{props.networkStatus === 4 && 're-fetching'}
+										{props.networkStatus === 7 && 'fetch success'}
+										{props.networkStatus === 8 && 'fetch failed'}
+									</Flex>
+								</Flex>
+								<Flex ml={0}>total: {props.data?.results?.length}</Flex>
 							</Flex>
 						</Flex>
-						<pre>{JSON.stringify(props, undefined, 2)}</pre>
+						<Flex style={{ position: 'relative' }}>
+							{props.loading && (
+								<div
+									style={{
+										display: 'flex',
+										justifyContent: 'center',
+										alignItems: 'center',
+										position: 'absolute',
+										width: '100%',
+										height: '100%',
+										background: 'rgba(255,255,255,0.5)',
+									}}
+								>
+									Loading...
+								</div>
+							)}
+							<pre>{JSON.stringify(props, undefined, 2)}</pre>
+						</Flex>
 					</div>
 				);
 			}}
@@ -105,7 +126,9 @@ const Planets = () => {
 						{props.networkStatus === 7 && 'fetch success'}
 						{props.networkStatus === 8 && 'fetch failed'}
 					</div>
-					<Flex mr={0}>total: {props.data?.length}</Flex>
+					<Flex mr={0}>
+						{`🚀`} total: {props.data?.length}
+					</Flex>
 				</Flex>
 			</Flex>
 			<pre>{JSON.stringify(props, undefined, 2)}</pre>
@@ -113,17 +136,36 @@ const Planets = () => {
 	);
 };
 
-const fakeInstance = ({ dispatch, endpoint, method }) => {
+const starWarsInstance = ({ endpoint, method }) => {
 	return ajax({
 		method: method,
 		url: `https://swapi.co/api/${endpoint}`,
 	}).pipe(timeout(10000));
 };
 
+const retryTestInstance = (timeout = 5000) => {
+	let attempts = 0;
+	return ({ dispatch, endpoint, method }) => {
+		return from(
+			new Promise((res, rej) => {
+				setTimeout(() => {
+					if (attempts < 3) {
+						attempts += 1;
+						rej(new Error('TIMEDOUT'));
+						return;
+					}
+					attempts = 0;
+					res({ response: { results: [{ name: 'wulfass3000' }] } });
+				}, timeout);
+			}),
+		);
+	};
+};
+
 export const TestEntry = () => {
 	return (
 		<AjaxProvider
-			api={[{ name: 'registry', instance: fakeInstance }]}
+			api={[{ name: 'registry', instance: starWarsInstance }]}
 			stores={[
 				{ name: 'planets', persist: false },
 				{ name: 'people', persist: false },

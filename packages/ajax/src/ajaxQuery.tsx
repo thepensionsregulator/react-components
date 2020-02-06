@@ -86,7 +86,7 @@ export const useQuery = ({
 				/** Retry multiple times upon failure */
 				retryWhen(
 					genericRetryStrategy({
-						maxRetryAttempts: 5,
+						maxRetryAttempts: 3,
 						excludedStatusCodes: [500],
 					}),
 				),
