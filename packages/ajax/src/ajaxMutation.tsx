@@ -11,11 +11,20 @@ export type MutationProps = {
 	errorPath?: any[];
 };
 
-type MutateProps = {
+type MutateFnProps = {
 	variables?: object;
 	headers?: object;
 	refetchQueries?: string[];
 };
+
+type MutationState = {
+	data: unknown;
+	loading: boolean;
+	error: unknown;
+};
+export interface IMutationReturns extends MutationState {
+	mutate: <T>(props?: MutateFnProps) => Promise<T>;
+}
 
 export const useMutation = ({
 	method = 'post',
@@ -23,7 +32,7 @@ export const useMutation = ({
 	api,
 	dataPath = ['response', 'data'],
 	errorPath = ['response', 'errors', 0],
-}: MutationProps) => {
+}: MutationProps): IMutationReturns => {
 	/** use context to get values from the Provider */
 	const { api: apis, dispatch } = useAjaxContext();
 	/** Will select first Endpoint in an array if store is undefined or not found */
@@ -31,11 +40,17 @@ export const useMutation = ({
 		() => apis.find(({ name }) => name === api) || apis[0],
 		[apis],
 	);
-	const [state, setState] = useReducer((p, n) => ({ ...p, ...n }), {
+
+	const initialState = {
 		data: undefined,
 		loading: false,
 		error: undefined,
+	};
+	const reducer = <S extends MutationState, A>(prev: S, next: A): S => ({
+		...prev,
+		...next,
 	});
+	const [state, setState] = useReducer(reducer, initialState);
 
 	const mutate = ({
 		variables = {},
@@ -43,23 +58,30 @@ export const useMutation = ({
 			'Content-Type': 'application/json',
 		},
 		refetchQueries,
-	}: MutateProps = {}) => {
+	}: MutateFnProps = {}) => {
 		setState({ loading: true, error: undefined });
 
-		const params = { endpoint, variables };
-		return instance(method, params, headers)
+		return instance({
+			endpoint,
+			variables,
+			method,
+			headers,
+		})
 			.toPromise()
-			.then((resp: object) => {
+			.then((resp: unknown) => {
 				const response = path(dataPath, resp);
 
+				/** refetch all queries from provided array in existing stores on request */
 				if (Array.isArray(refetchQueries) && refetchQueries.length > 0) {
-					refetchQueries.map(store => dispatch({ type: `${store}@refetch` }));
+					refetchQueries.map(store =>
+						dispatch({ type: `${store}@refetch`, payload: { loading: false } }),
+					);
 				}
 
 				setState({ loading: false, data: response });
 				return response;
 			})
-			.catch((err: any) => {
+			.catch((err: unknown) => {
 				const errorMessage = pathOr(
 					{
 						detail: `Unkown error occured while processing your request: ${name}/${endpoint}`,

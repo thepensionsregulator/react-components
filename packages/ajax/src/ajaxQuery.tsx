@@ -47,7 +47,6 @@ export const useQuery = ({
 		() => apis.find(({ name }) => name === api) || apis[0],
 		[apis],
 	);
-	const ajax = instance(dispatch);
 	// const fetch$ = instance(dispatch);
 	/** Select state from the global state efficiently. Update only if
 	 * prev state does not match new state */
@@ -77,12 +76,12 @@ export const useQuery = ({
 			return undefined;
 		}
 
-		const params = {
+		const sub = instance({
 			endpoint: stringifyEndpoint(method, endpoint, state.variables),
 			variables: state.variables,
-		};
-
-		const sub = ajax(method, params, headers)
+			method,
+			headers,
+		})
 			.pipe(
 				/** Retry multiple times upon failure */
 				retryWhen(
@@ -106,7 +105,7 @@ export const useQuery = ({
 			)
 			.subscribe((response: unknown) => {
 				/** Response was successfull. Update the store with new state */
-				let data = pathOr([], dataPath, response);
+				let data = pathOr({}, dataPath, response);
 
 				if (state.networkStatus === 3) {
 					data = mergeData(state.data, data);

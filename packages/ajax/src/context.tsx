@@ -1,22 +1,16 @@
-import React, { createContext, useContext, useMemo, useEffect } from 'react';
-import StoreProvider, {
-	createStore,
-	useStoreContext,
-} from '@alekna/react-store';
-import {
-	shareReplay,
-	debounceTime,
-	switchMap,
-	tap,
-	mergeMap,
-	distinctUntilChanged,
-	startWith,
-	filter,
-} from 'rxjs/operators';
+import React, {
+	createContext,
+	useContext,
+	useMemo,
+	useEffect,
+	useCallback,
+} from 'react';
+import StoreProvider from '@alekna/react-store';
+import { createStore, useStoreContext } from '@alekna/react-store';
+import { shareReplay, debounceTime, switchMap, mergeMap } from 'rxjs/operators';
 import reducer from './reducer';
-import { of, iif, Subject } from 'rxjs';
+import { of, iif } from 'rxjs';
 import { removeItemFromStorage, storeItem } from './localStorage';
-import { isEqual } from 'lodash';
 
 // What is the point of having global fetched data context?
 // 1. can help with caching and
@@ -101,36 +95,36 @@ export const AjaxProvider: React.FC<AjaxProviderProps> = ({
 		);
 	}, [stores]);
 
-	const sharedApi = useMemo(() => {
-		/** share reply with late subscribers without sending multiple network requests.
-		 * Instead send latest value received from network within 10s. Otherwise make
-		 * a new request.
-		 */
-
-		return api.map(({ instance, ...apiSettings }) => {
-			// TODO: workout the args to be passed on in the most convinient way.
-			return {
-				...apiSettings,
-				instance: (...args1) => (...args2) => {
-					return of([args1, ...args2]).pipe(
-						distinctUntilChanged(isEqual),
-						mergeMap(([dispatch, ...args]) => instance(dispatch)(...args)),
-						shareReplay(1),
-					);
-				},
-			};
-		});
-	}, [api]);
+	const sharedApi = useCallback(
+		dispatch => {
+			/** Share reply with late subscribers without sending multiple network requests,
+			 * instead send latest value received from network. Otherwise make a new request */
+			return api.map(({ instance, ...apiSettings }) => {
+				return {
+					...apiSettings,
+					instance: args => {
+						return of(args).pipe(
+							mergeMap(settings => instance({ dispatch, ...settings })),
+							shareReplay(1),
+						);
+					},
+				};
+			});
+		},
+		[api],
+	);
 
 	const clearStore = () => removeItemFromStorage(persistOn);
 
 	return (
 		<StoreProvider store={storeConfig}>
-			<AjaxContext.Provider value={{ api: sharedApi, clearStore }}>
-				<Persister persist={persist} persistOn={persistOn}>
-					{children}
-				</Persister>
-			</AjaxContext.Provider>
+			{({ dispatch }) => (
+				<AjaxContext.Provider value={{ api: sharedApi(dispatch), clearStore }}>
+					<Persister persist={persist} persistOn={persistOn}>
+						{children}
+					</Persister>
+				</AjaxContext.Provider>
+			)}
 		</StoreProvider>
 	);
 };

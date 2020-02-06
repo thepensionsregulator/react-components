@@ -113,7 +113,7 @@ const Planets = () => {
 	);
 };
 
-const fakeInstance = dispatch => (method, { endpoint }) => {
+const fakeInstance = ({ dispatch, endpoint, method }) => {
 	return ajax({
 		method: method,
 		url: `https://swapi.co/api/${endpoint}`,

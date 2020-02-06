@@ -36,9 +36,7 @@ export function useQuerySetup({ props }: Partial<{ props: QueryProps }> = {}) {
 	return renderArg;
 }
 
-export function useMutationSetup({
-	props,
-}: Partial<{ props: MutationProps }> = {}) {
+export function useMutationSetup({ props }: { props?: MutationProps } = {}) {
 	const renderArg = renderHook(useMutation, {
 		initialProps: props,
 		wrapper: ({ children }) => {

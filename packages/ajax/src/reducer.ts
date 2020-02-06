@@ -41,7 +41,7 @@ type CacheObject = {
 };
 
 export type StoreState = {
-	data: any;
+	data: unknown | void;
 	cache?: CacheObject[];
 	loading: boolean;
 	error: any;
@@ -81,6 +81,9 @@ const ajaxReducer = (store: string) => {
 			case REFETCH: {
 				return {
 					...state,
+					loading: action.payload.loading
+						? action.payload.loading
+						: state.loading,
 					networkStatus: 4,
 				};
 			}

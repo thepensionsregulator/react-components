@@ -76,7 +76,7 @@ describe('AjaxQuery', () => {
 		}
 	`);
 		act(() => {
-			result.current.fetchMore();
+			result.current.fetchMore(({ page }) => ({ page: page + 1 }));
 		});
 		expect(result.current.networkStatus).toEqual(3);
 		await waitForNextUpdate();
@@ -97,7 +97,7 @@ describe('AjaxQuery', () => {
 		  "networkStatus": 7,
 		  "refetch": [Function],
 		  "variables": Object {
-		    "page": 2,
+		    "page": 3,
 		    "sort": Object {
 		      "dob": "asc",
 		    },
