@@ -1,6 +1,6 @@
 import React from 'react';
 import { Flex } from '../../../layout';
-import { Text } from '../../../typography';
+import { Text, H2 } from '../../../typography';
 import { useTrusteeContext } from '../../context';
 import { Checkbox } from '@tpr/forms';
 import { Button } from '../../components/button';
@@ -11,12 +11,12 @@ const Preview: React.FC = () => {
 	return (
 		<Flex flex="1 1 auto" flexDirection="column">
 			<Flex flex="1 1 auto" justifyContent="space-evenly" mt={0}>
-				<Flex width="100%" flexDirection="column" mr="20px">
+				<Flex width="100%" flexDirection="column" mr="40px">
 					<Button onClick={() => send('EDIT_ORG')}>
 						Correspondance address >
 					</Button>
 					<Flex mt={0} flexDirection="column">
-						<Text>{company.name}</Text>
+						<H2>{company.name}</H2>
 						<Text>{company.line1}</Text>
 						<Text>{company.line2}</Text>
 						<Text>{company.city}</Text>
@@ -29,7 +29,7 @@ const Preview: React.FC = () => {
 						Contact details >
 					</Button>
 					<Flex mt={0} flexDirection="column">
-						<Text>Phone</Text>
+						<H2>Phone</H2>
 						<Text>{contact.phoneNumber}</Text>
 						<Text>Email</Text>
 						<Text>{contact.emailAddress}</Text>

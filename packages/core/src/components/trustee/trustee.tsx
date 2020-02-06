@@ -12,6 +12,8 @@ import Contacts from './views/contacts';
 import RemoveReason from './views/remove/reason';
 import RemoveConfirm from './views/remove/confirm';
 
+// TODO: make responsive. Should contain 1 column on small screens and 2 on larger screens.
+
 // NOTE: each view should hold its own Form with state, and in the end it should sync state with *state machine*
 // otherwise submit wont work and might be bad for Accessibility
 
@@ -44,14 +46,14 @@ export const Trustee: React.FC<Omit<TrusteeProps, 'children'>> = props => {
 			{({ current: { context, matches }, send }) => (
 				<StyledCard complete={context.complete}>
 					<StyledCardToolbar>
-						<Flex width="100%" flexDirection="column" mr="20px">
+						<Flex width="100%" flexDirection="column" mr="40px">
 							<Button
 								onClick={() => send('EDIT_TRUSTEE')}
 								disabled={!matches('preview')}
 							>
 								Trustee >
 							</Button>
-							<Flex flexDirection="column">
+							<Flex mt={0} flexDirection="column">
 								<H2>{`${context.trustee.firstName} ${context.trustee.lastName}`}</H2>
 								<Text>Member-nominated trustee</Text>
 							</Flex>
@@ -63,7 +65,7 @@ export const Trustee: React.FC<Omit<TrusteeProps, 'children'>> = props => {
 									onClick={() => send('REMOVE')}
 									disabled={!matches('preview')}
 								>
-									Remove
+									Remove >
 								</Button>
 							</Flex>
 						</Flex>

@@ -33,15 +33,15 @@ export const H2 = styled.h2<HtmlHTagTypes>`
 	${fontStack};
 
 	color: #3d3d3d;
-	font-weight: ${({ theme }) => theme.fontWeights[1]};
-	font-size: 23px;
+	font-weight: ${({ theme }) => theme.fontWeights[2]};
+	font-size: ${({ theme }) => theme.fontSizes[2]}px;
 	letter-spacing: 0.4px;
 	margin: 0;
 	padding: 0;
 
-	${color};
+	/* ${color};
 	${typography};
-	${space};
+	${space}; */
 `;
 
 export const H3 = styled.h3<HtmlHTagTypes>`
@@ -109,7 +109,7 @@ export const P = styled.p<HtmlHTagTypes>`
 
 	color: #3d3d3d;
 	font-weight: ${({ theme }) => theme.fontWeights[1]};
-	font-size: ${({ theme }) => theme.fontSizes[0]};
+	font-size: ${({ theme }) => theme.fontSizes[2]}px;
 	letter-spacing: 0.9px;
 	line-height: 1.4;
 	margin: 0;
@@ -120,21 +120,7 @@ export const P = styled.p<HtmlHTagTypes>`
 	${space};
 `;
 
-export const Text = styled.p<HtmlHTagTypes>`
-	${fontStack};
-
-	color: #3d3d3d;
-	font-weight: ${({ theme }) => theme.fontWeights[1]};
-	font-size: ${({ theme }) => theme.fontSizes[0]};
-	letter-spacing: 0.9px;
-	line-height: 1.4;
-	margin: 0;
-	padding: 0;
-
-	${color};
-	${typography};
-	${space};
-`;
+export const Text = styled(P)``;
 
 export const Span = styled.span<HtmlHTagTypes>`
 	${fontStack};

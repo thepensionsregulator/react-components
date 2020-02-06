@@ -9,8 +9,8 @@ export const Button = styled('button')`
 	border-bottom: 2px solid ${({ theme }) => theme.colors.primary[200]};
 
 	width: 100%;
-	height: ${({ theme }) => theme.space[4]}px;
-	font-size: ${({ theme }) => theme.fontSizes[3]}px;
+	height: ${({ theme }) => theme.space[3]}px;
+	font-size: ${({ theme }) => theme.fontSizes[1]}px;
 	font-weight: ${({ theme }) => theme.fontWeights[2]};
 	cursor: pointer;
 
