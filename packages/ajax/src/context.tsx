@@ -100,6 +100,10 @@ export const AjaxProvider: React.FC<AjaxProviderProps> = ({
 			/** Share reply with late subscribers without sending multiple network requests,
 			 * instead send latest value received from network. Otherwise make a new request */
 			return api.map(({ instance, ...apiSettings }) => {
+				/** NOTE: instance will be re-initialized on every call. If there is a need for cache,
+				 * the instance should be initialized only once with a composable function and reused
+				 * accross the app.
+				 */
 				return {
 					...apiSettings,
 					instance: args => {

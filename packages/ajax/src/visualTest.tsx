@@ -118,20 +118,38 @@ const Planets = () => {
 					</Button>
 				</Flex>
 				<Flex>
-					<div>
-						{props.networkStatus === 1 && 'initializing'}
-						{props.networkStatus === 2 && 'setting variables'}
-						{props.networkStatus === 3 && 'fetch more'}
-						{props.networkStatus === 4 && 're-fetching'}
-						{props.networkStatus === 7 && 'fetch success'}
-						{props.networkStatus === 8 && 'fetch failed'}
-					</div>
-					<Flex mr={0}>
-						{`🚀`} total: {props.data?.length}
+					<Flex>
+						networkStatus:
+						<Flex ml={0}>
+							{props.networkStatus === 1 && 'initializing'}
+							{props.networkStatus === 2 && 'setting variables'}
+							{props.networkStatus === 3 && 'fetch more'}
+							{props.networkStatus === 4 && 're-fetching'}
+							{props.networkStatus === 7 && 'fetch success'}
+							{props.networkStatus === 8 && 'fetch failed'}
+						</Flex>
 					</Flex>
+					<Flex ml={0}>total: {props.data?.results?.length}</Flex>
 				</Flex>
 			</Flex>
-			<pre>{JSON.stringify(props, undefined, 2)}</pre>
+			<Flex style={{ position: 'relative' }}>
+				{props.loading && (
+					<div
+						style={{
+							display: 'flex',
+							justifyContent: 'center',
+							alignItems: 'center',
+							position: 'absolute',
+							width: '100%',
+							height: '100%',
+							background: 'rgba(255,255,255,0.5)',
+						}}
+					>
+						Loading...
+					</div>
+				)}
+				<pre>{JSON.stringify(props, undefined, 2)}</pre>
+			</Flex>
 		</div>
 	);
 };
