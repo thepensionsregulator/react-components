@@ -35,7 +35,7 @@ const lightTheme = {
 			'-apple-system, BlinkMacSystemFont, "avenir next", avenir, "helvetica neue", helvetica, ubuntu, roboto, noto, "segoe ui", arial, sans-serif',
 	},
 	space: [10, 15, 20, 25, 30, 40, 50, 60],
-	fontSizes: [12, 14, 16, 18, 22, 30, 36],
+	fontSizes: [14, 16, 18, 22, 30, 36],
 	fontWeights: [300, 400, 500, 700],
 	breakpoints,
 	mediaQueries: respondTo(

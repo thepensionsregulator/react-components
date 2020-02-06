@@ -1,6 +1,6 @@
 {
 	"name": "@tpr/table",
-	"version": "1.0.3",
+	"version": "1.0.5",
 	"description": "TPR Table component and helpers",
 	"author": "David Alekna <david.alekna@tpr.gov.uk>",
 	"license": "MIT",
@@ -28,9 +28,7 @@
 		"dev": "yarn storybook",
 		"test": "jest --coverage",
 		"test:watch": "jest --watch",
-		"build": "yarn clean && tsc -b .",
-		"postbuild": "yarn bundle",
-		"bundle": "cross-env-shell \"../../node_modules/.bin/rollup\" -c rollup.config.js",
+		"build": "cross-env-shell \"../../node_modules/.bin/rollup\" -c rollup.config.js",
 		"clean": "rimraf lib",
 		"report-coverage": "codecov"
 	},

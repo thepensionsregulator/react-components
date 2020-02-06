@@ -1,10 +1,27 @@
 import React from 'react';
-import styled, { css } from 'styled-components';
-import { compose, space, color, border, layout, flexbox, typography } from 'styled-system';
-import { BorderProps, ColorProps, FlexboxProps, SpaceProps, LayoutProps, TypographyProps } from 'styled-system';
+import styled from 'styled-components';
+import {
+	compose,
+	space,
+	color,
+	border,
+	layout,
+	flexbox,
+	typography,
+} from 'styled-system';
+import {
+	BorderProps,
+	ColorProps,
+	FlexboxProps,
+	SpaceProps,
+	LayoutProps,
+	TypographyProps,
+} from 'styled-system';
 import { P, Link, H2 } from '../typography';
 
-const DocWidth = styled.div<BorderProps & ColorProps & FlexboxProps & SpaceProps>`
+const DocWidth = styled.div<
+	BorderProps & ColorProps & FlexboxProps & SpaceProps
+>`
 	display: flex;
 	width: 100%;
 
@@ -21,7 +38,12 @@ const AppWidth = styled.div`
 
 export const Container: React.FC = ({ children, ...rest }) => {
 	return (
-		<DocWidth justifyContent="center" bg="#eeeeee" borderTop="5px solid #777" {...rest}>
+		<DocWidth
+			justifyContent="center"
+			bg="#eeeeee"
+			borderTop="5px solid #777"
+			{...rest}
+		>
 			<AppWidth>{children}</AppWidth>
 		</DocWidth>
 	);
@@ -88,10 +110,22 @@ export const Footer: React.FC<FooterProps> = ({
 		<Container {...props}>
 			<Flex flexDirection="column">
 				<LevelOne>
-					<Logo>{logoUrl ? <img src={logoUrl} alt="TPR Logo" /> : 'logo placeholder'}</Logo>
+					<Logo>
+						{logoUrl ? (
+							<img src={logoUrl} alt="TPR Logo" />
+						) : (
+							'logo placeholder'
+						)}
+					</Logo>
 					<Flex flex="1 1 auto" />
 					{menus.map((menu, key: number) => (
-						<Flex key={key} flex="0 0 auto" maxWidth="200px" pl={4} flexDirection="column">
+						<Flex
+							key={key}
+							flex="0 0 auto"
+							maxWidth="200px"
+							pl={4}
+							flexDirection="column"
+						>
 							{menu.map(({ title, url, ...linkProps }, key: number) => (
 								<Link key={key} href={url} mb={1} {...linkProps}>
 									{title}
@@ -100,7 +134,12 @@ export const Footer: React.FC<FooterProps> = ({
 						</Flex>
 					))}
 				</LevelOne>
-				<DocWidth borderTop="1px solid #CCC" flexWrap="wrap" justifyContent="space-between" p={2}>
+				<DocWidth
+					borderTop="1px solid #CCC"
+					flexWrap="wrap"
+					justifyContent="space-between"
+					p={2}
+				>
 					<Flex>
 						{links.map(({ title, url, ...linkProps }, key: number) => (
 							<Link key={key} href={url} mr={1} {...linkProps}>
@@ -117,49 +156,46 @@ export const Footer: React.FC<FooterProps> = ({
 	);
 };
 
-const styledInfoTab = ({ important }: InfoProps) => {
-	if (!important) return null;
-	return css`
-		margin-top: 46px;
-		position: relative;
-
-		&:before {
-			content: 'Important';
-			display: flex;
-			align-items: center;
-			justify-content: center;
-			font-weight: 300;
-			font-size: 18px;
-			position: absolute;
-			left: 0;
-			height: 46px;
-			top: -46px;
-			padding: 0 30px;
-			background: #333;
-			color: #fff;
-		}
-	`;
-};
-
-const StyledInfo = styled('div')<{ important?: boolean }>`
+const StyledInfo = styled('div')<{ isImportant?: boolean }>`
+	position: relative;
 	display: flex;
 	flex-direction: column;
 	padding: 30px;
-	border-top: ${({ important }) => (important ? `6px solid #333` : null)};
 	background: #eee;
 	color: #333;
+	margin-top: ${({ isImportant }) => (isImportant ? '40px' : 0)};
+	border-top: ${({ isImportant }) => (isImportant ? '6px solid #333' : null)};
+`;
 
-	${styledInfoTab}
+const StyledInfoImportant = styled('div')`
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	font-weight: 300;
+	font-size: 18px;
+	position: absolute;
+	left: 0;
+	height: 46px;
+	top: -47px;
+	padding: 0 30px;
+	background: #333;
+	color: #fff;
 `;
 
 type InfoProps = {
-	important?: boolean;
+	important?: string;
 	title?: string;
 };
 
-export const Info: React.FC<InfoProps> = ({ children, title, important = false }) => {
+export const Info: React.FC<InfoProps> = ({
+	children,
+	title,
+	important = undefined,
+}) => {
+	const isImportant = typeof important === 'string' && important.length > 0;
 	return (
-		<StyledInfo important={important}>
+		<StyledInfo isImportant={isImportant}>
+			{isImportant && <StyledInfoImportant>{important}</StyledInfoImportant>}
 			{title && <H2 mb={2}>{title}</H2>}
 			{children}
 		</StyledInfo>
@@ -172,11 +208,24 @@ export const Alert: React.FC = ({ children }) => {
 	return <StyledAlert>{children}</StyledAlert>;
 };
 
-type FlexProps = FlexboxProps & SpaceProps & LayoutProps & TypographyProps & ColorProps;
+/**
+ * There will be 2 grid components for the Body component
+ * 1. Grid component with 1 column with rows layout
+ * 2. Grid component with 2 columns first for sidebar and second for rows layout
+ */
+export const BodyOneColumn = () => {};
+export const BodyTwoColumns = () => {};
+
+type FlexProps = FlexboxProps &
+	SpaceProps &
+	LayoutProps &
+	TypographyProps &
+	ColorProps &
+	BorderProps;
 
 export const Flex = styled('div').attrs(() => ({
 	display: 'flex',
-}))<FlexProps>(compose(flexbox, space, layout, typography, color));
+}))<FlexProps>(compose(flexbox, space, layout, typography, color, border));
 
 type TextProps = TypographyProps & SpaceProps & ColorProps;
 
