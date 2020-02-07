@@ -29,8 +29,8 @@ export const useQuery = ({
 	variables,
 	api,
 	store,
-	dataPath = ['response'],
-	errorPath = ['response', 'message'],
+	dataPath = [],
+	errorPath = [],
 	mergeData = (f, s) => [...f, ...s],
 }: QueryProps) => {
 	const { api: apis, dispatch } = useAjaxContext();
@@ -55,7 +55,6 @@ export const useQuery = ({
 		if (statusMaches(1)) {
 			send({
 				networkStatus: 2,
-				loading: true,
 				variables,
 			});
 			return undefined;
@@ -92,7 +91,6 @@ export const useQuery = ({
 			send({
 				networkStatus: 7,
 				data,
-				loading: false,
 				error: undefined,
 			});
 		});
@@ -106,7 +104,7 @@ export const useQuery = ({
 	//** METHODS */
 
 	const refetch = () => {
-		send({ networkStatus: 4, loading: true });
+		send({ networkStatus: 4 });
 	};
 
 	const fetchMore = (callback: (_: any) => { [key: string]: any }) => {

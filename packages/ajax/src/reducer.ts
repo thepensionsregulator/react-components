@@ -64,31 +64,34 @@ const initialState = {
 
 const ajaxReducer = (store: string) => {
 	const UPDATE = `${store}@update`;
-	const RESET = `${store}@reset`;
 	const REFETCH = `${store}@refetch`;
+	const RESET = `${store}@reset`;
 
 	return (state: StoreState = initialState, action: Action) => {
 		switch (action.type) {
 			case UPDATE: {
+				const loading = isNetworkRequestInFlight(
+					action.payload?.networkStatus || state.networkStatus,
+				);
 				return {
 					...state,
 					...action.payload,
+					loading,
 				};
-			}
-			case RESET: {
-				return initialState;
 			}
 			case REFETCH: {
 				return {
 					...state,
-					loading: action.payload.loading
-						? action.payload.loading
-						: state.loading,
-					variables: action.payload.variables
-						? action.payload.variables
-						: state.variables,
+					variables: Object.assign(
+						state.variables,
+						action.payload?.variables || {},
+					),
 					networkStatus: 4,
+					loading: true,
 				};
+			}
+			case RESET: {
+				return initialState;
 			}
 			default:
 				return state;
@@ -99,5 +102,15 @@ const ajaxReducer = (store: string) => {
 export const actions = (storeName: string, send: Function) => (
 	payload: object,
 ) => send({ type: `${storeName}@update`, payload });
+
+/**
+ * Returns true if there is currently a network request in flight according to a given network
+ * status.
+ */
+export function isNetworkRequestInFlight(
+	networkStatus: NetworkStatus,
+): boolean {
+	return networkStatus < 7;
+}
 
 export default ajaxReducer;

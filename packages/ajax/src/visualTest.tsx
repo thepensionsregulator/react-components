@@ -164,14 +164,12 @@ const Planets = () => {
 };
 
 const UpdateComponent = () => {
-	const { data, loading, mutate } = useMutation({
+	const { loading, mutate } = useMutation({
 		endpoint: 'articles',
 		api: 'localPromise',
 		dataPath: ['response', 'results'],
 		errorPath: ['response', 'errors', 0],
 	});
-
-	console.log('data', data);
 
 	return (
 		<Flex>

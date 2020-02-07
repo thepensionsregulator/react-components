@@ -13,7 +13,6 @@ export type MutationProps = {
 
 type StoreParams = {
 	name: string;
-	loading?: boolean;
 	variables?: { [key: string]: any };
 };
 
@@ -36,8 +35,8 @@ export const useMutation = ({
 	method = 'post',
 	endpoint = '',
 	api,
-	dataPath = ['response', 'data'],
-	errorPath = ['response', 'errors', 0],
+	dataPath = [],
+	errorPath = [],
 }: MutationProps): IMutationReturns => {
 	/** use context to get values from the Provider */
 	const { api: apis, dispatch } = useAjaxContext();
@@ -46,17 +45,16 @@ export const useMutation = ({
 		() => apis.find(({ name }) => name === api) || apis[0],
 		[apis],
 	);
-
-	const initialState = {
-		data: undefined,
-		loading: false,
-		error: undefined,
-	};
+	/** mutation state to keep trak if it's loading and if it had any errors */
 	const reducer = <S extends MutationState, A>(prev: S, next: A): S => ({
 		...prev,
 		...next,
 	});
-	const [state, setState] = useReducer(reducer, initialState);
+	const [state, setState] = useReducer(reducer, {
+		data: undefined,
+		loading: false,
+		error: undefined,
+	});
 
 	const mutate = ({
 		variables = {},
@@ -81,16 +79,12 @@ export const useMutation = ({
 				if (Array.isArray(refetchStores) && refetchStores.length > 0) {
 					for (const store of refetchStores) {
 						if (typeof store === 'string') {
-							dispatch({
-								type: `${store}@refetch`,
-								payload: { loading: true },
-							});
+							dispatch({ type: `${store}@refetch` });
 						}
 						if (typeof store === 'object' && 'name' in store) {
 							dispatch({
 								type: `${store.name}@refetch`,
 								payload: {
-									loading: store.loading || true,
 									variables: store.variables,
 								},
 							});
