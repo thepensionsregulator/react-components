@@ -4,8 +4,10 @@ import { AjaxQuery, useQuery } from './ajaxQuery';
 import { ajax } from 'rxjs/ajax';
 import { Flex, Button } from '@tpr/core';
 import { getItemFromStorage } from './localStorage';
-import { timeout } from 'rxjs/operators';
-import { from } from 'rxjs';
+import { timeout, retryWhen, catchError, tap } from 'rxjs/operators';
+import { from, throwError } from 'rxjs';
+import { genericRetryStrategy } from './retryStrategy';
+import { pathOr } from 'ramda';
 
 const People = () => {
 	return (
@@ -104,6 +106,12 @@ const Planets = () => {
 		variables: {
 			page: 2,
 		},
+		mergeData: (parent, next) => {
+			return {
+				...next,
+				results: [...parent.results, ...next.results],
+			};
+		},
 	});
 
 	return (
@@ -154,27 +162,60 @@ const Planets = () => {
 	);
 };
 
-const starWarsInstance = ({ endpoint, method }) => {
+const starWarsInstance = ({ endpoint, method, send, errorPath }) => {
 	return ajax({
 		method: method,
 		url: `https://swapi.co/api/${endpoint}`,
-	}).pipe(timeout(10000));
+	}).pipe(
+		retryWhen(
+			genericRetryStrategy({
+				maxRetryAttempts: 3,
+				excludedStatusCodes: [500],
+			}),
+		),
+		catchError(err => {
+			const getError = pathOr('unknown error occurred', errorPath);
+			send({
+				networkStatus: 8,
+				data: undefined,
+				loading: false,
+				error: getError(err),
+			});
+			return throwError(getError(err));
+		}),
+		timeout(10000),
+	);
 };
 
 const retryTestInstance = (timeout = 5000) => {
-	let attempts = 0;
-	return ({ dispatch, endpoint, method }) => {
-		return from(
-			new Promise((res, rej) => {
-				setTimeout(() => {
-					if (attempts < 3) {
-						attempts += 1;
-						rej(new Error('TIMEDOUT'));
-						return;
-					}
-					attempts = 0;
-					res({ response: { results: [{ name: 'wulfass3000' }] } });
-				}, timeout);
+	const success = () =>
+		new Promise(res =>
+			res({ response: { results: [{ name: 'wulfass3000' }] } }),
+		);
+
+	const failure = () =>
+		new Promise((_, rej) => rej(new Error('MOCKED FAILURE')));
+
+	return ({ send, errorPath }) => {
+		return from(success()).pipe(
+			retryWhen(
+				genericRetryStrategy({
+					maxRetryAttempts: 3,
+					scalingDuration: 3000,
+					excludedStatusCodes: [500],
+				}),
+			),
+			/** Catch a error if there was any, extract it from the object
+			 * and pass it on to the store to notify client */
+			catchError(err => {
+				const getError = pathOr('unknown error occurred', errorPath);
+				send({
+					networkStatus: 8,
+					data: undefined,
+					loading: false,
+					error: getError(err),
+				});
+				return throwError(getError(err));
 			}),
 		);
 	};
@@ -192,8 +233,9 @@ export const TestEntry = () => {
 			// persistOn="tpr"
 		>
 			<People />
-			<ComponentTwo />
+			{/* <ComponentTwo /> */}
 			<ComponentThree />
+			<Planets />
 		</AjaxProvider>
 	);
 };

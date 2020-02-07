@@ -8,6 +8,7 @@
 		"diff": "check-if-folder-contents-changed-in-git-commit-range",
 		"build": "lerna run build",
 		"test": "jest",
+		"test:watch": "jest --watch",
 		"coverage": "jest --verbose --coverage",
 		"coverage:upload": "codecov",
 		"codecov": "echo TODO...",

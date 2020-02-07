@@ -3,17 +3,10 @@ import { pathOr } from 'ramda';
 import { useAjaxContext } from './context';
 import { useSelector } from '@alekna/react-store';
 import { actions } from './reducer';
-import {
-	distinctUntilChanged,
-	catchError,
-	retryWhen,
-	tap,
-} from 'rxjs/operators';
+import { distinctUntilChanged } from 'rxjs/operators';
 import { isEqual } from 'lodash';
 import { StoreState } from './reducer';
-import { throwError } from 'rxjs';
 import { stringifyEndpoint } from './utils';
-import { genericRetryStrategy } from './retryStrategy';
 
 export type QueryProps = {
 	endpoint: string;
@@ -76,48 +69,34 @@ export const useQuery = ({
 			return undefined;
 		}
 
+		if (statusMaches(8)) {
+			/** Requests have failed, we don't want to kick off the instance again
+			 * until user interacts with UI again. */
+			return undefined;
+		}
+
 		const sub = instance({
 			endpoint: stringifyEndpoint(method, endpoint, state.variables),
 			variables: state.variables,
 			method,
 			headers,
-		})
-			.pipe(
-				/** Retry multiple times upon failure */
-				retryWhen(
-					genericRetryStrategy({
-						maxRetryAttempts: 3,
-						excludedStatusCodes: [500],
-					}),
-				),
-				/** Catch a error if there was any, extract it from the object
-				 * and pass it on to the store to notify client */
-				catchError(err => {
-					const getError = pathOr('unknown error occurred', errorPath);
-					send({
-						networkStatus: 8,
-						data: undefined,
-						loading: false,
-						error: getError(err),
-					});
-					return throwError(getError(err));
-				}),
-			)
-			.subscribe((response: unknown) => {
-				/** Response was successfull. Update the store with new state */
-				let data = pathOr({}, dataPath, response);
+			send,
+			errorPath,
+		}).subscribe((response: unknown) => {
+			/** Response was successfull. Update the store with new state */
+			let data = pathOr({}, dataPath, response);
 
-				if (state.networkStatus === 3) {
-					data = mergeData(state.data, data);
-				}
+			if (state.networkStatus === 3) {
+				data = mergeData(state.data, data);
+			}
 
-				send({
-					networkStatus: 7,
-					data,
-					loading: false,
-					error: undefined,
-				});
+			send({
+				networkStatus: 7,
+				data,
+				loading: false,
+				error: undefined,
 			});
+		});
 
 		return () => {
 			/** Cleanup the subscription when component unmounts. */

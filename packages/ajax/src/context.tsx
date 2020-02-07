@@ -7,10 +7,21 @@ import React, {
 } from 'react';
 import StoreProvider from '@alekna/react-store';
 import { createStore, useStoreContext } from '@alekna/react-store';
-import { shareReplay, debounceTime, switchMap, mergeMap } from 'rxjs/operators';
-import reducer from './reducer';
-import { of, iif } from 'rxjs';
 import { removeItemFromStorage, storeItem } from './localStorage';
+import reducer from './reducer';
+import { of, iif, Subject, combineLatest, BehaviorSubject } from 'rxjs';
+import {
+	shareReplay,
+	debounceTime,
+	switchMap,
+	mergeMap,
+	tap,
+	mergeMapTo,
+	distinctUntilChanged,
+	withLatestFrom,
+	throttleTime,
+	scan,
+} from 'rxjs/operators';
 
 // What is the point of having global fetched data context?
 // 1. can help with caching and
@@ -96,25 +107,21 @@ export const AjaxProvider: React.FC<AjaxProviderProps> = ({
 	}, [stores]);
 
 	const sharedApi = useCallback(
-		dispatch => {
-			/** Share reply with late subscribers without sending multiple network requests,
-			 * instead send latest value received from network. Otherwise make a new request */
-			return api.map(({ instance, ...apiSettings }) => {
-				/** NOTE: instance will be re-initialized on every call. If there is a need for cache,
-				 * the instance should be initialized only once with a composable function and reused
-				 * accross the app.
-				 */
+		dispatch =>
+			api.map(({ instance, ...apiSettings }) => {
+				/** Share reply with late subscribers without sending multiple network requests,
+				 * instead send latest value received from network. Otherwise make a new request */
 				return {
 					...apiSettings,
-					instance: args => {
-						return of(args).pipe(
+					instance: params => {
+						/** NOTE: this is a new observable every time function is called. */
+						return of(params).pipe(
 							mergeMap(settings => instance({ dispatch, ...settings })),
 							shareReplay(1),
 						);
 					},
 				};
-			});
-		},
+			}),
 		[api],
 	);
 
