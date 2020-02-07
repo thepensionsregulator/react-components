@@ -164,23 +164,26 @@ const Planets = () => {
 };
 
 const UpdateComponent = () => {
-	const { mutate } = useMutation({
+	const { data, loading, mutate } = useMutation({
 		endpoint: 'articles',
-		api: 'mutation',
-		dataPath: ['response', 'data'],
+		api: 'localPromise',
+		dataPath: ['response', 'results'],
 		errorPath: ['response', 'errors', 0],
 	});
+
+	console.log('data', data);
 
 	return (
 		<Flex>
 			<Button
 				onClick={() =>
 					mutate({
-						refetchQueries: ['people', 'planets'],
+						refetchStores: ['people', 'planets'],
 					})
 				}
+				disabled={loading}
 			>
-				MUTATION UPDATE
+				{loading ? 'MUTATING...' : 'MUTATION UPDATE'}
 			</Button>
 		</Flex>
 	);
@@ -212,16 +215,21 @@ const starWarsInstance = ({ endpoint, method, send, errorPath }) => {
 };
 
 const retryTestInstance = (timeout = 5000) => {
-	const success = () =>
+	const success = (ms: number = 0) =>
 		new Promise(res =>
-			res({ response: { results: [{ name: 'wulfass3000' }] } }),
+			setTimeout(
+				() => res({ response: { results: [{ name: 'wulfass3000' }] } }),
+				ms,
+			),
 		);
 
-	const failure = () =>
-		new Promise((_, rej) => rej(new Error('MOCKED FAILURE')));
+	const failure = (ms: number = 0) =>
+		new Promise((_, rej) =>
+			setTimeout(() => rej(new Error('MOCKED FAILURE')), ms),
+		);
 
 	return ({ send, errorPath }) => {
-		return from(success()).pipe(
+		return from(success(5000)).pipe(
 			retryWhen(
 				genericRetryStrategy({
 					maxRetryAttempts: 3,
@@ -249,8 +257,8 @@ export const TestEntry = () => {
 	return (
 		<AjaxProvider
 			api={[
-				{ name: 'registry', instance: starWarsInstance },
-				{ name: 'mutation', instance: retryTestInstance() },
+				{ name: 'starwars', instance: starWarsInstance },
+				{ name: 'localPromise', instance: retryTestInstance() },
 			]}
 			stores={[
 				{ name: 'planets', persist: false },

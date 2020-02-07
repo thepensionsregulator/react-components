@@ -11,10 +11,16 @@ export type MutationProps = {
 	errorPath?: any[];
 };
 
+type StoreParams = {
+	name: string;
+	loading?: boolean;
+	variables?: { [key: string]: any };
+};
+
 type MutateFnProps = {
 	variables?: object;
 	headers?: object;
-	refetchQueries?: string[];
+	refetchStores?: string[] | StoreParams[];
 };
 
 type MutationState = {
@@ -57,7 +63,7 @@ export const useMutation = ({
 		headers = {
 			'Content-Type': 'application/json',
 		},
-		refetchQueries,
+		refetchStores,
 	}: MutateFnProps = {}) => {
 		setState({ loading: true, error: undefined });
 
@@ -70,12 +76,26 @@ export const useMutation = ({
 			.toPromise()
 			.then((resp: unknown) => {
 				const response = path(dataPath, resp);
-				console.log('we are here', response);
+
 				/** refetch all queries from provided array in existing stores on request */
-				if (Array.isArray(refetchQueries) && refetchQueries.length > 0) {
-					refetchQueries.map(store =>
-						dispatch({ type: `${store}@refetch`, payload: { loading: true } }),
-					);
+				if (Array.isArray(refetchStores) && refetchStores.length > 0) {
+					for (const store of refetchStores) {
+						if (typeof store === 'string') {
+							dispatch({
+								type: `${store}@refetch`,
+								payload: { loading: true },
+							});
+						}
+						if (typeof store === 'object' && 'name' in store) {
+							dispatch({
+								type: `${store.name}@refetch`,
+								payload: {
+									loading: store.loading || true,
+									variables: store.variables,
+								},
+							});
+						}
+					}
 				}
 
 				setState({ loading: false, data: response });

@@ -84,6 +84,9 @@ const ajaxReducer = (store: string) => {
 					loading: action.payload.loading
 						? action.payload.loading
 						: state.loading,
+					variables: action.payload.variables
+						? action.payload.variables
+						: state.variables,
 					networkStatus: 4,
 				};
 			}
