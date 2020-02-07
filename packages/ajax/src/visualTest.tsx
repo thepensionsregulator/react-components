@@ -4,10 +4,11 @@ import { AjaxQuery, useQuery } from './ajaxQuery';
 import { ajax } from 'rxjs/ajax';
 import { Flex, Button } from '@tpr/core';
 import { getItemFromStorage } from './localStorage';
-import { timeout, retryWhen, catchError, tap } from 'rxjs/operators';
+import { timeout, retryWhen, catchError } from 'rxjs/operators';
 import { from, throwError } from 'rxjs';
 import { genericRetryStrategy } from './retryStrategy';
 import { pathOr } from 'ramda';
+import { useMutation } from './ajaxMutation';
 
 const People = () => {
 	return (
@@ -162,6 +163,29 @@ const Planets = () => {
 	);
 };
 
+const UpdateComponent = () => {
+	const { mutate } = useMutation({
+		endpoint: 'articles',
+		api: 'mutation',
+		dataPath: ['response', 'data'],
+		errorPath: ['response', 'errors', 0],
+	});
+
+	return (
+		<Flex>
+			<Button
+				onClick={() =>
+					mutate({
+						refetchQueries: ['people', 'planets'],
+					})
+				}
+			>
+				MUTATION UPDATE
+			</Button>
+		</Flex>
+	);
+};
+
 const starWarsInstance = ({ endpoint, method, send, errorPath }) => {
 	return ajax({
 		method: method,
@@ -224,7 +248,10 @@ const retryTestInstance = (timeout = 5000) => {
 export const TestEntry = () => {
 	return (
 		<AjaxProvider
-			api={[{ name: 'registry', instance: starWarsInstance }]}
+			api={[
+				{ name: 'registry', instance: starWarsInstance },
+				{ name: 'mutation', instance: retryTestInstance() },
+			]}
 			stores={[
 				{ name: 'planets', persist: false },
 				{ name: 'people', persist: false },
@@ -232,6 +259,7 @@ export const TestEntry = () => {
 			// initialState={getItemFromStorage('tpr')}
 			// persistOn="tpr"
 		>
+			<UpdateComponent />
 			<People />
 			{/* <ComponentTwo /> */}
 			<ComponentThree />

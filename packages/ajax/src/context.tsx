@@ -114,7 +114,13 @@ export const AjaxProvider: React.FC<AjaxProviderProps> = ({
 				return {
 					...apiSettings,
 					instance: params => {
-						/** NOTE: this is a new observable every time function is called. */
+						/** 1. NOTE: this is a new observable every time function is called. */
+
+						/** 2. NOTE: possible improvement: keep track of requests being called
+						 * and filter out diplicate requests before passing it to the instance.
+						 * This would probably require a Subject above the return statement within
+						 * the map function, to prevent re-initialization on every function call.
+						 */
 						return of(params).pipe(
 							mergeMap(settings => instance({ dispatch, ...settings })),
 							shareReplay(1),

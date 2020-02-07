@@ -70,11 +70,11 @@ export const useMutation = ({
 			.toPromise()
 			.then((resp: unknown) => {
 				const response = path(dataPath, resp);
-
+				console.log('we are here', response);
 				/** refetch all queries from provided array in existing stores on request */
 				if (Array.isArray(refetchQueries) && refetchQueries.length > 0) {
 					refetchQueries.map(store =>
-						dispatch({ type: `${store}@refetch`, payload: { loading: false } }),
+						dispatch({ type: `${store}@refetch`, payload: { loading: true } }),
 					);
 				}
 

@@ -32,7 +32,6 @@ export const useQuery = ({
 	dataPath = ['response'],
 	errorPath = ['response', 'message'],
 	mergeData = (f, s) => [...f, ...s],
-	fetchPolicy = 'network-only',
 }: QueryProps) => {
 	const { api: apis, dispatch } = useAjaxContext();
 	/** Will select first Endpoint in an array if store is undefined or not found */
