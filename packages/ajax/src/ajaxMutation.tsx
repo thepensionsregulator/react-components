@@ -28,7 +28,7 @@ type MutationState = {
 	error: unknown;
 };
 export interface IMutationReturns extends MutationState {
-	mutate: <T>(props?: MutateFnProps) => Promise<T>;
+	mutate: (props?: MutateFnProps) => Promise<unknown>;
 }
 
 export const useMutation = ({

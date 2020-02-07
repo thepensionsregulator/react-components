@@ -9,26 +9,31 @@ import StoreProvider from '@alekna/react-store';
 import { createStore, useStoreContext } from '@alekna/react-store';
 import { removeItemFromStorage, storeItem } from './localStorage';
 import reducer from './reducer';
-import { of, iif, Subject, combineLatest, BehaviorSubject } from 'rxjs';
+import { of, iif, combineLatest, BehaviorSubject, Observable } from 'rxjs';
 import {
 	shareReplay,
 	debounceTime,
 	switchMap,
 	mergeMap,
 	tap,
-	mergeMapTo,
 	distinctUntilChanged,
-	withLatestFrom,
-	throttleTime,
 	scan,
+	startWith,
+	filter,
+	map,
+	withLatestFrom,
 } from 'rxjs/operators';
+import { AjaxResponse } from 'rxjs/ajax';
 
 // What is the point of having global fetched data context?
 // 1. can help with caching and
 // 2. accessing same data in other components
 // 3. refetching from stored variables that were initially used to fetch data | doesnt require global state though, could use xstate
 
-type Endpoint = { name: string; instance: Function };
+type Endpoint = {
+	name: string;
+	instance: (params: any) => Observable<AjaxResponse>;
+};
 type AjaxContextProps = { api: Endpoint[]; clearStore: () => void };
 
 export const AjaxContext = createContext<AjaxContextProps>({
@@ -111,6 +116,7 @@ export const AjaxProvider: React.FC<AjaxProviderProps> = ({
 			api.map(({ instance, ...apiSettings }) => {
 				/** Share reply with late subscribers without sending multiple network requests,
 				 * instead send latest value received from network. Otherwise make a new request */
+
 				return {
 					...apiSettings,
 					instance: params => {
