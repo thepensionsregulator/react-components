@@ -9,6 +9,7 @@ import { from, throwError } from 'rxjs';
 import { genericRetryStrategy } from './retryStrategy';
 import { pathOr } from 'ramda';
 import { useMutation } from './ajaxMutation';
+import { useAjaxContext } from './context';
 
 const People = () => {
 	return (
@@ -251,6 +252,25 @@ const retryTestInstance = (timeout = 5000) => {
 	};
 };
 
+function UpdateState() {
+	const { dispatch } = useAjaxContext();
+
+	const sendUpdate = () => {
+		dispatch({
+			type: 'people@findAndUpdate',
+			payload: {
+				name: 'Luke Skywalker',
+				dataPath: ['results'],
+				item: {
+					height: '4000',
+				},
+			},
+		});
+	};
+
+	return <button onClick={() => sendUpdate()}>hello world</button>;
+}
+
 export const TestEntry = () => {
 	return (
 		<AjaxProvider
@@ -265,6 +285,7 @@ export const TestEntry = () => {
 			// initialState={getItemFromStorage('tpr')}
 			// persistOn="tpr"
 		>
+			<UpdateState />
 			<UpdateComponent />
 			<People />
 			{/* <ComponentTwo /> */}

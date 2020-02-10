@@ -1,3 +1,8 @@
+import qs from 'qs';
+import { pathOr } from 'ramda';
+import { merge } from 'lodash';
+import produce from 'immer';
+
 export enum NetworkStatus {
 	/**
 	 * The query has never been run before and the query is now currently running. A query will still
@@ -66,6 +71,7 @@ const ajaxReducer = (store: string) => {
 	const UPDATE = `${store}@update`;
 	const REFETCH = `${store}@refetch`;
 	const RESET = `${store}@reset`;
+	const FIND_AND_UPDATE = `${store}@findAndUpdate`;
 
 	return (state: StoreState = initialState, action: Action) => {
 		switch (action.type) {
@@ -88,6 +94,33 @@ const ajaxReducer = (store: string) => {
 					),
 					networkStatus: 4,
 					loading: true,
+				};
+			}
+			case FIND_AND_UPDATE: {
+				const itemId = action.payload.name;
+				const dataPath = action.payload.dataPath;
+
+				const data = pathOr([], dataPath, state.data);
+				const dataItemIndex = data.findIndex(item => item.name === itemId);
+				// if item was not found or no data, return state without changes
+				if (dataItemIndex < 0 || !data.length) {
+					console.error(`item with id ${itemId} was not found.`);
+					return state;
+				}
+
+				const mergeItems = merge(data[dataItemIndex], action.payload.item);
+
+				const midifiedData = Object.assign(data.slice(), {
+					[dataItemIndex]: mergeItems,
+				});
+
+				const nextState = produce(state, draftState => {
+					draftState[dataPath] = midifiedData;
+				});
+
+				return {
+					...state,
+					...nextState,
 				};
 			}
 			case RESET: {

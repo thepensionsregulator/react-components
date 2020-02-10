@@ -13,7 +13,7 @@
 		"allowSyntheticDefaultImports": true,
 		"declarationMap": true,
 		"esModuleInterop": true,
-		"lib": ["es2018", "dom"]
+		"lib": ["es2019", "dom"]
 	},
 	"include": ["src/**/*"],
 	"exclude": ["node_modules", "**/__tests__/**/*", "**/*.mdx"]
