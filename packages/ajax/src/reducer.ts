@@ -97,6 +97,8 @@ const ajaxReducer = (store: string) => {
 				};
 			}
 			case FIND_AND_UPDATE: {
+				// ERROR: will update the first time, but upon refresh will not update again for some reason...
+
 				const itemId = action.payload.name;
 				const dataPath = action.payload.dataPath;
 

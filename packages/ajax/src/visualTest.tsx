@@ -255,6 +255,8 @@ const retryTestInstance = (timeout = 5000) => {
 function UpdateState() {
 	const { dispatch } = useAjaxContext();
 
+	/** NOTE: this will be useful for example when Trustee is edited, we can update item from a response */
+
 	const sendUpdate = () => {
 		dispatch({
 			type: 'people@findAndUpdate',
@@ -263,12 +265,17 @@ function UpdateState() {
 				dataPath: ['results'],
 				item: {
 					height: '4000',
+					hair_color: 'black',
+					eye_color: 'red',
+					birth_year: '10000BC',
 				},
 			},
 		});
 	};
 
-	return <button onClick={() => sendUpdate()}>hello world</button>;
+	return (
+		<button onClick={() => sendUpdate()}>MODIFY FIRST ITEM IN ARRAY</button>
+	);
 }
 
 export const TestEntry = () => {
