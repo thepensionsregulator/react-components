@@ -46,7 +46,7 @@ export const Trustee: React.FC<Omit<TrusteeProps, 'children'>> = props => {
 			{({ current: { context, matches }, send }) => (
 				<StyledCard complete={context.complete}>
 					<StyledCardToolbar>
-						<Flex width="100%" flexDirection="column" mr="40px">
+						<Flex width="100%" flexDirection="column" mr="40px" p={[2]}>
 							<Button
 								onClick={() => send('EDIT_TRUSTEE')}
 								disabled={!matches('preview')}
@@ -58,7 +58,7 @@ export const Trustee: React.FC<Omit<TrusteeProps, 'children'>> = props => {
 								<Text>Member-nominated trustee</Text>
 							</Flex>
 						</Flex>
-						<Flex width="100%" justifyContent="flex-end">
+						<Flex width="100%" justifyContent="flex-end" p={[null, 2]}>
 							{context.complete ? 'No issues' : 'Incomplete'} |{' '}
 							<Flex width="80px">
 								<Button

@@ -29,6 +29,7 @@ export const StyledLabel = styled.label`
 	display: flex;
 	align-items: center;
 	margin: 0;
+	padding: 0;
 `;
 
 export const StyledHiddenInput = styled.input`

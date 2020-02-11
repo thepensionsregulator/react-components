@@ -27,7 +27,7 @@ export const CheckboxIcon: React.FC<CheckboxIconProps> = props => {
 						: null
 				}
 			>
-				{props.checked === 'checked' ? <CheckboxChecked /> : <CheckboxBlank />}
+				{props.checked ? <CheckboxChecked /> : <CheckboxBlank />}
 				<StyledHiddenInput
 					type="checkbox"
 					id={props.id}
@@ -42,30 +42,35 @@ export const CheckboxIcon: React.FC<CheckboxIconProps> = props => {
 	);
 };
 
-type CheckboxProps = Partial<
-	FieldRenderProps<string> & FieldProps & CheckboxIconProps
->;
-
-export const Checkbox: React.FC<CheckboxProps> = ({
-	label,
-	input,
-	onChange,
-}) => {
+export const Checkbox = ({ checked, onChange, label }) => {
 	return (
-		<Flex width="300px" flex="0 0 auto" p={0} backgroundColor="#eee">
-			<CheckboxIcon
-				checked={input.value ? 'checked' : 'unchecked'}
-				onChange={() =>
-					typeof onChange === 'function'
-						? onChange(input)
-						: input.onChange(!input.value)
-				}
-			/>
+		<Flex flex="0 0 auto" p={0} backgroundColor="#eee">
+			<CheckboxIcon checked={checked} onChange={onChange} />
 			{label && <Flex ml={0}>{label}</Flex>}
 		</Flex>
 	);
 };
 
+type FFRenderCheckboxProps = Partial<
+	FieldRenderProps<string> & FieldProps & CheckboxIconProps
+>;
 export const FFCheckbox: React.FC<FieldProps> = fieldProps => {
-	return <Field {...fieldProps} component={Checkbox} />;
+	return (
+		<Field
+			{...fieldProps}
+			render={({ label, input, onChange }: FFRenderCheckboxProps) => {
+				return (
+					<Checkbox
+						checked={input.value}
+						label={label}
+						onChange={() =>
+							typeof onChange === 'function'
+								? onChange(input)
+								: input.onChange(!input.value)
+						}
+					/>
+				);
+			}}
+		/>
+	);
 };

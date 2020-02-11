@@ -21,10 +21,14 @@ export const StyledCard = styled('div')<StyledCardProps>`
 
 export const StyledCardToolbar = styled('div')`
 	display: flex;
+	flex-direction: column;
 	flex: 0 0 auto;
 	justify-content: space-evenly;
 	align-items: flex-start;
-	padding: 20px 20px 0 20px;
+
+	${({ theme }) => theme.mediaQueries.sm`
+		flex-direction: row;
+	`}
 `;
 
 type ToolbarProps = {
