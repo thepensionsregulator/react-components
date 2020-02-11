@@ -156,13 +156,14 @@ TODO: ...
 
 ## `useUpdate` Props
 
+This hook provides a way to interact with one of available stores. Can be used for optimistic updates or update the state whenever it is appropriate todo so.
+
 > `useUpdate(args: UpdateProps): (search?: string | null, options: FindAndModifyProps) => void`
 
 ## Examples
 
 > NOTE: all examples will be hosted on the codesandbox
 
-- link 1
-- link 2
-- link 3
-- link 4
+- useQuery
+- useMutation
+- useUpdate
