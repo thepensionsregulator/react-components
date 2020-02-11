@@ -10,6 +10,7 @@ import { genericRetryStrategy } from './retryStrategy';
 import { pathOr } from 'ramda';
 import { useMutation } from './ajaxMutation';
 import { useAjaxContext } from './context';
+import { findAndModify } from './reducer';
 
 const People = () => {
 	return (
@@ -213,7 +214,7 @@ const starWarsInstance = ({ endpoint, method, send, errorPath }) => {
 	);
 };
 
-const retryTestInstance = (timeout = 5000) => {
+const retryTestInstance = () => {
 	const success = (ms: number = 0) =>
 		new Promise(res =>
 			setTimeout(
@@ -252,30 +253,29 @@ const retryTestInstance = (timeout = 5000) => {
 	};
 };
 
-function UpdateState() {
+function FindAndModify() {
 	const { dispatch } = useAjaxContext();
 
-	/** NOTE: this will be useful for example when Trustee is edited, we can update item from a response */
+	/** NOTE: this will be useful for example when Trustee is updated, we can update item from a successful response */
 
-	const sendUpdate = () => {
-		dispatch({
-			type: 'people@findAndUpdate',
-			payload: {
-				name: 'Luke Skywalker',
+	const modifyData = () => {
+		dispatch(
+			findAndModify({
+				key: 'name',
+				store: 'people',
+				search: 'Luke Skywalker',
 				dataPath: ['results'],
-				item: {
+				modify: {
 					height: '4000',
 					hair_color: 'black',
 					eye_color: 'red',
 					birth_year: '10000BC',
 				},
-			},
-		});
+			}),
+		);
 	};
 
-	return (
-		<button onClick={() => sendUpdate()}>MODIFY FIRST ITEM IN ARRAY</button>
-	);
+	return <button onClick={modifyData}>MODIFY FIRST ITEM IN ARRAY</button>;
 }
 
 export const TestEntry = () => {
@@ -292,7 +292,7 @@ export const TestEntry = () => {
 			// initialState={getItemFromStorage('tpr')}
 			// persistOn="tpr"
 		>
-			<UpdateState />
+			<FindAndModify />
 			<UpdateComponent />
 			<People />
 			{/* <ComponentTwo /> */}

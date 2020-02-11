@@ -3,7 +3,7 @@ import { pathOr } from 'ramda';
 import { useAjaxContext } from './context';
 import { useSelector } from '@alekna/react-store';
 import { actions } from './reducer';
-import { distinctUntilChanged } from 'rxjs/operators';
+import { distinctUntilChanged, tap } from 'rxjs/operators';
 import { isEqual } from 'lodash';
 import { StoreState } from './reducer';
 import { stringifyEndpoint } from './utils';
