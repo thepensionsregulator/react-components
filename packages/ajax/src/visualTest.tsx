@@ -208,7 +208,7 @@ const starWarsInstance = ({ endpoint, method, send, errorPath }) => {
 			});
 			return throwError(getError(err));
 		}),
-		timeout(10000),
+		timeout(30000),
 	);
 };
 
@@ -255,7 +255,7 @@ function FindAndModify() {
 	const update = useUpdate({
 		key: 'name',
 		store: 'people',
-		search: 'Luke Skywalker',
+		// search: 'Luke Skywalker',
 		dataPath: ['results'],
 		modify: true,
 	});
@@ -263,7 +263,7 @@ function FindAndModify() {
 	return (
 		<button
 			onClick={() =>
-				update(currentItem => {
+				update('Luke Skywalker', currentItem => {
 					console.log('callback', currentItem);
 					return {
 						height: '4000',

@@ -136,7 +136,7 @@ export const AjaxQuery = ({ children, ...rest }: AjaxQueryProps) => {
 type UpdateProps = {
 	key?: string;
 	store: string;
-	search: string;
+	search?: string;
 	dataPath: string[];
 	modify?: boolean;
 };
@@ -153,9 +153,14 @@ export const useUpdate = ({ key = 'id', ...props }: UpdateProps) => {
 	);
 
 	return useCallback(
-		params => {
+		(search, params) => {
 			const args = typeof params === 'function' ? params(selectedItem) : params;
-			dispatch(findAndModify({ key, ...props }, args));
+			dispatch(
+				findAndModify(
+					{ key, ...props, search: props.search ? props.search : search },
+					args,
+				),
+			);
 		},
 		[dispatch, selectedItem],
 	);
