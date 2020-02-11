@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { AjaxProvider } from './context';
-import { AjaxQuery, useQuery } from './ajaxQuery';
+import { AjaxQuery, useQuery, useUpdate } from './ajaxQuery';
 import { ajax } from 'rxjs/ajax';
 import { Flex, Button } from '@tpr/core';
 import { getItemFromStorage } from './localStorage';
@@ -9,8 +9,6 @@ import { from, throwError } from 'rxjs';
 import { genericRetryStrategy } from './retryStrategy';
 import { pathOr } from 'ramda';
 import { useMutation } from './ajaxMutation';
-import { useAjaxContext } from './context';
-import { findAndModify } from './reducer';
 
 const People = () => {
 	return (
@@ -254,28 +252,31 @@ const retryTestInstance = () => {
 };
 
 function FindAndModify() {
-	const { dispatch } = useAjaxContext();
+	const update = useUpdate({
+		key: 'name',
+		store: 'people',
+		search: 'Luke Skywalker',
+		dataPath: ['results'],
+		modify: true,
+	});
 
-	/** NOTE: this will be useful for example when Trustee is updated, we can update item from a successful response */
-
-	const modifyData = () => {
-		dispatch(
-			findAndModify({
-				key: 'name',
-				store: 'people',
-				search: 'Luke Skywalker',
-				dataPath: ['results'],
-				modify: {
-					height: '4000',
-					hair_color: 'black',
-					eye_color: 'red',
-					birth_year: '10000BC',
-				},
-			}),
-		);
-	};
-
-	return <button onClick={modifyData}>MODIFY FIRST ITEM IN ARRAY</button>;
+	return (
+		<button
+			onClick={() =>
+				update(currentItem => {
+					console.log('callback', currentItem);
+					return {
+						height: '4000',
+						hair_color: 'black',
+						eye_color: 'red',
+						birth_year: '10000BC',
+					};
+				})
+			}
+		>
+			MODIFY FIRST ITEM IN ARRAY
+		</button>
+	);
 }
 
 export const TestEntry = () => {

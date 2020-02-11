@@ -1,12 +1,21 @@
-import { useEffect, useMemo } from 'react';
+import { useEffect, useMemo, useCallback } from 'react';
 import { pathOr } from 'ramda';
 import { useAjaxContext } from './context';
 import { useSelector } from '@alekna/react-store';
 import { actions } from './reducer';
-import { distinctUntilChanged, tap } from 'rxjs/operators';
+import {
+	distinctUntilChanged,
+	pluck,
+	tap,
+	find,
+	filter,
+	flatMap,
+	map,
+} from 'rxjs/operators';
 import { isEqual } from 'lodash';
 import { StoreState } from './reducer';
 import { stringifyEndpoint } from './utils';
+import { findAndModify, FindAndModifyProps } from './reducer';
 
 export type QueryProps = {
 	endpoint: string;
@@ -122,4 +131,32 @@ interface AjaxQueryProps extends QueryProps {
 }
 export const AjaxQuery = ({ children, ...rest }: AjaxQueryProps) => {
 	return children(useQuery(rest));
+};
+
+type UpdateProps = {
+	key?: string;
+	store: string;
+	search: string;
+	dataPath: string[];
+	modify?: boolean;
+};
+
+export const useUpdate = ({ key = 'id', ...props }: UpdateProps) => {
+	const { dispatch } = useAjaxContext();
+	const selectedItem = useSelector<StoreState>(props.store, state$ =>
+		state$.pipe(
+			pluck(...['data'].concat(props.dataPath)),
+			filter(Array.isArray),
+			map(items => items.find(item => item[key] === props.search)),
+			distinctUntilChanged(),
+		),
+	);
+
+	return useCallback(
+		params => {
+			const args = typeof params === 'function' ? params(selectedItem) : params;
+			dispatch(findAndModify({ key, ...props }, args));
+		},
+		[dispatch, selectedItem],
+	);
 };

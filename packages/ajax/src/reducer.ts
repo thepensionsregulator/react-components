@@ -116,15 +116,15 @@ const ajaxReducer = (store: string) => {
 						/** Make an update */
 						let newData: object;
 
-						if (action.payload.update) {
-							/** Update will replace an item */
-							newData = action.payload.update;
-						} else if (action.payload.modify) {
+						if (action.payload.modify) {
 							/** Modify will merge the two and only touch new values */
 							newData = merge(
 								draftFromPath[dataItemIndex],
-								action.payload.modify,
+								action.payload.update,
 							);
+						} else {
+							/** Update will replace an item */
+							newData = action.payload.update;
 						}
 
 						draftState[dataPath] = Object.assign(draftFromPath, {
@@ -146,22 +146,16 @@ export const actions = (storeName: string, dispatch: Function) => (
 	payload: object,
 ) => dispatch({ type: `${storeName}@update`, payload });
 
-type FindAndModifyProps = {
-	key: string;
+export type FindAndModifyProps = {
+	key?: string;
 	store: string;
 	search: string;
 	dataPath: string[];
-	modify?: object;
-	update?: object;
+	modify?: boolean;
 };
-export const findAndModify = ({
-	key = 'id',
-	store,
-	search,
-	dataPath,
-	modify,
-	update,
-}: FindAndModifyProps) => {
+export const findAndModify = (options: FindAndModifyProps, update: any) => {
+	const { key = 'id', store, search, dataPath, modify = true } = options;
+
 	return {
 		type: `${store}@findAndModify`,
 		payload: {
