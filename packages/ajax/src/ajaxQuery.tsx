@@ -3,15 +3,7 @@ import { pathOr } from 'ramda';
 import { useAjaxContext } from './context';
 import { useSelector } from '@alekna/react-store';
 import { actions } from './reducer';
-import {
-	distinctUntilChanged,
-	pluck,
-	tap,
-	find,
-	filter,
-	flatMap,
-	map,
-} from 'rxjs/operators';
+import { distinctUntilChanged, pluck, filter, map } from 'rxjs/operators';
 import { isEqual } from 'lodash';
 import { StoreState } from './reducer';
 import { stringifyEndpoint } from './utils';
@@ -153,8 +145,9 @@ export const useUpdate = ({ key = 'id', ...props }: UpdateProps) => {
 	);
 
 	return useCallback(
-		(search, params) => {
-			const args = typeof params === 'function' ? params(selectedItem) : params;
+		(search?: string, params?: object | Function) => {
+			const args: FindAndModifyProps =
+				typeof params === 'function' ? params(selectedItem) : params;
 			dispatch(
 				findAndModify(
 					{ key, ...props, search: props.search ? props.search : search },
