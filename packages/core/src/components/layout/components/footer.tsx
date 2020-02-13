@@ -3,7 +3,7 @@ import styled from 'styled-components';
 import { P, Link } from '../../typography';
 import { Container, Flex, DocWidth } from './globals';
 
-export const Logo = styled('div')`
+const Logo = styled('div')`
 	display: flex;
 	flex: 0 0 auto;
 	align-items: flex-start;

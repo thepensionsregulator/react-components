@@ -2,8 +2,9 @@ import React from 'react';
 import styled from 'styled-components';
 import { DocWidth, AppWidth, Flex } from './globals';
 import { Button } from '../../buttons';
+import { P } from '../../typography';
 
-export const Logo = styled('div')`
+const Logo = styled('div')`
 	display: flex;
 	flex: 0 0 auto;
 	align-items: flex-start;
@@ -11,7 +12,6 @@ export const Logo = styled('div')`
 	width: 180px;
 	margin-right: 15px;
 	padding-right: 15px;
-
 	border-right: 1px solid ${({ theme }) => theme.colors.neutral[200]};
 
 	img {
@@ -19,7 +19,15 @@ export const Logo = styled('div')`
 	}
 `;
 
-export const Header = ({ logoUrl }) => {
+type HeaderProps = {
+	logoUrl: string;
+	title: string;
+};
+
+export const Header: React.FC<HeaderProps> = ({
+	logoUrl,
+	title = 'Exchange - Scheme return',
+}) => {
 	return (
 		<DocWidth justifyContent="center" bg="#eeeeee">
 			<AppWidth>
@@ -33,7 +41,7 @@ export const Header = ({ logoUrl }) => {
 									'logo placeholder'
 								)}
 							</Logo>
-							<span>Exchange - Scheme return</span>
+							<P>{title}</P>
 						</Flex>
 						<Flex alignItems="center">
 							<Button scale="small" appearance="link">
