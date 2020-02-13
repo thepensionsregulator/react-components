@@ -50,7 +50,7 @@ const Preview: React.FC = () => {
 				pt={2}
 			>
 				<Checkbox
-					checked={'checked'}
+					checked={false}
 					onChange={input => !input.value}
 					label="All details are correct"
 				/>
