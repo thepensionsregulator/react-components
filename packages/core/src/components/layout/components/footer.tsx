@@ -3,24 +3,7 @@ import styled from 'styled-components';
 import { P, Link } from '../../typography';
 import { Container, Flex, DocWidth } from './globals';
 
-type FooterLinkProps = {
-	title: string;
-	url: string;
-	size?: number;
-};
-
-type FooterProps = {
-	/** accepts 2d array of type FooterLinkProps objects, each array represents column in a footer */
-	menus: FooterLinkProps[][];
-	/** accepts an array of type FooterLinkProps objects */
-	links: FooterLinkProps[];
-	/** accepts a valid logo url, must be https */
-	logoUrl?: string;
-	/** accepts copyright description */
-	copyright?: string;
-};
-
-const Logo = styled('div')`
+export const Logo = styled('div')`
 	display: flex;
 	flex: 0 0 auto;
 	align-items: flex-start;
@@ -40,6 +23,23 @@ const Logo = styled('div')`
 		margin-right: 100px;
 	`};
 `;
+
+type FooterLinkProps = {
+	title: string;
+	url: string;
+	size?: number;
+};
+
+type FooterProps = {
+	/** accepts 2d array of type FooterLinkProps objects, each array represents column in a footer */
+	menus: FooterLinkProps[][];
+	/** accepts an array of type FooterLinkProps objects */
+	links: FooterLinkProps[];
+	/** accepts a valid logo url, must be https */
+	logoUrl?: string;
+	/** accepts copyright description */
+	copyright?: string;
+};
 
 export const LevelOne = styled('div')`
 	display: flex;
