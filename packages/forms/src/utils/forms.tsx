@@ -1,7 +1,7 @@
 import React from 'react';
 import { FFInputText } from '../components/text';
 import { FieldProps } from './validation';
-import { Form } from 'react-final-form';
+import { Form, Field } from 'react-final-form';
 
 export function renderFields(fields: FieldProps[] = []) {
 	return fields.map((field, key) => {
@@ -16,4 +16,4 @@ export function renderFields(fields: FieldProps[] = []) {
 	});
 }
 
-export { Form };
+export { Form, Field };

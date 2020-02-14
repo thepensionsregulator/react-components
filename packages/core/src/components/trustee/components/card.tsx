@@ -2,7 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 import { Flex } from '../../layout';
 import { Button } from '../../buttons';
-import { H2, H4 } from '../../typography';
+import { H3, H4 } from '../../typography';
 
 type StyledCardProps = { complete?: boolean };
 
@@ -33,22 +33,19 @@ export const StyledCardToolbar = styled('div')`
 
 type ToolbarProps = {
 	title: string;
-	subtitle: string;
 };
 
-export const Toolbar: React.FC<ToolbarProps> = ({ title, subtitle }) => {
+export const Toolbar: React.FC<ToolbarProps> = ({ title }) => {
 	return (
 		<Flex
-			flex="0 0 auto"
-			alignItems="center"
 			flexDirection="column"
-			height={100}
-			borderBottom="1 solid grey"
+			borderBottom="1px solid"
+			borderColor="neutral.200"
+			mb={2}
 			pb={1}
 		>
-			<Button appearance="link" children="< Back" />
-			<H4>{subtitle}</H4>
-			<H2>{title}</H2>
+			<H4 color="neutral.300">Edit trustee</H4>
+			<H3 fontWeight="bold">{title}</H3>
 		</Flex>
 	);
 };
@@ -81,7 +78,7 @@ export const Footer: React.FC<FooterProps> = ({
 		>
 			{onContinue && (
 				<Button
-					type={onSave.type}
+					type={onContinue?.type}
 					onClick={onContinue.fn}
 					disabled={isDisabled}
 				>
@@ -89,7 +86,7 @@ export const Footer: React.FC<FooterProps> = ({
 				</Button>
 			)}
 			{onSave && (
-				<Button type={onSave.type} onClick={onSave.fn} disabled={isDisabled}>
+				<Button type={onSave?.type} onClick={onSave.fn} disabled={isDisabled}>
 					{onSave.title}
 				</Button>
 			)}

@@ -35,8 +35,20 @@ export const StyledLabel = styled('label')<FlexboxProps>`
 	${flexbox}
 `;
 
-export const StyledHiddenInput = styled('input')`
+type StyledHiddenInputProps = {
+	checked: any;
+};
+
+export const StyledHiddenInput = styled('input')<StyledHiddenInputProps>`
 	visibility: hidden;
 	width: 0;
 	height: 0;
+`;
+export const ElementPlaceholder = styled('div')`
+	display: flex;
+	flex: 0 0 auto;
+	padding: ${({ theme }) => theme.space[0]}px;
+	background-color: ${({ theme }) => theme.colors.neutral[100]};
+	user-select: none;
+	cursor: pointer;
 `;

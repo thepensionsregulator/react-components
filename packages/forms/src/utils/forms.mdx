@@ -6,7 +6,7 @@ route: forms
 import { Playground, Props } from 'docz';
 import { Checkbox } from '../components/checkbox';
 import { InputText } from '../components/text';
-
+import { RadioButton } from '../components/radio'
 
 # Forms
 
@@ -20,6 +20,23 @@ Forms for TPR apps
 		return (
 			<div style={{ width: 240 }}>
 				<Checkbox
+					checked={checked}
+					onChange={() => setChecked(checked ? false : true)}
+					label="All details are correct"
+				/>
+			</div>
+		)
+  }}
+</Playground>
+
+## RadioButton
+
+<Playground>
+  {() => {
+		const [checked, setChecked] = React.useState(false)
+		return (
+			<div style={{ width: 240 }}>
+				<RadioButton
 					checked={checked}
 					onChange={() => setChecked(checked ? false : true)}
 					label="All details are correct"

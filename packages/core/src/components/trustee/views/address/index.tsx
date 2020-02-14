@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
 import { Flex } from '../../../layout';
-import { H3, H4, P } from '../../../typography';
+import { H4, P } from '../../../typography';
 import { useTrusteeContext } from '../../context';
-import { Footer } from '../../components/card';
+import { Footer, Toolbar } from '../../components/card';
 import { Button } from '../../../buttons';
 import { Form, renderFields, validate, InputText } from '@tpr/forms';
 import fields from './fields';
@@ -68,18 +68,7 @@ const AddressPage: React.FC = () => {
 	return (
 		<Flex flex="1 1 auto" flexDirection="column">
 			<Flex flexDirection="column">
-				<Flex
-					flexDirection="column"
-					borderBottom="1px solid"
-					borderColor="neutral.200"
-					mb={2}
-					pb={1}
-				>
-					<H4 color="neutral.300" mb={0}>
-						Edit trustee
-					</H4>
-					<H3 fontWeight="bold">What is this trustee’s address?</H3>
-				</Flex>
+				<Toolbar title="What is this trustee’s address?" />
 				<Flex flexDirection="column" bg="neutral.100" p={1} mb={2}>
 					<H4 mb={0}>Find the trustee's correspondence address</H4>
 					<P fontWeight="bold">Postcode</P>
