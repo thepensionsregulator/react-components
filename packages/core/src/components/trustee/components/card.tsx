@@ -55,10 +55,12 @@ export const Toolbar: React.FC<ToolbarProps> = ({ title, subtitle }) => {
 
 type FooterProps = {
 	onContinue?: {
+		type?: 'button' | 'submit' | 'reset';
 		title?: string;
 		fn?: () => void;
 	};
 	onSave?: {
+		type?: 'button' | 'submit' | 'reset';
 		title?: string;
 		fn?: () => void;
 	};
@@ -78,12 +80,16 @@ export const Footer: React.FC<FooterProps> = ({
 			justifyContent="flex-start"
 		>
 			{onContinue && (
-				<Button onClick={onContinue.fn} disabled={isDisabled}>
+				<Button
+					type={onSave.type}
+					onClick={onContinue.fn}
+					disabled={isDisabled}
+				>
 					{onContinue.title}
 				</Button>
 			)}
 			{onSave && (
-				<Button onClick={onSave.fn} disabled={isDisabled}>
+				<Button type={onSave.type} onClick={onSave.fn} disabled={isDisabled}>
 					{onSave.title}
 				</Button>
 			)}

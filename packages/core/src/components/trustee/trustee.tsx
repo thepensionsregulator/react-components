@@ -2,7 +2,7 @@ import React from 'react';
 import { StyledCard, StyledCardToolbar } from './components/card';
 import { TrusteeProvider, useTrusteeContext, TrusteeProps } from './context';
 import { Flex } from '../layout';
-import { Text, H2 } from '../typography';
+import { Text, H4 } from '../typography';
 import { Button } from './components/button';
 import Preview from './views/preview';
 import Name from './views/name';
@@ -54,7 +54,7 @@ export const Trustee: React.FC<Omit<TrusteeProps, 'children'>> = props => {
 								Trustee >
 							</Button>
 							<Flex mt={0} flexDirection="column">
-								<H2>{`${context.trustee.firstName} ${context.trustee.lastName}`}</H2>
+								<H4 fontWeight="bold">{`${context.trustee.firstName} ${context.trustee.lastName}`}</H4>
 								<Text>Member-nominated trustee</Text>
 							</Flex>
 						</Flex>

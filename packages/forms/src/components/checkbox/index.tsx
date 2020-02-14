@@ -17,7 +17,7 @@ type CheckboxIconProps = {
 
 export const CheckboxIcon: React.FC<CheckboxIconProps> = props => {
 	return (
-		<StyledLabel>
+		<StyledLabel alignItems="center">
 			<StyledCheckboxWrapper
 				disabled={props.disabled || false}
 				align={props.align || 'center'}

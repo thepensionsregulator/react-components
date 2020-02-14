@@ -10,7 +10,7 @@ export const StyledInput = styled('input')<StyledInputProps>`
 	width: 100%;
 	font-size: ${({ theme }) => theme.fontSizes[1]}px;
 	font-weight: 300;
-	background: ${({ theme }) => theme.colors.neutral['100']};
+	background: ${({ theme }) => theme.colors.background};
 	border: ${({ meta, theme }) => {
 		if (meta && meta.touched && meta.error) {
 			return `1px solid ${theme.colors.accents.danger}`;

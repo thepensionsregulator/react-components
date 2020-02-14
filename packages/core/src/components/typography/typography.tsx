@@ -18,7 +18,7 @@ export const H1 = styled.h1<HtmlHTagTypes>`
 	${fontStack};
 
 	font-weight: ${({ theme }) => theme.fontWeights[1]};
-	font-size: 45px;
+	font-size: ${({ theme }) => theme.fontWeights[5]};
 	letter-spacing: 0.4px;
 	margin: 0;
 	padding: 0;
@@ -32,21 +32,21 @@ export const H2 = styled.h2<HtmlHTagTypes>`
 	${fontStack};
 
 	font-weight: ${({ theme }) => theme.fontWeights[2]};
-	font-size: ${({ theme }) => theme.fontSizes[2]}px;
+	font-size: ${({ theme }) => theme.fontSizes[4]}px;
 	letter-spacing: 0.4px;
 	margin: 0;
 	padding: 0;
 
-	/* ${color};
+	${color};
 	${typography};
-	${space}; */
+	${space};
 `;
 
 export const H3 = styled.h3<HtmlHTagTypes>`
 	${fontStack};
 
 	font-weight: ${({ theme }) => theme.fontWeights[1]};
-	font-size: 16px;
+	font-size: ${({ theme }) => theme.fontWeights[3]};
 	letter-spacing: 0.4px;
 	margin: 0;
 	padding: 0;
@@ -60,7 +60,7 @@ export const H4 = styled.h4<HtmlHTagTypes>`
 	${fontStack};
 
 	font-weight: ${({ theme }) => theme.fontWeights[1]};
-	font-size: 14px;
+	font-size: ${({ theme }) => theme.fontWeights[2]};
 	letter-spacing: 0.4px;
 	margin: 0;
 	padding: 0;
@@ -74,7 +74,7 @@ export const H5 = styled.h5<HtmlHTagTypes>`
 	${fontStack};
 
 	font-weight: ${({ theme }) => theme.fontWeights[1]};
-	font-size: 13px;
+	font-size: ${({ theme }) => theme.fontWeights[1]};
 	letter-spacing: 0.4px;
 	margin: 0;
 	padding: 0;
@@ -88,7 +88,7 @@ export const H6 = styled.h6<HtmlHTagTypes>`
 	${fontStack};
 
 	font-weight: ${({ theme }) => theme.fontWeights[1]};
-	font-size: 12px;
+	font-size: ${({ theme }) => theme.fontWeights[0]};
 	letter-spacing: 0.4px;
 	margin: 0;
 	padding: 0;

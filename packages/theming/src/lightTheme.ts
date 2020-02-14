@@ -4,6 +4,7 @@ const breakpoints = ['48em', '64em', '90em', '114em'];
 
 const lightTheme = {
 	colors: {
+		background: '#FFFFFF',
 		primary: {
 			200: '#1d70b8',
 			300: '#003078',
@@ -11,7 +12,7 @@ const lightTheme = {
 			500: '#0b0c0c',
 		},
 		neutral: {
-			100: '#FFFFFF',
+			100: '#e8e8e8',
 			200: '#b1b4b6',
 			300: '#888888',
 			900: '#0b0c0c',
