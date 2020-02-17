@@ -1,6 +1,6 @@
 import { useEffect, useMemo, useCallback } from 'react';
 import { pathOr } from 'ramda';
-import { useAjaxContext } from './context';
+import { useAjaxContext, CONCURRENT_PROMISES } from './context';
 import { useSelector } from '@alekna/react-store';
 import { actions } from './reducer';
 import { distinctUntilChanged, pluck, filter, map } from 'rxjs/operators';
@@ -74,8 +74,24 @@ export const useQuery = ({
 			return undefined;
 		}
 
+		// TODO: should track request, if same request is already on-going then stop next one.
+		// might track by unique key of the request.
+
+		/** Key is the identifier of the query */
+		const _key = stringifyEndpoint(method, endpoint, state.variables);
+
+		if (CONCURRENT_PROMISES[_key]) {
+			/** Currently this Promise is already in flight therefore we do nothing.
+			 * Reply will be shared with all components automatically. */
+			return undefined;
+		}
+
+		/** can hold a fetch method for this particular query and later re-used */
+		CONCURRENT_PROMISES[_key] = {};
+
+		/** Network call starts here */
 		const sub = instance({
-			endpoint: stringifyEndpoint(method, endpoint, state.variables),
+			endpoint: _key,
 			variables: state.variables,
 			method,
 			headers,
@@ -88,6 +104,8 @@ export const useQuery = ({
 			if (state.networkStatus === 3) {
 				data = mergeData(state.data, data);
 			}
+
+			delete CONCURRENT_PROMISES[_key];
 
 			send({
 				networkStatus: 7,

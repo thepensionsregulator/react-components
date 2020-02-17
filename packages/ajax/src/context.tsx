@@ -25,6 +25,9 @@ import {
 } from 'rxjs/operators';
 import { AjaxResponse } from 'rxjs/ajax';
 
+/** an idea of holding all network request promises on this object and re-using them. Also helps to only have one promise in flight at a time */
+export const CONCURRENT_PROMISES = {};
+
 // What is the point of having global fetched data context?
 // 1. can help with caching and
 // 2. accessing same data in other components

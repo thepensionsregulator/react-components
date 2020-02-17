@@ -296,7 +296,7 @@ export const TestEntry = () => {
 			<FindAndModify />
 			<UpdateComponent />
 			<People />
-			{/* <ComponentTwo /> */}
+			<ComponentTwo />
 			<ComponentThree />
 			<Planets />
 		</AjaxProvider>
