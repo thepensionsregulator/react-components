@@ -82,11 +82,13 @@ export const useQuery = ({
 
 		if (CONCURRENT_PROMISES[_key]) {
 			/** Currently this Promise is already in flight therefore we do nothing.
-			 * Reply will be shared with all components automatically. */
+			 * Reply will be shared with all subscribed components automatically. */
 			return undefined;
 		}
 
-		/** can hold a fetch method for this particular query and later re-used */
+		/** can hold a fetch method for this particular query and later be re-used.
+		 * This has the ability to extend this hook to be able to use its own fetch
+		 * function by mounting it instead of an object */
 		CONCURRENT_PROMISES[_key] = {};
 
 		/** Network call starts here */
@@ -101,12 +103,15 @@ export const useQuery = ({
 			/** Response was successfull. Update the store with new state */
 			let data = pathOr({}, dataPath, response);
 
+			/** We are merging data here on fetchMore request */
 			if (state.networkStatus === 3) {
 				data = mergeData(state.data, data);
 			}
 
+			/** Delete concurrent promise as it now finished and was successful */
 			delete CONCURRENT_PROMISES[_key];
 
+			/** Update the state with successful response */
 			send({
 				networkStatus: 7,
 				data,
