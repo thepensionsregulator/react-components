@@ -41,12 +41,15 @@
 	},
 	"dependencies": {
 		"@alekna/react-data-browser": "^1.1.3",
-		"@tpr/core": "file:../core",
+		"@tpr/core": "^1.0.6",
 		"lodash": "^4.17.15",
 		"react-bottom-scroll-listener": "^3.0.0"
 	},
 	"publishConfig": {
 		"access": "public"
 	},
-	"gitHead": "3a9e85be825e7800b53a47e519afe0b85d508bb1"
+	"gitHead": "57aec9c9de22596d6343bae07eb6b198322a0bee",
+	"devDependencies": {
+		"cross-env": "^7.0.0"
+	}
 }
