@@ -144,7 +144,9 @@ interface ButtonProps
 	extends ButtonHTMLAttributes<HTMLButtonElement>,
 		Partial<ButtonConfigProps>,
 		SpaceProps,
-		LayoutProps {}
+		LayoutProps {
+	textDecoration?: string;
+}
 
 const StyledButton = styled('button').attrs<ButtonProps>(
 	({ type = 'button' }) => ({
@@ -156,6 +158,8 @@ const StyledButton = styled('button').attrs<ButtonProps>(
 
 	display: inline-block;
 	cursor: pointer;
+	text-decoration: ${({ textDecoration }) =>
+		textDecoration ? textDecoration : null};
 
 	${space}
 	${layout}

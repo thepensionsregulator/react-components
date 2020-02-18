@@ -22,11 +22,15 @@ const Logo = styled('div')`
 type HeaderProps = {
 	logoUrl: string;
 	title: string;
+	onClickSchemeOptions: () => void;
+	onClickLogout: () => void;
 };
 
 export const Header: React.FC<HeaderProps> = ({
 	logoUrl,
 	title = 'Exchange - Scheme return',
+	onClickSchemeOptions,
+	onClickLogout,
 }) => {
 	return (
 		<DocWidth justifyContent="center" bg="#eeeeee">
@@ -44,10 +48,21 @@ export const Header: React.FC<HeaderProps> = ({
 							<P>{title}</P>
 						</Flex>
 						<Flex alignItems="center">
-							<Button scale="small" appearance="link">
+							<Button
+								scale="small"
+								appearance="link"
+								textDecoration="underline"
+								onClick={onClickSchemeOptions}
+								mr={1}
+							>
 								Scheme Options
 							</Button>
-							<Button scale="small" appearance="link">
+							<Button
+								scale="small"
+								appearance="link"
+								textDecoration="underline"
+								onClick={onClickLogout}
+							>
 								Log out
 							</Button>
 						</Flex>
