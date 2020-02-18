@@ -4,11 +4,12 @@ import { useBottomScrollListener } from 'react-bottom-scroll-listener';
 import { TableBody, TableBodyRow, TableBodyRowItem, RefetchingData } from './styles';
 import { Flex, Text } from '@tpr/core';
 
-export type TableListProps = {
-	fieldReducer: (fieldValue: unknown, fieldName: string, row: any) => ReactElement;
-	onRowClick?: (row: any) => void;
+export type TableListProps<T> = {
+	fieldReducer: <T>(fieldValue?: unknown, fieldName?: string, row?: T) => ReactElement;
+	onRowClick?: <T>(row: T) => void;
 	rowOptions?: (props: { toggleMenu: Function; row: any; history: any }) => ReactElement;
 	onBottomTouch?: () => void;
+	/** fixed first and last column width */
 	fixedColW?: number;
 	/** row options menu jsx */
 	options?: (props: any) => ReactElement;
@@ -17,10 +18,10 @@ export type TableListProps = {
 	bottomTouchOffset?: number;
 	emptyDataMessage?: string;
 	rowHeight?: number;
-	data: any;
+	data: T[];
 };
 
-export const TableList: React.FC<TableListProps> = ({
+export const TableList = <T extends {}>({
 	isRefetching,
 	fixedColW = 40,
 	maxBodyHeight,
@@ -32,7 +33,7 @@ export const TableList: React.FC<TableListProps> = ({
 	bottomTouchOffset = 300,
 	rowHeight,
 	emptyDataMessage = `No data available yet... 🤷🏼‍♂️`,
-}) => {
+}: TableListProps<T>) => {
 	const { visibleColumns, columnFlex } = useDataBrowser();
 	const bodyRef = useBottomScrollListener(onBottomTouch, bottomTouchOffset);
 

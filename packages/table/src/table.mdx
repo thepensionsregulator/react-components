@@ -20,9 +20,9 @@ import { TableBase } from './index';
 			{ label: 'Contact Details', sortField: 'contact' },
 		]} 
 		data={[
-			{trustee: 'Fred Sandors', address: 'Napier House, Trafalgar Place, Brighton, BN1 4DW', contact: '01273', email: 'test@tpr.gov.uk'},
-			{trustee: 'Sally Fields', address: 'Napier House, Trafalgar Place, Brighton, BN1 4DW', contact: '01273 123 456', email: 'test@tpr.gov.uk'},
-			{trustee: 'Chandraprakasha Balakrishan', address: 'Napier House, Trafalgar Place, Brighton, BN1 4DW', contact: '01273 123 456', email: 'test@tpr.gov.uk'},
+			{trustee: 'Fred Sandors', address: 'Napier House, Trafalgar Place, Brighton, BN1 4DW', contact: '01273', email: 'test@tpr.gov.uk', valid: true},
+			{trustee: 'Sally Fields', address: 'Napier House, Trafalgar Place, Brighton, BN1 4DW', contact: '01273 123 456', email: 'test@tpr.gov.uk', valid: false},
+			{trustee: 'Chandraprakasha Balakrishan', address: 'Napier House, Trafalgar Place, Brighton, BN1 4DW', contact: '01273 123 456', email: 'test@tpr.gov.uk', valid: true},
 		]}
 	>
 		{renderBody =>
@@ -32,7 +32,7 @@ import { TableBase } from './index';
 						case 'trustee': 
 							return (
 								<>
-									<div style={{width: "10px", height: '100%', background: 'green', marginRight: 10}} />
+									<div style={{width: "10px", height: '100%', background: row.valid ? 'green' : 'red', marginRight: 10}} />
 									{fieldValue}
 								</>
 							)

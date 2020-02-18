@@ -1,0 +1,72 @@
+---
+name: Forms
+route: forms
+---
+
+import { Playground, Props } from 'docz';
+import { Checkbox } from '../components/checkbox';
+import { InputText } from '../components/text';
+import { RadioButton } from '../components/radio'
+
+# Forms
+
+Forms for TPR apps
+
+## Checkbox
+
+<Playground>
+  {() => {
+		const [checked, setChecked] = React.useState(false)
+		return (
+			<div style={{ width: 240 }}>
+				<Checkbox
+					checked={checked}
+					onChange={() => setChecked(checked ? false : true)}
+					label="All details are correct"
+				/>
+			</div>
+		)
+  }}
+</Playground>
+
+## RadioButton
+
+<Playground>
+  {() => {
+		const [checked, setChecked] = React.useState(false)
+		return (
+			<div style={{ width: 240 }}>
+				<RadioButton
+					checked={checked}
+					onChange={() => setChecked(checked ? false : true)}
+					label="All details are correct"
+				/>
+			</div>
+		)
+  }}
+</Playground>
+
+## Text
+
+<Playground>
+  {() => {
+		const [text, setText] = React.useState('')
+		return (
+			<div style={{ width: 240 }}>
+				<InputText 
+					required={false}
+					label="Fill Me With Text" 
+					type="text" 
+					input={{ 
+						value: text, 
+						onChange: (e) => setText(e.target.value)
+					}} 
+					meta={{
+						touched: false,
+						error: "Error message goes here"
+					}} 
+				/>
+			</div>
+		)
+  }}
+</Playground>
