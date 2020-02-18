@@ -13,8 +13,8 @@ const scales = {
 		font-size: ${({ theme }) => theme.fontSizes[2]}px;
 	`,
 	normal: css`
-		height: ${({ theme }) => theme.space[6]}px;
-		padding: 0 32px;
+		height: ${({ theme }) => theme.space[5]}px;
+		padding: 0 28px;
 		font-size: ${({ theme }) => theme.fontSizes[2]}px;
 	`,
 	big: css`
