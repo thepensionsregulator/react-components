@@ -52,12 +52,12 @@ export const RadioIcon: React.FC<RadioIconProps> = props => {
 
 export const RadioButton = ({ name, value, checked, onChange, label }) => {
 	return (
-		<ElementPlaceholder>
+		<ElementPlaceholder onClick={onChange}>
 			<RadioIcon
 				name={name}
 				value={value}
 				checked={checked}
-				onChange={onChange}
+				onChange={() => {}}
 			/>
 			<Flex ml={0}>{label}</Flex>
 		</ElementPlaceholder>

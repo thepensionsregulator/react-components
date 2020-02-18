@@ -9,20 +9,8 @@ import StoreProvider from '@alekna/react-store';
 import { createStore, useStoreContext } from '@alekna/react-store';
 import { removeItemFromStorage, storeItem } from './localStorage';
 import reducer from './reducer';
-import { of, iif, combineLatest, BehaviorSubject, Observable } from 'rxjs';
-import {
-	shareReplay,
-	debounceTime,
-	switchMap,
-	mergeMap,
-	tap,
-	distinctUntilChanged,
-	scan,
-	startWith,
-	filter,
-	map,
-	withLatestFrom,
-} from 'rxjs/operators';
+import { of, iif, Observable } from 'rxjs';
+import { shareReplay, debounceTime, switchMap, mergeMap } from 'rxjs/operators';
 import { AjaxResponse } from 'rxjs/ajax';
 
 /** an idea of holding all network request promises on this object and re-using them. Also helps to only have one promise in flight at a time */

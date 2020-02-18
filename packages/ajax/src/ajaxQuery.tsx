@@ -10,17 +10,24 @@ import { stringifyEndpoint } from './utils';
 import { findAndModify, FindAndModifyProps } from './reducer';
 
 export type QueryProps = {
+	/** http endpoint for the selected api */
 	endpoint: string;
+	/** http get or post methods */
 	method?: 'get' | 'post';
+	/** headers can be overwritten */
 	headers?: object;
+	/** variables will be stringified and attached to the endpoint */
 	variables?: object;
-	/** store from the global store object and for the api uri */
+	/** api from global apis, if none specified then the first one in the list is the default one */
 	api?: string;
+	/** store from the global store object */
 	store: string;
+	/** to extract data to specific depth level */
 	dataPath?: any[];
+	/** to extract error to specific depth level */
 	errorPath?: any[];
+	/** on fetchMore merge data with existing one */
 	mergeData?: (f: any, s: any) => any;
-	fetchPolicy?: 'network-only' | 'cache-and-network';
 };
 
 export const useQuery = ({
@@ -54,11 +61,10 @@ export const useQuery = ({
 	useEffect(() => {
 		/** Set the variables for the first time. */
 		if (statusMaches(1)) {
-			send({
+			return send({
 				networkStatus: 2,
 				variables,
 			});
-			return undefined;
 		}
 
 		/** State already has data in it and is ready to be rendered.
@@ -73,9 +79,6 @@ export const useQuery = ({
 			 * until user interacts with UI again. */
 			return undefined;
 		}
-
-		// TODO: should track request, if same request is already on-going then stop next one.
-		// might track by unique key of the request.
 
 		/** Key is the identifier of the query */
 		const _key = stringifyEndpoint(method, endpoint, state.variables);
@@ -100,17 +103,14 @@ export const useQuery = ({
 			send,
 			errorPath,
 		}).subscribe((response: unknown) => {
+			/** Delete concurrent promise as it now finished and was successful */
+			delete CONCURRENT_PROMISES[_key];
 			/** Response was successfull. Update the store with new state */
 			let data = pathOr({}, dataPath, response);
-
 			/** We are merging data here on fetchMore request */
 			if (state.networkStatus === 3) {
 				data = mergeData(state.data, data);
 			}
-
-			/** Delete concurrent promise as it now finished and was successful */
-			delete CONCURRENT_PROMISES[_key];
-
 			/** Update the state with successful response */
 			send({
 				networkStatus: 7,
@@ -127,9 +127,7 @@ export const useQuery = ({
 
 	//** METHODS */
 
-	const refetch = () => {
-		send({ networkStatus: 4 });
-	};
+	const refetch = () => send({ networkStatus: 4 });
 
 	const fetchMore = (callback: (_: any) => { [key: string]: any }) => {
 		send({

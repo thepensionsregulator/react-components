@@ -8,6 +8,16 @@
 
 These instructions will get you a copy of the project up and running on your local machine for development and testing purposes.
 
+## Features
+
+- Transport and protocol agnostic data fetching
+- Request deduplication
+- Local mutation
+- Pagination
+- TypeScript ready
+- Network status
+- Refetch queries upon successful mutation
+
 ## Table of Contents
 
 <!-- START doctoc generated TOC please keep comment here to allow auto update -->

@@ -63,7 +63,7 @@ const initialState = {
 	loading: true,
 	error: undefined,
 	variables: undefined,
-	networkStatus: 1, // TODO: implement number states + refetch state
+	networkStatus: 1,
 };
 
 const ajaxReducer = (store: string) => {
@@ -75,13 +75,12 @@ const ajaxReducer = (store: string) => {
 	return (state: StoreState = initialState, action: Action) => {
 		switch (action.type) {
 			case UPDATE: {
-				const loading = isNetworkRequestInFlight(
-					action.payload?.networkStatus || state.networkStatus,
-				);
 				return {
 					...state,
 					...action.payload,
-					loading,
+					loading: isNetworkRequestInFlight(
+						action.payload?.networkStatus || state.networkStatus,
+					),
 				};
 			}
 			case REFETCH: {
