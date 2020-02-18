@@ -67,8 +67,3 @@ export const Flex = styled('div').attrs(() => ({
 }))<FlexProps>(compose(flexbox, space, layout, typography, color, border));
 
 type TextProps = TypographyProps & SpaceProps & ColorProps;
-
-export const Text = styled('span').attrs(() => ({
-	overflowWrap: 'break-word',
-	lineHeight: '1em',
-}))<TextProps>(compose(typography, space, color));
