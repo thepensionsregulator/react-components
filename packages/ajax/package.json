@@ -1,6 +1,6 @@
 {
 	"name": "@tpr/ajax",
-	"version": "1.0.1",
+	"version": "1.0.2",
 	"description": "TPR Ajax components",
 	"author": "David Alekna <david.alekna@tpr.gov.uk>",
 	"license": "MIT",
