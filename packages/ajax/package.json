@@ -38,10 +38,10 @@
 	},
 	"dependencies": {
 		"@alekna/react-store": "^1.2.6",
-		"immer": "^5.3.4",
+		"immer": "^5.3.6",
 		"lodash": "^4.17.15",
 		"qs": "^6.9.1",
-		"ramda": "^0.26.1",
+		"ramda": "^0.27.0",
 		"rxjs": "^6.5.4"
 	},
 	"publishConfig": {

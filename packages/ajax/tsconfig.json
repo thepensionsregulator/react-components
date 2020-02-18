@@ -16,5 +16,11 @@
 		"lib": ["es2019", "dom"]
 	},
 	"include": ["src/**/*"],
-	"exclude": ["node_modules", "**/__tests__/**/*", "**/*.mdx"]
+	"exclude": [
+		"node_modules",
+		"src/visualTest.tsx",
+		"**/__tests__/**/*",
+		"**/__mocks__/**/*",
+		"**/*.mdx"
+	]
 }

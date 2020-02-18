@@ -115,7 +115,7 @@ export const P = styled.p<HtmlHTagTypes>`
 
 export const Text = styled(P)``;
 
-export const Span = styled.span<HtmlHTagTypes>`
+export const Span = styled('span')<HtmlHTagTypes>`
 	${fontStack};
 
 	${color};
@@ -123,18 +123,18 @@ export const Span = styled.span<HtmlHTagTypes>`
 	${space};
 `;
 
-type LinkProps = {
+interface LinkProps extends SpaceProps {
 	appearance?: 'default' | 'primary';
-};
+}
 
-export const Link = styled('a').attrs<LinkProps & SpaceProps>(
+export const Link = styled('a').attrs<LinkProps>(
 	({ theme, appearance = 'default' }) => ({
 		color:
 			appearance === 'default'
 				? theme.colors.neutral[300]
 				: theme.colors.primary[200],
 	}),
-)<LinkProps & SpaceProps>`
+)<LinkProps>`
 	${fontStack};
 
 	font-weight: ${({ theme }) => theme.fontWeights[1]};

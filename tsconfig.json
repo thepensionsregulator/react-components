@@ -1,8 +1,10 @@
 {
 	"extends": "./config/tsconfig.base.json",
 	"references": [
+		{ "path": "packages/ajax" },
 		{ "path": "packages/core" },
 		{ "path": "packages/forms" },
+		{ "path": "packages/icons" },
 		{ "path": "packages/table" },
 		{ "path": "packages/theming" }
 	]

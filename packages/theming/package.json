@@ -44,8 +44,7 @@
 		"access": "public"
 	},
 	"devDependencies": {
-		"cross-env": "^7.0.0",
-		"jest": "^24.9.0"
+		"cross-env": "^7.0.0"
 	},
 	"gitHead": "57aec9c9de22596d6343bae07eb6b198322a0bee"
 }

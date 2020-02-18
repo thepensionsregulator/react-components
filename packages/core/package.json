@@ -41,7 +41,7 @@
 		"xstate": "^4.7.6"
 	},
 	"dependencies": {
-		"@tpr/forms": "^1.0.3",
+		"@tpr/forms": "file:../forms",
 		"final-form": "^4.18.6",
 		"prop-types": "^15.7.2",
 		"qs": "^6.9.1",

@@ -39,8 +39,8 @@
 		"styled-system": "^5.1.4"
 	},
 	"dependencies": {
-		"@tpr/core": "^1.0.6",
-		"@tpr/icons": "^1.0.1",
+		"@tpr/core": "file:../core",
+		"@tpr/icons": "file:../icons",
 		"final-form": "^4.18.6",
 		"qs": "^6.9.1",
 		"react-final-form": "^6.3.3"
