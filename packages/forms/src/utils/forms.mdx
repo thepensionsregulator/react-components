@@ -21,7 +21,9 @@ Forms for TPR apps
 			<div style={{ width: 240 }}>
 				<Checkbox
 					checked={checked}
-					onChange={() => setChecked(checked ? false : true)}
+					onChange={() => {
+						setChecked(checked ? false : true)
+					}}
 					label="All details are correct"
 				/>
 			</div>
@@ -37,8 +39,11 @@ Forms for TPR apps
 		return (
 			<div style={{ width: 240 }}>
 				<RadioButton
+					value="radio_button_value"
 					checked={checked}
-					onChange={() => setChecked(checked ? false : true)}
+					onChange={() => {
+						setChecked(checked ? false : true)
+					}}
 					label="All details are correct"
 				/>
 			</div>

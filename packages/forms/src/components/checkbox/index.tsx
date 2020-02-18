@@ -11,46 +11,41 @@ import { CheckboxChecked, CheckboxBlank } from '@tpr/icons';
 import { Flex } from '@tpr/core';
 
 type CheckboxIconProps = {
-	checked: 'checked' | 'unchecked';
+	checked: any;
 	onChange: (props: any) => void;
 	disabled?: boolean;
 	align?: string;
 	dataCy?: string;
 	id?: string;
+	label: string;
 };
 
-export const CheckboxIcon: React.FC<CheckboxIconProps> = props => {
+export const Checkbox: React.FC<CheckboxIconProps> = props => {
 	return (
-		<StyledLabel alignItems="center">
-			<StyledCheckboxWrapper
-				disabled={props.disabled || false}
-				align={props.align || 'center'}
-				data-cy={
-					props.dataCy
-						? `${props.dataCy}-${props.checked ? 'checked' : 'unchecked'}`
-						: null
-				}
-			>
-				{props.checked ? <CheckboxChecked /> : <CheckboxBlank />}
-				<StyledHiddenInput
-					type="checkbox"
-					id={props.id}
-					checked={props.checked}
+		<ElementPlaceholder>
+			<StyledLabel alignItems="center">
+				<StyledCheckboxWrapper
 					disabled={props.disabled || false}
-					onChange={props.onChange}
-					data-cy={props.dataCy}
-				/>
-				{props.children}
-			</StyledCheckboxWrapper>
-		</StyledLabel>
-	);
-};
-
-export const Checkbox = ({ checked, onChange, label }) => {
-	return (
-		<ElementPlaceholder onClick={onChange}>
-			<CheckboxIcon checked={checked} onChange={() => {}} />
-			<Flex ml={0}>{label}</Flex>
+					align={props.align || 'center'}
+					data-cy={
+						props.dataCy
+							? `${props.dataCy}-${props.checked ? 'checked' : 'unchecked'}`
+							: null
+					}
+				>
+					{props.checked ? <CheckboxChecked /> : <CheckboxBlank />}
+					<StyledHiddenInput
+						type="checkbox"
+						id={props.id}
+						checked={props.checked}
+						disabled={props.disabled || false}
+						onChange={props.onChange}
+						data-cy={props.dataCy}
+					/>
+					{props.children}
+				</StyledCheckboxWrapper>
+				<Flex ml={0}>{props.label}</Flex>
+			</StyledLabel>
 		</ElementPlaceholder>
 	);
 };

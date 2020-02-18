@@ -65,5 +65,3 @@ type FlexProps = FlexboxProps &
 export const Flex = styled('div').attrs(() => ({
 	display: 'flex',
 }))<FlexProps>(compose(flexbox, space, layout, typography, color, border));
-
-type TextProps = TypographyProps & SpaceProps & ColorProps;

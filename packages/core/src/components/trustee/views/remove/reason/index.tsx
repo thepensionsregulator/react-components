@@ -16,13 +16,13 @@ const RemoveReason: React.FC = () => {
 			<Form
 				onSubmit={values => {
 					if (Object.keys(values).length !== 1) {
-						return { [FORM_ERROR]: 'Login Failed' };
+						return { [FORM_ERROR]: 'Please select one of the options.' };
 					} else {
 						send('SELECT');
 					}
 				}}
 			>
-				{({ handleSubmit }) => (
+				{({ handleSubmit, submitError }) => (
 					<form onSubmit={handleSubmit}>
 						<Field
 							name="reason"
@@ -64,6 +64,11 @@ const RemoveReason: React.FC = () => {
 								);
 							}}
 						/>
+						{submitError && (
+							<Flex color="danger.200" pt={1}>
+								{submitError}
+							</Flex>
+						)}
 						<Footer
 							onContinue={{
 								type: 'submit',

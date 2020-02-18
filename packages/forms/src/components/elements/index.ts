@@ -31,6 +31,7 @@ export const StyledLabel = styled('label')<FlexboxProps>`
 	display: flex;
 	margin: 0;
 	padding: 0;
+	cursor: pointer;
 
 	${flexbox}
 `;
@@ -49,6 +50,4 @@ export const ElementPlaceholder = styled('div')`
 	flex: 0 0 auto;
 	padding: ${({ theme }) => theme.space[0]}px;
 	background-color: ${({ theme }) => theme.colors.neutral[100]};
-	user-select: none;
-	cursor: pointer;
 `;

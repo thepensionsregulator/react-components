@@ -10,8 +10,8 @@ import { StyledRadioWrapper } from './styles';
 import { RadioButtonChecked, RadioButtonUnchecked } from '@tpr/icons';
 import { Flex } from '@tpr/core';
 
-type RadioIconProps = {
-	checked: 'checked' | 'unchecked';
+type RadioButtonProps = {
+	checked: any;
 	onChange: (props: any) => void;
 	disabled?: boolean;
 	align?: string;
@@ -19,53 +19,43 @@ type RadioIconProps = {
 	id?: string;
 	value?: any;
 	name?: string;
+	label: string;
 };
 
-export const RadioIcon: React.FC<RadioIconProps> = props => {
+export const RadioButton: React.FC<RadioButtonProps> = props => {
 	return (
-		<StyledLabel alignItems="center">
-			<StyledRadioWrapper
-				disabled={props.disabled || false}
-				align={props.align || 'center'}
-				data-cy={
-					props.dataCy
-						? `${props.dataCy}-${props.checked ? 'checked' : 'unchecked'}`
-						: null
-				}
-			>
-				{props.checked ? <RadioButtonChecked /> : <RadioButtonUnchecked />}
-				<StyledHiddenInput
-					type="radio"
-					id={props.id}
-					name={props.name}
-					checked={props.checked}
-					value={props.value}
+		<ElementPlaceholder>
+			<StyledLabel alignItems="center">
+				<StyledRadioWrapper
 					disabled={props.disabled || false}
-					onChange={props.onChange}
-					data-cy={props.dataCy}
-				/>
-				{props.children}
-			</StyledRadioWrapper>
-		</StyledLabel>
-	);
-};
-
-export const RadioButton = ({ name, value, checked, onChange, label }) => {
-	return (
-		<ElementPlaceholder onClick={onChange}>
-			<RadioIcon
-				name={name}
-				value={value}
-				checked={checked}
-				onChange={() => {}}
-			/>
-			<Flex ml={0}>{label}</Flex>
+					align={props.align || 'center'}
+					data-cy={
+						props.dataCy
+							? `${props.dataCy}-${props.checked ? 'checked' : 'unchecked'}`
+							: null
+					}
+				>
+					{props.checked ? <RadioButtonChecked /> : <RadioButtonUnchecked />}
+					<StyledHiddenInput
+						type="radio"
+						id={props.id}
+						name={props.name}
+						checked={props.checked}
+						value={props.value}
+						disabled={props.disabled || false}
+						onChange={props.onChange}
+						data-cy={props.dataCy}
+					/>
+					{props.children}
+				</StyledRadioWrapper>
+				<Flex ml={0}>{props.label}</Flex>
+			</StyledLabel>
 		</ElementPlaceholder>
 	);
 };
 
 type FFRenderRadioButtonProps = Partial<
-	FieldRenderProps<string> & FieldProps & RadioIconProps
+	FieldRenderProps<string> & FieldProps & RadioButtonProps
 >;
 export const FFRadioButton: React.FC<FieldProps> = fieldProps => {
 	return (
