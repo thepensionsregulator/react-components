@@ -1,6 +1,5 @@
 import React from 'react';
-import { Form, renderFields } from '../utils/forms';
-import { FieldProps } from '../utils/validation';
+import { Form } from '../utils/forms';
 import { render } from '@testing-library/react';
 import { ThemeProvider } from 'styled-components';
 import { lightTheme } from '../../../theming';
@@ -8,32 +7,35 @@ import { FormRenderProps } from 'react-final-form';
 
 type FormProviderProps = {
 	onSubmit?: any;
-	initialValues: any;
-	fields?: FieldProps[];
+	render?: any;
+	initialValues?: any;
+	validate?: any;
 };
 const FormProvider: React.FC<FormProviderProps> = ({
-	onSubmit,
+	onSubmit = () => {},
 	initialValues,
 	children,
+	validate,
 }) => (
 	<ThemeProvider theme={lightTheme}>
-		<Form onSubmit={onSubmit} initialValues={initialValues}>
+		<Form onSubmit={onSubmit} validate={validate} initialValues={initialValues}>
 			{children}
 		</Form>
 	</ThemeProvider>
 );
 
 export function formSetup({
+	render: renderFn = () => <div />,
 	onSubmit,
-	initialValues,
-	fields,
+	initialValues = {},
+	validate,
 }: FormProviderProps) {
 	let renderArg: FormRenderProps;
 	const childrenSpy = jest.fn(controllerArg => {
 		renderArg = controllerArg;
 		return (
 			<form onSubmit={controllerArg.handleSubmit}>
-				{renderFields(fields)}
+				{renderFn}
 				<button type="submit">Submit</button>
 			</form>
 		);
@@ -42,8 +44,8 @@ export function formSetup({
 	const utils = render(
 		<FormProvider
 			onSubmit={onSubmit}
+			validate={validate}
 			initialValues={initialValues}
-			fields={fields}
 		>
 			{childrenSpy}
 		</FormProvider>,

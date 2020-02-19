@@ -1,17 +1,18 @@
 import { fireEvent } from '@testing-library/react';
 import { formSetup } from '../__mocks__/setup';
+import { renderFields } from '../utils/forms';
 
 describe('Form', () => {
 	test('renders fields correctly and submitts with no errors', () => {
 		const handleSubmit = jest.fn();
 		const { container, form } = formSetup({
-			onSubmit: handleSubmit,
-			initialValues: {},
-			fields: [
+			render: renderFields([
 				{ name: 'firstName', type: 'text' },
 				{ name: 'lastName', type: 'text' },
 				{ name: 'email', type: 'email' },
-			],
+			]),
+			onSubmit: handleSubmit,
+			initialValues: {},
 		});
 
 		const firstName = container.querySelector('input[name="firstName"]');
