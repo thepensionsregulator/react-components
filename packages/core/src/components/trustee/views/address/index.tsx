@@ -8,11 +8,12 @@ import { Form, renderFields, validate, InputText } from '@tpr/forms';
 import fields from './fields';
 
 const ManualComplete = () => {
-	const { send } = useTrusteeContext();
+	const { send, onSave } = useTrusteeContext();
 
 	function onSubmit(values) {
+		/** could do optimistic update by updating the machine context */
 		send('SAVE');
-		console.log(values);
+		onSave(values);
 	}
 
 	return (

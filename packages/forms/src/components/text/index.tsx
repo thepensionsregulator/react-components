@@ -1,29 +1,38 @@
 import React from 'react';
 import { Field, FieldRenderProps } from 'react-final-form';
-import { ErrorMessage, FormLabelText, StyledLabel } from '../elements';
+import { ErrorMessage, FormLabelText, StyledInputLabel } from '../elements';
 import { StyledInput } from './styles';
 import { FieldProps } from '../../utils/validation';
 import { Span } from '@tpr/core';
 
 export const InputText: React.FC<FieldRenderProps<string> & FieldProps> = ({
 	label,
+	hint,
 	required,
 	input,
 	meta,
 	...props
 }) => {
 	return (
-		<StyledLabel flexDirection="column">
+		<StyledInputLabel
+			isError={meta && meta.touched && meta.error}
+			flexDirection="column"
+		>
 			{label && (
-				<FormLabelText>
-					{label} {!required && <Span>(optional)</Span>}
+				<FormLabelText m="0px">
+					{label} {!required && '(optional)'}
 				</FormLabelText>
 			)}
-			<StyledInput aria-label={label} {...input} {...props} />
+			{hint && (
+				<Span fontSize={1} my={0} color="neutral.300">
+					{hint}
+				</Span>
+			)}
 			{meta && meta.touched && meta.error && (
 				<ErrorMessage>{meta.error}</ErrorMessage>
 			)}
-		</StyledLabel>
+			<StyledInput aria-label={label} meta={meta} {...input} {...props} />
+		</StyledInputLabel>
 	);
 };
 

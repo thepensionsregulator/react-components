@@ -8,32 +8,25 @@ export const StyledInput = styled('input')<StyledInputProps>`
 	display: flex;
 	flex: 1 1 auto;
 	width: 100%;
-	font-size: ${({ theme }) => theme.fontSizes[1]}px;
-	font-weight: 300;
+	font-size: ${({ theme }) => theme.fontSizes[2]}px;
+	font-weight: ${({ theme }) => theme.fontWeights[0]}px;
 	background: ${({ theme }) => theme.colors.background};
 	border: ${({ meta, theme }) => {
 		if (meta && meta.touched && meta.error) {
-			return `1px solid ${theme.colors.accents.danger}`;
+			return `4px solid ${theme.colors.danger[300]}`;
 		} else {
-			return `1px solid ${theme.colors.neutral[200]}`;
+			return `2px solid ${theme.colors.neutral[900]}`;
 		}
 	}};
-	height: 50px;
+	height: 40px;
 	outline: none;
-	padding: 15px;
-	&::-webkit-input-placeholder {
-		color: ${({ theme }) => theme.colors.neutral['600']};
-	}
-	&:-moz-placeholder {
-		color: ${({ theme }) => theme.colors.neutral['600']};
-	}
-	&:-ms-input-placeholder {
-		color: ${({ theme }) => theme.colors.neutral['600']};
-	}
+	padding: 0 5px;
+
 	&:focus {
-		border: 1px solid ${({ theme }) => theme.colors.primary['200']};
-		box-shadow: inset 0 0 0 4px ${({ theme }) => theme.colors.primary['200']};
+		border: 4px solid ${({ theme }) => theme.colors.neutral[900]};
+		box-shadow: 0 0 0 3px ${({ theme }) => theme.colors.warning[300]};
 	}
+
 	&:disabled {
 		background: ${({ theme }) => theme.colors.neutral['A50']};
 	}
