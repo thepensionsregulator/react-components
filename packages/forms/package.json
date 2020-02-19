@@ -1,7 +1,7 @@
 {
 	"name": "@tpr/forms",
 	"version": "1.0.5",
-	"description": "TPR Forms components",
+	"description": "TPR Form components",
 	"author": "David Alekna <david.alekna@tpr.gov.uk>",
 	"license": "MIT",
 	"main": "./lib/bundle.cjs.js",

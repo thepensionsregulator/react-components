@@ -1,7 +1,7 @@
 {
 	"name": "@tpr/theming",
 	"version": "1.0.8",
-	"description": "TPR Core components",
+	"description": "TPR Theme components",
 	"author": "David Alekna <david.alekna@tpr.gov.uk>",
 	"license": "MIT",
 	"main": "./lib/bundle.cjs.js",
