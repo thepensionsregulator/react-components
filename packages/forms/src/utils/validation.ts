@@ -29,6 +29,8 @@ export type FieldProps = {
 	error?: string;
 	/** If required and has title, will display * next to the title */
 	required?: boolean;
+	/** field hints or requirements explained */
+	hint?: string;
 	/** For radio buttons */
 	checked?: boolean;
 	/** Accepts a validation function for custom validation */

@@ -3,6 +3,7 @@ export default [
 		name: 'line_1',
 		label: 'Address line 1',
 		type: 'text',
+		hint: 'First line of your home address',
 		error: 'This is a required field',
 		required: true,
 	},

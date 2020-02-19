@@ -18,7 +18,7 @@ Forms for TPR apps
   {() => {
 		const [checked, setChecked] = React.useState(false)
 		return (
-			<div style={{ width: 240 }}>
+			<div style={{ width: 400, padding: 10 }}>
 				<Checkbox
 					checked={checked}
 					onChange={() => {
@@ -37,7 +37,7 @@ Forms for TPR apps
   {() => {
 		const [checked, setChecked] = React.useState(false)
 		return (
-			<div style={{ width: 240 }}>
+			<div style={{ width: 400, padding: 10  }}>
 				<RadioButton
 					value="radio_button_value"
 					checked={checked}
@@ -57,18 +57,19 @@ Forms for TPR apps
   {() => {
 		const [text, setText] = React.useState('')
 		return (
-			<div style={{ width: 240 }}>
+			<div style={{ width: 400, padding: 10 }}>
 				<InputText 
-					required={false}
-					label="Fill Me With Text" 
 					type="text" 
+					required={true}
+					label="Event name" 
+					hint="Must be between 6 and 8 digits long"
 					input={{ 
 						value: text, 
 						onChange: (e) => setText(e.target.value)
 					}} 
 					meta={{
-						touched: false,
-						error: "Error message goes here"
+						touched: true,
+						error: "Enter an event name"
 					}} 
 				/>
 			</div>
