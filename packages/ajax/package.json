@@ -1,6 +1,6 @@
 {
 	"name": "@tpr/ajax",
-	"version": "1.0.0",
+	"version": "1.0.4",
 	"description": "TPR Ajax components",
 	"author": "David Alekna <david.alekna@tpr.gov.uk>",
 	"license": "MIT",
@@ -33,19 +33,23 @@
 		"report-coverage": "codecov"
 	},
 	"peerDependencies": {
-		"@xstate/react": "^0.8.1",
 		"react": "^16.12.0",
-		"react-dom": "^16.12.0",
-		"xstate": "^4.7.6"
+		"react-dom": "^16.12.0"
 	},
 	"dependencies": {
 		"@alekna/react-store": "^1.2.6",
+		"immer": "^5.3.6",
 		"lodash": "^4.17.15",
 		"qs": "^6.9.1",
-		"ramda": "^0.26.1",
+		"ramda": "^0.27.0",
 		"rxjs": "^6.5.4"
 	},
 	"publishConfig": {
 		"access": "public"
+	},
+	"gitHead": "57aec9c9de22596d6343bae07eb6b198322a0bee",
+	"devDependencies": {
+		"@tpr/core": "^1.0.9",
+		"cross-env": "^7.0.0"
 	}
 }

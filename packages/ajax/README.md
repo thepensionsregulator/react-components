@@ -8,21 +8,28 @@
 
 These instructions will get you a copy of the project up and running on your local machine for development and testing purposes.
 
+## Features
+
+- Transport and protocol agnostic data fetching
+- Request deduplication
+- Local mutation
+- Pagination
+- TypeScript ready
+- Network status
+- Refetch queries upon successful mutation
+
 ## Table of Contents
 
 <!-- START doctoc generated TOC please keep comment here to allow auto update -->
 <!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
 
 - [Installation](#installation)
-- [Usage](#usage)
-  - [Usage of AjaxProvider to initialize the App](#usage-of-ajaxprovider-to-initialize-the-app)
-  - [Usage of AjaxQuery](#usage-of-ajaxquery)
-- [AjaxProvider Props](#ajaxprovider-props)
+- [`AjaxProvider` Props](#ajaxprovider-props)
   - [children](#children)
   - [api](#api)
   - [stores](#stores)
   - [initialState](#initialstate)
-  - [persistKey](#persistkey)
+  - [persistOn](#persiston)
 - [AjaxQuery Props](#ajaxquery-props)
   - [endpoint](#endpoint)
   - [type](#type)
@@ -32,7 +39,11 @@ These instructions will get you a copy of the project up and running on your loc
   - [dataPath](#datapath)
   - [errorPath](#errorpath)
   - [mergeData](#mergedata)
-- [AjaxProvider Render Props](#ajaxprovider-render-props)
+- [`AjaxQuery` Render Props](#ajaxquery-render-props)
+- [`AjaxMutation` Props](#ajaxmutation-props)
+- [`AjaxMutation` Render Props](#ajaxmutation-render-props)
+- [`useUpdate` Hook](#useupdate-hook)
+- [Examples](#examples)
 
 <!-- END doctoc generated TOC please keep comment here to allow auto update -->
 
@@ -45,47 +56,14 @@ should be installed as one of your project's `dependencies`:
 npm i @tpr/ajax
 ```
 
-> This package also depends on react, react-dom, xstate and @xstate/react. Please make sure you have those installed as well.
+> This package also depends on react and react-dom. Please make sure you have those installed as well.
 
-## Usage
+## Testing
 
-> NOTE: AjaxProvider component will not provide any styles, only the functionality.
+Run following command from the root of the project and follow the instructions.
 
-### Usage of AjaxProvider to initialize the App
-
-```js
-const App = () => {
-	return (
-		<AjaxProvider
-			api={[{ name: 'registry', instance: fetch }]}
-			stores={[{ name: 'trustees' }]}
-		>
-			{...JSX}
-		</AjaxProvider>
-	);
-};
 ```
-
-### Usage of AjaxQuery
-
-```js
-const ListOfTrustees = () => {
-  return (
-    <AjaxQuery
-      endpoint="users"
-      store="trustees"
-      variables={{
-        page: 1,
-        total: 10,
-        sort: {
-          firstName: 'asc',
-        },
-      }}
-		>
-      {(...dataUtilities) => ...jsx}
-    </AjaxQuery>
-  );
-};
+yarn test:watch
 ```
 
 ## `AjaxProvider` Props
@@ -126,13 +104,13 @@ Store = {
 
 Use initialState to rehydrate the store from the `localStorage`
 
-### persistKey
+### persistOn
 
 > `string`: _optional_
 
 If store is persisted, it will be persisted on this key in the `localStorage`
 
-## AjaxQuery Props
+## AjaxQuery, useQuery Props
 
 ### endpoint
 
@@ -174,6 +152,28 @@ Define path to the error that comes back from the server from network request.
 
 Provide a method to merge data for `fetchMore` function
 
-## `AjaxQuery` Render Props
+## `AjaxQuery, useQuery` Render Props
 
 TODO: ...
+
+## `AjaxMutation, useMutation` Props
+
+TODO: ...
+
+## `AjaxMutation, useMutation` Render Props
+
+TODO: ...
+
+## `useUpdate` Props
+
+This hook provides a way to interact with one of available stores. Can be used for optimistic updates or update the state whenever it is appropriate todo so.
+
+> `useUpdate(args: UpdateProps): (search?: string | null, options: FindAndModifyProps) => void`
+
+## Examples
+
+> NOTE: all examples will be hosted on the codesandbox
+
+- useQuery
+- useMutation
+- useUpdate

@@ -14,8 +14,8 @@ const scales = {
 	`,
 	normal: css`
 		height: ${({ theme }) => theme.space[5]}px;
-		padding: 0 32px;
-		font-size: ${({ theme }) => theme.fontSizes[4]}px;
+		padding: 0 28px;
+		font-size: ${({ theme }) => theme.fontSizes[2]}px;
 	`,
 	big: css`
 		height: ${({ theme }) => theme.space[6]}px;
@@ -32,6 +32,8 @@ const linkAppearance = colors => {
 		color: ${colors?.[200]};
 		border: none;
 		text-decoration: none;
+		padding-right: 0;
+		padding-left: 0;
 
 		&:hover {
 			color: ${colors?.[300]};
@@ -142,22 +144,33 @@ interface ButtonProps
 	extends ButtonHTMLAttributes<HTMLButtonElement>,
 		Partial<ButtonConfigProps>,
 		SpaceProps,
-		LayoutProps {}
+		LayoutProps {
+	textDecoration?: string;
+}
 
-const StyledButton = styled('button').attrs<ButtonProps>(({ type = 'button' }) => ({
-	type,
-}))`
+const StyledButton = styled('button').attrs<ButtonProps>(
+	({ type = 'button' }) => ({
+		type,
+	}),
+)`
 	${getScale}
 	${getAppearance}
 
 	display: inline-block;
 	cursor: pointer;
+	text-decoration: ${({ textDecoration }) =>
+		textDecoration ? textDecoration : null};
 
 	${space}
 	${layout}
 `;
 
-export const Button: React.FC<ButtonProps> = ({ children, iconAfter, iconBefore, ...props }) => {
+export const Button: React.FC<ButtonProps> = ({
+	children,
+	iconAfter,
+	iconBefore,
+	...props
+}) => {
 	return (
 		<StyledButton disabled={props.isLoading} {...props}>
 			{iconBefore && iconBefore({ style: { marginRight: 10 } })}

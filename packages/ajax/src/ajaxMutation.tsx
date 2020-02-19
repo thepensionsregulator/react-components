@@ -11,10 +11,15 @@ export type MutationProps = {
 	errorPath?: any[];
 };
 
+type StoreParams = {
+	name: string;
+	variables?: { [key: string]: any };
+};
+
 type MutateFnProps = {
 	variables?: object;
 	headers?: object;
-	refetchQueries?: string[];
+	refetchStores?: string[] | StoreParams[];
 };
 
 type MutationState = {
@@ -23,15 +28,15 @@ type MutationState = {
 	error: unknown;
 };
 export interface IMutationReturns extends MutationState {
-	mutate: <T>(props?: MutateFnProps) => Promise<T>;
+	mutate: (props?: MutateFnProps) => Promise<unknown>;
 }
 
 export const useMutation = ({
 	method = 'post',
 	endpoint = '',
 	api,
-	dataPath = ['response', 'data'],
-	errorPath = ['response', 'errors', 0],
+	dataPath = [],
+	errorPath = [],
 }: MutationProps): IMutationReturns => {
 	/** use context to get values from the Provider */
 	const { api: apis, dispatch } = useAjaxContext();
@@ -40,24 +45,23 @@ export const useMutation = ({
 		() => apis.find(({ name }) => name === api) || apis[0],
 		[apis],
 	);
-
-	const initialState = {
-		data: undefined,
-		loading: false,
-		error: undefined,
-	};
+	/** mutation state to keep trak if it's loading and if it had any errors */
 	const reducer = <S extends MutationState, A>(prev: S, next: A): S => ({
 		...prev,
 		...next,
 	});
-	const [state, setState] = useReducer(reducer, initialState);
+	const [state, setState] = useReducer(reducer, {
+		data: undefined,
+		loading: false,
+		error: undefined,
+	});
 
 	const mutate = ({
 		variables = {},
 		headers = {
 			'Content-Type': 'application/json',
 		},
-		refetchQueries,
+		refetchStores,
 	}: MutateFnProps = {}) => {
 		setState({ loading: true, error: undefined });
 
@@ -72,10 +76,20 @@ export const useMutation = ({
 				const response = path(dataPath, resp);
 
 				/** refetch all queries from provided array in existing stores on request */
-				if (Array.isArray(refetchQueries) && refetchQueries.length > 0) {
-					refetchQueries.map(store =>
-						dispatch({ type: `${store}@refetch`, payload: { loading: false } }),
-					);
+				if (Array.isArray(refetchStores) && refetchStores.length > 0) {
+					for (const store of refetchStores) {
+						if (typeof store === 'string') {
+							dispatch({ type: `${store}@refetch` });
+						}
+						if (typeof store === 'object' && 'name' in store) {
+							dispatch({
+								type: `${store.name}@refetch`,
+								payload: {
+									variables: store.variables,
+								},
+							});
+						}
+					}
 				}
 
 				setState({ loading: false, data: response });

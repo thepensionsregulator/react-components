@@ -1,6 +1,6 @@
 {
 	"name": "@tpr/forms",
-	"version": "1.0.2",
+	"version": "1.0.6",
 	"description": "TPR Forms components",
 	"author": "David Alekna <david.alekna@tpr.gov.uk>",
 	"license": "MIT",
@@ -39,7 +39,7 @@
 		"styled-system": "^5.1.4"
 	},
 	"dependencies": {
-		"@tpr/core": "file:../core",
+		"@tpr/core": "^1.0.9",
 		"@tpr/icons": "file:../icons",
 		"final-form": "^4.18.6",
 		"qs": "^6.9.1",
@@ -47,5 +47,9 @@
 	},
 	"publishConfig": {
 		"access": "public"
+	},
+	"gitHead": "57aec9c9de22596d6343bae07eb6b198322a0bee",
+	"devDependencies": {
+		"cross-env": "^7.0.0"
 	}
 }

@@ -5,6 +5,8 @@ route: forms
 
 import { Playground, Props } from 'docz';
 import { Checkbox } from '../components/checkbox';
+import { InputText } from '../components/text';
+import { RadioButton } from '../components/radio'
 
 # Forms
 
@@ -13,9 +15,64 @@ Forms for TPR apps
 ## Checkbox
 
 <Playground>
-	<Checkbox
-		input={{ value: true }}
-		onChange={input => !input.value}
-		label="All details are correct"
-	/>
+  {() => {
+		const [checked, setChecked] = React.useState(false)
+		return (
+			<div style={{ width: 400, padding: 10 }}>
+				<Checkbox
+					checked={checked}
+					onChange={() => {
+						setChecked(checked ? false : true)
+					}}
+					label="All details are correct"
+				/>
+			</div>
+		)
+  }}
+</Playground>
+
+## RadioButton
+
+<Playground>
+  {() => {
+		const [checked, setChecked] = React.useState(false)
+		return (
+			<div style={{ width: 400, padding: 10  }}>
+				<RadioButton
+					value="radio_button_value"
+					checked={checked}
+					onChange={() => {
+						setChecked(checked ? false : true)
+					}}
+					label="All details are correct"
+				/>
+			</div>
+		)
+  }}
+</Playground>
+
+## Text
+
+<Playground>
+  {() => {
+		const [text, setText] = React.useState('')
+		return (
+			<div style={{ width: 400, padding: 10 }}>
+				<InputText 
+					type="text" 
+					required={true}
+					label="Event name" 
+					hint="Must be between 6 and 8 digits long"
+					input={{ 
+						value: text, 
+						onChange: (e) => setText(e.target.value)
+					}} 
+					meta={{
+						touched: true,
+						error: "Enter an event name"
+					}} 
+				/>
+			</div>
+		)
+  }}
 </Playground>

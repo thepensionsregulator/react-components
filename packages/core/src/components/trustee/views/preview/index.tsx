@@ -1,22 +1,28 @@
 import React from 'react';
 import { Flex } from '../../../layout';
-import { Text, H2 } from '../../../typography';
+import { Text, H4 } from '../../../typography';
 import { useTrusteeContext } from '../../context';
 import { Checkbox } from '@tpr/forms';
 import { Button } from '../../components/button';
+import { StyledCardToolbar } from '../../components/card';
 
 const Preview: React.FC = () => {
 	const { current, send } = useTrusteeContext();
 	const { company, contact } = current.context;
 	return (
 		<Flex flex="1 1 auto" flexDirection="column">
-			<Flex flex="1 1 auto" justifyContent="space-evenly" mt={0}>
-				<Flex width="100%" flexDirection="column" mr="40px">
+			<StyledCardToolbar>
+				<Flex
+					width="100%"
+					flex="1 1 auto"
+					flexDirection="column"
+					mr={[null, '40px']}
+				>
 					<Button onClick={() => send('EDIT_ORG')}>
 						Correspondance address >
 					</Button>
 					<Flex mt={0} flexDirection="column">
-						<H2>{company.name}</H2>
+						<H4 fontWeight="bold">{company.name}</H4>
 						<Text>{company.line1}</Text>
 						<Text>{company.line2}</Text>
 						<Text>{company.city}</Text>
@@ -24,18 +30,18 @@ const Preview: React.FC = () => {
 						<Text>{company.postCode}</Text>
 					</Flex>
 				</Flex>
-				<Flex width="100%" flexDirection="column">
+				<Flex width="100%" flex="1 1 auto" flexDirection="column">
 					<Button onClick={() => send('EDIT_CONTACTS')}>
 						Contact details >
 					</Button>
 					<Flex mt={0} flexDirection="column">
-						<H2>Phone</H2>
+						<H4 fontWeight="bold">Phone</H4>
 						<Text>{contact.phoneNumber}</Text>
-						<Text>Email</Text>
+						<H4 fontWeight="bold">Email</H4>
 						<Text>{contact.emailAddress}</Text>
 					</Flex>
 				</Flex>
-			</Flex>
+			</StyledCardToolbar>
 			<Flex
 				flex="0 0 auto"
 				justifyContent="flex-start"
@@ -44,10 +50,9 @@ const Preview: React.FC = () => {
 				pt={2}
 			>
 				<Checkbox
-					input={{ value: true }}
+					checked={false}
 					onChange={input => !input.value}
 					label="All details are correct"
-					disabled
 				/>
 			</Flex>
 		</Flex>

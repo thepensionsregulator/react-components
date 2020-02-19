@@ -7,17 +7,24 @@ import React, {
 } from 'react';
 import StoreProvider from '@alekna/react-store';
 import { createStore, useStoreContext } from '@alekna/react-store';
-import { shareReplay, debounceTime, switchMap, mergeMap } from 'rxjs/operators';
-import reducer from './reducer';
-import { of, iif } from 'rxjs';
 import { removeItemFromStorage, storeItem } from './localStorage';
+import reducer from './reducer';
+import { of, iif, Observable } from 'rxjs';
+import { shareReplay, debounceTime, switchMap, mergeMap } from 'rxjs/operators';
+import { AjaxResponse } from 'rxjs/ajax';
+
+/** an idea of holding all network request promises on this object and re-using them. Also helps to only have one promise in flight at a time */
+export const CONCURRENT_PROMISES = {};
 
 // What is the point of having global fetched data context?
 // 1. can help with caching and
 // 2. accessing same data in other components
 // 3. refetching from stored variables that were initially used to fetch data | doesnt require global state though, could use xstate
 
-type Endpoint = { name: string; instance: Function };
+type Endpoint = {
+	name: string;
+	instance: (params: any) => Observable<AjaxResponse>;
+};
 type AjaxContextProps = { api: Endpoint[]; clearStore: () => void };
 
 export const AjaxContext = createContext<AjaxContextProps>({
@@ -96,25 +103,28 @@ export const AjaxProvider: React.FC<AjaxProviderProps> = ({
 	}, [stores]);
 
 	const sharedApi = useCallback(
-		dispatch => {
-			/** Share reply with late subscribers without sending multiple network requests,
-			 * instead send latest value received from network. Otherwise make a new request */
-			return api.map(({ instance, ...apiSettings }) => {
-				/** NOTE: instance will be re-initialized on every call. If there is a need for cache,
-				 * the instance should be initialized only once with a composable function and reused
-				 * accross the app.
-				 */
+		dispatch =>
+			api.map(({ instance, ...apiSettings }) => {
+				/** Share reply with late subscribers without sending multiple network requests,
+				 * instead send latest value received from network. Otherwise make a new request */
+
 				return {
 					...apiSettings,
-					instance: args => {
-						return of(args).pipe(
+					instance: params => {
+						/** 1. NOTE: this is a new observable every time function is called. */
+
+						/** 2. NOTE: possible improvement: keep track of requests being called
+						 * and filter out diplicate requests before passing it to the instance.
+						 * This would probably require a Subject above the return statement within
+						 * the map function, to prevent re-initialization on every function call.
+						 */
+						return of(params).pipe(
 							mergeMap(settings => instance({ dispatch, ...settings })),
 							shareReplay(1),
 						);
 					},
 				};
-			});
-		},
+			}),
 		[api],
 	);
 

@@ -4,6 +4,7 @@ const breakpoints = ['48em', '64em', '90em', '114em'];
 
 const lightTheme = {
 	colors: {
+		background: '#FFFFFF',
 		primary: {
 			200: '#1d70b8',
 			300: '#003078',
@@ -11,7 +12,7 @@ const lightTheme = {
 			500: '#0b0c0c',
 		},
 		neutral: {
-			100: '#FFFFFF',
+			100: '#e8e8e8',
 			200: '#b1b4b6',
 			300: '#888888',
 			900: '#0b0c0c',
@@ -35,7 +36,7 @@ const lightTheme = {
 			'-apple-system, BlinkMacSystemFont, "avenir next", avenir, "helvetica neue", helvetica, ubuntu, roboto, noto, "segoe ui", arial, sans-serif',
 	},
 	space: [10, 15, 20, 25, 30, 40, 50, 60],
-	fontSizes: [14, 16, 18, 22, 30, 36],
+	fontSizes: [12, 14, 16, 22, 30, 36],
 	fontWeights: [300, 400, 500, 700],
 	breakpoints,
 	mediaQueries: respondTo(

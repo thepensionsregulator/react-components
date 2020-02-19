@@ -9,7 +9,7 @@ const Type: React.FC = () => {
 	return (
 		<Flex flex="1 1 auto" flexDirection="column">
 			<div>Edit Trustee Type</div>
-			<Footer onSave={{ title: 'Save', fn: () => send('SAVE') }} />
+			<Footer onSave={{ title: 'Save and close', fn: () => send('SAVE') }} />
 		</Flex>
 	);
 };

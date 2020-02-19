@@ -6,25 +6,27 @@ import {
 	ElementPlaceholder,
 } from '../elements';
 import { FieldProps } from '../../utils/validation';
-import { StyledCheckboxWrapper } from './styles';
-import { CheckboxChecked, CheckboxBlank } from '@tpr/icons';
+import { StyledRadioWrapper } from './styles';
+import { RadioButtonChecked, RadioButtonUnchecked } from '@tpr/icons';
 import { Flex } from '@tpr/core';
 
-type CheckboxIconProps = {
+type RadioButtonProps = {
 	checked: any;
 	onChange: (props: any) => void;
 	disabled?: boolean;
 	align?: string;
 	dataCy?: string;
 	id?: string;
+	value?: any;
+	name?: string;
 	label: string;
 };
 
-export const Checkbox: React.FC<CheckboxIconProps> = props => {
+export const RadioButton: React.FC<RadioButtonProps> = props => {
 	return (
 		<ElementPlaceholder>
 			<StyledLabel alignItems="center">
-				<StyledCheckboxWrapper
+				<StyledRadioWrapper
 					disabled={props.disabled || false}
 					align={props.align || 'center'}
 					data-cy={
@@ -33,34 +35,38 @@ export const Checkbox: React.FC<CheckboxIconProps> = props => {
 							: null
 					}
 				>
-					{props.checked ? <CheckboxChecked /> : <CheckboxBlank />}
+					{props.checked ? <RadioButtonChecked /> : <RadioButtonUnchecked />}
 					<StyledHiddenInput
-						type="checkbox"
+						type="radio"
 						id={props.id}
+						name={props.name}
 						checked={props.checked}
+						value={props.value}
 						disabled={props.disabled || false}
 						onChange={props.onChange}
 						data-cy={props.dataCy}
 					/>
 					{props.children}
-				</StyledCheckboxWrapper>
+				</StyledRadioWrapper>
 				<Flex ml={0}>{props.label}</Flex>
 			</StyledLabel>
 		</ElementPlaceholder>
 	);
 };
 
-type FFRenderCheckboxProps = Partial<
-	FieldRenderProps<string> & FieldProps & CheckboxIconProps
+type FFRenderRadioButtonProps = Partial<
+	FieldRenderProps<string> & FieldProps & RadioButtonProps
 >;
-export const FFCheckbox: React.FC<FieldProps> = fieldProps => {
+export const FFRadioButton: React.FC<FieldProps> = fieldProps => {
 	return (
 		<Field
 			{...fieldProps}
-			render={({ label, input, onChange }: FFRenderCheckboxProps) => {
+			render={({ label, input, onChange }: FFRenderRadioButtonProps) => {
 				return (
-					<Checkbox
-						checked={input.value}
+					<RadioButton
+						name={input.name}
+						value={input.value}
+						checked={input.checked}
 						label={label}
 						onChange={() =>
 							typeof onChange === 'function'

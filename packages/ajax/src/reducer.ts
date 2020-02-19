@@ -1,3 +1,7 @@
+import { pathOr } from 'ramda';
+import { merge } from 'lodash';
+import produce from 'immer';
+
 export enum NetworkStatus {
 	/**
 	 * The query has never been run before and the query is now currently running. A query will still
@@ -59,13 +63,14 @@ const initialState = {
 	loading: true,
 	error: undefined,
 	variables: undefined,
-	networkStatus: 1, // TODO: implement number states + refetch state
+	networkStatus: 1,
 };
 
 const ajaxReducer = (store: string) => {
 	const UPDATE = `${store}@update`;
-	const RESET = `${store}@reset`;
 	const REFETCH = `${store}@refetch`;
+	const RESET = `${store}@reset`;
+	const FIND_AND_MODIFY = `${store}@findAndModify`;
 
 	return (state: StoreState = initialState, action: Action) => {
 		switch (action.type) {
@@ -73,19 +78,62 @@ const ajaxReducer = (store: string) => {
 				return {
 					...state,
 					...action.payload,
+					loading: isNetworkRequestInFlight(
+						action.payload?.networkStatus || state.networkStatus,
+					),
 				};
-			}
-			case RESET: {
-				return initialState;
 			}
 			case REFETCH: {
 				return {
 					...state,
-					loading: action.payload.loading
-						? action.payload.loading
-						: state.loading,
+					variables: Object.assign(
+						state.variables,
+						action.payload?.variables || {},
+					),
 					networkStatus: 4,
+					loading: true,
 				};
+			}
+			case FIND_AND_MODIFY: {
+				const key = action.payload.key;
+				const itemId = action.payload[key];
+				const dataPath = action.payload.dataPath;
+
+				const data = pathOr([], dataPath, state.data);
+				const dataItemIndex = data.findIndex(item => item[key] === itemId);
+				// if item was not found or no data, return state without changes
+				if (dataItemIndex < 0 || !data.length) {
+					console.error(`item with id ${itemId} was not found.`);
+					return state;
+				}
+				// modify state with immer, only imutable state will take affect.
+				return {
+					...state,
+					data: produce(state.data, draftState => {
+						/** Get data from path */
+						const draftFromPath = pathOr([], dataPath, draftState);
+						/** Make an update */
+						let newData: object;
+
+						if (action.payload.modify) {
+							/** Modify will merge the two and only touch new values */
+							newData = merge(
+								draftFromPath[dataItemIndex],
+								action.payload.update,
+							);
+						} else {
+							/** Update will replace an item */
+							newData = action.payload.update;
+						}
+
+						draftState[dataPath] = Object.assign(draftFromPath, {
+							[dataItemIndex]: newData,
+						});
+					}),
+				};
+			}
+			case RESET: {
+				return initialState;
 			}
 			default:
 				return state;
@@ -93,8 +141,40 @@ const ajaxReducer = (store: string) => {
 	};
 };
 
-export const actions = (storeName: string, send: Function) => (
+export const actions = (storeName: string, dispatch: Function) => (
 	payload: object,
-) => send({ type: `${storeName}@update`, payload });
+) => dispatch({ type: `${storeName}@update`, payload });
+
+export type FindAndModifyProps = {
+	key?: string;
+	store: string;
+	search: string;
+	dataPath: string[];
+	modify?: boolean;
+};
+export const findAndModify = (options: FindAndModifyProps, update: any) => {
+	const { key = 'id', store, search, dataPath, modify = true } = options;
+
+	return {
+		type: `${store}@findAndModify`,
+		payload: {
+			key,
+			name: search,
+			dataPath,
+			modify,
+			update,
+		},
+	};
+};
+
+/**
+ * Returns true if there is currently a network request in flight
+ * according to a given network status.
+ */
+export function isNetworkRequestInFlight(
+	networkStatus: NetworkStatus,
+): boolean {
+	return networkStatus < 7;
+}
 
 export default ajaxReducer;

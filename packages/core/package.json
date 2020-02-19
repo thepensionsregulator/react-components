@@ -1,6 +1,6 @@
 {
 	"name": "@tpr/core",
-	"version": "1.0.5",
+	"version": "1.0.9",
 	"description": "TPR Core components",
 	"author": "David Alekna <david.alekna@tpr.gov.uk>",
 	"license": "MIT",
@@ -50,5 +50,8 @@
 	"publishConfig": {
 		"access": "public"
 	},
-	"gitHead": "3a9e85be825e7800b53a47e519afe0b85d508bb1"
+	"gitHead": "57aec9c9de22596d6343bae07eb6b198322a0bee",
+	"devDependencies": {
+		"cross-env": "^7.0.0"
+	}
 }

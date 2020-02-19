@@ -1,32 +1,33 @@
-import { useEffect, useMemo } from 'react';
+import { useEffect, useMemo, useCallback } from 'react';
 import { pathOr } from 'ramda';
-import { useAjaxContext } from './context';
+import { useAjaxContext, CONCURRENT_PROMISES } from './context';
 import { useSelector } from '@alekna/react-store';
 import { actions } from './reducer';
-import {
-	distinctUntilChanged,
-	catchError,
-	retryWhen,
-	tap,
-} from 'rxjs/operators';
+import { distinctUntilChanged, pluck, filter, map } from 'rxjs/operators';
 import { isEqual } from 'lodash';
 import { StoreState } from './reducer';
-import { throwError } from 'rxjs';
 import { stringifyEndpoint } from './utils';
-import { genericRetryStrategy } from './retryStrategy';
+import { findAndModify, FindAndModifyProps } from './reducer';
 
 export type QueryProps = {
+	/** http endpoint for the selected api */
 	endpoint: string;
+	/** http get or post methods */
 	method?: 'get' | 'post';
+	/** headers can be overwritten */
 	headers?: object;
+	/** variables will be stringified and attached to the endpoint */
 	variables?: object;
-	/** store from the global store object and for the api uri */
+	/** api from global apis, if none specified then the first one in the list is the default one */
 	api?: string;
+	/** store from the global store object */
 	store: string;
+	/** to extract data to specific depth level */
 	dataPath?: any[];
+	/** to extract error to specific depth level */
 	errorPath?: any[];
+	/** on fetchMore merge data with existing one */
 	mergeData?: (f: any, s: any) => any;
-	fetchPolicy?: 'network-only' | 'cache-and-network';
 };
 
 export const useQuery = ({
@@ -36,10 +37,9 @@ export const useQuery = ({
 	variables,
 	api,
 	store,
-	dataPath = ['response'],
-	errorPath = ['response', 'message'],
+	dataPath = [],
+	errorPath = [],
 	mergeData = (f, s) => [...f, ...s],
-	fetchPolicy = 'network-only',
 }: QueryProps) => {
 	const { api: apis, dispatch } = useAjaxContext();
 	/** Will select first Endpoint in an array if store is undefined or not found */
@@ -61,12 +61,10 @@ export const useQuery = ({
 	useEffect(() => {
 		/** Set the variables for the first time. */
 		if (statusMaches(1)) {
-			send({
+			return send({
 				networkStatus: 2,
-				loading: true,
 				variables,
 			});
-			return undefined;
 		}
 
 		/** State already has data in it and is ready to be rendered.
@@ -76,48 +74,50 @@ export const useQuery = ({
 			return undefined;
 		}
 
+		if (statusMaches(8)) {
+			/** Requests have failed, we don't want to kick off the instance again
+			 * until user interacts with UI again. */
+			return undefined;
+		}
+
+		/** Key is the identifier of the query */
+		const _key = stringifyEndpoint(method, endpoint, state.variables);
+
+		if (CONCURRENT_PROMISES[_key]) {
+			/** Currently this Promise is already in flight therefore we do nothing.
+			 * Reply will be shared with all subscribed components automatically. */
+			return undefined;
+		}
+
+		/** can hold a fetch method for this particular query and later be re-used.
+		 * This has the ability to extend this hook to be able to use its own fetch
+		 * function by mounting it instead of an object */
+		CONCURRENT_PROMISES[_key] = {};
+
+		/** Network call starts here */
 		const sub = instance({
-			endpoint: stringifyEndpoint(method, endpoint, state.variables),
+			endpoint: _key,
 			variables: state.variables,
 			method,
 			headers,
-		})
-			.pipe(
-				/** Retry multiple times upon failure */
-				retryWhen(
-					genericRetryStrategy({
-						maxRetryAttempts: 3,
-						excludedStatusCodes: [500],
-					}),
-				),
-				/** Catch a error if there was any, extract it from the object
-				 * and pass it on to the store to notify client */
-				catchError(err => {
-					const getError = pathOr('unknown error occurred', errorPath);
-					send({
-						networkStatus: 8,
-						data: undefined,
-						loading: false,
-						error: getError(err),
-					});
-					return throwError(getError(err));
-				}),
-			)
-			.subscribe((response: unknown) => {
-				/** Response was successfull. Update the store with new state */
-				let data = pathOr({}, dataPath, response);
-
-				if (state.networkStatus === 3) {
-					data = mergeData(state.data, data);
-				}
-
-				send({
-					networkStatus: 7,
-					data,
-					loading: false,
-					error: undefined,
-				});
+			send,
+			errorPath,
+		}).subscribe((response: unknown) => {
+			/** Delete concurrent promise as it now finished and was successful */
+			delete CONCURRENT_PROMISES[_key];
+			/** Response was successfull. Update the store with new state */
+			let data = pathOr({}, dataPath, response);
+			/** We are merging data here on fetchMore request */
+			if (state.networkStatus === 3) {
+				data = mergeData(state.data, data);
+			}
+			/** Update the state with successful response */
+			send({
+				networkStatus: 7,
+				data,
+				error: undefined,
 			});
+		});
 
 		return () => {
 			/** Cleanup the subscription when component unmounts. */
@@ -127,9 +127,7 @@ export const useQuery = ({
 
 	//** METHODS */
 
-	const refetch = () => {
-		send({ networkStatus: 4, loading: true });
-	};
+	const refetch = () => send({ networkStatus: 4 });
 
 	const fetchMore = (callback: (_: any) => { [key: string]: any }) => {
 		send({
@@ -146,4 +144,38 @@ interface AjaxQueryProps extends QueryProps {
 }
 export const AjaxQuery = ({ children, ...rest }: AjaxQueryProps) => {
 	return children(useQuery(rest));
+};
+
+type UpdateProps = {
+	key?: string;
+	store: string;
+	search?: string;
+	dataPath: string[];
+	modify?: boolean;
+};
+
+export const useUpdate = ({ key = 'id', ...props }: UpdateProps) => {
+	const { dispatch } = useAjaxContext();
+	const selectedItem = useSelector<StoreState>(props.store, state$ =>
+		state$.pipe(
+			pluck(...['data'].concat(props.dataPath)),
+			filter(Array.isArray),
+			map(items => items.find(item => item[key] === props.search)),
+			distinctUntilChanged(),
+		),
+	);
+
+	return useCallback(
+		(search?: string, params?: object | Function) => {
+			const args: FindAndModifyProps =
+				typeof params === 'function' ? params(selectedItem) : params;
+			dispatch(
+				findAndModify(
+					{ key, ...props, search: props.search ? props.search : search },
+					args,
+				),
+			);
+		},
+		[dispatch, selectedItem],
+	);
 };
