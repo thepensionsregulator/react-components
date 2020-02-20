@@ -11,13 +11,14 @@ import { CheckboxChecked, CheckboxBlank } from '@tpr/icons';
 import { Flex } from '@tpr/core';
 
 type CheckboxIconProps = {
-	checked: any;
+	checked?: any;
 	onChange: (props: any) => void;
 	disabled?: boolean;
 	align?: string;
-	dataCy?: string;
+	testId?: string;
 	id?: string;
 	label: string;
+	value?: any;
 };
 
 export const Checkbox: React.FC<CheckboxIconProps> = props => {
@@ -27,9 +28,14 @@ export const Checkbox: React.FC<CheckboxIconProps> = props => {
 				<StyledCheckboxWrapper
 					disabled={props.disabled || false}
 					align={props.align || 'center'}
+					data-testid={
+						props.testId
+							? `${props.testId}-${props.checked ? 'checked' : 'unchecked'}`
+							: null
+					}
 					data-cy={
-						props.dataCy
-							? `${props.dataCy}-${props.checked ? 'checked' : 'unchecked'}`
+						props.testId
+							? `${props.testId}-${props.checked ? 'checked' : 'unchecked'}`
 							: null
 					}
 				>
@@ -38,9 +44,9 @@ export const Checkbox: React.FC<CheckboxIconProps> = props => {
 						type="checkbox"
 						id={props.id}
 						checked={props.checked}
+						value={props.value}
 						disabled={props.disabled || false}
 						onChange={props.onChange}
-						data-cy={props.dataCy}
 					/>
 					{props.children}
 				</StyledCheckboxWrapper>
@@ -57,16 +63,14 @@ export const FFCheckbox: React.FC<FieldProps> = fieldProps => {
 	return (
 		<Field
 			{...fieldProps}
-			render={({ label, input, onChange }: FFRenderCheckboxProps) => {
+			render={({ label, input, ...rest }: FFRenderCheckboxProps) => {
 				return (
 					<Checkbox
+						value={input.value}
 						checked={input.value}
 						label={label}
-						onChange={() =>
-							typeof onChange === 'function'
-								? onChange(input)
-								: input.onChange(!input.value)
-						}
+						onChange={() => input.onChange(!input.value)}
+						{...rest}
 					/>
 				);
 			}}

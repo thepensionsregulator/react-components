@@ -52,6 +52,7 @@ export const StyledHiddenInput = styled('input')<StyledHiddenInputProps>`
 	width: 0;
 	height: 0;
 `;
+
 export const ElementPlaceholder = styled('div')`
 	display: flex;
 	flex: 0 0 auto;
