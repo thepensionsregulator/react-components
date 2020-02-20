@@ -16,5 +16,11 @@
 		"lib": ["es2018", "dom"]
 	},
 	"include": ["src/**/*"],
-	"exclude": ["node_modules", "lib", "**/__mocks__/**/*", "**/__tests__/**/*", "**/*.mdx"]
+	"exclude": [
+		"node_modules",
+		"lib",
+		"**/__mocks__/**/*",
+		"**/__tests__/**/*",
+		"**/*.mdx"
+	]
 }

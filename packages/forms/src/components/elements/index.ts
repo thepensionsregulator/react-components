@@ -16,7 +16,8 @@ export const ErrorMessage = styled('div')`
 	font-weight: ${({ theme }) => theme.fontWeights[3]};
 `;
 
-export const FormLabelText = styled('div')<SpaceProps>`
+interface FormLabelTextProps extends SpaceProps {}
+export const FormLabelText = styled('div')<FormLabelTextProps>`
 	color: ${({ theme }) => theme.colors.neutral[900]};
 	font-size: ${({ theme }) => theme.fontSizes[2]}px;
 	font-weight: ${({ theme }) => theme.fontWeights[1]};
@@ -26,7 +27,8 @@ export const FormLabelText = styled('div')<SpaceProps>`
 	${space}
 `;
 
-export const StyledLabel = styled('label')<FlexboxProps>`
+interface StyledLabelProps extends FlexboxProps {}
+export const StyledLabel = styled('label')<StyledLabelProps>`
 	display: flex;
 	flex: 1 1 auto;
 	margin: 0;
@@ -52,6 +54,7 @@ export const StyledHiddenInput = styled('input')<StyledHiddenInputProps>`
 	width: 0;
 	height: 0;
 `;
+
 export const ElementPlaceholder = styled('div')`
 	display: flex;
 	flex: 0 0 auto;

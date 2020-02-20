@@ -1,8 +1,11 @@
-import { getObjectValueByString } from '../index';
+import { getObjectValueByString } from '../utils';
 
 describe('utils', () => {
 	test('getObjectValueByString direct', () => {
-		const value = getObjectValueByString({ firstName: 'something in it' }, 'firstName');
+		const value = getObjectValueByString(
+			{ firstName: 'something in it' },
+			'firstName',
+		);
 		expect(value).toEqual('something in it');
 	});
 

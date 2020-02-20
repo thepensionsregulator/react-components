@@ -20,7 +20,7 @@ export type FieldProps = {
 	/** Field name, required for future ref. */
 	name: string;
 	/** HTML input type */
-	type: string;
+	type?: string;
 	/** If defined, adds an input label above the input */
 	label?: string;
 	/** If defined, sets a default value on an input on initial load */
@@ -35,6 +35,8 @@ export type FieldProps = {
 	checked?: boolean;
 	/** Accepts a validation function for custom validation */
 	validate?: (value: any, allValues: object, meta?: FieldState<any>) => any;
+	/** argument for tests */
+	testId?: string;
 };
 
 export function validate(formFields: FieldProps[]) {

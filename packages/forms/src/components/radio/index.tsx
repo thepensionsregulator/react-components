@@ -15,7 +15,7 @@ type RadioButtonProps = {
 	onChange: (props: any) => void;
 	disabled?: boolean;
 	align?: string;
-	dataCy?: string;
+	testId?: string;
 	id?: string;
 	value?: any;
 	name?: string;
@@ -29,9 +29,14 @@ export const RadioButton: React.FC<RadioButtonProps> = props => {
 				<StyledRadioWrapper
 					disabled={props.disabled || false}
 					align={props.align || 'center'}
+					data-testid={
+						props.testId
+							? `${props.testId}-${props.checked ? 'checked' : 'unchecked'}`
+							: null
+					}
 					data-cy={
-						props.dataCy
-							? `${props.dataCy}-${props.checked ? 'checked' : 'unchecked'}`
+						props.testId
+							? `${props.testId}-${props.checked ? 'checked' : 'unchecked'}`
 							: null
 					}
 				>
@@ -44,7 +49,8 @@ export const RadioButton: React.FC<RadioButtonProps> = props => {
 						value={props.value}
 						disabled={props.disabled || false}
 						onChange={props.onChange}
-						data-cy={props.dataCy}
+						data-cy={props.testId}
+						data-testid={props.testId}
 					/>
 					{props.children}
 				</StyledRadioWrapper>
@@ -61,18 +67,15 @@ export const FFRadioButton: React.FC<FieldProps> = fieldProps => {
 	return (
 		<Field
 			{...fieldProps}
-			render={({ label, input, onChange }: FFRenderRadioButtonProps) => {
+			render={({ label, input, ...rest }: FFRenderRadioButtonProps) => {
 				return (
 					<RadioButton
 						name={input.name}
 						value={input.value}
 						checked={input.checked}
 						label={label}
-						onChange={() =>
-							typeof onChange === 'function'
-								? onChange(input)
-								: input.onChange(!input.value)
-						}
+						onChange={input.onChange}
+						{...rest}
 					/>
 				);
 			}}

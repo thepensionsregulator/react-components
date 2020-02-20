@@ -42,18 +42,19 @@ export const TableBodyRow = styled(FlexRow).attrs(({ theme }) => ({
 		border-bottom: none;
 	}
 	&:hover {
-		background: ${({ isSelectable, hoveredBgColor }) => isSelectable && hoveredBgColor};
+		background: ${({ isSelectable, hoveredBgColor }) =>
+			isSelectable && hoveredBgColor};
 	}
 `;
 
-type TableBodyRowItemProps = {
+interface TableBodyRowItemProps extends FlexProps {
 	isSelectable?: boolean;
 	isChecked?: boolean;
 	/** set row height */
 	height?: number;
-};
+}
 
-export const TableBodyRowItem = styled('div')<FlexProps & TableBodyRowItemProps>`
+export const TableBodyRowItem = styled('div')<TableBodyRowItemProps>`
 	display: flex;
 	height: ${({ height }) => (height ? height : '100px')};
 	align-items: center;

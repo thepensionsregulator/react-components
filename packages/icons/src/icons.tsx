@@ -1,11 +1,18 @@
 import React from 'react';
 
 type SVGProps = Partial<{
+	/** inline css style */
 	style: any;
+	/** svg fill colour */
 	fill: string;
+	/** width and height of the icon */
 	width: string;
+	/** svg class name */
 	className: string;
+	/** svg viewBox */
 	viewBox: string;
+	/** test id for testing */
+	testId?: string;
 }>;
 
 export const SVG: React.FC<SVGProps> = ({
@@ -14,6 +21,7 @@ export const SVG: React.FC<SVGProps> = ({
 	width = '24',
 	className = '',
 	viewBox = '0 0 24 24',
+	testId,
 	children,
 }) => (
 	<svg
@@ -25,6 +33,7 @@ export const SVG: React.FC<SVGProps> = ({
 		xmlns="http://www.w3.org/2000/svg"
 		className={className}
 		xmlnsXlink="http://www.w3.org/1999/xlink"
+		data-testId={testId}
 	>
 		{children}
 	</svg>

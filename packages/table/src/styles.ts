@@ -25,11 +25,10 @@ export const TableHead = styled(FlexRow)`
 	/* user-select: none; */
 `;
 
-type TableHeadRowItemProps = {
+interface TableHeadRowItemProps extends FlexboxProps {
 	isClickable?: boolean;
-};
-
-export const TableHeadRowItem = styled(FlexRow)<TableHeadRowItemProps & FlexboxProps>`
+}
+export const TableHeadRowItem = styled(FlexRow)<TableHeadRowItemProps>`
 	align-items: center;
 	justify-content: space-between;
 	padding: 15px;
