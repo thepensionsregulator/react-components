@@ -37,6 +37,7 @@ export type FieldProps = {
 	validate?: (value: any, allValues: object, meta?: FieldState<any>) => any;
 	/** argument for tests */
 	testId?: string;
+	input?: any;
 };
 
 export function validate(formFields: FieldProps[]) {
