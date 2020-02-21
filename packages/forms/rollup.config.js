@@ -2,5 +2,7 @@ import { rollup } from '../../config/rollup.config';
 
 export default rollup({
 	name: 'forms',
-	extraGlobals: {},
+	extraGlobals: {
+		'styled-components': 'styled',
+	},
 });
