@@ -4,23 +4,14 @@
 		"rootDir": "src",
 		"baseUrl": "src",
 		"composite": true,
-		"outDir": "lib",
-		"jsx": "react",
-		"pretty": true,
-		"noImplicitAny": false,
-		"noUnusedLocals": false,
-		"noFallthroughCasesInSwitch": true,
-		"allowSyntheticDefaultImports": true,
-		"declarationMap": true,
-		"esModuleInterop": true,
-		"lib": ["es2019", "dom"]
+		"outDir": "lib"
 	},
 	"include": ["src/**/*"],
 	"exclude": [
 		"node_modules",
-		"src/visualTest.tsx",
-		"**/__tests__/**/*",
+		"lib",
 		"**/__mocks__/**/*",
+		"**/__tests__/**/*",
 		"**/*.mdx"
 	]
 }

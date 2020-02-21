@@ -279,20 +279,89 @@ function FindAndModify() {
 	);
 }
 
+const registryInstance = ({ endpoint, method, send, errorPath }) => {
+	return ajax({
+		method: method,
+		url: `https://apim.dev01.tpr.gov.uk/randomtrustees/${endpoint}`,
+		headers: {
+			'Ocp-Apim-Subscription-Key': 'c7dd5beab8a74e5ca0a20c2a02ddeb57',
+		},
+	}).pipe(
+		retryWhen(
+			genericRetryStrategy({
+				maxRetryAttempts: 3,
+				excludedStatusCodes: [500],
+			}),
+		),
+		catchError(err => {
+			const getError = pathOr('unknown error occurred', errorPath);
+			send({
+				networkStatus: 8,
+				data: undefined,
+				loading: false,
+				error: getError(err),
+			});
+			return throwError(getError(err));
+		}),
+		timeout(30000),
+	);
+};
+
+const Trustees = () => {
+	console.log('trustees');
+	const { refetch, fetchMore, ...props } = useQuery({
+		endpoint: 'Trustees',
+		store: 'trustees',
+		api: 'registry',
+		dataPath: ['response'],
+		errorPath: ['response', 'errors', 0],
+		mergeData: (parent, next) => {
+			return {
+				...next,
+				results: [...parent.results, ...next.results],
+			};
+		},
+	});
+
+	return (
+		<Flex style={{ position: 'relative' }}>
+			{props.loading && (
+				<div
+					style={{
+						display: 'flex',
+						justifyContent: 'center',
+						alignItems: 'center',
+						position: 'absolute',
+						width: '100%',
+						height: '100%',
+						background: 'rgba(255,255,255,0.5)',
+					}}
+				>
+					Loading...
+				</div>
+			)}
+			<pre>{JSON.stringify(props, undefined, 2)}</pre>
+		</Flex>
+	);
+};
+
 export const TestEntry = () => {
 	return (
 		<AjaxProvider
 			api={[
 				{ name: 'starwars', instance: starWarsInstance },
 				{ name: 'localPromise', instance: retryTestInstance() },
+				{ name: 'registry', instance: registryInstance },
 			]}
 			stores={[
 				{ name: 'planets', persist: false },
 				{ name: 'people', persist: false },
+				{ name: 'trustees', persist: false },
 			]}
 			// initialState={getItemFromStorage('tpr')}
 			// persistOn="tpr"
 		>
+			<Trustees />
 			<FindAndModify />
 			<UpdateComponent />
 			<People />
