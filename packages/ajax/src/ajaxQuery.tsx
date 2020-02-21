@@ -30,6 +30,8 @@ export type QueryProps = {
 	mergeData?: (f: any, s: any) => any;
 };
 
+// TODO: get dataPath and errorPath from context if available
+
 export const useQuery = ({
 	endpoint = '',
 	method = 'get',

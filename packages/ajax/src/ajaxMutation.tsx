@@ -27,9 +27,12 @@ type MutationState = {
 	loading: boolean;
 	error: unknown;
 };
+
 export interface IMutationReturns extends MutationState {
 	mutate: (props?: MutateFnProps) => Promise<unknown>;
 }
+
+// TODO: get dataPath and errorPath from context if available
 
 export const useMutation = ({
 	method = 'post',

@@ -24,6 +24,8 @@ export const CONCURRENT_PROMISES = {};
 type Endpoint = {
 	name: string;
 	instance: (params: any) => Observable<AjaxResponse>;
+	datePath?: any[];
+	errorPath?: any[];
 };
 type AjaxContextProps = { api: Endpoint[]; clearStore: () => void };
 
