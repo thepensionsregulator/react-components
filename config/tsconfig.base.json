@@ -6,6 +6,7 @@
 		"esModuleInterop": true,
 		"experimentalDecorators": true,
 		"declarationMap": false,
+		"sourceMap": false,
 		"jsx": "react",
 		"lib": ["es2019", "dom"],
 		"module": "es2015",
@@ -18,9 +19,9 @@
 		"noUnusedParameters": true,
 		"pretty": true,
 		"removeComments": false,
-		"sourceMap": true,
 		"stripInternal": true,
 		"target": "es5",
+		"noEmit": false,
 		"typeRoots": ["../node_modules/@types"]
 	}
 }

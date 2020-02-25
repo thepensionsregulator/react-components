@@ -2,8 +2,9 @@ import { of, throwError } from 'rxjs';
 import { map, catchError, retryWhen, switchMap, timeout } from 'rxjs/operators';
 import { ajax } from 'rxjs/ajax';
 import { genericRetryStrategy } from './retryStrategy';
-import { getNewTokenSuccess } from 'store/config/actions';
-import { logout } from 'store/account/actions';
+
+const getNewTokenSuccess: any = {};
+const logout: any = {};
 
 type Config = {
 	apiBase: string;

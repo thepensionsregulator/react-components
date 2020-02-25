@@ -19,6 +19,7 @@ const RemoveReason: React.FC = () => {
 						return { [FORM_ERROR]: 'Please select one of the options.' };
 					} else {
 						send('SELECT');
+						return undefined;
 					}
 				}}
 			>

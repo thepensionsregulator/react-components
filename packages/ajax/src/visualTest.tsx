@@ -362,12 +362,12 @@ export const TestEntry = () => {
 			// persistOn="tpr"
 		>
 			{/* <Trustees /> */}
-			<FindAndModify />
-			<UpdateComponent />
+			{/* <FindAndModify />
+			<UpdateComponent /> */}
 			<People />
-			<ComponentTwo />
+			{/* <ComponentTwo />
 			<ComponentThree />
-			<Planets />
+			<Planets /> */}
 		</AjaxProvider>
 	);
 };

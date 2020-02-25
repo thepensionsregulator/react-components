@@ -4,13 +4,11 @@
 	"description": "TPR Ajax components",
 	"author": "David Alekna <david.alekna@tpr.gov.uk>",
 	"license": "MIT",
-	"main": "./lib/bundle.cjs.js",
-	"module": "./lib/bundle.esm.js",
+	"main": "./lib/index.js",
 	"typings": "./lib/index.d.ts",
 	"sideEffects": false,
 	"files": [
-		"lib/bundle*",
-		"lib/**/*.d.ts"
+		"lib/*"
 	],
 	"repository": {
 		"type": "git",
@@ -28,7 +26,8 @@
 		"dev": "yarn storybook",
 		"test": "jest --coverage",
 		"test:watch": "jest --watch",
-		"build": "cross-env-shell \"../../node_modules/.bin/rollup\" -c rollup.config.js",
+		"build": "tsc -b .",
+		"bundle": "cross-env-shell \"../../node_modules/.bin/rollup\" -c rollup.config.js",
 		"clean": "rimraf lib",
 		"report-coverage": "codecov"
 	},
@@ -37,7 +36,7 @@
 		"react-dom": "^16.12.0"
 	},
 	"dependencies": {
-		"@alekna/react-store": "^1.2.6",
+		"@alekna/react-store": "^1.2.10-alpha.0",
 		"immer": "^5.3.6",
 		"lodash": "^4.17.15",
 		"qs": "^6.9.1",
