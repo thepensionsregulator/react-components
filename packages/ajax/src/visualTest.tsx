@@ -100,7 +100,7 @@ const ComponentThree = () => {
 
 const Planets = () => {
 	console.log('planets 4');
-	const { refetch, fetchMore, ...props } = useQuery({
+	const { refetch, fetchMore, ...props }: any = useQuery({
 		endpoint: 'planets/',
 		store: 'planets',
 		dataPath: ['response'],
@@ -212,7 +212,7 @@ const starWarsInstance = ({ endpoint, method, send, errorPath }) => {
 	);
 };
 
-const retryTestInstance = () => {
+const retryTestInstance: any = () => {
 	const success = (ms: number = 0) =>
 		new Promise(res =>
 			setTimeout(
@@ -361,7 +361,7 @@ export const TestEntry = () => {
 			// initialState={getItemFromStorage('tpr')}
 			// persistOn="tpr"
 		>
-			<Trustees />
+			{/* <Trustees /> */}
 			<FindAndModify />
 			<UpdateComponent />
 			<People />

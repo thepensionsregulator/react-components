@@ -1,0 +1,62 @@
+---
+name: Globals
+route: layout/globals
+---
+
+import { Playground, Props } from 'docz';
+import { Flex, DocWidth, AppWidth } from './globals';
+
+# Globals
+
+Global components for tpr apps
+
+## DocWidth
+
+<Playground>
+	<DocWidth justifyContent="center" bg="#eeeeee">
+		<AppWidth>
+			<Flex border="2px dashed black">This is app width area</Flex>
+		</AppWidth>
+	</DocWidth>
+</Playground>
+
+## Flex
+
+<Playground>
+	<Flex flexDirection="column">
+		<Flex
+			border="1px dashed"
+			borderColor="primary.300"
+			padding={7}
+			justifyContent="center"
+		>
+			Column 1
+		</Flex>
+		<Flex
+			border="1px dashed"
+			justifyContent="flex-end"
+			borderColor="primary.300"
+			padding={1}
+		>
+			Column 2
+		</Flex>
+	</Flex>
+	<Flex flexDirection="row">
+		<Flex
+			flex="1 1 auto"
+			border="1px dashed"
+			borderColor="warning.300"
+			padding={1}
+		>
+			Row 1
+		</Flex>
+		<Flex
+			flex="1 1 auto"
+			border="1px dashed"
+			borderColor="danger.300"
+			padding={1}
+		>
+			Row 2
+		</Flex>
+	</Flex>
+</Playground>
