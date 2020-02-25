@@ -4,7 +4,7 @@
 	"license": "MIT",
 	"scripts": {
 		"remove-typing-dupes": "rimraf node_modules/@types/react-native",
-		"postinstall": "yarn remove-typing-dupes && lerna exec -- yarn install --no-lockfile && lerna run prepare",
+		"postinstall": "lerna exec -- yarn install --no-lockfile && lerna run prepare",
 		"diff": "check-if-folder-contents-changed-in-git-commit-range",
 		"build": "lerna run build",
 		"test": "jest",
@@ -16,7 +16,7 @@
 		"lint-fix": "prettier --write \"packages/*/src/**/*.{js,jsx,ts,tsx}\"",
 		"lerna": "lerna",
 		"posttest": "yarn lint",
-		"deploy": "lerna publish",
+		"publish": "lerna run build && lerna publish",
 		"clean": "find . -name \"node_modules\" -exec rm -rf '{}' + && find . -name \"lib\" -exec rm -rf '{}' +",
 		"docz:dev": "docz dev",
 		"docz:build": "docz build",
@@ -42,15 +42,16 @@
 		"@types/prop-types": "^15.7.3",
 		"@types/qs": "^6.9.0",
 		"@types/ramda": "^0.26.40",
-		"@types/react": "^16.9.17",
+		"@types/react": "^16.9.22",
 		"@types/react-dom": "^16.9.4",
-		"@types/styled-components": "^4.4.1",
+		"@types/styled-components": "^5.0.0",
 		"@types/styled-system": "^5.1.4",
 		"@xstate/react": "^0.8.1",
 		"apollo-client": "^2.6.8",
 		"babel-jest": "^25.1.0",
 		"babel-loader": "^8.0.6",
 		"codecov": "^3.6.1",
+		"core-js": "^3.6.4",
 		"cross-env": "^7.0.0",
 		"docz": "^2.2.0",
 		"immutability-helper": "^3.0.1",
@@ -76,9 +77,6 @@
 		"ts-node": "^8.5.2",
 		"tslib": "^1.10.0",
 		"typescript": "^3.7.5"
-	},
-	"resolutions": {
-		"@types/react": "16.9.20"
 	},
 	"jest": {
 		"projects": [

@@ -4,12 +4,13 @@
 		"declaration": true,
 		"importHelpers": true,
 		"esModuleInterop": true,
+		"emitDecoratorMetadata": true,
 		"experimentalDecorators": true,
 		"declarationMap": false,
 		"sourceMap": false,
 		"jsx": "react",
 		"lib": ["es2019", "dom"],
-		"module": "es2015",
+		"module": "ES2015",
 		"moduleResolution": "node",
 		"noFallthroughCasesInSwitch": true,
 		"allowSyntheticDefaultImports": true,
@@ -18,10 +19,12 @@
 		"noUnusedLocals": false,
 		"noUnusedParameters": true,
 		"pretty": true,
-		"removeComments": false,
+		"removeComments": true,
 		"stripInternal": true,
-		"target": "es5",
+		"target": "es6",
+		"noLib": false,
 		"noEmit": false,
-		"typeRoots": ["../node_modules/@types"]
-	}
+		"skipLibCheck": true
+	},
+	"typeRoots": ["../node_modules/@types"]
 }
