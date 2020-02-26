@@ -1,8 +1,22 @@
 import React from 'react';
-import styled from 'styled-components';
-import { flexbox, space, layout, LayoutProps } from 'styled-system';
-import { FlexboxProps, SpaceProps } from 'styled-system';
-import { Span } from '@tpr/core';
+import styled, { css } from 'styled-components';
+import {
+	compose,
+	space,
+	color,
+	border,
+	layout,
+	flexbox,
+	typography,
+} from 'styled-system';
+import {
+	BorderProps,
+	ColorProps,
+	FlexboxProps,
+	SpaceProps,
+	LayoutProps,
+	TypographyProps,
+} from 'styled-system';
 
 export const StyledFieldset = styled('fieldset')`
 	border: none;
@@ -101,3 +115,31 @@ export const InputElementHeading = ({ label, required, hint, meta }: any) => {
 		</>
 	);
 };
+
+// Exporting Flex and Span here to avoid circular dependencies with @tpr/core
+export interface FlexProps
+	extends FlexboxProps,
+		SpaceProps,
+		LayoutProps,
+		TypographyProps,
+		ColorProps,
+		BorderProps {}
+export const Flex = styled('div').attrs(() => ({
+	display: 'flex',
+}))<FlexProps>(compose(flexbox, space, layout, typography, color, border));
+
+const fontStack = css`
+	font-family: ${({ theme }) => theme.fonts.sansSerif};
+`;
+
+export interface HtmlHTagTypes
+	extends SpaceProps,
+		ColorProps,
+		TypographyProps {}
+export const Span = styled('span')<HtmlHTagTypes>`
+	${fontStack};
+
+	${color};
+	${typography};
+	${space};
+`;

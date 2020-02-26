@@ -1,10 +1,15 @@
 import React, { useState, useEffect } from 'react';
 import { Field, FieldRenderProps } from 'react-final-form';
 import { isValid, toDate } from 'date-fns';
-import { StyledInputDiv, StyledLabel, InputElementHeading } from '../elements';
+import {
+	StyledInputDiv,
+	StyledLabel,
+	InputElementHeading,
+	Span,
+	Flex,
+} from '../elements';
 import { StyledInput } from '../text/styles';
 import { FieldProps } from '../../utils/validation';
-import { Span, Flex } from '@tpr/core';
 
 const handleChange = (onChange: Function, value: number) => ({ target }) => {
 	if (!target.value) {

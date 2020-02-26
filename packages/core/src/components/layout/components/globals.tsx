@@ -18,9 +18,13 @@ import {
 	TypographyProps,
 } from 'styled-system';
 
-export const DocWidth = styled.div<
-	BorderProps & ColorProps & FlexboxProps & SpaceProps
->`
+export interface DocWidthProps
+	extends BorderProps,
+		ColorProps,
+		FlexboxProps,
+		SpaceProps {}
+
+export const DocWidth = styled.div<DocWidthProps>`
 	display: flex;
 	width: 100%;
 
@@ -55,13 +59,13 @@ export const Container: React.FC = ({ children, ...rest }) => {
  */
 export const BodyWithSidebar = () => null;
 
-type FlexProps = FlexboxProps &
-	SpaceProps &
-	LayoutProps &
-	TypographyProps &
-	ColorProps &
-	BorderProps;
-
+interface FlexProps
+	extends FlexboxProps,
+		SpaceProps,
+		LayoutProps,
+		TypographyProps,
+		ColorProps,
+		BorderProps {}
 export const Flex = styled('div').attrs(() => ({
 	display: 'flex',
 }))<FlexProps>(compose(flexbox, space, layout, typography, color, border));

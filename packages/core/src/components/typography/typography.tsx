@@ -8,7 +8,7 @@ import {
 	TypographyProps,
 } from 'styled-system';
 
-type HtmlHTagTypes = SpaceProps & ColorProps & TypographyProps;
+interface HtmlHTagTypes extends SpaceProps, ColorProps, TypographyProps {}
 
 export const fontStack = css`
 	font-family: ${({ theme }) => theme.fonts.sansSerif};
