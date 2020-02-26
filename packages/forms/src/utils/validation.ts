@@ -1,6 +1,9 @@
 import qs from 'qs';
-import { getObjectValueByString } from '@tpr/core';
 import { FieldState } from 'final-form';
+
+const getObjectValueByString = (obj: object, path: string): unknown => {
+	return path.split('.').reduce((acc, part) => acc && acc[part], obj);
+};
 
 // export type FieldInputTypes =
 // 	| 'checkbox'
