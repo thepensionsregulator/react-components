@@ -34,21 +34,22 @@
 	"peerDependencies": {
 		"react": "^16.12.0",
 		"react-dom": "^16.12.0",
-		"styled-components": "^4.4.1",
-		"styled-system": "^5.1.4"
+		"styled-components": "^5.0.1",
+		"styled-system": "^5.1.5"
 	},
 	"dependencies": {
 		"@tpr/icons": "file:../icons",
-		"date-fns": "^2.9.0",
-		"final-form": "^4.18.6",
+		"date-fns": "^2.10.0",
+		"final-form": "^4.18.7",
 		"qs": "^6.9.1",
-		"react-final-form": "^6.3.3"
+		"react-final-form": "^6.3.5"
 	},
 	"publishConfig": {
 		"access": "public"
 	},
 	"gitHead": "57aec9c9de22596d6343bae07eb6b198322a0bee",
 	"devDependencies": {
-		"cross-env": "^7.0.0"
+		"cross-env": "^7.0.0",
+		"typescript": "^3.8.2"
 	}
 }
