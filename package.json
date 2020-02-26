@@ -10,7 +10,7 @@
 		"lint": "prettier --list-different \"packages/*/src/**/*.{js,jsx,ts,tsx}\"",
 		"lint-fix": "prettier --write \"packages/*/src/**/*.{js,jsx,ts,tsx}\"",
 		"posttest": "yarn lint",
-		"publish": "lerna run build && lerna publish",
+		"deploy": "npx lerna run build && lerna publish",
 		"clean": "find . -name \"node_modules\" -exec rm -rf '{}' + && find . -name \"lib\" -exec rm -rf '{}' +",
 		"docz:dev": "docz dev",
 		"docz:build": "docz build",
