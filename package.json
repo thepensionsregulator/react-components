@@ -3,15 +3,10 @@
 	"name": "@tpr/monorepo",
 	"license": "MIT",
 	"scripts": {
-		"remove-typing-dupes": "rimraf node_modules/@types/react-native",
-		"postinstall": "lerna exec -- yarn install --no-lockfile && lerna run prepare",
-		"diff": "check-if-folder-contents-changed-in-git-commit-range",
-		"build": "lerna run build",
+		"postinstall": "npx lerna exec -- yarn install --no-lockfile && npx lerna run prepare",
+		"build": "npx lerna run build",
 		"test": "jest",
 		"test:watch": "jest --watch",
-		"coverage": "jest --verbose --coverage",
-		"coverage:upload": "codecov",
-		"codecov": "echo TODO...",
 		"lint": "prettier --list-different \"packages/*/src/**/*.{js,jsx,ts,tsx}\"",
 		"lint-fix": "prettier --write \"packages/*/src/**/*.{js,jsx,ts,tsx}\"",
 		"posttest": "yarn lint",
@@ -22,12 +17,12 @@
 		"docz:serve": "docz build && docz serve"
 	},
 	"dependencies": {
-		"ajax": "file:packages/ajax",
-		"core": "file:packages/core",
-		"forms": "file:packages/forms",
-		"icons": "file:packages/icons",
-		"table": "file:packages/table",
-		"theming": "file:packages/theming"
+		"@tpr/ajax": "file:./packages/ajax",
+		"@tpr/core": "file:./packages/core",
+		"@tpr/forms": "file:./packages/forms",
+		"@tpr/icons": "file:./packages/icons",
+		"@tpr/table": "file:./packages/table",
+		"@tpr/theming": "file:./packages/theming"
 	},
 	"devDependencies": {
 		"@babel/core": "^7.8.3",
