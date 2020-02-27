@@ -46,7 +46,6 @@ describe('Checkbox', () => {
 				/>
 			),
 		});
-
 		expect(getByTestId(/checkbox-unchecked/)).toBeInTheDocument();
 		getByLabelText(/Click me/).click();
 		expect(getByTestId(/checkbox-checked/)).toBeInTheDocument();

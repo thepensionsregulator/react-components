@@ -5,8 +5,10 @@ import React, {
 	useEffect,
 	useCallback,
 } from 'react';
-import StoreProvider from '@alekna/react-store';
-import { createStore, useStoreContext } from '@alekna/react-store';
+import StoreProvider, {
+	createStore,
+	useStoreContext,
+} from '@alekna/react-store';
 import { removeItemFromStorage, storeItem } from './localStorage';
 import reducer from './reducer';
 import { of, iif, Observable } from 'rxjs';
