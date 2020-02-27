@@ -52,6 +52,7 @@ export const Header: React.FC<HeaderProps> = ({
 								scale="small"
 								appearance="link"
 								textDecoration="underline"
+								data-testid="onClickSchemeOptions"
 								onClick={onClickSchemeOptions}
 								mr={1}
 							>
@@ -61,6 +62,7 @@ export const Header: React.FC<HeaderProps> = ({
 								scale="small"
 								appearance="link"
 								textDecoration="underline"
+								data-testid="onClickLogout"
 								onClick={onClickLogout}
 							>
 								Log out
