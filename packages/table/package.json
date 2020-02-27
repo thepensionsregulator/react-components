@@ -40,7 +40,7 @@
 	},
 	"dependencies": {
 		"@alekna/react-data-browser": "^1.1.11",
-		"@tpr/core": "^1.0.11",
+		"@tpr/core": "file:../core",
 		"lodash": "^4.17.15",
 		"react-bottom-scroll-listener": "^3.0.0"
 	},

@@ -37,7 +37,7 @@
 	},
 	"dependencies": {
 		"@alekna/react-store": "^1.2.11-alpha.0",
-		"@tpr/core": "^1.0.11",
+		"@tpr/core": "file:../core",
 		"immer": "^5.3.6",
 		"lodash": "^4.17.15",
 		"qs": "^6.9.1",

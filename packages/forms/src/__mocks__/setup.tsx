@@ -2,7 +2,7 @@ import React from 'react';
 import { Form } from '../utils/forms';
 import { render } from '@testing-library/react';
 import { ThemeProvider } from 'styled-components';
-import { lightTheme } from '../../../theming';
+import { lightTheme } from '../../../theming/src';
 import { FormRenderProps } from 'react-final-form';
 
 type FormProviderProps = {
