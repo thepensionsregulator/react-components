@@ -43,7 +43,7 @@ export const InputDate: React.FC<FieldRenderProps<string> & FieldProps> = ({
 		if (input && typeof input.onChange === 'function') {
 			const newDate = getValidDate(year, month, day);
 			if (newDate) {
-				console.log(getValidDate(year, month, day));
+				// console.log(getValidDate(year, month, day));
 				input.onChange({ dd: day, mm: month, yyyy: year });
 			}
 		}
