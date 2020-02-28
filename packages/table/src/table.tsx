@@ -1,6 +1,5 @@
 import React, { ReactElement } from 'react';
 import DataBrowser, { DataBrowserProps } from '@alekna/react-data-browser';
-import { NetworkStatus, ApolloError } from 'apollo-client';
 import { TableContainer, TableHead, TableHeadRowItem } from './styles';
 import { TableListProps, TableList } from './views/table';
 import { H3 } from '@tpr/core';
@@ -9,9 +8,9 @@ type TableBaseProps<T> = {
 	/** fixed column width for the first and last items in the row */
 	fixedColW?: number;
 	data: T | T[];
-	error?: ApolloError;
+	error?: any;
 	loading?: boolean;
-	networkStatus?: NetworkStatus;
+	networkStatus?: any;
 	children: (utils: TableListProps<T>) => ReactElement;
 };
 

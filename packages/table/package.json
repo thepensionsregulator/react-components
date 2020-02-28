@@ -32,17 +32,17 @@
 		"report-coverage": "codecov"
 	},
 	"peerDependencies": {
-		"apollo-client": "^2.6.8",
 		"react": "^16.12.0",
-		"react-dom": "^16.12.0",
-		"styled-components": "^5.0.1",
-		"styled-system": "^5.1.5"
+		"react-dom": "^16.12.0"
 	},
 	"dependencies": {
 		"@alekna/react-data-browser": "^1.1.11",
 		"@tpr/core": "file:../core",
 		"lodash": "^4.17.15",
-		"react-bottom-scroll-listener": "^3.0.0"
+		"react-bottom-scroll-listener": "^3.0.0",
+		"styled-components": "^5.0.1",
+		"styled-system": "^5.1.5",
+		"tslib": "^1.11.1"
 	},
 	"publishConfig": {
 		"access": "public"

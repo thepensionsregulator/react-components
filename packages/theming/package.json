@@ -1,7 +1,7 @@
 {
 	"name": "@tpr/theming",
 	"version": "1.0.11",
-	"description": "TPR Core components",
+	"description": "TPR Theming components",
 	"author": "David Alekna <david.alekna@tpr.gov.uk>",
 	"license": "MIT",
 	"main": "./lib/index.js",
@@ -33,8 +33,7 @@
 	},
 	"peerDependencies": {
 		"react": "^16.12.0",
-		"react-dom": "^16.12.0",
-		"styled-components": "^5.0.1"
+		"react-dom": "^16.12.0"
 	},
 	"publishConfig": {
 		"access": "public"
@@ -43,5 +42,9 @@
 		"cross-env": "^7.0.0",
 		"typescript": "^3.8.2"
 	},
-	"gitHead": "57aec9c9de22596d6343bae07eb6b198322a0bee"
+	"gitHead": "57aec9c9de22596d6343bae07eb6b198322a0bee",
+	"dependencies": {
+		"styled-components": "^5.0.1",
+		"tslib": "^1.11.1"
+	}
 }
