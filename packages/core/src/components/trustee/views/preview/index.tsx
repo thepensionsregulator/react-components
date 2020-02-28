@@ -19,7 +19,7 @@ const Preview: React.FC = () => {
 					mr={[null, '40px']}
 				>
 					<Button onClick={() => send('EDIT_ORG')}>
-						Correspondance address {'>'}
+						Correspondence address {'>'}
 					</Button>
 					<Flex mt={0} flexDirection="column">
 						<H4 fontWeight="bold">{company.name}</H4>

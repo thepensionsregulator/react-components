@@ -284,7 +284,7 @@ const registryInstance = ({ endpoint, method, send, errorPath }) => {
 		method: method,
 		url: `https://apim.dev01.tpr.gov.uk/randomtrustees/${endpoint}`,
 		headers: {
-			'Ocp-Apim-Subscription-Key': 'c7dd5beab8a74e5ca0a20c2a02ddeb57',
+			'Ocp-Apim-Subscription-Key': process.env.API_ENDPOINT,
 		},
 	}).pipe(
 		retryWhen(
