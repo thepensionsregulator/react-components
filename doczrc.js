@@ -7,4 +7,7 @@ export default {
 	ignore: ['changelog', 'code_of_conduct', 'contributing', 'license'].map(
 		word => `${word.toUpperCase()}.md`,
 	),
+	themeConfig: {
+		useScopingInPlayground: true,
+	},
 };

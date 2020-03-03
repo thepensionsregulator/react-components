@@ -11,7 +11,7 @@ import {
 interface HtmlHTagTypes extends SpaceProps, ColorProps, TypographyProps {}
 
 export const fontStack = css`
-	font-family: ${({ theme }) => theme.fonts.sansSerif};
+	font-family: ${({ theme }) => theme.fonts.serif};
 `;
 
 export const H1 = styled.h1<HtmlHTagTypes>`
