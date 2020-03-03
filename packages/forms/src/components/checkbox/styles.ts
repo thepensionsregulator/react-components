@@ -1,11 +1,11 @@
 import styled from 'styled-components';
 
-type StyledCheckboxWrapper = {
+type StyledCheckboxWrapperProps = {
 	align?: string;
 	disabled?: boolean;
 };
 
-export const StyledCheckboxWrapper = styled('div')<StyledCheckboxWrapper>`
+export const StyledCheckboxWrapper = styled('div')<StyledCheckboxWrapperProps>`
 	display: flex;
 	flex-direction: 'row';
 	color: ${({ theme }) => theme.colors.neutral['800']};

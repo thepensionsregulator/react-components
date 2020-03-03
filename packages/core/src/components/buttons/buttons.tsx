@@ -103,7 +103,7 @@ const outlinedAppearance = colors => {
 	`;
 };
 
-function appearances(themeColors: DefaultTheme['colors'], intent: Intent) {
+function appearances(themeColors: any, intent: Intent) {
 	const colors = themeColors[intent === 'none' ? 'primary' : intent];
 	return {
 		primary: primaryAppearance(colors),
@@ -112,11 +112,12 @@ function appearances(themeColors: DefaultTheme['colors'], intent: Intent) {
 	};
 }
 
-const getAppearance = <T extends ButtonConfigProps & { theme: DefaultTheme }>({
+const getAppearance = ({
 	theme,
 	appearance = 'primary',
 	intent = 'none',
-}: T) => appearances(theme.colors, intent)[appearance];
+}: ButtonConfigProps & { theme: DefaultTheme }) =>
+	appearances(theme.colors, intent)[appearance];
 
 const getScale = ({ scale = 'normal' }): string => scales[scale];
 

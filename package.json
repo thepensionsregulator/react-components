@@ -3,7 +3,7 @@
 	"name": "@tpr/monorepo",
 	"license": "MIT",
 	"scripts": {
-		"postinstall": "npx lerna exec -- yarn install --no-lockfile && npx lerna run prepare",
+		"postinstall": "npx lerna exec -- npm install --package-lock=false && npx lerna run prepare",
 		"build": "npx lerna run build",
 		"test": "jest",
 		"test:watch": "jest --watch",
@@ -14,10 +14,11 @@
 		"clean": "find . -name \"node_modules\" -exec rm -rf '{}' + && find . -name \"lib\" -exec rm -rf '{}' +",
 		"docz:dev": "docz dev",
 		"docz:build": "docz build",
-		"docz:serve": "docz build && docz serve"
+		"docz:serve": "docz build && docz serve",
+		"storybook": "start-storybook -p 6006",
+		"build-storybook": "build-storybook"
 	},
 	"dependencies": {
-		"@tpr/ajax": "file:./packages/ajax",
 		"@tpr/core": "file:./packages/core",
 		"@tpr/forms": "file:./packages/forms",
 		"@tpr/icons": "file:./packages/icons",
@@ -25,9 +26,17 @@
 		"@tpr/theming": "file:./packages/theming"
 	},
 	"devDependencies": {
-		"@babel/core": "^7.8.3",
+		"@babel/core": "^7.8.6",
 		"@rollup/plugin-commonjs": "^11.0.2",
 		"@rollup/plugin-node-resolve": "^7.1.1",
+		"@storybook/addon-actions": "^5.3.14",
+		"@storybook/addon-docs": "^5.3.14",
+		"@storybook/addon-info": "^5.3.14",
+		"@storybook/addon-links": "^5.3.14",
+		"@storybook/addons": "^5.3.14",
+		"@storybook/html": "^5.3.14",
+		"@storybook/preset-typescript": "^1.2.0",
+		"@storybook/react": "^5.3.14",
 		"@testing-library/jest-dom": "^5.1.1",
 		"@testing-library/react": "^9.4.1",
 		"@testing-library/react-hooks": "^3.2.1",
@@ -41,22 +50,23 @@
 		"@types/react-dom": "^16.9.5",
 		"@types/styled-components": "^5.0.1",
 		"@types/styled-system": "^5.1.7",
+		"awesome-typescript-loader": "^5.2.1",
 		"babel-jest": "^25.1.0",
 		"babel-loader": "^8.0.6",
+		"babel-register": "^6.26.0",
 		"codecov": "^3.6.5",
 		"core-js": "^3.6.4",
 		"cross-env": "^7.0.0",
-		"docz": "^2.2.0",
+		"docz": "^2.3.0-alpha.13",
+		"fork-ts-checker-webpack-plugin": "^4.0.5",
 		"immutability-helper": "^3.0.1",
 		"jest": "^25.1.0",
 		"lerna": "^3.20.2",
 		"lerna-changelog": "^1.0.0",
-		"npm-run-all": "^4.1.5",
 		"react": "^16.12.0",
 		"react-docgen-typescript-loader": "^3.6.0",
 		"react-dom": "^16.12.0",
 		"react-is": "^16.13.0",
-		"react-test-renderer": "^16.12.0",
 		"rimraf": "^3.0.2",
 		"rollup": "^1.31.1",
 		"rollup-plugin-invariant": "^0.5.6",
@@ -69,12 +79,11 @@
 		"ts-jest": "^25.2.1",
 		"ts-loader": "^6.2.1",
 		"ts-node": "^8.6.2",
-		"tslib": "^1.11.0",
-		"typescript": "3.7.3",
-		"webpack": "^4.42.0"
+		"tslib": "^1.11.1",
+		"typescript": "^3.7.5"
 	},
 	"resolutions": {
-		"gatsby": "2.19.21"
+		"docz/**/webpack": "4.28.4"
 	},
 	"lint-staged": {
 		"*.{js,jsx,ts,tsx}": [

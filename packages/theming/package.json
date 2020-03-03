@@ -40,7 +40,7 @@
 	},
 	"devDependencies": {
 		"cross-env": "^7.0.0",
-		"typescript": "^3.8.2"
+		"typescript": "3.7.5"
 	},
 	"gitHead": "57aec9c9de22596d6343bae07eb6b198322a0bee",
 	"dependencies": {
