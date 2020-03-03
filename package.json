@@ -57,7 +57,7 @@
 		"codecov": "^3.6.5",
 		"core-js": "^3.6.4",
 		"cross-env": "^7.0.0",
-		"docz": "^2.3.0-alpha.13",
+		"docz": "^2.2.0",
 		"fork-ts-checker-webpack-plugin": "^4.0.5",
 		"immutability-helper": "^3.0.1",
 		"jest": "^25.1.0",
@@ -80,10 +80,7 @@
 		"ts-loader": "^6.2.1",
 		"ts-node": "^8.6.2",
 		"tslib": "^1.11.1",
-		"typescript": "^3.7.5"
-	},
-	"resolutions": {
-		"docz/**/webpack": "4.28.4"
+		"typescript": "^3.8.3"
 	},
 	"lint-staged": {
 		"*.{js,jsx,ts,tsx}": [

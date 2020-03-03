@@ -1,4 +1,4 @@
-const { get } = require('docz-utils')
+const get = require('lodash/get')
 
 const NO_OP = () => {}
 

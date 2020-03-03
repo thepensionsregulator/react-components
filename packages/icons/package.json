@@ -41,7 +41,7 @@
 	"gitHead": "57aec9c9de22596d6343bae07eb6b198322a0bee",
 	"devDependencies": {
 		"cross-env": "^7.0.0",
-		"typescript": "3.7.5"
+		"typescript": "^3.8.3"
 	},
 	"dependencies": {
 		"styled-components": "^5.0.1",
