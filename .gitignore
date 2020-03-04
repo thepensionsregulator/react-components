@@ -47,7 +47,7 @@ npm
 # alm editor
 .alm
 
-yarn.lock
+packages/*/yarn.lock
 
 # Build Path of Test Fixtures
 test/**/public
@@ -68,4 +68,3 @@ junit.xml
 .rpt2_cache
 
 tsconfig.tsbuildinfo
-yarn.lock
