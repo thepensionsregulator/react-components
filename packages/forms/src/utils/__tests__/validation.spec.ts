@@ -31,6 +31,8 @@ describe('form validation', () => {
 
 		const fieldsValidation = validate(fields);
 
-		expect(fieldsValidation(keyValuePairs)).toEqual({ [fields[0].name]: fields[0].error });
+		expect(fieldsValidation(keyValuePairs)).toEqual({
+			[fields[0].name]: fields[0].error,
+		});
 	});
 });

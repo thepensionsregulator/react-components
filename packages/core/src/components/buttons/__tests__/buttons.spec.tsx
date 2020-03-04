@@ -6,7 +6,9 @@ import lightTheme from '../../../../../theming/src/lightTheme';
 import { ThemeProvider } from 'styled-components';
 
 function renderFn(children) {
-	const utils = render(<ThemeProvider theme={lightTheme}>{children}</ThemeProvider>);
+	const utils = render(
+		<ThemeProvider theme={lightTheme}>{children}</ThemeProvider>,
+	);
 	return { ...utils };
 }
 
