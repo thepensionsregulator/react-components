@@ -3,6 +3,7 @@
 	"references": [
 		{ "path": "packages/core" },
 		{ "path": "packages/forms" },
+		{ "path": "packages/icons" },
 		{ "path": "packages/table" },
 		{ "path": "packages/theming" }
 	]

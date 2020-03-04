@@ -2,7 +2,7 @@ import React from 'react';
 import { StyledCard, StyledCardToolbar } from './components/card';
 import { TrusteeProvider, useTrusteeContext, TrusteeProps } from './context';
 import { Flex } from '../layout';
-import { Text, H2 } from '../typography';
+import { Text, H4 } from '../typography';
 import { Button } from './components/button';
 import Preview from './views/preview';
 import Name from './views/name';
@@ -46,26 +46,26 @@ export const Trustee: React.FC<Omit<TrusteeProps, 'children'>> = props => {
 			{({ current: { context, matches }, send }) => (
 				<StyledCard complete={context.complete}>
 					<StyledCardToolbar>
-						<Flex width="100%" flexDirection="column" mr="40px">
+						<Flex width="100%" flexDirection="column" mr="40px" p={[2]}>
 							<Button
 								onClick={() => send('EDIT_TRUSTEE')}
 								disabled={!matches('preview')}
 							>
-								Trustee >
+								Trustee {'>'}
 							</Button>
 							<Flex mt={0} flexDirection="column">
-								<H2>{`${context.trustee.firstName} ${context.trustee.lastName}`}</H2>
+								<H4 fontWeight="bold">{`${context.trustee.firstName} ${context.trustee.lastName}`}</H4>
 								<Text>Member-nominated trustee</Text>
 							</Flex>
 						</Flex>
-						<Flex width="100%" justifyContent="flex-end">
+						<Flex width="100%" justifyContent="flex-end" p={[null, 2]}>
 							{context.complete ? 'No issues' : 'Incomplete'} |{' '}
 							<Flex width="80px">
 								<Button
 									onClick={() => send('REMOVE')}
 									disabled={!matches('preview')}
 								>
-									Remove >
+									Remove {'>'}
 								</Button>
 							</Flex>
 						</Flex>

@@ -12,7 +12,7 @@ export const FlexCol = styled('div')`
 `;
 
 export const TableContainer = styled(FlexCol)`
-	font-family: ${({ theme }) => theme.fonts.montserrat};
+	font-family: ${({ theme }) => theme.fonts.serif};
 	position: relative;
 	width: 100%;
 	/* border: 1px solid #eee; */
@@ -25,11 +25,10 @@ export const TableHead = styled(FlexRow)`
 	/* user-select: none; */
 `;
 
-type TableHeadRowItemProps = {
+interface TableHeadRowItemProps extends FlexboxProps {
 	isClickable?: boolean;
-};
-
-export const TableHeadRowItem = styled(FlexRow)<TableHeadRowItemProps & FlexboxProps>`
+}
+export const TableHeadRowItem = styled(FlexRow)<TableHeadRowItemProps>`
 	align-items: center;
 	justify-content: space-between;
 	padding: 15px;

@@ -1,11 +1,11 @@
 import styled from 'styled-components';
 
-type StyledCheckboxWrapper = {
+type StyledCheckboxWrapperProps = {
 	align?: string;
 	disabled?: boolean;
 };
 
-export const StyledCheckboxWrapper = styled('div')<StyledCheckboxWrapper>`
+export const StyledCheckboxWrapper = styled('div')<StyledCheckboxWrapperProps>`
 	display: flex;
 	flex-direction: 'row';
 	color: ${({ theme }) => theme.colors.neutral['800']};
@@ -31,14 +31,4 @@ export const StyledCheckboxWrapper = styled('div')<StyledCheckboxWrapper>`
 			padding-bottom: 2px;
 		}
 	}
-`;
-
-type StyledHiddenInputProps = {
-	checked: any;
-};
-
-export const StyledHiddenInput = styled('input')<StyledHiddenInputProps>`
-	visibility: hidden;
-	width: 0;
-	height: 0;
 `;

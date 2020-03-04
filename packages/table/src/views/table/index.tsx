@@ -1,13 +1,26 @@
 import React, { ReactElement } from 'react';
 import { useDataBrowser, getBySortField } from '@alekna/react-data-browser';
 import { useBottomScrollListener } from 'react-bottom-scroll-listener';
-import { TableBody, TableBodyRow, TableBodyRowItem, RefetchingData } from './styles';
+import {
+	TableBody,
+	TableBodyRow,
+	TableBodyRowItem,
+	RefetchingData,
+} from './styles';
 import { Flex, Text } from '@tpr/core';
 
 export type TableListProps<T> = {
-	fieldReducer: <T>(fieldValue?: unknown, fieldName?: string, row?: T) => ReactElement;
+	fieldReducer: <T>(
+		fieldValue?: unknown,
+		fieldName?: string,
+		row?: T,
+	) => ReactElement;
 	onRowClick?: <T>(row: T) => void;
-	rowOptions?: (props: { toggleMenu: Function; row: any; history: any }) => ReactElement;
+	rowOptions?: (props: {
+		toggleMenu: Function;
+		row: any;
+		history: any;
+	}) => ReactElement;
 	onBottomTouch?: () => void;
 	/** fixed first and last column width */
 	fixedColW?: number;
@@ -21,7 +34,7 @@ export type TableListProps<T> = {
 	data: T[];
 };
 
-export const TableList = <T extends {}>({
+export const TableList = ({
 	isRefetching,
 	fixedColW = 40,
 	maxBodyHeight,
@@ -33,7 +46,7 @@ export const TableList = <T extends {}>({
 	bottomTouchOffset = 300,
 	rowHeight,
 	emptyDataMessage = `No data available yet... 🤷🏼‍♂️`,
-}: TableListProps<T>) => {
+}: TableListProps<any>) => {
 	const { visibleColumns, columnFlex } = useDataBrowser();
 	const bodyRef = useBottomScrollListener(onBottomTouch, bottomTouchOffset);
 
@@ -47,7 +60,9 @@ export const TableList = <T extends {}>({
 
 	return (
 		<TableBody ref={bodyRef} maxBodyHeight={maxBodyHeight}>
-			{isRefetching && <RefetchingData children={<div>loading spinner...</div>} />}
+			{isRefetching && (
+				<RefetchingData children={<div>loading spinner...</div>} />
+			)}
 			{data.map((row, key) => (
 				<TableBodyRow key={key} isSelectable={typeof onRowClick === 'function'}>
 					{visibleColumns.map(({ sortField }, index) => (
@@ -56,13 +71,19 @@ export const TableList = <T extends {}>({
 							flex={columnFlex[index]}
 							height={rowHeight}
 							isSelectable={typeof onRowClick === 'function'}
-							onClick={() => typeof onRowClick === 'function' && onRowClick(row)}
+							onClick={() =>
+								typeof onRowClick === 'function' && onRowClick(row)
+							}
 						>
 							{fieldReducer(getBySortField(row, sortField), sortField, row)}
 						</TableBodyRowItem>
 					))}
 					{fixedColW && (
-						<TableBodyRowItem flex="0 0 auto" style={{ width: fixedColW }} children={<Options {...row} />} />
+						<TableBodyRowItem
+							flex="0 0 auto"
+							style={{ width: fixedColW }}
+							children={<Options {...row} />}
+						/>
 					)}
 				</TableBodyRow>
 			))}

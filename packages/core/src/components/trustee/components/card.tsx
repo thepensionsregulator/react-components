@@ -2,7 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 import { Flex } from '../../layout';
 import { Button } from '../../buttons';
-import { H2, H4 } from '../../typography';
+import { H3, H4 } from '../../typography';
 
 type StyledCardProps = { complete?: boolean };
 
@@ -21,40 +21,43 @@ export const StyledCard = styled('div')<StyledCardProps>`
 
 export const StyledCardToolbar = styled('div')`
 	display: flex;
+	flex-direction: column;
 	flex: 0 0 auto;
 	justify-content: space-evenly;
 	align-items: flex-start;
-	padding: 20px 20px 0 20px;
+
+	${({ theme }) => theme.mediaQueries.sm`
+		flex-direction: row;
+	`}
 `;
 
 type ToolbarProps = {
 	title: string;
-	subtitle: string;
 };
 
-export const Toolbar: React.FC<ToolbarProps> = ({ title, subtitle }) => {
+export const Toolbar: React.FC<ToolbarProps> = ({ title }) => {
 	return (
 		<Flex
-			flex="0 0 auto"
-			alignItems="center"
 			flexDirection="column"
-			height={100}
-			borderBottom="1 solid grey"
+			borderBottom="1px solid"
+			borderColor="neutral.200"
+			mb={2}
 			pb={1}
 		>
-			<Button appearance="link" children="< Back" />
-			<H4>{subtitle}</H4>
-			<H2>{title}</H2>
+			<H4 color="neutral.300">Edit trustee</H4>
+			<H3 fontWeight="bold">{title}</H3>
 		</Flex>
 	);
 };
 
 type FooterProps = {
 	onContinue?: {
+		type?: 'button' | 'submit' | 'reset';
 		title?: string;
 		fn?: () => void;
 	};
 	onSave?: {
+		type?: 'button' | 'submit' | 'reset';
 		title?: string;
 		fn?: () => void;
 	};
@@ -74,12 +77,16 @@ export const Footer: React.FC<FooterProps> = ({
 			justifyContent="flex-start"
 		>
 			{onContinue && (
-				<Button onClick={onContinue.fn} disabled={isDisabled}>
+				<Button
+					type={onContinue?.type}
+					onClick={onContinue.fn}
+					disabled={isDisabled}
+				>
 					{onContinue.title}
 				</Button>
 			)}
 			{onSave && (
-				<Button onClick={onSave.fn} disabled={isDisabled}>
+				<Button type={onSave?.type} onClick={onSave.fn} disabled={isDisabled}>
 					{onSave.title}
 				</Button>
 			)}

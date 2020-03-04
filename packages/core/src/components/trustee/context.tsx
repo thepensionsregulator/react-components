@@ -7,15 +7,22 @@ type TrusteeContextProps = {
 	current: Partial<State<TC, any, any, any>>;
 	send: (event: any, payload?: EventData) => Partial<State<TC, any, any, any>>;
 	onToggleCorrect?: () => void;
+	onCorrect?: (...args: any[]) => void;
+	onRemove?: (...args: any[]) => void;
+	onSave?: (...args: any[]) => void;
 };
 
 export const TrusteeContext = createContext<TrusteeContextProps>({
 	current: {},
 	send: (_, __) => ({}),
 	onToggleCorrect: () => {},
+	onCorrect: () => {},
+	onRemove: () => {},
+	onSave: () => {},
 });
 
 type RenderProps = (_: TrusteeContextProps) => ReactElement;
+
 export type TrusteeProps = {
 	trustee: Partial<TC>;
 	children?: RenderProps | ReactElement;

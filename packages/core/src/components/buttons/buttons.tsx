@@ -14,8 +14,8 @@ const scales = {
 	`,
 	normal: css`
 		height: ${({ theme }) => theme.space[5]}px;
-		padding: 0 32px;
-		font-size: ${({ theme }) => theme.fontSizes[4]}px;
+		padding: 0 28px;
+		font-size: ${({ theme }) => theme.fontSizes[2]}px;
 	`,
 	big: css`
 		height: ${({ theme }) => theme.space[6]}px;
@@ -32,6 +32,8 @@ const linkAppearance = colors => {
 		color: ${colors?.[200]};
 		border: none;
 		text-decoration: none;
+		padding-right: 0;
+		padding-left: 0;
 
 		&:hover {
 			color: ${colors?.[300]};
@@ -101,7 +103,7 @@ const outlinedAppearance = colors => {
 	`;
 };
 
-function appearances(themeColors: DefaultTheme['colors'], intent: Intent) {
+function appearances(themeColors: any, intent: Intent) {
 	const colors = themeColors[intent === 'none' ? 'primary' : intent];
 	return {
 		primary: primaryAppearance(colors),
@@ -110,11 +112,12 @@ function appearances(themeColors: DefaultTheme['colors'], intent: Intent) {
 	};
 }
 
-const getAppearance = <T extends ButtonConfigProps & { theme: DefaultTheme }>({
+const getAppearance = ({
 	theme,
 	appearance = 'primary',
 	intent = 'none',
-}: T) => appearances(theme.colors, intent)[appearance];
+}: ButtonConfigProps & { theme: DefaultTheme }) =>
+	appearances(theme.colors, intent)[appearance];
 
 const getScale = ({ scale = 'normal' }): string => scales[scale];
 
@@ -124,40 +127,51 @@ type Scale = 'small' | 'normal' | 'big';
 
 type ButtonConfigProps = {
 	/** determins button color from theme */
-	intent: Intent;
+	intent?: Intent;
 	/** determins button style */
-	appearance: Appearance;
+	appearance?: Appearance;
 	/** determins button size */
-	scale: Scale;
+	scale?: Scale;
 	/** button loading state */
-	isLoading: boolean;
+	isLoading?: boolean;
 	/** icon JSX component before text */
-	iconBefore: FunctionComponent<{ style: any }>;
+	iconBefore?: FunctionComponent<{ style: any }>;
 	/** icon JSX component after text */
-	iconAfter: FunctionComponent<{ style: any }>;
-	disabled: boolean;
+	iconAfter?: FunctionComponent<{ style: any }>;
+	disabled?: boolean;
 };
 
 interface ButtonProps
 	extends ButtonHTMLAttributes<HTMLButtonElement>,
-		Partial<ButtonConfigProps>,
+		ButtonConfigProps,
 		SpaceProps,
-		LayoutProps {}
+		LayoutProps {
+	textDecoration?: string;
+}
 
-const StyledButton = styled('button').attrs<ButtonProps>(({ type = 'button' }) => ({
-	type,
-}))`
+const StyledButton = styled('button').attrs<ButtonProps>(
+	({ type = 'button' }) => ({
+		type,
+	}),
+)`
 	${getScale}
 	${getAppearance}
 
 	display: inline-block;
 	cursor: pointer;
+	text-decoration: ${({ textDecoration }) =>
+		textDecoration ? textDecoration : null};
 
 	${space}
 	${layout}
 `;
 
-export const Button: React.FC<ButtonProps> = ({ children, iconAfter, iconBefore, ...props }) => {
+export const Button: React.FC<ButtonProps> = ({
+	children,
+	iconAfter,
+	iconBefore,
+	...props
+}) => {
 	return (
 		<StyledButton disabled={props.isLoading} {...props}>
 			{iconBefore && iconBefore({ style: { marginRight: 10 } })}

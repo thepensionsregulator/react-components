@@ -52,6 +52,7 @@ yarn.lock
 # Build Path of Test Fixtures
 test/**/public
 .gatsby-context.js
+gatsby-config.js
 .cache/
 .netlify
 
