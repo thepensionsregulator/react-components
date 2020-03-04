@@ -15,7 +15,7 @@ series [How to Contribute to an Open Source Project on GitHub][egghead]
 > pull requests from branches on your fork. To do this, run:
 >
 > ```
-> git remote add upstream https://github.com/davidalekna/tpr.git
+> git remote add upstream https://github.com/thepensionsregulator/react-components.git
 > git fetch upstream
 > git branch --set-upstream-to=upstream/master master
 > ```
@@ -54,5 +54,5 @@ Please checkout the [the open issues][issues]
 Also, please watch the repo and respond to questions/bug reports/feature
 requests! Thanks!
 
-[all-contributors]: https://github.com/davidalekna/tpr/all-contributors
-[issues]: https://github.com/davidalekna/tpr/issues
+[all-contributors]: https://github.com/thepensionsregulator/react-components/all-contributors
+[issues]: https://github.com/thepensionsregulator/react-components/issues
