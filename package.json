@@ -7,16 +7,15 @@
 		"build": "npx lerna run build",
 		"test": "jest",
 		"test:watch": "jest --watch",
-		"lint": "prettier --list-different \"packages/*/src/**/*.{js,jsx,ts,tsx}\"",
-		"lint-fix": "prettier --write \"packages/*/src/**/*.{js,jsx,ts,tsx}\"",
 		"posttest": "yarn lint",
+		"lint": "prettier --list-different \"packages/*/src/**/*.{ts,tsx}\"",
+		"lint-fix": "prettier --write \"packages/*/src/**/*.{ts,tsx}\"",
 		"deploy": "npx lerna run build && lerna publish",
 		"clean": "find . -name \"node_modules\" -exec rm -rf '{}' + && find . -name \"lib\" -exec rm -rf '{}' +",
+		"format": "pretty-quick --pattern '**/*.*(js|ts|tsx)'",
 		"docz:dev": "docz dev",
 		"docz:build": "docz build",
-		"docz:serve": "docz build && docz serve",
-		"storybook": "start-storybook -p 6006",
-		"build-storybook": "build-storybook"
+		"docz:serve": "docz build && docz serve"
 	},
 	"dependencies": {
 		"@tpr/core": "file:./packages/core",
@@ -26,13 +25,13 @@
 		"@tpr/theming": "file:./packages/theming"
 	},
 	"devDependencies": {
-		"@babel/core": "^7.8.3",
+		"@babel/core": "^7.8.6",
 		"@rollup/plugin-commonjs": "^11.0.1",
 		"@rollup/plugin-node-resolve": "^7.0.0",
-		"@testing-library/jest-dom": "^5.0.0",
+		"@testing-library/jest-dom": "^5.1.1",
 		"@testing-library/react": "^9.4.0",
 		"@testing-library/react-hooks": "^3.2.1",
-		"@types/jest": "^24.0.23",
+		"@types/jest": "^25.1.3",
 		"@types/lodash": "^4.14.149",
 		"@types/prop-types": "^15.7.3",
 		"@types/qs": "^6.9.0",
@@ -42,17 +41,18 @@
 		"@types/styled-components": "^4.4.1",
 		"@types/styled-system": "^5.1.4",
 		"@xstate/react": "^0.8.1",
-		"apollo-client": "^2.6.8",
-		"babel-jest": "^24.9.0",
+		"babel-jest": "^25.1.0",
 		"babel-loader": "^8.0.6",
 		"codecov": "^3.6.1",
 		"cross-env": "^6.0.3",
 		"docz": "^2.2.0",
 		"immutability-helper": "^3.0.1",
-		"jest": "^24.9.0",
+		"jest": "^25.1.0",
 		"lerna": "^3.19.0",
 		"lerna-changelog": "^1.0.0",
 		"npm-run-all": "^4.1.5",
+		"prettier": "^1.19.1",
+		"pretty-quick": "^2.0.1",
 		"react": "^16.12.0",
 		"react-docgen-typescript-loader": "^3.6.0",
 		"react-dom": "^16.12.0",
@@ -66,7 +66,7 @@
 		"rollup-plugin-typescript2": "^0.25.3",
 		"styled-components": "^5.0.0",
 		"styled-system": "^5.1.4",
-		"ts-jest": "^24.2.0",
+		"ts-jest": "^25.2.1",
 		"ts-loader": "^6.2.1",
 		"ts-node": "^8.5.2",
 		"tslib": "^1.10.0",
@@ -76,7 +76,7 @@
 		"@types/react": "16.9.17"
 	},
 	"lint-staged": {
-		"*.{js,jsx,ts,tsx}": [
+		"*.{ts,tsx}": [
 			"prettier --write",
 			"git add"
 		]

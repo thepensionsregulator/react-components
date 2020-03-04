@@ -1,4 +1,10 @@
-const ignores = ['/node_modules/', '/fixtures/', '/__tests__/helpers/', '__mocks__', '__stories__'];
+const ignores = [
+	'/node_modules/',
+	'/lib',
+	'/__tests__/helpers/',
+	'__mocks__',
+	'__stories__',
+];
 
 module.exports = {
 	transform: {
