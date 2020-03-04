@@ -14,13 +14,13 @@ export const RefetchingData = styled('div')`
 	z-index: 100;
 `;
 
-type TableBody = {
+type TableBodyProps = {
 	maxBodyHeight?: number;
 	/** ref for react ref usage */
 	ref?: any;
 };
 
-export const TableBody = styled(FlexCol)<TableBody>`
+export const TableBody = styled(FlexCol)<TableBodyProps>`
 	flex: 1 1 auto;
 	position: relative;
 	max-height: ${({ maxBodyHeight }) => maxBodyHeight && `${maxBodyHeight}px`};

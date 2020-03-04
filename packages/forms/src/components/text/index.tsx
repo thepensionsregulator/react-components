@@ -1,9 +1,8 @@
 import React from 'react';
 import { Field, FieldRenderProps } from 'react-final-form';
-import { ErrorMessage, FormLabelText, StyledInputLabel } from '../elements';
+import { StyledInputLabel, InputElementHeading } from '../elements';
 import { StyledInput } from './styles';
 import { FieldProps } from '../../utils/validation';
-import { Span } from '@tpr/core';
 
 export const InputText: React.FC<FieldRenderProps<string> & FieldProps> = ({
 	label,
@@ -18,19 +17,12 @@ export const InputText: React.FC<FieldRenderProps<string> & FieldProps> = ({
 			isError={meta && meta.touched && meta.error}
 			flexDirection="column"
 		>
-			{label && (
-				<FormLabelText m="0px">
-					{label} {!required && '(optional)'}
-				</FormLabelText>
-			)}
-			{hint && (
-				<Span fontSize={1} my={0} color="neutral.300">
-					{hint}
-				</Span>
-			)}
-			{meta && meta.touched && meta.error && (
-				<ErrorMessage>{meta.error}</ErrorMessage>
-			)}
+			<InputElementHeading
+				label={label}
+				required={required}
+				hint={hint}
+				meta={meta}
+			/>
 			<StyledInput aria-label={label} meta={meta} {...input} {...props} />
 		</StyledInputLabel>
 	);

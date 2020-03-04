@@ -1,6 +1,9 @@
 import qs from 'qs';
-import { getObjectValueByString } from '@tpr/core';
 import { FieldState } from 'final-form';
+
+const getObjectValueByString = (obj: object, path: string): unknown => {
+	return path.split('.').reduce((acc, part) => acc && acc[part], obj);
+};
 
 // export type FieldInputTypes =
 // 	| 'checkbox'
@@ -37,6 +40,7 @@ export type FieldProps = {
 	validate?: (value: any, allValues: object, meta?: FieldState<any>) => any;
 	/** argument for tests */
 	testId?: string;
+	input?: any;
 };
 
 export function validate(formFields: FieldProps[]) {

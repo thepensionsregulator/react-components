@@ -1,12 +1,11 @@
 import styled from 'styled-components';
 
-type StyledInputProps = {
+interface StyledInputProps {
 	meta?: any;
 	padding?: number;
-};
+}
 export const StyledInput = styled('input')<StyledInputProps>`
 	display: flex;
-	flex: 1 1 auto;
 	width: 100%;
 	font-size: ${({ theme }) => theme.fontSizes[2]}px;
 	font-weight: ${({ theme }) => theme.fontWeights[0]}px;

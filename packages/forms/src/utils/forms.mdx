@@ -1,16 +1,46 @@
 ---
-name: Forms
+name: Form Elements
 route: forms
 ---
 
 import { Playground, Props } from 'docz';
 import { Checkbox } from '../components/checkbox';
 import { InputText } from '../components/text';
-import { RadioButton } from '../components/radio'
+import { InputDate } from '../components/date';
+import { RadioButton } from '../components/radio';
+import { Select } from '../components/select';
 
 # Forms
 
 Forms for TPR apps
+
+## Select
+
+<Playground>
+	<div style={{ width: 400, padding: 10 }}>
+		<Select />
+	</div>
+</Playground>
+
+## Date
+
+<Playground>
+	<div style={{ width: 400, padding: 10 }}>
+		<InputDate
+			label="When was your passport issued?"
+			hint="For example, 12 11 2007"
+			required={true}
+			input={{
+				onChange: console.log,
+				onBlur: () => {}
+			}}
+			meta={{
+				touched: false,
+				error: 'The date your passport was issued must be in the past',
+			}}
+		/>
+	</div>
+</Playground>
 
 ## Checkbox
 
@@ -58,21 +88,21 @@ Forms for TPR apps
 		const [text, setText] = React.useState('')
 		return (
 			<div style={{ width: 400, padding: 10 }}>
-				<InputText 
-					type="text" 
+				<InputText
+					type="text"
 					required={true}
-					label="Event name" 
+					label="Event name"
 					hint="Must be between 6 and 8 digits long"
-					input={{ 
-						value: text, 
+					input={{
+						value: text,
 						onChange: (e) => setText(e.target.value)
-					}} 
+					}}
 					meta={{
-						touched: true,
+						touched: false,
 						error: "Enter an event name"
-					}} 
+					}}
 				/>
 			</div>
 		)
   }}
-</Playground>
+</Playground> 

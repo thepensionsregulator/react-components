@@ -2,7 +2,10 @@ import React from 'react';
 import styled from 'styled-components';
 import { H2 } from '../../typography';
 
-const StyledInfo = styled('div')<{ isImportant?: boolean }>`
+type StyledInfoProps = {
+	isImportant?: boolean;
+};
+const StyledInfo = styled('div')<StyledInfoProps>`
 	position: relative;
 	display: flex;
 	flex-direction: column;

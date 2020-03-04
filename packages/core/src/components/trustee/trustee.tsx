@@ -51,7 +51,7 @@ export const Trustee: React.FC<Omit<TrusteeProps, 'children'>> = props => {
 								onClick={() => send('EDIT_TRUSTEE')}
 								disabled={!matches('preview')}
 							>
-								Trustee >
+								Trustee {'>'}
 							</Button>
 							<Flex mt={0} flexDirection="column">
 								<H4 fontWeight="bold">{`${context.trustee.firstName} ${context.trustee.lastName}`}</H4>
@@ -65,7 +65,7 @@ export const Trustee: React.FC<Omit<TrusteeProps, 'children'>> = props => {
 									onClick={() => send('REMOVE')}
 									disabled={!matches('preview')}
 								>
-									Remove >
+									Remove {'>'}
 								</Button>
 							</Flex>
 						</Flex>

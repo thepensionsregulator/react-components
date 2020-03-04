@@ -4,11 +4,11 @@ import {
 	StyledLabel,
 	StyledHiddenInput,
 	ElementPlaceholder,
+	Flex,
 } from '../elements';
 import { FieldProps } from '../../utils/validation';
 import { StyledRadioWrapper } from './styles';
 import { RadioButtonChecked, RadioButtonUnchecked } from '@tpr/icons';
-import { Flex } from '@tpr/core';
 
 type RadioButtonProps = {
 	checked: any;

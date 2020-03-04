@@ -31,9 +31,8 @@ const lightTheme = {
 		},
 	},
 	fonts: {
-		serif: 'athelas, georgia, times, serif',
-		sansSerif:
-			'-apple-system, BlinkMacSystemFont, "avenir next", avenir, "helvetica neue", helvetica, ubuntu, roboto, noto, "segoe ui", arial, sans-serif',
+		serif: "'Open Sans Regular', 'Open Sans', sans-serif",
+		sansSerif: "'Open Sans Regular', 'Open Sans', sans-serif",
 	},
 	space: [10, 15, 20, 25, 30, 40, 50, 60],
 	fontSizes: [12, 14, 16, 22, 30, 36],

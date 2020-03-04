@@ -4,11 +4,11 @@ import {
 	StyledLabel,
 	StyledHiddenInput,
 	ElementPlaceholder,
+	Flex,
 } from '../elements';
 import { FieldProps } from '../../utils/validation';
 import { StyledCheckboxWrapper } from './styles';
 import { CheckboxChecked, CheckboxBlank } from '@tpr/icons';
-import { Flex } from '@tpr/core';
 
 type CheckboxIconProps = {
 	checked?: any;

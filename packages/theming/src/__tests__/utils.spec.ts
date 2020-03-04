@@ -1,5 +1,9 @@
-import { hexToRgb, textColorFromRgb, textColorFromHex, respondTo, mergeThemes } from '../utils';
-import { assign } from 'lodash';
+import {
+	hexToRgb,
+	textColorFromRgb,
+	textColorFromHex,
+	respondTo,
+} from '../utils';
 
 describe('Utils', () => {
 	test('respondTo attaches media functions to media size keys', () => {
@@ -11,13 +15,6 @@ describe('Utils', () => {
 		  "sm": [Function],
 		}
 	`);
-	});
-
-	test('mergeThemes', () => {
-		const theme1 = { colors: {} };
-		const theme2 = { fonts: {} };
-		const mergedTheme = mergeThemes([theme1, theme2]);
-		expect(mergedTheme).toEqual({ ...theme1, ...theme2 });
 	});
 
 	test('hexToRgb converts colours from hex to rgb correctly', () => {

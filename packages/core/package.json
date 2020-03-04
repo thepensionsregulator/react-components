@@ -1,16 +1,14 @@
 {
 	"name": "@tpr/core",
-	"version": "1.0.9",
+	"version": "1.0.12",
 	"description": "TPR Core components",
 	"author": "David Alekna <david.alekna@tpr.gov.uk>",
 	"license": "MIT",
-	"main": "./lib/bundle.cjs.js",
-	"module": "./lib/bundle.esm.js",
+	"main": "./lib/index.js",
 	"typings": "./lib/index.d.ts",
 	"sideEffects": false,
 	"files": [
-		"lib/bundle*",
-		"lib/**/*.d.ts"
+		"lib/*"
 	],
 	"repository": {
 		"type": "git",
@@ -28,30 +26,33 @@
 		"dev": "yarn storybook",
 		"test": "jest --coverage",
 		"test:watch": "jest --watch",
-		"build": "cross-env-shell \"../../node_modules/.bin/rollup\" -c rollup.config.js",
+		"build": "tsc -b",
+		"bundle": "cross-env-shell \"../../node_modules/.bin/rollup\" -c rollup.config.js",
 		"clean": "rimraf lib",
 		"report-coverage": "codecov"
 	},
 	"peerDependencies": {
-		"@xstate/react": "^0.8.1",
 		"react": "^16.12.0",
 		"react-dom": "^16.12.0",
-		"styled-components": "^4.4.1",
-		"styled-system": "^5.1.4",
-		"xstate": "^4.7.6"
+		"styled-components": "^5.0.1",
+		"styled-system": "^5.1.5"
 	},
 	"dependencies": {
 		"@tpr/forms": "file:../forms",
-		"final-form": "^4.18.6",
+		"@xstate/react": "^0.8.1",
+		"final-form": "^4.18.7",
 		"prop-types": "^15.7.2",
 		"qs": "^6.9.1",
-		"react-final-form": "^6.3.3"
+		"react-final-form": "^6.3.5",
+		"tslib": "^1.11.1",
+		"xstate": "^4.7.8"
 	},
 	"publishConfig": {
 		"access": "public"
 	},
 	"gitHead": "57aec9c9de22596d6343bae07eb6b198322a0bee",
 	"devDependencies": {
-		"cross-env": "^7.0.0"
+		"cross-env": "^7.0.0",
+		"typescript": "3.7.5"
 	}
 }

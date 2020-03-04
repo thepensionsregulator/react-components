@@ -1,11 +1,11 @@
 import styled from 'styled-components';
 
-type StyledRadioWrapper = {
+type StyledRadioWrapperProps = {
 	align?: string;
 	disabled?: boolean;
 };
 
-export const StyledRadioWrapper = styled('div')<StyledRadioWrapper>`
+export const StyledRadioWrapper = styled('div')<StyledRadioWrapperProps>`
 	display: flex;
 	flex-direction: 'row';
 	color: ${({ theme }) => theme.colors.neutral['800']};

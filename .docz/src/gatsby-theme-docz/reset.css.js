@@ -8,7 +8,6 @@ const GlobalStyle = createGlobalStyle`
     font-weight: inherit;
     margin: 0;
     padding: 0;
-    font-size: 16px;
     text-decoration: none;
     text-rendering: optimizeLegibility;
     -webkit-appearance: none;

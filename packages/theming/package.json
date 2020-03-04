@@ -1,16 +1,14 @@
 {
 	"name": "@tpr/theming",
-	"version": "1.0.9",
-	"description": "TPR Core components",
+	"version": "1.0.12",
+	"description": "TPR Theming components",
 	"author": "David Alekna <david.alekna@tpr.gov.uk>",
 	"license": "MIT",
-	"main": "./lib/bundle.cjs.js",
-	"module": "./lib/bundle.esm.js",
+	"main": "./lib/index.js",
 	"typings": "./lib/index.d.ts",
 	"sideEffects": false,
 	"files": [
-		"lib/bundle*",
-		"lib/*.d.ts"
+		"lib/*"
 	],
 	"repository": {
 		"type": "git",
@@ -28,23 +26,25 @@
 		"dev": "yarn storybook",
 		"test": "jest --coverage",
 		"test:watch": "jest --watch",
-		"build": "cross-env-shell \"../../node_modules/.bin/rollup\" -c rollup.config.js",
+		"build": "tsc -b",
+		"bundle": "cross-env-shell \"../../node_modules/.bin/rollup\" -c rollup.config.js",
 		"clean": "rimraf lib",
 		"report-coverage": "codecov"
 	},
 	"peerDependencies": {
 		"react": "^16.12.0",
 		"react-dom": "^16.12.0",
-		"styled-components": "^4.4.1"
-	},
-	"dependencies": {
-		"lodash": "^4.17.15"
+		"styled-components": "^5.0.1"
 	},
 	"publishConfig": {
 		"access": "public"
 	},
 	"devDependencies": {
-		"cross-env": "^7.0.0"
+		"cross-env": "^7.0.0",
+		"typescript": "3.7.5"
 	},
-	"gitHead": "57aec9c9de22596d6343bae07eb6b198322a0bee"
+	"gitHead": "57aec9c9de22596d6343bae07eb6b198322a0bee",
+	"dependencies": {
+		"tslib": "^1.11.1"
+	}
 }

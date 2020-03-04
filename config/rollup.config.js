@@ -17,12 +17,14 @@ function onwarn(message) {
 const defaultGlobals = {
 	react: 'react',
 	'react-dom': 'react-dom',
-	'prop-types': 'propTypes',
-	lodash: 'lodash',
-	'styled-components': 'styled',
 };
 
-export function rollup({ name, input = './src/index.ts', outputPrefix = 'bundle', extraGlobals = {} }) {
+export function rollup({
+	name,
+	input = './src/index.ts',
+	outputPrefix = 'bundle',
+	extraGlobals = {},
+}) {
 	const projectDir = path.join(__filename, '..');
 	console.info(`Building project esm ${projectDir}`);
 	const tsconfig = `${projectDir}/tsconfig.json`;

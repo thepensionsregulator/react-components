@@ -12,7 +12,7 @@ export const FlexCol = styled('div')`
 `;
 
 export const TableContainer = styled(FlexCol)`
-	font-family: ${({ theme }) => theme.fonts.montserrat};
+	font-family: ${({ theme }) => theme.fonts.serif};
 	position: relative;
 	width: 100%;
 	/* border: 1px solid #eee; */
