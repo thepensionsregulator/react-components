@@ -127,23 +127,23 @@ type Scale = 'small' | 'normal' | 'big';
 
 type ButtonConfigProps = {
 	/** determins button color from theme */
-	intent: Intent;
+	intent?: Intent;
 	/** determins button style */
-	appearance: Appearance;
+	appearance?: Appearance;
 	/** determins button size */
-	scale: Scale;
+	scale?: Scale;
 	/** button loading state */
-	isLoading: boolean;
+	isLoading?: boolean;
 	/** icon JSX component before text */
-	iconBefore: FunctionComponent<{ style: any }>;
+	iconBefore?: FunctionComponent<{ style: any }>;
 	/** icon JSX component after text */
-	iconAfter: FunctionComponent<{ style: any }>;
-	disabled: boolean;
+	iconAfter?: FunctionComponent<{ style: any }>;
+	disabled?: boolean;
 };
 
 interface ButtonProps
 	extends ButtonHTMLAttributes<HTMLButtonElement>,
-		Partial<ButtonConfigProps>,
+		ButtonConfigProps,
 		SpaceProps,
 		LayoutProps {
 	textDecoration?: string;

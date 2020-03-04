@@ -4,6 +4,10 @@ import { TableContainer, TableHead, TableHeadRowItem } from './styles';
 import { TableListProps, TableList } from './views/table';
 import { H3 } from '@tpr/core';
 
+// NOTE: Table was build to be used with Apollo GraphQL
+// Component and TS types has to be rewritten in the way that
+// network layer is going to provide the data
+
 type TableBaseProps<T> = {
 	/** fixed column width for the first and last items in the row */
 	fixedColW?: number;
@@ -15,7 +19,7 @@ type TableBaseProps<T> = {
 };
 
 const views = ['list', 'error', 'loading', 'refetch', 'fetchMore'];
-export const TableBase = <T extends {}, K extends DataBrowserProps & TableBaseProps<T>>({
+export const TableBase = ({
 	fixedColW = 100,
 	data,
 	children,
@@ -23,8 +27,14 @@ export const TableBase = <T extends {}, K extends DataBrowserProps & TableBasePr
 	error,
 	loading = false,
 	...dataBrowserProps
-}: K) => {
-	const renderBody = tableBody({ fixedColW, data, networkStatus, error, loading });
+}: any) => {
+	const renderBody = tableBody({
+		fixedColW,
+		data,
+		networkStatus,
+		error,
+		loading,
+	});
 	return (
 		<DataBrowser views={views} viewType="loading" {...dataBrowserProps}>
 			{dbUtils => (
@@ -44,7 +54,9 @@ export const TableBase = <T extends {}, K extends DataBrowserProps & TableBasePr
 								</TableHeadRowItem>
 							);
 						})}
-						{fixedColW && <TableHeadRowItem flex="0 0 auto" style={{ width: fixedColW }} />}
+						{fixedColW && (
+							<TableHeadRowItem flex="0 0 auto" style={{ width: fixedColW }} />
+						)}
 					</TableHead>
 					{children(renderBody({ data, ...dbUtils }))}
 				</TableContainer>
@@ -54,15 +66,17 @@ export const TableBase = <T extends {}, K extends DataBrowserProps & TableBasePr
 };
 
 /** This function will manage Apollo data fetching states and renders the body accordingly */
-const tableBody = <T extends {}>({
+const tableBody = ({
 	loading,
 	error,
 	networkStatus,
 	...baseUtils
-}: Omit<TableBaseProps<T>, 'children'>): Function => {
+}: Omit<TableBaseProps<any>, 'children'>): Function => {
 	// could have a state machine to control body states
 
-	return (dbProps: DataBrowserProps) => (tlProps: TableListProps<T>): ReactElement => {
+	return (dbProps: DataBrowserProps) => (
+		tlProps: TableListProps<any>,
+	): ReactElement => {
 		if (loading) return <div>loading</div>;
 		if (error) return <div>error</div>;
 		if (networkStatus === 3) return <div>fetch more in progress</div>;

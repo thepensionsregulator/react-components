@@ -55,17 +55,20 @@ export const StyledLabel = styled('label')<StyledLabelProps>`
 	${flexbox};
 `;
 
-export const StyledInputLabel = styled(StyledLabel)<{ isError?: boolean }>`
+type StyledInputLabelProps = {
+	isError?: boolean;
+};
+export const StyledInputLabel = styled(StyledLabel)<StyledInputLabelProps>`
 	padding-left: ${({ isError }) => isError && '15px'};
 	border-left: ${({ isError, theme }) =>
 		isError && `4px solid ${theme.colors.danger[300]}`};
 	cursor: default;
 `;
 
-interface StyledInputDiv extends FlexboxProps, LayoutProps, SpaceProps {
+interface StyledInputDivProps extends FlexboxProps, LayoutProps, SpaceProps {
 	isError?: boolean;
 }
-export const StyledInputDiv = styled('div')<StyledInputDiv>`
+export const StyledInputDiv = styled('div')<StyledInputDivProps>`
 	display: flex;
 	flex: 1 1 auto;
 	margin: 0;
