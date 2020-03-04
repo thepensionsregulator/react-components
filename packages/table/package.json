@@ -33,15 +33,15 @@
 	},
 	"peerDependencies": {
 		"react": "^16.12.0",
-		"react-dom": "^16.12.0"
+		"react-dom": "^16.12.0",
+		"styled-components": "^5.0.1",
+		"styled-system": "^5.1.5"
 	},
 	"dependencies": {
 		"@alekna/react-data-browser": "^1.1.11",
 		"@tpr/core": "file:../core",
 		"lodash": "^4.17.15",
 		"react-bottom-scroll-listener": "^3.0.0",
-		"styled-components": "^5.0.1",
-		"styled-system": "^5.1.5",
 		"tslib": "^1.11.1"
 	},
 	"publishConfig": {
@@ -50,6 +50,6 @@
 	"gitHead": "57aec9c9de22596d6343bae07eb6b198322a0bee",
 	"devDependencies": {
 		"cross-env": "^7.0.0",
-		"typescript": "^3.8.3"
+		"typescript": "3.7.5"
 	}
 }

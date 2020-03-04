@@ -1,5 +1,13 @@
 {
 	"packages": ["packages/*"],
 	"version": "independent",
-	"npmClient": "yarn"
+	"npmClient": "yarn",
+	"command": {
+		"run": {
+			"npmClient": "yarn"
+		},
+		"publish": {
+			"message": "Release"
+		}
+	}
 }
