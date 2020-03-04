@@ -1,5 +1,7 @@
 import React from 'react';
 import Downshift from 'downshift';
+import { Flex, StyledInputLabel, InputElementHeading } from '../elements';
+import { StyledSelect, Menu, Item } from './styles';
 
 const items = [
 	{ value: 'apple' },
@@ -12,11 +14,7 @@ const items = [
 export const Select = () => {
 	return (
 		<Downshift
-			onChange={selection =>
-				alert(
-					selection ? `You selected ${selection.value}` : 'Selection Cleared',
-				)
-			}
+			onChange={console.log}
 			itemToString={item => (item ? item.value : '')}
 		>
 			{({
@@ -29,40 +27,43 @@ export const Select = () => {
 				highlightedIndex,
 				selectedItem,
 				getRootProps,
+				toggleMenu,
 			}) => (
-				<div>
-					<label {...getLabelProps()}>Enter a fruit</label>
-					<div
-						style={{ display: 'inline-block' }}
-						{...getRootProps({ refKey: null }, { suppressRefError: true })}
+				<Flex
+					flexDirection="column"
+					{...getRootProps({ refKey: null }, { suppressRefError: true })}
+				>
+					<StyledInputLabel
+						flexDirection="column"
+						{...getLabelProps({ onClick: () => toggleMenu() })}
 					>
-						<input {...getInputProps()} />
-					</div>
-					<ul {...getMenuProps()}>
+						<InputElementHeading
+							hint="For example apple or pear"
+							label="Enter a fruit"
+						/>
+						<StyledSelect {...getInputProps()} />
+					</StyledInputLabel>
+					<Menu {...getMenuProps()}>
 						{isOpen
-							? items
-									.filter(
-										item => !inputValue || item.value.includes(inputValue),
-									)
-									.map((item, index) => (
-										<li
-											{...getItemProps({
-												key: item.value,
-												index,
-												item,
-												style: {
-													backgroundColor:
-														highlightedIndex === index ? 'lightgray' : 'white',
-													fontWeight: selectedItem === item ? 'bold' : 'normal',
-												},
-											})}
-										>
-											{item.value}
-										</li>
-									))
+							? items.map((item, index) => (
+									<Item
+										{...getItemProps({
+											key: item.value,
+											index,
+											item,
+											style: {
+												backgroundColor:
+													highlightedIndex === index ? 'lightgray' : 'white',
+												fontWeight: selectedItem === item ? 'bold' : 'normal',
+											},
+										})}
+									>
+										{item.value}
+									</Item>
+							  ))
 							: null}
-					</ul>
-				</div>
+					</Menu>
+				</Flex>
 			)}
 		</Downshift>
 	);

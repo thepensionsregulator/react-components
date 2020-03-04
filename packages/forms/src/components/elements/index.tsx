@@ -127,6 +127,7 @@ export interface FlexProps
 		TypographyProps,
 		ColorProps,
 		BorderProps {}
+
 export const Flex = styled('div').attrs(() => ({
 	display: 'flex',
 }))<FlexProps>(compose(flexbox, space, layout, typography, color, border));
