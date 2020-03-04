@@ -23,7 +23,6 @@ export const Select = () => {
 				getLabelProps,
 				getMenuProps,
 				isOpen,
-				inputValue,
 				highlightedIndex,
 				selectedItem,
 				getRootProps,
