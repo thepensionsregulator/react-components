@@ -35,8 +35,8 @@ export const ErrorMessage = styled('div')`
 interface FormLabelTextProps extends SpaceProps {}
 export const FormLabelText = styled('div')<FormLabelTextProps>`
 	color: ${({ theme }) => theme.colors.neutral[900]};
-	font-size: ${({ theme }) => theme.fontSizes[2]}px;
 	font-weight: ${({ theme }) => theme.fontWeights[1]};
+	font-size: ${({ theme }) => theme.fontSizes[2]}px;
 	margin: 5px 0;
 	white-space: nowrap;
 
@@ -108,7 +108,7 @@ export const InputElementHeading = ({ label, required, hint, meta }: any) => {
 				</FormLabelText>
 			)}
 			{hint && (
-				<Span fontSize={1} my={0} color="neutral.300">
+				<Span my={0} color="neutral.300">
 					{hint}
 				</Span>
 			)}
@@ -139,8 +139,13 @@ export interface HtmlHTagTypes
 	extends SpaceProps,
 		ColorProps,
 		TypographyProps {}
+
 export const Span = styled('span')<HtmlHTagTypes>`
 	${fontStack};
+
+	font-weight: ${({ theme }) => theme.fontWeights[1]};
+	font-size: ${({ theme }) => theme.fontSizes[2]}px;
+	line-height: 1.6;
 
 	${color};
 	${typography};
