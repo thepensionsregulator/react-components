@@ -1,39 +1,86 @@
-Preview available on [netlify](https://5e5fabdee8df61000854c622--dreamy-goldstine-f2ab84.netlify.com/)
+# TPR React Components
 
-# Introduction
+[build status badge]: https://flat.badgen.net/travis/zendeskgarden/react-components/master
+[build status link]: https://travis-ci.org/zendeskgarden/react-components
+[dependency status badge]: https://flat.badgen.net/david/dev/zendeskgarden/react-components
+[dependency status link]: https://david-dm.org/zendeskgarden/react-components?type=dev
+[coverage status badge]: https://flat.badgen.net/coveralls/c/github/zendeskgarden/react-components/master
+[coverage status link]: https://coveralls.io/github/zendeskgarden/react-components
 
-TODO: Give a short introduction of your project. Let this section explain the objectives or the motivation behind this project.
+> React Components is a design system for TPR
 
-# Getting Started
+React components are maintained following a multi-package approach where
+components are packaged and published individually, but combined under this
+single repository.
 
-TODO: Guide users through getting your code up and running on their own system. In this section you can talk about:
+## Installation
 
-1. Installation process
-2. Software dependencies
-3. Latest releases
-4. API references
+See the individual package README for the React component you would like
+to install.
 
-# Build and Test
+| Package                            | Version                                                 | Size                                                     |
+| ---------------------------------- | ------------------------------------------------------- | -------------------------------------------------------- |
+| [`@tpr/core`](packages/core)       | [![npm version][core npm version]][core npm link]       | [![Bundle Size][core size bundle]][core size link]       |
+| [`@tpr/forms`](packages/forms)     | [![npm version][forms npm version]][forms npm link]     | [![Bundle Size][forms size bundle]][forms size link]     |
+| [`@tpr/table`](packages/table)     | [![npm version][table npm version]][table npm link]     | [![Bundle Size][table size bundle]][table size link]     |
+| [`@tpr/icons`](packages/icons)     | [![npm version][icons npm version]][icons npm link]     | [![Bundle Size][icons size bundle]][icons size link]     |
+| [`@tpr/theming`](packages/theming) | [![npm version][theming npm version]][theming npm link] | [![Bundle Size][theming size bundle]][theming size link] |
 
-TODO: Describe and show how to build your code and run the tests.
+[core npm version]: https://flat.badgen.net/npm/v/@tpr/core
+[core npm link]: https://www.npmjs.com/package/@tpr/core
+[core size bundle]: https://flat.badgen.net/bundlephobia/minzip/@tpr/core
+[core size link]: https://bundlephobia.com/result?p=@tpr/core
+[core dependency status]: https://flat.badgen.net/david/dep/tpr/react-components/packages/core
+[forms npm version]: https://flat.badgen.net/npm/v/@tpr/forms
+[forms npm link]: https://www.npmjs.com/package/@tpr/forms
+[forms size bundle]: https://flat.badgen.net/bundlephobia/minzip/@tpr/forms
+[forms size link]: https://bundlephobia.com/result?p=@tpr/forms
+[forms dependency status]: https://flat.badgen.net/david/dep/tpr/react-components/packages/forms
+[table npm version]: https://flat.badgen.net/npm/v/@tpr/table
+[table npm link]: https://www.npmjs.com/package/@tpr/table
+[table size bundle]: https://flat.badgen.net/bundlephobia/minzip/@tpr/table
+[table size link]: https://bundlephobia.com/result?p=@tpr/table
+[table dependency status]: https://flat.badgen.net/david/dep/tpr/react-components/packages/table
+[icons npm version]: https://flat.badgen.net/npm/v/@tpr/icons
+[icons npm link]: https://www.npmjs.com/package/@tpr/icons
+[icons size bundle]: https://flat.badgen.net/bundlephobia/minzip/@tpr/icons
+[icons size link]: https://bundlephobia.com/result?p=@tpr/icons
+[icons dependency status]: https://flat.badgen.net/david/dep/tpr/react-components/packages/icons
+[theming npm version]: https://flat.badgen.net/npm/v/@tpr/theming
+[theming npm link]: https://www.npmjs.com/package/@tpr/theming
+[theming size bundle]: https://flat.badgen.net/bundlephobia/minzip/@tpr/theming
+[theming size link]: https://bundlephobia.com/result?p=@tpr/theming
+[theming dependency status]: https://flat.badgen.net/david/dep/tpr/react-components/packages/theming
 
-# Contribute
+## Usage
 
-TODO: Explain how other users and developers can contribute to make your code better.
+React Components packages are ready to use in a
+[Create React App](https://create-react-app.dev/) environment or together
+with standard Rollup or webpack build configurations.
 
-If you want to learn more about creating good readme files then refer the following [guidelines](https://docs.microsoft.com/en-us/azure/devops/repos/git/create-a-readme?view=azure-devops). You can also seek inspiration from the below readme files:
+Here is a simple example to get you started:
 
-- [ASP.NET Core](https://github.com/aspnet/Home)
-- [Visual Studio Code](https://github.com/Microsoft/vscode)
-- [Chakra Core](https://github.com/Microsoft/ChakraCore)
+```jsx
+import React from 'react';
+import ReactDOM from 'react-dom';
+import { lightTheme } from '@tpr/theming';
+import { ThemeProvider } from 'styled-components';
+import { Button } from '@tpr/core';
 
-# Problems
+const App = () => (
+	/* Include a ThemeProvider wrapper at the root of your app */
+	<ThemeProvider theme={lightTheme}>
+		<Button>Example React button</Button>
+	</ThemeProvider>
+);
 
-upon yarn install have to delete node_modules/@types/react-native to prevent duplicate declarations.
-https://github.com/DefinitelyTyped/DefinitelyTyped/issues/33311
+ReactDOM.render(<App />, document.getElementById('root'));
+```
 
-# Usage
+## Documentation
 
-Run package in dev mode
+See TPR React Components [documentation website](https://silly-colden-aa858c.netlify.com/)
 
-yarn lerna run --scope @tpr/core docz:dev --stream
+## LICENSE
+
+MIT
