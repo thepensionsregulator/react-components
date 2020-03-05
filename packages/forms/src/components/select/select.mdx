@@ -25,6 +25,15 @@ earum rerum aspernatur similique commodi voluptates? Id ut ab cum doloremque mag
 
 <Playground>
 	<div style={{ width: 400, padding: 10 }}>
-		<Select />
+		<Select 
+		  itemToString={item => (item ? item.label : '')}
+			options={[
+				{label: 'apple', value: 1},
+				{label: 'pear', value: 2},
+				{label: 'orange', value: 3},
+				{label: 'grape', value: 4},
+				{label: 'banana', value: 5},
+			]} 
+		/>
 	</div>
 </Playground>

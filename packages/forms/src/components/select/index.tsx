@@ -1,21 +1,41 @@
 import React from 'react';
 import Downshift from 'downshift';
+import { Field } from 'react-final-form';
 import { Flex, StyledInputLabel, InputElementHeading } from '../elements';
-import { StyledSelect, Menu, Item } from './styles';
+import { StyledSelectInput, Popup } from './styles';
+import { FieldProps } from '../../utils/validation';
+import PopupBox from './popup';
 
-const items = [
-	{ value: 'apple' },
-	{ value: 'pear' },
-	{ value: 'orange' },
-	{ value: 'grape' },
-	{ value: 'banana' },
-];
+interface SelectProps {
+	options?: any;
+	label?: string;
+	placeholder?: string;
+	onChange?: Function;
+	onBlur?: Function;
+	meta?: any;
+	disabled?: boolean;
+	itemToString?: (item: any) => any;
+	handleNotFoundButtonClick?: Function;
+	notFoundMessage?: string;
+	initialSelectedItem?: string;
+}
 
-export const Select = () => {
+export const Select: React.FC<SelectProps> = ({
+	options,
+	label,
+	placeholder = 'Please select...',
+	meta,
+	onBlur,
+	disabled,
+	handleNotFoundButtonClick,
+	notFoundMessage = 'Your search criteria has no match',
+	itemToString,
+	initialSelectedItem,
+}) => {
 	return (
 		<Downshift
-			onChange={console.log}
-			itemToString={item => (item ? item.value : '')}
+			itemToString={itemToString}
+			initialSelectedItem={initialSelectedItem}
 		>
 			{({
 				getInputProps,
@@ -27,6 +47,7 @@ export const Select = () => {
 				selectedItem,
 				getRootProps,
 				toggleMenu,
+				inputValue,
 			}) => (
 				<Flex
 					flexDirection="column"
@@ -40,30 +61,83 @@ export const Select = () => {
 							hint="For example apple or pear"
 							label="Enter a fruit"
 						/>
-						<StyledSelect {...getInputProps()} />
+						<StyledSelectInput {...getInputProps()} />
 					</StyledInputLabel>
-					<Menu {...getMenuProps()}>
-						{isOpen
-							? items.map((item, index) => (
-									<Item
-										{...getItemProps({
-											key: item.value,
-											index,
-											item,
-											style: {
-												backgroundColor:
-													highlightedIndex === index ? 'lightgray' : 'white',
-												fontWeight: selectedItem === item ? 'bold' : 'normal',
-											},
-										})}
-									>
-										{item.value}
-									</Item>
-							  ))
-							: null}
-					</Menu>
+					<div style={{ position: 'relative' }}>
+						<Popup
+							isOpen={isOpen}
+							{...getMenuProps({
+								width: 200,
+								style: { padding: 0 },
+							})}
+						>
+							{isOpen && (
+								<PopupBox
+									{...{
+										getItemProps,
+										inputValue,
+										options,
+										highlightedIndex,
+										selectedItem,
+										handleNotFoundButtonClick,
+										notFoundMessage,
+									}}
+								/>
+							)}
+						</Popup>
+					</div>
 				</Flex>
 			)}
 		</Downshift>
+	);
+};
+
+interface FFSelectProps extends FieldProps {}
+export const FFSelect: React.FC<FFSelectProps> = field => {
+	return (
+		<Field
+			{...field}
+			render={({
+				label,
+				input,
+				meta,
+				hint,
+				required,
+				options,
+				onChange,
+				...props
+			}) => {
+				return (
+					<StyledInputLabel
+						isError={meta && meta.touched && meta.error}
+						flexDirection="column"
+					>
+						<InputElementHeading
+							label={label}
+							required={required}
+							hint={hint}
+							meta={meta}
+						/>
+						<Select
+							initialSelectedItem={input.value}
+							itemToString={item => (item ? item.label : '')}
+							onChange={value => {
+								// override onChange from outside if needed
+								if (onChange && typeof onChange === 'function') {
+									return onChange(value, input.onChange);
+								}
+								// otherwise forward the value
+								return input.onChange(value);
+							}}
+							// onBlur={input.onBlur}
+							options={options}
+							meta={meta}
+							aria-label={label}
+							{...props}
+						/>
+					</StyledInputLabel>
+				);
+			}}
+		/>
 	);
 };

@@ -2,9 +2,8 @@ import styled from 'styled-components';
 
 interface StyledSelectProps {
 	meta?: any;
-	padding?: number;
 }
-export const StyledSelect = styled('input')<StyledSelectProps>`
+export const StyledSelectInput = styled('input')<StyledSelectProps>`
 	display: flex;
 	align-items: center;
 	width: 100%;
@@ -37,7 +36,11 @@ export const Item = styled('div')``;
 
 /* Popup Styles */
 
-export const Popup = styled('div')`
+type PopupProps = {
+	isOpen?: boolean;
+};
+export const Popup = styled('div')<PopupProps>`
+	display: ${({ isOpen }) => !isOpen && 'none'};
 	flex: 0 0 auto;
 	flex-direction: column;
 	position: absolute;
@@ -49,13 +52,12 @@ export const Popup = styled('div')`
 	width: 100%;
 	max-height: 280px;
 	border: 1px solid #ddd;
-	border-radius: 3px;
 	box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
 	margin-top: 2px;
 	z-index: 10;
 	overflow-x: auto;
 	user-select: none;
-	padding: ${({ theme }) => theme.spacing.padding / 4}px;
+	padding: 10px;
 `;
 
 type PopupButtonProps = {
@@ -63,20 +65,22 @@ type PopupButtonProps = {
 	isSelected?: boolean;
 	isClickable?: boolean;
 };
-export const PopupButton = styled('button')<PopupButtonProps>`
+export const PopupButton = styled('div')<PopupButtonProps>`
 	width: 100%;
 	text-align: left;
-	font-size: ${({ theme }) => theme.fontSizes[1]}px;
-	color: ${({ theme }) => theme.colors.neutral[300]};
-	font-weight: 400;
-	border: none;
-	border-bottom: 1px solid ${({ theme }) => theme.colors.neutral[400]};
+	font-size: ${({ theme }) => theme.fontSizes[2]}px;
+	font-weight: ${({ theme }) => theme.fontWeights[2]};
+	color: ${({ theme }) => theme.colors.neutral[600]};
+	border-bottom: 1px solid ${({ theme }) => theme.colors.neutral[200]};
+	cursor: pointer;
+	padding: 10px;
 	background: ${({ isActive, isSelected }) => {
 		if (isActive || isSelected) {
 			return '#eee';
 		}
 		return 'none';
 	}};
+
 	&:hover {
 		background: #eaeaea;
 	}

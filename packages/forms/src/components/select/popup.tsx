@@ -1,35 +1,27 @@
 import React from 'react';
-import { Popup, PopupButton } from './styles';
+import { PopupButton } from './styles';
 
-const filteredOptions = [];
-
-export default function({
-	getMenuProps,
+export default function PopupBox({
 	getItemProps,
 	// inputValue,
-	// options,
+	options,
 	highlightedIndex,
 	selectedItem,
 	// openModal,
 	handleNotFoundButtonClick,
 	notFoundMessage,
 	optionPreview,
-}) {
+}: any) {
 	return (
-		<Popup
-			{...getMenuProps({
-				width: 200,
-				style: { padding: 0 },
-			})}
-		>
-			{!filteredOptions.length ? (
+		<>
+			{!options.length ? (
 				<PopupButton
 					isClickable={typeof handleNotFoundButtonClick === 'function'}
 					onClick={handleNotFoundButtonClick}
 					children={notFoundMessage}
 				/>
 			) : (
-				filteredOptions.map((item, index) => (
+				options.map((item, index) => (
 					<PopupButton
 						{...getItemProps({
 							key: index,
@@ -43,6 +35,6 @@ export default function({
 					</PopupButton>
 				))
 			)}
-		</Popup>
+		</>
 	);
 }
