@@ -63,13 +63,12 @@ Here is a simple example to get you started:
 ```jsx
 import React from 'react';
 import ReactDOM from 'react-dom';
-import { lightTheme } from '@tpr/theming';
-import { ThemeProvider } from 'styled-components';
+import ThemeProvider from '@tpr/theming';
 import { Button } from '@tpr/core';
 
 const App = () => (
 	/* Include a ThemeProvider wrapper at the root of your app */
-	<ThemeProvider theme={lightTheme}>
+	<ThemeProvider>
 		<Button>Example React button</Button>
 	</ThemeProvider>
 );
