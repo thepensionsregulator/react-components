@@ -6,7 +6,7 @@ import { renderFields } from '../utils/forms';
 // TODO: write more test when there are clear specs for date input validation
 
 describe('Date', () => {
-	test.skip('date fields are being rendered within the form and submits when data is correct', () => {
+	test('date fields are being rendered within the form and submits when data is correct', () => {
 		const fields = [
 			{
 				label: 'passport-expiry',

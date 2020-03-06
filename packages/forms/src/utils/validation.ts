@@ -19,6 +19,11 @@ const getObjectValueByString = (obj: object, path: string): unknown => {
 // 	| 'text'
 // 	| 'url';
 
+export type FieldOptions = {
+	label: string;
+	value: any;
+};
+
 export type FieldProps = {
 	/** Field name, required for future ref. */
 	name: string;
@@ -42,6 +47,7 @@ export type FieldProps = {
 	/** argument for tests */
 	testId?: string;
 	input?: any;
+	options?: FieldOptions[];
 };
 
 export function validate(formFields: FieldProps[]) {
