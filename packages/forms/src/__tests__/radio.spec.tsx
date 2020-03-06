@@ -1,7 +1,6 @@
 import React from 'react';
 import { formSetup } from '../__mocks__/setup';
 import { FFRadioButton } from '../components/radio';
-import '@testing-library/jest-dom/extend-expect';
 import { renderFields } from '../utils/forms';
 import { fireEvent } from '@testing-library/react';
 

@@ -1,4 +1,5 @@
 export default {
+	port: 6006,
 	title: 'TPR React Components',
 	description: 'React Components reused across the apps',
 	typescript: true,

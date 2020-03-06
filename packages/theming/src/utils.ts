@@ -1,15 +1,17 @@
 import { css } from 'styled-components';
 
+export const responsive = (label: string) => (...args: any[]) => css`
+	@media (min-width: ${label}) {
+		// @ts-ignore
+		${css(...args)}
+	}
+`;
+
 export const respondTo = (sizes: { [key: string]: string }) => {
 	return Object.keys(sizes).reduce((accumulator, label: string) => {
 		return {
 			...accumulator,
-			[label]: (...args: any[]) => css`
-				@media (min-width: ${sizes[label]}) {
-					// @ts-ignore
-					${css(...args)}
-				}
-			`,
+			[label]: responsive(sizes[label]),
 		};
 	}, {});
 };

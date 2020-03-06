@@ -22,11 +22,11 @@ interface SelectProps {
 
 export const Select: React.FC<SelectProps> = ({
 	options,
-	label,
-	placeholder = 'Please select...',
-	meta,
-	onBlur,
-	disabled,
+	// label,
+	// placeholder = 'Please select...',
+	// meta,
+	// onBlur,
+	// disabled,
 	handleNotFoundButtonClick,
 	notFoundMessage = 'Your search criteria has no match',
 	itemToString,
