@@ -5,6 +5,7 @@ import { FFInputText } from '../components/text';
 import { FFCheckbox } from '../components/checkbox';
 import { FFRadioButton } from '../components/radio';
 import { FFInputDate } from '../components/date';
+import { FFSelect } from '../components/select';
 
 export function renderFields(fields: FieldProps[] = []) {
 	return fields.map((field, key) => {
@@ -26,6 +27,9 @@ export function renderFields(fields: FieldProps[] = []) {
 			}
 			case 'date': {
 				return <FFInputDate key={key} {...field} />;
+			}
+			case 'select': {
+				return <FFSelect key={key} {...field} />;
 			}
 			default: {
 				console.error(`Incorrect field type: ${field.type}`);
