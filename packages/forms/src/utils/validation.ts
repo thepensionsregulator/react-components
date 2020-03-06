@@ -38,6 +38,7 @@ export type FieldProps = {
 	checked?: boolean;
 	/** Accepts a validation function for custom validation */
 	validate?: (value: any, allValues: object, meta?: FieldState<any>) => any;
+	meta?: any;
 	/** argument for tests */
 	testId?: string;
 	input?: any;
