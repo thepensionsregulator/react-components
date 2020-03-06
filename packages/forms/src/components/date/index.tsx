@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import { Field, FieldRenderProps } from 'react-final-form';
 import { isValid, toDate } from 'date-fns';
 import {
@@ -39,15 +39,22 @@ export const InputDate: React.FC<FieldRenderProps<string> & FieldProps> = ({
 	const [month, setMonth] = useState(input?.value?.mm || '');
 	const [year, setYear] = useState(input?.value?.yyyy || '');
 
-	useEffect(() => {
-		if (input && typeof input.onChange === 'function') {
-			const newDate = getValidDate(year, month, day);
-			if (newDate) {
-				// console.log(getValidDate(year, month, day));
-				input.onChange({ dd: day, mm: month, yyyy: year });
+	const onChange = useCallback(
+		(args: any) => {
+			if (input && typeof input.onChange === 'function') {
+				input.onChange(args);
 			}
+		},
+		[input],
+	);
+
+	useEffect(() => {
+		const newDate = getValidDate(year, month, day);
+		if (newDate) {
+			// console.log(getValidDate(year, month, day));
+			onChange({ dd: day, mm: month, yyyy: year });
 		}
-	}, [day, month, year]);
+	}, [day, month, year, onChange]);
 
 	return (
 		<StyledInputDiv

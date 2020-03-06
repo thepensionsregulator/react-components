@@ -1,7 +1,6 @@
 import React from 'react';
 import { formSetup } from '../__mocks__/setup';
 import { FFCheckbox } from '../components/checkbox';
-import '@testing-library/jest-dom/extend-expect';
 import { renderFields } from '../utils/forms';
 import { fireEvent } from '@testing-library/react';
 

@@ -3,6 +3,7 @@ import { Form } from '../utils/forms';
 import { render } from '@testing-library/react';
 import ThemeProvider from '@tpr/theming';
 import { FormRenderProps } from 'react-final-form';
+import '@testing-library/jest-dom/extend-expect';
 
 type FormProviderProps = {
 	onSubmit?: any;

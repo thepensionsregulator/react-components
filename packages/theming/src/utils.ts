@@ -7,14 +7,14 @@ export const responsive = (label: string) => (...args: any[]) => css`
 	}
 `;
 
-// export const respondTo = (sizes: { [key: string]: string }) => {
-// 	return Object.keys(sizes).reduce((accumulator, label: string) => {
-// 		return {
-// 			...accumulator,
-// 			[label]: responsive(sizes[label]),
-// 		};
-// 	}, {});
-// };
+export const respondTo = (sizes: { [key: string]: string }) => {
+	return Object.keys(sizes).reduce((accumulator, label: string) => {
+		return {
+			...accumulator,
+			[label]: responsive(sizes[label]),
+		};
+	}, {});
+};
 
 export const hexToRgb = (hex: string): number[] => {
 	return hex
