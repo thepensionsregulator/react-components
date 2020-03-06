@@ -48,6 +48,8 @@ export type FieldProps = {
 	testId?: string;
 	input?: any;
 	options?: FieldOptions[];
+	/** If value is an object then you can transform final returned value from the selection */
+	onChange?: (value: FieldOptions, set: Function) => void;
 };
 
 export function validate(formFields: FieldProps[]) {
