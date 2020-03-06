@@ -1,8 +1,7 @@
 import React from 'react';
 import { Form } from '../utils/forms';
 import { render } from '@testing-library/react';
-import { ThemeProvider } from 'styled-components';
-import { lightTheme } from '../../../theming/src';
+import ThemeProvider from '@tpr/theming';
 import { FormRenderProps } from 'react-final-form';
 
 type FormProviderProps = {
@@ -17,7 +16,7 @@ const FormProvider: React.FC<FormProviderProps> = ({
 	children,
 	validate,
 }) => (
-	<ThemeProvider theme={lightTheme}>
+	<ThemeProvider>
 		<Form onSubmit={onSubmit} validate={validate} initialValues={initialValues}>
 			{children}
 		</Form>

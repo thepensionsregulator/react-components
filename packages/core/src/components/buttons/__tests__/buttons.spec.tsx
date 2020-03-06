@@ -2,13 +2,10 @@ import React from 'react';
 import '@testing-library/jest-dom/extend-expect';
 import { render } from '@testing-library/react';
 import { Button } from '../';
-import lightTheme from '../../../../../theming/src/lightTheme';
-import { ThemeProvider } from 'styled-components';
+import ThemeProvider from '@tpr/theming';
 
 function renderFn(children) {
-	const utils = render(
-		<ThemeProvider theme={lightTheme}>{children}</ThemeProvider>,
-	);
+	const utils = render(<ThemeProvider>{children}</ThemeProvider>);
 	return { ...utils };
 }
 

@@ -1,5 +1,5 @@
 import React from 'react';
-import styled from 'styled-components';
+import { styled } from '@tpr/theming';
 import { DocWidth, AppWidth, Flex } from './globals';
 import { Button } from '../../buttons';
 import { P } from '../../typography';

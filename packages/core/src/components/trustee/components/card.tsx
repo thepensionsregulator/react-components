@@ -1,5 +1,5 @@
 import React from 'react';
-import styled from 'styled-components';
+import { styled } from '@tpr/theming';
 import { Flex } from '../../layout';
 import { Button } from '../../buttons';
 import { H3, H4 } from '../../typography';
