@@ -5,7 +5,8 @@ route: /forms/select
 ---
 
 import { Playground } from 'docz'
-import { Select } from './index';
+import { Form } from '../../utils/forms'
+import { FFSelect } from './index';
 
 # Select Dropdown
 
@@ -24,16 +25,28 @@ earum rerum aspernatur similique commodi voluptates? Id ut ab cum doloremque mag
 [CodeSandbox](https://codesandbox.io)
 
 <Playground>
-	<div style={{ width: 400, padding: 10 }}>
-		<Select 
-		  itemToString={item => (item ? item.label : '')}
-			options={[
-				{label: 'apple', value: 1},
-				{label: 'pear', value: 2},
-				{label: 'orange', value: 3},
-				{label: 'grape', value: 4},
-				{label: 'banana', value: 5},
-			]} 
-		/>
-	</div>
+	<Form onSubmit={console.log}>
+		{({handleSubmit}) => (
+			<form onSubmit={handleSubmit}>
+				<div style={{ width: 400, padding: 10 }}>
+					<FFSelect 
+						name="select-dropdown"
+						label="Select Fruit"
+						hint="one of the fruit only"
+						onChange={({value}, set) => {
+							console.log(value)
+							set(value)
+						}}
+						options={[
+							{label: 'apple', value: 1},
+							{label: 'pear', value: 2},
+							{label: 'orange', value: 3},
+							{label: 'grape', value: 4},
+							{label: 'banana', value: 5},
+						]} 
+					/>
+				</div>
+			</form>
+		)}
+	</Form>
 </Playground>
