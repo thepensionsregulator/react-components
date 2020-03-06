@@ -10,7 +10,7 @@ interface SelectProps {
 	options?: any;
 	label?: string;
 	placeholder?: string;
-	onChange?: Function;
+	onChange?: (args: any[]) => void;
 	onBlur?: Function;
 	meta?: any;
 	disabled?: boolean;
@@ -32,9 +32,11 @@ export const Select: React.FC<SelectProps> = ({
 	notFoundMessage = 'Your search criteria has no match',
 	itemToString,
 	initialSelectedItem,
+	onChange,
 }) => {
 	return (
 		<Downshift
+			onChange={onChange}
 			itemToString={itemToString}
 			initialSelectedItem={initialSelectedItem}
 		>
@@ -122,7 +124,7 @@ export const FFSelect: React.FC<FFSelectProps> = field => {
 							if (onChange && typeof onChange === 'function') {
 								return onChange(value, input.onChange);
 							}
-							// otherwise forward the value
+							// otherwise forward
 							return input.onChange(value);
 						}}
 						// onBlur={input.onBlur}

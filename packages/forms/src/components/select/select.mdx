@@ -33,6 +33,10 @@ earum rerum aspernatur similique commodi voluptates? Id ut ab cum doloremque mag
 						name="select-dropdown"
 						label="Select Fruit"
 						hint="one of the fruit only"
+						onChange={({value}, set) => {
+							console.log(value)
+							set(value)
+						}}
 						options={[
 							{label: 'apple', value: 1},
 							{label: 'pear', value: 2},
