@@ -1,5 +1,5 @@
 import React from 'react';
-import styled from 'styled-components';
+import { styled } from '@tpr/theming';
 import { P, Link } from '../../typography';
 import { Container, Flex, DocWidth } from './globals';
 

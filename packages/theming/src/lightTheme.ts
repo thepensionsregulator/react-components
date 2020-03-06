@@ -1,4 +1,4 @@
-import { respondTo } from './utils';
+import { responsive } from './utils';
 
 const breakpoints = ['48em', '64em', '90em', '114em'];
 
@@ -38,15 +38,12 @@ const lightTheme = {
 	fontSizes: [12, 14, 16, 22, 30, 36],
 	fontWeights: [300, 400, 500, 700],
 	breakpoints,
-	mediaQueries: respondTo(
-		['xs', 'sm', 'md', 'lg'].reduce(
-			(acc, val, index) =>
-				Object.assign(acc, {
-					[val]: breakpoints[index],
-				}),
-			{},
-		),
-	),
+	mediaQueries: {
+		xs: responsive(breakpoints[0]),
+		sm: responsive(breakpoints[1]),
+		md: responsive(breakpoints[2]),
+		lg: responsive(breakpoints[3]),
+	},
 	letterSpacings: {
 		normal: 'normal',
 		tracked: '0.1em',

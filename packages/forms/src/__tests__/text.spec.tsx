@@ -4,7 +4,6 @@ import { formSetup } from '../__mocks__/setup';
 import { FFInputText } from '../components/text';
 import { validate } from '../utils/validation';
 import { renderFields } from '../utils/forms';
-import '@testing-library/jest-dom/extend-expect';
 
 describe('Text', () => {
 	test('renders label', () => {

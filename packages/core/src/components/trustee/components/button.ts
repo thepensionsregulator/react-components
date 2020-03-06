@@ -1,4 +1,4 @@
-import styled from 'styled-components';
+import { styled } from '@tpr/theming';
 
 export const Button = styled('button')`
 	text-align: left;

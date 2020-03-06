@@ -1,4 +1,4 @@
-import styled from 'styled-components';
+import { styled } from '@tpr/theming';
 
 interface StyledSelectProps {
 	meta?: any;
@@ -20,6 +20,7 @@ export const StyledSelectInput = styled('input')<StyledSelectProps>`
 	height: 40px;
 	outline: none;
 	padding: 0 5px;
+	cursor: default;
 
 	&:focus {
 		border: 4px solid ${({ theme }) => theme.colors.neutral[900]};

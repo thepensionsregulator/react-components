@@ -1,4 +1,4 @@
-import styled from 'styled-components';
+import { styled } from '@tpr/theming';
 
 type StyledCheckboxWrapperProps = {
 	align?: string;
