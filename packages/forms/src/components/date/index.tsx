@@ -39,22 +39,15 @@ export const InputDate: React.FC<FieldRenderProps<string> & FieldProps> = ({
 	const [month, setMonth] = useState(input?.value?.mm || '');
 	const [year, setYear] = useState(input?.value?.yyyy || '');
 
-	const onChange = useCallback(
-		(args: any) => {
-			if (input && typeof input.onChange === 'function') {
-				input.onChange(args);
-			}
-		},
-		[input],
-	);
-
 	useEffect(() => {
-		const newDate = getValidDate(year, month, day);
-		if (newDate) {
-			// console.log(getValidDate(year, month, day));
-			onChange({ dd: day, mm: month, yyyy: year });
+		if (input && typeof input.onChange === 'function') {
+			const newDate = getValidDate(year, month, day);
+			if (newDate) {
+				// console.log(getValidDate(year, month, day));
+				input.onChange({ dd: day, mm: month, yyyy: year });
+			}
 		}
-	}, [day, month, year, onChange]);
+	}, [day, month, year]);
 
 	return (
 		<StyledInputDiv

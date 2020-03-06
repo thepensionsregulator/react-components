@@ -10,7 +10,7 @@ interface SelectProps {
 	options?: any;
 	label?: string;
 	placeholder?: string;
-	onChange?: Function;
+	onChange?: (args: any[]) => void;
 	onBlur?: Function;
 	meta?: any;
 	disabled?: boolean;
@@ -18,22 +18,25 @@ interface SelectProps {
 	handleNotFoundButtonClick?: Function;
 	notFoundMessage?: string;
 	initialSelectedItem?: string;
+	required?: boolean;
+	hint?: string;
 }
 
 export const Select: React.FC<SelectProps> = ({
 	options,
-	// label,
-	// placeholder = 'Please select...',
-	// meta,
-	// onBlur,
-	// disabled,
+	label,
+	required,
+	hint,
+	meta,
 	handleNotFoundButtonClick,
 	notFoundMessage = 'Your search criteria has no match',
 	itemToString,
 	initialSelectedItem,
+	onChange,
 }) => {
 	return (
 		<Downshift
+			onChange={onChange}
 			itemToString={itemToString}
 			initialSelectedItem={initialSelectedItem}
 		>
@@ -54,12 +57,15 @@ export const Select: React.FC<SelectProps> = ({
 					{...getRootProps({ refKey: null }, { suppressRefError: true })}
 				>
 					<StyledInputLabel
+						isError={meta && meta.touched && meta.error}
 						flexDirection="column"
 						{...getLabelProps({ onClick: () => toggleMenu() })}
 					>
 						<InputElementHeading
-							hint="For example apple or pear"
-							label="Enter a fruit"
+							label={label}
+							required={required}
+							hint={hint}
+							meta={meta}
 						/>
 						<StyledSelectInput {...getInputProps()} />
 					</StyledInputLabel>
@@ -108,34 +114,26 @@ export const FFSelect: React.FC<FFSelectProps> = field => {
 				...props
 			}) => {
 				return (
-					<StyledInputLabel
-						isError={meta && meta.touched && meta.error}
-						flexDirection="column"
-					>
-						<InputElementHeading
-							label={label}
-							required={required}
-							hint={hint}
-							meta={meta}
-						/>
-						<Select
-							initialSelectedItem={input.value}
-							itemToString={item => (item ? item.label : '')}
-							onChange={value => {
-								// override onChange from outside if needed
-								if (onChange && typeof onChange === 'function') {
-									return onChange(value, input.onChange);
-								}
-								// otherwise forward the value
-								return input.onChange(value);
-							}}
-							// onBlur={input.onBlur}
-							options={options}
-							meta={meta}
-							aria-label={label}
-							{...props}
-						/>
-					</StyledInputLabel>
+					<Select
+						initialSelectedItem={input.value}
+						itemToString={item => (item ? item.label : '')}
+						required={required}
+						hint={hint}
+						onChange={value => {
+							// override onChange from outside if needed
+							if (onChange && typeof onChange === 'function') {
+								return onChange(value, input.onChange);
+							}
+							// otherwise forward
+							return input.onChange(value);
+						}}
+						// onBlur={input.onBlur}
+						options={options}
+						meta={meta}
+						label={label}
+						aria-label={label}
+						{...props}
+					/>
 				);
 			}}
 		/>
