@@ -3,7 +3,7 @@ import { createGlobalStyle } from 'styled-components';
 const GlobalStyle = createGlobalStyle`
   * {
     border: 0;
-    box-sizing: inherit;
+    box-sizing: border-box;
     -webkit-font-smoothing: antialiased;
     font-weight: inherit;
     margin: 0;
