@@ -1,13 +1,13 @@
 ---
-name: Radio
+name: Number
 menu: Forms
-route: /forms/radio
+route: /forms/number
 ---
 
 import { Playground } from 'docz'
-import { RadioButton } from './index';
+import { InputNumber } from './index';
 
-# Radio Button
+# Number Input
 
 ## Introduction
 
@@ -21,22 +21,28 @@ et at ipsum, eveniet tempore nostrum quasi est unde modi impedit quaerat suscipi
 quo corporis? Cum dignissimos adipisci itaque sint tempore, saepe dolorem fugit quia placeat officiis 
 earum rerum aspernatur similique commodi voluptates? Id ut ab cum doloremque magnam illo ipsa officia nulla ipsum.
 
-[CodeSandbox](https://codesandbox.io/s/lively-wood-rxcpu)
+CodeSandbox
 
 <Playground>
   {() => {
-		const [checked, setChecked] = React.useState(false)
+		const [value, setNumber] = React.useState(0)
 		return (
-			<div style={{ width: 400, padding: 10  }}>
-				<RadioButton
-					value="radio_button_value"
-					checked={checked}
-					onChange={() => {
-						setChecked(checked ? false : true)
+			<div style={{ width: 400, padding: 10 }}>
+				<InputNumber
+					type="number"
+					required={true}
+					label="Number of days"
+					hint="Must be between 0 and 100"
+					input={{
+						value,
+						onChange: (value) => setNumber(value)
 					}}
-					label="All details are correct"
+					meta={{
+						touched: false,
+						error: "Enter number of days"
+					}}
 				/>
 			</div>
 		)
   }}
-</Playground>
+</Playground> 
