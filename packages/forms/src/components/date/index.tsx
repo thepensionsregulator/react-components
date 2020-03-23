@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useCallback } from 'react';
+import React, { useState, useEffect, useMemo } from 'react';
 import { Field, FieldRenderProps } from 'react-final-form';
 import { isValid, toDate } from 'date-fns';
 import {
@@ -28,6 +28,17 @@ export function getValidDate(yyyy: string, mm: string, dd: string) {
 	return undefined;
 }
 
+const useDateTransformer = (initialDate: Date = undefined) => {
+	return useMemo(() => {
+		const valid = isValid(initialDate);
+		return {
+			dd: valid ? `${initialDate.getDate()}` : undefined,
+			mm: valid ? `${initialDate.getMonth()}` : undefined,
+			yyyy: valid ? `${initialDate.getFullYear()}` : undefined,
+		};
+	}, [initialDate]);
+};
+
 export const InputDate: React.FC<FieldRenderProps<string> & FieldProps> = ({
 	label,
 	hint,
@@ -35,16 +46,16 @@ export const InputDate: React.FC<FieldRenderProps<string> & FieldProps> = ({
 	input = {},
 	meta,
 }) => {
-	const [day, setDay] = useState(input?.value?.dd || '');
-	const [month, setMonth] = useState(input?.value?.mm || '');
-	const [year, setYear] = useState(input?.value?.yyyy || '');
+	const { dd, mm, yyyy } = useDateTransformer(input.value);
+	const [day, setDay] = useState(dd);
+	const [month, setMonth] = useState(mm);
+	const [year, setYear] = useState(yyyy);
 
 	useEffect(() => {
 		if (input && typeof input.onChange === 'function') {
 			const newDate = getValidDate(year, month, day);
 			if (newDate) {
-				// console.log(getValidDate(year, month, day));
-				input.onChange({ dd: day, mm: month, yyyy: year });
+				input.onChange(newDate);
 			}
 		}
 	}, [day, month, year]);
