@@ -58,7 +58,7 @@ export function validate(formFields: FieldProps[]) {
 	const fieldsWithErrors = formFields.filter(
 		field => !field.validate && field.error,
 	);
-	return <T extends object>(keyValuePairs: T): { [key: string]: any } => {
+	return (keyValuePairs: object): { [key: string]: any } => {
 		const errors = {};
 
 		fieldsWithErrors.map(({ name, error }) => {

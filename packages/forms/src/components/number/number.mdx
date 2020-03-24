@@ -33,7 +33,7 @@ CodeSandbox
 						<FFInputNumber
 							name="number-of-days"
 							type="number"
-							required={true}
+							validate={value => (value ? undefined : 'Cannot be empty')}
 							label="Number of days"
 							hint="Must be between 0 and 100"
 						/>
