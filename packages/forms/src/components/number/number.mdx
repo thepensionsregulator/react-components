@@ -4,8 +4,9 @@ menu: Forms
 route: /forms/number
 ---
 
-import { Playground } from 'docz'
-import { InputNumber } from './index';
+import { Playground } from 'docz';
+import { Form } from 'react-final-form';
+import { FFInputNumber, InputNumber } from './index';
 
 # Number Input
 
@@ -13,36 +14,32 @@ import { InputNumber } from './index';
 
 ## Usage
 
-Lorem ipsum dolor sit amet consectetur adipisicing elit. Ipsum nostrum omnis ea unde totam, est 
-consectetur odio! Harum vitae, sed totam aperiam consequuntur nostrum repudiandae non nemo porro, 
-dolorem nulla corrupti hic consectetur eaque fuga illo numquam modi similique ipsam recusandae! Harum, 
-possimus suscipit. Quibusdam totam, fugiat officiis qui nisi tempora. Accusantium corrupti similique 
-et at ipsum, eveniet tempore nostrum quasi est unde modi impedit quaerat suscipit aspernatur ratione 
-quo corporis? Cum dignissimos adipisci itaque sint tempore, saepe dolorem fugit quia placeat officiis 
+Lorem ipsum dolor sit amet consectetur adipisicing elit. Ipsum nostrum omnis ea unde totam, est
+consectetur odio! Harum vitae, sed totam aperiam consequuntur nostrum repudiandae non nemo porro,
+dolorem nulla corrupti hic consectetur eaque fuga illo numquam modi similique ipsam recusandae! Harum,
+possimus suscipit. Quibusdam totam, fugiat officiis qui nisi tempora. Accusantium corrupti similique
+et at ipsum, eveniet tempore nostrum quasi est unde modi impedit quaerat suscipit aspernatur ratione
+quo corporis? Cum dignissimos adipisci itaque sint tempore, saepe dolorem fugit quia placeat officiis
 earum rerum aspernatur similique commodi voluptates? Id ut ab cum doloremque magnam illo ipsa officia nulla ipsum.
 
 CodeSandbox
 
 <Playground>
-  {() => {
-		const [value, setNumber] = React.useState(0)
+	{() => {
 		return (
-			<div style={{ width: 400, padding: 10 }}>
-				<InputNumber
-					type="number"
-					required={true}
-					label="Number of days"
-					hint="Must be between 0 and 100"
-					input={{
-						value,
-						onChange: (value) => setNumber(value)
-					}}
-					meta={{
-						touched: false,
-						error: "Enter number of days"
-					}}
-				/>
-			</div>
-		)
-  }}
-</Playground> 
+			<Form onSubmit={console.log}>
+				{({ handleSubmit }) => (
+					<form onSubmit={handleSubmit} style={{ width: 400, padding: 10 }}>
+						<FFInputNumber
+							name="number-of-days"
+							type="number"
+							required={true}
+							label="Number of days"
+							hint="Must be between 0 and 100"
+						/>
+					</form>
+				)}
+			</Form>
+		);
+	}}
+</Playground>

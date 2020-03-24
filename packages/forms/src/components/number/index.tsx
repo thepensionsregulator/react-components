@@ -28,6 +28,7 @@ export const InputNumber: React.FC<FieldRenderProps<string> & FieldProps> = ({
 				meta={meta}
 				{...input}
 				{...props}
+				{...input}
 				onChange={(evt: any) => input.onChange(parseInt(evt.target.value))}
 				type="number"
 			/>
