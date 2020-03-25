@@ -30,7 +30,7 @@ function getValidDate(yyyy: string, mm: string, dd: string) {
 
 const useDateTransformer = (initialDate: Date = undefined) => {
 	return useMemo(() => {
-		const valid = isValid(initialDate);
+		const valid = initialDate ? isValid(initialDate) : false;
 		return {
 			dd: valid ? `${initialDate.getDate()}` : undefined,
 			mm: valid ? `${initialDate.getMonth()}` : undefined,

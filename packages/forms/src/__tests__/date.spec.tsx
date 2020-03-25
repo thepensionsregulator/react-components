@@ -1,4 +1,4 @@
-import { fireEvent } from '@testing-library/react';
+import { fireEvent, act } from '@testing-library/react';
 import { formSetup } from '../__mocks__/setup';
 import { validate } from '../utils/validation';
 import { renderFields } from '../utils/forms';
@@ -9,9 +9,9 @@ describe('Date', () => {
 	test('date fields are being rendered within the form and submits when data is correct', () => {
 		const fields = [
 			{
+				name: 'date-1',
 				label: 'passport-expiry',
 				hint: 'For example, 12 11 2007',
-				name: 'date-1',
 				type: 'date',
 				required: true,
 			},
@@ -42,20 +42,26 @@ describe('Date', () => {
 
 		const submit = container.querySelector('button[type="submit"]');
 
-		fireEvent.change(dd, { target: { value: '20' } });
-		fireEvent.change(mm, { target: { value: '12' } });
-		fireEvent.change(yyyy, { target: { value: '2019' } });
+		// NOTE
+		// React throws an error because I change input by manipulating dom instead of
+		// using functions to change input state.
+		// TODO: FIX
+		// act(() => {
+		// 	result.current.onChangeDD(20)
+		// 	result.current.onChangeMM(12)
+		// 	result.current.onChangeYYYY(2019)
+		// })
+
+		fireEvent.change(dd, { target: { value: 20 } });
+		fireEvent.change(mm, { target: { value: 12 } });
+		fireEvent.change(yyyy, { target: { value: 2019 } });
 
 		fireEvent.click(submit);
 
 		expect(handleSubmit).toBeCalledTimes(1);
 		expect(form.getState().values).toMatchInlineSnapshot(`
 		Object {
-		  "date-1": Object {
-		    "dd": "20",
-		    "mm": "12",
-		    "yyyy": "2019",
-		  },
+		  "date-1": 2019-12-20T00:00:00.000Z,
 		}
 	`);
 	});
