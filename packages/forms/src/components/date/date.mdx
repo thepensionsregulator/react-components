@@ -5,7 +5,8 @@ route: /forms/date
 ---
 
 import { Playground } from 'docz'
-import { InputDate } from './index';
+import { Form } from '../../utils/forms'
+import { FFInputDate } from './index';
 
 # Date
 
@@ -24,19 +25,24 @@ earum rerum aspernatur similique commodi voluptates? Id ut ab cum doloremque mag
 [CodeSandbox](https://codesandbox.io/s/nice-dream-xs3zp)
 
 <Playground>
-	<div style={{ width: 400, padding: 10 }}>
-		<InputDate
-			label="When was your passport issued?"
-			hint="For example, 12 11 2007"
-			required={true}
-			input={{
-				onChange: console.log,
-				onBlur: () => {}
-			}}
-			meta={{
-				touched: false,
-				error: 'The date your passport was issued must be in the past',
-			}}
-		/>
-	</div>
+	{() => {
+		const name = 'passport-issued'
+		
+		return (
+			<Form onSubmit={console.log} initialValues={{ [name]: new Date(2008, 5, 24) }}>
+				{({ handleSubmit }) => (
+					<form onSubmit={handleSubmit} style={{ width: 400, padding: 10 }}>
+						<FFInputDate
+							name={name}
+							label="When was your passport issued?"
+							hint="For example, 12 11 2007"
+							required={true}
+							error="The date your passport was issued must be in the past"
+						/>
+						<button type="submit" style={{display: 'none'}}>Submit</button>
+					</form>
+				)}
+			</Form>
+		);
+	}}
 </Playground>

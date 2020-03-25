@@ -20,7 +20,7 @@ const handleChange = (onChange: Function, value: number) => ({ target }) => {
 	}
 };
 
-export function getValidDate(yyyy: string, mm: string, dd: string) {
+function getValidDate(yyyy: string, mm: string, dd: string) {
 	const date = toDate(new Date(parseInt(yyyy), parseInt(mm) - 1, parseInt(dd)));
 	if (isValid(date) && yyyy.length === 4) {
 		return date;
