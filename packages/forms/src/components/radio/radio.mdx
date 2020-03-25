@@ -5,7 +5,8 @@ route: /forms/radio
 ---
 
 import { Playground } from 'docz'
-import { RadioButton } from './index';
+import { Form } from '../../utils/forms'
+import { FFRadioButton } from './index';
 
 # Radio Button
 
@@ -21,22 +22,37 @@ et at ipsum, eveniet tempore nostrum quasi est unde modi impedit quaerat suscipi
 quo corporis? Cum dignissimos adipisci itaque sint tempore, saepe dolorem fugit quia placeat officiis 
 earum rerum aspernatur similique commodi voluptates? Id ut ab cum doloremque magnam illo ipsa officia nulla ipsum.
 
-[CodeSandbox](https://codesandbox.io)
+[CodeSandbox](https://codesandbox.io/s/lively-wood-rxcpu)
 
 <Playground>
-  {() => {
-		const [checked, setChecked] = React.useState(false)
+	{() => {
+		const FIELD_NAME = 'radio_button'; 
 		return (
-			<div style={{ width: 400, padding: 10  }}>
-				<RadioButton
-					value="radio_button_value"
-					checked={checked}
-					onChange={() => {
-						setChecked(checked ? false : true)
-					}}
-					label="All details are correct"
-				/>
-			</div>
-		)
-  }}
+			<Form onSubmit={console.log} initialValues={{[FIELD_NAME]: 'value_b'}}>
+				{({ handleSubmit }) => (
+					<form onSubmit={handleSubmit} style={{ width: 400, padding: 10 }}>
+						<FFRadioButton
+						  name={FIELD_NAME}
+							type="radio"
+							value="value_a"
+							label="Value A"
+						/>
+            <FFRadioButton
+						  name={FIELD_NAME}
+							type="radio"
+							value="value_b"
+							label="Value B"
+						/>
+            <FFRadioButton
+						  name={FIELD_NAME}
+							type="radio"
+							value="value_c"
+							label="Value C"
+						/>
+						<button type="submit">Submit</button>
+					</form>
+				)}
+			</Form>
+		);
+	}}
 </Playground>

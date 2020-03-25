@@ -5,7 +5,8 @@ route: /forms/checkbox
 ---
 
 import { Playground } from 'docz'
-import { Checkbox } from './index';
+import { Form } from '../../utils/forms'
+import { FFCheckbox } from './index';
 
 # Checkbox
 
@@ -41,18 +42,15 @@ earum rerum aspernatur similique commodi voluptates? Id ut ab cum doloremque mag
 [CodeSandbox](https://codesandbox.io)
 
 <Playground>
-  {() => {
-		const [checked, setChecked] = React.useState(false)
-		return (
-			<div style={{ width: 400, padding: 10 }}>
-				<Checkbox
-					checked={checked}
-					onChange={() => {
-						setChecked(checked ? false : true)
-					}}
+	<Form onSubmit={console.log}>
+		{({ handleSubmit }) => (
+			<form onSubmit={handleSubmit} style={{ width: 400, padding: 10 }}>
+				<FFCheckbox
+					name="checkbox-a"
 					label="All details are correct"
 				/>
-			</div>
-		)
-  }}
+				<button type="submit" style={{display: 'none'}}>Submit</button>
+			</form>
+		)}
+	</Form>
 </Playground>
