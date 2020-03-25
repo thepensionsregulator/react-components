@@ -48,7 +48,8 @@ export type FieldProps = {
 	testId?: string;
 	input?: any;
 	options?: FieldOptions[];
-	/** If value is an object then you can transform final returned value from the selection */
+	/** Select Component feature. If value is an object then you
+	 * can transform final returned value from the selection */
 	onChange?: (value: FieldOptions, set: Function) => void;
 };
 
@@ -57,7 +58,7 @@ export function validate(formFields: FieldProps[]) {
 	const fieldsWithErrors = formFields.filter(
 		field => !field.validate && field.error,
 	);
-	return <T extends object>(keyValuePairs: T): { [key: string]: any } => {
+	return (keyValuePairs: object): { [key: string]: any } => {
 		const errors = {};
 
 		fieldsWithErrors.map(({ name, error }) => {

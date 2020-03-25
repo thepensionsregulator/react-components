@@ -6,6 +6,7 @@ import { FFCheckbox } from '../components/checkbox';
 import { FFRadioButton } from '../components/radio';
 import { FFInputDate } from '../components/date';
 import { FFSelect } from '../components/select';
+import { FFInputNumber } from '../components/number';
 
 export function renderFields(fields: FieldProps[] = []) {
 	return fields.map((field, key) => {
@@ -18,6 +19,9 @@ export function renderFields(fields: FieldProps[] = []) {
 			}
 			case 'text': {
 				return <FFInputText key={key} {...field} />;
+			}
+			case 'number': {
+				return <FFInputNumber key={key} {...field} />;
 			}
 			case 'email': {
 				return <FFInputText key={key} {...field} />;
