@@ -25,21 +25,17 @@ earum rerum aspernatur similique commodi voluptates? Id ut ab cum doloremque mag
 CodeSandbox
 
 <Playground>
-	{() => {
-		return (
-			<Form onSubmit={console.log}>
-				{({ handleSubmit }) => (
-					<form onSubmit={handleSubmit} style={{ width: 400, padding: 10 }}>
-						<FFInputNumber
-							name="number-of-days"
-							type="number"
-							validate={value => (value ? undefined : 'Cannot be empty')}
-							label="Number of days"
-							hint="Must be between 0 and 100"
-						/>
-					</form>
-				)}
-			</Form>
-		);
-	}}
+	<Form onSubmit={console.log}>
+		{({ handleSubmit }) => (
+			<form onSubmit={handleSubmit} style={{ width: 400, padding: 10 }}>
+				<FFInputNumber
+					name="number-of-days"
+					type="number"
+					validate={value => (value ? undefined : 'Cannot be empty')}
+					label="Number of days"
+					hint="Must be between 0 and 100"
+				/>
+			</form>
+		)}
+	</Form>
 </Playground>

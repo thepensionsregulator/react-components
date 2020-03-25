@@ -5,7 +5,8 @@ route: /forms/text
 ---
 
 import { Playground } from 'docz'
-import { InputText } from './index';
+import { Form } from '../../utils/forms'
+import { FFInputText } from './index';
 
 # Text Input
 
@@ -24,25 +25,19 @@ earum rerum aspernatur similique commodi voluptates? Id ut ab cum doloremque mag
 [CodeSandbox](https://codesandbox.io)
 
 <Playground>
-  {() => {
-		const [text, setText] = React.useState('')
-		return (
-			<div style={{ width: 400, padding: 10 }}>
-				<InputText
+	<Form onSubmit={console.log}>
+		{({ handleSubmit }) => (
+			<form onSubmit={handleSubmit} style={{ width: 400, padding: 10 }}>
+				<FFInputText
+					name="event_name"
 					type="text"
 					required={true}
 					label="Event name"
 					hint="Must be between 6 and 8 digits long"
-					input={{
-						value: text,
-						onChange: (e) => setText(e.target.value)
-					}}
-					meta={{
-						touched: false,
-						error: "Enter an event name"
-					}}
+					error="Enter an event name"
 				/>
-			</div>
-		)
-  }}
-</Playground> 
+				<button type="submit" style={{display: 'none'}}>Submit</button>
+			</form>
+		)}
+	</Form>
+</Playground>
