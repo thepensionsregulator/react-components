@@ -5,16 +5,37 @@ export const editorFontStack = css`
 	font-weight: ${({ theme }) => theme.fontWeights[0]};
 	font-size: ${({ theme }) => theme.fontSizes[1]}px;
 
-	h3 {
+	h1 {
+		font-size: ${({ theme }) => theme.fontSizes[5]}px;
+	}
+	h2 {
 		font-size: ${({ theme }) => theme.fontSizes[4]}px;
 	}
+	h3 {
+		font-size: ${({ theme }) => theme.fontSizes[3]}px;
+	}
+	h4 {
+		font-size: ${({ theme }) => theme.fontSizes[2]}px;
+	}
+	h5 {
+		font-size: ${({ theme }) => theme.fontSizes[1]}px;
+	}
+	h6 {
+		font-size: ${({ theme }) => theme.fontSizes[0]}px;
+	}
 	p {
+		font-size: ${({ theme }) => theme.fontSizes[0]}px;
 	}
 	b {
 		font-weight: ${({ theme }) => theme.fontWeights[3]};
 	}
 	strong {
 		font-weight: ${({ theme }) => theme.fontWeights[3]};
+	}
+	span {
+		font-size: ${({ theme }) => theme.fontSizes[0]}px;
+	}
+	hr {
 	}
 	i {
 		font-style: italic;
