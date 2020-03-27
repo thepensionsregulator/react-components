@@ -5,3 +5,4 @@ export * from './components/checkbox';
 export * from './components/radio';
 export * from './components/date';
 export * from './components/select';
+export * from './components/richEditor';

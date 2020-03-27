@@ -51,6 +51,7 @@ export type FieldProps = {
 	/** Select Component feature. If value is an object then you
 	 * can transform final returned value from the selection */
 	onChange?: (value: FieldOptions, set: Function) => void;
+	[key: string]: any;
 };
 
 export function validate(formFields: FieldProps[]) {
