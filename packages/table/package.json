@@ -1,6 +1,6 @@
 {
 	"name": "@tpr/table",
-	"version": "1.0.18",
+	"version": "1.0.19",
 	"description": "TPR Table component and helpers",
 	"author": "David Alekna <david.alekna@tpr.gov.uk>",
 	"license": "MIT",
