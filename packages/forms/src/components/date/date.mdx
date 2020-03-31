@@ -28,7 +28,10 @@ earum rerum aspernatur similique commodi voluptates? Id ut ab cum doloremque mag
 	{() => {
 		const name = 'passport-issued'
 		return (
-			<Form onSubmit={console.log} initialValues={{ [name]: new Date(2008, 5, 24) }}>
+			<Form 
+			  onSubmit={val => console.log(val)} 
+				initialValues={{ [name]: new Date(2008, 6, 24) }}
+			>
 				{({ handleSubmit }) => (
 					<form onSubmit={handleSubmit} style={{ width: 400, padding: 10 }}>
 						<FFInputDate
@@ -38,7 +41,7 @@ earum rerum aspernatur similique commodi voluptates? Id ut ab cum doloremque mag
 							required={true}
 							error="The date your passport was issued must be in the past"
 						/>
-						<button type="submit" style={{display: 'none'}}>Submit</button>
+						<button type="submit">Submit</button>
 					</form>
 				)}
 			</Form>
