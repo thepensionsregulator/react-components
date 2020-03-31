@@ -11,8 +11,9 @@ export default function PopupBox({
 	handleNotFoundButtonClick,
 	notFoundMessage,
 	optionPreview,
+	searchable = false,
 }: any) {
-	const filteredOptions = getItems(options, inputValue);
+	const filteredOptions = searchable ? getItems(options, inputValue) : options;
 
 	return (
 		<>

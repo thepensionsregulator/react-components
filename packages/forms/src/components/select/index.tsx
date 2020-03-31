@@ -17,6 +17,7 @@ interface SelectProps extends DownshiftProps<any> {
 	notFoundMessage?: string;
 	required?: boolean;
 	hint?: string;
+	searchable?: boolean;
 }
 
 export const Select: React.FC<SelectProps> = ({
@@ -31,6 +32,8 @@ export const Select: React.FC<SelectProps> = ({
 	initialSelectedItem,
 	onChange,
 	disabled,
+	searchable,
+	placeholder,
 	...rest
 }) => {
 	return (
@@ -51,6 +54,7 @@ export const Select: React.FC<SelectProps> = ({
 				getRootProps,
 				toggleMenu,
 				inputValue,
+				// clearSelection,
 			}) => (
 				<Flex
 					flexDirection="column"
@@ -70,6 +74,7 @@ export const Select: React.FC<SelectProps> = ({
 						<StyledSelectInput
 							autoComplete="off"
 							disabled={disabled}
+							placeholder={placeholder}
 							{...getInputProps()}
 						/>
 					</StyledInputLabel>
@@ -84,6 +89,7 @@ export const Select: React.FC<SelectProps> = ({
 							{isOpen && (
 								<PopupBox
 									{...{
+										searchable,
 										getItemProps,
 										inputValue,
 										options,
