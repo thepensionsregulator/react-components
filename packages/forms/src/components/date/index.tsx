@@ -13,10 +13,10 @@ import { FieldProps } from '../../utils/validation';
 
 const handleChange = (onChange: Function, value: number) => ({ target }) => {
 	if (!target.value) {
-		onChange('');
+		return onChange('');
 	}
 	if (parseInt(target.value, 10) < value) {
-		onChange(target.value.trim().replace(/[^\d]/));
+		return onChange(target.value.trim().replace(/[^\d]/));
 	}
 };
 
@@ -46,7 +46,8 @@ export const InputDate: React.FC<FieldRenderProps<string> & FieldProps> = ({
 	input = {},
 	meta,
 }) => {
-	const { dd, mm, yyyy } = useDateTransformer(input.value);
+	const initialDate = useMemo(() => meta.initial, [meta.initial]);
+	const { dd, mm, yyyy } = useDateTransformer(initialDate);
 	const [day, setDay] = useState(dd);
 	const [month, setMonth] = useState(mm);
 	const [year, setYear] = useState(yyyy);
@@ -56,9 +57,11 @@ export const InputDate: React.FC<FieldRenderProps<string> & FieldProps> = ({
 			const newDate = getValidDate(year, month, day);
 			if (newDate) {
 				input.onChange(newDate);
+			} else {
+				input.onChange(undefined);
 			}
 		}
-	}, [day, month, year]);
+	}, [day, month, year, initialDate]);
 
 	return (
 		<StyledInputDiv
@@ -81,6 +84,12 @@ export const InputDate: React.FC<FieldRenderProps<string> & FieldProps> = ({
 						aria-label={`dd-${label}`}
 						value={day}
 						onChange={handleChange(setDay, 32)}
+						onBlur={evt => {
+							if (!evt.target.value || evt.target.value === '0') {
+								setMonth('');
+								input.onBlur();
+							}
+						}}
 						meta={meta}
 						autoComplete="off"
 					/>
@@ -92,6 +101,12 @@ export const InputDate: React.FC<FieldRenderProps<string> & FieldProps> = ({
 						aria-label={`mm-${label}`}
 						value={month}
 						onChange={handleChange(setMonth, 13)}
+						onBlur={evt => {
+							if (!evt.target.value || evt.target.value === '0') {
+								setMonth('');
+								input.onBlur();
+							}
+						}}
 						meta={meta}
 						autoComplete="off"
 					/>
@@ -102,6 +117,12 @@ export const InputDate: React.FC<FieldRenderProps<string> & FieldProps> = ({
 						type="text"
 						aria-label={`yyyy-${label}`}
 						onChange={handleChange(setYear, 10000)}
+						onBlur={evt => {
+							if (!evt.target.value || evt.target.value === '0') {
+								setMonth('');
+								input.onBlur();
+							}
+						}}
 						meta={meta}
 						value={year}
 						autoComplete="off"
