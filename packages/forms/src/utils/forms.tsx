@@ -1,6 +1,6 @@
 import React from 'react';
 import { FieldProps } from './validation';
-import { Form, Field, useFormState } from 'react-final-form';
+import { Form, Field, useFormState, useForm } from 'react-final-form';
 import { FFInputText } from '../components/text';
 import { FFCheckbox } from '../components/checkbox';
 import { FFRadioButton } from '../components/radio';
@@ -43,4 +43,4 @@ export function renderFields(fields: FieldProps[] = []) {
 	});
 }
 
-export { Form, Field, useFormState };
+export { Form, Field, useFormState, useForm };

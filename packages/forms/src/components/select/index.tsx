@@ -1,23 +1,20 @@
 import React from 'react';
-import Downshift from 'downshift';
+import Downshift, { DownshiftProps } from 'downshift';
 import { Field } from 'react-final-form';
 import { Flex, StyledInputLabel, InputElementHeading } from '../elements';
 import { StyledSelectInput, Popup } from './styles';
 import { FieldProps } from '../../utils/validation';
 import PopupBox from './popup';
 
-interface SelectProps {
+interface SelectProps extends DownshiftProps<any> {
 	options?: any;
 	label?: string;
 	placeholder?: string;
-	onChange?: (args: any[]) => void;
 	onBlur?: Function;
 	meta?: any;
 	disabled?: boolean;
-	itemToString?: (item: any) => any;
 	handleNotFoundButtonClick?: Function;
 	notFoundMessage?: string;
-	initialSelectedItem?: string;
 	required?: boolean;
 	hint?: string;
 }
@@ -33,12 +30,15 @@ export const Select: React.FC<SelectProps> = ({
 	itemToString,
 	initialSelectedItem,
 	onChange,
+	disabled,
+	...rest
 }) => {
 	return (
 		<Downshift
 			onChange={onChange}
 			itemToString={itemToString}
 			initialSelectedItem={initialSelectedItem}
+			{...rest}
 		>
 			{({
 				getInputProps,
@@ -67,7 +67,11 @@ export const Select: React.FC<SelectProps> = ({
 							hint={hint}
 							meta={meta}
 						/>
-						<StyledSelectInput autoComplete="off" {...getInputProps()} />
+						<StyledSelectInput
+							autoComplete="off"
+							disabled={disabled}
+							{...getInputProps()}
+						/>
 					</StyledInputLabel>
 					<div style={{ position: 'relative' }}>
 						<Popup
