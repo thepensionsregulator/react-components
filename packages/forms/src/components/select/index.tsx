@@ -67,7 +67,7 @@ export const Select: React.FC<SelectProps> = ({
 							hint={hint}
 							meta={meta}
 						/>
-						<StyledSelectInput {...getInputProps()} />
+						<StyledSelectInput autoComplete="off" {...getInputProps()} />
 					</StyledInputLabel>
 					<div style={{ position: 'relative' }}>
 						<Popup

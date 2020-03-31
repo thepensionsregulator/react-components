@@ -1,6 +1,6 @@
 {
 	"name": "@tpr/core",
-	"version": "1.0.18",
+	"version": "1.0.19",
 	"description": "TPR Core components",
 	"author": "David Alekna <david.alekna@tpr.gov.uk>",
 	"license": "MIT",
@@ -40,6 +40,8 @@
 	"dependencies": {
 		"@tpr/forms": "file:../forms",
 		"@tpr/theming": "file:../theming",
+		"@types/styled-components": "^5.0.1",
+		"@types/styled-system": "^5.1.9",
 		"@xstate/react": "^0.8.1",
 		"final-form": "^4.18.7",
 		"prop-types": "^15.7.2",

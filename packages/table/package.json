@@ -1,6 +1,6 @@
 {
 	"name": "@tpr/table",
-	"version": "1.0.18",
+	"version": "1.0.19",
 	"description": "TPR Table component and helpers",
 	"author": "David Alekna <david.alekna@tpr.gov.uk>",
 	"license": "MIT",
@@ -40,6 +40,8 @@
 	"dependencies": {
 		"@alekna/react-data-browser": "^1.1.11",
 		"@tpr/core": "file:../core",
+		"@types/styled-components": "^5.0.1",
+		"@types/styled-system": "^5.1.9",
 		"lodash": "^4.17.15",
 		"react-bottom-scroll-listener": "^3.0.0",
 		"tslib": "^1.11.1"
