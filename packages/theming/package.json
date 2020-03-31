@@ -45,6 +45,7 @@
 	},
 	"gitHead": "57aec9c9de22596d6343bae07eb6b198322a0bee",
 	"dependencies": {
+		"@types/styled-components": "^5.0.1",
 		"tslib": "^1.11.1"
 	}
 }
