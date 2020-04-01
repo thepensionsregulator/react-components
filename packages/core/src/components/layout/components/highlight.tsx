@@ -14,7 +14,13 @@ export const Highlight: React.FC<HighlightProps> = ({
 	return (
 		<DocWidth justifyContent="center">
 			<AppWidth>
-				<Flex flex="0 0 auto" height="50px" width="100%" bg="neutral.100">
+				<Flex
+					flex="0 0 auto"
+					height="50px"
+					width="100%"
+					bg="accents.300"
+					color="white"
+				>
 					<Flex flex="1 1 auto" alignItems="center" px={3}>
 						<P>{title}</P>
 					</Flex>

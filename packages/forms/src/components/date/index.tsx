@@ -33,7 +33,7 @@ const useDateTransformer = (initialDate: Date = undefined) => {
 		const valid = initialDate ? isValid(initialDate) : false;
 		return {
 			dd: valid ? `${initialDate.getDate()}` : undefined,
-			mm: valid ? `${initialDate.getMonth()}` : undefined,
+			mm: valid ? `${initialDate.getMonth() + 1}` : undefined,
 			yyyy: valid ? `${initialDate.getFullYear()}` : undefined,
 		};
 	}, [initialDate]);

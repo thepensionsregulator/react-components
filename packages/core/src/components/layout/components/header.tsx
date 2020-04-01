@@ -33,7 +33,7 @@ export const Header: React.FC<HeaderProps> = ({
 	onClickLogout,
 }) => {
 	return (
-		<DocWidth justifyContent="center" bg="#eeeeee">
+		<DocWidth justifyContent="center" bg="accents.300" color="white">
 			<AppWidth>
 				<Flex flexDirection="column">
 					<DocWidth justifyContent="space-between" p={2}>
