@@ -8,8 +8,8 @@ type HighlightProps = {
 };
 
 export const Highlight: React.FC<HighlightProps> = ({
-	title = 'Scheme return — Test Scheme: DC Scheme 3 SQL Update',
-	scheme = 'PSR: 12014314',
+	title = '',
+	scheme = '',
 }) => {
 	return (
 		<DocWidth justifyContent="center">
@@ -21,17 +21,35 @@ export const Highlight: React.FC<HighlightProps> = ({
 					bg="accents.300"
 					color="white"
 				>
-					<Flex flex="1 1 auto" alignItems="center" px={3}>
-						<P>{title}</P>
-					</Flex>
 					<Flex
 						flex="0 0 auto"
-						width="200px"
-						bg="#000"
+						width="240px"
 						alignItems="center"
-						justifyContent="center"
+						justifyContent="left"
+						borderTop="1px solid"
+						borderColor="accents.200"
 					>
-						<P color="white">{scheme}</P>
+						<P fontWeight={3} pl={1}>
+							Scheme return
+						</P>
+					</Flex>
+					<Flex
+						flex="1 1 auto"
+						alignItems="center"
+						justifyContent="space-between"
+						px={3}
+						bg="accents.400"
+					>
+						<P fontWeight={3}>{title}</P>
+						<Flex
+							borderLeft="2px solid"
+							height="70%"
+							alignItems="center"
+							borderColor="accents.200"
+							pl={2}
+						>
+							<P fontWeight={3}>PSR: {scheme}</P>
+						</Flex>
 					</Flex>
 				</Flex>
 			</AppWidth>

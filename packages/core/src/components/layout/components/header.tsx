@@ -12,7 +12,6 @@ const Logo = styled('div')`
 	width: 180px;
 	margin-right: 15px;
 	padding-right: 15px;
-	border-right: 1px solid ${({ theme }) => theme.colors.neutral[200]};
 
 	img {
 		width: 100%;
@@ -38,13 +37,20 @@ export const Header: React.FC<HeaderProps> = ({
 				<Flex flexDirection="column">
 					<DocWidth justifyContent="space-between" p={2}>
 						<Flex alignItems="center">
-							<Logo>
-								{logoUrl ? (
-									<img src={logoUrl} alt="TPR Logo" />
-								) : (
-									'logo placeholder'
-								)}
-							</Logo>
+							<Flex
+								width="240px"
+								borderRight="1px solid"
+								borderColor="accents.200"
+								mr={3}
+							>
+								<Logo>
+									{logoUrl ? (
+										<img src={logoUrl} alt="TPR Logo" />
+									) : (
+										'logo placeholder'
+									)}
+								</Logo>
+							</Flex>
 							<P>{title}</P>
 						</Flex>
 						<Flex alignItems="center">
