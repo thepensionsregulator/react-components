@@ -1,8 +1,24 @@
 import React from 'react';
-import { styled } from '@tpr/theming';
+import styled from 'styled-components';
 import { DocWidth, AppWidth, Flex } from './globals';
-import { Button } from '../../buttons';
 import { P } from '../../typography';
+
+const WhiteLinkButton = styled('button')`
+	background: transparent;
+	box-shadow: none;
+	border: none;
+	color: white;
+	border: none;
+	text-decoration: none;
+	padding-right: 0;
+	padding-left: 0;
+	text-decoration: underline;
+	margin-left: 15px;
+	cursor: pointer;
+
+	height: ${({ theme }) => theme.space[5]}px;
+	font-size: ${({ theme }) => theme.fontSizes[2]}px;
+`;
 
 const Logo = styled('div')`
 	display: flex;
@@ -10,8 +26,6 @@ const Logo = styled('div')`
 	align-items: flex-start;
 	justify-content: flex-start;
 	width: 180px;
-	margin-right: 15px;
-	padding-right: 15px;
 
 	img {
 		width: 100%;
@@ -35,7 +49,7 @@ export const Header: React.FC<HeaderProps> = ({
 		<DocWidth justifyContent="center" bg="accents.300" color="white">
 			<AppWidth>
 				<Flex flexDirection="column">
-					<DocWidth justifyContent="space-between" p={2}>
+					<DocWidth justifyContent="space-between" py={2}>
 						<Flex alignItems="center">
 							<Flex
 								width="240px"
@@ -54,25 +68,18 @@ export const Header: React.FC<HeaderProps> = ({
 							<P>{title}</P>
 						</Flex>
 						<Flex alignItems="center">
-							<Button
-								scale="small"
-								appearance="link"
-								textDecoration="underline"
+							<WhiteLinkButton
 								data-testid="onClickSchemeOptions"
 								onClick={onClickSchemeOptions}
-								mr={1}
 							>
 								Scheme Options
-							</Button>
-							<Button
-								scale="small"
-								appearance="link"
-								textDecoration="underline"
+							</WhiteLinkButton>
+							<WhiteLinkButton
 								data-testid="onClickLogout"
 								onClick={onClickLogout}
 							>
 								Log out
-							</Button>
+							</WhiteLinkButton>
 						</Flex>
 					</DocWidth>
 				</Flex>

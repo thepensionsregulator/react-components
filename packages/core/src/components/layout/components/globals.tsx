@@ -28,15 +28,18 @@ export const DocWidth = styled.div<DocWidthProps>`
 	display: flex;
 	width: 100%;
 
+	position: relative;
+
 	${space}
 	${border}
 	${color}
 	${flexbox}
 `;
 
-export const AppWidth = styled.div`
+export const AppWidth = styled.div<{ zIndex?: number }>`
 	width: 100%;
 	max-width: 1000px;
+	z-index: ${({ zIndex }) => (zIndex ? zIndex : undefined)};
 `;
 
 export const Container: React.FC = ({ children, ...rest }) => {
