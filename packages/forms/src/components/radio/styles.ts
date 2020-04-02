@@ -10,7 +10,7 @@ export const StyledRadioWrapper = styled('div')<StyledRadioWrapperProps>`
 	flex-direction: 'row';
 	color: ${({ theme }) => theme.colors.neutral[800]};
 	align-items: ${props => props.align};
-	line-height: 1.4;
+	height: 25px;
 	cursor: ${props => (props.disabled ? 'not-allowed' : 'pointer')};
 
 	&:hover {

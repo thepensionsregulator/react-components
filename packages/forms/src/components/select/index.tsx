@@ -1,8 +1,14 @@
 import React from 'react';
 import Downshift, { DownshiftProps } from 'downshift';
+import { UnfoldMore } from '@tpr/icons';
 import { Field } from 'react-final-form';
 import { Flex, StyledInputLabel, InputElementHeading } from '../elements';
-import { StyledSelectInput, Popup } from './styles';
+import {
+	StyledSelectInput,
+	Popup,
+	InputWrapper,
+	IconPlacement,
+} from './styles';
 import { FieldProps } from '../../utils/validation';
 import PopupBox from './popup';
 
@@ -54,7 +60,6 @@ export const Select: React.FC<SelectProps> = ({
 				getRootProps,
 				toggleMenu,
 				inputValue,
-				// clearSelection,
 			}) => (
 				<Flex
 					flexDirection="column"
@@ -63,7 +68,7 @@ export const Select: React.FC<SelectProps> = ({
 					<StyledInputLabel
 						isError={meta && meta.touched && meta.error}
 						flexDirection="column"
-						{...getLabelProps({ onClick: () => toggleMenu() })}
+						{...getLabelProps()}
 					>
 						<InputElementHeading
 							label={label}
@@ -71,12 +76,18 @@ export const Select: React.FC<SelectProps> = ({
 							hint={hint}
 							meta={meta}
 						/>
-						<StyledSelectInput
-							autoComplete="off"
-							disabled={disabled}
-							placeholder={placeholder}
-							{...getInputProps()}
-						/>
+						<InputWrapper>
+							<StyledSelectInput
+								autoComplete="off"
+								disabled={disabled}
+								placeholder={placeholder}
+								onClick={() => toggleMenu()}
+								{...getInputProps()}
+							/>
+							<IconPlacement>
+								<UnfoldMore />
+							</IconPlacement>
+						</InputWrapper>
 					</StyledInputLabel>
 					<div style={{ position: 'relative' }}>
 						<Popup
