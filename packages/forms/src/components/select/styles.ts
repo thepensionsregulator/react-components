@@ -69,23 +69,43 @@ type PopupButtonProps = {
 export const PopupButton = styled('div')<PopupButtonProps>`
 	width: 100%;
 	text-align: left;
+	font-family: ${({ theme }) => theme.fonts.serif};
 	font-size: ${({ theme }) => theme.fontSizes[2]}px;
 	font-weight: ${({ theme }) => theme.fontWeights[2]};
-	color: ${({ theme }) => theme.colors.neutral[600]};
-	border-bottom: 1px solid ${({ theme }) => theme.colors.neutral[200]};
+	color: ${({ isSelected, theme }) =>
+		isSelected ? 'white' : theme.colors.neutral[600]};
 	cursor: pointer;
-	padding: 10px;
-	background: ${({ isActive, isSelected }) => {
-		if (isActive || isSelected) {
-			return '#eee';
+	padding: 10px 15px;
+	background: ${({ isSelected, isActive, theme }) => {
+		if (isSelected) {
+			return theme.colors.primary[200];
+		}
+		if (isActive && !isSelected) {
+			return theme.colors.neutral[100];
 		}
 		return 'none';
 	}};
 
 	&:hover {
-		background: #eaeaea;
+		background: ${({ isSelected, theme }) =>
+			!isSelected && theme.colors.neutral[100]};
 	}
 	&:last-child {
 		border-bottom: none;
 	}
+`;
+
+export const InputWrapper = styled('div')`
+	position: relative;
+`;
+
+export const IconPlacement = styled('div')`
+	display: flex;
+	align-items: center;
+	position: absolute;
+	background: white;
+	top: 4px;
+	right: 4px;
+	width: 30px;
+	height: 32px;
 `;

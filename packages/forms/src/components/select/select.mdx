@@ -10,7 +10,11 @@ import { FFSelect } from './index';
 
 # Select Dropdown
 
-## Introduction
+## Usage
+
+```js
+import { FFSelect } from '@tpr/forms'
+```
 
 ## Usage
 
@@ -25,12 +29,12 @@ earum rerum aspernatur similique commodi voluptates? Id ut ab cum doloremque mag
 [CodeSandbox](https://codesandbox.io)
 
 <Playground>
-	<Form onSubmit={console.log}>
+	<Form onSubmit={console.log} initialValues={{ 'selected-option': {label: 'Apple', value: 1} }} >
 		{({handleSubmit}) => (
 			<form onSubmit={handleSubmit}>
 				<div style={{ width: 400, padding: 10 }}>
 					<FFSelect 
-						name="select-dropdown"
+						name="selected-option"
 						label="Select Fruit"
 						hint="one of the fruit only"
 						onChange={({value}, set) => {
@@ -38,11 +42,11 @@ earum rerum aspernatur similique commodi voluptates? Id ut ab cum doloremque mag
 							set(value)
 						}}
 						options={[
-							{label: 'apple', value: 1},
-							{label: 'pear', value: 2},
-							{label: 'orange', value: 3},
-							{label: 'grape', value: 4},
-							{label: 'banana', value: 5},
+							{label: 'Apple', value: 1},
+							{label: 'Pear', value: 2},
+							{label: 'Orange', value: 3},
+							{label: 'Grape', value: 4},
+							{label: 'Banana', value: 5},
 						]} 
 					/>
 				</div>

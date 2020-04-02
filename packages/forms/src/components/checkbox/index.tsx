@@ -50,7 +50,9 @@ export const Checkbox: React.FC<CheckboxIconProps> = props => {
 					/>
 					{props.children}
 				</StyledCheckboxWrapper>
-				<Flex ml={0}>{props.label}</Flex>
+				<Flex ml={0} fontSize={2}>
+					{props.label}
+				</Flex>
 			</StyledLabel>
 		</ElementPlaceholder>
 	);

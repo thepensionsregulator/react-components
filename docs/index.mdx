@@ -6,5 +6,56 @@ order: 1
 
 # TPR React Components
 
-Work in progress for the docsite. Looking to centralize TPR Component examples here.
-Also could be using it for Cypress tests.
+[build status badge]: https://flat.badgen.net/travis/zendeskgarden/react-components/master
+[build status link]: https://travis-ci.org/zendeskgarden/react-components
+[dependency status badge]: https://flat.badgen.net/david/dev/zendeskgarden/react-components
+[dependency status link]: https://david-dm.org/zendeskgarden/react-components?type=dev
+[coverage status badge]: https://flat.badgen.net/coveralls/c/github/zendeskgarden/react-components/master
+[coverage status link]: https://coveralls.io/github/zendeskgarden/react-components
+
+> React Components is a design system for TPR
+
+React components are maintained following a multi-package approach where
+components are packaged and published individually, but combined under this
+single repository.
+
+## Installation
+
+See the individual package README for the React component you would like
+to install.
+
+| Packages     |
+| ------------ |
+| @tpr/core    |
+| @tpr/forms   |
+| @tpr/table   |
+| @tpr/icons   |
+| @tpr/theming |
+
+## Usage
+
+React Components packages are ready to use in a
+[Create React App](https://create-react-app.dev/) environment or together
+with standard Rollup or webpack build configurations.
+
+Here is a simple example to get you started:
+
+```jsx
+import React from 'react';
+import ReactDOM from 'react-dom';
+import ThemeProvider from '@tpr/theming';
+import { Button } from '@tpr/core';
+
+const App = () => (
+	/* Include a ThemeProvider wrapper at the root of your app */
+	<ThemeProvider>
+		<Button>Example React button</Button>
+	</ThemeProvider>
+);
+
+ReactDOM.render(<App />, document.getElementById('root'));
+```
+
+## LICENSE
+
+MIT

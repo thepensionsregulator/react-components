@@ -10,6 +10,12 @@ import { FFCheckbox } from './index';
 
 # Checkbox
 
+## Usage
+
+```js
+import { FFCheckbox } from '@tpr/forms'
+```
+
 ## Introduction
 
 The `Checkbox` component should be used within the Form state provider.
@@ -42,12 +48,28 @@ earum rerum aspernatur similique commodi voluptates? Id ut ab cum doloremque mag
 [CodeSandbox](https://codesandbox.io)
 
 <Playground>
-	<Form onSubmit={console.log}>
+	<Form onSubmit={console.log} initialValues={{'checkbox-c': true}}>
 		{({ handleSubmit }) => (
 			<form onSubmit={handleSubmit} style={{ width: 400, padding: 10 }}>
 				<FFCheckbox
 					name="checkbox-a"
-					label="All details are correct"
+					label="select option 1"
+				/>
+        <FFCheckbox
+					name="checkbox-b"
+					label="select option 2"
+				/>
+        <FFCheckbox
+					name="checkbox-c"
+					label="select option 3"
+				/>
+        <FFCheckbox
+					name="checkbox-d"
+					label="select option 4"
+				/>
+        <FFCheckbox
+					name="checkbox-e"
+					label="select option 5"
 				/>
 				<button type="submit" style={{display: 'none'}}>Submit</button>
 			</form>

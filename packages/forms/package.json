@@ -1,6 +1,6 @@
 {
 	"name": "@tpr/forms",
-	"version": "1.0.16",
+	"version": "1.0.20",
 	"description": "TPR Forms components",
 	"author": "David Alekna <david.alekna@tpr.gov.uk>",
 	"license": "MIT",
@@ -40,11 +40,13 @@
 	"dependencies": {
 		"@tpr/icons": "file:../icons",
 		"@tpr/theming": "file:../theming",
+		"@types/match-sorter": "^4.0.0",
 		"@types/styled-components": "^5.0.1",
 		"@types/styled-system": "^5.1.9",
 		"date-fns": "^2.11.0",
 		"downshift": "^5.0.3",
 		"final-form": "^4.18.7",
+		"match-sorter": "^4.1.0",
 		"qs": "^6.9.1",
 		"react-final-form": "^6.3.5",
 		"tslib": "^1.11.1"
