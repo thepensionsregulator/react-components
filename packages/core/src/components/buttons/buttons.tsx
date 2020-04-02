@@ -1,5 +1,5 @@
 import React, { FunctionComponent, ButtonHTMLAttributes } from 'react';
-import styled, { css, DefaultTheme } from 'styled-components';
+import styled, { css } from 'styled-components';
 import { space, layout } from 'styled-system';
 import { SpaceProps, LayoutProps } from 'styled-system';
 // import { getObjectValueByString } from '../../utils';
@@ -116,7 +116,7 @@ const getAppearance = ({
 	theme,
 	appearance = 'primary',
 	intent = 'none',
-}: ButtonConfigProps & { theme: DefaultTheme }) =>
+}: ButtonConfigProps & { theme: any }) =>
 	appearances(theme.colors, intent)[appearance];
 
 const getScale = ({ scale = 'normal' }): string => scales[scale];
