@@ -29,14 +29,14 @@ const linkAppearance = colors => {
 		background: transparent;
 		box-shadow: none;
 		border: none;
-		color: ${colors?.[100]};
+		color: ${colors?.[200]};
 		border: none;
 		text-decoration: none;
 		padding-right: 0;
 		padding-left: 0;
 
 		&:hover {
-			color: ${colors?.[200]};
+			color: ${colors?.[300]};
 			text-decoration: underline;
 		}
 
@@ -53,13 +53,13 @@ const linkAppearance = colors => {
 
 const primaryAppearance = colors => {
 	return css`
-		background: ${colors?.[100]};
+		background: ${colors?.[200]};
 		color: white;
 		border: none;
 		outline: none;
 
 		&:hover {
-			background: ${colors?.[200]};
+			background: ${colors?.[300]};
 		}
 
 		&:focus {
@@ -86,7 +86,7 @@ const outlinedAppearance = colors => {
 
 		&:hover {
 			color: white;
-			background: ${colors?.[200]};
+			background: ${colors?.[300]};
 		}
 
 		&:focus {
