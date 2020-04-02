@@ -1,27 +1,30 @@
 import React from 'react';
 import { PopupButton } from './styles';
+import getItems from './getItems';
 
 export default function PopupBox({
 	getItemProps,
-	// inputValue,
+	inputValue,
 	options,
 	highlightedIndex,
 	selectedItem,
-	// openModal,
 	handleNotFoundButtonClick,
 	notFoundMessage,
 	optionPreview,
+	searchable = false,
 }: any) {
+	const filteredOptions = searchable ? getItems(options, inputValue) : options;
+
 	return (
 		<>
-			{!options.length ? (
+			{!filteredOptions.length ? (
 				<PopupButton
 					isClickable={typeof handleNotFoundButtonClick === 'function'}
 					onClick={handleNotFoundButtonClick}
 					children={notFoundMessage}
 				/>
 			) : (
-				options.map((item, index) => (
+				filteredOptions.map((item, index) => (
 					<PopupButton
 						{...getItemProps({
 							key: index,

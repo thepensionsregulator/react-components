@@ -108,7 +108,7 @@ export const ElementPlaceholder = styled('div')`
 	display: flex;
 	flex: 0 0 auto;
 	padding: ${({ theme }) => theme.space[0]}px;
-	background-color: ${({ theme }) => theme.colors.neutral[100]};
+	/* background-color: ${({ theme }) => theme.colors.neutral[100]}; */
 `;
 
 export const InputElementHeading = ({ label, required, hint, meta }: any) => {

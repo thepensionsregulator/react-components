@@ -1,25 +1,29 @@
 import React from 'react';
-import Downshift from 'downshift';
+import Downshift, { DownshiftProps } from 'downshift';
+import { UnfoldMore } from '@tpr/icons';
 import { Field } from 'react-final-form';
 import { Flex, StyledInputLabel, InputElementHeading } from '../elements';
-import { StyledSelectInput, Popup } from './styles';
+import {
+	StyledSelectInput,
+	Popup,
+	InputWrapper,
+	IconPlacement,
+} from './styles';
 import { FieldProps } from '../../utils/validation';
 import PopupBox from './popup';
 
-interface SelectProps {
+interface SelectProps extends DownshiftProps<any> {
 	options?: any;
 	label?: string;
 	placeholder?: string;
-	onChange?: (args: any[]) => void;
 	onBlur?: Function;
 	meta?: any;
 	disabled?: boolean;
-	itemToString?: (item: any) => any;
 	handleNotFoundButtonClick?: Function;
 	notFoundMessage?: string;
-	initialSelectedItem?: string;
 	required?: boolean;
 	hint?: string;
+	searchable?: boolean;
 }
 
 export const Select: React.FC<SelectProps> = ({
@@ -33,12 +37,17 @@ export const Select: React.FC<SelectProps> = ({
 	itemToString,
 	initialSelectedItem,
 	onChange,
+	disabled,
+	searchable,
+	placeholder,
+	...rest
 }) => {
 	return (
 		<Downshift
 			onChange={onChange}
 			itemToString={itemToString}
 			initialSelectedItem={initialSelectedItem}
+			{...rest}
 		>
 			{({
 				getInputProps,
@@ -59,7 +68,7 @@ export const Select: React.FC<SelectProps> = ({
 					<StyledInputLabel
 						isError={meta && meta.touched && meta.error}
 						flexDirection="column"
-						{...getLabelProps({ onClick: () => toggleMenu() })}
+						{...getLabelProps()}
 					>
 						<InputElementHeading
 							label={label}
@@ -67,7 +76,18 @@ export const Select: React.FC<SelectProps> = ({
 							hint={hint}
 							meta={meta}
 						/>
-						<StyledSelectInput autoComplete="off" {...getInputProps()} />
+						<InputWrapper>
+							<StyledSelectInput
+								autoComplete="off"
+								disabled={disabled}
+								placeholder={placeholder}
+								onClick={() => toggleMenu()}
+								{...getInputProps()}
+							/>
+							<IconPlacement>
+								<UnfoldMore />
+							</IconPlacement>
+						</InputWrapper>
 					</StyledInputLabel>
 					<div style={{ position: 'relative' }}>
 						<Popup
@@ -80,6 +100,7 @@ export const Select: React.FC<SelectProps> = ({
 							{isOpen && (
 								<PopupBox
 									{...{
+										searchable,
 										getItemProps,
 										inputValue,
 										options,

@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useMemo } from 'react';
 import { Field, FieldRenderProps } from 'react-final-form';
-import { isValid, toDate } from 'date-fns';
+import { isValid, toDate, format } from 'date-fns';
 import {
 	StyledInputDiv,
 	StyledLabel,
@@ -23,7 +23,7 @@ const handleChange = (onChange: Function, value: number) => ({ target }) => {
 function getValidDate(yyyy: string, mm: string, dd: string) {
 	const date = toDate(new Date(parseInt(yyyy), parseInt(mm) - 1, parseInt(dd)));
 	if (isValid(date) && yyyy.length === 4) {
-		return date;
+		return format(date, 'yyyy-MM-dd');
 	}
 	return undefined;
 }
@@ -33,7 +33,7 @@ const useDateTransformer = (initialDate: Date = undefined) => {
 		const valid = initialDate ? isValid(initialDate) : false;
 		return {
 			dd: valid ? `${initialDate.getDate()}` : undefined,
-			mm: valid ? `${initialDate.getMonth()}` : undefined,
+			mm: valid ? `${initialDate.getMonth() + 1}` : undefined,
 			yyyy: valid ? `${initialDate.getFullYear()}` : undefined,
 		};
 	}, [initialDate]);

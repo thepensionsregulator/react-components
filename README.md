@@ -78,7 +78,7 @@ ReactDOM.render(<App />, document.getElementById('root'));
 
 ## Documentation
 
-See TPR React Components [documentation website](https://silly-colden-aa858c.netlify.com/)
+See TPR React Components [documentation website](https://tpr.netlify.com/)
 
 ## LICENSE
 

@@ -17,6 +17,7 @@ type RadioButtonProps = {
 	align?: string;
 	testId?: string;
 	id?: string;
+	hint?: string;
 	value?: any;
 	name?: string;
 	label: string;
@@ -26,35 +27,44 @@ export const RadioButton: React.FC<RadioButtonProps> = props => {
 	return (
 		<ElementPlaceholder>
 			<StyledLabel alignItems="center">
-				<StyledRadioWrapper
-					disabled={props.disabled || false}
-					align={props.align || 'center'}
-					data-testid={
-						props.testId
-							? `${props.testId}-${props.checked ? 'checked' : 'unchecked'}`
-							: null
-					}
-					data-cy={
-						props.testId
-							? `${props.testId}-${props.checked ? 'checked' : 'unchecked'}`
-							: null
-					}
-				>
-					{props.checked ? <RadioButtonChecked /> : <RadioButtonUnchecked />}
-					<StyledHiddenInput
-						type="radio"
-						id={props.id}
-						name={props.name}
-						checked={props.checked}
-						value={props.value}
+				<Flex alignItems="flex-start">
+					<StyledRadioWrapper
 						disabled={props.disabled || false}
-						onChange={props.onChange}
-						data-cy={props.testId}
-						data-testid={props.testId}
-					/>
-					{props.children}
-				</StyledRadioWrapper>
-				<Flex ml={0}>{props.label}</Flex>
+						align={props.align || 'center'}
+						data-testid={
+							props.testId
+								? `${props.testId}-${props.checked ? 'checked' : 'unchecked'}`
+								: null
+						}
+						data-cy={
+							props.testId
+								? `${props.testId}-${props.checked ? 'checked' : 'unchecked'}`
+								: null
+						}
+					>
+						{props.checked ? <RadioButtonChecked /> : <RadioButtonUnchecked />}
+						<StyledHiddenInput
+							type="radio"
+							id={props.id}
+							name={props.name}
+							checked={props.checked}
+							value={props.value}
+							disabled={props.disabled || false}
+							onChange={props.onChange}
+							data-cy={props.testId}
+							data-testid={props.testId}
+						/>
+						{props.children}
+					</StyledRadioWrapper>
+					<Flex ml={0} flexDirection="column">
+						<Flex fontSize={2}>{props.label}</Flex>
+						{props.hint && (
+							<Flex color="neutral.300" fontSize={2}>
+								{props.hint}
+							</Flex>
+						)}
+					</Flex>
+				</Flex>
 			</StyledLabel>
 		</ElementPlaceholder>
 	);
