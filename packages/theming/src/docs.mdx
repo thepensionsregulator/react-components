@@ -7,14 +7,26 @@ import { Playground } from 'docz';
 
 # Theming
 
-Docs are in progress...
+## Usage
 
-## Introduction
+React Components packages are ready to use in a
+[Create React App](https://create-react-app.dev/) environment or together
+with standard Rollup or webpack build configurations.
 
-Lorem ipsum dolor sit amet consectetur adipisicing elit. Ipsum nostrum omnis ea unde totam, est
-consectetur odio! Harum vitae, sed totam aperiam consequuntur nostrum repudiandae non nemo porro,
-dolorem nulla corrupti hic consectetur eaque fuga illo numquam modi similique ipsam recusandae! Harum,
-possimus suscipit. Quibusdam totam, fugiat officiis qui nisi tempora. Accusantium corrupti similique
-et at ipsum, eveniet tempore nostrum quasi est unde modi impedit quaerat suscipit aspernatur ratione
-quo corporis? Cum dignissimos adipisci itaque sint tempore, saepe dolorem fugit quia placeat officiis
-earum rerum aspernatur similique commodi voluptates? Id ut ab cum doloremque magnam illo ipsa officia nulla ipsum.
+Here is a simple example to get you started:
+
+```jsx
+import React from 'react';
+import ReactDOM from 'react-dom';
+import { ThemeProvider } from '@tpr/theming';
+import { Button } from '@tpr/core';
+
+const App = () => (
+	/* Include a ThemeProvider wrapper at the root of your app */
+	<ThemeProvider>
+		<Button>Example React button</Button>
+	</ThemeProvider>
+);
+
+ReactDOM.render(<App />, document.getElementById('root'));
+```
