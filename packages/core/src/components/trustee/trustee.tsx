@@ -54,7 +54,7 @@ export const Trustee: React.FC<Omit<TrusteeProps, 'children'>> = props => {
 								Trustee {'>'}
 							</Button>
 							<Flex mt={0} flexDirection="column">
-								<H4 fontWeight="bold">{`${context.trustee.firstName} ${context.trustee.lastName}`}</H4>
+								<H4 fontWeight="bold">{context.name}</H4>
 								<Text>Member-nominated trustee</Text>
 							</Flex>
 						</Flex>

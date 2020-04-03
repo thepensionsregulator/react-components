@@ -29,25 +29,21 @@ import { Trustee } from '@tpr/core';
 		onRemove={console.log}
 		onCorrect={console.log}
 		trustee={{
-			trustee: {
-				title: 'Mr',
-				firstName: 'John',
-				lastName: 'Smith',
-				trusteeType: 'member-nominated',
-				isProfesional: false,
-			},
-			company: {
-				name: 'The Pensions Regulator',
-				line1: 'Napier House',
-				line2: 'Trafalgar Pl',
-				city: 'Brighton',
-				county: '',
-				postCode: 'BN1 4DW',
-			},
-			contact: {
-				phoneNumber: '01273 000 111',
-				emailAddress: 'fred.sandoors@trp.gov.uk',
-			},
+			name: 'Mr John Smith',
+			trusteeType: 'member-nominated',
+			professional: false,
+			//
+			address:
+				'The Pensions Regulator, Napier House, Trafalgar Pl, Brighton, BN1 4DW',
+			addressLineOne: 'The Pensions Regulator',
+			addressLineTwo: 'Napier House',
+			addressLineThree: 'Trafalgar Pl',
+			city: 'Brighton',
+			postCode: 'BN1 4DW',
+			//
+			companyPhone: '01273 000 111',
+			companyEmail: 'fred.sandoors@trp.gov.uk',
+			companiesHouseNumber: '123',
 		}}
 	/>
 </Playground>

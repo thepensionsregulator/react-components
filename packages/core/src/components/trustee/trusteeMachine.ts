@@ -28,26 +28,20 @@ interface TrusteeStates {
 type TrusteeEvents = any;
 
 export interface TrusteeContext {
-	complete?: boolean;
-	trustee: {
-		title: string;
-		firstName: string;
-		lastName: string;
-		trusteeType: string;
-		isProfesional: boolean;
-	};
-	company: {
-		name: string;
-		line1: string;
-		line2: string;
-		city: string;
-		county: string;
-		postCode: string;
-	};
-	contact: {
-		phoneNumber: string;
-		emailAddress: string;
-	};
+	complete: boolean;
+	//
+	name: string;
+	trusteeType: string;
+	professional: boolean;
+	address: string;
+	addressLineOne: string;
+	addressLineTwo: string;
+	addressLineThree: string;
+	city: string;
+	postCode: string;
+	companyPhone: string;
+	companyEmail: string;
+	companiesHouseNumber: string;
 }
 
 const trusteeMachine = Machine<TrusteeContext, TrusteeStates, TrusteeEvents>({
@@ -55,29 +49,19 @@ const trusteeMachine = Machine<TrusteeContext, TrusteeStates, TrusteeEvents>({
 	initial: 'preview',
 	context: {
 		complete: false,
-		trustee: {
-			// 1 name details form
-			title: '',
-			firstName: '',
-			lastName: '',
-			// 2 type details form
-			trusteeType: '', // radio button option
-			isProfesional: false, // select box 1/2
-		},
-		// 3 who does this trustee work for
-		company: {
-			name: '',
-			line1: '',
-			line2: '',
-			city: '',
-			county: '',
-			postCode: '',
-		},
-		// 4 contact details for this trustee
-		contact: {
-			phoneNumber: '',
-			emailAddress: '',
-		},
+		//
+		name: '',
+		trusteeType: '',
+		professional: false,
+		address: '',
+		addressLineOne: '',
+		addressLineTwo: '',
+		addressLineThree: '',
+		city: '',
+		postCode: '',
+		companyPhone: '',
+		companyEmail: '',
+		companiesHouseNumber: '',
 	},
 	states: {
 		preview: {
