@@ -10,6 +10,7 @@ type TrusteeContextProps = {
 	onCorrect?: (...args: any[]) => void;
 	onRemove?: (...args: any[]) => void;
 	onSave?: (...args: any[]) => void;
+	api: any;
 };
 
 export const TrusteeContext = createContext<TrusteeContextProps>({
@@ -19,6 +20,7 @@ export const TrusteeContext = createContext<TrusteeContextProps>({
 	onCorrect: () => {},
 	onRemove: () => {},
 	onSave: () => {},
+	api: { get: () => new Promise(res => res()) },
 });
 
 type RenderProps = (_: TrusteeContextProps) => ReactElement;
@@ -29,6 +31,7 @@ export type TrusteeProps = {
 	onCorrect?: (...args: any[]) => void;
 	onRemove?: (...args: any[]) => void;
 	onSave?: (...args: any[]) => void;
+	api: any;
 };
 
 export const TrusteeProvider = ({

@@ -28,6 +28,7 @@ import { Trustee } from '@tpr/core';
 		onSave={console.log}
 		onRemove={console.log}
 		onCorrect={console.log}
+		api={{ get: () => new Promise((res, rej) => rej()) }}
 		trustee={{
 			name: 'Mr John Smith',
 			trusteeType: 'member-nominated',

@@ -1,4 +1,4 @@
-import { Machine } from 'xstate';
+import { Machine, assign } from 'xstate';
 
 interface TrusteeStates {
 	states: {
@@ -86,7 +86,13 @@ const trusteeMachine = Machine<TrusteeContext, TrusteeStates, TrusteeEvents>({
 						},
 						type: {
 							on: {
-								SAVE: '#preview',
+								SAVE: {
+									target: '#preview',
+									actions: assign((context, event) => ({
+										...context,
+										...event.values,
+									})),
+								},
 								BACK: 'name',
 							},
 						},
@@ -96,7 +102,13 @@ const trusteeMachine = Machine<TrusteeContext, TrusteeStates, TrusteeEvents>({
 					id: 'companyAddress',
 					on: {
 						INCORRECT: 'trusteeCompanyDetails',
-						SAVE: '#preview',
+						SAVE: {
+							target: '#preview',
+							actions: assign((context, event) => ({
+								...context,
+								...event.values,
+							})),
+						},
 					},
 				},
 				trusteeCompanyDetails: {
@@ -106,7 +118,13 @@ const trusteeMachine = Machine<TrusteeContext, TrusteeStates, TrusteeEvents>({
 				},
 				trusteeContacts: {
 					on: {
-						SAVE: '#preview',
+						SAVE: {
+							target: '#preview',
+							actions: assign((context, event) => ({
+								...context,
+								...event.values,
+							})),
+						},
 					},
 				},
 			},

@@ -1,15 +1,65 @@
 import React from 'react';
 import { Flex } from '../../../layout';
 import { useTrusteeContext } from '../../context';
-import { Footer } from '../../components/card';
+import { Toolbar, Footer } from '../../components/card';
+import { Form, validate, FFInputText } from '@tpr/forms';
 
 const Contacts: React.FC = () => {
-	const { send } = useTrusteeContext();
+	const { current, send, onSave } = useTrusteeContext();
+	const state = current.context;
+
+	const onSubmit = values => {
+		send('SAVE', { values });
+		onSave({ ...state, ...values });
+	};
 
 	return (
 		<Flex flex="1 1 auto" flexDirection="column">
-			<div>Contacts</div>
-			<Footer onSave={{ title: 'Save and close', fn: () => send('SAVE') }} />
+			<Toolbar title="Contact details for this trustee" />
+			<Form
+				onSubmit={onSubmit}
+				initialValues={{
+					companyPhone: state.companyPhone,
+					companyEmail: state.companyEmail,
+				}}
+				validate={validate([
+					{
+						name: 'companyPhone',
+						error:
+							'Enter a telephone number, like 0163 960 598 or +44 7700 900 359',
+					},
+					{
+						name: 'companyEmail',
+						error: 'Cannot be empty',
+					},
+				])}
+			>
+				{({ handleSubmit }) => (
+					<form onSubmit={handleSubmit}>
+						<Flex maxWidth="760px" flexDirection="column">
+							<Flex maxWidth="300px">
+								<FFInputText
+									name="companyPhone"
+									label="Telephone number"
+									required
+								/>
+							</Flex>
+							<FFInputText
+								name="companyEmail"
+								type="email"
+								label="Email address"
+								required
+							/>
+						</Flex>
+						<Footer
+							onSave={{
+								type: 'submit',
+								title: 'Save and close',
+							}}
+						/>
+					</form>
+				)}
+			</Form>
 		</Flex>
 	);
 };
