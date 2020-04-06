@@ -4,6 +4,8 @@ import { StyledInputLabel, InputElementHeading } from '../elements';
 import { StyledInput } from './styles';
 import { FieldProps } from '../../utils/validation';
 
+export { StyledInput };
+
 export const InputText: React.FC<FieldRenderProps<string> & FieldProps> = ({
 	label,
 	hint,
@@ -16,6 +18,7 @@ export const InputText: React.FC<FieldRenderProps<string> & FieldProps> = ({
 		<StyledInputLabel
 			isError={meta && meta.touched && meta.error}
 			flexDirection="column"
+			mt={0}
 		>
 			<InputElementHeading
 				label={label}

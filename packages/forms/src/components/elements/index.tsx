@@ -55,14 +55,16 @@ export const StyledLabel = styled('label')<StyledLabelProps>`
 	${flexbox};
 `;
 
-type StyledInputLabelProps = {
+interface StyledInputLabelProps extends SpaceProps {
 	isError?: boolean;
-};
+}
 export const StyledInputLabel = styled(StyledLabel)<StyledInputLabelProps>`
 	padding-left: ${({ isError }) => isError && '15px'};
 	border-left: ${({ isError, theme }) =>
 		isError && `4px solid ${theme.colors.danger[300]}`};
 	cursor: default;
+
+	${space};
 `;
 
 export const StyledFakeInputLabel = styled('div')<StyledInputLabelProps>`
