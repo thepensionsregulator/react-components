@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import { Flex } from '../../../layout';
 import { useTrusteeContext } from '../../context';
 import { Footer } from '../../components/card';

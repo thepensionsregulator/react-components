@@ -81,7 +81,12 @@ const trusteeMachine = Machine<TrusteeContext, TrusteeStates, TrusteeEvents>({
 					states: {
 						name: {
 							on: {
-								NEXT: 'type',
+								NEXT: {
+									target: 'type',
+									actions: assign((_, event) => ({
+										name: event.name,
+									})),
+								},
 							},
 						},
 						type: {
