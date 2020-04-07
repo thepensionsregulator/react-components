@@ -21,6 +21,7 @@ type RadioButtonProps = {
 	value?: any;
 	name?: string;
 	label: string;
+	[key: string]: any;
 };
 
 export const RadioButton: React.FC<RadioButtonProps> = props => {
@@ -76,6 +77,7 @@ type FFRenderRadioButtonProps = Partial<
 export const FFRadioButton: React.FC<FieldProps> = fieldProps => {
 	return (
 		<Field
+			type="radio"
 			{...fieldProps}
 			render={({ label, input, ...rest }: FFRenderRadioButtonProps) => {
 				return (

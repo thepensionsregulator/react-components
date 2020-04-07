@@ -35,9 +35,9 @@ export const ErrorMessage = styled('div')`
 interface FormLabelTextProps extends SpaceProps {}
 export const FormLabelText = styled('div')<FormLabelTextProps>`
 	color: ${({ theme }) => theme.colors.neutral[900]};
-	font-weight: ${({ theme }) => theme.fontWeights[1]};
+	font-weight: ${({ theme }) => theme.fontWeights[2]};
 	font-size: ${({ theme }) => theme.fontSizes[2]}px;
-	margin: 5px 0;
+	margin-bottom: ${({ theme }) => theme.space[0]}px;
 	white-space: nowrap;
 
 	${space}
@@ -109,7 +109,8 @@ export const StyledHiddenInput = styled('input')<StyledHiddenInputProps>`
 export const ElementPlaceholder = styled('div')`
 	display: flex;
 	flex: 0 0 auto;
-	padding: ${({ theme }) => theme.space[0]}px;
+	padding-top: ${({ theme }) => theme.space[0]}px;
+	padding-bottom: ${({ theme }) => theme.space[0]}px;
 	/* background-color: ${({ theme }) => theme.colors.neutral[100]}; */
 `;
 
@@ -117,12 +118,12 @@ export const InputElementHeading = ({ label, required, hint, meta }: any) => {
 	return (
 		<>
 			{label && (
-				<FormLabelText m="0px">
+				<FormLabelText>
 					{label} {!required && '(optional)'}
 				</FormLabelText>
 			)}
 			{hint && (
-				<Span my={0} color="neutral.300">
+				<Span mb={0} color="neutral.300">
 					{hint}
 				</Span>
 			)}
