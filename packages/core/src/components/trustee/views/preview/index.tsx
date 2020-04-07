@@ -8,7 +8,7 @@ import { StyledCardToolbar } from '../../components/card';
 
 const Preview: React.FC = () => {
 	const { current, send } = useTrusteeContext();
-	const { company, contact } = current.context;
+	const state = current.context;
 	return (
 		<Flex flex="1 1 auto" flexDirection="column">
 			<StyledCardToolbar>
@@ -22,12 +22,12 @@ const Preview: React.FC = () => {
 						Correspondence address {'>'}
 					</Button>
 					<Flex mt={0} flexDirection="column">
-						<H4 fontWeight="bold">{company.name}</H4>
-						<Text>{company.line1}</Text>
-						<Text>{company.line2}</Text>
-						<Text>{company.city}</Text>
-						<Text>{company.county}</Text>
-						<Text>{company.postCode}</Text>
+						<H4 fontWeight="bold">{state.addressLineOne}</H4>
+						<Text>{state.addressLineTwo}</Text>
+						<Text>{state.addressLineThree}</Text>
+						<Text>{state.addressLineOne}</Text>
+						<Text>{state.city}</Text>
+						<Text>{state.postCode}</Text>
 					</Flex>
 				</Flex>
 				<Flex width="100%" flex="1 1 auto" flexDirection="column">
@@ -36,9 +36,9 @@ const Preview: React.FC = () => {
 					</Button>
 					<Flex mt={0} flexDirection="column">
 						<H4 fontWeight="bold">Phone</H4>
-						<Text>{contact.phoneNumber}</Text>
+						<Text>{state.companyPhone}</Text>
 						<H4 fontWeight="bold">Email</H4>
-						<Text>{contact.emailAddress}</Text>
+						<Text>{state.companyEmail}</Text>
 					</Flex>
 				</Flex>
 			</StyledCardToolbar>

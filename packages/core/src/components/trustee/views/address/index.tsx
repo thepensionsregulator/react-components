@@ -1,79 +1,34 @@
 import React, { useState } from 'react';
 import { Flex } from '../../../layout';
-import { H4, P } from '../../../typography';
+import { H4 } from '../../../typography';
 import { useTrusteeContext } from '../../context';
-import { Footer, Toolbar } from '../../components/card';
-import { Button } from '../../../buttons';
-import { Form, renderFields, validate, InputText } from '@tpr/forms';
-import fields from './fields';
-
-const ManualComplete = () => {
-	const { send, onSave } = useTrusteeContext();
-
-	function onSubmit(values) {
-		/** could do optimistic update by updating the machine context */
-		send('SAVE');
-		onSave(values);
-	}
-
-	return (
-		<Flex flexDirection="column">
-			<P>Enter the trustee’s correspondence address manually.</P>
-			<Form onSubmit={onSubmit} validate={validate(fields)}>
-				{({ handleSubmit }) => (
-					<form onSubmit={handleSubmit}>
-						{renderFields(fields)}
-						<Footer
-							onSave={{
-								type: 'submit',
-								title: 'Save and close',
-							}}
-						/>
-					</form>
-				)}
-			</Form>
-		</Flex>
-	);
-};
-
-const AutoComplete = ({ onClick }) => {
-	const { send } = useTrusteeContext();
-
-	return (
-		<Flex flexDirection="column">
-			<InputText
-				name="field"
-				type="text"
-				meta={{}}
-				input={{
-					name: '',
-					value: '',
-					onChange: () => {},
-					onBlur: () => {},
-					onFocus: () => {},
-				}}
-			/>
-			<Flex>
-				<Button appearance="link" onClick={onClick}>
-					I can't find my address in the list
-				</Button>
-			</Flex>
-			<Footer onSave={{ title: 'Save and close', fn: () => send('SAVE') }} />
-		</Flex>
-	);
-};
+import { Toolbar } from '../../components/card';
+import AutoComplete from './AutoComplete';
+import ManualComplete from './ManualComplete';
+import Postcode from './Postcode';
 
 const AddressPage: React.FC = () => {
+	const { current } = useTrusteeContext();
+	const { postCode } = current.context;
 	const [manual, setManual] = useState(false);
+	const [postcode, setPostcode] = useState(postCode);
+	const [lookup, showLookup] = useState(false);
+	const [loading, setLoading] = useState(false);
+	const [options, setOptions] = useState<{ [key: string]: string }[]>([]);
 
 	return (
 		<Flex flex="1 1 auto" flexDirection="column">
 			<Flex flexDirection="column">
 				<Toolbar title="What is this trustee’s address?" />
-				<Flex flexDirection="column" bg="neutral.100" p={1} mb={2}>
-					<H4 mb={0}>Find the trustee's correspondence address</H4>
-					<P fontWeight="bold">Postcode</P>
-				</Flex>
+				<Postcode
+					lookup={lookup}
+					loading={loading}
+					postcode={postcode}
+					setPostcode={setPostcode}
+					showLookup={showLookup}
+					setLoading={setLoading}
+					setOptions={setOptions}
+				/>
 				<Flex flexDirection="column" maxWidth="760px">
 					<H4 fontWeight="bold" mb={0}>
 						Address
@@ -81,7 +36,7 @@ const AddressPage: React.FC = () => {
 					{manual ? (
 						<ManualComplete />
 					) : (
-						<AutoComplete onClick={() => setManual(true)} />
+						<AutoComplete options={options} onClick={() => setManual(true)} />
 					)}
 				</Flex>
 			</Flex>
