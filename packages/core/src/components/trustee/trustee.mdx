@@ -28,8 +28,12 @@ import { Trustee } from '@tpr/core';
 		onSave={console.log}
 		onRemove={console.log}
 		onCorrect={console.log}
-		api={{ get: () => new Promise((res, rej) => rej()) }}
+		api={{
+			get: () => Promise.reject(new Error('THERE IS NO API IMPLEMENTATION')),
+		}}
 		trustee={{
+			complete: false,
+			//
 			name: 'Mr John Smith',
 			trusteeType: 'member-nominated',
 			professional: false,

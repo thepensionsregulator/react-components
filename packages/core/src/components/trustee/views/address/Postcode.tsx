@@ -25,7 +25,7 @@ const Postcode: React.FC<PostcodeProps> = ({
 	setOptions,
 }) => {
 	const { api } = useTrusteeContext();
-
+	console.log(api);
 	const search = useCallback(
 		(postcode: string, country = 'GBR', take = 100) => {
 			setLoading(true);
@@ -70,6 +70,10 @@ const Postcode: React.FC<PostcodeProps> = ({
 						setLoading(false);
 						console.error('NOTHING WAS FOUND');
 					}
+				})
+				.catch(err => {
+					console.log(err);
+					setLoading(false);
 				});
 		},
 		[setOptions],

@@ -7,7 +7,7 @@ import { Button } from '../../components/button';
 import { StyledCardToolbar } from '../../components/card';
 
 const Preview: React.FC = () => {
-	const { current, send } = useTrusteeContext();
+	const { current, send, onCorrect } = useTrusteeContext();
 	const state = current.context;
 	return (
 		<Flex flex="1 1 auto" flexDirection="column">
@@ -50,8 +50,9 @@ const Preview: React.FC = () => {
 				pt={2}
 			>
 				<Checkbox
-					checked={false}
-					onChange={input => !input.value}
+					value={state.complete}
+					checked={state.complete}
+					onChange={evt => onCorrect(!!Boolean(evt.target.value))}
 					label="All details are correct"
 				/>
 			</Flex>

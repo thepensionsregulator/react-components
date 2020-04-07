@@ -71,12 +71,14 @@ const Type: React.FC = () => {
 									value="yes"
 									label="Yes"
 								/>
-								<FFRadioButton
-									name="professional"
-									type="radio"
-									value="no"
-									label="No"
-								/>
+								<Flex ml={1}>
+									<FFRadioButton
+										name="professional"
+										type="radio"
+										value="no"
+										label="No"
+									/>
+								</Flex>
 							</Flex>
 							<Footer
 								onSave={{

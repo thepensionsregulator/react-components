@@ -18,7 +18,13 @@ const ManualComplete = () => {
 	return (
 		<Flex flexDirection="column">
 			<P>Enter the trustee’s correspondence address manually.</P>
-			<Form onSubmit={onSubmit} validate={validate(fields)}>
+			<Form
+				onSubmit={onSubmit}
+				validate={validate(fields)}
+				initialValues={{
+					postCode: state.postCode,
+				}}
+			>
 				{({ handleSubmit }) => (
 					<form onSubmit={handleSubmit}>
 						{renderFields(fields)}
