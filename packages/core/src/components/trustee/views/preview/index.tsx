@@ -22,12 +22,11 @@ const Preview: React.FC = () => {
 						Correspondence address {'>'}
 					</Button>
 					<Flex mt={0} flexDirection="column">
-						<H4 fontWeight="bold">{state.addressLineOne}</H4>
-						<Text>{state.addressLineTwo}</Text>
-						<Text>{state.addressLineThree}</Text>
-						<Text>{state.addressLineOne}</Text>
-						<Text>{state.city}</Text>
-						<Text>{state.postCode}</Text>
+						<H4 fontWeight="bold">{state.address.addressLine1}</H4>
+						<Text>{state.address.addressLine2}</Text>
+						<Text>{state.address.addressLine3}</Text>
+						<Text>{state.address.postTown}</Text>
+						<Text>{state.address.postcode}</Text>
 					</Flex>
 				</Flex>
 				<Flex width="100%" flex="1 1 auto" flexDirection="column">
@@ -36,9 +35,9 @@ const Preview: React.FC = () => {
 					</Button>
 					<Flex mt={0} flexDirection="column">
 						<H4 fontWeight="bold">Phone</H4>
-						<Text>{state.companyPhone}</Text>
+						<Text>{state.telephoneNumber}</Text>
 						<H4 fontWeight="bold">Email</H4>
-						<Text>{state.companyEmail}</Text>
+						<Text>{state.emailAddress}</Text>
 					</Flex>
 				</Flex>
 			</StyledCardToolbar>

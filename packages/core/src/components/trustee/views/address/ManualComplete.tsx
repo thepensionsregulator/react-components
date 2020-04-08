@@ -8,7 +8,7 @@ import fields from './fields';
 
 const ManualComplete = () => {
 	const { current, send, onSave } = useTrusteeContext();
-	const state = current.context;
+	const { address, ...state } = current.context;
 
 	function onSubmit(values) {
 		send('SAVE', { values });
@@ -22,7 +22,7 @@ const ManualComplete = () => {
 				onSubmit={onSubmit}
 				validate={validate(fields)}
 				initialValues={{
-					postCode: state.postCode,
+					postcode: address.postcode,
 				}}
 			>
 				{({ handleSubmit }) => (
