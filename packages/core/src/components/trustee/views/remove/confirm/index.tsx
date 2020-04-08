@@ -1,5 +1,6 @@
 import React from 'react';
 import { Flex } from '../../../../layout';
+import { H3, P } from '../../../../typography';
 import { useTrusteeContext } from '../../../context';
 import { Footer } from '../../../components/card';
 
@@ -8,11 +9,25 @@ const RemoveConfirm: React.FC = () => {
 
 	return (
 		<Flex flex="1 1 auto" flexDirection="column">
-			<div>Remove Confirm</div>
-			<div>This can't be undone.</div>
+			<H3>Are you sure you want to remove this trustee?</H3>
+			<Flex
+				flex="1 1 auto"
+				borderBottom="1px solid"
+				borderColor="neutral.100"
+				my={2}
+			/>
+			<P color="neutral.300">This can't be undone.</P>
 			<Footer
-				onContinue={{ title: 'Remove', fn: () => console.log('remove') }}
-				onSave={{ title: 'Cancel', fn: () => send('CANCEL') }}
+				onContinue={{
+					title: 'Remove',
+					intent: 'danger',
+					fn: () => console.log('remove'),
+				}}
+				onSave={{
+					title: 'Cancel',
+					appearance: 'link',
+					fn: () => send('CANCEL'),
+				}}
 			/>
 		</Flex>
 	);

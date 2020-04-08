@@ -9,9 +9,9 @@ import Postcode from './Postcode';
 
 const AddressPage: React.FC = () => {
 	const { current } = useTrusteeContext();
-	const { postCode } = current.context;
+	const { postcode } = current.context;
 	const [manual, setManual] = useState(false);
-	const [postcode, setPostcode] = useState(postCode);
+	const [postCode, setPostcode] = useState(postcode);
 	const [lookup, showLookup] = useState(false);
 	const [loading, setLoading] = useState(false);
 	const [options, setOptions] = useState<{ [key: string]: string }[]>([]);
@@ -23,7 +23,7 @@ const AddressPage: React.FC = () => {
 				<Postcode
 					lookup={lookup}
 					loading={loading}
-					postcode={postcode}
+					postcode={postCode}
 					setPostcode={setPostcode}
 					showLookup={showLookup}
 					setLoading={setLoading}

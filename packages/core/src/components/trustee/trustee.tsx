@@ -54,7 +54,11 @@ export const Trustee: React.FC<Omit<TrusteeProps, 'children'>> = props => {
 								Trustee {'>'}
 							</Button>
 							<Flex mt={0} flexDirection="column">
-								<H4 fontWeight="bold">{context.name}</H4>
+								<H4 fontWeight="bold">
+									{[context.title, context.forename, context.surname]
+										.filter(Boolean)
+										.join(' ')}
+								</H4>
 								{context.trusteeType && (
 									<Text>
 										{`${context.trusteeType[0].toUpperCase()}${context.trusteeType

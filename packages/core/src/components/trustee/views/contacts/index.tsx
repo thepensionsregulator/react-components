@@ -19,17 +19,17 @@ const Contacts: React.FC = () => {
 			<Form
 				onSubmit={onSubmit}
 				initialValues={{
-					companyPhone: state.companyPhone,
-					companyEmail: state.companyEmail,
+					telephoneNumber: state.telephoneNumber,
+					emailAddress: state.emailAddress,
 				}}
 				validate={validate([
 					{
-						name: 'companyPhone',
+						name: 'telephoneNumber',
 						error:
 							'Enter a telephone number, like 0163 960 598 or +44 7700 900 359',
 					},
 					{
-						name: 'companyEmail',
+						name: 'emailAddress',
 						error: 'Cannot be empty',
 					},
 				])}
@@ -39,13 +39,13 @@ const Contacts: React.FC = () => {
 						<Flex maxWidth="760px" flexDirection="column">
 							<Flex maxWidth="300px">
 								<FFInputText
-									name="companyPhone"
+									name="telephoneNumber"
 									label="Telephone number"
 									required
 								/>
 							</Flex>
 							<FFInputText
-								name="companyEmail"
+								name="emailAddress"
 								type="email"
 								label="Email address"
 								required

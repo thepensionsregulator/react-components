@@ -11,17 +11,18 @@ const Type: React.FC = () => {
 	const state = current.context;
 
 	function onSubmit(values) {
-		const professional = values.professional === 'yes' ? true : false;
+		const isProfessionalTrustee =
+			values.isProfessionalTrustee === 'yes' ? true : false;
 		send('SAVE', {
 			values: {
 				...values,
-				professional,
+				isProfessionalTrustee,
 			},
 		});
 		onSave({
 			...state,
 			...values,
-			professional,
+			isProfessionalTrustee,
 		});
 	}
 
@@ -33,7 +34,7 @@ const Type: React.FC = () => {
 					onSubmit={onSubmit}
 					initialValues={{
 						trusteeType: state.trusteeType,
-						professional: state.professional ? 'yes' : 'no',
+						isProfessionalTrustee: state.isProfessionalTrustee ? 'yes' : 'no',
 					}}
 				>
 					{({ handleSubmit }) => (
@@ -66,17 +67,19 @@ const Type: React.FC = () => {
 							</P>
 							<Flex>
 								<FFRadioButton
-									name="professional"
+									name="isProfessionalTrustee"
 									type="radio"
 									value="yes"
 									label="Yes"
 								/>
-								<FFRadioButton
-									name="professional"
-									type="radio"
-									value="no"
-									label="No"
-								/>
+								<Flex ml={1}>
+									<FFRadioButton
+										name="isProfessionalTrustee"
+										type="radio"
+										value="no"
+										label="No"
+									/>
+								</Flex>
 							</Flex>
 							<Footer
 								onSave={{

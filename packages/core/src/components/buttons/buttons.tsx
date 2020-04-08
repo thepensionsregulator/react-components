@@ -121,9 +121,9 @@ const getAppearance = ({
 
 const getScale = ({ scale = 'normal' }): string => scales[scale];
 
-type Intent = 'none' | 'success' | 'warning' | 'danger';
-type Appearance = 'primary' | 'link' | 'outlined';
-type Scale = 'small' | 'normal' | 'big';
+export type Intent = 'none' | 'success' | 'warning' | 'danger';
+export type Appearance = 'primary' | 'link' | 'outlined';
+export type Scale = 'small' | 'normal' | 'big';
 
 type ButtonConfigProps = {
 	/** determins button color from theme */

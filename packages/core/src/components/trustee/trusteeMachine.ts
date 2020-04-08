@@ -30,18 +30,26 @@ type TrusteeEvents = any;
 export interface TrusteeContext {
 	complete: boolean;
 	//
-	name: string;
+	schemeRoleId: string;
+	//
+	title: string;
+	forename: string;
+	surname: string;
 	trusteeType: string;
-	professional: boolean;
-	address: string;
-	addressLineOne: string;
-	addressLineTwo: string;
-	addressLineThree: string;
-	city: string;
-	postCode: string;
-	companyPhone: string;
-	companyEmail: string;
-	companiesHouseNumber: string;
+	isProfessionalTrustee: boolean;
+	//
+	address: {
+		addressLine1: string;
+		addressLine2: string;
+		addressLine3: string;
+		postTown: string;
+		postcode: string;
+		county: string;
+		countryId: string;
+	};
+	//
+	telephoneNumber: string;
+	emailAddress: string;
 }
 
 const trusteeMachine = Machine<TrusteeContext, TrusteeStates, TrusteeEvents>({
@@ -50,18 +58,26 @@ const trusteeMachine = Machine<TrusteeContext, TrusteeStates, TrusteeEvents>({
 	context: {
 		complete: false,
 		//
-		name: '',
+		schemeRoleId: '',
+		//
+		title: '',
+		forename: '',
+		surname: '',
 		trusteeType: '',
-		professional: false,
-		address: '',
-		addressLineOne: '',
-		addressLineTwo: '',
-		addressLineThree: '',
-		city: '',
-		postCode: '',
-		companyPhone: '',
-		companyEmail: '',
-		companiesHouseNumber: '',
+		isProfessionalTrustee: false,
+		//
+		address: {
+			addressLine1: '',
+			addressLine2: '',
+			addressLine3: '',
+			postTown: '',
+			postcode: '',
+			county: '',
+			countryId: '',
+		},
+		//
+		telephoneNumber: '',
+		emailAddress: '',
 	},
 	states: {
 		preview: {
@@ -83,8 +99,9 @@ const trusteeMachine = Machine<TrusteeContext, TrusteeStates, TrusteeEvents>({
 							on: {
 								NEXT: {
 									target: 'type',
-									actions: assign((_, event) => ({
-										name: event.name,
+									actions: assign((context, event) => ({
+										...context,
+										...event.values,
 									})),
 								},
 							},
@@ -109,9 +126,8 @@ const trusteeMachine = Machine<TrusteeContext, TrusteeStates, TrusteeEvents>({
 						INCORRECT: 'trusteeCompanyDetails',
 						SAVE: {
 							target: '#preview',
-							actions: assign((context, event) => ({
-								...context,
-								...event.values,
+							actions: assign((_, event) => ({
+								address: event.values,
 							})),
 						},
 					},

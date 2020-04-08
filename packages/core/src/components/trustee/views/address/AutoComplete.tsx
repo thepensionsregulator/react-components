@@ -24,7 +24,7 @@ const AutoComplete: React.FC<AutoCompleteProps> = ({ onClick, options }) => {
 				{({ handleSubmit }) => (
 					<form onSubmit={handleSubmit}>
 						<FFSelect
-							name="postCode"
+							name="postcode"
 							placeholder="Please select the address from the dropdown"
 							options={options}
 						/>

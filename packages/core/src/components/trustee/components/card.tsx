@@ -1,7 +1,7 @@
 import React from 'react';
 import { styled } from '@tpr/theming';
 import { Flex } from '../../layout';
-import { Button } from '../../buttons';
+import { Button, Intent, Appearance } from '../../buttons';
 import { H3, H4 } from '../../typography';
 
 type StyledCardProps = { complete?: boolean };
@@ -54,11 +54,15 @@ type FooterProps = {
 	onContinue?: {
 		type?: 'button' | 'submit' | 'reset';
 		title?: string;
+		intent?: Intent;
+		appearance?: Appearance;
 		fn?: () => void;
 	};
 	onSave?: {
 		type?: 'button' | 'submit' | 'reset';
 		title?: string;
+		intent?: Intent;
+		appearance?: Appearance;
 		fn?: () => void;
 	};
 	isDisabled?: boolean;
@@ -78,6 +82,8 @@ export const Footer: React.FC<FooterProps> = ({
 		>
 			{onContinue && (
 				<Button
+					intent={onContinue?.intent}
+					appearance={onContinue?.appearance}
 					type={onContinue?.type}
 					onClick={onContinue.fn}
 					disabled={isDisabled}
@@ -86,7 +92,14 @@ export const Footer: React.FC<FooterProps> = ({
 				</Button>
 			)}
 			{onSave && (
-				<Button type={onSave?.type} onClick={onSave.fn} disabled={isDisabled}>
+				<Button
+					intent={onSave?.intent}
+					appearance={onSave?.appearance}
+					type={onSave?.type}
+					onClick={onSave.fn}
+					disabled={isDisabled}
+					ml={onContinue && 1}
+				>
 					{onSave.title}
 				</Button>
 			)}
