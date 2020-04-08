@@ -1,4 +1,4 @@
-import { Machine } from 'xstate';
+import { Machine, assign } from 'xstate';
 
 interface TrusteeStates {
 	states: {
@@ -28,26 +28,28 @@ interface TrusteeStates {
 type TrusteeEvents = any;
 
 export interface TrusteeContext {
-	complete?: boolean;
-	trustee: {
-		title: string;
-		firstName: string;
-		lastName: string;
-		trusteeType: string;
-		isProfesional: boolean;
-	};
-	company: {
-		name: string;
-		line1: string;
-		line2: string;
-		city: string;
+	complete: boolean;
+	//
+	schemeRoleId: string;
+	//
+	title: string;
+	forename: string;
+	surname: string;
+	trusteeType: string;
+	isProfessionalTrustee: boolean;
+	//
+	address: {
+		addressLine1: string;
+		addressLine2: string;
+		addressLine3: string;
+		postTown: string;
+		postcode: string;
 		county: string;
-		postCode: string;
+		countryId: string;
 	};
-	contact: {
-		phoneNumber: string;
-		emailAddress: string;
-	};
+	//
+	telephoneNumber: string;
+	emailAddress: string;
 }
 
 const trusteeMachine = Machine<TrusteeContext, TrusteeStates, TrusteeEvents>({
@@ -55,29 +57,27 @@ const trusteeMachine = Machine<TrusteeContext, TrusteeStates, TrusteeEvents>({
 	initial: 'preview',
 	context: {
 		complete: false,
-		trustee: {
-			// 1 name details form
-			title: '',
-			firstName: '',
-			lastName: '',
-			// 2 type details form
-			trusteeType: '', // radio button option
-			isProfesional: false, // select box 1/2
-		},
-		// 3 who does this trustee work for
-		company: {
-			name: '',
-			line1: '',
-			line2: '',
-			city: '',
+		//
+		schemeRoleId: '',
+		//
+		title: '',
+		forename: '',
+		surname: '',
+		trusteeType: '',
+		isProfessionalTrustee: false,
+		//
+		address: {
+			addressLine1: '',
+			addressLine2: '',
+			addressLine3: '',
+			postTown: '',
+			postcode: '',
 			county: '',
-			postCode: '',
+			countryId: '',
 		},
-		// 4 contact details for this trustee
-		contact: {
-			phoneNumber: '',
-			emailAddress: '',
-		},
+		//
+		telephoneNumber: '',
+		emailAddress: '',
 	},
 	states: {
 		preview: {
@@ -97,12 +97,24 @@ const trusteeMachine = Machine<TrusteeContext, TrusteeStates, TrusteeEvents>({
 					states: {
 						name: {
 							on: {
-								NEXT: 'type',
+								NEXT: {
+									target: 'type',
+									actions: assign((context, event) => ({
+										...context,
+										...event.values,
+									})),
+								},
 							},
 						},
 						type: {
 							on: {
-								SAVE: '#preview',
+								SAVE: {
+									target: '#preview',
+									actions: assign((context, event) => ({
+										...context,
+										...event.values,
+									})),
+								},
 								BACK: 'name',
 							},
 						},
@@ -112,7 +124,12 @@ const trusteeMachine = Machine<TrusteeContext, TrusteeStates, TrusteeEvents>({
 					id: 'companyAddress',
 					on: {
 						INCORRECT: 'trusteeCompanyDetails',
-						SAVE: '#preview',
+						SAVE: {
+							target: '#preview',
+							actions: assign((_, event) => ({
+								address: event.values,
+							})),
+						},
 					},
 				},
 				trusteeCompanyDetails: {
@@ -122,7 +139,13 @@ const trusteeMachine = Machine<TrusteeContext, TrusteeStates, TrusteeEvents>({
 				},
 				trusteeContacts: {
 					on: {
-						SAVE: '#preview',
+						SAVE: {
+							target: '#preview',
+							actions: assign((context, event) => ({
+								...context,
+								...event.values,
+							})),
+						},
 					},
 				},
 			},

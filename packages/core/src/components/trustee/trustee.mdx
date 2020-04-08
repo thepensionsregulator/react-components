@@ -28,26 +28,30 @@ import { Trustee } from '@tpr/core';
 		onSave={console.log}
 		onRemove={console.log}
 		onCorrect={console.log}
+		api={{
+			get: () => Promise.reject(new Error('THERE IS NO API IMPLEMENTATION')),
+		}}
 		trustee={{
-			trustee: {
-				title: 'Mr',
-				firstName: 'John',
-				lastName: 'Smith',
-				trusteeType: 'member-nominated',
-				isProfesional: false,
-			},
-			company: {
-				name: 'The Pensions Regulator',
-				line1: 'Napier House',
-				line2: 'Trafalgar Pl',
-				city: 'Brighton',
-				county: '',
-				postCode: 'BN1 4DW',
-			},
-			contact: {
-				phoneNumber: '01273 000 111',
-				emailAddress: 'fred.sandoors@trp.gov.uk',
-			},
+			complete: false,
+			//
+			schemeRoleId: '12345',
+			//
+			title: 'Mr',
+			forename: 'John',
+			surname: 'Smith',
+			trusteeType: 'member-nominated',
+			isProfessionalTrustee: false,
+			//
+			addressLine1: 'The Pensions Regulator',
+			addressLine2: 'Napier House',
+			addressLine3: 'Trafalgar Pl',
+			postTown: 'Brighton',
+			postcode: 'BN1 4DW',
+			county: 'West Sussex',
+			countryId: '',
+			//
+			telephoneNumber: '01273 000 111',
+			emailAddress: 'fred.sandoors@trp.gov.uk',
 		}}
 	/>
 </Playground>

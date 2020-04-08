@@ -1,6 +1,6 @@
 export default [
 	{
-		name: 'line_1',
+		name: 'addressLine1',
 		label: 'Address line 1',
 		type: 'text',
 		hint: 'First line of your home address',
@@ -8,26 +8,23 @@ export default [
 		required: true,
 	},
 	{
-		name: 'line_2',
+		name: 'addressLine2',
 		label: 'Address line 2',
 		type: 'text',
 		error: 'This is a required field',
 		required: true,
 	},
 	{
-		name: 'line_3',
+		name: 'addressLine3',
+		value: ' ',
 		label: 'Address line 3',
 		type: 'text',
 	},
 	{
-		name: 'line_4',
-		label: 'Address line 4',
+		name: 'postTown',
+		label: 'City',
 		type: 'text',
-	},
-	{
-		name: 'line_5',
-		label: 'Address line 5',
-		type: 'text',
+		required: true,
 	},
 	{
 		name: 'postcode',
@@ -37,8 +34,8 @@ export default [
 		required: true,
 	},
 	{
-		name: 'country',
-		label: 'Country',
+		name: 'county',
+		label: 'County',
 		type: 'text',
 		error: 'This is a required field',
 		required: true,

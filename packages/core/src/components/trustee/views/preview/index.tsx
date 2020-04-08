@@ -7,8 +7,8 @@ import { Button } from '../../components/button';
 import { StyledCardToolbar } from '../../components/card';
 
 const Preview: React.FC = () => {
-	const { current, send } = useTrusteeContext();
-	const { company, contact } = current.context;
+	const { current, send, onCorrect } = useTrusteeContext();
+	const state = current.context;
 	return (
 		<Flex flex="1 1 auto" flexDirection="column">
 			<StyledCardToolbar>
@@ -22,12 +22,11 @@ const Preview: React.FC = () => {
 						Correspondence address {'>'}
 					</Button>
 					<Flex mt={0} flexDirection="column">
-						<H4 fontWeight="bold">{company.name}</H4>
-						<Text>{company.line1}</Text>
-						<Text>{company.line2}</Text>
-						<Text>{company.city}</Text>
-						<Text>{company.county}</Text>
-						<Text>{company.postCode}</Text>
+						<H4 fontWeight="bold">{state.address.addressLine1}</H4>
+						<Text>{state.address.addressLine2}</Text>
+						<Text>{state.address.addressLine3}</Text>
+						<Text>{state.address.postTown}</Text>
+						<Text>{state.address.postcode}</Text>
 					</Flex>
 				</Flex>
 				<Flex width="100%" flex="1 1 auto" flexDirection="column">
@@ -36,9 +35,9 @@ const Preview: React.FC = () => {
 					</Button>
 					<Flex mt={0} flexDirection="column">
 						<H4 fontWeight="bold">Phone</H4>
-						<Text>{contact.phoneNumber}</Text>
+						<Text>{state.telephoneNumber}</Text>
 						<H4 fontWeight="bold">Email</H4>
-						<Text>{contact.emailAddress}</Text>
+						<Text>{state.emailAddress}</Text>
 					</Flex>
 				</Flex>
 			</StyledCardToolbar>
@@ -50,8 +49,9 @@ const Preview: React.FC = () => {
 				pt={2}
 			>
 				<Checkbox
-					checked={false}
-					onChange={input => !input.value}
+					value={state.complete}
+					checked={state.complete}
+					onChange={evt => onCorrect(!!Boolean(evt.target.value))}
 					label="All details are correct"
 				/>
 			</Flex>
