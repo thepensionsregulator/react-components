@@ -50,6 +50,7 @@ export interface TrusteeInput {
 
 export type TrusteeProps = {
 	trustee: Partial<TrusteeInput>;
+	testId?: string;
 	children?: RenderProps | ReactElement;
 	onCorrect?: (...args: any[]) => void;
 	onRemove?: (...args: any[]) => void;

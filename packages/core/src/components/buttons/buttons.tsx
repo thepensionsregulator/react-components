@@ -147,6 +147,7 @@ interface ButtonProps
 		SpaceProps,
 		LayoutProps {
 	textDecoration?: string;
+	testId?: string;
 }
 
 const StyledButton = styled('button').attrs<ButtonProps>(
@@ -170,10 +171,11 @@ export const Button: React.FC<ButtonProps> = ({
 	children,
 	iconAfter,
 	iconBefore,
+	testId,
 	...props
 }) => {
 	return (
-		<StyledButton disabled={props.isLoading} {...props}>
+		<StyledButton data-testid={testId} disabled={props.isLoading} {...props}>
 			{iconBefore && iconBefore({ style: { marginRight: 10 } })}
 			<span>{children}</span>
 			{iconAfter && iconAfter({ style: { marginLeft: 10 } })}

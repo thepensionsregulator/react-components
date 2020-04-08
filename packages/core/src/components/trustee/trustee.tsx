@@ -44,7 +44,7 @@ export const Trustee: React.FC<Omit<TrusteeProps, 'children'>> = props => {
 	return (
 		<TrusteeProvider {...props}>
 			{({ current: { context, matches }, send }) => (
-				<StyledCard complete={context.complete}>
+				<StyledCard data-testid={props.testId} complete={context.complete}>
 					<StyledCardToolbar>
 						<Flex width="100%" flexDirection="column" mr="40px" p={[2]}>
 							<Button

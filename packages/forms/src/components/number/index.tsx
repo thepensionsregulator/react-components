@@ -9,6 +9,7 @@ export const InputNumber: React.FC<FieldRenderProps<string> & FieldProps> = ({
 	hint,
 	required,
 	input,
+	testId,
 	meta,
 	...props
 }) => {
@@ -25,6 +26,7 @@ export const InputNumber: React.FC<FieldRenderProps<string> & FieldProps> = ({
 			/>
 			<StyledInput
 				aria-label={label}
+				data-testid={testId}
 				meta={meta}
 				{...input}
 				{...props}
