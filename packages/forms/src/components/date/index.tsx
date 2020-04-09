@@ -45,6 +45,7 @@ export const InputDate: React.FC<FieldRenderProps<string> & FieldProps> = ({
 	required,
 	input = {},
 	meta,
+	testId,
 }) => {
 	const initialDate = useMemo(() => meta.initial, [meta.initial]);
 	const { dd, mm, yyyy } = useDateTransformer(initialDate);
@@ -82,6 +83,7 @@ export const InputDate: React.FC<FieldRenderProps<string> & FieldProps> = ({
 					<StyledInput
 						type="text"
 						aria-label={`dd-${label}`}
+						data-testid={`dd-${testId}`}
 						value={day}
 						onChange={handleChange(setDay, 32)}
 						onBlur={evt => {
@@ -99,6 +101,7 @@ export const InputDate: React.FC<FieldRenderProps<string> & FieldProps> = ({
 					<StyledInput
 						type="text"
 						aria-label={`mm-${label}`}
+						data-testid={`mm-${testId}`}
 						value={month}
 						onChange={handleChange(setMonth, 13)}
 						onBlur={evt => {
@@ -116,6 +119,7 @@ export const InputDate: React.FC<FieldRenderProps<string> & FieldProps> = ({
 					<StyledInput
 						type="text"
 						aria-label={`yyyy-${label}`}
+						data-testid={`yyyy-${testId}`}
 						onChange={handleChange(setYear, 10000)}
 						onBlur={evt => {
 							if (!evt.target.value || evt.target.value === '0') {

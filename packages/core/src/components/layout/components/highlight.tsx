@@ -7,6 +7,7 @@ import { P } from '../../typography';
 type HighlightProps = {
 	title: string;
 	scheme: string;
+	testId?: string;
 };
 
 const LeftBackground = styled('div')<ColorProps>`
@@ -22,12 +23,14 @@ const LeftBackground = styled('div')<ColorProps>`
 export const Highlight: React.FC<HighlightProps> = ({
 	title = '',
 	scheme = '',
+	testId,
 }) => {
 	return (
 		<DocWidth justifyContent="center" bg="accents.400">
 			<LeftBackground bg="accents.300" />
 			<AppWidth zIndex={1}>
 				<Flex
+					data-testid={testId}
 					flex="0 0 auto"
 					height="50px"
 					width="100%"

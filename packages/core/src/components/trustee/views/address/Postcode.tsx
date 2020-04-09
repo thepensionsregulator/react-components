@@ -24,12 +24,12 @@ const Postcode: React.FC<PostcodeProps> = ({
 	setLoading,
 	setOptions,
 }) => {
-	const { api } = useTrusteeContext();
-	console.log(api);
+	const { addressAPI } = useTrusteeContext();
+	console.log(postcode);
 	const search = useCallback(
 		(postcode: string, country = 'GBR', take = 100) => {
 			setLoading(true);
-			api
+			addressAPI
 				.get(`search?country=${country}&query=${postcode}&take=${take}`)
 				.then(resp => {
 					if (
@@ -39,7 +39,7 @@ const Postcode: React.FC<PostcodeProps> = ({
 						Promise.all(
 							resp.data.results.map(({ format }: { format: string }) => {
 								const [url] = format.split('v2/').slice(-1);
-								return api.get(url).then(({ data }) => {
+								return addressAPI.get(url).then(({ data }) => {
 									const address = extractToObject(data.address);
 
 									const addressToOurFormat = {

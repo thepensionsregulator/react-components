@@ -35,6 +35,7 @@ const Logo = styled('div')`
 type HeaderProps = {
 	logoUrl: string;
 	title: string;
+	testId?: string;
 	onClickSchemeOptions: () => void;
 	onClickLogout: () => void;
 };
@@ -42,13 +43,14 @@ type HeaderProps = {
 export const Header: React.FC<HeaderProps> = ({
 	logoUrl,
 	title = 'Exchange - Scheme return',
+	testId,
 	onClickSchemeOptions,
 	onClickLogout,
 }) => {
 	return (
 		<DocWidth justifyContent="center" bg="accents.300" color="white">
 			<AppWidth>
-				<Flex flexDirection="column">
+				<Flex data-testid={testId} flexDirection="column">
 					<DocWidth justifyContent="space-between" py={2}>
 						<Flex alignItems="center">
 							<Flex

@@ -7,6 +7,7 @@ import { H3, H4 } from '../../typography';
 type StyledCardProps = { complete?: boolean };
 
 export const StyledCard = styled('div')<StyledCardProps>`
+	position: relative;
 	display: flex;
 	flex-direction: column;
 	box-shadow: 0 2px 2px rgba(0, 0, 0, 0.2);

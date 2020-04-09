@@ -24,6 +24,7 @@ interface SelectProps extends DownshiftProps<any> {
 	required?: boolean;
 	hint?: string;
 	searchable?: boolean;
+	testId?: string;
 }
 
 export const Select: React.FC<SelectProps> = ({
@@ -39,6 +40,7 @@ export const Select: React.FC<SelectProps> = ({
 	onChange,
 	disabled,
 	searchable,
+	testId,
 	placeholder,
 	...rest
 }) => {
@@ -79,6 +81,7 @@ export const Select: React.FC<SelectProps> = ({
 						<InputWrapper>
 							<StyledSelectInput
 								autoComplete="off"
+								data-testid={testId}
 								disabled={disabled}
 								placeholder={placeholder}
 								onClick={() => toggleMenu()}

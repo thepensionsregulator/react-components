@@ -9,8 +9,8 @@ type TrusteeContextProps = {
 	onToggleCorrect?: () => void;
 	onCorrect?: (...args: any[]) => void;
 	onRemove?: (...args: any[]) => void;
-	onSave?: (...args: any[]) => void;
-	api: any;
+	onSave?: (...args: any[]) => Promise<any>;
+	addressAPI: any;
 };
 
 export const TrusteeContext = createContext<TrusteeContextProps>({
@@ -19,8 +19,8 @@ export const TrusteeContext = createContext<TrusteeContextProps>({
 	onToggleCorrect: () => {},
 	onCorrect: () => {},
 	onRemove: () => {},
-	onSave: () => {},
-	api: { get: () => new Promise(res => res()) },
+	onSave: () => new Promise(res => res()),
+	addressAPI: { get: () => new Promise(res => res()) },
 });
 
 type RenderProps = (_: TrusteeContextProps) => ReactElement;
@@ -50,11 +50,12 @@ export interface TrusteeInput {
 
 export type TrusteeProps = {
 	trustee: Partial<TrusteeInput>;
+	testId?: string;
 	children?: RenderProps | ReactElement;
 	onCorrect?: (...args: any[]) => void;
 	onRemove?: (...args: any[]) => void;
-	onSave?: (...args: any[]) => void;
-	api: any;
+	onSave?: (...args: any[]) => Promise<any>;
+	addressAPI: any;
 };
 
 export const TrusteeProvider = ({

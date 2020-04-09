@@ -34,16 +34,18 @@ const StyledInfoImportant = styled('div')`
 type InfoProps = {
 	important?: string;
 	title?: string;
+	testId?: string;
 };
 
 export const Info: React.FC<InfoProps> = ({
 	children,
 	title,
+	testId,
 	important = undefined,
 }) => {
 	const isImportant = typeof important === 'string' && important.length > 0;
 	return (
-		<StyledInfo isImportant={isImportant}>
+		<StyledInfo data-testid={testId} isImportant={isImportant}>
 			{isImportant && <StyledInfoImportant>{important}</StyledInfoImportant>}
 			{title && <H2 mb={2}>{title}</H2>}
 			{children}
