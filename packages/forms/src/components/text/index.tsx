@@ -11,6 +11,7 @@ export const InputText: React.FC<FieldRenderProps<string> & FieldProps> = ({
 	hint,
 	required,
 	input,
+	testId,
 	meta,
 	...props
 }) => {
@@ -26,7 +27,13 @@ export const InputText: React.FC<FieldRenderProps<string> & FieldProps> = ({
 				hint={hint}
 				meta={meta}
 			/>
-			<StyledInput aria-label={label} meta={meta} {...input} {...props} />
+			<StyledInput
+				data-testid={testId}
+				aria-label={label}
+				meta={meta}
+				{...input}
+				{...props}
+			/>
 		</StyledInputLabel>
 	);
 };

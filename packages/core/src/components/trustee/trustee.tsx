@@ -21,9 +21,9 @@ const TrusteeBody: React.FC = () => {
 	const { current } = useTrusteeContext();
 	if (current.matches('preview')) {
 		return <Preview />;
-	} else if (current.matches({ edit: { trustee: 'name' } })) {
+	} else if (current.matches({ edit: { trustee: 'trusteeName' } })) {
 		return <Name />;
-	} else if (current.matches({ edit: { trustee: 'type' } })) {
+	} else if (current.matches({ edit: { trustee: 'trusteeType' } })) {
 		return <Type />;
 	} else if (current.matches({ edit: 'companyAddress' })) {
 		return <Address />;
@@ -44,7 +44,7 @@ export const Trustee: React.FC<Omit<TrusteeProps, 'children'>> = props => {
 	return (
 		<TrusteeProvider {...props}>
 			{({ current: { context, matches }, send }) => (
-				<StyledCard complete={context.complete}>
+				<StyledCard data-testid={props.testId} complete={context.complete}>
 					<StyledCardToolbar>
 						<Flex width="100%" flexDirection="column" mr="40px" p={[2]}>
 							<Button

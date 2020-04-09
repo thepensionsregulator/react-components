@@ -125,10 +125,12 @@ export const Span = styled('span')<HtmlHTagTypes>`
 
 interface LinkProps extends SpaceProps {
 	appearance?: 'default' | 'primary';
+	testId?: string;
 }
 
 export const Link = styled('a').attrs<LinkProps>(
-	({ theme, appearance = 'default' }) => ({
+	({ theme, appearance = 'default', testId }) => ({
+		'data-testid': testId,
 		color:
 			appearance === 'default'
 				? theme.colors.neutral[300]

@@ -61,7 +61,7 @@ describe('Date', () => {
 		expect(handleSubmit).toBeCalledTimes(1);
 		expect(form.getState().values).toMatchInlineSnapshot(`
 		Object {
-		  "date-1": 2019-12-20T00:00:00.000Z,
+		  "date-1": "2019-12-20",
 		}
 	`);
 	});

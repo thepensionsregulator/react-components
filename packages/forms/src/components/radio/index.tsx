@@ -37,11 +37,6 @@ export const RadioButton: React.FC<RadioButtonProps> = props => {
 								? `${props.testId}-${props.checked ? 'checked' : 'unchecked'}`
 								: null
 						}
-						data-cy={
-							props.testId
-								? `${props.testId}-${props.checked ? 'checked' : 'unchecked'}`
-								: null
-						}
 					>
 						{props.checked ? <RadioButtonChecked /> : <RadioButtonUnchecked />}
 						<StyledHiddenInput
@@ -52,7 +47,6 @@ export const RadioButton: React.FC<RadioButtonProps> = props => {
 							value={props.value}
 							disabled={props.disabled || false}
 							onChange={props.onChange}
-							data-cy={props.testId}
 							data-testid={props.testId}
 						/>
 						{props.children}

@@ -39,6 +39,7 @@ type FooterProps = {
 	logoUrl?: string;
 	/** accepts copyright description */
 	copyright?: string;
+	testId?: string;
 };
 
 export const LevelOne = styled('div')`
@@ -57,11 +58,12 @@ export const Footer: React.FC<FooterProps> = ({
 	menus,
 	links,
 	logoUrl,
+	testId,
 	copyright = '© The Pensions Regulator',
 	...props
 }) => {
 	return (
-		<Container {...props}>
+		<Container data-testid={testId} {...props}>
 			<Flex flexDirection="column">
 				<LevelOne>
 					<Logo>

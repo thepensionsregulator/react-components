@@ -7,8 +7,8 @@ interface TrusteeStates {
 			states: {
 				trustee: {
 					states: {
-						name: {};
-						type: {};
+						trusteeName: {};
+						trusteeType: {};
 					};
 				};
 				companyAddress: {};
@@ -83,7 +83,7 @@ const trusteeMachine = Machine<TrusteeContext, TrusteeStates, TrusteeEvents>({
 		preview: {
 			id: 'preview',
 			on: {
-				EDIT_TRUSTEE: 'edit.trustee.name',
+				EDIT_TRUSTEE: 'edit.trustee.trusteeName',
 				EDIT_ORG: 'edit.companyAddress',
 				EDIT_CONTACTS: 'edit.trusteeContacts',
 				REMOVE: 'remove',
@@ -93,20 +93,21 @@ const trusteeMachine = Machine<TrusteeContext, TrusteeStates, TrusteeEvents>({
 			initial: 'trustee',
 			states: {
 				trustee: {
-					initial: 'name',
+					initial: 'trusteeName',
 					states: {
-						name: {
+						trusteeName: {
+							id: 'trusteeName',
 							on: {
 								NEXT: {
-									target: 'type',
-									actions: assign((context, event) => ({
+									target: 'trusteeType',
+									actions: assign((context: any, event: any) => ({
 										...context,
 										...event.values,
 									})),
 								},
 							},
 						},
-						type: {
+						trusteeType: {
 							on: {
 								SAVE: {
 									target: '#preview',
@@ -115,7 +116,7 @@ const trusteeMachine = Machine<TrusteeContext, TrusteeStates, TrusteeEvents>({
 										...event.values,
 									})),
 								},
-								BACK: 'name',
+								BACK: 'trusteeName',
 							},
 						},
 					},
