@@ -21,9 +21,9 @@ const TrusteeBody: React.FC = () => {
 	const { current } = useTrusteeContext();
 	if (current.matches('preview')) {
 		return <Preview />;
-	} else if (current.matches({ edit: { trustee: 'name' } })) {
+	} else if (current.matches({ edit: { trustee: 'trusteeName' } })) {
 		return <Name />;
-	} else if (current.matches({ edit: { trustee: 'type' } })) {
+	} else if (current.matches({ edit: { trustee: 'trusteeType' } })) {
 		return <Type />;
 	} else if (current.matches({ edit: 'companyAddress' })) {
 		return <Address />;

@@ -1,33 +1,44 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Flex } from '../../../layout';
 import { P } from '../../../typography';
 import { useTrusteeContext } from '../../context';
 import { Footer } from '../../components/card';
 import { Toolbar } from '../../components/card';
 import { Form, FFRadioButton } from '@tpr/forms';
+import { Loading } from '../../components/loader';
 
 const Type: React.FC = () => {
+	const [loading, setLoading] = useState(false);
 	const { current, send, onSave } = useTrusteeContext();
 	const state = current.context;
 
-	function onSubmit(values) {
+	async function onSubmit(values) {
 		const isProfessionalTrustee =
 			values.isProfessionalTrustee === 'yes' ? true : false;
-		send('SAVE', {
-			values: {
-				...values,
-				isProfessionalTrustee,
-			},
-		});
-		onSave({
+		setLoading(true);
+		await onSave({
 			...state,
 			...values,
 			isProfessionalTrustee,
-		});
+		})
+			.then(() => {
+				send('SAVE', {
+					values: {
+						...values,
+						isProfessionalTrustee,
+					},
+				});
+				setLoading(false);
+			})
+			.catch(err => {
+				console.log(err);
+				setLoading(false);
+			});
 	}
 
 	return (
 		<Flex flex="1 1 auto" flexDirection="column">
+			{loading && <Loading>Saving...</Loading>}
 			<Flex flexDirection="column">
 				<Toolbar title="Type of trustee" />
 				<Form
@@ -82,6 +93,7 @@ const Type: React.FC = () => {
 								</Flex>
 							</Flex>
 							<Footer
+								isDisabled={loading}
 								onSave={{
 									type: 'submit',
 									title: 'Save and close',
