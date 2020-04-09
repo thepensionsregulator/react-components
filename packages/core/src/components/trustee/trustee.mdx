@@ -31,7 +31,7 @@ import { Trustee } from '@tpr/core';
 				onSave={() => onSave(5000)}
 				onRemove={console.log}
 				onCorrect={console.log}
-				api={{
+				addressAPI={{
 					get: () =>
 						Promise.reject(new Error('THERE IS NO API IMPLEMENTATION')),
 				}}
