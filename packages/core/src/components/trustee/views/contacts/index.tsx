@@ -2,19 +2,30 @@ import React from 'react';
 import { Flex } from '../../../layout';
 import { useTrusteeContext } from '../../context';
 import { Toolbar, Footer } from '../../components/card';
+import { Loading } from '../../components/loader';
 import { Form, validate, FFInputText } from '@tpr/forms';
+import useLoading from '../../../../hooks/use-loading';
 
 const Contacts: React.FC = () => {
+	const [loading, setLoading] = useLoading();
 	const { current, send, onSave } = useTrusteeContext();
-	const state = current.context;
+	const state = current.context.trustee;
 
-	const onSubmit = values => {
-		send('SAVE', { values });
-		onSave({ ...state, ...values });
+	const onSubmit = (values) => {
+		setLoading(true);
+		onSave({ ...state, ...values })
+			.then(() => {
+				setLoading(false);
+				send('SAVE', { values });
+			})
+			.catch(() => {
+				setLoading(false);
+			});
 	};
 
 	return (
 		<Flex flex="1 1 auto" flexDirection="column">
+			{loading && <Loading />}
 			<Toolbar title="Contact details for this trustee" />
 			<Form
 				onSubmit={onSubmit}
@@ -52,6 +63,7 @@ const Contacts: React.FC = () => {
 							/>
 						</Flex>
 						<Footer
+							isDisabled={loading}
 							onSave={{
 								type: 'submit',
 								title: 'Save and close',

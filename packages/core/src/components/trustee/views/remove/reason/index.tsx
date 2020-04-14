@@ -9,11 +9,16 @@ import { FORM_ERROR } from 'final-form';
 const RemoveReason: React.FC = () => {
 	const { send } = useTrusteeContext();
 
-	const onSubmit = values => {
-		if (Object.keys(values).filter(key => key === 'reason').length !== 1) {
+	const onSubmit = (values) => {
+		if (Object.keys(values).filter((key) => key === 'reason').length !== 1) {
 			return { [FORM_ERROR]: 'Please select one of the options.' };
 		} else {
-			send('SELECT');
+			send(
+				'SELECT',
+				values.date && {
+					date: values.date,
+				},
+			);
 			return undefined;
 		}
 	};
@@ -37,11 +42,13 @@ const RemoveReason: React.FC = () => {
 								value="left_the_scheme"
 							/>
 							{leftScheme && (
-								<Flex my={1}>
+								<Flex my={1} ml="34px">
 									<FFInputDate
 										name="date"
 										label="Date the trustee left the scheme"
 										hint="For example, 31 3 2019"
+										required={true}
+										error="Cannot be left empty!"
 									/>
 								</Flex>
 							)}

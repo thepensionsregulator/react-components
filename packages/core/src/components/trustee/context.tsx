@@ -10,6 +10,7 @@ type TrusteeContextProps = {
 	onCorrect?: (...args: any[]) => void;
 	onRemove?: (...args: any[]) => void;
 	onSave?: (...args: any[]) => Promise<any>;
+	complete?: boolean;
 	addressAPI: any;
 };
 
@@ -19,15 +20,13 @@ export const TrusteeContext = createContext<TrusteeContextProps>({
 	onToggleCorrect: () => {},
 	onCorrect: () => {},
 	onRemove: () => {},
-	onSave: () => new Promise(res => res()),
-	addressAPI: { get: () => new Promise(res => res()) },
+	onSave: () => new Promise((res) => res()),
+	addressAPI: { get: () => new Promise((res) => res()) },
 });
 
 type RenderProps = (_: TrusteeContextProps) => ReactElement;
 
 export interface TrusteeInput {
-	complete: boolean;
-	//
 	schemeRoleId: string;
 	//
 	title: string;
@@ -49,7 +48,8 @@ export interface TrusteeInput {
 }
 
 export type TrusteeProps = {
-	trustee: Partial<TrusteeInput>;
+	complete: boolean;
+	trustee: TrusteeInput;
 	testId?: string;
 	children?: RenderProps | ReactElement;
 	onCorrect?: (...args: any[]) => void;
@@ -60,6 +60,7 @@ export type TrusteeProps = {
 
 export const TrusteeProvider = ({
 	trustee,
+	complete,
 	children,
 	...rest
 }: TrusteeProps) => {
@@ -76,15 +77,18 @@ export const TrusteeProvider = ({
 
 	const [current, send] = useMachine(trusteeMachine, {
 		context: {
-			...restTrustee,
-			address: {
-				addressLine1,
-				addressLine2,
-				addressLine3,
-				postTown,
-				postcode,
-				county,
-				countryId,
+			complete,
+			trustee: {
+				...restTrustee,
+				address: {
+					addressLine1,
+					addressLine2,
+					addressLine3,
+					postTown,
+					postcode,
+					county,
+					countryId,
+				},
 			},
 		},
 	});

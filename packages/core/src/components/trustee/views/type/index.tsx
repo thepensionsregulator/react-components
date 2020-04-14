@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { Flex } from '../../../layout';
 import { P } from '../../../typography';
 import { useTrusteeContext } from '../../context';
@@ -6,19 +6,20 @@ import { Footer } from '../../components/card';
 import { Toolbar } from '../../components/card';
 import { Form, FFRadioButton } from '@tpr/forms';
 import { Loading } from '../../components/loader';
+import useLoading from '../../../../hooks/use-loading';
 
 const Type: React.FC = () => {
-	const [loading, setLoading] = useState(false);
+	const [loading, setLoading] = useLoading(false);
 	const { current, send, onSave } = useTrusteeContext();
-	const state = current.context;
+	const { trustee } = current.context;
 
 	async function onSubmit(values) {
 		const isProfessionalTrustee =
 			values.isProfessionalTrustee === 'yes' ? true : false;
 		setLoading(true);
 		await onSave({
-			...state,
-			...values,
+			...trustee,
+			address: values,
 			isProfessionalTrustee,
 		})
 			.then(() => {
@@ -30,7 +31,7 @@ const Type: React.FC = () => {
 				});
 				setLoading(false);
 			})
-			.catch(err => {
+			.catch((err) => {
 				console.log(err);
 				setLoading(false);
 			});
@@ -38,14 +39,14 @@ const Type: React.FC = () => {
 
 	return (
 		<Flex flex="1 1 auto" flexDirection="column">
-			{loading && <Loading>Saving...</Loading>}
+			{loading && <Loading />}
 			<Flex flexDirection="column">
 				<Toolbar title="Type of trustee" />
 				<Form
 					onSubmit={onSubmit}
 					initialValues={{
-						trusteeType: state.trusteeType,
-						isProfessionalTrustee: state.isProfessionalTrustee ? 'yes' : 'no',
+						trusteeType: trustee.trusteeType,
+						isProfessionalTrustee: trustee.isProfessionalTrustee ? 'yes' : 'no',
 					}}
 				>
 					{({ handleSubmit }) => (

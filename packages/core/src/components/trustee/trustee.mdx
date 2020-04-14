@@ -5,6 +5,7 @@ route: /core/trustee
 ---
 
 import { Playground, Props } from 'docz';
+import { useState } from 'react';
 import { Trustee } from './trustee';
 
 # Trustee
@@ -25,19 +26,19 @@ import { Trustee } from '@tpr/core';
 
 <Playground>
 	{() => {
-		const onSave = ms => new Promise(res => setTimeout(res, ms));
+		const [complete, setComplete] = useState(false);
+		const onSave = (ms) => new Promise((res) => setTimeout(res, ms));
 		return (
 			<Trustee
-				onSave={() => onSave(5000)}
+				onSave={() => onSave(2500)}
 				onRemove={console.log}
-				onCorrect={console.log}
+				onCorrect={(value) => setComplete(value)}
 				addressAPI={{
 					get: () =>
 						Promise.reject(new Error('THERE IS NO API IMPLEMENTATION')),
 				}}
+				complete={complete}
 				trustee={{
-					complete: false,
-					//
 					schemeRoleId: '12345',
 					//
 					title: 'Mr',

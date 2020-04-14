@@ -2,7 +2,7 @@ import React from 'react';
 import { StyledCard, StyledCardToolbar } from './components/card';
 import { TrusteeProvider, useTrusteeContext, TrusteeProps } from './context';
 import { Flex } from '../layout';
-import { Text, H4 } from '../typography';
+import { Text, H4, P } from '../typography';
 import { Button } from './components/button';
 import Preview from './views/preview';
 import Name from './views/name';
@@ -40,7 +40,7 @@ const TrusteeBody: React.FC = () => {
 	}
 };
 
-export const Trustee: React.FC<Omit<TrusteeProps, 'children'>> = props => {
+export const Trustee: React.FC<Omit<TrusteeProps, 'children'>> = (props) => {
 	return (
 		<TrusteeProvider {...props}>
 			{({ current: { context, matches }, send }) => (
@@ -55,13 +55,17 @@ export const Trustee: React.FC<Omit<TrusteeProps, 'children'>> = props => {
 							</Button>
 							<Flex mt={0} flexDirection="column">
 								<H4 fontWeight="bold">
-									{[context.title, context.forename, context.surname]
+									{[
+										context.trustee.title,
+										context.trustee.forename,
+										context.trustee.surname,
+									]
 										.filter(Boolean)
 										.join(' ')}
 								</H4>
-								{context.trusteeType && (
+								{context.trustee.trusteeType && (
 									<Text>
-										{`${context.trusteeType[0].toUpperCase()}${context.trusteeType
+										{`${context.trustee.trusteeType[0].toUpperCase()}${context.trustee.trusteeType
 											.slice(1)
 											.toLowerCase()} trustee`}
 									</Text>
@@ -69,8 +73,20 @@ export const Trustee: React.FC<Omit<TrusteeProps, 'children'>> = props => {
 							</Flex>
 						</Flex>
 						<Flex width="100%" justifyContent="flex-end" p={[null, 2]}>
-							{context.complete ? 'No issues' : 'Incomplete'} |{' '}
-							<Flex width="80px">
+							<P
+								fontSize={1}
+								lineHeight="22px"
+								color={context.complete ? `success.200` : `danger.200`}
+							>
+								{context.complete ? `No issues` : `Incomplete`}
+							</P>
+							<Flex
+								width="84px"
+								ml={1}
+								pl={1}
+								borderLeft="1px solid"
+								borderColor="neutral.200"
+							>
 								<Button
 									onClick={() => send('REMOVE')}
 									disabled={!matches('preview')}
