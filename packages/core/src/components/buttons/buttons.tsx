@@ -1,5 +1,5 @@
 import React, { FunctionComponent, ButtonHTMLAttributes } from 'react';
-import styled, { css } from 'styled-components';
+import styled, { css, keyframes } from 'styled-components';
 import { space, layout } from 'styled-system';
 import { SpaceProps, LayoutProps } from 'styled-system';
 // import { getObjectValueByString } from '../../utils';
@@ -24,7 +24,7 @@ const scales = {
 	`,
 };
 
-const linkAppearance = colors => {
+const linkAppearance = (colors) => {
 	return css`
 		background: transparent;
 		box-shadow: none;
@@ -51,7 +51,7 @@ const linkAppearance = colors => {
 	`;
 };
 
-const primaryAppearance = colors => {
+const primaryAppearance = (colors) => {
 	return css`
 		background: ${colors?.[200]};
 		color: white;
@@ -66,7 +66,7 @@ const primaryAppearance = colors => {
 		}
 
 		&:disabled {
-			background: grey;
+			background: ${({ theme }) => theme.colors.primary[200]};
 			cursor: not-allowed;
 		}
 
@@ -77,7 +77,7 @@ const primaryAppearance = colors => {
 	`;
 };
 
-const outlinedAppearance = colors => {
+const outlinedAppearance = (colors) => {
 	return css`
 		background: transparent;
 		color: ${colors?.[200]};
@@ -158,6 +158,7 @@ const StyledButton = styled('button').attrs<ButtonProps>(
 	${getScale}
 	${getAppearance}
 
+	position: relative;
 	display: inline-block;
 	cursor: pointer;
 	text-decoration: ${({ textDecoration }) =>
@@ -182,6 +183,38 @@ export const Button: React.FC<ButtonProps> = ({
 		</StyledButton>
 	);
 };
+
+const spin = keyframes`
+  to {transform: rotate(360deg);}
+`;
+
+type SpinnerProps = { size?: number; inline?: boolean };
+export const Spinner = styled.span<SpinnerProps>`
+	width: ${(props) => (props.size ? `${props.size}px` : '32px')};
+	height: ${(props) => (props.size ? `${props.size}px` : '32px')};
+	position: relative;
+
+	&:before {
+		content: '';
+		box-sizing: border-box;
+		display: inline-block;
+		position: ${(props) => (props.inline ? 'relative' : 'absolute')};
+		top: ${(props) => (props.inline ? '0' : '50%')};
+		left: ${(props) => (props.inline ? '0' : '50%')};
+		width: ${(props) =>
+			props.size !== undefined ? `${props.size}px` : '16px'};
+		height: ${(props) =>
+			props.size !== undefined ? `${props.size}px` : '16px'};
+		margin-top: ${(props) =>
+			props.size !== undefined ? `-${props.size / 2}px` : '-8px'};
+		margin-left: ${(props) =>
+			props.size !== undefined ? `-${props.size / 2}px` : '-8px'};
+		border-radius: 50%;
+		border: 2px solid transparent;
+		border-top: 3px solid ${({ theme }) => theme.colors.primary[100]};
+		animation: ${spin} 500ms linear infinite;
+	}
+`;
 
 export const IconButton = () => null;
 export const BackButton = () => null;

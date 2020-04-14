@@ -7,9 +7,9 @@ import { Form, FFInputText } from '@tpr/forms';
 
 const Name: React.FC = () => {
 	const { current, send } = useTrusteeContext();
-	const state = current.context;
+	const state = current.context.trustee;
 
-	const onSubmit = values => {
+	const onSubmit = (values) => {
 		send('NEXT', { values });
 	};
 

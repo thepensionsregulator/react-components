@@ -25,13 +25,13 @@ const Postcode: React.FC<PostcodeProps> = ({
 	setOptions,
 }) => {
 	const { addressAPI } = useTrusteeContext();
-	console.log(postcode);
+
 	const search = useCallback(
 		(postcode: string, country = 'GBR', take = 100) => {
 			setLoading(true);
 			addressAPI
 				.get(`search?country=${country}&query=${postcode}&take=${take}`)
-				.then(resp => {
+				.then((resp) => {
 					if (
 						Array.isArray(resp.data.results) &&
 						resp.data.results.length > 0
@@ -55,13 +55,13 @@ const Postcode: React.FC<PostcodeProps> = ({
 									return {
 										...addressToOurFormat,
 										singleLineAddress: Object.keys(addressToOurFormat)
-											.filter(key => address[key])
-											.map(key => address[key])
+											.filter((key) => address[key])
+											.map((key) => address[key])
 											.join(', '),
 									};
 								});
 							}),
-						).then(results => {
+						).then((results) => {
 							setOptions(results);
 							showLookup(false);
 							setLoading(false);
@@ -71,7 +71,7 @@ const Postcode: React.FC<PostcodeProps> = ({
 						console.error('NOTHING WAS FOUND');
 					}
 				})
-				.catch(err => {
+				.catch((err) => {
 					console.log(err);
 					setLoading(false);
 				});
@@ -96,7 +96,7 @@ const Postcode: React.FC<PostcodeProps> = ({
 					<Flex width="160px" mb={0}>
 						<StyledInput
 							value={postcode}
-							onChange={evt => setPostcode(evt.target.value)}
+							onChange={(evt) => setPostcode(evt.target.value)}
 							disabled={loading}
 						/>
 					</Flex>

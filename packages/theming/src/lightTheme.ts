@@ -6,6 +6,7 @@ const lightTheme = {
 	colors: {
 		background: '#FFFFFF',
 		primary: {
+			100: '#75bdf0',
 			200: '#036db8',
 			300: '#003078',
 			// 300: '#5e529f',

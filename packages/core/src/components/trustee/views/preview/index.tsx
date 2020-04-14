@@ -8,7 +8,8 @@ import { StyledCardToolbar } from '../../components/card';
 
 const Preview: React.FC = () => {
 	const { current, send, onCorrect } = useTrusteeContext();
-	const state = current.context;
+	const { trustee, complete } = current.context;
+
 	return (
 		<Flex flex="1 1 auto" flexDirection="column">
 			<StyledCardToolbar>
@@ -22,11 +23,11 @@ const Preview: React.FC = () => {
 						Correspondence address {'>'}
 					</Button>
 					<Flex mt={0} flexDirection="column">
-						<H4 fontWeight="bold">{state.address.addressLine1}</H4>
-						<Text>{state.address.addressLine2}</Text>
-						<Text>{state.address.addressLine3}</Text>
-						<Text>{state.address.postTown}</Text>
-						<Text>{state.address.postcode}</Text>
+						<H4 fontWeight="bold">{trustee.address.addressLine1}</H4>
+						<Text>{trustee.address.addressLine2}</Text>
+						<Text>{trustee.address.addressLine3}</Text>
+						<Text>{trustee.address.postTown}</Text>
+						<Text>{trustee.address.postcode}</Text>
 					</Flex>
 				</Flex>
 				<Flex width="100%" flex="1 1 auto" flexDirection="column">
@@ -35,9 +36,9 @@ const Preview: React.FC = () => {
 					</Button>
 					<Flex mt={0} flexDirection="column">
 						<H4 fontWeight="bold">Phone</H4>
-						<Text>{state.telephoneNumber}</Text>
+						<Text>{trustee.telephoneNumber}</Text>
 						<H4 fontWeight="bold">Email</H4>
-						<Text>{state.emailAddress}</Text>
+						<Text>{trustee.emailAddress}</Text>
 					</Flex>
 				</Flex>
 			</StyledCardToolbar>
@@ -49,9 +50,12 @@ const Preview: React.FC = () => {
 				pt={2}
 			>
 				<Checkbox
-					value={state.complete}
-					checked={state.complete}
-					onChange={evt => onCorrect(!!Boolean(evt.target.value))}
+					value={complete}
+					checked={complete}
+					onChange={() => {
+						send('CORRECT', { value: !complete });
+						onCorrect(!complete);
+					}}
 					label="All details are correct"
 				/>
 			</Flex>

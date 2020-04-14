@@ -5,7 +5,8 @@ import { useTrusteeContext } from '../../../context';
 import { Footer } from '../../../components/card';
 
 const RemoveConfirm: React.FC = () => {
-	const { send } = useTrusteeContext();
+	const { current, send, onRemove } = useTrusteeContext();
+	const { leftTheScheme } = current.context;
 
 	return (
 		<Flex flex="1 1 auto" flexDirection="column">
@@ -21,7 +22,14 @@ const RemoveConfirm: React.FC = () => {
 				onContinue={{
 					title: 'Remove',
 					intent: 'danger',
-					fn: () => console.log('remove'),
+					fn: () =>
+						onRemove({
+							id: 'trustee_id_here',
+							reason: {
+								leftTheScheme: leftTheScheme ? true : false,
+								date: leftTheScheme,
+							},
+						}),
 				}}
 				onSave={{
 					title: 'Cancel',

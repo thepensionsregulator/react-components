@@ -14,8 +14,13 @@ const AutoComplete: React.FC<AutoCompleteProps> = ({ onClick, options }) => {
 	const state = current.context;
 
 	function onSubmit(values) {
-		send('SAVE', { values });
-		onSave({ ...state, ...values });
+		onSave({ ...state, ...values }).then(() => {
+			if (Object.values(values).length > 0) {
+				send('SAVE', { values });
+			} else {
+				Promise.reject('Address has not been selected...');
+			}
+		});
 	}
 
 	return (

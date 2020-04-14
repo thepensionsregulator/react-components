@@ -1,8 +1,8 @@
 import React from 'react';
 import { styled } from '@tpr/theming';
 import { Flex } from '../../layout';
-import { Button, Intent, Appearance } from '../../buttons';
-import { H3, H4 } from '../../typography';
+import { Button, Intent, Appearance, Spinner } from '../../buttons';
+import { H3, H4, P } from '../../typography';
 
 type StyledCardProps = { complete?: boolean };
 
@@ -57,14 +57,14 @@ type FooterProps = {
 		title?: string;
 		intent?: Intent;
 		appearance?: Appearance;
-		fn?: () => void;
+		fn?: (...args: any[]) => void;
 	};
 	onSave?: {
 		type?: 'button' | 'submit' | 'reset';
 		title?: string;
 		intent?: Intent;
 		appearance?: Appearance;
-		fn?: () => void;
+		fn?: (...args: any[]) => void;
 	};
 	isDisabled?: boolean;
 };
@@ -89,7 +89,14 @@ export const Footer: React.FC<FooterProps> = ({
 					onClick={onContinue.fn}
 					disabled={isDisabled}
 				>
-					{onContinue.title}
+					{isDisabled ? (
+						<Flex height="100%" alignItems="center">
+							<Spinner size={22} />
+							<P ml={0}>Saving...</P>
+						</Flex>
+					) : (
+						onContinue.title
+					)}
 				</Button>
 			)}
 			{onSave && (
@@ -101,7 +108,14 @@ export const Footer: React.FC<FooterProps> = ({
 					disabled={isDisabled}
 					ml={onContinue && 1}
 				>
-					{onSave.title}
+					{isDisabled ? (
+						<Flex height="100%" alignItems="center">
+							<Spinner size={22} />
+							<P ml={0}>Saving...</P>
+						</Flex>
+					) : (
+						onSave.title
+					)}
 				</Button>
 			)}
 		</Flex>
