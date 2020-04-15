@@ -5,25 +5,15 @@ import { useTrusteeContext } from '../../context';
 import { Footer } from '../../components/card';
 import { Form, renderFields, validate } from '@tpr/forms';
 import { Loading } from '../../components/loader';
-import useLoading from '../../../../hooks/use-loading';
 import fields from './fields';
 
 const ManualComplete = () => {
-	const [loading, setLoading] = useLoading();
-	const { current, send, onSave } = useTrusteeContext();
-	const { trustee } = current.context;
+	const { current, send } = useTrusteeContext();
+	const { trustee, loading } = current.context;
 
-	function onSubmit(values) {
-		setLoading(true);
-		onSave({ ...trustee, address: values })
-			.then(() => {
-				send('SAVE', { address: values });
-				setLoading(false);
-			})
-			.catch(() => {
-				setLoading(false);
-			});
-	}
+	const onSubmit = (values) => {
+		send('SAVE', { address: values });
+	};
 
 	return (
 		<Flex flexDirection="column">

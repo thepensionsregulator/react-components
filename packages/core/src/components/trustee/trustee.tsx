@@ -4,6 +4,7 @@ import { TrusteeProvider, useTrusteeContext, TrusteeProps } from './context';
 import { Flex } from '../layout';
 import { Text, H4, P } from '../typography';
 import { Button } from './components/button';
+import { CheckedCircle, ErrorCircle } from '@tpr/icons';
 import Preview from './views/preview';
 import Name from './views/name';
 import Type from './views/type';
@@ -11,25 +12,30 @@ import Address from './views/address';
 import Contacts from './views/contacts';
 import RemoveReason from './views/remove/reason';
 import RemoveConfirm from './views/remove/confirm';
+import { useTheme } from 'styled-components';
 
 // TODO: make responsive. Should contain 1 column on small screens and 2 on larger screens.
-
-// NOTE: each view should hold its own Form with state, and in the end it should sync state with *state machine*
-// otherwise submit wont work and might be bad for Accessibility
 
 const TrusteeBody: React.FC = () => {
 	const { current } = useTrusteeContext();
 	if (current.matches('preview')) {
 		return <Preview />;
-	} else if (current.matches({ edit: { trustee: 'trusteeName' } })) {
+	} else if (current.matches({ edit: { trustee: 'name' } })) {
 		return <Name />;
-	} else if (current.matches({ edit: { trustee: 'trusteeType' } })) {
+	} else if (
+		current.matches({ edit: { trustee: 'kind' } }) ||
+		current.matches({ edit: { trustee: 'save' } })
+	) {
 		return <Type />;
-	} else if (current.matches({ edit: 'companyAddress' })) {
+	} else if (
+		current.matches({ edit: { company: 'address' } }) ||
+		current.matches({ edit: { company: 'save' } })
+	) {
 		return <Address />;
-	} else if (current.matches({ edit: 'trusteeCompanyDetails' })) {
-		return <div>edit.trusteeCompanyDetails</div>;
-	} else if (current.matches({ edit: 'trusteeContacts' })) {
+	} else if (
+		current.matches({ edit: { contact: 'details' } }) ||
+		current.matches({ edit: { contact: 'save' } })
+	) {
 		return <Contacts />;
 	} else if (current.matches({ remove: 'reason' })) {
 		return <RemoveReason />;
@@ -38,6 +44,18 @@ const TrusteeBody: React.FC = () => {
 	} else {
 		return null;
 	}
+};
+
+const StatusMessage = ({ complete, icon: Icon }) => {
+	const { colors }: any = useTheme();
+	return (
+		<Flex alignItems="center" height="22px">
+			<Icon size={18} fill={colors[complete ? 'success' : 'danger'][200]} />
+			<P ml={0} fontSize={1} color={complete ? 'success.200' : 'danger.200'}>
+				{complete ? 'No issues' : 'Incomplete'}
+			</P>
+		</Flex>
+	);
 };
 
 export const Trustee: React.FC<Omit<TrusteeProps, 'children'>> = (props) => {
@@ -73,13 +91,14 @@ export const Trustee: React.FC<Omit<TrusteeProps, 'children'>> = (props) => {
 							</Flex>
 						</Flex>
 						<Flex width="100%" justifyContent="flex-end" p={[null, 2]}>
-							<P
-								fontSize={1}
-								lineHeight="22px"
-								color={context.complete ? `success.200` : `danger.200`}
-							>
-								{context.complete ? `No issues` : `Incomplete`}
-							</P>
+							{context.complete ? (
+								<StatusMessage
+									complete={context.complete}
+									icon={CheckedCircle}
+								/>
+							) : (
+								<StatusMessage complete={context.complete} icon={ErrorCircle} />
+							)}
 							<Flex
 								width="84px"
 								ml={1}

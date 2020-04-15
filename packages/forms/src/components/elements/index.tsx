@@ -148,7 +148,7 @@ export const Flex = styled('div').attrs(() => ({
 }))<FlexProps>(compose(flexbox, space, layout, typography, color, border));
 
 const fontStack = css`
-	font-family: ${({ theme }) => theme.fonts.sansSerif};
+	font-family: ${({ theme }) => theme.fonts.serif};
 `;
 
 export interface HtmlHTagTypes

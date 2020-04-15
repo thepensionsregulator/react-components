@@ -92,8 +92,11 @@ export const TrusteeProvider = ({
 				},
 			},
 		},
-		actions: {
-			save: onSave,
+		services: {
+			saveData: ({ trustee }, _) => {
+				const { address, ...details } = trustee;
+				return onSave({ ...details, ...address });
+			},
 		},
 	});
 
