@@ -7,13 +7,23 @@ interface TrusteeStates {
 			states: {
 				trustee: {
 					states: {
-						trusteeName: {};
-						trusteeType: {};
+						name: {};
+						kind: {};
+						save: {};
 					};
 				};
-				companyAddress: {};
-				trusteeCompanyDetails: {};
-				trusteeContacts: {};
+				company: {
+					states: {
+						address: {};
+						save: {};
+					};
+				};
+				contact: {
+					states: {
+						details: {};
+						save: {};
+					};
+				};
 			};
 		};
 		remove: {
@@ -28,125 +38,155 @@ interface TrusteeStates {
 type TrusteeEvents = any;
 
 export interface TrusteeContext {
+	loading: boolean;
 	complete: boolean;
-	//
-	schemeRoleId: string;
-	//
-	title: string;
-	forename: string;
-	surname: string;
-	trusteeType: string;
-	isProfessionalTrustee: boolean;
-	//
-	address: {
-		addressLine1: string;
-		addressLine2: string;
-		addressLine3: string;
-		postTown: string;
-		postcode: string;
-		county: string;
-		countryId: string;
+	leftTheScheme: null | String;
+	trustee: {
+		schemeRoleId: string;
+		//
+		title: string;
+		forename: string;
+		surname: string;
+		trusteeType: string;
+		isProfessionalTrustee: boolean;
+		//
+		address: {
+			addressLine1: string;
+			addressLine2: string;
+			addressLine3: string;
+			postTown: string;
+			postcode: string;
+			county: string;
+			countryId: string;
+		};
+		//
+		telephoneNumber: string;
+		emailAddress: string;
 	};
-	//
-	telephoneNumber: string;
-	emailAddress: string;
 }
 
 const trusteeMachine = Machine<TrusteeContext, TrusteeStates, TrusteeEvents>({
 	id: 'trustee',
 	initial: 'preview',
 	context: {
+		loading: false,
 		complete: false,
-		//
-		schemeRoleId: '',
-		//
-		title: '',
-		forename: '',
-		surname: '',
-		trusteeType: '',
-		isProfessionalTrustee: false,
-		//
-		address: {
-			addressLine1: '',
-			addressLine2: '',
-			addressLine3: '',
-			postTown: '',
-			postcode: '',
-			county: '',
-			countryId: '',
+		leftTheScheme: null,
+		trustee: {
+			schemeRoleId: '',
+			//
+			title: '',
+			forename: '',
+			surname: '',
+			trusteeType: '',
+			isProfessionalTrustee: false,
+			//
+			address: {
+				addressLine1: '',
+				addressLine2: '',
+				addressLine3: '',
+				postTown: '',
+				postcode: '',
+				county: '',
+				countryId: '',
+			},
+			//
+			telephoneNumber: '',
+			emailAddress: '',
 		},
-		//
-		telephoneNumber: '',
-		emailAddress: '',
 	},
 	states: {
 		preview: {
 			id: 'preview',
 			on: {
-				EDIT_TRUSTEE: 'edit.trustee.trusteeName',
-				EDIT_ORG: 'edit.companyAddress',
-				EDIT_CONTACTS: 'edit.trusteeContacts',
+				EDIT_TRUSTEE: 'edit.trustee.name',
+				EDIT_ORG: 'edit.company.address',
+				EDIT_CONTACTS: 'edit.contact.details',
 				REMOVE: 'remove',
+				COMPLETE: {
+					actions: assign((_: any, event: any) => ({
+						complete: event.value,
+					})),
+				},
 			},
 		},
 		edit: {
 			initial: 'trustee',
 			states: {
 				trustee: {
-					initial: 'trusteeName',
+					initial: 'name',
 					states: {
-						trusteeName: {
-							id: 'trusteeName',
+						name: {
+							id: 'name',
 							on: {
 								NEXT: {
-									target: 'trusteeType',
+									target: 'kind',
 									actions: assign((context: any, event: any) => ({
-										...context,
-										...event.values,
+										trustee: {
+											...context.trustee,
+											...event.values,
+										},
 									})),
 								},
 							},
 						},
-						trusteeType: {
+						kind: {
 							on: {
 								SAVE: {
-									target: '#preview',
+									target: 'save',
 									actions: assign((context, event) => ({
-										...context,
-										...event.values,
+										loading: true,
+										trustee: {
+											...context.trustee,
+											...event.values,
+										},
 									})),
 								},
-								BACK: 'trusteeName',
+								BACK: 'name',
 							},
 						},
+						save: saveTrustee('#preview'),
 					},
 				},
-				companyAddress: {
-					id: 'companyAddress',
-					on: {
-						INCORRECT: 'trusteeCompanyDetails',
-						SAVE: {
-							target: '#preview',
-							actions: assign((_, event) => ({
-								address: event.values,
-							})),
+				company: {
+					initial: 'address',
+					states: {
+						address: {
+							id: 'address',
+							on: {
+								SAVE: {
+									target: 'save',
+									actions: assign((context, event) => ({
+										loading: true,
+										trustee: {
+											...context.trustee,
+											address: event.address,
+										},
+									})),
+								},
+							},
 						},
+						save: saveTrustee('#preview'),
 					},
 				},
-				trusteeCompanyDetails: {
-					on: {
-						COMPLETE: '#companyAddress',
-					},
-				},
-				trusteeContacts: {
-					on: {
-						SAVE: {
-							target: '#preview',
-							actions: assign((context, event) => ({
-								...context,
-								...event.values,
-							})),
+				contact: {
+					initial: 'details',
+					states: {
+						details: {
+							on: {
+								SAVE: {
+									target: 'save',
+									actions: assign((context, event) => ({
+										loading: true,
+										trustee: {
+											...context.trustee,
+											...event.values,
+										},
+									})),
+								},
+							},
 						},
+						save: saveTrustee('#preview'),
 					},
 				},
 			},
@@ -156,7 +196,14 @@ const trusteeMachine = Machine<TrusteeContext, TrusteeStates, TrusteeEvents>({
 			states: {
 				reason: {
 					on: {
-						SELECT: 'confirm',
+						SELECT: {
+							target: 'confirm',
+							actions: assign((_, event) => {
+								return {
+									leftTheScheme: event.date,
+								};
+							}),
+						},
 						CANCEL: '#preview',
 					},
 				},
@@ -169,5 +216,30 @@ const trusteeMachine = Machine<TrusteeContext, TrusteeStates, TrusteeEvents>({
 		},
 	},
 });
+
+function saveTrustee(onErrorTarget: string) {
+	return {
+		invoke: {
+			src: 'saveData',
+			onDone: {
+				target: '#preview',
+				actions: assign((ctx: any, event: any) => ({
+					loading: false,
+					trustee: {
+						...ctx.trustee,
+						...event.data,
+					},
+				})),
+			},
+			onError: {
+				target: onErrorTarget,
+				actions: assign((ctx: any) => ({
+					...ctx,
+					loading: false,
+				})),
+			},
+		},
+	};
+}
 
 export default trusteeMachine;

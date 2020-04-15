@@ -2,25 +2,26 @@ import React from 'react';
 import { Flex } from '../../../layout';
 import { useTrusteeContext } from '../../context';
 import { Toolbar, Footer } from '../../components/card';
+import { Loading } from '../../components/loader';
 import { Form, validate, FFInputText } from '@tpr/forms';
 
 const Contacts: React.FC = () => {
-	const { current, send, onSave } = useTrusteeContext();
-	const state = current.context;
+	const { current, send } = useTrusteeContext();
+	const { trustee, loading } = current.context;
 
-	const onSubmit = values => {
+	const onSubmit = (values) => {
 		send('SAVE', { values });
-		onSave({ ...state, ...values });
 	};
 
 	return (
 		<Flex flex="1 1 auto" flexDirection="column">
+			{loading && <Loading />}
 			<Toolbar title="Contact details for this trustee" />
 			<Form
 				onSubmit={onSubmit}
 				initialValues={{
-					telephoneNumber: state.telephoneNumber,
-					emailAddress: state.emailAddress,
+					telephoneNumber: trustee.telephoneNumber,
+					emailAddress: trustee.emailAddress,
 				}}
 				validate={validate([
 					{
@@ -52,6 +53,7 @@ const Contacts: React.FC = () => {
 							/>
 						</Flex>
 						<Footer
+							isDisabled={loading}
 							onSave={{
 								type: 'submit',
 								title: 'Save and close',
