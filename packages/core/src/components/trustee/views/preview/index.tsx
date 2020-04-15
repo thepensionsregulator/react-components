@@ -23,7 +23,7 @@ const Preview: React.FC = () => {
 						Correspondence address {'>'}
 					</Button>
 					<Flex mt={0} flexDirection="column">
-						<H4 fontWeight="bold">{trustee.address.addressLine1}</H4>
+						<H4>{trustee.address.addressLine1}</H4>
 						<Text>{trustee.address.addressLine2}</Text>
 						<Text>{trustee.address.addressLine3}</Text>
 						<Text>{trustee.address.postTown}</Text>
@@ -35,9 +35,9 @@ const Preview: React.FC = () => {
 						Contact details {'>'}
 					</Button>
 					<Flex mt={0} flexDirection="column">
-						<H4 fontWeight="bold">Phone</H4>
+						<H4>Phone</H4>
 						<Text>{trustee.telephoneNumber}</Text>
-						<H4 fontWeight="bold">Email</H4>
+						<H4>Email</H4>
 						<Text>{trustee.emailAddress}</Text>
 					</Flex>
 				</Flex>

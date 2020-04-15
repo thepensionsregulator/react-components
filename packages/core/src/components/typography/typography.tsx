@@ -59,7 +59,7 @@ export const H3 = styled.h3<HtmlHTagTypes>`
 export const H4 = styled.h4<HtmlHTagTypes>`
 	${fontStack};
 
-	font-weight: ${({ theme }) => theme.fontWeights[1]};
+	font-weight: ${({ theme }) => theme.fontWeights[2]};
 	font-size: ${({ theme }) => theme.fontSizes[2]}px;
 	letter-spacing: 0.4px;
 	margin: 0;
@@ -102,7 +102,7 @@ export const P = styled.p<HtmlHTagTypes>`
 	${fontStack};
 
 	font-weight: ${({ theme }) => theme.fontWeights[1]};
-	font-size: ${({ theme }) => theme.fontSizes[2]}px;
+	font-size: ${({ theme }) => theme.fontSizes[1]}px;
 	letter-spacing: 0.9px;
 	line-height: 1.4;
 	margin: 0;

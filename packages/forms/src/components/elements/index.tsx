@@ -35,7 +35,7 @@ export const ErrorMessage = styled('div')`
 interface FormLabelTextProps extends SpaceProps {}
 export const FormLabelText = styled('div')<FormLabelTextProps>`
 	color: ${({ theme }) => theme.colors.neutral[900]};
-	font-weight: ${({ theme }) => theme.fontWeights[2]};
+	font-weight: ${({ theme }) => theme.fontWeights[1]};
 	font-size: ${({ theme }) => theme.fontSizes[2]}px;
 	margin-bottom: ${({ theme }) => theme.space[0]}px;
 	white-space: nowrap;

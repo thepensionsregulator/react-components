@@ -64,7 +64,7 @@ export const Trustee: React.FC<Omit<TrusteeProps, 'children'>> = (props) => {
 			{({ current: { context, matches }, send }) => (
 				<StyledCard data-testid={props.testId} complete={context.complete}>
 					<StyledCardToolbar>
-						<Flex width="100%" flexDirection="column" mr="40px" p={[2]}>
+						<Flex width="100%" flexDirection="column" mr="40px" pl={2} py={2}>
 							<Button
 								onClick={() => send('EDIT_TRUSTEE')}
 								disabled={!matches('preview')}
@@ -72,7 +72,7 @@ export const Trustee: React.FC<Omit<TrusteeProps, 'children'>> = (props) => {
 								Trustee {'>'}
 							</Button>
 							<Flex mt={0} flexDirection="column">
-								<H4 fontWeight="bold">
+								<H4>
 									{[
 										context.trustee.title,
 										context.trustee.forename,
@@ -100,7 +100,7 @@ export const Trustee: React.FC<Omit<TrusteeProps, 'children'>> = (props) => {
 								<StatusMessage complete={context.complete} icon={ErrorCircle} />
 							)}
 							<Flex
-								width="84px"
+								width="100px"
 								ml={1}
 								pl={1}
 								borderLeft="1px solid"
