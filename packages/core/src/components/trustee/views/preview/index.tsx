@@ -53,7 +53,7 @@ const Preview: React.FC = () => {
 					value={complete}
 					checked={complete}
 					onChange={() => {
-						send('CORRECT', { value: !complete });
+						send('COMPLETE', { value: !complete });
 						onCorrect(!complete);
 					}}
 					label="All details are correct"

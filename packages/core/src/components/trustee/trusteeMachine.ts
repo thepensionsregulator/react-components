@@ -93,8 +93,7 @@ const trusteeMachine = Machine<TrusteeContext, TrusteeStates, TrusteeEvents>({
 				EDIT_ORG: 'edit.companyAddress',
 				EDIT_CONTACTS: 'edit.trusteeContacts',
 				REMOVE: 'remove',
-				CORRECT: {
-					target: 'preview',
+				COMPLETE: {
 					actions: assign((_: any, event: any) => ({
 						complete: event.value,
 					})),
@@ -133,6 +132,11 @@ const trusteeMachine = Machine<TrusteeContext, TrusteeStates, TrusteeEvents>({
 									})),
 								},
 								BACK: 'trusteeName',
+								LOADING: {
+									actions: assign((_, event) => ({
+										loading: event.loading,
+									})),
+								},
 							},
 						},
 					},

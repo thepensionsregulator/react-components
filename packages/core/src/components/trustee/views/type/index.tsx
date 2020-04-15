@@ -13,11 +13,11 @@ const Type: React.FC = () => {
 	const { current, send, onSave } = useTrusteeContext();
 	const { trustee } = current.context;
 
-	async function onSubmit(values) {
+	function onSubmit(values) {
 		const isProfessionalTrustee =
 			values.isProfessionalTrustee === 'yes' ? true : false;
 		setLoading(true);
-		await onSave({
+		onSave({
 			...trustee,
 			address: values,
 			isProfessionalTrustee,
