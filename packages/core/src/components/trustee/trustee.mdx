@@ -30,7 +30,7 @@ import { Trustee } from '@tpr/core';
 		const onSave = (ms) => new Promise((res) => setTimeout(res, ms));
 		return (
 			<Trustee
-				onSave={() => onSave(2500)}
+				onSave={(values) => onSave(2500).then(() => console.log(values))}
 				onRemove={console.log}
 				onCorrect={(value) => setComplete(value)}
 				addressAPI={{

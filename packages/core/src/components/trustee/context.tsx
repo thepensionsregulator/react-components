@@ -62,6 +62,7 @@ export const TrusteeProvider = ({
 	trustee,
 	complete,
 	children,
+	onSave,
 	...rest
 }: TrusteeProps) => {
 	const {
@@ -91,14 +92,20 @@ export const TrusteeProvider = ({
 				},
 			},
 		},
+		services: {
+			saveData: ({ trustee }, _) => {
+				const { address, ...details } = trustee;
+				return onSave({ ...details, ...address });
+			},
+		},
 	});
 
 	const ui =
 		typeof children === 'function'
-			? children({ current, send, ...rest })
+			? children({ current, send, onSave, ...rest })
 			: children;
 	return (
-		<TrusteeContext.Provider value={{ current, send, ...rest }}>
+		<TrusteeContext.Provider value={{ current, send, onSave, ...rest }}>
 			{ui}
 		</TrusteeContext.Provider>
 	);

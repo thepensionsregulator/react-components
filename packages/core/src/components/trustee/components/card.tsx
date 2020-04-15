@@ -42,11 +42,12 @@ export const Toolbar: React.FC<ToolbarProps> = ({ title }) => {
 			flexDirection="column"
 			borderBottom="1px solid"
 			borderColor="neutral.200"
+			mt={3}
 			mb={2}
 			pb={1}
 		>
 			<H4 color="neutral.300">Edit trustee</H4>
-			<H3 fontWeight="bold">{title}</H3>
+			<H3 fontWeight={2}>{title}</H3>
 		</Flex>
 	);
 };

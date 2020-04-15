@@ -6,36 +6,20 @@ import { Footer } from '../../components/card';
 import { Toolbar } from '../../components/card';
 import { Form, FFRadioButton } from '@tpr/forms';
 import { Loading } from '../../components/loader';
-import useLoading from '../../../../hooks/use-loading';
 
 const Type: React.FC = () => {
-	const [loading, setLoading] = useLoading(false);
-	const { current, send, onSave } = useTrusteeContext();
-	const { trustee } = current.context;
+	const { current, send } = useTrusteeContext();
+	const { trustee, loading } = current.context;
 
-	async function onSubmit(values) {
-		const isProfessionalTrustee =
-			values.isProfessionalTrustee === 'yes' ? true : false;
-		setLoading(true);
-		await onSave({
-			...trustee,
-			address: values,
-			isProfessionalTrustee,
-		})
-			.then(() => {
-				send('SAVE', {
-					values: {
-						...values,
-						isProfessionalTrustee,
-					},
-				});
-				setLoading(false);
-			})
-			.catch((err) => {
-				console.log(err);
-				setLoading(false);
-			});
-	}
+	const onSubmit = (values) => {
+		send('SAVE', {
+			values: {
+				...values,
+				isProfessionalTrustee:
+					values.isProfessionalTrustee === 'yes' ? true : false,
+			},
+		});
+	};
 
 	return (
 		<Flex flex="1 1 auto" flexDirection="column">

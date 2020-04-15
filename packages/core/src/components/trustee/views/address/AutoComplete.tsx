@@ -10,18 +10,16 @@ type AutoCompleteProps = {
 	options: any;
 };
 const AutoComplete: React.FC<AutoCompleteProps> = ({ onClick, options }) => {
-	const { current, send, onSave } = useTrusteeContext();
-	const state = current.context;
+	const { current, send } = useTrusteeContext();
+	const { loading } = current.context;
 
-	function onSubmit(values) {
-		onSave({ ...state, ...values }).then(() => {
-			if (Object.values(values).length > 0) {
-				send('SAVE', { values });
-			} else {
-				Promise.reject('Address has not been selected...');
-			}
-		});
-	}
+	const onSubmit = (values) => {
+		if (Object.values(values).length > 0) {
+			send('SAVE', { values });
+		} else {
+			Promise.reject('Address has not been selected...');
+		}
+	};
 
 	return (
 		<Flex flexDirection="column">
@@ -37,6 +35,7 @@ const AutoComplete: React.FC<AutoCompleteProps> = ({ onClick, options }) => {
 							I can't find my address in the list
 						</Button>
 						<Footer
+							isDisabled={loading}
 							onSave={{
 								type: 'submit',
 								title: 'Save and close',

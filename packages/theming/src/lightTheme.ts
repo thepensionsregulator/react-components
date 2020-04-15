@@ -38,12 +38,12 @@ const lightTheme = {
 		},
 	},
 	fonts: {
-		serif: "'Open Sans Regular', 'Open Sans', sans-serif",
-		sansSerif: "'Open Sans Regular', 'Open Sans', sans-serif",
+		serif: "'Open Sans', sans-serif",
+		// sansSerif: "'Open Sans Regular', 'Open Sans', sans-serif",
 	},
 	space: [10, 15, 20, 25, 30, 40, 50, 60],
-	fontSizes: [12, 14, 16, 22, 30, 36],
-	fontWeights: [300, 400, 500, 700],
+	fontSizes: [14, 16, 18, 23, 36, 45],
+	fontWeights: [300, 400, 600],
 	breakpoints,
 	mediaQueries: {
 		xs: responsive(breakpoints[0]),

@@ -4,23 +4,13 @@ import { useTrusteeContext } from '../../context';
 import { Toolbar, Footer } from '../../components/card';
 import { Loading } from '../../components/loader';
 import { Form, validate, FFInputText } from '@tpr/forms';
-import useLoading from '../../../../hooks/use-loading';
 
 const Contacts: React.FC = () => {
-	const [loading, setLoading] = useLoading();
-	const { current, send, onSave } = useTrusteeContext();
-	const state = current.context.trustee;
+	const { current, send } = useTrusteeContext();
+	const { trustee, loading } = current.context;
 
 	const onSubmit = (values) => {
-		setLoading(true);
-		onSave({ ...state, ...values })
-			.then(() => {
-				setLoading(false);
-				send('SAVE', { values });
-			})
-			.catch(() => {
-				setLoading(false);
-			});
+		send('SAVE', { values });
 	};
 
 	return (
@@ -30,8 +20,8 @@ const Contacts: React.FC = () => {
 			<Form
 				onSubmit={onSubmit}
 				initialValues={{
-					telephoneNumber: state.telephoneNumber,
-					emailAddress: state.emailAddress,
+					telephoneNumber: trustee.telephoneNumber,
+					emailAddress: trustee.emailAddress,
 				}}
 				validate={validate([
 					{

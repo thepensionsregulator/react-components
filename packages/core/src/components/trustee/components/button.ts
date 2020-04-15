@@ -7,6 +7,7 @@ export const Button = styled('button')`
 	border: none;
 	color: ${({ theme }) => theme.colors.primary[200]};
 	border-bottom: 2px solid ${({ theme }) => theme.colors.primary[200]};
+	padding: 0 0 4px 2px;
 
 	width: 100%;
 	height: ${({ theme }) => theme.space[3]}px;

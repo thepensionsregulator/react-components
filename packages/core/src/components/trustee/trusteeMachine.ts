@@ -7,13 +7,23 @@ interface TrusteeStates {
 			states: {
 				trustee: {
 					states: {
-						trusteeName: {};
-						trusteeType: {};
+						name: {};
+						kind: {};
+						save: {};
 					};
 				};
-				companyAddress: {};
-				trusteeCompanyDetails: {};
-				trusteeContacts: {};
+				company: {
+					states: {
+						address: {};
+						save: {};
+					};
+				};
+				contact: {
+					states: {
+						details: {};
+						save: {};
+					};
+				};
 			};
 		};
 		remove: {
@@ -89,12 +99,11 @@ const trusteeMachine = Machine<TrusteeContext, TrusteeStates, TrusteeEvents>({
 		preview: {
 			id: 'preview',
 			on: {
-				EDIT_TRUSTEE: 'edit.trustee.trusteeName',
-				EDIT_ORG: 'edit.companyAddress',
-				EDIT_CONTACTS: 'edit.trusteeContacts',
+				EDIT_TRUSTEE: 'edit.trustee.name',
+				EDIT_ORG: 'edit.company.address',
+				EDIT_CONTACTS: 'edit.contact.details',
 				REMOVE: 'remove',
-				CORRECT: {
-					target: 'preview',
+				COMPLETE: {
 					actions: assign((_: any, event: any) => ({
 						complete: event.value,
 					})),
@@ -105,13 +114,13 @@ const trusteeMachine = Machine<TrusteeContext, TrusteeStates, TrusteeEvents>({
 			initial: 'trustee',
 			states: {
 				trustee: {
-					initial: 'trusteeName',
+					initial: 'name',
 					states: {
-						trusteeName: {
-							id: 'trusteeName',
+						name: {
+							id: 'name',
 							on: {
 								NEXT: {
-									target: 'trusteeType',
+									target: 'kind',
 									actions: assign((context: any, event: any) => ({
 										trustee: {
 											...context.trustee,
@@ -121,53 +130,63 @@ const trusteeMachine = Machine<TrusteeContext, TrusteeStates, TrusteeEvents>({
 								},
 							},
 						},
-						trusteeType: {
+						kind: {
 							on: {
 								SAVE: {
-									target: '#preview',
+									target: 'save',
 									actions: assign((context, event) => ({
+										loading: true,
 										trustee: {
 											...context.trustee,
 											...event.values,
 										},
 									})),
 								},
-								BACK: 'trusteeName',
+								BACK: 'name',
 							},
 						},
+						save: saveTrustee('#preview'),
 					},
 				},
-				companyAddress: {
-					id: 'companyAddress',
-					on: {
-						INCORRECT: 'trusteeCompanyDetails',
-						SAVE: {
-							target: '#preview',
-							actions: assign((context, event) => ({
-								trustee: {
-									...context.trustee,
-									address: event.address,
+				company: {
+					initial: 'address',
+					states: {
+						address: {
+							id: 'address',
+							on: {
+								SAVE: {
+									target: 'save',
+									actions: assign((context, event) => ({
+										loading: true,
+										trustee: {
+											...context.trustee,
+											address: event.address,
+										},
+									})),
 								},
-							})),
+							},
 						},
+						save: saveTrustee('#preview'),
 					},
 				},
-				trusteeCompanyDetails: {
-					on: {
-						COMPLETE: '#companyAddress',
-					},
-				},
-				trusteeContacts: {
-					on: {
-						SAVE: {
-							target: '#preview',
-							actions: assign((context, event) => ({
-								trustee: {
-									...context.trustee,
-									...event.values,
+				contact: {
+					initial: 'details',
+					states: {
+						details: {
+							on: {
+								SAVE: {
+									target: 'save',
+									actions: assign((context, event) => ({
+										loading: true,
+										trustee: {
+											...context.trustee,
+											...event.values,
+										},
+									})),
 								},
-							})),
+							},
 						},
+						save: saveTrustee('#preview'),
 					},
 				},
 			},
@@ -197,5 +216,30 @@ const trusteeMachine = Machine<TrusteeContext, TrusteeStates, TrusteeEvents>({
 		},
 	},
 });
+
+function saveTrustee(onErrorTarget: string) {
+	return {
+		invoke: {
+			src: 'saveData',
+			onDone: {
+				target: '#preview',
+				actions: assign((ctx: any, event: any) => ({
+					loading: false,
+					trustee: {
+						...ctx.trustee,
+						...event.data,
+					},
+				})),
+			},
+			onError: {
+				target: onErrorTarget,
+				actions: assign((ctx: any) => ({
+					...ctx,
+					loading: false,
+				})),
+			},
+		},
+	};
+}
 
 export default trusteeMachine;
