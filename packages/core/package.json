@@ -48,7 +48,7 @@
 		"qs": "^6.9.1",
 		"react-final-form": "^6.3.5",
 		"tslib": "^1.11.1",
-		"xstate": "^4.7.8"
+		"xstate": "^4.9.0"
 	},
 	"publishConfig": {
 		"access": "public"
@@ -56,6 +56,6 @@
 	"gitHead": "57aec9c9de22596d6343bae07eb6b198322a0bee",
 	"devDependencies": {
 		"cross-env": "^7.0.0",
-		"typescript": "3.7.5"
+		"typescript": "^3.8.3"
 	}
 }
