@@ -3,7 +3,7 @@ import { Flex } from '../../../layout';
 import { Text, H4 } from '../../../typography';
 import { useTrusteeContext } from '../../context';
 import { Checkbox } from '@tpr/forms';
-import { Button } from '../../components/button';
+import { UnderlinedButton } from '../../components/button';
 import { StyledCardToolbar } from '../../components/card';
 
 const Preview: React.FC = () => {
@@ -19,9 +19,9 @@ const Preview: React.FC = () => {
 					flexDirection="column"
 					mr={[null, '40px']}
 				>
-					<Button onClick={() => send('EDIT_ORG')}>
-						Correspondence address {'>'}
-					</Button>
+					<UnderlinedButton onClick={() => send('EDIT_ORG')}>
+						Correspondence address
+					</UnderlinedButton>
 					<Flex mt={0} flexDirection="column">
 						<H4>{trustee.address.addressLine1}</H4>
 						<Text>{trustee.address.addressLine2}</Text>
@@ -31,9 +31,9 @@ const Preview: React.FC = () => {
 					</Flex>
 				</Flex>
 				<Flex width="100%" flex="1 1 auto" flexDirection="column">
-					<Button onClick={() => send('EDIT_CONTACTS')}>
-						Contact details {'>'}
-					</Button>
+					<UnderlinedButton onClick={() => send('EDIT_CONTACTS')}>
+						Contact details
+					</UnderlinedButton>
 					<Flex mt={0} flexDirection="column">
 						<H4>Phone</H4>
 						<Text>{trustee.telephoneNumber}</Text>
