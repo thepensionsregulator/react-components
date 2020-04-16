@@ -66,8 +66,19 @@ export const Trustee: React.FC<Omit<TrusteeProps, 'children'>> = (props) => {
 					<StyledCardToolbar>
 						<Flex width="100%" flexDirection="column" mr="40px" pl={2} py={2}>
 							<Button
-								onClick={() => send('EDIT_TRUSTEE')}
-								disabled={!matches('preview')}
+								onClick={() => {
+									if (
+										matches({ edit: { trustee: 'name' } }) ||
+										matches({ edit: { trustee: 'kind' } }) ||
+										matches({ edit: { company: 'address' } }) ||
+										matches({ edit: { contact: 'details' } })
+									) {
+										send('CANCEL');
+									} else {
+										send('EDIT_TRUSTEE');
+									}
+								}}
+								disabled={context.loading}
 							>
 								Trustee {'>'}
 							</Button>
@@ -107,8 +118,17 @@ export const Trustee: React.FC<Omit<TrusteeProps, 'children'>> = (props) => {
 								borderColor="neutral.200"
 							>
 								<Button
-									onClick={() => send('REMOVE')}
-									disabled={!matches('preview')}
+									onClick={() => {
+										if (
+											matches({ remove: 'reason' }) ||
+											matches({ remove: 'confirm' })
+										) {
+											send('CANCEL');
+										} else {
+											send('REMOVE');
+										}
+									}}
+									disabled={context.loading}
 								>
 									Remove {'>'}
 								</Button>
