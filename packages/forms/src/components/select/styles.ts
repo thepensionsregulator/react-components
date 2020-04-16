@@ -95,8 +95,12 @@ export const PopupButton = styled('div')<PopupButtonProps>`
 	}
 `;
 
-export const InputWrapper = styled('div')`
+type InputWrapperProps = {
+	maxWidth?: number;
+};
+export const InputWrapper = styled('div')<InputWrapperProps>`
 	position: relative;
+	max-width: ${({ maxWidth }) => maxWidth && `${maxWidth}px`};
 `;
 
 export const IconPlacement = styled('div')`

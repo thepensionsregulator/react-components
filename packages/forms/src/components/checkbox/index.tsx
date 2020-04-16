@@ -21,7 +21,7 @@ type CheckboxIconProps = {
 	value?: any;
 };
 
-export const Checkbox: React.FC<CheckboxIconProps> = props => {
+export const Checkbox: React.FC<CheckboxIconProps> = (props) => {
 	return (
 		<ElementPlaceholder>
 			<StyledLabel alignItems="center">
@@ -39,7 +39,11 @@ export const Checkbox: React.FC<CheckboxIconProps> = props => {
 							: null
 					}
 				>
-					{props.checked ? <CheckboxChecked /> : <CheckboxBlank />}
+					{props.checked ? (
+						<CheckboxChecked width="36px" />
+					) : (
+						<CheckboxBlank width="36px" />
+					)}
 					<StyledHiddenInput
 						type="checkbox"
 						id={props.id}
@@ -61,7 +65,7 @@ export const Checkbox: React.FC<CheckboxIconProps> = props => {
 type FFRenderCheckboxProps = Partial<
 	FieldRenderProps<string> & FieldProps & CheckboxIconProps
 >;
-export const FFCheckbox: React.FC<FieldProps> = fieldProps => {
+export const FFCheckbox: React.FC<FieldProps> = (fieldProps) => {
 	return (
 		<Field
 			{...fieldProps}

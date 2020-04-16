@@ -5,7 +5,7 @@ route: /forms/number
 ---
 
 import { Playground } from 'docz';
-import { Form } from '../../utils/forms'
+import { Form } from '../../utils/forms';
 import { FFInputNumber } from './index';
 
 # Number Input
@@ -13,7 +13,7 @@ import { FFInputNumber } from './index';
 ## Usage
 
 ```js
-import { FFInputNumber } from '@tpr/forms'
+import { FFInputNumber } from '@tpr/forms';
 ```
 
 ## Usage
@@ -31,11 +31,12 @@ CodeSandbox
 <Playground>
 	<Form onSubmit={console.log}>
 		{({ handleSubmit }) => (
-			<form onSubmit={handleSubmit} style={{ width: 400, padding: 10 }}>
+			<form onSubmit={handleSubmit} style={{ padding: 10 }}>
 				<FFInputNumber
 					name="number-of-days"
 					type="number"
-					validate={value => (value ? undefined : 'Cannot be empty')}
+					inputWidth={400}
+					validate={(value) => (value ? undefined : 'Cannot be empty')}
 					label="Number of days"
 					hint="Must be between 0 and 100"
 				/>
