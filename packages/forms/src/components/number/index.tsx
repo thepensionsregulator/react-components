@@ -11,6 +11,7 @@ export const InputNumber: React.FC<FieldRenderProps<string> & FieldProps> = ({
 	input,
 	testId,
 	meta,
+	inputWidth,
 	...props
 }) => {
 	return (
@@ -27,6 +28,7 @@ export const InputNumber: React.FC<FieldRenderProps<string> & FieldProps> = ({
 			<StyledInput
 				aria-label={label}
 				data-testid={testId}
+				maxWidth={inputWidth}
 				meta={meta}
 				{...input}
 				{...props}
@@ -38,6 +40,6 @@ export const InputNumber: React.FC<FieldRenderProps<string> & FieldProps> = ({
 	);
 };
 
-export const FFInputNumber: React.FC<FieldProps> = fieldProps => {
+export const FFInputNumber: React.FC<FieldProps> = (fieldProps) => {
 	return <Field {...fieldProps} component={InputNumber} />;
 };

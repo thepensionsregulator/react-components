@@ -24,7 +24,7 @@ type RadioButtonProps = {
 	[key: string]: any;
 };
 
-export const RadioButton: React.FC<RadioButtonProps> = props => {
+export const RadioButton: React.FC<RadioButtonProps> = (props) => {
 	return (
 		<ElementPlaceholder>
 			<StyledLabel alignItems="center">
@@ -38,7 +38,11 @@ export const RadioButton: React.FC<RadioButtonProps> = props => {
 								: null
 						}
 					>
-						{props.checked ? <RadioButtonChecked /> : <RadioButtonUnchecked />}
+						{props.checked ? (
+							<RadioButtonChecked width="36px" />
+						) : (
+							<RadioButtonUnchecked width="36px" />
+						)}
 						<StyledHiddenInput
 							type="radio"
 							id={props.id}
@@ -68,7 +72,7 @@ export const RadioButton: React.FC<RadioButtonProps> = props => {
 type FFRenderRadioButtonProps = Partial<
 	FieldRenderProps<string> & FieldProps & RadioButtonProps
 >;
-export const FFRadioButton: React.FC<FieldProps> = fieldProps => {
+export const FFRadioButton: React.FC<FieldProps> = (fieldProps) => {
 	return (
 		<Field
 			type="radio"

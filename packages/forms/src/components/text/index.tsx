@@ -13,6 +13,7 @@ export const InputText: React.FC<FieldRenderProps<string> & FieldProps> = ({
 	input,
 	testId,
 	meta,
+	inputWidth,
 	...props
 }) => {
 	return (
@@ -31,6 +32,7 @@ export const InputText: React.FC<FieldRenderProps<string> & FieldProps> = ({
 				data-testid={testId}
 				aria-label={label}
 				meta={meta}
+				maxWidth={inputWidth}
 				{...input}
 				{...props}
 			/>
@@ -38,6 +40,6 @@ export const InputText: React.FC<FieldRenderProps<string> & FieldProps> = ({
 	);
 };
 
-export const FFInputText: React.FC<FieldProps> = fieldProps => {
+export const FFInputText: React.FC<FieldProps> = (fieldProps) => {
 	return <Field {...fieldProps} component={InputText} />;
 };

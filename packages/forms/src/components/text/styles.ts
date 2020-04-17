@@ -3,10 +3,12 @@ import { styled } from '@tpr/theming';
 interface StyledInputProps {
 	meta?: any;
 	padding?: number;
+	maxWidth?: number;
 }
 export const StyledInput = styled('input')<StyledInputProps>`
 	display: flex;
 	width: 100%;
+	max-width: ${({ maxWidth }) => maxWidth && `${maxWidth}px`};
 	font-size: ${({ theme }) => theme.fontSizes[2]}px;
 	font-weight: ${({ theme }) => theme.fontWeights[0]}px;
 	background: ${({ theme }) => theme.colors.background};
