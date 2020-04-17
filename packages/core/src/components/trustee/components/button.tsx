@@ -1,6 +1,7 @@
 import React from 'react';
 import { styled } from '@tpr/theming';
-import { Flex, P } from '@tpr/core';
+import { Flex } from '../../layout';
+import { P } from '../../typography';
 import { ArrowDown, ArrowUp } from '@tpr/icons';
 import { useTheme } from 'styled-components';
 

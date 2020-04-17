@@ -39,6 +39,7 @@
 	},
 	"dependencies": {
 		"@tpr/forms": "file:../forms",
+		"@tpr/icons": "file:../icons",
 		"@tpr/theming": "file:../theming",
 		"@types/styled-components": "^5.1.0",
 		"@types/styled-system": "^5.1.9",
