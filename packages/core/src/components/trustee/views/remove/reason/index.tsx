@@ -42,7 +42,7 @@ const RemoveReason: React.FC = () => {
 								value="left_the_scheme"
 							/>
 							{leftScheme && (
-								<Flex my={1} ml="34px">
+								<Flex my={1} ml="47px">
 									<FFInputDate
 										name="date"
 										label="Date the trustee left the scheme"

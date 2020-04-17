@@ -25,6 +25,7 @@ interface SelectProps extends DownshiftProps<any> {
 	hint?: string;
 	searchable?: boolean;
 	testId?: string;
+	inputWidth?: number;
 }
 
 export const Select: React.FC<SelectProps> = ({
@@ -42,6 +43,7 @@ export const Select: React.FC<SelectProps> = ({
 	searchable,
 	testId,
 	placeholder,
+	inputWidth,
 	...rest
 }) => {
 	return (
@@ -78,7 +80,7 @@ export const Select: React.FC<SelectProps> = ({
 							hint={hint}
 							meta={meta}
 						/>
-						<InputWrapper>
+						<InputWrapper maxWidth={inputWidth}>
 							<StyledSelectInput
 								autoComplete="off"
 								data-testid={testId}
@@ -92,7 +94,7 @@ export const Select: React.FC<SelectProps> = ({
 							</IconPlacement>
 						</InputWrapper>
 					</StyledInputLabel>
-					<div style={{ position: 'relative' }}>
+					<div style={{ position: 'relative', maxWidth: inputWidth }}>
 						<Popup
 							isOpen={isOpen}
 							{...getMenuProps({
@@ -123,7 +125,7 @@ export const Select: React.FC<SelectProps> = ({
 };
 
 interface FFSelectProps extends FieldProps {}
-export const FFSelect: React.FC<FFSelectProps> = field => {
+export const FFSelect: React.FC<FFSelectProps> = (field) => {
 	return (
 		<Field
 			{...field}
@@ -140,10 +142,10 @@ export const FFSelect: React.FC<FFSelectProps> = field => {
 				return (
 					<Select
 						initialSelectedItem={input.value}
-						itemToString={item => (item ? item.label : '')}
+						itemToString={(item) => (item ? item.label : '')}
 						required={required}
 						hint={hint}
-						onChange={value => {
+						onChange={(value) => {
 							// override onChange from outside if needed
 							if (onChange && typeof onChange === 'function') {
 								return onChange(value, input.onChange);

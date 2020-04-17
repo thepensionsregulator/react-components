@@ -3,8 +3,8 @@ import { StyledCard, StyledCardToolbar } from './components/card';
 import { TrusteeProvider, useTrusteeContext, TrusteeProps } from './context';
 import { Flex } from '../layout';
 import { Text, H4, P } from '../typography';
-import { Button } from './components/button';
-import { CheckedCircle, ErrorCircle } from '@tpr/icons';
+import { UnderlinedButton } from './components/button';
+import { CheckedCircle, ErrorCircle, ArrowDown, ArrowUp } from '@tpr/icons';
 import Preview from './views/preview';
 import Name from './views/name';
 import Type from './views/type';
@@ -65,12 +65,32 @@ export const Trustee: React.FC<Omit<TrusteeProps, 'children'>> = (props) => {
 				<StyledCard data-testid={props.testId} complete={context.complete}>
 					<StyledCardToolbar>
 						<Flex width="100%" flexDirection="column" mr="40px" pl={2} py={2}>
-							<Button
-								onClick={() => send('EDIT_TRUSTEE')}
-								disabled={!matches('preview')}
+							<UnderlinedButton
+								isOpen={
+									matches({ edit: { trustee: 'name' } }) ||
+									matches({ edit: { trustee: 'kind' } }) ||
+									matches({ edit: { trustee: 'save' } }) ||
+									matches({ edit: { company: 'address' } }) ||
+									matches({ edit: { company: 'save' } }) ||
+									matches({ edit: { contact: 'details' } }) ||
+									matches({ edit: { contact: 'save' } })
+								}
+								onClick={() => {
+									if (
+										matches({ edit: { trustee: 'name' } }) ||
+										matches({ edit: { trustee: 'kind' } }) ||
+										matches({ edit: { company: 'address' } }) ||
+										matches({ edit: { contact: 'details' } })
+									) {
+										send('CANCEL');
+									} else {
+										send('EDIT_TRUSTEE');
+									}
+								}}
+								disabled={context.loading}
 							>
-								Trustee {'>'}
-							</Button>
+								Trustee
+							</UnderlinedButton>
 							<Flex mt={0} flexDirection="column">
 								<H4>
 									{[
@@ -100,18 +120,31 @@ export const Trustee: React.FC<Omit<TrusteeProps, 'children'>> = (props) => {
 								<StatusMessage complete={context.complete} icon={ErrorCircle} />
 							)}
 							<Flex
-								width="100px"
+								width="110px"
 								ml={1}
 								pl={1}
 								borderLeft="1px solid"
 								borderColor="neutral.200"
 							>
-								<Button
-									onClick={() => send('REMOVE')}
-									disabled={!matches('preview')}
+								<UnderlinedButton
+									isOpen={
+										matches({ remove: 'reason' }) ||
+										matches({ remove: 'confirm' })
+									}
+									onClick={() => {
+										if (
+											matches({ remove: 'reason' }) ||
+											matches({ remove: 'confirm' })
+										) {
+											send('CANCEL');
+										} else {
+											send('REMOVE');
+										}
+									}}
+									disabled={context.loading}
 								>
-									Remove {'>'}
-								</Button>
+									Remove
+								</UnderlinedButton>
 							</Flex>
 						</Flex>
 					</StyledCardToolbar>

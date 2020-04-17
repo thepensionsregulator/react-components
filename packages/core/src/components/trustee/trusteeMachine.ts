@@ -111,6 +111,7 @@ const trusteeMachine = Machine<TrusteeContext, TrusteeStates, TrusteeEvents>({
 			},
 		},
 		edit: {
+			id: 'edit',
 			initial: 'trustee',
 			states: {
 				trustee: {
@@ -128,6 +129,8 @@ const trusteeMachine = Machine<TrusteeContext, TrusteeStates, TrusteeEvents>({
 										},
 									})),
 								},
+								CANCEL: '#preview',
+								REMOVE: '#remove',
 							},
 						},
 						kind: {
@@ -143,6 +146,8 @@ const trusteeMachine = Machine<TrusteeContext, TrusteeStates, TrusteeEvents>({
 									})),
 								},
 								BACK: 'name',
+								CANCEL: '#preview',
+								REMOVE: '#remove',
 							},
 						},
 						save: saveTrustee('#preview'),
@@ -164,6 +169,8 @@ const trusteeMachine = Machine<TrusteeContext, TrusteeStates, TrusteeEvents>({
 										},
 									})),
 								},
+								CANCEL: '#preview',
+								REMOVE: '#remove',
 							},
 						},
 						save: saveTrustee('#preview'),
@@ -184,6 +191,8 @@ const trusteeMachine = Machine<TrusteeContext, TrusteeStates, TrusteeEvents>({
 										},
 									})),
 								},
+								CANCEL: '#preview',
+								REMOVE: '#remove',
 							},
 						},
 						save: saveTrustee('#preview'),
@@ -192,6 +201,7 @@ const trusteeMachine = Machine<TrusteeContext, TrusteeStates, TrusteeEvents>({
 			},
 		},
 		remove: {
+			id: 'remove',
 			initial: 'reason',
 			states: {
 				reason: {
@@ -204,11 +214,13 @@ const trusteeMachine = Machine<TrusteeContext, TrusteeStates, TrusteeEvents>({
 								};
 							}),
 						},
+						EDIT_TRUSTEE: '#edit.trustee.name',
 						CANCEL: '#preview',
 					},
 				},
 				confirm: {
 					on: {
+						EDIT_TRUSTEE: '#edit.trustee.name',
 						CANCEL: '#preview',
 					},
 				},

@@ -16,8 +16,7 @@ export const StyledCard = styled('div')<StyledCardProps>`
 		`6px solid ${
 			complete ? theme.colors.success[200] : theme.colors.danger[200]
 		}`};
-	/* TODO: temp margin for preview, remove later. */
-	margin: 20px;
+	margin-bottom: 20px;
 `;
 
 export const StyledCardToolbar = styled('div')`

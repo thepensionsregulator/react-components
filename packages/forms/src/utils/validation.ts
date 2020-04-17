@@ -51,13 +51,15 @@ export type FieldProps = {
 	/** Select Component feature. If value is an object then you
 	 * can transform final returned value from the selection */
 	onChange?: (value: FieldOptions, set: Function) => void;
+	/** Sets max input width without affecting labels */
+	inputWidth?: number;
 	[key: string]: any;
 };
 
 export function validate(formFields: FieldProps[]) {
 	/** Save fields with errors in memory to avoid filtering on every key stroke */
 	const fieldsWithErrors = formFields.filter(
-		field => !field.validate && field.error,
+		(field) => !field.validate && field.error,
 	);
 	return (keyValuePairs: object): { [key: string]: any } => {
 		const errors = {};
