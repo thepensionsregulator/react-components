@@ -1,7 +1,7 @@
 import { rollup } from '../../config/rollup.config';
 
 export default rollup({
-	name: 'core',
+	name: 'css',
 	extraGlobals: {
 		'styled-components': 'styled-components',
 		'styled-system': 'styled-system',
