@@ -28,7 +28,6 @@ type TextProps = {
 	[key: string]: any;
 };
 export const Text: React.FC<TextProps> = ({
-	children,
 	tag = '',
 	className,
 	cfg = {},
@@ -36,14 +35,10 @@ export const Text: React.FC<TextProps> = ({
 }) => {
 	const tagClassName = useMemo(() => styles[tag], [tag]);
 	const classNames = useClassNames(cfg, [tagClassName, className]);
-	return createElement(
-		tag,
-		{
-			className: classNames,
-			...props,
-		},
-		children,
-	);
+	return createElement(tag, {
+		className: classNames,
+		...props,
+	});
 };
 
 type TagProps = Partial<TextProps>;
