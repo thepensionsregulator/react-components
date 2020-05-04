@@ -15,6 +15,7 @@ export type AvailableTags =
 	| 'h3'
 	| 'h4'
 	| 'h5'
+	| 'h6'
 	| 'p'
 	| 'span'
 	| 'hr'
@@ -65,6 +66,10 @@ export const H4: React.FC<TagProps> = ({ ...props }) => {
 
 export const H5: React.FC<TagProps> = ({ ...props }) => {
 	return <Text tag="h5" {...props} />;
+};
+
+export const H6: React.FC<TagProps> = ({ ...props }) => {
+	return <Text tag="h6" {...props} />;
 };
 
 export const P: React.FC<TagProps> = ({ ...props }) => {

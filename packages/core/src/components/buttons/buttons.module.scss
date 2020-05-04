@@ -50,18 +50,22 @@
 
 .intent-none {
 	background: $colors-primary-2;
+	border-color: $colors-primary-2;
 }
 
 .intent-success {
 	background: $colors-success-2;
+	border-color: $colors-success-2;
 }
 
 .intent-warning {
 	background: $colors-warning-2;
+	border-color: $colors-warning-2;
 }
 
 .intent-danger {
 	background: $colors-danger-2;
+	border-color: $colors-danger-2;
 }
 
 /* 'small' | 'normal' | 'big'; */

@@ -1,0 +1,106 @@
+---
+name: Button
+menu: Core
+route: /core/buttons
+---
+
+import { Playground, Props } from 'docz';
+import { Button } from './buttons';
+
+# Buttons
+
+Buttons make common actions more obvious and help users more easily perform them. Buttons use labels and sometimes icons to communicate
+the action that will occur when the user touches them.
+
+## Properties
+
+<Props of={Button} />
+
+## Usage
+
+```js
+import { Button } from '@tpr/core';
+```
+
+## Basic usage
+
+<Playground>
+	<Button>Click me</Button>
+</Playground>
+
+## Usage with props
+
+<Playground>
+	<Button
+		appearance="primary"
+		intent="danger"
+		size="small"
+		margin={30}
+		before={() => `🐑 `}
+		after={() => ` 🦊`}
+		cfg={{
+			m: 3,
+		}}
+	>
+		Click me
+	</Button>
+</Playground>
+
+## All variations
+
+### With different sizes
+
+<Button size="big" cfg={{ mr: 3 }}>
+	Click me
+</Button>
+<Button size="normal" cfg={{ mr: 3 }}>
+	Click me
+</Button>
+<Button size="small" cfg={{ mr: 3 }}>
+	Click me
+</Button>
+
+### Primary appearance with intent
+
+<Button cfg={{ mr: 3 }} intent="none">
+	Click me
+</Button>
+<Button cfg={{ mr: 3 }} intent="success">
+	Click me
+</Button>
+<Button cfg={{ mr: 3 }} intent="warning">
+	Click me
+</Button>
+<Button cfg={{ mr: 3 }} intent="danger">
+	Click me
+</Button>
+
+### Outlined appearance with intent
+
+<Button cfg={{ mr: 3 }} appearance="outlined" intent="none">
+	Click me
+</Button>
+<Button cfg={{ mr: 3 }} appearance="outlined" intent="success">
+	Click me
+</Button>
+<Button cfg={{ mr: 3 }} appearance="outlined" intent="warning">
+	Click me
+</Button>
+<Button cfg={{ mr: 3 }} appearance="outlined" intent="danger">
+	Click me
+</Button>
+
+### Link appearance with intent
+
+<Button cfg={{ mr: 3 }} appearance="link" intent="none">
+	Click me
+</Button>
+<Button cfg={{ mr: 3 }} appearance="link" intent="success">
+	Click me
+</Button>
+<Button cfg={{ mr: 3 }} appearance="link" intent="warning">
+	Click me
+</Button>
+<Button cfg={{ mr: 3 }} appearance="link" intent="danger">
+	Click me
+</Button>
