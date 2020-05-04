@@ -8,7 +8,7 @@ type ButtonProps = {
 	cfg?: SpaceProps;
 	appearance?: 'primary' | 'outlined';
 	intent?: 'none' | 'success' | 'warning' | 'danger';
-	size?: 'small' | 'normal' | 'big';
+	size?: 'small' | 'medium' | 'large';
 	before?: any;
 	after?: any;
 	disabled?: boolean;
@@ -22,7 +22,7 @@ export const Button: React.FC<ButtonProps> = ({
 	className,
 	appearance = 'primary',
 	intent = 'none',
-	size = 'normal',
+	size = 'medium',
 	before: Before,
 	after: After,
 	disabled,

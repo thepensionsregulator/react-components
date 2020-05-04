@@ -72,7 +72,7 @@
 	color: white;
 }
 
-/* 'small' | 'normal' | 'big'; */
+/* 'small' | 'medium' | 'large'; */
 
 .size-small {
 	font-weight: $font-weight-1;
@@ -80,13 +80,13 @@
 	padding: 0.5rem 15px;
 }
 
-.size-normal {
+.size-medium {
 	font-weight: $font-weight-2;
 	font-size: $font-size-2;
 	padding: 1rem 28px;
 }
 
-.size-big {
+.size-large {
 	font-weight: $font-weight-3;
 	font-size: $font-size-3;
 	padding: 1.2rem 38px;

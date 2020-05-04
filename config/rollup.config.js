@@ -6,6 +6,7 @@ import path from 'path';
 import invariantPlugin from 'rollup-plugin-invariant';
 import peerDepsExternal from 'rollup-plugin-peer-deps-external';
 import postcss from 'rollup-plugin-postcss';
+import autoprefixer from 'autoprefixer';
 
 function onwarn(message) {
 	const suppressed = ['UNRESOLVED_IMPORT', 'THIS_IS_UNDEFINED'];
@@ -74,6 +75,7 @@ export function rollup({
 				}),
 				postcss({
 					extract: 'styles.css',
+					plugins: [autoprefixer()],
 					modules: true,
 					use: ['sass'],
 				}),
