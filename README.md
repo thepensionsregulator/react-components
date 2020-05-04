@@ -22,7 +22,6 @@ to install.
 | ---------------------------------- | ------------------------------------------------------- | -------------------------------------------------------- |
 | [`@tpr/core`](packages/core)       | [![npm version][core npm version]][core npm link]       | [![Bundle Size][core size bundle]][core size link]       |
 | [`@tpr/forms`](packages/forms)     | [![npm version][forms npm version]][forms npm link]     | [![Bundle Size][forms size bundle]][forms size link]     |
-| [`@tpr/table`](packages/table)     | [![npm version][table npm version]][table npm link]     | [![Bundle Size][table size bundle]][table size link]     |
 | [`@tpr/icons`](packages/icons)     | [![npm version][icons npm version]][icons npm link]     | [![Bundle Size][icons size bundle]][icons size link]     |
 | [`@tpr/theming`](packages/theming) | [![npm version][theming npm version]][theming npm link] | [![Bundle Size][theming size bundle]][theming size link] |
 

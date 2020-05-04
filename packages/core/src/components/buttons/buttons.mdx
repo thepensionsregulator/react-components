@@ -35,11 +35,10 @@ import { Button } from '@tpr/core';
 		appearance="primary"
 		intent="danger"
 		size="small"
-		margin={30}
 		before={() => `🐑 `}
 		after={() => ` 🦊`}
 		cfg={{
-			m: 3,
+			my: 5,
 		}}
 	>
 		Click me
@@ -87,20 +86,5 @@ import { Button } from '@tpr/core';
 	Click me
 </Button>
 <Button cfg={{ mr: 3 }} appearance="outlined" intent="danger">
-	Click me
-</Button>
-
-### Link appearance with intent
-
-<Button cfg={{ mr: 3 }} appearance="link" intent="none">
-	Click me
-</Button>
-<Button cfg={{ mr: 3 }} appearance="link" intent="success">
-	Click me
-</Button>
-<Button cfg={{ mr: 3 }} appearance="link" intent="warning">
-	Click me
-</Button>
-<Button cfg={{ mr: 3 }} appearance="link" intent="danger">
 	Click me
 </Button>

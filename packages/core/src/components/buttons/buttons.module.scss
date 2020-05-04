@@ -1,6 +1,6 @@
 @import '@tpr/theming/src/variables.scss';
 
-.initial {
+.button {
 	display: inline-block;
 	position: relative;
 	cursor: pointer;
@@ -17,22 +17,6 @@
 .appearance-primary:disabled {
 	cursor: not-allowed !important;
 	background: $colors-neutral-2;
-}
-
-.appearance-link {
-	text-align: left;
-	background: transparent !important;
-	box-shadow: none;
-	border: none;
-	color: $colors-primary-2 !important;
-	text-decoration: underline;
-	padding-left: 0 !important;
-	padding-right: 0 !important;
-}
-
-.appearance-link:disabled {
-	cursor: not-allowed !important;
-	color: $colors-neutral-2 !important;
 }
 
 .appearance-outlined {
@@ -53,9 +37,19 @@
 	border-color: $colors-primary-2;
 }
 
+.intent-none:hover {
+	background: $colors-primary-2 !important;
+	color: white;
+}
+
 .intent-success {
 	background: $colors-success-2;
 	border-color: $colors-success-2;
+}
+
+.intent-success:hover {
+	background: $colors-success-2 !important;
+	color: white;
 }
 
 .intent-warning {
@@ -63,9 +57,19 @@
 	border-color: $colors-warning-2;
 }
 
+.intent-warning:hover {
+	background: $colors-warning-2 !important;
+	color: white;
+}
+
 .intent-danger {
 	background: $colors-danger-2;
 	border-color: $colors-danger-2;
+}
+
+.intent-danger:hover {
+	background: $colors-danger-2 !important;
+	color: white;
 }
 
 /* 'small' | 'normal' | 'big'; */

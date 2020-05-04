@@ -6,7 +6,7 @@ import useClassNames from '../../hooks/use-class-names';
 type ButtonProps = {
 	className?: string;
 	cfg?: SpaceProps;
-	appearance?: 'primary' | 'link' | 'outlined';
+	appearance?: 'primary' | 'outlined';
 	intent?: 'none' | 'success' | 'warning' | 'danger';
 	size?: 'small' | 'normal' | 'big';
 	before?: any;
@@ -31,7 +31,7 @@ export const Button: React.FC<ButtonProps> = ({
 	...props
 }) => {
 	const classNames = useClassNames(globalStyles, [
-		styles.initial,
+		styles.button,
 		styles[`appearance-${appearance}`],
 		styles[`intent-${intent}`],
 		styles[`size-${size}`],
