@@ -12,7 +12,7 @@ export default {
 		'license',
 		'readme',
 	].map((word) => `${word.toUpperCase()}.md`),
-	menu: ['Home', 'Core', 'Forms'],
+	menu: ['Home', 'Core', 'Forms', 'Layout'],
 	themeConfig: {
 		mode: 'light',
 		showDarkModeSwitch: false,
