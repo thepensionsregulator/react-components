@@ -1,0 +1,17 @@
+{
+	"extends": "../../config/tsconfig.base.json",
+	"compilerOptions": {
+		"rootDir": "src",
+		"baseUrl": "src",
+		"composite": true,
+		"outDir": "lib"
+	},
+	"include": ["src/**/*"],
+	"exclude": [
+		"node_modules",
+		"lib",
+		"**/__mocks__/**/*",
+		"**/__tests__/**/*",
+		"**/*.mdx"
+	]
+}

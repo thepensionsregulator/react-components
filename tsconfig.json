@@ -2,7 +2,9 @@
 	"extends": "./config/tsconfig.base.json",
 	"references": [
 		{ "path": "packages/core" },
+		{ "path": "packages/forms" },
 		{ "path": "packages/icons" },
+		{ "path": "packages/layout" },
 		{ "path": "packages/theming" }
 	]
 }
