@@ -1,0 +1,103 @@
+@import '@tpr/theming/src/variables.scss';
+
+.initial {
+	display: inline-block;
+	position: relative;
+	cursor: pointer;
+}
+
+/* 'primary' | 'link' | 'outlined'; */
+
+.appearance-primary {
+	color: white;
+	border: none;
+	border-radius: 6px;
+}
+
+.appearance-primary:disabled {
+	cursor: not-allowed !important;
+	background: $colors-neutral-2;
+}
+
+.appearance-link {
+	text-align: left;
+	background: transparent !important;
+	box-shadow: none;
+	border: none;
+	color: $colors-primary-2 !important;
+	text-decoration: underline;
+	padding-left: 0 !important;
+	padding-right: 0 !important;
+}
+
+.appearance-link:disabled {
+	cursor: not-allowed !important;
+	color: $colors-neutral-2 !important;
+}
+
+.appearance-outlined {
+	border: 2px solid $colors-primary-2;
+	background: transparent !important;
+	border-radius: 6px;
+}
+
+.appearance-outlined:disabled {
+	cursor: not-allowed !important;
+	border: 2px solid $colors-neutral-2;
+}
+
+/* 'none' | 'success' | 'warning' | 'danger'; */
+
+.intent-none {
+	background: $colors-primary-2;
+}
+
+.intent-success {
+	background: $colors-success-2;
+}
+
+.intent-warning {
+	background: $colors-warning-2;
+}
+
+.intent-danger {
+	background: $colors-danger-2;
+}
+
+/* 'small' | 'normal' | 'big'; */
+
+.size-small {
+	font-weight: $font-weight-1;
+	font-size: $font-size-1;
+	padding: 0.5rem 15px;
+}
+
+.size-normal {
+	font-weight: $font-weight-2;
+	font-size: $font-size-2;
+	padding: 1rem 28px;
+}
+
+.size-big {
+	font-weight: $font-weight-3;
+	font-size: $font-size-3;
+	padding: 1.2rem 38px;
+}
+
+/* LINK styles */
+
+.link {
+	display: inline-block;
+	background: transparent;
+	color: $colors-primary-2;
+	cursor: pointer;
+}
+
+.link:hover {
+	color: $colors-primary-3;
+	text-decoration: underline;
+}
+
+.link-underline {
+	text-decoration: underline;
+}

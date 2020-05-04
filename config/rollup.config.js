@@ -72,6 +72,11 @@ export function rollup({
 				peerDepsExternal({
 					packageJsonPath: `${projectDir}/package.json`,
 				}),
+				postcss({
+					extract: 'styles.css',
+					modules: true,
+					use: ['sass'],
+				}),
 				nodeResolve({
 					browser: true,
 				}),
@@ -79,10 +84,6 @@ export function rollup({
 					include: '/node_modules/**',
 				}),
 				typescriptPlugin({ typescript, tsconfig }),
-				postcss({
-					extract: 'styles.css',
-					modules: true,
-				}),
 			],
 			onwarn,
 		},

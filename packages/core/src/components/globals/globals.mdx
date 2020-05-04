@@ -1,0 +1,29 @@
+---
+name: Globals
+menu: Core
+route: /core/globals
+---
+
+import { Playground, Props } from 'docz';
+import { Flex } from './globals';
+
+# Props
+
+<Props of={Flex} />
+
+# Globals
+
+<Playground>
+	<Flex
+		cfg={{
+			flex: '1 1 auto',
+			justifyContent: 'space-between',
+			bg: 'accents.3',
+			color: 'background',
+			p: 3,
+		}}
+	>
+		<Flex>Left</Flex>
+		<Flex>Right</Flex>
+	</Flex>
+</Playground>

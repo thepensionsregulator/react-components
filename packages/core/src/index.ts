@@ -1,6 +1,6 @@
-export { getObjectValueByString } from './utils';
+import useClassNames from './hooks/use-class-names';
 
-export * from './components/buttons';
-export * from './components/layout';
-export * from './components/typography';
-export * from './components/trustee';
+export { useClassNames };
+
+export * from './utils';
+export * from './components/globals/globals';

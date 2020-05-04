@@ -1,0 +1,60 @@
+@import '@tpr/theming/src/variables.scss';
+
+.h1 {
+	font-family: $fonts-sans-serif;
+	font-weight: $font-weight-2;
+	font-size: $font-size-6;
+	letter-spacing: 0.4px;
+}
+
+.h2 {
+	font-family: $fonts-sans-serif;
+	font-weight: $font-weight-2;
+	font-size: $font-size-5;
+	letter-spacing: 0.4px;
+}
+
+.h3 {
+	font-family: $fonts-sans-serif;
+	font-weight: $font-weight-1;
+	font-size: $font-size-4;
+	letter-spacing: 0.4px;
+}
+
+.h4 {
+	font-family: $fonts-sans-serif;
+	font-weight: $font-weight-3;
+	font-size: $font-size-3;
+	letter-spacing: 0.4px;
+}
+
+.h5 {
+	font-family: $fonts-sans-serif;
+	font-weight: $font-weight-2;
+	font-size: $font-size-2;
+	letter-spacing: 0.4px;
+}
+
+.p {
+	font-family: $fonts-sans-serif;
+	font-weight: $font-weight-2;
+	font-size: $font-size-2;
+	letter-spacing: 0.9px;
+	line-height: 1.4;
+}
+
+.span {
+	font-family: $fonts-sans-serif;
+	font-weight: $font-weight-2;
+	font-size: $font-size-2;
+	letter-spacing: 0.9px;
+	line-height: 1.4;
+}
+
+.hr {
+	border-bottom: 1px solid $colors-neutral-1;
+}
+
+.bold {
+	font-weight: $font-weight-3;
+}
