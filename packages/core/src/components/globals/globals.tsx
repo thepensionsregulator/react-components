@@ -92,14 +92,19 @@ type FlexBoxProps = {
 };
 export const Flex: React.FC<FlexBoxProps> = ({
 	className,
+	children,
 	cfg = {},
 	...props
 }) => {
 	const classNames = useClassNames(cfg, [styles.flex, className]);
-	return createElement('div', {
-		className: classNames,
-		...props,
-	});
+	return createElement(
+		'div',
+		{
+			className: classNames,
+			...props,
+		},
+		children,
+	);
 };
 
 export const matchClassName = (
