@@ -1,220 +1,83 @@
-import React, { FunctionComponent, ButtonHTMLAttributes } from 'react';
-import styled, { css, keyframes } from 'styled-components';
-import { space, layout } from 'styled-system';
-import { SpaceProps, LayoutProps } from 'styled-system';
-// import { getObjectValueByString } from '../../utils';
+import React from 'react';
+import styles from './buttons.module.scss';
+import { SpaceProps, ColorProps, TypographyProps } from '../globals/globals';
+import useClassNames from '../../hooks/use-class-names';
 
-// TODO: get all params from the theme
-
-const scales = {
-	small: css`
-		height: ${({ theme }) => theme.space[4]}px;
-		padding: 0 15px;
-		font-size: ${({ theme }) => theme.fontSizes[2]}px;
-	`,
-	normal: css`
-		height: ${({ theme }) => theme.space[5]}px;
-		padding: 0 28px;
-		font-size: ${({ theme }) => theme.fontSizes[2]}px;
-	`,
-	big: css`
-		height: ${({ theme }) => theme.space[6]}px;
-		padding: 0 38px;
-		font-size: ${({ theme }) => theme.fontSizes[5]}px;
-	`,
-};
-
-const linkAppearance = (colors) => {
-	return css`
-		background: transparent;
-		box-shadow: none;
-		border: none;
-		color: ${colors?.[200]};
-		border: none;
-		text-decoration: none;
-		padding-right: 0;
-		padding-left: 0;
-
-		&:hover {
-			color: ${colors?.[300]};
-			text-decoration: underline;
-		}
-
-		&:focus {
-		}
-
-		&:disabled {
-		}
-
-		&:active {
-		}
-	`;
-};
-
-const primaryAppearance = (colors) => {
-	return css`
-		background: ${colors?.[200]};
-		color: white;
-		border: none;
-		outline: none;
-
-		&:hover {
-			background: ${colors?.[300]};
-		}
-
-		&:focus {
-		}
-
-		&:disabled {
-			background: ${({ theme }) => theme.colors.primary[200]};
-			cursor: not-allowed;
-		}
-
-		&:active {
-			background: ${colors?.[200]};
-			box-shadow: none;
-		}
-	`;
-};
-
-const outlinedAppearance = (colors) => {
-	return css`
-		background: transparent;
-		color: ${colors?.[200]};
-		border: 1px solid ${colors?.[200]};
-		outline: none;
-
-		&:hover {
-			color: white;
-			background: ${colors?.[300]};
-		}
-
-		&:focus {
-		}
-
-		&:disabled {
-			background: grey;
-			cursor: not-allowed;
-		}
-
-		&:active {
-			box-shadow: none;
-		}
-	`;
-};
-
-function appearances(themeColors: any, intent: Intent) {
-	const colors = themeColors[intent === 'none' ? 'primary' : intent];
-	return {
-		primary: primaryAppearance(colors),
-		outlined: outlinedAppearance(colors),
-		link: linkAppearance(colors),
-	};
-}
-
-const getAppearance = ({
-	theme,
-	appearance = 'primary',
-	intent = 'none',
-}: ButtonConfigProps & { theme: any }) =>
-	appearances(theme.colors, intent)[appearance];
-
-const getScale = ({ scale = 'normal' }): string => scales[scale];
-
-export type Intent = 'none' | 'success' | 'warning' | 'danger';
-export type Appearance = 'primary' | 'link' | 'outlined';
-export type Scale = 'small' | 'normal' | 'big';
-
-type ButtonConfigProps = {
-	/** determins button color from theme */
-	intent?: Intent;
-	/** determins button style */
-	appearance?: Appearance;
-	/** determins button size */
-	scale?: Scale;
-	/** button loading state */
-	isLoading?: boolean;
-	/** icon JSX component before text */
-	iconBefore?: FunctionComponent<{ style: any }>;
-	/** icon JSX component after text */
-	iconAfter?: FunctionComponent<{ style: any }>;
+type ButtonProps = {
+	className?: string;
+	cfg?: SpaceProps;
+	appearance?: 'primary' | 'outlined';
+	intent?: 'none' | 'success' | 'warning' | 'danger';
+	size?: 'small' | 'medium' | 'large';
+	before?: any;
+	after?: any;
 	disabled?: boolean;
+	loading?: boolean;
+	type?: 'button' | 'submit';
+	[key: string]: any;
 };
-
-interface ButtonProps
-	extends ButtonHTMLAttributes<HTMLButtonElement>,
-		ButtonConfigProps,
-		SpaceProps,
-		LayoutProps {
-	textDecoration?: string;
-	testId?: string;
-}
-
-const StyledButton = styled('button').attrs<ButtonProps>(
-	({ type = 'button' }) => ({
-		type,
-	}),
-)`
-	${getScale}
-	${getAppearance}
-
-	position: relative;
-	display: inline-block;
-	cursor: pointer;
-	text-decoration: ${({ textDecoration }) =>
-		textDecoration ? textDecoration : null};
-
-	${space}
-	${layout}
-`;
-
 export const Button: React.FC<ButtonProps> = ({
 	children,
-	iconAfter,
-	iconBefore,
-	testId,
+	cfg: globalStyles = {},
+	className,
+	appearance = 'primary',
+	intent = 'none',
+	size = 'medium',
+	before: Before,
+	after: After,
+	disabled,
+	loading,
+	type = 'button',
 	...props
 }) => {
+	const classNames = useClassNames(globalStyles, [
+		styles.button,
+		styles[`appearance-${appearance}`],
+		styles[`intent-${intent}`],
+		styles[`size-${size}`],
+		className,
+	]);
 	return (
-		<StyledButton data-testid={testId} disabled={props.isLoading} {...props}>
-			{iconBefore && iconBefore({ style: { marginRight: 10 } })}
-			<span>{children}</span>
-			{iconAfter && iconAfter({ style: { marginLeft: 10 } })}
-		</StyledButton>
+		<button
+			type={type}
+			disabled={disabled || loading}
+			className={classNames}
+			{...props}
+		>
+			{loading ? (
+				'Loading...'
+			) : (
+				<>
+					{Before && <Before />}
+					{children}
+					{After && <After />}
+				</>
+			)}
+		</button>
 	);
 };
 
-const spin = keyframes`
-  to {transform: rotate(360deg);}
-`;
+type LinkProps = {
+	cfg?: SpaceProps | ColorProps | TypographyProps;
+	className?: string;
+	underline?: boolean;
+	[key: string]: any;
+};
+export const Link: React.FC<LinkProps> = ({
+	cfg: globalStyles,
+	underline = false,
+	className,
+	...props
+}) => {
+	const classNames = useClassNames(globalStyles, [
+		styles.link,
+		{ [styles['link-underline']]: underline },
+		className,
+	]);
 
-type SpinnerProps = { size?: number; inline?: boolean };
-export const Spinner = styled.span<SpinnerProps>`
-	width: ${(props) => (props.size ? `${props.size}px` : '32px')};
-	height: ${(props) => (props.size ? `${props.size}px` : '32px')};
-	position: relative;
-
-	&:before {
-		content: '';
-		box-sizing: border-box;
-		display: inline-block;
-		position: ${(props) => (props.inline ? 'relative' : 'absolute')};
-		top: ${(props) => (props.inline ? '0' : '50%')};
-		left: ${(props) => (props.inline ? '0' : '50%')};
-		width: ${(props) =>
-			props.size !== undefined ? `${props.size}px` : '16px'};
-		height: ${(props) =>
-			props.size !== undefined ? `${props.size}px` : '16px'};
-		margin-top: ${(props) =>
-			props.size !== undefined ? `-${props.size / 2}px` : '-8px'};
-		margin-left: ${(props) =>
-			props.size !== undefined ? `-${props.size / 2}px` : '-8px'};
-		border-radius: 50%;
-		border: 2px solid transparent;
-		border-top: 3px solid ${({ theme }) => theme.colors.primary[100]};
-		animation: ${spin} 500ms linear infinite;
-	}
-`;
-
-export const IconButton = () => null;
-export const BackButton = () => null;
+	return React.createElement('button', {
+		type: 'button',
+		className: classNames,
+		...props,
+	});
+};

@@ -1,0 +1,60 @@
+{
+	"name": "@tpr/layout",
+	"version": "1",
+	"description": "TPR Layout components",
+	"author": "David Alekna <david.alekna@tpr.gov.uk>",
+	"license": "MIT",
+	"main": "./lib/index.js",
+	"module": "./lib/esm.js",
+	"typings": "./lib/index.d.ts",
+	"sideEffects": false,
+	"files": [
+		"lib/*"
+	],
+	"repository": {
+		"type": "git",
+		"url": "https://github.com/thepensionsregulator/react-components.git"
+	},
+	"bugs": {
+		"url": "https://github.com/thepensionsregulator/react-components/issues"
+	},
+	"homepage": "https://github.com/thepensionsregulator/react-components#readme",
+	"keywords": [
+		"tpr"
+	],
+	"scripts": {
+		"prepare": "yarn build",
+		"dev": "yarn storybook",
+		"test": "jest --coverage",
+		"test:watch": "jest --watch",
+		"copycss": "copyfiles -u 1 \"./src/**/*.{css,scss}\" \"./lib/\" && echo @tpr/core css files copied.",
+		"bundle": "cross-env-shell \"../../node_modules/.bin/rollup\" -c rollup.config.js",
+		"build": "tsc -b && yarn copycss",
+		"clean": "rimraf lib",
+		"report-coverage": "codecov"
+	},
+	"peerDependencies": {
+		"react": "^16.12.0",
+		"react-dom": "^16.12.0"
+	},
+	"dependencies": {
+		"@tpr/theming": "file:../theming",
+		"@tpr/forms": "file:../forms",
+		"@tpr/icons": "file:../icons",
+		"@tpr/core": "file:../core",
+		"@xstate/react": "^0.8.1",
+		"final-form": "^4.18.7",
+		"qs": "^6.9.1",
+		"react-final-form": "^6.3.5",
+		"tslib": "^1.11.1",
+		"xstate": "^4.9.0"
+	},
+	"devDependencies": {
+		"cross-env": "^7.0.0",
+		"typescript": "^3.8.3"
+	},
+	"publishConfig": {
+		"access": "public"
+	},
+	"gitHead": "57aec9c9de22596d6343bae07eb6b198322a0bee"
+}

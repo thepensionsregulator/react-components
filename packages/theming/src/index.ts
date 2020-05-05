@@ -1,5 +1,3 @@
-import lightTheme from './lightTheme';
-import { ThemeProvider, styled } from './provider';
+import { ThemeProvider } from './theming';
 
-export * from './utils';
-export { ThemeProvider as default, styled, ThemeProvider, lightTheme };
+export { ThemeProvider as default };

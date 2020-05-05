@@ -33,16 +33,12 @@
 	},
 	"peerDependencies": {
 		"react": "^16.12.0",
-		"react-dom": "^16.12.0",
-		"styled-components": "^5.0.1",
-		"styled-system": "^5.1.5"
+		"react-dom": "^16.12.0"
 	},
 	"dependencies": {
 		"@tpr/icons": "file:../icons",
 		"@tpr/theming": "file:../theming",
 		"@types/match-sorter": "^4.0.0",
-		"@types/styled-components": "^5.0.1",
-		"@types/styled-system": "^5.1.9",
 		"date-fns": "^2.11.0",
 		"downshift": "^5.0.3",
 		"final-form": "^4.18.7",
@@ -54,9 +50,9 @@
 	"publishConfig": {
 		"access": "public"
 	},
-	"gitHead": "57aec9c9de22596d6343bae07eb6b198322a0bee",
 	"devDependencies": {
 		"cross-env": "^7.0.0",
 		"typescript": "^3.8.3"
-	}
+	},
+	"gitHead": "57aec9c9de22596d6343bae07eb6b198322a0bee"
 }
