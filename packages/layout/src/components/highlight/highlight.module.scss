@@ -1,1 +1,18 @@
 @import '@tpr/theming/src/variables.scss';
+
+.appTitle {
+	width: $sidebar-width;
+	background-color: $colors-accents-3;
+	height: 50px;
+}
+
+.highlight {
+	width: 100%;
+	height: 50px;
+}
+
+.schemeName {
+	width:200px;
+	border-left: 1px solid;
+	border-color: $colors-accents-2;
+}
