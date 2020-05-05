@@ -62,6 +62,9 @@ docs.json
 .docz/public
 .idea/
 
+.docz/gatsby-config.js 
+.docz/gatsby-node.js 
+
 junit.xml
 
 .rpt2_cache
