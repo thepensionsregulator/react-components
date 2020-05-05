@@ -1,8 +1,21 @@
 @import '@tpr/theming/src/variables.scss';
 
 .headerBackground {
-	background: $colors-accents-2;
+	background: $colors-accents-3;
 	justify-content: center;
 }
 
+.logo {
+	display: flex;
+	flex: 0 0 auto;
+	align-items: flex-start;
+	justify-content: flex-start;
+	width: $sidebar-width;
+	border-right: 1px solid;
+	border-color: $colors-accents-2;
+	margin-right: $space-4;
+}
 
+.img {
+	max-width: 180px;
+}

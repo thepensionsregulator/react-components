@@ -59,7 +59,7 @@ const config = {
         o: null,
         open: null,
         'open-browser': null,
-        root: '/Users/davidalekna/Development/tpr/react-components/.docz',
+        root: 'C:\\dev\\github\\react-components\\.docz',
         base: '/',
         source: './',
         'gatsby-root': null,
@@ -78,35 +78,25 @@ const config = {
         p: 3000,
         separator: '-',
         paths: {
-          root: '/Users/davidalekna/Development/tpr/react-components',
+          root: 'C:\\dev\\github\\react-components',
           templates:
-            '/Users/davidalekna/Development/tpr/react-components/node_modules/docz-core/dist/templates',
-          docz: '/Users/davidalekna/Development/tpr/react-components/.docz',
-          cache:
-            '/Users/davidalekna/Development/tpr/react-components/.docz/.cache',
-          app: '/Users/davidalekna/Development/tpr/react-components/.docz/app',
-          appPackageJson:
-            '/Users/davidalekna/Development/tpr/react-components/package.json',
-          appTsConfig:
-            '/Users/davidalekna/Development/tpr/react-components/tsconfig.json',
-          gatsbyConfig:
-            '/Users/davidalekna/Development/tpr/react-components/gatsby-config.js',
-          gatsbyBrowser:
-            '/Users/davidalekna/Development/tpr/react-components/gatsby-browser.js',
-          gatsbyNode:
-            '/Users/davidalekna/Development/tpr/react-components/gatsby-node.js',
-          gatsbySSR:
-            '/Users/davidalekna/Development/tpr/react-components/gatsby-ssr.js',
+            'C:\\dev\\github\\react-components\\node_modules\\docz-core\\dist\\templates',
+          docz: 'C:\\dev\\github\\react-components\\.docz',
+          cache: 'C:\\dev\\github\\react-components\\.docz\\.cache',
+          app: 'C:\\dev\\github\\react-components\\.docz\\app',
+          appPackageJson: 'C:\\dev\\github\\react-components\\package.json',
+          appTsConfig: 'C:\\dev\\github\\react-components\\tsconfig.json',
+          gatsbyConfig: 'C:\\dev\\github\\react-components\\gatsby-config.js',
+          gatsbyBrowser: 'C:\\dev\\github\\react-components\\gatsby-browser.js',
+          gatsbyNode: 'C:\\dev\\github\\react-components\\gatsby-node.js',
+          gatsbySSR: 'C:\\dev\\github\\react-components\\gatsby-ssr.js',
           importsJs:
-            '/Users/davidalekna/Development/tpr/react-components/.docz/app/imports.js',
-          rootJs:
-            '/Users/davidalekna/Development/tpr/react-components/.docz/app/root.jsx',
-          indexJs:
-            '/Users/davidalekna/Development/tpr/react-components/.docz/app/index.jsx',
+            'C:\\dev\\github\\react-components\\.docz\\app\\imports.js',
+          rootJs: 'C:\\dev\\github\\react-components\\.docz\\app\\root.jsx',
+          indexJs: 'C:\\dev\\github\\react-components\\.docz\\app\\index.jsx',
           indexHtml:
-            '/Users/davidalekna/Development/tpr/react-components/.docz/app/index.html',
-          db:
-            '/Users/davidalekna/Development/tpr/react-components/.docz/app/db.json',
+            'C:\\dev\\github\\react-components\\.docz\\app\\index.html',
+          db: 'C:\\dev\\github\\react-components\\.docz\\app\\db.json',
         },
       },
     },
