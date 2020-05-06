@@ -1,1 +1,36 @@
 import React from 'react';
+import { classNames, Flex, LayoutProps } from '@tpr/core';
+import styles from './input.module.scss';
+
+export type InputProps = {
+	type: string;
+	width?: LayoutProps['width'];
+	testId?: string;
+	label?: string;
+	touched?: boolean;
+};
+export const Input: React.FC<InputProps> = ({
+	type = 'text',
+	width,
+	testId,
+	label,
+	touched = false,
+	...rest
+}) => {
+	return (
+		<Flex cfg={{ flex: width ? '0 0 auto' : '1 1 auto', width }}>
+			<input
+				type={type}
+				data-testid={testId}
+				aria-label={label}
+				className={classNames([
+					styles.inputText,
+					{
+						[styles['inputText-error']]: touched,
+					},
+				])}
+				{...rest}
+			/>
+		</Flex>
+	);
+};

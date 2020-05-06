@@ -1,0 +1,40 @@
+---
+name: Text
+menu: Forms
+route: /forms/text
+---
+
+import { Playground } from 'docz';
+import { Form } from 'react-final-form';
+import { FFInputText } from './text';
+
+# Text Input
+
+## Usage
+
+```js
+import { FFInputText } from '@tpr/forms';
+```
+
+## Usage
+
+[CodeSandbox](https://codesandbox.io)
+
+<Playground>
+	<Form onSubmit={console.log}>
+		{({ handleSubmit }) => (
+			<form onSubmit={handleSubmit}>
+				<FFInputText
+					name="event_name"
+					label="Event name"
+					hint="Must be between 6 and 8 digits long"
+					error="Enter an event name"
+					validate={(value) => (value ? undefined : 'Required')}
+					inputWidth={5}
+					cfg={{ m: 5 }}
+				/>
+				<button type="submit" style={{ display: 'none' }} children="Submit" />
+			</form>
+		)}
+	</Form>
+</Playground>
