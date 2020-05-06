@@ -4,6 +4,18 @@ menu: Layout
 route: /layout/footer
 ---
 
-import { Playground } from 'docz';
+import { Playground, Props } from 'docz';
+import { Footer } from './footer';
 
 # Footer
+
+<Playground>
+	<Footer
+	logoUrl="https://www.thepensionsregulator.gov.uk/-/media/thepensionsregulator/images/logo/tpr-logo-footer.ashx"
+  links={[
+    { title: 'Website help', url: '#' },
+    { title: 'Cymraeg', url: '#' },
+    { title: 'Site map', url: '#' },
+  ]}
+	/>
+</Playground>
