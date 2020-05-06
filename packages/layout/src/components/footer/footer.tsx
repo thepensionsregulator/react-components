@@ -9,8 +9,6 @@ type FooterLinkProps = {
 };
 
 type FooterProps = {
-	/** accepts 2d array of type FooterLinkProps objects, each array represents column in a footer */
-	menus: FooterLinkProps[][];
 	/** accepts an array of type FooterLinkProps objects */
 	links: FooterLinkProps[];
 	/** accepts a valid logo url, must be https */
@@ -22,7 +20,6 @@ type FooterProps = {
 export const Footer: React.FC<FooterProps> = ({
 	logoUrl,
 	copyright = '© The Pensions Regulator',
-	menus,
 	links,
 }) => {
 	return (
@@ -35,23 +32,6 @@ export const Footer: React.FC<FooterProps> = ({
 						<div className={styles.logo}>
 							<img className={styles.img} src={logoUrl} alt="TPR Logo" />
 						</div>
-						{/* <Flex cfg={{ flex: '1 1 auto' }} />
-						{menus.map((menu, key: number) => (
-							<Flex
-								cfg={{
-									pl: 5,
-									flex: '0 0 auto',
-									flexDirection: 'column',
-								}}
-								key={key}
-							>
-								{menu.map(({ title, url, ...linkProps }, key: number) => (
-									<Link key={key} href={url} cfg={{ mb: 2 }} {...linkProps}>
-										{title}
-									</Link>
-								))}
-							</Flex>
-						))} */}
 					</Flex>
 					<Flex
 						className={styles.lowerPart}
