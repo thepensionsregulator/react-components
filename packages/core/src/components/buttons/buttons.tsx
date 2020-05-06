@@ -3,7 +3,7 @@ import styles from './buttons.module.scss';
 import { SpaceProps, ColorProps, TypographyProps } from '../globals/globals';
 import useClassNames from '../../hooks/use-class-names';
 
-type ButtonProps = {
+export type ButtonProps = {
 	className?: string;
 	cfg?: SpaceProps;
 	appearance?: 'primary' | 'outlined';
@@ -57,7 +57,7 @@ export const Button: React.FC<ButtonProps> = ({
 	);
 };
 
-type LinkProps = {
+export type LinkProps = {
 	cfg?: SpaceProps | ColorProps | TypographyProps;
 	className?: string;
 	underline?: boolean;
