@@ -44,6 +44,7 @@
 		"docz": "^2.3.1",
 		"gatsby-plugin-sass": "^2.3.0",
 		"husky": "^4.2.5",
+		"identity-obj-proxy": "^3.0.0",
 		"immutability-helper": "^3.0.2",
 		"jest": "^25.3.0",
 		"lerna": "^3.19.0",
