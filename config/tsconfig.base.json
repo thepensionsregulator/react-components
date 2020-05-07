@@ -8,7 +8,7 @@
 		"experimentalDecorators": true,
 		"declarationMap": false,
 		"sourceMap": false,
-		"allowJs": false,
+		"allowJs": true,
 		"jsx": "react",
 		"lib": ["es2019", "dom"],
 		"module": "ES6",
