@@ -21,7 +21,7 @@ export type AvailableTags =
 	| 'hr'
 	| 'b';
 
-type TextProps = {
+export type TextProps = {
 	className?: string;
 	tag: AvailableTags;
 	cfg?: SpaceProps & TypographyProps & BackgroundProps & ColorProps;
@@ -46,7 +46,7 @@ export const Text: React.FC<TextProps> = ({
 	);
 };
 
-type TagProps = Partial<TextProps>;
+export type TagProps = Partial<TextProps>;
 
 export const H1: React.FC<TagProps> = ({ ...props }) => {
 	return <Text tag="h1" {...props} />;

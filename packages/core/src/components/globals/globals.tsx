@@ -22,7 +22,7 @@ export type LayoutProps = Partial<{
 	width: 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10;
 }>;
 
-type FullColorRange =
+export type FullColorRange =
 	| 'background'
 	| 'primary.1'
 	| 'primary.2'
@@ -85,7 +85,7 @@ export type SpaceProps = Partial<{
 	px: FullValueRange;
 }>;
 
-type FlexBoxProps = {
+export type FlexBoxProps = {
 	className?: string;
 	cfg?: FlexProps & SpaceProps & BackgroundProps & ColorProps & LayoutProps;
 	[key: string]: any;
