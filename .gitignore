@@ -54,6 +54,7 @@ test/**/public
 .gatsby-context.js
 .docz/gatsby-config.js 
 .docz/gatsby-node.js 
+.docz/src/pages/404.js
 .cache/
 .netlify
 
