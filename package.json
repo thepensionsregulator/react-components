@@ -19,6 +19,7 @@
 	},
 	"dependencies": {
 		"@tpr/core": "file:./packages/core",
+		"@tpr/layout": "file:./packages/layout",
 		"@tpr/forms": "file:./packages/forms",
 		"@tpr/icons": "file:./packages/icons",
 		"@tpr/theming": "file:./packages/theming"
