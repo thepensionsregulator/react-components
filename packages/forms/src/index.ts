@@ -3,3 +3,4 @@ export * from './elements/input/input';
 
 export * from './renderFields';
 export * from './validation';
+export * from './finalFormExports';

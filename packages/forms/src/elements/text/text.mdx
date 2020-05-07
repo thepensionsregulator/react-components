@@ -7,18 +7,20 @@ route: /forms/text
 import { Playground } from 'docz';
 import { Form } from 'react-final-form';
 import { FFInputText } from './text';
+import { validate } from '../../validation';
+import { renderFields } from '../../renderFields';
 
 # Text Input
 
 ## Usage
 
 ```js
-import { FFInputText } from '@tpr/forms';
+import { Form, FFInputText } from '@tpr/forms';
 ```
 
-## Usage
-
 [CodeSandbox](https://codesandbox.io)
+
+Example using field level validation
 
 <Playground>
 	<Form onSubmit={console.log}>
@@ -27,14 +29,52 @@ import { FFInputText } from '@tpr/forms';
 				<FFInputText
 					name="event_name"
 					label="Event name"
+					placeholder="add some text here..."
 					hint="Must be between 6 and 8 digits long"
-					error="Enter an event name"
-					validate={(value) => (value ? undefined : 'Required')}
+					validate={(value) => (value ? undefined : 'Enter an event name')}
 					inputWidth={5}
-					cfg={{ m: 5 }}
+					cfg={{ my: 5 }}
 				/>
 				<button type="submit" style={{ display: 'none' }} children="Submit" />
 			</form>
 		)}
 	</Form>
+</Playground>
+
+<br />
+Example using record level validation
+
+```js
+import { Form, validate, renderFields } from '@tpr/forms';
+```
+
+<Playground>
+	{() => {
+		const fields = [
+			{
+				type: 'text',
+				name: 'event_name',
+				label: 'Event name',
+				hint: 'Must be between 6 and 8 digits long',
+				error: 'Enter an event name',
+				placeholder: 'add some text here...',
+				inputWidth: 5,
+				cfg: { my: 5 },
+			},
+		];
+		return (
+			<Form onSubmit={console.log} validate={validate(fields)}>
+				{({ handleSubmit }) => (
+					<form onSubmit={handleSubmit}>
+						{renderFields(fields)}
+						<button
+							type="submit"
+							style={{ display: 'none' }}
+							children="Submit"
+						/>
+					</form>
+				)}
+			</Form>
+		);
+	}}
 </Playground>
