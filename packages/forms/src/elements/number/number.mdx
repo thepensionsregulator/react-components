@@ -1,0 +1,83 @@
+---
+name: Number
+menu: Forms
+route: /forms/number
+---
+
+import { Playground } from 'docz';
+import { Form } from 'react-final-form';
+import { FFInputNumber } from './number';
+import { validate } from '../../validation';
+import { renderFields } from '../../renderFields';
+
+# Number Input
+
+## Usage
+
+```js
+import { Form, FFInputNumber } from '@tpr/forms';
+```
+
+[CodeSandbox](https://codesandbox.io)
+
+Example using field level validation
+
+<Playground>
+	<Form onSubmit={console.log}>
+		{({ handleSubmit }) => (
+			<form onSubmit={handleSubmit}>
+				<FFInputNumber
+					name="number_of_participants"
+					label="Number of participants"
+					hint="How many people are entering this event"
+					validate={(value) => {
+						if (value < 1 || value > 20 || !value || value === 0) {
+							return 'Must be between 1 and 20';
+						}
+						return undefined;
+					}}
+					inputWidth={5}
+					cfg={{ my: 5 }}
+				/>
+				<button type="submit" style={{ display: 'none' }} children="Submit" />
+			</form>
+		)}
+	</Form>
+</Playground>
+
+<br />
+Example using record level validation
+
+```js
+import { Form, validate, renderFields } from '@tpr/forms';
+```
+
+<Playground>
+	{() => {
+		const fields = [
+			{
+				type: 'number',
+				name: 'number_of_participants',
+				label: 'Number of participants',
+				hint: 'must be between 1 and 20',
+				error: 'Cannot be empty',
+				inputWidth: 5,
+				cfg: { my: 5 },
+			},
+		];
+		return (
+			<Form onSubmit={console.log} validate={validate(fields)}>
+				{({ handleSubmit }) => (
+					<form onSubmit={handleSubmit}>
+						{renderFields(fields)}
+						<button
+							type="submit"
+							style={{ display: 'none' }}
+							children="Submit"
+						/>
+					</form>
+				)}
+			</Form>
+		);
+	}}
+</Playground>
