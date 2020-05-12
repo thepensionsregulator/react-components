@@ -1,6 +1,6 @@
 {
 	"name": "@tpr/layout",
-	"version": "2.0.1",
+	"version": "2.0.2",
 	"description": "TPR Layout components",
 	"author": "David Alekna <david.alekna@tpr.gov.uk>",
 	"license": "MIT",
@@ -38,9 +38,9 @@
 		"react-dom": "^16.12.0"
 	},
 	"dependencies": {
-		"@tpr/core": "^2.0.0",
-		"@tpr/forms": "^2.0.0",
-		"@tpr/icons": "^2.0.0",
+		"@tpr/core": "^2.0.1",
+		"@tpr/forms": "^2.0.1",
+		"@tpr/icons": "^2.0.1",
 		"@tpr/theming": "^2.0.0",
 		"@xstate/react": "^0.8.1",
 		"final-form": "^4.18.7",
