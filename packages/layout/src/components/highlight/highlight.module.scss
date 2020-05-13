@@ -1,18 +1,53 @@
 @import '@tpr/theming/lib/variables.scss';
 
-.appTitle {
-	width: $sidebar-width;
-	background-color: $colors-accents-3;
-	height: 50px;
-}
-
 .highlight {
-	width: 100%;
+	position: relative;
+	display: flex;
+	align-items: center;
+	color: white;
 	height: 50px;
+	background-color: $colors-accents-4;
 }
 
-.schemeName {
-	width: 200px;
-	border-left: 1px solid;
-	border-color: $colors-accents-2;
+.highlightContent {
+	position: absolute;
+	display: flex;
+	height: 100%;
+	z-index: 1;
+	background-color: $colors-accents-4;
+}
+
+// borderTop="1px solid"
+// borderColor="accents.200"
+
+.schemeReturn {
+	display: flex;
+	align-items: center;
+	flex: 0 0 auto;
+	width: $sidebar-width;
+	border-top: 1px solid $colors-accents-2;
+	background: $colors-accents-3;
+}
+
+.leftBackground {
+	position: absolute;
+	left: 0;
+	width: 50%;
+	height: 100%;
+	border-top: 1px solid $colors-accents-2;
+	background-color: $colors-accents-3;
+	z-index: 0;
+}
+
+.psrNumber {
+	min-width: 180px;
+	border-left: 1px solid $colors-accents-2;
+}
+
+.truncate {
+	max-width: 500px;
+
+	white-space: nowrap;
+	overflow: hidden;
+	text-overflow: ellipsis;
 }

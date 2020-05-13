@@ -1,19 +1,33 @@
-import React from 'react';
-import styles from './beta.module.scss';
-import { DocWidth, AppWidth, Flex, P } from '@tpr/core';
+import React, { useMemo } from 'react';
+import { AppWidth, DocWidth, Flex, P } from '@tpr/core';
+import style from './beta.module.scss';
 
-type BetaProps = {};
+type BetaHeaderProps = {
+	text: any;
+};
+export const BetaHeader: React.FC<BetaHeaderProps> = ({ text }) => {
+	const TextComponent = useMemo(() => {
+		return typeof text === 'function' ? text : () => text;
+	}, [text]);
 
-export const Beta: React.FC<BetaProps> = () => {
 	return (
-		<DocWidth className={styles.bannerBackground}>
+		<DocWidth className={style.beta}>
 			<AppWidth>
 				<Flex cfg={{ alignItems: 'center' }}>
-					<Flex cfg={{ bg: 'primary.2', color: 'background', mr: 2, p: 1 }}>
-						<P cfg={{ fontSize: 1, p: 1 }}>BETA</P>
-					</Flex>
-					<P cfg={{ fontSize: 1 }}>
-						This is a new service - your feedback will help us improve it.
+					<P
+						cfg={{
+							fontSize: 1,
+							color: 'background',
+							bg: 'primary.2',
+							p: 1,
+							my: 2,
+							mr: 3,
+						}}
+					>
+						BETA
+					</P>
+					<P cfg={{ fontSize: 1, color: 'neutral.3' }}>
+						<TextComponent />
 					</P>
 				</Flex>
 			</AppWidth>

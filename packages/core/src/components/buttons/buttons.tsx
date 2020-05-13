@@ -67,6 +67,7 @@ export const Link: React.FC<LinkProps> = ({
 	cfg: globalStyles,
 	underline = false,
 	className,
+	children,
 	...props
 }) => {
 	const classNames = useClassNames(globalStyles, [
@@ -75,9 +76,13 @@ export const Link: React.FC<LinkProps> = ({
 		className,
 	]);
 
-	return React.createElement('button', {
-		type: 'button',
-		className: classNames,
-		...props,
-	});
+	return React.createElement(
+		'button',
+		{
+			type: 'button',
+			className: classNames,
+			...props,
+		},
+		children,
+	);
 };

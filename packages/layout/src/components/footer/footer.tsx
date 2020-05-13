@@ -1,6 +1,6 @@
 import React from 'react';
+import { AppWidth, DocWidth, P, Flex, Link } from '@tpr/core';
 import styles from './footer.module.scss';
-import { DocWidth, AppWidth, Flex, Link, P } from '@tpr/core';
 
 type FooterLinkProps = {
 	title: string;
@@ -9,6 +9,8 @@ type FooterLinkProps = {
 };
 
 type FooterProps = {
+	/** function to handle link clicks */
+	onLinkClickHandler: (url: string) => void;
 	/** accepts an array of type FooterLinkProps objects */
 	links: FooterLinkProps[];
 	/** accepts a valid logo url, must be https */
@@ -16,36 +18,32 @@ type FooterProps = {
 	/** accepts copyright description */
 	copyright?: string;
 };
-
 export const Footer: React.FC<FooterProps> = ({
 	logoUrl,
-	copyright = '© The Pensions Regulator',
+	copyright = '© 2020 The Pensions Regulator',
+	onLinkClickHandler,
 	links,
 }) => {
 	return (
-		<DocWidth className={styles.footer}>
+		<DocWidth className={styles.wrapper}>
 			<AppWidth>
-				<Flex cfg={{ flexDirection: 'column', px: 6 }}>
+				<Flex cfg={{ flexDirection: 'column' }}>
 					<Flex
 						cfg={{ justifyContent: 'flex-start', py: 6, alignItems: 'center' }}
 					>
 						<div className={styles.logo}>
-							<img className={styles.img} src={logoUrl} alt="TPR Logo" />
+							<img src={logoUrl} alt="TPR Logo" />
 						</div>
 					</Flex>
 					<Flex
-						className={styles.lowerPart}
-						cfg={{
-							justifyContent: 'space-between',
-							mt: 3,
-							px: 2,
-						}}
+						cfg={{ justifyContent: 'space-between', mt: 3 }}
+						className={styles.footerText}
 					>
 						<Flex>
-							{links.map(({ title, url, ...linkProps }, key: number) => (
+							{links.map(({ url, title, ...linkProps }, key: number) => (
 								<Link
 									key={key}
-									href={url}
+									onClick={() => onLinkClickHandler(url)}
 									cfg={{ mr: 3, color: 'neutral.3' }}
 									{...linkProps}
 								>
@@ -53,7 +51,7 @@ export const Footer: React.FC<FooterProps> = ({
 								</Link>
 							))}
 						</Flex>
-						<P>{copyright}</P>
+						<P cfg={{ fontSize: 1, color: 'neutral.3' }}>{copyright}</P>
 					</Flex>
 				</Flex>
 			</AppWidth>

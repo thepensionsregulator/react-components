@@ -1,9 +1,7 @@
 import React from 'react';
+import style from './sidebar.module.scss';
 
-export const Sidebar: React.FC<any> = () => {
-	return (
-		<>
-			<div>SIDEBAR</div>
-		</>
-	);
+type SidebarProps = {};
+export const Sidebar: React.FC<SidebarProps> = () => {
+	return <div className={style.sidebar}>sidebar</div>;
 };
