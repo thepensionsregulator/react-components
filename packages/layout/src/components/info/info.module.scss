@@ -1,14 +1,5 @@
 @import '@tpr/theming/lib/variables.scss';
 
-.info {
-	position: relative;
-	display: flex;
-	flex-direction: column;
-	padding: 30px;
-	background: $colors-neutral-1;
-	color: $colors-neutral-9;
-}
-
 .important {
 	margin-top: 40px;
 	border-top: 6px solid $colors-neutral-9;

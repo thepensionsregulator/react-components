@@ -19,11 +19,7 @@ export const Checkbox: React.FC<CheckboxIconProps> = ({
 	const msg = testId ? `${testId}-${checked ? 'checked' : 'unchecked'}` : null;
 	return (
 		<StyledInputLabel cfg={Object.assign({ mt: 1, py: 1 }, cfg)}>
-			<div
-				data-testid={msg}
-				className={styles.styledCheckboxWrapper}
-				onClick={onChange}
-			>
+			<div data-testid={msg} className={styles.styledCheckboxWrapper}>
 				{checked ? (
 					<CheckboxChecked width="36px" />
 				) : (

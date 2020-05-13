@@ -21,7 +21,7 @@ export const StyledInputLabel: React.FC<StyledInputLabelProps> = ({
 		className,
 	]);
 	return createElement(
-		'div',
+		'label',
 		{
 			className: classNames,
 			...props,
