@@ -41,5 +41,11 @@ const InputText: React.FC<InputTextProps> = ({
 };
 
 export const FFInputText: React.FC<FieldProps> = (fieldProps) => {
-	return <Field {...fieldProps} component={InputText} />;
+	return (
+		<Field
+			{...fieldProps}
+			required={typeof fieldProps.validate === 'function' || fieldProps.error}
+			component={InputText}
+		/>
+	);
 };

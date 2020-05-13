@@ -6,6 +6,7 @@ interface StyledInputLabelProps {
 	isError?: boolean;
 	className?: string;
 	cfg?: FlexProps | SpaceProps;
+	[key: string]: any;
 }
 export const StyledInputLabel: React.FC<StyledInputLabelProps> = ({
 	cfg,

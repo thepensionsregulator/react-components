@@ -1,21 +1,21 @@
 ---
-name: Text
+name: Number
 menu: Forms
-route: /forms/text
+route: /forms/number
 ---
 
 import { Playground } from 'docz';
 import { Form } from 'react-final-form';
-import { FFInputText } from './text';
+import { FFInputNumber } from './number';
 import { validate } from '../../validation';
 import { renderFields } from '../../renderFields';
 
-# Text Input
+# Number Input
 
 ## Usage
 
 ```js
-import { Form, FFInputText } from '@tpr/forms';
+import { Form, FFInputNumber } from '@tpr/forms';
 ```
 
 [CodeSandbox](https://codesandbox.io)
@@ -26,12 +26,16 @@ Example using field level validation
 	<Form onSubmit={console.log}>
 		{({ handleSubmit }) => (
 			<form onSubmit={handleSubmit}>
-				<FFInputText
-					name="event_name"
-					label="Event name"
-					placeholder="add some text here..."
-					hint="Must be between 6 and 8 digits long"
-					validate={(value) => (value ? undefined : 'Enter an event name')}
+				<FFInputNumber
+					name="number_of_participants"
+					label="Number of participants"
+					hint="How many people are entering this event"
+					validate={(value) => {
+						if (value < 1 || value > 20 || !value || value === 0) {
+							return 'Must be between 1 and 20';
+						}
+						return undefined;
+					}}
 					inputWidth={5}
 					cfg={{ my: 5 }}
 				/>
@@ -52,12 +56,11 @@ import { Form, validate, renderFields } from '@tpr/forms';
 	{() => {
 		const fields = [
 			{
-				type: 'text',
-				name: 'event_name',
-				label: 'Event name',
-				hint: 'Must be between 6 and 8 digits long',
-				error: 'Enter an event name',
-				placeholder: 'add some text here...',
+				type: 'number',
+				name: 'number_of_participants',
+				label: 'Number of participants',
+				hint: 'must be between 1 and 20',
+				error: 'Cannot be empty',
 				inputWidth: 5,
 				cfg: { my: 5 },
 			},
