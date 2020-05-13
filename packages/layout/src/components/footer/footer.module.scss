@@ -1,8 +1,7 @@
-@import '@tpr/theming/src/variables.scss';
+@import '@tpr/theming/lib/variables.scss';
 
-.footer {
+.wrapper {
 	background-color: $colors-neutral-1;
-	justify-content: center;
 	border-top: 5px solid #777;
 }
 
@@ -11,17 +10,16 @@
 	flex: 0 0 auto;
 	align-items: flex-start;
 	justify-content: flex-start;
-	width: 180px;
-	margin: $space-4;
-	margin-right: 100px;
+	width: $sidebar-width;
+	margin-right: $space-4;
+
+	img {
+		width: 180px;
+	}
 }
 
-.lowerPart {
+.footerText {
 	align-items: center;
 	height: 50px;
-	border-top: 1px solid $colors-neutral-2;
-}
-
-.img {
-	width: 100%;
+	border-top: 2px solid $colors-neutral-2;
 }

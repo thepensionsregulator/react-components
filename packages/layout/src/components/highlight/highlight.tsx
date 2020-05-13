@@ -1,40 +1,38 @@
 import React from 'react';
+import { AppWidth, DocWidth, Flex, P } from '@tpr/core';
 import styles from './highlight.module.scss';
-import { DocWidth, AppWidth, Flex, P } from '@tpr/core';
 
 type HighlightProps = {
 	title: string;
 	scheme: string;
+	testId?: string;
 };
-
 export const Highlight: React.FC<HighlightProps> = ({
-	title = 'Test Scheme: DC Scheme 3 SQL Update',
-	scheme = 'PSR: 12014314',
+	title = '',
+	scheme = '',
 }) => {
 	return (
-		<DocWidth>
-			<AppWidth>
-				<Flex cfg={{ flex: '0 0 auto' }}>
+		<DocWidth className={styles.highlight}>
+			<div className={styles.leftBackground} />
+			<AppWidth className={styles.highlightContent}>
+				<Flex cfg={{ flex: '0 0 auto' }} className={styles.schemeReturn}>
+					<P cfg={{ fontWeight: 3 }}>Scheme return</P>
+				</Flex>
+				<Flex
+					cfg={{
+						flex: '1 1 auto',
+						alignItems: 'center',
+						justifyContent: 'space-between',
+					}}
+				>
+					<P cfg={{ fontWeight: 3, px: 4 }} className={styles.truncate}>
+						{title}
+					</P>
 					<Flex
-						className={styles.appTitle}
-						cfg={{ flex: '1 1 auto', alignItems: 'center' }}
+						cfg={{ flex: '0 0 auto', alignItems: 'center', pl: 3 }}
+						className={styles.psrNumber}
 					>
-						<P cfg={{ color: 'background' }}>Scheme return</P>
-					</Flex>
-					<Flex cfg={{ bg: 'accents.4', py: 2 }} className={styles.highlight}>
-						<Flex cfg={{ flex: '1 1 auto', alignItems: 'center', px: 4 }}>
-							<P cfg={{ color: 'background' }}>{title}</P>
-						</Flex>
-						<Flex
-							cfg={{
-								flex: '0 0 auto',
-								alignItems: 'center',
-								justifyContent: 'center',
-							}}
-							className={styles.schemeName}
-						>
-							<P cfg={{ color: 'background' }}>{scheme}</P>
-						</Flex>
+						<P cfg={{ fontWeight: 3 }}>PSR: {scheme}</P>
 					</Flex>
 				</Flex>
 			</AppWidth>

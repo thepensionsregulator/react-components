@@ -4,7 +4,7 @@ menu: Layout
 route: /layout/info
 ---
 
-import { Playground } from 'docz';
+import { Playground, Props } from 'docz';
 import { Info } from './info';
 
 # Info
@@ -17,8 +17,12 @@ Info components for tpr apps
 
 ## Basic usage
 
+```js
+import { Info } from '@tpr/layout';
+```
+
 <Playground>
-	<Info title="Hello World">
+	<Info title="Hello world">
 		Lorem ipsum dolor sit, amet consectetur adipisicing elit. Molestias
 		voluptatibus quaerat consequatur deleniti nobis explicabo eius. Fugit
 		consequuntur, rerum optio architecto ab ad nam. Aperiam nostrum eveniet quam
@@ -31,7 +35,7 @@ Info components for tpr apps
 ## With props
 
 <Playground>
-	<Info title="Hello World" important="Important Information!">
+	<Info title="Due date" importantMessage="Important">
 		Lorem ipsum dolor sit, amet consectetur adipisicing elit. Molestias
 		voluptatibus quaerat consequatur deleniti nobis explicabo eius. Fugit
 		consequuntur, rerum optio architecto ab ad nam. Aperiam nostrum eveniet quam
@@ -40,4 +44,3 @@ Info components for tpr apps
 		perferendis.
 	</Info>
 </Playground>
-

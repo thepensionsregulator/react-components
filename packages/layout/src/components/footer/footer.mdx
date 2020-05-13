@@ -4,18 +4,25 @@ menu: Layout
 route: /layout/footer
 ---
 
-import { Playground, Props } from 'docz';
+import { Playground } from 'docz';
 import { Footer } from './footer';
 
 # Footer
 
+## Basic usage
+
+```js
+import { Footer } from '@tpr/layout';
+```
+
 <Playground>
 	<Footer
-	logoUrl="https://www.thepensionsregulator.gov.uk/-/media/thepensionsregulator/images/logo/tpr-logo-footer.ashx"
-  links={[
-    { title: 'Website help', url: '#' },
-    { title: 'Cymraeg', url: '#' },
-    { title: 'Site map', url: '#' },
-  ]}
+		logoUrl="https://www.thepensionsregulator.gov.uk/-/media/thepensionsregulator/images/logo/tpr-logo-footer.ashx"
+		onLinkClickHandler={(url) => console.log(`navigate to ${url}`)}
+		links={[
+			{ title: 'Website help', url: 'link-1' },
+			{ title: 'Cymraeg', url: 'link-2' },
+			{ title: 'Site map', url: 'link-3' },
+		]}
 	/>
 </Playground>
