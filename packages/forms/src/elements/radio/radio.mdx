@@ -1,0 +1,54 @@
+---
+name: Radio
+menu: Forms
+route: /forms/radio
+---
+
+import { Playground } from 'docz';
+import { Form } from 'react-final-form';
+import { FFRadioButton } from './radio';
+
+# Radio Button
+
+## Usage
+
+```js
+import { FFRadioButton } from '@tpr/forms';
+```
+
+## Usage
+
+Lorem ipsum dolor sit amet consectetur adipisicing elit. Ipsum nostrum omnis ea unde totam, est
+consectetur odio! Harum vitae, sed totam aperiam consequuntur nostrum repudiandae non nemo porro,
+dolorem nulla corrupti hic consectetur eaque fuga illo numquam modi similique ipsam recusandae! Harum,
+possimus suscipit. Quibusdam totam, fugiat officiis qui nisi tempora. Accusantium corrupti similique
+et at ipsum, eveniet tempore nostrum quasi est unde modi impedit quaerat suscipit aspernatur ratione
+quo corporis? Cum dignissimos adipisci itaque sint tempore, saepe dolorem fugit quia placeat officiis
+earum rerum aspernatur similique commodi voluptates? Id ut ab cum doloremque magnam illo ipsa officia nulla ipsum.
+
+[CodeSandbox](https://codesandbox.io/s/lively-wood-rxcpu)
+
+<Playground>
+	{() => {
+		const FIELD_NAME = 'radio_button';
+		return (
+			<Form onSubmit={console.log} initialValues={{ [FIELD_NAME]: 'value_b' }}>
+				{({ handleSubmit }) => (
+					<form onSubmit={handleSubmit} style={{ width: 400, padding: 10 }}>
+						<FFRadioButton name={FIELD_NAME} value="value_a" label="Value A" />
+						<FFRadioButton
+							name={FIELD_NAME}
+							value="value_b"
+							label="Value B"
+							hint="Lorem, ipsum dolor sit amet consectetur adipisicing elit. Ea obcaecati repellat molestias nemo deleniti eveniet vel similique nesciunt fugiat nisi?"
+						/>
+						<FFRadioButton name={FIELD_NAME} value="value_c" label="Value C" />
+						<button type="submit" style={{ display: 'none' }}>
+							Submit
+						</button>
+					</form>
+				)}
+			</Form>
+		);
+	}}
+</Playground>

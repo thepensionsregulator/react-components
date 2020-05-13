@@ -1,4 +1,4 @@
-@import '@tpr/theming/src/variables.scss';
+@import '@tpr/theming/lib/variables.scss';
 
 .appTitle {
 	width: $sidebar-width;
@@ -12,7 +12,7 @@
 }
 
 .schemeName {
-	width:200px;
+	width: 200px;
 	border-left: 1px solid;
 	border-color: $colors-accents-2;
 }
