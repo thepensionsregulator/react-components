@@ -44,8 +44,8 @@ export const Checkbox: React.FC<CheckboxIconProps> = ({
 export const FFCheckbox: React.FC<FieldProps> = (fieldProps) => {
 	return (
 		<Field
-			type="checkbox"
 			{...fieldProps}
+			type="checkbox"
 			render={({ label, input, ...rest }: any) => {
 				return (
 					<Checkbox
