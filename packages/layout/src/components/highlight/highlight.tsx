@@ -35,16 +35,6 @@ export const Highlight: React.FC<HighlightProps> = ({
 						<P cfg={{ fontWeight: 3 }}>PSR: {scheme}</P>
 					</Flex>
 				</Flex>
-				<Flex
-					cfg={{
-						flex: '0 0 auto',
-						alignItems: 'center',
-						justifyContent: 'center',
-					}}
-					className={styles.schemeName}
-				>
-					<P cfg={{ color: 'background' }}>{scheme}</P>
-				</Flex>
 			</AppWidth>
 		</DocWidth>
 	);
