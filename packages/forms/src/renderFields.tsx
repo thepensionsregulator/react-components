@@ -6,7 +6,6 @@ import { FFRadioButton } from './elements/radio/radio';
 import { FFInputDate } from './elements/date/date';
 import { FlexProps, SpaceProps, LayoutProps } from '@tpr/core';
 import { FieldProps as FinalFormFieldProps } from 'react-final-form';
-import { FFRadioButton } from './elements/radio/radio';
 
 // export * from 'react-final-form';
 
