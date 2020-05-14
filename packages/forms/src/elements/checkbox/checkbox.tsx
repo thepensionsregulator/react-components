@@ -1,6 +1,6 @@
 import React from 'react';
 import { Field, FieldRenderProps } from 'react-final-form';
-import { Flex, P } from '@tpr/core';
+import { P } from '@tpr/core';
 import { FieldProps, FieldExtraProps } from '../../renderFields';
 import { CheckboxChecked, CheckboxBlank } from '@tpr/icons';
 import { StyledInputLabel } from '../elements';
@@ -19,24 +19,28 @@ export const Checkbox: React.FC<CheckboxIconProps> = ({
 }) => {
 	const msg = testId ? `${testId}-${checked ? 'checked' : 'unchecked'}` : null;
 	return (
-		<StyledInputLabel element="div" cfg={Object.assign({ mt: 1, py: 1 }, cfg)}>
-			<Flex cfg={{ alignItems: 'flex-start', flexDirection: 'column' }}>
-				<label data-testid={msg} className={styles.styledCheckboxWrapper}>
-					{checked ? (
-						<CheckboxChecked width="36px" />
-					) : (
-						<CheckboxBlank width="36px" />
-					)}
-					<HiddenInput
-						type="checkbox"
-						checked={checked}
-						disabled={disabled}
-						onChange={onChange}
-					/>
-					<P cfg={{ ml: 2 }}>{label}</P>
-				</label>
-				{hint && <P className={styles.hint}>{hint}</P>}
-			</Flex>
+		<StyledInputLabel
+			element="div"
+			cfg={Object.assign(
+				{ mt: 1, py: 1, alignItems: 'flex-start', flexDirection: 'column' },
+				cfg,
+			)}
+		>
+			<label data-testid={msg} className={styles.wrapper}>
+				{checked ? (
+					<CheckboxChecked width="36px" />
+				) : (
+					<CheckboxBlank width="36px" />
+				)}
+				<HiddenInput
+					type="checkbox"
+					checked={checked}
+					disabled={disabled}
+					onChange={onChange}
+				/>
+				<P cfg={{ ml: 2 }}>{label}</P>
+			</label>
+			{hint && <P className={styles.hint}>{hint}</P>}
 		</StyledInputLabel>
 	);
 };
