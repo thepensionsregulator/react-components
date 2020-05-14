@@ -3,6 +3,7 @@ import { FFInputText } from './elements/text/text';
 import { FFInputNumber } from './elements/number/number';
 import { FlexProps, SpaceProps, LayoutProps } from '@tpr/core';
 import { FieldProps as FinalFormFieldProps } from 'react-final-form';
+import { FFRadioButton } from 'elements/radio/radio';
 
 // export * from 'react-final-form';
 
@@ -55,15 +56,15 @@ export function renderFields(fields: FieldProps[] = []) {
 			// case 'checkbox': {
 			//   return <FFCheckbox key={key} {...field} />;
 			// }
-			// case 'radio': {
-			//   return <FFRadioButton key={key} {...field} />;
-			// }
-			// case 'email': {
-			//   return <FFInputText key={key} {...field} />;
-			// }
-			// case 'password': {
-			//   return <FFInputText key={key} {...field} />;
-			// }
+			case 'radio': {
+				return <FFRadioButton key={key} {...field} />;
+			}
+			case 'email': {
+				return <FFInputText key={key} {...field} />;
+			}
+			case 'password': {
+				return <FFInputText key={key} {...field} />;
+			}
 			// case 'date': {
 			//   return <FFInputDate key={key} {...field} />;
 			// }
