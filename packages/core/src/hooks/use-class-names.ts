@@ -1,7 +1,7 @@
 import { useMemo } from 'react';
 import { classNames, filterProps } from '../utils';
 
-const useClassNames = (
+export const useClassNames = (
 	globalStyles: { [key: string]: any } = {},
 	otherStyles: any[] = [],
 ): string => {
@@ -12,5 +12,3 @@ const useClassNames = (
 	);
 	return flattenedStyles;
 };
-
-export default useClassNames;

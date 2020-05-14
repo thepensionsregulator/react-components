@@ -639,3 +639,17 @@
 .color-danger-3 {
 	color: $colors-danger-3 !important;
 }
+
+/* cursor */
+
+.cursor-pointer {
+	cursor: pointer;
+}
+
+.cursor-default {
+	cursor: default;
+}
+
+.cursor-not-allowed {
+	cursor: not-allowed;
+}

@@ -1,6 +1,6 @@
 import React, { createElement } from 'react';
 import styles from './globals.module.scss';
-import useClassNames from '../../hooks/use-class-names';
+import { useClassNames } from '../../hooks/use-class-names';
 
 export type FullValueRange = 1 | 2 | 3 | 4 | 5 | 6;
 
@@ -16,6 +16,10 @@ export type FlexProps = Partial<{
 		| 'space-between'
 		| 'space-around'
 		| 'space-evenly';
+}>;
+
+export type CursorProps = Partial<{
+	cursor: 'pointer' | 'default' | 'not-allowed';
 }>;
 
 export type LayoutProps = Partial<{
@@ -87,7 +91,12 @@ export type SpaceProps = Partial<{
 
 export type FlexBoxProps = {
 	className?: string;
-	cfg?: FlexProps & SpaceProps & BackgroundProps & ColorProps & LayoutProps;
+	cfg?: FlexProps &
+		SpaceProps &
+		BackgroundProps &
+		ColorProps &
+		LayoutProps &
+		CursorProps;
 	[key: string]: any;
 };
 export const Flex: React.FC<FlexBoxProps> = ({

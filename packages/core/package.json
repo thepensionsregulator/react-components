@@ -34,8 +34,6 @@
 		"report-coverage": "codecov"
 	},
 	"peerDependencies": {
-		"@tpr/forms": "file:../forms",
-		"@tpr/icons": "file:../icons",
 		"react": "^16.12.0",
 		"react-dom": "^16.12.0"
 	},

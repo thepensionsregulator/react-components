@@ -5,9 +5,10 @@ import {
 	TypographyProps,
 	BackgroundProps,
 	ColorProps,
+	CursorProps,
 } from '../globals/globals';
 import { classNames } from '../../utils';
-import useClassNames from '../../hooks/use-class-names';
+import { useClassNames } from '../../hooks/use-class-names';
 
 export type AvailableTags =
 	| 'h1'
@@ -24,7 +25,11 @@ export type AvailableTags =
 export type TextProps = {
 	className?: string;
 	tag: AvailableTags;
-	cfg?: SpaceProps & TypographyProps & BackgroundProps & ColorProps;
+	cfg?: SpaceProps &
+		TypographyProps &
+		BackgroundProps &
+		ColorProps &
+		CursorProps;
 	[key: string]: any;
 };
 export const Text: React.FC<TextProps> = ({

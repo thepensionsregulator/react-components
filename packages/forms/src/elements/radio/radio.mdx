@@ -35,14 +35,33 @@ earum rerum aspernatur similique commodi voluptates? Id ut ab cum doloremque mag
 			<Form onSubmit={console.log} initialValues={{ [FIELD_NAME]: 'value_b' }}>
 				{({ handleSubmit }) => (
 					<form onSubmit={handleSubmit} style={{ width: 400, padding: 10 }}>
-						<FFRadioButton name={FIELD_NAME} value="value_a" label="Value A" />
+						<FFRadioButton
+							name={FIELD_NAME}
+							value="value_a"
+							label="Select Value A"
+						/>
 						<FFRadioButton
 							name={FIELD_NAME}
 							value="value_b"
-							label="Value B"
+							label="Select Value B"
 							hint="Lorem, ipsum dolor sit amet consectetur adipisicing elit. Ea obcaecati repellat molestias nemo deleniti eveniet vel similique nesciunt fugiat nisi?"
 						/>
-						<FFRadioButton name={FIELD_NAME} value="value_c" label="Value C" />
+						<FFRadioButton
+							name={FIELD_NAME}
+							value="value_c"
+							label="Select Value C"
+						/>
+						<FFRadioButton
+							name={FIELD_NAME}
+							value="value_d"
+							label="Select Value D"
+							hint="Lorem, ipsum dolor sit amet consectetur adipisicing elit."
+						/>
+						<FFRadioButton
+							name={FIELD_NAME}
+							value="value_e"
+							label="Select Value E"
+						/>
 						<button type="submit" style={{ display: 'none' }}>
 							Submit
 						</button>

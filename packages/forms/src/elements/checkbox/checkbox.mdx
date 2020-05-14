@@ -51,11 +51,19 @@ earum rerum aspernatur similique commodi voluptates? Id ut ab cum doloremque mag
 	<Form onSubmit={console.log} initialValues={{ 'checkbox-c': true }}>
 		{({ handleSubmit }) => (
 			<form onSubmit={handleSubmit} style={{ width: 400, padding: 10 }}>
-				<FFCheckbox name="checkbox-a" label="select option 1" />
-				<FFCheckbox name="checkbox-b" label="select option 2" />
-				<FFCheckbox name="checkbox-c" label="select option 3" />
-				<FFCheckbox name="checkbox-d" label="select option 4" />
-				<FFCheckbox name="checkbox-e" label="select option 5" />
+				<FFCheckbox name="checkbox-a" label="Select option 1" />
+				<FFCheckbox
+					name="checkbox-b"
+					label="Select option 2"
+					hint="Lorem, ipsum dolor sit amet consectetur adipisicing elit. Ea obcaecati repellat molestias nemo deleniti eveniet vel similique nesciunt fugiat nisi?"
+				/>
+				<FFCheckbox name="checkbox-c" label="Select option 3" />
+				<FFCheckbox
+					name="checkbox-d"
+					label="Select option 4"
+					hint="Lorem, ipsum dolor sit amet consectetur adipisicing elit."
+				/>
+				<FFCheckbox name="checkbox-e" label="Select option 5" />
 				<button type="submit" style={{ display: 'none' }}>
 					Submit
 				</button>

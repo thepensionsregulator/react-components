@@ -1,0 +1,16 @@
+@import '@tpr/theming/lib/variables.scss';
+
+.inputSmall {
+	display: flex;
+	flex: 0 0 auto;
+	flex-direction: column;
+	width: 55px;
+	margin-right: $space-1;
+}
+
+.inputLarge {
+	display: flex;
+	flex: 0 0 auto;
+	flex-direction: column;
+	width: 70px;
+}

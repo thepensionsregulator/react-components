@@ -15,11 +15,18 @@ export const Checkbox: React.FC<CheckboxIconProps> = ({
 	checked,
 	onChange,
 	label,
+	hint,
 }) => {
 	const msg = testId ? `${testId}-${checked ? 'checked' : 'unchecked'}` : null;
 	return (
-		<StyledInputLabel cfg={Object.assign({ mt: 1, py: 1 }, cfg)}>
-			<div data-testid={msg} className={styles.styledCheckboxWrapper}>
+		<StyledInputLabel
+			element="div"
+			cfg={Object.assign(
+				{ mt: 1, py: 1, alignItems: 'flex-start', flexDirection: 'column' },
+				cfg,
+			)}
+		>
+			<label data-testid={msg} className={styles.wrapper}>
 				{checked ? (
 					<CheckboxChecked width="36px" />
 				) : (
@@ -31,8 +38,9 @@ export const Checkbox: React.FC<CheckboxIconProps> = ({
 					disabled={disabled}
 					onChange={onChange}
 				/>
-				<P cfg={{ ml: 1 }}>{label}</P>
-			</div>
+				<P cfg={{ ml: 2 }}>{label}</P>
+			</label>
+			{hint && <P className={styles.hint}>{hint}</P>}
 		</StyledInputLabel>
 	);
 };
