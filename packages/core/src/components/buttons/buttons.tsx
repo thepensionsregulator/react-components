@@ -1,7 +1,7 @@
 import React from 'react';
 import styles from './buttons.module.scss';
 import { SpaceProps, ColorProps, TypographyProps } from '../globals/globals';
-import useClassNames from '../../hooks/use-class-names';
+import { useClassNames } from '../../hooks/use-class-names';
 
 export type ButtonProps = {
 	className?: string;

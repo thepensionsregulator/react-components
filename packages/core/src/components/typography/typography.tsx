@@ -8,7 +8,7 @@ import {
 	CursorProps,
 } from '../globals/globals';
 import { classNames } from '../../utils';
-import useClassNames from '../../hooks/use-class-names';
+import { useClassNames } from '../../hooks/use-class-names';
 
 export type AvailableTags =
 	| 'h1'

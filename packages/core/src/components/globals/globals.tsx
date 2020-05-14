@@ -1,6 +1,6 @@
 import React, { createElement } from 'react';
 import styles from './globals.module.scss';
-import useClassNames from '../../hooks/use-class-names';
+import { useClassNames } from '../../hooks/use-class-names';
 
 export type FullValueRange = 1 | 2 | 3 | 4 | 5 | 6;
 
