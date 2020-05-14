@@ -18,6 +18,10 @@ export type FlexProps = Partial<{
 		| 'space-evenly';
 }>;
 
+export type CursorProps = Partial<{
+	cursor: 'pointer' | 'default' | 'not-allowed';
+}>;
+
 export type LayoutProps = Partial<{
 	width: 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10;
 }>;
@@ -87,7 +91,12 @@ export type SpaceProps = Partial<{
 
 export type FlexBoxProps = {
 	className?: string;
-	cfg?: FlexProps & SpaceProps & BackgroundProps & ColorProps & LayoutProps;
+	cfg?: FlexProps &
+		SpaceProps &
+		BackgroundProps &
+		ColorProps &
+		LayoutProps &
+		CursorProps;
 	[key: string]: any;
 };
 export const Flex: React.FC<FlexBoxProps> = ({

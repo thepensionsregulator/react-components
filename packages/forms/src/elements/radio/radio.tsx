@@ -1,6 +1,6 @@
 import React from 'react';
 import { Field, FieldRenderProps } from 'react-final-form';
-import { Flex } from '@tpr/core';
+import { Flex, P } from '@tpr/core';
 import { FieldProps, FieldExtraProps } from '../../renderFields';
 import { RadioButtonChecked, RadioButtonUnchecked } from '@tpr/icons';
 import { StyledInputLabel } from '../elements';
@@ -21,9 +21,9 @@ export const RadioButton: React.FC<RadioButtonProps> = ({
 }) => {
 	const msg = testId ? `${testId}-${checked ? 'checked' : 'unchecked'}` : null;
 	return (
-		<StyledInputLabel cfg={Object.assign({ mt: 1, py: 1 }, cfg)}>
-			<Flex cfg={{ alignItems: 'flex-start' }}>
-				<div className={styles.wrapper} data-testid={msg}>
+		<StyledInputLabel element="div" cfg={Object.assign({ mt: 1, py: 1 }, cfg)}>
+			<Flex cfg={{ alignItems: 'flex-start', flexDirection: 'column' }}>
+				<label className={styles.wrapper} data-testid={msg}>
 					{checked ? (
 						<RadioButtonChecked width="36px" />
 					) : (
@@ -39,15 +39,9 @@ export const RadioButton: React.FC<RadioButtonProps> = ({
 						onChange={onChange}
 						data-testid={testId}
 					/>
-				</div>
-				<Flex cfg={{ ml: 1, flexDirection: 'column' }}>
-					<Flex fontSize={2}>{label}</Flex>
-					{hint && (
-						<Flex color="neutral.300" fontSize={2}>
-							{hint}
-						</Flex>
-					)}
-				</Flex>
+					<P className={styles.label}>{label}</P>
+				</label>
+				{hint && <P className={styles.hint}>{hint}</P>}
 			</Flex>
 		</StyledInputLabel>
 	);

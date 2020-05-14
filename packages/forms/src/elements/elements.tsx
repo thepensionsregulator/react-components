@@ -3,12 +3,14 @@ import { SpaceProps, FlexProps, useClassNames, Span } from '@tpr/core';
 import styles from './elements.module.scss';
 
 interface StyledInputLabelProps {
+	element?: 'label' | 'div';
 	isError?: boolean;
 	className?: string;
 	cfg?: FlexProps | SpaceProps;
 	[key: string]: any;
 }
 export const StyledInputLabel: React.FC<StyledInputLabelProps> = ({
+	element = 'label',
 	cfg,
 	isError,
 	className,
@@ -21,7 +23,7 @@ export const StyledInputLabel: React.FC<StyledInputLabelProps> = ({
 		className,
 	]);
 	return createElement(
-		'label',
+		element,
 		{
 			className: classNames,
 			...props,

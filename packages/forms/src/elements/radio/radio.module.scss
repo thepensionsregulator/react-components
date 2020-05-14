@@ -3,7 +3,6 @@
 .wrapper {
 	display: flex;
 	flex: 0 0 auto;
-	color: $colors-neutral-3;
 	align-items: center;
 	cursor: pointer;
 	height: 25px;
@@ -32,7 +31,20 @@
 	}
 }
 
+.label {
+	line-height: 27px;
+	padding-left: $space-2;
+	cursor: pointer;
+}
+
 .wrapper:disabled {
 	cursor: not-allowed;
 	color: $colors-neutral-9;
+}
+
+.hint {
+	color: $colors-neutral-3;
+	font-size: $font-size-1;
+	margin-top: $space-2;
+	margin-left: 46px;
 }
