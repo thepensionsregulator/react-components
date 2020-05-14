@@ -8,6 +8,7 @@ export type InputProps = {
 	testId?: string;
 	label?: string;
 	touched?: boolean;
+	[key: string]: any;
 };
 export const Input: React.FC<InputProps> = ({
 	type = 'text',

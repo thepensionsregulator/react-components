@@ -59,7 +59,9 @@ export const InputElementHeading: React.FC<InputElementHeadingProps> = ({
 					{label} {!required && '(optional)'}
 				</FormLabelText>
 			)}
-			{hint && <Span cfg={{ mb: 1, color: 'neutral.3' }}>{hint}</Span>}
+			{hint && (
+				<Span cfg={{ mb: 2, fontSize: 2, color: 'neutral.3' }}>{hint}</Span>
+			)}
 			{meta && meta.touched && meta.error && (
 				<ErrorMessage>{meta.error}</ErrorMessage>
 			)}
