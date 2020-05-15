@@ -44,8 +44,10 @@
 	border-left: 1px solid $colors-accents-2;
 }
 
-.schemeName {
-	width: 200px;
-	border-left: 1px solid;
-	border-color: $colors-accents-2;
+.truncate {
+	max-width: 500px;
+
+	white-space: nowrap;
+	overflow: hidden;
+	text-overflow: ellipsis;
 }

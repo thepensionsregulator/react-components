@@ -13,6 +13,7 @@ export const RadioButton: React.FC<RadioButtonProps> = ({
 	cfg,
 	disabled = false,
 	testId,
+	name,
 	checked,
 	onChange,
 	label,
