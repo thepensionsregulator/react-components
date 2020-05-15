@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useMemo } from 'react';
+import React, { ChangeEvent, useState, useEffect, useMemo } from 'react';
 import { Field, FieldRenderProps } from 'react-final-form';
 import { isValid, toDate, format } from 'date-fns';
 import { P, Flex } from '@tpr/core';
@@ -35,6 +35,53 @@ const useDateTransformer = (initialDate: Date = undefined) => {
 	}, [initialDate]);
 };
 
+type DateInputFieldProps = {
+	small?: boolean;
+	ariaLabel?: string;
+	testId?: string;
+	value: any;
+	updateFn: Function;
+	setMonth: Function;
+	onBlur: Function;
+	maxInt: number;
+	meta: any;
+	label: string;
+};
+const DateInputField: React.FC<DateInputFieldProps> = ({
+	small = true,
+	label,
+	ariaLabel,
+	testId,
+	value,
+	updateFn,
+	maxInt,
+	setMonth,
+	onBlur,
+	meta,
+}) => {
+	return (
+		<label className={small ? styles.inputSmall : styles.inputLarge}>
+			<P cfg={{ fontSize: 2, fontWeight: 3, mb: 1 }}>{label}</P>
+			<Input
+				type="text"
+				aria-label={ariaLabel}
+				data-testid={testId}
+				value={value}
+				onFocus={({ target }: ChangeEvent<HTMLInputElement>) => target.select()}
+				onChange={handleChange(updateFn, maxInt)}
+				onBlur={(evt: ChangeEvent<HTMLInputElement>) => {
+					if (!evt.target.value || evt.target.value === '0') {
+						setMonth('');
+						onBlur();
+					}
+				}}
+				meta={meta}
+				autoComplete="off"
+			/>
+		</label>
+	);
+};
+
 type InputDateProps = FieldRenderProps<string> & FieldExtraProps;
 export const InputDate: React.FC<InputDateProps> = ({
 	label,
@@ -46,6 +93,7 @@ export const InputDate: React.FC<InputDateProps> = ({
 	inputWidth: width,
 	cfg,
 }) => {
+	// react-final-form types says it's a string, incorrect, it's a date object.
 	const initialDate: any = useMemo(() => meta.initial, [meta.initial]);
 	const { dd, mm, yyyy } = useDateTransformer(initialDate);
 	const [day, setDay] = useState(dd);
@@ -81,60 +129,40 @@ export const InputDate: React.FC<InputDateProps> = ({
 				meta={meta}
 			/>
 			<Flex cfg={{ width }}>
-				<label className={styles.inputSmall}>
-					<P cfg={{ fontSize: 2, fontWeight: 3, mb: 1 }}>Day</P>
-					<Input
-						type="text"
-						aria-label={`dd-${label}`}
-						data-testid={`dd-${testId}`}
-						value={day}
-						onChange={handleChange(setDay, 32)}
-						onBlur={(evt) => {
-							if (!evt.target.value || evt.target.value === '0') {
-								setMonth('');
-								input.onBlur();
-							}
-						}}
-						meta={meta}
-						autoComplete="off"
-					/>
-				</label>
-				<label className={styles.inputSmall}>
-					<P cfg={{ fontSize: 2, fontWeight: 3, mb: 1 }}>Month</P>
-					<Input
-						type="text"
-						aria-label={`mm-${label}`}
-						data-testid={`mm-${testId}`}
-						value={month}
-						onChange={handleChange(setMonth, 13)}
-						onBlur={(evt) => {
-							if (!evt.target.value || evt.target.value === '0') {
-								setMonth('');
-								input.onBlur();
-							}
-						}}
-						meta={meta}
-						autoComplete="off"
-					/>
-				</label>
-				<label className={styles.inputLarge}>
-					<P cfg={{ fontSize: 2, fontWeight: 3, mb: 1 }}>Year</P>
-					<Input
-						type="text"
-						aria-label={`yyyy-${label}`}
-						data-testid={`yyyy-${testId}`}
-						onChange={handleChange(setYear, 10000)}
-						onBlur={(evt) => {
-							if (!evt.target.value || evt.target.value === '0') {
-								setMonth('');
-								input.onBlur();
-							}
-						}}
-						meta={meta}
-						value={year}
-						autoComplete="off"
-					/>
-				</label>
+				<DateInputField
+					label="Day"
+					ariaLabel={`dd-${label}`}
+					testId={`dd-${testId}`}
+					value={day}
+					updateFn={setDay}
+					maxInt={32}
+					setMonth={setMonth}
+					onBlur={input.onBlur}
+					meta={meta}
+				/>
+				<DateInputField
+					label="Month"
+					ariaLabel={`mm-${label}`}
+					testId={`mm-${testId}`}
+					value={month}
+					updateFn={setMonth}
+					maxInt={13}
+					setMonth={setMonth}
+					onBlur={input.onBlur}
+					meta={meta}
+				/>
+				<DateInputField
+					label="Year"
+					small={false}
+					ariaLabel={`yyyy-${label}`}
+					testId={`yyyy-${testId}`}
+					value={year}
+					updateFn={setYear}
+					maxInt={10000}
+					setMonth={setMonth}
+					onBlur={input.onBlur}
+					meta={meta}
+				/>
 			</Flex>
 		</StyledInputLabel>
 	);
