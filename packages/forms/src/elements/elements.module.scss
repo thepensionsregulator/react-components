@@ -1,6 +1,7 @@
 @import '@tpr/theming/lib/variables.scss';
 
 .label {
+	display: flex;
 	cursor: default;
 }
 
@@ -10,8 +11,9 @@
 }
 
 .labelText {
+	font-family: $fonts-sans-serif;
 	color: $colors-neutral-9;
-	font-weight: $font-weight-2;
+	font-weight: $font-weight-3;
 	font-size: $font-size-2;
 	margin-bottom: $space-1;
 	white-space: nowrap;
@@ -21,5 +23,5 @@
 	color: $colors-danger-3;
 	font-size: $font-size-2;
 	font-weight: $font-weight-3;
-	margin-bottom: $space-1;
+	margin-bottom: $space-2;
 }
