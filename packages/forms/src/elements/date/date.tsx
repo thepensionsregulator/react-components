@@ -90,7 +90,6 @@ export const InputDate: React.FC<InputDateProps> = ({
 	input,
 	meta,
 	testId,
-	inputWidth: width,
 	cfg,
 }) => {
 	// react-final-form types says it's a string, incorrect, it's a date object.
@@ -128,7 +127,7 @@ export const InputDate: React.FC<InputDateProps> = ({
 				hint={hint}
 				meta={meta}
 			/>
-			<Flex cfg={{ width }}>
+			<Flex>
 				<DateInputField
 					label="Day"
 					ariaLabel={`dd-${label}`}

@@ -23,7 +23,7 @@ import { Form, FFInputNumber } from '@tpr/forms';
 Example using field level validation
 
 <Playground>
-	<Form onSubmit={console.log}>
+	<Form onSubmit={(values) => console.log(values)}>
 		{({ handleSubmit }) => (
 			<form onSubmit={handleSubmit}>
 				<FFInputNumber
