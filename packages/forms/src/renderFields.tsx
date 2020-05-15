@@ -4,6 +4,7 @@ import { FFInputNumber } from './elements/number/number';
 import { FFCheckbox } from './elements/checkbox/checkbox';
 import { FFRadioButton } from './elements/radio/radio';
 import { FFInputDate } from './elements/date/date';
+import { FFSelect } from './elements/select/select';
 import { FlexProps, SpaceProps, LayoutProps } from '@tpr/core';
 import { FieldProps as FinalFormFieldProps } from 'react-final-form';
 
@@ -70,9 +71,9 @@ export function renderFields(fields: FieldProps[] = []) {
 			case 'date': {
 				return <FFInputDate key={key} {...field} />;
 			}
-			// case 'select': {
-			//   return <FFSelect key={key} {...field} />;
-			// }
+			case 'select': {
+				return <FFSelect key={key} {...field} />;
+			}
 			default: {
 				console.error(`Incorrect field type: ${field.type}`);
 				return null;
