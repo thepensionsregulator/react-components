@@ -16,6 +16,7 @@ export const Input: React.FC<InputProps> = ({
 	testId,
 	label,
 	touched = false,
+	className,
 	...rest
 }) => {
 	return (
@@ -26,6 +27,7 @@ export const Input: React.FC<InputProps> = ({
 				aria-label={label}
 				className={classNames([
 					styles.inputText,
+					className,
 					{
 						[styles['inputText-error']]: touched,
 					},

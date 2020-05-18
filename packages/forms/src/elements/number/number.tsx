@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { ChangeEvent } from 'react';
 import { Field, FieldRenderProps } from 'react-final-form';
 import { StyledInputLabel, InputElementHeading } from '../elements';
 import { FieldProps, FieldExtraProps } from '../../renderFields';
@@ -34,6 +34,9 @@ const InputNumber: React.FC<InputNumberProps> = ({
 				label={label}
 				touched={meta && meta.touched && meta.error}
 				{...input}
+				onChange={(evt: ChangeEvent<HTMLInputElement>) =>
+					input.onChange(evt.target.value && parseInt(evt.target.value, 10))
+				}
 				{...props}
 			/>
 		</StyledInputLabel>
