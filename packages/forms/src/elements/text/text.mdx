@@ -56,7 +56,7 @@ import { Form, validate, renderFields } from '@tpr/forms';
 				name: 'event_place',
 				label: 'Event place',
 				hint: 'The word must be London exactly',
-				error: (value, fields) => {
+				error: (value, _fields) => {
 					return value === 'London' ? undefined : 'Must be in London';
 				},
 				placeholder: 'add some text here...',
