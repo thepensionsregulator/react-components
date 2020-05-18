@@ -14,7 +14,6 @@ const InputText: React.FC<InputTextProps> = ({
 	required,
 	inputWidth: width,
 	cfg,
-	...props
 }) => {
 	return (
 		<StyledInputLabel
@@ -34,7 +33,6 @@ const InputText: React.FC<InputTextProps> = ({
 				label={label}
 				touched={meta && meta.touched && meta.error}
 				{...input}
-				{...props}
 			/>
 		</StyledInputLabel>
 	);
