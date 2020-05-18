@@ -1,4 +1,4 @@
-import React, { ChangeEvent, useState, useEffect, useMemo } from 'react';
+import React, { ChangeEvent, useEffect, memo, useReducer } from 'react';
 import { Field, FieldRenderProps } from 'react-final-form';
 import { isValid, toDate, format } from 'date-fns';
 import { P, Flex } from '@tpr/core';
@@ -7,7 +7,9 @@ import { Input } from '../input/input';
 import { FieldProps, FieldExtraProps } from '../../renderFields';
 import styles from './date.module.scss';
 
-const handleChange = (onChange: Function, value: number) => ({ target }) => {
+const handleChange = (onChange: Function, value: number) => ({
+	target,
+}: any) => {
 	if (!target.value) {
 		return onChange('');
 	}
@@ -24,15 +26,14 @@ function getValidDate(yyyy: string, mm: string, dd: string) {
 	return undefined;
 }
 
-const useDateTransformer = (initialDate: Date = undefined) => {
-	return useMemo(() => {
-		const valid = initialDate ? isValid(initialDate) : false;
-		return {
-			dd: valid ? `${initialDate.getDate()}` : undefined,
-			mm: valid ? `${initialDate.getMonth() + 1}` : undefined,
-			yyyy: valid ? `${initialDate.getFullYear()}` : undefined,
-		};
-	}, [initialDate]);
+const transformDate = (initialDate: any) => {
+	if (!initialDate) return { dd: '', mm: '', yyyy: '' };
+	const valid = initialDate ? isValid(initialDate) : false;
+	return {
+		dd: valid ? `${initialDate.getDate()}` : '',
+		mm: valid ? `${initialDate.getMonth() + 1}` : '',
+		yyyy: valid ? `${initialDate.getFullYear()}` : '',
+	};
 };
 
 type DateInputFieldProps = {
@@ -83,89 +84,89 @@ const DateInputField: React.FC<DateInputFieldProps> = ({
 };
 
 type InputDateProps = FieldRenderProps<string> & FieldExtraProps;
-export const InputDate: React.FC<InputDateProps> = ({
-	label,
-	hint,
-	required,
-	input,
-	meta,
-	testId,
-	cfg,
-}) => {
-	// react-final-form types says it's a string, incorrect, it's a date object.
-	const initialDate: any = useMemo(() => meta.initial, [meta.initial]);
-	const { dd, mm, yyyy } = useDateTransformer(initialDate);
-	const [day, setDay] = useState(dd);
-	const [month, setMonth] = useState(mm);
-	const [year, setYear] = useState(yyyy);
+export const InputDate: React.FC<InputDateProps> = memo(
+	({ label, hint, required, input, meta, testId, cfg }) => {
+		// react-final-form types says it's a string, incorrect, it's a date object.
+		const { dd, mm, yyyy } = transformDate(meta.initial);
+		const [{ dd: day, mm: month, yyyy: year }, setState] = useReducer(
+			(p: any, n: any) => ({ ...p, ...n }),
+			{ dd, mm, yyyy },
+		);
 
-	useEffect(() => {
-		if (input && typeof input.onChange === 'function') {
-			const newDate = getValidDate(year, month, day);
-			if (newDate) {
-				input.onChange(newDate);
-			} else {
-				input.onChange(undefined);
+		useEffect(() => {
+			setState({ dd: dd, mm: mm, yyyy: yyyy });
+		}, [dd, mm, yyyy]);
+
+		useEffect(() => {
+			if (input && typeof input.onChange === 'function') {
+				const newDate = getValidDate(year, month, day);
+				if (newDate) {
+					input.onChange(newDate);
+				} else {
+					input.onChange(undefined);
+				}
 			}
-		}
-	}, [day, month, year, initialDate]);
+		}, [day, month, year, input]);
 
-	return (
-		<StyledInputLabel
-			isError={meta && meta.touched && meta.error}
-			element="div"
-			onFocus={input.onFocus}
-			onBlur={input.onBlur}
-			cfg={Object.assign(
-				{ mt: 1, py: 1, alignItems: 'flex-start', flexDirection: 'column' },
-				cfg,
-			)}
-		>
-			<InputElementHeading
-				label={label}
-				required={required}
-				hint={hint}
-				meta={meta}
-			/>
-			<Flex>
-				<DateInputField
-					label="Day"
-					ariaLabel={`dd-${label}`}
-					testId={`dd-${testId}`}
-					value={day}
-					updateFn={setDay}
-					maxInt={32}
-					setMonth={setMonth}
-					onBlur={input.onBlur}
+		return (
+			<StyledInputLabel
+				isError={meta && meta.touched && meta.error}
+				element="div"
+				onFocus={input.onFocus}
+				onBlur={input.onBlur}
+				cfg={Object.assign(
+					{ mt: 1, py: 1, alignItems: 'flex-start', flexDirection: 'column' },
+					cfg,
+				)}
+			>
+				<InputElementHeading
+					label={label}
+					required={required}
+					hint={hint}
 					meta={meta}
 				/>
-				<DateInputField
-					label="Month"
-					ariaLabel={`mm-${label}`}
-					testId={`mm-${testId}`}
-					value={month}
-					updateFn={setMonth}
-					maxInt={13}
-					setMonth={setMonth}
-					onBlur={input.onBlur}
-					meta={meta}
-				/>
-				<DateInputField
-					label="Year"
-					small={false}
-					ariaLabel={`yyyy-${label}`}
-					testId={`yyyy-${testId}`}
-					value={year}
-					updateFn={setYear}
-					maxInt={10000}
-					setMonth={setMonth}
-					onBlur={input.onBlur}
-					meta={meta}
-				/>
-			</Flex>
-		</StyledInputLabel>
-	);
-};
+				<Flex>
+					<DateInputField
+						label="Day"
+						ariaLabel={`dd-${label}`}
+						testId={`dd-${testId}`}
+						value={day}
+						updateFn={(dd: number) => setState({ dd })}
+						maxInt={32}
+						setMonth={(mm: number) => setState({ mm })}
+						onBlur={input.onBlur}
+						meta={meta}
+					/>
+					<DateInputField
+						label="Month"
+						ariaLabel={`mm-${label}`}
+						testId={`mm-${testId}`}
+						value={month}
+						updateFn={(mm: number) => setState({ mm })}
+						maxInt={13}
+						setMonth={(mm: number) => setState({ mm })}
+						onBlur={input.onBlur}
+						meta={meta}
+					/>
+					<DateInputField
+						label="Year"
+						small={false}
+						ariaLabel={`yyyy-${label}`}
+						testId={`yyyy-${testId}`}
+						value={year}
+						updateFn={(yyyy: number) => setState({ yyyy })}
+						maxInt={10000}
+						setMonth={(mm: number) => setState({ mm })}
+						onBlur={input.onBlur}
+						meta={meta}
+					/>
+				</Flex>
+			</StyledInputLabel>
+		);
+	},
+	({ meta: prevMeta }, { meta: nextMeta }) =>
+		prevMeta.initial === nextMeta.initial,
+);
 
 export const FFInputDate: React.FC<FieldProps> = ({ type, ...fieldProps }) => {
 	return <Field {...fieldProps} type="text" component={InputDate} />;

@@ -20,14 +20,25 @@ export function validate(formFields: FieldProps[]) {
 		for (const { name, error } of fieldsWithErrors) {
 			// get field value if object is nested
 			const fieldValue = getObjectValueByString(keyValuePairs, name);
-			// construct object from string with errors
-			const errorObject = qs.parse(`${name}=${error}`, { allowDots: true });
-			// if no field value, assign error to errors
+			// if error is a function, make it a callback function and process the value
+			if (typeof error === 'function') {
+				const errorMessage = error(fieldValue, keyValuePairs);
+				const errorObject = qs.parse(`${name}=${errorMessage}`, {
+					allowDots: true,
+				});
+				if (errorMessage) return merge(errors, errorObject);
+			}
+			// typof error is a string and there is no field value, assign error to errors
 			if (
 				!fieldValue ||
 				(typeof fieldValue === 'string' && !fieldValue.trim()) ||
 				(Array.isArray(fieldValue) && !fieldValue.length)
 			) {
+				// construct object from string with errors
+				const errorObject = qs.parse(`${name}=${error}`, {
+					allowDots: true,
+				});
+
 				merge(errors, errorObject);
 			}
 		}

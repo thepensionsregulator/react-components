@@ -53,9 +53,21 @@ import { Form, validate, renderFields } from '@tpr/forms';
 		const fields = [
 			{
 				type: 'text',
+				name: 'event_place',
+				label: 'Event place',
+				hint: 'The word must be London exactly',
+				error: (value, _fields) => {
+					return value === 'London' ? undefined : 'Must be in London';
+				},
+				placeholder: 'add some text here...',
+				inputWidth: 5,
+				cfg: { my: 5 },
+			},
+			{
+				type: 'text',
 				name: 'event_name',
 				label: 'Event name',
-				hint: 'Must be between 6 and 8 digits long',
+				hint: 'Cannot be empty',
 				error: 'Enter an event name',
 				placeholder: 'add some text here...',
 				inputWidth: 5,
