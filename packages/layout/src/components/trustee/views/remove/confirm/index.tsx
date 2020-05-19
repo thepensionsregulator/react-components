@@ -2,13 +2,14 @@ import React from 'react';
 import { Flex, H3, P } from '@tpr/core';
 import { useTrusteeContext } from '../../../context';
 import { Footer } from '../../../components/card';
+import { Content } from '../../../components/content';
 
 const RemoveConfirm: React.FC = () => {
 	const { current, send, onRemove } = useTrusteeContext();
 	const { leftTheScheme } = current.context;
 
 	return (
-		<Flex cfg={{ flex: '1 1 auto', flexDirection: 'column' }}>
+		<Content>
 			<H3>Are you sure you want to remove this trustee?</H3>
 			<Flex
 				cfg={{ flex: '1 1 auto', flexDirection: 'column', my: 3 }}
@@ -31,11 +32,11 @@ const RemoveConfirm: React.FC = () => {
 				}}
 				onSave={{
 					title: 'Cancel',
-					appearance: 'link',
+					appearance: 'outlined',
 					fn: () => send('CANCEL'),
 				}}
 			/>
-		</Flex>
+		</Content>
 	);
 };
 

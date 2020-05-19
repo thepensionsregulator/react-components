@@ -1,20 +1,11 @@
 @import '@tpr/theming/lib/variables.scss';
 
-.card {
-	position: relative;
+.content {
 	display: flex;
 	flex-direction: column;
-	border: 1px solid grey;
-}
-
-.cardToolbar {
-	display: flex;
-	flex-direction: row;
-	flex: 0 0 auto;
-	height: 100px;
-	padding: 40px 40px 0 40px;
 	border-left: 5px solid;
 	border-color: $colors-danger-2;
+	padding: 0 40px 20px 40px;
 }
 
 .complete {

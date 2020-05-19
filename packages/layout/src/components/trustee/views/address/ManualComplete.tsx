@@ -3,7 +3,7 @@ import { Flex, P } from '@tpr/core';
 import { Form, renderFields, validate } from '@tpr/forms';
 import { useTrusteeContext } from '../../context';
 import { Footer } from '../../components/card';
-import { Loading } from '../../components/loader';
+import { Loading } from '../../components/content';
 import fields from './fields';
 
 const ManualComplete = () => {

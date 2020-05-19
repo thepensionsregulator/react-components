@@ -1,20 +1,26 @@
 import React from 'react';
-import { Flex, P, H4 } from '@tpr/core';
+import { Flex, P, H4, Hr, classNames } from '@tpr/core';
 import { useTrusteeContext } from '../../context';
-import { Link } from '@tpr/core';
-import { StyledCardToolbar } from '../../components/card';
+import { UnderlinedButton } from '../../components/button';
+import { Checkbox } from '@tpr/forms';
+import styles from './preview.module.scss';
 
-const Preview: React.FC = () => {
+export const Preview: React.FC = () => {
 	const { current, send, onCorrect } = useTrusteeContext();
 	const { trustee, complete } = current.context;
 
 	return (
-		<Flex cfg={{ flex: '1 1 auto', flexDirection: 'column' }}>
-			<StyledCardToolbar>
-				<Flex cfg={{ width: 10, flex: '1 1 auto', flexDirection: 'column' }}>
-					<Link underline onClick={() => send('EDIT_ORG')}>
+		<div
+			className={classNames([{ [styles.complete]: complete }, styles.content])}
+		>
+			<P cfg={{ mb: 4 }}>Member-nominated trustee</P>
+			<Flex>
+				<Flex
+					cfg={{ width: 5, flex: '0 0 auto', flexDirection: 'column', pr: 4 }}
+				>
+					<UnderlinedButton onClick={() => send('EDIT_ORG')}>
 						Correspondence address
-					</Link>
+					</UnderlinedButton>
 					<Flex cfg={{ mt: 1, flexDirection: 'column' }}>
 						<H4>{trustee.address.addressLine1}</H4>
 						<P>{trustee.address.addressLine2}</P>
@@ -23,10 +29,12 @@ const Preview: React.FC = () => {
 						<P>{trustee.address.postcode}</P>
 					</Flex>
 				</Flex>
-				<Flex cfg={{ width: 10, flex: '1 1 auto', flexDirection: 'column' }}>
-					<Link underline onClick={() => send('EDIT_CONTACTS')}>
+				<Flex
+					cfg={{ width: 5, flex: '0 0 auto', flexDirection: 'column', pl: 4 }}
+				>
+					<UnderlinedButton onClick={() => send('EDIT_CONTACTS')}>
 						Contact details
-					</Link>
+					</UnderlinedButton>
 					<Flex cfg={{ mt: 1, flexDirection: 'column' }}>
 						<H4>Phone</H4>
 						<P>{trustee.telephoneNumber}</P>
@@ -34,23 +42,19 @@ const Preview: React.FC = () => {
 						<P>{trustee.emailAddress}</P>
 					</Flex>
 				</Flex>
-			</StyledCardToolbar>
-			<Flex
-				cfg={{ flex: '0 0 auto', justifyContent: 'flex-start', mt: 1, pt: 3 }}
-				// borderTop="1px solid #eee"
-			>
-				{/* <Checkbox
+			</Flex>
+			<Flex cfg={{ flexDirection: 'column' }}>
+				<Hr cfg={{ my: 4 }} />
+				<Checkbox
 					value={complete}
 					checked={complete}
 					onChange={() => {
 						send('COMPLETE', { value: !complete });
 						onCorrect(!complete);
 					}}
-					label="All details are correct"
-				/> */}
+					label="All details are correct."
+				/>
 			</Flex>
-		</Flex>
+		</div>
 	);
 };
-
-export default Preview;

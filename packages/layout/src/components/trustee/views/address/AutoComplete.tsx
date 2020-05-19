@@ -21,7 +21,7 @@ const AutoComplete: React.FC<AutoCompleteProps> = ({ onClick, options }) => {
 	};
 
 	return (
-		<Flex flexDirection="column">
+		<Flex cfg={{ flexDirection: 'column' }}>
 			<Form onSubmit={onSubmit}>
 				{({ handleSubmit }) => (
 					<form onSubmit={handleSubmit}>
@@ -29,6 +29,7 @@ const AutoComplete: React.FC<AutoCompleteProps> = ({ onClick, options }) => {
 							name="postcode"
 							placeholder="Please select the address from the dropdown"
 							options={options}
+							inputWidth={6}
 						/>
 						<Link onClick={onClick} cfg={{ mt: 1 }}>
 							I can't find my address in the list

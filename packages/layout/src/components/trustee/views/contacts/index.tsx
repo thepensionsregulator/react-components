@@ -2,8 +2,8 @@ import React from 'react';
 import { Flex } from '@tpr/core';
 import { Form, validate, FFInputText } from '@tpr/forms';
 import { useTrusteeContext } from '../../context';
-import { Toolbar, Footer } from '../../components/card';
-import { Loading } from '../../components/loader';
+import { Footer } from '../../components/card';
+import { Content } from '../../components/content';
 
 const Contacts: React.FC = () => {
 	const { current, send } = useTrusteeContext();
@@ -14,9 +14,7 @@ const Contacts: React.FC = () => {
 	};
 
 	return (
-		<Flex cfg={{ flex: '1 1 auto', flexDirection: 'column' }}>
-			{loading && <Loading />}
-			<Toolbar title="Contact details for this trustee" />
+		<Content title="Contact details for this trustee" loading={loading}>
 			<Form
 				onSubmit={onSubmit}
 				initialValues={{
@@ -67,7 +65,7 @@ const Contacts: React.FC = () => {
 					</form>
 				)}
 			</Form>
-		</Flex>
+		</Content>
 	);
 };
 

@@ -8,7 +8,7 @@ import { HiddenInput } from '../hidden/hidden';
 import styles from './checkbox.module.scss';
 
 type CheckboxIconProps = FieldRenderProps<string> & FieldExtraProps;
-export const Checkbox: React.FC<CheckboxIconProps> = ({
+export const Checkbox: React.FC<Partial<CheckboxIconProps>> = ({
 	cfg,
 	disabled = false,
 	testId,

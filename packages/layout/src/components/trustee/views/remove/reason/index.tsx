@@ -1,9 +1,10 @@
 import React from 'react';
 import { Flex, H4 } from '@tpr/core';
 import { useTrusteeContext } from '../../../context';
-import { Toolbar, Footer } from '../../../components/card';
+import { Footer } from '../../../components/card';
 import { Form, FFRadioButton, FFInputDate } from '@tpr/forms';
 import { FORM_ERROR } from 'final-form';
+import { Content } from '../../../components/content';
 
 const RemoveReason: React.FC = () => {
 	const { send } = useTrusteeContext();
@@ -23,8 +24,7 @@ const RemoveReason: React.FC = () => {
 	};
 
 	return (
-		<Flex flex="1 1 auto" flexDirection="column">
-			<Toolbar title="Remove this trustee" />
+		<Content title="Remove this trustee">
 			<H4 fontWeight="bold" mb={0}>
 				Why are you removing this trustee?
 			</H4>
@@ -72,7 +72,7 @@ const RemoveReason: React.FC = () => {
 					);
 				}}
 			</Form>
-		</Flex>
+		</Content>
 	);
 };
 

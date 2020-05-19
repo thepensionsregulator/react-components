@@ -1,3 +1,13 @@
+@import '@tpr/theming/lib/variables.scss';
+
+.content {
+	position: relative;
+	display: flex;
+	flex-direction: column;
+	padding: 15px 40px 20px 40px;
+	border-left: 5px solid white;
+}
+
 .loading {
 	display: flex;
 	flex: 1 1 auto;

@@ -8,6 +8,7 @@ const fields: FieldProps[] = [
 		hint: 'First line of your home address',
 		error: 'This is a required field',
 		required: true,
+		inputWidth: 6,
 	},
 	{
 		name: 'addressLine2',
@@ -15,18 +16,21 @@ const fields: FieldProps[] = [
 		type: 'text',
 		error: 'This is a required field',
 		required: true,
+		inputWidth: 6,
 	},
 	{
 		name: 'addressLine3',
 		value: ' ',
 		label: 'Address line 3',
 		type: 'text',
+		inputWidth: 6,
 	},
 	{
 		name: 'postTown',
 		label: 'City',
 		type: 'text',
 		required: true,
+		inputWidth: 6,
 	},
 	{
 		name: 'postcode',
@@ -34,6 +38,7 @@ const fields: FieldProps[] = [
 		type: 'text',
 		error: 'This is a required field',
 		required: true,
+		inputWidth: 6,
 	},
 	{
 		name: 'county',
@@ -41,6 +46,7 @@ const fields: FieldProps[] = [
 		type: 'text',
 		error: 'This is a required field',
 		required: true,
+		inputWidth: 6,
 	},
 ];
 

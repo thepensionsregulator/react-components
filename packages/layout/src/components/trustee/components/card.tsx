@@ -1,64 +1,51 @@
 import React from 'react';
-import { Flex, H3, H4, P } from '@tpr/core';
-import { Button } from '@tpr/core';
+import { Flex, H3, H4, P, Button, classNames } from '@tpr/core';
+import styles from './card.module.scss';
 
-type StyledCardProps = { complete?: boolean };
-
-export const StyledCard = styled('div')<StyledCardProps>`
-	position: relative;
-	display: flex;
-	flex-direction: column;
-	box-shadow: 0 2px 2px rgba(0, 0, 0, 0.2);
-	border: 1px solid #ddd;
-	border-left: ${({ theme, complete }) =>
-		`6px solid ${
-			complete ? theme.colors.success[200] : theme.colors.danger[200]
-		}`};
-	margin-bottom: 20px;
-`;
-
-export const StyledCardToolbar = styled('div')`
-	display: flex;
-	flex-direction: column;
-	flex: 0 0 auto;
-	justify-content: space-evenly;
-	align-items: flex-start;
-
-	${({ theme }) => theme.mediaQueries.sm`
-		flex-direction: row;
-	`}
-`;
-
-type ToolbarProps = {
-	title: string;
+type StyledCardProps = { complete: boolean };
+export const StyledCard: React.FC<StyledCardProps> = ({
+	complete = false,
+	children,
+}) => {
+	return (
+		<div
+			className={classNames([
+				styles.card,
+				{ [styles['card-completed']]: complete },
+			])}
+		>
+			{children}
+		</div>
+	);
 };
 
+export const StyledCardToolbar: React.FC = ({ children }) => {
+	return <div className={styles.cardToolbar}>{children}</div>;
+};
+
+type ToolbarProps = { title: string };
 export const Toolbar: React.FC<ToolbarProps> = ({ title }) => {
 	return (
 		<Flex
-			flexDirection="column"
-			borderBottom="1px solid"
-			borderColor="neutral.200"
-			mt={3}
-			mb={2}
-			pb={1}
+			cfg={{ flexDirection: 'column', mt: 4, mb: 3, pb: 2 }}
+			className={styles.toolbarBottomBorder}
 		>
-			<H4 color="neutral.300">Edit trustee</H4>
-			<H3 fontWeight={2}>{title}</H3>
+			<P cfg={{ color: 'neutral.3', fontSize: 3 }}>Edit trustee</P>
+			<H3 cfg={{ fontWeight: 3 }}>{title}</H3>
 		</Flex>
 	);
 };
 
 type FooterProps = {
 	onContinue?: {
-		type?: 'button' | 'submit' | 'reset';
+		type?: 'button' | 'submit';
 		title?: string;
 		appearance?: 'primary' | 'outlined';
 		intent?: 'none' | 'success' | 'warning' | 'danger';
 		fn?: (...args: any[]) => void;
 	};
 	onSave?: {
-		type?: 'button' | 'submit' | 'reset';
+		type?: 'button' | 'submit';
 		title?: string;
 		appearance?: 'primary' | 'outlined';
 		intent?: 'none' | 'success' | 'warning' | 'danger';
@@ -74,10 +61,14 @@ export const Footer: React.FC<FooterProps> = ({
 }) => {
 	return (
 		<Flex
-			flex="0 0 auto"
-			height={100}
-			alignItems="center"
-			justifyContent="flex-start"
+			cfg={{
+				flex: '0 0 auto',
+				flexDirection: 'column',
+				alignItems: 'flex-start',
+				justifyContent: 'flex-start',
+				mt: 5,
+			}}
+			// height={100}
 		>
 			{onContinue && (
 				<Button
@@ -88,9 +79,9 @@ export const Footer: React.FC<FooterProps> = ({
 					disabled={isDisabled}
 				>
 					{isDisabled ? (
-						<Flex height="100%" alignItems="center">
+						<Flex cfg={{ alignItems: 'center' }} height="100%">
 							{/* <Spinner size={22} /> */}
-							<P ml={0}>Saving...</P>
+							<P cfg={{ ml: 1 }}>Saving...</P>
 						</Flex>
 					) : (
 						onContinue.title
@@ -107,9 +98,9 @@ export const Footer: React.FC<FooterProps> = ({
 					ml={onContinue && 1}
 				>
 					{isDisabled ? (
-						<Flex height="100%" alignItems="center">
+						<Flex cfg={{ alignItems: 'center' }} height="100%">
 							{/* <Spinner size={22} /> */}
-							<P ml={0}>Saving...</P>
+							<P cfg={{ ml: 1 }}>Saving...</P>
 						</Flex>
 					) : (
 						onSave.title

@@ -1,20 +1,21 @@
 import React from 'react';
-import { StyledCard, StyledCardToolbar } from './components/card';
 import { TrusteeProvider, useTrusteeContext, TrusteeProps } from './context';
-import { Flex, H4, P } from '@tpr/core';
+import { Flex, H4, P, classNames } from '@tpr/core';
 import { UnderlinedButton } from './components/button';
-import { CheckedCircle, ErrorCircle, ArrowDown, ArrowUp } from '@tpr/icons';
-import Preview from './views/preview';
+import { CheckedCircle, ErrorCircle } from '@tpr/icons';
+import { Preview } from './views/preview';
 import Name from './views/name';
-import Type from './views/type';
+import Type from './views/type/type';
 import Address from './views/address';
 import Contacts from './views/contacts';
 import RemoveReason from './views/remove/reason';
 import RemoveConfirm from './views/remove/confirm';
 
+import styles from './trustee.module.scss';
+
 // TODO: make responsive. Should contain 1 column on small screens and 2 on larger screens.
 
-const TrusteeBody: React.FC = () => {
+const CardContent: React.FC = () => {
 	const { current } = useTrusteeContext();
 	if (current.matches('preview')) {
 		return <Preview />;
@@ -47,8 +48,8 @@ const TrusteeBody: React.FC = () => {
 const StatusMessage = ({ complete, icon: Icon }) => {
 	// colors[complete ? 'success' : 'danger'][200]
 	return (
-		<Flex alignItems="center" height="22px">
-			<Icon size={18} fill="red" />
+		<Flex cfg={{ alignItems: 'center' }} height="22px">
+			<Icon size={18} fill={complete ? '#207e3b' : '#d4351c'} />
 			<P
 				cfg={{ ml: 1, fontSize: 2, color: complete ? 'success.2' : 'danger.2' }}
 			>
@@ -62,10 +63,21 @@ export const Trustee: React.FC<Omit<TrusteeProps, 'children'>> = (props) => {
 	return (
 		<TrusteeProvider {...props}>
 			{({ current: { context, matches }, send }) => (
-				<StyledCard data-testid={props.testId} complete={context.complete}>
-					<StyledCardToolbar>
+				<div data-testid={props.testId} className={styles.card}>
+					<div
+						className={classNames([
+							{ [styles.complete]: context.complete },
+							styles.cardToolbar,
+						])}
+					>
 						<Flex
-							cfg={{ width: 10, flexDirection: 'column', mr: 6, pl: 3, py: 3 }}
+							cfg={{
+								width: 5,
+								flex: '0 0 auto',
+								flexDirection: 'column',
+								justifyContent: 'flex-start',
+								pr: 4,
+							}}
 						>
 							<UnderlinedButton
 								isOpen={
@@ -89,7 +101,6 @@ export const Trustee: React.FC<Omit<TrusteeProps, 'children'>> = (props) => {
 										send('EDIT_TRUSTEE');
 									}
 								}}
-								disabled={context.loading}
 							>
 								Trustee
 							</UnderlinedButton>
@@ -103,16 +114,24 @@ export const Trustee: React.FC<Omit<TrusteeProps, 'children'>> = (props) => {
 										.filter(Boolean)
 										.join(' ')}
 								</H4>
-								{context.trustee.trusteeType && (
+								{/* {context.trustee.trusteeType && (
 									<P>
 										{`${context.trustee.trusteeType[0].toUpperCase()}${context.trustee.trusteeType
 											.slice(1)
 											.toLowerCase()} trustee`}
 									</P>
-								)}
+								)} */}
 							</Flex>
 						</Flex>
-						<Flex cfg={{ width: 10, justifyContent: 'flex-end', p: 3 }}>
+						<Flex
+							cfg={{
+								width: 5,
+								flex: '0 0 auto',
+								justifyContent: 'flex-end',
+								alignItems: 'flex-start',
+								pl: 4,
+							}}
+						>
 							{context.complete ? (
 								<StatusMessage
 									complete={context.complete}
@@ -122,7 +141,7 @@ export const Trustee: React.FC<Omit<TrusteeProps, 'children'>> = (props) => {
 								<StatusMessage complete={context.complete} icon={ErrorCircle} />
 							)}
 							<Flex
-								cfg={{ width: 2, ml: 2, pl: 2 }}
+								cfg={{ width: 2, ml: 2, pl: 2, alignItems: 'flex-start' }}
 								// borderLeft="1px solid"
 								// borderColor="neutral.200"
 							>
@@ -141,17 +160,14 @@ export const Trustee: React.FC<Omit<TrusteeProps, 'children'>> = (props) => {
 											send('REMOVE');
 										}
 									}}
-									disabled={context.loading}
 								>
 									Remove
 								</UnderlinedButton>
 							</Flex>
 						</Flex>
-					</StyledCardToolbar>
-					<Flex cfg={{ pr: 2, pb: 2, pl: 2 }}>
-						<TrusteeBody />
-					</Flex>
-				</StyledCard>
+					</div>
+					<CardContent />
+				</div>
 			)}
 		</TrusteeProvider>
 	);
