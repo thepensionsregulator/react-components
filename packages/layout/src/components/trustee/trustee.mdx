@@ -29,36 +29,37 @@ import { Trustee } from '@tpr/core';
 	{() => {
 		const [complete, setComplete] = useState(false);
 		const onSave = (ms) => new Promise((res) => setTimeout(res, ms));
+		const API = {
+			get: () => Promise.reject(new Error('THERE IS NO API IMPLEMENTATION')),
+		};
+		const trustee = {
+			schemeRoleId: '12345',
+			//
+			title: 'Mr',
+			forename: 'John',
+			surname: 'Smith',
+			trusteeType: 'member-nominated',
+			isProfessionalTrustee: false,
+			//
+			addressLine1: 'The Pensions Regulator',
+			addressLine2: 'Napier House',
+			addressLine3: 'Trafalgar Pl',
+			postTown: 'Brighton',
+			postcode: 'BN1 4DW',
+			county: 'West Sussex',
+			countryId: '',
+			//
+			telephoneNumber: '01273 000 111',
+			emailAddress: 'fred.sandoors@trp.gov.uk',
+		};
 		return (
 			<Trustee
-				onSave={(values) => onSave(2500).then(() => console.log(values))}
+				onSave={(values) => onSave(1000).then(() => console.log(values))}
 				onRemove={console.log}
 				onCorrect={(value) => setComplete(value)}
-				addressAPI={{
-					get: () =>
-						Promise.reject(new Error('THERE IS NO API IMPLEMENTATION')),
-				}}
+				addressAPI={API}
 				complete={complete}
-				trustee={{
-					schemeRoleId: '12345',
-					//
-					title: 'Mr',
-					forename: 'John',
-					surname: 'Smith',
-					trusteeType: 'member-nominated',
-					isProfessionalTrustee: false,
-					//
-					addressLine1: 'The Pensions Regulator',
-					addressLine2: 'Napier House',
-					addressLine3: 'Trafalgar Pl',
-					postTown: 'Brighton',
-					postcode: 'BN1 4DW',
-					county: 'West Sussex',
-					countryId: '',
-					//
-					telephoneNumber: '01273 000 111',
-					emailAddress: 'fred.sandoors@trp.gov.uk',
-				}}
+				trustee={trustee}
 			/>
 		);
 	}}

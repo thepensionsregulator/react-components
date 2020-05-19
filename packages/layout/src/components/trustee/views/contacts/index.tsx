@@ -1,5 +1,4 @@
 import React from 'react';
-import { Flex } from '@tpr/core';
 import { Form, validate, FFInputText } from '@tpr/forms';
 import { useTrusteeContext } from '../../context';
 import { Footer } from '../../components/card';
@@ -35,26 +34,19 @@ const Contacts: React.FC = () => {
 			>
 				{({ handleSubmit }) => (
 					<form onSubmit={handleSubmit}>
-						<Flex
-							cfg={{ flexDirection: 'column' }}
-							//  maxWidth="760px"
-						>
-							<Flex
-							// maxWidth="300px"
-							>
-								<FFInputText
-									name="telephoneNumber"
-									label="Telephone number"
-									required
-								/>
-							</Flex>
-							<FFInputText
-								name="emailAddress"
-								type="email"
-								label="Email address"
-								required
-							/>
-						</Flex>
+						<FFInputText
+							name="telephoneNumber"
+							label="Telephone number"
+							inputWidth={2}
+							required
+						/>
+						<FFInputText
+							name="emailAddress"
+							type="email"
+							label="Email address"
+							inputWidth={6}
+							required
+						/>
 						<Footer
 							isDisabled={loading}
 							onSave={{
