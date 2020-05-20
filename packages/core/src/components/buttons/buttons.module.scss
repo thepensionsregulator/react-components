@@ -109,6 +109,12 @@
 	text-decoration: underline;
 }
 
+.link:disabled {
+	color: $colors-neutral-3;
+	text-decoration: none;
+	cursor: default;
+}
+
 .link-underline {
 	text-decoration: underline;
 }

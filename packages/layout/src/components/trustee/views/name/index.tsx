@@ -1,8 +1,33 @@
 import React from 'react';
-import { Form, FFInputText } from '@tpr/forms';
+import { Form, FieldProps, renderFields, validate } from '@tpr/forms';
 import { useTrusteeContext } from '../../context';
-import { Footer } from '../../components/card';
+import { Footer, FooterButton } from '../../components/card';
 import { Content } from '../../components/content';
+
+const fields: FieldProps[] = [
+	{
+		name: 'title',
+		type: 'text',
+		label: 'Title',
+		inputWidth: 1,
+		cfg: { mb: 4 },
+	},
+	{
+		name: 'forename',
+		type: 'text',
+		label: 'First name',
+		error: 'field is required',
+		inputWidth: 6,
+		cfg: { mb: 4 },
+	},
+	{
+		name: 'surname',
+		type: 'text',
+		label: 'Last name',
+		error: 'field is required',
+		inputWidth: 6,
+	},
+];
 
 const Name: React.FC = () => {
 	const { current, send } = useTrusteeContext();
@@ -16,6 +41,7 @@ const Name: React.FC = () => {
 		<Content title="Name of the trustee">
 			<Form
 				onSubmit={onSubmit}
+				validate={validate(fields)}
 				initialValues={{
 					title: state.title,
 					forename: state.forename,
@@ -24,25 +50,10 @@ const Name: React.FC = () => {
 			>
 				{({ handleSubmit }) => (
 					<form onSubmit={handleSubmit}>
-						<FFInputText name="title" label="Title" inputWidth={1} />
-						<FFInputText
-							name="forename"
-							label="First name"
-							error="field is required"
-							inputWidth={6}
-						/>
-						<FFInputText
-							name="surname"
-							label="Last name"
-							error="field is required"
-							inputWidth={6}
-						/>
-						<Footer
-							onSave={{
-								type: 'submit',
-								title: 'Continue',
-							}}
-						/>
+						{renderFields(fields)}
+						<Footer>
+							<FooterButton type="submit" title="Continue" />
+						</Footer>
 					</form>
 				)}
 			</Form>

@@ -28,11 +28,8 @@ const AddressPage: React.FC = () => {
 				setLoading={setLoading}
 				setOptions={setOptions}
 			/>
-			<Flex
-				cfg={{ flexDirection: 'column' }}
-				// maxWidth="760px"
-			>
-				<H4 cfg={{ fontWeight: 3, mb: 1 }}>Address</H4>
+			<Flex cfg={{ flexDirection: 'column' }}>
+				<H4 cfg={{ fontWeight: 3, my: 1 }}>Address</H4>
 				{manual ? (
 					<ManualComplete />
 				) : (

@@ -114,13 +114,6 @@ export const Trustee: React.FC<Omit<TrusteeProps, 'children'>> = (props) => {
 										.filter(Boolean)
 										.join(' ')}
 								</H4>
-								{/* {context.trustee.trusteeType && (
-									<P>
-										{`${context.trustee.trusteeType[0].toUpperCase()}${context.trustee.trusteeType
-											.slice(1)
-											.toLowerCase()} trustee`}
-									</P>
-								)} */}
 							</Flex>
 						</Flex>
 						<Flex
@@ -140,11 +133,8 @@ export const Trustee: React.FC<Omit<TrusteeProps, 'children'>> = (props) => {
 							) : (
 								<StatusMessage complete={context.complete} icon={ErrorCircle} />
 							)}
-							<Flex
-								cfg={{ width: 2, ml: 2, pl: 2, alignItems: 'flex-start' }}
-								// borderLeft="1px solid"
-								// borderColor="neutral.200"
-							>
+							<div className={styles.verticalHr} />
+							<Flex cfg={{ alignItems: 'flex-start' }}>
 								<UnderlinedButton
 									isOpen={
 										matches({ remove: 'reason' }) ||

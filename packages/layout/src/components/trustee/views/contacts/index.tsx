@@ -1,8 +1,26 @@
 import React from 'react';
-import { Form, validate, FFInputText } from '@tpr/forms';
+import { Form, validate, FieldProps, renderFields } from '@tpr/forms';
 import { useTrusteeContext } from '../../context';
-import { Footer } from '../../components/card';
+import { Footer, FooterButton } from '../../components/card';
 import { Content } from '../../components/content';
+
+const fields: FieldProps[] = [
+	{
+		type: 'text',
+		name: 'telephoneNumber',
+		label: 'Telephone number',
+		inputWidth: 2,
+		error: 'Enter a telephone number, like 0163 960 598 or +44 7700 900 359',
+		cfg: { mb: 3 },
+	},
+	{
+		type: 'email',
+		name: 'emailAddress',
+		label: 'Email address',
+		inputWidth: 6,
+		error: 'Cannot be empty',
+	},
+];
 
 const Contacts: React.FC = () => {
 	const { current, send } = useTrusteeContext();
@@ -13,47 +31,29 @@ const Contacts: React.FC = () => {
 	};
 
 	return (
-		<Content title="Contact details for this trustee" loading={loading}>
+		<Content
+			title="Contact details for this trustee"
+			subtitle="Provide contact details for the trustee, not a third-party such as an administrator."
+			loading={loading}
+		>
 			<Form
 				onSubmit={onSubmit}
 				initialValues={{
 					telephoneNumber: trustee.telephoneNumber,
 					emailAddress: trustee.emailAddress,
 				}}
-				validate={validate([
-					{
-						name: 'telephoneNumber',
-						error:
-							'Enter a telephone number, like 0163 960 598 or +44 7700 900 359',
-					},
-					{
-						name: 'emailAddress',
-						error: 'Cannot be empty',
-					},
-				])}
+				validate={validate(fields)}
 			>
 				{({ handleSubmit }) => (
 					<form onSubmit={handleSubmit}>
-						<FFInputText
-							name="telephoneNumber"
-							label="Telephone number"
-							inputWidth={2}
-							required
-						/>
-						<FFInputText
-							name="emailAddress"
-							type="email"
-							label="Email address"
-							inputWidth={6}
-							required
-						/>
-						<Footer
-							isDisabled={loading}
-							onSave={{
-								type: 'submit',
-								title: 'Save and close',
-							}}
-						/>
+						{renderFields(fields)}
+						<Footer>
+							<FooterButton
+								disabled={loading}
+								type="submit"
+								title="Save and close"
+							/>
+						</Footer>
 					</form>
 				)}
 			</Form>

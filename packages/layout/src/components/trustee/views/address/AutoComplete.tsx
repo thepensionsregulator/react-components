@@ -1,7 +1,7 @@
 import React from 'react';
 import { Flex, Link } from '@tpr/core';
 import { useTrusteeContext } from '../../context';
-import { Footer } from '../../components/card';
+import { Footer, FooterButton } from '../../components/card';
 import { Form, FFSelect } from '@tpr/forms';
 
 type AutoCompleteProps = {
@@ -34,13 +34,13 @@ const AutoComplete: React.FC<AutoCompleteProps> = ({ onClick, options }) => {
 						<Link onClick={onClick} cfg={{ mt: 1 }}>
 							I can't find my address in the list
 						</Link>
-						<Footer
-							isDisabled={loading}
-							onSave={{
-								type: 'submit',
-								title: 'Save and close',
-							}}
-						/>
+						<Footer>
+							<FooterButton
+								type="submit"
+								title="Save and close"
+								disabled={loading}
+							/>
+						</Footer>
 					</form>
 				)}
 			</Form>

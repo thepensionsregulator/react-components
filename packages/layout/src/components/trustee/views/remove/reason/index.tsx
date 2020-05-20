@@ -1,7 +1,7 @@
 import React from 'react';
 import { Flex, H4 } from '@tpr/core';
 import { useTrusteeContext } from '../../../context';
-import { Footer } from '../../../components/card';
+import { Footer, FooterButton } from '../../../components/card';
 import { Form, FFRadioButton, FFInputDate } from '@tpr/forms';
 import { FORM_ERROR } from 'final-form';
 import { Content } from '../../../components/content';
@@ -39,17 +39,17 @@ const RemoveReason: React.FC = () => {
 								type="radio"
 								label="They have left the scheme."
 								value="left_the_scheme"
+								cfg={{ mb: 3 }}
 							/>
 							{leftScheme && (
-								<Flex my={1} ml="47px">
-									<FFInputDate
-										name="date"
-										label="Date the trustee left the scheme"
-										hint="For example, 31 3 2019"
-										required={true}
-										error="Cannot be left empty!"
-									/>
-								</Flex>
+								<FFInputDate
+									name="date"
+									label="Date the trustee left the scheme"
+									hint="For example, 31 3 2019"
+									required={true}
+									error="Cannot be left empty!"
+									cfg={{ mb: 3 }}
+								/>
 							)}
 							<FFRadioButton
 								name="reason"
@@ -62,12 +62,9 @@ const RemoveReason: React.FC = () => {
 									{submitError}
 								</Flex>
 							)}
-							<Footer
-								onContinue={{
-									type: 'submit',
-									title: 'Continue',
-								}}
-							/>
+							<Footer>
+								<FooterButton type="submit" title="Continue" />
+							</Footer>
 						</form>
 					);
 				}}

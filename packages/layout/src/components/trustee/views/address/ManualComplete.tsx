@@ -2,7 +2,7 @@ import React from 'react';
 import { Flex, P } from '@tpr/core';
 import { Form, renderFields, validate } from '@tpr/forms';
 import { useTrusteeContext } from '../../context';
-import { Footer } from '../../components/card';
+import { Footer, FooterButton } from '../../components/card';
 import { Loading } from '../../components/content';
 import fields from './fields';
 
@@ -17,7 +17,9 @@ const ManualComplete = () => {
 	return (
 		<Flex cfg={{ flexDirection: 'column' }}>
 			{loading && <Loading />}
-			<P>Enter the trustee’s correspondence address manually.</P>
+			<P cfg={{ my: 3 }}>
+				Enter the trustee’s correspondence address manually.
+			</P>
 			<Form
 				onSubmit={onSubmit}
 				validate={validate(fields)}
@@ -28,13 +30,13 @@ const ManualComplete = () => {
 				{({ handleSubmit }) => (
 					<form onSubmit={handleSubmit}>
 						{renderFields(fields)}
-						<Footer
-							isDisabled={loading}
-							onSave={{
-								type: 'submit',
-								title: 'Save and close',
-							}}
-						/>
+						<Footer>
+							<FooterButton
+								type="submit"
+								title="Save and close"
+								disabled={loading}
+							/>
+						</Footer>
 					</form>
 				)}
 			</Form>

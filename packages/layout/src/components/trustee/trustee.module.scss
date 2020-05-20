@@ -4,7 +4,8 @@
 	position: relative;
 	display: flex;
 	flex-direction: column;
-	border: 1px solid grey;
+	border: 1px solid $colors-neutral-2;
+	box-shadow: 0 2px 3px rgba(0, 0, 0, 0.2);
 }
 
 .cardToolbar {
@@ -19,4 +20,11 @@
 
 .complete {
 	border-color: $colors-success-2;
+}
+
+.verticalHr {
+	width: 1px;
+	background-color: $colors-neutral-2;
+	height: 50%;
+	margin: 0 $space-4;
 }

@@ -221,6 +221,7 @@ const trusteeMachine = Machine<TrusteeContext, TrusteeStates, TrusteeEvents>({
 				confirm: {
 					on: {
 						EDIT_TRUSTEE: '#edit.trustee.name',
+						BACK: 'reason',
 						CANCEL: '#preview',
 					},
 				},
