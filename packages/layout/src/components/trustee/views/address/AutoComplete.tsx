@@ -31,7 +31,7 @@ const AutoComplete: React.FC<AutoCompleteProps> = ({ onClick, options }) => {
 							options={options}
 							inputWidth={6}
 						/>
-						<Link onClick={onClick} cfg={{ mt: 1 }}>
+						<Link onClick={onClick} cfg={{ mt: 3 }}>
 							I can't find my address in the list
 						</Link>
 						<Footer>

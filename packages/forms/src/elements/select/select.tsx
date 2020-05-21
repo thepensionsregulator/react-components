@@ -78,7 +78,10 @@ export const Select: React.FC<SelectProps> = ({
 								onClick={() => toggleMenu()}
 								{...getInputProps()}
 							/>
-							<div className={styles.iconPlacement}>
+							<div
+								className={styles.iconPlacement}
+								onClick={() => toggleMenu()}
+							>
 								<UnfoldMore />
 							</div>
 						</Flex>
