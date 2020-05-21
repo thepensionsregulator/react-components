@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { H3, P, Hr, Link } from '@tpr/core';
 import { useTrusteeContext } from '../../../context';
 import { Footer, FooterButton } from '../../../components/card';
@@ -18,8 +18,26 @@ const breadcrumbLinks: BreadcrumbLink[] = [
 ];
 
 const RemoveConfirm: React.FC = () => {
+	const [loading, setLoading] = useState(false);
 	const { current, send, onRemove } = useTrusteeContext();
 	const { leftTheScheme } = current.context;
+
+	function handleRemove() {
+		setLoading(true);
+		onRemove({
+			id: 'trustee_id_here',
+			reason: {
+				leftTheScheme: leftTheScheme ? true : false,
+				date: leftTheScheme,
+			},
+		})
+			.then(() => {
+				setLoading(false);
+			})
+			.catch(() => {
+				setLoading(false);
+			});
+	}
 
 	return (
 		<Content breadcrumbs={() => <Breadcrumbs links={breadcrumbLinks} />}>
@@ -30,19 +48,18 @@ const RemoveConfirm: React.FC = () => {
 			<P cfg={{ color: 'neutral.3' }}>This can't be undone.</P>
 			<Footer>
 				<FooterButton
+					disabled={loading}
 					title="Remove"
 					intent="danger"
-					onClick={() => {
-						onRemove({
-							id: 'trustee_id_here',
-							reason: {
-								leftTheScheme: leftTheScheme ? true : false,
-								date: leftTheScheme,
-							},
-						});
-					}}
+					onClick={handleRemove}
+					loadingMessage="Removing..."
 				/>
-				<Link cfg={{ m: 3 }} onClick={() => send('CANCEL')} underline>
+				<Link
+					disabled={loading}
+					cfg={{ m: 3 }}
+					onClick={() => send('CANCEL')}
+					underline
+				>
 					Cancel
 				</Link>
 			</Footer>

@@ -1,7 +1,9 @@
-import React, { useEffect, useCallback } from 'react';
-import { Flex, Button, H4, P, Link } from '@tpr/core';
+import React, { useEffect, useCallback, ChangeEvent } from 'react';
+import { Flex, Button, P, Link } from '@tpr/core';
+import { Input } from '@tpr/forms';
 import { extractToObject } from './helpers';
 import { useTrusteeContext } from '../../context';
+import styles from './Postcode.module.scss';
 
 type PostcodeProps = {
 	lookup: boolean;
@@ -83,42 +85,42 @@ const Postcode: React.FC<PostcodeProps> = ({
 	}, []);
 
 	return (
-		<Flex cfg={{ flexDirection: 'column', bg: 'neutral.1', p: 2, mb: 3 }}>
-			<H4 cfg={{ mb: 1 }}>Find the trustee's correspondence address</H4>
-			<P cfg={{ mb: 1, fontWeight: 3 }}>Postcode</P>
+		<div className={styles.wrapper}>
+			<P cfg={{ mb: 3 }}>Find the trustee's correspondence address</P>
+			<P cfg={{ mb: 2, fontWeight: 3 }}>Postcode</P>
 			{lookup ? (
 				<>
-					<Flex
-						cfg={{ mb: 1 }}
-						//  width="160px"
-					>
-						INPUT HERE
-						{/* <StyledInput
+					<div className={styles.inputWrapper}>
+						<Input
+							type="text"
 							value={postcode}
-							onChange={(evt) => setPostcode(evt.target.value)}
+							onChange={(evt: ChangeEvent<HTMLInputElement>) =>
+								setPostcode(evt.target.value)
+							}
 							disabled={loading}
-						/> */}
+						/>
+					</div>
+					<Flex>
+						<Button
+							onClick={() => {
+								search(postcode);
+								// form.change("address", undefined);
+							}}
+							disabled={loading}
+						>
+							{loading ? 'Loading...' : 'Find Address'}
+						</Button>
 					</Flex>
-					<Button
-						width="160px"
-						onClick={() => {
-							search(postcode);
-							// form.change("address", undefined);
-						}}
-						disabled={loading}
-					>
-						{loading ? 'Loading...' : 'Find Address'}
-					</Button>
 				</>
 			) : (
 				<Flex>
 					<P cfg={{ mr: 2 }}>{postcode}</P>
-					<Link appearance="primary" onClick={() => showLookup(true)}>
+					<Link onClick={() => showLookup(true)} underline>
 						Change
 					</Link>
 				</Flex>
 			)}
-		</Flex>
+		</div>
 	);
 };
 

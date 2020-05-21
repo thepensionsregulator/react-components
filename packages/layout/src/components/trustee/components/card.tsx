@@ -48,6 +48,7 @@ type FooterButtonProps = {
 	title?: string;
 	appearance?: 'primary' | 'outlined';
 	intent?: 'none' | 'success' | 'warning' | 'danger';
+	loadingMessage?: string;
 	onClick?: (...args: any[]) => void;
 	disabled?: boolean;
 	cfg?: ButtonProps['cfg'];
@@ -58,6 +59,7 @@ export const FooterButton: React.FC<FooterButtonProps> = ({
 	type,
 	onClick,
 	disabled,
+	loadingMessage = 'Saving...',
 	title,
 	cfg,
 }) => {
@@ -70,14 +72,7 @@ export const FooterButton: React.FC<FooterButtonProps> = ({
 			disabled={disabled}
 			cfg={cfg}
 		>
-			{disabled ? (
-				<Flex cfg={{ alignItems: 'center' }} height="100%">
-					{/* <Spinner size={22} /> */}
-					<P cfg={{ ml: 1 }}>Saving...</P>
-				</Flex>
-			) : (
-				title
-			)}
+			{disabled ? loadingMessage : title}
 		</Button>
 	);
 };

@@ -5,6 +5,7 @@ import { Footer, FooterButton } from '../../../components/card';
 import { Form, FFRadioButton, FFInputDate } from '@tpr/forms';
 import { FORM_ERROR } from 'final-form';
 import { Content } from '../../../components/content';
+import styles from './reason.module.scss';
 
 const RemoveReason: React.FC = () => {
 	const { send } = useTrusteeContext();
@@ -42,14 +43,16 @@ const RemoveReason: React.FC = () => {
 								cfg={{ mb: 3 }}
 							/>
 							{leftScheme && (
-								<FFInputDate
-									name="date"
-									label="Date the trustee left the scheme"
-									hint="For example, 31 3 2019"
-									required={true}
-									error="Cannot be left empty!"
-									cfg={{ mb: 3 }}
-								/>
+								<div className={styles.dateWrapper}>
+									<FFInputDate
+										name="date"
+										label="Date the trustee left the scheme"
+										hint="For example, 31 3 2019"
+										required={true}
+										error="Cannot be left empty!"
+										cfg={{ mb: 3 }}
+									/>
+								</div>
 							)}
 							<FFRadioButton
 								name="reason"

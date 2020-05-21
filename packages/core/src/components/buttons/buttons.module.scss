@@ -17,6 +17,10 @@
 .appearance-primary:disabled {
 	cursor: not-allowed !important;
 	background: $colors-neutral-2;
+
+	&:hover {
+		background: $colors-neutral-2 !important;
+	}
 }
 
 .appearance-outlined {
@@ -26,8 +30,15 @@
 }
 
 .appearance-outlined:disabled {
+	color: $colors-neutral-2;
 	cursor: not-allowed !important;
 	border: 2px solid $colors-neutral-2;
+
+	&:hover {
+		color: $colors-neutral-2;
+		background: none !important;
+		border: 2px solid $colors-neutral-2 !important;
+	}
 }
 
 /* 'none' | 'success' | 'warning' | 'danger'; */
@@ -77,19 +88,25 @@
 .size-small {
 	font-weight: $font-weight-1;
 	font-size: $font-size-1;
-	padding: 0.5rem 15px;
+	text-align: center;
+	height: 40px;
+	padding: 0 15px;
 }
 
 .size-medium {
 	font-weight: $font-weight-2;
 	font-size: $font-size-2;
-	padding: 1rem 28px;
+	text-align: center;
+	height: 50px;
+	padding: 0 28px;
 }
 
 .size-large {
 	font-weight: $font-weight-3;
 	font-size: $font-size-3;
-	padding: 1.2rem 38px;
+	text-align: center;
+	height: 60px;
+	padding: 0 38px;
 }
 
 /* LINK styles */

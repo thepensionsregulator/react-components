@@ -8,7 +8,7 @@ type TrusteeContextProps = {
 	send: (event: any, payload?: EventData) => Partial<State<TC, any, any, any>>;
 	onToggleCorrect?: () => void;
 	onCorrect?: (...args: any[]) => void;
-	onRemove?: (...args: any[]) => void;
+	onRemove?: (...args: any[]) => Promise<any>;
 	onSave?: (...args: any[]) => Promise<any>;
 	complete?: boolean;
 	addressAPI: any;
@@ -19,7 +19,7 @@ export const TrusteeContext = createContext<TrusteeContextProps>({
 	send: (_, __) => ({}),
 	onToggleCorrect: () => {},
 	onCorrect: () => {},
-	onRemove: () => {},
+	onRemove: () => new Promise((res) => res()),
 	onSave: () => new Promise((res) => res()),
 	addressAPI: { get: () => new Promise((res) => res()) },
 });
@@ -53,7 +53,7 @@ export type TrusteeProps = {
 	testId?: string;
 	children?: RenderProps | ReactElement;
 	onCorrect?: (...args: any[]) => void;
-	onRemove?: (...args: any[]) => void;
+	onRemove?: (...args: any[]) => Promise<any>;
 	onSave?: (...args: any[]) => Promise<any>;
 	addressAPI: any;
 };

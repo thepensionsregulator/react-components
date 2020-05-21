@@ -8,12 +8,10 @@ import Name from './views/name';
 import Type from './views/type/type';
 import Address from './views/address';
 import Contacts from './views/contacts';
-import RemoveReason from './views/remove/reason';
+import RemoveReason from './views/remove/reason/reason';
 import RemoveConfirm from './views/remove/confirm';
 
 import styles from './trustee.module.scss';
-
-// TODO: make responsive. Should contain 1 column on small screens and 2 on larger screens.
 
 const CardContent: React.FC = () => {
 	const { current } = useTrusteeContext();
@@ -46,7 +44,6 @@ const CardContent: React.FC = () => {
 };
 
 const StatusMessage = ({ complete, icon: Icon }) => {
-	// colors[complete ? 'success' : 'danger'][200]
 	return (
 		<Flex cfg={{ alignItems: 'center' }} height="22px">
 			<Icon size={18} fill={complete ? '#207e3b' : '#d4351c'} />
@@ -59,10 +56,69 @@ const StatusMessage = ({ complete, icon: Icon }) => {
 	);
 };
 
+const TrusteeButton: React.FC = () => {
+	const { current, send } = useTrusteeContext();
+	return (
+		<UnderlinedButton
+			isOpen={
+				current.matches({ edit: { trustee: 'name' } }) ||
+				current.matches({ edit: { trustee: 'kind' } }) ||
+				current.matches({ edit: { trustee: 'save' } }) ||
+				current.matches({ edit: { company: 'address' } }) ||
+				current.matches({ edit: { company: 'save' } }) ||
+				current.matches({ edit: { contact: 'details' } }) ||
+				current.matches({ edit: { contact: 'save' } }) ||
+				current.matches({ remove: 'reason' }) ||
+				current.matches({ remove: 'confirm' })
+			}
+			onClick={() => {
+				if (
+					current.matches({ edit: { trustee: 'name' } }) ||
+					current.matches({ edit: { trustee: 'kind' } }) ||
+					current.matches({ edit: { company: 'address' } }) ||
+					current.matches({ edit: { contact: 'details' } }) ||
+					current.matches({ remove: 'reason' }) ||
+					current.matches({ remove: 'confirm' })
+				) {
+					send('CANCEL');
+				} else {
+					send('EDIT_TRUSTEE');
+				}
+			}}
+		>
+			Trustee
+		</UnderlinedButton>
+	);
+};
+
+const RemoveButton: React.FC = () => {
+	const { current, send } = useTrusteeContext();
+	return (
+		<UnderlinedButton
+			isOpen={
+				current.matches({ remove: 'reason' }) ||
+				current.matches({ remove: 'confirm' })
+			}
+			onClick={() => {
+				if (
+					current.matches({ remove: 'reason' }) ||
+					current.matches({ remove: 'confirm' })
+				) {
+					send('CANCEL');
+				} else {
+					send('REMOVE');
+				}
+			}}
+		>
+			Remove
+		</UnderlinedButton>
+	);
+};
+
 export const Trustee: React.FC<Omit<TrusteeProps, 'children'>> = (props) => {
 	return (
 		<TrusteeProvider {...props}>
-			{({ current: { context, matches }, send }) => (
+			{({ current: { context } }) => (
 				<div data-testid={props.testId} className={styles.card}>
 					<div
 						className={classNames([
@@ -79,31 +135,7 @@ export const Trustee: React.FC<Omit<TrusteeProps, 'children'>> = (props) => {
 								pr: 4,
 							}}
 						>
-							<UnderlinedButton
-								isOpen={
-									matches({ edit: { trustee: 'name' } }) ||
-									matches({ edit: { trustee: 'kind' } }) ||
-									matches({ edit: { trustee: 'save' } }) ||
-									matches({ edit: { company: 'address' } }) ||
-									matches({ edit: { company: 'save' } }) ||
-									matches({ edit: { contact: 'details' } }) ||
-									matches({ edit: { contact: 'save' } })
-								}
-								onClick={() => {
-									if (
-										matches({ edit: { trustee: 'name' } }) ||
-										matches({ edit: { trustee: 'kind' } }) ||
-										matches({ edit: { company: 'address' } }) ||
-										matches({ edit: { contact: 'details' } })
-									) {
-										send('CANCEL');
-									} else {
-										send('EDIT_TRUSTEE');
-									}
-								}}
-							>
-								Trustee
-							</UnderlinedButton>
+							<TrusteeButton />
 							<Flex cfg={{ mt: 1, flexDirection: 'column' }}>
 								<H4>
 									{[
@@ -135,24 +167,7 @@ export const Trustee: React.FC<Omit<TrusteeProps, 'children'>> = (props) => {
 							)}
 							<div className={styles.verticalHr} />
 							<Flex cfg={{ alignItems: 'flex-start' }}>
-								<UnderlinedButton
-									isOpen={
-										matches({ remove: 'reason' }) ||
-										matches({ remove: 'confirm' })
-									}
-									onClick={() => {
-										if (
-											matches({ remove: 'reason' }) ||
-											matches({ remove: 'confirm' })
-										) {
-											send('CANCEL');
-										} else {
-											send('REMOVE');
-										}
-									}}
-								>
-									Remove
-								</UnderlinedButton>
+								<RemoveButton />
 							</Flex>
 						</Flex>
 					</div>

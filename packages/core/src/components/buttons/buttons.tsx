@@ -1,6 +1,11 @@
 import React from 'react';
 import styles from './buttons.module.scss';
-import { SpaceProps, ColorProps, TypographyProps } from '../globals/globals';
+import {
+	SpaceProps,
+	ColorProps,
+	TypographyProps,
+	LayoutProps,
+} from '../globals/globals';
 import { useClassNames } from '../../hooks/use-class-names';
 
 export type ButtonProps = {
@@ -58,7 +63,7 @@ export const Button: React.FC<ButtonProps> = ({
 };
 
 export type LinkProps = {
-	cfg?: SpaceProps | ColorProps | TypographyProps;
+	cfg?: SpaceProps | ColorProps | TypographyProps | LayoutProps;
 	className?: string;
 	underline?: boolean;
 	[key: string]: any;
