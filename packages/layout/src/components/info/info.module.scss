@@ -1,0 +1,30 @@
+@import '@tpr/theming/lib/variables.scss';
+
+.info {
+	position: relative;
+	display: flex;
+	flex-direction: column;
+	padding: 30px;
+	background: $colors-neutral-1;
+	color: $colors-neutral-9;
+}
+
+.important {
+	margin-top: 40px;
+	border-top: 6px solid $colors-neutral-9;
+}
+
+.importantMessage {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	font-weight: 300;
+	font-size: 18px;
+	position: absolute;
+	left: 0;
+	height: 46px;
+	top: -47px;
+	padding: 0 30px;
+	background: $colors-neutral-9;
+	color: $colors-background;
+}

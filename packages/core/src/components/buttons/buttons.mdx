@@ -4,7 +4,7 @@ menu: Core
 route: /core/buttons
 ---
 
-import { Playground,  } from 'docz';
+import { Playground, Props } from 'docz';
 import { Button } from './buttons';
 
 # Buttons
@@ -14,12 +14,12 @@ the action that will occur when the user touches them.
 
 ## Properties
 
-TODO
+<Props of={Button} />
 
 ## Usage
 
 ```js
-import { Button } from '@tpr/core'
+import { Button } from '@tpr/core';
 ```
 
 ## Basic usage
@@ -31,7 +31,16 @@ import { Button } from '@tpr/core'
 ## Usage with props
 
 <Playground>
-	<Button intent="warning" scale="big" margin={30} iconBefore={() => `🎄`} iconAfter={() => `🎄`}>
+	<Button
+		appearance="primary"
+		intent="danger"
+		size="small"
+		before={() => `🐑 `}
+		after={() => ` 🦊`}
+		cfg={{
+			my: 5,
+		}}
+	>
 		Click me
 	</Button>
 </Playground>
@@ -40,77 +49,48 @@ import { Button } from '@tpr/core'
 
 ### With different sizes
 
-<Button mr={15} scale="small">
+<Button size="large" cfg={{ mr: 3 }}>
 	Click me
 </Button>
-<Button mr={15} scale="normal">
+<Button size="medium" cfg={{ mr: 3 }}>
 	Click me
 </Button>
-<Button mr={15} scale="big">
-	Click me
-</Button>
-<Button mr={15} appearance="link" scale="small">
-	Click me
-</Button>
-<Button mr={15} appearance="link" scale="normal">
-	Click me
-</Button>
-<Button mr={15} appearance="link" scale="big">
+<Button size="small" cfg={{ mr: 3 }}>
 	Click me
 </Button>
 
 ### Primary appearance with intent
 
-<Button mr={15} intent="none">
+<Button cfg={{ mr: 3 }} intent="none">
 	Click me
 </Button>
-<Button mr={15} intent="success">
+<Button cfg={{ mr: 3 }} intent="success">
 	Click me
 </Button>
-<Button mr={15} intent="warning">
+<Button cfg={{ mr: 3 }} intent="warning">
 	Click me
 </Button>
-<Button mr={15} intent="danger">
+<Button cfg={{ mr: 3 }} intent="danger">
+	Click me
+</Button>
+<Button cfg={{ mr: 3 }} disabled>
 	Click me
 </Button>
 
 ### Outlined appearance with intent
 
-<Button mr={15} appearance="outlined" intent="none">
+<Button cfg={{ mr: 3 }} appearance="outlined" intent="none">
 	Click me
 </Button>
-<Button mr={15} appearance="outlined" intent="success">
+<Button cfg={{ mr: 3 }} appearance="outlined" intent="success">
 	Click me
 </Button>
-<Button mr={15} appearance="outlined" intent="warning">
+<Button cfg={{ mr: 3 }} appearance="outlined" intent="warning">
 	Click me
 </Button>
-<Button mr={15} appearance="outlined" intent="danger">
+<Button cfg={{ mr: 3 }} appearance="outlined" intent="danger">
 	Click me
 </Button>
-
-### Link appearance with intent
-
-<Button mr={15} appearance="link" intent="none">
+<Button cfg={{ mr: 3 }} appearance="outlined" disabled>
 	Click me
 </Button>
-<Button mr={15} appearance="link" intent="success">
-	Click me
-</Button>
-<Button mr={15} appearance="link" intent="warning">
-	Click me
-</Button>
-<Button mr={15} appearance="link" intent="danger">
-	Click me
-</Button>
-
-### Block level buttons
-
-<Button width="100%" intent="none" mb="10px">
-	Click me
-</Button>
-
-<Button width="100%" intent="none" disabled>
-	Click me
-</Button>
-

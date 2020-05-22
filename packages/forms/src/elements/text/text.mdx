@@ -1,0 +1,92 @@
+---
+name: Text
+menu: Forms
+route: /forms/text
+---
+
+import { Playground } from 'docz';
+import { Form } from 'react-final-form';
+import { FFInputText } from './text';
+import { validate } from '../../validation';
+import { renderFields } from '../../renderFields';
+
+# Text Input
+
+## Usage
+
+```js
+import { Form, FFInputText } from '@tpr/forms';
+```
+
+[CodeSandbox](https://codesandbox.io)
+
+Example using field level validation
+
+<Playground>
+	<Form onSubmit={console.log}>
+		{({ handleSubmit }) => (
+			<form onSubmit={handleSubmit}>
+				<FFInputText
+					name="event_name"
+					label="Event name"
+					placeholder="add some text here..."
+					hint="Must be between 6 and 8 digits long"
+					validate={(value) => (value ? undefined : 'Enter an event name')}
+					inputWidth={5}
+					cfg={{ my: 5 }}
+				/>
+				<button type="submit" style={{ display: 'none' }} children="Submit" />
+			</form>
+		)}
+	</Form>
+</Playground>
+
+<br />
+Example using record level validation
+
+```js
+import { Form, validate, renderFields } from '@tpr/forms';
+```
+
+<Playground>
+	{() => {
+		const fields = [
+			{
+				type: 'text',
+				name: 'event_place',
+				label: 'Event place',
+				hint: 'The word must be London exactly',
+				error: (value, _fields) => {
+					return value === 'London' ? undefined : 'Must be in London';
+				},
+				placeholder: 'add some text here...',
+				inputWidth: 5,
+				cfg: { my: 5 },
+			},
+			{
+				type: 'text',
+				name: 'event_name',
+				label: 'Event name',
+				hint: 'Cannot be empty',
+				error: 'Enter an event name',
+				placeholder: 'add some text here...',
+				inputWidth: 5,
+				cfg: { my: 5 },
+			},
+		];
+		return (
+			<Form onSubmit={console.log} validate={validate(fields)}>
+				{({ handleSubmit }) => (
+					<form onSubmit={handleSubmit}>
+						{renderFields(fields)}
+						<button
+							type="submit"
+							style={{ display: 'none' }}
+							children="Submit"
+						/>
+					</form>
+				)}
+			</Form>
+		);
+	}}
+</Playground>

@@ -1,0 +1,30 @@
+@import '@tpr/theming/lib/variables.scss';
+
+.card {
+	position: relative;
+	display: flex;
+	flex-direction: column;
+	border: 1px solid $colors-neutral-2;
+	box-shadow: 0 2px 3px rgba(0, 0, 0, 0.2);
+}
+
+.cardToolbar {
+	display: flex;
+	flex-direction: row;
+	flex: 0 0 auto;
+	height: 100px;
+	padding: 40px 40px 0 40px;
+	border-left: 5px solid;
+	border-color: $colors-danger-2;
+}
+
+.complete {
+	border-color: $colors-success-2;
+}
+
+.verticalHr {
+	width: 1px;
+	background-color: $colors-neutral-2;
+	height: 50%;
+	margin: 0 $space-4;
+}

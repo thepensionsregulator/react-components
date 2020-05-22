@@ -1,0 +1,38 @@
+---
+name: Link
+menu: Core
+route: /core/links
+---
+
+import { Playground, Props } from 'docz';
+import { Link } from './buttons';
+
+# Link
+
+Button with link appearance
+
+## Properties
+
+<Props of={Link} />
+
+## Usage
+
+```js
+import { Link } from '@tpr/core';
+```
+
+## Basic usage
+
+<Playground>
+	<Link>Click to go back</Link>
+</Playground>
+
+### Usage with props
+
+<Playground>
+	<Link cfg={{ mr: 3 }}>Home</Link>
+	<Link cfg={{ mr: 3 }}>Gallery</Link>
+	<Link cfg={{ mr: 3 }} underline={true}>
+		Log out
+	</Link>
+</Playground>

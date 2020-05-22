@@ -52,7 +52,9 @@ packages/*/yarn.lock
 # Build Path of Test Fixtures
 test/**/public
 .gatsby-context.js
-gatsby-config.js
+.docz/gatsby-config.js 
+.docz/gatsby-node.js 
+.docz/src/pages/404.js
 .cache/
 .netlify
 
@@ -62,6 +64,8 @@ docs.json
 *.log
 .docz/public
 .idea/
+
+
 
 junit.xml
 

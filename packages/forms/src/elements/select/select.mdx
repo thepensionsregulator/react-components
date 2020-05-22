@@ -1,0 +1,55 @@
+---
+name: Select
+menu: Forms
+route: /forms/select
+---
+
+import { Playground } from 'docz';
+import { Form } from 'react-final-form';
+import { FFSelect, Select } from './select';
+
+# Select Dropdown
+
+## Usage
+
+```js
+import { FFSelect } from '@tpr/forms';
+```
+
+<Playground>
+	{() => {
+		const FIELD_NAME = 'fruit';
+		return (
+			<Form
+				onSubmit={console.log}
+				initialValues={{ [FIELD_NAME]: { label: 'Apple', value: 1 } }}
+			>
+				{({ handleSubmit }) => (
+					<form onSubmit={handleSubmit}>
+						<div style={{ padding: 10 }}>
+							<FFSelect
+								name={FIELD_NAME}
+								label="Select Fruit"
+								hint="Please select one of the fruit from the dropdown menu"
+								inputWidth={4}
+								onChange={({ value }, send) => send(value)}
+								validate={(value) =>
+									value
+										? undefined
+										: 'Cannot be left empty, please select a value!'
+								}
+								options={[
+									{ label: 'Apple', value: 1 },
+									{ label: 'Pear', value: 2 },
+									{ label: 'Orange', value: 3 },
+									{ label: 'Grape', value: 4 },
+									{ label: 'Banana', value: 5 },
+								]}
+							/>
+						</div>
+					</form>
+				)}
+			</Form>
+		);
+	}}
+</Playground>

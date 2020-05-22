@@ -1,0 +1,27 @@
+@import '@tpr/theming/lib/variables.scss';
+
+.label {
+	display: flex;
+	cursor: default;
+}
+
+.labelError {
+	padding-left: $space-3;
+	border-left: 4px solid $colors-danger-3;
+}
+
+.labelText {
+	font-family: $fonts-sans-serif;
+	color: $colors-neutral-9;
+	font-weight: $font-weight-3;
+	font-size: $font-size-2;
+	margin-bottom: $space-1;
+	white-space: nowrap;
+}
+
+.errorMessage {
+	color: $colors-danger-3;
+	font-size: $font-size-2;
+	font-weight: $font-weight-3;
+	margin-bottom: $space-2;
+}

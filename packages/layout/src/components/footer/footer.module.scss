@@ -1,0 +1,25 @@
+@import '@tpr/theming/lib/variables.scss';
+
+.wrapper {
+	background-color: $colors-neutral-1;
+	border-top: 5px solid #777;
+}
+
+.logo {
+	display: flex;
+	flex: 0 0 auto;
+	align-items: flex-start;
+	justify-content: flex-start;
+	width: $sidebar-width;
+	margin-right: $space-4;
+
+	img {
+		width: 180px;
+	}
+}
+
+.footerText {
+	align-items: center;
+	height: 50px;
+	border-top: 2px solid $colors-neutral-2;
+}

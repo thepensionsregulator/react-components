@@ -1,0 +1,8 @@
+@import '@tpr/theming/lib/variables.scss';
+
+.sidebar {
+	display: flex;
+	flex: 0 0 auto;
+	width: $sidebar-width;
+	background: $colors-neutral-1;
+}
