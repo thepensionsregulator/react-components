@@ -90,19 +90,22 @@ export type SpaceProps = Partial<{
 }>;
 
 export type FlexBoxProps = {
+	testId?: string;
 	className?: string;
 	cfg?: FlexProps &
 		SpaceProps &
 		BackgroundProps &
 		ColorProps &
 		LayoutProps &
-		CursorProps;
+		CursorProps &
+		TypographyProps;
 	[key: string]: any;
 };
 export const Flex: React.FC<FlexBoxProps> = ({
 	className,
 	children,
 	cfg = {},
+	testId,
 	...props
 }) => {
 	const classNames = useClassNames(cfg, [styles.flex, className]);
@@ -110,6 +113,7 @@ export const Flex: React.FC<FlexBoxProps> = ({
 		'div',
 		{
 			className: classNames,
+			'data-testid': testId,
 			...props,
 		},
 		children,
