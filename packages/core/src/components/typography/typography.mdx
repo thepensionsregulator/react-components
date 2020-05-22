@@ -5,38 +5,42 @@ route: /core/typography
 ---
 
 import { Playground, Props } from 'docz';
-import { H1, H2, H3, H4, H5, H6, P, Span, Link } from './typography';
+import { Text, H1, H2, H3, H4, H5, H6, P, Span, B, Hr } from './typography';
 
 # Typography
 
 TPR Typography components
 
+## Props
+
+<Props of={H1} />
+
 ## Usage
 
 ```js
-import { H1 } from '@tpr/core'
+import { H1 } from '@tpr/core';
 ```
 
-| Components   |
-| ------------ |
-| H1  ...  H6  |
-| Span         |
-| Link         |
-| Text         |
-| P            |
-| fontStack    |
+| Available Components |
+| -------------------- |
+| H1 ... H6            |
+| Text                 |
+| P                    |
+| Span                 |
+| B                    |
+| Hr                   |
 
 ## Basic usage
 
 <Playground>
-	<Link>Click this link</Link><br />
-	<Span>Lorem ipsum dolor sit amet consectetur adipisicing elit.</Span>
-	<P>Lorem ipsum dolor sit amet consectetur adipisicing elit.</P>
-	<hr />
-	<H1>H1: Lorem ipsum dolor sit amet consectetur.</H1>
-	<H2>H2: Lorem ipsum dolor sit amet consectetur.</H2>
-	<H3>H3: Lorem ipsum dolor sit amet consectetur.</H3>
-	<H4>H4: Lorem ipsum dolor sit amet consectetur.</H4>
-	<H5>H5: Lorem ipsum dolor sit amet consectetur.</H5>
-	<H6>H6: Lorem ipsum dolor sit amet consectetur.</H6>
+	<Text tag="p">Almost before we knew it, we had left the ground.</Text>
+	<Span>Almost before we knew it, we had left the ground.</Span>
+	<P>Almost before we knew it, we had left the ground.</P>
+	<Hr cfg={{ my: 4 }} />
+	<H6 cfg={{ mt: 2 }}>Almost before we knew it, we had left the ground.</H6>
+	<H5 cfg={{ mt: 2 }}>Almost before we knew it, we had left the ground.</H5>
+	<H4 cfg={{ mt: 2 }}>Almost before we knew it, we had left the ground.</H4>
+	<H3 cfg={{ mt: 2 }}>Almost before we knew it, we had left the ground.</H3>
+	<H2 cfg={{ mt: 2 }}>Almost before we knew it, we had left the ground.</H2>
+	<H1 cfg={{ mt: 2 }}>Almost before we knew it, we had left the ground.</H1>
 </Playground>

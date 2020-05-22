@@ -1,0 +1,52 @@
+/**** SCREEN SETTINGS ****/
+$app-width: 1170px;
+$sidebar-width: 275px;
+/**** COLORS ****/
+$colors-background: #ffffff;
+/* colors primary */
+$colors-primary-1: #75bdf0;
+$colors-primary-2: #036db8;
+$colors-primary-3: #003078;
+/* colors neutral */
+$colors-neutral-1: #e8e8e8;
+$colors-neutral-2: #b1b4b6;
+$colors-neutral-3: #888888;
+$colors-neutral-9: #0b0c0c;
+/* colors accents */
+$colors-accents-2: #5e529f;
+$colors-accents-3: #483b88;
+$colors-accents-4: #0b012f;
+/* colors success */
+$colors-success-2: #207e3b;
+$colors-success-3: #015e33;
+/* colors warning */
+$colors-warning-2: #ffdd00;
+$colors-warning-3: #e3c502;
+/* colors danger */
+$colors-danger-2: #d4351c;
+$colors-danger-3: #bd2811;
+/**** FONTS ****/
+$fonts-sans-serif: 'Open Sans', sans-serif;
+/**** SPACE ****/
+$space-1: 5px;
+$space-2: 10px;
+$space-3: 15px;
+$space-4: 20px;
+$space-5: 25px;
+$space-6: 30px;
+/**** FONT SIZES ****/
+$font-size-1: 14px;
+$font-size-2: 16px;
+$font-size-3: 18px;
+$font-size-4: 23px;
+$font-size-5: 36px;
+$font-size-6: 45px;
+/**** FONT WEIGHTS ****/
+$font-weight-1: 300;
+$font-weight-2: 400;
+$font-weight-3: 600;
+/**** BREAKPOINTS ****/
+$breakpoint-1: 48em;
+$breakpoint-2: 64em;
+$breakpoint-3: 90em;
+$breakpoint-4: 114em;

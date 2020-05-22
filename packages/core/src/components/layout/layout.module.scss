@@ -1,0 +1,13 @@
+@import '@tpr/theming/lib/variables.scss';
+
+.appWidth {
+	width: 100%;
+	max-width: $app-width;
+}
+
+.docWidth {
+	display: flex;
+	width: 100%;
+	position: relative;
+	justify-content: center;
+}

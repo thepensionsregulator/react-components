@@ -1,0 +1,61 @@
+---
+name: Date
+menu: Forms
+route: /forms/date
+---
+
+import { Playground } from 'docz';
+import { Form } from 'react-final-form';
+import { FFInputDate } from './date';
+import { validate } from '../../validation';
+import { renderFields } from '../../renderFields';
+
+# Date
+
+## Usage
+
+```js
+import { FFInputDate } from '@tpr/forms';
+```
+
+## Usage
+
+Lorem ipsum dolor sit amet consectetur adipisicing elit. Ipsum nostrum omnis ea unde totam, est
+consectetur odio! Harum vitae, sed totam aperiam consequuntur nostrum repudiandae non nemo porro,
+dolorem nulla corrupti hic consectetur eaque fuga illo numquam modi similique ipsam recusandae! Harum,
+possimus suscipit. Quibusdam totam, fugiat officiis qui nisi tempora. Accusantium corrupti similique
+et at ipsum, eveniet tempore nostrum quasi est unde modi impedit quaerat suscipit aspernatur ratione
+quo corporis? Cum dignissimos adipisci itaque sint tempore, saepe dolorem fugit quia placeat officiis
+earum rerum aspernatur similique commodi voluptates? Id ut ab cum doloremque magnam illo ipsa officia nulla ipsum.
+
+[CodeSandbox](https://codesandbox.io/s/nice-dream-xs3zp)
+
+<Playground>
+	{() => {
+		const fields = [
+			{
+				type: 'date',
+				name: 'passport-issued',
+				label: 'When was your passport issued?',
+				hint: 'For example, 12 11 2007',
+				error: 'The date your passport was issued must be in the past',
+			},
+		];
+		return (
+			<Form
+				onSubmit={(val) => console.log(val)}
+				initialValues={{ 'passport-issued': new Date() }}
+				validate={validate(fields)}
+			>
+				{({ handleSubmit }) => (
+					<form onSubmit={handleSubmit} style={{ padding: 10 }}>
+						{renderFields(fields)}
+						<button type="submit" style={{ display: 'none' }}>
+							Submit
+						</button>
+					</form>
+				)}
+			</Form>
+		);
+	}}
+</Playground>

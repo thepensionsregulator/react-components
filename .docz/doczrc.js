@@ -11,8 +11,8 @@ export default {
 		'contributing',
 		'license',
 		'readme',
-	].map(word => `${word.toUpperCase()}.md`),
-	menu: ['Home', 'Core', 'Forms'],
+	].map((word) => `${word.toUpperCase()}.md`),
+	menu: ['Home', 'Core', 'Forms', 'Layout'],
 	themeConfig: {
 		mode: 'light',
 		showDarkModeSwitch: false,

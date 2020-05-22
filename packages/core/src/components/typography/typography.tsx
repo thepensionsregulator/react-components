@@ -1,153 +1,98 @@
-import styled, { css } from 'styled-components';
+import React, { createElement, useMemo } from 'react';
+import styles from './typography.module.scss';
 import {
-	space,
-	color,
-	typography,
 	SpaceProps,
-	ColorProps,
 	TypographyProps,
-} from 'styled-system';
+	BackgroundProps,
+	ColorProps,
+	CursorProps,
+} from '../globals/globals';
+import { classNames } from '../../utils';
+import { useClassNames } from '../../hooks/use-class-names';
 
-interface HtmlHTagTypes extends SpaceProps, ColorProps, TypographyProps {}
+export type AvailableTags =
+	| 'h1'
+	| 'h2'
+	| 'h3'
+	| 'h4'
+	| 'h5'
+	| 'h6'
+	| 'p'
+	| 'span'
+	| 'hr'
+	| 'b';
 
-export const fontStack = css`
-	font-family: ${({ theme }) => theme.fonts.serif};
-`;
+export type TextProps = {
+	className?: string;
+	tag: AvailableTags;
+	cfg?: SpaceProps &
+		TypographyProps &
+		BackgroundProps &
+		ColorProps &
+		CursorProps;
+	[key: string]: any;
+};
+export const Text: React.FC<TextProps> = ({
+	tag = '',
+	className,
+	children,
+	cfg = {},
+	...props
+}) => {
+	const tagClassName = useMemo(() => styles[tag], [tag]);
+	const classNames = useClassNames(cfg, [tagClassName, className]);
+	return createElement(
+		tag,
+		{
+			className: classNames,
+			...props,
+		},
+		children,
+	);
+};
 
-export const H1 = styled.h1<HtmlHTagTypes>`
-	${fontStack};
+export type TagProps = Partial<TextProps>;
 
-	font-weight: ${({ theme }) => theme.fontWeights[1]};
-	font-size: ${({ theme }) => theme.fontSizes[5]}px;
-	letter-spacing: 0.4px;
-	margin: 0;
-	padding: 0;
+export const H1: React.FC<TagProps> = ({ ...props }) => {
+	return <Text tag="h1" {...props} />;
+};
 
-	${color};
-	${typography};
-	${space};
-`;
+export const H2: React.FC<TagProps> = ({ ...props }) => {
+	return <Text tag="h2" {...props} />;
+};
 
-export const H2 = styled.h2<HtmlHTagTypes>`
-	${fontStack};
+export const H3: React.FC<TagProps> = ({ ...props }) => {
+	return <Text tag="h3" {...props} />;
+};
 
-	font-weight: ${({ theme }) => theme.fontWeights[2]};
-	font-size: ${({ theme }) => theme.fontSizes[4]}px;
-	letter-spacing: 0.4px;
-	margin: 0;
-	padding: 0;
+export const H4: React.FC<TagProps> = ({ ...props }) => {
+	return <Text tag="h4" {...props} />;
+};
 
-	${color};
-	${typography};
-	${space};
-`;
+export const H5: React.FC<TagProps> = ({ ...props }) => {
+	return <Text tag="h5" {...props} />;
+};
 
-export const H3 = styled.h3<HtmlHTagTypes>`
-	${fontStack};
+export const H6: React.FC<TagProps> = ({ ...props }) => {
+	return <Text tag="h6" {...props} />;
+};
 
-	font-weight: ${({ theme }) => theme.fontWeights[1]};
-	font-size: ${({ theme }) => theme.fontSizes[3]}px;
-	letter-spacing: 0.4px;
-	margin: 0;
-	padding: 0;
+export const P: React.FC<TagProps> = ({ ...props }) => {
+	return <Text tag="p" {...props} />;
+};
 
-	${color};
-	${typography};
-	${space};
-`;
+export const Span: React.FC<TagProps> = ({ ...props }) => {
+	return <Text tag="span" {...props} />;
+};
 
-export const H4 = styled.h4<HtmlHTagTypes>`
-	${fontStack};
+export const B: React.FC<TagProps> = ({ className, ...props }) => {
+	return (
+		<Text tag="b" className={classNames([styles.bold, className])} {...props} />
+	);
+};
 
-	font-weight: ${({ theme }) => theme.fontWeights[2]};
-	font-size: ${({ theme }) => theme.fontSizes[2]}px;
-	letter-spacing: 0.4px;
-	margin: 0;
-	padding: 0;
-
-	${color};
-	${typography};
-	${space};
-`;
-
-export const H5 = styled.h5<HtmlHTagTypes>`
-	${fontStack};
-
-	font-weight: ${({ theme }) => theme.fontWeights[1]};
-	font-size: ${({ theme }) => theme.fontSizes[1]}px;
-	letter-spacing: 0.4px;
-	margin: 0;
-	padding: 0;
-
-	${color};
-	${typography};
-	${space};
-`;
-
-export const H6 = styled.h6<HtmlHTagTypes>`
-	${fontStack};
-
-	font-weight: ${({ theme }) => theme.fontWeights[1]};
-	font-size: ${({ theme }) => theme.fontSizes[0]}px;
-	letter-spacing: 0.4px;
-	margin: 0;
-	padding: 0;
-
-	${color};
-	${typography};
-	${space};
-`;
-
-export const P = styled.p<HtmlHTagTypes>`
-	${fontStack};
-
-	font-weight: ${({ theme }) => theme.fontWeights[1]};
-	font-size: ${({ theme }) => theme.fontSizes[1]}px;
-	letter-spacing: 0.9px;
-	line-height: 1.4;
-	margin: 0;
-	padding: 0;
-
-	${color};
-	${typography};
-	${space};
-`;
-
-export const Text = styled(P)``;
-
-export const Span = styled('span')<HtmlHTagTypes>`
-	${fontStack};
-
-	${color};
-	${typography};
-	${space};
-`;
-
-interface LinkProps extends SpaceProps {
-	appearance?: 'default' | 'primary';
-	testId?: string;
-}
-
-export const Link = styled('a').attrs<LinkProps>(
-	({ theme, appearance = 'default', testId }) => ({
-		'data-testid': testId,
-		color:
-			appearance === 'default'
-				? theme.colors.neutral[300]
-				: theme.colors.primary[200],
-	}),
-)<LinkProps>`
-	${fontStack};
-
-	font-weight: ${({ theme }) => theme.fontWeights[1]};
-	text-decoration: underline;
-	color: ${({ color }) => color};
-	font-size: ${({ theme }) => theme.fontSizes[2]}px;
-	letter-spacing: 0.9px;
-	line-height: 1.4;
-	margin: 0;
-	padding: 0;
-	cursor: pointer;
-
-	${space};
-`;
+export const Hr: React.FC<TagProps> = ({ className, ...props }) => {
+	return (
+		<Text tag="hr" className={classNames([styles.hr, className])} {...props} />
+	);
+};

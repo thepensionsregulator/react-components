@@ -1,13 +1,4 @@
 import React from 'react';
-import { ThemeProvider } from 'styled-components';
-import lightTheme from '../../../packages/theming/src/lightTheme';
-import GlobalConfig from '../../../packages/theming/src/reset.css';
+import ThemeProvider from '../../../packages/theming/src';
 
-export default ({ children }) => (
-	<ThemeProvider theme={lightTheme}>
-		<>
-			<GlobalConfig />
-			{children}
-		</>
-	</ThemeProvider>
-);
+export default ({ children }) => <ThemeProvider>{children}</ThemeProvider>;

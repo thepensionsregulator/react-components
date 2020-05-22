@@ -1,0 +1,25 @@
+---
+name: Header
+menu: Layout
+route: /layout/header
+---
+
+import { Playground } from 'docz';
+import { Header } from './header';
+
+# Header
+
+## Basic usage
+
+```js
+import { Header } from '@tpr/layout';
+```
+
+<Playground>
+	<Header
+		title="Test Scheme Return"
+		logoUrl="https://www.thepensionsregulator.gov.uk/-/media/thepensionsregulator/images/logo/tpr-logo-header.ashx"
+		onClickLogout={() => alert('logged out')}
+		onClickSchemeOptions={() => alert('scheme options clicked')}
+	/>
+</Playground>
