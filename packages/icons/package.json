@@ -23,9 +23,6 @@
 	],
 	"scripts": {
 		"prepare": "yarn build",
-		"dev": "yarn storybook",
-		"test": "jest --coverage",
-		"test:watch": "jest --watch",
 		"build": "tsc -b",
 		"bundle": "cross-env-shell \"../../node_modules/.bin/rollup\" -c rollup.config.js",
 		"clean": "rimraf lib",

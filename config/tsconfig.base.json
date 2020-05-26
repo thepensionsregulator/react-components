@@ -11,7 +11,7 @@
 		"allowJs": true,
 		"jsx": "react",
 		"lib": ["es2019", "dom"],
-		"module": "ES6",
+		"module": "commonjs",
 		"moduleResolution": "node",
 		"noFallthroughCasesInSwitch": true,
 		"allowSyntheticDefaultImports": true,

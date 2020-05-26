@@ -24,9 +24,6 @@
 	],
 	"scripts": {
 		"prepare": "yarn build",
-		"dev": "yarn storybook",
-		"test": "jest --coverage",
-		"test:watch": "jest --watch",
 		"copycss": "copyfiles -u 1 \"./src/**/*.{css,scss}\" \"./lib/\" && echo @tpr/core css files copied.",
 		"bundle": "cross-env-shell \"../../node_modules/.bin/rollup\" -c rollup.config.js",
 		"build": "tsc -b && yarn copycss",

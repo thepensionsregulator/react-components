@@ -24,7 +24,6 @@
 	],
 	"scripts": {
 		"prepare": "yarn build",
-		"dev": "yarn storybook",
 		"test": "jest --coverage",
 		"test:watch": "jest --watch",
 		"copycss": "copyfiles -u 1 \"./src/**/*.{css,scss}\" \"./lib/\" && echo @tpr/layout css files copied.",
