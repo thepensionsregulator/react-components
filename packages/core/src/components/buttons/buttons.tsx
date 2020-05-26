@@ -19,6 +19,7 @@ export type ButtonProps = {
 	disabled?: boolean;
 	loading?: boolean;
 	type?: 'button' | 'submit';
+	testId?: string;
 	[key: string]: any;
 };
 export const Button: React.FC<ButtonProps> = ({
@@ -32,6 +33,7 @@ export const Button: React.FC<ButtonProps> = ({
 	after: After,
 	disabled,
 	loading,
+	testId,
 	type = 'button',
 	...props
 }) => {
@@ -47,6 +49,7 @@ export const Button: React.FC<ButtonProps> = ({
 			type={type}
 			disabled={disabled || loading}
 			className={classNames}
+			data-testid={testId}
 			{...props}
 		>
 			{loading ? (

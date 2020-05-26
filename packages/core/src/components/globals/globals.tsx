@@ -34,6 +34,7 @@ export type FullColorRange =
 	| 'neutral.1'
 	| 'neutral.2'
 	| 'neutral.3'
+	| 'neutral.4'
 	| 'accents.2'
 	| 'accents.3'
 	| 'accents.4'
@@ -90,19 +91,22 @@ export type SpaceProps = Partial<{
 }>;
 
 export type FlexBoxProps = {
+	testId?: string;
 	className?: string;
 	cfg?: FlexProps &
 		SpaceProps &
 		BackgroundProps &
 		ColorProps &
 		LayoutProps &
-		CursorProps;
+		CursorProps &
+		TypographyProps;
 	[key: string]: any;
 };
 export const Flex: React.FC<FlexBoxProps> = ({
 	className,
 	children,
 	cfg = {},
+	testId,
 	...props
 }) => {
 	const classNames = useClassNames(cfg, [styles.flex, className]);
@@ -110,6 +114,7 @@ export const Flex: React.FC<FlexBoxProps> = ({
 		'div',
 		{
 			className: classNames,
+			'data-testid': testId,
 			...props,
 		},
 		children,

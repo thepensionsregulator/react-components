@@ -1,7 +1,7 @@
 import React from 'react';
 import '@testing-library/jest-dom/extend-expect';
 import { render } from '@testing-library/react';
-import { Footer } from '../footer';
+import { Footer } from '../footer/footer';
 
 describe('Footer', () => {
 	test('it renders with links', () => {
@@ -11,7 +11,9 @@ describe('Footer', () => {
 			{ title: 'b-link number 3', url: '#' },
 		];
 
-		const { getAllByText } = render(<Footer links={links} />);
+		const { getAllByText } = render(
+			<Footer links={links} onLinkClickHandler={() => {}} />,
+		);
 
 		const bottomLinks = getAllByText(/b-link number/i);
 
@@ -19,10 +21,11 @@ describe('Footer', () => {
 		expect(bottomLinks).toHaveLength(links.length);
 	});
 	test('it renders correctly', () => {
-		const { getByText, getByAltText, getAllByRole } = render(
+		const { getByText, getByAltText } = render(
 			<Footer
 				logoUrl="https://www.thepensionsregulator.gov.uk"
 				copyright="Copyright TPR"
+				onLinkClickHandler={() => {}}
 				links={[]}
 			/>,
 		);

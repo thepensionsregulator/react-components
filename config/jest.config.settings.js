@@ -1,18 +1,12 @@
-const ignores = [
-	'/node_modules/',
-	'/lib',
-	'/__tests__/helpers/',
-	'__mocks__',
-	'__stories__',
-];
+const ignores = ['/node_modules/', '/lib/'];
 
 module.exports = {
 	transform: {
-		'.(ts|tsx)': 'ts-jest',
+		'.(ts|tsx|js)': 'ts-jest',
 	},
 	moduleNameMapper: {
 		'\\.module\\.(css|scss)$': 'identity-obj-proxy',
-		'\\.(css|scss)$': require.resolve('../test/style-mock.js'),
+		// '\\.(css|scss)$': require.resolve('../test/style-mock.js'),
 	},
 	moduleFileExtensions: ['ts', 'tsx', 'js', 'json'],
 	testURL: 'http://localhost',
