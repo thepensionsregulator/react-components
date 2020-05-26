@@ -85,7 +85,7 @@ const DateInputField: React.FC<DateInputFieldProps> = ({
 
 type InputDateProps = FieldRenderProps<string> & FieldExtraProps;
 export const InputDate: React.FC<InputDateProps> = memo(
-	({ label, hint, required, input, meta, testId, cfg }) => {
+	({ label, hint, required, input, meta, testId = 'field', cfg }) => {
 		// react-final-form types says it's a string, incorrect, it's a date object.
 		const { dd, mm, yyyy } = transformDate(meta.initial);
 		const [{ dd: day, mm: month, yyyy: year }, setState] = useReducer(
@@ -114,6 +114,7 @@ export const InputDate: React.FC<InputDateProps> = memo(
 				element="div"
 				onFocus={input.onFocus}
 				onBlur={input.onBlur}
+				data-testid={`date-input-${testId}`}
 				cfg={Object.assign(
 					{ mt: 1, py: 1, alignItems: 'flex-start', flexDirection: 'column' },
 					cfg,
