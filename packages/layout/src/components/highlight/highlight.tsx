@@ -3,20 +3,22 @@ import { AppWidth, DocWidth, Flex, P } from '@tpr/core';
 import styles from './highlight.module.scss';
 
 type HighlightProps = {
-	title: string;
-	scheme: string;
+	title?: string;
+	name: string;
+	psr: string;
 	testId?: string;
 };
 export const Highlight: React.FC<HighlightProps> = ({
-	title = '',
-	scheme = '',
+	title = 'Scheme return',
+	name = '',
+	psr = '',
 }) => {
 	return (
 		<DocWidth className={styles.highlight}>
 			<div className={styles.leftBackground} />
 			<AppWidth className={styles.highlightContent}>
 				<Flex cfg={{ flex: '0 0 auto' }} className={styles.schemeReturn}>
-					<P cfg={{ fontWeight: 3 }}>Scheme return</P>
+					<P cfg={{ fontWeight: 3 }}>{title}</P>
 				</Flex>
 				<Flex
 					cfg={{
@@ -26,13 +28,13 @@ export const Highlight: React.FC<HighlightProps> = ({
 					}}
 				>
 					<P cfg={{ fontWeight: 3, px: 4 }} className={styles.truncate}>
-						{title}
+						{name}
 					</P>
 					<Flex
 						cfg={{ flex: '0 0 auto', alignItems: 'center', pl: 3 }}
 						className={styles.psrNumber}
 					>
-						<P cfg={{ fontWeight: 3 }}>PSR: {scheme}</P>
+						<P cfg={{ fontWeight: 3 }}>PSR: {psr}</P>
 					</Flex>
 				</Flex>
 			</AppWidth>
