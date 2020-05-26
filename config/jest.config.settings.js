@@ -2,7 +2,7 @@ const ignores = ['/node_modules/', '/lib/'];
 
 module.exports = {
 	transform: {
-		'.(ts|tsx|js)': 'ts-jest',
+		'.(ts|tsx)': 'ts-jest',
 	},
 	moduleNameMapper: {
 		'\\.module\\.(css|scss)$': 'identity-obj-proxy',
