@@ -3,6 +3,8 @@ orbs:
   node: circleci/node@2.1.1
 jobs:
   build-and-test:
+    executor:
+      name: node/default
     steps:
       - checkout
       - node/with-cache:
