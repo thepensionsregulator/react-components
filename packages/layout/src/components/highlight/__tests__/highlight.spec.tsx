@@ -7,10 +7,12 @@ describe('Highlight', () => {
 	test('it renders correctly', () => {
 		// const onClickSchemeOptions = jest.fn();
 		// const onClickLogout = jest.fn();
-		const { getByText } = render(<Highlight scheme="Alpha" title="Beta" />);
+		const { getByText } = render(
+			<Highlight title="Scheme return" name="Alpha" psr="12014314" />,
+		);
 
-		expect(getByText('Scheme return')).toBeInTheDocument();
+		expect(getByText(/Scheme return/g)).toBeInTheDocument();
 		expect(getByText('Alpha')).toBeInTheDocument();
-		expect(getByText('Beta')).toBeInTheDocument();
+		expect(getByText(/12014314/g)).toBeInTheDocument();
 	});
 });

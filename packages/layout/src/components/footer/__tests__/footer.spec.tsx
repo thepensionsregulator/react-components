@@ -11,7 +11,9 @@ describe('Footer', () => {
 			{ title: 'b-link number 3', url: '#' },
 		];
 
-		const { getAllByText } = render(<Footer links={links} />);
+		const { getAllByText } = render(
+			<Footer links={links} onLinkClickHandler={() => {}} />,
+		);
 
 		const bottomLinks = getAllByText(/b-link number/i);
 
@@ -23,6 +25,7 @@ describe('Footer', () => {
 			<Footer
 				logoUrl="https://www.thepensionsregulator.gov.uk"
 				copyright="Copyright TPR"
+				onLinkClickHandler={() => {}}
 				links={[]}
 			/>,
 		);

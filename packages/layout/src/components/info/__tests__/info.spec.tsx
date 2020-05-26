@@ -8,7 +8,7 @@ describe('Footer', () => {
 		// const onClickSchemeOptions = jest.fn();
 		// const onClickLogout = jest.fn();
 		const { getByText } = render(
-			<Info important="Important Information" title="Title">
+			<Info importantMessage="Important Information" title="Title">
 				<p>Here is some information</p>
 			</Info>,
 		);
@@ -16,7 +16,7 @@ describe('Footer', () => {
 		//const image = getByAltText('TPR Logo');
 		const wrapper = getByText('Important Information');
 		const title = getByText('Title');
-		expect(wrapper).toHaveClass('important');
+		expect(wrapper).toHaveClass('importantMessage');
 		expect(title.tagName).toEqual('H2');
 		expect(getByText('Here is some information')).toBeInTheDocument();
 	});
