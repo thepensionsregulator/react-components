@@ -3,9 +3,6 @@ orbs:
   node: circleci/node@1.1.6
 jobs:
   build-and-test:
-    branches:
-      only:
-        - /feature/*/
     executor:
       name: node/default
     steps:
