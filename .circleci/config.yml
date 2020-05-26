@@ -5,7 +5,7 @@ jobs:
   build-and-test:
     branches:
       only:
-        - 'feature/css-trustee'
+        - /feature/*/
     executor:
       name: node/default
     steps:
