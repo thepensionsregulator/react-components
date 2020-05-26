@@ -1,11 +1,6 @@
 module.exports = {
 	plugins: [
-		{
-			resolve: `gatsby-plugin-polyfill-io`,
-			options: {
-				features: [`Array.prototype.flat`],
-			},
-		},
+		`gatsby-plugin-polyfill-io`,
 		{
 			resolve: `gatsby-plugin-sass`,
 			options: {

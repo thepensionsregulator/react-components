@@ -1,5 +1,5 @@
 import { useMemo } from 'react';
-import { classNames, filterProps } from '../utils';
+import { classNames, filterProps, flatten } from '../utils';
 
 export const useClassNames = (
 	globalStyles: { [key: string]: any } = {},
@@ -7,7 +7,7 @@ export const useClassNames = (
 ): string => {
 	const styles = useMemo(() => filterProps(globalStyles), [globalStyles]);
 	const flattenedStyles = useMemo(
-		() => classNames([otherStyles.filter(Boolean), styles].flat(Infinity)),
+		() => classNames(flatten([otherStyles.filter(Boolean), styles])),
 		[otherStyles, styles],
 	);
 	return flattenedStyles;
