@@ -44,7 +44,6 @@
 		"copyfiles": "^2.2.0",
 		"cross-env": "^7.0.2",
 		"docz": "^2.3.1",
-		"gatsby-plugin-polyfill-io": "^1.1.0",
 		"gatsby-plugin-sass": "^2.3.0",
 		"husky": "^4.2.5",
 		"identity-obj-proxy": "^3.0.0",
