@@ -1,5 +1,13 @@
 import { matchClassName } from './components/globals/globals';
 
+export const flatten = (array: any[]) => {
+	return array.reduce((flat, toFlatten) => {
+		return flat.concat(
+			Array.isArray(toFlatten) ? flatten(toFlatten) : toFlatten,
+		);
+	}, []);
+};
+
 /**
  * @classNames takes an object with key as a class name and value as a boolean to signify if
  * it should be included. It also takes an array of strings and objects same as above
@@ -8,7 +16,7 @@ export const classNames = (classNames: { [key: string]: any } = []) => {
 	const joinedNames = [];
 
 	if (Array.isArray(classNames)) {
-		for (const className of classNames.flat(Infinity)) {
+		for (const className of flatten(classNames)) {
 			if (typeof className === 'string') {
 				/** if classname is a string then forward it to the joinedNames */
 				joinedNames.push(className);
