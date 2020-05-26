@@ -34,6 +34,7 @@ export type FullColorRange =
 	| 'neutral.1'
 	| 'neutral.2'
 	| 'neutral.3'
+	| 'neutral.4'
 	| 'accents.2'
 	| 'accents.3'
 	| 'accents.4'
