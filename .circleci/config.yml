@@ -13,7 +13,7 @@ jobs:
       - run: node --version
       - run: yarn install
       - run: yarn test
-  deploy-rc:
+  build-test-deploy-rc:
     docker:
       - image: 'cimg/base:stable'
     steps:
@@ -21,6 +21,9 @@ jobs:
       - node/install:
           install-yarn: true
           node-version: latest
+      - run: node --version
+      - run: yarn install
+      - run: yarn test
       - run:
           name: Authenticate with NPM registry
           command: echo "//registry.npmjs.org/:_authToken=$NPM_TOKEN" > .npmrc
@@ -30,8 +33,12 @@ jobs:
 workflows:
   build-test-deploy:
     jobs:
-      - build-and-test
-      - deploy-rc:
+      - build-and-test:
+          filters:
+            branches:
+              ignore:
+                - /rc-.*/
+      - build-test-deploy-rc:
           filters:
             branches:
               only:
