@@ -44,36 +44,104 @@ export const SVG: React.FC<SVGProps> = ({
 
 export const CheckboxChecked: React.FC<SVGProps> = (props) => {
 	return (
-		<SVG testId="checkbox-checked" {...props}>
-			<path d="M0 0h24v24H0z" fill="none" />
-			<path d="M19 3H5c-1.11 0-2 .9-2 2v14c0 1.1.89 2 2 2h14c1.11 0 2-.9 2-2V5c0-1.1-.89-2-2-2zm-9 14l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z" />
+		<SVG
+			testId="checkbox-checked"
+			width="40px"
+			viewBox="351 1301 40 40"
+			{...props}
+		>
+			<path
+				d="M 354.5 1304.5  L 387.5 1304.5  L 387.5 1337.5  L 354.5 1337.5  L 354.5 1304.5  Z "
+				fill-rule="nonzero"
+				fill="#f2f2f2"
+				stroke="none"
+			/>
+			<path
+				d="M 353 1303  L 389 1303  L 389 1339  L 353 1339  L 353 1303  Z "
+				stroke-width="4"
+				stroke="#585858"
+				fill="none"
+			/>
+			<path
+				d="M 359.571428571429 1321  L 368.142857142857 1329.57142857143  "
+				stroke-width="8.57142857142857"
+				stroke="#036db8"
+				fill="none"
+			/>
+			<path
+				d="M 368.142857142857 1329.57142857143  L 382.428571428571 1309.57142857143  "
+				stroke-width="8.57142857142857"
+				stroke="#036db8"
+				fill="none"
+			/>
 		</SVG>
 	);
 };
 
 export const CheckboxBlank: React.FC<SVGProps> = (props) => {
 	return (
-		<SVG testId="checkbox-blank" {...props}>
-			<path d="M19 5v14H5V5h14m0-2H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2z" />
-			<path d="M0 0h24v24H0z" fill="none" />
+		<SVG
+			testId="checkbox-blank"
+			width="40px"
+			viewBox="351 1301 40 40"
+			{...props}
+		>
+			<path
+				d="M 351.5 1301.5  L 390.5 1301.5  L 390.5 1340.5  L 351.5 1340.5  L 351.5 1301.5  Z "
+				fill-rule="nonzero"
+				fill="#f2f2f2"
+				stroke="none"
+			/>
+			<path
+				d="M 351.5 1301.5  L 390.5 1301.5  L 390.5 1340.5  L 351.5 1340.5  L 351.5 1301.5  Z "
+				stroke-width="1"
+				stroke="#585858"
+				fill="none"
+			/>
 		</SVG>
 	);
 };
 
 export const RadioButtonChecked: React.FC<SVGProps> = (props) => {
 	return (
-		<SVG testId="radio-button-checked" {...props}>
-			<path d="M12 7c-2.76 0-5 2.24-5 5s2.24 5 5 5 5-2.24 5-5-2.24-5-5-5zm0-5C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.42 0-8-3.58-8-8s3.58-8 8-8 8 3.58 8 8-3.58 8-8 8z" />
-			<path d="M0 0h24v24H0z" fill="none" />
+		<SVG width="40" viewBox="315 504 40 40" {...props}>
+			<path
+				d="M 335 507  C 344.52 507  352 514.48  352 524  C 352 533.52  344.52 541  335 541  C 325.48 541  318 533.52  318 524  C 318 514.48  325.48 507  335 507  Z "
+				fill-rule="nonzero"
+				fill="#f2f2f2"
+				stroke="none"
+			/>
+			<path
+				d="M 335 506  C 345.08 506  353 513.92  353 524  C 353 534.08  345.08 542  335 542  C 324.92 542  317 534.08  317 524  C 317 513.92  324.92 506  335 506  Z "
+				stroke-width="4"
+				stroke="#585858"
+				fill="none"
+			/>
+			<path
+				d="M 335 534  C 329.4 534  325 529.6  325 524  C 325 518.4  329.4 514  335 514  C 340.6 514  345 518.4  345 524  C 345 529.6  340.6 534  335 534  "
+				fill-rule="nonzero"
+				fill="#036db8"
+				stroke="none"
+			/>
 		</SVG>
 	);
 };
 
 export const RadioButtonUnchecked: React.FC<SVGProps> = (props) => {
 	return (
-		<SVG testId="radio-button-unchecked" {...props}>
-			<path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.42 0-8-3.58-8-8s3.58-8 8-8 8 3.58 8 8-3.58 8-8 8z" />
-			<path d="M0 0h24v24H0z" fill="none" />
+		<SVG width="40" viewBox="315 504 40 40" {...props}>
+			<path
+				d="M 335 504  C 346.2 504  355 512.8  355 524  C 355 535.2  346.2 544  335 544  C 323.8 544  315 535.2  315 524  C 315 512.8  323.8 504  335 504  Z "
+				fill-rule="nonzero"
+				fill="#f2f2f2"
+				stroke="none"
+			/>
+			<path
+				d="M 335 504.5  C 345.92 504.5  354.5 513.08  354.5 524  C 354.5 534.92  345.92 543.5  335 543.5  C 324.08 543.5  315.5 534.92  315.5 524  C 315.5 513.08  324.08 504.5  335 504.5  Z "
+				stroke-width="1"
+				stroke="#585858"
+				fill="none"
+			/>
 		</SVG>
 	);
 };
