@@ -19,11 +19,11 @@ jobs:
         - /rc-.*/
     steps:
       - run:
-        name: Authenticate with NPM registry
-        command: echo "//registry.npmjs.org/:_authToken=$NPM_TOKEN" > .npmrc
+          name: Authenticate with NPM registry
+          command: echo "//registry.npmjs.org/:_authToken=$NPM_TOKEN" > .npmrc
       - run:
-        name: Publish packages to NPM
-        command: yarn deploy --preid next --dist-tag next
+          name: Publish packages to NPM
+          command: yarn deploy --preid next --dist-tag next
 workflows:
   build-and-test:
     jobs:
