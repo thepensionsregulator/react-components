@@ -1,4 +1,4 @@
 import React from 'react';
-import ThemeProvider from '../../../packages/theming/src';
+import ThemeProvider from '@tpr/theming';
 
 export default ({ children }) => <ThemeProvider>{children}</ThemeProvider>;

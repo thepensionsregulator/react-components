@@ -22,7 +22,7 @@
 		"@tpr/forms": "file:./packages/forms",
 		"@tpr/icons": "file:./packages/icons",
 		"@tpr/layout": "file:./packages/layout",
-		"@tpr/theming": "file:./packages/theming"
+		"@tpr/theming": "^2.0.0"
 	},
 	"devDependencies": {
 		"@babel/core": "^7.9.0",
