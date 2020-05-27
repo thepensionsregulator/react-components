@@ -13,19 +13,33 @@ jobs:
       - run: node --version
       - run: yarn install
       - run: yarn test
-  deploy-next:
-    branches:
-      only:
-        - /rc-.*/
+  build-test-deploy-rc:
+    docker:
+      - image: 'cimg/base:stable'
     steps:
+      - checkout
+      - node/install:
+          install-yarn: true
+          node-version: latest
+      - run: node --version
+      - run: yarn install
+      - run: yarn test
       - run:
-        name: Authenticate with NPM registry
-        command: echo "//registry.npmjs.org/:_authToken=$NPM_TOKEN" > .npmrc
+          name: Authenticate with NPM registry
+          command: echo "//registry.npmjs.org/:_authToken=$NPM_TOKEN" > .npmrc
       - run:
-        name: Publish packages to NPM
-        command: yarn deploy --preid next --dist-tag next
+          name: Publish packages to NPM
+          command: yarn deploy --preid next --dist-tag next
 workflows:
-  build-and-test:
+  build-test-deploy:
     jobs:
-      - build-and-test
-      - deploy-next
+      - build-and-test:
+          filters:
+            branches:
+              ignore:
+                - /rc-.*/
+      - build-test-deploy-rc:
+          filters:
+            branches:
+              only:
+                - /rc-.*/
