@@ -1,0 +1,58 @@
+@import './variables.scss';
+
+.editorFontStack {
+	font-family: $fonts-sans-serif;
+	font-weight: $font-weight-1;
+	font-size: $font-size-2;
+
+	h1 {
+		font-size: $font-size-6;
+	}
+	h2 {
+		font-size: $font-size-5;
+	}
+	h3 {
+		font-size: $font-size-4;
+	}
+	h4 {
+		font-size: $font-size-3;
+	}
+	h5 {
+		font-size: $font-size-2;
+	}
+	h6 {
+		font-size: $font-size-1;
+	}
+	p {
+		font-size: $font-size-2;
+	}
+	b {
+		font-weight: $font-weight-3;
+	}
+	strong {
+		font-weight: $font-weight-3;
+	}
+	span {
+		font-size: $font-size-2;
+	}
+	hr {
+	}
+	i {
+		font-style: italic;
+	}
+	u {
+		text-decoration: underline;
+	}
+	del {
+		text-decoration: line-through;
+	}
+	ul {
+	}
+	ol {
+	}
+	ul > li {
+	}
+	blockquote {
+		background: $colors-neutral-2;
+	}
+}
