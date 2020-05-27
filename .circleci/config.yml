@@ -13,7 +13,19 @@ jobs:
       - run: node --version
       - run: yarn install
       - run: yarn test
+  deploy-next:
+    branches:
+      only:
+        - /rc-.*/
+    steps:
+      - run:
+        name: Authenticate with NPM registry
+        command: echo "//registry.npmjs.org/:_authToken=$NPM_TOKEN" > .npmrc
+      - run:
+        name: Publish packages to NPM
+        command: yarn deploy --preid next --dist-tag next
 workflows:
   build-and-test:
     jobs:
       - build-and-test
+      - deploy-next
