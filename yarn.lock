@@ -2447,7 +2447,7 @@
 "@tpr/core@file:./packages/core", "@tpr/core@file:packages/core":
   version "2.0.4"
   dependencies:
-    "@tpr/theming" "file:../../../Library/Caches/Yarn/v6/npm-@tpr-core-2.0.4-a915f1e3-d8c1-4eca-ab1a-035f26cf79d9-1590504719389/node_modules/@tpr/theming"
+    "@tpr/theming" "file:../../../Library/Caches/Yarn/v6/npm-@tpr-core-2.0.4-4eb0daec-f17b-4cc7-8b02-66569c3a4d1c-1590581754747/node_modules/@tpr/theming"
     "@xstate/react" "^0.8.1"
     final-form "^4.18.7"
     qs "^6.9.1"
@@ -2458,9 +2458,9 @@
 "@tpr/forms@file:./packages/forms", "@tpr/forms@file:packages/forms":
   version "2.0.9"
   dependencies:
-    "@tpr/core" "file:../../../Library/Caches/Yarn/v6/npm-@tpr-forms-2.0.9-69e471c1-9c00-4933-aaa8-7e26a49b82f5-1590504719398/node_modules/@tpr/core"
-    "@tpr/icons" "file:../../../Library/Caches/Yarn/v6/npm-@tpr-forms-2.0.9-69e471c1-9c00-4933-aaa8-7e26a49b82f5-1590504719398/node_modules/@tpr/icons"
-    "@tpr/theming" "file:../../../Library/Caches/Yarn/v6/npm-@tpr-forms-2.0.9-69e471c1-9c00-4933-aaa8-7e26a49b82f5-1590504719398/node_modules/@tpr/theming"
+    "@tpr/core" "file:../../../Library/Caches/Yarn/v6/npm-@tpr-forms-2.0.9-2b4513a4-0d31-42b1-a6a0-9ae57b2b114e-1590581754755/node_modules/@tpr/core"
+    "@tpr/icons" "file:../../../Library/Caches/Yarn/v6/npm-@tpr-forms-2.0.9-2b4513a4-0d31-42b1-a6a0-9ae57b2b114e-1590581754755/node_modules/@tpr/icons"
+    "@tpr/theming" "file:../../../Library/Caches/Yarn/v6/npm-@tpr-forms-2.0.9-2b4513a4-0d31-42b1-a6a0-9ae57b2b114e-1590581754755/node_modules/@tpr/theming"
     "@types/lodash.merge" "^4.6.6"
     "@types/match-sorter" "^4.0.0"
     "@types/qs" "^6.9.2"
@@ -2481,10 +2481,10 @@
 "@tpr/layout@file:./packages/layout":
   version "2.0.12"
   dependencies:
-    "@tpr/core" "file:../../../Library/Caches/Yarn/v6/npm-@tpr-layout-2.0.12-2a66fcd5-fa57-4eb0-b1b5-dbace9b2dd2d-1590504719411/node_modules/@tpr/core"
-    "@tpr/forms" "file:../../../Library/Caches/Yarn/v6/npm-@tpr-layout-2.0.12-2a66fcd5-fa57-4eb0-b1b5-dbace9b2dd2d-1590504719411/node_modules/@tpr/forms"
-    "@tpr/icons" "file:../../../Library/Caches/Yarn/v6/npm-@tpr-layout-2.0.12-2a66fcd5-fa57-4eb0-b1b5-dbace9b2dd2d-1590504719411/node_modules/@tpr/icons"
-    "@tpr/theming" "file:../../../Library/Caches/Yarn/v6/npm-@tpr-layout-2.0.12-2a66fcd5-fa57-4eb0-b1b5-dbace9b2dd2d-1590504719411/node_modules/@tpr/theming"
+    "@tpr/core" "file:../../../Library/Caches/Yarn/v6/npm-@tpr-layout-2.0.12-bd692d1d-b8f0-4651-a2cf-e74430925b34-1590581754769/node_modules/@tpr/core"
+    "@tpr/forms" "file:../../../Library/Caches/Yarn/v6/npm-@tpr-layout-2.0.12-bd692d1d-b8f0-4651-a2cf-e74430925b34-1590581754769/node_modules/@tpr/forms"
+    "@tpr/icons" "file:../../../Library/Caches/Yarn/v6/npm-@tpr-layout-2.0.12-bd692d1d-b8f0-4651-a2cf-e74430925b34-1590581754769/node_modules/@tpr/icons"
+    "@tpr/theming" "file:../../../Library/Caches/Yarn/v6/npm-@tpr-layout-2.0.12-bd692d1d-b8f0-4651-a2cf-e74430925b34-1590581754769/node_modules/@tpr/theming"
     "@xstate/react" "^0.8.1"
     final-form "^4.18.7"
     qs "^6.9.1"
@@ -2492,7 +2492,14 @@
     tslib "^1.11.1"
     xstate "^4.9.0"
 
-"@tpr/theming@file:./packages/theming", "@tpr/theming@file:packages/theming":
+"@tpr/theming@^2.0.0":
+  version "2.0.0"
+  resolved "https://registry.yarnpkg.com/@tpr/theming/-/theming-2.0.0.tgz#4f6101399b1480b32f20b6918f0be2b3de011bf3"
+  integrity sha512-wxFte18SNnsmzu7FyCqU6BOJMe66vr7B2sbS+rkFOjtUSmv9l3QKs4BF/CaAMr2LIVtYu4sLLvzf/4apzdkaNg==
+  dependencies:
+    tslib "^1.11.1"
+
+"@tpr/theming@file:packages/theming":
   version "2.0.1"
   dependencies:
     tslib "^1.11.1"
