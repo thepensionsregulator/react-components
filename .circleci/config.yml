@@ -28,11 +28,11 @@ jobs:
           name: Publish packages to NPM
           command: yarn deploy --preid next --dist-tag next
 workflows:
-  build-and-test:
+  build-test-deploy:
     jobs:
       - build-and-test
-      - deploy-rc
-          filters: 
+      - deploy-rc:
+          filters:
             branches:
               only:
                 - /rc-.*/
