@@ -13,7 +13,7 @@
 		"clean": "find . -name \"node_modules\" -exec rm -rf '{}' + && find . -name \"lib\" -exec rm -rf '{}' +",
 		"format": "pretty-quick --pattern \"./packages/**/*.*(js|ts|tsx)\"",
 		"docz:dev": "docz dev",
-		"docz:build": "yarn install && docz build",
+		"docz:build": "docz build",
 		"docz:serve": "docz build && docz serve",
 		"deploy": "yarn build && lerna publish --canary"
 	},
