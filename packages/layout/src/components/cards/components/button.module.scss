@@ -1,0 +1,40 @@
+@import '@tpr/theming/lib/variables.scss';
+
+.button {
+	text-align: left;
+	background: transparent;
+	box-shadow: none;
+	border: none;
+	cursor: pointer;
+	color: $colors-primary-2;
+	border-bottom: 1px solid;
+	border-bottom-color: $colors-primary-2;
+	padding: 0 0 4px 2px;
+	width: 100%;
+	height: $space-5;
+}
+
+.button:hover {
+	color: $colors-primary-3;
+	border-bottom-color: $colors-primary-3;
+}
+
+.button:disabled {
+	color: $colors-neutral-3;
+	border-bottom: 2px solid $colors-neutral-3;
+	cursor: not-allowed;
+}
+
+.buttonPlaceholder {
+	text-align: left;
+	background: transparent;
+	box-shadow: none;
+	border: none;
+	cursor: default;
+	color: $colors-neutral-4;
+	border-bottom: 1px solid;
+	border-bottom-color: $colors-neutral-4;
+	padding: 0 0 4px 2px;
+	width: 100%;
+	height: $space-5;
+}

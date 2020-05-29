@@ -5,4 +5,5 @@ export * from './components/header/header';
 export * from './components/highlight/highlight';
 export * from './components/info/info';
 export * from './components/sidebar/sidebar';
-export * from './components/trustee/trustee';
+export * from './components/cards/trustee/trustee';
+export * from './components/cards/employer/employer';

@@ -3,27 +3,35 @@ orbs:
   node: circleci/node@2.1.1
 jobs:
   build-and-test:
+    working_directory: ~/react-components
     docker:
       - image: 'cimg/base:stable'
     steps:
       - checkout
+      - restore_cache:
+          key: dependency-cache-{{ checksum "package.json" }}
       - node/install:
           install-yarn: true
           node-version: latest
       - run: node --version
       - run: yarn install
       - run: yarn test
-  build-test-deploy-rc:
+      - save_cache:
+          key: dependency-cache-{{ checksum "package.json" }}
+          paths:
+            - node_modules
+  deploy-rc:
+    working_directory: ~/react-components
     docker:
       - image: 'cimg/base:stable'
     steps:
       - checkout
+      - restore_cache:
+          key: dependency-cache-{{ checksum "package.json" }}
       - node/install:
           install-yarn: true
           node-version: latest
-      - run: node --version
-      - run: yarn install
-      - run: yarn test
+      - run: yarn postinstall
       - run:
           name: Authenticate with NPM registry
           command: echo "//registry.npmjs.org/:_authToken=$NPM_TOKEN" > .npmrc
@@ -33,13 +41,13 @@ jobs:
 workflows:
   build-test-deploy:
     jobs:
-      - build-and-test:
-          filters:
-            branches:
-              ignore:
-                - /rc-.*/
-      - build-test-deploy-rc:
+      - build-and-test
+      - deploy-rc:
+          requires:
+            - build-and-test
           filters:
             branches:
               only:
                 - /rc-.*/
+                - /feature-.*/
+                - /bug-.*/
