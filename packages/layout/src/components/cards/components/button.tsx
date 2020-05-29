@@ -12,6 +12,16 @@ export const UnderlinedButton: React.FC<UnderlinedButtonProps> = ({
 	isOpen,
 	onClick,
 }) => {
+	if (typeof onClick === 'undefined') {
+		return (
+			<div className={styles.buttonPlaceholder}>
+				<Flex cfg={{ flex: '0 0 auto', alignItems: 'center' }}>
+					<P cfg={{ fontSize: 2, fontWeight: 3 }}>{children}</P>
+				</Flex>
+			</div>
+		);
+	}
+
 	return (
 		<button className={styles.button} onClick={onClick}>
 			<Flex cfg={{ flex: '0 0 auto', alignItems: 'center' }}>

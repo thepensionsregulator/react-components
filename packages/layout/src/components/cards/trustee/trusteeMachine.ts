@@ -35,7 +35,27 @@ interface TrusteeStates {
 	};
 }
 
-type TrusteeEvents = any;
+type TrusteeEvents =
+	| { type: 'EDIT_TRUSTEE' }
+	| { type: 'EDIT_ORG' }
+	| { type: 'EDIT_CONTACTS' }
+	| { type: 'REMOVE' }
+	| { type: 'COMPLETE' }
+	| { type: 'NEXT' }
+	| { type: 'CANCEL' }
+	| { type: 'SAVE'; address?: TrusteeAddress; values?: any }
+	| { type: 'BACK' }
+	| { type: 'SELECT'; date?: any };
+
+type TrusteeAddress = Partial<{
+	addressLine1: string;
+	addressLine2: string;
+	addressLine3: string;
+	postTown: string;
+	postcode: string;
+	county: string;
+	countryId: string;
+}>;
 
 export interface TrusteeContext {
 	loading: boolean;
@@ -50,15 +70,7 @@ export interface TrusteeContext {
 		trusteeType: string;
 		isProfessionalTrustee: boolean;
 		//
-		address: {
-			addressLine1: string;
-			addressLine2: string;
-			addressLine3: string;
-			postTown: string;
-			postcode: string;
-			county: string;
-			countryId: string;
-		};
+		address: TrusteeAddress;
 		//
 		telephoneNumber: string;
 		emailAddress: string;

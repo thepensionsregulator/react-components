@@ -3,6 +3,7 @@ orbs:
   node: circleci/node@2.1.1
 jobs:
   build-and-test:
+    working_directory: ~/box-starter
     docker:
       - image: 'cimg/base:stable'
     steps:
@@ -13,7 +14,7 @@ jobs:
       - run: node --version
       - run: yarn install
       - run: yarn test
-  build-test-deploy-rc:
+  deploy-rc:
     docker:
       - image: 'cimg/base:stable'
     steps:
@@ -21,9 +22,6 @@ jobs:
       - node/install:
           install-yarn: true
           node-version: latest
-      - run: node --version
-      - run: yarn install
-      - run: yarn test
       - run:
           name: Authenticate with NPM registry
           command: echo "//registry.npmjs.org/:_authToken=$NPM_TOKEN" > .npmrc
@@ -33,13 +31,13 @@ jobs:
 workflows:
   build-test-deploy:
     jobs:
-      - build-and-test:
-          filters:
-            branches:
-              ignore:
-                - /rc-.*/
-      - build-test-deploy-rc:
+      - build-and-test
+      - deploy-rc:
+          requires:
+            - build-and-test
           filters:
             branches:
               only:
                 - /rc-.*/
+                - /feature-.*/
+                - /bug-.*/

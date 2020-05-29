@@ -24,3 +24,17 @@
 	border-bottom: 2px solid $colors-neutral-3;
 	cursor: not-allowed;
 }
+
+.buttonPlaceholder {
+	text-align: left;
+	background: transparent;
+	box-shadow: none;
+	border: none;
+	cursor: default;
+	color: $colors-neutral-4;
+	border-bottom: 1px solid;
+	border-bottom-color: $colors-neutral-4;
+	padding: 0 0 4px 2px;
+	width: 100%;
+	height: $space-5;
+}

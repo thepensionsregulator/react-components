@@ -32,7 +32,6 @@ import { Employer } from '@tpr/layout';
 		const employer = {};
 		return (
 			<Employer
-				type="employer"
 				onSave={(employer) => sleep(1000).then(() => console.log(employer))}
 				onRemove={(employer) => sleep(2500).then(() => console.log(employer))}
 				onCorrect={(value) => setComplete(value)}
