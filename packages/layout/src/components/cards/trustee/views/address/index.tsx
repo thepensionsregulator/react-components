@@ -1,8 +1,8 @@
 import React from 'react';
 import { Flex, H4 } from '@tpr/core';
 import { useTrusteeContext } from '../../context';
-import { Content } from '../../components/content';
-import useSetState from '../../hooks/use-set-state';
+import { Content } from '../../../components/content';
+import useSetState from '../../../hooks/use-set-state';
 import AutoComplete from './AutoComplete';
 import ManualComplete from './ManualComplete';
 import Postcode from './Postcode';

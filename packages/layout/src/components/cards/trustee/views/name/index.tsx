@@ -1,8 +1,8 @@
 import React from 'react';
 import { Form, FieldProps, renderFields, validate } from '@tpr/forms';
 import { useTrusteeContext } from '../../context';
-import { Footer, FooterButton } from '../../components/card';
-import { Content } from '../../components/content';
+import { Footer, FooterButton } from '../../../components/card';
+import { Content } from '../../../components/content';
 
 const fields: FieldProps[] = [
 	{

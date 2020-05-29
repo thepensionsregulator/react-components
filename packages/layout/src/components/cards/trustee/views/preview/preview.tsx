@@ -1,7 +1,7 @@
 import React from 'react';
 import { Flex, P, H4, Hr, classNames } from '@tpr/core';
 import { useTrusteeContext } from '../../context';
-import { UnderlinedButton } from '../../components/button';
+import { UnderlinedButton } from '../../../components/button';
 import { Checkbox } from '@tpr/forms';
 import styles from './preview.module.scss';
 

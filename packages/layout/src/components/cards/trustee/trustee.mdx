@@ -20,7 +20,7 @@ Trustee for tpr apps
 ## Usage
 
 ```js
-import { Trustee } from '@tpr/core';
+import { Trustee } from '@tpr/layout';
 ```
 
 ## Basic usage
@@ -54,6 +54,7 @@ import { Trustee } from '@tpr/core';
 		};
 		return (
 			<Trustee
+				type="trustee"
 				onSave={(values) => sleep(1000).then(() => console.log(values))}
 				onRemove={(trustee) => sleep(2500).then(() => console.log(trustee))}
 				onCorrect={(value) => setComplete(value)}

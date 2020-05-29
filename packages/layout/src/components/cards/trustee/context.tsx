@@ -3,21 +3,9 @@ import { useMachine } from '@xstate/react';
 import trusteeMachine, { TrusteeContext as TC } from './trusteeMachine';
 import { State, EventData } from 'xstate';
 
-type TrusteeContextProps = {
-	current: Partial<State<TC, any, any, any>>;
-	send: (event: any, payload?: EventData) => Partial<State<TC, any, any, any>>;
-	onToggleCorrect?: () => void;
-	onCorrect?: (...args: any[]) => void;
-	onRemove?: (...args: any[]) => Promise<any>;
-	onSave?: (...args: any[]) => Promise<any>;
-	complete?: boolean;
-	addressAPI: any;
-};
-
 export const TrusteeContext = createContext<TrusteeContextProps>({
 	current: {},
 	send: (_, __) => ({}),
-	onToggleCorrect: () => {},
 	onCorrect: () => {},
 	onRemove: () => new Promise((res) => res()),
 	onSave: () => new Promise((res) => res()),
@@ -47,16 +35,21 @@ export interface TrusteeInput {
 	emailAddress: string;
 }
 
-export type TrusteeProps = {
-	complete: boolean;
-	trustee: TrusteeInput;
-	testId?: string;
-	children?: RenderProps | ReactElement;
+export interface TrusteeContextProps extends Omit<TrusteeProps, 'trustee'> {
+	send: (event: any, payload?: EventData) => Partial<State<TC, any, any, any>>;
+	current: Partial<State<TC, any, any, any>>;
+}
+
+export interface TrusteeProps {
+	complete?: boolean;
 	onCorrect?: (...args: any[]) => void;
 	onRemove?: (...args: any[]) => Promise<any>;
 	onSave?: (...args: any[]) => Promise<any>;
 	addressAPI: any;
-};
+	testId?: string;
+	trustee: TrusteeInput;
+	children?: RenderProps | ReactElement;
+}
 
 export const TrusteeProvider = ({
 	trustee,

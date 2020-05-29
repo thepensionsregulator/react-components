@@ -94,3 +94,16 @@ export const Footer: React.FC = ({ children }) => {
 		</Flex>
 	);
 };
+
+export const StatusMessage = ({ complete, icon: Icon }) => {
+	return (
+		<Flex cfg={{ alignItems: 'center' }} height="22px">
+			<Icon size={18} fill={complete ? '#207e3b' : '#d4351c'} />
+			<P
+				cfg={{ ml: 1, fontSize: 2, color: complete ? 'success.2' : 'danger.2' }}
+			>
+				{complete ? 'No issues' : 'Incomplete'}
+			</P>
+		</Flex>
+	);
+};

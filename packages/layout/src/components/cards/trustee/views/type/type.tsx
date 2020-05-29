@@ -2,9 +2,9 @@ import React from 'react';
 import { Flex, P } from '@tpr/core';
 import { Form, FieldProps, renderFields } from '@tpr/forms';
 import { useTrusteeContext } from '../../context';
-import { Footer, FooterButton } from '../../components/card';
-import { Content } from '../../components/content';
-import { Breadcrumbs, BreadcrumbLink } from '../../components/breadcrumbs';
+import { Footer, FooterButton } from '../../../components/card';
+import { Content } from '../../../components/content';
+import { Breadcrumbs, BreadcrumbLink } from '../../../components/breadcrumbs';
 
 const descriptionFields: FieldProps[] = [
 	{

@@ -1,7 +1,7 @@
 import React, { Fragment } from 'react';
 import { Flex, Link } from '@tpr/core';
 import { ArrowRight } from '@tpr/icons';
-import { useTrusteeContext } from '../context';
+import { useTrusteeContext } from '../trustee/context';
 
 export type BreadcrumbLink = {
 	to?: 'BACK';

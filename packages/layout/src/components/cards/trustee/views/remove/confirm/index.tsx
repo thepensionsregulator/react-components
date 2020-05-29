@@ -1,9 +1,12 @@
 import React, { useState } from 'react';
 import { H3, P, Hr, Link } from '@tpr/core';
 import { useTrusteeContext } from '../../../context';
-import { Footer, FooterButton } from '../../../components/card';
-import { Content } from '../../../components/content';
-import { Breadcrumbs, BreadcrumbLink } from '../../../components/breadcrumbs';
+import { Footer, FooterButton } from '../../../../components/card';
+import { Content } from '../../../../components/content';
+import {
+	Breadcrumbs,
+	BreadcrumbLink,
+} from '../../../../components/breadcrumbs';
 
 const breadcrumbLinks: BreadcrumbLink[] = [
 	{

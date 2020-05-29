@@ -1,0 +1,44 @@
+---
+name: Employer
+menu: Layout
+route: /layout/employer
+---
+
+import { Playground, Props } from 'docz';
+import { Form } from 'react-final-form';
+import { useState } from 'react';
+import { Employer } from './employer';
+
+# Employer
+
+Employer for tpr apps
+
+<!-- ## Properties
+
+<Props of={Employer} /> -->
+
+## Usage
+
+```js
+import { Employer } from '@tpr/layout';
+```
+
+## Basic usage
+
+<Playground>
+	{() => {
+		const [complete, setComplete] = useState(false);
+		const sleep = (ms) => new Promise((res) => setTimeout(res, ms));
+		const employer = {};
+		return (
+			<Employer
+				type="employer"
+				onSave={(employer) => sleep(1000).then(() => console.log(employer))}
+				onRemove={(employer) => sleep(2500).then(() => console.log(employer))}
+				onCorrect={(value) => setComplete(value)}
+				complete={complete}
+				employer={employer}
+			/>
+		);
+	}}
+</Playground>

@@ -1,10 +1,10 @@
 import React from 'react';
 import { Flex, H4 } from '@tpr/core';
 import { useTrusteeContext } from '../../../context';
-import { Footer, FooterButton } from '../../../components/card';
+import { Footer, FooterButton } from '../../../../components/card';
 import { Form, FFRadioButton, FFInputDate } from '@tpr/forms';
 import { FORM_ERROR } from 'final-form';
-import { Content } from '../../../components/content';
+import { Content } from '../../../../components/content';
 import styles from './reason.module.scss';
 
 const RemoveReason: React.FC = () => {

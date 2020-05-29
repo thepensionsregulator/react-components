@@ -1,9 +1,9 @@
 import React from 'react';
 import { TrusteeProvider, useTrusteeContext, TrusteeProps } from './context';
-import { Flex, H4, P, classNames } from '@tpr/core';
-import { UnderlinedButton } from './components/button';
-import { CheckedCircle, ErrorCircle } from '@tpr/icons';
+import { H4 } from '@tpr/core';
+import { UnderlinedButton } from '../components/button';
 import { Preview } from './views/preview';
+import { Toolbar } from '../components/toolbar';
 import Name from './views/name';
 import Type from './views/type/type';
 import Address from './views/address';
@@ -11,7 +11,7 @@ import Contacts from './views/contacts';
 import RemoveReason from './views/remove/reason/reason';
 import RemoveConfirm from './views/remove/confirm';
 
-import styles from './trustee.module.scss';
+import styles from '../cards.module.scss';
 
 const CardContent: React.FC = () => {
 	const { current } = useTrusteeContext();
@@ -41,19 +41,6 @@ const CardContent: React.FC = () => {
 	} else {
 		return null;
 	}
-};
-
-const StatusMessage = ({ complete, icon: Icon }) => {
-	return (
-		<Flex cfg={{ alignItems: 'center' }} height="22px">
-			<Icon size={18} fill={complete ? '#207e3b' : '#d4351c'} />
-			<P
-				cfg={{ ml: 1, fontSize: 2, color: complete ? 'success.2' : 'danger.2' }}
-			>
-				{complete ? 'No issues' : 'Incomplete'}
-			</P>
-		</Flex>
-	);
 };
 
 const TrusteeButton: React.FC = () => {
@@ -91,8 +78,7 @@ const TrusteeButton: React.FC = () => {
 	);
 };
 
-const RemoveButton: React.FC = () => {
-	const { current, send } = useTrusteeContext();
+const RemoveButton: React.FC<any> = ({ current, send }) => {
 	return (
 		<UnderlinedButton
 			isOpen={
@@ -118,59 +104,24 @@ const RemoveButton: React.FC = () => {
 export const Trustee: React.FC<Omit<TrusteeProps, 'children'>> = (props) => {
 	return (
 		<TrusteeProvider {...props}>
-			{({ current: { context } }) => (
+			{({ current, send }) => (
 				<div data-testid={props.testId} className={styles.card}>
-					<div
-						className={classNames([
-							{ [styles.complete]: context.complete },
-							styles.cardToolbar,
-						])}
-					>
-						<Flex
-							cfg={{
-								width: 5,
-								flex: '0 0 auto',
-								flexDirection: 'column',
-								justifyContent: 'flex-start',
-								pr: 4,
-							}}
-						>
-							<TrusteeButton />
-							<Flex cfg={{ mt: 1, flexDirection: 'column' }}>
-								<H4>
-									{[
-										context.trustee.title,
-										context.trustee.forename,
-										context.trustee.surname,
-									]
-										.filter(Boolean)
-										.join(' ')}
-								</H4>
-							</Flex>
-						</Flex>
-						<Flex
-							cfg={{
-								width: 5,
-								flex: '0 0 auto',
-								justifyContent: 'flex-end',
-								alignItems: 'flex-start',
-								pl: 4,
-							}}
-						>
-							{context.complete ? (
-								<StatusMessage
-									complete={context.complete}
-									icon={CheckedCircle}
-								/>
-							) : (
-								<StatusMessage complete={context.complete} icon={ErrorCircle} />
-							)}
-							<div className={styles.verticalHr} />
-							<Flex cfg={{ alignItems: 'flex-start' }}>
-								<RemoveButton />
-							</Flex>
-						</Flex>
-					</div>
+					<Toolbar
+						complete={current.context.complete}
+						buttonLeft={() => <TrusteeButton />}
+						buttonRight={() => <RemoveButton current={current} send={send} />}
+						subtitle={() => (
+							<H4>
+								{[
+									current.context.trustee.title,
+									current.context.trustee.forename,
+									current.context.trustee.surname,
+								]
+									.filter(Boolean)
+									.join(' ')}
+							</H4>
+						)}
+					/>
 					<CardContent />
 				</div>
 			)}
