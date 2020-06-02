@@ -7,6 +7,8 @@ import peerDepsExternal from 'rollup-plugin-peer-deps-external';
 import postcss from 'rollup-plugin-postcss';
 import autoprefixer from 'autoprefixer';
 
+// TODO: outDir should be different from ts build `lib` as otherwise we have a style collision
+
 function onwarn(message) {
 	const suppressed = ['UNRESOLVED_IMPORT', 'THIS_IS_UNDEFINED'];
 
@@ -75,7 +77,7 @@ export function rollup({
 					browser: true,
 				}),
 				commonjs({
-					include: '/node_modules/**',
+					include: /node_modules/,
 				}),
 				peerDepsExternal({
 					packageJsonPath: `${projectDir}/package.json`,
@@ -96,7 +98,7 @@ export function rollup({
 				typescriptPlugin({
 					typescript,
 					tsconfig,
-					tsconfigOverride: { compilerOptions: { module: 'ES6' } },
+					// tsconfigOverride: { compilerOptions: { module: 'ES6' } },
 				}),
 			],
 			onwarn,
