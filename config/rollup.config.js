@@ -3,7 +3,6 @@ import commonjs from '@rollup/plugin-commonjs';
 import typescriptPlugin from 'rollup-plugin-typescript2';
 import typescript from 'typescript';
 import path from 'path';
-import invariantPlugin from 'rollup-plugin-invariant';
 import peerDepsExternal from 'rollup-plugin-peer-deps-external';
 import postcss from 'rollup-plugin-postcss';
 import autoprefixer from 'autoprefixer';
@@ -16,28 +15,31 @@ function onwarn(message) {
 	}
 }
 
-const defaultGlobals = {
-	react: 'react',
-};
+const external = ['react', 'tslib'];
+
+// const defaultGlobals = {
+// 	react: 'react',
+// 	tslib: 'tslib',
+// };
 
 export function rollup({
 	name,
 	input = './src/index.ts',
 	outputPrefix = 'bundle',
-	extraGlobals = {},
+	// extraGlobals = {},
 }) {
 	const projectDir = path.join(__filename, '..');
 	console.info(`Building project esm ${projectDir}`);
 	const tsconfig = `${projectDir}/tsconfig.json`;
 
-	const globals = {
-		...defaultGlobals,
-		...extraGlobals,
-	};
+	// const globals = {
+	// 	...defaultGlobals,
+	// 	...extraGlobals,
+	// };
 
-	function external(id) {
-		return Object.prototype.hasOwnProperty.call(globals, id);
-	}
+	// function external(id) {
+	// 	return Object.prototype.hasOwnProperty.call(globals, id);
+	// }
 
 	function outputFile(format) {
 		// outputPrefix.format.js
@@ -53,7 +55,6 @@ export function rollup({
 				format,
 				sourcemap: true,
 				name,
-				globals,
 			},
 			onwarn,
 		};
@@ -70,6 +71,12 @@ export function rollup({
 				sourcemap: true,
 			},
 			plugins: [
+				nodeResolve({
+					browser: true,
+				}),
+				commonjs({
+					include: '/node_modules/**',
+				}),
 				peerDepsExternal({
 					packageJsonPath: `${projectDir}/package.json`,
 				}),
@@ -77,19 +84,23 @@ export function rollup({
 					extract: 'styles.css',
 					plugins: [autoprefixer()],
 					modules: true,
-					use: ['sass'],
+					use: [
+						[
+							'sass',
+							{
+								includePaths: ['./node_modules'],
+							},
+						],
+					],
 				}),
-				nodeResolve({
-					browser: true,
+				typescriptPlugin({
+					typescript,
+					tsconfig,
+					tsconfigOverride: { compilerOptions: { module: 'ES6' } },
 				}),
-				commonjs({
-					include: '/node_modules/**',
-				}),
-				typescriptPlugin({ typescript, tsconfig }),
 			],
 			onwarn,
 		},
 		convert('cjs'),
-		convert('umd'),
 	];
 }

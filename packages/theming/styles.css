@@ -4,7 +4,7 @@
 	font-weight: 300;
 	font-display: swap;
 	src: local('Open Sans Light'), local('OpenSans-Light'),
-		url(./fonts/open-sans-light.woff2) format('woff2');
+		url(./assets/fonts/open-sans-light.woff2) format('woff2');
 }
 
 @font-face {
@@ -13,7 +13,7 @@
 	font-weight: 400;
 	font-display: swap;
 	src: local('Open Sans Regular'), local('OpenSans-Regular'),
-		url(./fonts/open-sans-regular.woff2) format('woff2');
+		url(./assets/fonts/open-sans-regular.woff2) format('woff2');
 }
 
 @font-face {
@@ -22,7 +22,7 @@
 	font-weight: 600;
 	font-display: swap;
 	src: local('Open Sans SemiBold'), local('OpenSans-SemiBold'),
-		url(./fonts/open-sans-semi-bold.woff2) format('woff2');
+		url(./assets/fonts/open-sans-semi-bold.woff2) format('woff2');
 }
 
 @font-face {
@@ -31,8 +31,54 @@
 	font-weight: 700;
 	font-display: swap;
 	src: local('Open Sans Bold'), local('OpenSans-Bold'),
-		url(./fonts/open-sans-bold.woff2) format('woff2');
+		url(./assets/fonts/open-sans-bold.woff2) format('woff2');
 }
+
+/**** SCREEN SETTINGS ****/
+/**** COLORS ****/
+/* colors primary */
+/* colors neutral */
+/* colors accents */
+/* colors success */
+/* colors warning */
+/* colors danger */
+/**** FONTS ****/
+/**** SPACE ****/
+/**** FONT SIZES ****/
+/**** FONT WEIGHTS ****/
+/**** BREAKPOINTS ****/
+.richTextEditor_editorFontStack__3RH-q {
+  font-family: "Open Sans", sans-serif;
+  font-weight: 300;
+  font-size: 16px; }
+  .richTextEditor_editorFontStack__3RH-q h1 {
+    font-size: 45px; }
+  .richTextEditor_editorFontStack__3RH-q h2 {
+    font-size: 36px; }
+  .richTextEditor_editorFontStack__3RH-q h3 {
+    font-size: 23px; }
+  .richTextEditor_editorFontStack__3RH-q h4 {
+    font-size: 18px; }
+  .richTextEditor_editorFontStack__3RH-q h5 {
+    font-size: 16px; }
+  .richTextEditor_editorFontStack__3RH-q h6 {
+    font-size: 14px; }
+  .richTextEditor_editorFontStack__3RH-q p {
+    font-size: 16px; }
+  .richTextEditor_editorFontStack__3RH-q b {
+    font-weight: 600; }
+  .richTextEditor_editorFontStack__3RH-q strong {
+    font-weight: 600; }
+  .richTextEditor_editorFontStack__3RH-q span {
+    font-size: 16px; }
+  .richTextEditor_editorFontStack__3RH-q i {
+    font-style: italic; }
+  .richTextEditor_editorFontStack__3RH-q u {
+    text-decoration: underline; }
+  .richTextEditor_editorFontStack__3RH-q del {
+    text-decoration: line-through; }
+  .richTextEditor_editorFontStack__3RH-q blockquote {
+    background: #b1b4b6; }
 
 * {
 	border: 0;
