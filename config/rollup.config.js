@@ -1,108 +1,64 @@
-import nodeResolve from '@rollup/plugin-node-resolve';
-import commonjs from '@rollup/plugin-commonjs';
-import typescriptPlugin from 'rollup-plugin-typescript2';
-import typescript from 'typescript';
 import path from 'path';
-import peerDepsExternal from 'rollup-plugin-peer-deps-external';
+import nodeResolve from '@rollup/plugin-node-resolve';
 import postcss from 'rollup-plugin-postcss';
 import autoprefixer from 'autoprefixer';
+// import commonjs from '@rollup/plugin-commonjs';
+// import typescriptPlugin from 'rollup-plugin-typescript2';
+// import typescript from 'typescript';
+// import peerDepsExternal from 'rollup-plugin-peer-deps-external';
+// import ignoreImport from 'rollup-plugin-ignore-import';
 
-// TODO: outDir should be different from ts build `lib` as otherwise we have a style collision
+const plugins = [
+	nodeResolve(),
+	postcss({
+		extract: 'styles.css',
+		plugins: [autoprefixer()],
+		modules: true,
+		use: [
+			[
+				'sass',
+				{
+					includePaths: [path.resolve('node_modules')],
+				},
+			],
+		],
+	}),
+];
 
-function onwarn(message) {
-	const suppressed = ['UNRESOLVED_IMPORT', 'THIS_IS_UNDEFINED'];
+const outputFile = (format) => `./lib/index.${format}.js`;
 
-	if (!suppressed.find((code) => message.code === code)) {
-		return console.warn(message.message);
-	}
+function prepareESM(input, external) {
+	return {
+		input,
+		external,
+		output: {
+			file: outputFile('esm'),
+			format: 'esm',
+			sourcemap: true,
+		},
+		plugins,
+	};
 }
 
-const external = ['react', 'tslib'];
-
-// const defaultGlobals = {
-// 	react: 'react',
-// 	tslib: 'tslib',
-// };
+function prepareCJS(input, external) {
+	return {
+		input,
+		external,
+		output: {
+			file: outputFile('cjs'),
+			format: 'cjs',
+			sourcemap: true,
+			exports: 'named',
+		},
+		plugins,
+	};
+}
 
 export function rollup({
-	name,
-	input = './src/index.ts',
-	outputPrefix = 'bundle',
-	// extraGlobals = {},
+	// name,
+	input = './lib/index.js',
+	extraExternal = [],
 }) {
-	const projectDir = path.join(__filename, '..');
-	console.info(`Building project esm ${projectDir}`);
-	const tsconfig = `${projectDir}/tsconfig.json`;
-
-	// const globals = {
-	// 	...defaultGlobals,
-	// 	...extraGlobals,
-	// };
-
-	// function external(id) {
-	// 	return Object.prototype.hasOwnProperty.call(globals, id);
-	// }
-
-	function outputFile(format) {
-		// outputPrefix.format.js
-		return `./lib/${format}.js`;
-	}
-
-	function convert(format) {
-		return {
-			input: outputFile('esm'),
-			external,
-			output: {
-				file: outputFile(format),
-				format,
-				sourcemap: true,
-				name,
-			},
-			onwarn,
-		};
-	}
-
-	return [
-		{
-			input,
-			external,
-			output: {
-				file: outputFile('esm'),
-				format: 'esm',
-				exports: 'named',
-				sourcemap: true,
-			},
-			plugins: [
-				nodeResolve({
-					browser: true,
-				}),
-				commonjs({
-					include: /node_modules/,
-				}),
-				peerDepsExternal({
-					packageJsonPath: `${projectDir}/package.json`,
-				}),
-				postcss({
-					extract: 'styles.css',
-					plugins: [autoprefixer()],
-					modules: true,
-					use: [
-						[
-							'sass',
-							{
-								includePaths: ['./node_modules'],
-							},
-						],
-					],
-				}),
-				typescriptPlugin({
-					typescript,
-					tsconfig,
-					// tsconfigOverride: { compilerOptions: { module: 'ES6' } },
-				}),
-			],
-			onwarn,
-		},
-		convert('cjs'),
-	];
+	const external = ['react', 'tslib'].concat(extraExternal);
+	return [prepareESM(input, external), prepareCJS(input, external)];
 }

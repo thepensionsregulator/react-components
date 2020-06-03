@@ -1,5 +1,5 @@
 import React from 'react';
-import { Flex, Link } from '@tpr/core';
+import { Link } from '@tpr/core';
 import { useTrusteeContext } from '../../context';
 import { Footer, FooterButton } from '../../../components/card';
 import { Form, FFSelect } from '@tpr/forms';

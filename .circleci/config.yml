@@ -15,6 +15,7 @@ jobs:
           node-version: latest
       - run: node --version
       - run: yarn install
+      - run: yarn build
       - run: yarn test
       - save_cache:
           key: dependency-cache-{{ checksum "package.json" }}
@@ -32,6 +33,7 @@ jobs:
           install-yarn: true
           node-version: latest
       - run: yarn postinstall
+      - run: yarn build
       - run:
           name: Authenticate with NPM registry
           command: echo "//registry.npmjs.org/:_authToken=$NPM_TOKEN" > .npmrc
