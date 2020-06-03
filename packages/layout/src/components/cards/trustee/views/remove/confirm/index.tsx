@@ -43,7 +43,10 @@ const RemoveConfirm: React.FC = () => {
 	}
 
 	return (
-		<Content breadcrumbs={() => <Breadcrumbs links={breadcrumbLinks} />}>
+		<Content
+			type="trustee"
+			breadcrumbs={() => <Breadcrumbs links={breadcrumbLinks} />}
+		>
 			<H3 cfg={{ mt: 3, fontWeight: 2 }}>
 				Are you sure you want to remove this trustee?
 			</H3>

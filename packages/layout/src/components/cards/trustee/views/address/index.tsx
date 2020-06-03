@@ -20,7 +20,7 @@ const AddressPage: React.FC = () => {
 	const { loading, manual, postcode, lookup, options } = state;
 
 	return (
-		<Content title="What is this trustee’s address?">
+		<Content type="trustee" title="What is this trustee’s address?">
 			<Postcode
 				lookup={lookup}
 				loading={loading}

@@ -25,7 +25,7 @@ const RemoveReason: React.FC = () => {
 	};
 
 	return (
-		<Content title="Remove this trustee">
+		<Content type="trustee" title="Remove this trustee">
 			<H4 fontWeight="bold" mb={0}>
 				Why are you removing this trustee?
 			</H4>
