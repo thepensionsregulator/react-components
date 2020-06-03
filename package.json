@@ -3,7 +3,7 @@
 	"name": "@tpr/monorepo",
 	"license": "MIT",
 	"scripts": {
-		"postinstall": "npx lerna exec -- npm install --package-lock=false && npx lerna run prepare",
+		"postinstall": "npx lerna exec -- npm install --package-lock=false && npx lerna run prepare & yarn bundle",
 		"build": "npx lerna run build",
 		"postbuild": "yarn bundle",
 		"test": "jest",
