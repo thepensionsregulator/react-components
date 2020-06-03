@@ -5,6 +5,7 @@
 	"scripts": {
 		"postinstall": "npx lerna exec -- npm install --package-lock=false && npx lerna run prepare",
 		"build": "npx lerna run build",
+		"postbuild": "yarn bundle",
 		"test": "jest",
 		"test:watch": "jest --watch",
 		"posttest": "yarn lint",
@@ -16,7 +17,8 @@
 		"docz:dev": "docz dev",
 		"docz:build": "docz build",
 		"docz:serve": "docz build && docz serve",
-		"deploy": "yarn build && lerna publish --canary"
+		"predeploy": "yarn build",
+		"deploy": "lerna publish --canary"
 	},
 	"dependencies": {
 		"@tpr/core": "file:./packages/core",
