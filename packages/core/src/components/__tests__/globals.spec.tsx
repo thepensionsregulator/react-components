@@ -1,6 +1,6 @@
 import React from 'react';
 import { render } from '@testing-library/react';
-import { Flex, matchClassName } from '../globals/globals';
+import { Flex } from '../globals/globals';
 
 describe('Flex', () => {
 	test('Flex renders correctly and accepts testId prop', () => {
