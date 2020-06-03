@@ -2,6 +2,7 @@ import React, { createContext, useContext, ReactElement } from 'react';
 import { useMachine } from '@xstate/react';
 import employerMachine, { EmployerContext as EC } from './employerMachine';
 import { State, EventData } from 'xstate';
+import { SpaceProps } from '@tpr/core';
 
 export const EmployerContext = createContext<EmployerContextProps>({
 	current: {},
@@ -30,6 +31,7 @@ export interface EmployerProps {
 	testId?: string;
 	employer: EmployerInput;
 	children?: RenderProps | ReactElement;
+	cfg?: SpaceProps;
 }
 
 export const EmployerProvider = ({
