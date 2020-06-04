@@ -7,6 +7,7 @@ import { EmployerProvider, useEmployerContext, EmployerProps } from './context';
 import { Preview } from './views/preview/preview';
 import { DateForm } from './views/remove/date/date';
 import { EmployerType } from './views/type/type';
+import { Confirm } from './views/remove/confirm/confirm';
 
 const CardContentSwitch: React.FC = () => {
 	const { current } = useEmployerContext();
@@ -18,7 +19,7 @@ const CardContentSwitch: React.FC = () => {
 		case current.matches({ remove: 'date' }):
 			return <DateForm />;
 		case current.matches({ remove: 'confirm' }):
-			return <div>confirm if you want to delete Employer</div>;
+			return <Confirm />;
 		default:
 			return null;
 	}

@@ -50,7 +50,7 @@ const RemoveConfirm: React.FC = () => {
 			<H3 cfg={{ mt: 3, fontWeight: 2 }}>
 				Are you sure you want to remove this trustee?
 			</H3>
-			<Hr cfg={{ my: 3 }} />
+			<Hr cfg={{ my: 4 }} />
 			<P cfg={{ color: 'neutral.3' }}>This can't be undone.</P>
 			<Footer>
 				<FooterButton
