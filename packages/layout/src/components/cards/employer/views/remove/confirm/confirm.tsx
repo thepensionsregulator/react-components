@@ -2,7 +2,7 @@ import React from 'react';
 import { Hr, Flex, P, H3, Link } from '@tpr/core';
 import { Content } from '../../../../components/content';
 import { FooterButton } from '../../../../components/card';
-import { useEmployerContext } from '../../../context';
+// import { useEmployerContext } from '../../../context';
 import styles from './confirm.module.scss';
 import {
 	Breadcrumbs,
@@ -22,7 +22,7 @@ const breadcrumbLinks: BreadcrumbLink[] = [
 ];
 
 export const Confirm = () => {
-	const { send } = useEmployerContext();
+	// const { send } = useEmployerContext();
 
 	return (
 		<Content
