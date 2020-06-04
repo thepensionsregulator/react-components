@@ -1,11 +1,11 @@
 {
 	"name": "@tpr/core",
-	"version": "2.0.4",
+	"version": "2.1.0",
 	"description": "TPR Core components",
 	"author": "David Alekna <david.alekna@tpr.gov.uk>",
 	"license": "MIT",
-	"main": "./lib/index.js",
-	"module": "./lib/esm.js",
+	"main": "./lib/index.cjs.js",
+	"module": "./lib/index.js",
 	"typings": "./lib/index.d.ts",
 	"sideEffects": false,
 	"files": [
@@ -37,18 +37,17 @@
 	"dependencies": {
 		"@tpr/theming": "file:../theming",
 		"@xstate/react": "^0.8.1",
-		"final-form": "^4.18.7",
-		"qs": "^6.9.1",
-		"react-final-form": "^6.3.5",
-		"tslib": "^1.11.1",
-		"xstate": "^4.9.0"
+		"final-form": "^4.20.0",
+		"qs": "^6.9.4",
+		"react-final-form": "^6.5.0",
+		"tslib": "^2.0.0",
+		"xstate": "^4.10.0"
 	},
 	"publishConfig": {
 		"access": "public"
 	},
 	"gitHead": "57aec9c9de22596d6343bae07eb6b198322a0bee",
 	"devDependencies": {
-		"cross-env": "^7.0.0",
-		"typescript": "^3.8.3"
+		"cross-env": "^7.0.2"
 	}
 }

@@ -23,12 +23,12 @@ const breadcrumbLinks: BreadcrumbLink[] = [
 const RemoveConfirm: React.FC = () => {
 	const [loading, setLoading] = useState(false);
 	const { current, send, onRemove } = useTrusteeContext();
-	const { leftTheScheme } = current.context;
+	const { trustee, leftTheScheme } = current.context;
 
 	function handleRemove() {
 		setLoading(true);
 		onRemove({
-			id: 'trustee_id_here',
+			id: trustee.id,
 			reason: {
 				leftTheScheme: leftTheScheme ? true : false,
 				date: leftTheScheme,
@@ -43,11 +43,14 @@ const RemoveConfirm: React.FC = () => {
 	}
 
 	return (
-		<Content breadcrumbs={() => <Breadcrumbs links={breadcrumbLinks} />}>
+		<Content
+			type="trustee"
+			breadcrumbs={() => <Breadcrumbs links={breadcrumbLinks} />}
+		>
 			<H3 cfg={{ mt: 3, fontWeight: 2 }}>
 				Are you sure you want to remove this trustee?
 			</H3>
-			<Hr cfg={{ my: 3 }} />
+			<Hr cfg={{ my: 4 }} />
 			<P cfg={{ color: 'neutral.3' }}>This can't be undone.</P>
 			<Footer>
 				<FooterButton

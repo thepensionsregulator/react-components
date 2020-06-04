@@ -120,19 +120,3 @@ export const Flex: React.FC<FlexBoxProps> = ({
 		children,
 	);
 };
-
-export const matchClassName = (
-	className: string,
-	selector: string | boolean,
-) => {
-	/** if selector is boolean, include the class name */
-	if (typeof selector === 'boolean') return className;
-	/** TODO? if we provide and array of values, we could process that for different screen sizes */
-	if (Array.isArray(selector)) {
-		return className;
-	}
-	/** if selector is a string with spaces then join it with dashes to match an appropriate class name */
-	const classParams = `${selector}`.split(/[ .]+/).join('-');
-	/** select matched style from styles if any */
-	return styles[`${className}-${classParams}`];
-};

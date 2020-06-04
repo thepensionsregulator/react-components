@@ -89,8 +89,6 @@ export const Select: React.FC<SelectProps> = ({
 					<Flex cfg={{ width }} className={styles.relative}>
 						<div
 							{...getMenuProps({
-								width: 200,
-								style: { padding: 0 },
 								className: classNames([
 									{ [styles['popup-isopen']]: isOpen },
 									styles.popup,

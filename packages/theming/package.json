@@ -1,11 +1,11 @@
 {
 	"name": "@tpr/theming",
-	"version": "2.0.1",
+	"version": "2.1.0",
 	"description": "TPR Theming components",
 	"author": "David Alekna <david.alekna@tpr.gov.uk>",
 	"license": "MIT",
-	"main": "./lib/index.js",
-	"module": "./lib/esm.js",
+	"main": "./lib/index.cjs.js",
+	"module": "./lib/index.js",
 	"typings": "./lib/index.d.ts",
 	"sideEffects": false,
 	"files": [
@@ -38,11 +38,10 @@
 		"access": "public"
 	},
 	"dependencies": {
-		"tslib": "^1.11.1"
+		"tslib": "^2.0.0"
 	},
 	"devDependencies": {
-		"cross-env": "^7.0.0",
-		"typescript": "^3.8.3"
+		"cross-env": "^7.0.2"
 	},
 	"gitHead": "57aec9c9de22596d6343bae07eb6b198322a0bee"
 }

@@ -32,6 +32,7 @@ const Contacts: React.FC = () => {
 
 	return (
 		<Content
+			type="trustee"
 			title="Contact details for this trustee"
 			subtitle="Provide contact details for the trustee, not a third-party such as an administrator."
 			loading={loading}

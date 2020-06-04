@@ -1,5 +1,5 @@
 import { classNames, filterProps } from '../utils';
-import { matchClassName } from '../components/globals/globals';
+// import { matchClassName } from '../utils';
 
 describe('classNames', () => {
 	test('classNames can accept an array of strings and merge them into one string', () => {

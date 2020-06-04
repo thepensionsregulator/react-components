@@ -38,7 +38,7 @@ const Name: React.FC = () => {
 	};
 
 	return (
-		<Content title="Name of the trustee">
+		<Content type="trustee" title="Name of the trustee">
 			<Form
 				onSubmit={onSubmit}
 				validate={validate(fields)}

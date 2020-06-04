@@ -74,6 +74,7 @@ const Type: React.FC = () => {
 
 	return (
 		<Content
+			type="trustee"
 			title="Type of trustee"
 			loading={loading}
 			breadcrumbs={() => <Breadcrumbs links={breadcrumbLinks} />}

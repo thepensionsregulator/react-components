@@ -1,11 +1,11 @@
 {
 	"name": "@tpr/layout",
-	"version": "2.0.12",
+	"version": "2.1.0",
 	"description": "TPR Layout components",
 	"author": "David Alekna <david.alekna@tpr.gov.uk>",
 	"license": "MIT",
-	"main": "./lib/index.js",
-	"module": "./lib/esm.js",
+	"main": "./lib/index.cjs.js",
+	"module": "./lib/index.js",
 	"typings": "./lib/index.d.ts",
 	"sideEffects": false,
 	"files": [
@@ -42,15 +42,14 @@
 		"@tpr/icons": "file:../icons",
 		"@tpr/theming": "file:../theming",
 		"@xstate/react": "^0.8.1",
-		"final-form": "^4.18.7",
-		"qs": "^6.9.1",
-		"react-final-form": "^6.3.5",
-		"tslib": "^1.11.1",
-		"xstate": "^4.9.0"
+		"final-form": "^4.20.0",
+		"qs": "^6.9.4",
+		"react-final-form": "^6.5.0",
+		"tslib": "^2.0.0",
+		"xstate": "^4.10.0"
 	},
 	"devDependencies": {
-		"cross-env": "^7.0.0",
-		"typescript": "^3.8.3"
+		"cross-env": "^7.0.2"
 	},
 	"publishConfig": {
 		"access": "public"
