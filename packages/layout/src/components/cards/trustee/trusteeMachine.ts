@@ -62,6 +62,7 @@ export interface TrusteeContext {
 	complete: boolean;
 	leftTheScheme: null | String;
 	trustee: {
+		id: string;
 		schemeRoleId: string;
 		//
 		title: string;
@@ -85,6 +86,7 @@ const trusteeMachine = Machine<TrusteeContext, TrusteeStates, TrusteeEvents>({
 		complete: false,
 		leftTheScheme: null,
 		trustee: {
+			id: '',
 			schemeRoleId: '',
 			//
 			title: '',

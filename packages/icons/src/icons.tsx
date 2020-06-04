@@ -52,7 +52,7 @@ export const CheckboxChecked: React.FC<SVGProps> = (props) => {
 		>
 			<path
 				d="M 354.5 1304.5  L 387.5 1304.5  L 387.5 1337.5  L 354.5 1337.5  L 354.5 1304.5  Z "
-				fill-rule="nonzero"
+				fillRule="nonzero"
 				fill="#f2f2f2"
 				stroke="none"
 			/>
@@ -88,7 +88,7 @@ export const CheckboxBlank: React.FC<SVGProps> = (props) => {
 		>
 			<path
 				d="M 351.5 1301.5  L 390.5 1301.5  L 390.5 1340.5  L 351.5 1340.5  L 351.5 1301.5  Z "
-				fill-rule="nonzero"
+				fillRule="nonzero"
 				fill="#f2f2f2"
 				stroke="none"
 			/>
@@ -107,7 +107,7 @@ export const RadioButtonChecked: React.FC<SVGProps> = (props) => {
 		<SVG width="40" viewBox="315 504 40 40" {...props}>
 			<path
 				d="M 335 507  C 344.52 507  352 514.48  352 524  C 352 533.52  344.52 541  335 541  C 325.48 541  318 533.52  318 524  C 318 514.48  325.48 507  335 507  Z "
-				fill-rule="nonzero"
+				fillRule="nonzero"
 				fill="#f2f2f2"
 				stroke="none"
 			/>
@@ -119,7 +119,7 @@ export const RadioButtonChecked: React.FC<SVGProps> = (props) => {
 			/>
 			<path
 				d="M 335 534  C 329.4 534  325 529.6  325 524  C 325 518.4  329.4 514  335 514  C 340.6 514  345 518.4  345 524  C 345 529.6  340.6 534  335 534  "
-				fill-rule="nonzero"
+				fillRule="nonzero"
 				fill="#036db8"
 				stroke="none"
 			/>
@@ -132,7 +132,7 @@ export const RadioButtonUnchecked: React.FC<SVGProps> = (props) => {
 		<SVG width="40" viewBox="315 504 40 40" {...props}>
 			<path
 				d="M 335 504  C 346.2 504  355 512.8  355 524  C 355 535.2  346.2 544  335 544  C 323.8 544  315 535.2  315 524  C 315 512.8  323.8 504  335 504  Z "
-				fill-rule="nonzero"
+				fillRule="nonzero"
 				fill="#f2f2f2"
 				stroke="none"
 			/>

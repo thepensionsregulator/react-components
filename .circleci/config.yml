@@ -33,7 +33,6 @@ jobs:
           install-yarn: true
           node-version: latest
       - run: yarn postinstall
-      - run: yarn build
       - run:
           name: Authenticate with NPM registry
           command: echo "//registry.npmjs.org/:_authToken=$NPM_TOKEN" > .npmrc

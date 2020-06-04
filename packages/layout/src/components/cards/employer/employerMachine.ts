@@ -17,7 +17,7 @@ interface EmployerStates {
 type EmployerEvents =
 	| { type: 'CHANGE_TYPE' }
 	| { type: 'REMOVE' }
-	| { type: 'PREVIEW' }
+	| { type: 'SAVE'; values?: any }
 	| { type: 'CANCEL' }
 	| { type: 'NEXT'; values?: any }
 	| { type: 'DELETE' }
@@ -55,7 +55,7 @@ const employerMachine = Machine<
 		employerType: {
 			id: 'employerType',
 			on: {
-				PREVIEW: '#preview',
+				SAVE: '#preview',
 			},
 		},
 		remove: {

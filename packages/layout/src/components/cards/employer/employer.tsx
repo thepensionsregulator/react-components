@@ -1,12 +1,13 @@
 import React from 'react';
 import { UnderlinedButton } from '../components/button';
 import { Toolbar } from '../components/toolbar';
-import { P } from '@tpr/core';
+import { Flex, P } from '@tpr/core';
 import styles from '../cards.module.scss';
 import { EmployerProvider, useEmployerContext, EmployerProps } from './context';
 import { Preview } from './views/preview/preview';
 import { DateForm } from './views/remove/date/date';
 import { EmployerType } from './views/type/type';
+import { Confirm } from './views/remove/confirm/confirm';
 
 const CardContentSwitch: React.FC = () => {
 	const { current } = useEmployerContext();
@@ -18,17 +19,17 @@ const CardContentSwitch: React.FC = () => {
 		case current.matches({ remove: 'date' }):
 			return <DateForm />;
 		case current.matches({ remove: 'confirm' }):
-			return <div>confirm if you want to delete Employer</div>;
+			return <Confirm />;
 		default:
 			return null;
 	}
 };
 
-export const Employer: React.FC<EmployerProps> = ({ testId, ...rest }) => {
+export const Employer: React.FC<EmployerProps> = ({ testId, cfg, ...rest }) => {
 	return (
 		<EmployerProvider {...rest}>
 			{({ current: { context }, send }) => (
-				<div data-testid={testId} className={styles.card}>
+				<Flex cfg={cfg} data-testid={testId} className={styles.card}>
 					<Toolbar
 						complete={context.complete}
 						subtitle={() => <P>Principal and participating employer</P>}
@@ -47,7 +48,7 @@ export const Employer: React.FC<EmployerProps> = ({ testId, ...rest }) => {
 						)}
 					/>
 					<CardContentSwitch />
-				</div>
+				</Flex>
 			)}
 		</EmployerProvider>
 	);

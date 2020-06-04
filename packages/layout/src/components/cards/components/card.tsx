@@ -23,15 +23,25 @@ export const StyledCardToolbar: React.FC = ({ children }) => {
 	return <div className={styles.cardToolbar}>{children}</div>;
 };
 
-type ToolbarProps = { title: string; subtitle?: string };
-export const Toolbar: React.FC<ToolbarProps> = ({ title, subtitle }) => {
+type ToolbarProps = {
+	type: 'trustee' | 'employer';
+	title: string;
+	subtitle?: string;
+};
+export const Toolbar: React.FC<ToolbarProps> = ({
+	type = 'trustee',
+	title,
+	subtitle,
+}) => {
 	return (
 		<Flex cfg={{ flexDirection: 'column', mt: 4, mb: 3 }}>
 			<Flex
 				cfg={{ flexDirection: 'column', pb: 2 }}
 				className={styles.toolbarBottomBorder}
 			>
-				<P cfg={{ color: 'neutral.3', fontSize: 3 }}>Edit trustee</P>
+				<P cfg={{ color: 'neutral.3', fontSize: 3 }}>
+					Edit {type === 'trustee' ? 'trustee' : 'employer'}
+				</P>
 				<H3 cfg={{ fontWeight: 3 }}>{title}</H3>
 			</Flex>
 			{subtitle && (
@@ -45,7 +55,7 @@ export const Toolbar: React.FC<ToolbarProps> = ({ title, subtitle }) => {
 
 type FooterButtonProps = {
 	type?: 'button' | 'submit';
-	title?: string;
+	title?: string | Function;
 	appearance?: 'primary' | 'outlined';
 	intent?: 'none' | 'success' | 'warning' | 'danger';
 	loadingMessage?: string;
@@ -63,6 +73,7 @@ export const FooterButton: React.FC<FooterButtonProps> = ({
 	title,
 	cfg,
 }) => {
+	const t = typeof title === 'function' ? title() : title;
 	return (
 		<Button
 			intent={intent}
@@ -72,7 +83,7 @@ export const FooterButton: React.FC<FooterButtonProps> = ({
 			disabled={disabled}
 			cfg={cfg}
 		>
-			{disabled ? loadingMessage : title}
+			{disabled ? loadingMessage : t}
 		</Button>
 	);
 };

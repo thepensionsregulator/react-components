@@ -2,6 +2,7 @@ import React, { createContext, useContext, ReactElement } from 'react';
 import { useMachine } from '@xstate/react';
 import trusteeMachine, { TrusteeContext as TC } from './trusteeMachine';
 import { State, EventData } from 'xstate';
+import { SpaceProps } from '@tpr/core';
 
 export const TrusteeContext = createContext<TrusteeContextProps>({
 	current: {},
@@ -15,6 +16,7 @@ export const TrusteeContext = createContext<TrusteeContextProps>({
 type RenderProps = (_: TrusteeContextProps) => ReactElement;
 
 export interface TrusteeInput {
+	id: string;
 	schemeRoleId: string;
 	//
 	title: string;
@@ -49,6 +51,7 @@ export interface TrusteeProps {
 	testId?: string;
 	trustee: TrusteeInput;
 	children?: RenderProps | ReactElement;
+	cfg?: SpaceProps;
 }
 
 export const TrusteeProvider = ({
