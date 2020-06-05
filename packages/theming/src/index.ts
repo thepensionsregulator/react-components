@@ -1,3 +1,3 @@
-import { ThemeProvider } from './theming';
+import { ThemeProvider, EditorFonts } from './theming';
 
-export { ThemeProvider as default };
+export { ThemeProvider as default, EditorFonts };

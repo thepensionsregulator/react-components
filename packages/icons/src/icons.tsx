@@ -58,19 +58,19 @@ export const CheckboxChecked: React.FC<SVGProps> = (props) => {
 			/>
 			<path
 				d="M 353 1303  L 389 1303  L 389 1339  L 353 1339  L 353 1303  Z "
-				stroke-width="4"
+				strokeWidth="4"
 				stroke="#585858"
 				fill="none"
 			/>
 			<path
 				d="M 359.571428571429 1321  L 368.142857142857 1329.57142857143  "
-				stroke-width="8.57142857142857"
+				strokeWidth="8.57142857142857"
 				stroke="#036db8"
 				fill="none"
 			/>
 			<path
 				d="M 368.142857142857 1329.57142857143  L 382.428571428571 1309.57142857143  "
-				stroke-width="8.57142857142857"
+				strokeWidth="8.57142857142857"
 				stroke="#036db8"
 				fill="none"
 			/>
@@ -94,7 +94,7 @@ export const CheckboxBlank: React.FC<SVGProps> = (props) => {
 			/>
 			<path
 				d="M 351.5 1301.5  L 390.5 1301.5  L 390.5 1340.5  L 351.5 1340.5  L 351.5 1301.5  Z "
-				stroke-width="1"
+				strokeWidth="1"
 				stroke="#585858"
 				fill="none"
 			/>
@@ -113,7 +113,7 @@ export const RadioButtonChecked: React.FC<SVGProps> = (props) => {
 			/>
 			<path
 				d="M 335 506  C 345.08 506  353 513.92  353 524  C 353 534.08  345.08 542  335 542  C 324.92 542  317 534.08  317 524  C 317 513.92  324.92 506  335 506  Z "
-				stroke-width="4"
+				strokeWidth="4"
 				stroke="#585858"
 				fill="none"
 			/>
@@ -138,7 +138,7 @@ export const RadioButtonUnchecked: React.FC<SVGProps> = (props) => {
 			/>
 			<path
 				d="M 335 504.5  C 345.92 504.5  354.5 513.08  354.5 524  C 354.5 534.92  345.92 543.5  335 543.5  C 324.08 543.5  315.5 534.92  315.5 524  C 315.5 513.08  324.08 504.5  335 504.5  Z "
-				stroke-width="1"
+				strokeWidth="1"
 				stroke="#585858"
 				fill="none"
 			/>

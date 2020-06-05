@@ -4,13 +4,32 @@ menu: Forms
 route: /forms/checkbox
 ---
 
-import { Playground } from 'docz';
+import { Playground } from '@playground';
 import { Form } from 'react-final-form';
 import { FFCheckbox } from './checkbox';
 
 # Checkbox
 
+Checkbox component.
+
+## When To Use
+
+- Used for selecting multiple values from several options.
+- If you use only one checkbox, it is the same as using Switch to toggle between two states. The difference is that Switch will trigger the state change directly, but Checkbox just marks the state as changed and this needs to be submitted.
+
 ## Usage
+
+Inside your React project directory, run the following:
+
+```js
+yarn add @tpr/forms
+```
+
+or with npm
+
+```js
+npm install @tpr/forms
+```
 
 ```js
 import { FFCheckbox } from '@tpr/forms';

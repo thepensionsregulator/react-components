@@ -1,3 +1,5 @@
+const fs = require('fs');
+
 export default {
 	port: 6006,
 	title: 'TPR React Components',

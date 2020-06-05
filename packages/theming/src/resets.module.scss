@@ -1,4 +1,13 @@
-* {
+.bodyreset {
+	margin: 0;
+	font-family: 'Open Sans', sans-serif;
+	-webkit-font-smoothing: antialiased;
+	-moz-osx-font-smoothing: grayscale;
+}
+
+// apply css resets for all elements within a div. We don't want to reset default docz styles.
+
+.bodyreset * {
 	border: 0;
 	margin: 0;
 	padding: 0;
@@ -12,11 +21,4 @@
 	text-rendering: optimizeLegibility;
 	-webkit-appearance: none;
 	-moz-appearance: none;
-}
-
-body {
-	margin: 0;
-	font-family: 'Open Sans', sans-serif;
-	-webkit-font-smoothing: antialiased;
-	-moz-osx-font-smoothing: grayscale;
 }
