@@ -38,6 +38,7 @@
 		"access": "public"
 	},
 	"dependencies": {
+		"normalize.css": "^8.0.1",
 		"tslib": "^2.0.0"
 	},
 	"devDependencies": {
