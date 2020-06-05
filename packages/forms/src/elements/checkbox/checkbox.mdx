@@ -35,34 +35,7 @@ npm install @tpr/forms
 import { FFCheckbox } from '@tpr/forms';
 ```
 
-<!-- ## Introduction
-
-The `Checkbox` component should be used within the Form state provider.
-
-| Props      |
-| ---------- |
-| `checked`  |
-| `onChange` |
-| `disabled` |
-| `align`    |
-| `testId`   |
-| `id`       |
-| `label`    |
-| `value`    | -->
-
-For a complete documentation on all the returned props, hook props and more
-information check out the
-[Github Page](https://github.com/davidalekna/tpr/tree/master/packages/forms#checkbox).
-
-## Usage
-
-Lorem ipsum dolor sit amet consectetur adipisicing elit. Ipsum nostrum omnis ea unde totam, est
-consectetur odio! Harum vitae, sed totam aperiam consequuntur nostrum repudiandae non nemo porro,
-dolorem nulla corrupti hic consectetur eaque fuga illo numquam modi similique ipsam recusandae! Harum,
-possimus suscipit. Quibusdam totam, fugiat officiis qui nisi tempora. Accusantium corrupti similique
-et at ipsum, eveniet tempore nostrum quasi est unde modi impedit quaerat suscipit aspernatur ratione
-quo corporis? Cum dignissimos adipisci itaque sint tempore, saepe dolorem fugit quia placeat officiis
-earum rerum aspernatur similique commodi voluptates? Id ut ab cum doloremque magnam illo ipsa officia nulla ipsum.
+## Examples
 
 [CodeSandbox](https://codesandbox.io)
 
@@ -90,3 +63,17 @@ earum rerum aspernatur similique commodi voluptates? Id ut ab cum doloremque mag
 		)}
 	</Form>
 </Playground>
+
+## API
+
+### Props
+
+| Property | Description                                                     | Type                 | Required |
+| -------- | --------------------------------------------------------------- | -------------------- | -------- |
+| cfg      | FlexProps & SpaceProps                                          | object               | false    |
+| disabled | Disable checkbox                                                | boolean              | false    |
+| testId   | data attribute for testers                                      | string               | false    |
+| checked  | Specifies whether the checkbox is selected.                     | boolean              | true     |
+| onChange | The callback function that is triggered when the state changes. | function(evt: Event) | true     |
+| label    | Checkbox description                                            | string               | true     |
+| hint     | More detailed description about the checkbox                    | string               | false    |
