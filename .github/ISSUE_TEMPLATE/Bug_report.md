@@ -3,7 +3,7 @@ name: 🐛 Bug report
 about: Something not working as expected?
 ---
 
-<!-- IF YOU ARE A PALANTIR EMPLOYEE, DO NOT POST INTERNAL LINKS OR REFERENCES HERE -->
+<!-- IF YOU ARE A TPR EMPLOYEE, DO NOT POST INTERNAL LINKS OR REFERENCES HERE -->
 
 #### Environment
 
