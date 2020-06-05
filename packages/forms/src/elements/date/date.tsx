@@ -64,7 +64,7 @@ const DateInputField: React.FC<DateInputFieldProps> = ({
 		<label className={small ? styles.inputSmall : styles.inputLarge}>
 			<P cfg={{ fontSize: 2, fontWeight: 3, mb: 1 }}>{label}</P>
 			<Input
-				type="text"
+				type="number"
 				aria-label={ariaLabel}
 				data-testid={testId}
 				value={value}
