@@ -1,8 +1,8 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Hr, Flex, P, H3, Link } from '@tpr/core';
 import { Content } from '../../../../components/content';
 import { FooterButton } from '../../../../components/card';
-// import { useEmployerContext } from '../../../context';
+import { useEmployerContext } from '../../../context';
 import styles from './confirm.module.scss';
 import {
 	Breadcrumbs,
@@ -22,7 +22,23 @@ const breadcrumbLinks: BreadcrumbLink[] = [
 ];
 
 export const Confirm = () => {
-	// const { send } = useEmployerContext();
+	const [loading, setLoading] = useState(false);
+	const { current, send, onRemove } = useEmployerContext();
+	const { employer } = current.context;
+
+	function handleRemove() {
+		setLoading(true);
+		onRemove({
+			id: employer.id,
+			reason: {},
+		})
+			.then(() => {
+				setLoading(false);
+			})
+			.catch(() => {
+				setLoading(false);
+			});
+	}
 
 	return (
 		<Content
@@ -46,11 +62,13 @@ export const Confirm = () => {
 				<P cfg={{ my: 3 }}>This can't be undone.</P>
 				<Flex>
 					<FooterButton
+						disabled={loading}
 						title="Remove employer"
 						intent="danger"
+						onClick={handleRemove}
 						loadingMessage="Removing..."
 					/>
-					<Link cfg={{ m: 3 }} underline>
+					<Link cfg={{ m: 3 }} underline onClick={() => send('CANCEL')}>
 						Cancel
 					</Link>
 				</Flex>

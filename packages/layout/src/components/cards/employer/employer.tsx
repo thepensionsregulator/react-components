@@ -25,6 +25,56 @@ const CardContentSwitch: React.FC = () => {
 	}
 };
 
+const EmployerButton: React.FC = () => {
+	const { current, send } = useEmployerContext();
+	const condition =
+		current.matches('employerType') ||
+		current.matches({ remove: 'date' }) ||
+		current.matches({ remove: 'confirm' });
+
+	return (
+		<UnderlinedButton
+			isOpen={condition}
+			onClick={() => {
+				if (condition) {
+					send('CANCEL');
+				} else {
+					console.log('cancel');
+
+					send('CHANGE_TYPE');
+				}
+			}}
+		>
+			Trustee
+		</UnderlinedButton>
+	);
+};
+
+const RemoveButton: React.FC = () => {
+	const { current, send } = useEmployerContext();
+	return (
+		<UnderlinedButton
+			isOpen={
+				current.matches('employerType') ||
+				current.matches({ remove: 'date' }) ||
+				current.matches({ remove: 'confirm' })
+			}
+			onClick={() => {
+				if (
+					current.matches({ remove: 'date' }) ||
+					current.matches({ remove: 'confirm' })
+				) {
+					send('CANCEL');
+				} else {
+					send('REMOVE');
+				}
+			}}
+		>
+			Remove
+		</UnderlinedButton>
+	);
+};
+
 export const Employer: React.FC<EmployerProps> = ({ testId, cfg, ...rest }) => {
 	return (
 		<EmployerProvider {...rest}>
@@ -33,19 +83,8 @@ export const Employer: React.FC<EmployerProps> = ({ testId, cfg, ...rest }) => {
 					<Toolbar
 						complete={context.complete}
 						subtitle={() => <P>Principal and participating employer</P>}
-						buttonLeft={() => (
-							<UnderlinedButton
-								isOpen={false}
-								onClick={() => send('CHANGE_TYPE')}
-							>
-								Employer type
-							</UnderlinedButton>
-						)}
-						buttonRight={() => (
-							<UnderlinedButton isOpen={false} onClick={() => send('REMOVE')}>
-								Remove
-							</UnderlinedButton>
-						)}
+						buttonLeft={() => <EmployerButton />}
+						buttonRight={() => <RemoveButton />}
 					/>
 					<CardContentSwitch />
 				</Flex>
