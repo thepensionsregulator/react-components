@@ -3092,7 +3092,7 @@
 "@tpr/core@file:./packages/core", "@tpr/core@file:packages/core":
   version "2.1.0"
   dependencies:
-    "@tpr/theming" "file:../../../Library/Caches/Yarn/v6/npm-@tpr-core-2.1.0-90f90525-820d-4001-ae4c-61dc51131270-1591348948170/node_modules/@tpr/theming"
+    "@tpr/theming" "file:../../../Library/Caches/Yarn/v6/npm-@tpr-core-2.1.0-6ea15560-ca4a-4790-800d-483996ecde69-1591356174314/node_modules/@tpr/theming"
     "@xstate/react" "^0.8.1"
     final-form "^4.20.0"
     qs "^6.9.4"
@@ -3103,9 +3103,9 @@
 "@tpr/forms@file:./packages/forms", "@tpr/forms@file:packages/forms":
   version "2.1.0"
   dependencies:
-    "@tpr/core" "file:../../../Library/Caches/Yarn/v6/npm-@tpr-forms-2.1.0-56052797-6857-42a3-b835-da125b043ce5-1591348948182/node_modules/@tpr/core"
-    "@tpr/icons" "file:../../../Library/Caches/Yarn/v6/npm-@tpr-forms-2.1.0-56052797-6857-42a3-b835-da125b043ce5-1591348948182/node_modules/@tpr/icons"
-    "@tpr/theming" "file:../../../Library/Caches/Yarn/v6/npm-@tpr-forms-2.1.0-56052797-6857-42a3-b835-da125b043ce5-1591348948182/node_modules/@tpr/theming"
+    "@tpr/core" "file:../../../Library/Caches/Yarn/v6/npm-@tpr-forms-2.1.0-3a396cbf-e1c1-486e-b52c-f72a33e25e25-1591356174486/node_modules/@tpr/core"
+    "@tpr/icons" "file:../../../Library/Caches/Yarn/v6/npm-@tpr-forms-2.1.0-3a396cbf-e1c1-486e-b52c-f72a33e25e25-1591356174486/node_modules/@tpr/icons"
+    "@tpr/theming" "file:../../../Library/Caches/Yarn/v6/npm-@tpr-forms-2.1.0-3a396cbf-e1c1-486e-b52c-f72a33e25e25-1591356174486/node_modules/@tpr/theming"
     "@types/lodash.merge" "^4.6.6"
     "@types/match-sorter" "^4.0.0"
     "@types/qs" "^6.9.3"
@@ -3121,16 +3121,16 @@
 "@tpr/icons@file:./packages/icons", "@tpr/icons@file:packages/icons":
   version "2.1.0"
   dependencies:
-    "@tpr/core" "file:../../../Library/Caches/Yarn/v6/npm-@tpr-icons-2.1.0-91cd7cf3-c0d8-42eb-b39f-da352b68d082-1591348948197/node_modules/@tpr/core"
+    "@tpr/core" "file:../../../Library/Caches/Yarn/v6/npm-@tpr-icons-2.1.0-63a71b07-2c84-43ac-98e0-2d77ec00ce28-1591356174496/node_modules/@tpr/core"
     tslib "^2.0.0"
 
 "@tpr/layout@file:./packages/layout":
   version "2.1.0"
   dependencies:
-    "@tpr/core" "file:../../../Library/Caches/Yarn/v6/npm-@tpr-layout-2.1.0-c82f92f1-dac2-46ff-8606-dbe39b653084-1591348948199/node_modules/@tpr/core"
-    "@tpr/forms" "file:../../../Library/Caches/Yarn/v6/npm-@tpr-layout-2.1.0-c82f92f1-dac2-46ff-8606-dbe39b653084-1591348948199/node_modules/@tpr/forms"
-    "@tpr/icons" "file:../../../Library/Caches/Yarn/v6/npm-@tpr-layout-2.1.0-c82f92f1-dac2-46ff-8606-dbe39b653084-1591348948199/node_modules/@tpr/icons"
-    "@tpr/theming" "file:../../../Library/Caches/Yarn/v6/npm-@tpr-layout-2.1.0-c82f92f1-dac2-46ff-8606-dbe39b653084-1591348948199/node_modules/@tpr/theming"
+    "@tpr/core" "file:../../../Library/Caches/Yarn/v6/npm-@tpr-layout-2.1.0-670eb75f-8db7-4aa8-8216-cd3c2eb53890-1591356174504/node_modules/@tpr/core"
+    "@tpr/forms" "file:../../../Library/Caches/Yarn/v6/npm-@tpr-layout-2.1.0-670eb75f-8db7-4aa8-8216-cd3c2eb53890-1591356174504/node_modules/@tpr/forms"
+    "@tpr/icons" "file:../../../Library/Caches/Yarn/v6/npm-@tpr-layout-2.1.0-670eb75f-8db7-4aa8-8216-cd3c2eb53890-1591356174504/node_modules/@tpr/icons"
+    "@tpr/theming" "file:../../../Library/Caches/Yarn/v6/npm-@tpr-layout-2.1.0-670eb75f-8db7-4aa8-8216-cd3c2eb53890-1591356174504/node_modules/@tpr/theming"
     "@xstate/react" "^0.8.1"
     final-form "^4.20.0"
     qs "^6.9.4"
@@ -3141,6 +3141,7 @@
 "@tpr/theming@file:./packages/theming", "@tpr/theming@file:packages/theming":
   version "2.1.0"
   dependencies:
+    normalize.css "^8.0.1"
     tslib "^2.0.0"
 
 "@types/babel__core@^7.1.7":
@@ -13562,6 +13563,11 @@ normalize-url@^4.1.0:
   version "4.5.0"
   resolved "https://registry.yarnpkg.com/normalize-url/-/normalize-url-4.5.0.tgz#453354087e6ca96957bd8f5baf753f5982142129"
   integrity sha512-2s47yzUxdexf1OhyRi4Em83iQk0aPvwTddtFz4hnSSw9dCEsLEGf6SwIO8ss/19S9iBb5sJaOuTvTGDeZI00BQ==
+
+normalize.css@^8.0.1:
+  version "8.0.1"
+  resolved "https://registry.yarnpkg.com/normalize.css/-/normalize.css-8.0.1.tgz#9b98a208738b9cc2634caacbc42d131c97487bf3"
+  integrity sha512-qizSNPO93t1YUuUhP22btGOo3chcvDFqFaj2TRybP0DMxkHOCTYwp3n34fel4a31ORXy4m1Xq0Gyqpb5m33qIg==
 
 npm-bundled@^1.0.1:
   version "1.1.1"

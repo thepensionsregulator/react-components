@@ -9,11 +9,11 @@ Here is a simple example how to get started:
 ```jsx
 import React from 'react';
 import ReactDOM from 'react-dom';
-import ThemeProvider from '@tpr/theming';
+import ThemeProvider, { EditorFonts } from '@tpr/theming';
 import { Button } from '@tpr/core';
 
 const App = () => (
-	/* Include a ThemeProvider wrapper at the root of your app */
+	/* Include a ThemeProvider wrapper at the root of your app or component to apply the styles */
 	<ThemeProvider>
 		<Button>Example React button</Button>
 	</ThemeProvider>
