@@ -56,6 +56,7 @@ const employerMachine = Machine<
 			id: 'employerType',
 			on: {
 				SAVE: '#preview',
+				CANCEL: '#preview',
 			},
 		},
 		remove: {

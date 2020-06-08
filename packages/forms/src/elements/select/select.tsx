@@ -79,7 +79,9 @@ export const Select: React.FC<SelectProps> = ({
 								{...getInputProps()}
 							/>
 							<div
-								className={styles.iconPlacement}
+								role="button"
+								data-testid={`${testId}-button`}
+								className={styles.iconButton}
 								onClick={() => toggleMenu()}
 							>
 								<UnfoldMore />
