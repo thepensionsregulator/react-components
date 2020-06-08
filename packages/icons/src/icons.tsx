@@ -6,6 +6,8 @@ type SVGProps = Partial<{
 	cfg: SpaceProps;
 	/** svg fill colour */
 	fill: string;
+	/** svg stroke colour */
+	stroke: string;
 	/** width and height of the icon */
 	width: string;
 	/** svg class name */
@@ -19,6 +21,7 @@ type SVGProps = Partial<{
 export const SVG: React.FC<SVGProps> = ({
 	cfg,
 	fill = '#000',
+	stroke = '',
 	width = '24',
 	className,
 	viewBox = '0 0 24 24',
@@ -31,6 +34,7 @@ export const SVG: React.FC<SVGProps> = ({
 			width={width}
 			height={width}
 			fill={fill}
+			stroke={stroke}
 			viewBox={viewBox}
 			xmlns="http://www.w3.org/2000/svg"
 			className={classNames}
@@ -80,24 +84,11 @@ export const CheckboxChecked: React.FC<SVGProps> = (props) => {
 
 export const CheckboxBlank: React.FC<SVGProps> = (props) => {
 	return (
-		<SVG
-			testId="checkbox-blank"
-			width="40px"
-			viewBox="351 1301 40 40"
-			{...props}
-		>
-			<path
-				d="M 351.5 1301.5  L 390.5 1301.5  L 390.5 1340.5  L 351.5 1340.5  L 351.5 1301.5  Z "
-				fillRule="nonzero"
-				fill="#f2f2f2"
-				stroke="none"
-			/>
-			<path
-				d="M 351.5 1301.5  L 390.5 1301.5  L 390.5 1340.5  L 351.5 1340.5  L 351.5 1301.5  Z "
-				strokeWidth="1"
-				stroke="#585858"
-				fill="none"
-			/>
+		<SVG testId="checkbox-blank" width="40" viewBox="0 0 40 40" {...props}>
+			<g fill="#f5f5f5" stroke="#585858" strokeWidth="1">
+				<rect width="40" height="40" stroke="none" />
+				<rect x="0.5" y="0.5" width="39" height="39" fill="none" />
+			</g>
 		</SVG>
 	);
 };
@@ -129,19 +120,11 @@ export const RadioButtonChecked: React.FC<SVGProps> = (props) => {
 
 export const RadioButtonUnchecked: React.FC<SVGProps> = (props) => {
 	return (
-		<SVG width="40" viewBox="315 504 40 40" {...props}>
-			<path
-				d="M 335 504  C 346.2 504  355 512.8  355 524  C 355 535.2  346.2 544  335 544  C 323.8 544  315 535.2  315 524  C 315 512.8  323.8 504  335 504  Z "
-				fillRule="nonzero"
-				fill="#f2f2f2"
-				stroke="none"
-			/>
-			<path
-				d="M 335 504.5  C 345.92 504.5  354.5 513.08  354.5 524  C 354.5 534.92  345.92 543.5  335 543.5  C 324.08 543.5  315.5 534.92  315.5 524  C 315.5 513.08  324.08 504.5  335 504.5  Z "
-				strokeWidth="1"
-				stroke="#585858"
-				fill="none"
-			/>
+		<SVG width="40" viewBox="0 0 40 40" {...props}>
+			<g fill="#f5f5f5" stroke="#585858" strokeWidth="1">
+				<circle cx="20" cy="20" r="20" stroke="none" />
+				<circle cx="20" cy="20" r="19.5" fill="none" />
+			</g>
 		</SVG>
 	);
 };
@@ -157,18 +140,28 @@ export const UnfoldMore: React.FC<SVGProps> = (props) => {
 
 export const CheckedCircle: React.FC<SVGProps> = (props) => {
 	return (
-		<SVG testId="checked-circle" {...props}>
-			<path d="M0 0h24v24H0z" fill="none" />
-			<path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z" />
+		<SVG testId="checked-circle" width="22" viewBox="0 0 22 22" {...props}>
+			<circle cx="11" cy="11" r="11" />
+			<g transform="translate(5.665 5.915)">
+				<path
+					d="M3.648-6.692,7.785-4.11l5.863-8.975"
+					transform="translate(-3.648 13.085)"
+					fill="none"
+					stroke="#fff"
+					strokeWidth="3"
+				/>
+			</g>
 		</SVG>
 	);
 };
 
 export const ErrorCircle: React.FC<SVGProps> = (props) => {
 	return (
-		<SVG testId="error-circle" {...props}>
-			<path d="M0 0h24v24H0z" fill="none" />
-			<path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-2h2v2zm0-4h-2V7h2v6z" />
+		<SVG testId="error-circle" width="22" viewBox="0 0 22 22" {...props}>
+			<path
+				d="M241.259,11476.006a11,11,0,1,0,11,11A11,11,0,0,0,241.259,11476.006Zm1.181,17.4a1.6,1.6,0,0,1-1.172.416,1.642,1.642,0,0,1-1.19-.408,1.81,1.81,0,0,1-.009-2.311,1.671,1.671,0,0,1,1.2-.4,1.624,1.624,0,0,1,1.177.4,1.78,1.78,0,0,1,0,2.294Zm-.046-4.778h-2.234l-.467-8.439h3.168Z"
+				transform="translate(-230.259 -11476.006)"
+			/>
 		</SVG>
 	);
 };

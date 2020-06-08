@@ -23,16 +23,13 @@ const breadcrumbLinks: BreadcrumbLink[] = [
 const RemoveConfirm: React.FC = () => {
 	const [loading, setLoading] = useState(false);
 	const { current, send, onRemove } = useTrusteeContext();
-	const { trustee, leftTheScheme } = current.context;
+	const { trustee, remove } = current.context;
 
 	function handleRemove() {
 		setLoading(true);
 		onRemove({
 			id: trustee.id,
-			reason: {
-				leftTheScheme: leftTheScheme ? true : false,
-				date: leftTheScheme,
-			},
+			...remove,
 		})
 			.then(() => {
 				setLoading(false);

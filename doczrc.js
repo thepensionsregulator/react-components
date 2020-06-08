@@ -18,5 +18,6 @@ export default {
 	themeConfig: {
 		mode: 'light',
 		showDarkModeSwitch: false,
+		showPlaygroundEditor: false,
 	},
 };
