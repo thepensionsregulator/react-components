@@ -13,7 +13,7 @@ describe('Select', () => {
 			{ label: 'banana', value: 'banana' },
 		];
 
-		const { queryByTestId, getByText, debug } = formSetup({
+		const { queryByTestId, getByText } = formSetup({
 			render: (
 				<FFSelect
 					label="Select your favourite fruit"
