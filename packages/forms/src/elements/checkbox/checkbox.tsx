@@ -2,7 +2,7 @@ import React from 'react';
 import { Field, FieldRenderProps } from 'react-final-form';
 import { P } from '@tpr/core';
 import { FieldProps, FieldExtraProps } from '../../renderFields';
-import { CheckboxChecked, CheckboxBlank } from '@tpr/icons';
+import { CheckboxChecked, CheckboxBlank } from './icons';
 import { StyledInputLabel } from '../elements';
 import { HiddenInput } from '../hidden/hidden';
 import styles from './checkbox.module.scss';
@@ -27,17 +27,17 @@ export const Checkbox: React.FC<Partial<CheckboxIconProps>> = ({
 			)}
 		>
 			<label data-testid={msg} className={styles.wrapper}>
-				{checked ? (
-					<CheckboxChecked width="36px" />
-				) : (
-					<CheckboxBlank width="36px" />
-				)}
 				<HiddenInput
 					type="checkbox"
 					checked={checked}
 					disabled={disabled}
 					onChange={onChange}
 				/>
+				{checked ? (
+					<CheckboxChecked className={styles.checkbox} />
+				) : (
+					<CheckboxBlank className={styles.checkbox} />
+				)}
 				<P cfg={{ ml: 2 }}>{label}</P>
 			</label>
 			{hint && <P className={styles.hint}>{hint}</P>}

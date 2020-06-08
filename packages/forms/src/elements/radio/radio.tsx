@@ -2,7 +2,7 @@ import React from 'react';
 import { Field, FieldRenderProps } from 'react-final-form';
 import { P } from '@tpr/core';
 import { FieldProps, FieldExtraProps } from '../../renderFields';
-import { RadioButtonChecked, RadioButtonUnchecked } from '@tpr/icons';
+import { RadioButtonChecked, RadioButtonUnchecked } from './icons';
 import { StyledInputLabel } from '../elements';
 import { HiddenInput } from '../hidden/hidden';
 import styles from './radio.module.scss';
@@ -30,11 +30,6 @@ export const RadioButton: React.FC<RadioButtonProps> = ({
 			)}
 		>
 			<label className={styles.wrapper} data-testid={msg}>
-				{checked ? (
-					<RadioButtonChecked width="36px" />
-				) : (
-					<RadioButtonUnchecked width="36px" />
-				)}
 				<HiddenInput
 					type="radio"
 					id={id}
@@ -45,6 +40,11 @@ export const RadioButton: React.FC<RadioButtonProps> = ({
 					onChange={onChange}
 					data-testid={testId}
 				/>
+				{checked ? (
+					<RadioButtonChecked className={styles.radio} />
+				) : (
+					<RadioButtonUnchecked />
+				)}
 				<P className={styles.label}>{label}</P>
 			</label>
 			{hint && <P className={styles.hint}>{hint}</P>}

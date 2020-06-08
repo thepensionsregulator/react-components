@@ -78,7 +78,7 @@ const RemoveButton: React.FC = () => {
 export const Employer: React.FC<EmployerProps> = ({ testId, cfg, ...rest }) => {
 	return (
 		<EmployerProvider {...rest}>
-			{({ current: { context }, send }) => (
+			{({ current: { context } }) => (
 				<Flex cfg={cfg} data-testid={testId} className={styles.card}>
 					<Toolbar
 						complete={context.complete}

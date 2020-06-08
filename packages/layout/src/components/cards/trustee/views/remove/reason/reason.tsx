@@ -8,28 +8,35 @@ import { Content } from '../../../../components/content';
 import styles from './reason.module.scss';
 
 const RemoveReason: React.FC = () => {
-	const { send } = useTrusteeContext();
+	const { current, send } = useTrusteeContext();
+	const { remove } = current.context;
 
 	const onSubmit = (values) => {
 		if (Object.keys(values).filter((key) => key === 'reason').length !== 1) {
 			return { [FORM_ERROR]: 'Please select one of the options.' };
 		} else {
-			send(
-				'SELECT',
-				values.date && {
-					date: values.date,
+			send('SELECT', {
+				values: {
+					reason: values.reason,
+					date: values.reason === 'left_the_scheme' ? values.date : null,
 				},
-			);
+			});
 			return undefined;
 		}
 	};
-
+	console.log(remove);
 	return (
 		<Content type="trustee" title="Remove this trustee">
 			<H4 fontWeight="bold" mb={0}>
 				Why are you removing this trustee?
 			</H4>
-			<Form onSubmit={onSubmit}>
+			<Form
+				onSubmit={onSubmit}
+				initialValues={{
+					reason: remove && remove.reason,
+					date: remove && remove.date && new Date(remove.date),
+				}}
+			>
 				{({ handleSubmit, submitError, form }) => {
 					const leftScheme =
 						form.getState().values.reason === 'left_the_scheme';
@@ -40,7 +47,7 @@ const RemoveReason: React.FC = () => {
 								type="radio"
 								label="They have left the scheme."
 								value="left_the_scheme"
-								cfg={{ mb: 3 }}
+								cfg={{ my: 4 }}
 							/>
 							{leftScheme && (
 								<div className={styles.dateWrapper}>

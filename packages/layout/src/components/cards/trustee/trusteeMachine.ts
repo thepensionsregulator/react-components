@@ -45,7 +45,13 @@ type TrusteeEvents =
 	| { type: 'CANCEL' }
 	| { type: 'SAVE'; address?: TrusteeAddress; values?: any }
 	| { type: 'BACK' }
-	| { type: 'SELECT'; date?: any };
+	| {
+			type: 'SELECT';
+			values?: {
+				reason: null | string;
+				date: null | string;
+			};
+	  };
 
 type TrusteeAddress = Partial<{
 	addressLine1: string;
@@ -60,7 +66,6 @@ type TrusteeAddress = Partial<{
 export interface TrusteeContext {
 	loading: boolean;
 	complete: boolean;
-	leftTheScheme: null | String;
 	trustee: {
 		id: string;
 		schemeRoleId: string;
@@ -76,6 +81,10 @@ export interface TrusteeContext {
 		telephoneNumber: string;
 		emailAddress: string;
 	};
+	remove?: {
+		reason: null | string;
+		date: null | string;
+	};
 }
 
 const trusteeMachine = Machine<TrusteeContext, TrusteeStates, TrusteeEvents>({
@@ -84,7 +93,6 @@ const trusteeMachine = Machine<TrusteeContext, TrusteeStates, TrusteeEvents>({
 	context: {
 		loading: false,
 		complete: false,
-		leftTheScheme: null,
 		trustee: {
 			id: '',
 			schemeRoleId: '',
@@ -108,6 +116,7 @@ const trusteeMachine = Machine<TrusteeContext, TrusteeStates, TrusteeEvents>({
 			telephoneNumber: '',
 			emailAddress: '',
 		},
+		remove: null,
 	},
 	states: {
 		preview: {
@@ -224,7 +233,7 @@ const trusteeMachine = Machine<TrusteeContext, TrusteeStates, TrusteeEvents>({
 							target: 'confirm',
 							actions: assign((_, event) => {
 								return {
-									leftTheScheme: event.date,
+									remove: event.values,
 								};
 							}),
 						},

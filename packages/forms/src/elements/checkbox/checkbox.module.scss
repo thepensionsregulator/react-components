@@ -8,26 +8,16 @@
 	cursor: pointer;
 	user-select: none;
 
-	// &:hover {
-	// 	color: ${({ theme, disabled }) =>
-	// 		disabled ? theme.colors.neutral['800'] : theme.colors.primary['200']};
-	// }
-
-	> div {
-		margin-right: 8px;
+	input[type='checkbox']:focus + .checkbox {
+		box-shadow: 0 0 0 4px #ffd300;
 	}
-	> a {
-		text-decoration: none;
-		color: $colors-primary-2;
-		font-weight: 600;
-		border-bottom: 2px solid transparent;
-		position: relative;
-		padding-bottom: 0px;
 
-		&:hover {
-			border-bottom: 2px solid $colors-primary-2;
-			padding-bottom: 2px;
-		}
+	input[type='checkbox']:checked + .checkbox {
+		// outline: 2px dashed orange;
+	}
+
+	.checkbox {
+		// outline: 1px dashed red;
 	}
 }
 
@@ -39,5 +29,5 @@
 	color: $colors-neutral-4;
 	font-size: $font-size-2;
 	margin-top: $space-2;
-	margin-left: 46px;
+	margin-left: 50px;
 }
