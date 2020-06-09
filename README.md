@@ -1,11 +1,10 @@
 # TPR React Components
 
-[build status badge]: https://flat.badgen.net/travis/zendeskgarden/react-components/master
-[build status link]: https://travis-ci.org/zendeskgarden/react-components
-[dependency status badge]: https://flat.badgen.net/david/dev/zendeskgarden/react-components
-[dependency status link]: https://david-dm.org/zendeskgarden/react-components?type=dev
-[coverage status badge]: https://flat.badgen.net/coveralls/c/github/zendeskgarden/react-components/master
-[coverage status link]: https://coveralls.io/github/zendeskgarden/react-components
+[build-badge]: https://circleci.com/gh/thepensionsregulator/react-components/tree/master.svg?style=svg
+[license-badge]: https://img.shields.io/npm/l/react-components.svg?style=flat-square
+
+[![Build Status][build-badge]][build]
+[![MIT License][license-badge]][license]
 
 > React Components is a design system for TPR
 
@@ -15,8 +14,7 @@ single repository.
 
 ## Installation
 
-See the individual package README for the React component you would like
-to install.
+See the [CONTRIBUTING](./CONTRIBUTING.md)
 
 | Package                            | Version                                                 | Size                                                     |
 | ---------------------------------- | ------------------------------------------------------- | -------------------------------------------------------- |
@@ -29,27 +27,18 @@ to install.
 [core npm link]: https://www.npmjs.com/package/@tpr/core
 [core size bundle]: https://flat.badgen.net/bundlephobia/minzip/@tpr/core
 [core size link]: https://bundlephobia.com/result?p=@tpr/core
-[core dependency status]: https://flat.badgen.net/david/dep/tpr/react-components/packages/core
 [forms npm version]: https://flat.badgen.net/npm/v/@tpr/forms
 [forms npm link]: https://www.npmjs.com/package/@tpr/forms
 [forms size bundle]: https://flat.badgen.net/bundlephobia/minzip/@tpr/forms
 [forms size link]: https://bundlephobia.com/result?p=@tpr/forms
-[forms dependency status]: https://flat.badgen.net/david/dep/tpr/react-components/packages/forms
-[table npm version]: https://flat.badgen.net/npm/v/@tpr/table
-[table npm link]: https://www.npmjs.com/package/@tpr/table
-[table size bundle]: https://flat.badgen.net/bundlephobia/minzip/@tpr/table
-[table size link]: https://bundlephobia.com/result?p=@tpr/table
-[table dependency status]: https://flat.badgen.net/david/dep/tpr/react-components/packages/table
 [icons npm version]: https://flat.badgen.net/npm/v/@tpr/icons
 [icons npm link]: https://www.npmjs.com/package/@tpr/icons
 [icons size bundle]: https://flat.badgen.net/bundlephobia/minzip/@tpr/icons
 [icons size link]: https://bundlephobia.com/result?p=@tpr/icons
-[icons dependency status]: https://flat.badgen.net/david/dep/tpr/react-components/packages/icons
 [theming npm version]: https://flat.badgen.net/npm/v/@tpr/theming
 [theming npm link]: https://www.npmjs.com/package/@tpr/theming
 [theming size bundle]: https://flat.badgen.net/bundlephobia/minzip/@tpr/theming
 [theming size link]: https://bundlephobia.com/result?p=@tpr/theming
-[theming dependency status]: https://flat.badgen.net/david/dep/tpr/react-components/packages/theming
 
 ## Usage
 
@@ -65,12 +54,14 @@ import ReactDOM from 'react-dom';
 import ThemeProvider from '@tpr/theming';
 import { Button } from '@tpr/core';
 
-const App = () => (
-	/* Include a ThemeProvider wrapper at the root of your app */
-	<ThemeProvider>
-		<Button>Example React button</Button>
-	</ThemeProvider>
-);
+const App = () => {
+	return (
+		/* Include a ThemeProvider wrapper at the root of your app */
+		<ThemeProvider>
+			<Button>Example React button</Button>
+		</ThemeProvider>
+	);
+};
 
 ReactDOM.render(<App />, document.getElementById('root'));
 ```
