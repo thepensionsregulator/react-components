@@ -80,6 +80,7 @@ export interface TrusteeContext {
 		//
 		telephoneNumber: string;
 		emailAddress: string;
+		[key: string]: any;
 	};
 	remove?: {
 		reason: null | string;
