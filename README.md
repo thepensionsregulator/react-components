@@ -3,8 +3,8 @@
 [build-badge]: https://circleci.com/gh/thepensionsregulator/react-components/tree/master.svg?style=svg
 [license-badge]: https://img.shields.io/npm/l/react-components.svg?style=flat-square
 
-[![Build Status][build-badge]][build]
-[![MIT License][license-badge]][license]
+![Build Status][build-badge]
+![MIT License][license-badge]
 
 > React Components is a design system for TPR
 
