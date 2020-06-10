@@ -46,7 +46,7 @@ export interface TrusteeProps {
 	complete?: boolean;
 	onCorrect?: (...args: any[]) => void;
 	onRemove?: (...args: any[]) => Promise<any>;
-	onSave?: (...args: any[]) => Promise<any>;
+	onSave?: (trustee: Partial<TrusteeInput>) => Promise<any>;
 	addressAPI: any;
 	testId?: string;
 	trustee: TrusteeInput;

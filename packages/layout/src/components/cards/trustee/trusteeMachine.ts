@@ -174,7 +174,7 @@ const trusteeMachine = Machine<TrusteeContext, TrusteeStates, TrusteeEvents>({
 								REMOVE: '#remove',
 							},
 						},
-						save: saveTrustee('#preview'),
+						save: saveTrustee('kind'),
 					},
 				},
 				company: {
@@ -197,7 +197,7 @@ const trusteeMachine = Machine<TrusteeContext, TrusteeStates, TrusteeEvents>({
 								REMOVE: '#remove',
 							},
 						},
-						save: saveTrustee('#preview'),
+						save: saveTrustee('address'),
 					},
 				},
 				contact: {
@@ -219,7 +219,7 @@ const trusteeMachine = Machine<TrusteeContext, TrusteeStates, TrusteeEvents>({
 								REMOVE: '#remove',
 							},
 						},
-						save: saveTrustee('#preview'),
+						save: saveTrustee('details'),
 					},
 				},
 			},
@@ -254,26 +254,22 @@ const trusteeMachine = Machine<TrusteeContext, TrusteeStates, TrusteeEvents>({
 	},
 });
 
-function saveTrustee(onErrorTarget: string) {
+function saveTrustee(targetOnError: string) {
 	return {
 		invoke: {
+			id: 'saveData',
 			src: 'saveData',
 			onDone: {
 				target: '#preview',
-				actions: assign((ctx: any, event: any) => ({
+				actions: assign({
 					loading: false,
-					trustee: {
-						...ctx.trustee,
-						...event.data,
-					},
-				})),
+				}),
 			},
 			onError: {
-				target: onErrorTarget,
-				actions: assign((ctx: any) => ({
-					...ctx,
+				target: targetOnError,
+				actions: assign({
 					loading: false,
-				})),
+				}),
 			},
 		},
 	};
