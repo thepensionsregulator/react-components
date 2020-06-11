@@ -61,10 +61,10 @@ describe('Flex', () => {
 
 	test('Flex cfg can change background color', () => {
 		const { getByTestId } = render(
-			<Flex cfg={{ bg: 'neutral.2' }} testId="flex" />,
+			<Flex cfg={{ bg: 'neutral.6' }} testId="flex" />,
 		);
 		const Component = getByTestId(/flex/i);
-		expect(Component.className.includes('bg-neutral-2')).toBeTruthy();
+		expect(Component.className.includes('bg-neutral-6')).toBeTruthy();
 		expect(Component).toBeDefined();
 	});
 
@@ -101,10 +101,10 @@ describe('Flex', () => {
 
 	test('Flex accepts cfg with color props', () => {
 		const { getByTestId } = render(
-			<Flex cfg={{ color: 'warning.3' }} testId="flex" />,
+			<Flex cfg={{ color: 'warning.1' }} testId="flex" />,
 		);
 		const Component = getByTestId(/flex/i);
-		expect(Component.className.includes('color-warning-3')).toBeTruthy();
+		expect(Component.className.includes('color-warning-1')).toBeTruthy();
 		expect(Component).toBeDefined();
 	});
 

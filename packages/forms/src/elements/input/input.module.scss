@@ -5,25 +5,25 @@
 	font-size: $font-size-2;
 	display: flex;
 	width: 100%;
-	background: $colors-background;
+	background: $white;
 	height: 50px;
 	outline: none;
 	padding: 0 8px;
-	border: 2px solid $colors-neutral-9;
+	border: 2px solid $colors-neutral-7;
 }
 
 .inputText:focus {
-	border: 4px solid $colors-neutral-9;
-	box-shadow: 0 0 0 3px $colors-warning-3;
+	border: 4px solid $colors-neutral-7;
+	box-shadow: 0 0 0 3px $colors-warning-1;
 	padding: 0 6px;
 }
 
 .inputText:disabled {
-	background: $colors-neutral-1;
+	background: $colors-neutral-6;
 }
 
 .inputText-error {
-	border: 4px solid $colors-danger-3;
+	border: 4px solid $colors-danger-2;
 }
 
 /* Chrome, Safari, Edge, Opera */

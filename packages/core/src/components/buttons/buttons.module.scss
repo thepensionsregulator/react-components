@@ -16,60 +16,60 @@
 
 .appearance-primary:disabled {
 	cursor: not-allowed !important;
-	background: $colors-neutral-2;
+	background: $colors-neutral-6;
 
 	&:hover {
-		background: $colors-neutral-2 !important;
+		background: $colors-neutral-6 !important;
 	}
 }
 
 .appearance-outlined {
-	border: 2px solid $colors-primary-2;
+	border: 2px solid $colors-primary-3;
 	background: transparent !important;
 	border-radius: 6px;
 }
 
 .appearance-outlined:disabled {
-	color: $colors-neutral-2;
+	color: $colors-neutral-6;
 	cursor: not-allowed !important;
-	border: 2px solid $colors-neutral-2;
+	border: 2px solid $colors-neutral-6;
 
 	&:hover {
-		color: $colors-neutral-2;
+		color: $colors-neutral-6;
 		background: none !important;
-		border: 2px solid $colors-neutral-2 !important;
+		border: 2px solid $colors-neutral-6 !important;
 	}
 }
 
 /* 'none' | 'success' | 'warning' | 'danger'; */
 
 .intent-none {
-	background: $colors-primary-2;
-	border-color: $colors-primary-2;
+	background: $colors-primary-3;
+	border-color: $colors-primary-3;
 }
 
 .intent-none:hover {
-	background: $colors-primary-2 !important;
+	background: $colors-primary-3 !important;
 	color: white;
 }
 
 .intent-success {
-	background: $colors-success-2;
-	border-color: $colors-success-2;
+	background: $colors-success-1;
+	border-color: $colors-success-1;
 }
 
 .intent-success:hover {
-	background: $colors-success-2 !important;
+	background: $colors-success-1 !important;
 	color: white;
 }
 
 .intent-warning {
-	background: $colors-warning-2;
-	border-color: $colors-warning-2;
+	background: $colors-warning-1;
+	border-color: $colors-warning-1;
 }
 
 .intent-warning:hover {
-	background: $colors-warning-2 !important;
+	background: $colors-warning-1 !important;
 	color: white;
 }
 
@@ -80,6 +80,16 @@
 
 .intent-danger:hover {
 	background: $colors-danger-2 !important;
+	color: white;
+}
+
+.intent-special {
+	background: $colors-primary-a2;
+	border-color: $colors-primary-a2;
+}
+
+.intent-special:hover {
+	background: $colors-primary-a2 !important;
 	color: white;
 }
 
@@ -115,7 +125,7 @@
 	display: inline-block;
 	background: transparent;
 	border: none;
-	color: $colors-primary-2;
+	color: $colors-primary-3;
 	font-family: $fonts-sans-serif;
 	font-weight: $font-weight-2;
 	font-size: $font-size-2;
@@ -128,7 +138,7 @@
 }
 
 .link:disabled {
-	color: $colors-neutral-3;
+	color: $colors-neutral-6;
 	text-decoration: none;
 	cursor: default;
 }
