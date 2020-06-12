@@ -21,7 +21,7 @@ export const PageHeading: React.FC<PageHeadingProps> = ({
 			)}
 			<H1 cfg={{ mb: 2 }}>{title}</H1>
 			<Hr cfg={{ mb: 3 }} />
-			{subtitle && <P cfg={{ mb: 4, color: 'neutral.3' }}>{subtitle}</P>}
+			{subtitle && <P cfg={{ mb: 4, color: 'neutral.6' }}>{subtitle}</P>}
 		</Flex>
 	);
 };

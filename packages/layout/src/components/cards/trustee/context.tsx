@@ -14,7 +14,6 @@ export const TrusteeContext = createContext<TrusteeContextProps>({
 });
 
 type RenderProps = (_: TrusteeContextProps) => ReactElement;
-
 export interface TrusteeInput {
 	id: string;
 	schemeRoleId: string;
@@ -35,6 +34,7 @@ export interface TrusteeInput {
 	//
 	telephoneNumber: string;
 	emailAddress: string;
+	[key: string]: any;
 }
 
 export interface TrusteeContextProps extends Omit<TrusteeProps, 'trustee'> {
@@ -46,7 +46,7 @@ export interface TrusteeProps {
 	complete?: boolean;
 	onCorrect?: (...args: any[]) => void;
 	onRemove?: (...args: any[]) => Promise<any>;
-	onSave?: (...args: any[]) => Promise<any>;
+	onSave?: (trustee: Partial<TrusteeInput>) => Promise<any>;
 	addressAPI: any;
 	testId?: string;
 	trustee: TrusteeInput;

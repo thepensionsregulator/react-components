@@ -3,6 +3,7 @@ import { Flex, P, H4, Hr, classNames } from '@tpr/core';
 import { useTrusteeContext } from '../../context';
 import { UnderlinedButton } from '../../../components/button';
 import { Checkbox } from '@tpr/forms';
+import { capitalize } from '../../../../../utils';
 import styles from './preview.module.scss';
 
 export const Preview: React.FC = () => {
@@ -13,7 +14,7 @@ export const Preview: React.FC = () => {
 		<div
 			className={classNames([{ [styles.complete]: complete }, styles.content])}
 		>
-			<P cfg={{ mb: 4 }}>Member-nominated trustee</P>
+			<P cfg={{ mb: 4 }}>{capitalize(trustee.trusteeType)} trustee</P>
 			<Flex>
 				<Flex
 					cfg={{ width: 5, flex: '0 0 auto', flexDirection: 'column', pr: 4 }}

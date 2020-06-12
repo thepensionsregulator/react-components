@@ -13,13 +13,13 @@ describe('Typography', () => {
 
 	test('Text accepts cfg props', () => {
 		const { getByText } = render(
-			<Text tag="p" cfg={{ p: 3, m: 4, color: 'neutral.2' }}>
+			<Text tag="p" cfg={{ p: 3, m: 4, color: 'neutral.6' }}>
 				Hello world
 			</Text>,
 		);
 
 		expect(getByText(/Hello world/i).className).toMatchInlineSnapshot(
-			`"p p-3 m-4 color-neutral-2"`,
+			`"p p-3 m-4 color-neutral-6"`,
 		);
 	});
 
@@ -28,7 +28,7 @@ describe('Typography', () => {
 		const { getByText } = render(
 			<Text
 				tag="p"
-				cfg={{ p: 3, m: 4, color: 'neutral.2' }}
+				cfg={{ p: 3, m: 4, color: 'neutral.6' }}
 				className={className}
 			>
 				Hello world
@@ -39,7 +39,7 @@ describe('Typography', () => {
 			getByText(/Hello world/i).className.includes(className),
 		).toBeTruthy();
 		expect(getByText(/Hello world/i).className).toMatchInlineSnapshot(
-			`"p some-weird-class-name-here p-3 m-4 color-neutral-2"`,
+			`"p some-weird-class-name-here p-3 m-4 color-neutral-6"`,
 		);
 	});
 });

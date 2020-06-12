@@ -44,14 +44,14 @@ export const Footer: React.FC<FooterProps> = ({
 								<Link
 									key={key}
 									onClick={() => onLinkClickHandler(url)}
-									cfg={{ mr: 3, color: 'neutral.3' }}
+									cfg={{ mr: 3, color: 'neutral.a2' }}
 									{...linkProps}
 								>
 									{title}
 								</Link>
 							))}
 						</Flex>
-						<P cfg={{ fontSize: 1, color: 'neutral.3' }}>{copyright}</P>
+						<P cfg={{ fontSize: 1, color: 'neutral.a2' }}>{copyright}</P>
 					</Flex>
 				</Flex>
 			</AppWidth>

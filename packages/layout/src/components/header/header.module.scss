@@ -1,7 +1,7 @@
 @import '@tpr/theming/lib/variables.scss';
 
 .headerBackground {
-	background: $colors-accents-3;
+	background: $colors-accents-2;
 }
 
 .logo {
@@ -11,7 +11,7 @@
 	justify-content: flex-start;
 	width: $sidebar-width;
 	border-right: 1px solid;
-	border-color: $colors-accents-2;
+	border-color: $colors-accents-1;
 	margin-right: $space-4;
 }
 
