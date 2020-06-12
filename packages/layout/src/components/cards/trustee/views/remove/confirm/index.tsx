@@ -1,8 +1,9 @@
 import React, { useState } from 'react';
-import { H3, P, Hr, Link } from '@tpr/core';
+import { H3, H4, P, Hr, Link, Flex } from '@tpr/core';
 import { useTrusteeContext } from '../../../context';
-import { Footer, FooterButton } from '../../../../components/card';
+import { FooterButton } from '../../../../components/card';
 import { Content } from '../../../../components/content';
+import styles from './confirm.module.scss';
 import {
 	Breadcrumbs,
 	BreadcrumbLink,
@@ -27,10 +28,13 @@ const RemoveConfirm: React.FC = () => {
 
 	function handleRemove() {
 		setLoading(true);
-		onRemove({
-			id: trustee.id,
-			...remove,
-		})
+		onRemove(
+			{
+				schemeRoleId: trustee.schemeRoleId,
+				...remove,
+			},
+			trustee,
+		)
 			.then(() => {
 				setLoading(false);
 			})
@@ -44,28 +48,29 @@ const RemoveConfirm: React.FC = () => {
 			type="trustee"
 			breadcrumbs={() => <Breadcrumbs links={breadcrumbLinks} />}
 		>
-			<H3 cfg={{ mt: 3, fontWeight: 2 }}>
+			<H4 cfg={{ mt: 3, color: 'neutral.5' }}>Edit trustee</H4>
+			<H3 cfg={{ fontWeight: 2 }}>
 				Are you sure you want to remove this trustee?
 			</H3>
 			<Hr cfg={{ my: 4 }} />
-			<P cfg={{ color: 'neutral.6' }}>This can't be undone.</P>
-			<Footer>
-				<FooterButton
-					disabled={loading}
-					title="Remove"
-					intent="danger"
-					onClick={handleRemove}
-					loadingMessage="Removing..."
-				/>
-				<Link
-					disabled={loading}
-					cfg={{ m: 3 }}
-					onClick={() => send('CANCEL')}
-					underline
-				>
-					Cancel
-				</Link>
-			</Footer>
+			<Flex
+				cfg={{ flexDirection: 'column', p: 4, my: 4 }}
+				className={styles.confirmBox}
+			>
+				<P cfg={{ my: 3 }}>This can't be undone.</P>
+				<Flex>
+					<FooterButton
+						disabled={loading}
+						title="Remove this trustee >"
+						intent="danger"
+						onClick={handleRemove}
+						loadingMessage="Removing..."
+					/>
+					<Link cfg={{ m: 3 }} underline onClick={() => send('CANCEL')}>
+						Cancel
+					</Link>
+				</Flex>
+			</Flex>
 		</Content>
 	);
 };

@@ -1,5 +1,5 @@
 import React from 'react';
-import { Flex, H4 } from '@tpr/core';
+import { P, H4 } from '@tpr/core';
 import { useTrusteeContext } from '../../../context';
 import { Footer, FooterButton } from '../../../../components/card';
 import { Form, FFRadioButton, FFInputDate } from '@tpr/forms';
@@ -12,8 +12,14 @@ const RemoveReason: React.FC = () => {
 	const { remove } = current.context;
 
 	const onSubmit = (values) => {
-		if (Object.keys(values).filter((key) => key === 'reason').length !== 1) {
-			return { [FORM_ERROR]: 'Please select one of the options.' };
+		if (
+			!values.reason ||
+			(values.reason === 'left_the_scheme' && !values.date)
+		) {
+			return {
+				[FORM_ERROR]:
+					'Please select one of the options and fill in required fields.',
+			};
 		} else {
 			send('SELECT', {
 				values: {
@@ -24,7 +30,7 @@ const RemoveReason: React.FC = () => {
 			return undefined;
 		}
 	};
-	console.log(remove);
+
 	return (
 		<Content type="trustee" title="Remove this trustee">
 			<H4 fontWeight="bold" mb={0}>
@@ -56,7 +62,6 @@ const RemoveReason: React.FC = () => {
 										label="Date the trustee left the scheme"
 										hint="For example, 31 3 2019"
 										required={true}
-										error="Cannot be left empty!"
 										cfg={{ mb: 3 }}
 									/>
 								</div>
@@ -68,9 +73,7 @@ const RemoveReason: React.FC = () => {
 								value="not_part_of_scheme"
 							/>
 							{submitError && (
-								<Flex color="danger.200" pt={1}>
-									{submitError}
-								</Flex>
+								<P cfg={{ color: 'danger.2', mt: 5 }}>{submitError}</P>
 							)}
 							<Footer>
 								<FooterButton type="submit" title="Continue" />
