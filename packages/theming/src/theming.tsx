@@ -4,7 +4,7 @@ import React from 'react';
 import resets from './resets.module.scss';
 import editor from './richTextEditor.module.scss';
 
-export const ThemeProvider: React.FC = ({ children }) => (
+export const CssResets: React.FC = ({ children }) => (
 	<div className={resets.bodyreset}>{children}</div>
 );
 

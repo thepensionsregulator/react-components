@@ -1,8 +1,8 @@
 @import '@tpr/theming/lib/variables.scss';
 
 .wrapper {
-	background-color: $colors-neutral-1;
-	border-top: 5px solid #777;
+	background-color: $colors-neutral-3;
+	border-top: 5px solid $colors-neutral-7;
 }
 
 .logo {
@@ -21,5 +21,5 @@
 .footerText {
 	align-items: center;
 	height: 50px;
-	border-top: 2px solid $colors-neutral-2;
+	border-top: 2px solid $colors-neutral-4;
 }

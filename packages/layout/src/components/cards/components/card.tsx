@@ -39,14 +39,14 @@ export const Toolbar: React.FC<ToolbarProps> = ({
 				cfg={{ flexDirection: 'column', pb: 2 }}
 				className={styles.toolbarBottomBorder}
 			>
-				<P cfg={{ color: 'neutral.3', fontSize: 3 }}>
+				<P cfg={{ color: 'neutral.6', fontSize: 3 }}>
 					Edit {type === 'trustee' ? 'trustee' : 'employer'}
 				</P>
 				<H3 cfg={{ fontWeight: 3 }}>{title}</H3>
 			</Flex>
 			{subtitle && (
 				<Flex cfg={{ py: 3 }} className={styles.toolbarBottomBorder}>
-					<P cfg={{ color: 'neutral.3' }}>{subtitle}</P>
+					<P cfg={{ color: 'neutral.6' }}>{subtitle}</P>
 				</Flex>
 			)}
 		</Flex>
@@ -111,7 +111,7 @@ export const StatusMessage = ({ complete, icon: Icon }) => {
 		<Flex cfg={{ alignItems: 'center' }} height="22px">
 			<Icon size={18} fill={complete ? '#207e3b' : '#d4351c'} />
 			<P
-				cfg={{ ml: 1, fontSize: 2, color: complete ? 'success.2' : 'danger.2' }}
+				cfg={{ ml: 1, fontSize: 2, color: complete ? 'success.1' : 'danger.2' }}
 			>
 				{complete ? 'No issues' : 'Incomplete'}
 			</P>

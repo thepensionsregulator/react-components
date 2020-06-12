@@ -2,7 +2,7 @@ import React, { createElement } from 'react';
 import styles from './globals.module.scss';
 import { useClassNames } from '../../hooks/use-class-names';
 
-export type FullValueRange = 1 | 2 | 3 | 4 | 5 | 6;
+export type ValuesFullRange = 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10;
 
 export type FlexProps = Partial<{
 	/** flex 1 1 auto or flex 0 0 auto */
@@ -23,71 +23,89 @@ export type CursorProps = Partial<{
 }>;
 
 export type LayoutProps = Partial<{
-	width: 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10;
+	width: ValuesFullRange;
 }>;
 
-export type FullColorRange =
-	| 'background'
+export type ColorsPrimary =
 	| 'primary.1'
 	| 'primary.2'
 	| 'primary.3'
+	| 'primary.4'
+	| 'primary.a1'
+	| 'primary.a2';
+
+export type ColorsNeutral =
 	| 'neutral.1'
 	| 'neutral.2'
 	| 'neutral.3'
 	| 'neutral.4'
-	| 'accents.2'
-	| 'accents.3'
-	| 'accents.4'
-	| 'success.2'
-	| 'success.3'
-	| 'warning.2'
-	| 'warning.3'
-	| 'danger.2'
-	| 'danger.3';
+	| 'neutral.5'
+	| 'neutral.6'
+	| 'neutral.7'
+	| 'neutral.8'
+	| 'neutral.a1'
+	| 'neutral.a2';
+
+export type ColorsAccents = 'accents.1' | 'accents.2';
+
+export type ColorsSuccess = 'success.1';
+
+export type ColorsWarning = 'warning.1' | 'warning.a1';
+
+export type ColorsDanger = 'danger.1' | 'danger.2';
+
+export type ColorsFullRange =
+	| 'background'
+	| ColorsPrimary
+	| ColorsNeutral
+	| ColorsAccents
+	| ColorsSuccess
+	| ColorsWarning
+	| ColorsDanger;
 
 export type BackgroundProps = Partial<{
-	bg: FullColorRange;
+	bg: ColorsFullRange;
 }>;
 
 export type ColorProps = Partial<{
-	color: FullColorRange;
+	color: ColorsFullRange;
 }>;
 
 export type TypographyProps = Partial<{
-	fontSize: FullValueRange;
+	fontSize: ValuesFullRange;
 	textAlign: 'left' | 'center' | 'right';
 	fontWeight: 1 | 2 | 3;
 }>;
 
 export type SpaceProps = Partial<{
 	/** margin */
-	m: FullValueRange;
+	m: ValuesFullRange;
 	/** margin top */
-	mt: FullValueRange;
+	mt: ValuesFullRange;
 	/** margin right */
-	mr: FullValueRange;
+	mr: ValuesFullRange;
 	/** margin bottom */
-	mb: FullValueRange;
+	mb: ValuesFullRange;
 	/** margin left */
-	ml: FullValueRange;
+	ml: ValuesFullRange;
 	/** margin-top and margin-bottom */
-	my: FullValueRange;
+	my: ValuesFullRange;
 	/** margin-left and margin-right */
-	mx: FullValueRange;
+	mx: ValuesFullRange;
 	/** padding */
-	p: FullValueRange;
+	p: ValuesFullRange;
 	/** padding top */
-	pt: FullValueRange;
+	pt: ValuesFullRange;
 	/** padding right */
-	pr: FullValueRange;
+	pr: ValuesFullRange;
 	/** padding bottom */
-	pb: FullValueRange;
+	pb: ValuesFullRange;
 	/** padding left */
-	pl: FullValueRange;
+	pl: ValuesFullRange;
 	/** padding-top and padding-bottom */
-	py: FullValueRange;
+	py: ValuesFullRange;
 	/** padding-left and padding-right */
-	px: FullValueRange;
+	px: ValuesFullRange;
 }>;
 
 export type FlexBoxProps = {

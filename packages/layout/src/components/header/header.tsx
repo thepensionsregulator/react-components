@@ -18,7 +18,7 @@ export const Header: React.FC<HeaderProps> = ({
 	return (
 		<DocWidth className={styles.headerBackground}>
 			<AppWidth>
-				<Flex cfg={{ justifyContent: 'space-between', py: 2 }}>
+				<Flex cfg={{ justifyContent: 'space-between', py: 2, pr: 3 }}>
 					<Flex cfg={{ alignItems: 'center' }}>
 						<div className={styles.logo}>
 							<img className={styles.img} src={logoUrl} alt="TPR Logo" />

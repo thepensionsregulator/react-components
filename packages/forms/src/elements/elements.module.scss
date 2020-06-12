@@ -7,12 +7,12 @@
 
 .labelError {
 	padding-left: $space-3;
-	border-left: 4px solid $colors-danger-3;
+	border-left: 4px solid $colors-danger-2;
 }
 
 .labelText {
 	font-family: $fonts-sans-serif;
-	color: $colors-neutral-9;
+	color: $colors-neutral-7;
 	font-weight: $font-weight-3;
 	font-size: $font-size-2;
 	margin-bottom: $space-1;
@@ -20,7 +20,7 @@
 }
 
 .errorMessage {
-	color: $colors-danger-3;
+	color: $colors-danger-2;
 	font-size: $font-size-2;
 	font-weight: $font-weight-3;
 	margin-bottom: $space-2;

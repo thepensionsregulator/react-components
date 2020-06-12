@@ -49,10 +49,10 @@ describe('classNames', () => {
 describe('filterProps', () => {
 	// NOTE: testing on existing class names is not going to work because of jest setup.
 	test('filterProps can format and match class names to the ones declared in the cfg styles', () => {
-		const result = filterProps({ flex: '1 1 auto', color: 'neutral.3' });
+		const result = filterProps({ flex: '1 1 auto', color: 'neutral.6' });
 		expect(result).toMatchInlineSnapshot(`
 		Object {
-		  "color-neutral-3": true,
+		  "color-neutral-6": true,
 		  "flex-1-1-auto": true,
 		}
 	`);

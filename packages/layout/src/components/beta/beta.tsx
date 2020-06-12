@@ -18,7 +18,7 @@ export const BetaHeader: React.FC<BetaHeaderProps> = ({ text }) => {
 						cfg={{
 							fontSize: 1,
 							color: 'background',
-							bg: 'primary.2',
+							bg: 'primary.3',
 							p: 1,
 							my: 2,
 							mr: 3,
@@ -26,7 +26,7 @@ export const BetaHeader: React.FC<BetaHeaderProps> = ({ text }) => {
 					>
 						BETA
 					</P>
-					<P cfg={{ fontSize: 1, color: 'neutral.3' }}>
+					<P cfg={{ fontSize: 1, color: 'neutral.6' }}>
 						<TextComponent />
 					</P>
 				</Flex>
