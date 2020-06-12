@@ -1,5 +1,9 @@
 import React from 'react';
-import { TrusteeProvider, useTrusteeContext, TrusteeProps } from './context';
+import {
+	TrusteeProvider,
+	useTrusteeContext,
+	TrusteeCardProps,
+} from './context';
 import { H4, Flex } from '@tpr/core';
 import { UnderlinedButton } from '../components/button';
 import { Preview } from './views/preview';
@@ -101,7 +105,7 @@ const RemoveButton: React.FC<any> = ({ current, send }) => {
 	);
 };
 
-export const Trustee: React.FC<Omit<TrusteeProps, 'children'>> = ({
+export const Trustee: React.FC<Omit<TrusteeCardProps, 'children'>> = ({
 	cfg,
 	...props
 }) => {

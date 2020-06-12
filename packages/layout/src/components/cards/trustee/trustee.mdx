@@ -32,8 +32,12 @@ import { Trustee } from '@tpr/layout';
 		const API = {
 			get: () => Promise.reject(new Error('THERE IS NO API IMPLEMENTATION')),
 		};
+		const callbackFn = (values, _fullTrusteeObject) => {
+			console.log(values);
+			return Promise.resolve();
+		};
 		const trustee = {
-			id: '123',
+			id: '12345',
 			schemeRoleId: '12345',
 			//
 			title: 'Mr',
@@ -55,14 +59,10 @@ import { Trustee } from '@tpr/layout';
 		};
 		return (
 			<Trustee
-				onSave={(trustee) => {
-					console.log(trustee);
-					return Promise.resolve();
-				}}
-				onRemove={(details) => {
-					console.log(details);
-					return Promise.resolve();
-				}}
+				onDetailsSave={callbackFn}
+				onContactSave={callbackFn}
+				onAddressSave={callbackFn}
+				onRemove={callbackFn}
 				onCorrect={(value) => setComplete(value)}
 				addressAPI={API}
 				complete={complete}
