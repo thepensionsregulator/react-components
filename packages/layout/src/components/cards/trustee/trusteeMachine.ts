@@ -63,25 +63,27 @@ type TrusteeAddress = Partial<{
 	countryId: string;
 }>;
 
+export type TrusteeProps = {
+	id: string;
+	schemeRoleId: string;
+	//
+	title: string;
+	forename: string;
+	surname: string;
+	trusteeType: string;
+	isProfessionalTrustee: boolean;
+	//
+	address: TrusteeAddress;
+	//
+	telephoneNumber: string;
+	emailAddress: string;
+	[key: string]: any;
+};
+
 export interface TrusteeContext {
 	loading: boolean;
 	complete: boolean;
-	trustee: {
-		id: string;
-		schemeRoleId: string;
-		//
-		title: string;
-		forename: string;
-		surname: string;
-		trusteeType: string;
-		isProfessionalTrustee: boolean;
-		//
-		address: TrusteeAddress;
-		//
-		telephoneNumber: string;
-		emailAddress: string;
-		[key: string]: any;
-	};
+	trustee: TrusteeProps;
 	remove?: {
 		reason: null | string;
 		date: null | string;
@@ -174,7 +176,7 @@ const trusteeMachine = Machine<TrusteeContext, TrusteeStates, TrusteeEvents>({
 								REMOVE: '#remove',
 							},
 						},
-						save: saveTrustee('kind'),
+						save: saveTrustee('onDetailsSave', 'kind'),
 					},
 				},
 				company: {
@@ -197,7 +199,7 @@ const trusteeMachine = Machine<TrusteeContext, TrusteeStates, TrusteeEvents>({
 								REMOVE: '#remove',
 							},
 						},
-						save: saveTrustee('address'),
+						save: saveTrustee('onAddressSave', 'address'),
 					},
 				},
 				contact: {
@@ -219,7 +221,7 @@ const trusteeMachine = Machine<TrusteeContext, TrusteeStates, TrusteeEvents>({
 								REMOVE: '#remove',
 							},
 						},
-						save: saveTrustee('details'),
+						save: saveTrustee('onContactSave', 'details'),
 					},
 				},
 			},
@@ -254,11 +256,17 @@ const trusteeMachine = Machine<TrusteeContext, TrusteeStates, TrusteeEvents>({
 	},
 });
 
-function saveTrustee(targetOnError: string) {
+function saveTrustee(
+	onSaveFunctionName: 'onContactSave' | 'onAddressSave' | 'onDetailsSave',
+	targetOnError: string,
+) {
+	if (!onSaveFunctionName) {
+		throw Error('saveTrustee function doesn`t have a prop name');
+	}
 	return {
 		invoke: {
-			id: 'saveData',
-			src: 'saveData',
+			id: onSaveFunctionName,
+			src: onSaveFunctionName,
 			onDone: {
 				target: '#preview',
 				actions: assign({
