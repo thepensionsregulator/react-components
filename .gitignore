@@ -65,7 +65,8 @@ docs.json
 .docz/public
 .idea/
 
-
+# Env variables
+.env
 
 junit.xml
 

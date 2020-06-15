@@ -14,7 +14,7 @@ const AutoComplete: React.FC<AutoCompleteProps> = ({ onClick, options }) => {
 
 	const onSubmit = (values) => {
 		if (Object.values(values).length > 0) {
-			send('SAVE', { values });
+			send('SAVE', { address: values.address.value });
 		} else {
 			Promise.reject('Address has not been selected...');
 		}
@@ -25,7 +25,7 @@ const AutoComplete: React.FC<AutoCompleteProps> = ({ onClick, options }) => {
 			{({ handleSubmit }) => (
 				<form onSubmit={handleSubmit}>
 					<FFSelect
-						name="postcode"
+						name="address"
 						placeholder="Please select the address from the dropdown"
 						options={options}
 						inputWidth={6}
