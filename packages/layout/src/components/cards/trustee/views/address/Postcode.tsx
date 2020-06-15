@@ -71,6 +71,7 @@ const Postcode: React.FC<PostcodeProps> = ({
 					}
 				})
 				.catch((err) => {
+					console.log(err);
 					setLoading(false);
 				});
 		},
