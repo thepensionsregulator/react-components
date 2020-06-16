@@ -10,13 +10,36 @@ import { FFInputText } from './text';
 import { validate } from '../../validation';
 import { renderFields } from '../../renderFields';
 
-# Text Input
+# Input
+
+A basic widget for getting the user input as a text field. Keyboard and mouse can be used for providing or changing data.
+
+## When To Use
+
+- A user input in a form field is needed.
+- A search input is required.
 
 ## Usage
+
+`Inside your React project directory, run the following:`
+
+```js
+yarn add @tpr/forms
+```
+
+`or with npm`
+
+```js
+npm install @tpr/forms
+```
+
+`import items you wish to use from the library`
 
 ```js
 import { Form, FFInputText } from '@tpr/forms';
 ```
+
+## Examples
 
 [CodeSandbox](https://codesandbox.io)
 
@@ -90,3 +113,15 @@ import { Form, validate, renderFields } from '@tpr/forms';
 		);
 	}}
 </Playground>
+
+## API
+
+### Props
+
+| Property | Required | Type    | Description                                  |
+| -------- | -------- | ------- | -------------------------------------------- |
+| cfg      | false    | object  | FlexProps & SpaceProps                       |
+| disabled | false    | boolean | Disable checkbox                             |
+| testId   | false    | string  | data attribute for testers                   |
+| label    | true     | string  | Checkbox description                         |
+| hint     | false    | string  | More detailed description about the checkbox |

@@ -7,10 +7,14 @@ import { Form, FFSelect } from '@tpr/forms';
 type AutoCompleteProps = {
 	onClick: (evt: any) => void;
 	options: any[];
+	loading: boolean;
 };
-const AutoComplete: React.FC<AutoCompleteProps> = ({ onClick, options }) => {
-	const { current, send } = useTrusteeContext();
-	const { loading } = current.context;
+const AutoComplete: React.FC<AutoCompleteProps> = ({
+	onClick,
+	options,
+	loading,
+}) => {
+	const { send } = useTrusteeContext();
 
 	const onSubmit = (values) => {
 		if (Object.values(values).length > 0) {
@@ -29,6 +33,7 @@ const AutoComplete: React.FC<AutoCompleteProps> = ({ onClick, options }) => {
 						placeholder="Please select the address from the dropdown"
 						options={options}
 						inputWidth={6}
+						disabled={loading}
 					/>
 					<Link onClick={onClick} cfg={{ mt: 3 }}>
 						I can't find my address in the list
