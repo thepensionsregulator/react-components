@@ -47,6 +47,7 @@ type DateInputFieldProps = {
 	maxInt: number;
 	meta: any;
 	label: string;
+	disabled?: boolean;
 };
 const DateInputField: React.FC<DateInputFieldProps> = ({
 	small = true,
@@ -59,12 +60,14 @@ const DateInputField: React.FC<DateInputFieldProps> = ({
 	setMonth,
 	onBlur,
 	meta,
+	disabled,
 }) => {
 	return (
 		<label className={small ? styles.inputSmall : styles.inputLarge}>
 			<P cfg={{ fontSize: 2, fontWeight: 3, mb: 1 }}>{label}</P>
 			<Input
 				type="number"
+				disabled={disabled}
 				aria-label={ariaLabel}
 				data-testid={testId}
 				value={value}
@@ -85,7 +88,7 @@ const DateInputField: React.FC<DateInputFieldProps> = ({
 
 type InputDateProps = FieldRenderProps<string> & FieldExtraProps;
 export const InputDate: React.FC<InputDateProps> = memo(
-	({ label, hint, required, input, meta, testId = 'field', cfg }) => {
+	({ label, hint, required, input, meta, testId = 'field', cfg, disabled }) => {
 		// react-final-form types says it's a string, incorrect, it's a date object.
 		const { dd, mm, yyyy } = transformDate(meta.initial);
 		const [{ dd: day, mm: month, yyyy: year }, setState] = useReducer(
@@ -137,6 +140,7 @@ export const InputDate: React.FC<InputDateProps> = memo(
 						setMonth={(mm: number) => setState({ mm })}
 						onBlur={input.onBlur}
 						meta={meta}
+						disabled={disabled}
 					/>
 					<DateInputField
 						label="Month"
@@ -148,6 +152,7 @@ export const InputDate: React.FC<InputDateProps> = memo(
 						setMonth={(mm: number) => setState({ mm })}
 						onBlur={input.onBlur}
 						meta={meta}
+						disabled={disabled}
 					/>
 					<DateInputField
 						label="Year"
@@ -160,6 +165,7 @@ export const InputDate: React.FC<InputDateProps> = memo(
 						setMonth={(mm: number) => setState({ mm })}
 						onBlur={input.onBlur}
 						meta={meta}
+						disabled={disabled}
 					/>
 				</Flex>
 			</StyledInputLabel>

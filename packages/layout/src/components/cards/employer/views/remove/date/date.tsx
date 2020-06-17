@@ -9,7 +9,6 @@ export const DateForm = () => {
 	const { send } = useEmployerContext();
 
 	function onSubmit(values) {
-		console.log(values);
 		send('NEXT', { values });
 	}
 

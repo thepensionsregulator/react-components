@@ -5,7 +5,7 @@ route: /layout/trustee
 ---
 
 import { Props } from 'docz';
-import { Playground } from '@playground';
+import { Playground, experianApiGet } from '@playground';
 import { Form } from 'react-final-form';
 import { useState } from 'react';
 import { Trustee } from './trustee';
@@ -29,9 +29,7 @@ import { Trustee } from '@tpr/layout';
 <Playground>
 	{() => {
 		const [complete, setComplete] = useState(false);
-		const API = {
-			get: () => Promise.reject(new Error('THERE IS NO API IMPLEMENTATION')),
-		};
+		const API = experianApiGet;
 		const callbackFn = (values, _fullTrusteeObject) => {
 			console.log(values);
 			return Promise.resolve();

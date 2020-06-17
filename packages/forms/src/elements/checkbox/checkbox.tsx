@@ -38,7 +38,7 @@ export const Checkbox: React.FC<Partial<CheckboxIconProps>> = ({
 				) : (
 					<CheckboxBlank className={styles.checkbox} />
 				)}
-				<P cfg={{ ml: 2 }}>{label}</P>
+				<P cfg={{ ml: 4, fontWeight: 3 }}>{label}</P>
 			</label>
 			{hint && <P className={styles.hint}>{hint}</P>}
 		</StyledInputLabel>

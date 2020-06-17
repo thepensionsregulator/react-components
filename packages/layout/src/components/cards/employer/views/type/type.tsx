@@ -37,7 +37,6 @@ export const EmployerType = () => {
 	const { send } = useEmployerContext();
 
 	function onSubmit(values) {
-		console.log(values);
 		send('SAVE', { values });
 	}
 
