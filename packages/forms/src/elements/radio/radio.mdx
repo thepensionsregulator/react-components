@@ -8,23 +8,36 @@ import { Playground } from '@playground';
 import { Form } from 'react-final-form';
 import { FFRadioButton } from './radio';
 
-# Radio Button
+# Radio
+
+Radio.
+
+## When To Use
+
+- Used to select a single state from multiple options.
+- The difference from Select is that Radio is visible to the user and can facilitate the comparison of choice, which means there shouldn't be too many of them.
 
 ## Usage
+
+`Inside your React project directory, run the following:`
+
+```js
+yarn add @tpr/forms
+```
+
+`or with npm`
+
+```js
+npm install @tpr/forms
+```
+
+`import items you wish to use from the library`
 
 ```js
 import { FFRadioButton } from '@tpr/forms';
 ```
 
-## Usage
-
-Lorem ipsum dolor sit amet consectetur adipisicing elit. Ipsum nostrum omnis ea unde totam, est
-consectetur odio! Harum vitae, sed totam aperiam consequuntur nostrum repudiandae non nemo porro,
-dolorem nulla corrupti hic consectetur eaque fuga illo numquam modi similique ipsam recusandae! Harum,
-possimus suscipit. Quibusdam totam, fugiat officiis qui nisi tempora. Accusantium corrupti similique
-et at ipsum, eveniet tempore nostrum quasi est unde modi impedit quaerat suscipit aspernatur ratione
-quo corporis? Cum dignissimos adipisci itaque sint tempore, saepe dolorem fugit quia placeat officiis
-earum rerum aspernatur similique commodi voluptates? Id ut ab cum doloremque magnam illo ipsa officia nulla ipsum.
+## Examples
 
 [CodeSandbox](https://codesandbox.io/s/lively-wood-rxcpu)
 
@@ -75,3 +88,17 @@ earum rerum aspernatur similique commodi voluptates? Id ut ab cum doloremque mag
 		);
 	}}
 </Playground>
+
+## API
+
+### Props
+
+| Property | Required | Type                 | Description                                                     |
+| -------- | -------- | -------------------- | --------------------------------------------------------------- |
+| cfg      | false    | object               | FlexProps & SpaceProps                                          |
+| disabled | false    | boolean              | Disable checkbox                                                |
+| testId   | false    | string               | data attribute for testers                                      |
+| checked  | true     | boolean              | Specifies whether the checkbox is selected.                     |
+| onChange | true     | function(evt: Event) | The callback function that is triggered when the state changes. |
+| label    | true     | string               | Checkbox description                                            |
+| hint     | false    | string               | More detailed description about the checkbox                    |

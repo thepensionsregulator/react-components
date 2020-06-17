@@ -1,28 +1,5 @@
 @import '@tpr/theming/lib/variables.scss';
 
-.selectInput {
-	font-family: $fonts-sans-serif;
-	display: flex;
-	align-items: center;
-	width: 100%;
-	font-size: $font-size-2;
-	font-weight: $font-weight-1;
-	background: $white;
-	height: 40px;
-	outline: none;
-	padding: 0 5px;
-	cursor: default;
-}
-
-.selectInput:focus {
-	border: 4px solid $colors-neutral-7;
-	box-shadow: 0 0 0 3px $colors-warning-1;
-}
-
-.selectInput:disabled {
-	background: $colors-neutral-6;
-}
-
 .popup {
 	display: none;
 	flex: 0 0 auto;
@@ -56,10 +33,15 @@
 	display: flex;
 	align-items: center;
 	position: absolute;
-	background: $white;
+	background: none;
 	top: 9px;
 	right: 4px;
 	width: 30px;
 	height: 32px;
 	cursor: pointer;
+	outline: none;
+}
+
+.iconButton:disabled {
+	cursor: not-allowed;
 }

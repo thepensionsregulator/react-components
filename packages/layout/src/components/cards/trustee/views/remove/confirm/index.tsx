@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { H3, H4, P, Hr, Link, Flex } from '@tpr/core';
+import { ArrowRight } from '@tpr/icons';
 import { useTrusteeContext } from '../../../context';
 import { FooterButton } from '../../../../components/card';
 import { Content } from '../../../../components/content';
@@ -57,11 +58,16 @@ const RemoveConfirm: React.FC = () => {
 				cfg={{ flexDirection: 'column', p: 4, my: 4 }}
 				className={styles.confirmBox}
 			>
-				<P cfg={{ my: 3 }}>This can't be undone.</P>
+				<P cfg={{ mt: 3, mb: 6 }}>This can't be undone.</P>
 				<Flex>
 					<FooterButton
 						disabled={loading}
-						title="Remove this trustee >"
+						title={() => (
+							<Flex cfg={{ alignItems: 'center' }}>
+								<P cfg={{ mr: 2 }}>Remove this trustee</P>
+								<ArrowRight fill="#FFF" width="32" />
+							</Flex>
+						)}
 						intent="danger"
 						onClick={handleRemove}
 						loadingMessage="Removing..."

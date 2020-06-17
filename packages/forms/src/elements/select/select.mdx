@@ -8,13 +8,38 @@ import { Playground } from '@playground';
 import { Form } from 'react-final-form';
 import { FFSelect, Select } from './select';
 
-# Select Dropdown
+# Select
+
+Select component to select value from options.
+
+## When To Use
+
+- A dropdown menu for displaying choices - an elegant alternative to the native `<select>` element.
+- Utilizing Radio is recommended when there are fewer total options (less than 5).
 
 ## Usage
+
+`Inside your React project directory, run the following:`
+
+```js
+yarn add @tpr/forms
+```
+
+`or with npm`
+
+```js
+npm install @tpr/forms
+```
+
+`import items you wish to use from the library`
 
 ```js
 import { FFSelect } from '@tpr/forms';
 ```
+
+## Examples
+
+[CodeSandbox](https://codesandbox.io)
 
 <Playground>
 	{() => {
@@ -53,3 +78,14 @@ import { FFSelect } from '@tpr/forms';
 		);
 	}}
 </Playground>
+
+## API
+
+### Props
+
+| Property | Required | Type    | Description                                 |
+| -------- | -------- | ------- | ------------------------------------------- |
+| cfg      | false    | object  | FlexProps & SpaceProps                      |
+| disabled | false    | boolean | Disable checkbox                            |
+| testId   | false    | string  | data attribute for testers                  |
+| checked  | true     | boolean | Specifies whether the checkbox is selected. |

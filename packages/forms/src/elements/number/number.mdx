@@ -12,15 +12,35 @@ import { renderFields } from '../../renderFields';
 
 # Number Input
 
+Enter a number within certain range with the mouse or keyboard.
+
+## When To Use
+
+- When a numeric value needs to be provided
+
 ## Usage
 
+`Inside your React project directory, run the following:`
+
 ```js
-import { Form, FFInputNumber } from '@tpr/forms';
+yarn add @tpr/forms
 ```
 
-[CodeSandbox](https://codesandbox.io)
+`or with npm`
 
-Example using field level validation
+```js
+npm install @tpr/forms
+```
+
+`import items you wish to use from the library`
+
+```js
+import { FFInputNumber } from '@tpr/forms';
+```
+
+## Examples
+
+[CodeSandbox](https://codesandbox.io)
 
 <Playground>
 	<Form onSubmit={(values) => console.log(values)}>
@@ -81,3 +101,15 @@ import { Form, validate, renderFields } from '@tpr/forms';
 		);
 	}}
 </Playground>
+
+## API
+
+### Props
+
+| Property | Required | Type    | Description                                  |
+| -------- | -------- | ------- | -------------------------------------------- |
+| cfg      | false    | object  | FlexProps & SpaceProps                       |
+| disabled | false    | boolean | Disable checkbox                             |
+| testId   | false    | string  | data attribute for testers                   |
+| label    | true     | string  | Checkbox description                         |
+| hint     | false    | string  | More detailed description about the checkbox |

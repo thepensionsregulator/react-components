@@ -49,6 +49,7 @@ const CardContent: React.FC = () => {
 
 const TrusteeButton: React.FC = () => {
 	const { current, send } = useTrusteeContext();
+
 	return (
 		<UnderlinedButton
 			isOpen={

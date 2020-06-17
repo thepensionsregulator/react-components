@@ -78,14 +78,15 @@ export const Select: React.FC<SelectProps> = ({
 								onClick={() => toggleMenu()}
 								{...getInputProps()}
 							/>
-							<div
-								role="button"
+							<button
+								type="button"
+								disabled={disabled}
 								data-testid={`${testId}-button`}
 								className={styles.iconButton}
 								onClick={() => toggleMenu()}
 							>
 								<UnfoldMore />
-							</div>
+							</button>
 						</Flex>
 					</StyledInputLabel>
 					<Flex cfg={{ width }} className={styles.relative}>

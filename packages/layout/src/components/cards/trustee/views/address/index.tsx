@@ -36,6 +36,7 @@ const AddressPage: React.FC = () => {
 					<ManualComplete />
 				) : (
 					<AutoComplete
+						loading={loading}
 						options={options}
 						onClick={() => setState({ manual: true })}
 					/>

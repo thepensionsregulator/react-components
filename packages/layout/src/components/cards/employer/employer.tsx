@@ -39,8 +39,6 @@ const EmployerButton: React.FC = () => {
 				if (condition) {
 					send('CANCEL');
 				} else {
-					console.log('cancel');
-
 					send('CHANGE_TYPE');
 				}
 			}}

@@ -45,7 +45,9 @@ export const RadioButton: React.FC<RadioButtonProps> = ({
 				) : (
 					<RadioButtonUnchecked />
 				)}
-				<P className={styles.label}>{label}</P>
+				<P cfg={{ ml: 2, fontWeight: 3 }} className={styles.label}>
+					{label}
+				</P>
 			</label>
 			{hint && <P className={styles.hint}>{hint}</P>}
 		</StyledInputLabel>

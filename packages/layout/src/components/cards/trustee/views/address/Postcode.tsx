@@ -26,36 +26,32 @@ const Postcode: React.FC<PostcodeProps> = ({
 	const { addressAPI } = useTrusteeContext();
 
 	const search = useCallback(
-		(postcode: string, country = 'GBR', take = 100) => {
+		(postcode: string, country = 'GBR', take = 25) => {
 			setLoading(true);
-			addressAPI
-				.get(`search?country=${country}&query=${postcode}&take=${take}`)
+			addressAPI(`search?country=${country}&query=${postcode}&take=${take}`)
 				.then((resp) => {
-					if (
-						Array.isArray(resp.data.results) &&
-						resp.data.results.length > 0
-					) {
+					if (Array.isArray(resp.results) && resp.results.length > 0) {
 						Promise.all(
-							resp.data.results.map(({ format }: { format: string }) => {
+							resp.results.map(({ format }: { format: string }) => {
 								const [url] = format.split('v2/').slice(-1);
-								return addressAPI.get(url).then(({ data }) => {
-									const address = extractToObject(data.address);
+								return addressAPI(url).then(({ address }) => {
+									const addressObject = extractToObject(address);
 
 									const addressToOurFormat = {
-										addressLine1: address.addressLine1 || '',
-										addressLine2: address.addressLine2 || '',
-										addressLine3: address.addressLine3 || '',
-										city: address.locality || '',
-										county: address.province || '',
-										postcode: address.postalCode || '',
-										country: address.country || '',
+										addressLine1: addressObject.addressLine1 || '',
+										addressLine2: addressObject.addressLine2 || '',
+										addressLine3: addressObject.addressLine3 || '',
+										postTown: addressObject.locality || '',
+										postcode: addressObject.postalCode || '',
+										county: addressObject.province || '',
+										country: addressObject.country || '',
 									};
 
 									return {
-										...addressToOurFormat,
-										singleLineAddress: Object.keys(addressToOurFormat)
-											.filter((key) => address[key])
-											.map((key) => address[key])
+										value: addressToOurFormat,
+										label: Object.keys(addressToOurFormat)
+											.filter((key) => addressObject[key])
+											.map((key) => addressObject[key])
 											.join(', '),
 									};
 								});

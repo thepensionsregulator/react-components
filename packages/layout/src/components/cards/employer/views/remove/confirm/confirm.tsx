@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { Hr, Flex, P, H3, Link } from '@tpr/core';
+import { ArrowRight } from '@tpr/icons';
 import { Content } from '../../../../components/content';
 import { FooterButton } from '../../../../components/card';
 import { useEmployerContext } from '../../../context';
@@ -63,7 +64,12 @@ export const Confirm = () => {
 				<Flex>
 					<FooterButton
 						disabled={loading}
-						title="Remove employer"
+						title={() => (
+							<Flex cfg={{ alignItems: 'center' }}>
+								<P cfg={{ mr: 2 }}>Remove employer</P>
+								<ArrowRight fill="#FFF" width="32" />
+							</Flex>
+						)}
 						intent="danger"
 						onClick={handleRemove}
 						loadingMessage="Removing..."

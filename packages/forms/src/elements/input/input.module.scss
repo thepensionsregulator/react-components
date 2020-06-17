@@ -19,7 +19,9 @@
 }
 
 .inputText:disabled {
-	background: $colors-neutral-6;
+	background: $colors-neutral-2;
+	border-color: $colors-neutral-6;
+	cursor: not-allowed;
 }
 
 .inputText-error {
