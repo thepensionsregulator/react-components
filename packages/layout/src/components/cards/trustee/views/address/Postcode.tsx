@@ -2,6 +2,7 @@ import React, { useEffect, useCallback, ChangeEvent } from 'react';
 import { Flex, Button, P, Link } from '@tpr/core';
 import { Input } from '@tpr/forms';
 import { extractToObject } from './helpers';
+import { getObjectValueByString } from '../../../../../utils';
 import { useTrusteeContext } from '../../context';
 import styles from './Postcode.module.scss';
 
@@ -26,15 +27,25 @@ const Postcode: React.FC<PostcodeProps> = ({
 	const { addressAPI } = useTrusteeContext();
 
 	const search = useCallback(
-		(postcode: string, country = 'GBR', take = 25) => {
+		(postcode: string, country = 'GBR') => {
 			setLoading(true);
-			addressAPI(`search?country=${country}&query=${postcode}&take=${take}`)
-				.then((resp) => {
-					if (Array.isArray(resp.results) && resp.results.length > 0) {
+			addressAPI
+				.get(
+					`search?country=${country}&query=${postcode}&take=${
+						addressAPI.limit || 50
+					}`,
+				)
+				.then((response: unknown) => {
+					const results = getObjectValueByString(
+						response,
+						addressAPI.extract || 'results',
+					);
+
+					if (Array.isArray(results) && results.length > 0) {
 						Promise.all(
-							resp.results.map(({ format }: { format: string }) => {
+							results.map(({ format }: { format: string }) => {
 								const [url] = format.split('v2/').slice(-1);
-								return addressAPI(url).then(({ address }) => {
+								return addressAPI.get(url).then(({ address }) => {
 									const addressObject = extractToObject(address);
 
 									const addressToOurFormat = {

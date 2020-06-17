@@ -15,7 +15,11 @@ export const TrusteeContext = createContext<TrusteeContextProps>({
 	send: (_, __) => ({}),
 	onCorrect: () => {},
 	onRemove: () => new Promise((res) => res()),
-	addressAPI: { get: () => new Promise((res) => res()) },
+	addressAPI: {
+		get: (endpoint) => Promise.resolve(endpoint),
+		extract: 'results',
+		limit: 50,
+	},
 });
 
 type RenderProps = (_: TrusteeContextProps) => ReactElement;
@@ -42,6 +46,15 @@ export interface TrusteeInput {
 	[key: string]: any;
 }
 
+export type AddressAPIType = {
+	/** API instance with auth to get a list of addresses */
+	get: (endpoint: string) => Promise<any>;
+	/** interface return path to the results array */
+	extract: string;
+	/** limit of items to display per search */
+	limit: number;
+};
+
 export interface TrusteeContextProps {
 	complete?: boolean;
 	testId?: string;
@@ -50,7 +63,7 @@ export interface TrusteeContextProps {
 	onRemove: (...args: any[]) => Promise<any>;
 	onCorrect: (...args: any[]) => void;
 	send: (event: any, payload?: EventData) => Partial<State<TC, any, any, any>>;
-	addressAPI: any;
+	addressAPI: AddressAPIType;
 	current: Partial<State<TC, any, any, any>>;
 }
 
@@ -62,7 +75,8 @@ export interface TrusteeCardProps {
 	onDetailsSave: (values: any, trustee: TrusteeProps) => Promise<any>;
 	onContactSave: (values: any, trustee: TrusteeProps) => Promise<any>;
 	onAddressSave: (values: any, trustee: TrusteeProps) => Promise<any>;
-	addressAPI: any;
+	addressAPI: AddressAPIType;
+	/** depending on your network lib, provide a path to the addressAPI results array */
 	testId?: string;
 	children?: RenderProps | ReactElement;
 	cfg?: SpaceProps;

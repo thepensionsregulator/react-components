@@ -1,5 +1,5 @@
 import React from 'react';
-import { Link } from '@tpr/core';
+import { Link, P } from '@tpr/core';
 import { useTrusteeContext } from '../../context';
 import { Footer, FooterButton } from '../../../components/card';
 import { Form, FFSelect } from '@tpr/forms';
@@ -19,25 +19,31 @@ const AutoComplete: React.FC<AutoCompleteProps> = ({
 	const onSubmit = (values) => {
 		if (Object.values(values).length > 0) {
 			send('SAVE', { address: values.address.value });
-		} else {
-			Promise.reject('Address has not been selected...');
 		}
 	};
 
 	return (
 		<Form onSubmit={onSubmit}>
-			{({ handleSubmit }) => (
+			{({ handleSubmit, submitError }) => (
 				<form onSubmit={handleSubmit}>
 					<FFSelect
 						name="address"
 						placeholder="Please select the address from the dropdown"
 						options={options}
 						inputWidth={6}
+						validate={(value) =>
+							!value
+								? 'Please select one of the address from the dropdown menu. If you cannot find your address, please click the link below to enter it manually.'
+								: undefined
+						}
 						disabled={loading}
 					/>
 					<Link onClick={onClick} cfg={{ mt: 3 }}>
 						I can't find my address in the list
 					</Link>
+					{submitError && (
+						<P cfg={{ color: 'danger.2', mt: 5 }}>{submitError}</P>
+					)}
 					<Footer>
 						<FooterButton
 							type="submit"
