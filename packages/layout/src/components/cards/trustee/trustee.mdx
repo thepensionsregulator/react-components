@@ -29,7 +29,6 @@ import { Trustee } from '@tpr/layout';
 <Playground>
 	{() => {
 		const [complete, setComplete] = useState(false);
-		const API = experianApiGet;
 		const callbackFn = (values, _fullTrusteeObject) => {
 			console.log(values);
 			return Promise.resolve();
@@ -62,7 +61,11 @@ import { Trustee } from '@tpr/layout';
 				onAddressSave={callbackFn}
 				onRemove={callbackFn}
 				onCorrect={(value) => setComplete(value)}
-				addressAPI={API}
+				addressAPI={{
+					get: (endpont) => experianApiGet(endpont),
+					extract: 'results',
+					limit: 100,
+				}}
 				complete={complete}
 				trustee={trustee}
 			/>
