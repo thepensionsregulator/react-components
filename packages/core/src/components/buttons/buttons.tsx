@@ -69,12 +69,14 @@ export type LinkProps = {
 	cfg?: SpaceProps | ColorProps | TypographyProps | LayoutProps;
 	className?: string;
 	underline?: boolean;
+	testId?: string;
 	[key: string]: any;
 };
 export const Link: React.FC<LinkProps> = ({
 	cfg: globalStyles,
 	underline = false,
 	className,
+	testId,
 	children,
 	...props
 }) => {
@@ -88,6 +90,7 @@ export const Link: React.FC<LinkProps> = ({
 		'button',
 		{
 			type: 'button',
+			'data-testid': testId,
 			className: classNames,
 			...props,
 		},
