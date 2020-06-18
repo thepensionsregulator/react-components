@@ -776,8 +776,12 @@
 
 /* color background */
 
-.color-background {
+.color-white {
 	color: $white !important;
+}
+
+.color-black {
+	color: $black !important;
 }
 
 /* color primary */
@@ -882,6 +886,120 @@
 
 .color-danger-2 {
 	color: $colors-danger-2 !important;
+}
+
+/* FILL FOR SVG */
+
+.fill-white {
+	fill: $white !important;
+}
+
+.fill-black {
+	fill: $black !important;
+}
+
+/* fill primary */
+
+.fill-primary-1 {
+	fill: $colors-primary-1 !important;
+}
+
+.fill-primary-2 {
+	fill: $colors-primary-3 !important;
+}
+
+.fill-primary-3 {
+	fill: $colors-primary-3 !important;
+}
+
+.fill-primary-4 {
+	fill: $colors-primary-4 !important;
+}
+
+.fill-primary-a1 {
+	fill: $colors-primary-a1 !important;
+}
+
+.fill-primary-a2 {
+	fill: $colors-primary-a2 !important;
+}
+
+/* color neutral */
+
+.fill-neutral-1 {
+	fill: $colors-neutral-1 !important;
+}
+
+.fill-neutral-2 {
+	fill: $colors-neutral-2 !important;
+}
+
+.fill-neutral-3 {
+	fill: $colors-neutral-3 !important;
+}
+
+.fill-neutral-4 {
+	fill: $colors-neutral-4 !important;
+}
+
+.fill-neutral-5 {
+	fill: $colors-neutral-5 !important;
+}
+
+.fill-neutral-6 {
+	fill: $colors-neutral-6 !important;
+}
+
+.fill-neutral-7 {
+	fill: $colors-neutral-7 !important;
+}
+
+.fill-neutral-8 {
+	fill: $colors-neutral-8 !important;
+}
+
+.fill-neutral-a1 {
+	fill: $colors-neutral-a1 !important;
+}
+
+.fill-neutral-a2 {
+	fill: $colors-neutral-a2 !important;
+}
+
+/* color accents */
+
+.fill-accents-1 {
+	fill: $colors-accents-1 !important;
+}
+
+.fill-accents-2 {
+	fill: $colors-accents-2 !important;
+}
+
+/* color success */
+
+.fill-success-1 {
+	fill: $colors-success-1 !important;
+}
+
+/* color warning */
+
+.fill-warning-1 {
+	fill: $colors-warning-1 !important;
+}
+
+.fill-warning-a1 {
+	fill: $colors-warning-a1 !important;
+}
+
+/* color danger */
+
+.fill-danger-1 {
+	fill: $colors-danger-1 !important;
+}
+
+.fill-danger-2 {
+	fill: $colors-danger-2 !important;
 }
 
 /* cursor */

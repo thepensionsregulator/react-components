@@ -1,8 +1,7 @@
 import React, { useState } from 'react';
 import { Hr, Flex, P, H3, Link } from '@tpr/core';
-import { ArrowRight } from '@tpr/icons';
 import { Content } from '../../../../components/content';
-import { FooterButton } from '../../../../components/card';
+import { ArrowButton } from '../../../../../buttons/buttons';
 import { useEmployerContext } from '../../../context';
 import styles from './confirm.module.scss';
 import {
@@ -62,17 +61,13 @@ export const Confirm = () => {
 				</P>
 				<P cfg={{ my: 3 }}>This can't be undone.</P>
 				<Flex>
-					<FooterButton
-						disabled={loading}
-						title={() => (
-							<Flex cfg={{ alignItems: 'center' }}>
-								<P cfg={{ mr: 2 }}>Remove employer</P>
-								<ArrowRight fill="#FFF" width="32" />
-							</Flex>
-						)}
+					<ArrowButton
 						intent="danger"
+						pointsTo="right"
+						iconSide="right"
+						title="Remove employer"
 						onClick={handleRemove}
-						loadingMessage="Removing..."
+						disabled={loading}
 					/>
 					<Link cfg={{ m: 3 }} underline onClick={() => send('CANCEL')}>
 						Cancel

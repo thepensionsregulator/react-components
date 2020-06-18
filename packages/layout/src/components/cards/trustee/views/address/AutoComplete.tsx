@@ -1,8 +1,9 @@
 import React from 'react';
 import { Link, P } from '@tpr/core';
 import { useTrusteeContext } from '../../context';
-import { Footer, FooterButton } from '../../../components/card';
+import { Footer } from '../../../components/card';
 import { Form, FFSelect } from '@tpr/forms';
+import { ArrowButton } from '../../../../buttons/buttons';
 
 type AutoCompleteProps = {
 	onClick: (evt: any) => void;
@@ -45,7 +46,10 @@ const AutoComplete: React.FC<AutoCompleteProps> = ({
 						<P cfg={{ color: 'danger.2', mt: 5 }}>{submitError}</P>
 					)}
 					<Footer>
-						<FooterButton
+						<ArrowButton
+							intent="special"
+							pointsTo="up"
+							iconSide="right"
 							type="submit"
 							title="Save and close"
 							disabled={loading}

@@ -2,9 +2,10 @@ import React from 'react';
 import { Flex, P } from '@tpr/core';
 import { Form, FieldProps, renderFields } from '@tpr/forms';
 import { useTrusteeContext } from '../../context';
-import { Footer, FooterButton } from '../../../components/card';
+import { Footer } from '../../../components/card';
 import { Content } from '../../../components/content';
 import { Breadcrumbs, BreadcrumbLink } from '../../../components/breadcrumbs';
+import { ArrowButton } from '../../../../buttons/buttons';
 
 const descriptionFields: FieldProps[] = [
 	{
@@ -99,10 +100,13 @@ const Type: React.FC = () => {
 						</P>
 						<Flex>{renderFields(individualFields)}</Flex>
 						<Footer>
-							<FooterButton
-								disabled={loading}
+							<ArrowButton
+								intent="special"
+								pointsTo="up"
+								iconSide="right"
 								type="submit"
 								title="Save and close"
+								disabled={loading}
 							/>
 						</Footer>
 					</form>

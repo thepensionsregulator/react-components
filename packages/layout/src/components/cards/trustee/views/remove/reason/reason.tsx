@@ -1,10 +1,11 @@
 import React from 'react';
 import { P, H4 } from '@tpr/core';
 import { useTrusteeContext } from '../../../context';
-import { Footer, FooterButton } from '../../../../components/card';
+import { Footer } from '../../../../components/card';
 import { Form, FFRadioButton, FFInputDate } from '@tpr/forms';
 import { FORM_ERROR } from 'final-form';
 import { Content } from '../../../../components/content';
+import { ArrowButton } from '../../../../../buttons/buttons';
 import styles from './reason.module.scss';
 
 const RemoveReason: React.FC = () => {
@@ -76,7 +77,13 @@ const RemoveReason: React.FC = () => {
 								<P cfg={{ color: 'danger.2', mt: 5 }}>{submitError}</P>
 							)}
 							<Footer>
-								<FooterButton type="submit" title="Continue" />
+								<ArrowButton
+									intent="special"
+									pointsTo="right"
+									iconSide="right"
+									type="submit"
+									title="Continue"
+								/>
 							</Footer>
 						</form>
 					);
