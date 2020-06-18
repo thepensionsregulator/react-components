@@ -2,8 +2,6 @@ import React, { ChangeEvent } from 'react';
 import { Link, LinkProps, Flex } from '@tpr/core';
 import { ArrowIcon } from './icons';
 
-// TODO: update icon colors from the theming variables once ready.
-
 type ArrowLinkProps = {
 	onClick: (evt: ChangeEvent<HTMLInputElement>) => void;
 	title?: string;

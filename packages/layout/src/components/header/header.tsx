@@ -23,21 +23,21 @@ export const Header: React.FC<HeaderProps> = ({
 						<div className={styles.logo}>
 							<img className={styles.img} src={logoUrl} alt="TPR Logo" />
 						</div>
-						<P cfg={{ color: 'background', fontWeight: 2 }}>{title}</P>
+						<P cfg={{ color: 'white', fontWeight: 2 }}>{title}</P>
 					</Flex>
 					<Flex cfg={{ alignItems: 'center' }}>
 						<Link
 							onClick={onClickSchemeOptions}
 							underline
 							data-testid="onClickSchemeOptions"
-							cfg={{ color: 'background', mr: 4 }}
+							cfg={{ color: 'white', mr: 4 }}
 						>
 							Scheme Options
 						</Link>
 						<Link
 							onClick={onClickLogout}
 							underline
-							cfg={{ color: 'background' }}
+							cfg={{ color: 'white' }}
 							data-testid="onClickLogout"
 						>
 							Log out

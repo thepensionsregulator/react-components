@@ -17,7 +17,7 @@ export const BetaHeader: React.FC<BetaHeaderProps> = ({ text }) => {
 					<P
 						cfg={{
 							fontSize: 1,
-							color: 'background',
+							color: 'white',
 							bg: 'primary.3',
 							p: 1,
 							my: 2,

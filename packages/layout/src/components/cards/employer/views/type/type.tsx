@@ -1,8 +1,9 @@
 import React from 'react';
 import { Form, renderFields, validate, FieldProps } from '@tpr/forms';
 import { Content } from '../../../components/content';
-import { Footer, FooterButton } from '../../../components/card';
+import { Footer } from '../../../components/card';
 import { useEmployerContext } from '../../context';
+import { ArrowButton } from '../../../../buttons/buttons';
 
 const fields: FieldProps[] = [
 	{
@@ -51,7 +52,13 @@ export const EmployerType = () => {
 					<form onSubmit={handleSubmit}>
 						{renderFields(fields)}
 						<Footer>
-							<FooterButton type="submit" title="Save and close" />
+							<ArrowButton
+								intent="special"
+								pointsTo="up"
+								iconSide="right"
+								title="Save and close"
+								type="submit"
+							/>
 						</Footer>
 					</form>
 				)}

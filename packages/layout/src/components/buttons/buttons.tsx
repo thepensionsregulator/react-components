@@ -1,17 +1,16 @@
 import React, { ChangeEvent } from 'react';
-import { Flex, P, Button, ButtonProps } from '@tpr/core';
+import { Flex, Button, ButtonProps, ColorProps } from '@tpr/core';
 import { ArrowIcon } from './icons';
 import styles from './buttons.module.scss';
 
-// TODO: update icon colors from the theming variables once ready.
-
-interface ArrowButtonProps extends ButtonProps {
+export interface ArrowButtonProps extends ButtonProps {
 	title: string;
 	loadingMessage?: string;
 	type?: 'button' | 'submit';
-	onClick: (evt: ChangeEvent<HTMLInputElement>) => void;
+	onClick?: (evt: ChangeEvent<HTMLInputElement>) => void;
 	pointsTo?: 'left' | 'up' | 'right' | 'down';
 	iconSide?: 'left' | 'right';
+	iconColor?: ColorProps['fill'];
 }
 export const ArrowButton: React.FC<ArrowButtonProps> = ({
 	intent,
@@ -25,6 +24,7 @@ export const ArrowButton: React.FC<ArrowButtonProps> = ({
 	pointsTo = 'left',
 	iconSide = 'left',
 	testId,
+	iconColor = 'white',
 }) => {
 	return (
 		<Button
@@ -48,11 +48,11 @@ export const ArrowButton: React.FC<ArrowButtonProps> = ({
 					}}
 				>
 					{iconSide === 'left' && (
-						<ArrowIcon pointsTo={pointsTo} fill="white" size="32" />
+						<ArrowIcon pointsTo={pointsTo} fill={iconColor} size="32" />
 					)}
 					<>{title}</>
 					{iconSide === 'right' && (
-						<ArrowIcon pointsTo={pointsTo} fill="white" size="32" />
+						<ArrowIcon pointsTo={pointsTo} fill={iconColor} size="32" />
 					)}
 				</Flex>
 			)}

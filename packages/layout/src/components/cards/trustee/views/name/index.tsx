@@ -1,8 +1,9 @@
 import React from 'react';
 import { Form, FieldProps, renderFields, validate } from '@tpr/forms';
 import { useTrusteeContext } from '../../context';
-import { Footer, FooterButton } from '../../../components/card';
+import { Footer } from '../../../components/card';
 import { Content } from '../../../components/content';
+import { ArrowButton } from '../../../../buttons/buttons';
 
 const fields: FieldProps[] = [
 	{
@@ -52,7 +53,13 @@ const Name: React.FC = () => {
 					<form onSubmit={handleSubmit}>
 						{renderFields(fields)}
 						<Footer>
-							<FooterButton type="submit" title="Continue" />
+							<ArrowButton
+								intent="special"
+								pointsTo="right"
+								iconSide="right"
+								type="submit"
+								title="Continue"
+							/>
 						</Footer>
 					</form>
 				)}

@@ -1,9 +1,8 @@
 import React, { useState } from 'react';
 import { H3, H4, P, Hr, Link, Flex } from '@tpr/core';
-import { ArrowRight } from '@tpr/icons';
 import { useTrusteeContext } from '../../../context';
-import { FooterButton } from '../../../../components/card';
 import { Content } from '../../../../components/content';
+import { ArrowButton } from '../../../../../buttons/buttons';
 import styles from './confirm.module.scss';
 import {
 	Breadcrumbs,
@@ -60,17 +59,13 @@ const RemoveConfirm: React.FC = () => {
 			>
 				<P cfg={{ mt: 3, mb: 6 }}>This can't be undone.</P>
 				<Flex>
-					<FooterButton
-						disabled={loading}
-						title={() => (
-							<Flex cfg={{ alignItems: 'center' }}>
-								<P cfg={{ mr: 2 }}>Remove this trustee</P>
-								<ArrowRight fill="#FFF" width="32" />
-							</Flex>
-						)}
+					<ArrowButton
 						intent="danger"
+						pointsTo="right"
+						iconSide="right"
+						disabled={loading}
 						onClick={handleRemove}
-						loadingMessage="Removing..."
+						title="Remove this trustee"
 					/>
 					<Link cfg={{ m: 3 }} underline onClick={() => send('CANCEL')}>
 						Cancel
