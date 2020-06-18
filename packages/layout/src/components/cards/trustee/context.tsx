@@ -17,7 +17,6 @@ export const TrusteeContext = createContext<TrusteeContextProps>({
 	onRemove: () => new Promise((res) => res()),
 	addressAPI: {
 		get: (endpoint) => Promise.resolve(endpoint),
-		extract: 'results',
 		limit: 50,
 	},
 });
@@ -49,8 +48,6 @@ export interface TrusteeInput {
 export type AddressAPIType = {
 	/** API instance with auth to get a list of addresses */
 	get: (endpoint: string) => Promise<any>;
-	/** interface return path to the results array */
-	extract: string;
 	/** limit of items to display per search */
 	limit: number;
 };

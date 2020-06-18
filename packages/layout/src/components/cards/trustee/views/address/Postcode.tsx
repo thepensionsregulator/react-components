@@ -35,18 +35,16 @@ const Postcode: React.FC<PostcodeProps> = ({
 						addressAPI.limit || 50
 					}`,
 				)
-				.then((response: unknown) => {
-					const results = getObjectValueByString(
-						response,
-						addressAPI.extract || 'results',
-					);
-
-					if (Array.isArray(results) && results.length > 0) {
+				.then((response: { data: any }) => {
+					if (
+						Array.isArray(response.data.results) &&
+						response.data.results.length > 0
+					) {
 						Promise.all(
-							results.map(({ format }: { format: string }) => {
+							response.data.results.map(({ format }: { format: string }) => {
 								const [url] = format.split('v2/').slice(-1);
-								return addressAPI.get(url).then(({ address }) => {
-									const addressObject = extractToObject(address);
+								return addressAPI.get(url).then(({ data }) => {
+									const addressObject = extractToObject(data.address);
 
 									const addressToOurFormat = {
 										addressLine1: addressObject.addressLine1 || '',
