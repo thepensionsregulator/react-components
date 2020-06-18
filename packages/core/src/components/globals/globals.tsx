@@ -55,7 +55,8 @@ export type ColorsWarning = 'warning.1' | 'warning.a1';
 export type ColorsDanger = 'danger.1' | 'danger.2';
 
 export type ColorsFullRange =
-	| 'background'
+	| 'white'
+	| 'black'
 	| ColorsPrimary
 	| ColorsNeutral
 	| ColorsAccents
@@ -69,6 +70,7 @@ export type BackgroundProps = Partial<{
 
 export type ColorProps = Partial<{
 	color: ColorsFullRange;
+	fill: ColorsFullRange;
 }>;
 
 export type TypographyProps = Partial<{

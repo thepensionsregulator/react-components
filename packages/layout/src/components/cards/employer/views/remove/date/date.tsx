@@ -1,8 +1,9 @@
 import React from 'react';
 import { Form, FFCheckbox, FFInputDate } from '@tpr/forms';
 import { Content } from '../../../../components/content';
-import { Footer, FooterButton } from '../../../../components/card';
+import { Footer } from '../../../../components/card';
 import { useEmployerContext } from '../../../context';
+import { ArrowButton } from '../../../../../buttons/buttons';
 import styles from './date.module.scss';
 
 export const DateForm = () => {
@@ -36,7 +37,13 @@ export const DateForm = () => {
 							/>
 						</div>
 						<Footer>
-							<FooterButton type="submit" title="Save and close" />
+							<ArrowButton
+								intent="special"
+								pointsTo="right"
+								iconSide="right"
+								title="Continue"
+								type="submit"
+							/>
 						</Footer>
 					</form>
 				)}

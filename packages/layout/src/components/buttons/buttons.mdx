@@ -1,0 +1,148 @@
+---
+name: Buttons
+menu: Layout
+route: /layout/buttons
+---
+
+import { Playground } from '@playground';
+import { Flex } from '@tpr/core';
+import { ArrowLink } from './links';
+import { ArrowButton } from './buttons';
+
+# Buttons and Links
+
+Styled buttons
+
+## Basic usage
+
+```js
+import { ArrowLink, ArrowButton } from '@tpr/layout';
+```
+
+### Link Arrows based on the left
+
+<Playground>
+	<Flex>
+		<ArrowLink
+			iconSide="left"
+			pointsTo="left"
+			onClick={() => console.log('clicked')}
+			cfg={{ mr: 3 }}
+		/>
+		<ArrowLink
+			iconSide="left"
+			pointsTo="up"
+			onClick={() => console.log('clicked')}
+			cfg={{ mr: 3 }}
+		/>
+		<ArrowLink
+			iconSide="left"
+			pointsTo="right"
+			onClick={() => console.log('clicked')}
+			cfg={{ mr: 3 }}
+		/>
+		<ArrowLink
+			iconSide="left"
+			pointsTo="down"
+			onClick={() => console.log('clicked')}
+		/>
+	</Flex>
+</Playground>
+
+### Link Arrows based on the right
+
+<Playground>
+	<Flex>
+		<ArrowLink
+			iconSide="right"
+			pointsTo="right"
+			onClick={() => console.log('clicked')}
+			cfg={{ mr: 3 }}
+		/>
+		<ArrowLink
+			iconSide="right"
+			pointsTo="up"
+			onClick={() => console.log('clicked')}
+			cfg={{ mr: 3 }}
+		/>
+		<ArrowLink
+			iconSide="right"
+			pointsTo="left"
+			onClick={() => console.log('clicked')}
+			cfg={{ mr: 3 }}
+		/>
+		<ArrowLink
+			iconSide="right"
+			pointsTo="down"
+			onClick={() => console.log('clicked')}
+		/>
+	</Flex>
+</Playground>
+
+### Button Arrows based on the left
+
+<Playground>
+	<Flex>
+		<ArrowButton
+			iconSide="left"
+			title="Submit"
+			pointsTo="left"
+			onClick={() => console.log('clicked')}
+			cfg={{ mr: 3 }}
+		/>
+		<ArrowButton
+			iconSide="left"
+			title="Submit"
+			pointsTo="up"
+			onClick={() => console.log('clicked')}
+			cfg={{ mr: 3 }}
+		/>
+		<ArrowButton
+			iconSide="left"
+			title="Submit"
+			pointsTo="right"
+			onClick={() => console.log('clicked')}
+			cfg={{ mr: 3 }}
+		/>
+		<ArrowButton
+			iconSide="left"
+			title="Submit"
+			pointsTo="down"
+			onClick={() => console.log('clicked')}
+		/>
+	</Flex>
+</Playground>
+
+### Button Arrows based on the right
+
+<Playground>
+	<Flex>
+		<ArrowButton
+			iconSide="right"
+			title="Submit"
+			pointsTo="right"
+			onClick={() => console.log('clicked')}
+			cfg={{ mr: 3 }}
+		/>
+		<ArrowButton
+			iconSide="right"
+			title="Submit"
+			pointsTo="up"
+			onClick={() => console.log('clicked')}
+			cfg={{ mr: 3 }}
+		/>
+		<ArrowButton
+			iconSide="right"
+			title="Submit"
+			pointsTo="left"
+			onClick={() => console.log('clicked')}
+			cfg={{ mr: 3 }}
+		/>
+		<ArrowButton
+			iconSide="right"
+			title="Submit"
+			pointsTo="down"
+			onClick={() => console.log('clicked')}
+		/>
+	</Flex>
+</Playground>

@@ -2,8 +2,9 @@ import React from 'react';
 import { Flex, P } from '@tpr/core';
 import { Form, renderFields, validate } from '@tpr/forms';
 import { useTrusteeContext } from '../../context';
-import { Footer, FooterButton } from '../../../components/card';
+import { Footer } from '../../../components/card';
 import { Loading } from '../../../components/content';
+import { ArrowButton } from '../../../../buttons/buttons';
 import fields from './fields';
 
 const ManualComplete = () => {
@@ -31,7 +32,10 @@ const ManualComplete = () => {
 					<form onSubmit={handleSubmit}>
 						{renderFields(fields)}
 						<Footer>
-							<FooterButton
+							<ArrowButton
+								intent="special"
+								pointsTo="up"
+								iconSide="right"
 								type="submit"
 								title="Save and close"
 								disabled={loading}

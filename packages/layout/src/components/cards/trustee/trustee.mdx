@@ -63,7 +63,6 @@ import { Trustee } from '@tpr/layout';
 				onCorrect={(value) => setComplete(value)}
 				addressAPI={{
 					get: (endpont) => experianApiGet(endpont),
-					extract: 'results',
 					limit: 100,
 				}}
 				complete={complete}

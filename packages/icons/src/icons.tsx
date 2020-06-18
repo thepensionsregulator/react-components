@@ -1,9 +1,9 @@
 import React from 'react';
-import { useClassNames, SpaceProps } from '@tpr/core';
+import { useClassNames, SpaceProps, ColorProps } from '@tpr/core';
 
 type SVGProps = Partial<{
 	/** space props */
-	cfg: SpaceProps;
+	cfg: SpaceProps | ColorProps;
 	/** svg fill colour */
 	fill: string;
 	/** svg stroke colour */
@@ -20,7 +20,7 @@ type SVGProps = Partial<{
 
 export const SVG: React.FC<SVGProps> = ({
 	cfg,
-	fill = '#000',
+	fill = '',
 	stroke = '',
 	width = '24',
 	className,
