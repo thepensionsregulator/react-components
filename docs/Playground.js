@@ -17,5 +17,7 @@ export const experianApiGet = (endpoint) => {
 		headers: {
 			'Auth-Token': process.env.GATSBY_LOOKUP_API_URL,
 		},
-	}).then((resp) => resp.json());
+	})
+		.then((resp) => resp.json())
+		.then((data) => ({ data }));
 };
