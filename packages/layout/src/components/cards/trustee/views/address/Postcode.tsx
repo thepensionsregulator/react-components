@@ -2,7 +2,6 @@ import React, { useEffect, useCallback, ChangeEvent } from 'react';
 import { Flex, Button, P, Link } from '@tpr/core';
 import { Input } from '@tpr/forms';
 import { extractToObject } from './helpers';
-import { getObjectValueByString } from '../../../../../utils';
 import { useTrusteeContext } from '../../context';
 import styles from './Postcode.module.scss';
 
