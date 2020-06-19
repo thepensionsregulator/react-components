@@ -64,7 +64,6 @@ type TrusteeAddress = Partial<{
 }>;
 
 export type TrusteeProps = {
-	id: string;
 	schemeRoleId: string;
 	//
 	title: string;
@@ -97,7 +96,6 @@ const trusteeMachine = Machine<TrusteeContext, TrusteeStates, TrusteeEvents>({
 		loading: false,
 		complete: false,
 		trustee: {
-			id: '',
 			schemeRoleId: '',
 			//
 			title: '',
