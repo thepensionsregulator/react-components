@@ -39,7 +39,7 @@ export const SVG: React.FC<SVGProps> = ({
 			xmlns="http://www.w3.org/2000/svg"
 			className={classNames}
 			xmlnsXlink="http://www.w3.org/1999/xlink"
-			data-testid={`icon-${testId}`}
+			data-testid={testId}
 		>
 			{children}
 		</svg>

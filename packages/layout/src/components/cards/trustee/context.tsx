@@ -23,7 +23,6 @@ export const TrusteeContext = createContext<TrusteeContextProps>({
 
 type RenderProps = (_: TrusteeContextProps) => ReactElement;
 export interface TrusteeInput {
-	id: string;
 	schemeRoleId: string;
 	//
 	title: string;
