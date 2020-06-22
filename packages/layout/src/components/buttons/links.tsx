@@ -2,15 +2,12 @@ import React, { ChangeEvent } from 'react';
 import { Link, LinkProps, Flex } from '@tpr/core';
 import { ArrowIcon } from './icons';
 
-type ArrowLinkProps = {
+export interface ArrowLinkProps extends LinkProps {
 	onClick: (evt: ChangeEvent<HTMLInputElement>) => void;
 	title?: string;
 	pointsTo?: 'left' | 'up' | 'right' | 'down';
 	iconSide?: 'left' | 'right';
-	underline?: boolean;
-	testId?: string;
-	cfg?: LinkProps['cfg'];
-};
+}
 export const ArrowLink: React.FC<ArrowLinkProps> = ({
 	onClick,
 	testId,
@@ -18,14 +15,31 @@ export const ArrowLink: React.FC<ArrowLinkProps> = ({
 	title = 'Back',
 	pointsTo = 'left',
 	iconSide = 'left',
+	disabled,
 	cfg,
 }) => {
 	return (
-		<Link cfg={cfg} onClick={onClick} underline={underline} testId={testId}>
+		<Link
+			cfg={cfg}
+			onClick={onClick}
+			underline={underline}
+			testId={testId}
+			disabled={disabled}
+		>
 			<Flex cfg={{ alignItems: 'center' }}>
-				{iconSide === 'left' && <ArrowIcon pointsTo={pointsTo} />}
+				{iconSide === 'left' && (
+					<ArrowIcon
+						fill={disabled ? 'neutral.6' : 'primary.3'}
+						pointsTo={pointsTo}
+					/>
+				)}
 				<>{title}</>
-				{iconSide === 'right' && <ArrowIcon pointsTo={pointsTo} />}
+				{iconSide === 'right' && (
+					<ArrowIcon
+						fill={disabled ? 'neutral.6' : 'primary.3'}
+						pointsTo={pointsTo}
+					/>
+				)}
 			</Flex>
 		</Link>
 	);

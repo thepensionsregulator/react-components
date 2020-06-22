@@ -140,7 +140,7 @@
 .link:disabled {
 	color: $colors-neutral-6;
 	text-decoration: none;
-	cursor: default;
+	cursor: not-allowed;
 }
 
 .link-underline {
