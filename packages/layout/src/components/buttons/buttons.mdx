@@ -70,6 +70,13 @@ import { ArrowLink, ArrowButton } from '@tpr/layout';
 	<ArrowLink
 		iconSide="right"
 		pointsTo="down"
+		cfg={{ mr: 3 }}
+		onClick={() => console.log('clicked')}
+	/>
+	<ArrowLink
+		iconSide="right"
+		pointsTo="down"
+		disabled
 		onClick={() => console.log('clicked')}
 	/>
 </Playground>
@@ -135,5 +142,22 @@ import { ArrowLink, ArrowButton } from '@tpr/layout';
 		title="Submit"
 		pointsTo="down"
 		onClick={() => console.log('clicked')}
+		cfg={{ mr: 3 }}
+	/>
+	<ArrowButton
+		iconSide="right"
+		title="Submit"
+		pointsTo="right"
+		onClick={() => console.log('clicked')}
+		cfg={{ mr: 3 }}
+		disabled
+	/>
+	<ArrowButton
+		iconSide="right"
+		title="Submit"
+		pointsTo="right"
+		onClick={() => console.log('clicked')}
+		disabled
+		disabledText="Loading..."
 	/>
 </Playground>
