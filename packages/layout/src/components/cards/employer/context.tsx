@@ -8,8 +8,8 @@ export const EmployerContext = createContext<EmployerContextProps>({
 	current: {},
 	send: (_, __) => ({}),
 	onCorrect: () => {},
-	onRemove: () => new Promise((res) => res()),
-	onSave: () => new Promise((res) => res()),
+	onRemove: Promise.resolve,
+	onSave: Promise.resolve,
 });
 
 type RenderProps = (_: EmployerContextProps) => ReactElement;

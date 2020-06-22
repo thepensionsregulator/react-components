@@ -2,12 +2,12 @@ import React from 'react';
 import { UnderlinedButton } from '../components/button';
 import { Toolbar } from '../components/toolbar';
 import { Flex, P } from '@tpr/core';
-import styles from '../cards.module.scss';
 import { EmployerProvider, useEmployerContext, EmployerProps } from './context';
 import { Preview } from './views/preview/preview';
 import { DateForm } from './views/remove/date/date';
 import { EmployerType } from './views/type/type';
 import { Confirm } from './views/remove/confirm/confirm';
+import styles from '../cards.module.scss';
 
 const CardContentSwitch: React.FC = () => {
 	const { current } = useEmployerContext();
@@ -25,30 +25,9 @@ const CardContentSwitch: React.FC = () => {
 	}
 };
 
-const EmployerButton: React.FC = () => {
-	const { current, send } = useEmployerContext();
-	const condition =
-		current.matches('employerType') ||
-		current.matches({ remove: 'date' }) ||
-		current.matches({ remove: 'confirm' });
-
-	return (
-		<UnderlinedButton
-			isOpen={condition}
-			onClick={() => {
-				if (condition) {
-					send('CANCEL');
-				} else {
-					send('CHANGE_TYPE');
-				}
-			}}
-		>
-			Trustee
-		</UnderlinedButton>
-	);
-};
-
-const RemoveButton: React.FC = () => {
+const ToolbarButton: React.FC<{ title: 'Remove' | 'Trustee' }> = ({
+	title,
+}) => {
 	const { current, send } = useEmployerContext();
 	return (
 		<UnderlinedButton
@@ -59,16 +38,17 @@ const RemoveButton: React.FC = () => {
 			}
 			onClick={() => {
 				if (
+					current.matches('employerType') ||
 					current.matches({ remove: 'date' }) ||
 					current.matches({ remove: 'confirm' })
 				) {
 					send('CANCEL');
 				} else {
-					send('REMOVE');
+					send(title === 'Remove' ? 'REMOVE' : 'CHANGE_TYPE');
 				}
 			}}
 		>
-			Remove
+			{title}
 		</UnderlinedButton>
 	);
 };
@@ -81,8 +61,8 @@ export const Employer: React.FC<EmployerProps> = ({ testId, cfg, ...rest }) => {
 					<Toolbar
 						complete={context.complete}
 						subtitle={() => <P>Principal and participating employer</P>}
-						buttonLeft={() => <EmployerButton />}
-						buttonRight={() => <RemoveButton />}
+						buttonLeft={() => <ToolbarButton title="Trustee" />}
+						buttonRight={() => <ToolbarButton title="Remove" />}
 					/>
 					<CardContentSwitch />
 				</Flex>
