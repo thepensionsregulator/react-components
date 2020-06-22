@@ -1,44 +1,28 @@
-# `@tpr/forms`
+# @tpr/forms [![npm version](https://flat.badgen.net/npm/v/@tpr/forms)](https://www.npmjs.com/package/@tpr/forms)
 
-Forms will adapt react-final-forms library and will expose helper functions to simplify form components delivery.
+Form components for TPR apps.
 
-## Form Functions
+## Installation
 
-### ✅ validate()
+```sh
+npm install @tpr/forms
 
-```ts
-validate(formFields: FieldProps[]) => (formValues) => errors object
+# Peer Dependencies - Also Required
+npm install react react-dom @tpr/theming
 ```
 
-### ✅ renderFields()
+## Helpers
 
-```ts
-renderFields(fields: FieldProps[]): ReactElement
-```
+- `validate: (fields: FieldProps[]) => (formValues) => errors object`: validate function helper for `react-final-form` Form component.
+- `renderFields: (fields: FieldProps[]) => ReactElement[]`: renders a vertical list of fields from the fields array. Has to be used as a child of Form component.
 
-## Form Components
+## Components
 
-### ✅ Text
-
-- should have a label
-- label should have a state if it is an optional input
-- should take custom validation function
-- should have a 100% or custom width option
-
-### ✅ Radio Buttons Group
-
-- if 2 options than should display as row list
-- if 3 or more options should display in column list
-- config to be able to select a number of options
-
-### ✅ Checkbox
-
-### ✅ Select + Search
-
-- should have a dropdown with ability to select a single option
-- shoult take onSelect handler
-
-### ✅ Textarea
-
-- should have max length prop
-- should show chars left when typing
+- Checkbox
+- Date
+- Hidden input
+- Input
+- Number
+- Radio
+- Select
+- Text
