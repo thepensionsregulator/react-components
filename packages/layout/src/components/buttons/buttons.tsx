@@ -1,11 +1,11 @@
 import React, { ChangeEvent } from 'react';
-import { Flex, Button, ButtonProps, ColorProps } from '@tpr/core';
+import { Flex, Button, ButtonProps, ColorProps, P } from '@tpr/core';
 import { ArrowIcon } from './icons';
 import styles from './buttons.module.scss';
 
 export interface ArrowButtonProps extends ButtonProps {
 	title: string;
-	loadingMessage?: string;
+	disabledText?: string;
 	type?: 'button' | 'submit';
 	onClick?: (evt: ChangeEvent<HTMLInputElement>) => void;
 	pointsTo?: 'left' | 'up' | 'right' | 'down';
@@ -18,7 +18,7 @@ export const ArrowButton: React.FC<ArrowButtonProps> = ({
 	type = 'button',
 	onClick,
 	disabled,
-	loadingMessage = 'Saving...',
+	disabledText,
 	title,
 	cfg,
 	pointsTo = 'left',
@@ -37,8 +37,8 @@ export const ArrowButton: React.FC<ArrowButtonProps> = ({
 			testId={testId}
 			className={styles.removepadding}
 		>
-			{disabled ? (
-				loadingMessage
+			{disabled && disabledText ? (
+				<P cfg={{ px: 4 }}>{disabledText}</P>
 			) : (
 				<Flex
 					cfg={{
