@@ -25,7 +25,13 @@ export const RadioButton: React.FC<RadioButtonProps> = ({
 		<StyledInputLabel
 			element="div"
 			cfg={Object.assign(
-				{ mt: 1, py: 1, alignItems: 'flex-start', flexDirection: 'column' },
+				{
+					mt: 1,
+					mb: 3,
+					py: 1,
+					alignItems: 'flex-start',
+					flexDirection: 'column',
+				},
 				cfg,
 			)}
 		>
