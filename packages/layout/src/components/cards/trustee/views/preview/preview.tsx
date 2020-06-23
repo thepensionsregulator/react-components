@@ -23,7 +23,7 @@ export const Preview: React.FC = () => {
 						Correspondence address
 					</UnderlinedButton>
 					<Flex cfg={{ mt: 1, flexDirection: 'column' }}>
-						<H4>{trustee.address.addressLine1}</H4>
+						<H4 cfg={{ lineHeight: 3 }}>{trustee.address.addressLine1}</H4>
 						<P>{trustee.address.addressLine2}</P>
 						<P>{trustee.address.addressLine3}</P>
 						<P>{trustee.address.postTown}</P>
@@ -37,9 +37,9 @@ export const Preview: React.FC = () => {
 						Contact details
 					</UnderlinedButton>
 					<Flex cfg={{ mt: 1, flexDirection: 'column' }}>
-						<H4>Phone</H4>
+						<H4 cfg={{ lineHeight: 3 }}>Phone</H4>
 						<P>{trustee.telephoneNumber}</P>
-						<H4>Email</H4>
+						<H4 cfg={{ lineHeight: 3 }}>Email</H4>
 						<P>{trustee.emailAddress}</P>
 					</Flex>
 				</Flex>

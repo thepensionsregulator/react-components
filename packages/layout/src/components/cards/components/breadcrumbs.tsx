@@ -1,7 +1,6 @@
 import React, { Fragment } from 'react';
 import { Flex, Link } from '@tpr/core';
 import { ArrowRight } from '@tpr/icons';
-import { useTrusteeContext } from '../trustee/context';
 
 export type BreadcrumbLink = {
 	to?: 'BACK';
@@ -10,9 +9,8 @@ export type BreadcrumbLink = {
 	disabled?: boolean;
 };
 
-type BreadcrumbsProps = { links: BreadcrumbLink[] };
-export const Breadcrumbs: React.FC<BreadcrumbsProps> = ({ links }) => {
-	const { send } = useTrusteeContext();
+type BreadcrumbsProps = { links: BreadcrumbLink[]; send: Function };
+export const Breadcrumbs: React.FC<BreadcrumbsProps> = ({ links, send }) => {
 	const totalLinks = links.length - 1;
 	if (links.length < 1) return null;
 	return (

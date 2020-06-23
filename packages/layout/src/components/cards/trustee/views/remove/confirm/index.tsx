@@ -46,7 +46,7 @@ const RemoveConfirm: React.FC = () => {
 	return (
 		<Content
 			type="trustee"
-			breadcrumbs={() => <Breadcrumbs links={breadcrumbLinks} />}
+			breadcrumbs={() => <Breadcrumbs links={breadcrumbLinks} send={send} />}
 		>
 			<H4 cfg={{ mt: 3, color: 'neutral.5' }}>Edit trustee</H4>
 			<H3 cfg={{ fontWeight: 2 }}>

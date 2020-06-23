@@ -78,7 +78,7 @@ const Type: React.FC = () => {
 			type="trustee"
 			title="Type of trustee"
 			loading={loading}
-			breadcrumbs={() => <Breadcrumbs links={breadcrumbLinks} />}
+			breadcrumbs={() => <Breadcrumbs links={breadcrumbLinks} send={send} />}
 		>
 			<Form
 				onSubmit={onSubmit}
