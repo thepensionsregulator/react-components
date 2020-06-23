@@ -22,7 +22,12 @@ export const Checkbox: React.FC<Partial<CheckboxIconProps>> = ({
 		<StyledInputLabel
 			element="div"
 			cfg={Object.assign(
-				{ mt: 1, py: 1, alignItems: 'flex-start', flexDirection: 'column' },
+				{
+					mt: 1,
+					mb: 3,
+					alignItems: 'flex-start',
+					flexDirection: 'column',
+				},
 				cfg,
 			)}
 		>
@@ -38,7 +43,7 @@ export const Checkbox: React.FC<Partial<CheckboxIconProps>> = ({
 				) : (
 					<CheckboxBlank className={styles.checkbox} />
 				)}
-				<P cfg={{ ml: 4, fontWeight: 3 }}>{label}</P>
+				<P cfg={{ ml: 3, fontWeight: 3 }}>{label}</P>
 			</label>
 			{hint && <P className={styles.hint}>{hint}</P>}
 		</StyledInputLabel>
