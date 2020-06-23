@@ -77,6 +77,7 @@ export type TypographyProps = Partial<{
 	fontSize: ValuesFullRange;
 	textAlign: 'left' | 'center' | 'right';
 	fontWeight: 1 | 2 | 3;
+	lineHeight: 1 | 2 | 3;
 }>;
 
 export type SpaceProps = Partial<{

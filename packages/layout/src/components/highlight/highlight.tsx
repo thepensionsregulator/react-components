@@ -31,7 +31,12 @@ export const Highlight: React.FC<HighlightProps> = ({
 						{name}
 					</P>
 					<Flex
-						cfg={{ flex: '0 0 auto', alignItems: 'center', pl: 3 }}
+						cfg={{
+							flex: '0 0 auto',
+							alignItems: 'center',
+							justifyContent: 'flex-end',
+							pl: 3,
+						}}
 						className={styles.psrNumber}
 					>
 						<P cfg={{ fontWeight: 3 }}>PSR: {psr}</P>

@@ -101,11 +101,11 @@ describe('Trustee Preview', () => {
 			/>,
 		);
 
-		expect(getByText(/The Pensions Regulator/gi)).toBeDefined();
-		expect(getByText(/Napier House/gi)).toBeDefined();
-		expect(getByText(/Trafalgar Pl/gi)).toBeDefined();
-		expect(getByText(/Brighton/gi)).toBeDefined();
-		expect(getByText(/BN1 4DW/gi)).toBeDefined();
+		expect(getByText(trustee.addressLine1)).toBeDefined();
+		expect(getByText(trustee.addressLine2)).toBeDefined();
+		expect(getByText(trustee.addressLine3)).toBeDefined();
+		expect(getByText(trustee.postTown)).toBeDefined();
+		expect(getByText(trustee.postcode)).toBeDefined();
 	});
 
 	test('contact details shows up correctly', () => {
@@ -128,8 +128,8 @@ describe('Trustee Preview', () => {
 		);
 
 		expect(getByText('Phone')).toBeDefined();
-		expect(getByText('01273 000 111')).toBeDefined();
+		expect(getByText(trustee.telephoneNumber)).toBeDefined();
 		expect(getByText('Email')).toBeDefined();
-		expect(getByText('fred.sandoors@trp.gov.uk')).toBeDefined();
+		expect(getByText(trustee.emailAddress)).toBeDefined();
 	});
 });

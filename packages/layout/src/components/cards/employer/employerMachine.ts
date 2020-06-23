@@ -20,11 +20,13 @@ type EmployerEvents =
 	| { type: 'SAVE'; values?: any }
 	| { type: 'CANCEL' }
 	| { type: 'NEXT'; values?: any }
+	| { type: 'BACK' }
 	| { type: 'DELETE' }
 	| { type: 'COMPLETE'; value: boolean };
 
 export interface EmployerContext {
 	complete: boolean;
+	remove: { confirm: boolean; date: string } | null;
 	employer: any;
 }
 
@@ -37,6 +39,7 @@ const employerMachine = Machine<
 	initial: 'preview',
 	context: {
 		complete: false,
+		remove: null,
 		employer: {},
 	},
 	states: {
@@ -66,12 +69,20 @@ const employerMachine = Machine<
 				date: {
 					on: {
 						CANCEL: '#preview',
-						NEXT: 'confirm',
+						NEXT: {
+							target: 'confirm',
+							actions: assign((_, event) => {
+								return {
+									remove: event.values,
+								};
+							}),
+						},
 					},
 				},
 				confirm: {
 					on: {
 						CANCEL: '#preview',
+						BACK: '#remove',
 						DELETE: 'deleted',
 					},
 				},

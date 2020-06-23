@@ -19,7 +19,7 @@ export const Preview: React.FC<any> = () => {
 				>
 					<UnderlinedButton>Employer</UnderlinedButton>
 					<Flex cfg={{ my: 2, flexDirection: 'column' }}>
-						<H4>Starfleet Academy</H4>
+						<H4 cfg={{ lineHeight: 3 }}>Starfleet Academy</H4>
 						<P>Picard House</P>
 						<P>Enterprice place</P>
 						<P>Gamma Quadrant</P>

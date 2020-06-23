@@ -650,7 +650,7 @@
 	text-align: center !important;
 }
 
-/* .lineHeight-1 {} */
+/* font weights */
 
 .fontWeight-1 {
 	font-weight: $font-weight-1 !important;
@@ -662,6 +662,20 @@
 
 .fontWeight-3 {
 	font-weight: $font-weight-3 !important;
+}
+
+/* line heights */
+
+.lineHeight-1 {
+	line-height: $line-height-1 !important;
+}
+
+.lineHeight-2 {
+	line-height: $line-height-2 !important;
+}
+
+.lineHeight-3 {
+	line-height: $line-height-3 !important;
 }
 
 /* BACKGROUND */

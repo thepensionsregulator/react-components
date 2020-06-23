@@ -43,7 +43,7 @@ export const Confirm = () => {
 	return (
 		<Content
 			type="trustee"
-			breadcrumbs={() => <Breadcrumbs links={breadcrumbLinks} />}
+			breadcrumbs={() => <Breadcrumbs links={breadcrumbLinks} send={send} />}
 		>
 			<H3 cfg={{ mt: 3, fontWeight: 2 }}>
 				Are you sure you want to remove this employer?
