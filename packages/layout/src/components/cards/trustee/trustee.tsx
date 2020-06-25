@@ -119,7 +119,7 @@ export const Trustee: React.FC<Omit<TrusteeCardProps, 'children'>> = ({
 						buttonLeft={() => <TrusteeButton />}
 						buttonRight={() => <RemoveButton current={current} send={send} />}
 						subtitle={() => (
-							<H4>
+							<H4 cfg={{ lineHeight: 3 }}>
 								{[
 									current.context.trustee.title,
 									current.context.trustee.forename,

@@ -8,11 +8,17 @@ import { Props } from 'docz';
 import { Playground } from '@playground';
 import { Flex } from './globals';
 
-# Props
+# Flex
 
-<Props of={Flex} />
+Flexbox building block with access to the theme variables
 
-# Globals
+## When To Use
+
+When you need to build a certain shape with padding, margin or background colour, set a direction of layout or separate 2 elements.
+
+## Examples
+
+### Basic usage
 
 <Playground>
 	<Flex
@@ -28,3 +34,11 @@ import { Flex } from './globals';
 		<Flex>Right</Flex>
 	</Flex>
 </Playground>
+
+## API
+
+```
+Accepted config props: FlexProps, SpaceProps, BackgroundProps, ColorProps, LayoutProps, CursorProps, TypographyProps
+```
+
+<Props of={Flex} />

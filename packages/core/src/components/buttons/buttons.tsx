@@ -66,7 +66,7 @@ export const Button: React.FC<ButtonProps> = ({
 };
 
 export type LinkProps = {
-	cfg?: SpaceProps | ColorProps | TypographyProps | LayoutProps;
+	cfg?: SpaceProps & ColorProps & TypographyProps & LayoutProps;
 	className?: string;
 	underline?: boolean;
 	testId?: string;

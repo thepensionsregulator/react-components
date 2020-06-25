@@ -16,7 +16,7 @@ export const ArrowButton: React.FC<ArrowButtonProps> = ({
 	intent,
 	appearance,
 	type = 'button',
-	onClick,
+	onClick = undefined,
 	disabled,
 	disabledText,
 	title,
