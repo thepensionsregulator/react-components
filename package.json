@@ -20,6 +20,9 @@
 		"predeploy": "yarn build",
 		"deploy": "lerna publish --canary"
 	},
+	"workspaces": [
+		"packages/*"
+ 	],
 	"dependencies": {
 		"@tpr/core": "file:./packages/core",
 		"@tpr/forms": "file:./packages/forms",

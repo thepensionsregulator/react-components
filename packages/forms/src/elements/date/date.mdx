@@ -56,7 +56,7 @@ import { FFInputDate } from '@tpr/forms';
 		return (
 			<Form
 				onSubmit={(val) => console.log(val)}
-				initialValues={{ 'passport-issued': new Date() }}
+				initialValues={{ 'passport-issued': null }}
 				validate={validate(fields)}
 			>
 				{({ handleSubmit }) => (
