@@ -8,14 +8,27 @@ import { Playground } from '@playground';
 import { Props } from 'docz';
 import { Button } from './buttons';
 
-# Buttons
+# Button
 
-Buttons make common actions more obvious and help users more easily perform them. Buttons use labels and sometimes icons to communicate
-the action that will occur when the user touches them.
+To trigger an operation.
 
-## Properties
+## When To Use
 
-<Props of={Button} />
+A button means an operation (or a series of operations). Clicking a button will trigger corresponding business logic.
+
+We provide 2 types of button.
+
+- Primary button
+- Outlined button
+
+And 6 other properties additionally.
+
+- none
+- success
+- warning
+- danger
+- special
+- disabled
 
 ## Usage
 
@@ -23,13 +36,15 @@ the action that will occur when the user touches them.
 import { Button } from '@tpr/core';
 ```
 
-## Basic usage
+## Examples
+
+### Basic usage
 
 <Playground>
 	<Button>Click me</Button>
 </Playground>
 
-## Usage with props
+### Usage with props
 
 <Playground>
 	<Button
@@ -46,58 +61,70 @@ import { Button } from '@tpr/core';
 	</Button>
 </Playground>
 
-## All variations
-
 ### With different sizes
 
-<Button size="large" cfg={{ mr: 3 }}>
-	Click me
-</Button>
-<Button size="medium" cfg={{ mr: 3 }}>
-	Click me
-</Button>
-<Button size="small" cfg={{ mr: 3 }}>
-	Click me
-</Button>
+<Playground>
+	<Button size="large" cfg={{ mr: 3 }}>
+		Click me
+	</Button>
+	<Button size="medium" cfg={{ mr: 3 }}>
+		Click me
+	</Button>
+	<Button size="small" cfg={{ mr: 3 }}>
+		Click me
+	</Button>
+</Playground>
 
 ### Primary appearance with intent
 
-<Button cfg={{ mr: 3 }} intent="none">
-	Click me
-</Button>
-<Button cfg={{ mr: 3 }} intent="success">
-	Click me
-</Button>
-<Button cfg={{ mr: 3 }} intent="warning">
-	Click me
-</Button>
-<Button cfg={{ mr: 3 }} intent="danger">
-	Click me
-</Button>
-<Button cfg={{ mr: 3 }} intent="special">
-	Click me
-</Button>
-<Button cfg={{ mr: 3 }} disabled>
-	Click me
-</Button>
+<Playground>
+	<Button cfg={{ mr: 3 }} intent="none">
+		Click me
+	</Button>
+	<Button cfg={{ mr: 3 }} intent="success">
+		Click me
+	</Button>
+	<Button cfg={{ mr: 3 }} intent="warning">
+		Click me
+	</Button>
+	<Button cfg={{ mr: 3 }} intent="danger">
+		Click me
+	</Button>
+	<Button cfg={{ mr: 3 }} intent="special">
+		Click me
+	</Button>
+	<Button cfg={{ mr: 3 }} disabled>
+		Click me
+	</Button>
+</Playground>
 
 ### Outlined appearance with intent
 
-<Button cfg={{ mr: 3 }} appearance="outlined" intent="none">
-	Click me
-</Button>
-<Button cfg={{ mr: 3 }} appearance="outlined" intent="success">
-	Click me
-</Button>
-<Button cfg={{ mr: 3 }} appearance="outlined" intent="warning">
-	Click me
-</Button>
-<Button cfg={{ mr: 3 }} appearance="outlined" intent="danger">
-	Click me
-</Button>
-<Button cfg={{ mr: 3 }} appearance="outlined" intent="special">
-	Click me
-</Button>
-<Button cfg={{ mr: 3 }} appearance="outlined" disabled>
-	Click me
-</Button>
+<Playground>
+	<Button cfg={{ mr: 3 }} appearance="outlined" intent="none">
+		Click me
+	</Button>
+	<Button cfg={{ mr: 3 }} appearance="outlined" intent="success">
+		Click me
+	</Button>
+	<Button cfg={{ mr: 3 }} appearance="outlined" intent="warning">
+		Click me
+	</Button>
+	<Button cfg={{ mr: 3 }} appearance="outlined" intent="danger">
+		Click me
+	</Button>
+	<Button cfg={{ mr: 3 }} appearance="outlined" intent="special">
+		Click me
+	</Button>
+	<Button cfg={{ mr: 3 }} appearance="outlined" disabled>
+		Click me
+	</Button>
+</Playground>
+
+## API
+
+```
+Accepted config props: SpaceProps
+```
+
+<Props of={Button} />
