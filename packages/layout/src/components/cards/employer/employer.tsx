@@ -25,7 +25,7 @@ const CardContentSwitch: React.FC = () => {
 	}
 };
 
-const ToolbarButton: React.FC<{ title: 'Remove' | 'Trustee' }> = ({
+const ToolbarButton: React.FC<{ title: 'Remove' | 'Employer' }> = ({
 	title,
 }) => {
 	const { current, send } = useEmployerContext();
@@ -61,7 +61,7 @@ export const Employer: React.FC<EmployerProps> = ({ testId, cfg, ...rest }) => {
 					<Toolbar
 						complete={context.complete}
 						subtitle={() => <P>Principal and participating employer</P>}
-						buttonLeft={() => <ToolbarButton title="Trustee" />}
+						buttonLeft={() => <ToolbarButton title="Employer" />}
 						buttonRight={() => <ToolbarButton title="Remove" />}
 					/>
 					<CardContentSwitch />
