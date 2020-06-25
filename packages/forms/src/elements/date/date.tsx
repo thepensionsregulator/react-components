@@ -10,9 +10,8 @@ import styles from './date.module.scss';
 const handleChange = (onChange: Function, value: number) => ({
 	target,
 }: any) => {
-	if (!target.value) {
-		return onChange('');
-	}
+	if (typeof target.value !== 'number') return;
+	if (!target.value) return onChange('');
 	if (parseInt(target.value, 10) < value) {
 		return onChange(target.value.trim().replace(/[^\d]/));
 	}
