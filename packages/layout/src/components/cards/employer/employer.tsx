@@ -61,7 +61,7 @@ export const Employer: React.FC<EmployerProps> = ({ testId, cfg, ...rest }) => {
 					<Toolbar
 						complete={context.complete}
 						subtitle={() => <P>Principal and participating employer</P>}
-						buttonLeft={() => <ToolbarButton title="Trustee" />}
+						buttonLeft={() => <ToolbarButton title="Employer" />}
 						buttonRight={() => <ToolbarButton title="Remove" />}
 					/>
 					<CardContentSwitch />
