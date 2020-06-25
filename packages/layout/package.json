@@ -33,14 +33,14 @@
 		"report-coverage": "codecov"
 	},
 	"peerDependencies": {
-		"@tpr/core": "file:../core",
-		"@tpr/forms": "file:../forms",
-		"@tpr/icons": "file:../icons",
-		"@tpr/theming": "file:../theming",
 		"react": "^16.12.0",
 		"react-dom": "^16.12.0"
 	},
 	"dependencies": {
+		"@tpr/core": "file:../core",
+		"@tpr/forms": "file:../forms",
+		"@tpr/icons": "file:../icons",
+		"@tpr/theming": "file:../theming",
 		"@xstate/react": "^0.8.1",
 		"final-form": "^4.20.0",
 		"qs": "^6.9.4",
@@ -49,10 +49,6 @@
 		"xstate": "^4.10.0"
 	},
 	"devDependencies": {
-		"@tpr/core": "file:../core",
-		"@tpr/forms": "file:../forms",
-		"@tpr/icons": "file:../icons",
-		"@tpr/theming": "file:../theming",
 		"cross-env": "^7.0.2"
 	},
 	"publishConfig": {
