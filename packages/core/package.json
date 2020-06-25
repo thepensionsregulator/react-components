@@ -32,10 +32,10 @@
 	},
 	"peerDependencies": {
 		"react": "^16.12.0",
-		"react-dom": "^16.12.0"
+		"react-dom": "^16.12.0",
+		"@tpr/theming": "file:../theming"
 	},
 	"dependencies": {
-		"@tpr/theming": "file:../theming",
 		"@xstate/react": "^0.8.1",
 		"final-form": "^4.20.0",
 		"qs": "^6.9.4",
@@ -48,6 +48,7 @@
 	},
 	"gitHead": "57aec9c9de22596d6343bae07eb6b198322a0bee",
 	"devDependencies": {
-		"cross-env": "^7.0.2"
+		"cross-env": "^7.0.2",
+		"@tpr/theming": "file:../theming"
 	}
 }

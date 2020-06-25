@@ -5,6 +5,7 @@ import { P, Flex } from '@tpr/core';
 import { StyledInputLabel, InputElementHeading } from '../elements';
 import { Input } from '../input/input';
 import { FieldProps, FieldExtraProps } from '../../renderFields';
+import { isEqual } from 'lodash';
 import styles from './date.module.scss';
 
 const handleChange = (onChange: Function, value: number) => ({
@@ -171,8 +172,7 @@ export const InputDate: React.FC<InputDateProps> = memo(
 			</StyledInputLabel>
 		);
 	},
-	({ meta: prevMeta }, { meta: nextMeta }) =>
-		prevMeta.initial === nextMeta.initial,
+	({ meta: prevMeta }, { meta: nextMeta }) => isEqual(prevMeta, nextMeta),
 );
 
 export const FFInputDate: React.FC<FieldProps> = ({ type, ...fieldProps }) => {
