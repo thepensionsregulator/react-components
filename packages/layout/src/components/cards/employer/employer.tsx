@@ -25,7 +25,7 @@ const CardContentSwitch: React.FC = () => {
 	}
 };
 
-const ToolbarButton: React.FC<{ title: 'Remove' | 'Trustee' }> = ({
+const ToolbarButton: React.FC<{ title: 'Remove' | 'Employer' }> = ({
 	title,
 }) => {
 	const { current, send } = useEmployerContext();
