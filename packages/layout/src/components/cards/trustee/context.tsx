@@ -17,7 +17,7 @@ export const TrusteeContext = createContext<TrusteeContextProps>({
 	send: (_, __) => ({}),
 	onCorrect: () => {},
 	onRemove: () => new Promise((res) => res()),
-	i18n: {},
+	i18n: i18nDefaults,
 	addressAPI: {
 		get: (endpoint) => Promise.resolve(endpoint),
 		limit: 50,
