@@ -5,11 +5,11 @@ import { Footer } from '../../../components/card';
 import { Content } from '../../../components/content';
 import { ArrowButton } from '../../../../buttons/buttons';
 
-const fields: FieldProps[] = [
+const getFields = ({ fields }: any): FieldProps[] => [
 	{
 		type: 'text',
 		name: 'telephoneNumber',
-		label: 'Telephone number',
+		label: fields.telephone,
 		inputWidth: 2,
 		error: 'Enter a telephone number, like 0163 960 598 or +44 7700 900 359',
 		cfg: { mb: 3 },
@@ -17,15 +17,16 @@ const fields: FieldProps[] = [
 	{
 		type: 'email',
 		name: 'emailAddress',
-		label: 'Email address',
+		label: fields.email,
 		inputWidth: 6,
 		error: 'Cannot be empty',
 	},
 ];
 
 const Contacts: React.FC = () => {
-	const { current, send } = useTrusteeContext();
+	const { current, send, i18n } = useTrusteeContext();
 	const { trustee, loading } = current.context;
+	const fields = getFields(i18n.contacts);
 
 	const onSubmit = (values) => {
 		send('SAVE', { values });
@@ -34,8 +35,8 @@ const Contacts: React.FC = () => {
 	return (
 		<Content
 			type="trustee"
-			title="Contact details for this trustee"
-			subtitle="Provide contact details for the trustee, not a third-party such as an administrator."
+			title={i18n.contacts.title}
+			subtitle={i18n.contacts.subtitle}
 			loading={loading}
 		>
 			<Form

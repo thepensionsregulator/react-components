@@ -1,4 +1,4 @@
-import React, { createContext, useContext, ReactElement } from 'react';
+import React, { createContext, useContext, ReactElement, useMemo } from 'react';
 import { useMachine } from '@xstate/react';
 import trusteeMachine, {
 	TrusteeContext as TC,
@@ -6,6 +6,8 @@ import trusteeMachine, {
 } from './trusteeMachine';
 import { State, EventData } from 'xstate';
 import { SpaceProps } from '@tpr/core';
+import { merge } from 'lodash';
+import { i18n as i18nDefaults, i18nProps } from './i18n';
 
 export const TrusteeContext = createContext<TrusteeContextProps>({
 	complete: false,
@@ -15,6 +17,7 @@ export const TrusteeContext = createContext<TrusteeContextProps>({
 	send: (_, __) => ({}),
 	onCorrect: () => {},
 	onRemove: () => new Promise((res) => res()),
+	i18n: {},
 	addressAPI: {
 		get: (endpoint) => Promise.resolve(endpoint),
 		limit: 50,
@@ -56,6 +59,7 @@ export interface TrusteeContextProps {
 	testId?: string;
 	children?: RenderProps | ReactElement;
 	cfg?: SpaceProps;
+	i18n: Partial<i18nProps>;
 	onRemove: (...args: any[]) => Promise<any>;
 	onCorrect: (...args: any[]) => void;
 	send: (event: any, payload?: EventData) => Partial<State<TC, any, any, any>>;
@@ -66,6 +70,7 @@ export interface TrusteeContextProps {
 export interface TrusteeCardProps {
 	trustee: TrusteeInput;
 	complete?: boolean;
+	i18n: Partial<i18nProps>;
 	onCorrect: (...args: any[]) => void;
 	onRemove: (...args: any[]) => Promise<any>;
 	onDetailsSave: (values: any, trustee: TrusteeProps) => Promise<any>;
@@ -85,8 +90,13 @@ export const TrusteeProvider = ({
 	onDetailsSave,
 	onContactSave,
 	onAddressSave,
+	i18n: i18nRewrites,
 	...rest
 }: TrusteeCardProps) => {
+	const i18n = useMemo(() => merge(i18nDefaults, i18nRewrites), [
+		i18nDefaults,
+		i18nRewrites,
+	]);
 	const {
 		addressLine1,
 		addressLine2,
@@ -150,14 +160,10 @@ export const TrusteeProvider = ({
 		},
 	});
 
-	const ui =
-		typeof children === 'function'
-			? children({ current, send, ...rest })
-			: children;
+	const fwdValues = { current, send, i18n, ...rest };
+	const ui = typeof children === 'function' ? children(fwdValues) : children;
 	return (
-		<TrusteeContext.Provider value={{ current, send, ...rest }}>
-			{ui}
-		</TrusteeContext.Provider>
+		<TrusteeContext.Provider value={fwdValues}>{ui}</TrusteeContext.Provider>
 	);
 };
 

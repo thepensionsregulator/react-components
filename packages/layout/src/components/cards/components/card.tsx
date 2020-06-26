@@ -1,6 +1,7 @@
 import React from 'react';
 import { Flex, H3, P, classNames, Hr } from '@tpr/core';
 import styles from './card.module.scss';
+import { useTrusteeContext } from '../trustee/context';
 
 type StyledCardProps = { complete: boolean };
 export const StyledCard: React.FC<StyledCardProps> = ({
@@ -53,41 +54,6 @@ export const Toolbar: React.FC<ToolbarProps> = ({
 	);
 };
 
-// type FooterButtonProps = {
-// 	type?: 'button' | 'submit';
-// 	title?: string | Function;
-// 	appearance?: 'primary' | 'outlined';
-// 	intent?: 'none' | 'success' | 'warning' | 'danger';
-// 	loadingMessage?: string;
-// 	onClick?: (...args: any[]) => void;
-// 	disabled?: boolean;
-// 	cfg?: ButtonProps['cfg'];
-// };
-// export const FooterButton: React.FC<FooterButtonProps> = ({
-// 	intent,
-// 	appearance,
-// 	type,
-// 	onClick,
-// 	disabled,
-// 	loadingMessage = 'Saving...',
-// 	title,
-// 	cfg,
-// }) => {
-// 	const t = typeof title === 'function' ? title() : title;
-// 	return (
-// 		<Button
-// 			intent={intent}
-// 			appearance={appearance}
-// 			type={type}
-// 			onClick={onClick}
-// 			disabled={disabled}
-// 			cfg={cfg}
-// 		>
-// 			{disabled ? loadingMessage : t}
-// 		</Button>
-// 	);
-// };
-
 export const Footer: React.FC = ({ children }) => {
 	return (
 		<Flex
@@ -107,6 +73,8 @@ export const Footer: React.FC = ({ children }) => {
 };
 
 export const StatusMessage = ({ complete, icon: Icon }) => {
+	const { i18n } = useTrusteeContext();
+
 	return (
 		<Flex cfg={{ alignItems: 'center' }} height="22px">
 			<Icon size={18} fill={complete ? '#207e3b' : '#d4351c'} />
@@ -118,7 +86,9 @@ export const StatusMessage = ({ complete, icon: Icon }) => {
 					color: complete ? 'success.1' : 'danger.2',
 				}}
 			>
-				{complete ? 'No issues' : 'Incomplete'}
+				{complete
+					? i18n.preview.statuses.complete
+					: i18n.preview.statuses.incomplete}
 			</P>
 		</Flex>
 	);

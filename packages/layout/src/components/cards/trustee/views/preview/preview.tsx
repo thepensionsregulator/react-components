@@ -7,7 +7,7 @@ import { capitalize } from '../../../../../utils';
 import styles from './preview.module.scss';
 
 export const Preview: React.FC = () => {
-	const { current, send, onCorrect } = useTrusteeContext();
+	const { current, send, onCorrect, i18n } = useTrusteeContext();
 	const { trustee, complete } = current.context;
 
 	return (
@@ -20,7 +20,7 @@ export const Preview: React.FC = () => {
 					cfg={{ width: 5, flex: '0 0 auto', flexDirection: 'column', pr: 4 }}
 				>
 					<UnderlinedButton onClick={() => send('EDIT_ORG')}>
-						Correspondence address
+						{i18n.preview.buttons.three}
 					</UnderlinedButton>
 					<Flex cfg={{ mt: 1, flexDirection: 'column' }}>
 						<H4 cfg={{ lineHeight: 3 }}>{trustee.address.addressLine1}</H4>
@@ -34,7 +34,7 @@ export const Preview: React.FC = () => {
 					cfg={{ width: 5, flex: '0 0 auto', flexDirection: 'column', pl: 4 }}
 				>
 					<UnderlinedButton onClick={() => send('EDIT_CONTACTS')}>
-						Contact details
+						{i18n.preview.buttons.four}
 					</UnderlinedButton>
 					<Flex cfg={{ mt: 1, flexDirection: 'column' }}>
 						<H4 cfg={{ lineHeight: 3 }}>Phone</H4>
@@ -53,7 +53,7 @@ export const Preview: React.FC = () => {
 						send('COMPLETE', { value: !complete });
 						onCorrect(!complete);
 					}}
-					label="All details are correct."
+					label={i18n.preview.checkboxLabel}
 				/>
 			</Flex>
 		</div>
