@@ -1,11 +1,50 @@
-import { fireEvent } from '@testing-library/react';
 import { formSetup } from '../__mocks__/setup';
 import { renderFields, validate } from '../index';
 import { FieldProps } from '../renderFields';
+import userEvent from '@testing-library/user-event';
 
 // TODO: write more test when there are clear specs for date input validation
 
 describe('Date', () => {
+	test('date fields accepts only numbers', () => {
+		const fields: FieldProps[] = [
+			{
+				name: 'date-1',
+				label: 'passport-expiry',
+				hint: 'For example, 12 11 2007',
+				type: 'date',
+				required: true,
+			},
+		];
+		const handleSubmit = jest.fn();
+		const { container, form } = formSetup({
+			render: renderFields(fields),
+			validate: validate(fields),
+			onSubmit: handleSubmit,
+		});
+
+		const dd = container.querySelector(
+			'input[aria-label="dd-passport-expiry"]',
+		);
+		const mm = container.querySelector(
+			'input[aria-label="mm-passport-expiry"]',
+		);
+		const yyyy = container.querySelector(
+			'input[aria-label="yyyy-passport-expiry"]',
+		);
+
+		const submit = container.querySelector('button[type="submit"]');
+
+		userEvent.type(dd, 'sss');
+		userEvent.type(mm, 'eeee');
+		userEvent.type(yyyy, 'something');
+
+		userEvent.click(submit);
+
+		expect(handleSubmit).toBeCalledTimes(1);
+		expect(form.getState().values).toEqual({});
+	});
+
 	test('date fields are being rendered within the form and submits when data is correct', () => {
 		const fields: FieldProps[] = [
 			{
@@ -36,27 +75,17 @@ describe('Date', () => {
 		expect(dd).toHaveAttribute('aria-label', 'dd-passport-expiry');
 		expect(mm).toHaveAttribute('aria-label', 'mm-passport-expiry');
 		expect(yyyy).toHaveAttribute('aria-label', 'yyyy-passport-expiry');
-		expect(dd).toHaveAttribute('type', 'number');
-		expect(mm).toHaveAttribute('type', 'number');
-		expect(yyyy).toHaveAttribute('type', 'number');
+		expect(dd).toHaveAttribute('type', 'string');
+		expect(mm).toHaveAttribute('type', 'string');
+		expect(yyyy).toHaveAttribute('type', 'string');
 
 		const submit = container.querySelector('button[type="submit"]');
 
-		// NOTE
-		// React throws an error because I change input by manipulating dom instead of
-		// using functions to change input state.
-		// TODO: FIX
-		// act(() => {
-		// 	result.current.onChangeDD(20)
-		// 	result.current.onChangeMM(12)
-		// 	result.current.onChangeYYYY(2019)
-		// })
+		userEvent.type(dd, '20');
+		userEvent.type(mm, '12');
+		userEvent.type(yyyy, '2019');
 
-		fireEvent.change(dd, { target: { value: 20 } });
-		fireEvent.change(mm, { target: { value: 12 } });
-		fireEvent.change(yyyy, { target: { value: 2019 } });
-
-		fireEvent.click(submit);
+		userEvent.click(submit);
 
 		expect(handleSubmit).toBeCalledTimes(1);
 		expect(form.getState().values).toMatchInlineSnapshot(`
@@ -85,7 +114,7 @@ describe('Date', () => {
 		});
 		const submit = container.querySelector('button[type="submit"]');
 
-		fireEvent.click(submit);
+		userEvent.click(submit);
 		const formState = form.getState();
 
 		expect(formState.hasValidationErrors).toBeTruthy();

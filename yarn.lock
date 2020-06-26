@@ -2846,6 +2846,13 @@
     "@babel/runtime" "^7.10.3"
     "@testing-library/dom" "^7.17.1"
 
+"@testing-library/user-event@^12.0.11":
+  version "12.0.11"
+  resolved "https://registry.yarnpkg.com/@testing-library/user-event/-/user-event-12.0.11.tgz#157594e6c6d73a1503003933177843648b8c7da4"
+  integrity sha512-r7QNfktLE2n8IODEl32orup/HNOMueJpoXRDeTMlvWR4nZIHJwx59+8SkLf6nqV4Ot5Xo6qNeaWrvC1KO4eOng==
+  dependencies:
+    "@babel/runtime" "^7.10.2"
+
 "@theme-ui/color-modes@^0.3.1":
   version "0.3.1"
   resolved "https://registry.yarnpkg.com/@theme-ui/color-modes/-/color-modes-0.3.1.tgz#8c2b18fb170e6c998287b7381240a8b9cca8b0d1"
@@ -2915,10 +2922,17 @@
   resolved "https://registry.yarnpkg.com/@tootallnate/once/-/once-1.1.2.tgz#ccb91445360179a04e7fe6aff78c00ffc1eeaf82"
   integrity sha512-RbzJvlNzmRq5c3O09UipeuXno4tA1FE6ikOjxZK0tuxVv3412l64l5t1W5pj4+rJq9vpkm/kwiR07aZXnsKPxw==
 
+<<<<<<< HEAD
 "@tpr/core@file:packages/core":
   version "2.1.5"
   dependencies:
     "@tpr/theming" "file:../../../Library/Caches/Yarn/v6/npm-@tpr-core-2.1.5-6bf7d636-c24c-4918-a316-1317084ab6dd-1593167465460/node_modules/@tpr/theming"
+=======
+"@tpr/core@file:./packages/core", "@tpr/core@file:packages/core":
+  version "2.1.5"
+  dependencies:
+    "@tpr/theming" "file:../../../Library/Caches/Yarn/v6/npm-@tpr-core-2.1.5-602380cb-a657-4a74-944d-789b75b8d5ab-1593180316766/node_modules/@tpr/theming"
+>>>>>>> 8f4b2591c503a524f6def2ead2bb241aac43b9bb
     "@xstate/react" "^0.8.1"
     final-form "^4.20.0"
     qs "^6.9.4"
@@ -2926,12 +2940,21 @@
     tslib "^2.0.0"
     xstate "^4.10.0"
 
+<<<<<<< HEAD
 "@tpr/forms@file:packages/forms":
   version "2.1.6"
   dependencies:
     "@tpr/core" "file:../../../Library/Caches/Yarn/v6/npm-@tpr-forms-2.1.6-20d3e8bb-2bbb-4173-b48f-70a3c6235ba3-1593167465461/node_modules/@tpr/core"
     "@tpr/icons" "file:../../../Library/Caches/Yarn/v6/npm-@tpr-forms-2.1.6-20d3e8bb-2bbb-4173-b48f-70a3c6235ba3-1593167465461/node_modules/@tpr/icons"
     "@tpr/theming" "file:../../../Library/Caches/Yarn/v6/npm-@tpr-forms-2.1.6-20d3e8bb-2bbb-4173-b48f-70a3c6235ba3-1593167465461/node_modules/@tpr/theming"
+=======
+"@tpr/forms@file:./packages/forms", "@tpr/forms@file:packages/forms":
+  version "2.1.6"
+  dependencies:
+    "@tpr/core" "file:../../../Library/Caches/Yarn/v6/npm-@tpr-forms-2.1.6-5e883797-497c-47c7-8c4a-1dd43de85cfd-1593180316774/node_modules/@tpr/core"
+    "@tpr/icons" "file:../../../Library/Caches/Yarn/v6/npm-@tpr-forms-2.1.6-5e883797-497c-47c7-8c4a-1dd43de85cfd-1593180316774/node_modules/@tpr/icons"
+    "@tpr/theming" "file:../../../Library/Caches/Yarn/v6/npm-@tpr-forms-2.1.6-5e883797-497c-47c7-8c4a-1dd43de85cfd-1593180316774/node_modules/@tpr/theming"
+>>>>>>> 8f4b2591c503a524f6def2ead2bb241aac43b9bb
     "@types/lodash" "^4.14.157"
     "@types/match-sorter" "^4.0.0"
     "@types/qs" "^6.9.3"
@@ -2944,10 +2967,23 @@
     react-final-form "^6.5.0"
     tslib "^2.0.0"
 
-"@tpr/icons@file:packages/icons":
+"@tpr/icons@file:./packages/icons", "@tpr/icons@file:packages/icons":
   version "2.1.5"
   dependencies:
-    "@tpr/core" "file:../../../Library/Caches/Yarn/v6/npm-@tpr-icons-2.1.5-450cff6f-af36-4920-a793-a8a0f92aa6b1-1593167465461/node_modules/@tpr/core"
+    "@tpr/core" "file:../../../Library/Caches/Yarn/v6/npm-@tpr-icons-2.1.5-4738eb09-2ae2-4d8a-b961-10e35a94fe64-1593180316794/node_modules/@tpr/core"
+    tslib "^2.0.0"
+
+"@tpr/layout@file:./packages/layout":
+  version "2.1.6"
+  dependencies:
+    "@tpr/core" "file:../../../Library/Caches/Yarn/v6/npm-@tpr-layout-2.1.6-ebef88e4-3ad0-4e09-b43e-b31ac8176a32-1593180316799/node_modules/@tpr/core"
+    "@tpr/forms" "file:../../../Library/Caches/Yarn/v6/npm-@tpr-layout-2.1.6-ebef88e4-3ad0-4e09-b43e-b31ac8176a32-1593180316799/node_modules/@tpr/forms"
+    "@tpr/icons" "file:../../../Library/Caches/Yarn/v6/npm-@tpr-layout-2.1.6-ebef88e4-3ad0-4e09-b43e-b31ac8176a32-1593180316799/node_modules/@tpr/icons"
+    "@tpr/theming" "file:../../../Library/Caches/Yarn/v6/npm-@tpr-layout-2.1.6-ebef88e4-3ad0-4e09-b43e-b31ac8176a32-1593180316799/node_modules/@tpr/theming"
+    "@xstate/react" "^0.8.1"
+    final-form "^4.20.0"
+    qs "^6.9.4"
+    react-final-form "^6.5.0"
     tslib "^2.0.0"
 
 "@tpr/theming@file:packages/theming":

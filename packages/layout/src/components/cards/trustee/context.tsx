@@ -70,7 +70,7 @@ export interface TrusteeContextProps {
 export interface TrusteeCardProps {
 	trustee: TrusteeInput;
 	complete?: boolean;
-	i18n: Partial<i18nProps>;
+	i18n?: Partial<i18nProps>;
 	onCorrect: (...args: any[]) => void;
 	onRemove: (...args: any[]) => Promise<any>;
 	onDetailsSave: (values: any, trustee: TrusteeProps) => Promise<any>;
@@ -90,7 +90,7 @@ export const TrusteeProvider = ({
 	onDetailsSave,
 	onContactSave,
 	onAddressSave,
-	i18n: i18nRewrites,
+	i18n: i18nRewrites = {},
 	...rest
 }: TrusteeCardProps) => {
 	const i18n = useMemo(() => merge(i18nDefaults, i18nRewrites), [

@@ -10,11 +10,11 @@ import styles from './date.module.scss';
 
 const handleChange = (onChange: Function, value: number) => ({
 	target,
-}: any) => {
-	if (typeof target.value !== 'number') return;
-	if (!target.value) return onChange('');
-	if (parseInt(target.value, 10) < value) {
-		return onChange(target.value.trim().replace(/[^\d]/));
+}: ChangeEvent<HTMLInputElement>) => {
+	const newValue = target.value.replace(/[^0-9]/g, '').trim();
+	if (!newValue) return onChange('');
+	if (parseInt(newValue, 10) < value) {
+		return onChange(newValue);
 	}
 };
 
@@ -66,7 +66,7 @@ const DateInputField: React.FC<DateInputFieldProps> = ({
 		<label className={small ? styles.inputSmall : styles.inputLarge}>
 			<P cfg={{ fontSize: 2, fontWeight: 3, mb: 1 }}>{label}</P>
 			<Input
-				type="number"
+				type="string"
 				disabled={disabled}
 				aria-label={ariaLabel}
 				data-testid={testId}
