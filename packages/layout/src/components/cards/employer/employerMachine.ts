@@ -1,4 +1,5 @@
 import { Machine, assign } from 'xstate';
+import { EmployerProps } from './context';
 
 interface EmployerStates {
 	states: {
@@ -27,7 +28,7 @@ type EmployerEvents =
 export interface EmployerContext {
 	complete: boolean;
 	remove: { confirm: boolean; date: string } | null;
-	employer: any;
+	employer: Partial<EmployerProps>;
 }
 
 const employerMachine = Machine<
@@ -58,7 +59,15 @@ const employerMachine = Machine<
 		employerType: {
 			id: 'employerType',
 			on: {
-				SAVE: '#preview',
+				SAVE: {
+					target: '#preview',
+					actions: assign((context, event) => ({
+						employer: {
+							...context.employer,
+							employerType: event.values.employerType,
+						},
+					})),
+				},
 				CANCEL: '#preview',
 			},
 		},

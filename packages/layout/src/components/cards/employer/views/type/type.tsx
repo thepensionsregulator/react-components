@@ -35,7 +35,8 @@ const fields: FieldProps[] = [
 ];
 
 export const EmployerType = () => {
-	const { send } = useEmployerContext();
+	const { send, current } = useEmployerContext();
+	const { employer } = current.context;
 
 	function onSubmit(values) {
 		send('SAVE', { values });
@@ -47,7 +48,13 @@ export const EmployerType = () => {
 			title="Type of employer"
 			subtitle="A scheme can only have one principal employer at any point in time. Not all schemes will have a principal employer. If the employer type has defaulted to 'Participating’, but this employer is actually the principal employer, you will need to correct the employer recorded as principal before you can correct this employer."
 		>
-			<Form onSubmit={onSubmit} validate={validate(fields)}>
+			<Form
+				onSubmit={onSubmit}
+				initialValues={{
+					employerType: employer.employerType,
+				}}
+				validate={validate(fields)}
+			>
 				{({ handleSubmit }) => (
 					<form onSubmit={handleSubmit}>
 						{renderFields(fields)}

@@ -7,11 +7,13 @@ export default rollup({
 		'@tpr/forms',
 		'@tpr/icons',
 		'@tpr/theming',
+		'@types/lodash',
 		'@xstate/react',
 		'final-form',
 		'qs',
 		'react-final-form',
 		'tslib',
+		'lodash',
 		'xstate',
 	],
 });
