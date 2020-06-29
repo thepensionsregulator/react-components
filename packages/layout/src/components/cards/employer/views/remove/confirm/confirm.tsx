@@ -24,13 +24,13 @@ const breadcrumbLinks: BreadcrumbLink[] = [
 export const Confirm = () => {
 	const [loading, setLoading] = useState(false);
 	const { current, send, onRemove } = useEmployerContext();
-	const { employer } = current.context;
+	const { employer, remove } = current.context;
 
 	function handleRemove() {
 		setLoading(true);
 		onRemove({
-			id: employer.id,
-			reason: {},
+			schemeRoleId: employer.schemeRoleId,
+			date: remove.date,
 		})
 			.then(() => {
 				setLoading(false);

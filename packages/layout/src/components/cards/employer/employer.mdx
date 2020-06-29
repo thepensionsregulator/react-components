@@ -14,10 +14,6 @@ import { Employer } from './employer';
 
 Employer for tpr apps
 
-<!-- ## Properties
-
-<Props of={Employer} /> -->
-
 ## Usage
 
 ```js
@@ -29,12 +25,29 @@ import { Employer } from '@tpr/layout';
 <Playground>
 	{() => {
 		const [complete, setComplete] = useState(false);
-		const sleep = (ms) => new Promise((res) => setTimeout(res, ms));
-		const employer = {};
+		const callbackFn = (values, _fullTrusteeObject) => {
+			console.log(values);
+			return Promise.resolve();
+		};
+		const employer = {
+			schemeRoleId: 123,
+			employerType: 'principal-and-participating',
+			organisationReference: 0,
+			companiesHouseNumber: 'AB123456',
+			registeredCharityNumber: 0,
+			organisationName: 'The Pensions Regulator',
+			addressLine1: 'The Pensions Regulator',
+			addressLine2: 'Napier House',
+			addressLine3: 'Trafalgar Pl',
+			postTown: 'Brighton',
+			postCode: 'BN1 4DW',
+			county: 'West Sussex',
+			countryId: '',
+		};
 		return (
 			<Employer
-				onSave={(employer) => sleep(1000).then(() => console.log(employer))}
-				onRemove={(employer) => sleep(2500).then(() => console.log(employer))}
+				onSave={callbackFn}
+				onRemove={callbackFn}
 				onCorrect={(value) => setComplete(value)}
 				complete={complete}
 				employer={employer}
