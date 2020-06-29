@@ -1,12 +1,18 @@
-import React from 'react';
+import React, { useMemo } from 'react';
 import { UnderlinedButton } from '../components/button';
 import { Toolbar } from '../components/toolbar';
 import { Flex, P } from '@tpr/core';
-import { EmployerProvider, useEmployerContext, EmployerProps } from './context';
 import { Preview } from './views/preview/preview';
 import { DateForm } from './views/remove/date/date';
 import { EmployerType } from './views/type/type';
 import { Confirm } from './views/remove/confirm/confirm';
+import { capitalize } from '../../../utils';
+import {
+	EmployerProvider,
+	useEmployerContext,
+	EmployerProviderProps,
+	EmployerProps,
+} from './context';
 import styles from '../cards.module.scss';
 
 const CardContentSwitch: React.FC = () => {
@@ -25,7 +31,7 @@ const CardContentSwitch: React.FC = () => {
 	}
 };
 
-const ToolbarButton: React.FC<{ title: 'Remove' | 'Employer' }> = ({
+const ToolbarButton: React.FC<{ title: 'Remove' | 'Employer type' }> = ({
 	title,
 }) => {
 	const { current, send } = useEmployerContext();
@@ -53,20 +59,44 @@ const ToolbarButton: React.FC<{ title: 'Remove' | 'Employer' }> = ({
 	);
 };
 
-export const Employer: React.FC<EmployerProps> = ({ testId, cfg, ...rest }) => {
+const EmployerSubtitle: React.FC<Partial<EmployerProps>> = ({
+	employerType,
+}) => {
+	if (!employerType) return null;
+
+	const title = useMemo(
+		() =>
+			employerType
+				.split('-')
+				.map((word, index) => (index === 0 ? capitalize(word) : word))
+				.join(' ')
+				.concat(` employer`),
+		[employerType],
+	);
+
+	return <P>{title}</P>;
+};
+
+export const Employer: React.FC<EmployerProviderProps> = ({
+	testId,
+	cfg,
+	...rest
+}) => {
 	return (
 		<EmployerProvider {...rest}>
-			{({ current: { context } }) => (
-				<Flex cfg={cfg} data-testid={testId} className={styles.card}>
-					<Toolbar
-						complete={context.complete}
-						subtitle={() => <P>Principal and participating employer</P>}
-						buttonLeft={() => <ToolbarButton title="Employer" />}
-						buttonRight={() => <ToolbarButton title="Remove" />}
-					/>
-					<CardContentSwitch />
-				</Flex>
-			)}
+			{({ current: { context } }) => {
+				return (
+					<Flex cfg={cfg} data-testid={testId} className={styles.card}>
+						<Toolbar
+							complete={context.complete}
+							subtitle={() => <EmployerSubtitle {...context.employer} />}
+							buttonLeft={() => <ToolbarButton title="Employer type" />}
+							buttonRight={() => <ToolbarButton title="Remove" />}
+						/>
+						<CardContentSwitch />
+					</Flex>
+				);
+			}}
 		</EmployerProvider>
 	);
 };
