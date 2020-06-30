@@ -8,7 +8,7 @@ import ManualComplete from './ManualComplete';
 import Postcode from './Postcode';
 
 const AddressPage: React.FC = () => {
-	const { current } = useTrusteeContext();
+	const { current, i18n } = useTrusteeContext();
 	const { trustee } = current.context;
 	const [state, setState] = useSetState({
 		loading: false,
@@ -20,7 +20,7 @@ const AddressPage: React.FC = () => {
 	const { loading, manual, postcode, lookup, options } = state;
 
 	return (
-		<Content type="trustee" title="What is this trustee’s address?">
+		<Content type="trustee" title={i18n.address.title}>
 			<Postcode
 				lookup={lookup}
 				loading={loading}
@@ -31,7 +31,7 @@ const AddressPage: React.FC = () => {
 				setOptions={(options: any[]) => setState({ options })}
 			/>
 			<Flex cfg={{ flexDirection: 'column' }}>
-				<H4 cfg={{ fontWeight: 3, my: 1 }}>Address</H4>
+				<H4 cfg={{ fontWeight: 3, my: 1 }}>{i18n.address.auto.title}</H4>
 				{manual ? (
 					<ManualComplete />
 				) : (

@@ -7,60 +7,63 @@ import { Content } from '../../../components/content';
 import { Breadcrumbs, BreadcrumbLink } from '../../../components/breadcrumbs';
 import { ArrowButton } from '../../../../buttons/buttons';
 
-const descriptionFields: FieldProps[] = [
+const getDescriptionFields = ({ fields }: any): FieldProps[] => [
 	{
 		type: 'radio',
 		name: 'trusteeType',
 		value: 'member-nominated',
-		label: 'Member-nominated trustee',
+		label: fields.memberNominated,
 		cfg: { mb: 2 },
 	},
 	{
 		type: 'radio',
 		name: 'trusteeType',
 		value: 'employer-appointed',
-		label: 'Employer-appointed trustee',
+		label: fields.employerAppointed,
 		cfg: { mb: 2 },
 	},
 	{
 		type: 'radio',
 		name: 'trusteeType',
 		value: 'regulator-appointed',
-		label: 'Regulator-appointed trustee',
+		label: fields.regulatorAppointed,
 		cfg: { mb: 4 },
 	},
 ];
 
-const individualFields: FieldProps[] = [
+const getIndividualFields = ({ fields }: any): FieldProps[] => [
 	{
 		type: 'radio',
 		name: 'isProfessionalTrustee',
 		value: 'yes',
-		label: 'Yes',
+		label: fields.isProfessionalTrusteeYes,
 	},
 	{
 		type: 'radio',
 		name: 'isProfessionalTrustee',
 		value: 'no',
-		label: 'No',
+		label: fields.isProfessionalTrusteeNo,
 		cfg: { ml: 3 },
 	},
 ];
 
-const breadcrumbLinks: BreadcrumbLink[] = [
+const getBreadcrumbLinks = ({ breadcrumbs }: any): BreadcrumbLink[] => [
 	{
 		to: 'BACK',
 		underline: true,
-		name: 'Name of the trustee',
+		name: breadcrumbs.link1,
 	},
 	{
-		name: 'Type of trustee',
+		name: breadcrumbs.link2,
 		disabled: true,
 	},
 ];
 
 const Type: React.FC = () => {
-	const { current, send } = useTrusteeContext();
+	const { current, send, i18n } = useTrusteeContext();
+	const descriptionFields = getDescriptionFields(i18n.type);
+	const individualFields = getIndividualFields(i18n.type);
+	const breadcrumbLinks = getBreadcrumbLinks(i18n.type);
 	const { trustee, loading } = current.context;
 
 	const onSubmit = (values) => {

@@ -3,7 +3,7 @@ import { useMachine } from '@xstate/react';
 import employerMachine, { EmployerContext as EC } from './employerMachine';
 import { State, EventData } from 'xstate';
 import { SpaceProps } from '@tpr/core';
-import { i18n as i18nDefaults, i18nProps } from './i18n';
+import { i18n as i18nDefaults, EmployerI18nProps } from './i18n';
 import { merge } from 'lodash';
 
 export const EmployerContext = createContext<EmployerContextProps>({
@@ -31,7 +31,7 @@ export interface EmployerProviderProps {
 	testId?: string;
 	employer: Partial<EmployerProps>;
 	children?: RenderProps | ReactElement;
-	i18n?: i18nProps;
+	i18n?: Partial<EmployerI18nProps>;
 	cfg?: SpaceProps;
 }
 

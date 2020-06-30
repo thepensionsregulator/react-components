@@ -9,7 +9,7 @@ import { ArrowButton } from '../../../../../buttons/buttons';
 import styles from './reason.module.scss';
 
 const RemoveReason: React.FC = () => {
-	const { current, send } = useTrusteeContext();
+	const { current, send, i18n } = useTrusteeContext();
 	const { remove } = current.context;
 
 	const onSubmit = (values) => {
@@ -33,9 +33,9 @@ const RemoveReason: React.FC = () => {
 	};
 
 	return (
-		<Content type="trustee" title="Remove this trustee">
+		<Content type="trustee" title={i18n.remove.reason.title}>
 			<H4 fontWeight="bold" mb={0}>
-				Why are you removing this trustee?
+				{i18n.remove.reason.subtitle}
 			</H4>
 			<Form
 				onSubmit={onSubmit}
@@ -52,7 +52,7 @@ const RemoveReason: React.FC = () => {
 							<FFRadioButton
 								name="reason"
 								type="radio"
-								label="They have left the scheme."
+								label={i18n.remove.reason.fields.leftTheScheme}
 								value="left_the_scheme"
 								cfg={{ my: 4 }}
 							/>
@@ -60,7 +60,7 @@ const RemoveReason: React.FC = () => {
 								<div className={styles.dateWrapper}>
 									<FFInputDate
 										name="date"
-										label="Date the trustee left the scheme"
+										label={i18n.remove.reason.fields.date}
 										hint="For example, 31 3 2019"
 										required={true}
 										cfg={{ mb: 3 }}
@@ -70,7 +70,7 @@ const RemoveReason: React.FC = () => {
 							<FFRadioButton
 								name="reason"
 								type="radio"
-								label="They were never part of the scheme."
+								label={i18n.remove.reason.fields.neverPartOfTheScheme}
 								value="not_part_of_scheme"
 							/>
 							{submitError && (

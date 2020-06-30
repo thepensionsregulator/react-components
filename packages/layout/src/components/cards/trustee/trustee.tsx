@@ -48,7 +48,7 @@ const CardContent: React.FC = () => {
 };
 
 const TrusteeButton: React.FC = () => {
-	const { current, send } = useTrusteeContext();
+	const { current, send, i18n } = useTrusteeContext();
 
 	return (
 		<UnderlinedButton
@@ -78,12 +78,14 @@ const TrusteeButton: React.FC = () => {
 				}
 			}}
 		>
-			Trustee
+			{i18n.preview.buttons.one}
 		</UnderlinedButton>
 	);
 };
 
-const RemoveButton: React.FC<any> = ({ current, send }) => {
+const RemoveButton: React.FC = () => {
+	const { current, send, i18n } = useTrusteeContext();
+
 	return (
 		<UnderlinedButton
 			isOpen={
@@ -101,7 +103,7 @@ const RemoveButton: React.FC<any> = ({ current, send }) => {
 				}
 			}}
 		>
-			Remove
+			{i18n.preview.buttons.two}
 		</UnderlinedButton>
 	);
 };
@@ -112,18 +114,18 @@ export const Trustee: React.FC<Omit<TrusteeCardProps, 'children'>> = ({
 }) => {
 	return (
 		<TrusteeProvider {...props}>
-			{({ current, send }) => (
+			{({ current }) => (
 				<Flex cfg={cfg} data-testid={props.testId} className={styles.card}>
 					<Toolbar
 						complete={current.context.complete}
 						buttonLeft={() => <TrusteeButton />}
-						buttonRight={() => <RemoveButton current={current} send={send} />}
+						buttonRight={() => <RemoveButton />}
 						subtitle={() => (
 							<H4 cfg={{ lineHeight: 3 }}>
 								{[
 									current.context.trustee.title,
-									current.context.trustee.forename,
-									current.context.trustee.surname,
+									current.context.trustee.firstname,
+									current.context.trustee.lastname,
 								]
 									.filter(Boolean)
 									.join(' ')}
