@@ -9,21 +9,22 @@ import {
 	BreadcrumbLink,
 } from '../../../../components/breadcrumbs';
 
-const breadcrumbLinks: BreadcrumbLink[] = [
+const getBreadcrumbLinks = ({ link1, link2 }): BreadcrumbLink[] => [
 	{
 		to: 'BACK',
 		underline: true,
-		name: 'Remove this trustee',
+		name: link1,
 	},
 	{
-		name: 'Are you sure...?',
+		name: link2,
 		disabled: true,
 	},
 ];
 
 const RemoveConfirm: React.FC = () => {
 	const [loading, setLoading] = useState(false);
-	const { current, send, onRemove } = useTrusteeContext();
+	const { current, send, onRemove, i18n } = useTrusteeContext();
+	const breadcrumbLinks = getBreadcrumbLinks(i18n.remove.confirm.breadcrumbs);
 	const { trustee, remove } = current.context;
 
 	function handleRemove() {
@@ -49,15 +50,13 @@ const RemoveConfirm: React.FC = () => {
 			breadcrumbs={() => <Breadcrumbs links={breadcrumbLinks} send={send} />}
 		>
 			<H4 cfg={{ mt: 3, color: 'neutral.5' }}>Edit trustee</H4>
-			<H3 cfg={{ fontWeight: 2 }}>
-				Are you sure you want to remove this trustee?
-			</H3>
+			<H3 cfg={{ fontWeight: 2 }}>{i18n.remove.confirm.title}</H3>
 			<Hr cfg={{ my: 4 }} />
 			<Flex
 				cfg={{ flexDirection: 'column', p: 4, my: 4 }}
 				className={styles.confirmBox}
 			>
-				<P cfg={{ mt: 3, mb: 6 }}>This can't be undone.</P>
+				<P cfg={{ mt: 3, mb: 6 }}>{i18n.remove.confirm.subtitle}</P>
 				<Flex>
 					<ArrowButton
 						intent="danger"
@@ -65,10 +64,10 @@ const RemoveConfirm: React.FC = () => {
 						iconSide="right"
 						disabled={loading}
 						onClick={handleRemove}
-						title="Remove this trustee"
+						title={i18n.remove.confirm.buttons.remove}
 					/>
 					<Link cfg={{ m: 3 }} underline onClick={() => send('CANCEL')}>
-						Cancel
+						{i18n.remove.confirm.buttons.cancel}
 					</Link>
 				</Flex>
 			</Flex>

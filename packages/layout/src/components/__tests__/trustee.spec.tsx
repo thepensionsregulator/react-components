@@ -14,8 +14,8 @@ const trustee = {
 	schemeRoleId: '12345',
 	//
 	title: 'Mr',
-	forename: 'John',
-	surname: 'Smith',
+	firstname: 'John',
+	lastname: 'Smith',
 	trusteeType: 'member-nominated',
 	isProfessionalTrustee: false,
 	//

@@ -7,7 +7,7 @@ import trusteeMachine, {
 import { State, EventData } from 'xstate';
 import { SpaceProps } from '@tpr/core';
 import { merge } from 'lodash';
-import { i18n as i18nDefaults, i18nProps } from './i18n';
+import { i18n as i18nDefaults, TrusteeI18nProps } from './i18n';
 
 export const TrusteeContext = createContext<TrusteeContextProps>({
 	complete: false,
@@ -59,7 +59,7 @@ export interface TrusteeContextProps {
 	testId?: string;
 	children?: RenderProps | ReactElement;
 	cfg?: SpaceProps;
-	i18n: Partial<i18nProps>;
+	i18n: Partial<TrusteeI18nProps>;
 	onRemove: (...args: any[]) => Promise<any>;
 	onCorrect: (...args: any[]) => void;
 	send: (event: any, payload?: EventData) => Partial<State<TC, any, any, any>>;
@@ -70,7 +70,7 @@ export interface TrusteeContextProps {
 export interface TrusteeCardProps {
 	trustee: TrusteeInput;
 	complete?: boolean;
-	i18n?: Partial<i18nProps>;
+	i18n?: Partial<TrusteeI18nProps>;
 	onCorrect: (...args: any[]) => void;
 	onRemove: (...args: any[]) => Promise<any>;
 	onDetailsSave: (values: any, trustee: TrusteeProps) => Promise<any>;

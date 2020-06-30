@@ -23,7 +23,7 @@ const Postcode: React.FC<PostcodeProps> = ({
 	setLoading,
 	setOptions,
 }) => {
-	const { addressAPI } = useTrusteeContext();
+	const { addressAPI, i18n } = useTrusteeContext();
 
 	const search = useCallback(
 		(postcode: string, country = 'GBR') => {
@@ -90,8 +90,8 @@ const Postcode: React.FC<PostcodeProps> = ({
 
 	return (
 		<div className={styles.wrapper}>
-			<P cfg={{ mb: 3 }}>Find the trustee's correspondence address</P>
-			<P cfg={{ mb: 2, fontWeight: 3 }}>Postcode</P>
+			<P cfg={{ mb: 3 }}>{i18n.address.auto.subtitle}</P>
+			<P cfg={{ mb: 2, fontWeight: 3 }}>{i18n.address.postcode.title}</P>
 			{lookup ? (
 				<>
 					<div className={styles.inputWrapper}>
@@ -112,7 +112,7 @@ const Postcode: React.FC<PostcodeProps> = ({
 							}}
 							disabled={loading}
 						>
-							{loading ? 'Loading...' : 'Find Address'}
+							{loading ? 'Loading...' : i18n.address.postcode.button}
 						</Button>
 					</Flex>
 				</>
@@ -120,7 +120,7 @@ const Postcode: React.FC<PostcodeProps> = ({
 				<Flex>
 					<P cfg={{ mr: 2 }}>{postcode}</P>
 					<Link onClick={() => showLookup(true)} underline>
-						Change
+						{i18n.address.postcode.link}
 					</Link>
 				</Flex>
 			)}

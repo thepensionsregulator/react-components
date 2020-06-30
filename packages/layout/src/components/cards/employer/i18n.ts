@@ -1,3 +1,3 @@
-export type i18nProps = any;
+export type EmployerI18nProps = any;
 
-export const i18n: i18nProps = {};
+export const i18n: EmployerI18nProps = {};
