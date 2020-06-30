@@ -29,8 +29,8 @@ export interface TrusteeInput {
 	schemeRoleId: string;
 	//
 	title: string;
-	forename: string;
-	surname: string;
+	firstname: string;
+	lastname: string;
 	trusteeType: string;
 	isProfessionalTrustee: boolean;
 	//
@@ -129,8 +129,8 @@ export const TrusteeProvider = ({
 				const {
 					schemeRoleId,
 					title,
-					forename,
-					surname,
+					firstname,
+					lastname,
 					trusteeType,
 					isProfessionalTrustee,
 				} = trustee;
@@ -138,8 +138,8 @@ export const TrusteeProvider = ({
 					{
 						schemeRoleId,
 						title,
-						forename,
-						surname,
+						firstname,
+						lastname,
 						trusteeType,
 						isProfessionalTrustee,
 					},

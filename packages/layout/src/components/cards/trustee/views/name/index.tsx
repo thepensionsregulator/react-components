@@ -14,7 +14,7 @@ const getFields = ({ fields }: any): FieldProps[] => [
 		cfg: { mb: 4 },
 	},
 	{
-		name: 'forename',
+		name: 'firstname',
 		type: 'text',
 		label: fields.firstName,
 		error: 'field is required',
@@ -22,7 +22,7 @@ const getFields = ({ fields }: any): FieldProps[] => [
 		cfg: { mb: 4 },
 	},
 	{
-		name: 'surname',
+		name: 'lastname',
 		type: 'text',
 		label: fields.lastName,
 		error: 'field is required',
@@ -46,8 +46,8 @@ const Name: React.FC = () => {
 				validate={validate(fields)}
 				initialValues={{
 					title: state.title,
-					forename: state.forename,
-					surname: state.surname,
+					firstname: state.firstname,
+					lastname: state.lastname,
 				}}
 			>
 				{({ handleSubmit }) => (

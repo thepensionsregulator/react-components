@@ -67,8 +67,8 @@ export type TrusteeProps = {
 	schemeRoleId: string;
 	//
 	title: string;
-	forename: string;
-	surname: string;
+	firstname: string;
+	lastname: string;
 	trusteeType: string;
 	isProfessionalTrustee: boolean;
 	//
@@ -99,8 +99,8 @@ const trusteeMachine = Machine<TrusteeContext, TrusteeStates, TrusteeEvents>({
 			schemeRoleId: '',
 			//
 			title: '',
-			forename: '',
-			surname: '',
+			firstname: '',
+			lastname: '',
 			trusteeType: '',
 			isProfessionalTrustee: false,
 			//

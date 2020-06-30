@@ -124,8 +124,8 @@ export const Trustee: React.FC<Omit<TrusteeCardProps, 'children'>> = ({
 							<H4 cfg={{ lineHeight: 3 }}>
 								{[
 									current.context.trustee.title,
-									current.context.trustee.forename,
-									current.context.trustee.surname,
+									current.context.trustee.firstname,
+									current.context.trustee.lastname,
 								]
 									.filter(Boolean)
 									.join(' ')}
