@@ -31,9 +31,7 @@ const CardContentSwitch: React.FC = () => {
 	}
 };
 
-const ToolbarButton: React.FC<{ title: 'Remove' | 'Employer type' }> = ({
-	title,
-}) => {
+const ToolbarButton: React.FC<{ title: string }> = ({ title }) => {
 	const { current, send } = useEmployerContext();
 	return (
 		<UnderlinedButton
@@ -84,14 +82,18 @@ export const Employer: React.FC<EmployerProviderProps> = ({
 }) => {
 	return (
 		<EmployerProvider {...rest}>
-			{({ current: { context } }) => {
+			{({ current: { context }, i18n }) => {
 				return (
 					<Flex cfg={cfg} data-testid={testId} className={styles.card}>
 						<Toolbar
 							complete={context.complete}
 							subtitle={() => <EmployerSubtitle {...context.employer} />}
-							buttonLeft={() => <ToolbarButton title="Employer type" />}
-							buttonRight={() => <ToolbarButton title="Remove" />}
+							buttonLeft={() => (
+								<ToolbarButton title={i18n.preview.buttons.one} />
+							)}
+							buttonRight={() => (
+								<ToolbarButton title={i18n.preview.buttons.two} />
+							)}
 						/>
 						<CardContentSwitch />
 					</Flex>
