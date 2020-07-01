@@ -38,8 +38,8 @@ import { Trustee } from '@tpr/layout';
 			schemeRoleId: '12345',
 			//
 			title: 'Mr',
-			forename: 'John',
-			surname: 'Smith',
+			firstname: 'John',
+			lastname: 'Smith',
 			trusteeType: 'member-nominated',
 			isProfessionalTrustee: false,
 			//
@@ -66,6 +66,13 @@ import { Trustee } from '@tpr/layout';
 					limit: 100,
 				}}
 				complete={complete}
+				i18n={{
+					preview: {
+						buttons: {
+							one: 'Trustee',
+						},
+					},
+				}}
 				trustee={trustee}
 			/>
 		);

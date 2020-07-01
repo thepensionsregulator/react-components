@@ -25,9 +25,9 @@ import { Employer } from '@tpr/layout';
 <Playground>
 	{() => {
 		const [complete, setComplete] = useState(false);
-		const callbackFn = (values, _fullTrusteeObject) => {
+		const callbackFn = (values, _fullEmployerObject) => {
 			console.log(values);
-			return Promise.resolve();
+			return Promise.resolve(values);
 		};
 		const employer = {
 			schemeRoleId: 123,
@@ -36,9 +36,8 @@ import { Employer } from '@tpr/layout';
 			companiesHouseNumber: 'AB123456',
 			registeredCharityNumber: 0,
 			organisationName: 'The Pensions Regulator',
-			addressLine1: 'The Pensions Regulator',
-			addressLine2: 'Napier House',
-			addressLine3: 'Trafalgar Pl',
+			addressLine1: 'Napier House',
+			addressLine2: 'Trafalgar Pl',
 			postTown: 'Brighton',
 			postCode: 'BN1 4DW',
 			county: 'West Sussex',
@@ -46,11 +45,18 @@ import { Employer } from '@tpr/layout';
 		};
 		return (
 			<Employer
-				onSave={callbackFn}
+				onSaveType={callbackFn}
 				onRemove={callbackFn}
 				onCorrect={(value) => setComplete(value)}
 				complete={complete}
 				employer={employer}
+				i18n={{
+					preview: {
+						buttons: {
+							one: 'Employer type',
+						},
+					},
+				}}
 			/>
 		);
 	}}

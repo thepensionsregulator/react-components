@@ -5,11 +5,12 @@ import { useTrusteeContext } from '../../context';
 import { Footer } from '../../../components/card';
 import { Loading } from '../../../components/content';
 import { ArrowButton } from '../../../../buttons/buttons';
-import fields from './fields';
+import { getFields } from './fields';
 
 const ManualComplete = () => {
-	const { current, send } = useTrusteeContext();
+	const { current, send, i18n } = useTrusteeContext();
 	const { trustee, loading } = current.context;
+	const fields = getFields(i18n.address.manual.fields);
 
 	const onSubmit = (values) => {
 		send('SAVE', { address: values });

@@ -53,41 +53,6 @@ export const Toolbar: React.FC<ToolbarProps> = ({
 	);
 };
 
-// type FooterButtonProps = {
-// 	type?: 'button' | 'submit';
-// 	title?: string | Function;
-// 	appearance?: 'primary' | 'outlined';
-// 	intent?: 'none' | 'success' | 'warning' | 'danger';
-// 	loadingMessage?: string;
-// 	onClick?: (...args: any[]) => void;
-// 	disabled?: boolean;
-// 	cfg?: ButtonProps['cfg'];
-// };
-// export const FooterButton: React.FC<FooterButtonProps> = ({
-// 	intent,
-// 	appearance,
-// 	type,
-// 	onClick,
-// 	disabled,
-// 	loadingMessage = 'Saving...',
-// 	title,
-// 	cfg,
-// }) => {
-// 	const t = typeof title === 'function' ? title() : title;
-// 	return (
-// 		<Button
-// 			intent={intent}
-// 			appearance={appearance}
-// 			type={type}
-// 			onClick={onClick}
-// 			disabled={disabled}
-// 			cfg={cfg}
-// 		>
-// 			{disabled ? loadingMessage : t}
-// 		</Button>
-// 	);
-// };
-
 export const Footer: React.FC = ({ children }) => {
 	return (
 		<Flex

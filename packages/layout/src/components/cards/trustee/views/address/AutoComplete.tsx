@@ -15,7 +15,7 @@ const AutoComplete: React.FC<AutoCompleteProps> = ({
 	options,
 	loading,
 }) => {
-	const { send } = useTrusteeContext();
+	const { send, i18n } = useTrusteeContext();
 
 	const onSubmit = (values) => {
 		if (Object.values(values).length > 0) {
@@ -29,18 +29,16 @@ const AutoComplete: React.FC<AutoCompleteProps> = ({
 				<form onSubmit={handleSubmit}>
 					<FFSelect
 						name="address"
-						placeholder="Please select the address from the dropdown"
+						placeholder={i18n.address.auto.dropdown.placeholder}
 						options={options}
 						inputWidth={6}
 						validate={(value) =>
-							!value
-								? 'Please select one of the address from the dropdown menu. If you cannot find your address, please click the link below to enter it manually.'
-								: undefined
+							!value ? i18n.address.auto.dropdown.error : undefined
 						}
 						disabled={loading}
 					/>
 					<Link onClick={onClick} cfg={{ mt: 3 }}>
-						I can't find my address in the list
+						{i18n.address.auto.dropdown.link}
 					</Link>
 					{submitError && (
 						<P cfg={{ color: 'danger.2', mt: 5 }}>{submitError}</P>

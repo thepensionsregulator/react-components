@@ -5,33 +5,34 @@ import { Footer } from '../../../components/card';
 import { Content } from '../../../components/content';
 import { ArrowButton } from '../../../../buttons/buttons';
 
-const fields: FieldProps[] = [
+const getFields = ({ fields }: any): FieldProps[] => [
 	{
 		name: 'title',
 		type: 'text',
-		label: 'Title',
+		label: fields.title,
 		inputWidth: 1,
 		cfg: { mb: 4 },
 	},
 	{
-		name: 'forename',
+		name: 'firstname',
 		type: 'text',
-		label: 'First name',
+		label: fields.firstName,
 		error: 'field is required',
 		inputWidth: 6,
 		cfg: { mb: 4 },
 	},
 	{
-		name: 'surname',
+		name: 'lastname',
 		type: 'text',
-		label: 'Last name',
+		label: fields.lastName,
 		error: 'field is required',
 		inputWidth: 6,
 	},
 ];
 
 const Name: React.FC = () => {
-	const { current, send } = useTrusteeContext();
+	const { current, send, i18n } = useTrusteeContext();
+	const fields = getFields(i18n.name);
 	const state = current.context.trustee;
 
 	const onSubmit = (values) => {
@@ -45,8 +46,8 @@ const Name: React.FC = () => {
 				validate={validate(fields)}
 				initialValues={{
 					title: state.title,
-					forename: state.forename,
-					surname: state.surname,
+					firstname: state.firstname,
+					lastname: state.lastname,
 				}}
 			>
 				{({ handleSubmit }) => (

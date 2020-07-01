@@ -1,52 +1,67 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Form, renderFields, validate, FieldProps } from '@tpr/forms';
 import { Content } from '../../../components/content';
 import { Footer } from '../../../components/card';
 import { useEmployerContext } from '../../context';
 import { ArrowButton } from '../../../../buttons/buttons';
+import { EmployerI18nProps } from '../../i18n';
 
-const fields: FieldProps[] = [
+const getFields = (
+	labels: EmployerI18nProps['type']['fields'],
+): FieldProps[] => [
 	{
 		type: 'radio',
-		hint:
-			"The employer who is named in the scheme's latest trust deed and rules and any subsequently amending deeds and usually has powers, eg the power to appoint trustees, amend the scheme rules or wind up the scheme.",
+		hint: labels.employerType.principal.hint,
 		name: 'employerType',
 		value: 'principal',
-		label: 'Principal',
+		label: labels.employerType.principal.label,
 		cfg: { mb: 2 },
 	},
 	{
 		type: 'radio',
-		hint:
-			'An employer who is the principal employer but also has employees who can participate in the scheme.',
+		hint: labels.employerType.principalAndParticipating.hint,
 		name: 'employerType',
 		value: 'principal-and-participating',
-		label: 'Principal and participating employer',
+		label: labels.employerType.principalAndParticipating.label,
 		cfg: { mb: 2 },
 	},
 	{
 		type: 'radio',
-		hint: 'Any employer whose employees can participate in the scheme.',
+		hint: labels.employerType.participating.hint,
 		name: 'employerType',
 		value: 'participating',
-		label: 'Participating',
+		label: labels.employerType.participating.label,
 		cfg: { mb: 4 },
 	},
 ];
 
 export const EmployerType = () => {
-	const { send, current } = useEmployerContext();
+	const [loading, setLoading] = useState(false);
+	const { send, current, i18n, onSaveType } = useEmployerContext();
+	const fields = getFields(i18n.type.fields);
 	const { employer } = current.context;
 
-	function onSubmit(values) {
-		send('SAVE', { values });
+	async function onSubmit(values) {
+		const updatedValues = {
+			schemeRoleId: employer.schemeRoleId,
+			employerType: values.employerType,
+		};
+		setLoading(true);
+		await onSaveType(updatedValues, employer)
+			.then(() => {
+				setLoading(false);
+				send('SAVE', { values });
+			})
+			.catch(() => {
+				setLoading(false);
+			});
 	}
 
 	return (
 		<Content
 			type="employer"
-			title="Type of employer"
-			subtitle="A scheme can only have one principal employer at any point in time. Not all schemes will have a principal employer. If the employer type has defaulted to 'Participating’, but this employer is actually the principal employer, you will need to correct the employer recorded as principal before you can correct this employer."
+			title={i18n.type.title}
+			subtitle={i18n.type.subtitle}
 		>
 			<Form
 				onSubmit={onSubmit}
@@ -63,6 +78,8 @@ export const EmployerType = () => {
 								intent="special"
 								pointsTo="up"
 								iconSide="right"
+								disabled={loading}
+								disabledText="Saving..."
 								title="Save and close"
 								type="submit"
 							/>

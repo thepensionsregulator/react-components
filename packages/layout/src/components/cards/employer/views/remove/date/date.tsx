@@ -9,7 +9,7 @@ import { ArrowButton } from '../../../../../buttons/buttons';
 import styles from './date.module.scss';
 
 export const DateForm = () => {
-	const { current, send } = useEmployerContext();
+	const { current, send, i18n } = useEmployerContext();
 	const { remove } = current.context;
 
 	const onSubmit = (values) => {
@@ -24,7 +24,7 @@ export const DateForm = () => {
 	};
 
 	return (
-		<Content type="employer" title="Remove this employer">
+		<Content type="employer" title={i18n.remove.date.title}>
 			<Form
 				onSubmit={onSubmit}
 				initialValues={{
@@ -37,16 +37,16 @@ export const DateForm = () => {
 						<FFCheckbox
 							name="confirm"
 							type="checkbox"
-							label="I confirm this employer is no longer associated with the scheme."
+							label={i18n.remove.date.fields.confirm.label}
 							cfg={{ mb: 3 }}
 						/>
 						<div className={styles.dateWrapper}>
 							<FFInputDate
 								name="date"
-								label="Date the employer left the scheme"
-								hint="For example, 31 3 2019"
+								label={i18n.remove.date.fields.date.label}
+								hint={i18n.remove.date.fields.date.hint}
 								required={true}
-								error="Cannot be left empty!"
+								error={i18n.remove.date.fields.date.error}
 								cfg={{ mb: 3 }}
 							/>
 						</div>

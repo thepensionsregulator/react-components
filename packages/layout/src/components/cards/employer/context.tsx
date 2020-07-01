@@ -3,7 +3,7 @@ import { useMachine } from '@xstate/react';
 import employerMachine, { EmployerContext as EC } from './employerMachine';
 import { State, EventData } from 'xstate';
 import { SpaceProps } from '@tpr/core';
-import { i18n as i18nDefaults, i18nProps } from './i18n';
+import { i18n as i18nDefaults, EmployerI18nProps } from './i18n';
 import { merge } from 'lodash';
 
 export const EmployerContext = createContext<EmployerContextProps>({
@@ -11,7 +11,7 @@ export const EmployerContext = createContext<EmployerContextProps>({
 	send: (_, __) => ({}),
 	onCorrect: () => {},
 	onRemove: Promise.resolve,
-	onSave: Promise.resolve,
+	onSaveType: Promise.resolve,
 	i18n: i18nDefaults,
 });
 
@@ -27,11 +27,11 @@ export interface EmployerProviderProps {
 	complete?: boolean;
 	onCorrect?: (...args: any[]) => void;
 	onRemove?: (...args: any[]) => Promise<any>;
-	onSave?: (...args: any[]) => Promise<any>;
+	onSaveType?: (...args: any[]) => Promise<any>;
 	testId?: string;
 	employer: Partial<EmployerProps>;
 	children?: RenderProps | ReactElement;
-	i18n?: i18nProps;
+	i18n?: Partial<EmployerI18nProps>;
 	cfg?: SpaceProps;
 }
 
@@ -58,7 +58,6 @@ export const EmployerProvider = ({
 	complete,
 	employer,
 	children,
-	onSave,
 	i18n: i18nOverrides = {},
 	...rest
 }: EmployerProviderProps) => {
@@ -70,9 +69,6 @@ export const EmployerProvider = ({
 		context: {
 			complete,
 			employer,
-		},
-		services: {
-			saveData: ({ employer }) => onSave(employer),
 		},
 	});
 
