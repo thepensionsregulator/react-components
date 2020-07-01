@@ -6,7 +6,7 @@ import styles from './preview.module.scss';
 import { useEmployerContext } from '../../context';
 
 export const Preview: React.FC<any> = () => {
-	const { current, send, onCorrect } = useEmployerContext();
+	const { current, send, onCorrect, i18n } = useEmployerContext();
 	const { employer, complete } = current.context;
 
 	return (
@@ -17,11 +17,12 @@ export const Preview: React.FC<any> = () => {
 				<Flex
 					cfg={{ width: 5, flex: '0 0 auto', flexDirection: 'column', pr: 4 }}
 				>
-					<UnderlinedButton>Employer</UnderlinedButton>
+					<UnderlinedButton>{i18n.preview.buttons.three}</UnderlinedButton>
 					<Flex cfg={{ my: 2, flexDirection: 'column' }}>
-						<H4 cfg={{ lineHeight: 3 }}>{employer.addressLine1}</H4>
-						<P>{employer.addressLine2}</P>
-						<P>{employer.addressLine3}</P>
+						<H4 cfg={{ lineHeight: 3 }}>{employer.organisationName}</H4>
+						<P>{employer.addressLine1}</P>
+						{employer.addressLine2 && <P>{employer.addressLine2}</P>}
+						{employer.addressLine3 && <P>{employer.addressLine3}</P>}
 						<P>{employer.postTown}</P>
 						<P>{employer.postCode}</P>
 					</Flex>
@@ -29,7 +30,7 @@ export const Preview: React.FC<any> = () => {
 				<Flex
 					cfg={{ width: 5, flex: '0 0 auto', flexDirection: 'column', pl: 4 }}
 				>
-					<UnderlinedButton>Companies House number</UnderlinedButton>
+					<UnderlinedButton>{i18n.preview.buttons.four}</UnderlinedButton>
 					<Flex cfg={{ my: 2, flexDirection: 'column' }}>
 						<P>{employer.companiesHouseNumber}</P>
 					</Flex>
@@ -44,7 +45,7 @@ export const Preview: React.FC<any> = () => {
 						send('COMPLETE', { value: !complete });
 						onCorrect(!complete);
 					}}
-					label="All details are correct."
+					label={i18n.preview.checkboxLabel}
 				/>
 			</Flex>
 		</div>

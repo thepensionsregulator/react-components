@@ -1,7 +1,6 @@
 import React from 'react';
 import { Flex, H3, P, classNames, Hr } from '@tpr/core';
 import styles from './card.module.scss';
-import { useTrusteeContext } from '../trustee/context';
 
 type StyledCardProps = { complete: boolean };
 export const StyledCard: React.FC<StyledCardProps> = ({
@@ -73,8 +72,6 @@ export const Footer: React.FC = ({ children }) => {
 };
 
 export const StatusMessage = ({ complete, icon: Icon }) => {
-	const { i18n } = useTrusteeContext();
-
 	return (
 		<Flex cfg={{ alignItems: 'center' }} height="22px">
 			<Icon size={18} fill={complete ? '#207e3b' : '#d4351c'} />
@@ -86,9 +83,7 @@ export const StatusMessage = ({ complete, icon: Icon }) => {
 					color: complete ? 'success.1' : 'danger.2',
 				}}
 			>
-				{complete
-					? i18n.preview.statuses.complete
-					: i18n.preview.statuses.incomplete}
+				{complete ? 'No issues' : 'Incomplete'}
 			</P>
 		</Flex>
 	);
