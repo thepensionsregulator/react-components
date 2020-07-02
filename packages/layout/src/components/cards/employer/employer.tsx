@@ -68,6 +68,7 @@ const EmployerSubtitle: React.FC<Partial<EmployerProps>> = ({
 				.split('-')
 				.map((word, index) => (index === 0 ? capitalize(word) : word))
 				.join(' ')
+				.replace('employer', '')
 				.concat(` employer`),
 		[employerType],
 	);
