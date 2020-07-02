@@ -16,15 +16,17 @@ export const Checkbox: React.FC<Partial<CheckboxIconProps>> = ({
 	onChange,
 	label,
 	hint,
+	className,
 }) => {
 	const msg = testId ? `${testId}-${checked ? 'checked' : 'unchecked'}` : null;
 	return (
 		<StyledInputLabel
 			element="div"
+			className={className}
 			cfg={Object.assign(
 				{
 					mt: 1,
-					mb: 3,
+					mb: 1,
 					alignItems: 'flex-start',
 					flexDirection: 'column',
 				},
