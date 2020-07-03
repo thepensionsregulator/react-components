@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { Form, renderFields, validate, FieldProps } from '@tpr/forms';
+import { Flex, Link } from '@tpr/core';
 import { Content } from '../../../components/content';
 import { Footer } from '../../../components/card';
 import { useEmployerContext } from '../../context';
@@ -70,19 +71,24 @@ export const EmployerType = () => {
 				}}
 				validate={validate(fields)}
 			>
-				{({ handleSubmit }) => (
+				{({ handleSubmit, pristine }) => (
 					<form onSubmit={handleSubmit}>
 						{renderFields(fields)}
 						<Footer>
-							<ArrowButton
-								intent="special"
-								pointsTo="up"
-								iconSide="right"
-								disabled={loading}
-								disabledText="Saving..."
-								title="Save and close"
-								type="submit"
-							/>
+							<Flex>
+								<ArrowButton
+									intent="special"
+									pointsTo="up"
+									iconSide="right"
+									disabled={loading || pristine}
+									disabledText={loading ? 'Saving...' : undefined}
+									title="Save and close"
+									type="submit"
+								/>
+								<Link cfg={{ m: 3 }} underline onClick={() => send('CANCEL')}>
+									Cancel
+								</Link>
+							</Flex>
 						</Footer>
 					</form>
 				)}

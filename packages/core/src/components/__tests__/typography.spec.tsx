@@ -1,5 +1,4 @@
 import React from 'react';
-// import '@testing-library/jest-dom/extend-expect';
 import { Text } from '../typography/typography';
 import { render } from '@testing-library/react';
 

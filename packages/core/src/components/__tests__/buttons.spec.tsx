@@ -1,8 +1,15 @@
 import React from 'react';
 import { Button } from '../buttons/buttons';
 import { render } from '@testing-library/react';
+import { axe } from 'jest-axe';
 
 describe('Buttons', () => {
+	test('Button are accessible', async () => {
+		const { container } = render(<Button testId="btn">Click me</Button>);
+		const results = await axe(container);
+		expect(results).toHaveNoViolations();
+	});
+
 	test('Button renders correctly and accepts testId prop', () => {
 		const { getByTestId } = render(<Button testId="btn">Click me</Button>);
 		expect(getByTestId(/btn/i)).toBeDefined();

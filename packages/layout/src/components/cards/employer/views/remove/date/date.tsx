@@ -6,16 +6,27 @@ import { Content } from '../../../../components/content';
 import { Footer } from '../../../../components/card';
 import { useEmployerContext } from '../../../context';
 import { ArrowButton } from '../../../../../buttons/buttons';
+import { isAfter, toDate, isBefore } from 'date-fns';
 import styles from './date.module.scss';
 
 export const DateForm = () => {
 	const { current, send, i18n } = useEmployerContext();
-	const { remove } = current.context;
+	const { remove, employer } = current.context;
 
 	const onSubmit = (values) => {
 		if (!values.confirm || !values.date) {
 			return {
-				[FORM_ERROR]: 'Please confirm and fill in the date fields.',
+				[FORM_ERROR]: i18n.remove.date.errors.formIncomplete,
+			};
+		} else if (
+			isBefore(toDate(new Date(values.date)), toDate(employer.effectiveDate))
+		) {
+			return {
+				[FORM_ERROR]: i18n.remove.date.errors.dateAddedBeforeEffectiveDate,
+			};
+		} else if (isAfter(toDate(new Date(values.date)), new Date())) {
+			return {
+				[FORM_ERROR]: i18n.remove.date.errors.dateAddedInTheFuture,
 			};
 		} else {
 			send('NEXT', { values });

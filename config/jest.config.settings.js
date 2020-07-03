@@ -11,4 +11,5 @@ module.exports = {
 	testURL: 'http://localhost',
 	testMatch: ['<rootDir>/src/**/__tests__/**/*.(ts|tsx)'],
 	testPathIgnorePatterns: [...ignores],
+	setupFilesAfterEnv: ['<rootDir>/setupTests.js'],
 };

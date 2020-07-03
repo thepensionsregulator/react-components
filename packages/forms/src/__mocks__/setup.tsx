@@ -2,7 +2,7 @@ import React from 'react';
 import { Form } from '../index';
 import { render } from '@testing-library/react';
 import { FormRenderProps } from 'react-final-form';
-import '@testing-library/jest-dom/extend-expect';
+// import '@testing-library/jest-dom/extend-expect';
 
 type FormProviderProps = {
 	onSubmit?: any;
