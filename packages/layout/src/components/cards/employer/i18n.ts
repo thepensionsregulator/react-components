@@ -6,6 +6,10 @@ export type EmployerI18nProps = {
 			three: string;
 			four: string;
 		};
+		identifiers: {
+			companiesHouseNo: string;
+			registeredCharityNo: string;
+		};
 		checkboxLabel: string;
 	};
 	type: {
@@ -56,6 +60,11 @@ export type EmployerI18nProps = {
 					error: string;
 				};
 			};
+			errors: {
+				formIncomplete: string;
+				dateAddedBeforeEffectiveDate: string;
+				dateAddedInTheFuture: string;
+			};
 		};
 	};
 };
@@ -66,7 +75,11 @@ export const i18n: EmployerI18nProps = {
 			one: 'Employer type',
 			two: 'Remove',
 			three: 'Employer',
-			four: 'Companies House number',
+			four: 'Employer Identifiers',
+		},
+		identifiers: {
+			companiesHouseNo: 'Companies House number',
+			registeredCharityNo: 'Registered Charity number',
 		},
 		checkboxLabel: 'All details are correct.',
 	},
@@ -122,6 +135,12 @@ export const i18n: EmployerI18nProps = {
 					hint: 'For example, 31 3 2019',
 					error: 'Cannot be left empty!',
 				},
+			},
+			errors: {
+				formIncomplete: 'Please confirm and fill in the date fields.',
+				dateAddedBeforeEffectiveDate:
+					'Date must be after the Employer was added.',
+				dateAddedInTheFuture: 'Date cannot be in the future.',
 			},
 		},
 	},

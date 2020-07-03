@@ -3,7 +3,7 @@ import { H3, H4, P, Hr, Link, Flex } from '@tpr/core';
 import { useTrusteeContext } from '../../../context';
 import { Content } from '../../../../components/content';
 import { ArrowButton } from '../../../../../buttons/buttons';
-import styles from './confirm.module.scss';
+import { WarningBox } from '../../../../../warning/warning';
 import {
 	Breadcrumbs,
 	BreadcrumbLink,
@@ -52,10 +52,7 @@ const RemoveConfirm: React.FC = () => {
 			<H4 cfg={{ mt: 3, color: 'neutral.5' }}>Edit trustee</H4>
 			<H3 cfg={{ fontWeight: 2 }}>{i18n.remove.confirm.title}</H3>
 			<Hr cfg={{ my: 4 }} />
-			<Flex
-				cfg={{ flexDirection: 'column', p: 4, my: 4 }}
-				className={styles.confirmBox}
-			>
+			<WarningBox>
 				<P cfg={{ mt: 3, mb: 6 }}>{i18n.remove.confirm.subtitle}</P>
 				<Flex>
 					<ArrowButton
@@ -70,7 +67,7 @@ const RemoveConfirm: React.FC = () => {
 						{i18n.remove.confirm.buttons.cancel}
 					</Link>
 				</Flex>
-			</Flex>
+			</WarningBox>
 		</Content>
 	);
 };
