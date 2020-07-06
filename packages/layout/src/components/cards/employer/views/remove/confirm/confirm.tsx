@@ -32,10 +32,13 @@ export const Confirm = () => {
 
 	async function handleRemove() {
 		setLoading(true);
-		await onRemove({
-			schemeRoleId: employer.schemeRoleId,
-			date: remove.date,
-		})
+		await onRemove(
+			{
+				schemeRoleId: employer.schemeRoleId,
+				date: remove.date,
+			},
+			employer,
+		)
 			.then(() => {
 				setLoading(false);
 			})

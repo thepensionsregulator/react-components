@@ -27,6 +27,7 @@ import { Employer } from '@tpr/layout';
 		const [complete, setComplete] = useState(false);
 		const callbackFn = (values, _fullEmployerObject) => {
 			console.log(values);
+			console.log(_fullEmployerObject);
 			return Promise.resolve(values);
 		};
 		const employer = {
@@ -42,7 +43,7 @@ import { Employer } from '@tpr/layout';
 			postCode: 'BN1 4DW',
 			county: 'West Sussex',
 			countryId: '',
-			effectiveDate: new Date(2019, 0, 1),
+			effectiveDate: '1997-04-01T00:00:00',
 		};
 		return (
 			<Employer
