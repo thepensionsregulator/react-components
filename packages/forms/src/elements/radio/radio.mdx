@@ -7,6 +7,7 @@ route: /forms/radio
 import { Playground } from '@playground';
 import { Form } from 'react-final-form';
 import { FFRadioButton } from './radio';
+import { SeparatorY, SeparatorX } from '../separator';
 
 # Radio
 
@@ -41,17 +42,20 @@ import { FFRadioButton } from '@tpr/forms';
 
 [CodeSandbox](https://codesandbox.io/s/lively-wood-rxcpu)
 
+### No separator
+
 <Playground>
 	{() => {
 		const FIELD_NAME = 'radio_button';
 		return (
 			<Form onSubmit={console.log} initialValues={{ [FIELD_NAME]: 'value_b' }}>
 				{({ handleSubmit }) => (
-					<form onSubmit={handleSubmit} style={{ width: 400, padding: 10 }}>
+					<form onSubmit={handleSubmit}>
 						<FFRadioButton
 							name={FIELD_NAME}
 							value="value_a"
 							label="Select Value A"
+							cfg={{ mb: 4 }}
 						/>
 						<FFRadioButton
 							name={FIELD_NAME}
@@ -59,22 +63,91 @@ import { FFRadioButton } from '@tpr/forms';
 							label="Select Value B"
 							hint="Lorem, ipsum dolor sit amet consectetur adipisicing elit. Ea obcaecati repellat molestias nemo deleniti eveniet vel similique nesciunt fugiat nisi?"
 						/>
-						<FFRadioButton
-							name={FIELD_NAME}
-							value="value_c"
-							label="Select Value C"
-						/>
-						<FFRadioButton
-							name={FIELD_NAME}
-							value="value_d"
-							label="Select Value D"
-							hint="Lorem, ipsum dolor sit amet consectetur adipisicing elit."
-						/>
-						<FFRadioButton
-							name={FIELD_NAME}
-							value="value_e"
-							label="Select Value E"
-						/>
+						<button type="submit" style={{ display: 'none' }}>
+							Submit
+						</button>
+					</form>
+				)}
+			</Form>
+		);
+	}}
+</Playground>
+
+### SeparatorY
+
+<Playground>
+	{() => {
+		const FIELD_NAME = 'radio_button';
+		return (
+			<Form onSubmit={console.log} initialValues={{ [FIELD_NAME]: 'value_b' }}>
+				{({ handleSubmit }) => (
+					<form onSubmit={handleSubmit}>
+						<SeparatorY>
+							<FFRadioButton
+								name={FIELD_NAME}
+								value="value_a"
+								label="Select Value A"
+							/>
+							<FFRadioButton
+								name={FIELD_NAME}
+								value="value_b"
+								label="Select Value B"
+								hint="Lorem, ipsum dolor sit amet consectetur adipisicing elit. Ea obcaecati repellat molestias nemo deleniti eveniet vel similique nesciunt fugiat nisi?"
+							/>
+							<FFRadioButton
+								name={FIELD_NAME}
+								value="value_c"
+								label="Select Value C"
+							/>
+							<FFRadioButton
+								name={FIELD_NAME}
+								value="value_d"
+								label="Select Value D"
+								hint="Lorem, ipsum dolor sit amet consectetur adipisicing elit."
+							/>
+							<FFRadioButton
+								name={FIELD_NAME}
+								value="value_e"
+								label="Select Value E"
+							/>
+						</SeparatorY>
+						<button type="submit" style={{ display: 'none' }}>
+							Submit
+						</button>
+					</form>
+				)}
+			</Form>
+		);
+	}}
+</Playground>
+
+### SeparatorX
+
+<Playground>
+	{() => {
+		const FIELD_NAME = 'radio_button';
+		return (
+			<Form onSubmit={console.log} initialValues={{ [FIELD_NAME]: 'value_b' }}>
+				{({ handleSubmit }) => (
+					<form onSubmit={handleSubmit}>
+						<SeparatorX>
+							<FFRadioButton
+								name={FIELD_NAME}
+								value="value_a"
+								label="Select Value A"
+								hint="Lorem, ipsum dolor sit amet consectetur adipisicing elit."
+							/>
+							<FFRadioButton
+								name={FIELD_NAME}
+								value="value_b"
+								label="Select Value B"
+							/>
+							<FFRadioButton
+								name={FIELD_NAME}
+								value="value_c"
+								label="Select Value C"
+							/>
+						</SeparatorX>
 						<button type="submit" style={{ display: 'none' }}>
 							Submit
 						</button>

@@ -1,13 +1,35 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Flex, P, Hr, H4, classNames } from '@tpr/core';
 import { UnderlinedButton } from '../../../components/button';
 import { Checkbox } from '@tpr/forms';
 import styles from './preview.module.scss';
 import { useEmployerContext } from '../../context';
 
+type IdentifiersItemProps = { title: string; number: string | number };
+const IdentifiersItem: React.FC<IdentifiersItemProps> = ({ title, number }) => {
+	return (
+		<>
+			<H4 cfg={{ lineHeight: 3 }}>{title}</H4>
+			<P>{number}</P>
+		</>
+	);
+};
+
 export const Preview: React.FC<any> = () => {
 	const { current, send, onCorrect, i18n } = useEmployerContext();
 	const { employer, complete } = current.context;
+	const [items] = useState(
+		[
+			{
+				title: i18n.preview.identifiers.companiesHouseNo,
+				number: employer.companiesHouseNumber,
+			},
+			{
+				title: i18n.preview.identifiers.registeredCharityNo,
+				number: employer.registeredCharityNumber,
+			},
+		].filter((item) => item.title && item.number),
+	);
 
 	return (
 		<div
@@ -31,8 +53,10 @@ export const Preview: React.FC<any> = () => {
 					cfg={{ width: 5, flex: '0 0 auto', flexDirection: 'column', pl: 4 }}
 				>
 					<UnderlinedButton>{i18n.preview.buttons.four}</UnderlinedButton>
-					<Flex cfg={{ my: 2, flexDirection: 'column' }}>
-						<P>{employer.companiesHouseNumber}</P>
+					<Flex cfg={{ mt: 1, flexDirection: 'column' }}>
+						{items.map((item, key) => (
+							<IdentifiersItem key={key} {...item} />
+						))}
 					</Flex>
 				</Flex>
 			</Flex>

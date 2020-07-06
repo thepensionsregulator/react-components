@@ -4,7 +4,7 @@ import { Content } from '../../../../components/content';
 import { ArrowButton } from '../../../../../buttons/buttons';
 import { useEmployerContext } from '../../../context';
 import { EmployerI18nProps } from '../../../i18n';
-import styles from './confirm.module.scss';
+import { WarningBox } from '../../../../../warning/warning';
 import {
 	Breadcrumbs,
 	BreadcrumbLink,
@@ -51,10 +51,7 @@ export const Confirm = () => {
 		>
 			<H3 cfg={{ mt: 3, fontWeight: 2 }}>{i18n.remove.confirm.title}</H3>
 			<Hr cfg={{ my: 4 }} />
-			<Flex
-				cfg={{ flexDirection: 'column', p: 4, my: 4 }}
-				className={styles.confirmBox}
-			>
+			<WarningBox>
 				<P>{i18n.remove.confirm.dialog.message1}</P>
 				<P cfg={{ my: 3 }}>{i18n.remove.confirm.dialog.message2}</P>
 				<Flex>
@@ -70,7 +67,7 @@ export const Confirm = () => {
 						{i18n.remove.confirm.buttons.cancel}
 					</Link>
 				</Flex>
-			</Flex>
+			</WarningBox>
 		</Content>
 	);
 };

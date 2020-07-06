@@ -52,6 +52,7 @@ export type EmployerProps = {
 	county: string;
 	postCode: string;
 	countryId: string;
+	effectiveDate: Date; // rename once name received
 };
 
 export const EmployerProvider = ({

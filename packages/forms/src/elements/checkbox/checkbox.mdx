@@ -7,6 +7,7 @@ route: /forms/checkbox
 import { Playground } from '@playground';
 import { Form } from 'react-final-form';
 import { FFCheckbox } from './checkbox';
+import { SeparatorY, SeparatorX } from '../separator';
 
 # Checkbox
 
@@ -41,23 +42,77 @@ import { FFCheckbox } from '@tpr/forms';
 
 [CodeSandbox](https://codesandbox.io)
 
+### No separator
+
 <Playground>
 	<Form onSubmit={console.log} initialValues={{ 'checkbox-c': true }}>
 		{({ handleSubmit }) => (
-			<form onSubmit={handleSubmit} style={{ width: 400, padding: 10 }}>
-				<FFCheckbox name="checkbox-a" label="Select option 1" />
+			<form onSubmit={handleSubmit}>
 				<FFCheckbox
-					name="checkbox-b"
-					label="Select option 2"
+					name="checkbox-a"
+					label="Select option 1"
 					hint="Lorem, ipsum dolor sit amet consectetur adipisicing elit. Ea obcaecati repellat molestias nemo deleniti eveniet vel similique nesciunt fugiat nisi?"
+					cfg={{ mb: 4 }}
 				/>
-				<FFCheckbox name="checkbox-c" label="Select option 3" />
-				<FFCheckbox
-					name="checkbox-d"
-					label="Select option 4"
-					hint="Lorem, ipsum dolor sit amet consectetur adipisicing elit."
-				/>
-				<FFCheckbox name="checkbox-e" label="Select option 5" />
+				<FFCheckbox name="checkbox-b" label="Select option 2" />
+				<button type="submit" style={{ display: 'none' }}>
+					Submit
+				</button>
+			</form>
+		)}
+	</Form>
+</Playground>
+
+### SeparatorY
+
+<Playground>
+	<Form onSubmit={console.log} initialValues={{ 'checkbox-c': true }}>
+		{({ handleSubmit }) => (
+			<form onSubmit={handleSubmit}>
+				<SeparatorY>
+					<FFCheckbox name="checkbox-a" label="Select option 1" />
+					<FFCheckbox
+						name="checkbox-b"
+						label="Select option 2"
+						hint="Lorem, ipsum dolor sit amet consectetur adipisicing elit. Ea obcaecati repellat molestias nemo deleniti eveniet vel similique nesciunt fugiat nisi?"
+					/>
+					<FFCheckbox name="checkbox-c" label="Select option 3" />
+					<FFCheckbox
+						name="checkbox-d"
+						label="Select option 4"
+						hint="Lorem, ipsum dolor sit amet consectetur adipisicing elit."
+					/>
+					<FFCheckbox name="checkbox-e" label="Select option 5" />
+				</SeparatorY>
+				<button type="submit" style={{ display: 'none' }}>
+					Submit
+				</button>
+			</form>
+		)}
+	</Form>
+</Playground>
+
+### SeparatorX
+
+<Playground>
+	<Form onSubmit={console.log} initialValues={{ 'checkbox-c': true }}>
+		{({ handleSubmit }) => (
+			<form onSubmit={handleSubmit}>
+				<SeparatorX>
+					<FFCheckbox name="checkbox-a" label="Select option 1" />
+					<FFCheckbox
+						name="checkbox-b"
+						label="Select option 2"
+						hint="Lorem, ipsum dolor sit amet consectetur adipisicing elit. Ea obcaecati repellat molestias nemo deleniti eveniet vel similique nesciunt fugiat nisi?"
+					/>
+					<FFCheckbox name="checkbox-c" label="Select option 3" />
+					<FFCheckbox
+						name="checkbox-d"
+						label="Select option 4"
+						hint="Lorem, ipsum dolor sit amet consectetur adipisicing elit."
+					/>
+					<FFCheckbox name="checkbox-e" label="Select option 5" />
+				</SeparatorX>
 				<button type="submit" style={{ display: 'none' }}>
 					Submit
 				</button>
