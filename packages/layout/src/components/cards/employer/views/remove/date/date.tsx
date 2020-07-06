@@ -19,7 +19,10 @@ export const DateForm = () => {
 				[FORM_ERROR]: i18n.remove.date.errors.formIncomplete,
 			};
 		} else if (
-			isBefore(toDate(new Date(values.date)), toDate(employer.effectiveDate))
+			isBefore(
+				toDate(new Date(values.date)),
+				toDate(new Date(employer.effectiveDate)),
+			)
 		) {
 			return {
 				[FORM_ERROR]: i18n.remove.date.errors.dateAddedBeforeEffectiveDate,
