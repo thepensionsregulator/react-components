@@ -14,7 +14,7 @@ import { isEqual } from 'lodash';
 // as it will be stored in the localStorage.
 
 // NOTE: active status vertical line is fixed height at 42px and is ok for single lined links
-// but on double line links it looks too shourt. This one is for Jodi I guess...
+// but on double line links it looks too short. This one is for Jodi I guess...
 
 type SidebarMenuProps = { title: string; links: SidebarLinkProps[] };
 const SidebarMenu: React.FC<SidebarMenuProps> = ({ title, links }) => {
@@ -70,10 +70,16 @@ export type SidebarProps = {
 	sections: SidebarSectionProps[];
 };
 
+export function calculateProgress(sections: SidebarSectionProps[]) {
+	const totalSections = sections.map((section) => section.links).flat();
+	const totalCompleted = totalSections.filter((section) => section.completed);
+
+	return [totalSections, totalCompleted];
+}
+
 export const Sidebar: React.FC<SidebarProps> = memo(
 	({ title, sections }) => {
-		const totalSections = sections.map((section) => section.links).flat();
-		const totalCompleted = totalSections.filter((section) => section.completed);
+		const [totalSections, totalCompleted] = calculateProgress(sections);
 
 		return (
 			<div className={styles.sidebar}>
