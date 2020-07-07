@@ -5,6 +5,7 @@ route: /layout/sidebar
 ---
 
 import { Playground } from '@playground';
+import { Props } from 'docz';
 import { Sidebar } from './sidebar';
 
 # Sidebar
@@ -18,5 +19,49 @@ import { Sidebar } from '@tpr/layout';
 ```
 
 <Playground>
-	<Sidebar />
+	{() => {
+		const sections = [
+			{
+				title: 'Scheme details',
+				links: [
+					{
+						name: 'Scheme name and address',
+						completed: true,
+						onClick: (link) => alert(`You clicked on ${link.name}`),
+					},
+					{
+						name: 'Scheme status and membership',
+						onClick: (link) => alert(`You clicked on ${link.name}`),
+					},
+					{
+						name: 'Consent to electronic comunication',
+						onClick: (link) => alert(`You clicked on ${link.name}`),
+					},
+				],
+				order: 1,
+			},
+			{
+				title: 'Roles',
+				links: [
+					{ name: 'Trustee details', completed: true, active: true },
+					{ name: 'Employer details' },
+					{ name: 'Service provider details' },
+					{ name: 'Named contact details', completed: true },
+				],
+				order: 2,
+			},
+			{
+				title: 'Finish up',
+				links: [
+					{ name: 'Review and submit', completed: false, disabled: true },
+				],
+				order: 3,
+			},
+		];
+		return <Sidebar title="Scheme return home" sections={sections} />;
+	}}
 </Playground>
+
+## API
+
+<Props of={Sidebar} />
