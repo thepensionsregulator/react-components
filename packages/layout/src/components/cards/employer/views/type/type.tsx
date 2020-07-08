@@ -6,9 +6,10 @@ import { Footer } from '../../../components/card';
 import { useEmployerContext } from '../../context';
 import { ArrowButton } from '../../../../buttons/buttons';
 import { EmployerI18nProps } from '../../i18n';
+import { RecursivePartial } from '../../context';
 
 const getFields = (
-	labels: EmployerI18nProps['type']['fields'],
+	labels: RecursivePartial<EmployerI18nProps['type']['fields']>,
 ): FieldProps[] => [
 	{
 		type: 'radio',
@@ -39,7 +40,7 @@ const getFields = (
 export const EmployerType = () => {
 	const [loading, setLoading] = useState(false);
 	const { send, current, i18n, onSaveType } = useEmployerContext();
-	const fields = getFields(i18n.type.fields);
+	const fields = getFields(i18n?.type?.fields);
 	const { employer } = current.context;
 
 	async function onSubmit(values) {

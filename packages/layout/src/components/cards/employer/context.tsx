@@ -23,7 +23,7 @@ export interface EmployerContextProps
 	current: Partial<State<EC, any, any, any>>;
 }
 
-type RecursivePartial<T> = {
+export type RecursivePartial<T> = {
 	[P in keyof T]?: RecursivePartial<T[P]>;
 };
 
