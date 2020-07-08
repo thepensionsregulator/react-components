@@ -9,7 +9,7 @@ import {
 	BreadcrumbLink,
 } from '../../../../components/breadcrumbs';
 
-const getBreadcrumbLinks = ({ link1, link2 }): BreadcrumbLink[] => [
+const getBreadcrumbLinks = ({ link1, link2 }: any): BreadcrumbLink[] => [
 	{
 		to: 'BACK',
 		underline: true,
@@ -24,7 +24,9 @@ const getBreadcrumbLinks = ({ link1, link2 }): BreadcrumbLink[] => [
 const RemoveConfirm: React.FC = () => {
 	const [loading, setLoading] = useState(false);
 	const { current, send, onRemove, i18n } = useTrusteeContext();
-	const breadcrumbLinks = getBreadcrumbLinks(i18n.remove.confirm.breadcrumbs);
+	const breadcrumbLinks = getBreadcrumbLinks(
+		i18n?.remove?.confirm?.breadcrumbs,
+	);
 	const { trustee, remove } = current.context;
 
 	function handleRemove() {

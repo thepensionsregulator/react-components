@@ -23,6 +23,10 @@ export interface EmployerContextProps
 	current: Partial<State<EC, any, any, any>>;
 }
 
+export type RecursivePartial<T> = {
+	[P in keyof T]?: RecursivePartial<T[P]>;
+};
+
 export interface EmployerProviderProps {
 	complete?: boolean;
 	onCorrect?: (...args: any[]) => void;
@@ -31,7 +35,7 @@ export interface EmployerProviderProps {
 	testId?: string;
 	employer: Partial<EmployerProps>;
 	children?: RenderProps | ReactElement;
-	i18n?: Partial<EmployerI18nProps>;
+	i18n?: RecursivePartial<EmployerI18nProps>;
 	cfg?: SpaceProps;
 }
 
@@ -43,8 +47,8 @@ export type EmployerProps = {
 		| 'principal-and-participating';
 	organisationReference: number;
 	organisationName: string;
-	companiesHouseNumber: number;
-	registeredCharityNumber: number;
+	companiesHouseNumber: number | string;
+	registeredCharityNumber: number | string;
 	addressLine1: string;
 	addressLine2: string;
 	addressLine3: string;

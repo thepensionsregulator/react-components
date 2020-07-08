@@ -11,7 +11,7 @@ import {
 } from '../../../../components/breadcrumbs';
 
 const getBreadcrumbLinks = (
-	labels: EmployerI18nProps['remove']['confirm']['breadcrumbs'],
+	labels: Partial<EmployerI18nProps['remove']['confirm']['breadcrumbs']>,
 ): BreadcrumbLink[] => [
 	{
 		to: 'BACK',
@@ -27,7 +27,9 @@ const getBreadcrumbLinks = (
 export const Confirm = () => {
 	const [loading, setLoading] = useState(false);
 	const { current, send, onRemove, i18n } = useEmployerContext();
-	const breadcrumbLinks = getBreadcrumbLinks(i18n.remove.confirm.breadcrumbs);
+	const breadcrumbLinks = getBreadcrumbLinks(
+		i18n?.remove?.confirm?.breadcrumbs,
+	);
 	const { employer, remove } = current.context;
 
 	async function handleRemove() {

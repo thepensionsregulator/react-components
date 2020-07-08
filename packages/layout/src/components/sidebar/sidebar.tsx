@@ -16,47 +16,55 @@ import { isEqual } from 'lodash';
 // NOTE: active status vertical line is fixed height at 42px and is ok for single lined links
 // but on double line links it looks too short. This one is for Jodi I guess...
 
+export function isActive(_path: string): boolean {
+	return false;
+}
+
 type SidebarMenuProps = { title: string; links: SidebarLinkProps[] };
 const SidebarMenu: React.FC<SidebarMenuProps> = ({ title, links }) => {
 	return (
 		<Flex cfg={{ flexDirection: 'column' }} className={styles.sidebarMenu}>
 			<H3 cfg={{ fontWeight: 2, mt: 4 }}>{title}</H3>
 			<Hr cfg={{ my: 4 }} />
-			{links.map(({ onClick = () => {}, ...link }, key) => (
-				<Flex key={key} cfg={{ justifyContent: 'space-between', mb: 4 }}>
-					<Link
-						cfg={{
-							color: 'primary.2',
-							textAlign: 'left',
-							fontWeight: 3,
-							width: 8,
-						}}
-						disabled={link.disabled}
-						underline={link.active}
-						className={link.active ? styles.activeLink : undefined}
-						onClick={() => onClick(link)}
-					>
-						{link.name}
-					</Link>
-					{link.completed ? (
-						<CheckedCircle cfg={{ fill: 'success.1' }} />
-					) : (
-						<ErrorCircle
-							cfg={{ fill: link.disabled ? 'danger.1' : 'danger.2' }}
-						/>
-					)}
-				</Flex>
-			))}
+			{links.map(
+				({ onClick = () => {}, active = () => false, ...link }, key) => (
+					<Flex key={key} cfg={{ justifyContent: 'space-between', mb: 5 }}>
+						<Link
+							cfg={{
+								color: 'primary.2',
+								textAlign: 'left',
+								fontWeight: 3,
+								width: 8,
+							}}
+							disabled={link.disabled}
+							underline={active(link.path)}
+							className={active(link.path) ? styles.activeLink : undefined}
+							onClick={() => onClick(link)}
+						>
+							{link.name}
+						</Link>
+						{link.completed ? (
+							<CheckedCircle cfg={{ fill: 'success.1' }} />
+						) : (
+							<ErrorCircle
+								cfg={{ fill: link.disabled ? 'danger.1' : 'danger.2' }}
+							/>
+						)}
+					</Flex>
+				),
+			)}
 		</Flex>
 	);
 };
 
 export type SidebarLinkProps = {
 	name: string;
+	/** route url path for react router */
+	path: string;
 	completed?: boolean;
 	onClick?: (link: Omit<SidebarLinkProps, 'onClick'>) => void;
 	disabled?: boolean;
-	active?: boolean;
+	active?: (path: string) => boolean;
 };
 
 export type SidebarSectionProps = {
@@ -83,7 +91,10 @@ export const Sidebar: React.FC<SidebarProps> = memo(
 
 		return (
 			<div className={styles.sidebar}>
-				<Flex cfg={{ flexDirection: 'column' }} className={styles.sidebarMenu}>
+				<Flex
+					cfg={{ flexDirection: 'column', mt: 4 }}
+					className={styles.sidebarMenu}
+				>
 					<H3 cfg={{ fontWeight: 3, color: 'primary.2' }}>{title}</H3>
 					<Flex cfg={{ justifyContent: 'space-between', mt: 4, mb: 2 }}>
 						<P>Section</P>

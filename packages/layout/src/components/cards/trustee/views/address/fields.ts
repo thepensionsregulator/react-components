@@ -2,7 +2,7 @@ import { FieldProps } from '@tpr/forms';
 import { TrusteeI18nProps } from '../../i18n';
 
 export const getFields = (
-	labels: TrusteeI18nProps['address']['manual']['fields'],
+	labels: Partial<TrusteeI18nProps['address']['manual']['fields']>,
 ): FieldProps[] => [
 	{
 		name: 'addressLine1',

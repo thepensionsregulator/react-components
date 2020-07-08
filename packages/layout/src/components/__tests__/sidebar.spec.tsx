@@ -14,15 +14,18 @@ const s1: SidebarSectionProps = {
 		{
 			name: 'Scheme name and address',
 			completed: true,
-			onClick: (link) => console.log(`You clicked on ${link.name}`),
+			onClick: (link) => alert(`You clicked on ${link.path}`),
+			path: '/scheme-name-and-address',
 		},
 		{
 			name: 'Scheme status and membership',
-			onClick: (link) => console.log(`You clicked on ${link.name}`),
+			onClick: (link) => alert(`You clicked on ${link.path}`),
+			path: '/scheme-status-and-membership',
 		},
 		{
-			name: 'Consent to electronic comunication',
-			onClick: (link) => console.log(`You clicked on ${link.name}`),
+			name: 'Consent to electronic communication',
+			onClick: (link) => alert(`You clicked on ${link.path}`),
+			path: '/consent-to-electronic-communication',
 		},
 	],
 	order: 1,
@@ -30,16 +33,35 @@ const s1: SidebarSectionProps = {
 const s2: SidebarSectionProps = {
 	title: 'Roles',
 	links: [
-		{ name: 'Trustee details', completed: true, active: true },
-		{ name: 'Employer details' },
-		{ name: 'Service provider details' },
-		{ name: 'Named contact details', completed: true },
+		{
+			name: 'Trustee details',
+			completed: true,
+			active: () => true,
+			path: '/trustee-details',
+		},
+		{ name: 'Employer details', path: '/employer-details' },
+		{
+			name: 'Service provider details',
+			path: '/service-provider-details',
+		},
+		{
+			name: 'Named contact details',
+			completed: true,
+			path: '/name-contact-details',
+		},
 	],
 	order: 2,
 };
 const s3: SidebarSectionProps = {
 	title: 'Finish up',
-	links: [{ name: 'Review and submit', completed: false, disabled: true }],
+	links: [
+		{
+			name: 'Review and submit',
+			completed: false,
+			disabled: true,
+			path: '/review-and-submit',
+		},
+	],
 	order: 3,
 };
 
