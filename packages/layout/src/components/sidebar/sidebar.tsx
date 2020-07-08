@@ -16,7 +16,7 @@ import { isEqual } from 'lodash';
 // NOTE: active status vertical line is fixed height at 42px and is ok for single lined links
 // but on double line links it looks too short. This one is for Jodi I guess...
 
-export function isActive(path: string): boolean {
+export function isActive(_path: string): boolean {
 	return false;
 }
 

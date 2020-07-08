@@ -36,7 +36,7 @@ const s2: SidebarSectionProps = {
 		{
 			name: 'Trustee details',
 			completed: true,
-			active: true,
+			active: () => true,
 			path: '/trustee-details',
 		},
 		{ name: 'Employer details', path: '/employer-details' },
