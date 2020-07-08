@@ -1,24 +1,43 @@
-import React, { memo } from 'react';
+import React, { useMemo } from 'react';
 import { H3, Flex, Hr, Link, P } from '@tpr/core';
 import { CheckedCircle, ErrorCircle } from '@tpr/icons';
 import styles from './sidebar.module.scss';
-import { isEqual } from 'lodash';
 
-// react router Link isActive
-// const isActive = !!(isActiveProp ? isActiveProp(match, currentLocation) : match);
-// https://github.com/ReactTraining/react-router/blob/master/packages/react-router-dom/modules/NavLink.js
-
-// NOTE: if decided to keep track of the progress in the browser with no API relation
-// we'll need to create app context for the status of the completion
-// but need to keep in mind that the completion status will only be valid on that same browser
-// as it will be stored in the localStorage.
-
-// NOTE: active status vertical line is fixed height at 42px and is ok for single lined links
-// but on double line links it looks too short. This one is for Jodi I guess...
-
-export function isActive(_path: string): boolean {
-	return false;
+function callAllEventHandlers(...fns: Function[]) {
+	return (event: unknown, ...args: unknown[]) =>
+		fns.some((fn) => fn && fn(event, ...args));
 }
+
+type ReactRouterDomProps = { history: any; matchPath: any; location: any };
+export const useSectionsUpdater = (
+	sections: SidebarSectionProps[],
+	{ history, matchPath, location }: ReactRouterDomProps,
+): SidebarSectionProps[] => {
+	return sections.reduce<SidebarSectionProps[]>((accumulator, section) => {
+		return [
+			...accumulator,
+			{
+				...section,
+				links: section.links.map((link) => ({
+					...link,
+					onClick: callAllEventHandlers(
+						({ path }) => history.push(path),
+						link.onClick,
+					),
+					active: isActive({ matchPath, location }),
+				})),
+			},
+		];
+	}, []);
+};
+
+export const isActive = (settings: { matchPath: any; location: any }) => (
+	path: string,
+): boolean => {
+	const { matchPath = () => {}, location } = settings;
+	const matched = matchPath(location.pathname, { path });
+	return matched ? true : false;
+};
 
 type SidebarMenuProps = { title: string; links: SidebarLinkProps[] };
 const SidebarMenu: React.FC<SidebarMenuProps> = ({ title, links }) => {
@@ -59,7 +78,7 @@ const SidebarMenu: React.FC<SidebarMenuProps> = ({ title, links }) => {
 
 export type SidebarLinkProps = {
 	name: string;
-	/** route url path for react router */
+	/** route url path for react router, must match with Route path that is already declared */
 	path: string;
 	completed?: boolean;
 	onClick?: (link: Omit<SidebarLinkProps, 'onClick'>) => void;
@@ -73,43 +92,60 @@ export type SidebarSectionProps = {
 	order: number;
 };
 
-export type SidebarProps = {
-	title: string;
-	sections: SidebarSectionProps[];
-};
-
-export function calculateProgress(sections: SidebarSectionProps[]) {
-	const totalSections = sections.map((section) => section.links).flat();
-	const totalCompleted = totalSections.filter((section) => section.completed);
+export function useCalculateProgress(sections: SidebarSectionProps[]) {
+	const totalSections = useMemo(
+		() => sections.map((section) => section.links).flat(),
+		[sections],
+	);
+	const totalCompleted = useMemo(
+		() => totalSections.filter((section) => section.completed),
+		[totalSections],
+	);
 
 	return [totalSections, totalCompleted];
 }
 
-export const Sidebar: React.FC<SidebarProps> = memo(
-	({ title, sections }) => {
-		const [totalSections, totalCompleted] = calculateProgress(sections);
+export type SidebarProps = {
+	title: string;
+	sections: SidebarSectionProps[];
+	/** import from react-router-dom */
+	matchPath: any;
+	/** import from react-router-dom */
+	location: any;
+	/** import from react-router-dom */
+	history: any;
+};
 
-		return (
-			<div className={styles.sidebar}>
-				<Flex
-					cfg={{ flexDirection: 'column', mt: 4 }}
-					className={styles.sidebarMenu}
-				>
-					<H3 cfg={{ fontWeight: 3, color: 'primary.2' }}>{title}</H3>
-					<Flex cfg={{ justifyContent: 'space-between', mt: 4, mb: 2 }}>
-						<P>Section</P>
-						<P>
-							Progress {totalCompleted.length} / {totalSections.length}
-						</P>
-					</Flex>
+export const Sidebar: React.FC<SidebarProps> = ({
+	title,
+	sections: originalSections,
+	matchPath,
+	location,
+	history,
+}) => {
+	const routerProps = { matchPath, location, history };
+	const sections = useSectionsUpdater(originalSections, routerProps);
+	const [totalSections, totalCompleted] = useCalculateProgress(sections);
+
+	return (
+		<div className={styles.sidebar}>
+			<Flex
+				cfg={{ flexDirection: 'column', mt: 4 }}
+				className={styles.sidebarMenu}
+			>
+				<H3 cfg={{ fontWeight: 3, color: 'primary.2' }}>{title}</H3>
+				<Flex cfg={{ justifyContent: 'space-between', mt: 4, mb: 2 }}>
+					<P>Section</P>
+					<P>
+						Progress {totalCompleted.length} / {totalSections.length}
+					</P>
 				</Flex>
-				{sections
-					.sort((a, b) => a.order - b.order)
-					.map((item, key) => (
-						<SidebarMenu key={key} title={item.title} links={item.links} />
-					))}
-			</div>
-		);
-	},
-	(a, b) => isEqual(a.sections, b.sections),
-);
+			</Flex>
+			{sections
+				.sort((a, b) => a.order - b.order)
+				.map((item, key) => (
+					<SidebarMenu key={key} title={item.title} links={item.links} />
+				))}
+		</div>
+	);
+};
