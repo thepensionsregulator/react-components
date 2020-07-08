@@ -54,12 +54,16 @@ export type AddressAPIType = {
 	limit: number;
 };
 
+type RecursivePartial<T> = {
+	[P in keyof T]?: RecursivePartial<T[P]>;
+};
+
 export interface TrusteeContextProps {
 	complete?: boolean;
 	testId?: string;
 	children?: RenderProps | ReactElement;
 	cfg?: SpaceProps;
-	i18n: Partial<TrusteeI18nProps>;
+	i18n: RecursivePartial<TrusteeI18nProps>;
 	onRemove: (...args: any[]) => Promise<any>;
 	onCorrect: (...args: any[]) => void;
 	send: (event: any, payload?: EventData) => Partial<State<TC, any, any, any>>;
