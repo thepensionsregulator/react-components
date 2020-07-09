@@ -1,10 +1,10 @@
 import React from 'react';
-// import '@testing-library/jest-dom/extend-expect';
 import { render } from '@testing-library/react';
+import { renderHook } from '@testing-library/react-hooks';
 import {
 	Sidebar,
 	SidebarSectionProps,
-	calculateProgress,
+	useCalculateProgress,
 } from '../sidebar/sidebar';
 import { axe } from 'jest-axe';
 
@@ -70,7 +70,13 @@ const sections = [s1, s2, s3];
 describe('Sidebar', () => {
 	test('Sidebar is accessible', async () => {
 		const { container } = render(
-			<Sidebar title="Scheme return home" sections={sections} />,
+			<Sidebar
+				title="Scheme return home"
+				sections={sections}
+				matchPath={() => {}}
+				location={{}}
+				history={{ push: () => {} }}
+			/>,
 		);
 		const results = await axe(container);
 		expect(results).toHaveNoViolations();
@@ -78,14 +84,30 @@ describe('Sidebar', () => {
 
 	test('Sidebar renders title', () => {
 		const title = 'Scheme return home';
-		const { getByText } = render(<Sidebar title={title} sections={sections} />);
+		const { getByText } = render(
+			<Sidebar
+				title={title}
+				sections={sections}
+				matchPath={() => {}}
+				location={{}}
+				history={{ push: () => {} }}
+			/>,
+		);
 		expect(getByText(title)).toBeInTheDocument();
 		expect(true).toBeTruthy();
 	});
 
 	test('Sidebar calculates and displays progress correctly', () => {
 		const title = 'Scheme return home';
-		const { getByText } = render(<Sidebar title={title} sections={sections} />);
+		const { getByText } = render(
+			<Sidebar
+				title={title}
+				sections={sections}
+				matchPath={() => {}}
+				location={{}}
+				history={{ push: () => {} }}
+			/>,
+		);
 		// debug();
 		const progressText = getByText((content) => content.startsWith('Progress'));
 		const [currentProgress, totalProgress] = progressText.textContent
@@ -93,7 +115,8 @@ describe('Sidebar', () => {
 			.map((value) => parseInt(value))
 			.filter(Boolean);
 
-		const [totalSections, totalCompleted] = calculateProgress(sections);
+		const { result } = renderHook(() => useCalculateProgress(sections));
+		const [totalSections, totalCompleted] = result.current;
 
 		expect(currentProgress).toEqual(totalCompleted.length);
 		expect(totalProgress).toEqual(totalSections.length);

@@ -78,7 +78,15 @@ import { Sidebar } from '@tpr/layout';
 				order: 3,
 			},
 		];
-		return <Sidebar title="Scheme return home" sections={sections} />;
+		return (
+			<Sidebar
+				title="Scheme return home"
+				sections={sections}
+				matchPath={() => {}}
+				location={{}}
+				history={{ push: () => {} }}
+			/>
+		);
 	}}
 </Playground>
 

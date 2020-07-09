@@ -103,5 +103,3 @@ export const Employer: React.FC<EmployerProviderProps> = ({
 		</EmployerProvider>
 	);
 };
-
-export { EmployerProps };
