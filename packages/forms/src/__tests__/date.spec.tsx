@@ -2,10 +2,31 @@ import { formSetup } from '../__mocks__/setup';
 import { renderFields, validate } from '../index';
 import { FieldProps } from '../renderFields';
 import userEvent from '@testing-library/user-event';
+import { axe } from 'jest-axe';
 
 // TODO: write more test when there are clear specs for date input validation
 
 describe('Date', () => {
+	test('is accessible', async () => {
+		const fields: FieldProps[] = [
+			{
+				name: 'date-1',
+				label: 'passport-expiry',
+				hint: 'For example, 12 11 2007',
+				type: 'date',
+				required: true,
+			},
+		];
+		const handleSubmit = jest.fn();
+		const { container } = formSetup({
+			render: renderFields(fields),
+			validate: validate(fields),
+			onSubmit: handleSubmit,
+		});
+		const results = await axe(container);
+		expect(results).toHaveNoViolations();
+	});
+
 	test('date fields accepts only numbers', () => {
 		const fields: FieldProps[] = [
 			{

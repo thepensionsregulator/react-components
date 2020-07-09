@@ -1,7 +1,7 @@
 import React from 'react';
-// import '@testing-library/jest-dom/extend-expect';
 import { render } from '@testing-library/react';
 import { Trustee } from '../cards/trustee/trustee';
+import { axe } from 'jest-axe';
 
 // TODO
 
@@ -32,6 +32,29 @@ const trustee = {
 };
 
 describe('Trustee Preview', () => {
+	test('preview is accessible', async () => {
+		const callbackFn = () => Promise.resolve();
+		const { container } = render(
+			<Trustee
+				onDetailsSave={callbackFn}
+				onContactSave={callbackFn}
+				onAddressSave={callbackFn}
+				onRemove={callbackFn}
+				onCorrect={(_value) => {}}
+				addressAPI={{
+					get: (_endpont) => Promise.resolve(),
+					limit: 100,
+				}}
+				complete={true}
+				trustee={trustee}
+				testId={trustee.schemeRoleId}
+			/>,
+		);
+
+		const results = await axe(container);
+		expect(results).toHaveNoViolations();
+	});
+
 	test('buttons renders correctly', () => {
 		const callbackFn = () => Promise.resolve();
 		const { getByText } = render(

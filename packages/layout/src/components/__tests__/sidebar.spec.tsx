@@ -68,7 +68,7 @@ const s3: SidebarSectionProps = {
 const sections = [s1, s2, s3];
 
 describe('Sidebar', () => {
-	test('Sidebar is accessible', async () => {
+	test('is accessible', async () => {
 		const { container } = render(
 			<Sidebar
 				title="Scheme return home"
@@ -82,7 +82,7 @@ describe('Sidebar', () => {
 		expect(results).toHaveNoViolations();
 	});
 
-	test('Sidebar renders title', () => {
+	test('renders title', () => {
 		const title = 'Scheme return home';
 		const { getByText } = render(
 			<Sidebar
@@ -97,7 +97,7 @@ describe('Sidebar', () => {
 		expect(true).toBeTruthy();
 	});
 
-	test('Sidebar calculates and displays progress correctly', () => {
+	test('calculates and displays progress correctly', () => {
 		const title = 'Scheme return home';
 		const { getByText } = render(
 			<Sidebar
@@ -108,7 +108,7 @@ describe('Sidebar', () => {
 				history={{ push: () => {} }}
 			/>,
 		);
-		// debug();
+
 		const progressText = getByText((content) => content.startsWith('Progress'));
 		const [currentProgress, totalProgress] = progressText.textContent
 			.split(' ')

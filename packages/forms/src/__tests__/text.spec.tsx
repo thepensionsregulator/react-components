@@ -4,8 +4,19 @@ import { formSetup } from '../__mocks__/setup';
 import { FFInputText } from '../elements/text/text';
 import { validate, renderFields } from '../index';
 import { FieldProps } from '../renderFields';
+import { axe } from 'jest-axe';
 
 describe('Text', () => {
+	test('is accessible', async () => {
+		const { container } = formSetup({
+			render: (
+				<FFInputText label="Name" testId="text-input" name="name" type="text" />
+			),
+		});
+		const results = await axe(container);
+		expect(results).toHaveNoViolations();
+	});
+
 	test('renders label', () => {
 		const { queryByTestId } = formSetup({
 			render: (

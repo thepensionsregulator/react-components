@@ -3,8 +3,38 @@ import { formSetup } from '../__mocks__/setup';
 import { FFRadioButton } from '../elements/radio/radio';
 import { renderFields } from '../index';
 import { fireEvent } from '@testing-library/react';
+import { axe } from 'jest-axe';
 
 describe('RadioButton', () => {
+	test('is accessible', async () => {
+		const handleSubmit = jest.fn();
+		const { container } = formSetup({
+			render: renderFields([
+				{
+					name: 'radio_button',
+					label: 'Click me 1',
+					type: 'radio',
+					value: 'radio_1',
+				},
+				{
+					name: 'radio_button',
+					label: 'Click me 2',
+					type: 'radio',
+					value: 'radio_2',
+				},
+				{
+					name: 'radio_button',
+					label: 'Click me 3',
+					type: 'radio',
+					value: 'radio_3',
+				},
+			]),
+			onSubmit: handleSubmit,
+		});
+		const results = await axe(container);
+		expect(results).toHaveNoViolations();
+	});
+
 	test('checked value being captured in state', () => {
 		const handleSubmit = jest.fn();
 		const { container, getByLabelText, form } = formSetup({

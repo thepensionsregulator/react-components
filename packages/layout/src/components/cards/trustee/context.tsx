@@ -54,7 +54,7 @@ export type AddressAPIType = {
 	limit: number;
 };
 
-type RecursivePartial<T> = {
+export type RecursivePartial<T> = {
 	[P in keyof T]?: RecursivePartial<T[P]>;
 };
 
