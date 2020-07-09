@@ -1,8 +1,34 @@
 import React from 'react';
 import { formSetup } from '../__mocks__/setup';
 import { FFSelect } from '../elements/select/select';
+import { axe } from 'jest-axe';
 
 describe('Select', () => {
+	test('is accessible', async () => {
+		const testId = 'select-input';
+		const items = [
+			{ label: 'apple', value: 'apple' },
+			{ label: 'pear', value: 'pear' },
+			{ label: 'orange', value: 'orange' },
+			{ label: 'grape', value: 'grape' },
+			{ label: 'banana', value: 'banana' },
+		];
+		const { container } = formSetup({
+			render: (
+				<FFSelect
+					label="Select your favourite fruit"
+					testId={testId}
+					name="fruits"
+					error="required"
+					required={true}
+					options={items}
+				/>
+			),
+		});
+		const results = await axe(container);
+		expect(results).toHaveNoViolations();
+	});
+
 	test('on button click opens the dropdown', () => {
 		const testId = 'select-input';
 		const items = [

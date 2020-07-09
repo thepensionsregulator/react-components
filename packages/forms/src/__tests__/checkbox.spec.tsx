@@ -3,8 +3,24 @@ import { formSetup } from '../__mocks__/setup';
 import { FFCheckbox } from '../elements/checkbox/checkbox';
 import { renderFields } from '../renderFields';
 import { fireEvent } from '@testing-library/react';
+import { axe } from 'jest-axe';
 
 describe('Checkbox', () => {
+	test('is accessible', async () => {
+		const handleSubmit = jest.fn();
+		const { container } = formSetup({
+			render: renderFields([
+				{ label: 'Click me 1', name: 'checkbox-1', type: 'checkbox' },
+				{ label: 'Click me 2', name: 'checkbox-2', type: 'checkbox' },
+				{ label: 'Click me 3', name: 'checkbox-3', type: 'checkbox' },
+				{ label: 'Click me 4', name: 'checkbox-4', type: 'checkbox' },
+			]),
+			onSubmit: handleSubmit,
+		});
+		const results = await axe(container);
+		expect(results).toHaveNoViolations();
+	});
+
 	test('checked values being captured in state', () => {
 		const handleSubmit = jest.fn();
 		const { container, getByLabelText, form } = formSetup({

@@ -4,35 +4,39 @@ import { useTrusteeContext } from '../../context';
 import { Footer } from '../../../components/card';
 import { Content } from '../../../components/content';
 import { ArrowButton } from '../../../../buttons/buttons';
+import { TrusteeI18nProps } from '../../i18n';
+import { RecursivePartial } from '../../context';
 
-const getFields = ({ fields }: any): FieldProps[] => [
+const getFields = (
+	fields: RecursivePartial<TrusteeI18nProps['name']['fields']>,
+): FieldProps[] => [
 	{
 		name: 'title',
 		type: 'text',
-		label: fields.title,
+		label: fields.title.label,
 		inputWidth: 1,
 		cfg: { mb: 4 },
 	},
 	{
 		name: 'firstname',
 		type: 'text',
-		label: fields.firstName,
-		error: 'field is required',
+		label: fields.firstName.label,
+		error: fields.firstName.error,
 		inputWidth: 6,
 		cfg: { mb: 4 },
 	},
 	{
 		name: 'lastname',
 		type: 'text',
-		label: fields.lastName,
-		error: 'field is required',
+		label: fields.lastName.label,
+		error: fields.lastName.error,
 		inputWidth: 6,
 	},
 ];
 
 const Name: React.FC = () => {
 	const { current, send, i18n } = useTrusteeContext();
-	const fields = getFields(i18n.name);
+	const fields = getFields(i18n.name.fields);
 	const state = current.context.trustee;
 
 	const onSubmit = (values) => {

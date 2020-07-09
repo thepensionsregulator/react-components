@@ -1,9 +1,23 @@
 import React from 'react';
-// import '@testing-library/jest-dom/extend-expect';
 import { render } from '@testing-library/react';
 import { Footer } from '../footer/footer';
+import { axe } from 'jest-axe';
 
 describe('Footer', () => {
+	test('is accessible', async () => {
+		const links = [
+			{ title: 'b-link number 1', url: '#' },
+			{ title: 'b-link number 2', url: '#' },
+			{ title: 'b-link number 3', url: '#' },
+		];
+		const { container } = render(
+			<Footer links={links} onLinkClickHandler={() => {}} />,
+		);
+
+		const results = await axe(container);
+		expect(results).toHaveNoViolations();
+	});
+
 	test('it renders with links', () => {
 		const links = [
 			{ title: 'b-link number 1', url: '#' },
