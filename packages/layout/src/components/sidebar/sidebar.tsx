@@ -1,5 +1,5 @@
 import React, { useMemo } from 'react';
-import { H3, Flex, Hr, Link, P } from '@tpr/core';
+import { H3, Flex, Hr, Link, P, flatten } from '@tpr/core';
 import { CheckedCircle, ErrorCircle } from '@tpr/icons';
 import styles from './sidebar.module.scss';
 
@@ -39,8 +39,24 @@ export const isActive = (settings: { matchPath: any; location: any }) => (
 	return matched ? true : false;
 };
 
-type SidebarMenuProps = { title: string; links: SidebarLinkProps[] };
-const SidebarMenu: React.FC<SidebarMenuProps> = ({ title, links }) => {
+const StatusIcon: React.FC<{ link: SidebarLinkProps }> = ({ link }) => {
+	return link.completed ? (
+		<CheckedCircle cfg={{ fill: 'success.1' }} />
+	) : (
+		<ErrorCircle cfg={{ fill: link.disabled ? 'danger.1' : 'danger.2' }} />
+	);
+};
+
+type SidebarMenuProps = {
+	title: string;
+	links: SidebarLinkProps[];
+	maintenanceMode: boolean;
+};
+const SidebarMenu: React.FC<SidebarMenuProps> = ({
+	title,
+	links,
+	maintenanceMode,
+}) => {
 	return (
 		<Flex cfg={{ flexDirection: 'column' }} className={styles.sidebarMenu}>
 			<H3 cfg={{ fontWeight: 2, mt: 4 }}>{title}</H3>
@@ -62,13 +78,7 @@ const SidebarMenu: React.FC<SidebarMenuProps> = ({ title, links }) => {
 						>
 							{link.name}
 						</Link>
-						{link.completed ? (
-							<CheckedCircle cfg={{ fill: 'success.1' }} />
-						) : (
-							<ErrorCircle
-								cfg={{ fill: link.disabled ? 'danger.1' : 'danger.2' }}
-							/>
-						)}
+						{!maintenanceMode && <StatusIcon link={link} />}
 					</Flex>
 				),
 			)}
@@ -94,7 +104,7 @@ export type SidebarSectionProps = {
 
 export function useCalculateProgress(sections: SidebarSectionProps[]) {
 	const totalSections = useMemo(
-		() => sections.map((section) => section.links).flat(),
+		() => flatten(sections.map((section) => section.links)),
 		[sections],
 	);
 	const totalCompleted = useMemo(
@@ -107,6 +117,7 @@ export function useCalculateProgress(sections: SidebarSectionProps[]) {
 
 export type SidebarProps = {
 	title: string;
+	maintenanceMode?: boolean;
 	sections: SidebarSectionProps[];
 	/** import from react-router-dom */
 	matchPath: any;
@@ -119,6 +130,7 @@ export type SidebarProps = {
 export const Sidebar: React.FC<SidebarProps> = ({
 	title,
 	sections: originalSections,
+	maintenanceMode = false,
 	matchPath,
 	location,
 	history,
@@ -144,7 +156,12 @@ export const Sidebar: React.FC<SidebarProps> = ({
 			{sections
 				.sort((a, b) => a.order - b.order)
 				.map((item, key) => (
-					<SidebarMenu key={key} title={item.title} links={item.links} />
+					<SidebarMenu
+						key={key}
+						title={item.title}
+						links={item.links}
+						maintenanceMode={maintenanceMode}
+					/>
 				))}
 		</div>
 	);
