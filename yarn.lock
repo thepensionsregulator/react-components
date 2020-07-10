@@ -2922,10 +2922,10 @@
   resolved "https://registry.yarnpkg.com/@tootallnate/once/-/once-1.1.2.tgz#ccb91445360179a04e7fe6aff78c00ffc1eeaf82"
   integrity sha512-RbzJvlNzmRq5c3O09UipeuXno4tA1FE6ikOjxZK0tuxVv3412l64l5t1W5pj4+rJq9vpkm/kwiR07aZXnsKPxw==
 
-"@tpr/core@file:packages/core":
-  version "2.1.6"
+"@tpr/core@file:./packages/core", "@tpr/core@file:packages/core":
+  version "2.1.7"
   dependencies:
-    "@tpr/theming" "file:../../../Library/Caches/Yarn/v6/npm-@tpr-core-2.1.6-07b841c4-acdd-48e1-a005-8d9eecd1ee96-1593785304500/node_modules/@tpr/theming"
+    "@tpr/theming" "file:../../../Library/Caches/Yarn/v6/npm-@tpr-core-2.1.7-957f423c-6fb4-44bd-adea-d1dd0d679e5c-1594371575967/node_modules/@tpr/theming"
     "@xstate/react" "^0.8.1"
     final-form "^4.20.0"
     qs "^6.9.4"
@@ -2933,12 +2933,12 @@
     tslib "^2.0.0"
     xstate "^4.10.0"
 
-"@tpr/forms@file:packages/forms":
-  version "2.1.7"
+"@tpr/forms@file:./packages/forms", "@tpr/forms@file:packages/forms":
+  version "2.1.8"
   dependencies:
-    "@tpr/core" "file:../../../Library/Caches/Yarn/v6/npm-@tpr-forms-2.1.7-72289c15-157a-4721-8128-2a3f8c09def0-1593785304502/node_modules/@tpr/core"
-    "@tpr/icons" "file:../../../Library/Caches/Yarn/v6/npm-@tpr-forms-2.1.7-72289c15-157a-4721-8128-2a3f8c09def0-1593785304502/node_modules/@tpr/icons"
-    "@tpr/theming" "file:../../../Library/Caches/Yarn/v6/npm-@tpr-forms-2.1.7-72289c15-157a-4721-8128-2a3f8c09def0-1593785304502/node_modules/@tpr/theming"
+    "@tpr/core" "file:../../../Library/Caches/Yarn/v6/npm-@tpr-forms-2.1.8-34e408b0-af3e-455c-b93d-1dfd7323dcd6-1594371575975/node_modules/@tpr/core"
+    "@tpr/icons" "file:../../../Library/Caches/Yarn/v6/npm-@tpr-forms-2.1.8-34e408b0-af3e-455c-b93d-1dfd7323dcd6-1594371575975/node_modules/@tpr/icons"
+    "@tpr/theming" "file:../../../Library/Caches/Yarn/v6/npm-@tpr-forms-2.1.8-34e408b0-af3e-455c-b93d-1dfd7323dcd6-1594371575975/node_modules/@tpr/theming"
     "@types/lodash" "^4.14.157"
     "@types/match-sorter" "^4.0.0"
     "@types/qs" "^6.9.3"
@@ -2951,14 +2951,31 @@
     react-final-form "^6.5.0"
     tslib "^2.0.0"
 
-"@tpr/icons@file:packages/icons":
-  version "2.1.6"
+"@tpr/icons@file:./packages/icons", "@tpr/icons@file:packages/icons":
+  version "2.1.7"
   dependencies:
-    "@tpr/core" "file:../../../Library/Caches/Yarn/v6/npm-@tpr-icons-2.1.6-d6d42845-2677-4dba-9c35-fb8c70516488-1593785304502/node_modules/@tpr/core"
+    "@tpr/core" "file:../../../Library/Caches/Yarn/v6/npm-@tpr-icons-2.1.7-057fa047-065a-4f61-8eaf-dd22f78399c6-1594371575996/node_modules/@tpr/core"
     tslib "^2.0.0"
 
-"@tpr/theming@file:packages/theming":
-  version "2.1.4"
+"@tpr/layout@file:./packages/layout":
+  version "2.1.8"
+  dependencies:
+    "@tpr/core" "file:../../../Library/Caches/Yarn/v6/npm-@tpr-layout-2.1.8-a04bc641-6c75-46c1-803e-841710cabd3a-1594371575998/node_modules/@tpr/core"
+    "@tpr/forms" "file:../../../Library/Caches/Yarn/v6/npm-@tpr-layout-2.1.8-a04bc641-6c75-46c1-803e-841710cabd3a-1594371575998/node_modules/@tpr/forms"
+    "@tpr/icons" "file:../../../Library/Caches/Yarn/v6/npm-@tpr-layout-2.1.8-a04bc641-6c75-46c1-803e-841710cabd3a-1594371575998/node_modules/@tpr/icons"
+    "@tpr/theming" "file:../../../Library/Caches/Yarn/v6/npm-@tpr-layout-2.1.8-a04bc641-6c75-46c1-803e-841710cabd3a-1594371575998/node_modules/@tpr/theming"
+    "@types/lodash" "^4.14.157"
+    "@xstate/react" "^0.8.1"
+    date-fns "^2.14.0"
+    final-form "^4.20.0"
+    lodash "^4.17.15"
+    qs "^6.9.4"
+    react-final-form "^6.5.0"
+    tslib "^2.0.0"
+    xstate "^4.10.0"
+
+"@tpr/theming@file:./packages/theming", "@tpr/theming@file:packages/theming":
+  version "2.1.5"
   dependencies:
     normalize.css "^8.0.1"
     tslib "^2.0.0"
@@ -3227,7 +3244,7 @@
   dependencies:
     "@types/react" "*"
 
-"@types/react@*", "@types/react@^16.9.34":
+"@types/react@*", "@types/react@16.9.35", "@types/react@^16.9.34":
   version "16.9.35"
   resolved "https://registry.yarnpkg.com/@types/react/-/react-16.9.35.tgz#a0830d172e8aadd9bd41709ba2281a3124bbd368"
   integrity sha512-q0n0SsWcGc8nDqH2GJfWQWUOmZSJhXV64CjVN5SvcNti3TdEaA3AH0D8DwNmMdzjMAC/78tB8nAZIlV8yTz+zQ==
@@ -6002,6 +6019,11 @@ core-js@^1.0.0:
   resolved "https://registry.yarnpkg.com/core-js/-/core-js-1.2.7.tgz#652294c14651db28fa93bd2d5ff2983a4f08c636"
   integrity sha1-ZSKUwUZR2yj6k70tX/KYOk8IxjY=
 
+core-js@^3.6.5:
+  version "3.6.5"
+  resolved "https://registry.yarnpkg.com/core-js/-/core-js-3.6.5.tgz#7395dc273af37fb2e50e9bd3d9fe841285231d1a"
+  integrity sha512-vZVEEwZoIsI+vPEuoF9Iqf5H7/M3eeQqWlQnYa8FSKKePuYTf5MWnxb5SDAzCa60b3JBRS5g9b+Dq7b1y/RCrA==
+
 core-util-is@1.0.2, core-util-is@~1.0.0:
   version "1.0.2"
   resolved "https://registry.yarnpkg.com/core-util-is/-/core-util-is-1.0.2.tgz#b5fd54220aa2bc5ab57aab7140c940754503c1a7"
@@ -6083,7 +6105,7 @@ create-react-context@0.3.0:
     gud "^1.0.0"
     warning "^4.0.3"
 
-cross-env@^7.0.0, cross-env@^7.0.2:
+cross-env@^7.0.2:
   version "7.0.2"
   resolved "https://registry.yarnpkg.com/cross-env/-/cross-env-7.0.2.tgz#bd5ed31339a93a3418ac4f3ca9ca3403082ae5f9"
   integrity sha512-KZP/bMEOJEDCkDQAyRhu3RL2ZO/SUVrxQVI0G3YEQ+OLbRA3c6zgixe8Mq8a/z7+HKlNEjo8oiLUs8iRijY2Rw==

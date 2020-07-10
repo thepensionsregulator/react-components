@@ -2,7 +2,32 @@
 
 .sidebar {
 	display: flex;
+	flex-direction: column;
 	flex: 0 0 auto;
 	width: $sidebar-width;
-	background: $colors-neutral-6;
+	background: $white;
+}
+
+.sidebarMenu {
+	border-bottom: 5px solid $colors-neutral-4;
+}
+
+.sidebarMenu:last-child {
+	border-bottom: none;
+}
+
+.activeLink {
+	position: relative;
+}
+
+.activeLink::before {
+	content: ' ';
+	position: absolute;
+	left: -20px;
+	top: -8px;
+	height: 40px;
+	width: 5px;
+	background: $colors-primary-3;
+	// to hide outline from pseudo element
+	box-shadow: 0px 0px 0px 1px white;
 }

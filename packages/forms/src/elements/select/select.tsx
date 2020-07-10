@@ -30,7 +30,7 @@ export const Select: React.FC<SelectProps> = ({
 	onChange,
 	disabled,
 	searchable,
-	testId,
+	testId = 'select',
 	placeholder,
 	inputWidth: width,
 	cfg,
@@ -81,6 +81,7 @@ export const Select: React.FC<SelectProps> = ({
 							<button
 								type="button"
 								disabled={disabled}
+								aria-label="open-dropdown"
 								data-testid={`${testId}-button`}
 								className={styles.iconButton}
 								onClick={() => toggleMenu()}

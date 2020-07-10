@@ -38,9 +38,18 @@ export type TrusteeI18nProps = {
 	name: {
 		title: string;
 		fields: {
-			title: string;
-			firstName: string;
-			lastName: string;
+			title: {
+				label: string;
+				error: string;
+			};
+			firstName: {
+				label: string;
+				error: string;
+			};
+			lastName: {
+				label: string;
+				error: string;
+			};
 		};
 	};
 	preview: {
@@ -134,9 +143,18 @@ export const i18n: TrusteeI18nProps = {
 	name: {
 		title: 'Name of trustee',
 		fields: {
-			title: 'Title',
-			firstName: 'First name',
-			lastName: 'Last name',
+			title: {
+				label: 'Title',
+				error: '',
+			},
+			firstName: {
+				label: 'First name',
+				error: 'field is required',
+			},
+			lastName: {
+				label: 'Last name',
+				error: 'field is required',
+			},
 		},
 	},
 	preview: {

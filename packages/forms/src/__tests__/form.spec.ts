@@ -1,8 +1,24 @@
 import { fireEvent } from '@testing-library/react';
 import { formSetup } from '../__mocks__/setup';
 import { renderFields } from '../index';
+import { axe } from 'jest-axe';
 
 describe('Form', () => {
+	test('is accessible', async () => {
+		const handleSubmit = jest.fn();
+		const { container } = formSetup({
+			render: renderFields([
+				{ name: 'firstName', type: 'text', label: 'First Name' },
+				{ name: 'lastName', type: 'text', label: 'Last Name' },
+				{ name: 'email', type: 'email', label: 'Email' },
+			]),
+			onSubmit: handleSubmit,
+			initialValues: {},
+		});
+		const results = await axe(container);
+		expect(results).toHaveNoViolations();
+	});
+
 	test('renders fields correctly and submitts with no errors', () => {
 		const handleSubmit = jest.fn();
 		const { container, form } = formSetup({
