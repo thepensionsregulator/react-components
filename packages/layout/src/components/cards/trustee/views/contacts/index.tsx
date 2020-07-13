@@ -4,29 +4,33 @@ import { useTrusteeContext } from '../../context';
 import { Footer } from '../../../components/card';
 import { Content } from '../../../components/content';
 import { ArrowButton } from '../../../../buttons/buttons';
+import { TrusteeI18nProps } from '../../i18n';
+import { RecursivePartial } from '../../context';
 
-const getFields = ({ fields }: any): FieldProps[] => [
+const getFields = (
+	fields: RecursivePartial<TrusteeI18nProps['contacts']['fields']>,
+): FieldProps[] => [
 	{
 		type: 'text',
 		name: 'telephoneNumber',
-		label: fields.telephone,
+		label: fields.telephone.label,
 		inputWidth: 2,
-		error: 'Enter a telephone number, like 0163 960 598 or +44 7700 900 359',
+		error: fields.telephone.error,
 		cfg: { mb: 3 },
 	},
 	{
 		type: 'email',
 		name: 'emailAddress',
-		label: fields.email,
+		label: fields.email.label,
 		inputWidth: 6,
-		error: 'Cannot be empty',
+		error: fields.email.error,
 	},
 ];
 
 const Contacts: React.FC = () => {
 	const { current, send, i18n } = useTrusteeContext();
 	const { trustee, loading } = current.context;
-	const fields = getFields(i18n.contacts);
+	const fields = getFields(i18n?.contacts?.fields);
 
 	const onSubmit = (values) => {
 		send('SAVE', { values });
