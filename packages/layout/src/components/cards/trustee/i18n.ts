@@ -18,12 +18,12 @@ export type TrusteeI18nProps = {
 		manual: {
 			subtitle: string;
 			fields: {
-				addressLine1: string;
-				addressLine2: string;
-				addressLine3: string;
-				postTown: string;
-				postcode: string;
-				county: string;
+				addressLine1: { label: string; error: string };
+				addressLine2: { label: string; error: string };
+				addressLine3: { label: string };
+				postTown: { label: string };
+				postcode: { label: string; error: string };
+				county: { label: string; error: string };
 			};
 		};
 	};
@@ -31,8 +31,14 @@ export type TrusteeI18nProps = {
 		title: string;
 		subtitle: string;
 		fields: {
-			telephone: string;
-			email: string;
+			telephone: {
+				label: string;
+				error: string;
+			};
+			email: {
+				label: string;
+				error: string;
+			};
 		};
 	};
 	name: {
@@ -40,7 +46,6 @@ export type TrusteeI18nProps = {
 		fields: {
 			title: {
 				label: string;
-				error: string;
 			};
 			firstName: {
 				label: string;
@@ -78,9 +83,18 @@ export type TrusteeI18nProps = {
 			title: string;
 			subtitle: string;
 			fields: {
-				leftTheScheme: string;
-				date: string;
-				neverPartOfTheScheme: string;
+				leftTheScheme: {
+					label: string;
+				};
+				date: {
+					label: string;
+				};
+				neverPartOfTheScheme: {
+					label: string;
+				};
+			};
+			errors: {
+				pristine: string;
 			};
 		};
 	};
@@ -88,11 +102,19 @@ export type TrusteeI18nProps = {
 		title: string;
 		subtitle: string;
 		fields: {
-			memberNominated: string;
-			employerAppointed: string;
-			regulatorAppointed: string;
-			isProfessionalTrusteeYes: string;
-			isProfessionalTrusteeNo: string;
+			trusteeType: {
+				labels: {
+					memberNominated: string;
+					employerAppointed: string;
+					regulatorAppointed: string;
+				};
+			};
+			isProfessionalTrustee: {
+				labels: {
+					isProfessionalTrusteeYes: string;
+					isProfessionalTrusteeNo: string;
+				};
+			};
 		};
 		breadcrumbs: {
 			link1: string;
@@ -122,12 +144,18 @@ export const i18n: TrusteeI18nProps = {
 		manual: {
 			subtitle: 'Enter the trustee’s correspondence address manually.',
 			fields: {
-				addressLine1: 'Address line 1',
-				addressLine2: 'Address line 2',
-				addressLine3: 'Address line 3',
-				postTown: 'City',
-				postcode: 'Postcode',
-				county: 'County',
+				addressLine1: {
+					label: 'Address line 1',
+					error: 'This is a required field',
+				},
+				addressLine2: {
+					label: 'Address line 2',
+					error: 'This is a required field',
+				},
+				addressLine3: { label: 'Address line 3' },
+				postTown: { label: 'City' },
+				postcode: { label: 'Postcode', error: 'This is a required field' },
+				county: { label: 'County', error: 'This is a required field' },
 			},
 		},
 	},
@@ -136,8 +164,15 @@ export const i18n: TrusteeI18nProps = {
 		subtitle:
 			'Provide contact details for the trustee, not a third-party such as an administrator.',
 		fields: {
-			telephone: 'Telephone number',
-			email: 'Email address',
+			telephone: {
+				label: 'Telephone number',
+				error:
+					'Enter a telephone number, like 0163 960 598 or +44 7700 900 359',
+			},
+			email: {
+				label: 'Email address',
+				error: 'Cannot be empty',
+			},
 		},
 	},
 	name: {
@@ -145,7 +180,6 @@ export const i18n: TrusteeI18nProps = {
 		fields: {
 			title: {
 				label: 'Title',
-				error: '',
 			},
 			firstName: {
 				label: 'First name',
@@ -183,9 +217,19 @@ export const i18n: TrusteeI18nProps = {
 			title: 'Remove this trustee',
 			subtitle: 'Why are you removing this trustee?',
 			fields: {
-				leftTheScheme: 'They have left the scheme.',
-				date: 'Date the trustee left the scheme',
-				neverPartOfTheScheme: 'They were never part of the scheme.',
+				leftTheScheme: {
+					label: 'They have left the scheme.',
+				},
+				date: {
+					label: 'Date the trustee left the scheme',
+				},
+				neverPartOfTheScheme: {
+					label: 'They were never part of the scheme.',
+				},
+			},
+			errors: {
+				pristine:
+					'Please select one of the options and fill in required fields.',
 			},
 		},
 	},
@@ -193,11 +237,19 @@ export const i18n: TrusteeI18nProps = {
 		title: 'Type of trustee',
 		subtitle: 'Select the option that best describes the type of trustee.',
 		fields: {
-			memberNominated: 'Member-nominated trustee',
-			employerAppointed: 'Employer-appointed trustee',
-			regulatorAppointed: 'Regulator-appointed trustee',
-			isProfessionalTrusteeYes: 'Yes',
-			isProfessionalTrusteeNo: 'No',
+			trusteeType: {
+				labels: {
+					memberNominated: 'Member-nominated trustee',
+					employerAppointed: 'Employer-appointed trustee',
+					regulatorAppointed: 'Regulator-appointed trustee',
+				},
+			},
+			isProfessionalTrustee: {
+				labels: {
+					isProfessionalTrusteeYes: 'Yes',
+					isProfessionalTrusteeNo: 'No',
+				},
+			},
 		},
 		breadcrumbs: {
 			link1: 'Name of the trustee',

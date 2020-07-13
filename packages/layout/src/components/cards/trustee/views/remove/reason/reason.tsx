@@ -18,8 +18,7 @@ const RemoveReason: React.FC = () => {
 			(values.reason === 'left_the_scheme' && !values.date)
 		) {
 			return {
-				[FORM_ERROR]:
-					'Please select one of the options and fill in required fields.',
+				[FORM_ERROR]: i18n.remove.reason.errors.pristine,
 			};
 		} else {
 			send('SELECT', {
@@ -52,7 +51,7 @@ const RemoveReason: React.FC = () => {
 							<FFRadioButton
 								name="reason"
 								type="radio"
-								label={i18n.remove.reason.fields.leftTheScheme}
+								label={i18n.remove.reason.fields.leftTheScheme.label}
 								value="left_the_scheme"
 								cfg={{ my: 4 }}
 							/>
@@ -60,7 +59,7 @@ const RemoveReason: React.FC = () => {
 								<div className={styles.dateWrapper}>
 									<FFInputDate
 										name="date"
-										label={i18n.remove.reason.fields.date}
+										label={i18n.remove.reason.fields.date.label}
 										hint="For example, 31 3 2019"
 										required={true}
 										cfg={{ mb: 3 }}
@@ -70,7 +69,7 @@ const RemoveReason: React.FC = () => {
 							<FFRadioButton
 								name="reason"
 								type="radio"
-								label={i18n.remove.reason.fields.neverPartOfTheScheme}
+								label={i18n.remove.reason.fields.neverPartOfTheScheme.label}
 								value="not_part_of_scheme"
 							/>
 							{submitError && (
