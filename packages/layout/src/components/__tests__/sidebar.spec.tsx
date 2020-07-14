@@ -82,7 +82,7 @@ describe('Sidebar', () => {
 		expect(results).toHaveNoViolations();
 	});
 
-	test('renders title', () => {
+	test('renders main header title', () => {
 		const title = 'Scheme return home';
 		const { getByText } = render(
 			<Sidebar
@@ -120,5 +120,47 @@ describe('Sidebar', () => {
 
 		expect(currentProgress).toEqual(totalCompleted.length);
 		expect(totalProgress).toEqual(totalSections.length);
+	});
+
+	test('each section title is visible', () => {
+		const title = 'Scheme return home';
+		const { getByText } = render(
+			<Sidebar
+				title={title}
+				sections={sections}
+				matchPath={() => {}}
+				location={{}}
+				history={{ push: () => {} }}
+			/>,
+		);
+
+		[s1.title, s2.title, s3.title].map((title) => {
+			expect(getByText(title)).toBeInTheDocument();
+		});
+	});
+
+	test('each section link name is visible', () => {
+		const title = 'Scheme return home';
+		const { getByText } = render(
+			<Sidebar
+				title={title}
+				sections={sections}
+				matchPath={() => {}}
+				location={{}}
+				history={{ push: () => {} }}
+			/>,
+		);
+
+		[...s1.links, ...s2.links, ...s3.links].map((link) => {
+			expect(getByText(link.name)).toBeInTheDocument();
+		});
+	});
+
+	test('useCalculateProgress calculates values as expected', () => {
+		const { result } = renderHook(() => useCalculateProgress(sections));
+		const [totalSections, totalCompleted] = result.current;
+
+		expect(totalCompleted.length).toMatchInlineSnapshot(`3`);
+		expect(totalSections.length).toMatchInlineSnapshot(`8`);
 	});
 });
