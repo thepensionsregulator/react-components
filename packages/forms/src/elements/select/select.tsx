@@ -4,20 +4,22 @@ import { UnfoldMore } from '@tpr/icons';
 import { Field, FieldRenderProps } from 'react-final-form';
 import { Flex, classNames } from '@tpr/core';
 import { StyledInputLabel, InputElementHeading } from '../elements';
-import { FieldProps, FieldExtraProps } from '../../renderFields';
+import { FieldProps, FieldOptions, FieldExtraProps } from '../../renderFields';
 import { Input } from '../input/input';
 import PopupBox from './popup';
 import styles from './select.module.scss';
-interface SelectProps
-	extends FieldRenderProps<string>,
-		DownshiftProps<any>,
-		FieldExtraProps {
+
+interface SelectProps extends DownshiftProps<any>, FieldExtraProps {
 	handleNotFoundButtonClick?: Function;
-	options?: any;
+	options?: FieldOptions[];
 	notFoundMessage?: string;
+	showToggleButton?: boolean;
 	searchable?: boolean;
 }
-export const Select: React.FC<SelectProps> = ({
+
+export const selectStateChangeTypes = Downshift.stateChangeTypes;
+
+export const Select: React.FC<SelectProps & FieldRenderProps<string>> = ({
 	options,
 	label,
 	required,
@@ -31,6 +33,7 @@ export const Select: React.FC<SelectProps> = ({
 	disabled,
 	searchable,
 	testId = 'select',
+	showToggleButton = true,
 	placeholder,
 	inputWidth: width,
 	cfg,
@@ -78,16 +81,18 @@ export const Select: React.FC<SelectProps> = ({
 								onClick={() => toggleMenu()}
 								{...getInputProps()}
 							/>
-							<button
-								type="button"
-								disabled={disabled}
-								aria-label="open-dropdown"
-								data-testid={`${testId}-button`}
-								className={styles.iconButton}
-								onClick={() => toggleMenu()}
-							>
-								<UnfoldMore />
-							</button>
+							{showToggleButton && (
+								<button
+									type="button"
+									disabled={disabled}
+									aria-label="open-dropdown"
+									data-testid={`${testId}-button`}
+									className={styles.iconButton}
+									onClick={() => toggleMenu()}
+								>
+									<UnfoldMore />
+								</button>
+							)}
 						</Flex>
 					</StyledInputLabel>
 					<Flex cfg={{ width }} className={styles.relative}>
@@ -121,7 +126,7 @@ export const Select: React.FC<SelectProps> = ({
 	);
 };
 
-export const FFSelect: React.FC<FieldProps> = (fieldProps) => {
+export const FFSelect: React.FC<FieldProps & SelectProps> = (fieldProps) => {
 	return (
 		<Field
 			{...fieldProps}
