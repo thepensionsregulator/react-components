@@ -74,7 +74,7 @@ export interface TrusteeContextProps {
 export interface TrusteeCardProps {
 	trustee: TrusteeInput;
 	complete?: boolean;
-	i18n?: Partial<TrusteeI18nProps>;
+	i18n?: RecursivePartial<TrusteeI18nProps>;
 	onCorrect: (...args: any[]) => void;
 	onRemove: (...args: any[]) => Promise<any>;
 	onDetailsSave: (values: any, trustee: TrusteeProps) => Promise<any>;
