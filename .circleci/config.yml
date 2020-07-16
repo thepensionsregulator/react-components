@@ -16,7 +16,7 @@ jobs:
       - run: node --version
       - run: yarn install
       - run: yarn build
-      - run: yarn test
+      - run: yarn test --runInBand
       - save_cache:
           key: dependency-cache-{{ checksum "package.json" }}
           paths:
