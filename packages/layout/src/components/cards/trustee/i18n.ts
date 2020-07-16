@@ -18,12 +18,20 @@ export type TrusteeI18nProps = {
 		manual: {
 			subtitle: string;
 			fields: {
-				addressLine1: { label: string; error: string };
-				addressLine2: { label: string; error: string };
-				addressLine3: { label: string };
-				postTown: { label: string };
-				postcode: { label: string; error: string };
-				county: { label: string; error: string };
+				addressLine1: {
+					label: string;
+					emptyError?: string;
+					invalidError: string;
+				};
+				addressLine2: { label: string; error?: string };
+				addressLine3: { label: string; error?: string };
+				postTown: { label: string; error?: string };
+				postcode: {
+					label: string;
+					invalidError?: string;
+					emptyError?: string;
+				};
+				county: { label: string; error?: string };
 			};
 		};
 	};
@@ -95,6 +103,8 @@ export type TrusteeI18nProps = {
 			};
 			errors: {
 				pristine: string;
+				dateAddedBeforeEffectiveDate: string;
+				dateAddedInTheFuture: string;
 			};
 		};
 	};
@@ -146,7 +156,8 @@ export const i18n: TrusteeI18nProps = {
 			fields: {
 				addressLine1: {
 					label: 'Address line 1',
-					error: 'This is a required field',
+					emptyError: 'This is a required field',
+					invalidError: 'Must be at least 2 chars',
 				},
 				addressLine2: {
 					label: 'Address line 2',
@@ -154,8 +165,15 @@ export const i18n: TrusteeI18nProps = {
 				},
 				addressLine3: { label: 'Address line 3' },
 				postTown: { label: 'City' },
-				postcode: { label: 'Postcode', error: 'This is a required field' },
-				county: { label: 'County', error: 'This is a required field' },
+				postcode: {
+					label: 'Postcode',
+					emptyError: 'This is a required field',
+					invalidError: 'Incorrect postcode format',
+				},
+				county: {
+					label: 'County',
+					error: 'This is a required field',
+				},
 			},
 		},
 	},
@@ -230,6 +248,9 @@ export const i18n: TrusteeI18nProps = {
 			errors: {
 				pristine:
 					'Please select one of the options and fill in required fields.',
+				dateAddedBeforeEffectiveDate:
+					'Date must be after the Trustee was added.',
+				dateAddedInTheFuture: 'Date cannot be in the future.',
 			},
 		},
 	},

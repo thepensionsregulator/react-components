@@ -1,5 +1,5 @@
 import React from 'react';
-import { render } from '@testing-library/react';
+import { render, waitFor } from '@testing-library/react';
 import { Trustee } from '../cards/trustee/trustee';
 import { axe } from 'jest-axe';
 
@@ -9,6 +9,8 @@ import { axe } from 'jest-axe';
 // test each form
 // test search functionality
 // test checkbox state toggles
+
+const noop = () => Promise.resolve();
 
 const trustee = {
 	schemeRoleId: '12345',
@@ -29,17 +31,17 @@ const trustee = {
 	//
 	telephoneNumber: '01273 000 111',
 	emailAddress: 'fred.sandoors@trp.gov.uk',
+	effectiveDate: '1997-04-01T00:00:00',
 };
 
 describe('Trustee Preview', () => {
-	test('preview is accessible', async () => {
-		const callbackFn = () => Promise.resolve();
+	test('is accessible', async () => {
 		const { container } = render(
 			<Trustee
-				onDetailsSave={callbackFn}
-				onContactSave={callbackFn}
-				onAddressSave={callbackFn}
-				onRemove={callbackFn}
+				onDetailsSave={noop}
+				onContactSave={noop}
+				onAddressSave={noop}
+				onRemove={noop}
 				onCorrect={(_value) => {}}
 				addressAPI={{
 					get: (_endpont) => Promise.resolve(),
@@ -56,13 +58,12 @@ describe('Trustee Preview', () => {
 	});
 
 	test('buttons renders correctly', () => {
-		const callbackFn = () => Promise.resolve();
 		const { getByText } = render(
 			<Trustee
-				onDetailsSave={callbackFn}
-				onContactSave={callbackFn}
-				onAddressSave={callbackFn}
-				onRemove={callbackFn}
+				onDetailsSave={noop}
+				onContactSave={noop}
+				onAddressSave={noop}
+				onRemove={noop}
 				onCorrect={(_value) => {}}
 				addressAPI={{
 					get: (_endpont) => Promise.resolve(),
@@ -83,13 +84,12 @@ describe('Trustee Preview', () => {
 	});
 
 	test('initial status is correct', () => {
-		const callbackFn = () => Promise.resolve();
 		const { getByText } = render(
 			<Trustee
-				onDetailsSave={callbackFn}
-				onContactSave={callbackFn}
-				onAddressSave={callbackFn}
-				onRemove={callbackFn}
+				onDetailsSave={noop}
+				onContactSave={noop}
+				onAddressSave={noop}
+				onRemove={noop}
 				onCorrect={(_value) => {}}
 				addressAPI={{
 					get: (_endpont) => Promise.resolve(),
@@ -106,13 +106,12 @@ describe('Trustee Preview', () => {
 	});
 
 	test('address shows up correctly', () => {
-		const callbackFn = () => Promise.resolve();
 		const { getByText } = render(
 			<Trustee
-				onDetailsSave={callbackFn}
-				onContactSave={callbackFn}
-				onAddressSave={callbackFn}
-				onRemove={callbackFn}
+				onDetailsSave={noop}
+				onContactSave={noop}
+				onAddressSave={noop}
+				onRemove={noop}
 				onCorrect={(_value) => {}}
 				addressAPI={{
 					get: (_endpont) => Promise.resolve(),
@@ -132,13 +131,12 @@ describe('Trustee Preview', () => {
 	});
 
 	test('contact details shows up correctly', () => {
-		const callbackFn = () => Promise.resolve();
 		const { getByText } = render(
 			<Trustee
-				onDetailsSave={callbackFn}
-				onContactSave={callbackFn}
-				onAddressSave={callbackFn}
-				onRemove={callbackFn}
+				onDetailsSave={noop}
+				onContactSave={noop}
+				onAddressSave={noop}
+				onRemove={noop}
 				onCorrect={(_value) => {}}
 				addressAPI={{
 					get: (_endpont) => Promise.resolve(),
@@ -154,5 +152,169 @@ describe('Trustee Preview', () => {
 		expect(getByText(trustee.telephoneNumber)).toBeDefined();
 		expect(getByText('Email')).toBeDefined();
 		expect(getByText(trustee.emailAddress)).toBeDefined();
+	});
+});
+
+describe('Trustee Name', () => {
+	test('is accessible', async () => {
+		const { container, getByText } = render(
+			<Trustee
+				onDetailsSave={noop}
+				onContactSave={noop}
+				onAddressSave={noop}
+				onRemove={noop}
+				onCorrect={(_value) => {}}
+				addressAPI={{
+					get: (_endpont) => Promise.resolve(),
+					limit: 100,
+				}}
+				complete={true}
+				trustee={trustee}
+				testId={trustee.schemeRoleId}
+			/>,
+		);
+
+		getByText('Trustee').click();
+		const results = await axe(container);
+		expect(results).toHaveNoViolations();
+	});
+});
+
+describe('Trustee Type', () => {
+	test('is accessible', async () => {
+		const { container, getByText } = render(
+			<Trustee
+				onDetailsSave={noop}
+				onContactSave={noop}
+				onAddressSave={noop}
+				onRemove={noop}
+				onCorrect={(_value) => {}}
+				addressAPI={{
+					get: (_endpont) => Promise.resolve(),
+					limit: 100,
+				}}
+				complete={true}
+				trustee={trustee}
+				testId={trustee.schemeRoleId}
+			/>,
+		);
+
+		getByText(/Trustee/).click();
+		getByText(/Continue/).click();
+
+		const results = await axe(container);
+		expect(results).toHaveNoViolations();
+	});
+});
+
+describe('Trustee Contact Details', () => {
+	test('is accessible', async () => {
+		const { container, getByText } = render(
+			<Trustee
+				onDetailsSave={noop}
+				onContactSave={noop}
+				onAddressSave={noop}
+				onRemove={noop}
+				onCorrect={(_value) => {}}
+				addressAPI={{
+					get: (_endpont) => Promise.resolve(),
+					limit: 100,
+				}}
+				complete={true}
+				trustee={trustee}
+				testId={trustee.schemeRoleId}
+			/>,
+		);
+
+		getByText('Contact details').click();
+
+		const results = await axe(container);
+		expect(results).toHaveNoViolations();
+	});
+});
+
+describe('Trustee Remove', () => {
+	test('is accessible', async () => {
+		const { container, getByText } = render(
+			<Trustee
+				onDetailsSave={noop}
+				onContactSave={noop}
+				onAddressSave={noop}
+				onRemove={noop}
+				onCorrect={(_value) => {}}
+				addressAPI={{
+					get: (_endpont) => Promise.resolve(),
+					limit: 100,
+				}}
+				complete={true}
+				trustee={trustee}
+				testId={trustee.schemeRoleId}
+			/>,
+		);
+
+		getByText('Remove').click();
+
+		const results = await axe(container);
+		expect(results).toHaveNoViolations();
+	});
+});
+
+describe('Trustee Auto Address', () => {
+	test('is accessible', async () => {
+		const { container, getByText } = render(
+			<Trustee
+				onDetailsSave={noop}
+				onContactSave={noop}
+				onAddressSave={noop}
+				onRemove={noop}
+				onCorrect={(_value) => {}}
+				addressAPI={{
+					get: (_endpont) => Promise.resolve(),
+					limit: 100,
+				}}
+				complete={true}
+				trustee={trustee}
+				testId={trustee.schemeRoleId}
+			/>,
+		);
+
+		getByText('Correspondence address').click();
+
+		// wait for initial postcode to be loaded
+		await waitFor(() => {});
+
+		const results = await axe(container);
+		expect(results).toHaveNoViolations();
+	});
+});
+
+describe('Trustee Manual Address', () => {
+	test('is accessible', async () => {
+		const { container, getByText } = render(
+			<Trustee
+				onDetailsSave={noop}
+				onContactSave={noop}
+				onAddressSave={noop}
+				onRemove={noop}
+				onCorrect={(_value) => {}}
+				addressAPI={{
+					get: (_endpont) => Promise.resolve(),
+					limit: 100,
+				}}
+				complete={true}
+				trustee={trustee}
+				testId={trustee.schemeRoleId}
+			/>,
+		);
+
+		getByText('Correspondence address').click();
+
+		// wait for initial postcode to be loaded
+		await waitFor(() => {});
+
+		getByText(`I can't find my address in the list`).click();
+
+		const results = await axe(container);
+		expect(results).toHaveNoViolations();
 	});
 });
