@@ -6,25 +6,49 @@ import { Form, FFRadioButton, FFInputDate } from '@tpr/forms';
 import { FORM_ERROR } from 'final-form';
 import { Content } from '../../../../components/content';
 import { ArrowButton } from '../../../../../buttons/buttons';
+import { isAfter, toDate, isBefore } from 'date-fns';
 import styles from './reason.module.scss';
 
 const RemoveReason: React.FC = () => {
 	const { current, send, i18n } = useTrusteeContext();
-	const { remove } = current.context;
+	const { remove, trustee } = current.context;
 
-	const onSubmit = (values) => {
-		if (
-			!values.reason ||
-			(values.reason === 'left_the_scheme' && !values.date)
-		) {
-			return {
-				[FORM_ERROR]: i18n.remove.reason.errors.pristine,
-			};
+	const onSubmit = (values: {
+		reason: 'left_the_scheme' | 'not_part_of_scheme';
+		date?: Date;
+	}) => {
+		if (!values.reason || values.reason === 'left_the_scheme') {
+			if (!values.date) {
+				return {
+					[FORM_ERROR]: i18n.remove.reason.errors.pristine,
+				};
+			} else if (
+				isBefore(
+					toDate(new Date(values.date)),
+					toDate(new Date(trustee.effectiveDate)),
+				)
+			) {
+				return {
+					[FORM_ERROR]: i18n.remove.reason.errors.dateAddedBeforeEffectiveDate,
+				};
+			} else if (isAfter(toDate(new Date(values.date)), new Date())) {
+				return {
+					[FORM_ERROR]: i18n.remove.reason.errors.dateAddedInTheFuture,
+				};
+			} else {
+				send('SELECT', {
+					values: {
+						reason: values.reason,
+						date: values.date,
+					},
+				});
+				return undefined;
+			}
 		} else {
 			send('SELECT', {
 				values: {
 					reason: values.reason,
-					date: values.reason === 'left_the_scheme' ? values.date : null,
+					date: null,
 				},
 			});
 			return undefined;

@@ -103,6 +103,8 @@ export type TrusteeI18nProps = {
 			};
 			errors: {
 				pristine: string;
+				dateAddedBeforeEffectiveDate: string;
+				dateAddedInTheFuture: string;
 			};
 		};
 	};
@@ -246,6 +248,9 @@ export const i18n: TrusteeI18nProps = {
 			errors: {
 				pristine:
 					'Please select one of the options and fill in required fields.',
+				dateAddedBeforeEffectiveDate:
+					'Date must be after the Trustee was added.',
+				dateAddedInTheFuture: 'Date cannot be in the future.',
 			},
 		},
 	},

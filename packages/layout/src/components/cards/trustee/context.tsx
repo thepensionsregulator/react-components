@@ -44,6 +44,7 @@ export interface TrusteeInput {
 	//
 	telephoneNumber: string;
 	emailAddress: string;
+	effectiveDate: string;
 	[key: string]: any;
 }
 
