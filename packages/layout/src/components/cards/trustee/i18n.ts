@@ -117,6 +117,7 @@ export type TrusteeI18nProps = {
 					memberNominated: string;
 					employerAppointed: string;
 					regulatorAppointed: string;
+					other: string;
 				};
 			};
 			isProfessionalTrustee: {
@@ -263,6 +264,7 @@ export const i18n: TrusteeI18nProps = {
 					memberNominated: 'Member-nominated trustee',
 					employerAppointed: 'Employer-appointed trustee',
 					regulatorAppointed: 'Regulator-appointed trustee',
+					other: 'Other',
 				},
 			},
 			isProfessionalTrustee: {

@@ -27,6 +27,13 @@ const getDescriptionFields = ({ fields }: any): FieldProps[] => [
 		name: 'trusteeType',
 		value: 'regulator-appointed',
 		label: fields.trusteeType.labels.regulatorAppointed,
+		cfg: { mb: 2 },
+	},
+	{
+		type: 'radio',
+		name: 'trusteeType',
+		value: 'other',
+		label: fields.trusteeType.labels.other,
 		cfg: { mb: 4 },
 	},
 ];
