@@ -1,0 +1,131 @@
+---
+name: Phone
+menu: Forms
+route: /forms/phone
+---
+
+import { Playground } from '@playground';
+import { Form } from 'react-final-form';
+import { FFInputPhone } from './phone';
+import { validate } from '../../validation';
+import { renderFields } from '../../renderFields';
+
+# Input
+
+A basic widget for getting the user input as a phone field. Keyboard and mouse can be used for providing or changing data.
+
+## When To Use
+
+- A user input in a form field is needed.
+- A search input is required.
+
+## Usage
+
+`Inside your React project directory, run the following:`
+
+```js
+yarn add @tpr/forms
+```
+
+`or with npm`
+
+```js
+npm install @tpr/forms
+```
+
+`import items you wish to use from the library`
+
+```js
+import { Form, FFInputPhone } from '@tpr/forms';
+```
+
+## Examples
+
+[CodeSandbox](https://codesandbox.io)
+
+Example using field level validation
+
+<Playground>
+	<Form onSubmit={console.log}>
+		{({ handleSubmit }) => (
+			<form onSubmit={handleSubmit}>
+				<FFInputPhone
+					name="event_name"
+					label="Event name"
+					placeholder="07543 221 321"
+					hint="Must be between 6 and 8 digits long"
+					validate={(value) => (value ? undefined : 'Enter an event name')}
+					inputWidth={5}
+					cfg={{ my: 5 }}
+				/>
+				<button type="submit" style={{ display: 'none' }} children="Submit" />
+			</form>
+		)}
+	</Form>
+</Playground>
+
+<br />
+Example using record level validation
+
+```js
+import { Form, validate, renderFields } from '@tpr/forms';
+```
+
+<Playground>
+	{() => {
+		const fields = [
+			{
+				type: 'phone',
+				name: 'event_place',
+				label: 'Event place',
+				hint: 'The word must be London exactly',
+				error: (value, _fields) => {
+					return value === 'London' ? undefined : 'Must be in London';
+				},
+				placeholder: 'add some text here...',
+				inputWidth: 5,
+				cfg: { my: 5 },
+			},
+			{
+				type: 'phone',
+				name: 'event_name',
+				label: 'Event name',
+				hint: 'Cannot be empty',
+				error: 'Enter an event name',
+				placeholder: 'add some text here...',
+				inputWidth: 5,
+				cfg: { my: 5 },
+			},
+		];
+		return (
+			<Form onSubmit={console.log} validate={validate(fields)}>
+				{({ handleSubmit }) => (
+					<form onSubmit={handleSubmit}>
+						{renderFields(fields)}
+						<button
+							type="submit"
+							style={{ display: 'none' }}
+							children="Submit"
+						/>
+					</form>
+				)}
+			</Form>
+		);
+	}}
+</Playground>
+
+## API
+
+```
+Accepted config props: FlexProps, SpaceProps
+```
+
+### Props
+
+| Property | Required | Type    | Description                                  |
+| -------- | -------- | ------- | -------------------------------------------- |
+| cfg      | false    | object  | FlexProps & SpaceProps                       |
+| disabled | false    | boolean | Disable checkbox                             |
+| testId   | false    | string  | data attribute for testers                   |
+| label    | true     | string  | Checkbox description                         |
+| hint     | false    | string  | More detailed description about the checkbox |

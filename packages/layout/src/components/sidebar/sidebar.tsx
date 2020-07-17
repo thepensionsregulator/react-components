@@ -1,12 +1,8 @@
 import React, { useMemo } from 'react';
 import { H3, Flex, Hr, Link, P, flatten } from '@tpr/core';
 import { CheckedCircle, ErrorCircle } from '@tpr/icons';
+import { callAllEventHandlers } from '../../utils';
 import styles from './sidebar.module.scss';
-
-function callAllEventHandlers(...fns: Function[]) {
-	return (event: unknown, ...args: unknown[]) =>
-		fns.some((fn) => fn && fn(event, ...args));
-}
 
 type ReactRouterDomProps = { history: any; matchPath: any; location: any };
 export const useSectionsUpdater = (

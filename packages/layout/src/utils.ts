@@ -11,3 +11,8 @@ export const getObjectValueByString = (
 ): unknown => {
 	return path.split('.').reduce((acc, part) => acc && acc[part], obj);
 };
+
+export const callAllEventHandlers = (...fns: Function[]) => {
+	return (event: unknown, ...args: unknown[]) =>
+		fns.some((fn) => fn && fn(event, ...args));
+};
