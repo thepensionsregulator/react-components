@@ -1,11 +1,16 @@
-import React, { ChangeEvent } from 'react';
+import React from 'react';
 import { Field, FieldRenderProps } from 'react-final-form';
 import { StyledInputLabel, InputElementHeading } from '../elements';
 import { FieldProps, FieldExtraProps } from '../../renderFields';
 import { Input } from '../input/input';
+import {
+	composeValidators,
+	isPhoneValid,
+	executeClientValidation,
+} from '../../validators';
 
-type InputNumberProps = FieldRenderProps<number> & FieldExtraProps;
-const InputNumber: React.FC<InputNumberProps> = ({
+type InputPhoneProps = FieldRenderProps<string> & FieldExtraProps;
+const InputPhone: React.FC<InputPhoneProps> = ({
 	label,
 	hint,
 	input,
@@ -15,7 +20,6 @@ const InputNumber: React.FC<InputNumberProps> = ({
 	placeholder,
 	inputWidth: width,
 	cfg,
-	...props
 }) => {
 	return (
 		<StyledInputLabel
@@ -29,22 +33,30 @@ const InputNumber: React.FC<InputNumberProps> = ({
 				meta={meta}
 			/>
 			<Input
-				type="number"
+				type="phone"
 				width={width}
 				testId={testId}
 				label={label}
-				touched={meta && meta.touched && meta.error}
 				placeholder={placeholder}
+				touched={meta && meta.touched && meta.error}
 				{...input}
-				onChange={(evt: ChangeEvent<HTMLInputElement>) =>
-					input.onChange(evt.target.value && parseInt(evt.target.value, 10))
-				}
-				{...props}
 			/>
 		</StyledInputLabel>
 	);
 };
 
-export const FFInputNumber: React.FC<FieldProps> = (fieldProps) => {
-	return <Field {...fieldProps} component={InputNumber} />;
+export const FFInputPhone: React.FC<FieldProps & FieldExtraProps> = (
+	fieldProps,
+) => {
+	return (
+		<Field
+			{...fieldProps}
+			required={typeof fieldProps.validate === 'function' || fieldProps.error}
+			validate={composeValidators(
+				executeClientValidation(fieldProps.validate),
+				isPhoneValid('Invalid phone number'),
+			)}
+			component={InputPhone}
+		/>
+	);
 };

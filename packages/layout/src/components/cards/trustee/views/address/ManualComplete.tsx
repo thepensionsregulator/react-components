@@ -19,6 +19,7 @@ const ManualComplete = () => {
 	return (
 		<Flex cfg={{ flexDirection: 'column' }}>
 			{loading && <Loading />}
+			<P cfg={{ fontWeight: 3 }}>{i18n.address.auto.title}</P>
 			<P cfg={{ my: 3 }}>
 				Enter the trustee’s correspondence address manually.
 			</P>

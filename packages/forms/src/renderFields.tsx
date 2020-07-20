@@ -5,41 +5,43 @@ import { FFCheckbox } from './elements/checkbox/checkbox';
 import { FFRadioButton } from './elements/radio/radio';
 import { FFInputDate } from './elements/date/date';
 import { FFSelect } from './elements/select/select';
+import { FFInputEmail } from './elements/email/email';
+import { FFInputPhone } from './elements/phone/phone';
 import { FlexProps, SpaceProps, LayoutProps } from '@tpr/core';
 import { FieldProps as FinalFormFieldProps } from 'react-final-form';
-
-// export * from 'react-final-form';
 
 export type FieldInputTypes =
 	| 'text'
 	| 'checkbox'
 	| 'radio'
 	| 'number'
-	| 'email'
 	| 'password'
 	| 'date'
-	| 'select';
+	| 'select'
+	| 'phone'
+	| 'email';
 
 export type FieldOptions = {
 	label: string;
 	value: any;
 };
 
-export type FieldExtraProps = Partial<{
-	/** If defined, adds an input label above the input */
+export type FieldExtraProps = {
+	/** input label above the input box, it is required due to accessibility */
 	label: string;
 	/** field hints or requirements explained */
-	hint: string;
-	/** For radio buttons */
-	checked: boolean;
+	hint?: string;
+	/** for radio buttons */
+	checked?: boolean;
 	/** argument for tests */
-	testId: string;
-	options: FieldOptions[];
-	/** Sets max input width without affecting labels */
-	inputWidth: LayoutProps['width'];
+	testId?: string;
+	/** options for Select input field */
+	options?: FieldOptions[];
+	/** sets max input width without affecting labels */
+	inputWidth?: LayoutProps['width'];
 	/** flex and space props */
-	cfg: FlexProps & SpaceProps;
-}>;
+	cfg?: FlexProps & SpaceProps;
+};
 
 export interface FieldProps
 	extends FinalFormFieldProps<any, any>,
@@ -62,9 +64,6 @@ export function renderFields(fields: FieldProps[] = []) {
 			case 'radio': {
 				return <FFRadioButton key={key} {...field} />;
 			}
-			case 'email': {
-				return <FFInputText key={key} {...field} />;
-			}
 			case 'password': {
 				return <FFInputText key={key} {...field} />;
 			}
@@ -73,6 +72,12 @@ export function renderFields(fields: FieldProps[] = []) {
 			}
 			case 'select': {
 				return <FFSelect key={key} {...field} />;
+			}
+			case 'phone': {
+				return <FFInputPhone key={key} {...field} />;
+			}
+			case 'email': {
+				return <FFInputEmail key={key} {...field} />;
 			}
 			default: {
 				console.error(`Incorrect field type: ${field.type}`);

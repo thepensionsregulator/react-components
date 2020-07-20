@@ -28,6 +28,7 @@ const AutoComplete: React.FC<AutoCompleteProps> = ({
 			{({ handleSubmit, submitError }) => (
 				<form onSubmit={handleSubmit}>
 					<FFSelect
+						label="Address"
 						name="address"
 						placeholder={i18n.address.auto.dropdown.placeholder}
 						options={options}

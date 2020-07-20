@@ -23,9 +23,9 @@ describe('Form', () => {
 		const handleSubmit = jest.fn();
 		const { container, form } = formSetup({
 			render: renderFields([
-				{ name: 'firstName', type: 'text' },
-				{ name: 'lastName', type: 'text' },
-				{ name: 'email', type: 'email' },
+				{ label: 'First Name', name: 'firstName', type: 'text' },
+				{ label: 'Last Name', name: 'lastName', type: 'text' },
+				{ label: 'Email', name: 'email', type: 'email' },
 			]),
 			onSubmit: handleSubmit,
 			initialValues: {},

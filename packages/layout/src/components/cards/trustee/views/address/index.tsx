@@ -1,5 +1,5 @@
 import React from 'react';
-import { Flex, H4 } from '@tpr/core';
+import { Flex } from '@tpr/core';
 import { useTrusteeContext } from '../../context';
 import { Content } from '../../../components/content';
 import useSetState from '../../../hooks/use-set-state';
@@ -31,7 +31,6 @@ const AddressPage: React.FC = () => {
 				setOptions={(options: any[]) => setState({ options })}
 			/>
 			<Flex cfg={{ flexDirection: 'column' }}>
-				<H4 cfg={{ fontWeight: 3, my: 1 }}>{i18n.address.auto.title}</H4>
 				{manual ? (
 					<ManualComplete />
 				) : (

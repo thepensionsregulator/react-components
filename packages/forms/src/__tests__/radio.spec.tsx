@@ -5,7 +5,7 @@ import { renderFields } from '../index';
 import { fireEvent } from '@testing-library/react';
 import { axe } from 'jest-axe';
 
-describe('RadioButton', () => {
+describe('Radio input', () => {
 	test('is accessible', async () => {
 		const handleSubmit = jest.fn();
 		const { container } = formSetup({

@@ -1,0 +1,85 @@
+---
+name: Email
+menu: Forms
+route: /forms/email
+---
+
+import { Playground } from '@playground';
+import { Form } from 'react-final-form';
+import { FFInputEmail } from './email';
+import { validate } from '../../validation';
+import { renderFields } from '../../renderFields';
+
+# Input
+
+A basic widget for getting the user input as a email field. Keyboard and mouse can be used for providing or changing data.
+
+## When To Use
+
+- A user input in a form field is needed.
+- A search input is required.
+
+## Usage
+
+`Inside your React project directory, run the following:`
+
+```js
+yarn add @tpr/forms
+```
+
+`or with npm`
+
+```js
+npm install @tpr/forms
+```
+
+`import items you wish to use from the library`
+
+```js
+import { Form, FFInputEmail } from '@tpr/forms';
+```
+
+## Examples
+
+[CodeSandbox](https://codesandbox.io)
+
+Example using field level validation
+
+<Playground>
+	<Form onSubmit={console.log}>
+		{({ handleSubmit }) => (
+			<form onSubmit={handleSubmit}>
+				<FFInputEmail
+					name="event_name"
+					label="Event name"
+					placeholder="john.smith@tpr.gov.uk"
+					hint="Must be between 6 and 8 digits long"
+					validate={(email) =>
+						email && email.includes('tpr.gov.uk')
+							? undefined
+							: 'Must be a TPR email'
+					}
+					inputWidth={5}
+					cfg={{ my: 5 }}
+				/>
+				<button type="submit" style={{ display: 'none' }} children="Submit" />
+			</form>
+		)}
+	</Form>
+</Playground>
+
+## API
+
+```
+Accepted config props: FlexProps, SpaceProps
+```
+
+### Props
+
+| Property | Required | Type    | Description                                  |
+| -------- | -------- | ------- | -------------------------------------------- |
+| cfg      | false    | object  | FlexProps & SpaceProps                       |
+| disabled | false    | boolean | Disable checkbox                             |
+| testId   | false    | string  | data attribute for testers                   |
+| label    | true     | string  | Checkbox description                         |
+| hint     | false    | string  | More detailed description about the checkbox |

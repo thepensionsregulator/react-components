@@ -132,6 +132,7 @@ export const FFSelect: React.FC<FieldProps & Omit<SelectProps, 'children'>> = (
 	return (
 		<Field
 			{...fieldProps}
+			required={typeof fieldProps.validate === 'function' || fieldProps.error}
 			render={({
 				input,
 				initialSelectedItem,

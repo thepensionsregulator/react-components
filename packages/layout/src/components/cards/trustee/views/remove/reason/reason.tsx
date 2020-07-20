@@ -14,7 +14,7 @@ const RemoveReason: React.FC = () => {
 	const { remove, trustee } = current.context;
 
 	const onSubmit = (values: {
-		reason: 'left_the_scheme' | 'not_part_of_scheme';
+		reason: string; // 'left_the_scheme' | 'not_part_of_scheme'
 		date?: Date;
 	}) => {
 		if (!values.reason || values.reason === 'left_the_scheme') {
