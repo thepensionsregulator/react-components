@@ -6,7 +6,7 @@ import { validate, renderFields } from '../index';
 import { FieldProps } from '../renderFields';
 import { axe } from 'jest-axe';
 
-describe('Text', () => {
+describe('Text input', () => {
 	test('is accessible', async () => {
 		const { container } = formSetup({
 			render: (
@@ -80,7 +80,7 @@ describe('Text', () => {
 	test('handles input', async () => {
 		const handleSubmit = jest.fn();
 		const { container, form } = formSetup({
-			render: <FFInputText name="name" type="text" />,
+			render: <FFInputText label="Input Text" name="name" type="text" />,
 			onSubmit: handleSubmit,
 		});
 		const name = container.querySelector('input[name="name"]');

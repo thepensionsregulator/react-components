@@ -50,11 +50,15 @@ Example using field level validation
 		{({ handleSubmit }) => (
 			<form onSubmit={handleSubmit}>
 				<FFInputPhone
-					name="event_name"
-					label="Event name"
+					name="phone_number"
+					label="Phone Number"
 					placeholder="07543 221 321"
-					hint="Must be between 6 and 8 digits long"
-					validate={(value) => (value ? undefined : 'Enter an event name')}
+					hint="Must be a UK number and 11 digits long"
+					validate={(number) =>
+						number && number.includes('777')
+							? undefined
+							: 'It must include 3 sevens.'
+					}
 					inputWidth={5}
 					cfg={{ my: 5 }}
 				/>
@@ -62,56 +66,6 @@ Example using field level validation
 			</form>
 		)}
 	</Form>
-</Playground>
-
-<br />
-Example using record level validation
-
-```js
-import { Form, validate, renderFields } from '@tpr/forms';
-```
-
-<Playground>
-	{() => {
-		const fields = [
-			{
-				type: 'phone',
-				name: 'event_place',
-				label: 'Event place',
-				hint: 'The word must be London exactly',
-				error: (value, _fields) => {
-					return value === 'London' ? undefined : 'Must be in London';
-				},
-				placeholder: 'add some text here...',
-				inputWidth: 5,
-				cfg: { my: 5 },
-			},
-			{
-				type: 'phone',
-				name: 'event_name',
-				label: 'Event name',
-				hint: 'Cannot be empty',
-				error: 'Enter an event name',
-				placeholder: 'add some text here...',
-				inputWidth: 5,
-				cfg: { my: 5 },
-			},
-		];
-		return (
-			<Form onSubmit={console.log} validate={validate(fields)}>
-				{({ handleSubmit }) => (
-					<form onSubmit={handleSubmit}>
-						{renderFields(fields)}
-						<button
-							type="submit"
-							style={{ display: 'none' }}
-							children="Submit"
-						/>
-					</form>
-				)}
-			</Form>
-		);
-	}}
 </Playground>
 
 ## API

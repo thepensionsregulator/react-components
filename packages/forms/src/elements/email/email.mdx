@@ -6,7 +6,7 @@ route: /forms/email
 
 import { Playground } from '@playground';
 import { Form } from 'react-final-form';
-import { FFInputEmail, validateEmail } from './email';
+import { FFInputEmail } from './email';
 import { validate } from '../../validation';
 import { renderFields } from '../../renderFields';
 
@@ -54,63 +54,18 @@ Example using field level validation
 					label="Event name"
 					placeholder="john.smith@tpr.gov.uk"
 					hint="Must be between 6 and 8 digits long"
+					validate={(email) =>
+						email && email.includes('tpr.gov.uk')
+							? undefined
+							: 'Must be a TPR email'
+					}
 					inputWidth={5}
 					cfg={{ my: 5 }}
 				/>
-				<button type="submit" children="Submit" />
+				<button type="submit" style={{ display: 'none' }} children="Submit" />
 			</form>
 		)}
 	</Form>
-</Playground>
-
-<br />
-Example using record level validation
-
-```js
-import { Form, validate, renderFields } from '@tpr/forms';
-```
-
-<Playground>
-	{() => {
-		const fields = [
-			{
-				type: 'email',
-				name: 'event_place',
-				label: 'Event place',
-				hint: 'The word must be London exactly',
-				error: (value, _fields) => {
-					return value === 'London' ? undefined : 'Must be in London';
-				},
-				placeholder: 'add some text here...',
-				inputWidth: 5,
-				cfg: { my: 5 },
-			},
-			{
-				type: 'email',
-				name: 'event_name',
-				label: 'Event name',
-				hint: 'Cannot be empty',
-				error: 'Enter an event name',
-				placeholder: 'add some text here...',
-				inputWidth: 5,
-				cfg: { my: 5 },
-			},
-		];
-		return (
-			<Form onSubmit={console.log} validate={validate(fields)}>
-				{({ handleSubmit }) => (
-					<form onSubmit={handleSubmit}>
-						{renderFields(fields)}
-						<button
-							type="submit"
-							style={{ display: 'none' }}
-							children="Submit"
-						/>
-					</form>
-				)}
-			</Form>
-		);
-	}}
 </Playground>
 
 ## API

@@ -3,8 +3,11 @@ import { Field, FieldRenderProps } from 'react-final-form';
 import { StyledInputLabel, InputElementHeading } from '../elements';
 import { FieldProps, FieldExtraProps } from '../../renderFields';
 import { Input } from '../input/input';
-
-// TODO: find a way to add regex to email validation
+import {
+	composeValidators,
+	isPhoneValid,
+	executeClientValidation,
+} from '../../validators';
 
 type InputPhoneProps = FieldRenderProps<string> & FieldExtraProps;
 const InputPhone: React.FC<InputPhoneProps> = ({
@@ -14,6 +17,7 @@ const InputPhone: React.FC<InputPhoneProps> = ({
 	testId,
 	meta,
 	required,
+	placeholder,
 	inputWidth: width,
 	cfg,
 }) => {
@@ -33,6 +37,7 @@ const InputPhone: React.FC<InputPhoneProps> = ({
 				width={width}
 				testId={testId}
 				label={label}
+				placeholder={placeholder}
 				touched={meta && meta.touched && meta.error}
 				{...input}
 			/>
@@ -47,6 +52,10 @@ export const FFInputPhone: React.FC<FieldProps & FieldExtraProps> = (
 		<Field
 			{...fieldProps}
 			required={typeof fieldProps.validate === 'function' || fieldProps.error}
+			validate={composeValidators(
+				executeClientValidation(fieldProps.validate),
+				isPhoneValid('Invalid phone number'),
+			)}
 			component={InputPhone}
 		/>
 	);

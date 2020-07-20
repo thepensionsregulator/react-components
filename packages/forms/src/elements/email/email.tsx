@@ -3,24 +3,11 @@ import { Field, FieldRenderProps } from 'react-final-form';
 import { StyledInputLabel, InputElementHeading } from '../elements';
 import { FieldProps, FieldExtraProps } from '../../renderFields';
 import { Input } from '../input/input';
-
-// NOTE: composition option for validate on FFInputEmail
-// const compose = (...functions: Function[]) => (args: any[]) => {
-// 	return functions.reduceRight((arg, fn) => {
-// 		if (typeof fn === 'function') {
-// 			const fnValue = fn(arg);
-// 			console.log(fnValue);
-// 			if (fnValue) {
-// 				return fnValue;
-// 			}
-// 		}
-// 	}, args);
-// };
-
-export function validEmail(email: string) {
-	const regex = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
-	return regex.test(String(email).toLowerCase());
-}
+import {
+	composeValidators,
+	isEmailValid,
+	executeClientValidation,
+} from '../../validators';
 
 type InputEmailProps = FieldRenderProps<string> & FieldExtraProps;
 const InputEmail: React.FC<InputEmailProps> = ({
@@ -30,6 +17,7 @@ const InputEmail: React.FC<InputEmailProps> = ({
 	testId,
 	meta,
 	required,
+	placeholder,
 	inputWidth: width,
 	cfg,
 }) => {
@@ -49,6 +37,7 @@ const InputEmail: React.FC<InputEmailProps> = ({
 				width={width}
 				testId={testId}
 				label={label}
+				placeholder={placeholder}
 				touched={meta && meta.touched && meta.error}
 				{...input}
 			/>
@@ -63,15 +52,10 @@ export const FFInputEmail: React.FC<FieldProps & FieldExtraProps> = (
 		<Field
 			{...fieldProps}
 			required={typeof fieldProps.validate === 'function' || fieldProps.error}
-			validate={(email, allValues) => {
-				// NOTE: might be a good option to use currying but then we would
-				// need to provide default error message
-				if (fieldProps.validate) {
-					return fieldProps.validate(email, allValues);
-				} else {
-					return validEmail(email) ? undefined : 'Invalid email address';
-				}
-			}}
+			validate={composeValidators(
+				executeClientValidation(fieldProps.validate),
+				isEmailValid('Invalid email address'),
+			)}
 			component={InputEmail}
 		/>
 	);

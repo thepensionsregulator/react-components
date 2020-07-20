@@ -10,8 +10,6 @@ import { FFInputPhone } from './elements/phone/phone';
 import { FlexProps, SpaceProps, LayoutProps } from '@tpr/core';
 import { FieldProps as FinalFormFieldProps } from 'react-final-form';
 
-// export * from 'react-final-form';
-
 export type FieldInputTypes =
 	| 'text'
 	| 'checkbox'
@@ -28,21 +26,22 @@ export type FieldOptions = {
 	value: any;
 };
 
-export type FieldExtraProps = Partial<{
-	/** If defined, adds an input label above the input */
+export type FieldExtraProps = {
+	/** input label above the input box, it is required due to accessibility */
 	label: string;
 	/** field hints or requirements explained */
-	hint: string;
-	/** For radio buttons */
-	checked: boolean;
+	hint?: string;
+	/** for radio buttons */
+	checked?: boolean;
 	/** argument for tests */
-	testId: string;
-	options: FieldOptions[];
-	/** Sets max input width without affecting labels */
-	inputWidth: LayoutProps['width'];
+	testId?: string;
+	/** options for Select input field */
+	options?: FieldOptions[];
+	/** sets max input width without affecting labels */
+	inputWidth?: LayoutProps['width'];
 	/** flex and space props */
-	cfg: FlexProps & SpaceProps;
-}>;
+	cfg?: FlexProps & SpaceProps;
+};
 
 export interface FieldProps
 	extends FinalFormFieldProps<any, any>,
