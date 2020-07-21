@@ -1,0 +1,47 @@
+---
+name: Insurer
+menu: Cards
+route: /cards/insurer
+---
+
+import { Props } from 'docz';
+import { Playground } from '@playground';
+import { Form } from 'react-final-form';
+import { useState } from 'react';
+import { Insurer } from './insurer';
+
+# Insurer
+
+Insurer Card for tpr apps
+
+## Usage
+
+```js
+import { Insurer } from '@tpr/layout';
+```
+
+## Basic usage
+
+<Playground>
+	{() => {
+		const [complete, setComplete] = useState(false);
+		const callbackFn = (values, _fullInsurerObject) => {
+			console.log(values);
+			console.log(_fullInsurerObject);
+			return Promise.resolve(values);
+		};
+		const insurer = {
+			schemeRoleId: 123,
+			effectiveDate: '1997-04-01T00:00:00',
+		};
+		return (
+			<Insurer
+				onSaveType={callbackFn}
+				onRemove={callbackFn}
+				onCorrect={(value) => setComplete(value)}
+				complete={complete}
+				insurer={insurer}
+			/>
+		);
+	}}
+</Playground>

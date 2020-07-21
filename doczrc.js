@@ -14,7 +14,7 @@ export default {
 		'license',
 		'readme',
 	].map((word) => `${word.toUpperCase()}.md`),
-	menu: ['Home', 'Core', 'Forms', 'Layout'],
+	menu: ['Home', 'Core', 'Forms', 'Layout', 'Cards'],
 	themeConfig: {
 		mode: 'light',
 		showDarkModeSwitch: false,
