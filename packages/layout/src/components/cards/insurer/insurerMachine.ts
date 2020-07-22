@@ -16,6 +16,7 @@ interface InsurerStates {
 
 type InsurerEvents =
 	| { type: 'COMPLETE'; value: boolean }
+	| { type: 'REMOVE' }
 	| { type: 'CANCEL' }
 	| { type: 'NEXT'; values?: any }
 	| { type: 'BACK' }
