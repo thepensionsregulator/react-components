@@ -31,8 +31,22 @@ import { Insurer } from '@tpr/layout';
 			return Promise.resolve(values);
 		};
 		const insurer = {
+			id: '',
 			schemeRoleId: 123,
 			effectiveDate: '1997-04-01T00:00:00',
+			organisationReference: 123,
+			organisationName: 'Some Organisation Name',
+			insurerCompanyReference: '12345678',
+			addressLine1: 'Napier House',
+			addressLine2: 'Trafalgar Pl',
+			addressLine3: '',
+			postTown: 'Brighton',
+			postCode: 'BN1 4DW',
+			county: 'West Sussex',
+			postcode: '',
+			countryId: '',
+			telephoneNumber: '',
+			emailAddress: '',
 		};
 		return (
 			<Insurer
