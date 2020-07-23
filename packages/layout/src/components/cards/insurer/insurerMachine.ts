@@ -4,6 +4,11 @@ import { InsurerProps } from './context';
 interface InsurerStates {
 	states: {
 		preview: {};
+		edit: {
+			states: {
+				reference: {};
+			};
+		};
 		remove: {
 			states: {
 				date: {};
@@ -16,9 +21,11 @@ interface InsurerStates {
 
 type InsurerEvents =
 	| { type: 'COMPLETE'; value: boolean }
+	| { type: 'EDIT_INSURER' }
 	| { type: 'REMOVE' }
 	| { type: 'CANCEL' }
 	| { type: 'NEXT'; values?: any }
+	| { type: 'SAVE'; values?: any }
 	| { type: 'BACK' }
 	| { type: 'DELETE' };
 
@@ -41,10 +48,22 @@ const insurerMachine = Machine<InsurerContext, InsurerStates, InsurerEvents>({
 			id: 'preview',
 			on: {
 				REMOVE: '#remove',
+				EDIT_INSURER: 'edit',
 				COMPLETE: {
 					actions: assign((_, event) => ({
 						complete: event.value,
 					})),
+				},
+			},
+		},
+		edit: {
+			initial: 'reference',
+			states: {
+				reference: {
+					id: 'reference',
+					on: {
+						SAVE: '#preview',
+					},
 				},
 			},
 		},

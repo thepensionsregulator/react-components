@@ -30,11 +30,16 @@ export const Preview: React.FC<any> = () => {
 				<Flex
 					cfg={{ width: 5, flex: '0 0 auto', flexDirection: 'column', pl: 4 }}
 				>
-					<UnderlinedButton isOpen={false} onClick={() => {}}>
-						{i18n.preview.buttons.four}
+					<UnderlinedButton>{i18n.preview.buttons.four}</UnderlinedButton>
+					<Flex cfg={{ mt: 1, flexDirection: 'column', mb: 2 }}>
+						<P>Phone: {insurer.telephoneNumber}</P>
+						<P>Email: {insurer.emailAddress}</P>
+					</Flex>
+					<UnderlinedButton isOpen={false} onClick={() => send('EDIT_INSURER')}>
+						{i18n.preview.buttons.five}
 					</UnderlinedButton>
 					<Flex cfg={{ mt: 1, flexDirection: 'column' }}>
-						<P>Ref {insurer.insurerCompanyReference}</P>
+						<P>Ref: {insurer.insurerCompanyReference}</P>
 					</Flex>
 				</Flex>
 			</Flex>

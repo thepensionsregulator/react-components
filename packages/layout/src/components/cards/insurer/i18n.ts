@@ -5,8 +5,19 @@ export type InsurerI18nProps = {
 			two: string;
 			three: string;
 			four: string;
+			five: string;
 		};
 		checkboxLabel: string;
+	};
+	reference: {
+		title: string;
+		subtitle: string;
+		fields: {
+			insurerCompanyReference: {
+				label: string;
+				error: string;
+			};
+		};
 	};
 	remove: {
 		confirm: {
@@ -51,9 +62,20 @@ export const i18n: InsurerI18nProps = {
 			one: 'Insurer administrator',
 			two: 'Remove',
 			three: 'AON',
-			four: 'Insurer reference number',
+			four: 'Contact details',
+			five: 'Insurer reference number',
 		},
 		checkboxLabel: 'All details are correct.',
+	},
+	reference: {
+		title: 'Reference details for this insurer',
+		subtitle: 'Provide reference details for the insurer.',
+		fields: {
+			insurerCompanyReference: {
+				label: 'Reference Number',
+				error: 'Please provide reference number for the insurer',
+			},
+		},
 	},
 	remove: {
 		confirm: {
