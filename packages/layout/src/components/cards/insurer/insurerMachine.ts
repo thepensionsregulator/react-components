@@ -62,7 +62,17 @@ const insurerMachine = Machine<InsurerContext, InsurerStates, InsurerEvents>({
 				reference: {
 					id: 'reference',
 					on: {
-						SAVE: '#preview',
+						SAVE: {
+							target: '#preview',
+							actions: assign((context, event) => ({
+								insurer: {
+									...context.insurer,
+									...event.values,
+								},
+							})),
+						},
+						CANCEL: '#preview',
+						REMOVE: '#remove',
 					},
 				},
 			},

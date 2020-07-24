@@ -19,7 +19,6 @@ export const Preview: React.FC<any> = () => {
 				>
 					<UnderlinedButton>{i18n.preview.buttons.three}</UnderlinedButton>
 					<Flex cfg={{ my: 2, flexDirection: 'column' }}>
-						<H4 cfg={{ lineHeight: 3 }}>{insurer.organisationName}</H4>
 						<P>{insurer.addressLine1}</P>
 						{insurer.addressLine2 && <P>{insurer.addressLine2}</P>}
 						{insurer.addressLine3 && <P>{insurer.addressLine3}</P>}
