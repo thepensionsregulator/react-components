@@ -3,7 +3,7 @@ import { formSetup } from '../__mocks__/setup';
 import { FFSelect } from '../elements/select/select';
 import { axe } from 'jest-axe';
 
-describe('Select', () => {
+describe('Select input', () => {
 	test('is accessible', async () => {
 		const testId = 'select-input';
 		const items = [

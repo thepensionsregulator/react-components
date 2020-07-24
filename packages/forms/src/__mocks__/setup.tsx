@@ -34,5 +34,7 @@ export function formSetup({
 		</Form>,
 	);
 
+	// console.log(renderArg);
+
 	return { ...renderArg, ...utils };
 }

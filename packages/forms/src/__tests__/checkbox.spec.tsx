@@ -5,7 +5,7 @@ import { renderFields } from '../renderFields';
 import { fireEvent } from '@testing-library/react';
 import { axe } from 'jest-axe';
 
-describe('Checkbox', () => {
+describe('Checkbox input', () => {
 	test('is accessible', async () => {
 		const handleSubmit = jest.fn();
 		const { container } = formSetup({

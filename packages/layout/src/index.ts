@@ -6,6 +6,7 @@ export * from './components/info/info';
 export * from './components/sidebar/sidebar';
 export * from './components/cards/trustee/trustee';
 export * from './components/cards/employer/employer';
+export * from './components/cards/insurer/insurer';
 export * from './components/buttons/buttons';
 export * from './components/buttons/links';
 export * from './components/warning/warning';

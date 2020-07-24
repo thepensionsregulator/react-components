@@ -12,6 +12,7 @@ const InputNumber: React.FC<InputNumberProps> = ({
 	testId,
 	meta,
 	required,
+	placeholder,
 	inputWidth: width,
 	cfg,
 	...props
@@ -33,6 +34,7 @@ const InputNumber: React.FC<InputNumberProps> = ({
 				testId={testId}
 				label={label}
 				touched={meta && meta.touched && meta.error}
+				placeholder={placeholder}
 				{...input}
 				onChange={(evt: ChangeEvent<HTMLInputElement>) =>
 					input.onChange(evt.target.value && parseInt(evt.target.value, 10))

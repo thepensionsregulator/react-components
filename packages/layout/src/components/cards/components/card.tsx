@@ -24,7 +24,7 @@ export const StyledCardToolbar: React.FC = ({ children }) => {
 };
 
 type ToolbarProps = {
-	type: 'trustee' | 'employer';
+	type: 'trustee' | 'employer' | 'insurer';
 	title: string;
 	subtitle?: string;
 };
@@ -39,9 +39,7 @@ export const Toolbar: React.FC<ToolbarProps> = ({
 				cfg={{ flexDirection: 'column', pb: 2 }}
 				className={styles.toolbarBottomBorder}
 			>
-				<P cfg={{ color: 'neutral.6', fontSize: 3 }}>
-					Edit {type === 'trustee' ? 'trustee' : 'employer'}
-				</P>
+				<P cfg={{ color: 'neutral.6', fontSize: 3 }}>Edit {type}</P>
 				<H3 cfg={{ fontWeight: 3 }}>{title}</H3>
 			</Flex>
 			{subtitle && (

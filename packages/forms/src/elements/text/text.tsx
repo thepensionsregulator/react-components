@@ -12,6 +12,7 @@ const InputText: React.FC<InputTextProps> = ({
 	testId,
 	meta,
 	required,
+	placeholder,
 	inputWidth: width,
 	cfg,
 }) => {
@@ -31,6 +32,7 @@ const InputText: React.FC<InputTextProps> = ({
 				width={width}
 				testId={testId}
 				label={label}
+				placeholder={placeholder}
 				touched={meta && meta.touched && meta.error}
 				{...input}
 			/>

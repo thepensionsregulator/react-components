@@ -6,7 +6,7 @@ import { axe } from 'jest-axe';
 
 // TODO: write more test when there are clear specs for date input validation
 
-describe('Date', () => {
+describe('Date input', () => {
 	test('is accessible', async () => {
 		const fields: FieldProps[] = [
 			{

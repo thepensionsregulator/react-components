@@ -36,6 +36,7 @@ const Postcode: React.FC<PostcodeProps> = ({
 				)
 				.then((response: { data: any }) => {
 					if (
+						response &&
 						Array.isArray(response.data.results) &&
 						response.data.results.length > 0
 					) {
@@ -71,7 +72,7 @@ const Postcode: React.FC<PostcodeProps> = ({
 						});
 					} else {
 						setLoading(false);
-						console.error('NOTHING WAS FOUND');
+						// console.error('NOTHING WAS FOUND');
 					}
 				})
 				.catch((err) => {
