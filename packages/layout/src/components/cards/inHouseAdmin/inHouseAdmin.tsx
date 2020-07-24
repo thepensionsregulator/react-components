@@ -8,8 +8,6 @@ import { Flex } from '@tpr/core';
 import { Toolbar } from '../components/toolbar';
 import { UnderlinedButton } from '../components/button';
 import { Preview } from './views/preview/preview';
-import { DateForm } from './views/remove/date/date';
-import { Confirm } from './views/remove/confirm/confirm';
 import styles from '../cards.module.scss';
 
 const CardContentSwitch: React.FC = () => {
@@ -17,10 +15,10 @@ const CardContentSwitch: React.FC = () => {
 	switch (true) {
 		case current.matches('preview'):
 			return <Preview />;
-		case current.matches({ remove: 'date' }):
-			return <DateForm />;
-		case current.matches({ remove: 'confirm' }):
-			return <Confirm />;
+		// case current.matches({ remove: 'date' }):
+		// 	return <DateForm />;
+		// case current.matches({ remove: 'confirm' }):
+		// 	return <Confirm />;
 		default:
 			return null;
 	}
