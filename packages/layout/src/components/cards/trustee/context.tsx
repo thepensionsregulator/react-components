@@ -1,4 +1,4 @@
-import React, { createContext, useContext, ReactElement, useMemo } from 'react';
+import React, { createContext, useContext, ReactElement } from 'react';
 import { useMachine } from '@xstate/react';
 import trusteeMachine, {
 	TrusteeContext as TC,
@@ -6,8 +6,8 @@ import trusteeMachine, {
 } from './trusteeMachine';
 import { State, EventData } from 'xstate';
 import { SpaceProps } from '@tpr/core';
-import { merge } from 'lodash';
 import { i18n as i18nDefaults, TrusteeI18nProps } from './i18n';
+import { useI18n } from '../hooks/use-i18n';
 
 export const TrusteeContext = createContext<TrusteeContextProps>({
 	complete: false,
@@ -98,10 +98,7 @@ export const TrusteeProvider = ({
 	i18n: i18nRewrites = {},
 	...rest
 }: TrusteeCardProps) => {
-	const i18n = useMemo(() => merge(i18nDefaults, i18nRewrites), [
-		i18nDefaults,
-		i18nRewrites,
-	]);
+	const i18n = useI18n(i18nDefaults, i18nRewrites);
 	const {
 		addressLine1,
 		addressLine2,

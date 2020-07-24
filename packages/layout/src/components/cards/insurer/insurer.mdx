@@ -1,23 +1,23 @@
 ---
-name: Employer
+name: Insurer
 menu: Cards
-route: /cards/employer
+route: /cards/insurer
 ---
 
 import { Props } from 'docz';
 import { Playground } from '@playground';
 import { Form } from 'react-final-form';
 import { useState } from 'react';
-import { Employer } from './employer';
+import { Insurer } from './insurer';
 
-# Employer
+# Insurer
 
-Employer Card for tpr apps
+Insurer Card for tpr apps
 
 ## Usage
 
 ```js
-import { Employer } from '@tpr/layout';
+import { Insurer } from '@tpr/layout';
 ```
 
 ## Basic usage
@@ -25,40 +25,36 @@ import { Employer } from '@tpr/layout';
 <Playground>
 	{() => {
 		const [complete, setComplete] = useState(false);
-		const callbackFn = (values, _fullEmployerObject) => {
+		const callbackFn = (values, _fullInsurerObject) => {
 			console.log(values);
-			console.log(_fullEmployerObject);
+			console.log(_fullInsurerObject);
 			return Promise.resolve(values);
 		};
-		const employer = {
+		const insurer = {
+			id: '',
 			schemeRoleId: 123,
-			employerType: 'principal-and-participating',
-			organisationReference: 0,
-			companiesHouseNumber: 'AB123456',
-			registeredCharityNumber: '123',
-			organisationName: 'The Pensions Regulator',
+			effectiveDate: '1997-04-01T00:00:00',
+			organisationReference: 123,
+			organisationName: 'Some Organisation Name',
+			insurerCompanyReference: '12345678',
 			addressLine1: 'Napier House',
 			addressLine2: 'Trafalgar Pl',
+			addressLine3: '',
 			postTown: 'Brighton',
 			postCode: 'BN1 4DW',
 			county: 'West Sussex',
+			postcode: '',
 			countryId: '',
-			effectiveDate: '1997-04-01T00:00:00',
+			telephoneNumber: '01273 222 111',
+			emailAddress: 'john.wick@warnerbros.com',
 		};
 		return (
-			<Employer
+			<Insurer
 				onSaveType={callbackFn}
 				onRemove={callbackFn}
 				onCorrect={(value) => setComplete(value)}
 				complete={complete}
-				employer={employer}
-				i18n={{
-					preview: {
-						buttons: {
-							one: 'Employer type',
-						},
-					},
-				}}
+				insurer={insurer}
 			/>
 		);
 	}}

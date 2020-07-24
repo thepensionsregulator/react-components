@@ -6,7 +6,7 @@ import styles from '../cards.module.scss';
 
 export type ToolbarProps = {
 	complete: boolean;
-	subtitle: Function;
+	subtitle?: Function;
 	buttonLeft: Function;
 	buttonRight: Function;
 };
@@ -33,7 +33,9 @@ export const Toolbar: React.FC<ToolbarProps> = ({
 				}}
 			>
 				{buttonLeft()}
-				<Flex cfg={{ mt: 1, flexDirection: 'column' }}>{subtitle()}</Flex>
+				{subtitle && (
+					<Flex cfg={{ mt: 1, flexDirection: 'column' }}>{subtitle()}</Flex>
+				)}
 			</Flex>
 			<Flex
 				cfg={{

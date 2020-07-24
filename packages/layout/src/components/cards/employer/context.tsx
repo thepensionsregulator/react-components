@@ -1,10 +1,10 @@
-import React, { createContext, useContext, ReactElement, useMemo } from 'react';
+import React, { createContext, useContext, ReactElement } from 'react';
 import { useMachine } from '@xstate/react';
 import employerMachine, { EmployerContext as EC } from './employerMachine';
 import { State, EventData } from 'xstate';
 import { SpaceProps } from '@tpr/core';
 import { i18n as i18nDefaults, EmployerI18nProps } from './i18n';
-import { merge } from 'lodash';
+import { useI18n } from '../hooks/use-i18n';
 
 export const EmployerContext = createContext<EmployerContextProps>({
 	current: {},
@@ -66,10 +66,7 @@ export const EmployerProvider = ({
 	i18n: i18nOverrides = {},
 	...rest
 }: EmployerProviderProps) => {
-	const i18n = useMemo(() => merge(i18nDefaults, i18nOverrides), [
-		i18nDefaults,
-		i18nOverrides,
-	]);
+	const i18n = useI18n(i18nDefaults, i18nOverrides);
 	const [current, send] = useMachine(employerMachine, {
 		context: {
 			complete,
