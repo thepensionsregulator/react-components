@@ -28,7 +28,7 @@ describe('Insurer Preview', () => {
 	test('is accessible', async () => {
 		const { container } = render(
 			<Insurer
-				onSaveType={noop}
+				onSaveRef={noop}
 				onRemove={noop}
 				onCorrect={(_value) => {}}
 				complete={true}

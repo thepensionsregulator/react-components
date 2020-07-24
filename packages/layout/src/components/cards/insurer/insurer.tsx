@@ -4,7 +4,7 @@ import {
 	InsurerProviderProps,
 	useInsurerContext,
 } from './context';
-import { Flex } from '@tpr/core';
+import { Flex, H4 } from '@tpr/core';
 import { Toolbar } from '../components/toolbar';
 import { UnderlinedButton } from '../components/button';
 import { Preview } from './views/preview/preview';
@@ -65,6 +65,7 @@ export const Insurer: React.FC<InsurerProviderProps> = ({
 					<Flex cfg={cfg} data-testid={testId} className={styles.card}>
 						<Toolbar
 							complete={context.complete}
+							subtitle={() => <H4>{context.insurer.organisationName}</H4>}
 							buttonLeft={() => (
 								<UnderlinedButton>{i18n.preview.buttons.one}</UnderlinedButton>
 							)}
