@@ -6,7 +6,12 @@ interface InHouseAdminStates {
 		preview: {};
 		edit: {
 			states: {
-				reference: {};
+				contact: {
+					states: {
+						details: {};
+						save: {};
+					};
+				};
 			};
 		};
 		remove: {
@@ -22,6 +27,7 @@ interface InHouseAdminStates {
 type InHouseAdminEvents =
 	| { type: 'COMPLETE'; value: boolean }
 	| { type: 'EDIT_INSURER' }
+	| { type: 'EDIT_CONTACTS' }
 	| { type: 'REMOVE' }
 	| { type: 'CANCEL' }
 	| { type: 'NEXT'; values?: any }
@@ -53,6 +59,7 @@ const inHouseAdminMachine = Machine<
 			on: {
 				REMOVE: '#remove',
 				EDIT_INSURER: 'edit',
+				EDIT_CONTACTS: 'edit.contact.details',
 				COMPLETE: {
 					actions: assign((_, event) => ({
 						complete: event.value,
@@ -61,12 +68,19 @@ const inHouseAdminMachine = Machine<
 			},
 		},
 		edit: {
-			initial: 'reference',
+			initial: 'contact',
 			states: {
-				reference: {
-					id: 'reference',
-					on: {
-						SAVE: '#preview',
+				contact: {
+					initial: 'details',
+					states: {
+						details: {
+							on: {
+								SAVE: 'save',
+								CANCEL: '#preview',
+								REMOVE: '#remove',
+							},
+						},
+						save: {},
 					},
 				},
 			},

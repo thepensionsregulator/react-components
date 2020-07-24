@@ -32,7 +32,7 @@ export const Preview: React.FC<any> = () => {
 				<Flex
 					cfg={{ width: 5, flex: '0 0 auto', flexDirection: 'column', pl: 4 }}
 				>
-					<UnderlinedButton onClick={() => {}}>
+					<UnderlinedButton onClick={() => send('EDIT_CONTACTS')}>
 						{i18n.preview.buttons.four}
 					</UnderlinedButton>
 					<Flex cfg={{ my: 2, flexDirection: 'column' }}>

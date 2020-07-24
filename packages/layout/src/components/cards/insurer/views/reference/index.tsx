@@ -1,5 +1,6 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Form, validate, FieldProps, renderFields } from '@tpr/forms';
+import { Link, Flex } from '@tpr/core';
 import { useInsurerContext } from '../../context';
 import { Footer } from '../../../components/card';
 import { Content } from '../../../components/content';
@@ -15,18 +16,37 @@ const getFields = (
 		name: 'insurerCompanyReference',
 		label: fields.insurerCompanyReference.label,
 		inputWidth: 5,
-		error: fields.insurerCompanyReference.error,
+		error: (value: string) => {
+			if (!value) {
+				return fields.insurerCompanyReference.errorIfEmpty;
+			} else if (value.length < 1) {
+				return fields.insurerCompanyReference.errorIfTooShort;
+			} else if (value.length > 100) {
+				return fields.insurerCompanyReference.errorIfTooLong;
+			}
+			return undefined;
+		},
 		cfg: { mb: 3 },
 	},
 ];
 
 export const Reference: React.FC = () => {
-	const { current, send, i18n } = useInsurerContext();
+	const [loading, setLoading] = useState(false);
+	const { current, send, i18n, onSaveRef } = useInsurerContext();
 	const { insurer } = current.context;
 	const fields = getFields(i18n?.reference?.fields);
 
-	const onSubmit = (values) => {
-		send('SAVE', { values });
+	const onSubmit = async (values) => {
+		setLoading(true);
+		try {
+			await onSaveRef(values, insurer);
+			send('SAVE', { values });
+			setLoading(false);
+		} catch (error) {
+			// todo: maybe an error message from the server?
+			console.log(error);
+			setLoading(false);
+		}
 	};
 
 	return (
@@ -47,14 +67,25 @@ export const Reference: React.FC = () => {
 					<form onSubmit={handleSubmit}>
 						{renderFields(fields)}
 						<Footer>
-							<ArrowButton
-								intent="special"
-								pointsTo="up"
-								iconSide="right"
-								type="submit"
-								title="Save and close"
-								disabled={false}
-							/>
+							<Flex>
+								<ArrowButton
+									intent="special"
+									pointsTo="up"
+									iconSide="right"
+									type="submit"
+									title="Save and close"
+									disabled={loading}
+								/>
+
+								<Link
+									cfg={{ m: 3 }}
+									disabled={loading}
+									underline
+									onClick={() => send('CANCEL')}
+								>
+									Cancel
+								</Link>
+							</Flex>
 						</Footer>
 					</form>
 				)}

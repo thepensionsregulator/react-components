@@ -8,19 +8,21 @@ import { Flex } from '@tpr/core';
 import { Toolbar } from '../components/toolbar';
 import { UnderlinedButton } from '../components/button';
 import { Preview } from './views/preview/preview';
+import { Contacts } from './views/contacts';
 import styles from '../cards.module.scss';
 
 const CardContentSwitch: React.FC = () => {
 	const { current } = useInHouseAdminContext();
-	switch (true) {
-		case current.matches('preview'):
-			return <Preview />;
-		// case current.matches({ remove: 'date' }):
-		// 	return <DateForm />;
-		// case current.matches({ remove: 'confirm' }):
-		// 	return <Confirm />;
-		default:
-			return null;
+
+	if (current.matches('preview')) {
+		return <Preview />;
+	} else if (
+		current.matches({ edit: { contact: 'details' } }) ||
+		current.matches({ edit: { contact: 'save' } })
+	) {
+		return <Contacts />;
+	} else {
+		return null;
 	}
 };
 
