@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Form, validate, FieldProps, renderFields } from '@tpr/forms';
+import { Form, FieldProps, renderFields, validate } from '@tpr/forms';
 import { useInHouseAdminContext } from '../../context';
 import { Footer } from '../../../components/card';
 import { Content } from '../../../components/content';
@@ -8,39 +8,46 @@ import { InHouseAdminI18nProps } from '../../i18n';
 import { RecursivePartial } from '../../context';
 
 const getFields = (
-	fields: RecursivePartial<InHouseAdminI18nProps['contacts']['fields']>,
+	fields: RecursivePartial<InHouseAdminI18nProps['name']['fields']>,
 ): FieldProps[] => [
 	{
-		type: 'phone',
-		name: 'telephoneNumber',
-		label: fields.telephone.label,
-		inputWidth: 2,
-		error: fields.telephone.error,
-		cfg: { mb: 3 },
+		name: 'title',
+		type: 'text',
+		label: fields.title.label,
+		inputWidth: 1,
+		cfg: { mb: 4 },
 	},
 	{
-		type: 'email',
-		name: 'emailAddress',
-		label: fields.email.label,
+		name: 'firstname',
+		type: 'text',
+		label: fields.firstName.label,
+		error: fields.firstName.error,
 		inputWidth: 6,
-		error: fields.email.error,
+		cfg: { mb: 4 },
+	},
+	{
+		name: 'lastname',
+		type: 'text',
+		label: fields.lastName.label,
+		error: fields.lastName.error,
+		inputWidth: 6,
 	},
 ];
 
-export const Contacts: React.FC = () => {
+export const NameScreen: React.FC = () => {
 	const [loading, setLoading] = useState(false);
-	const { current, send, i18n, onSaveContacts } = useInHouseAdminContext();
-	const { inHouseAdmin } = current.context;
-	const fields = getFields(i18n?.contacts?.fields);
+	const { current, send, i18n, onSaveName } = useInHouseAdminContext();
+	const fields = getFields(i18n.name.fields);
+	const state = current.context.inHouseAdmin;
 
 	const onSubmit = async (values) => {
 		setLoading(true);
 		try {
-			await onSaveContacts(values, inHouseAdmin);
+			await onSaveName(values, state);
 			setLoading(false);
 			send('SAVE', { values });
 		} catch (error) {
-			console.error(error);
+			console.log(error);
 			setLoading(false);
 		}
 	};
@@ -49,17 +56,16 @@ export const Contacts: React.FC = () => {
 		<Content
 			type="inHouseAdmin"
 			typeName="In House Administrator"
-			title={i18n.contacts.title}
-			subtitle={i18n.contacts.subtitle}
-			loading={loading}
+			title="Name of the in house administrator"
 		>
 			<Form
 				onSubmit={onSubmit}
-				initialValues={{
-					telephoneNumber: inHouseAdmin.telephoneNumber,
-					emailAddress: inHouseAdmin.emailAddress,
-				}}
 				validate={validate(fields)}
+				initialValues={{
+					title: state.title,
+					firstname: state.firstname,
+					lastname: state.lastname,
+				}}
 			>
 				{({ handleSubmit }) => (
 					<form onSubmit={handleSubmit}>
@@ -69,9 +75,9 @@ export const Contacts: React.FC = () => {
 								intent="special"
 								pointsTo="up"
 								iconSide="right"
-								type="submit"
-								title="Save and close"
 								disabled={loading}
+								type="submit"
+								title="Save and Close"
 							/>
 						</Footer>
 					</form>

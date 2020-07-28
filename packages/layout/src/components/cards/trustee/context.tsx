@@ -8,6 +8,7 @@ import { State, EventData } from 'xstate';
 import { SpaceProps } from '@tpr/core';
 import { i18n as i18nDefaults, TrusteeI18nProps } from './i18n';
 import { useI18n } from '../hooks/use-i18n';
+import { splitObjectIntoTwo } from '../../../utils';
 
 export const TrusteeContext = createContext<TrusteeContextProps>({
 	complete: false,
@@ -88,6 +89,17 @@ export interface TrusteeCardProps {
 	cfg?: SpaceProps;
 }
 
+const addressFields = [
+	'addressLine1',
+	'addressLine2',
+	'addressLine3',
+	'postTown',
+	'county',
+	'country',
+	'postcode',
+	'countryId',
+];
+
 export const TrusteeProvider = ({
 	trustee,
 	complete,
@@ -99,31 +111,17 @@ export const TrusteeProvider = ({
 	...rest
 }: TrusteeCardProps) => {
 	const i18n = useI18n(i18nDefaults, i18nRewrites);
-	const {
-		addressLine1,
-		addressLine2,
-		addressLine3,
-		postTown,
-		postcode,
-		county,
-		countryId,
-		...restTrustee
-	} = trustee;
+	const [modifiedTrustee, trusteeAddress] = splitObjectIntoTwo(
+		trustee,
+		addressFields,
+	);
 
 	const [current, send] = useMachine(trusteeMachine, {
 		context: {
 			complete,
 			trustee: {
-				...restTrustee,
-				address: {
-					addressLine1,
-					addressLine2,
-					addressLine3,
-					postTown,
-					postcode,
-					county,
-					countryId,
-				},
+				...modifiedTrustee,
+				address: trusteeAddress,
 			},
 		},
 		services: {

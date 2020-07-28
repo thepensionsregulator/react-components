@@ -17,16 +17,22 @@ export const Preview: React.FC<any> = () => {
 				<Flex
 					cfg={{ width: 5, flex: '0 0 auto', flexDirection: 'column', pr: 4 }}
 				>
-					<UnderlinedButton onClick={() => {}}>
+					<UnderlinedButton onClick={() => send('EDIT_ADDRESS')}>
 						{i18n.preview.buttons.three}
 					</UnderlinedButton>
 					<Flex cfg={{ my: 2, flexDirection: 'column' }}>
-						<H4 cfg={{ lineHeight: 3 }}>{inHouseAdmin.organisationName}</H4>
-						<P>{inHouseAdmin.addressLine1}</P>
-						{inHouseAdmin.addressLine2 && <P>{inHouseAdmin.addressLine2}</P>}
-						{inHouseAdmin.addressLine3 && <P>{inHouseAdmin.addressLine3}</P>}
-						<P>{inHouseAdmin.postTown}</P>
-						<P>{inHouseAdmin.postCode}</P>
+						<P>{inHouseAdmin.address.addressLine1}</P>
+						{inHouseAdmin.address.addressLine2 && (
+							<P>{inHouseAdmin.address.addressLine2}</P>
+						)}
+						{inHouseAdmin.address.addressLine3 && (
+							<P>{inHouseAdmin.address.addressLine3}</P>
+						)}
+						<P>{inHouseAdmin.address.postTown}</P>
+						<P>{inHouseAdmin.address.postCode}</P>
+						{inHouseAdmin.address.country && (
+							<P>{inHouseAdmin.address.country}</P>
+						)}
 					</Flex>
 				</Flex>
 				<Flex

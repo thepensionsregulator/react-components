@@ -5,7 +5,7 @@ route: /cards/inHouseAdmin
 ---
 
 import { Props } from 'docz';
-import { Playground } from '@playground';
+import { Playground, experianApiGet } from '@playground';
 import { Form } from 'react-final-form';
 import { useState } from 'react';
 import { InHouseAdmin } from './inHouseAdmin';
@@ -49,11 +49,17 @@ import { InHouseAdmin } from '@tpr/layout';
 		};
 		return (
 			<InHouseAdmin
-				onSaveType={callbackFn}
+				onSaveContacts={callbackFn}
+				onSaveAddress={callbackFn}
+				onSaveName={callbackFn}
 				onRemove={callbackFn}
 				onCorrect={(value) => setComplete(value)}
 				complete={complete}
 				inHouseAdmin={inHouseAdmin}
+				addressAPI={{
+					get: (endpont) => experianApiGet(endpont),
+					limit: 100,
+				}}
 			/>
 		);
 	}}

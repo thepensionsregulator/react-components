@@ -31,7 +31,8 @@ import { Trustee } from '@tpr/layout';
 		const [complete, setComplete] = useState(false);
 		const callbackFn = (values, _fullTrusteeObject) => {
 			console.log(values);
-			return Promise.resolve();
+			console.log(_fullTrusteeObject);
+			return Promise.resolve(values);
 		};
 		const trustee = {
 			id: '12345',

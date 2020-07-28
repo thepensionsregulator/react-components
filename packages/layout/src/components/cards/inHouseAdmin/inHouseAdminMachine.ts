@@ -1,17 +1,14 @@
 import { Machine, assign } from 'xstate';
-import { InHouseAdminProps } from './context';
+import { InHouseAdminWithContactsProps } from './context';
 
 interface InHouseAdminStates {
 	states: {
 		preview: {};
 		edit: {
 			states: {
-				contact: {
-					states: {
-						details: {};
-						save: {};
-					};
-				};
+				name: {};
+				address: {};
+				contacts: {};
 			};
 		};
 		remove: {
@@ -28,6 +25,8 @@ type InHouseAdminEvents =
 	| { type: 'COMPLETE'; value: boolean }
 	| { type: 'EDIT_INSURER' }
 	| { type: 'EDIT_CONTACTS' }
+	| { type: 'EDIT_NAME' }
+	| { type: 'EDIT_ADDRESS' }
 	| { type: 'REMOVE' }
 	| { type: 'CANCEL' }
 	| { type: 'NEXT'; values?: any }
@@ -38,7 +37,7 @@ type InHouseAdminEvents =
 export interface InHouseAdminContext {
 	complete: boolean;
 	remove: { confirm: boolean; date: string } | null;
-	inHouseAdmin: Partial<InHouseAdminProps>;
+	inHouseAdmin: Partial<InHouseAdminWithContactsProps>;
 }
 
 const inHouseAdminMachine = Machine<
@@ -59,7 +58,9 @@ const inHouseAdminMachine = Machine<
 			on: {
 				REMOVE: '#remove',
 				EDIT_INSURER: 'edit',
-				EDIT_CONTACTS: 'edit.contact.details',
+				EDIT_CONTACTS: 'edit.contacts',
+				EDIT_NAME: 'edit.name',
+				EDIT_ADDRESS: 'edit.address',
 				COMPLETE: {
 					actions: assign((_, event) => ({
 						complete: event.value,
@@ -68,19 +69,51 @@ const inHouseAdminMachine = Machine<
 			},
 		},
 		edit: {
-			initial: 'contact',
+			initial: 'contacts',
 			states: {
-				contact: {
-					initial: 'details',
-					states: {
-						details: {
-							on: {
-								SAVE: 'save',
-								CANCEL: '#preview',
-								REMOVE: '#remove',
-							},
+				name: {
+					on: {
+						SAVE: {
+							target: '#preview',
+							actions: assign((context, event) => ({
+								inHouseAdmin: {
+									...context.inHouseAdmin,
+									...event.values,
+								},
+							})),
 						},
-						save: {},
+						CANCEL: '#preview',
+						REMOVE: '#remove',
+					},
+				},
+				contacts: {
+					on: {
+						SAVE: {
+							target: '#preview',
+							actions: assign((context, event) => ({
+								inHouseAdmin: {
+									...context.inHouseAdmin,
+									...event.values,
+								},
+							})),
+						},
+						CANCEL: '#preview',
+						REMOVE: '#remove',
+					},
+				},
+				address: {
+					on: {
+						SAVE: {
+							target: '#preview',
+							actions: assign((context, event) => ({
+								inHouseAdmin: {
+									...context.inHouseAdmin,
+									address: event.values,
+								},
+							})),
+						},
+						CANCEL: '#preview',
+						REMOVE: '#remove',
 					},
 				},
 			},
