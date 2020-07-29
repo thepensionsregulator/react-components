@@ -16,3 +16,19 @@ export const callAllEventHandlers = (...fns: Function[]) => {
 	return (event: unknown, ...args: unknown[]) =>
 		fns.some((fn) => fn && fn(event, ...args));
 };
+
+export const splitObjectIntoTwo = <T>(obj: T, fields = []): [any, any] => {
+	const mainObj = {};
+	const extractedObj = {};
+
+	for (let key of Object.keys(obj)) {
+		if (!fields.includes(key)) {
+			mainObj[key] = obj[key];
+		}
+		if (fields.includes(key)) {
+			extractedObj[key] = obj[key];
+		}
+	}
+
+	return [mainObj, extractedObj];
+};

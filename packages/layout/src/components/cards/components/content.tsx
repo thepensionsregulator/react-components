@@ -6,7 +6,8 @@ import styles from './content.module.scss';
 export const Loading = () => <div className={styles.loading} />;
 
 type ContentProps = {
-	type: 'trustee' | 'employer' | 'insurer';
+	type: 'trustee' | 'employer' | 'insurer' | 'inHouseAdmin';
+	typeName?: string;
 	title?: string;
 	loading?: boolean;
 	breadcrumbs?: any;
@@ -14,6 +15,7 @@ type ContentProps = {
 };
 export const Content: React.FC<ContentProps> = ({
 	type,
+	typeName,
 	children,
 	title,
 	loading = false,
@@ -29,7 +31,14 @@ export const Content: React.FC<ContentProps> = ({
 		>
 			{loading && <Loading />}
 			{Breadcrumbs && <Breadcrumbs />}
-			{title && <Toolbar type={type} title={title} subtitle={subtitle} />}
+			{title && (
+				<Toolbar
+					type={type}
+					typeName={typeName}
+					title={title}
+					subtitle={subtitle}
+				/>
+			)}
 			{children}
 		</div>
 	);

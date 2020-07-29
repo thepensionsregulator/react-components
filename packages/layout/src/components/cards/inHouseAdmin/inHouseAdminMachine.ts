@@ -1,12 +1,14 @@
 import { Machine, assign } from 'xstate';
-import { InsurerProps } from './context';
+import { InHouseAdminWithContactsProps } from './context';
 
-interface InsurerStates {
+interface InHouseAdminStates {
 	states: {
 		preview: {};
 		edit: {
 			states: {
-				reference: {};
+				name: {};
+				address: {};
+				contacts: {};
 			};
 		};
 		remove: {
@@ -19,9 +21,12 @@ interface InsurerStates {
 	};
 }
 
-type InsurerEvents =
+type InHouseAdminEvents =
 	| { type: 'COMPLETE'; value: boolean }
 	| { type: 'EDIT_INSURER' }
+	| { type: 'EDIT_CONTACTS' }
+	| { type: 'EDIT_NAME' }
+	| { type: 'EDIT_ADDRESS' }
 	| { type: 'REMOVE' }
 	| { type: 'CANCEL' }
 	| { type: 'NEXT'; values?: any }
@@ -29,19 +34,23 @@ type InsurerEvents =
 	| { type: 'BACK' }
 	| { type: 'DELETE' };
 
-export interface InsurerContext {
+export interface InHouseAdminContext {
 	complete: boolean;
 	remove: { confirm: boolean; date: string } | null;
-	insurer: Partial<InsurerProps>;
+	inHouseAdmin: Partial<InHouseAdminWithContactsProps>;
 }
 
-const insurerMachine = Machine<InsurerContext, InsurerStates, InsurerEvents>({
-	id: 'insurer',
+const inHouseAdminMachine = Machine<
+	InHouseAdminContext,
+	InHouseAdminStates,
+	InHouseAdminEvents
+>({
+	id: 'inHouseAdmin',
 	initial: 'preview',
 	context: {
 		complete: false,
 		remove: null,
-		insurer: {},
+		inHouseAdmin: {},
 	},
 	states: {
 		preview: {
@@ -49,6 +58,9 @@ const insurerMachine = Machine<InsurerContext, InsurerStates, InsurerEvents>({
 			on: {
 				REMOVE: '#remove',
 				EDIT_INSURER: 'edit',
+				EDIT_CONTACTS: 'edit.contacts',
+				EDIT_NAME: 'edit.name',
+				EDIT_ADDRESS: 'edit.address',
 				COMPLETE: {
 					actions: assign((_, event) => ({
 						complete: event.value,
@@ -57,17 +69,46 @@ const insurerMachine = Machine<InsurerContext, InsurerStates, InsurerEvents>({
 			},
 		},
 		edit: {
-			initial: 'reference',
+			initial: 'contacts',
 			states: {
-				reference: {
-					id: 'reference',
+				name: {
 					on: {
 						SAVE: {
 							target: '#preview',
 							actions: assign((context, event) => ({
-								insurer: {
-									...context.insurer,
+								inHouseAdmin: {
+									...context.inHouseAdmin,
 									...event.values,
+								},
+							})),
+						},
+						CANCEL: '#preview',
+						REMOVE: '#remove',
+					},
+				},
+				contacts: {
+					on: {
+						SAVE: {
+							target: '#preview',
+							actions: assign((context, event) => ({
+								inHouseAdmin: {
+									...context.inHouseAdmin,
+									...event.values,
+								},
+							})),
+						},
+						CANCEL: '#preview',
+						REMOVE: '#remove',
+					},
+				},
+				address: {
+					on: {
+						SAVE: {
+							target: '#preview',
+							actions: assign((context, event) => ({
+								inHouseAdmin: {
+									...context.inHouseAdmin,
+									address: event.values,
 								},
 							})),
 						},
@@ -109,4 +150,4 @@ const insurerMachine = Machine<InsurerContext, InsurerStates, InsurerEvents>({
 	},
 });
 
-export default insurerMachine;
+export default inHouseAdminMachine;

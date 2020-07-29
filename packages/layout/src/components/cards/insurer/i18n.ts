@@ -15,7 +15,9 @@ export type InsurerI18nProps = {
 		fields: {
 			insurerCompanyReference: {
 				label: string;
-				error: string;
+				errorIfEmpty: string;
+				errorIfTooShort: string;
+				errorIfTooLong: string;
 			};
 		};
 	};
@@ -61,7 +63,7 @@ export const i18n: InsurerI18nProps = {
 		buttons: {
 			one: 'Insurer administrator',
 			two: 'Remove',
-			three: 'AON',
+			three: 'Address',
 			four: 'Contact details',
 			five: 'Insurer reference number',
 		},
@@ -73,7 +75,9 @@ export const i18n: InsurerI18nProps = {
 		fields: {
 			insurerCompanyReference: {
 				label: 'Reference Number',
-				error: 'Please provide reference number for the insurer',
+				errorIfEmpty: 'Please provide reference number for the insurer',
+				errorIfTooShort: 'We require at least one letter',
+				errorIfTooLong: 'Maximum length is 100 letters',
 			},
 		},
 	},

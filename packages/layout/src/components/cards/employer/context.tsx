@@ -40,7 +40,7 @@ export interface EmployerProviderProps {
 }
 
 export type EmployerProps = {
-	schemeRoleId: number;
+	schemeRoleId: string | number;
 	employerType:
 		| 'participating-employer'
 		| 'principal-employer'

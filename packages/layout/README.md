@@ -8,5 +8,5 @@ Layout components for TPR apps.
 npm install @tpr/layout
 
 # Peer Dependencies - Also Required
-npm install react react-dom @tpr/theming
+npm install react react-dom @tpr/core @tpr/forms @tpr/icons @tpr/theming
 ```

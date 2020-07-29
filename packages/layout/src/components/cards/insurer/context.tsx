@@ -11,7 +11,7 @@ export const InsurerContext = createContext<InsurerContextProps>({
 	send: (_, __) => ({}),
 	onCorrect: () => {},
 	onRemove: Promise.resolve,
-	onSaveType: Promise.resolve,
+	onSaveRef: Promise.resolve,
 	i18n: i18nDefaults,
 });
 
@@ -50,7 +50,7 @@ export interface InsurerProviderProps {
 	complete?: boolean;
 	onCorrect?: (...args: any[]) => void;
 	onRemove?: (...args: any[]) => Promise<any>;
-	onSaveType?: (...args: any[]) => Promise<any>;
+	onSaveRef?: (...args: any[]) => Promise<any>;
 	testId?: string;
 	/** insurer props from the API */
 	insurer: Partial<InsurerProps>;

@@ -1,23 +1,23 @@
 ---
-name: Insurer
+name: InHouseAdmin
 menu: Cards
-route: /cards/insurer
+route: /cards/inHouseAdmin
 ---
 
 import { Props } from 'docz';
-import { Playground } from '@playground';
+import { Playground, experianApiGet } from '@playground';
 import { Form } from 'react-final-form';
 import { useState } from 'react';
-import { Insurer } from './insurer';
+import { InHouseAdmin } from './inHouseAdmin';
 
-# Insurer
+# InHouseAdmin
 
-Insurer Card for tpr apps
+InHouseAdmin Card for tpr apps
 
 ## Usage
 
 ```js
-import { Insurer } from '@tpr/layout';
+import { InHouseAdmin } from '@tpr/layout';
 ```
 
 ## Basic usage
@@ -25,36 +25,41 @@ import { Insurer } from '@tpr/layout';
 <Playground>
 	{() => {
 		const [complete, setComplete] = useState(false);
-		const callbackFn = (values, _fullInsurerObject) => {
+		const callbackFn = (values, _fullInHouseAdminObject) => {
 			console.log(values);
-			console.log(_fullInsurerObject);
+			console.log(_fullInHouseAdminObject);
 			return Promise.resolve(values);
 		};
-		const insurer = {
+		const inHouseAdmin = {
 			id: '',
 			schemeRoleId: 123,
+			title: 'Mr',
+			firstname: 'John',
+			lastname: 'Smoth',
 			effectiveDate: '1997-04-01T00:00:00',
-			organisationReference: 123,
-			organisationName: 'Nike Inc.',
-			insurerCompanyReference: '12345678',
 			addressLine1: 'Napier House',
 			addressLine2: 'Trafalgar Pl',
 			addressLine3: '',
 			postTown: 'Brighton',
 			postCode: 'BN1 4DW',
 			county: 'West Sussex',
-			postcode: '',
 			countryId: '',
 			telephoneNumber: '01273 222 111',
 			emailAddress: 'john.wick@warnerbros.com',
 		};
 		return (
-			<Insurer
-				onSaveRef={callbackFn}
+			<InHouseAdmin
+				onSaveContacts={callbackFn}
+				onSaveAddress={callbackFn}
+				onSaveName={callbackFn}
 				onRemove={callbackFn}
 				onCorrect={(value) => setComplete(value)}
 				complete={complete}
-				insurer={insurer}
+				inHouseAdmin={inHouseAdmin}
+				addressAPI={{
+					get: (endpont) => experianApiGet(endpont),
+					limit: 100,
+				}}
 			/>
 		);
 	}}

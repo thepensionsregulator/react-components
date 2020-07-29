@@ -1,6 +1,6 @@
 {
 	"name": "@tpr/layout",
-	"version": "2.2.0",
+	"version": "2.2.1",
 	"description": "TPR Layout components",
 	"author": "David Alekna <david.alekna@tpr.gov.uk>",
 	"license": "MIT",
@@ -33,14 +33,14 @@
 		"report-coverage": "codecov"
 	},
 	"peerDependencies": {
+		"@tpr/core": "~2.1.7",
+		"@tpr/forms": "~2.2.0",
+		"@tpr/icons": "~2.1.7",
+		"@tpr/theming": "~2.1.5",
 		"react": "^16.12.0",
 		"react-dom": "^16.12.0"
 	},
 	"dependencies": {
-		"@tpr/core": "file:../core",
-		"@tpr/forms": "file:../forms",
-		"@tpr/icons": "file:../icons",
-		"@tpr/theming": "file:../theming",
 		"@types/lodash": "^4.14.157",
 		"@xstate/react": "^0.8.1",
 		"date-fns": "^2.14.0",
@@ -52,6 +52,10 @@
 		"xstate": "^4.10.0"
 	},
 	"devDependencies": {
+		"@tpr/core": "file:../core",
+		"@tpr/forms": "file:../forms",
+		"@tpr/icons": "file:../icons",
+		"@tpr/theming": "file:../theming",
 		"cross-env": "^7.0.2"
 	},
 	"publishConfig": {
