@@ -11,6 +11,7 @@ series [How to Contribute to an Open Source Project on GitHub][egghead]
 2. `npm yarn install` to setup and validate your clone of the project
 3. `npm yarn build` to lerna link dependencies
 4. Create a branch for your PR
+5. `yarn docz:dev` to start gatsby components site for components development
 
 > Tip: Keep your `master` branch pointing at the original repository and make
 > pull requests from branches on your fork. To do this, run:
@@ -34,3 +35,19 @@ Please make sure to run the tests before you commit your changes. You can run
 
 [issues]: https://github.com/thepensionsregulator/react-components/issues
 [egghead]: https://egghead.io/courses/how-to-contribute-to-an-open-source-project-on-github
+
+## Deployment to NPM
+
+Automatic deployment:
+
+- Branch names that starts with `rc`, `feature` or `bug` will be automatically published to NPM with a `next` tag on a `patch` version, only if they pass build and tests on CircleCI. The status of deployment will be visible on a pull request.
+
+Manual deployment:
+
+- When you're ready to deploy `minor` or `major` versions you can do so from updated `develop` branch in your terminal running command `yarn deploy` and follow the instructions in your terminal. `Lerna` will bump all versions to chosen ones and will push git refs to github and new packages to npm registry.
+
+## Deployment to Netlify
+
+Automatic deployment:
+
+- Create a PR to master branch and Netlify will build Gatsby site. If build is successful merge it and production site will be updated.

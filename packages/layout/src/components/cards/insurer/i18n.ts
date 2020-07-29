@@ -63,7 +63,7 @@ export const i18n: InsurerI18nProps = {
 		buttons: {
 			one: 'Insurer administrator',
 			two: 'Remove',
-			three: 'AON',
+			three: 'Address',
 			four: 'Contact details',
 			five: 'Insurer reference number',
 		},
