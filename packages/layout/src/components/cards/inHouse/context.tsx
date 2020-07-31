@@ -2,7 +2,7 @@ import React, { createContext, useContext, ReactElement } from 'react';
 import { useMachine } from '@xstate/react';
 import inHouseAdminMachine, {
 	InHouseAdminContext as IHAC,
-} from './inHouseAdminMachine';
+} from './inHouseMachine';
 import { State, EventData } from 'xstate';
 import { SpaceProps } from '@tpr/core';
 import { i18n as i18nDefaults, InHouseAdminI18nProps } from './i18n';

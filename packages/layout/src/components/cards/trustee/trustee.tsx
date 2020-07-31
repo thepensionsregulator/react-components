@@ -108,7 +108,7 @@ const RemoveButton: React.FC = () => {
 	);
 };
 
-export const Trustee: React.FC<Omit<TrusteeCardProps, 'children'>> = ({
+export const TrusteeCard: React.FC<Omit<TrusteeCardProps, 'children'>> = ({
 	cfg,
 	...props
 }) => {

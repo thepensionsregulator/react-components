@@ -8,11 +8,11 @@ import { Props } from 'docz';
 import { Playground, experianApiGet } from '@playground';
 import { Form } from 'react-final-form';
 import { useState } from 'react';
-import { Trustee } from './trustee';
+import { TrusteeCard } from './trustee';
 
-# Trustee
+# Trustee Card
 
-Trustee Card for tpr apps
+Trustee Card Card for tpr apps
 
 <!-- ## Properties
 
@@ -21,7 +21,7 @@ Trustee Card for tpr apps
 ## Usage
 
 ```js
-import { Trustee } from '@tpr/layout';
+import { TrusteeCard } from '@tpr/layout';
 ```
 
 ## Basic usage
@@ -57,7 +57,7 @@ import { Trustee } from '@tpr/layout';
 			effectiveDate: '1997-04-01T00:00:00',
 		};
 		return (
-			<Trustee
+			<TrusteeCard
 				onDetailsSave={callbackFn}
 				onContactSave={callbackFn}
 				onAddressSave={callbackFn}

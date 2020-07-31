@@ -8,10 +8,11 @@ series [How to Contribute to an Open Source Project on GitHub][egghead]
 ## Project setup
 
 1. Fork and clone the repo
-2. `npm yarn install` to setup and validate your clone of the project
-3. `npm yarn build` to lerna link dependencies
+2. `npm` or `yarn install` to setup and validate your clone of the project
+3. `npm` or `yarn build` to lerna link dependencies
 4. Create a branch for your PR
-5. `yarn docz:dev` to start gatsby components site for components development
+5. Create `.env` file in the root of the project and add environment variables (GATSBY_LOOKUP_API_URL)
+6. `yarn docz:dev` to start gatsby components site for components development
 
 > Tip: Keep your `master` branch pointing at the original repository and make
 > pull requests from branches on your fork. To do this, run:
@@ -40,14 +41,14 @@ Please make sure to run the tests before you commit your changes. You can run
 
 Automatic deployment:
 
-- Branch names that starts with `rc`, `feature` or `bug` will be automatically published to NPM with a `next` tag on a `patch` version, only if they pass build and tests on CircleCI. The status of deployment will be visible on a pull request.
+- Branch names that start with `rc`, `feature` or `bug` will be automatically published to NPM with a `next` tag on a `patch` version, only if they pass build and tests on CircleCI. The status of deployment will be visible on a pull request.
 
 Manual deployment:
 
-- When you're ready to deploy `minor` or `major` versions you can do so from updated `develop` branch in your terminal running command `yarn deploy` and follow the instructions in your terminal. `Lerna` will bump all versions to chosen ones and will push git refs to github and new packages to npm registry.
+- When you're ready to deploy `minor` or `major` versions you can do so from updated `develop` branch in your terminal running command `yarn deploy` and follow the instructions in your terminal. `Lerna` will bump all versions to chosen ones and will push git refs to Github and new packages to the NPM registry.
 
 ## Deployment to Netlify
 
 Automatic deployment:
 
-- Create a PR to master branch and Netlify will build Gatsby site. If build is successful merge it and production site will be updated.
+- Create a PR to master branch and Netlify will build Gatsby's site. If a build is successful, merge it and the production site will be updated.
