@@ -53,7 +53,7 @@ const ToolbarButton: React.FC<{ title: string }> = ({ title }) => {
 	);
 };
 
-export const Insurer: React.FC<InsurerProviderProps> = ({
+export const InsurerCard: React.FC<InsurerProviderProps> = ({
 	testId,
 	cfg,
 	...rest

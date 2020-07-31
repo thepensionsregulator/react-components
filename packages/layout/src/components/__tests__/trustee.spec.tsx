@@ -1,14 +1,9 @@
 import React from 'react';
 import { render, waitFor } from '@testing-library/react';
-import { Trustee } from '../cards/trustee/trustee';
+import { TrusteeCard } from '../cards/trustee/trustee';
 import { axe } from 'jest-axe';
 
-// TODO
-
-// test state transitions
-// test each form
-// test search functionality
-// test checkbox state toggles
+// TODO: write more tests
 
 const noop = () => Promise.resolve();
 
@@ -37,7 +32,7 @@ const trustee = {
 describe('Trustee Preview', () => {
 	test('is accessible', async () => {
 		const { container } = render(
-			<Trustee
+			<TrusteeCard
 				onDetailsSave={noop}
 				onContactSave={noop}
 				onAddressSave={noop}
@@ -59,7 +54,7 @@ describe('Trustee Preview', () => {
 
 	test('buttons renders correctly', () => {
 		const { getByText } = render(
-			<Trustee
+			<TrusteeCard
 				onDetailsSave={noop}
 				onContactSave={noop}
 				onAddressSave={noop}
@@ -85,7 +80,7 @@ describe('Trustee Preview', () => {
 
 	test('initial status is correct', () => {
 		const { getByText } = render(
-			<Trustee
+			<TrusteeCard
 				onDetailsSave={noop}
 				onContactSave={noop}
 				onAddressSave={noop}
@@ -107,7 +102,7 @@ describe('Trustee Preview', () => {
 
 	test('address shows up correctly', () => {
 		const { getByText } = render(
-			<Trustee
+			<TrusteeCard
 				onDetailsSave={noop}
 				onContactSave={noop}
 				onAddressSave={noop}
@@ -132,7 +127,7 @@ describe('Trustee Preview', () => {
 
 	test('contact details shows up correctly', () => {
 		const { getByText } = render(
-			<Trustee
+			<TrusteeCard
 				onDetailsSave={noop}
 				onContactSave={noop}
 				onAddressSave={noop}
@@ -158,7 +153,7 @@ describe('Trustee Preview', () => {
 describe('Trustee Name', () => {
 	test('is accessible', async () => {
 		const { container, getByText } = render(
-			<Trustee
+			<TrusteeCard
 				onDetailsSave={noop}
 				onContactSave={noop}
 				onAddressSave={noop}
@@ -183,7 +178,7 @@ describe('Trustee Name', () => {
 describe('Trustee Type', () => {
 	test('is accessible', async () => {
 		const { container, getByText } = render(
-			<Trustee
+			<TrusteeCard
 				onDetailsSave={noop}
 				onContactSave={noop}
 				onAddressSave={noop}
@@ -210,7 +205,7 @@ describe('Trustee Type', () => {
 describe('Trustee Contact Details', () => {
 	test('is accessible', async () => {
 		const { container, getByText } = render(
-			<Trustee
+			<TrusteeCard
 				onDetailsSave={noop}
 				onContactSave={noop}
 				onAddressSave={noop}
@@ -236,7 +231,7 @@ describe('Trustee Contact Details', () => {
 describe('Trustee Remove', () => {
 	test('is accessible', async () => {
 		const { container, getByText } = render(
-			<Trustee
+			<TrusteeCard
 				onDetailsSave={noop}
 				onContactSave={noop}
 				onAddressSave={noop}
@@ -262,7 +257,7 @@ describe('Trustee Remove', () => {
 describe('Trustee Auto Address', () => {
 	test('is accessible', async () => {
 		const { container, getByText } = render(
-			<Trustee
+			<TrusteeCard
 				onDetailsSave={noop}
 				onContactSave={noop}
 				onAddressSave={noop}
@@ -291,7 +286,7 @@ describe('Trustee Auto Address', () => {
 describe('Trustee Manual Address', () => {
 	test('is accessible', async () => {
 		const { container, getByText } = render(
-			<Trustee
+			<TrusteeCard
 				onDetailsSave={noop}
 				onContactSave={noop}
 				onAddressSave={noop}

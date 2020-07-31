@@ -11,7 +11,8 @@ series [How to Contribute to an Open Source Project on GitHub][egghead]
 2. `npm` or `yarn install` to setup and validate your clone of the project
 3. `npm` or `yarn build` to lerna link dependencies
 4. Create a branch for your PR
-5. `yarn docz:dev` to start gatsby components site for components development
+5. Create `.env` file in the root of the project and add environment variables (GATSBY_LOOKUP_API_URL)
+6. `yarn docz:dev` to start gatsby components site for components development
 
 > Tip: Keep your `master` branch pointing at the original repository and make
 > pull requests from branches on your fork. To do this, run:

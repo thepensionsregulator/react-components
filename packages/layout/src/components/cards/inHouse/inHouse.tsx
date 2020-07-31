@@ -90,7 +90,7 @@ const RemoveButton: React.FC<{ title: string }> = ({ title }) => {
 	);
 };
 
-export const InHouseAdmin: React.FC<InHouseAdminProviderProps> = ({
+export const InHouseCard: React.FC<InHouseAdminProviderProps> = ({
 	testId,
 	cfg,
 	...rest

@@ -1,5 +1,5 @@
 ---
-name: InHouseAdmin
+name: InHouse
 menu: Cards
 route: /cards/inHouseAdmin
 ---
@@ -8,16 +8,16 @@ import { Props } from 'docz';
 import { Playground, experianApiGet } from '@playground';
 import { Form } from 'react-final-form';
 import { useState } from 'react';
-import { InHouseAdmin } from './inHouseAdmin';
+import { InHouseCard } from './inHouse';
 
-# InHouseAdmin
+# In House Admin Card
 
-InHouseAdmin Card for tpr apps
+In House Admin Card for tpr apps
 
 ## Usage
 
 ```js
-import { InHouseAdmin } from '@tpr/layout';
+import { InHouseCard } from '@tpr/layout';
 ```
 
 ## Basic usage
@@ -48,7 +48,7 @@ import { InHouseAdmin } from '@tpr/layout';
 			emailAddress: 'john.wick@warnerbros.com',
 		};
 		return (
-			<InHouseAdmin
+			<InHouseCard
 				onSaveContacts={callbackFn}
 				onSaveAddress={callbackFn}
 				onSaveName={callbackFn}
