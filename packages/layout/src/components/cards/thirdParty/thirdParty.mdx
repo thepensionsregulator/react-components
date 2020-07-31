@@ -1,23 +1,23 @@
 ---
-name: Insurer
+name: ThirdParty
 menu: Cards
-route: /cards/insurer
+route: /cards/thirdParty
 ---
 
 import { Props } from 'docz';
 import { Playground } from '@playground';
 import { Form } from 'react-final-form';
 import { useState } from 'react';
-import { InsurerCard } from './insurer';
+import { ThirdPartyCard } from './thirdParty';
 
-# Insurer Card
+# Third Party Admin Card
 
-Insurer Card Card for tpr apps
+Third Party Admin Card Card for tpr apps
 
 ## Usage
 
 ```js
-import { InsurerCard } from '@tpr/layout';
+import { ThirdPartyCard } from '@tpr/layout';
 ```
 
 ## Basic usage
@@ -25,36 +25,33 @@ import { InsurerCard } from '@tpr/layout';
 <Playground>
 	{() => {
 		const [complete, setComplete] = useState(false);
-		const callbackFn = (values, _fullInsurerObject) => {
+		const callbackFn = (values, _fullThirdPartyObject) => {
 			console.log(values);
-			console.log(_fullInsurerObject);
+			console.log(_fullThirdPartyObject);
 			return Promise.resolve(values);
 		};
-		const insurer = {
+		const thirdParty = {
 			id: '',
 			schemeRoleId: 123,
 			effectiveDate: '1997-04-01T00:00:00',
-			organisationReference: 123,
-			organisationName: 'Nike Inc.',
-			insurerCompanyReference: '12345678',
+			organisationName: `McDonald's`,
+			telephoneNumber: '01273 222 111',
+			emailAddress: 'john.wick@warnerbros.com',
 			addressLine1: 'Napier House',
 			addressLine2: 'Trafalgar Pl',
 			addressLine3: '',
 			postTown: 'Brighton',
-			postCode: 'BN1 4DW',
+			postcode: 'BN1 4DW',
 			county: 'West Sussex',
 			postcode: '',
 			countryId: '',
-			telephoneNumber: '01273 222 111',
-			emailAddress: 'john.wick@warnerbros.com',
 		};
 		return (
-			<InsurerCard
-				onSaveRef={callbackFn}
+			<ThirdPartyCard
 				onRemove={callbackFn}
 				onCorrect={(value) => setComplete(value)}
 				complete={complete}
-				insurer={insurer}
+				thirdParty={thirdParty}
 			/>
 		);
 	}}

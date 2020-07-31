@@ -8,16 +8,16 @@ import { Props } from 'docz';
 import { Playground } from '@playground';
 import { Form } from 'react-final-form';
 import { useState } from 'react';
-import { Employer } from './employer';
+import { EmployerCard } from './employer';
 
-# Employer
+# Employer Card
 
-Employer Card for tpr apps
+Employer Card Card for tpr apps
 
 ## Usage
 
 ```js
-import { Employer } from '@tpr/layout';
+import { EmployerCard } from '@tpr/layout';
 ```
 
 ## Basic usage
@@ -46,7 +46,7 @@ import { Employer } from '@tpr/layout';
 			effectiveDate: '1997-04-01T00:00:00',
 		};
 		return (
-			<Employer
+			<EmployerCard
 				onSaveType={callbackFn}
 				onRemove={callbackFn}
 				onCorrect={(value) => setComplete(value)}

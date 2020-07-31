@@ -1,27 +1,22 @@
-import React, { useMemo } from 'react';
-import { UnderlinedButton } from '../components/button';
+import React from 'react';
+import {
+	ThirdPartyProvider,
+	ThirdPartyProviderProps,
+	useThirdPartyContext,
+} from './context';
+import { Flex, H4 } from '@tpr/core';
 import { Toolbar } from '../components/toolbar';
-import { Flex, P } from '@tpr/core';
+import { UnderlinedButton } from '../components/button';
 import { Preview } from './views/preview/preview';
 import { DateForm } from './views/remove/date/date';
-import { EmployerType } from './views/type/type';
 import { Confirm } from './views/remove/confirm/confirm';
-import { capitalize } from '../../../utils';
-import {
-	EmployerProvider,
-	useEmployerContext,
-	EmployerProviderProps,
-	EmployerProps,
-} from './context';
 import styles from '../cards.module.scss';
 
 const CardContentSwitch: React.FC = () => {
-	const { current } = useEmployerContext();
+	const { current } = useThirdPartyContext();
 	switch (true) {
 		case current.matches('preview'):
 			return <Preview />;
-		case current.matches('employerType'):
-			return <EmployerType />;
 		case current.matches({ remove: 'date' }):
 			return <DateForm />;
 		case current.matches({ remove: 'confirm' }):
@@ -32,23 +27,21 @@ const CardContentSwitch: React.FC = () => {
 };
 
 const ToolbarButton: React.FC<{ title: string }> = ({ title }) => {
-	const { current, send } = useEmployerContext();
+	const { current, send } = useThirdPartyContext();
 	return (
 		<UnderlinedButton
 			isOpen={
-				current.matches('employerType') ||
 				current.matches({ remove: 'date' }) ||
 				current.matches({ remove: 'confirm' })
 			}
 			onClick={() => {
 				if (
-					current.matches('employerType') ||
 					current.matches({ remove: 'date' }) ||
 					current.matches({ remove: 'confirm' })
 				) {
 					send('CANCEL');
 				} else {
-					send(title === 'Remove' ? 'REMOVE' : 'CHANGE_TYPE');
+					send('REMOVE');
 				}
 			}}
 		>
@@ -57,40 +50,21 @@ const ToolbarButton: React.FC<{ title: string }> = ({ title }) => {
 	);
 };
 
-const EmployerSubtitle: React.FC<Partial<EmployerProps>> = ({
-	employerType,
-}) => {
-	if (!employerType) return null;
-
-	const title = useMemo(
-		() =>
-			employerType
-				.split('-')
-				.map((word, index) => (index === 0 ? capitalize(word) : word))
-				.join(' ')
-				.replace('employer', '')
-				.concat(` employer`),
-		[employerType],
-	);
-
-	return <P>{title}</P>;
-};
-
-export const EmployerCard: React.FC<EmployerProviderProps> = ({
+export const ThirdPartyCard: React.FC<ThirdPartyProviderProps> = ({
 	testId,
 	cfg,
 	...rest
 }) => {
 	return (
-		<EmployerProvider {...rest}>
+		<ThirdPartyProvider {...rest}>
 			{({ current: { context }, i18n }) => {
 				return (
 					<Flex cfg={cfg} data-testid={testId} className={styles.card}>
 						<Toolbar
 							complete={context.complete}
-							subtitle={() => <EmployerSubtitle {...context.employer} />}
+							subtitle={() => <H4>{context.thirdParty.organisationName}</H4>}
 							buttonLeft={() => (
-								<ToolbarButton title={i18n.preview.buttons.one} />
+								<UnderlinedButton>{i18n.preview.buttons.one}</UnderlinedButton>
 							)}
 							buttonRight={() => (
 								<ToolbarButton title={i18n.preview.buttons.two} />
@@ -100,6 +74,6 @@ export const EmployerCard: React.FC<EmployerProviderProps> = ({
 					</Flex>
 				);
 			}}
-		</EmployerProvider>
+		</ThirdPartyProvider>
 	);
 };

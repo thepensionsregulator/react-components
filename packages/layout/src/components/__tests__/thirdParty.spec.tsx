@@ -1,41 +1,36 @@
 import React from 'react';
 import { render } from '@testing-library/react';
-import { InsurerCard } from '../cards/insurer/insurer';
+import { ThirdPartyCard } from '../cards/thirdParty/thirdParty';
 import { axe } from 'jest-axe';
 import userEvent from '@testing-library/user-event';
 
-// TODO: write more tests
-
 const noop = () => Promise.resolve();
 
-const insurer = {
+const thirdPartyAdmin = {
 	id: '',
 	schemeRoleId: 123,
 	effectiveDate: '1997-04-01T00:00:00',
-	organisationReference: 123,
-	organisationName: 'Some Organisation Name',
-	insurerCompanyReference: '12345678',
+	organisationName: `McDonald's`,
+	telephoneNumber: '01273 222 111',
+	emailAddress: 'john.wick@warnerbros.com',
 	addressLine1: 'Napier House',
 	addressLine2: 'Trafalgar Pl',
 	addressLine3: '',
 	postTown: 'Brighton',
-	postCode: 'BN1 4DW',
+	postcode: 'BN1 4DW',
 	county: 'West Sussex',
-	postcode: '',
+	postCode: '',
 	countryId: '',
-	telephoneNumber: '01273 222 111',
-	emailAddress: 'john.wick@warnerbros.com',
 };
 
-describe('Insurer Preview', () => {
+describe('ThirdParty Preview', () => {
 	test('is accessible', async () => {
 		const { container } = render(
-			<InsurerCard
-				onSaveRef={noop}
+			<ThirdPartyCard
 				onRemove={noop}
 				onCorrect={(_value) => {}}
 				complete={true}
-				insurer={insurer}
+				thirdParty={thirdPartyAdmin}
 			/>,
 		);
 
@@ -44,15 +39,14 @@ describe('Insurer Preview', () => {
 	});
 });
 
-describe('Insurer Remove', () => {
+describe('ThirdParty Remove', () => {
 	test('Date screen is accessible', async () => {
 		const { container, getByText } = render(
-			<InsurerCard
-				onSaveRef={noop}
+			<ThirdPartyCard
 				onRemove={noop}
 				onCorrect={(_value) => {}}
 				complete={true}
-				insurer={insurer}
+				thirdParty={thirdPartyAdmin}
 			/>,
 		);
 
@@ -64,12 +58,11 @@ describe('Insurer Remove', () => {
 
 	test('Date screen date and checkbox is required', async () => {
 		const { getByText } = render(
-			<InsurerCard
-				onSaveRef={noop}
+			<ThirdPartyCard
 				onRemove={noop}
 				onCorrect={(_value) => {}}
 				complete={true}
-				insurer={insurer}
+				thirdParty={thirdPartyAdmin}
 			/>,
 		);
 
@@ -83,12 +76,11 @@ describe('Insurer Remove', () => {
 
 	test('Date screen date is required', async () => {
 		const { getByText } = render(
-			<InsurerCard
-				onSaveRef={noop}
+			<ThirdPartyCard
 				onRemove={noop}
 				onCorrect={(_value) => {}}
 				complete={true}
-				insurer={insurer}
+				thirdParty={thirdPartyAdmin}
 			/>,
 		);
 
@@ -103,12 +95,11 @@ describe('Insurer Remove', () => {
 
 	test('Date screen checkbox is required', async () => {
 		const { getByText, getByTestId } = render(
-			<InsurerCard
-				onSaveRef={noop}
+			<ThirdPartyCard
 				onRemove={noop}
 				onCorrect={(_value) => {}}
 				complete={true}
-				insurer={insurer}
+				thirdParty={thirdPartyAdmin}
 			/>,
 		);
 
@@ -128,12 +119,11 @@ describe('Insurer Remove', () => {
 
 	test('Date screen validation passes when required fields complete', async () => {
 		const { getByText, getByTestId } = render(
-			<InsurerCard
-				onSaveRef={noop}
+			<ThirdPartyCard
 				onRemove={noop}
 				onCorrect={(_value) => {}}
 				complete={true}
-				insurer={insurer}
+				thirdParty={thirdPartyAdmin}
 			/>,
 		);
 
@@ -149,7 +139,7 @@ describe('Insurer Remove', () => {
 		userEvent.click(getByText('Continue'));
 
 		expect(
-			getByText('Are you sure you want to remove this insurer?'),
+			getByText('Are you sure you want to remove this third party admin?'),
 		).toBeInTheDocument();
 	});
 });

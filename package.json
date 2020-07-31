@@ -9,7 +9,7 @@
 		"test": "jest",
 		"test:watch": "jest --watch",
 		"posttest": "yarn lint",
-		"lint": "prettier --list-different \"packages/*/src/**/*.{ts,tsx}\"",
+		"lint": "prettier --list-different --write \"packages/*/src/**/*.{ts,tsx}\"",
 		"lint-fix": "prettier --write \"packages/*/src/**/*.{ts,tsx}\"",
 		"clean": "find . -name \"node_modules\" -exec rm -rf '{}' + && find . -name \"lib\" -exec rm -rf '{}' +",
 		"format": "pretty-quick --pattern \"./packages/**/*.*(js|ts|tsx)\"",
@@ -18,7 +18,7 @@
 		"docz:build": "docz build",
 		"docz:serve": "docz build && docz serve",
 		"predeploy": "yarn build",
-		"deploy": "lerna publish --canary"
+		"deploy": "lerna publish"
 	},
 	"workspaces": [
 		"packages/*"

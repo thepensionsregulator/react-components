@@ -2,8 +2,8 @@ import React, { useState } from 'react';
 import { Hr, Flex, P, H3, Link } from '@tpr/core';
 import { Content } from '../../../../components/content';
 import { ArrowButton } from '../../../../../buttons/buttons';
-import { useInsurerContext } from '../../../context';
-import { InsurerI18nProps } from '../../../i18n';
+import { useThirdPartyContext } from '../../../context';
+import { ThirdPartyI18nProps } from '../../../i18n';
 import { WarningBox } from '../../../../../warning/warning';
 import {
 	Breadcrumbs,
@@ -11,7 +11,7 @@ import {
 } from '../../../../components/breadcrumbs';
 
 const getBreadcrumbLinks = (
-	labels: Partial<InsurerI18nProps['remove']['confirm']['breadcrumbs']>,
+	labels: Partial<ThirdPartyI18nProps['remove']['confirm']['breadcrumbs']>,
 ): BreadcrumbLink[] => [
 	{
 		to: 'BACK',
@@ -26,25 +26,27 @@ const getBreadcrumbLinks = (
 
 export const Confirm = () => {
 	const [loading, setLoading] = useState(false);
-	const { current, send, onRemove, i18n } = useInsurerContext();
+	const { current, send, onRemove, i18n } = useThirdPartyContext();
 	const breadcrumbLinks = getBreadcrumbLinks(
 		i18n?.remove?.confirm?.breadcrumbs,
 	);
-	const { insurer, remove } = current.context;
+	const { thirdParty, remove } = current.context;
 
 	async function handleRemove() {
 		setLoading(true);
-		try {
-			const params = {
-				schemeRoleId: insurer.schemeRoleId,
+		await onRemove(
+			{
+				schemeRoleId: thirdParty.schemeRoleId,
 				date: remove.date,
-			};
-			await onRemove(params, insurer);
-			setLoading(false);
-		} catch (error) {
-			console.error(error);
-			setLoading(false);
-		}
+			},
+			thirdParty,
+		)
+			.then(() => {
+				setLoading(false);
+			})
+			.catch(() => {
+				setLoading(false);
+			});
 	}
 
 	return (
