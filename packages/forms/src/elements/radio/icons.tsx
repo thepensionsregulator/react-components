@@ -29,7 +29,7 @@ export const RadioButtonChecked: React.FC<any> = ({ className }) => {
 	);
 };
 
-export const RadioButtonUnchecked: React.FC<any> = ({className}) => {
+export const RadioButtonUnchecked: React.FC<any> = ({ className }) => {
 	return (
 		<svg
 			xmlns="http://www.w3.org/2000/svg"
