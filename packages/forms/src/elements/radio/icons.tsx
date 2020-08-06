@@ -18,10 +18,6 @@ export const RadioButtonChecked: React.FC<any> = ({ className }) => {
 				<circle cx="19.6" cy="19.6" r="20" stroke="none" />
 				<circle cx="19.6" cy="19.6" r="18" fill="none" />
 			</g>
-			{/* <g fill="none" stroke="#fed100" strokeWidth="4">
-				<circle cx="24" cy="24" r="24" stroke="none" />
-				<circle cx="24" cy="24" r="22" fill="none" />
-			</g> */}
 			<circle
 				cx="10"
 				cy="10"
