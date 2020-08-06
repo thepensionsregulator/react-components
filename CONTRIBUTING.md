@@ -47,10 +47,6 @@ Manual deployment:
 
 - When you're ready to deploy `minor` or `major` versions you can do so from updated `develop` branch in your terminal running command `yarn deploy` and follow the instructions in your terminal. `Lerna` will bump all versions to chosen ones and will push git refs to Github and new packages to the NPM registry.
 
-- If CircleCI doesn't automatically publish, you can also run `yarn deploy --dist-tag next` locally to add the `next` tag.
-
-- Sometimes, you need github to publish to npm on your behalf. To do this, try `npx lerna publish from-git`
-
 ## Deployment to Netlify
 
 Automatic deployment:
