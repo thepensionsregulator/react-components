@@ -11,7 +11,7 @@ const getFields = (
 	fields: RecursivePartial<TrusteeI18nProps['contacts']['fields']>,
 ): FieldProps[] => [
 	{
-		type: 'text',
+		type: 'phone',
 		name: 'telephoneNumber',
 		label: fields.telephone.label,
 		inputWidth: 2,
