@@ -7,6 +7,7 @@ import { Content } from '../../../../components/content';
 import { ArrowButton } from '../../../../../buttons/buttons';
 import { isAfter, toDate, isBefore } from 'date-fns';
 import styles from './reason.module.scss';
+import { FORM_ERROR } from 'final-form';
 
 const RemoveReason: React.FC = () => {
 	const { current, send, i18n } = useTrusteeContext();
@@ -42,12 +43,19 @@ const RemoveReason: React.FC = () => {
 		reason: string; // 'left_the_scheme' | 'not_part_of_scheme'
 		date?: Date;
 	}) => {
-		send('SELECT', {
-			values: {
-				reason: values.reason,
-				date: values.reason === 'not_part_of_scheme' ? undefined : values.date,
-			},
-		});
+		if (!values.reason) {
+			return {
+				[FORM_ERROR]: i18n.remove.reason.errors.pristine,
+			};
+		} else {
+			send('SELECT', {
+				values: {
+					reason: values.reason,
+					date:
+						values.reason === 'not_part_of_scheme' ? undefined : values.date,
+				},
+			});
+		}
 	};
 
 	return (
