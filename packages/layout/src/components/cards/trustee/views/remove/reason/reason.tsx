@@ -12,39 +12,43 @@ const RemoveReason: React.FC = () => {
 	const { current, send, i18n } = useTrusteeContext();
 	const { remove, trustee } = current.context;
 
-	const DateField : FieldProps[] = [{
-		type: 'date',
-		name: 'date',
-		label: i18n.remove.reason.fields.date.label,
-		hint: "For example, 31 3 2019",
-		cfg: {mb: 3},
-		validate: (value) => {if (!value) {
-			return i18n.remove.reason.errors.pristine;
-			
-		} else if (
-			isBefore(
-				toDate(new Date(value)),
-				toDate(new Date(trustee.effectiveDate)),
-			)
-		) {
-			return  i18n.remove.reason.errors.dateAddedBeforeEffectiveDate;
-		} else if (isAfter(toDate(new Date(value)), new Date())) {
-			return i18n.remove.reason.errors.dateAddedInTheFuture;
-		} else {
-		return undefined;}}
-	}]
+	const DateField: FieldProps[] = [
+		{
+			type: 'date',
+			name: 'date',
+			label: i18n.remove.reason.fields.date.label,
+			hint: 'For example, 31 3 2019',
+			cfg: { mb: 3 },
+			validate: (value) => {
+				if (!value) {
+					return i18n.remove.reason.errors.pristine;
+				} else if (
+					isBefore(
+						toDate(new Date(value)),
+						toDate(new Date(trustee.effectiveDate)),
+					)
+				) {
+					return i18n.remove.reason.errors.dateAddedBeforeEffectiveDate;
+				} else if (isAfter(toDate(new Date(value)), new Date())) {
+					return i18n.remove.reason.errors.dateAddedInTheFuture;
+				} else {
+					return undefined;
+				}
+			},
+		},
+	];
 
 	const onSubmit = (values: {
 		reason: string; // 'left_the_scheme' | 'not_part_of_scheme'
 		date?: Date;
 	}) => {
-			send('SELECT', {
-				values: {
-					reason: values.reason,
-					date: values.reason === 'not_part_of_scheme'? undefined: values.date,
-				},
-			});
-		}
+		send('SELECT', {
+			values: {
+				reason: values.reason,
+				date: values.reason === 'not_part_of_scheme' ? undefined : values.date,
+			},
+		});
+	};
 
 	return (
 		<Content type="trustee" title={i18n.remove.reason.title}>
