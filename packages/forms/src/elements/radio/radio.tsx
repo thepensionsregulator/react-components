@@ -51,7 +51,7 @@ export const RadioButton: React.FC<RadioButtonProps> = ({
 				{checked ? (
 					<RadioButtonChecked className={styles.radio} />
 				) : (
-					<RadioButtonUnchecked />
+					<RadioButtonUnchecked className={styles.radio} />
 				)}
 				<P cfg={{ ml: 2, fontWeight: 3 }} className={styles.label}>
 					{label}
