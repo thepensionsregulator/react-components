@@ -52,3 +52,7 @@ workflows:
                 - /rc-.*/
                 - /feature-.*/
                 - /bug-.*/
+                - /release/.*/
+                - /feature/.*/
+                - /bug/.*/
+                - /bugfix/.*/

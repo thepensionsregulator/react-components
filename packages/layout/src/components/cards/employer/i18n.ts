@@ -9,6 +9,7 @@ export type EmployerI18nProps = {
 		identifiers: {
 			companiesHouseNo: string;
 			registeredCharityNo: string;
+			epsrNumber: string;
 		};
 		checkboxLabel: string;
 	};
@@ -80,6 +81,7 @@ export const i18n: EmployerI18nProps = {
 		identifiers: {
 			companiesHouseNo: 'Companies House number',
 			registeredCharityNo: 'Registered Charity number',
+			epsrNumber: 'Employer Pension Scheme Reference number',
 		},
 		checkboxLabel: 'All details are correct.',
 	},
