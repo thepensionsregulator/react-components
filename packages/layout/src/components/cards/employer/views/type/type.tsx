@@ -72,7 +72,7 @@ export const EmployerType = () => {
 				}}
 				validate={validate(fields)}
 			>
-				{({ handleSubmit, pristine }) => (
+				{({ handleSubmit }) => (
 					<form onSubmit={handleSubmit}>
 						{renderFields(fields)}
 						<Footer>
