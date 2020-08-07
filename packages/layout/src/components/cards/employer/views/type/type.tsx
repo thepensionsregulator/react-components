@@ -81,7 +81,7 @@ export const EmployerType = () => {
 									intent="special"
 									pointsTo="up"
 									iconSide="right"
-									disabled={loading || pristine}
+									disabled={false}
 									disabledText={loading ? 'Saving...' : undefined}
 									title="Save and close"
 									type="submit"
