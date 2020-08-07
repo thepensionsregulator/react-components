@@ -72,7 +72,7 @@ export const EmployerType = () => {
 				}}
 				validate={validate(fields)}
 			>
-				{({ handleSubmit, pristine }) => (
+				{({ handleSubmit }) => (
 					<form onSubmit={handleSubmit}>
 						{renderFields(fields)}
 						<Footer>
@@ -81,7 +81,7 @@ export const EmployerType = () => {
 									intent="special"
 									pointsTo="up"
 									iconSide="right"
-									disabled={loading || pristine}
+									disabled={loading}
 									disabledText={loading ? 'Saving...' : undefined}
 									title="Save and close"
 									type="submit"
