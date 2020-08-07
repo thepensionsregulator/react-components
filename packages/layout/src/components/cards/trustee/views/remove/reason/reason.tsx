@@ -39,16 +39,13 @@ const RemoveReason: React.FC = () => {
 		reason: string; // 'left_the_scheme' | 'not_part_of_scheme'
 		date?: Date;
 	}) => {
-		} else {
 			send('SELECT', {
 				values: {
 					reason: values.reason,
-					date: null,
+					date: values.reason === 'not_part_of_scheme'? undefined: values.date,
 				},
 			});
-			return undefined;
 		}
-	};
 
 	return (
 		<Content type="trustee" title={i18n.remove.reason.title}>
