@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Form, renderFields, validate, FieldProps } from '@tpr/forms';
-import { Flex, Link, H3, B } from '@tpr/core';
+import { Flex, Link, B } from '@tpr/core';
 import { Content } from '../../../components/content';
 import { Footer } from '../../../components/card';
 import { useEmployerContext } from '../../context';
