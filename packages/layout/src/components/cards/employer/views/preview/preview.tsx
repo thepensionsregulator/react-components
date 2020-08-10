@@ -28,6 +28,10 @@ export const Preview: React.FC<any> = () => {
 				title: i18n.preview.identifiers.registeredCharityNo,
 				number: employer.registeredCharityNumber,
 			},
+			{
+				title: i18n.preview.identifiers.epsrNumber,
+				number: employer.epsrNumber,
+			},
 		].filter((item) => item.title && item.number),
 	);
 
