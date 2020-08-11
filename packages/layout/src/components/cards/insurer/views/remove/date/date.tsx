@@ -1,12 +1,6 @@
 import React from 'react';
 import { FORM_ERROR } from 'final-form';
-import {
-	Form,
-	FFCheckbox,
-	FFInputDate,
-	FieldProps,
-	renderFields,
-} from '@tpr/forms';
+import { Form, FFCheckbox, FieldProps, renderFields } from '@tpr/forms';
 import { P } from '@tpr/core';
 import { Content } from '../../../../components/content';
 import { Footer } from '../../../../components/card';
