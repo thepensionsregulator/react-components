@@ -49,6 +49,7 @@ export type EmployerProps = {
 	organisationName: string;
 	companiesHouseNumber: number | string;
 	registeredCharityNumber: number | string;
+	epsrNumber: number | string;
 	addressLine1: string;
 	addressLine2: string;
 	addressLine3: string;
@@ -57,6 +58,7 @@ export type EmployerProps = {
 	postCode: string;
 	countryId: string;
 	effectiveDate: string;
+	statutoryEmployer: 'statutory' | 'non-statutory';
 };
 
 export const EmployerProvider = ({

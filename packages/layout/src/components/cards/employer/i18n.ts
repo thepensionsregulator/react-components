@@ -9,6 +9,7 @@ export type EmployerI18nProps = {
 		identifiers: {
 			companiesHouseNo: string;
 			registeredCharityNo: string;
+			epsrNumber: string;
 		};
 		checkboxLabel: string;
 	};
@@ -26,6 +27,21 @@ export type EmployerI18nProps = {
 					hint: string;
 				};
 				participating: {
+					label: string;
+					hint: string;
+				};
+			};
+		};
+	};
+	statutory: {
+		title: string;
+		fields: {
+			statutoryEmployer: {
+				statutory: {
+					label: string;
+					hint: string;
+				};
+				nonStatutory: {
 					label: string;
 					hint: string;
 				};
@@ -80,6 +96,7 @@ export const i18n: EmployerI18nProps = {
 		identifiers: {
 			companiesHouseNo: 'Companies House number',
 			registeredCharityNo: 'Registered Charity number',
+			epsrNumber: 'Employer Pension Scheme Reference number',
 		},
 		checkboxLabel: 'All details are correct.',
 	},
@@ -102,6 +119,21 @@ export const i18n: EmployerI18nProps = {
 				participating: {
 					label: 'Participating',
 					hint: 'Any employer whose employees can participate in the scheme.',
+				},
+			},
+		},
+	},
+	statutory: {
+		title: 'Is this employer a statutory employer?',
+		fields: {
+			statutoryEmployer: {
+				statutory: {
+					label: 'Statutory Employer',
+					hint: 'Statutory copy text goes here',
+				},
+				nonStatutory: {
+					label: 'Non-statutory Employer',
+					hint: 'Non-statutory copy text goes here',
 				},
 			},
 		},

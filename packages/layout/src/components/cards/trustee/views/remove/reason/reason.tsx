@@ -2,56 +2,59 @@ import React from 'react';
 import { P, H4 } from '@tpr/core';
 import { useTrusteeContext } from '../../../context';
 import { Footer } from '../../../../components/card';
-import { Form, FFRadioButton, FFInputDate } from '@tpr/forms';
-import { FORM_ERROR } from 'final-form';
+import { Form, FFRadioButton, FieldProps, renderFields } from '@tpr/forms';
 import { Content } from '../../../../components/content';
 import { ArrowButton } from '../../../../../buttons/buttons';
 import { isAfter, toDate, isBefore } from 'date-fns';
 import styles from './reason.module.scss';
+import { FORM_ERROR } from 'final-form';
 
 const RemoveReason: React.FC = () => {
 	const { current, send, i18n } = useTrusteeContext();
 	const { remove, trustee } = current.context;
 
+	const DateField: FieldProps[] = [
+		{
+			type: 'date',
+			name: 'date',
+			label: i18n.remove.reason.fields.date.label,
+			hint: 'For example, 31 3 2019',
+			cfg: { mb: 3 },
+			validate: (value) => {
+				if (!value) {
+					return i18n.remove.reason.errors.pristine;
+				} else if (
+					isBefore(
+						toDate(new Date(value)),
+						toDate(new Date(trustee.effectiveDate)),
+					)
+				) {
+					return i18n.remove.reason.errors.dateAddedBeforeEffectiveDate;
+				} else if (isAfter(toDate(new Date(value)), new Date())) {
+					return i18n.remove.reason.errors.dateAddedInTheFuture;
+				} else {
+					return undefined;
+				}
+			},
+		},
+	];
+
 	const onSubmit = (values: {
 		reason: string; // 'left_the_scheme' | 'not_part_of_scheme'
 		date?: Date;
 	}) => {
-		if (!values.reason || values.reason === 'left_the_scheme') {
-			if (!values.date) {
-				return {
-					[FORM_ERROR]: i18n.remove.reason.errors.pristine,
-				};
-			} else if (
-				isBefore(
-					toDate(new Date(values.date)),
-					toDate(new Date(trustee.effectiveDate)),
-				)
-			) {
-				return {
-					[FORM_ERROR]: i18n.remove.reason.errors.dateAddedBeforeEffectiveDate,
-				};
-			} else if (isAfter(toDate(new Date(values.date)), new Date())) {
-				return {
-					[FORM_ERROR]: i18n.remove.reason.errors.dateAddedInTheFuture,
-				};
-			} else {
-				send('SELECT', {
-					values: {
-						reason: values.reason,
-						date: values.date,
-					},
-				});
-				return undefined;
-			}
+		if (!values.reason) {
+			return {
+				[FORM_ERROR]: i18n.remove.reason.errors.pristine,
+			};
 		} else {
 			send('SELECT', {
 				values: {
 					reason: values.reason,
-					date: null,
+					date:
+						values.reason === 'not_part_of_scheme' ? undefined : values.date,
 				},
 			});
-			return undefined;
 		}
 	};
 
@@ -81,13 +84,7 @@ const RemoveReason: React.FC = () => {
 							/>
 							{leftScheme && (
 								<div className={styles.dateWrapper}>
-									<FFInputDate
-										name="date"
-										label={i18n.remove.reason.fields.date.label}
-										hint="For example, 31 3 2019"
-										required={true}
-										cfg={{ mb: 3 }}
-									/>
+									{renderFields(DateField)}
 								</div>
 							)}
 							<FFRadioButton
