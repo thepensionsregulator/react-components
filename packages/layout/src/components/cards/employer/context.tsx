@@ -58,6 +58,7 @@ export type EmployerProps = {
 	postCode: string;
 	countryId: string;
 	effectiveDate: string;
+	statutoryEmployer: 'statutory' | 'non-statutory';
 };
 
 export const EmployerProvider = ({
