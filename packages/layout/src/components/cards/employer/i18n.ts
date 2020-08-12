@@ -33,6 +33,21 @@ export type EmployerI18nProps = {
 			};
 		};
 	};
+	statutory: {
+		title: string;
+		fields: {
+			statutoryEmployer: {
+				statutory: {
+					label: string;
+					hint: string;
+				};
+				nonStatutory: {
+					label: string;
+					hint: string;
+				};
+			};
+		};
+	};
 	remove: {
 		confirm: {
 			breadcrumbs: {
@@ -104,6 +119,21 @@ export const i18n: EmployerI18nProps = {
 				participating: {
 					label: 'Participating',
 					hint: 'Any employer whose employees can participate in the scheme.',
+				},
+			},
+		},
+	},
+	statutory: {
+		title: 'Is this employer a statutory employer?',
+		fields: {
+			statutoryEmployer: {
+				statutory: {
+					label: 'Statutory Employer',
+					hint: 'Statutory copy text goes here',
+				},
+				nonStatutory: {
+					label: 'Non-statutory Employer',
+					hint: 'Non-statutory copy text goes here',
 				},
 			},
 		},

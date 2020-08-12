@@ -65,6 +65,7 @@ const employerMachine = Machine<
 						employer: {
 							...context.employer,
 							employerType: event.values.employerType,
+							statutoryEmployer: event.values.statutoryEmployer,
 						},
 					})),
 				},

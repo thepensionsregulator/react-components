@@ -59,8 +59,9 @@ const ToolbarButton: React.FC<{ title: string }> = ({ title }) => {
 
 const EmployerSubtitle: React.FC<Partial<EmployerProps>> = ({
 	employerType,
+	statutoryEmployer,
 }) => {
-	if (!employerType) return null;
+	if (!employerType || !statutoryEmployer) return null;
 
 	const title = useMemo(
 		() =>
@@ -73,7 +74,17 @@ const EmployerSubtitle: React.FC<Partial<EmployerProps>> = ({
 		[employerType],
 	);
 
-	return <P>{title}</P>;
+	const subtitle = useMemo(
+		() => capitalize(statutoryEmployer).concat(` employer`),
+		[statutoryEmployer],
+	);
+
+	return (
+		<>
+			<P>{title}</P>
+			<P>{subtitle}</P>
+		</>
+	);
 };
 
 export const EmployerCard: React.FC<EmployerProviderProps> = ({
