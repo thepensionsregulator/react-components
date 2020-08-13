@@ -6,7 +6,7 @@
 ![Build Status][build-badge]
 ![MIT License][license-badge]
 
-> React Components is a design system for TPR
+> React Components is a design system for TPR.
 
 React components are maintained following a multi-package approach where
 components are packaged and published individually, but combined under this
