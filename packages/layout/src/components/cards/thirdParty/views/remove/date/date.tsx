@@ -1,6 +1,6 @@
 import React from 'react';
 import { FORM_ERROR } from 'final-form';
-import { Form, FFCheckbox, FFInputDate } from '@tpr/forms';
+import { Form, FFCheckbox, FieldProps, renderFields } from '@tpr/forms';
 import { P } from '@tpr/core';
 import { Content } from '../../../../components/content';
 import { Footer } from '../../../../components/card';
@@ -13,27 +13,38 @@ export const DateForm = () => {
 	const { current, send, i18n } = useThirdPartyContext();
 	const { remove, thirdParty } = current.context;
 
+	const DateField: FieldProps[] = [
+		{
+			type: 'date',
+			name: 'date',
+			label: i18n.remove.date.fields.date.label,
+			hint: i18n.remove.date.fields.date.hint,
+			validate: (value) => {
+				if (!value) {
+					return i18n.remove.date.errors.formIncomplete;
+				} else if (
+					isBefore(
+						toDate(new Date(value)),
+						toDate(new Date(thirdParty.effectiveDate)),
+					)
+				) {
+					return i18n.remove.date.errors.dateAddedBeforeEffectiveDate;
+				} else if (isAfter(toDate(new Date(value)), new Date())) {
+					return i18n.remove.date.errors.dateAddedInTheFuture;
+				}
+			},
+			error: i18n.remove.date.fields.date.error,
+			cfg: { mb: 3 },
+		},
+	];
+
 	const onSubmit = (values) => {
-		if (!values.confirm || !values.date) {
+		if (!values.confirm) {
 			return {
 				[FORM_ERROR]: i18n.remove.date.errors.formIncomplete,
 			};
-		} else if (
-			isBefore(
-				toDate(new Date(values.date)),
-				toDate(new Date(thirdParty.effectiveDate)),
-			)
-		) {
-			return {
-				[FORM_ERROR]: i18n.remove.date.errors.dateAddedBeforeEffectiveDate,
-			};
-		} else if (isAfter(toDate(new Date(values.date)), new Date())) {
-			return {
-				[FORM_ERROR]: i18n.remove.date.errors.dateAddedInTheFuture,
-			};
 		} else {
 			send('NEXT', { values });
-			return undefined;
 		}
 	};
 
@@ -54,16 +65,7 @@ export const DateForm = () => {
 							label={i18n.remove.date.fields.confirm.label}
 							cfg={{ mb: 3 }}
 						/>
-						<div className={styles.dateWrapper}>
-							<FFInputDate
-								name="date"
-								label={i18n.remove.date.fields.date.label}
-								hint={i18n.remove.date.fields.date.hint}
-								required={true}
-								error={i18n.remove.date.fields.date.error}
-								cfg={{ mb: 3 }}
-							/>
-						</div>
+						<div className={styles.dateWrapper}>{renderFields(DateField)}</div>
 						{submitError && (
 							<P cfg={{ color: 'danger.2', mt: 5 }}>{submitError}</P>
 						)}
