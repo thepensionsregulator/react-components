@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Form, renderFields, validate, FieldProps } from '@tpr/forms';
-import { Flex, Link } from '@tpr/core';
+import { Flex, Link, B } from '@tpr/core';
 import { Content } from '../../../components/content';
 import { Footer } from '../../../components/card';
 import { useEmployerContext } from '../../context';
@@ -8,7 +8,7 @@ import { ArrowButton } from '../../../../buttons/buttons';
 import { EmployerI18nProps } from '../../i18n';
 import { RecursivePartial } from '../../context';
 
-const getFields = (
+const getTypeFields = (
 	labels: RecursivePartial<EmployerI18nProps['type']['fields']>,
 ): FieldProps[] => [
 	{
@@ -37,16 +37,39 @@ const getFields = (
 	},
 ];
 
+const getStatutoryFields = (
+	labels: RecursivePartial<EmployerI18nProps['statutory']['fields']>,
+): FieldProps[] => [
+	{
+		type: 'radio',
+		hint: labels.statutoryEmployer.statutory.hint,
+		name: 'statutoryEmployer',
+		value: 'statutory',
+		label: labels.statutoryEmployer.statutory.label,
+		cfg: { mb: 2 },
+	},
+	{
+		type: 'radio',
+		hint: labels.statutoryEmployer.nonStatutory.hint,
+		name: 'statutoryEmployer',
+		value: 'non-statutory',
+		label: labels.statutoryEmployer.nonStatutory.label,
+		cfg: { mb: 2 },
+	},
+];
+
 export const EmployerType = () => {
 	const [loading, setLoading] = useState(false);
 	const { send, current, i18n, onSaveType } = useEmployerContext();
-	const fields = getFields(i18n?.type?.fields);
+	const typeFields = getTypeFields(i18n?.type?.fields);
+	const statutoryFields = getStatutoryFields(i18n?.statutory?.fields);
 	const { employer } = current.context;
 
 	async function onSubmit(values) {
 		const updatedValues = {
 			schemeRoleId: employer.schemeRoleId,
 			employerType: values.employerType,
+			statutoryEmployer: values.statutoryEmployer,
 		};
 		setLoading(true);
 		await onSaveType(updatedValues, employer)
@@ -69,12 +92,15 @@ export const EmployerType = () => {
 				onSubmit={onSubmit}
 				initialValues={{
 					employerType: employer.employerType,
+					statutoryEmployer: employer.statutoryEmployer,
 				}}
-				validate={validate(fields)}
+				validate={validate(typeFields)}
 			>
 				{({ handleSubmit }) => (
 					<form onSubmit={handleSubmit}>
-						{renderFields(fields)}
+						{renderFields(typeFields)}
+						<B>{i18n.statutory.title}</B>
+						{renderFields(statutoryFields)}
 						<Footer>
 							<Flex>
 								<ArrowButton
