@@ -71,7 +71,13 @@ export type ActuaryI18nProps = {
 				dateAddedInTheFuture: string;
 			};
 		};
-	};
+  };
+  // organisation: {
+  //   title: string;
+  //   fields: {
+  //     name: string;
+  //   }
+  // }
 };
 
 export const i18n: ActuaryI18nProps = {
@@ -99,7 +105,13 @@ export const i18n: ActuaryI18nProps = {
 				error: 'field is required',
 			},
 		},
-	},
+  },
+  // organisation: {
+  //   title: 'Organisation name',
+  //   fields: {
+  //     name: 'Please provide name for the organisation'
+  //   }
+  // },
 	contacts: {
 		title: 'Contact details for this actuary',
 		subtitle: 'Provide contact details for the actuary.',

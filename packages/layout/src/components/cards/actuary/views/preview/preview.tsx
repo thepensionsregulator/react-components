@@ -13,6 +13,7 @@ export const Preview: React.FC<any> = () => {
 		<div
 			className={classNames([{ [styles.complete]: complete }, styles.content])}
 		>
+			<P cfg={{ mb: 4 }}>{ actuary.organisationName }</P>
 			<Flex>
 				<Flex
 					cfg={{ width: 5, flex: '0 0 auto', flexDirection: 'column', pr: 4 }}

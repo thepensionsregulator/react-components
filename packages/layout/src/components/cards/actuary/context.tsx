@@ -56,7 +56,8 @@ interface Actuary {
 	countryId: string;
 	telephoneNumber: string;
 	emailAddress: string;
-	//addressAPI: AddressAPIType;
+  //addressAPI: AddressAPIType;
+  organisationName: string;
 }
 
 export interface ActuaryWithContactsProps extends Actuary {
