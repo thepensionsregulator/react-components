@@ -6,7 +6,13 @@ import styles from './content.module.scss';
 export const Loading = () => <div className={styles.loading} />;
 
 type ContentProps = {
-	type: 'trustee' | 'employer' | 'insurer' | 'inHouseAdmin' | 'thirdParty' | 'actuary';
+	type:
+		| 'trustee'
+		| 'employer'
+		| 'insurer'
+		| 'inHouseAdmin'
+		| 'thirdParty'
+		| 'actuary';
 	typeName?: string;
 	title?: string;
 	loading?: boolean;

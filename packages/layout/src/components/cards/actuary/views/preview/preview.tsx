@@ -13,14 +13,12 @@ export const Preview: React.FC<any> = () => {
 		<div
 			className={classNames([{ [styles.complete]: complete }, styles.content])}
 		>
-			<P cfg={{ mb: 4 }}>{ actuary.organisationName }</P>
+			<P cfg={{ mb: 4 }}>{actuary.organisationName}</P>
 			<Flex>
 				<Flex
 					cfg={{ width: 5, flex: '0 0 auto', flexDirection: 'column', pr: 4 }}
 				>
-					<UnderlinedButton>
-						{i18n.preview.buttons.three}
-					</UnderlinedButton>
+					<UnderlinedButton>{i18n.preview.buttons.three}</UnderlinedButton>
 					<Flex cfg={{ my: 2, flexDirection: 'column' }}>
 						<P>{actuary.address.addressLine1}</P>
 						{actuary.address.addressLine2 && (
@@ -31,9 +29,7 @@ export const Preview: React.FC<any> = () => {
 						)}
 						<P>{actuary.address.postTown}</P>
 						<P>{actuary.address.postCode}</P>
-						{actuary.address.country && (
-							<P>{actuary.address.country}</P>
-						)}
+						{actuary.address.country && <P>{actuary.address.country}</P>}
 					</Flex>
 				</Flex>
 				<Flex

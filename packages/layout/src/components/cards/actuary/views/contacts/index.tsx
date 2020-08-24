@@ -62,7 +62,7 @@ export const Contacts: React.FC = () => {
 				validate={validate(fields)}
 			>
 				{({ handleSubmit }) => (
-					<form onSubmit={handleSubmit}>
+					<form onSubmit={handleSubmit} data-testid="actuary-contact-form">
 						{renderFields(fields)}
 						<Footer>
 							<ArrowButton

@@ -1,8 +1,6 @@
 import React, { createContext, useContext, ReactElement } from 'react';
 import { useMachine } from '@xstate/react';
-import actuaryMachine, {
-	ActuaryContext as IHAC,
-} from './actuaryMachine';
+import actuaryMachine, { ActuaryContext as IHAC } from './actuaryMachine';
 import { State, EventData } from 'xstate';
 import { SpaceProps } from '@tpr/core';
 import { i18n as i18nDefaults, ActuaryI18nProps } from './i18n';
@@ -25,9 +23,9 @@ export const ActuaryContext = createContext<ActuaryContextProps>({
 });
 
 //type AddressAPIType = {
-	/** API instance with auth to get a list of addresses */
+/** API instance with auth to get a list of addresses */
 //	get: (endpoint: string) => Promise<any>;
-	/** limit of items to display per search */
+/** limit of items to display per search */
 //	limit: number;
 //};
 
@@ -47,7 +45,7 @@ export type RecursivePartial<T> = {
 };
 
 interface Actuary {
-	id: string;
+	//id: string;
 	schemeRoleId: string | number;
 	title: string;
 	firstname: string;
@@ -56,8 +54,8 @@ interface Actuary {
 	countryId: string;
 	telephoneNumber: string;
 	emailAddress: string;
-  //addressAPI: AddressAPIType;
-  organisationName: string;
+	//addressAPI: AddressAPIType;
+	organisationName: string;
 }
 
 export interface ActuaryWithContactsProps extends Actuary {

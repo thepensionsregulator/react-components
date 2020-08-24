@@ -53,11 +53,7 @@ export const NameScreen: React.FC = () => {
 	};
 
 	return (
-		<Content
-			type="actuary"
-			typeName="Actuary"
-			title="Name of the actuary"
-		>
+		<Content type="actuary" typeName="Actuary" title="Name of the actuary">
 			<Form
 				onSubmit={onSubmit}
 				validate={validate(fields)}
@@ -68,7 +64,7 @@ export const NameScreen: React.FC = () => {
 				}}
 			>
 				{({ handleSubmit }) => (
-					<form onSubmit={handleSubmit}>
+					<form onSubmit={handleSubmit} data-testid="actuary-name-form">
 						{renderFields(fields)}
 						<Footer>
 							<ArrowButton

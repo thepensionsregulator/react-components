@@ -49,11 +49,7 @@ export const DateForm = () => {
 	};
 
 	return (
-		<Content
-			type="actuary"
-			typeName="Actuary"
-			title={i18n.remove.date.title}
-		>
+		<Content type="actuary" typeName="Actuary" title={i18n.remove.date.title}>
 			<Form
 				onSubmit={onSubmit}
 				initialValues={{
@@ -62,7 +58,7 @@ export const DateForm = () => {
 				}}
 			>
 				{({ handleSubmit, submitError }) => (
-					<form onSubmit={handleSubmit}>
+					<form onSubmit={handleSubmit} data-testid="remove-actuary-form">
 						<FFCheckbox
 							name="confirm"
 							type="checkbox"

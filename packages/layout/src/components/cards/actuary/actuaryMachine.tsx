@@ -38,11 +38,7 @@ export interface ActuaryContext {
 	actuary: Partial<ActuaryWithContactsProps>;
 }
 
-const actuaryMachine = Machine<
-	ActuaryContext,
-	ActuaryStates,
-	ActuaryEvents
->({
+const actuaryMachine = Machine<ActuaryContext, ActuaryStates, ActuaryEvents>({
 	id: 'actuary',
 	initial: 'preview',
 	context: {

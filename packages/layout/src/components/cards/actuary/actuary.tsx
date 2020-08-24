@@ -4,7 +4,7 @@ import {
 	ActuaryProviderProps,
 	useActuaryContext,
 } from './context';
-import { Flex, H4, H5 } from '@tpr/core';
+import { Flex, H4 } from '@tpr/core';
 import { Toolbar } from '../components/toolbar';
 import { UnderlinedButton } from '../components/button';
 import { Preview } from './views/preview/preview';
@@ -31,7 +31,7 @@ const CardContentSwitch: React.FC = () => {
 			return <Confirm />;
 		case current.matches({ remove: 'deleted' }):
 			// TODO: some nice message to show it has been successfuly deleted.
-      return <RemovedBox type="actuary" />
+			return <RemovedBox type="actuary" />;
 		default:
 			return null;
 	}
@@ -100,15 +100,15 @@ export const ActuaryCard: React.FC<ActuaryProviderProps> = ({
 						<Toolbar
 							complete={context.complete}
 							subtitle={() => (
-                <H4 cfg={{ lineHeight: 3 }}>
-                  {[
-                    context.actuary.title,
-                    context.actuary.firstname,
-                    context.actuary.lastname,
-                  ]
-                    .filter(Boolean)
-                    .join(' ')}
-                </H4>
+								<H4 cfg={{ lineHeight: 3 }}>
+									{[
+										context.actuary.title,
+										context.actuary.firstname,
+										context.actuary.lastname,
+									]
+										.filter(Boolean)
+										.join(' ')}
+								</H4>
 							)}
 							buttonLeft={() => <ActuaryButton />}
 							buttonRight={() => (
