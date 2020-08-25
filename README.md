@@ -10,7 +10,7 @@
 
 React components are maintained following a multi-package approach where
 components are packaged and published individually, but combined under this
-single repository.
+single repository..
 
 ## Installation
 
