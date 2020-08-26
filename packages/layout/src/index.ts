@@ -4,6 +4,7 @@ export * from './components/cards/employer/employer';
 export * from './components/cards/inHouse/inHouse';
 export * from './components/cards/thirdParty/thirdParty';
 export * from './components/cards/insurer/insurer';
+export * from './components/cards/actuary/actuary';
 // all other exports
 export * from './components/beta/beta';
 export * from './components/footer/footer';
