@@ -1,15 +1,14 @@
 import React, { useState } from 'react';
 import { Form, FieldProps, renderFields, validate } from '@tpr/forms';
-import { useInHouseAdminContext } from '../../context';
+import { useNewActuaryContext } from '../../context';
 import { Footer } from '../../../components/card';
 import { Content } from '../../../components/content';
 import { ArrowButton } from '../../../../buttons/buttons';
-import { InHouseAdminI18nProps } from '../../i18n';
-import { RecursivePartial } from '../../context';
-import { cardType, cardTypeName } from '../../../common/interfaces';
+import { NewActuaryI18nProps } from '../../i18n';
+import { RecursivePartial, cardType, cardTypeName } from '../../../common/interfaces';
 
 const getFields = (
-	fields: RecursivePartial<InHouseAdminI18nProps['name']['fields']>,
+	fields: RecursivePartial<NewActuaryI18nProps['name']['fields']>,
 ): FieldProps[] => [
 	{
 		name: 'title',
@@ -37,9 +36,9 @@ const getFields = (
 
 export const NameScreen: React.FC = () => {
 	const [loading, setLoading] = useState(false);
-	const { current, send, i18n, onSaveName } = useInHouseAdminContext();
+	const { current, send, i18n, onSaveName } = useNewActuaryContext();
 	const fields = getFields(i18n.name.fields);
-	const state = current.context.inHouseAdmin;
+	const state = current.context.actuary;
 
 	const onSubmit = async (values) => {
 		setLoading(true);
@@ -54,11 +53,7 @@ export const NameScreen: React.FC = () => {
 	};
 
 	return (
-		<Content
-			type={cardType.inHouseAdmin}
-			typeName={cardTypeName.inHouseAdmin}
-			title="Name of the in house administrator"
-		>
+		<Content type={cardType.actuary} typeName={cardTypeName.actuary} title="Name of the actuary">
 			<Form
 				onSubmit={onSubmit}
 				validate={validate(fields)}
@@ -69,7 +64,7 @@ export const NameScreen: React.FC = () => {
 				}}
 			>
 				{({ handleSubmit }) => (
-					<form onSubmit={handleSubmit}>
+					<form onSubmit={handleSubmit} data-testid="actuary-name-form">
 						{renderFields(fields)}
 						<Footer>
 							<ArrowButton

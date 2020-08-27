@@ -8,6 +8,7 @@ import { ArrowButton } from '../../../../../buttons/buttons';
 import { isAfter, toDate, isBefore } from 'date-fns';
 import styles from './reason.module.scss';
 import { FORM_ERROR } from 'final-form';
+import { cardType } from '../../../../common/interfaces';
 
 const RemoveReason: React.FC = () => {
 	const { current, send, i18n } = useTrusteeContext();
@@ -59,7 +60,7 @@ const RemoveReason: React.FC = () => {
 	};
 
 	return (
-		<Content type="trustee" title={i18n.remove.reason.title}>
+		<Content type={cardType.trustee} title={i18n.remove.reason.title}>
 			<H4 fontWeight="bold" mb={0}>
 				{i18n.remove.reason.subtitle}
 			</H4>

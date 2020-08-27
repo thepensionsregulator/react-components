@@ -6,6 +6,7 @@ import useSetState from '../../../hooks/use-set-state';
 import AutoComplete from './AutoComplete';
 import ManualComplete from './ManualComplete';
 import Postcode from './Postcode';
+import { cardType } from '../../../common/interfaces';
 
 const AddressPage: React.FC = () => {
 	const { current, i18n } = useTrusteeContext();
@@ -20,7 +21,7 @@ const AddressPage: React.FC = () => {
 	const { loading, manual, postcode, lookup, options } = state;
 
 	return (
-		<Content type="trustee" title={i18n.address.title}>
+		<Content type={cardType.trustee} title={i18n.address.title}>
 			<Postcode
 				lookup={lookup}
 				loading={loading}

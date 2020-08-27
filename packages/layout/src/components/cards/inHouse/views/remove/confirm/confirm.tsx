@@ -9,6 +9,7 @@ import {
 	Breadcrumbs,
 	BreadcrumbLink,
 } from '../../../../components/breadcrumbs';
+import { cardType, cardTypeName } from '../../../../common/interfaces';
 
 const getBreadcrumbLinks = (
 	labels: Partial<InHouseAdminI18nProps['remove']['confirm']['breadcrumbs']>,
@@ -52,8 +53,8 @@ export const Confirm = () => {
 
 	return (
 		<Content
-			type="inHouseAdmin"
-			typeName="In House Administrator"
+			type={cardType.inHouseAdmin}
+			typeName={cardTypeName.inHouseAdmin}
 			breadcrumbs={() => <Breadcrumbs links={breadcrumbLinks} send={send} />}
 		>
 			<H3 cfg={{ mt: 3, fontWeight: 2 }}>{i18n.remove.confirm.title}</H3>

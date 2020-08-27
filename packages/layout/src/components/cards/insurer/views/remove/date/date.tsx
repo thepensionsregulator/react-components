@@ -7,6 +7,7 @@ import { Footer } from '../../../../components/card';
 import { useInsurerContext } from '../../../context';
 import { ArrowButton } from '../../../../../buttons/buttons';
 import { isAfter, toDate, isBefore } from 'date-fns';
+import { cardType } from '../../../../common/interfaces';
 import styles from './date.module.scss';
 
 export const DateForm = () => {
@@ -48,7 +49,7 @@ export const DateForm = () => {
 	};
 
 	return (
-		<Content type="insurer" title={i18n.remove.date.title}>
+		<Content type={cardType.insurer} title={i18n.remove.date.title}>
 			<Form
 				onSubmit={onSubmit}
 				initialValues={{

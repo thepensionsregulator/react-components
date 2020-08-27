@@ -6,6 +6,7 @@ import { Content } from '../../../components/content';
 import { ArrowButton } from '../../../../buttons/buttons';
 import { TrusteeI18nProps } from '../../i18n';
 import { RecursivePartial } from '../../context';
+import { cardType } from '../../../common/interfaces';
 
 const getFields = (
 	fields: RecursivePartial<TrusteeI18nProps['contacts']['fields']>,
@@ -38,7 +39,7 @@ const Contacts: React.FC = () => {
 
 	return (
 		<Content
-			type="trustee"
+			type={cardType.trustee}
 			title={i18n.contacts.title}
 			subtitle={i18n.contacts.subtitle}
 			loading={loading}

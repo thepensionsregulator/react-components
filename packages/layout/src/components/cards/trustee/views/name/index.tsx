@@ -6,6 +6,7 @@ import { Content } from '../../../components/content';
 import { ArrowButton } from '../../../../buttons/buttons';
 import { TrusteeI18nProps } from '../../i18n';
 import { RecursivePartial } from '../../context';
+import { cardType } from '../../../common/interfaces';
 
 const getFields = (
 	fields: RecursivePartial<TrusteeI18nProps['name']['fields']>,
@@ -44,7 +45,7 @@ const Name: React.FC = () => {
 	};
 
 	return (
-		<Content type="trustee" title="Name of the trustee">
+		<Content type={cardType.trustee} title="Name of the trustee">
 			<Form
 				onSubmit={onSubmit}
 				validate={validate(fields)}

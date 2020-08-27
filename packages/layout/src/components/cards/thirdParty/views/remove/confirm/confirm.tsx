@@ -9,6 +9,7 @@ import {
 	Breadcrumbs,
 	BreadcrumbLink,
 } from '../../../../components/breadcrumbs';
+import { cardType } from '../../../../common/interfaces';
 
 const getBreadcrumbLinks = (
 	labels: Partial<ThirdPartyI18nProps['remove']['confirm']['breadcrumbs']>,
@@ -51,7 +52,7 @@ export const Confirm = () => {
 
 	return (
 		<Content
-			type="trustee"
+			type={cardType.thirdParty}
 			breadcrumbs={() => <Breadcrumbs links={breadcrumbLinks} send={send} />}
 		>
 			<H3 cfg={{ mt: 3, fontWeight: 2 }}>{i18n.remove.confirm.title}</H3>

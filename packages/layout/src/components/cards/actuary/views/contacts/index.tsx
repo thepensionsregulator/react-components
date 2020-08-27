@@ -6,6 +6,7 @@ import { Content } from '../../../components/content';
 import { ArrowButton } from '../../../../buttons/buttons';
 import { ActuaryI18nProps } from '../../i18n';
 import { RecursivePartial } from '../../context';
+import { cardType, cardTypeName } from '../../../common/interfaces';
 
 const getFields = (
 	fields: RecursivePartial<ActuaryI18nProps['contacts']['fields']>,
@@ -47,8 +48,8 @@ export const Contacts: React.FC = () => {
 
 	return (
 		<Content
-			type="actuary"
-			typeName="Actuary"
+			type={cardType.actuary} 
+			typeName={cardTypeName.actuary}
 			title={i18n.contacts.title}
 			subtitle={i18n.contacts.subtitle}
 			loading={loading}

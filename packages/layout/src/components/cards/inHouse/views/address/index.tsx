@@ -6,6 +6,7 @@ import useSetState from '../../../hooks/use-set-state';
 import AutoComplete from './AutoComplete';
 import ManualComplete from './ManualComplete';
 import Postcode from './Postcode';
+import { cardType, cardTypeName } from '../../../common/interfaces';
 
 export const AddressPage: React.FC = () => {
 	const { current, i18n } = useInHouseAdminContext();
@@ -21,8 +22,8 @@ export const AddressPage: React.FC = () => {
 
 	return (
 		<Content
-			type="inHouseAdmin"
-			typeName="In House Administrator"
+			type={cardType.inHouseAdmin}
+			typeName={cardTypeName.inHouseAdmin}
 			title={i18n.address.title}
 		>
 			<Postcode

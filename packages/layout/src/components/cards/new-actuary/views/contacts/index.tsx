@@ -1,15 +1,15 @@
 import React, { useState } from 'react';
 import { Form, validate, FieldProps, renderFields } from '@tpr/forms';
-import { useInHouseAdminContext } from '../../context';
+import { useNewActuaryContext } from '../../context';
 import { Footer } from '../../../components/card';
 import { Content } from '../../../components/content';
 import { ArrowButton } from '../../../../buttons/buttons';
-import { InHouseAdminI18nProps } from '../../i18n';
-import { RecursivePartial } from '../../context';
+import { NewActuaryI18nProps } from '../../i18n';
+import { RecursivePartial } from '../../../common/interfaces';
 import { cardType, cardTypeName } from '../../../common/interfaces';
 
 const getFields = (
-	fields: RecursivePartial<InHouseAdminI18nProps['contacts']['fields']>,
+	fields: RecursivePartial<NewActuaryI18nProps['contacts']['fields']>,
 ): FieldProps[] => [
 	{
 		type: 'phone',
@@ -30,14 +30,14 @@ const getFields = (
 
 export const Contacts: React.FC = () => {
 	const [loading, setLoading] = useState(false);
-	const { current, send, i18n, onSaveContacts } = useInHouseAdminContext();
-	const { inHouseAdmin } = current.context;
+	const { current, send, i18n, onSaveContacts } = useNewActuaryContext();
+	const { actuary } = current.context;
 	const fields = getFields(i18n?.contacts?.fields);
 
 	const onSubmit = async (values) => {
 		setLoading(true);
 		try {
-			await onSaveContacts(values, inHouseAdmin);
+			await onSaveContacts(values, actuary);
 			setLoading(false);
 			send('SAVE', { values });
 		} catch (error) {
@@ -48,8 +48,8 @@ export const Contacts: React.FC = () => {
 
 	return (
 		<Content
-		type={cardType.inHouseAdmin}
-		typeName={cardTypeName.inHouseAdmin}
+			type={cardType.actuary}
+			typeName={cardTypeName.actuary}
 			title={i18n.contacts.title}
 			subtitle={i18n.contacts.subtitle}
 			loading={loading}
@@ -57,13 +57,13 @@ export const Contacts: React.FC = () => {
 			<Form
 				onSubmit={onSubmit}
 				initialValues={{
-					telephoneNumber: inHouseAdmin.telephoneNumber,
-					emailAddress: inHouseAdmin.emailAddress,
+					telephoneNumber: actuary.telephoneNumber,
+					emailAddress: actuary.emailAddress,
 				}}
 				validate={validate(fields)}
 			>
 				{({ handleSubmit }) => (
-					<form onSubmit={handleSubmit}>
+					<form onSubmit={handleSubmit} data-testid="actuary-contact-form">
 						{renderFields(fields)}
 						<Footer>
 							<ArrowButton

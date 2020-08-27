@@ -1,6 +1,7 @@
 import React from 'react';
 import { Flex, H3, P, classNames, Hr } from '@tpr/core';
 import styles from './card.module.scss';
+import { cardType } from '../common/interfaces';
 
 type StyledCardProps = { complete: boolean };
 export const StyledCard: React.FC<StyledCardProps> = ({
@@ -24,13 +25,14 @@ export const StyledCardToolbar: React.FC = ({ children }) => {
 };
 
 type ToolbarProps = {
-	type:
-		| 'trustee'
-		| 'employer'
-		| 'insurer'
-		| 'inHouseAdmin'
-		| 'thirdParty'
-		| 'actuary';
+	// type:
+	// 	| 'trustee'
+	// 	| 'employer'
+	// 	| 'insurer'
+	// 	| 'inHouseAdmin'
+	// 	| 'thirdParty'
+	// 	| 'actuary';
+	type: cardType;
 	typeName?: string;
 	title: string;
 	subtitle?: string;

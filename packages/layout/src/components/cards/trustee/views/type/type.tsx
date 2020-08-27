@@ -6,6 +6,7 @@ import { Footer } from '../../../components/card';
 import { Content } from '../../../components/content';
 import { Breadcrumbs, BreadcrumbLink } from '../../../components/breadcrumbs';
 import { ArrowButton } from '../../../../buttons/buttons';
+import { cardType } from '../../../common/interfaces';
 
 const getDescriptionFields = ({ fields }: any): FieldProps[] => [
 	{
@@ -85,7 +86,7 @@ const Type: React.FC = () => {
 
 	return (
 		<Content
-			type="trustee"
+			type={cardType.trustee}
 			title="Type of trustee"
 			loading={loading}
 			breadcrumbs={() => <Breadcrumbs links={breadcrumbLinks} send={send} />}

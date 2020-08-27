@@ -7,6 +7,7 @@ import { Footer } from '../../../../components/card';
 import { useThirdPartyContext } from '../../../context';
 import { ArrowButton } from '../../../../../buttons/buttons';
 import { isAfter, toDate, isBefore } from 'date-fns';
+import { cardType } from '../../../../common/interfaces';
 import styles from './date.module.scss';
 
 export const DateForm = () => {
@@ -49,7 +50,7 @@ export const DateForm = () => {
 	};
 
 	return (
-		<Content type="thirdParty" title={i18n.remove.date.title}>
+		<Content type={cardType.thirdParty} title={i18n.remove.date.title}>
 			<Form
 				onSubmit={onSubmit}
 				initialValues={{

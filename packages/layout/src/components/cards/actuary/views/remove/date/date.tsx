@@ -7,6 +7,7 @@ import { Footer } from '../../../../components/card';
 import { useActuaryContext } from '../../../context';
 import { ArrowButton } from '../../../../../buttons/buttons';
 import { isAfter, toDate, isBefore } from 'date-fns';
+import { cardType, cardTypeName } from '../../../../common/interfaces';
 import styles from './date.module.scss';
 
 export const DateForm = () => {
@@ -49,7 +50,7 @@ export const DateForm = () => {
 	};
 
 	return (
-		<Content type="actuary" typeName="Actuary" title={i18n.remove.date.title}>
+		<Content type={cardType.actuary} typeName={cardTypeName.actuary} title={i18n.remove.date.title}>
 			<Form
 				onSubmit={onSubmit}
 				initialValues={{

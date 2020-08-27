@@ -7,6 +7,7 @@ import { Content } from '../../../components/content';
 import { ArrowButton } from '../../../../buttons/buttons';
 import { InsurerI18nProps } from '../../i18n';
 import { RecursivePartial } from '../../context';
+import { cardType } from '../../../common/interfaces';
 
 const getFields = (
 	fields: RecursivePartial<InsurerI18nProps['reference']['fields']>,
@@ -51,7 +52,7 @@ export const Reference: React.FC = () => {
 
 	return (
 		<Content
-			type="insurer"
+			type={cardType.insurer}
 			title={i18n.reference.title}
 			subtitle={i18n.reference.subtitle}
 			loading={false}

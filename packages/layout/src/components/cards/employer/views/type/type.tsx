@@ -7,6 +7,7 @@ import { useEmployerContext } from '../../context';
 import { ArrowButton } from '../../../../buttons/buttons';
 import { EmployerI18nProps } from '../../i18n';
 import { RecursivePartial } from '../../context';
+import { cardType } from '../../../common/interfaces';
 
 const getTypeFields = (
 	labels: RecursivePartial<EmployerI18nProps['type']['fields']>,
@@ -84,7 +85,7 @@ export const EmployerType = () => {
 
 	return (
 		<Content
-			type="employer"
+			type={cardType.employer}
 			title={i18n.type.title}
 			subtitle={i18n.type.subtitle}
 		>

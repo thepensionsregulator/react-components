@@ -6,6 +6,7 @@ import { Content } from '../../../components/content';
 import { ArrowButton } from '../../../../buttons/buttons';
 import { ActuaryI18nProps } from '../../i18n';
 import { RecursivePartial } from '../../context';
+import { cardType, cardTypeName } from '../../../common/interfaces';
 
 const getFields = (
 	fields: RecursivePartial<ActuaryI18nProps['name']['fields']>,
@@ -53,7 +54,11 @@ export const NameScreen: React.FC = () => {
 	};
 
 	return (
-		<Content type="actuary" typeName="Actuary" title="Name of the actuary">
+		<Content 
+			type={cardType.actuary} 
+			typeName={cardTypeName.actuary}
+			title="Name of the actuary"
+		>
 			<Form
 				onSubmit={onSubmit}
 				validate={validate(fields)}

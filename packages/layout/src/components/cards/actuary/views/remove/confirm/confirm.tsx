@@ -9,6 +9,7 @@ import {
 	Breadcrumbs,
 	BreadcrumbLink,
 } from '../../../../components/breadcrumbs';
+import { cardType, cardTypeName } from '../../../../common/interfaces';
 
 const getBreadcrumbLinks = (
 	labels: Partial<ActuaryI18nProps['remove']['confirm']['breadcrumbs']>,
@@ -52,8 +53,8 @@ export const Confirm = () => {
 
 	return (
 		<Content
-			type="actuary"
-			typeName="Actuary"
+			type={cardType.actuary}
+			typeName={cardTypeName.actuary}
 			breadcrumbs={() => <Breadcrumbs links={breadcrumbLinks} send={send} />}
 		>
 			<H3 cfg={{ mt: 3, fontWeight: 2 }}>{i18n.remove.confirm.title}</H3>

@@ -8,6 +8,7 @@ import {
 	Breadcrumbs,
 	BreadcrumbLink,
 } from '../../../../components/breadcrumbs';
+import { cardType } from '../../../../common/interfaces';
 
 const getBreadcrumbLinks = ({ link1, link2 }: any): BreadcrumbLink[] => [
 	{
@@ -48,7 +49,7 @@ const RemoveConfirm: React.FC = () => {
 
 	return (
 		<Content
-			type="trustee"
+			type={cardType.trustee}
 			breadcrumbs={() => <Breadcrumbs links={breadcrumbLinks} send={send} />}
 		>
 			<H4 cfg={{ mt: 3, color: 'neutral.5' }}>Edit trustee</H4>
