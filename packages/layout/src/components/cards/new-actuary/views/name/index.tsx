@@ -1,11 +1,9 @@
 import React, { useState } from 'react';
-import { Form, FieldProps, renderFields, validate } from '@tpr/forms';
+import { FieldProps } from '@tpr/forms';
 import { useNewActuaryContext } from '../../context';
-import { Footer } from '../../../components/card';
-import { Content } from '../../../components/content';
-import { ArrowButton } from '../../../../buttons/buttons';
 import { NewActuaryI18nProps } from '../../i18n';
 import { RecursivePartial, cardType, cardTypeName } from '../../../common/interfaces';
+import NameForm from '../../../common/views/name/name'
 
 const getFields = (
 	fields: RecursivePartial<NewActuaryI18nProps['name']['fields']>,
@@ -53,32 +51,17 @@ export const NameScreen: React.FC = () => {
 	};
 
 	return (
-		<Content type={cardType.actuary} typeName={cardTypeName.actuary} title="Name of the actuary">
-			<Form
-				onSubmit={onSubmit}
-				validate={validate(fields)}
-				initialValues={{
-					title: state.title,
-					firstname: state.firstname,
-					lastname: state.lastname,
-				}}
-			>
-				{({ handleSubmit }) => (
-					<form onSubmit={handleSubmit} data-testid="actuary-name-form">
-						{renderFields(fields)}
-						<Footer>
-							<ArrowButton
-								intent="special"
-								pointsTo="up"
-								iconSide="right"
-								disabled={loading}
-								type="submit"
-								title="Save and Close"
-							/>
-						</Footer>
-					</form>
-				)}
-			</Form>
-		</Content>
-	);
+		<NameForm
+			type={cardType.actuary}
+			typeName={cardTypeName.actuary}
+			onSubmit={onSubmit}
+			fields={fields}
+			initialValues={{ 
+				title: state.title,
+				firstname: state.firstname,
+				lastname: state.lastname
+			 }}
+			loading={loading}
+		/>
+	)
 };

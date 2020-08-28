@@ -11,9 +11,11 @@ interface ContactDetailsProps {
   title: string,
   subtitle: string,
   loading: boolean,
-  onSubmit: any,
-  telephoneNumber: string,
-  emailAddress: string,
+	onSubmit: any,
+	initialValues: {
+		telephoneNumber: string,
+		emailAddress: string
+	},
   fields: any
 }
 
@@ -24,8 +26,7 @@ const ContactDetails:React.FC<ContactDetailsProps> = ({
   subtitle,
   loading,
   onSubmit,
-  telephoneNumber,
-  emailAddress,
+  initialValues,
   fields
 }) => {
 	return (
@@ -39,8 +40,8 @@ const ContactDetails:React.FC<ContactDetailsProps> = ({
 			<Form
 				onSubmit={onSubmit}
 				initialValues={{
-					telephoneNumber: telephoneNumber,
-					emailAddress: emailAddress,
+					telephoneNumber: initialValues.telephoneNumber,
+					emailAddress: initialValues.emailAddress,
 				}}
 				validate={validate(fields)}
 			>

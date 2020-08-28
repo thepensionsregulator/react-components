@@ -52,8 +52,10 @@ export const Contacts: React.FC = () => {
 			subtitle={i18n.contacts.subtitle}
 			loading={loading}
 			onSubmit={onSubmit}
-			telephoneNumber={actuary.telephoneNumber}
-			emailAddress={actuary.emailAddress}
+			initialValues={{
+				telephoneNumber:actuary.telephoneNumber,
+				emailAddress:actuary.emailAddress
+			}}
 			fields={fields}
 		/>
 	);
