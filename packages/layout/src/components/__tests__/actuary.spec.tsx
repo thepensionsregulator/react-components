@@ -1,15 +1,15 @@
 import React from 'react';
 import { render } from '@testing-library/react';
 import { ActuaryCard } from '../cards/actuary/actuary';
-import { ActuaryProps } from '../cards/actuary/context';
+import { ActuaryWithAddress } from '../cards/actuary/context';
 import { axe } from 'jest-axe';
 import { act } from 'react-dom/test-utils';
 import { cleanup } from '@testing-library/react-hooks';
 
 const noop = () => Promise.resolve();
 
-const actuary: ActuaryProps = {
-	//id: '',
+const actuary: ActuaryWithAddress = {
+	id: '',
 	schemeRoleId: '123',
 	title: 'Mr',
 	firstname: 'John',

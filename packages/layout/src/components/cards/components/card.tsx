@@ -25,13 +25,6 @@ export const StyledCardToolbar: React.FC = ({ children }) => {
 };
 
 type ToolbarProps = {
-	// type:
-	// 	| 'trustee'
-	// 	| 'employer'
-	// 	| 'insurer'
-	// 	| 'inHouseAdmin'
-	// 	| 'thirdParty'
-	// 	| 'actuary';
 	type: cardType;
 	typeName?: string;
 	title: string;

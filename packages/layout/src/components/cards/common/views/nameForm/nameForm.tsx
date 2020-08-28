@@ -6,32 +6,28 @@ import { ArrowButton } from '../../../../buttons/buttons';
 import { cardType, cardTypeName } from '../../interfaces';
 
 interface NameFormProps {
-  type: cardType,
-  typeName: cardTypeName,
-  onSubmit: any,
-  fields: any,
-  initialValues: {
-    title: string,
-    firstname: string,
-    lastname: string
-  },
-  loading: boolean
+	type: cardType;
+	typeName: cardTypeName;
+	onSubmit: any;
+	fields: any;
+	initialValues: {
+		title: string;
+		firstname: string;
+		lastname: string;
+	};
+	loading: boolean;
 }
 
-const NameForm:React.FC<NameFormProps> = ({
-  type,
-  typeName,
-  onSubmit,
-  fields,
-  initialValues,
-  loading
+const NameForm: React.FC<NameFormProps> = ({
+	type,
+	typeName,
+	onSubmit,
+	fields,
+	initialValues,
+	loading,
 }) => {
 	return (
-    <Content 
-      type={type} 
-      typeName={typeName} 
-      title={`Name of the ${typeName}`}
-    >
+		<Content type={type} typeName={typeName} title={`Name of the ${typeName}`}>
 			<Form
 				onSubmit={onSubmit}
 				validate={validate(fields)}

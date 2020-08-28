@@ -6,28 +6,28 @@ import { ArrowButton } from '../../../../buttons/buttons';
 import { cardType, cardTypeName } from '../../../common/interfaces';
 
 interface ContactDetailsProps {
-  type: cardType,
-  typeName: cardTypeName,
-  title: string,
-  subtitle: string,
-  loading: boolean,
-	onSubmit: any,
+	type: cardType;
+	typeName: cardTypeName;
+	title: string;
+	subtitle: string;
+	loading: boolean;
+	onSubmit: any;
 	initialValues: {
-		telephoneNumber: string,
-		emailAddress: string
-	},
-  fields: any
+		telephoneNumber: string;
+		emailAddress: string;
+	};
+	fields: any;
 }
 
-const ContactDetails:React.FC<ContactDetailsProps> = ({ 
-  type,
-  typeName,
-  title,
-  subtitle,
-  loading,
-  onSubmit,
-  initialValues,
-  fields
+const ContactDetails: React.FC<ContactDetailsProps> = ({
+	type,
+	typeName,
+	title,
+	subtitle,
+	loading,
+	onSubmit,
+	initialValues,
+	fields,
 }) => {
 	return (
 		<Content
@@ -46,7 +46,7 @@ const ContactDetails:React.FC<ContactDetailsProps> = ({
 				validate={validate(fields)}
 			>
 				{({ handleSubmit }) => (
-					<form onSubmit={handleSubmit} data-testid={`${type}-contact-form"`}>
+					<form onSubmit={handleSubmit} data-testid={`${type}-contact-form`}>
 						{renderFields(fields)}
 						<Footer>
 							<ArrowButton

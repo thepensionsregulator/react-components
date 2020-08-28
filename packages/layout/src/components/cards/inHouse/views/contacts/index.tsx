@@ -48,8 +48,8 @@ export const Contacts: React.FC = () => {
 
 	return (
 		<Content
-		type={cardType.inHouseAdmin}
-		typeName={cardTypeName.inHouseAdmin}
+			type={cardType.inHouseAdmin}
+			typeName={cardTypeName.inHouseAdmin}
 			title={i18n.contacts.title}
 			subtitle={i18n.contacts.subtitle}
 			loading={loading}

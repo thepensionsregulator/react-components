@@ -7,13 +7,6 @@ import styles from './content.module.scss';
 export const Loading = () => <div className={styles.loading} />;
 
 type ContentProps = {
-	// type:
-	// 	| 'trustee'
-	// 	| 'employer'
-	// 	| 'insurer'
-	// 	| 'inHouseAdmin'
-	// 	| 'thirdParty'
-	// 	| 'actuary';
 	type: cardType;
 	typeName?: cardTypeName;
 	title?: string;

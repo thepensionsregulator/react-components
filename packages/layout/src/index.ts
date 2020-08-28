@@ -5,7 +5,6 @@ export * from './components/cards/inHouse/inHouse';
 export * from './components/cards/thirdParty/thirdParty';
 export * from './components/cards/insurer/insurer';
 export * from './components/cards/actuary/actuary';
-export * from './components/cards/new-actuary/newActuary';
 // all other exports
 export * from './components/beta/beta';
 export * from './components/footer/footer';

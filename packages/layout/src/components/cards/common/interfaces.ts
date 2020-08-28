@@ -11,26 +11,26 @@ export const addressFields = [
 	'countryId',
 ];
 
-export enum cardType { 
+export enum cardType {
 	trustee = 'trustee',
-  employer = 'employer',
-  insurer = 'insurer',
-  inHouseAdmin = 'inHouseAdmin',
-  thirdParty = 'thirdParty',
-	actuary = 'actuary'
-} 
+	employer = 'employer',
+	insurer = 'insurer',
+	inHouseAdmin = 'inHouseAdmin',
+	thirdParty = 'thirdParty',
+	actuary = 'actuary',
+}
 
 export enum cardTypeName {
 	trustee = 'Trustee',
-  employer = 'Employer',
-  insurer = 'Insurer',
-  inHouseAdmin = 'In House Administrator',
-  thirdParty = 'Third Party',
-	actuary = 'Actuary'
+	employer = 'Employer',
+	insurer = 'Insurer',
+	inHouseAdmin = 'In House Administrator',
+	thirdParty = 'Third Party',
+	actuary = 'Actuary',
 }
 
 export interface CardAddress {
-  addressLine1: string;
+	addressLine1: string;
 	addressLine2: string;
 	addressLine3: string;
 	postTown: string;
@@ -40,20 +40,20 @@ export interface CardAddress {
 }
 
 export interface CardPersonalDetails {
-  title: string;
+	title: string;
 	firstname: string;
 	lastname: string;
 }
 
 export interface CardContactDetails {
-  telephoneNumber: string;
+	telephoneNumber: string;
 	emailAddress: string;
 }
 
 export interface CardDefaultProps {
-  id: string,
-  schemeRoleId: string,
-  effectiveDate: string
+	id: string;
+	schemeRoleId: string;
+	effectiveDate: string;
 }
 
 export type RecursivePartial<T> = {

@@ -8,22 +8,26 @@ import { cardType, cardTypeName } from '../../../../common/interfaces';
 import styles from './date.module.scss';
 
 interface DateFormProps {
-  title: string,
-  onSubmit: any,
-  remove: any,
-  label: string,
-  dateField: any
+	title: string;
+	onSubmit: any;
+	remove: any;
+	label: string;
+	dateField: any;
 }
 
-const DateForm:React.FC<DateFormProps> = ({ 
-  title,
-  onSubmit,
-  remove,
-  label,
-  dateField
- }) => {
+const DateForm: React.FC<DateFormProps> = ({
+	title,
+	onSubmit,
+	remove,
+	label,
+	dateField,
+}) => {
 	return (
-		<Content type={cardType.actuary} typeName={cardTypeName.actuary} title={title}>
+		<Content
+			type={cardType.actuary}
+			typeName={cardTypeName.actuary}
+			title={title}
+		>
 			<Form
 				onSubmit={onSubmit}
 				initialValues={{
