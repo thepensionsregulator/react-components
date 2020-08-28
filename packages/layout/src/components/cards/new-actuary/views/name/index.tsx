@@ -3,7 +3,7 @@ import { FieldProps } from '@tpr/forms';
 import { useNewActuaryContext } from '../../context';
 import { NewActuaryI18nProps } from '../../i18n';
 import { RecursivePartial, cardType, cardTypeName } from '../../../common/interfaces';
-import NameForm from '../../../common/views/name/name'
+import NameForm from '../../../common/views/nameForm/nameForm'
 
 const getFields = (
 	fields: RecursivePartial<NewActuaryI18nProps['name']['fields']>,
