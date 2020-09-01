@@ -4,9 +4,7 @@ import actuaryMachine, { ActuaryContext as IHAC } from './actuaryMachine';
 import { State, EventData } from 'xstate';
 import { i18n as i18nDefaults, ActuaryI18nProps } from './i18n';
 import { useI18n } from '../hooks/use-i18n';
-import { splitObjectIntoTwo } from '../../../utils';
 import {
-	addressFields,
 	RecursivePartial,
 	CardDefaultProps,
 	CardPersonalDetails,
@@ -40,14 +38,9 @@ export interface Actuary
 	extends CardDefaultProps,
 		CardPersonalDetails,
 		CardContactDetails {
-	countryId: string;
 	organisationName: string;
 	address: Partial<CardAddress>;
 }
-
-export interface ActuaryWithAddress
-	extends Omit<Actuary, 'address'>,
-		CardAddress {}
 
 export interface ActuaryProviderProps extends CardProviderProps {
 	/** Actuary props from the API */
@@ -65,17 +58,10 @@ export const ActuaryProvider = ({
 	...rest
 }: ActuaryProviderProps) => {
 	const i18n = useI18n(i18nDefaults, i18nOverrides);
-	const [modifiedAdmin, adminAddress] = splitObjectIntoTwo(
-		actuary,
-		addressFields,
-	);
 	const [current, send] = useMachine(actuaryMachine, {
 		context: {
 			complete,
-			actuary: {
-				...modifiedAdmin,
-				address: adminAddress,
-			},
+			actuary: actuary,
 		},
 	});
 

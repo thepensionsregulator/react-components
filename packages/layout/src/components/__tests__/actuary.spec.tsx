@@ -1,31 +1,33 @@
 import React from 'react';
 import { render } from '@testing-library/react';
 import { ActuaryCard } from '../cards/actuary/actuary';
-import { ActuaryWithAddress } from '../cards/actuary/context';
+import { Actuary } from '../cards/actuary/context';
 import { axe } from 'jest-axe';
 import { act } from 'react-dom/test-utils';
 import { cleanup } from '@testing-library/react-hooks';
 
 const noop = () => Promise.resolve();
 
-const actuary: ActuaryWithAddress = {
+const actuary: Actuary = {
 	id: '',
 	schemeRoleId: '123',
 	title: 'Mr',
 	firstname: 'John',
 	lastname: 'Johnson',
 	effectiveDate: '2010-01-01T00:00:00',
-	countryId: '',
 	telephoneNumber: '01273 000 111',
 	emailAddress: 'john@actuary.com',
 	organisationName: 'Actuaries Group Ltd',
-	addressLine1: 'The Pensions Regulator',
-	addressLine2: 'Napier House',
-	addressLine3: 'Trafalgar Pl',
-	postTown: 'Brighton',
-	postCode: 'BN1 4DW',
-	county: 'West Sussex',
-	country: '',
+	address: {
+		addressLine1: 'The Pensions Regulator',
+		addressLine2: 'Napier House',
+		addressLine3: 'Trafalgar Pl',
+		postTown: 'Brighton',
+		postCode: 'BN1 4DW',
+		county: 'West Sussex',
+		country: '',
+		countryId: '',
+	},
 };
 
 describe('Actuary Card', () => {

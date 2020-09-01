@@ -36,16 +36,19 @@ import { ActuaryCard } from '@tpr/layout';
 			firstname: 'John',
 			lastname: 'Smith',
 			effectiveDate: '1997-04-01T00:00:00',
-			addressLine1: 'Napier House',
-			addressLine2: 'Trafalgar Pl',
-			addressLine3: '',
-			postTown: 'Brighton',
-			postCode: 'BN1 4DW',
-			county: 'West Sussex',
-			countryId: '',
 			telephoneNumber: '01273 222 111',
 			emailAddress: 'john.wick@warnerbros.com',
-      organisationName: 'Actuaries Group Ltd'
+      organisationName: 'Actuaries Group Ltd',
+			address: {				
+				addressLine1: 'Napier House',
+				addressLine2: 'Trafalgar Pl',
+				addressLine3: '',
+				postTown: 'Brighton',
+				postCode: 'BN1 4DW',
+				county: 'West Sussex',
+				country: '',
+				countryId: ''
+			}
 		};
 		return (
 			<ActuaryCard

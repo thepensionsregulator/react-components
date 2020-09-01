@@ -12,21 +12,21 @@ export const addressFields = [
 ];
 
 export enum cardType {
-	trustee = 'trustee',
-	employer = 'employer',
-	insurer = 'insurer',
-	inHouseAdmin = 'inHouseAdmin',
-	thirdParty = 'thirdParty',
 	actuary = 'actuary',
+	employer = 'employer',
+	inHouseAdmin = 'inHouseAdmin',
+	insurer = 'insurer',
+	thirdParty = 'thirdParty',
+	trustee = 'trustee',
 }
 
 export enum cardTypeName {
-	trustee = 'Trustee',
-	employer = 'Employer',
-	insurer = 'Insurer',
-	inHouseAdmin = 'In House Administrator',
-	thirdParty = 'Third Party',
 	actuary = 'Actuary',
+	employer = 'Employer',
+	inHouseAdmin = 'In House Administrator',
+	insurer = 'Insurer',
+	thirdParty = 'Third Party',
+	trustee = 'Trustee',
 }
 
 export interface CardAddress {
@@ -37,6 +37,7 @@ export interface CardAddress {
 	county: string;
 	postCode: string;
 	country: string;
+	countryId: string;
 }
 
 export interface CardPersonalDetails {
@@ -68,11 +69,6 @@ export interface CardProviderProps {
 	onSaveContacts?: (...args: any[]) => Promise<any>;
 	onSaveName?: (...args: any[]) => Promise<any>;
 	testId?: string;
-	/** Actuary props from the API */
-	//actuary: Partial<ActuaryProps>;
-	//children?: RenderProps | ReactElement;
-	/** overwrite any text that you need */
-	//i18n?: RecursivePartial<ActuaryI18nProps>;
 	/** cfg space props */
 	cfg?: SpaceProps;
 }
