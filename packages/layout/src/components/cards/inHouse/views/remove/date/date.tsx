@@ -1,16 +1,11 @@
 import React from 'react';
 import { FORM_ERROR } from 'final-form';
-import { Form, FFCheckbox, FieldProps, renderFields } from '@tpr/forms';
-import { P } from '@tpr/core';
-import { Content } from '../../../../components/content';
-import { Footer } from '../../../../components/card';
+import { FieldProps } from '@tpr/forms';
 import { useInHouseAdminContext } from '../../../context';
-import { ArrowButton } from '../../../../../buttons/buttons';
 import { isAfter, toDate, isBefore } from 'date-fns';
-import { cardType, cardTypeName } from '../../../../common/interfaces';
-import styles from './date.module.scss';
+import DateForm from '../../../../common/views/remove/date/date';
 
-export const DateForm = () => {
+export const RemoveDateForm = () => {
 	const { current, send, i18n } = useInHouseAdminContext();
 	const { remove, inHouseAdmin } = current.context;
 
@@ -50,42 +45,12 @@ export const DateForm = () => {
 	};
 
 	return (
-		<Content
-			type={cardType.inHouseAdmin}
-			typeName={cardTypeName.inHouseAdmin}
+		<DateForm
 			title={i18n.remove.date.title}
-		>
-			<Form
-				onSubmit={onSubmit}
-				initialValues={{
-					confirm: remove?.confirm,
-					date: remove && remove.date && new Date(remove.date),
-				}}
-			>
-				{({ handleSubmit, submitError }) => (
-					<form onSubmit={handleSubmit}>
-						<FFCheckbox
-							name="confirm"
-							type="checkbox"
-							label={i18n.remove.date.fields.confirm.label}
-							cfg={{ mb: 3 }}
-						/>
-						<div className={styles.dateWrapper}>{renderFields(DateField)}</div>
-						{submitError && (
-							<P cfg={{ color: 'danger.2', mt: 5 }}>{submitError}</P>
-						)}
-						<Footer>
-							<ArrowButton
-								intent="special"
-								pointsTo="right"
-								iconSide="right"
-								title="Continue"
-								type="submit"
-							/>
-						</Footer>
-					</form>
-				)}
-			</Form>
-		</Content>
+			onSubmit={onSubmit}
+			remove={remove}
+			label={i18n.remove.date.fields.confirm.label}
+			dateField={DateField}
+		/>
 	);
 };

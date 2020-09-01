@@ -1,9 +1,9 @@
 import { FieldProps } from '@tpr/forms';
 import { InHouseAdminI18nProps } from '../../i18n';
-import { RecursivePartial } from '../../context';
+import { RecursivePartial } from '../../../common/interfaces';
 
-function validPostcode(postcode: string) {
-	const PC = postcode.replace(/\s/g, '');
+function validPostcode(postCode: string) {
+	const PC = postCode.replace(/\s/g, '');
 	const regex = /^[A-Z]{1,2}[0-9]{1,2} ?[0-9][A-Z]{2}$/i;
 	return regex.test(PC);
 }
@@ -49,12 +49,12 @@ export const getFields = (
 		cfg: { mb: 3 },
 	},
 	{
-		name: 'postcode',
-		label: labels.postcode.label,
+		name: 'postCode',
+		label: labels.postCode.label,
 		type: 'text',
-		error: (postcode: string) => {
-			if (!postcode) return labels.postcode.emptyError;
-			return validPostcode(postcode) ? undefined : labels.postcode.invalidError;
+		error: (postCode: string) => {
+			if (!postCode) return labels.postCode.emptyError;
+			return validPostcode(postCode) ? undefined : labels.postCode.invalidError;
 		},
 		inputWidth: 6,
 		cfg: { mb: 3 },

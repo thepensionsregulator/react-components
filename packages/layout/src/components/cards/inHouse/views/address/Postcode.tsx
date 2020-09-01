@@ -7,7 +7,7 @@ import styles from './Postcode.module.scss';
 
 type PostcodeProps = {
 	lookup: boolean;
-	postcode: string;
+	postCode: string;
 	loading: boolean;
 	setPostcode: Function;
 	showLookup: Function;
@@ -17,7 +17,7 @@ type PostcodeProps = {
 const Postcode: React.FC<PostcodeProps> = ({
 	lookup,
 	loading,
-	postcode,
+	postCode,
 	setPostcode,
 	showLookup,
 	setLoading,
@@ -26,11 +26,11 @@ const Postcode: React.FC<PostcodeProps> = ({
 	const { addressAPI, i18n } = useInHouseAdminContext();
 
 	const search = useCallback(
-		(postcode: string, country = 'GBR') => {
+		(postCode: string, country = 'GBR') => {
 			setLoading(true);
 			addressAPI
 				.get(
-					`search?country=${country}&query=${postcode}&take=${
+					`search?country=${country}&query=${postCode}&take=${
 						addressAPI.limit || 50
 					}`,
 				)
@@ -51,7 +51,7 @@ const Postcode: React.FC<PostcodeProps> = ({
 										addressLine2: addressObject.addressLine2 || '',
 										addressLine3: addressObject.addressLine3 || '',
 										postTown: addressObject.locality || '',
-										postcode: addressObject.postalCode || '',
+										postCode: addressObject.postalCode || '',
 										county: addressObject.province || '',
 										country: addressObject.country || '',
 									};
@@ -84,21 +84,21 @@ const Postcode: React.FC<PostcodeProps> = ({
 	);
 
 	useEffect(() => {
-		if (postcode) {
-			search(postcode);
+		if (postCode) {
+			search(postCode);
 		}
 	}, []);
 
 	return (
 		<div className={styles.wrapper}>
 			<P cfg={{ mb: 3 }}>{i18n.address.auto.subtitle}</P>
-			<P cfg={{ mb: 2, fontWeight: 3 }}>{i18n.address.postcode.title}</P>
+			<P cfg={{ mb: 2, fontWeight: 3 }}>{i18n.address.postCode.title}</P>
 			{lookup ? (
 				<>
 					<div className={styles.inputWrapper}>
 						<Input
 							type="text"
-							value={postcode}
+							value={postCode}
 							onChange={(evt: ChangeEvent<HTMLInputElement>) =>
 								setPostcode(evt.target.value)
 							}
@@ -108,20 +108,20 @@ const Postcode: React.FC<PostcodeProps> = ({
 					<Flex>
 						<Button
 							onClick={() => {
-								search(postcode);
+								search(postCode);
 								// form.change("address", undefined);
 							}}
 							disabled={loading}
 						>
-							{loading ? 'Loading...' : i18n.address.postcode.button}
+							{loading ? 'Loading...' : i18n.address.postCode.button}
 						</Button>
 					</Flex>
 				</>
 			) : (
 				<Flex>
-					<P cfg={{ mr: 2 }}>{postcode}</P>
+					<P cfg={{ mr: 2 }}>{postCode}</P>
 					<Link onClick={() => showLookup(true)} underline>
-						{i18n.address.postcode.link}
+						{i18n.address.postCode.link}
 					</Link>
 				</Flex>
 			)}

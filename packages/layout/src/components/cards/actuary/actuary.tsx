@@ -13,6 +13,7 @@ import { RemoveDateForm } from './views/remove/date/date';
 import { ConfirmRemove } from './views/remove/confirm/confirm';
 import { NameScreen } from './views/name';
 import RemovedBox from '../components/removedBox';
+import { cardTypeName } from '../common/interfaces';
 import styles from '../cards.module.scss';
 
 const CardContentSwitch: React.FC = () => {
@@ -31,7 +32,7 @@ const CardContentSwitch: React.FC = () => {
 			return <ConfirmRemove />;
 		case current.matches({ remove: 'deleted' }):
 			// message to show when successfuly deleted.
-			return <RemovedBox type="actuary" />;
+			return <RemovedBox type={cardTypeName.actuary} />;
 		default:
 			return null;
 	}

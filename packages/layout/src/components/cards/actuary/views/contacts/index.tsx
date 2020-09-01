@@ -2,8 +2,11 @@ import React, { useState } from 'react';
 import { FieldProps } from '@tpr/forms';
 import { useActuaryContext } from '../../context';
 import { ActuaryI18nProps } from '../../i18n';
-import { RecursivePartial } from '../../../common/interfaces';
-import { cardType, cardTypeName } from '../../../common/interfaces';
+import {
+	cardType,
+	cardTypeName,
+	RecursivePartial,
+} from '../../../common/interfaces';
 import ContactDetails from '../../../common/views/contactDetails/contactDetails';
 
 const getFields = (

@@ -17,7 +17,7 @@ export const Preview: React.FC<any> = () => {
 			<P cfg={{ mb: 4 }}>{actuary.organisationName}</P>
 
 			<Flex>
-				{/* Address block: display only	 */}
+				{/* Address section: display only	 */}
 				<Flex
 					cfg={{ width: 5, flex: '0 0 auto', flexDirection: 'column', pr: 4 }}
 				>
@@ -37,7 +37,7 @@ export const Preview: React.FC<any> = () => {
 					</Flex>
 				</Flex>
 
-				{/* Contact details - block: open for editing	 */}
+				{/* Contact details section: open for editing	 */}
 				<Flex
 					cfg={{ width: 5, flex: '0 0 auto', flexDirection: 'column', pl: 4 }}
 				>

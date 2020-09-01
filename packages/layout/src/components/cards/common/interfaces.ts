@@ -53,7 +53,7 @@ export interface CardContactDetails {
 
 export interface CardDefaultProps {
 	id: string;
-	schemeRoleId: string;
+	schemeRoleId: string | number;
 	effectiveDate: string;
 }
 

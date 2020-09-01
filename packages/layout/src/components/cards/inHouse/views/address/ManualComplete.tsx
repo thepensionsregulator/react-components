@@ -37,7 +37,7 @@ const ManualComplete = () => {
 				onSubmit={onSubmit}
 				validate={validate(fields)}
 				initialValues={{
-					postcode: inHouseAdmin.address.postCode,
+					postCode: inHouseAdmin.address.postCode,
 				}}
 			>
 				{({ handleSubmit }) => (

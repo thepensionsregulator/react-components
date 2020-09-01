@@ -14,6 +14,7 @@ export const Preview: React.FC<any> = () => {
 			className={classNames([{ [styles.complete]: complete }, styles.content])}
 		>
 			<Flex>
+				{/* Addres section: open for editing	 */}
 				<Flex
 					cfg={{ width: 5, flex: '0 0 auto', flexDirection: 'column', pr: 4 }}
 				>
@@ -29,12 +30,17 @@ export const Preview: React.FC<any> = () => {
 							<P>{inHouseAdmin.address.addressLine3}</P>
 						)}
 						<P>{inHouseAdmin.address.postTown}</P>
+						{inHouseAdmin.address.county && (
+							<P>{inHouseAdmin.address.county}</P>
+						)}
 						<P>{inHouseAdmin.address.postCode}</P>
 						{inHouseAdmin.address.country && (
 							<P>{inHouseAdmin.address.country}</P>
 						)}
 					</Flex>
 				</Flex>
+
+				{/* Contact details section: open for editing	 */}
 				<Flex
 					cfg={{ width: 5, flex: '0 0 auto', flexDirection: 'column', pl: 4 }}
 				>
@@ -57,6 +63,8 @@ export const Preview: React.FC<any> = () => {
 					</Flex>
 				</Flex>
 			</Flex>
+
+			{/*  All details correct - Checkbox	 */}
 			<Flex cfg={{ flexDirection: 'column' }}>
 				<Hr cfg={{ my: 4 }} />
 				<Checkbox

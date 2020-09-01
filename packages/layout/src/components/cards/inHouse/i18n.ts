@@ -26,7 +26,7 @@ export type InHouseAdminI18nProps = {
 	};
 	address: {
 		title: string;
-		postcode: {
+		postCode: {
 			title: string;
 			link: string;
 			button: string;
@@ -51,7 +51,7 @@ export type InHouseAdminI18nProps = {
 				addressLine2: { label: string; error?: string };
 				addressLine3: { label: string; error?: string };
 				postTown: { label: string; error?: string };
-				postcode: {
+				postCode: {
 					label: string;
 					invalidError?: string;
 					emptyError?: string;
@@ -139,7 +139,7 @@ export const i18n: InHouseAdminI18nProps = {
 	},
 	address: {
 		title: 'What is this in house admin’s address?',
-		postcode: {
+		postCode: {
 			button: 'Find Address',
 			title: 'Postcode',
 			link: 'Change',
@@ -168,7 +168,7 @@ export const i18n: InHouseAdminI18nProps = {
 				},
 				addressLine3: { label: 'Address line 3' },
 				postTown: { label: 'City' },
-				postcode: {
+				postCode: {
 					label: 'Postcode',
 					emptyError: 'This is a required field',
 					invalidError: 'Incorrect postcode format',
