@@ -52,6 +52,7 @@ export const ConfirmRemove = () => {
 			breadcrumbs={() => <Breadcrumbs links={breadcrumbLinks} send={send} />}
 			removeTitle={i18n.remove.confirm.title}
 			removeMessage1={i18n.remove.confirm.dialog.message1}
+			removeMessage2={i18n.remove.confirm.dialog.message2}
 			removeBtnTitle={i18n.remove.confirm.buttons.remove}
 			cancelBtnTitle={i18n.remove.confirm.buttons.cancel}
 			handleRemove={handleRemove}

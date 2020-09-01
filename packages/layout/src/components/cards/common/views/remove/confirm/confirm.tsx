@@ -25,6 +25,7 @@ const Confirm: React.FC<ConfirmProps> = ({
 	breadcrumbs,
 	removeTitle,
 	removeMessage1,
+	removeMessage2,
 	removeBtnTitle,
 	cancelBtnTitle,
 	handleRemove,
@@ -36,8 +37,9 @@ const Confirm: React.FC<ConfirmProps> = ({
 			<H3 cfg={{ mt: 3, fontWeight: 2 }}>{removeTitle}</H3>
 			<Hr cfg={{ my: 4 }} />
 			<WarningBox>
-				<P cfg={{ mb: 6 }}>{removeMessage1}</P>
-				<Flex>
+				<P>{removeMessage1}</P>
+				{removeMessage2 && <P cfg={{ mt: 3 }}>{removeMessage2}</P>}
+				<Flex cfg={{ mt: 3 }}>
 					<ArrowButton
 						intent="danger"
 						pointsTo="right"
