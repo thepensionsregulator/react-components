@@ -19,11 +19,17 @@ export const Preview: React.FC<any> = () => {
 				>
 					<UnderlinedButton>{i18n.preview.buttons.three}</UnderlinedButton>
 					<Flex cfg={{ my: 2, flexDirection: 'column' }}>
-						<P>{thirdParty.addressLine1}</P>
-						{thirdParty.addressLine2 && <P>{thirdParty.addressLine2}</P>}
-						{thirdParty.addressLine3 && <P>{thirdParty.addressLine3}</P>}
-						<P>{thirdParty.postTown}</P>
-						<P>{thirdParty.postCode}</P>
+						<P>{thirdParty.address.addressLine1}</P>
+						{thirdParty.address.addressLine2 && (
+							<P>{thirdParty.address.addressLine2}</P>
+						)}
+						{thirdParty.address.addressLine3 && (
+							<P>{thirdParty.address.addressLine3}</P>
+						)}
+						<P>{thirdParty.address.postTown}</P>
+						{thirdParty.address.county && <P>{thirdParty.address.county}</P>}
+						<P>{thirdParty.address.postCode}</P>
+						{thirdParty.address.country && <P>{thirdParty.address.country}</P>}
 					</Flex>
 				</Flex>
 				<Flex

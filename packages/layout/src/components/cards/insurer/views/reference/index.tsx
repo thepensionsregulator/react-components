@@ -6,8 +6,8 @@ import { Footer } from '../../../components/card';
 import { Content } from '../../../components/content';
 import { ArrowButton } from '../../../../buttons/buttons';
 import { InsurerI18nProps } from '../../i18n';
-import { RecursivePartial } from '../../context';
-import { cardType } from '../../../common/interfaces';
+//import { RecursivePartial } from '../../context';
+import { cardType, RecursivePartial } from '../../../common/interfaces';
 
 const getFields = (
 	fields: RecursivePartial<InsurerI18nProps['reference']['fields']>,

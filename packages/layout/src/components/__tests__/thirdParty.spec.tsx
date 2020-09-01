@@ -3,24 +3,24 @@ import { render } from '@testing-library/react';
 import { ThirdPartyCard } from '../cards/thirdParty/thirdParty';
 import { axe } from 'jest-axe';
 import userEvent from '@testing-library/user-event';
+import { ThirdPartyProps } from '../cards/thirdParty/context';
 
 const noop = () => Promise.resolve();
 
-const thirdPartyAdmin = {
+const thirdPartyAdmin: ThirdPartyProps = {
 	id: '',
-	schemeRoleId: 123,
+	schemeRoleId: '123',
 	effectiveDate: '1997-04-01T00:00:00',
 	organisationName: `McDonald's`,
-	telephoneNumber: '01273 222 111',
-	emailAddress: 'john.wick@warnerbros.com',
-	addressLine1: 'Napier House',
-	addressLine2: 'Trafalgar Pl',
-	addressLine3: '',
-	postTown: 'Brighton',
-	postcode: 'BN1 4DW',
-	county: 'West Sussex',
-	postCode: '',
-	countryId: '',
+	address: {
+		addressLine1: 'Napier House',
+		addressLine2: 'Trafalgar Pl',
+		addressLine3: '',
+		postTown: 'Brighton',
+		postCode: 'BN1 4DW',
+		county: 'West Sussex',
+		countryId: '',
+	},
 };
 
 describe('ThirdParty Preview', () => {

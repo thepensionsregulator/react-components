@@ -17,7 +17,7 @@ export const Preview: React.FC<any> = () => {
 			<P cfg={{ mb: 4 }}>{actuary.organisationName}</P>
 
 			<Flex>
-				{/* Address - block: display only	 */}
+				{/* Address block: display only	 */}
 				<Flex
 					cfg={{ width: 5, flex: '0 0 auto', flexDirection: 'column', pr: 4 }}
 				>
@@ -31,6 +31,7 @@ export const Preview: React.FC<any> = () => {
 							<P>{actuary.address.addressLine3}</P>
 						)}
 						<P>{actuary.address.postTown}</P>
+						{actuary.address.county && <P>{actuary.address.county}</P>}
 						<P>{actuary.address.postCode}</P>
 						{actuary.address.country && <P>{actuary.address.country}</P>}
 					</Flex>
@@ -59,7 +60,7 @@ export const Preview: React.FC<any> = () => {
 					</Flex>
 				</Flex>
 			</Flex>
-			
+
 			{/*  All details correct - Checkbox	 */}
 			<Flex cfg={{ flexDirection: 'column' }}>
 				<Hr cfg={{ my: 4 }} />

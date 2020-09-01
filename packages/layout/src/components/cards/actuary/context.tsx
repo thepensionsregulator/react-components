@@ -61,7 +61,7 @@ export const ActuaryProvider = ({
 	const [current, send] = useMachine(actuaryMachine, {
 		context: {
 			complete,
-			actuary: actuary,
+			actuary,
 		},
 	});
 
