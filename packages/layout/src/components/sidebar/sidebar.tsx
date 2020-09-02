@@ -113,6 +113,7 @@ export function useCalculateProgress(sections: SidebarSectionProps[]) {
 
 export type SidebarProps = {
 	title: string;
+	titlePath?: string;
 	maintenanceMode?: boolean;
 	sections: SidebarSectionProps[];
 	/** import from react-router-dom */
@@ -125,6 +126,7 @@ export type SidebarProps = {
 
 export const Sidebar: React.FC<SidebarProps> = ({
 	title,
+	titlePath,
 	sections: originalSections,
 	maintenanceMode = false,
 	matchPath,
