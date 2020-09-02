@@ -14,6 +14,7 @@ import {
 	CardContactDetails,
 	CardAddress,
 	CardProviderProps,
+	AddressAPIType,
 	//addressFields
 } from '../common/interfaces';
 
@@ -31,13 +32,6 @@ export const InHouseAdminContext = createContext<InHouseAdminContextProps>({
 		limit: 50,
 	},
 });
-
-type AddressAPIType = {
-	/** API instance with auth to get a list of addresses */
-	get: (endpoint: string) => Promise<any>;
-	/** limit of items to display per search */
-	limit: number;
-};
 
 type RenderProps = (_props: InHouseAdminContextProps) => ReactElement;
 

@@ -8,7 +8,7 @@ import { AutoCompleteProps } from '../../interfaces';
 interface AutoCompleteFormProps extends AutoCompleteProps {
 	onSubmit: any;
 	dropdown: any;
-	submitLoading: any;
+	submitLoading?: any;
 }
 
 const AutoCompleteForm: React.FC<AutoCompleteFormProps> = ({

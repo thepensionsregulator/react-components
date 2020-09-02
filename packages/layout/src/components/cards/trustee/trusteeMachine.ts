@@ -58,7 +58,7 @@ type TrusteeAddress = Partial<{
 	addressLine2: string;
 	addressLine3: string;
 	postTown: string;
-	postcode: string;
+	postCode: string;
 	county: string;
 	countryId: string;
 }>;
@@ -109,7 +109,7 @@ const trusteeMachine = Machine<TrusteeContext, TrusteeStates, TrusteeEvents>({
 				addressLine2: '',
 				addressLine3: '',
 				postTown: '',
-				postcode: '',
+				postCode: '',
 				county: '',
 				countryId: '',
 			},

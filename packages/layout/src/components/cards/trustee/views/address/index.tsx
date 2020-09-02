@@ -5,31 +5,33 @@ import { Content } from '../../../components/content';
 import useSetState from '../../../hooks/use-set-state';
 import AutoComplete from './AutoComplete';
 import ManualComplete from './ManualComplete';
-import Postcode from './Postcode';
+import Postcode from '../../../common/views/address/Postcode';
 import { cardType } from '../../../common/interfaces';
 
 const AddressPage: React.FC = () => {
-	const { current, i18n } = useTrusteeContext();
+	const { current, i18n, addressAPI } = useTrusteeContext();
 	const { trustee } = current.context;
 	const [state, setState] = useSetState({
 		loading: false,
 		manual: false,
-		postcode: trustee.address.postcode,
+		postCode: trustee.address.postCode,
 		lookup: false,
 		options: [],
 	});
-	const { loading, manual, postcode, lookup, options } = state;
+	const { loading, manual, postCode, lookup, options } = state;
 
 	return (
 		<Content type={cardType.trustee} title={i18n.address.title}>
 			<Postcode
 				lookup={lookup}
 				loading={loading}
-				postcode={postcode}
-				setPostcode={(postcode: string) => setState({ postcode })}
+				postCode={postCode}
+				setPostcode={(postCode: string) => setState({ postCode })}
 				showLookup={(lookup: boolean) => setState({ lookup })}
 				setLoading={(loading: boolean) => setState({ loading })}
 				setOptions={(options: any[]) => setState({ options })}
+				addressAPI={addressAPI}
+				i18n={i18n}
 			/>
 			<Flex cfg={{ flexDirection: 'column' }}>
 				{manual ? (

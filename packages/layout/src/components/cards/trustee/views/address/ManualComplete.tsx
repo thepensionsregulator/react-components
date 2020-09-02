@@ -1,11 +1,8 @@
 import React from 'react';
-import { Flex, P } from '@tpr/core';
-import { Form, renderFields, validate } from '@tpr/forms';
 import { useTrusteeContext } from '../../context';
-import { Footer } from '../../../components/card';
-import { Loading } from '../../../components/content';
-import { ArrowButton } from '../../../../buttons/buttons';
-import { getFields } from './fields';
+import { getFields } from '../../../common/views/address/fields';
+import ManualCompleteForm from '../../../common/views/address/ManualCompleteForm';
+import { cardTypeName } from '../../../common/interfaces';
 
 const ManualComplete = () => {
 	const { current, send, i18n } = useTrusteeContext();
@@ -17,36 +14,16 @@ const ManualComplete = () => {
 	};
 
 	return (
-		<Flex cfg={{ flexDirection: 'column' }}>
-			{loading && <Loading />}
-			<P cfg={{ fontWeight: 3 }}>{i18n.address.auto.title}</P>
-			<P cfg={{ my: 3 }}>
-				Enter the trustee’s correspondence address manually.
-			</P>
-			<Form
-				onSubmit={onSubmit}
-				validate={validate(fields)}
-				initialValues={{
-					postcode: trustee.address.postcode,
-				}}
-			>
-				{({ handleSubmit }) => (
-					<form onSubmit={handleSubmit}>
-						{renderFields(fields)}
-						<Footer>
-							<ArrowButton
-								intent="special"
-								pointsTo="up"
-								iconSide="right"
-								type="submit"
-								title="Save and close"
-								disabled={loading}
-							/>
-						</Footer>
-					</form>
-				)}
-			</Form>
-		</Flex>
+		<ManualCompleteForm
+			loading={loading}
+			title={i18n.address.auto.title}
+			onSubmit={onSubmit}
+			fields={fields}
+			initialValues={{
+				postCode: trustee.address.postCode,
+			}}
+			cardTypeName={cardTypeName.trustee}
+		/>
 	);
 };
 

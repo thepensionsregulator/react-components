@@ -2,12 +2,14 @@ import React from 'react';
 import { render, waitFor } from '@testing-library/react';
 import { TrusteeCard } from '../cards/trustee/trustee';
 import { axe } from 'jest-axe';
+import { Trustee } from '../cards/trustee/context';
 
 // TODO: write more tests
 
 const noop = () => Promise.resolve();
 
-const trustee = {
+const trustee: Trustee = {
+	id: '',
 	schemeRoleId: '12345',
 	//
 	title: 'Mr',
@@ -20,8 +22,9 @@ const trustee = {
 	addressLine2: 'Napier House',
 	addressLine3: 'Trafalgar Pl',
 	postTown: 'Brighton',
-	postcode: 'BN1 4DW',
+	postCode: 'BN1 4DW',
 	county: 'West Sussex',
+	country: '',
 	countryId: '',
 	//
 	telephoneNumber: '01273 000 111',
@@ -122,7 +125,7 @@ describe('Trustee Preview', () => {
 		expect(getByText(trustee.addressLine2)).toBeDefined();
 		expect(getByText(trustee.addressLine3)).toBeDefined();
 		expect(getByText(trustee.postTown)).toBeDefined();
-		expect(getByText(trustee.postcode)).toBeDefined();
+		expect(getByText(trustee.postCode)).toBeDefined();
 	});
 
 	test('contact details shows up correctly', () => {

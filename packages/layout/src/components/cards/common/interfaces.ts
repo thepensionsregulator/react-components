@@ -107,3 +107,10 @@ export type AutoCompleteProps = {
 	options: any[];
 	loading: boolean;
 };
+
+export type AddressAPIType = {
+	/** API instance with auth to get a list of addresses */
+	get: (endpoint: string) => Promise<any>;
+	/** limit of items to display per search */
+	limit: number;
+};

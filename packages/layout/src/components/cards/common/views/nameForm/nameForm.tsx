@@ -16,6 +16,7 @@ interface NameFormProps {
 		lastname: string;
 	};
 	loading: boolean;
+	nextStep?: boolean;
 }
 
 const NameForm: React.FC<NameFormProps> = ({
@@ -25,6 +26,7 @@ const NameForm: React.FC<NameFormProps> = ({
 	fields,
 	initialValues,
 	loading,
+	nextStep,
 }) => {
 	return (
 		<Content type={type} typeName={typeName} title={`Name of the ${typeName}`}>
@@ -43,11 +45,11 @@ const NameForm: React.FC<NameFormProps> = ({
 						<Footer>
 							<ArrowButton
 								intent="special"
-								pointsTo="up"
+								pointsTo={nextStep ? 'right' : 'up'}
 								iconSide="right"
 								disabled={loading}
 								type="submit"
-								title="Save and Close"
+								title={nextStep ? 'Continue' : 'Save and Close'}
 							/>
 						</Footer>
 					</form>
