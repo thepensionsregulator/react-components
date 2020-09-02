@@ -4,6 +4,7 @@ import { FieldProps } from '@tpr/forms';
 import { useInsurerContext } from '../../../context';
 import { isAfter, toDate, isBefore } from 'date-fns';
 import DateForm from '../../../../common/views/remove/date/date';
+import { cardType, cardTypeName } from '../../../../common/interfaces';
 
 export const RemoveDateForm = () => {
 	const { current, send, i18n } = useInsurerContext();
@@ -50,6 +51,8 @@ export const RemoveDateForm = () => {
 			remove={remove}
 			label={i18n.remove.date.fields.confirm.label}
 			dateField={DateField}
+			type={cardType.insurer}
+			typeName={cardTypeName.insurer}
 		/>
 	);
 };

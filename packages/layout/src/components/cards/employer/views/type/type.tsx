@@ -6,8 +6,7 @@ import { Footer } from '../../../components/card';
 import { useEmployerContext } from '../../context';
 import { ArrowButton } from '../../../../buttons/buttons';
 import { EmployerI18nProps } from '../../i18n';
-import { RecursivePartial } from '../../context';
-import { cardType } from '../../../common/interfaces';
+import { cardType, RecursivePartial } from '../../../common/interfaces';
 
 const getTypeFields = (
 	labels: RecursivePartial<EmployerI18nProps['type']['fields']>,

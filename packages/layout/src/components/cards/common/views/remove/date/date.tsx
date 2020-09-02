@@ -13,6 +13,8 @@ interface DateFormProps {
 	remove: any;
 	label: string;
 	dateField: any;
+	type: cardType;
+	typeName: cardTypeName;
 }
 
 const DateForm: React.FC<DateFormProps> = ({
@@ -21,13 +23,11 @@ const DateForm: React.FC<DateFormProps> = ({
 	remove,
 	label,
 	dateField,
+	type,
+	typeName,
 }) => {
 	return (
-		<Content
-			type={cardType.actuary}
-			typeName={cardTypeName.actuary}
-			title={title}
-		>
+		<Content type={type} typeName={typeName} title={title}>
 			<Form
 				onSubmit={onSubmit}
 				initialValues={{
