@@ -2,18 +2,9 @@ import React, { useEffect, useCallback, ChangeEvent } from 'react';
 import { Flex, Button, P, Link } from '@tpr/core';
 import { Input } from '@tpr/forms';
 import { extractToObject } from './helpers';
-import { useInHouseAdminContext } from '../../context';
+import { PostcodeProps } from '../../../common/interfaces';
 import styles from './Postcode.module.scss';
 
-type PostcodeProps = {
-	lookup: boolean;
-	postCode: string;
-	loading: boolean;
-	setPostcode: Function;
-	showLookup: Function;
-	setLoading: Function;
-	setOptions: Function;
-};
 const Postcode: React.FC<PostcodeProps> = ({
 	lookup,
 	loading,
@@ -22,8 +13,10 @@ const Postcode: React.FC<PostcodeProps> = ({
 	showLookup,
 	setLoading,
 	setOptions,
+	addressAPI,
+	i18n,
 }) => {
-	const { addressAPI, i18n } = useInHouseAdminContext();
+	//const { addressAPI, i18n } = useInHouseAdminContext();
 
 	const search = useCallback(
 		(postCode: string, country = 'GBR') => {

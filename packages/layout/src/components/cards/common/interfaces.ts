@@ -72,3 +72,38 @@ export interface CardProviderProps {
 	/** cfg space props */
 	cfg?: SpaceProps;
 }
+
+export interface PostcodeProps {
+	lookup: boolean;
+	postCode: string;
+	loading: boolean;
+	setPostcode: Function;
+	showLookup: Function;
+	setLoading: Function;
+	setOptions: Function;
+	addressAPI: any;
+	i18n: any;
+}
+
+export interface addressLabelsFields {
+	addressLine1: {
+		label: string;
+		emptyError?: string;
+		invalidError: string;
+	};
+	addressLine2: { label: string; error?: string };
+	addressLine3: { label: string; error?: string };
+	postTown: { label: string; error?: string };
+	postCode: {
+		label: string;
+		invalidError?: string;
+		emptyError?: string;
+	};
+	county: { label: string; error?: string };
+}
+
+export type AutoCompleteProps = {
+	onClick: (evt: any) => void;
+	options: any[];
+	loading: boolean;
+};

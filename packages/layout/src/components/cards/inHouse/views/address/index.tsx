@@ -5,11 +5,11 @@ import { Content } from '../../../components/content';
 import useSetState from '../../../hooks/use-set-state';
 import AutoComplete from './AutoComplete';
 import ManualComplete from './ManualComplete';
-import Postcode from './Postcode';
+import Postcode from '../../../common/views/address/Postcode';
 import { cardType, cardTypeName } from '../../../common/interfaces';
 
 export const AddressPage: React.FC = () => {
-	const { current, i18n } = useInHouseAdminContext();
+	const { current, i18n, addressAPI } = useInHouseAdminContext();
 	const { inHouseAdmin } = current.context;
 	const [state, setState] = useSetState({
 		loading: false,
@@ -34,6 +34,8 @@ export const AddressPage: React.FC = () => {
 				showLookup={(lookup: boolean) => setState({ lookup })}
 				setLoading={(loading: boolean) => setState({ loading })}
 				setOptions={(options: any[]) => setState({ options })}
+				addressAPI={addressAPI}
+				i18n={i18n}
 			/>
 			<Flex cfg={{ flexDirection: 'column' }}>
 				{manual ? (
