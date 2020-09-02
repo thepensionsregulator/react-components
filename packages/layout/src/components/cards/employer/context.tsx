@@ -37,7 +37,7 @@ export interface EmployerProviderProps extends CardProviderProps {
 	i18n?: RecursivePartial<EmployerI18nProps>;
 }
 
-export interface Employer extends CardDefaultProps, CardAddress {
+export interface Employer extends CardDefaultProps {
 	employerType:
 		| 'participating-employer'
 		| 'principal-employer'
@@ -48,6 +48,7 @@ export interface Employer extends CardDefaultProps, CardAddress {
 	registeredCharityNumber: number | string;
 	epsrNumber: number | string;
 	statutoryEmployer: 'statutory' | 'non-statutory';
+	address: Partial<CardAddress>;
 }
 
 export const EmployerProvider = ({

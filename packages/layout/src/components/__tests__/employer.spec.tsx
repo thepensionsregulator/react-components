@@ -20,14 +20,16 @@ const employer: Employer = {
 	epsrNumber: '11223344',
 	organisationName: 'The Pensions Regulator',
 	statutoryEmployer: 'statutory',
-	addressLine1: 'Napier House',
-	addressLine2: 'Trafalgar Pl',
-	addressLine3: '',
-	postTown: 'Brighton',
-	postCode: 'BN1 4DW',
-	county: 'West Sussex',
-	country: '',
-	countryId: '',
+	address: {
+		addressLine1: 'Napier House',
+		addressLine2: 'Trafalgar Pl',
+		addressLine3: '',
+		postTown: 'Brighton',
+		postCode: 'BN1 4DW',
+		county: 'West Sussex',
+		country: '',
+		countryId: '',
+	},
 };
 
 describe('Employer Preview', () => {

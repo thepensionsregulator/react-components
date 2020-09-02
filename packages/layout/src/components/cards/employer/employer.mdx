@@ -41,13 +41,15 @@ import { EmployerCard } from '@tpr/layout';
 			epsrNumber: 'ABCD1234',
 			organisationName: 'The Pensions Regulator',
 			statutoryEmployer: 'statutory',
-			addressLine1: 'Napier House',
-			addressLine2: 'Trafalgar Pl',
-			postTown: 'Brighton',
-			postCode: 'BN1 4DW',
-			county: 'West Sussex',
-			country: '',
-			countryId: '',
+			address: {
+				addressLine1: 'Napier House',
+				addressLine2: 'Trafalgar Pl',
+				postTown: 'Brighton',
+				postCode: 'BN1 4DW',
+				county: 'West Sussex',
+				country: '',
+				countryId: ''
+			},
 		};
 		return (
 			<EmployerCard

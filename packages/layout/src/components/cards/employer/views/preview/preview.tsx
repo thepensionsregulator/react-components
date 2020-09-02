@@ -46,11 +46,16 @@ export const Preview: React.FC<any> = () => {
 					<UnderlinedButton>{i18n.preview.buttons.three}</UnderlinedButton>
 					<Flex cfg={{ my: 2, flexDirection: 'column' }}>
 						<H4 cfg={{ lineHeight: 3 }}>{employer.organisationName}</H4>
-						<P>{employer.addressLine1}</P>
-						{employer.addressLine2 && <P>{employer.addressLine2}</P>}
-						{employer.addressLine3 && <P>{employer.addressLine3}</P>}
-						<P>{employer.postTown}</P>
-						<P>{employer.postCode}</P>
+						<P>{employer.address.addressLine1}</P>
+						{employer.address.addressLine2 && (
+							<P>{employer.address.addressLine2}</P>
+						)}
+						{employer.address.addressLine3 && (
+							<P>{employer.address.addressLine3}</P>
+						)}
+						<P>{employer.address.postTown}</P>
+						{employer.address.county && <P>{employer.address.county}</P>}
+						<P>{employer.address.postCode}</P>
 					</Flex>
 				</Flex>
 				<Flex
