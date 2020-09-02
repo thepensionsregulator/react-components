@@ -143,7 +143,17 @@ export const Sidebar: React.FC<SidebarProps> = ({
 				cfg={{ flexDirection: 'column', mt: 4 }}
 				className={styles.sidebarMenu}
 			>
-				<H3 cfg={{ fontWeight: 3, color: 'primary.2' }}>{title}</H3>
+				<Link
+					cfg={{
+						fontWeight: 3,
+						color: 'primary.2',
+						textAlign: 'left',
+						fontSize: 4,
+					}}
+					onClick={() => history.push(titlePath)}
+				>
+					{title}
+				</Link>
 				<Flex cfg={{ justifyContent: 'space-between', mt: 4, mb: 2 }}>
 					<P>Section</P>
 					<P>
