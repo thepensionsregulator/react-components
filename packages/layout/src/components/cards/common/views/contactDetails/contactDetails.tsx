@@ -1,5 +1,5 @@
 import React from 'react';
-import { Form, validate, renderFields } from '@tpr/forms';
+import { Form, validate, renderFields, FieldProps } from '@tpr/forms';
 import { Footer } from '../../../components/card';
 import { Content } from '../../../components/content';
 import { ArrowButton } from '../../../../buttons/buttons';
@@ -11,12 +11,12 @@ interface ContactDetailsProps {
 	title: string;
 	subtitle: string;
 	loading: boolean;
-	onSubmit: any;
+	onSubmit: (any) => void;
 	initialValues: {
 		telephoneNumber: string;
 		emailAddress: string;
 	};
-	fields: any;
+	fields: FieldProps[];
 }
 
 const ContactDetails: React.FC<ContactDetailsProps> = ({

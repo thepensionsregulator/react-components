@@ -6,7 +6,7 @@ import { isAfter, toDate, isBefore } from 'date-fns';
 import DateForm from '../../../../common/views/remove/date/date';
 import { cardType, cardTypeName } from '../../../../common/interfaces';
 
-export const RemoveDateForm = () => {
+export const RemoveDateForm: React.FC = () => {
 	const { current, send, i18n } = useInHouseAdminContext();
 	const { remove, inHouseAdmin } = current.context;
 

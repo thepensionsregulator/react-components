@@ -68,34 +68,6 @@ const Name: React.FC = () => {
 			nextStep={true}
 		/>
 	);
-	// return (
-	// 	<Content type={cardType.trustee} title="Name of the trustee">
-	// 		<Form
-	// 			onSubmit={onSubmit}
-	// 			validate={validate(fields)}
-	// 			initialValues={{
-	// 				title: state.title,
-	// 				firstname: state.firstname,
-	// 				lastname: state.lastname,
-	// 			}}
-	// 		>
-	// 			{({ handleSubmit }) => (
-	// 				<form onSubmit={handleSubmit}>
-	// 					{renderFields(fields)}
-	// 					<Footer>
-	// 						<ArrowButton
-	// 							intent="special"
-	// 							pointsTo="right"
-	// 							iconSide="right"
-	// 							type="submit"
-	// 							title="Continue"
-	// 						/>
-	// 					</Footer>
-	// 				</form>
-	// 			)}
-	// 		</Form>
-	// 	</Content>
-	// );
 };
 
 export default Name;

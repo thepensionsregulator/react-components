@@ -1,5 +1,5 @@
 import React from 'react';
-import { Form, renderFields, validate } from '@tpr/forms';
+import { Form, renderFields, validate, FieldProps } from '@tpr/forms';
 import { Footer } from '../../../components/card';
 import { Content } from '../../../components/content';
 import { ArrowButton } from '../../../../buttons/buttons';
@@ -8,8 +8,8 @@ import { cardType, cardTypeName } from '../../interfaces';
 interface NameFormProps {
 	type: cardType;
 	typeName: cardTypeName;
-	onSubmit: any;
-	fields: any;
+	onSubmit: (any) => void;
+	fields: FieldProps[];
 	initialValues: {
 		title: string;
 		firstname: string;

@@ -14,8 +14,8 @@ interface ConfirmProps {
 	removeMessage2?: string;
 	removeBtnTitle: string;
 	cancelBtnTitle: string;
-	handleRemove: any;
-	handleCancel: any;
+	handleRemove: () => void;
+	handleCancel: () => void;
 	loading: boolean;
 }
 

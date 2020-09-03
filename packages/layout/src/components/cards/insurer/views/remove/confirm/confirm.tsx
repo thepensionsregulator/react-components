@@ -22,7 +22,7 @@ const getBreadcrumbLinks = (
 	},
 ];
 
-export const ConfirmRemove = () => {
+export const ConfirmRemove: React.FC = () => {
 	const [loading, setLoading] = useState(false);
 	const { current, send, onRemove, i18n } = useInsurerContext();
 	const breadcrumbLinks = getBreadcrumbLinks(

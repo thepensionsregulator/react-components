@@ -1,5 +1,5 @@
 import React from 'react';
-import { Form, FFCheckbox, renderFields } from '@tpr/forms';
+import { Form, FFCheckbox, renderFields, FieldProps } from '@tpr/forms';
 import { P } from '@tpr/core';
 import { Content } from '../../../../components/content';
 import { Footer } from '../../../../components/card';
@@ -9,10 +9,10 @@ import styles from './date.module.scss';
 
 interface DateFormProps {
 	title: string;
-	onSubmit: any;
+	onSubmit: (any) => void;
 	remove: any;
 	label: string;
-	dateField: any;
+	dateField: FieldProps[];
 	type: cardType;
 	typeName: cardTypeName;
 }

@@ -58,7 +58,7 @@ const getStatutoryFields = (
 	},
 ];
 
-export const EmployerType = () => {
+export const EmployerType: React.FC = () => {
 	const [loading, setLoading] = useState(false);
 	const { send, current, i18n, onSaveType } = useEmployerContext();
 	const typeFields = getTypeFields(i18n?.type?.fields);

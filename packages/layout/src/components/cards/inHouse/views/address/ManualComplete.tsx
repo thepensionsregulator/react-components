@@ -4,7 +4,7 @@ import { getFields } from '../../../common/views/address/fields';
 import ManualCompleteForm from '../../../common/views/address/ManualCompleteForm';
 import { cardTypeName } from '../../../common/interfaces';
 
-const ManualComplete = () => {
+const ManualComplete: React.FC = () => {
 	const [loading, setLoading] = useState(false);
 	const { current, send, i18n, onSaveAddress } = useInHouseAdminContext();
 	const { inHouseAdmin } = current.context;

@@ -6,9 +6,9 @@ import { ArrowButton } from '../../../../buttons/buttons';
 import { AutoCompleteProps } from '../../interfaces';
 
 interface AutoCompleteFormProps extends AutoCompleteProps {
-	onSubmit: any;
+	onSubmit: (any) => void;
 	dropdown: any;
-	submitLoading?: any;
+	submitLoading?: boolean;
 }
 
 const AutoCompleteForm: React.FC<AutoCompleteFormProps> = ({

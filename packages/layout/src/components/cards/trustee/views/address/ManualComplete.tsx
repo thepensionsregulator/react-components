@@ -4,7 +4,7 @@ import { getFields } from '../../../common/views/address/fields';
 import ManualCompleteForm from '../../../common/views/address/ManualCompleteForm';
 import { cardTypeName } from '../../../common/interfaces';
 
-const ManualComplete = () => {
+const ManualComplete: React.FC = () => {
 	const { current, send, i18n } = useTrusteeContext();
 	const { trustee, loading } = current.context;
 	const fields = getFields(i18n?.address?.manual?.fields);
