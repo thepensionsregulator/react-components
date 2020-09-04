@@ -8,6 +8,7 @@ export type InputProps = {
 	testId?: string;
 	label?: string;
 	touched?: boolean;
+	after?: any;
 	[key: string]: any;
 };
 export const Input: React.FC<InputProps> = ({
@@ -17,6 +18,7 @@ export const Input: React.FC<InputProps> = ({
 	label,
 	touched = false,
 	className,
+	after: After,
 	...rest
 }) => {
 	return (
@@ -34,6 +36,7 @@ export const Input: React.FC<InputProps> = ({
 				])}
 				{...rest}
 			/>
+			{After && <span className={styles.after}>{After}</span>}
 		</Flex>
 	);
 };

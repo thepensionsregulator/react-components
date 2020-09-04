@@ -4,7 +4,10 @@ import { StyledInputLabel, InputElementHeading } from '../elements';
 import { FieldProps, FieldExtraProps } from '../../renderFields';
 import { Input } from '../input/input';
 
-type InputNumberProps = FieldRenderProps<number> & FieldExtraProps;
+interface InputNumberProps extends FieldRenderProps<number>, FieldExtraProps {
+	after?: any;
+}
+
 const InputNumber: React.FC<InputNumberProps> = ({
 	label,
 	hint,
@@ -15,6 +18,7 @@ const InputNumber: React.FC<InputNumberProps> = ({
 	placeholder,
 	inputWidth: width,
 	cfg,
+	after,
 	...props
 }) => {
 	return (
@@ -39,6 +43,7 @@ const InputNumber: React.FC<InputNumberProps> = ({
 				onChange={(evt: ChangeEvent<HTMLInputElement>) =>
 					input.onChange(evt.target.value && parseInt(evt.target.value, 10))
 				}
+				after={after}
 				{...props}
 			/>
 		</StyledInputLabel>
