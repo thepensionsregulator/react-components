@@ -1,6 +1,6 @@
 import React, { createContext, useContext, ReactElement } from 'react';
 import { useMachine } from '@xstate/react';
-import actuaryMachine, { ActuaryContext as IHAC } from './actuaryMachine';
+import actuaryMachine, { ActuaryContext as AC } from './actuaryMachine';
 import { State, EventData } from 'xstate';
 import { i18n as i18nDefaults, ActuaryI18nProps } from './i18n';
 import { useI18n } from '../hooks/use-i18n';
@@ -30,24 +30,24 @@ export interface ActuaryContextProps
 	send: (
 		event: any,
 		payload?: EventData,
-	) => Partial<State<IHAC, any, any, any>>;
-	current: Partial<State<IHAC, any, any, any>>;
+	) => Partial<State<AC, any, any, any>>;
+	current: Partial<State<AC, any, any, any>>;
 }
 
 export interface Actuary
 	extends CardDefaultProps,
 		CardPersonalDetails,
 		CardContactDetails {
-	organisationName: string;
-	address: Partial<CardAddress>;
+	organisationName: string,
+	address: Partial<CardAddress>,
 }
 
 export interface ActuaryProviderProps extends CardProviderProps {
 	/** Actuary props from the API */
-	actuary: Partial<Actuary>;
-	children?: RenderProps | ReactElement;
+	actuary: Partial<Actuary>,
+	children?: RenderProps | ReactElement,
 	/** overwrite any text that you need */
-	i18n?: RecursivePartial<ActuaryI18nProps>;
+	i18n?: RecursivePartial<ActuaryI18nProps>,
 }
 
 export const ActuaryProvider = ({
@@ -65,12 +65,10 @@ export const ActuaryProvider = ({
 		},
 	});
 
-	const ui =
-		typeof children === 'function'
-			? children({ current, send, i18n, ...rest })
-			: children;
+	const fwdValues = { current, send, i18n, ...rest };
+	const ui = typeof children === 'function' ? children(fwdValues) : children;
 	return (
-		<ActuaryContext.Provider value={{ current, send, i18n, ...rest }}>
+		<ActuaryContext.Provider value={fwdValues}>
 			{ui}
 		</ActuaryContext.Provider>
 	);

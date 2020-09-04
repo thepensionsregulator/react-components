@@ -60,12 +60,10 @@ export const InsurerProvider = ({
 		},
 	});
 
-	const ui =
-		typeof children === 'function'
-			? children({ current, send, i18n, ...rest })
-			: children;
+	const fwdValues = { current, send, i18n, ...rest };
+	const ui = typeof children === 'function' ? children(fwdValues) : children;
 	return (
-		<InsurerContext.Provider value={{ current, send, i18n, ...rest }}>
+		<InsurerContext.Provider value={fwdValues}>
 			{ui}
 		</InsurerContext.Provider>
 	);
