@@ -3,24 +3,28 @@ import { render } from '@testing-library/react';
 import { InHouseCard } from '../cards/inHouse/inHouse';
 import { axe } from 'jest-axe';
 import userEvent from '@testing-library/user-event';
+import { InHouseAdminNoApi } from '../cards/inHouse/context';
 
 // TODO: write more tests
 
 const noop = () => Promise.resolve();
 
-const inHouseAdmin = {
+const inHouseAdmin: InHouseAdminNoApi = {
+	id: '',
 	schemeRoleId: '123',
 	title: 'Mr',
 	firstname: 'John',
 	lastname: 'Smoth',
 	effectiveDate: '1997-04-01T00:00:00',
-	addressLine1: 'Napier House',
-	addressLine2: 'Trafalgar Pl',
-	addressLine3: '',
-	postTown: 'Brighton',
-	postCode: 'BN1 4DW',
-	county: 'West Sussex',
-	countryId: '',
+	address: {
+		addressLine1: 'Napier House',
+		addressLine2: 'Trafalgar Pl',
+		addressLine3: '',
+		postTown: 'Brighton',
+		postcode: 'BN1 4DW',
+		county: 'West Sussex',
+		countryId: '',
+	},
 	telephoneNumber: '01273 222 111',
 	emailAddress: 'john.wick@warnerbros.com',
 };

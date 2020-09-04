@@ -9,10 +9,12 @@ import { Toolbar } from '../components/toolbar';
 import { UnderlinedButton } from '../components/button';
 import { Preview } from './views/preview/preview';
 import { Contacts } from './views/contacts';
-import { DateForm } from './views/remove/date/date';
-import { Confirm } from './views/remove/confirm/confirm';
+import { RemoveDateForm } from './views/remove/date/date';
+import { ConfirmRemove } from './views/remove/confirm/confirm';
 import { AddressPage } from './views/address/index';
 import { NameScreen } from './views/name';
+import RemovedBox from '../components/removedBox';
+import { cardTypeName } from '../common/interfaces';
 import styles from '../cards.module.scss';
 
 const CardContentSwitch: React.FC = () => {
@@ -28,12 +30,12 @@ const CardContentSwitch: React.FC = () => {
 		case current.matches({ edit: 'name' }):
 			return <NameScreen />;
 		case current.matches({ remove: 'date' }):
-			return <DateForm />;
+			return <RemoveDateForm />;
 		case current.matches({ remove: 'confirm' }):
-			return <Confirm />;
+			return <ConfirmRemove />;
 		case current.matches({ remove: 'deleted' }):
-			// TODO: some nice message to show it has been successfuly deleted.
-			return <div>in house admin deleted successfuly</div>;
+			// message to show when successfuly deleted.
+			return <RemovedBox type={cardTypeName.inHouseAdmin} />;
 		default:
 			return null;
 	}

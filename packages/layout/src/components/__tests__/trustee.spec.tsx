@@ -2,12 +2,14 @@ import React from 'react';
 import { render, waitFor } from '@testing-library/react';
 import { TrusteeCard } from '../cards/trustee/trustee';
 import { axe } from 'jest-axe';
+import { Trustee } from '../cards/trustee/context';
 
 // TODO: write more tests
 
 const noop = () => Promise.resolve();
 
-const trustee = {
+const trustee: Trustee = {
+	id: '',
 	schemeRoleId: '12345',
 	//
 	title: 'Mr',
@@ -22,6 +24,7 @@ const trustee = {
 	postTown: 'Brighton',
 	postcode: 'BN1 4DW',
 	county: 'West Sussex',
+	country: '',
 	countryId: '',
 	//
 	telephoneNumber: '01273 000 111',

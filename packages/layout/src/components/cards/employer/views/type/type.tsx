@@ -6,7 +6,7 @@ import { Footer } from '../../../components/card';
 import { useEmployerContext } from '../../context';
 import { ArrowButton } from '../../../../buttons/buttons';
 import { EmployerI18nProps } from '../../i18n';
-import { RecursivePartial } from '../../context';
+import { cardType, RecursivePartial } from '../../../common/interfaces';
 
 const getTypeFields = (
 	labels: RecursivePartial<EmployerI18nProps['type']['fields']>,
@@ -58,7 +58,7 @@ const getStatutoryFields = (
 	},
 ];
 
-export const EmployerType = () => {
+export const EmployerType: React.FC = () => {
 	const [loading, setLoading] = useState(false);
 	const { send, current, i18n, onSaveType } = useEmployerContext();
 	const typeFields = getTypeFields(i18n?.type?.fields);
@@ -84,7 +84,7 @@ export const EmployerType = () => {
 
 	return (
 		<Content
-			type="employer"
+			type={cardType.employer}
 			title={i18n.type.title}
 			subtitle={i18n.type.subtitle}
 		>

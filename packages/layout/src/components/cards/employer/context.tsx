@@ -2,9 +2,14 @@ import React, { createContext, useContext, ReactElement } from 'react';
 import { useMachine } from '@xstate/react';
 import employerMachine, { EmployerContext as EC } from './employerMachine';
 import { State, EventData } from 'xstate';
-import { SpaceProps } from '@tpr/core';
 import { i18n as i18nDefaults, EmployerI18nProps } from './i18n';
 import { useI18n } from '../hooks/use-i18n';
+import {
+	CardDefaultProps,
+	CardAddress,
+	CardProviderProps,
+	RecursivePartial,
+} from '../common/interfaces';
 
 export const EmployerContext = createContext<EmployerContextProps>({
 	current: {},
@@ -23,24 +28,16 @@ export interface EmployerContextProps
 	current: Partial<State<EC, any, any, any>>;
 }
 
-export type RecursivePartial<T> = {
-	[P in keyof T]?: RecursivePartial<T[P]>;
-};
-
-export interface EmployerProviderProps {
-	complete?: boolean;
-	onCorrect?: (...args: any[]) => void;
-	onRemove?: (...args: any[]) => Promise<any>;
+export interface EmployerProviderProps extends CardProviderProps {
 	onSaveType?: (...args: any[]) => Promise<any>;
-	testId?: string;
-	employer: Partial<EmployerProps>;
+	/** employer props from the API */
+	employer: Partial<Employer>;
 	children?: RenderProps | ReactElement;
+	/** overwrite any text that you need */
 	i18n?: RecursivePartial<EmployerI18nProps>;
-	cfg?: SpaceProps;
 }
 
-export type EmployerProps = {
-	schemeRoleId: string | number;
+export interface Employer extends CardDefaultProps {
 	employerType:
 		| 'participating-employer'
 		| 'principal-employer'
@@ -50,16 +47,9 @@ export type EmployerProps = {
 	companiesHouseNumber: number | string;
 	registeredCharityNumber: number | string;
 	epsrNumber: number | string;
-	addressLine1: string;
-	addressLine2: string;
-	addressLine3: string;
-	postTown: string;
-	county: string;
-	postCode: string;
-	countryId: string;
-	effectiveDate: string;
 	statutoryEmployer: 'statutory' | 'non-statutory';
-};
+	address: Partial<CardAddress>;
+}
 
 export const EmployerProvider = ({
 	complete,

@@ -1,5 +1,5 @@
 import { Machine, assign } from 'xstate';
-import { InsurerProps } from './context';
+import { Insurer } from './context';
 
 interface InsurerStates {
 	states: {
@@ -32,7 +32,7 @@ type InsurerEvents =
 export interface InsurerContext {
 	complete: boolean;
 	remove: { confirm: boolean; date: string } | null;
-	insurer: Partial<InsurerProps>;
+	insurer: Partial<Insurer>;
 }
 
 const insurerMachine = Machine<InsurerContext, InsurerStates, InsurerEvents>({

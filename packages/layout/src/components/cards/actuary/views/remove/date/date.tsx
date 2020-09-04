@@ -1,15 +1,12 @@
 import React from 'react';
 import { FORM_ERROR } from 'final-form';
-import { Form, FFCheckbox, FieldProps, renderFields } from '@tpr/forms';
-import { P } from '@tpr/core';
-import { Content } from '../../../../components/content';
-import { Footer } from '../../../../components/card';
+import { FieldProps } from '@tpr/forms';
 import { useActuaryContext } from '../../../context';
-import { ArrowButton } from '../../../../../buttons/buttons';
 import { isAfter, toDate, isBefore } from 'date-fns';
-import styles from './date.module.scss';
+import DateForm from '../../../../common/views/remove/date/date';
+import { cardType, cardTypeName } from '../../../../common/interfaces';
 
-export const DateForm = () => {
+export const RemoveDateForm = () => {
 	const { current, send, i18n } = useActuaryContext();
 	const { remove, actuary } = current.context;
 
@@ -49,38 +46,14 @@ export const DateForm = () => {
 	};
 
 	return (
-		<Content type="actuary" typeName="Actuary" title={i18n.remove.date.title}>
-			<Form
-				onSubmit={onSubmit}
-				initialValues={{
-					confirm: remove?.confirm,
-					date: remove && remove.date && new Date(remove.date),
-				}}
-			>
-				{({ handleSubmit, submitError }) => (
-					<form onSubmit={handleSubmit} data-testid="remove-actuary-form">
-						<FFCheckbox
-							name="confirm"
-							type="checkbox"
-							label={i18n.remove.date.fields.confirm.label}
-							cfg={{ mb: 3 }}
-						/>
-						<div className={styles.dateWrapper}>{renderFields(DateField)}</div>
-						{submitError && (
-							<P cfg={{ color: 'danger.2', mt: 5 }}>{submitError}</P>
-						)}
-						<Footer>
-							<ArrowButton
-								intent="special"
-								pointsTo="right"
-								iconSide="right"
-								title="Continue"
-								type="submit"
-							/>
-						</Footer>
-					</form>
-				)}
-			</Form>
-		</Content>
+		<DateForm
+			title={i18n.remove.date.title}
+			onSubmit={onSubmit}
+			remove={remove}
+			label={i18n.remove.date.fields.confirm.label}
+			dateField={DateField}
+			type={cardType.actuary}
+			typeName={cardTypeName.actuary}
+		/>
 	);
 };

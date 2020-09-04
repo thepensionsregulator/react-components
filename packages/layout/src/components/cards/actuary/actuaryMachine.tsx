@@ -1,5 +1,5 @@
 import { Machine, assign } from 'xstate';
-import { ActuaryWithContactsProps } from './context';
+import { Actuary } from './context';
 
 interface ActuaryStates {
 	states: {
@@ -35,7 +35,7 @@ type ActuaryEvents =
 export interface ActuaryContext {
 	complete: boolean;
 	remove: { confirm: boolean; date: string } | null;
-	actuary: Partial<ActuaryWithContactsProps>;
+	actuary: Partial<Actuary>;
 }
 
 const actuaryMachine = Machine<ActuaryContext, ActuaryStates, ActuaryEvents>({

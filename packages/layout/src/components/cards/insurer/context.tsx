@@ -2,9 +2,15 @@ import React, { createContext, useContext, ReactElement } from 'react';
 import { useMachine } from '@xstate/react';
 import insurerMachine, { InsurerContext as EC } from './insurerMachine';
 import { State, EventData } from 'xstate';
-import { SpaceProps } from '@tpr/core';
 import { i18n as i18nDefaults, InsurerI18nProps } from './i18n';
 import { useI18n } from '../hooks/use-i18n';
+import {
+	CardDefaultProps,
+	CardContactDetails,
+	CardAddress,
+	CardProviderProps,
+	RecursivePartial,
+} from '../common/interfaces';
 
 export const InsurerContext = createContext<InsurerContextProps>({
 	current: {},
@@ -23,42 +29,20 @@ export interface InsurerContextProps
 	current: Partial<State<EC, any, any, any>>;
 }
 
-export type RecursivePartial<T> = {
-	[P in keyof T]?: RecursivePartial<T[P]>;
-};
-
-export type InsurerProps = {
-	id: string;
-	schemeRoleId: number;
-	effectiveDate: string;
+export interface Insurer extends CardDefaultProps, CardContactDetails {
 	organisationReference: number;
 	organisationName: string;
 	insurerCompanyReference: string;
-	addressLine1: string;
-	addressLine2: string;
-	addressLine3: string;
-	postTown: string;
-	county: string;
-	postcode: string;
-	countryId: string;
-	telephoneNumber: string;
-	emailAddress: string;
-	[key: string]: any;
-};
+	address: Partial<CardAddress>;
+}
 
-export interface InsurerProviderProps {
-	complete?: boolean;
-	onCorrect?: (...args: any[]) => void;
-	onRemove?: (...args: any[]) => Promise<any>;
+export interface InsurerProviderProps extends CardProviderProps {
 	onSaveRef?: (...args: any[]) => Promise<any>;
-	testId?: string;
 	/** insurer props from the API */
-	insurer: Partial<InsurerProps>;
+	insurer: Partial<Insurer>;
 	children?: RenderProps | ReactElement;
 	/** overwrite any text that you need */
 	i18n?: RecursivePartial<InsurerI18nProps>;
-	/** cfg space props */
-	cfg?: SpaceProps;
 }
 
 export const InsurerProvider = ({

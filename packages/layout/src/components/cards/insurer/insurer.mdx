@@ -37,16 +37,17 @@ import { InsurerCard } from '@tpr/layout';
 			organisationReference: 123,
 			organisationName: 'Nike Inc.',
 			insurerCompanyReference: '12345678',
-			addressLine1: 'Napier House',
-			addressLine2: 'Trafalgar Pl',
-			addressLine3: '',
-			postTown: 'Brighton',
-			postCode: 'BN1 4DW',
-			county: 'West Sussex',
-			postcode: '',
-			countryId: '',
 			telephoneNumber: '01273 222 111',
 			emailAddress: 'john.wick@warnerbros.com',
+			address: {
+				addressLine1: 'Napier House',
+				addressLine2: 'Trafalgar Pl',
+				addressLine3: '',
+				postTown: 'Brighton',
+				postcode: 'BN1 4DW',
+				county: 'West Sussex',
+				countryId: ''
+			},
 		};
 		return (
 			<InsurerCard

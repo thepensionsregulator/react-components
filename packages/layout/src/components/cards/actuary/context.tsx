@@ -2,10 +2,16 @@ import React, { createContext, useContext, ReactElement } from 'react';
 import { useMachine } from '@xstate/react';
 import actuaryMachine, { ActuaryContext as IHAC } from './actuaryMachine';
 import { State, EventData } from 'xstate';
-import { SpaceProps } from '@tpr/core';
 import { i18n as i18nDefaults, ActuaryI18nProps } from './i18n';
 import { useI18n } from '../hooks/use-i18n';
-import { splitObjectIntoTwo } from '../../../utils';
+import {
+	RecursivePartial,
+	CardDefaultProps,
+	CardPersonalDetails,
+	CardContactDetails,
+	CardAddress,
+	CardProviderProps,
+} from '../common/interfaces';
 
 export const ActuaryContext = createContext<ActuaryContextProps>({
 	current: {},
@@ -28,70 +34,21 @@ export interface ActuaryContextProps
 	current: Partial<State<IHAC, any, any, any>>;
 }
 
-export type RecursivePartial<T> = {
-	[P in keyof T]?: RecursivePartial<T[P]>;
-};
-
-interface Actuary {
-	schemeRoleId: string | number;
-	title: string;
-	firstname: string;
-	lastname: string;
-	effectiveDate: string;
-	countryId: string;
-	telephoneNumber: string;
-	emailAddress: string;
+export interface Actuary
+	extends CardDefaultProps,
+		CardPersonalDetails,
+		CardContactDetails {
 	organisationName: string;
+	address: Partial<CardAddress>;
 }
 
-export interface ActuaryWithContactsProps extends Actuary {
-	address: Partial<{
-		addressLine1: string;
-		addressLine2: string;
-		addressLine3: string;
-		postTown: string;
-		county: string;
-		postCode: string;
-		country: string;
-	}>;
-}
-
-export interface ActuaryProps extends Actuary {
-	addressLine1: string;
-	addressLine2: string;
-	addressLine3: string;
-	postTown: string;
-	county: string;
-	postCode: string;
-	country: string;
-}
-
-export interface ActuaryProviderProps {
-	complete?: boolean;
-	onCorrect?: (...args: any[]) => void;
-	onRemove?: (...args: any[]) => Promise<any>;
-	onSaveContacts?: (...args: any[]) => Promise<any>;
-	onSaveName?: (...args: any[]) => Promise<any>;
-	testId?: string;
+export interface ActuaryProviderProps extends CardProviderProps {
 	/** Actuary props from the API */
-	actuary: Partial<ActuaryProps>;
+	actuary: Partial<Actuary>;
 	children?: RenderProps | ReactElement;
 	/** overwrite any text that you need */
 	i18n?: RecursivePartial<ActuaryI18nProps>;
-	/** cfg space props */
-	cfg?: SpaceProps;
 }
-
-const addressFields = [
-	'addressLine1',
-	'addressLine2',
-	'addressLine3',
-	'postTown',
-	'county',
-	'country',
-	'postCode',
-	'countryId',
-];
 
 export const ActuaryProvider = ({
 	complete,
@@ -101,17 +58,10 @@ export const ActuaryProvider = ({
 	...rest
 }: ActuaryProviderProps) => {
 	const i18n = useI18n(i18nDefaults, i18nOverrides);
-	const [modifiedAdmin, adminAddress] = splitObjectIntoTwo(
-		actuary,
-		addressFields,
-	);
 	const [current, send] = useMachine(actuaryMachine, {
 		context: {
 			complete,
-			actuary: {
-				...modifiedAdmin,
-				address: adminAddress,
-			},
+			actuary,
 		},
 	});
 

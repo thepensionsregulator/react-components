@@ -14,18 +14,27 @@ export const Preview: React.FC<any> = () => {
 			className={classNames([{ [styles.complete]: complete }, styles.content])}
 		>
 			<Flex>
+				{/* Address block: display only	 */}
 				<Flex
 					cfg={{ width: 5, flex: '0 0 auto', flexDirection: 'column', pr: 4 }}
 				>
 					<UnderlinedButton>{i18n.preview.buttons.three}</UnderlinedButton>
 					<Flex cfg={{ my: 2, flexDirection: 'column' }}>
-						<P>{insurer.addressLine1}</P>
-						{insurer.addressLine2 && <P>{insurer.addressLine2}</P>}
-						{insurer.addressLine3 && <P>{insurer.addressLine3}</P>}
-						<P>{insurer.postTown}</P>
-						<P>{insurer.postCode}</P>
+						<P>{insurer.address.addressLine1}</P>
+						{insurer.address.addressLine2 && (
+							<P>{insurer.address.addressLine2}</P>
+						)}
+						{insurer.address.addressLine3 && (
+							<P>{insurer.address.addressLine3}</P>
+						)}
+						<P>{insurer.address.postTown}</P>
+						{insurer.address.county && <P>{insurer.address.county}</P>}
+						<P>{insurer.address.postcode}</P>
+						{insurer.address.country && <P>{insurer.address.country}</P>}
 					</Flex>
 				</Flex>
+
+				{/* Contact details block: display only	 */}
 				<Flex
 					cfg={{ width: 5, flex: '0 0 auto', flexDirection: 'column', pl: 4 }}
 				>
@@ -44,6 +53,8 @@ export const Preview: React.FC<any> = () => {
 							</>
 						)}
 					</Flex>
+
+					{/* Contact details block: display only	 */}
 					<UnderlinedButton isOpen={false} onClick={() => send('EDIT_INSURER')}>
 						{i18n.preview.buttons.five}
 					</UnderlinedButton>
@@ -52,6 +63,8 @@ export const Preview: React.FC<any> = () => {
 					</Flex>
 				</Flex>
 			</Flex>
+
+			{/*  All details correct - Checkbox	 */}
 			<Flex cfg={{ flexDirection: 'column' }}>
 				<Hr cfg={{ my: 4 }} />
 				<Checkbox

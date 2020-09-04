@@ -1,11 +1,13 @@
 import React, { useState } from 'react';
-import { Form, validate, FieldProps, renderFields } from '@tpr/forms';
+import { FieldProps } from '@tpr/forms';
 import { useActuaryContext } from '../../context';
-import { Footer } from '../../../components/card';
-import { Content } from '../../../components/content';
-import { ArrowButton } from '../../../../buttons/buttons';
 import { ActuaryI18nProps } from '../../i18n';
-import { RecursivePartial } from '../../context';
+import {
+	cardType,
+	cardTypeName,
+	RecursivePartial,
+} from '../../../common/interfaces';
+import ContactDetails from '../../../common/views/contactDetails/contactDetails';
 
 const getFields = (
 	fields: RecursivePartial<ActuaryI18nProps['contacts']['fields']>,
@@ -46,37 +48,18 @@ export const Contacts: React.FC = () => {
 	};
 
 	return (
-		<Content
-			type="actuary"
-			typeName="Actuary"
+		<ContactDetails
+			type={cardType.actuary}
+			typeName={cardTypeName.actuary}
 			title={i18n.contacts.title}
 			subtitle={i18n.contacts.subtitle}
 			loading={loading}
-		>
-			<Form
-				onSubmit={onSubmit}
-				initialValues={{
-					telephoneNumber: actuary.telephoneNumber,
-					emailAddress: actuary.emailAddress,
-				}}
-				validate={validate(fields)}
-			>
-				{({ handleSubmit }) => (
-					<form onSubmit={handleSubmit} data-testid="actuary-contact-form">
-						{renderFields(fields)}
-						<Footer>
-							<ArrowButton
-								intent="special"
-								pointsTo="up"
-								iconSide="right"
-								type="submit"
-								title="Save and close"
-								disabled={loading}
-							/>
-						</Footer>
-					</form>
-				)}
-			</Form>
-		</Content>
+			onSubmit={onSubmit}
+			initialValues={{
+				telephoneNumber: actuary.telephoneNumber,
+				emailAddress: actuary.emailAddress,
+			}}
+			fields={fields}
+		/>
 	);
 };

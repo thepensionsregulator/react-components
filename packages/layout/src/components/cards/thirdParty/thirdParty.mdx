@@ -32,19 +32,19 @@ import { ThirdPartyCard } from '@tpr/layout';
 		};
 		const thirdParty = {
 			id: '',
-			schemeRoleId: 123,
+			schemeRoleId: '123',
 			effectiveDate: '1997-04-01T00:00:00',
 			organisationName: `McDonald's`,
-			telephoneNumber: '01273 222 111',
-			emailAddress: 'john.wick@warnerbros.com',
-			addressLine1: 'Napier House',
-			addressLine2: 'Trafalgar Pl',
-			addressLine3: '',
-			postTown: 'Brighton',
-			postcode: 'BN1 4DW',
-			county: 'West Sussex',
-			postcode: '',
-			countryId: '',
+			address: {
+				addressLine1: 'Napier House',
+				addressLine2: 'Trafalgar Pl',
+				addressLine3: '',
+				postTown: 'Brighton',
+				county: 'West Sussex',
+				postcode: 'BN1 4DW',
+				country: '',
+				countryId: '',
+			}
 		};
 		return (
 			<ThirdPartyCard

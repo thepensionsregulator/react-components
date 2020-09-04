@@ -2,18 +2,9 @@ import React, { useEffect, useCallback, ChangeEvent } from 'react';
 import { Flex, Button, P, Link } from '@tpr/core';
 import { Input } from '@tpr/forms';
 import { extractToObject } from './helpers';
-import { useTrusteeContext } from '../../context';
+import { PostcodeProps } from '../../../common/interfaces';
 import styles from './Postcode.module.scss';
 
-type PostcodeProps = {
-	lookup: boolean;
-	postcode: string;
-	loading: boolean;
-	setPostcode: Function;
-	showLookup: Function;
-	setLoading: Function;
-	setOptions: Function;
-};
 const Postcode: React.FC<PostcodeProps> = ({
 	lookup,
 	loading,
@@ -22,9 +13,9 @@ const Postcode: React.FC<PostcodeProps> = ({
 	showLookup,
 	setLoading,
 	setOptions,
+	addressAPI,
+	i18n,
 }) => {
-	const { addressAPI, i18n } = useTrusteeContext();
-
 	const search = useCallback(
 		(postcode: string, country = 'GBR') => {
 			setLoading(true);
@@ -72,7 +63,6 @@ const Postcode: React.FC<PostcodeProps> = ({
 						});
 					} else {
 						setLoading(false);
-						// console.error('NOTHING WAS FOUND');
 					}
 				})
 				.catch((err) => {
@@ -109,7 +99,6 @@ const Postcode: React.FC<PostcodeProps> = ({
 						<Button
 							onClick={() => {
 								search(postcode);
-								// form.change("address", undefined);
 							}}
 							disabled={loading}
 						>
