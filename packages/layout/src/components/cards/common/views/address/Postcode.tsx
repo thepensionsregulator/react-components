@@ -8,7 +8,7 @@ import styles from './Postcode.module.scss';
 const Postcode: React.FC<PostcodeProps> = ({
 	lookup,
 	loading,
-	postCode,
+	postcode,
 	setPostcode,
 	showLookup,
 	setLoading,
@@ -16,14 +16,12 @@ const Postcode: React.FC<PostcodeProps> = ({
 	addressAPI,
 	i18n,
 }) => {
-	//const { addressAPI, i18n } = useInHouseAdminContext();
-
 	const search = useCallback(
-		(postCode: string, country = 'GBR') => {
+		(postcode: string, country = 'GBR') => {
 			setLoading(true);
 			addressAPI
 				.get(
-					`search?country=${country}&query=${postCode}&take=${
+					`search?country=${country}&query=${postcode}&take=${
 						addressAPI.limit || 50
 					}`,
 				)
@@ -44,7 +42,7 @@ const Postcode: React.FC<PostcodeProps> = ({
 										addressLine2: addressObject.addressLine2 || '',
 										addressLine3: addressObject.addressLine3 || '',
 										postTown: addressObject.locality || '',
-										postCode: addressObject.postalCode || '',
+										postcode: addressObject.postalCode || '',
 										county: addressObject.province || '',
 										country: addressObject.country || '',
 									};
@@ -65,7 +63,6 @@ const Postcode: React.FC<PostcodeProps> = ({
 						});
 					} else {
 						setLoading(false);
-						// console.error('NOTHING WAS FOUND');
 					}
 				})
 				.catch((err) => {
@@ -77,21 +74,21 @@ const Postcode: React.FC<PostcodeProps> = ({
 	);
 
 	useEffect(() => {
-		if (postCode) {
-			search(postCode);
+		if (postcode) {
+			search(postcode);
 		}
 	}, []);
 
 	return (
 		<div className={styles.wrapper}>
 			<P cfg={{ mb: 3 }}>{i18n.address.auto.subtitle}</P>
-			<P cfg={{ mb: 2, fontWeight: 3 }}>{i18n.address.postCode.title}</P>
+			<P cfg={{ mb: 2, fontWeight: 3 }}>{i18n.address.postcode.title}</P>
 			{lookup ? (
 				<>
 					<div className={styles.inputWrapper}>
 						<Input
 							type="text"
-							value={postCode}
+							value={postcode}
 							onChange={(evt: ChangeEvent<HTMLInputElement>) =>
 								setPostcode(evt.target.value)
 							}
@@ -101,20 +98,19 @@ const Postcode: React.FC<PostcodeProps> = ({
 					<Flex>
 						<Button
 							onClick={() => {
-								search(postCode);
-								// form.change("address", undefined);
+								search(postcode);
 							}}
 							disabled={loading}
 						>
-							{loading ? 'Loading...' : i18n.address.postCode.button}
+							{loading ? 'Loading...' : i18n.address.postcode.button}
 						</Button>
 					</Flex>
 				</>
 			) : (
 				<Flex>
-					<P cfg={{ mr: 2 }}>{postCode}</P>
+					<P cfg={{ mr: 2 }}>{postcode}</P>
 					<Link onClick={() => showLookup(true)} underline>
-						{i18n.address.postCode.link}
+						{i18n.address.postcode.link}
 					</Link>
 				</Flex>
 			)}

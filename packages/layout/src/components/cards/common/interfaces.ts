@@ -7,7 +7,7 @@ export const addressFields = [
 	'postTown',
 	'county',
 	'country',
-	'postCode',
+	'postcode',
 	'countryId',
 ];
 
@@ -35,7 +35,7 @@ export interface CardAddress {
 	addressLine3: string;
 	postTown: string;
 	county: string;
-	postCode: string;
+	postcode: string;
 	country: string;
 	countryId: string;
 }
@@ -75,7 +75,7 @@ export interface CardProviderProps {
 
 export interface PostcodeProps {
 	lookup: boolean;
-	postCode: string;
+	postcode: string;
 	loading: boolean;
 	setPostcode: Function;
 	showLookup: Function;
@@ -94,7 +94,7 @@ export interface addressLabelsFields {
 	addressLine2: { label: string; error?: string };
 	addressLine3: { label: string; error?: string };
 	postTown: { label: string; error?: string };
-	postCode: {
+	postcode: {
 		label: string;
 		invalidError?: string;
 		emptyError?: string;

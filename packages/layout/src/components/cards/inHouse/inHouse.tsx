@@ -34,7 +34,7 @@ const CardContentSwitch: React.FC = () => {
 		case current.matches({ remove: 'confirm' }):
 			return <ConfirmRemove />;
 		case current.matches({ remove: 'deleted' }):
-			// TODO: some nice message to show it has been successfuly deleted.
+			// message to show when successfuly deleted.
 			return <RemovedBox type={cardTypeName.inHouseAdmin} />;
 		default:
 			return null;

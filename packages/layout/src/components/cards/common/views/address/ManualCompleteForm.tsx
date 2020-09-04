@@ -12,7 +12,7 @@ interface ManualCompleteFormProps {
 	onSubmit: (any) => void;
 	fields: FieldProps[];
 	initialValues: {
-		postCode: string;
+		postcode: string;
 	};
 	cardTypeName: cardTypeName;
 }

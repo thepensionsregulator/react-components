@@ -33,7 +33,7 @@ export const Preview: React.FC<any> = () => {
 						{inHouseAdmin.address.county && (
 							<P>{inHouseAdmin.address.county}</P>
 						)}
-						<P>{inHouseAdmin.address.postCode}</P>
+						<P>{inHouseAdmin.address.postcode}</P>
 						{inHouseAdmin.address.country && (
 							<P>{inHouseAdmin.address.country}</P>
 						)}

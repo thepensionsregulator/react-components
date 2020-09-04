@@ -29,7 +29,7 @@ export const Preview: React.FC<any> = () => {
 						)}
 						<P>{insurer.address.postTown}</P>
 						{insurer.address.county && <P>{insurer.address.county}</P>}
-						<P>{insurer.address.postCode}</P>
+						<P>{insurer.address.postcode}</P>
 						{insurer.address.country && <P>{insurer.address.country}</P>}
 					</Flex>
 				</Flex>

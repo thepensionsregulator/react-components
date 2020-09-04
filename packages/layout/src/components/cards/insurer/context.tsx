@@ -34,7 +34,6 @@ export interface Insurer extends CardDefaultProps, CardContactDetails {
 	organisationName: string;
 	insurerCompanyReference: string;
 	address: Partial<CardAddress>;
-	//[key: string]: any;
 }
 
 export interface InsurerProviderProps extends CardProviderProps {

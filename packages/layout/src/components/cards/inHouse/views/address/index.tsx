@@ -14,11 +14,11 @@ export const AddressPage: React.FC = () => {
 	const [state, setState] = useSetState({
 		loading: false,
 		manual: false,
-		postCode: inHouseAdmin.address.postCode,
+		postcode: inHouseAdmin.address.postcode,
 		lookup: false,
 		options: [],
 	});
-	const { loading, manual, postCode, lookup, options } = state;
+	const { loading, manual, postcode, lookup, options } = state;
 
 	return (
 		<Content
@@ -29,8 +29,8 @@ export const AddressPage: React.FC = () => {
 			<Postcode
 				lookup={lookup}
 				loading={loading}
-				postCode={postCode}
-				setPostcode={(postCode: string) => setState({ postCode })}
+				postcode={postcode}
+				setPostcode={(postcode: string) => setState({ postcode })}
 				showLookup={(lookup: boolean) => setState({ lookup })}
 				setLoading={(loading: boolean) => setState({ loading })}
 				setOptions={(options: any[]) => setState({ options })}

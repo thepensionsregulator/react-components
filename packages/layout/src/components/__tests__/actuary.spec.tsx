@@ -23,7 +23,7 @@ const actuary: Actuary = {
 		addressLine2: 'Napier House',
 		addressLine3: 'Trafalgar Pl',
 		postTown: 'Brighton',
-		postCode: 'BN1 4DW',
+		postcode: 'BN1 4DW',
 		county: 'West Sussex',
 		country: '',
 		countryId: '',

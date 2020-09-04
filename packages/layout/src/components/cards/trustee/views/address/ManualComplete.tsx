@@ -20,7 +20,7 @@ const ManualComplete: React.FC = () => {
 			onSubmit={onSubmit}
 			fields={fields}
 			initialValues={{
-				postCode: trustee.address.postCode,
+				postcode: trustee.address.postcode,
 			}}
 			cardTypeName={cardTypeName.trustee}
 		/>

@@ -28,7 +28,7 @@ export const Preview: React.FC<any> = () => {
 						)}
 						<P>{thirdParty.address.postTown}</P>
 						{thirdParty.address.county && <P>{thirdParty.address.county}</P>}
-						<P>{thirdParty.address.postCode}</P>
+						<P>{thirdParty.address.postcode}</P>
 						{thirdParty.address.country && <P>{thirdParty.address.country}</P>}
 					</Flex>
 				</Flex>

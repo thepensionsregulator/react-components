@@ -21,7 +21,7 @@ const inHouseAdmin: InHouseAdminNoApi = {
 		addressLine2: 'Trafalgar Pl',
 		addressLine3: '',
 		postTown: 'Brighton',
-		postCode: 'BN1 4DW',
+		postcode: 'BN1 4DW',
 		county: 'West Sussex',
 		countryId: '',
 	},

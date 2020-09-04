@@ -32,7 +32,7 @@ export const Preview: React.FC<any> = () => {
 						)}
 						<P>{actuary.address.postTown}</P>
 						{actuary.address.county && <P>{actuary.address.county}</P>}
-						<P>{actuary.address.postCode}</P>
+						<P>{actuary.address.postcode}</P>
 						{actuary.address.country && <P>{actuary.address.country}</P>}
 					</Flex>
 				</Flex>

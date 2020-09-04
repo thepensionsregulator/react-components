@@ -22,7 +22,7 @@ const trustee: Trustee = {
 	addressLine2: 'Napier House',
 	addressLine3: 'Trafalgar Pl',
 	postTown: 'Brighton',
-	postCode: 'BN1 4DW',
+	postcode: 'BN1 4DW',
 	county: 'West Sussex',
 	country: '',
 	countryId: '',
@@ -125,7 +125,7 @@ describe('Trustee Preview', () => {
 		expect(getByText(trustee.addressLine2)).toBeDefined();
 		expect(getByText(trustee.addressLine3)).toBeDefined();
 		expect(getByText(trustee.postTown)).toBeDefined();
-		expect(getByText(trustee.postCode)).toBeDefined();
+		expect(getByText(trustee.postcode)).toBeDefined();
 	});
 
 	test('contact details shows up correctly', () => {

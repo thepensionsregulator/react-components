@@ -42,12 +42,12 @@ export const getFields = (
 		cfg: { mb: 3 },
 	},
 	{
-		name: 'postCode',
-		label: labels.postCode.label,
+		name: 'postcode',
+		label: labels.postcode.label,
 		type: 'text',
-		error: (postCode: string) => {
-			if (!postCode) return labels.postCode.emptyError;
-			return validPostcode(postCode) ? undefined : labels.postCode.invalidError;
+		error: (postcode: string) => {
+			if (!postcode) return labels.postcode.emptyError;
+			return validPostcode(postcode) ? undefined : labels.postcode.invalidError;
 		},
 		inputWidth: 6,
 		cfg: { mb: 3 },

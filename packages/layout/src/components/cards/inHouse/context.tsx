@@ -6,7 +6,6 @@ import inHouseAdminMachine, {
 import { State, EventData } from 'xstate';
 import { i18n as i18nDefaults, InHouseAdminI18nProps } from './i18n';
 import { useI18n } from '../hooks/use-i18n';
-//import { splitObjectIntoTwo } from '../../../utils';
 import {
 	RecursivePartial,
 	CardDefaultProps,
@@ -15,7 +14,6 @@ import {
 	CardAddress,
 	CardProviderProps,
 	AddressAPIType,
-	//addressFields
 } from '../common/interfaces';
 
 export const InHouseAdminContext = createContext<InHouseAdminContextProps>({
@@ -71,17 +69,9 @@ export const InHouseAdminProvider = ({
 	...rest
 }: InHouseAdminProviderProps) => {
 	const i18n = useI18n(i18nDefaults, i18nOverrides);
-	// const [modifiedAdmin, adminAddress] = splitObjectIntoTwo(
-	// 	inHouseAdmin,
-	// 	addressFields,
-	// );
 	const [current, send] = useMachine(inHouseAdminMachine, {
 		context: {
 			complete,
-			// inHouseAdmin: {
-			// 	...modifiedAdmin,
-			// 	address: adminAddress,
-			// },
 			inHouseAdmin,
 		},
 	});

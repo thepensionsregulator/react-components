@@ -55,7 +55,7 @@ export const Preview: React.FC<any> = () => {
 						)}
 						<P>{employer.address.postTown}</P>
 						{employer.address.county && <P>{employer.address.county}</P>}
-						<P>{employer.address.postCode}</P>
+						<P>{employer.address.postcode}</P>
 					</Flex>
 				</Flex>
 				<Flex

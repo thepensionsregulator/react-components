@@ -1,7 +1,7 @@
 export type TrusteeI18nProps = {
 	address: {
 		title: string;
-		postCode: {
+		postcode: {
 			title: string;
 			link: string;
 			button: string;
@@ -26,7 +26,7 @@ export type TrusteeI18nProps = {
 				addressLine2: { label: string; error?: string };
 				addressLine3: { label: string; error?: string };
 				postTown: { label: string; error?: string };
-				postCode: {
+				postcode: {
 					label: string;
 					invalidError?: string;
 					emptyError?: string;
@@ -137,7 +137,7 @@ export type TrusteeI18nProps = {
 export const i18n: TrusteeI18nProps = {
 	address: {
 		title: 'What is this trustee’s address?',
-		postCode: {
+		postcode: {
 			button: 'Find Address',
 			title: 'Postcode',
 			link: 'Change',
@@ -166,7 +166,7 @@ export const i18n: TrusteeI18nProps = {
 				},
 				addressLine3: { label: 'Address line 3' },
 				postTown: { label: 'City' },
-				postCode: {
+				postcode: {
 					label: 'Postcode',
 					emptyError: 'This is a required field',
 					invalidError: 'Incorrect postcode format',

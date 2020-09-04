@@ -23,7 +23,6 @@ const AutoComplete: React.FC<AutoCompleteProps> = ({
 			loading={loading}
 			onSubmit={onSubmit}
 			dropdown={i18n.address.auto.dropdown}
-			//submitLoading={submitLoading}
 		/>
 	);
 };
