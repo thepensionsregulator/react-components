@@ -27,10 +27,7 @@ type RenderProps = (_props: ActuaryContextProps) => ReactElement;
 
 export interface ActuaryContextProps
 	extends Omit<ActuaryProviderProps, 'actuary'> {
-	send: (
-		event: any,
-		payload?: EventData,
-	) => Partial<State<AC, any, any, any>>;
+	send: (event: any, payload?: EventData) => Partial<State<AC, any, any, any>>;
 	current: Partial<State<AC, any, any, any>>;
 }
 
@@ -38,16 +35,16 @@ export interface Actuary
 	extends CardDefaultProps,
 		CardPersonalDetails,
 		CardContactDetails {
-	organisationName: string,
-	address: Partial<CardAddress>,
+	organisationName: string;
+	address: Partial<CardAddress>;
 }
 
 export interface ActuaryProviderProps extends CardProviderProps {
 	/** Actuary props from the API */
-	actuary: Partial<Actuary>,
-	children?: RenderProps | ReactElement,
+	actuary: Partial<Actuary>;
+	children?: RenderProps | ReactElement;
 	/** overwrite any text that you need */
-	i18n?: RecursivePartial<ActuaryI18nProps>,
+	i18n?: RecursivePartial<ActuaryI18nProps>;
 }
 
 export const ActuaryProvider = ({
@@ -68,9 +65,7 @@ export const ActuaryProvider = ({
 	const fwdValues = { current, send, i18n, ...rest };
 	const ui = typeof children === 'function' ? children(fwdValues) : children;
 	return (
-		<ActuaryContext.Provider value={fwdValues}>
-			{ui}
-		</ActuaryContext.Provider>
+		<ActuaryContext.Provider value={fwdValues}>{ui}</ActuaryContext.Provider>
 	);
 };
 

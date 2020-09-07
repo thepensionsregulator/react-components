@@ -19,7 +19,7 @@ export enum cardType {
 	thirdParty = 'thirdParty',
 	trustee = 'trustee',
 	corporateGroup = 'corporateGroup',
-	independent = 'independent'
+	independent = 'independent',
 }
 
 export enum cardTypeName {
@@ -30,7 +30,7 @@ export enum cardTypeName {
 	thirdParty = 'Third Party',
 	trustee = 'Trustee',
 	corporateGroup = 'Corporate Group Trustee',
-	independent = 'Professional / Independent Trustee'
+	independent = 'Professional / Independent Trustee',
 }
 
 export interface CardAddress {

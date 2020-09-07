@@ -63,9 +63,7 @@ export const InsurerProvider = ({
 	const fwdValues = { current, send, i18n, ...rest };
 	const ui = typeof children === 'function' ? children(fwdValues) : children;
 	return (
-		<InsurerContext.Provider value={fwdValues}>
-			{ui}
-		</InsurerContext.Provider>
+		<InsurerContext.Provider value={fwdValues}>{ui}</InsurerContext.Provider>
 	);
 };
 

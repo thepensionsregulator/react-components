@@ -138,9 +138,7 @@ export const TrusteeProvider = ({
 	const fwdValues = { current, send, i18n, ...rest };
 	const ui = typeof children === 'function' ? children(fwdValues) : children;
 	return (
-		<TrusteeContext.Provider value={fwdValues}>
-			{ui}
-		</TrusteeContext.Provider>
+		<TrusteeContext.Provider value={fwdValues}>{ui}</TrusteeContext.Provider>
 	);
 };
 

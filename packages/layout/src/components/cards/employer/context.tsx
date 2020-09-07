@@ -69,9 +69,7 @@ export const EmployerProvider = ({
 	const fwdValues = { current, send, i18n, ...rest };
 	const ui = typeof children === 'function' ? children(fwdValues) : children;
 	return (
-		<EmployerContext.Provider value={fwdValues}>
-			{ui}
-		</EmployerContext.Provider>
+		<EmployerContext.Provider value={fwdValues}>{ui}</EmployerContext.Provider>
 	);
 };
 
