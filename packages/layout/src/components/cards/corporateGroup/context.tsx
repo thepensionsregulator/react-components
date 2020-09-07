@@ -30,7 +30,7 @@ export interface CorporateGroupProviderProps extends CardProviderProps {
 	children?: RenderProps | ReactElement;
 	/** overwrite any text that you need */
 	i18n?: RecursivePartial<CorporateGroupI18nProps>;
-	onSaveDirector: (directorIsProfessional: boolean) => Promise<any>;
+	onSaveDirector: (...args: any[]) => Promise<any>;
 }
 
 export interface CorporateGroupContextProps

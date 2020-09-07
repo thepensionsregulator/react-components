@@ -32,11 +32,21 @@ type CorporateGroupEvents =
 	| { type: 'NEXT'; values?: any }
 	| { type: 'SAVE'; values?: any }
 	| { type: 'BACK' }
-	| { type: 'DELETE' };
+	| { type: 'DELETE' }
+	| {
+			type: 'SELECT';
+			values?: {
+				reason: null | string;
+				date: null | string;
+			};
+	  };
 
 export interface CorporateGroupContext {
 	complete: boolean;
-	remove: { reason: string; confirm: boolean } | null;
+	remove?: {
+		reason: null | string;
+		date: null | string;
+	};
 	corporateGroup: Partial<CorporateGroup>;
 }
 
@@ -109,10 +119,11 @@ const corporateGroupMachine = Machine<
 							actions: assign((context, event) => ({
 								corporateGroup: {
 									...context.corporateGroup,
-									...event.values,
+									directorIsProfessional: event.values.professional === 'yes' ? true : false,
 								},
 							})),
 						},
+            CANCEL: '#preview',
 					},
 				},
 			},

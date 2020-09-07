@@ -58,11 +58,12 @@ export type CorporateGroupI18nProps = {
 	};
 	remove: {
 		confirm: {
+      title: string;
+      subtitle: string;
 			breadcrumbs: {
 				link1: string;
 				link2: string;
 			};
-			title: string;
 			dialog: {
 				message1: string;
 			};
@@ -156,11 +157,12 @@ export const i18n: CorporateGroupI18nProps = {
 	},
 	remove: {
 		confirm: {
+      title: 'Are you sure you want to remove this corporate trustee?',
+      subtitle: "This can't be undone.",
 			breadcrumbs: {
 				link1: 'Remove this trustee',
 				link2: 'Are you sure...?',
 			},
-			title: 'Are you sure you want to remove this corporate trustee?',
 			dialog: {
 				message1: "This can't be undone",
 			},
@@ -170,8 +172,8 @@ export const i18n: CorporateGroupI18nProps = {
 			},
 		},
 		reason: {
-			title: 'Why are you removing this trustee?',
-			subtitle: '',
+			title: 'Remove this trustee',
+			subtitle: 'Why are you removing this trustee?',
 			fields: {
 				leftTheScheme: {
 					label: 'They have left the scheme',
