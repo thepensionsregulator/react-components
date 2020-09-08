@@ -40,6 +40,7 @@ const InputNumber: React.FC<InputNumberProps> = ({
 				touched={meta && meta.touched && meta.error}
 				placeholder={placeholder}
 				{...input}
+				onKeyDown={(e) => e.key === 'e' && e.preventDefault()}
 				onChange={(evt: ChangeEvent<HTMLInputElement>) =>
 					input.onChange(evt.target.value && parseInt(evt.target.value, 10))
 				}
