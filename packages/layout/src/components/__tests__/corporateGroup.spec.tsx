@@ -3,7 +3,6 @@ import { render } from '@testing-library/react';
 import { CorporateGroupCard } from '../cards/corporateGroup/corporateGroup';
 import { CorporateGroup } from '../cards/corporateGroup/context';
 import { axe } from 'jest-axe';
-//import { act } from 'react-dom/test-utils';
 import { cleanup } from '@testing-library/react-hooks';
 import { act } from 'react-dom/test-utils';
 

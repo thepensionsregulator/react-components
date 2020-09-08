@@ -6,7 +6,6 @@ import {
 } from '../../../../components/breadcrumbs';
 import Confirm from '../../../../common/views/remove/confirm/confirm';
 import { cardType, cardTypeName } from '../../../../common/interfaces';
-//import styles from './confirm.module.scss';
 
 const getBreadcrumbLinks = ({ link1, link2 }: any): BreadcrumbLink[] => [
 	{
@@ -33,7 +32,6 @@ export const ConfirmRemove: React.FC = () => {
 		await onRemove(
 			{
 				schemeRoleId: corporateGroup.schemeRoleId,
-				//...remove,
 				date: remove.date,
 			},
 			corporateGroup,

@@ -23,7 +23,6 @@ interface CorporateGroupStates {
 
 type CorporateGroupEvents =
 	| { type: 'COMPLETE'; value: boolean }
-	//| { type: 'EDIT_GROUP' }
 	| { type: 'EDIT_NAME' }
 	| { type: 'EDIT_CONTACTS' }
 	| { type: 'EDIT_PROFESSIONAL' }
@@ -67,7 +66,6 @@ const corporateGroupMachine = Machine<
 			id: 'preview',
 			on: {
 				REMOVE: '#remove',
-				//EDIT_GROUP: 'edit',
 				EDIT_NAME: 'edit.name',
 				EDIT_CONTACTS: 'edit.contacts',
 				EDIT_PROFESSIONAL: 'edit.professional',

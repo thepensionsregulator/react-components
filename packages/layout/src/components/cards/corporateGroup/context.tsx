@@ -25,7 +25,7 @@ export interface CorporateGroup
 }
 
 export interface CorporateGroupProviderProps extends CardProviderProps {
-	/** Actuary props from the API */
+	/** CorporateGroup props from the API */
 	corporateGroup: Partial<CorporateGroup>;
 	children?: RenderProps | ReactElement;
 	/** overwrite any text that you need */

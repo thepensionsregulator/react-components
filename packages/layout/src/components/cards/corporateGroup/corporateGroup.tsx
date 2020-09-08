@@ -40,29 +40,6 @@ const CardContentSwitch: React.FC = () => {
 	}
 };
 
-// const CorporateGroupButton: React.FC = () => {
-//   const { current, send, i18n } = useCorporateGroupContext();
-
-//   const onOfStatesIsActive =
-//     current.matches({ edit: 'name' }) ||
-//     current.matches({ edit: 'contacts' }) ||
-//     current.matches({ edit: 'professional' }) ||
-//     current.matches({ remove: 'reason' }) ||
-//     current.matches({ remove: 'confirm' }) ||
-//     current.matches({ remove: 'deleted' });
-
-//   return (
-//     <UnderlinedButton
-//       isOpen={onOfStatesIsActive}
-//       onClick={() => {
-//         onOfStatesIsActive ? send('CANCEL') : send('REMOVE');
-//       }}
-//     >
-//       {i18n.preview.buttons.one}
-//     </UnderlinedButton>
-//   );
-// }
-
 const RemoveButton: React.FC<{ title: string }> = ({ title }) => {
 	const { current, send } = useCorporateGroupContext();
 
@@ -109,7 +86,6 @@ export const CorporateGroupCard: React.FC<CorporateGroupProviderProps> = ({
 								</>
 							)}
 							buttonLeft={() => (
-								// <CorporateGroupButton />
 								<UnderlinedButton>{i18n.preview.buttons.one}</UnderlinedButton>
 							)}
 							buttonRight={() => (
