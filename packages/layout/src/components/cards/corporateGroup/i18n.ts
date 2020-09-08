@@ -58,8 +58,8 @@ export type CorporateGroupI18nProps = {
 	};
 	remove: {
 		confirm: {
-      title: string;
-      subtitle: string;
+			title: string;
+			subtitle: string;
 			breadcrumbs: {
 				link1: string;
 				link2: string;
@@ -102,9 +102,9 @@ export const i18n: CorporateGroupI18nProps = {
 			two: 'Remove',
 			three: 'Address',
 			four: 'Chair of board',
-			five: 'Director(s) are Professional Trustee',
+			five: 'Director(s) are Professional Trustees',
 		},
-		checkboxLabel: 'All details are correct',
+		checkboxLabel: 'All details are correct.',
 		trusteeType: 'Corporate Group trustee',
 	},
 	name: {
@@ -157,8 +157,8 @@ export const i18n: CorporateGroupI18nProps = {
 	},
 	remove: {
 		confirm: {
-      title: 'Are you sure you want to remove this corporate trustee?',
-      subtitle: "This can't be undone.",
+			title: 'Are you sure you want to remove this corporate trustee?',
+			subtitle: "This can't be undone.",
 			breadcrumbs: {
 				link1: 'Remove this trustee',
 				link2: 'Are you sure...?',

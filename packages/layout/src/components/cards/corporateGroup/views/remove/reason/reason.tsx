@@ -60,11 +60,11 @@ export const ReasonRemove: React.FC = () => {
 	};
 
 	return (
-    <Content 
-      type={cardType.corporateGroup} 
-      typeName={cardTypeName.trustee}
-      title={i18n.remove.reason.title}
-    >
+		<Content
+			type={cardType.corporateGroup}
+			typeName={cardTypeName.trustee}
+			title={i18n.remove.reason.title}
+		>
 			<H4 fontWeight="bold" mb={0}>
 				{i18n.remove.reason.subtitle}
 			</H4>
@@ -79,7 +79,10 @@ export const ReasonRemove: React.FC = () => {
 					const leftScheme =
 						form.getState().values.reason === 'left_the_scheme';
 					return (
-						<form onSubmit={handleSubmit}>
+						<form
+							onSubmit={handleSubmit}
+							data-testid={`remove-${cardType.corporateGroup}-form`}
+						>
 							<FFRadioButton
 								name="reason"
 								type="radio"
@@ -117,4 +120,3 @@ export const ReasonRemove: React.FC = () => {
 		</Content>
 	);
 };
-

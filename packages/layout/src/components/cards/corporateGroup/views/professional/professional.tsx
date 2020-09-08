@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Form, renderFields, validate, FieldProps } from '@tpr/forms';
-import { Flex, Link } from '@tpr/core';
+import { Flex } from '@tpr/core';
 import { Content } from '../../../components/content';
 import { Footer } from '../../../components/card';
 import { ArrowButton } from '../../../../buttons/buttons';
@@ -27,67 +27,65 @@ const getProfessionalFields = (
 	},
 ];
 
-export const Professional:React.FC = () => {
-  const [loading, setLoading] = useState(false);
-  const { current, send, i18n, onSaveDirector } = useCorporateGroupContext();
-  const professionalFields = getProfessionalFields(i18n.professional.fields);
-  const { corporateGroup } = current.context;
+export const Professional: React.FC = () => {
+	const [loading, setLoading] = useState(false);
+	const { current, send, i18n, onSaveDirector } = useCorporateGroupContext();
+	const professionalFields = getProfessionalFields(i18n.professional.fields);
+	const { corporateGroup } = current.context;
 
-  const onSubmit = async(values) => {
-    const updatedValues = {
-      schemeRoleId: corporateGroup.schemeRoleId,
-      directorIsProfessional: values.professional === 'yes' ? true : false
-    }
-    console.log(updatedValues);
+	const onSubmit = async (values) => {
+		const updatedValues = {
+			schemeRoleId: corporateGroup.schemeRoleId,
+			directorIsProfessional: values.professional === 'yes' ? true : false,
+		};
+		console.log(updatedValues);
 		setLoading(true);
 		await onSaveDirector(updatedValues, corporateGroup)
 			.then(() => {
-        console.log("success");
+				console.log('success');
 				setLoading(false);
 				send('SAVE', { values });
 			})
 			.catch(() => {
-        console.log("error");
+				console.log('error');
 				setLoading(false);
 			});
-  }
+	};
 
-  return (
-    <Content
-      type={cardType.trustee}
-      title={i18n.professional.title}
-    >
-      <Form
-        onSubmit={onSubmit}
-        initialValues={{
-          professional: corporateGroup.directorIsProfessional ? 'yes' : 'no'
-        }}
-        validate={validate(professionalFields)}
-      >
-        {({ handleSubmit }) => (
-          <form onSubmit={handleSubmit}>
-            {renderFields(professionalFields)}
-            {/* <B>{i18n.professional.title}</B> */}
-            <Footer>
-              <Flex>
-                <ArrowButton
-                  intent="special"
-                  pointsTo="up"
-                  iconSide="right"
-                  disabled={loading}
-                  disabledText={loading ? 'Saving...' : undefined}
-                  title="Save and close"
-                  type="submit"
-                />
-                <Link cfg={{ m: 3 }} underline onClick={() => send('CANCEL')}>
+	return (
+		<Content type={cardType.trustee} title={i18n.professional.title}>
+			<Form
+				onSubmit={onSubmit}
+				initialValues={{
+					professional: corporateGroup.directorIsProfessional ? 'yes' : 'no',
+				}}
+				validate={validate(professionalFields)}
+			>
+				{({ handleSubmit }) => (
+					<form
+						onSubmit={handleSubmit}
+						data-testid={`${cardType.corporateGroup}-directors-form`}
+					>
+						{renderFields(professionalFields)}
+						<Footer>
+							<Flex>
+								<ArrowButton
+									intent="special"
+									pointsTo="up"
+									iconSide="right"
+									disabled={loading}
+									disabledText={loading ? 'Saving...' : undefined}
+									title="Save and close"
+									type="submit"
+								/>
+								{/* <Link cfg={{ m: 3 }} underline onClick={() => send('CANCEL')}>
 									Cancel
-								</Link>
-              </Flex>
-            </Footer>
-          </form>
-        )}
-      </Form>
-    </Content>
-  )
-}
-
+								</Link> */}
+							</Flex>
+						</Footer>
+					</form>
+				)}
+			</Form>
+		</Content>
+	);
+};

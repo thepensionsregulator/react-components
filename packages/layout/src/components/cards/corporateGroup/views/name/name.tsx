@@ -3,16 +3,16 @@ import { FieldProps } from '@tpr/forms';
 import { useCorporateGroupContext } from '../../context';
 import { CorporateGroupI18nProps } from '../../i18n';
 import {
-  RecursivePartial,
-  cardType,
-  cardTypeName
+	RecursivePartial,
+	cardType,
+	cardTypeName,
 } from '../../../common/interfaces';
 import NameForm from '../../../common/views/nameForm/nameForm';
 
 const getFields = (
-  fields: RecursivePartial<CorporateGroupI18nProps['name']['fields']>,
-):FieldProps[] => [
-  {
+	fields: RecursivePartial<CorporateGroupI18nProps['name']['fields']>,
+): FieldProps[] => [
+	{
 		name: 'title',
 		type: 'text',
 		label: fields.title.label,
@@ -37,38 +37,36 @@ const getFields = (
 ];
 
 export const NameScreen: React.FC = () => {
-  const [loading, setLoading] = useState(false);
-  const { current, send, i18n, onSaveName } = useCorporateGroupContext();
-  const fields = getFields(i18n.name.fields);
-  const state = current.context.corporateGroup;
+	const [loading, setLoading] = useState(false);
+	const { current, send, i18n, onSaveName } = useCorporateGroupContext();
+	const fields = getFields(i18n.name.fields);
+	const state = current.context.corporateGroup;
 
-  const onSubmit = async(values) => {
-    setLoading(true);
-    try {
-      await onSaveName(values, state);
-      setLoading(false);
-      send('SAVE', { values });
-    }
-    catch (error) { 
-      console.log(error);
-      setLoading(false);
-    }
-  };
+	const onSubmit = async (values) => {
+		setLoading(true);
+		try {
+			await onSaveName(values, state);
+			setLoading(false);
+			send('SAVE', { values });
+		} catch (error) {
+			console.log(error);
+			setLoading(false);
+		}
+	};
 
-  return (
-    <NameForm
-      type={cardType.corporateGroup}
-      typeName={cardTypeName.corporateGroup}
-      onSubmit={onSubmit}
-      fields={fields}
-      initialValues={{
-        title: state.title,
-        firstname: state.firstname,
-        lastname: state.lastname
-      }}
-      loading={loading}
-      nextStep={true}
-    />
-  )
-}
-
+	return (
+		<NameForm
+			type={cardType.corporateGroup}
+			typeName={cardTypeName.corporateGroup}
+			onSubmit={onSubmit}
+			fields={fields}
+			initialValues={{
+				title: state.title,
+				firstname: state.firstname,
+				lastname: state.lastname,
+			}}
+			loading={loading}
+			nextStep={true}
+		/>
+	);
+};

@@ -119,11 +119,12 @@ const corporateGroupMachine = Machine<
 							actions: assign((context, event) => ({
 								corporateGroup: {
 									...context.corporateGroup,
-									directorIsProfessional: event.values.professional === 'yes' ? true : false,
+									directorIsProfessional:
+										event.values.professional === 'yes' ? true : false,
 								},
 							})),
 						},
-            CANCEL: '#preview',
+						REMOVE: '#remove',
 					},
 				},
 			},

@@ -24,15 +24,15 @@ const CardContentSwitch: React.FC = () => {
 		case current.matches('preview'):
 			return <Preview />;
 		case current.matches({ edit: 'name' }):
-		  return <NameScreen />;
+			return <NameScreen />;
 		case current.matches({ edit: 'contacts' }):
-		  return <Contacts />;
+			return <Contacts />;
 		case current.matches({ edit: 'professional' }):
-		  return <Professional />;
+			return <Professional />;
 		case current.matches({ remove: 'reason' }):
-		  return <ReasonRemove />;
+			return <ReasonRemove />;
 		case current.matches({ remove: 'confirm' }):
-		  return <ConfirmRemove />;
+			return <ConfirmRemove />;
 		case current.matches({ remove: 'deleted' }):
 			return <RemovedBox type={cardTypeName.corporateGroup} />;
 		default:
@@ -115,6 +115,7 @@ export const CorporateGroupCard: React.FC<CorporateGroupProviderProps> = ({
 							buttonRight={() => (
 								<RemoveButton title={i18n.preview.buttons.two} />
 							)}
+							extraPB={true}
 						/>
 						<CardContentSwitch />
 					</Flex>

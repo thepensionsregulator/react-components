@@ -6,7 +6,7 @@ import {
 } from '../../../../components/breadcrumbs';
 import Confirm from '../../../../common/views/remove/confirm/confirm';
 import { cardType, cardTypeName } from '../../../../common/interfaces';
-import styles from './confirm.module.scss';
+//import styles from './confirm.module.scss';
 
 const getBreadcrumbLinks = ({ link1, link2 }: any): BreadcrumbLink[] => [
 	{
@@ -33,34 +33,32 @@ export const ConfirmRemove: React.FC = () => {
 		await onRemove(
 			{
 				schemeRoleId: corporateGroup.schemeRoleId,
-        //...remove,
-        date: remove.date
+				//...remove,
+				date: remove.date,
 			},
 			corporateGroup,
 		)
 			.then(() => {
-        setLoading(false);
-        send('DELETE');
+				setLoading(false);
+				send('DELETE');
 			})
 			.catch(() => {
 				setLoading(false);
 			});
-	}
+	};
 
 	return (
-    <div className={styles.wrapper}>
-      <Confirm
-        cardType={cardType.actuary}
-        cardTypeName={cardTypeName.actuary}
-        breadcrumbs={() => <Breadcrumbs links={breadcrumbLinks} send={send} />}
-        removeTitle={i18n.remove.confirm.title}
-        removeMessage1={i18n.remove.confirm.subtitle}
-        removeBtnTitle={i18n.remove.confirm.buttons.remove}
-        cancelBtnTitle={i18n.remove.confirm.buttons.cancel}
-        handleRemove={handleRemove}
-        handleCancel={() => send('CANCEL')}
-        loading={loading}
-      />
-    </div>
+		<Confirm
+			cardType={cardType.actuary}
+			cardTypeName={cardTypeName.actuary}
+			breadcrumbs={() => <Breadcrumbs links={breadcrumbLinks} send={send} />}
+			removeTitle={i18n.remove.confirm.title}
+			removeMessage1={i18n.remove.confirm.subtitle}
+			removeBtnTitle={i18n.remove.confirm.buttons.remove}
+			cancelBtnTitle={i18n.remove.confirm.buttons.cancel}
+			handleRemove={handleRemove}
+			handleCancel={() => send('CANCEL')}
+			loading={loading}
+		/>
 	);
 };
