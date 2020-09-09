@@ -44,8 +44,8 @@ const InputNumber: React.FC<InputNumberProps> = ({
 				{...input}
 				onKeyDown={(e) => e.key.toLowerCase() === 'e' && e.preventDefault()}
 				onChange={(evt: ChangeEvent<HTMLInputElement>) => {
-					input.onChange(evt.target.value && parseInt(evt.target.value, 10)),
-					callback();
+					input.onChange(evt.target.value && parseInt(evt.target.value, 10));
+					callback && callback();
 				}}
 				after={after}
 				{...props}
