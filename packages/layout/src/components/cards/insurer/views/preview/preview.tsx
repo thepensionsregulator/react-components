@@ -49,7 +49,7 @@ export const Preview: React.FC<any> = () => {
 						{insurer.emailAddress && (
 							<>
 								<H4 cfg={{ lineHeight: 3 }}>Email</H4>
-								<P>{insurer.emailAddress}</P>
+								<P cfg={{ wordBreak: 'all' }}>{insurer.emailAddress}</P>
 							</>
 						)}
 					</Flex>

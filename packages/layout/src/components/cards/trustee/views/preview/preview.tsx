@@ -48,7 +48,7 @@ export const Preview: React.FC = () => {
 						<H4 cfg={{ lineHeight: 3 }}>Phone</H4>
 						<P>{trustee.telephoneNumber}</P>
 						<H4 cfg={{ lineHeight: 3 }}>Email</H4>
-						<P>{trustee.emailAddress}</P>
+						<P cfg={{ wordBreak: 'all' }}>{trustee.emailAddress}</P>
 					</Flex>
 				</Flex>
 			</Flex>
