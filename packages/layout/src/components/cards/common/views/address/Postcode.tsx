@@ -50,8 +50,8 @@ const Postcode: React.FC<PostcodeProps> = ({
 									return {
 										value: addressToOurFormat,
 										label: Object.keys(addressToOurFormat)
-											.filter((key) => addressObject[key])
-											.map((key) => addressObject[key])
+											.filter((key) => addressToOurFormat[key])
+											.map((key) => addressToOurFormat[key])
 											.join(', '),
 									};
 								});
