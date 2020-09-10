@@ -4,42 +4,42 @@ import { Flex } from '@tpr/core';
 import { Content } from '../../../components/content';
 import { Footer } from '../../../components/card';
 import { ArrowButton } from '../../../../buttons/buttons';
-import { useCorporateGroupContext } from '../../context';
-import { CorporateGroupI18nProps } from '../../i18n';
+import { useIndependentTrusteeContext } from '../../context';
+import { IndependentTrusteeI18nProps } from '../../i18n';
 import { cardType, RecursivePartial } from '../../../common/interfaces';
 
-const getProfessionalFields = (
-	labels: RecursivePartial<CorporateGroupI18nProps['professional']['fields']>,
+const getIndependentTrusteeFields = (
+	labels: RecursivePartial<IndependentTrusteeI18nProps['regulator']['fields']>,
 ): FieldProps[] => [
 	{
 		type: 'radio',
-		name: 'professional',
+		name: 'regulator',
 		value: 'yes',
-		label: labels.isProfessional.labels.isProfessionalYes,
+		label: labels.appointedByRegulator.labels.isAppointedByRegulatorYes,
 		cfg: { mb: 2 },
 	},
 	{
 		type: 'radio',
-		name: 'professional',
+		name: 'regulator',
 		value: 'no',
-		label: labels.isProfessional.labels.isProfessionalNo,
+		label: labels.appointedByRegulator.labels.isAppointedByRegulatorNo,
 		cfg: { mb: 2 },
 	},
 ];
 
-export const Professional: React.FC = () => {
+export const Regulator: React.FC = () => {
 	const [loading, setLoading] = useState(false);
-	const { current, send, i18n, onSaveDirector } = useCorporateGroupContext();
-	const professionalFields = getProfessionalFields(i18n.professional.fields);
-	const { corporateGroup } = current.context;
+	const { current, send, i18n, onSaveAppointed } = useIndependentTrusteeContext();
+	const regulatorFields = getIndependentTrusteeFields(i18n.regulator.fields);
+	const { independentTrustee } = current.context;
 
 	const onSubmit = async (values) => {
 		const updatedValues = {
-			schemeRoleId: corporateGroup.schemeRoleId,
-			directorIsProfessional: values.professional === 'yes' ? true : false,
+			schemeRoleId: independentTrustee.schemeRoleId,
+			appointedByRegulator: values.regulator === 'yes' ? true : false,
 		};
 		setLoading(true);
-		await onSaveDirector(updatedValues, corporateGroup)
+		await onSaveAppointed(updatedValues, independentTrustee)
 			.then(() => {
 				setLoading(false);
 				send('SAVE', { values });
@@ -51,20 +51,20 @@ export const Professional: React.FC = () => {
 	};
 
 	return (
-		<Content type={cardType.trustee} title={i18n.professional.title}>
+		<Content type={cardType.trustee} title={i18n.regulator.title}>
 			<Form
 				onSubmit={onSubmit}
 				initialValues={{
-					professional: corporateGroup.directorIsProfessional ? 'yes' : 'no',
+					regulator: independentTrustee.appointedByRegulator ? 'yes' : 'no',
 				}}
-				validate={validate(professionalFields)}
+				validate={validate(regulatorFields)}
 			>
 				{({ handleSubmit }) => (
 					<form
 						onSubmit={handleSubmit}
-						data-testid={`${cardType.corporateGroup}-directors-form`}
+						data-testid={`${cardType.independent}-regulator-form`}
 					>
-						{renderFields(professionalFields)}
+						{renderFields(regulatorFields)}
 						<Footer>
 							<Flex>
 								<ArrowButton

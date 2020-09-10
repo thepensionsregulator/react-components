@@ -1,18 +1,18 @@
 import React from 'react';
 import { P, H4 } from '@tpr/core';
-import { useCorporateGroupContext } from '../../../context';
+import { useIndependentTrusteeContext } from '../../../context';
 import { Footer } from '../../../../components/card';
 import { Form, FFRadioButton, FieldProps, renderFields } from '@tpr/forms';
 import { Content } from '../../../../components/content';
 import { ArrowButton } from '../../../../../buttons/buttons';
 import { isAfter, toDate, isBefore } from 'date-fns';
-import styles from './reason.module.scss';
 import { FORM_ERROR } from 'final-form';
 import { cardType, cardTypeName } from '../../../../common/interfaces';
+import styles from './reason.module.scss';
 
 export const ReasonRemove: React.FC = () => {
-	const { current, send, i18n } = useCorporateGroupContext();
-	const { remove, corporateGroup } = current.context;
+	const { current, send, i18n } = useIndependentTrusteeContext();
+	const { remove, independentTrustee } = current.context;
 
 	const DateField: FieldProps[] = [
 		{
@@ -27,7 +27,7 @@ export const ReasonRemove: React.FC = () => {
 				} else if (
 					isBefore(
 						toDate(new Date(value)),
-						toDate(new Date(corporateGroup.effectiveDate)),
+						toDate(new Date(independentTrustee.effectiveDate)),
 					)
 				) {
 					return i18n.remove.reason.errors.dateAddedBeforeEffectiveDate;
@@ -61,7 +61,7 @@ export const ReasonRemove: React.FC = () => {
 
 	return (
 		<Content
-			type={cardType.corporateGroup}
+			type={cardType.independent}
 			typeName={cardTypeName.trustee}
 			title={i18n.remove.reason.title}
 		>
@@ -81,7 +81,7 @@ export const ReasonRemove: React.FC = () => {
 					return (
 						<form
 							onSubmit={handleSubmit}
-							data-testid={`remove-${cardType.corporateGroup}-form`}
+							data-testid={`remove-${cardType.independent}-form`}
 						>
 							<FFRadioButton
 								name="reason"

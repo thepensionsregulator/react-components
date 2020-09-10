@@ -118,3 +118,9 @@ export type AddressAPIType = {
 	/** limit of items to display per search */
 	limit: number;
 };
+
+
+export interface RemoveReasonProps {
+	reason: null | string;
+	date: null | string;
+}

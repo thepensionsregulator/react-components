@@ -1,5 +1,6 @@
 import { Machine, assign } from 'xstate';
 import { CorporateGroup } from './context';
+import { RemoveReasonProps } from '../common/interfaces';
 
 interface CorporateGroupStates {
 	states: {
@@ -28,24 +29,14 @@ type CorporateGroupEvents =
 	| { type: 'EDIT_PROFESSIONAL' }
 	| { type: 'REMOVE' }
 	| { type: 'CANCEL' }
-	| { type: 'NEXT'; values?: any }
 	| { type: 'SAVE'; values?: any }
 	| { type: 'BACK' }
 	| { type: 'DELETE' }
-	| {
-			type: 'SELECT';
-			values?: {
-				reason: null | string;
-				date: null | string;
-			};
-	  };
+	| { type: 'SELECT';	values?: RemoveReasonProps; };
 
 export interface CorporateGroupContext {
 	complete: boolean;
-	remove?: {
-		reason: null | string;
-		date: null | string;
-	};
+	remove?: RemoveReasonProps;
 	corporateGroup: Partial<CorporateGroup>;
 }
 
@@ -134,7 +125,7 @@ const corporateGroupMachine = Machine<
 				reason: {
 					on: {
 						CANCEL: '#preview',
-						NEXT: {
+						SELECT: {
 							target: 'confirm',
 							actions: assign((_, event) => {
 								return {
