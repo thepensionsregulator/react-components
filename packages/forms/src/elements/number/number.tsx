@@ -6,7 +6,7 @@ import { Input } from '../input/input';
 
 interface InputNumberProps extends FieldRenderProps<number>, FieldExtraProps {
 	after?: any;
-	callback?: () => void;
+	callback?: (e: any) => void;
 }
 
 const InputNumber: React.FC<InputNumberProps> = ({
@@ -45,7 +45,7 @@ const InputNumber: React.FC<InputNumberProps> = ({
 				onKeyDown={(e) => e.key.toLowerCase() === 'e' && e.preventDefault()}
 				onChange={(evt: ChangeEvent<HTMLInputElement>) => {
 					input.onChange(evt.target.value && parseInt(evt.target.value, 10));
-					callback && callback();
+					callback && callback(evt);
 				}}
 				after={after}
 				{...props}
