@@ -86,7 +86,7 @@ export type TypographyProps = Partial<{
 	textAlign: 'left' | 'center' | 'right';
 	fontWeight: 1 | 2 | 3;
 	lineHeight: 1 | 2 | 3;
-	wordBreak?: WordBreak;
+	wordBreak: WordBreak;
 }>;
 
 export type SpaceProps = Partial<{
