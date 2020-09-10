@@ -74,7 +74,7 @@ export const Preview: React.FC<any> = () => {
 						{corporateGroup.emailAddress && (
 							<>
 								<H4 cfg={{ lineHeight: 3 }}>Email</H4>
-								<P>{corporateGroup.emailAddress}</P>
+								<P cfg={{ wordBreak: 'all' }}>{corporateGroup.emailAddress}</P>
 							</>
 						)}
 					</Flex>
