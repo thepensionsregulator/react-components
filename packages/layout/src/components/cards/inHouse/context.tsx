@@ -76,12 +76,10 @@ export const InHouseAdminProvider = ({
 		},
 	});
 
-	const ui =
-		typeof children === 'function'
-			? children({ current, send, i18n, ...rest })
-			: children;
+	const fwdValues = { current, send, i18n, ...rest };
+	const ui = typeof children === 'function' ? children(fwdValues) : children;
 	return (
-		<InHouseAdminContext.Provider value={{ current, send, i18n, ...rest }}>
+		<InHouseAdminContext.Provider value={fwdValues}>
 			{ui}
 		</InHouseAdminContext.Provider>
 	);
