@@ -217,7 +217,7 @@ describe('Corporate Group Trustee Card', () => {
 		});
 
 		test('remove Corporate Group - reason', () => {
-			expect(findByTestId('remove-corporateGroup-form')).not.toBe(null);
+			expect(findByTestId('remove-trustee-form')).not.toBe(null);
 			expect(findByText('Remove this trustee')).toBeDefined();
 			expect(findByText('Why are you removing this trustee?')).toBeDefined();
 			expect(findByText('They have left the scheme')).toBeDefined();

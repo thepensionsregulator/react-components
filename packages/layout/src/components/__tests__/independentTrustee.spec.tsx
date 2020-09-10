@@ -143,7 +143,7 @@ describe('Professional / Independent Trustee Card', () => {
 		});
 
 		test('remove Independent Trustee - reason', () => {
-			expect(findByTestId('remove-independent-form')).not.toBe(null);
+			expect(findByTestId('remove-trustee-form')).not.toBe(null);
 			expect(findByText('Remove this trustee')).toBeDefined();
 			expect(findByText('Why are you removing this trustee?')).toBeDefined();
 			expect(findByText('They have left the scheme')).toBeDefined();
