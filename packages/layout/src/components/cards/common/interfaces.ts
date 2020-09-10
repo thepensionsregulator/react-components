@@ -18,6 +18,8 @@ export enum cardType {
 	insurer = 'insurer',
 	thirdParty = 'thirdParty',
 	trustee = 'trustee',
+	corporateGroup = 'corporateGroup',
+	independent = 'independent',
 }
 
 export enum cardTypeName {
@@ -27,6 +29,8 @@ export enum cardTypeName {
 	insurer = 'Insurer',
 	thirdParty = 'Third Party',
 	trustee = 'Trustee',
+	corporateGroup = 'Corporate Group Trustee',
+	independent = 'Professional / Independent Trustee',
 }
 
 export interface CardAddress {
@@ -68,7 +72,7 @@ export interface CardProviderProps {
 	onSaveAddress?: (...args: any[]) => Promise<any>;
 	onSaveContacts?: (...args: any[]) => Promise<any>;
 	onSaveName?: (...args: any[]) => Promise<any>;
-	testId?: string;
+	testId?: string | number;
 	/** cfg space props */
 	cfg?: SpaceProps;
 }

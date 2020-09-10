@@ -9,18 +9,21 @@ export type ToolbarProps = {
 	subtitle?: Function;
 	buttonLeft: Function;
 	buttonRight: Function;
+	extraPB?: boolean;
 };
 export const Toolbar: React.FC<ToolbarProps> = ({
 	complete,
 	subtitle,
 	buttonLeft,
 	buttonRight,
+	extraPB,
 }) => {
 	return (
 		<div
 			className={classNames([
 				{ [styles.complete]: complete },
 				styles.cardToolbar,
+				extraPB && styles.extraPB,
 			])}
 		>
 			<Flex
@@ -46,6 +49,8 @@ export const Toolbar: React.FC<ToolbarProps> = ({
 					pl: 4,
 				}}
 			>
+				{/* This code will be used in case that the showing the "Error" is not needed, replacing the code below */}
+				{/* {complete && <StatusMessage complete={complete} icon={CheckedCircle} />} */}
 				{complete ? (
 					<StatusMessage complete={complete} icon={CheckedCircle} />
 				) : (

@@ -9,7 +9,7 @@ interface ContactDetailsProps {
 	type: cardType;
 	typeName: cardTypeName;
 	title: string;
-	subtitle: string;
+	subtitle?: string;
 	loading: boolean;
 	onSubmit: (any) => void;
 	initialValues: {
