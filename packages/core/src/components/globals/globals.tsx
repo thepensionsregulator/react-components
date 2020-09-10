@@ -73,11 +73,20 @@ export type ColorProps = Partial<{
 	fill: ColorsFullRange;
 }>;
 
+export type WordBreak =
+	| 'all'
+	| 'word'
+	| 'normal'
+	| 'keep'
+	| 'initial'
+	| 'inherit';
+
 export type TypographyProps = Partial<{
 	fontSize: ValuesFullRange;
 	textAlign: 'left' | 'center' | 'right';
 	fontWeight: 1 | 2 | 3;
 	lineHeight: 1 | 2 | 3;
+	wordBreak: WordBreak;
 }>;
 
 export type SpaceProps = Partial<{
