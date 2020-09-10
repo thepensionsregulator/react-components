@@ -58,7 +58,6 @@ export const ReasonRemove: React.FC = () => {
 	return (
 		<Reason
 			type={cardType.trustee}
-			//typeName={cardTypeName.independent}
 			i18nRemoveReason={i18n.remove.reason}
 			onSubmit={onSubmit}
 			remove={remove}
