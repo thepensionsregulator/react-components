@@ -1,3 +1,5 @@
+import { I18nRemoveReason } from '../common/interfaces';
+
 export type IndependentTrusteeI18nProps = {
 	preview: {
 		buttons: {
@@ -20,10 +22,6 @@ export type IndependentTrusteeI18nProps = {
 				};
 			};
 		};
-		// breadcrumbs: {
-		// 	link1: string;
-		// 	link2: string;
-		// };
 	};
 	remove: {
 		confirm: {
@@ -41,26 +39,7 @@ export type IndependentTrusteeI18nProps = {
 				cancel: string;
 			};
 		};
-		reason: {
-			title: string;
-			subtitle: string;
-			fields: {
-				leftTheScheme: {
-					label: string;
-				};
-				date: {
-					label: string;
-				};
-				neverPartOfTheScheme: {
-					label: string;
-				};
-			};
-			errors: {
-				pristine: string;
-				dateAddedBeforeEffectiveDate: string;
-				dateAddedInTheFuture: string;
-			};
-		};
+		reason: I18nRemoveReason;
 	};
 };
 
@@ -76,8 +55,7 @@ export const i18n: IndependentTrusteeI18nProps = {
 		trusteeType: 'Professional / Independent Trustee',
 	},
 	regulator: {
-		title:
-			'Was this trustee appointed to this scheme by the regulator?',
+		title: 'Was this trustee appointed to this scheme by the regulator?',
 		subtitle: 'subtitle',
 		fields: {
 			appointedByRegulator: {
@@ -87,10 +65,6 @@ export const i18n: IndependentTrusteeI18nProps = {
 				},
 			},
 		},
-		// breadcrumbs: {
-		// 	link1: 'Edit Trustee',
-		// 	link2: 'Professional Trustee?',
-		// },
 	},
 	remove: {
 		confirm: {

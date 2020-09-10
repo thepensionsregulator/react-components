@@ -1,3 +1,5 @@
+import { I18nRemoveReason } from '../common/interfaces';
+
 export type CorporateGroupI18nProps = {
 	preview: {
 		buttons: {
@@ -51,10 +53,6 @@ export type CorporateGroupI18nProps = {
 				};
 			};
 		};
-		breadcrumbs: {
-			link1: string;
-			link2: string;
-		};
 	};
 	remove: {
 		confirm: {
@@ -72,26 +70,7 @@ export type CorporateGroupI18nProps = {
 				cancel: string;
 			};
 		};
-		reason: {
-			title: string;
-			subtitle: string;
-			fields: {
-				leftTheScheme: {
-					label: string;
-				};
-				date: {
-					label: string;
-				};
-				neverPartOfTheScheme: {
-					label: string;
-				};
-			};
-			errors: {
-				pristine: string;
-				dateAddedBeforeEffectiveDate: string;
-				dateAddedInTheFuture: string;
-			};
-		};
+		reason: I18nRemoveReason;
 	};
 };
 
@@ -149,10 +128,6 @@ export const i18n: CorporateGroupI18nProps = {
 					isProfessionalNo: 'No',
 				},
 			},
-		},
-		breadcrumbs: {
-			link1: 'Edit Corporate Trustee',
-			link2: 'Professional Trustee?',
 		},
 	},
 	remove: {

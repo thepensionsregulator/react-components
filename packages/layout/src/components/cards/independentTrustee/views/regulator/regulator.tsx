@@ -29,7 +29,12 @@ const getIndependentTrusteeFields = (
 
 export const Regulator: React.FC = () => {
 	const [loading, setLoading] = useState(false);
-	const { current, send, i18n, onSaveAppointed } = useIndependentTrusteeContext();
+	const {
+		current,
+		send,
+		i18n,
+		onSaveAppointed,
+	} = useIndependentTrusteeContext();
 	const regulatorFields = getIndependentTrusteeFields(i18n.regulator.fields);
 	const { independentTrustee } = current.context;
 

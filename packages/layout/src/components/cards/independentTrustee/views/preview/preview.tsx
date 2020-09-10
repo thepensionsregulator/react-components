@@ -36,21 +36,21 @@ export const Preview: React.FC<any> = () => {
 							<P>{independentTrustee.address.country}</P>
 						)}
 					</Flex>
-				</Flex>				
+				</Flex>
 
-        {/* Appointed By Regulator section: open for editing	 */}
-        <Flex cfg={{ flexDirection: 'column' }}>
-          <UnderlinedButton onClick={() => send('EDIT_REGULATOR')}>
-            {i18n.preview.buttons.four}
-          </UnderlinedButton>
-          <P cfg={{ pt: 3 }}>
-            {independentTrustee.appointedByRegulator
-              ? i18n.regulator.fields.appointedByRegulator.labels
-                  .isAppointedByRegulatorYes
-              : i18n.regulator.fields.appointedByRegulator.labels
-                  .isAppointedByRegulatorNo}
-          </P>
-        </Flex>
+				{/* Appointed By Regulator section: open for editing	 */}
+				<Flex cfg={{ flexDirection: 'column' }}>
+					<UnderlinedButton onClick={() => send('EDIT_REGULATOR')}>
+						{i18n.preview.buttons.four}
+					</UnderlinedButton>
+					<P cfg={{ pt: 3 }}>
+						{independentTrustee.appointedByRegulator
+							? i18n.regulator.fields.appointedByRegulator.labels
+									.isAppointedByRegulatorYes
+							: i18n.regulator.fields.appointedByRegulator.labels
+									.isAppointedByRegulatorNo}
+					</P>
+				</Flex>
 			</Flex>
 
 			{/*  All details correct - Checkbox	 */}

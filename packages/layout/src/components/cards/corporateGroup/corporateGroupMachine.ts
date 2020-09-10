@@ -32,7 +32,7 @@ type CorporateGroupEvents =
 	| { type: 'SAVE'; values?: any }
 	| { type: 'BACK' }
 	| { type: 'DELETE' }
-	| { type: 'SELECT';	values?: RemoveReasonProps; };
+	| { type: 'SELECT'; values?: RemoveReasonProps };
 
 export interface CorporateGroupContext {
 	complete: boolean;

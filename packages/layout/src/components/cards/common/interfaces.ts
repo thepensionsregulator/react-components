@@ -119,8 +119,31 @@ export type AddressAPIType = {
 	limit: number;
 };
 
-
 export interface RemoveReasonProps {
 	reason: null | string;
 	date: null | string;
+}
+
+/*	--------------------------------
+					i18n common props
+		--------------------------------	*/
+export interface I18nRemoveReason {
+	title: string;
+	subtitle: string;
+	fields: {
+		leftTheScheme: {
+			label: string;
+		};
+		date: {
+			label: string;
+		};
+		neverPartOfTheScheme: {
+			label: string;
+		};
+	};
+	errors: {
+		pristine: string;
+		dateAddedBeforeEffectiveDate: string;
+		dateAddedInTheFuture: string;
+	};
 }

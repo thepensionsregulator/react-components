@@ -13,7 +13,7 @@ import {
 	CardProviderProps,
 } from '../common/interfaces';
 
-export interface IndependentTrustee	extends CardDefaultProps {
+export interface IndependentTrustee extends CardDefaultProps {
 	organisationName: string;
 	address: Partial<CardAddress>;
 	appointedByRegulator: boolean;
@@ -36,7 +36,9 @@ export interface IndependentTrusteeContextProps
 
 type RenderProps = (_: IndependentTrusteeContextProps) => ReactElement;
 
-export const IndependentTrusteeContext = createContext<IndependentTrusteeContextProps>({
+export const IndependentTrusteeContext = createContext<
+	IndependentTrusteeContextProps
+>({
 	current: {},
 	send: (_, __) => ({}),
 	i18n: i18nDefaults,

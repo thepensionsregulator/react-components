@@ -28,7 +28,7 @@ type IndependentTrusteeEvents =
 	| { type: 'SAVE'; values?: any }
 	| { type: 'BACK' }
 	| { type: 'DELETE' }
-	| { type: 'SELECT'; values?: RemoveReasonProps; };
+	| { type: 'SELECT'; values?: RemoveReasonProps };
 
 export interface IndependentTrusteeContext {
 	complete: boolean;

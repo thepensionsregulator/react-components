@@ -6,6 +6,7 @@ export * from './components/cards/thirdParty/thirdParty';
 export * from './components/cards/insurer/insurer';
 export * from './components/cards/actuary/actuary';
 export * from './components/cards/corporateGroup/corporateGroup';
+export * from './components/cards/independentTrustee/independentTrustee';
 // all other exports
 export * from './components/beta/beta';
 export * from './components/footer/footer';
