@@ -1,3 +1,5 @@
+import { I18nRemoveReason } from '../common/interfaces';
+
 export type TrusteeI18nProps = {
 	address: {
 		title: string;
@@ -87,26 +89,7 @@ export type TrusteeI18nProps = {
 				cancel: string;
 			};
 		};
-		reason: {
-			title: string;
-			subtitle: string;
-			fields: {
-				leftTheScheme: {
-					label: string;
-				};
-				date: {
-					label: string;
-				};
-				neverPartOfTheScheme: {
-					label: string;
-				};
-			};
-			errors: {
-				pristine: string;
-				dateAddedBeforeEffectiveDate: string;
-				dateAddedInTheFuture: string;
-			};
-		};
+		reason: I18nRemoveReason;
 	};
 	type: {
 		title: string;

@@ -1,5 +1,5 @@
 import React from 'react';
-import { useCorporateGroupContext } from '../../../context';
+import { useIndependentTrusteeContext } from '../../../context';
 import { FieldProps } from '@tpr/forms';
 import { isAfter, toDate, isBefore } from 'date-fns';
 import { FORM_ERROR } from 'final-form';
@@ -7,8 +7,8 @@ import { cardType } from '../../../../common/interfaces';
 import { Reason } from '../../../../common/views/remove/reason/reason';
 
 export const ReasonRemove: React.FC = () => {
-	const { current, send, i18n } = useCorporateGroupContext();
-	const { remove, corporateGroup } = current.context;
+	const { current, send, i18n } = useIndependentTrusteeContext();
+	const { remove, independentTrustee } = current.context;
 
 	const DateField: FieldProps[] = [
 		{
@@ -23,7 +23,7 @@ export const ReasonRemove: React.FC = () => {
 				} else if (
 					isBefore(
 						toDate(new Date(value)),
-						toDate(new Date(corporateGroup.effectiveDate)),
+						toDate(new Date(independentTrustee.effectiveDate)),
 					)
 				) {
 					return i18n.remove.reason.errors.dateAddedBeforeEffectiveDate;

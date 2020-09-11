@@ -1,0 +1,60 @@
+---
+name: IndependentTrustee
+menu: Cards
+route: /cards/independentTrustee
+---
+
+import { Props } from 'docz';
+import { Playground, experianApiGet } from '@playground';
+import { Form } from 'react-final-form';
+import { useState } from 'react';
+import { IndependentTrusteeCard } from './independentTrustee';
+
+# Professional / Independent Trustee Card
+
+Professional / Independent Trustee Card for tpr apps
+
+## Usage
+
+```js
+import { IndependentTrusteeCard } from '@tpr/layout';
+```
+
+## Basic Usage
+
+<Playground>
+  {() => {
+    const [complete, setComplete] = useState(false);
+    const callbackFn = (values, _fullIndependentTrusteeObject) => {
+      console.log(values);
+      console.log(_fullIndependentTrusteeObject);
+      return Promise.resolve(values);
+    }
+    const independentTrustee = {
+      id: '',
+      schemeRoleId: 123,
+      effectiveDate: '1997-04-01T00:00:00',
+      organisationName: 'Acme Factory Pension Trustees Limited',
+      appointedByRegulator: true,
+      address: {				
+				addressLine1: 'Napier House',
+				addressLine2: 'Trafalgar Pl',
+				addressLine3: '',
+				postTown: 'Brighton',
+				county: 'West Sussex',
+				postcode: 'BN1 4DW',
+				country: '',
+				countryId: ''
+			}
+    };
+		return (
+			<IndependentTrusteeCard
+        onSaveAppointed={callbackFn}
+				onRemove={callbackFn}
+				onCorrect={(value) => setComplete(value)}
+				complete={complete}
+				independentTrustee={independentTrustee}
+			/>
+		);
+  }}
+</Playground>

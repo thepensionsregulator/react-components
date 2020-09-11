@@ -1,15 +1,13 @@
 import { Machine, assign } from 'xstate';
-import { CorporateGroup } from './context';
+import { IndependentTrustee } from './context';
 import { RemoveReasonProps } from '../common/interfaces';
 
-interface CorporateGroupStates {
+interface IndependentTrusteeStates {
 	states: {
 		preview: {};
 		edit: {
 			states: {
-				name: {};
-				contacts: {};
-				professional: {};
+				regulator: {};
 			};
 		};
 		remove: {
@@ -22,11 +20,9 @@ interface CorporateGroupStates {
 	};
 }
 
-type CorporateGroupEvents =
+type IndependentTrusteeEvents =
 	| { type: 'COMPLETE'; value: boolean }
-	| { type: 'EDIT_NAME' }
-	| { type: 'EDIT_CONTACTS' }
-	| { type: 'EDIT_PROFESSIONAL' }
+	| { type: 'EDIT_REGULATOR' }
 	| { type: 'REMOVE' }
 	| { type: 'CANCEL' }
 	| { type: 'SAVE'; values?: any }
@@ -34,32 +30,30 @@ type CorporateGroupEvents =
 	| { type: 'DELETE' }
 	| { type: 'SELECT'; values?: RemoveReasonProps };
 
-export interface CorporateGroupContext {
+export interface IndependentTrusteeContext {
 	complete: boolean;
 	remove?: RemoveReasonProps;
-	corporateGroup: Partial<CorporateGroup>;
+	independentTrustee: Partial<IndependentTrustee>;
 }
 
-const corporateGroupMachine = Machine<
-	CorporateGroupContext,
-	CorporateGroupStates,
-	CorporateGroupEvents
+const independentTrusteeMachine = Machine<
+	IndependentTrusteeContext,
+	IndependentTrusteeStates,
+	IndependentTrusteeEvents
 >({
-	id: 'corporate-group',
+	id: 'independent-trustee',
 	initial: 'preview',
 	context: {
 		complete: false,
 		remove: null,
-		corporateGroup: {},
+		independentTrustee: {},
 	},
 	states: {
 		preview: {
 			id: 'preview',
 			on: {
 				REMOVE: '#remove',
-				EDIT_NAME: 'edit.name',
-				EDIT_CONTACTS: 'edit.contacts',
-				EDIT_PROFESSIONAL: 'edit.professional',
+				EDIT_REGULATOR: 'edit.regulator',
 				COMPLETE: {
 					actions: assign((_, event) => ({
 						complete: event.value,
@@ -69,47 +63,17 @@ const corporateGroupMachine = Machine<
 		},
 		edit: {
 			id: 'edit',
-			initial: 'name',
+			initial: 'regulator',
 			states: {
-				name: {
-					on: {
-						SAVE: {
-							target: 'contacts',
-							actions: assign((context, event) => ({
-								corporateGroup: {
-									...context.corporateGroup,
-									...event.values,
-								},
-							})),
-						},
-						CANCEL: '#preview',
-						REMOVE: '#remove',
-					},
-				},
-				contacts: {
+				regulator: {
 					on: {
 						SAVE: {
 							target: '#preview',
 							actions: assign((context, event) => ({
-								corporateGroup: {
-									...context.corporateGroup,
-									...event.values,
-								},
-							})),
-						},
-						CANCEL: '#preview',
-						REMOVE: '#remove',
-					},
-				},
-				professional: {
-					on: {
-						SAVE: {
-							target: '#preview',
-							actions: assign((context, event) => ({
-								corporateGroup: {
-									...context.corporateGroup,
-									directorIsProfessional:
-										event.values.professional === 'yes' ? true : false,
+								independentTrustee: {
+									...context.independentTrustee,
+									appointedByRegulator:
+										event.values.regulator === 'yes' ? true : false,
 								},
 							})),
 						},
@@ -150,4 +114,4 @@ const corporateGroupMachine = Machine<
 	},
 });
 
-export default corporateGroupMachine;
+export default independentTrusteeMachine;

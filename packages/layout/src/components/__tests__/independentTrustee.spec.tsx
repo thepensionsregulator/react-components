@@ -1,24 +1,19 @@
 import React from 'react';
 import { render } from '@testing-library/react';
-import { CorporateGroupCard } from '../cards/corporateGroup/corporateGroup';
-import { CorporateGroup } from '../cards/corporateGroup/context';
+import { IndependentTrusteeCard } from '../cards/independentTrustee/independentTrustee';
+import { IndependentTrustee } from '../cards/independentTrustee/context';
 import { axe } from 'jest-axe';
 import { cleanup } from '@testing-library/react-hooks';
 import { act } from 'react-dom/test-utils';
 
 const noop = () => Promise.resolve();
 
-const corporateGroup: CorporateGroup = {
+const independentTrustee: IndependentTrustee = {
 	id: '',
 	schemeRoleId: '',
 	effectiveDate: '',
-	organisationName: 'Acme Factory Pension Trustees Limited',
-	title: 'Miss',
-	firstname: 'Susan',
-	lastname: 'Smith',
-	directorIsProfessional: true,
-	telephoneNumber: '01273 000 111',
-	emailAddress: 'susan@corporate-group.com',
+	organisationName: 'Pensions Are Us Limited',
+	appointedByRegulator: true,
 	address: {
 		addressLine1: 'The Pensions Regulator',
 		addressLine2: 'Napier House',
@@ -31,19 +26,17 @@ const corporateGroup: CorporateGroup = {
 	},
 };
 
-describe('Corporate Group Trustee Card', () => {
+describe('Professional / Independent Trustee Card', () => {
 	describe('Preview', () => {
 		let component, findByText;
 		beforeEach(() => {
 			const { container, getByText } = render(
-				<CorporateGroupCard
-					corporateGroup={corporateGroup}
+				<IndependentTrusteeCard
+					independentTrustee={independentTrustee}
 					complete={true}
 					onCorrect={() => {}}
 					onRemove={noop}
-					onSaveContacts={noop}
-					onSaveName={noop}
-					onSaveDirector={noop}
+					onSaveAppointed={noop}
 				/>,
 			);
 
@@ -61,8 +54,7 @@ describe('Corporate Group Trustee Card', () => {
 			expect(findByText('Corporate Trustee')).toBeDefined();
 			expect(findByText('Remove')).toBeDefined();
 			expect(findByText('Address')).toBeDefined();
-			expect(findByText('Chair of board')).toBeDefined();
-			expect(findByText('Director(s) are Professional Trustees')).toBeDefined();
+			expect(findByText('Appointed by the regulator')).toBeDefined();
 		});
 
 		test('initial status is correct', () => {
@@ -71,8 +63,8 @@ describe('Corporate Group Trustee Card', () => {
 		});
 
 		test('Organisation block displays values correctly', () => {
-			expect(findByText('Acme Factory Pension Trustees Limited')).toBeDefined();
-			expect(findByText('Corporate Group trustee')).toBeDefined();
+			expect(findByText('Pensions Are Us Limited')).toBeDefined();
+			expect(findByText('Professional / Independent Trustee')).toBeDefined();
 		});
 
 		test('Address block displays values correctly', () => {
@@ -84,29 +76,21 @@ describe('Corporate Group Trustee Card', () => {
 			expect(findByText('West Sussex')).toBeDefined();
 		});
 
-		test('Chair-of-board block displays values correctly', () => {
-			expect(findByText('Miss Susan Smith')).toBeDefined();
-			expect(findByText('01273 000 111')).toBeDefined();
-			expect(findByText('susan@corporate-group.com')).toBeDefined();
-		});
-
-		test('Director(s) block displays values correctly', () => {
+		test('Appointed by the regulator block displays value correctly', () => {
 			expect(findByText('Yes')).toBeDefined();
 		});
 	});
 
-	describe('editing Chair-of-board', () => {
+	describe('editing Appointed by the regulator', () => {
 		let component, findByText, findByTestId;
 		beforeEach(async () => {
 			const { container, getByText, getByTestId } = render(
-				<CorporateGroupCard
-					corporateGroup={corporateGroup}
+				<IndependentTrusteeCard
+					independentTrustee={independentTrustee}
 					complete={true}
 					onCorrect={() => {}}
 					onRemove={noop}
-					onSaveContacts={noop}
-					onSaveName={noop}
-					onSaveDirector={noop}
+					onSaveAppointed={noop}
 				/>,
 			);
 
@@ -114,72 +98,16 @@ describe('Corporate Group Trustee Card', () => {
 			findByText = getByText;
 			findByTestId = getByTestId;
 
-			findByText('Chair of board').click();
+			findByText('Appointed by the regulator').click();
 			const results = await axe(component);
 			expect(results).toHaveNoViolations();
 		});
 
-		afterEach(() => {
-			cleanup();
-		});
-
-		test('editing Name of the chair of the board', () => {
-			expect(findByTestId('corporateGroup-name-form')).not.toBe(null);
-			expect(findByText('Title (optional)')).toBeDefined();
-			expect(findByText('First name')).toBeDefined();
-			expect(findByText('Last name')).toBeDefined();
-			expect(findByText('Continue')).toBeDefined();
-		});
-
-		test('editing contact details for chair of the board', async () => {
-			await act(async () => {
-				findByText('Continue').click();
-				const results = await axe(component);
-				expect(results).toHaveNoViolations();
-				expect(findByText('Telephone number')).toBeDefined();
-				expect(findByText('Email address')).toBeDefined();
-				expect(findByText('Save and close')).toBeDefined();
-			});
-
-			await act(async () => {
-				findByText('Save and close').click();
-				const results = await axe(component);
-				expect(results).toHaveNoViolations();
-				// After clicking the "Save and Close" button, it goes back to the Preview
-				expect(findByText('Address')).toBeDefined();
-			});
-		});
-	});
-
-	describe('editing Director(s) are Professional Trustees', () => {
-		let component, findByText, findByTestId;
-		beforeEach(async () => {
-			const { container, getByText, getByTestId } = render(
-				<CorporateGroupCard
-					corporateGroup={corporateGroup}
-					complete={true}
-					onCorrect={() => {}}
-					onRemove={noop}
-					onSaveContacts={noop}
-					onSaveName={noop}
-					onSaveDirector={noop}
-				/>,
-			);
-
-			component = container;
-			findByText = getByText;
-			findByTestId = getByTestId;
-
-			findByText('Director(s) are Professional Trustees').click();
-			const results = await axe(component);
-			expect(results).toHaveNoViolations();
-		});
-
-		test('editing Director(s) type', () => {
-			expect(findByTestId('corporateGroup-directors-form')).not.toBe(null);
+		test('indicating if trustee was appointed by the regulator', () => {
+			expect(findByTestId('independent-regulator-form')).not.toBe(null);
 			expect(
 				findByText(
-					'Are any of the directors of this corporate trustee a professional trustee?',
+					'Was this trustee appointed to this scheme by the regulator?',
 				),
 			).toBeDefined();
 			expect(findByText('Yes')).toBeDefined();
@@ -192,14 +120,12 @@ describe('Corporate Group Trustee Card', () => {
 		let component, findByText, findByTestId;
 		beforeEach(async () => {
 			const { container, getByText, getByTestId } = render(
-				<CorporateGroupCard
-					corporateGroup={corporateGroup}
+				<IndependentTrusteeCard
+					independentTrustee={independentTrustee}
 					complete={true}
 					onCorrect={() => {}}
 					onRemove={noop}
-					onSaveContacts={noop}
-					onSaveName={noop}
-					onSaveDirector={noop}
+					onSaveAppointed={noop}
 				/>,
 			);
 
@@ -216,7 +142,7 @@ describe('Corporate Group Trustee Card', () => {
 			cleanup();
 		});
 
-		test('remove Corporate Group - reason', () => {
+		test('remove Independent Trustee - reason', () => {
 			expect(findByTestId('remove-trustee-form')).not.toBe(null);
 			expect(findByText('Remove this trustee')).toBeDefined();
 			expect(findByText('Why are you removing this trustee?')).toBeDefined();
@@ -225,7 +151,7 @@ describe('Corporate Group Trustee Card', () => {
 			expect(findByText('Continue')).toBeDefined();
 		});
 
-		test('remove Corporate Group - confirm', async () => {
+		test('remove Independent Trustee - confirm', async () => {
 			await act(async () => {
 				findByText('They were never part of the scheme.').click();
 				const results = await axe(component);
@@ -237,7 +163,7 @@ describe('Corporate Group Trustee Card', () => {
 				const results = await axe(component);
 				expect(results).toHaveNoViolations();
 				expect(
-					findByText('Are you sure you want to remove this corporate trustee?'),
+					findByText('Are you sure you want to remove this trustee?'),
 				).toBeDefined();
 				expect(findByText("This can't be undone.")).toBeDefined();
 				expect(findByText('Remove Trustee')).toBeDefined();
@@ -250,7 +176,7 @@ describe('Corporate Group Trustee Card', () => {
 				const results = await axe(component);
 				expect(results).toHaveNoViolations();
 				expect(
-					findByText('Corporate Group Trustee removed successfully'),
+					findByText('Professional / Independent Trustee removed successfully'),
 				).toBeDefined();
 			});
 		});
