@@ -39,6 +39,7 @@ const InputPhone: React.FC<InputPhoneProps> = ({
 				label={label}
 				placeholder={placeholder}
 				touched={meta && meta.touched && meta.error}
+				required={required}
 				{...input}
 			/>
 		</StyledInputLabel>
@@ -51,7 +52,6 @@ export const FFInputPhone: React.FC<FieldProps & FieldExtraProps> = (
 	return (
 		<Field
 			{...fieldProps}
-			required={typeof fieldProps.validate === 'function' || fieldProps.error}
 			validate={composeValidators(
 				executeClientValidation(fieldProps.validate),
 				isPhoneValid('Invalid phone number'),
