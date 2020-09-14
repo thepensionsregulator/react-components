@@ -61,7 +61,7 @@ export const ThirdPartyCard: React.FC<ThirdPartyProviderProps> = ({
 				return (
 					<Flex cfg={cfg} data-testid={testId} className={styles.card}>
 						<Toolbar
-							complete={context.complete}
+							complete={context.preValidatedData ? true : context.complete}
 							subtitle={() => <H4>{context.thirdParty.organisationName}</H4>}
 							buttonLeft={() => (
 								<UnderlinedButton>{i18n.preview.buttons.one}</UnderlinedButton>

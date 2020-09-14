@@ -29,6 +29,7 @@ export interface EmployerContext {
 	complete: boolean;
 	remove: { confirm: boolean; date: string } | null;
 	employer: Partial<Employer>;
+	preValidatedData?: boolean | null;
 }
 
 const employerMachine = Machine<

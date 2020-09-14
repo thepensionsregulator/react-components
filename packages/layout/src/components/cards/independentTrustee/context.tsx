@@ -49,6 +49,7 @@ export const IndependentTrusteeContext = createContext<
 
 export const IndependentTrusteeProvider = ({
 	complete,
+	preValidatedData,
 	independentTrustee,
 	children,
 	i18n: i18nOverrides = {},
@@ -59,6 +60,7 @@ export const IndependentTrusteeProvider = ({
 		context: {
 			complete,
 			independentTrustee,
+			preValidatedData,
 		},
 	});
 

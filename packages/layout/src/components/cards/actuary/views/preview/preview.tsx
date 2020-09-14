@@ -7,11 +7,15 @@ import styles from './preview.module.scss';
 
 export const Preview: React.FC<any> = () => {
 	const { current, send, onCorrect, i18n } = useActuaryContext();
-	const { actuary, complete } = current.context;
+	const { actuary, complete, preValidatedData } = current.context;
 
 	return (
 		<div
-			className={classNames([{ [styles.complete]: complete }, styles.content])}
+			className={
+				preValidatedData
+					? classNames([styles.content, styles.complete])
+					: classNames([{ [styles.complete]: complete }, styles.content])
+			}
 		>
 			{/* Actuary's Organisation name: display only	 */}
 			<P cfg={{ mb: 4 }}>{actuary.organisationName}</P>

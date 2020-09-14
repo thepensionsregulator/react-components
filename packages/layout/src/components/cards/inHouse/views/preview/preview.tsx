@@ -7,11 +7,15 @@ import styles from './preview.module.scss';
 
 export const Preview: React.FC<any> = () => {
 	const { current, send, onCorrect, i18n } = useInHouseAdminContext();
-	const { inHouseAdmin, complete } = current.context;
+	const { inHouseAdmin, complete, preValidatedData } = current.context;
 
 	return (
 		<div
-			className={classNames([{ [styles.complete]: complete }, styles.content])}
+			className={
+				preValidatedData
+					? classNames([styles.content, styles.complete])
+					: classNames([{ [styles.complete]: complete }, styles.content])
+			}
 		>
 			<Flex>
 				{/* Addres section: open for editing	 */}

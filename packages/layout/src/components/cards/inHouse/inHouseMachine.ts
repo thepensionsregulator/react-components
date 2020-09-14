@@ -38,6 +38,7 @@ export interface InHouseAdminContext {
 	complete: boolean;
 	remove: { confirm: boolean; date: string } | null;
 	inHouseAdmin: Partial<InHouseAdmin>;
+	preValidatedData?: boolean | null;
 }
 
 const inHouseAdminMachine = Machine<

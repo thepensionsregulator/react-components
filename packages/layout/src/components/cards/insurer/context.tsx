@@ -47,6 +47,7 @@ export interface InsurerProviderProps extends CardProviderProps {
 
 export const InsurerProvider = ({
 	complete,
+	preValidatedData,
 	insurer,
 	children,
 	i18n: i18nOverrides = {},
@@ -57,6 +58,7 @@ export const InsurerProvider = ({
 		context: {
 			complete,
 			insurer,
+			preValidatedData,
 		},
 	});
 

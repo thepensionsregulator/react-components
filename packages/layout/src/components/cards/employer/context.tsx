@@ -53,6 +53,7 @@ export interface Employer extends CardDefaultProps {
 
 export const EmployerProvider = ({
 	complete,
+	preValidatedData,
 	employer,
 	children,
 	i18n: i18nOverrides = {},
@@ -63,6 +64,7 @@ export const EmployerProvider = ({
 		context: {
 			complete,
 			employer,
+			preValidatedData,
 		},
 	});
 

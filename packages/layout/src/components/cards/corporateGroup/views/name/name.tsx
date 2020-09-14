@@ -2,11 +2,7 @@ import React, { useState } from 'react';
 import { FieldProps } from '@tpr/forms';
 import { useCorporateGroupContext } from '../../context';
 import { CorporateGroupI18nProps } from '../../i18n';
-import {
-	RecursivePartial,
-	cardType,
-	cardTypeName,
-} from '../../../common/interfaces';
+import { RecursivePartial, cardType } from '../../../common/interfaces';
 import NameForm from '../../../common/views/nameForm/nameForm';
 
 const getFields = (
@@ -57,7 +53,7 @@ export const NameScreen: React.FC = () => {
 	return (
 		<NameForm
 			type={cardType.corporateGroup}
-			typeName={cardTypeName.corporateGroup}
+			typeName={'chair of the board'}
 			onSubmit={onSubmit}
 			fields={fields}
 			initialValues={{

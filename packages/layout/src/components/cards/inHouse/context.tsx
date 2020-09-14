@@ -63,6 +63,7 @@ export interface InHouseAdminProviderProps extends CardProviderProps {
 
 export const InHouseAdminProvider = ({
 	complete,
+	preValidatedData,
 	inHouseAdmin,
 	children,
 	i18n: i18nOverrides = {},
@@ -73,6 +74,7 @@ export const InHouseAdminProvider = ({
 		context: {
 			complete,
 			inHouseAdmin,
+			preValidatedData,
 		},
 	});
 

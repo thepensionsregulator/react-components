@@ -7,7 +7,7 @@ import { cardType, cardTypeName } from '../../interfaces';
 
 interface NameFormProps {
 	type: cardType;
-	typeName: cardTypeName;
+	typeName: cardTypeName | string;
 	onSubmit: (any) => void;
 	fields: FieldProps[];
 	initialValues: {

@@ -44,6 +44,7 @@ export interface ThirdPartyProviderProps extends CardProviderProps {
 
 export const ThirdPartyProvider = ({
 	complete,
+	preValidatedData,
 	thirdParty,
 	children,
 	i18n: i18nOverrides = {},
@@ -54,6 +55,7 @@ export const ThirdPartyProvider = ({
 		context: {
 			complete,
 			thirdParty,
+			preValidatedData,
 		},
 	});
 

@@ -77,6 +77,7 @@ export interface TrusteeContext {
 		reason: null | string;
 		date: null | string;
 	};
+	preValidatedData?: boolean | null;
 }
 
 const trusteeMachine = Machine<TrusteeContext, TrusteeStates, TrusteeEvents>({
