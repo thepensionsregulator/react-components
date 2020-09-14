@@ -33,7 +33,7 @@ const InputPhone: React.FC<InputPhoneProps> = ({
 				meta={meta}
 			/>
 			<Input
-				type="tel"
+				type="phone"
 				width={width}
 				testId={testId}
 				label={label}
