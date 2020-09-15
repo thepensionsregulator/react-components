@@ -34,7 +34,6 @@ const InputEmail: React.FC<InputEmailProps> = ({
 			/>
 			<Input
 				type="email"
-				noValidate
 				width={width}
 				testId={testId}
 				label={label}

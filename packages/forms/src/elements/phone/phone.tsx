@@ -34,7 +34,6 @@ const InputPhone: React.FC<InputPhoneProps> = ({
 			/>
 			<Input
 				type="tel"
-				noValidate
 				width={width}
 				testId={testId}
 				label={label}
