@@ -9,6 +9,7 @@ export type InputProps = {
 	label?: string;
 	touched?: boolean;
 	after?: any;
+	decimals?: number;
 	[key: string]: any;
 };
 export const Input: React.FC<InputProps> = ({
@@ -19,6 +20,7 @@ export const Input: React.FC<InputProps> = ({
 	touched = false,
 	className,
 	after: After,
+	decimals,
 	...rest
 }) => {
 	return (
@@ -27,6 +29,7 @@ export const Input: React.FC<InputProps> = ({
 				type={type}
 				data-testid={testId}
 				aria-label={label}
+				step={decimals ? Math.pow(10, -decimals) : null}
 				className={classNames([
 					styles.inputText,
 					className,
