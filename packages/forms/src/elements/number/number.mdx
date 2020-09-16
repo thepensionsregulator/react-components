@@ -86,13 +86,13 @@ import { Form, validate, renderFields } from '@tpr/forms';
 				placeholder: "e.g. 456.77",
 				cfg: { my: 5 },
 				after: "mi",
-				decimals: 2,
+				decimalPlaces: 2,
 				validate: (value) => {
 					if (!value) {
 						return 'value not valid or empty';
 					}
 					if (value <= 0 || value > 100000) {
-						return 'value must be between 0 and 100000 and accepts 2 decimals';
+						return 'value must be between 0 and 100000 and accepts 2 decimal places';
 					}
 					return undefined;
 				},
@@ -123,13 +123,13 @@ Accepted config props: FlexProps, SpaceProps
 
 ### Props
 
-| Property | Required | Type     | Description                                          |
-| -------- | -------- | -------- | ---------------------------------------------------- |
-| cfg      | false    | object   | FlexProps & SpaceProps                               |
-| disabled | false    | boolean  | Disable checkbox                                     |
-| testId   | false    | string   | data attribute for testers                           |
-| label    | true     | string   | Checkbox description                                 |
-| hint     | false    | string   | More detailed description about the checkbox         |
-| callback | false    | function | callback function to be executed after onChange      |
-| after    | false    | string   | emulates text passed to ::after pseudo-selector      |
-| decimals | false    | number   | the number of decimals used for formatting the value |
+| Property      | Required | Type     | Description                                                |
+| ------------- | -------- | -------- | ---------------------------------------------------------- |
+| cfg           | false    | object   | FlexProps & SpaceProps                                     |
+| disabled      | false    | boolean  | Disable checkbox                                           |
+| testId        | false    | string   | data attribute for testers                                 |
+| label         | true     | string   | Checkbox description                                       |
+| hint          | false    | string   | More detailed description about the checkbox               |
+| callback      | false    | function | callback function to be executed after onChange            |
+| after         | false    | string   | emulates text passed to ::after pseudo-selector            |
+| decimalPlaces | false    | number   | the number of decimal places used for formatting the value |

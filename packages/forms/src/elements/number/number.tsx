@@ -8,7 +8,7 @@ import { parseToDecimals, handleBlur } from '../helpers';
 interface InputNumberProps extends FieldRenderProps<number>, FieldExtraProps {
 	after?: any;
 	callback?: (e: any) => void;
-	decimals?: number;
+	decimalPlaces?: number;
 }
 
 const InputNumber: React.FC<InputNumberProps> = ({
@@ -23,7 +23,7 @@ const InputNumber: React.FC<InputNumberProps> = ({
 	cfg,
 	after,
 	callback,
-	decimals,
+	decimalPlaces,
 	...props
 }) => {
 	return (
@@ -44,13 +44,14 @@ const InputNumber: React.FC<InputNumberProps> = ({
 				label={label}
 				touched={meta && meta.touched && meta.error}
 				placeholder={placeholder}
-				decimals={decimals}
+				decimalPlaces={decimalPlaces}
 				{...input}
 				onKeyDown={(e) => e.key.toLowerCase() === 'e' && e.preventDefault()}
 				onChange={(evt: ChangeEvent<HTMLInputElement>) => {
-					decimals
+					decimalPlaces
 						? input.onChange(
-								evt.target.value && parseToDecimals(evt.target.value, decimals),
+								evt.target.value &&
+									parseToDecimals(evt.target.value, decimalPlaces),
 						  )
 						: input.onChange(
 								evt.target.value && parseInt(evt.target.value, 10),
@@ -60,7 +61,7 @@ const InputNumber: React.FC<InputNumberProps> = ({
 				onBlur={(e: any) => {
 					input.onBlur(e); // without this call, validate won't be executed even if specified
 					e.target.value = e.target.value
-						? handleBlur(e.target.value, decimals)
+						? handleBlur(e.target.value, decimalPlaces)
 						: null;
 				}}
 				after={after}
