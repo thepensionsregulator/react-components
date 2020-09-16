@@ -19,6 +19,7 @@ const getFields = (
 		inputWidth: 2,
 		error: fields.telephone.error,
 		cfg: { mb: 3 },
+		required: true,
 	},
 	{
 		type: 'email',
@@ -26,6 +27,7 @@ const getFields = (
 		label: fields.email.label,
 		inputWidth: 6,
 		error: fields.email.error,
+		required: true,
 	},
 ];
 
