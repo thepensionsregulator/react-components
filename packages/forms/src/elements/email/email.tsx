@@ -37,6 +37,7 @@ const InputEmail: React.FC<InputEmailProps> = ({
 				width={width}
 				testId={testId}
 				label={label}
+				required={required}
 				placeholder={placeholder}
 				touched={meta && meta.touched && meta.error}
 				{...input}
@@ -51,7 +52,6 @@ export const FFInputEmail: React.FC<FieldProps & FieldExtraProps> = (
 	return (
 		<Field
 			{...fieldProps}
-			required={typeof fieldProps.validate === 'function' || fieldProps.error}
 			validate={composeValidators(
 				executeClientValidation(fieldProps.validate),
 				isEmailValid('Invalid email address'),
