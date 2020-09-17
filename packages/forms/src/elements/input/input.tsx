@@ -1,7 +1,6 @@
 import React from 'react';
 import { classNames, Flex, LayoutProps } from '@tpr/core';
 import styles from './input.module.scss';
-
 export type InputProps = {
 	type: string;
 	width?: LayoutProps['width'];
@@ -9,6 +8,7 @@ export type InputProps = {
 	label?: string;
 	touched?: boolean;
 	after?: any;
+	decimalPlaces?: number;
 	[key: string]: any;
 };
 export const Input: React.FC<InputProps> = ({
@@ -19,6 +19,7 @@ export const Input: React.FC<InputProps> = ({
 	touched = false,
 	className,
 	after: After,
+	decimalPlaces,
 	...rest
 }) => {
 	return (
@@ -27,6 +28,13 @@ export const Input: React.FC<InputProps> = ({
 				type={type}
 				data-testid={testId}
 				aria-label={label}
+				step={
+					type !== 'number'
+						? null
+						: decimalPlaces
+						? Math.pow(10, -decimalPlaces)
+						: 1
+				}
 				className={classNames([
 					styles.inputText,
 					className,
