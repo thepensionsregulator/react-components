@@ -55,8 +55,9 @@ const Name: React.FC = () => {
 
 	return (
 		<NameForm
-			type={cardType.inHouseAdmin}
-			typeName={cardTypeName.inHouseAdmin}
+			type={cardType.trustee}
+			typeName={cardTypeName.trustee}
+			title={i18n.name.title}
 			onSubmit={onSubmit}
 			fields={fields}
 			initialValues={{

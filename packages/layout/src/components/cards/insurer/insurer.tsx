@@ -64,7 +64,7 @@ export const InsurerCard: React.FC<InsurerProviderProps> = ({
 				return (
 					<Flex cfg={cfg} data-testid={testId} className={styles.card}>
 						<Toolbar
-							complete={context.complete}
+							complete={context.preValidatedData ? true : context.complete}
 							subtitle={() => <H4>{context.insurer.organisationName}</H4>}
 							buttonLeft={() => (
 								<UnderlinedButton>{i18n.preview.buttons.one}</UnderlinedButton>

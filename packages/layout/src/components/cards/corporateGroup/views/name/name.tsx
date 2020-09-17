@@ -57,7 +57,8 @@ export const NameScreen: React.FC = () => {
 	return (
 		<NameForm
 			type={cardType.corporateGroup}
-			typeName={cardTypeName.corporateGroup}
+			typeName={cardTypeName.trustee}
+			title={i18n.name.title}
 			onSubmit={onSubmit}
 			fields={fields}
 			initialValues={{

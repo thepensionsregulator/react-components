@@ -54,6 +54,7 @@ export const CorporateGroupContext = createContext<CorporateGroupContextProps>({
 
 export const CorporateGroupProvider = ({
 	complete,
+	preValidatedData,
 	corporateGroup,
 	children,
 	i18n: i18nOverrides = {},
@@ -63,6 +64,7 @@ export const CorporateGroupProvider = ({
 	const [current, send] = useMachine(corporateGroupMachine, {
 		context: {
 			complete,
+			preValidatedData,
 			corporateGroup,
 		},
 	});

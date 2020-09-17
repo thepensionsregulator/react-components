@@ -7,11 +7,15 @@ import styles from './preview.module.scss';
 
 export const Preview: React.FC<any> = () => {
 	const { current, send, onCorrect, i18n } = useInsurerContext();
-	const { insurer, complete } = current.context;
+	const { insurer, complete, preValidatedData } = current.context;
 
 	return (
 		<div
-			className={classNames([{ [styles.complete]: complete }, styles.content])}
+			className={
+				preValidatedData
+					? classNames([styles.content, styles.complete])
+					: classNames([{ [styles.complete]: complete }, styles.content])
+			}
 		>
 			<Flex>
 				{/* Address block: display only	 */}

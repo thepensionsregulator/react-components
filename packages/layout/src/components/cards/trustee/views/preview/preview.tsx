@@ -8,11 +8,15 @@ import styles from './preview.module.scss';
 
 export const Preview: React.FC = () => {
 	const { current, send, onCorrect, i18n } = useTrusteeContext();
-	const { trustee, complete } = current.context;
+	const { trustee, complete, preValidatedData } = current.context;
 
 	return (
 		<div
-			className={classNames([{ [styles.complete]: complete }, styles.content])}
+			className={
+				preValidatedData
+					? classNames([styles.content, styles.complete])
+					: classNames([{ [styles.complete]: complete }, styles.content])
+			}
 		>
 			<P cfg={{ mb: 4 }}>{capitalize(trustee.trusteeType)} trustee</P>
 			<Flex>

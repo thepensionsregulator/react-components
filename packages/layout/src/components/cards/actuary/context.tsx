@@ -49,6 +49,7 @@ export interface ActuaryProviderProps extends CardProviderProps {
 
 export const ActuaryProvider = ({
 	complete,
+	preValidatedData,
 	actuary,
 	children,
 	i18n: i18nOverrides = {},
@@ -58,6 +59,7 @@ export const ActuaryProvider = ({
 	const [current, send] = useMachine(actuaryMachine, {
 		context: {
 			complete,
+			preValidatedData,
 			actuary,
 		},
 	});
