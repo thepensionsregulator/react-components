@@ -58,6 +58,7 @@ export const NameScreen: React.FC = () => {
 		<NameForm
 			type={cardType.inHouseAdmin}
 			typeName={cardTypeName.inHouseAdmin}
+			title={i18n.name.title}
 			onSubmit={onSubmit}
 			fields={fields}
 			initialValues={{

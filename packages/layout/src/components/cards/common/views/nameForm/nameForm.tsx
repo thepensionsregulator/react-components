@@ -8,6 +8,7 @@ import { cardType, cardTypeName } from '../../interfaces';
 interface NameFormProps {
 	type: cardType;
 	typeName: cardTypeName | string;
+	title: string;
 	onSubmit: (any) => void;
 	fields: FieldProps[];
 	initialValues: {
@@ -22,6 +23,7 @@ interface NameFormProps {
 const NameForm: React.FC<NameFormProps> = ({
 	type,
 	typeName,
+	title,
 	onSubmit,
 	fields,
 	initialValues,
@@ -29,7 +31,7 @@ const NameForm: React.FC<NameFormProps> = ({
 	nextStep,
 }) => {
 	return (
-		<Content type={type} typeName={typeName} title={`Name of the ${typeName}`}>
+		<Content type={type} typeName={typeName} title={title} loading={loading}>
 			<Form
 				onSubmit={onSubmit}
 				validate={validate(fields)}
