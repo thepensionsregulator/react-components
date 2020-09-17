@@ -49,7 +49,7 @@ import { FFInputNumber } from '@tpr/forms';
 				<FFInputNumber
 					name="number_of_participants"
 					label="Number of participants"
-					hint="How many people are entering this event"
+					hint="people attending this event, maximum of 20"
 					validate={(value) => {
 						if (value < 1 || value > 20 || !value || value === 0) {
 							return 'Must be between 1 and 20';
@@ -58,7 +58,6 @@ import { FFInputNumber } from '@tpr/forms';
 					}}
 					inputWidth={5}
 					cfg={{ my: 5 }}
-					after="cm"
 					callback={(e) => console.log(e.target.value)}
 				/>
 				<button type="submit" style={{ display: 'none' }} children="Submit" />
@@ -79,12 +78,24 @@ import { Form, validate, renderFields } from '@tpr/forms';
 		const fields = [
 			{
 				type: 'number',
-				name: 'number_of_participants',
-				label: 'Number of participants',
-				hint: 'must be between 1 and 20',
+				name: 'cities_distance',
+				label: 'Distance between the 2 cities',
+				hint: 'must be expressed in miles',
 				error: 'Cannot be empty',
 				inputWidth: 5,
+				placeholder: "e.g. 456.77",
 				cfg: { my: 5 },
+				after: "mi",
+				decimalPlaces: 2,
+				validate: (value) => {
+					if (!value) {
+						return 'value not valid or empty';
+					}
+					if (value <= 0 || value > 100000) {
+						return 'value must be between 0 and 100000 and accepts 2 decimal places';
+					}
+					return undefined;
+				},
 			},
 		];
 		return (
@@ -112,10 +123,13 @@ Accepted config props: FlexProps, SpaceProps
 
 ### Props
 
-| Property | Required | Type    | Description                                  |
-| -------- | -------- | ------- | -------------------------------------------- |
-| cfg      | false    | object  | FlexProps & SpaceProps                       |
-| disabled | false    | boolean | Disable checkbox                             |
-| testId   | false    | string  | data attribute for testers                   |
-| label    | true     | string  | Checkbox description                         |
-| hint     | false    | string  | More detailed description about the checkbox |
+| Property      | Required | Type     | Description                                                |
+| ------------- | -------- | -------- | ---------------------------------------------------------- |
+| cfg           | false    | object   | FlexProps & SpaceProps                                     |
+| disabled      | false    | boolean  | Disable checkbox                                           |
+| testId        | false    | string   | data attribute for testers                                 |
+| label         | true     | string   | Checkbox description                                       |
+| hint          | false    | string   | More detailed description about the checkbox               |
+| callback      | false    | function | callback function to be executed after onChange            |
+| after         | false    | string   | emulates text passed to ::after pseudo-selector            |
+| decimalPlaces | false    | number   | the number of decimal places used for formatting the value |
