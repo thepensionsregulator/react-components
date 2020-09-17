@@ -33,6 +33,7 @@ export interface InsurerContext {
 	complete: boolean;
 	remove: { confirm: boolean; date: string } | null;
 	insurer: Partial<Insurer>;
+	preValidatedData?: boolean | null;
 }
 
 const insurerMachine = Machine<InsurerContext, InsurerStates, InsurerEvents>({

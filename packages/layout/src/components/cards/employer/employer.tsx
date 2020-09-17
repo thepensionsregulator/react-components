@@ -98,7 +98,7 @@ export const EmployerCard: React.FC<EmployerProviderProps> = ({
 				return (
 					<Flex cfg={cfg} data-testid={testId} className={styles.card}>
 						<Toolbar
-							complete={context.complete}
+							complete={context.preValidatedData ? true : context.complete}
 							subtitle={() => <EmployerSubtitle {...context.employer} />}
 							buttonLeft={() => (
 								<ToolbarButton title={i18n.preview.buttons.one} />

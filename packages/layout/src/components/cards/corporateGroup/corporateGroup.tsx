@@ -76,7 +76,7 @@ export const CorporateGroupCard: React.FC<CorporateGroupProviderProps> = ({
 				return (
 					<Flex cfg={cfg} data-testid={testId} className={styles.card}>
 						<Toolbar
-							complete={context.complete}
+							complete={context.preValidatedData ? true : context.complete}
 							subtitle={() => (
 								<>
 									<H4 cfg={{ lineHeight: 3 }}>

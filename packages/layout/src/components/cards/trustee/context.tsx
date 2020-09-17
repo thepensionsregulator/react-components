@@ -48,6 +48,7 @@ export interface Trustee
 
 export interface TrusteeContextProps {
 	complete?: boolean;
+	preValidatedData?: boolean;
 	testId?: string | number;
 	children?: RenderProps | ReactElement;
 	cfg?: SpaceProps;
@@ -62,6 +63,7 @@ export interface TrusteeContextProps {
 export interface TrusteeCardProps {
 	trustee: Trustee;
 	complete?: boolean;
+	preValidatedData?: boolean;
 	i18n?: RecursivePartial<TrusteeI18nProps>;
 	onCorrect: (...args: any[]) => void;
 	onRemove: (...args: any[]) => Promise<any>;
@@ -77,6 +79,7 @@ export interface TrusteeCardProps {
 
 export const TrusteeProvider = ({
 	trustee,
+	preValidatedData,
 	complete,
 	children,
 	onDetailsSave,
@@ -94,6 +97,7 @@ export const TrusteeProvider = ({
 	const [current, send] = useMachine(trusteeMachine, {
 		context: {
 			complete,
+			preValidatedData,
 			trustee: {
 				...modifiedTrustee,
 				address: trusteeAddress,

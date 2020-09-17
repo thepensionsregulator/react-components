@@ -72,6 +72,7 @@ export interface TrusteeProps extends CardPersonalDetails, CardContactDetails {
 export interface TrusteeContext {
 	loading: boolean;
 	complete: boolean;
+	preValidatedData?: boolean | null;
 	trustee: TrusteeProps;
 	remove?: {
 		reason: null | string;

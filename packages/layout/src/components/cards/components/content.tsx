@@ -8,7 +8,7 @@ export const Loading = () => <div className={styles.loading} />;
 
 type ContentProps = {
 	type: cardType;
-	typeName?: cardTypeName;
+	typeName?: cardTypeName | string;
 	title?: string;
 	loading?: boolean;
 	breadcrumbs?: any;

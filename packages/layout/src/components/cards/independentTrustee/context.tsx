@@ -49,6 +49,7 @@ export const IndependentTrusteeContext = createContext<
 
 export const IndependentTrusteeProvider = ({
 	complete,
+	preValidatedData,
 	independentTrustee,
 	children,
 	i18n: i18nOverrides = {},
@@ -58,6 +59,7 @@ export const IndependentTrusteeProvider = ({
 	const [current, send] = useMachine(independentTrusteeMachine, {
 		context: {
 			complete,
+			preValidatedData,
 			independentTrustee,
 		},
 	});

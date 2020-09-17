@@ -49,8 +49,6 @@ export const Toolbar: React.FC<ToolbarProps> = ({
 					pl: 4,
 				}}
 			>
-				{/* This code will be used in case that the showing the "Error" is not needed, replacing the code below */}
-				{/* {complete && <StatusMessage complete={complete} icon={CheckedCircle} />} */}
 				{complete ? (
 					<StatusMessage complete={complete} icon={CheckedCircle} />
 				) : (

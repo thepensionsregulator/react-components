@@ -38,6 +38,7 @@ export interface CorporateGroupContext {
 	complete: boolean;
 	remove?: RemoveReasonProps;
 	corporateGroup: Partial<CorporateGroup>;
+	preValidatedData?: boolean | null;
 }
 
 const corporateGroupMachine = Machine<
