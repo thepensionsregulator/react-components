@@ -1,4 +1,4 @@
-import { SpaceProps } from '@tpr/core';
+import { SpaceProps } from '../../components/globals/globals';
 
 export const addressFields = [
 	'addressLine1',
