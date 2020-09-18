@@ -1,15 +1,21 @@
-import { ReactElement } from "react";
-import { ActuaryContextProps } from "../context";
-import { ActuaryI18nProps } from "../i18n";
-import { CardAddress, CardContactDetails, CardDefaultProps, CardPersonalDetails, CardProviderProps, RecursivePartial } from "../interfaces";
-
+import { ReactElement } from 'react';
+import { ActuaryContextProps } from '../context';
+import { ActuaryI18nProps } from '../i18n';
+import {
+	CardAddress,
+	CardContactDetails,
+	CardDefaultProps,
+	CardPersonalDetails,
+	CardProviderProps,
+	RecursivePartial,
+} from '../interfaces';
 
 export interface Actuary
-extends CardDefaultProps,
-  CardPersonalDetails,
-  CardContactDetails {
-organisationName: string;
-address: Partial<CardAddress>;
+	extends CardDefaultProps,
+		CardPersonalDetails,
+		CardContactDetails {
+	organisationName: string;
+	address: Partial<CardAddress>;
 }
 
 export type ActuaryRenderProps = (_props: ActuaryContextProps) => ReactElement;

@@ -1,5 +1,5 @@
-import { EventData, State } from "xstate";
-import { Actuary, ActuaryProviderProps } from "../providers";
+import { EventData, State } from 'xstate';
+import { Actuary, ActuaryProviderProps } from '../providers';
 import { ActuaryContext as AC } from '../context';
 
 export interface ActuaryContext {

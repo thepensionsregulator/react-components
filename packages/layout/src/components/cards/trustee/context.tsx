@@ -7,7 +7,7 @@ import { splitObjectIntoTwo } from '../../../utils';
 import {
 	addressFields,
 	TrusteeContextProps,
-	TrusteeCardProps
+	TrusteeCardProps,
 } from '@tpr/core';
 
 export const TrusteeContext = createContext<TrusteeContextProps>({
@@ -24,7 +24,6 @@ export const TrusteeContext = createContext<TrusteeContextProps>({
 		limit: 50,
 	},
 });
-
 
 export const TrusteeProvider = ({
 	trustee,

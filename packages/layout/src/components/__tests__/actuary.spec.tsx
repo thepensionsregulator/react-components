@@ -1,7 +1,7 @@
 import React from 'react';
 import { render } from '@testing-library/react';
 import { ActuaryCard } from '../cards/actuary/actuary';
-import { Actuary } from '../cards/actuary/context';
+import { Actuary } from '@tpr/core';
 import { axe } from 'jest-axe';
 import { act } from 'react-dom/test-utils';
 import { cleanup } from '@testing-library/react-hooks';

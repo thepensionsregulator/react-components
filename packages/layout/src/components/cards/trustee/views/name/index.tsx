@@ -5,7 +5,7 @@ import {
 	RecursivePartial,
 	cardType,
 	cardTypeName,
-	TrusteeI18nProps
+	TrusteeI18nProps,
 } from '@tpr/core';
 import NameForm from '../../../common/views/nameForm/nameForm';
 

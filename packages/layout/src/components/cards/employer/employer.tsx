@@ -7,14 +7,8 @@ import { RemoveDateForm } from './views/remove/date/date';
 import { EmployerType } from './views/type/type';
 import { ConfirmRemove } from './views/remove/confirm/confirm';
 import { capitalize } from '../../../utils';
-import {
-	EmployerProvider,
-	useEmployerContext
-} from './context';
-import {
-	EmployerProviderProps,
-	Employer
-} from '@tpr/core';
+import { EmployerProvider, useEmployerContext } from './context';
+import { EmployerProviderProps, Employer } from '@tpr/core';
 import styles from '../cards.module.scss';
 
 const CardContentSwitch: React.FC = () => {

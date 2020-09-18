@@ -1,15 +1,20 @@
-import { SpaceProps } from "../../../components/globals/globals";
-import { ReactElement } from "react";
-import { TrusteeContextProps } from "../context/trustee";
-import { TrusteeI18nProps } from "../i18n/trustee";
-import { AddressAPIType, CardAddress, CardContactDetails, CardDefaultProps, CardPersonalDetails, RecursivePartial } from "../interfaces";
+import { SpaceProps } from '../../../components/globals/globals';
+import { ReactElement } from 'react';
+import { TrusteeContextProps } from '../context/trustee';
+import { TrusteeI18nProps } from '../i18n/trustee';
+import {
+	AddressAPIType,
+	CardAddress,
+	CardContactDetails,
+	CardDefaultProps,
+	CardPersonalDetails,
+	RecursivePartial,
+} from '../interfaces';
 
-
-export interface Trustee
-extends Omit<TrusteeProps, 'address'>, CardAddress {
-trusteeType: string;
-isProfessionalTrustee: boolean;
-[key: string]: any;
+export interface Trustee extends Omit<TrusteeProps, 'address'>, CardAddress {
+	trusteeType: string;
+	isProfessionalTrustee: boolean;
+	[key: string]: any;
 }
 
 export type TrusteeRenderProps = (_: TrusteeContextProps) => ReactElement;
@@ -31,14 +36,14 @@ export interface TrusteeCardProps {
 	cfg?: SpaceProps;
 }
 
-export interface TrusteeProps 
-extends CardDefaultProps,
-  CardPersonalDetails,
-  CardContactDetails {
-trusteeType: string;
-isProfessionalTrustee: boolean;
-//
-address: Partial<CardAddress>;
-//
-[key: string]: any;
+export interface TrusteeProps
+	extends CardDefaultProps,
+		CardPersonalDetails,
+		CardContactDetails {
+	trusteeType: string;
+	isProfessionalTrustee: boolean;
+	//
+	address: Partial<CardAddress>;
+	//
+	[key: string]: any;
 }

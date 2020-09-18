@@ -3,10 +3,7 @@ import { useMachine } from '@xstate/react';
 import employerMachine from './employerMachine';
 import { i18n as i18nDefaults } from './i18n';
 import { useI18n } from '../hooks/use-i18n';
-import {
-	EmployerProviderProps,
-	EmployerContextProps
-} from '@tpr/core';
+import { EmployerProviderProps, EmployerContextProps } from '@tpr/core';
 
 export const EmployerContext = createContext<EmployerContextProps>({
 	current: {},

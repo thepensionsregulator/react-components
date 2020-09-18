@@ -5,7 +5,7 @@ import {
 	cardType,
 	cardTypeName,
 	RecursivePartial,
-	TrusteeI18nProps
+	TrusteeI18nProps,
 } from '@tpr/core';
 import ContactDetails from '../../../common/views/contactDetails/contactDetails';
 

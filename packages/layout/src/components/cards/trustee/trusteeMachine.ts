@@ -1,5 +1,5 @@
 import { Machine, assign } from 'xstate';
-import { CardAddress,	TrusteeContext } from '@tpr/core';
+import { CardAddress, TrusteeContext } from '@tpr/core';
 
 interface TrusteeStates {
 	states: {
@@ -53,7 +53,6 @@ type TrusteeEvents =
 				date: null | string;
 			};
 	  };
-
 
 const trusteeMachine = Machine<TrusteeContext, TrusteeStates, TrusteeEvents>({
 	id: 'trustee',

@@ -1,8 +1,5 @@
 import React from 'react';
-import {
-	ActuaryProvider,
-	useActuaryContext,
-} from './context';
+import { ActuaryProvider, useActuaryContext } from './context';
 import { Flex, H4, ActuaryProviderProps, cardTypeName } from '@tpr/core';
 import { Toolbar } from '../components/toolbar';
 import { UnderlinedButton } from '../components/button';

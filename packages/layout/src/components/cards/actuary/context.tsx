@@ -3,10 +3,7 @@ import { useMachine } from '@xstate/react';
 import actuaryMachine from './actuaryMachine';
 import { i18n as i18nDefaults } from './i18n';
 import { useI18n } from '../hooks/use-i18n';
-import {
-	ActuaryContextProps,
-	ActuaryProviderProps
-} from '@tpr/core';
+import { ActuaryContextProps, ActuaryProviderProps } from '@tpr/core';
 
 export const ActuaryContext = createContext<ActuaryContextProps>({
 	current: {},

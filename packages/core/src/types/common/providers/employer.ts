@@ -22,7 +22,9 @@ export interface Employer extends CardDefaultProps {
 	address: Partial<CardAddress>;
 }
 
-export type EmployerRenderProps = (_: EmployerContextProps) => React.ReactElement;
+export type EmployerRenderProps = (
+	_: EmployerContextProps,
+) => React.ReactElement;
 
 export interface EmployerProviderProps extends CardProviderProps {
 	onSaveType?: (...args: any[]) => Promise<any>;

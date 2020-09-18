@@ -2,7 +2,7 @@ import React from 'react';
 import { render, waitFor } from '@testing-library/react';
 import { TrusteeCard } from '../cards/trustee/trustee';
 import { axe } from 'jest-axe';
-import { Trustee } from '../cards/trustee/context';
+import { Trustee } from '@tpr/core';
 
 // TODO: write more tests
 

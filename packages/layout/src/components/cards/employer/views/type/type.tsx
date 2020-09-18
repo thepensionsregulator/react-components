@@ -1,6 +1,13 @@
 import React, { useState } from 'react';
 import { Form, renderFields, validate, FieldProps } from '@tpr/forms';
-import { Flex, Link, B, cardType, RecursivePartial, EmployerI18nProps } from '@tpr/core';
+import {
+	Flex,
+	Link,
+	B,
+	cardType,
+	RecursivePartial,
+	EmployerI18nProps,
+} from '@tpr/core';
 import { Content } from '../../../components/content';
 import { Footer } from '../../../components/card';
 import { useEmployerContext } from '../../context';

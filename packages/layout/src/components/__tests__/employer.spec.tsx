@@ -3,7 +3,7 @@ import { render } from '@testing-library/react';
 import { EmployerCard } from '../cards/employer/employer';
 import { axe } from 'jest-axe';
 import userEvent from '@testing-library/user-event';
-import { Employer } from '../cards/employer/context';
+import { Employer } from '@tpr/core';
 
 // TODO: write more tests
 
