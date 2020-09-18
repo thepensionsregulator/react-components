@@ -1,12 +1,12 @@
 import React from 'react';
 import { FieldProps } from '@tpr/forms';
 import { useTrusteeContext } from '../../context';
-import { TrusteeI18nProps } from '../../i18n';
 import {
 	cardType,
 	cardTypeName,
 	RecursivePartial,
-} from '../../../common/interfaces';
+	TrusteeI18nProps
+} from '@tpr/core';
 import ContactDetails from '../../../common/views/contactDetails/contactDetails';
 
 const getFields = (

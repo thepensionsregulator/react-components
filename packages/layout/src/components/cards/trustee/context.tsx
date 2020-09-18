@@ -1,23 +1,14 @@
-import React, { createContext, useContext, ReactElement } from 'react';
+import React, { createContext, useContext } from 'react';
 import { useMachine } from '@xstate/react';
-import trusteeMachine, {
-	TrusteeContext as TC,
-	TrusteeProps,
-} from './trusteeMachine';
-import { State, EventData } from 'xstate';
-import { SpaceProps } from '@tpr/core';
-import { i18n as i18nDefaults, TrusteeI18nProps } from './i18n';
+import trusteeMachine from './trusteeMachine';
+import { i18n as i18nDefaults } from './i18n';
 import { useI18n } from '../hooks/use-i18n';
 import { splitObjectIntoTwo } from '../../../utils';
 import {
-	RecursivePartial,
 	addressFields,
-	AddressAPIType,
-	CardDefaultProps,
-	CardPersonalDetails,
-	CardContactDetails,
-	CardAddress,
-} from '../common/interfaces';
+	TrusteeContextProps,
+	TrusteeCardProps
+} from '@tpr/core';
 
 export const TrusteeContext = createContext<TrusteeContextProps>({
 	complete: false,
@@ -34,48 +25,6 @@ export const TrusteeContext = createContext<TrusteeContextProps>({
 	},
 });
 
-type RenderProps = (_: TrusteeContextProps) => ReactElement;
-
-export interface Trustee
-	extends CardDefaultProps,
-		CardPersonalDetails,
-		CardContactDetails,
-		CardAddress {
-	trusteeType: string;
-	isProfessionalTrustee: boolean;
-	[key: string]: any;
-}
-
-export interface TrusteeContextProps {
-	complete?: boolean;
-	preValidatedData?: boolean;
-	testId?: string | number;
-	children?: RenderProps | ReactElement;
-	cfg?: SpaceProps;
-	i18n: RecursivePartial<TrusteeI18nProps>;
-	onRemove: (...args: any[]) => Promise<any>;
-	onCorrect: (...args: any[]) => void;
-	send: (event: any, payload?: EventData) => Partial<State<TC, any, any, any>>;
-	addressAPI: AddressAPIType;
-	current: Partial<State<TC, any, any, any>>;
-}
-
-export interface TrusteeCardProps {
-	trustee: Trustee;
-	complete?: boolean;
-	preValidatedData?: boolean;
-	i18n?: RecursivePartial<TrusteeI18nProps>;
-	onCorrect: (...args: any[]) => void;
-	onRemove: (...args: any[]) => Promise<any>;
-	onDetailsSave: (values: any, trustee: TrusteeProps) => Promise<any>;
-	onContactSave: (values: any, trustee: TrusteeProps) => Promise<any>;
-	onAddressSave: (values: any, trustee: TrusteeProps) => Promise<any>;
-	addressAPI: AddressAPIType;
-	/** depending on your network lib, provide a path to the addressAPI results array */
-	testId?: string | number;
-	children?: RenderProps | ReactElement;
-	cfg?: SpaceProps;
-}
 
 export const TrusteeProvider = ({
 	trustee,

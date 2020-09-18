@@ -12,7 +12,7 @@ isProfessionalTrustee: boolean;
 [key: string]: any;
 }
 
-export type RenderProps = (_: TrusteeContextProps) => ReactElement;
+export type TrusteeRenderProps = (_: TrusteeContextProps) => ReactElement;
 
 export interface TrusteeCardProps {
 	trustee: Trustee;
@@ -27,15 +27,14 @@ export interface TrusteeCardProps {
 	addressAPI: AddressAPIType;
 	/** depending on your network lib, provide a path to the addressAPI results array */
 	testId?: string | number;
-	children?: RenderProps | ReactElement;
+	children?: TrusteeRenderProps | ReactElement;
 	cfg?: SpaceProps;
 }
 
 export interface TrusteeProps 
 extends CardDefaultProps,
   CardPersonalDetails,
-  CardContactDetails,
-  CardAddress {
+  CardContactDetails {
 trusteeType: string;
 isProfessionalTrustee: boolean;
 //

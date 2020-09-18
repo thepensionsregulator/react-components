@@ -1,5 +1,5 @@
 import { Machine, assign } from 'xstate';
-import { Employer } from './context';
+import { Employer } from '@tpr/core';
 
 interface EmployerStates {
 	states: {

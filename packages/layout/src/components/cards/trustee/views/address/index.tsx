@@ -1,12 +1,11 @@
 import React from 'react';
-import { Flex } from '@tpr/core';
+import { Flex, cardType } from '@tpr/core';
 import { useTrusteeContext } from '../../context';
 import { Content } from '../../../components/content';
 import useSetState from '../../../hooks/use-set-state';
 import AutoComplete from './AutoComplete';
 import ManualComplete from './ManualComplete';
 import Postcode from '../../../common/views/address/Postcode';
-import { cardType } from '../../../common/interfaces';
 
 const AddressPage: React.FC = () => {
 	const { current, i18n, addressAPI } = useTrusteeContext();

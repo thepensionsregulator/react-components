@@ -1,9 +1,5 @@
 import { Machine, assign } from 'xstate';
-import {
-	CardAddress,
-	CardPersonalDetails,
-	CardContactDetails,
-} from '../common/interfaces';
+import { CardAddress,	TrusteeContext } from '@tpr/core';
 
 interface TrusteeStates {
 	states: {
@@ -58,27 +54,6 @@ type TrusteeEvents =
 			};
 	  };
 
-export interface TrusteeProps extends CardPersonalDetails, CardContactDetails {
-	schemeRoleId: string;
-	//
-	trusteeType: string;
-	isProfessionalTrustee: boolean;
-	//
-	address: Partial<CardAddress>;
-	//
-	[key: string]: any;
-}
-
-export interface TrusteeContext {
-	loading: boolean;
-	complete: boolean;
-	preValidatedData?: boolean | null;
-	trustee: TrusteeProps;
-	remove?: {
-		reason: null | string;
-		date: null | string;
-	};
-}
 
 const trusteeMachine = Machine<TrusteeContext, TrusteeStates, TrusteeEvents>({
 	id: 'trustee',
@@ -87,7 +62,9 @@ const trusteeMachine = Machine<TrusteeContext, TrusteeStates, TrusteeEvents>({
 		loading: false,
 		complete: false,
 		trustee: {
+			id: '',
 			schemeRoleId: '',
+			effectiveDate: '',
 			//
 			title: '',
 			firstname: '',

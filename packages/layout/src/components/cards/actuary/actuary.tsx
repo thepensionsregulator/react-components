@@ -1,10 +1,9 @@
 import React from 'react';
 import {
 	ActuaryProvider,
-	ActuaryProviderProps,
 	useActuaryContext,
 } from './context';
-import { Flex, H4 } from '@tpr/core';
+import { Flex, H4, ActuaryProviderProps, cardTypeName } from '@tpr/core';
 import { Toolbar } from '../components/toolbar';
 import { UnderlinedButton } from '../components/button';
 import { Preview } from './views/preview/preview';
@@ -13,7 +12,6 @@ import { RemoveDateForm } from './views/remove/date/date';
 import { ConfirmRemove } from './views/remove/confirm/confirm';
 import { NameScreen } from './views/name';
 import RemovedBox from '../components/removedBox';
-import { cardTypeName } from '../common/interfaces';
 import styles from '../cards.module.scss';
 
 const CardContentSwitch: React.FC = () => {

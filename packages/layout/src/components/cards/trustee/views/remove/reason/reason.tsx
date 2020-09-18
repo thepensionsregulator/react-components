@@ -3,7 +3,7 @@ import { useTrusteeContext } from '../../../context';
 import { FieldProps } from '@tpr/forms';
 import { isAfter, toDate, isBefore } from 'date-fns';
 import { FORM_ERROR } from 'final-form';
-import { cardType } from '../../../../common/interfaces';
+import { cardType } from '@tpr/core';
 import { Reason } from '../../../../common/views/remove/reason/reason';
 
 const RemoveReason: React.FC = () => {

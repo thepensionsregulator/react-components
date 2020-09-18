@@ -9,10 +9,12 @@ import { ConfirmRemove } from './views/remove/confirm/confirm';
 import { capitalize } from '../../../utils';
 import {
 	EmployerProvider,
-	useEmployerContext,
-	EmployerProviderProps,
-	Employer,
+	useEmployerContext
 } from './context';
+import {
+	EmployerProviderProps,
+	Employer
+} from '@tpr/core';
 import styles from '../cards.module.scss';
 
 const CardContentSwitch: React.FC = () => {

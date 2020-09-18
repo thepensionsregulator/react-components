@@ -1,6 +1,6 @@
 import React from 'react';
 import { useTrusteeContext } from '../../context';
-import { AutoCompleteProps } from '../../../common/interfaces';
+import { AutoCompleteProps } from '@tpr/core';
 import AutoCompleteForm from '../../../common/views/address/AutoCompleteForm';
 
 const AutoComplete: React.FC<AutoCompleteProps> = ({

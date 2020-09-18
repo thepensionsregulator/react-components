@@ -1,12 +1,11 @@
 import React from 'react';
-import { Flex, P } from '@tpr/core';
+import { Flex, P, cardType } from '@tpr/core';
 import { Form, FieldProps, renderFields } from '@tpr/forms';
 import { useTrusteeContext } from '../../context';
 import { Footer } from '../../../components/card';
 import { Content } from '../../../components/content';
 import { Breadcrumbs, BreadcrumbLink } from '../../../components/breadcrumbs';
 import { ArrowButton } from '../../../../buttons/buttons';
-import { cardType } from '../../../common/interfaces';
 
 const getDescriptionFields = ({ fields }: any): FieldProps[] => [
 	{

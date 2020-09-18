@@ -1,12 +1,12 @@
 import React, { useState } from 'react';
 import { FieldProps } from '@tpr/forms';
 import { useActuaryContext } from '../../context';
-import { ActuaryI18nProps } from '../../i18n';
 import {
 	cardType,
 	cardTypeName,
 	RecursivePartial,
-} from '../../../common/interfaces';
+	ActuaryI18nProps
+} from '@tpr/core';
 import ContactDetails from '../../../common/views/contactDetails/contactDetails';
 
 const getFields = (

@@ -1,12 +1,11 @@
 import React, { useState } from 'react';
 import { useEmployerContext } from '../../../context';
-import { EmployerI18nProps } from '../../../i18n';
 import {
 	Breadcrumbs,
 	BreadcrumbLink,
 } from '../../../../components/breadcrumbs';
 import Confirm from '../../../../common/views/remove/confirm/confirm';
-import { cardType, cardTypeName } from '../../../../common/interfaces';
+import { cardType, cardTypeName, EmployerI18nProps } from '@tpr/core';
 
 const getBreadcrumbLinks = (
 	labels: Partial<EmployerI18nProps['remove']['confirm']['breadcrumbs']>,

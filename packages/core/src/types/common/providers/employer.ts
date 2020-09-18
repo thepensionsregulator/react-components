@@ -22,13 +22,13 @@ export interface Employer extends CardDefaultProps {
 	address: Partial<CardAddress>;
 }
 
-type RenderProps = (_: EmployerContextProps) => React.ReactElement;
+export type EmployerRenderProps = (_: EmployerContextProps) => React.ReactElement;
 
 export interface EmployerProviderProps extends CardProviderProps {
 	onSaveType?: (...args: any[]) => Promise<any>;
 	/** employer props from the API */
 	employer: Partial<Employer>;
-	children?: RenderProps | ReactElement;
+	children?: EmployerRenderProps | ReactElement;
 	/** overwrite any text that you need */
 	i18n?: RecursivePartial<EmployerI18nProps>;
 }

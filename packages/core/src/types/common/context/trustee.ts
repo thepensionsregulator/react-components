@@ -3,7 +3,7 @@ import { EventData, State } from "xstate";
 import { SpaceProps } from "../../../components/globals/globals";
 import { TrusteeI18nProps } from "../i18n/trustee";
 import { AddressAPIType, RecursivePartial } from "../interfaces";
-import { RenderProps, TrusteeProps } from "../providers/trustee";
+import { TrusteeRenderProps, TrusteeProps } from "../providers/trustee";
 
 
 export interface TrusteeContext {
@@ -21,7 +21,7 @@ export interface TrusteeContextProps {
 	complete?: boolean;
 	preValidatedData?: boolean;
 	testId?: string | number;
-	children?: RenderProps | ReactElement;
+	children?: TrusteeRenderProps | ReactElement;
 	cfg?: SpaceProps;
 	i18n: RecursivePartial<TrusteeI18nProps>;
 	onRemove: (...args: any[]) => Promise<any>;

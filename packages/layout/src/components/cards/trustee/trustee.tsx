@@ -1,10 +1,9 @@
 import React from 'react';
 import {
 	TrusteeProvider,
-	useTrusteeContext,
-	TrusteeCardProps,
+	useTrusteeContext
 } from './context';
-import { H4, Flex } from '@tpr/core';
+import { H4, Flex, TrusteeCardProps } from '@tpr/core';
 import { UnderlinedButton } from '../components/button';
 import { Preview } from './views/preview';
 import { Toolbar } from '../components/toolbar';

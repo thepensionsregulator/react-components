@@ -1,12 +1,10 @@
 import React, { useState } from 'react';
 import { Form, renderFields, validate, FieldProps } from '@tpr/forms';
-import { Flex, Link, B } from '@tpr/core';
+import { Flex, Link, B, cardType, RecursivePartial, EmployerI18nProps } from '@tpr/core';
 import { Content } from '../../../components/content';
 import { Footer } from '../../../components/card';
 import { useEmployerContext } from '../../context';
 import { ArrowButton } from '../../../../buttons/buttons';
-import { EmployerI18nProps } from '../../i18n';
-import { cardType, RecursivePartial } from '../../../common/interfaces';
 
 const getTypeFields = (
 	labels: RecursivePartial<EmployerI18nProps['type']['fields']>,
