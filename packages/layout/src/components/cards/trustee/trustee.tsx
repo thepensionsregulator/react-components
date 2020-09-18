@@ -117,7 +117,9 @@ export const TrusteeCard: React.FC<Omit<TrusteeCardProps, 'children'>> = ({
 			{({ current }) => (
 				<Flex cfg={cfg} data-testid={props.testId} className={styles.card}>
 					<Toolbar
-						complete={current.context.complete}
+						complete={
+							current.context.preValidatedData ? true : current.context.complete
+						}
 						buttonLeft={() => <TrusteeButton />}
 						buttonRight={() => <RemoveButton />}
 						subtitle={() => (

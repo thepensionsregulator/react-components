@@ -67,6 +67,7 @@ export type RecursivePartial<T> = {
 
 export interface CardProviderProps {
 	complete?: boolean;
+	preValidatedData?: boolean;
 	onCorrect?: (...args: any[]) => void;
 	onRemove?: (...args: any[]) => Promise<any>;
 	onSaveAddress?: (...args: any[]) => Promise<any>;

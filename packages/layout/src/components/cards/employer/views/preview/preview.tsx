@@ -17,7 +17,7 @@ const IdentifiersItem: React.FC<IdentifiersItemProps> = ({ title, number }) => {
 
 export const Preview: React.FC<any> = () => {
 	const { current, send, onCorrect, i18n } = useEmployerContext();
-	const { employer, complete } = current.context;
+	const { employer, complete, preValidatedData } = current.context;
 	const [items] = useState(
 		[
 			{
@@ -37,7 +37,11 @@ export const Preview: React.FC<any> = () => {
 
 	return (
 		<div
-			className={classNames([{ [styles.complete]: complete }, styles.content])}
+			className={
+				preValidatedData
+					? classNames([styles.content, styles.complete])
+					: classNames([{ [styles.complete]: complete }, styles.content])
+			}
 		>
 			<Flex>
 				<Flex
