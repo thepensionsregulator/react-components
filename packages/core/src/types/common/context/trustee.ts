@@ -1,9 +1,9 @@
 import { ReactElement } from 'react';
 import { EventData, State } from 'xstate';
 import { SpaceProps } from '../../../components/globals/globals';
-import { TrusteeI18nProps } from '../i18n/trustee';
+import { TrusteeI18nProps } from '../i18n';
 import { AddressAPIType, RecursivePartial } from '../interfaces';
-import { TrusteeRenderProps, TrusteeProps } from '../providers/trustee';
+import { TrusteeRenderProps, TrusteeProps } from '../providers';
 
 export interface TrusteeContext {
 	loading: boolean;

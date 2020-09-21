@@ -6,8 +6,8 @@ export const addressFields = [
 	'addressLine3',
 	'postTown',
 	'county',
-	'country',
 	'postcode',
+	'country',
 	'countryId',
 ];
 

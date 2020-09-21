@@ -1,6 +1,5 @@
 import { Machine, assign } from 'xstate';
-import { CorporateGroup } from './context';
-import { RemoveReasonProps } from '../common/interfaces';
+import { RemoveReasonProps, CorporateGroupContext } from '@tpr/core';
 
 interface CorporateGroupStates {
 	states: {
@@ -33,13 +32,6 @@ type CorporateGroupEvents =
 	| { type: 'BACK' }
 	| { type: 'DELETE' }
 	| { type: 'SELECT'; values?: RemoveReasonProps };
-
-export interface CorporateGroupContext {
-	complete: boolean;
-	remove?: RemoveReasonProps;
-	corporateGroup: Partial<CorporateGroup>;
-	preValidatedData?: boolean | null;
-}
 
 const corporateGroupMachine = Machine<
 	CorporateGroupContext,

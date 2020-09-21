@@ -1,6 +1,5 @@
 import { EventData, State } from 'xstate';
 import { Actuary, ActuaryProviderProps } from '../providers';
-import { ActuaryContext as AC } from '../context';
 
 export interface ActuaryContext {
 	complete: boolean;
@@ -11,6 +10,9 @@ export interface ActuaryContext {
 
 export interface ActuaryContextProps
 	extends Omit<ActuaryProviderProps, 'actuary'> {
-	send: (event: any, payload?: EventData) => Partial<State<AC, any, any, any>>;
-	current: Partial<State<AC, any, any, any>>;
+	send: (
+		event: any,
+		payload?: EventData,
+	) => Partial<State<ActuaryContext, any, any, any>>;
+	current: Partial<State<ActuaryContext, any, any, any>>;
 }

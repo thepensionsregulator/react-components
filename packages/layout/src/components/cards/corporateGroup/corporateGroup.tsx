@@ -1,9 +1,5 @@
 import React from 'react';
-import {
-	CorporateGroupProvider,
-	CorporateGroupProviderProps,
-	useCorporateGroupContext,
-} from './context';
+import { CorporateGroupProvider, useCorporateGroupContext } from './context';
 import { Flex, H4, P } from '@tpr/core';
 import { Toolbar } from '../components/toolbar';
 import { UnderlinedButton } from '../components/button';
@@ -14,7 +10,7 @@ import { Contacts } from './views/contacts/contacts';
 import { Professional } from './views/professional/professional';
 import { ReasonRemove } from './views/remove/reason/reason';
 import { ConfirmRemove } from './views/remove/confirm/confirm';
-import { cardTypeName } from '../common/interfaces';
+import { cardTypeName, CorporateGroupProviderProps } from '@tpr/core';
 import styles from '../cards.module.scss';
 
 const CardContentSwitch: React.FC = () => {

@@ -1,12 +1,12 @@
 import React, { useState } from 'react';
 import { FieldProps } from '@tpr/forms';
 import { useCorporateGroupContext } from '../../context';
-import { CorporateGroupI18nProps } from '../../i18n';
 import {
 	RecursivePartial,
 	cardType,
 	cardTypeName,
-} from '../../../common/interfaces';
+	CorporateGroupI18nProps,
+} from '@tpr/core';
 import NameForm from '../../../common/views/nameForm/nameForm';
 
 const getFields = (

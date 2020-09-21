@@ -1,45 +1,12 @@
-import React, { createContext, ReactElement, useContext } from 'react';
+import React, { createContext, useContext } from 'react';
 import { useMachine } from '@xstate/react';
-import { State, EventData } from 'xstate';
-import corporateGroupMachine, {
-	CorporateGroupContext as CGC,
-} from './corporateGroupMachine';
-import { i18n as i18nDefaults, CorporateGroupI18nProps } from './i18n';
+import corporateGroupMachine from './corporateGroupMachine';
+import { i18n as i18nDefaults } from './i18n';
 import { useI18n } from '../hooks/use-i18n';
 import {
-	CardDefaultProps,
-	CardPersonalDetails,
-	CardContactDetails,
-	CardAddress,
-	RecursivePartial,
-	CardProviderProps,
-} from '../common/interfaces';
-
-export interface CorporateGroup
-	extends CardDefaultProps,
-		CardPersonalDetails,
-		CardContactDetails {
-	organisationName: string;
-	address: Partial<CardAddress>;
-	directorIsProfessional: boolean;
-}
-
-export interface CorporateGroupProviderProps extends CardProviderProps {
-	/** CorporateGroup props from the API */
-	corporateGroup: Partial<CorporateGroup>;
-	children?: RenderProps | ReactElement;
-	/** overwrite any text that you need */
-	i18n?: RecursivePartial<CorporateGroupI18nProps>;
-	onSaveDirector: (...args: any[]) => Promise<any>;
-}
-
-export interface CorporateGroupContextProps
-	extends Omit<CorporateGroupProviderProps, 'corporateGroup'> {
-	send: (event: any, payload?: EventData) => Partial<State<CGC, any, any, any>>;
-	current: Partial<State<CGC, any, any, any>>;
-}
-
-type RenderProps = (_: CorporateGroupContextProps) => ReactElement;
+	CorporateGroupContextProps,
+	CorporateGroupProviderProps,
+} from '@tpr/core';
 
 export const CorporateGroupContext = createContext<CorporateGroupContextProps>({
 	current: {},
