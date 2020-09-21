@@ -29,13 +29,6 @@ type IndependentTrusteeEvents =
 	| { type: 'DELETE' }
 	| { type: 'SELECT'; values?: RemoveReasonProps };
 
-// export interface IndependentTrusteeContext {
-// 	complete: boolean;
-// 	remove?: RemoveReasonProps;
-// 	independentTrustee: Partial<IndependentTrustee>;
-// 	preValidatedData?: boolean | null;
-// }
-
 const independentTrusteeMachine = Machine<
 	IndependentTrusteeContext,
 	IndependentTrusteeStates,
