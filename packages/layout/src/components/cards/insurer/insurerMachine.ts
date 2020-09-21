@@ -1,5 +1,5 @@
 import { Machine, assign } from 'xstate';
-import { Insurer } from './context';
+import { InsurerContext } from '@tpr/core';
 
 interface InsurerStates {
 	states: {
@@ -28,13 +28,6 @@ type InsurerEvents =
 	| { type: 'SAVE'; values?: any }
 	| { type: 'BACK' }
 	| { type: 'DELETE' };
-
-export interface InsurerContext {
-	complete: boolean;
-	remove: { confirm: boolean; date: string } | null;
-	insurer: Partial<Insurer>;
-	preValidatedData?: boolean | null;
-}
 
 const insurerMachine = Machine<InsurerContext, InsurerStates, InsurerEvents>({
 	id: 'insurer',

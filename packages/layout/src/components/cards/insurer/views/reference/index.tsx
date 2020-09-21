@@ -1,12 +1,16 @@
 import React, { useState } from 'react';
 import { Form, validate, FieldProps, renderFields } from '@tpr/forms';
-import { Link, Flex } from '@tpr/core';
 import { useInsurerContext } from '../../context';
 import { Footer } from '../../../components/card';
 import { Content } from '../../../components/content';
 import { ArrowButton } from '../../../../buttons/buttons';
-import { InsurerI18nProps } from '../../i18n';
-import { cardType, RecursivePartial } from '../../../common/interfaces';
+import {
+	Link,
+	Flex,
+	cardType,
+	RecursivePartial,
+	InsurerI18nProps,
+} from '@tpr/core';
 
 const getFields = (
 	fields: RecursivePartial<InsurerI18nProps['reference']['fields']>,

@@ -1,10 +1,6 @@
 import React from 'react';
-import {
-	InsurerProvider,
-	InsurerProviderProps,
-	useInsurerContext,
-} from './context';
-import { Flex, H4 } from '@tpr/core';
+import { InsurerProvider, useInsurerContext } from './context';
+import { Flex, H4, InsurerProviderProps } from '@tpr/core';
 import { Toolbar } from '../components/toolbar';
 import { UnderlinedButton } from '../components/button';
 import { Preview } from './views/preview/preview';

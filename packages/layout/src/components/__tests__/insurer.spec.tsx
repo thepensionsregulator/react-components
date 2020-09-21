@@ -3,7 +3,7 @@ import { render } from '@testing-library/react';
 import { InsurerCard } from '../cards/insurer/insurer';
 import { axe } from 'jest-axe';
 import userEvent from '@testing-library/user-event';
-import { Insurer } from '../cards/insurer/context';
+import { Insurer } from '@tpr/core';
 
 // TODO: write more tests
 

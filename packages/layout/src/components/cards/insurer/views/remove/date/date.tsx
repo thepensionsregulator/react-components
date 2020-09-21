@@ -4,7 +4,7 @@ import { FieldProps } from '@tpr/forms';
 import { useInsurerContext } from '../../../context';
 import { isAfter, toDate, isBefore } from 'date-fns';
 import DateForm from '../../../../common/views/remove/date/date';
-import { cardType, cardTypeName } from '../../../../common/interfaces';
+import { cardType, cardTypeName } from '@tpr/core';
 
 export const RemoveDateForm: React.FC = () => {
 	const { current, send, i18n } = useInsurerContext();
