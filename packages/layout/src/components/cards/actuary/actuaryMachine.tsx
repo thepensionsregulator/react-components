@@ -32,13 +32,6 @@ type ActuaryEvents =
 	| { type: 'BACK' }
 	| { type: 'DELETE' };
 
-// export interface ActuaryContext {
-// 	complete: boolean;
-// 	remove: { confirm: boolean; date: string } | null;
-// 	actuary: Partial<Actuary>;
-// 	preValidatedData?: boolean | null;
-// }
-
 const actuaryMachine = Machine<ActuaryContext, ActuaryStates, ActuaryEvents>({
 	id: 'actuary',
 	initial: 'preview',
