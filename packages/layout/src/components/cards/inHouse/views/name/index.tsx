@@ -1,12 +1,12 @@
 import React, { useState } from 'react';
 import { FieldProps } from '@tpr/forms';
 import { useInHouseAdminContext } from '../../context';
-import { InHouseAdminI18nProps } from '../../i18n';
 import {
 	RecursivePartial,
 	cardType,
 	cardTypeName,
-} from '../../../common/interfaces';
+	InHouseAdminI18nProps,
+} from '@tpr/core';
 import NameForm from '../../../common/views/nameForm/nameForm';
 
 const getFields = (

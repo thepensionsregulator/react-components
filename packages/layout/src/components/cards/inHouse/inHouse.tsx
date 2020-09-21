@@ -1,10 +1,5 @@
 import React from 'react';
-import {
-	InHouseAdminProvider,
-	InHouseAdminProviderProps,
-	useInHouseAdminContext,
-} from './context';
-import { Flex, H4 } from '@tpr/core';
+import { InHouseAdminProvider, useInHouseAdminContext } from './context';
 import { Toolbar } from '../components/toolbar';
 import { UnderlinedButton } from '../components/button';
 import { Preview } from './views/preview/preview';
@@ -14,7 +9,7 @@ import { ConfirmRemove } from './views/remove/confirm/confirm';
 import { AddressPage } from './views/address/index';
 import { NameScreen } from './views/name';
 import RemovedBox from '../components/removedBox';
-import { cardTypeName } from '../common/interfaces';
+import { Flex, H4, cardTypeName, InHouseAdminProviderProps } from '@tpr/core';
 import styles from '../cards.module.scss';
 
 const CardContentSwitch: React.FC = () => {

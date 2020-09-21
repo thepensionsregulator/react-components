@@ -1,12 +1,11 @@
 import React from 'react';
-import { Flex } from '@tpr/core';
 import { useInHouseAdminContext } from '../../context';
 import { Content } from '../../../components/content';
 import useSetState from '../../../hooks/use-set-state';
 import AutoComplete from './AutoComplete';
 import ManualComplete from './ManualComplete';
 import Postcode from '../../../common/views/address/Postcode';
-import { cardType, cardTypeName } from '../../../common/interfaces';
+import { Flex, cardType, cardTypeName } from '@tpr/core';
 
 export const AddressPage: React.FC = () => {
 	const { current, i18n, addressAPI } = useInHouseAdminContext();

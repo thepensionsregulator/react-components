@@ -1,12 +1,12 @@
 import React, { useState } from 'react';
 import { FieldProps } from '@tpr/forms';
 import { useInHouseAdminContext } from '../../context';
-import { InHouseAdminI18nProps } from '../../i18n';
 import {
 	cardType,
 	cardTypeName,
 	RecursivePartial,
-} from '../../../common/interfaces';
+	InHouseAdminI18nProps,
+} from '@tpr/core';
 import ContactDetails from '../../../common/views/contactDetails/contactDetails';
 
 const getFields = (

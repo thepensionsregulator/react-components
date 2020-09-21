@@ -1,5 +1,5 @@
 import { Machine, assign } from 'xstate';
-import { InHouseAdmin } from './context';
+import { InHouseAdminContext } from '@tpr/core';
 
 interface InHouseAdminStates {
 	states: {
@@ -33,13 +33,6 @@ type InHouseAdminEvents =
 	| { type: 'SAVE'; values?: any }
 	| { type: 'BACK' }
 	| { type: 'DELETE' };
-
-export interface InHouseAdminContext {
-	complete: boolean;
-	remove: { confirm: boolean; date: string } | null;
-	inHouseAdmin: Partial<InHouseAdmin>;
-	preValidatedData?: boolean | null;
-}
 
 const inHouseAdminMachine = Machine<
 	InHouseAdminContext,

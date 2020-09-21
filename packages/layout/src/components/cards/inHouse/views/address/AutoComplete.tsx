@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { useInHouseAdminContext } from '../../context';
-import { AutoCompleteProps } from '../../../common/interfaces';
+import { AutoCompleteProps } from '@tpr/core';
 import AutoCompleteForm from '../../../common/views/address/AutoCompleteForm';
 
 const AutoComplete: React.FC<AutoCompleteProps> = ({

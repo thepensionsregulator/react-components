@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { useInHouseAdminContext } from '../../context';
 import { getFields } from '../../../common/views/address/fields';
 import ManualCompleteForm from '../../../common/views/address/ManualCompleteForm';
-import { cardTypeName } from '../../../common/interfaces';
+import { cardTypeName } from '@tpr/core';
 
 const ManualComplete: React.FC = () => {
 	const [loading, setLoading] = useState(false);

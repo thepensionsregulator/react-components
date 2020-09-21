@@ -1,20 +1,9 @@
-import React, { createContext, useContext, ReactElement } from 'react';
+import React, { createContext, useContext } from 'react';
 import { useMachine } from '@xstate/react';
-import inHouseAdminMachine, {
-	InHouseAdminContext as IHAC,
-} from './inHouseMachine';
-import { State, EventData } from 'xstate';
-import { i18n as i18nDefaults, InHouseAdminI18nProps } from './i18n';
+import inHouseAdminMachine from './inHouseMachine';
+import { i18n as i18nDefaults } from './i18n';
 import { useI18n } from '../hooks/use-i18n';
-import {
-	RecursivePartial,
-	CardDefaultProps,
-	CardPersonalDetails,
-	CardContactDetails,
-	CardAddress,
-	CardProviderProps,
-	AddressAPIType,
-} from '../common/interfaces';
+import { InHouseAdminContextProps, InHouseAdminProviderProps } from '@tpr/core';
 
 export const InHouseAdminContext = createContext<InHouseAdminContextProps>({
 	current: {},
@@ -30,36 +19,6 @@ export const InHouseAdminContext = createContext<InHouseAdminContextProps>({
 		limit: 50,
 	},
 });
-
-type RenderProps = (_props: InHouseAdminContextProps) => ReactElement;
-
-export interface InHouseAdminContextProps
-	extends Omit<InHouseAdminProviderProps, 'inHouseAdmin'> {
-	send: (
-		event: any,
-		payload?: EventData,
-	) => Partial<State<IHAC, any, any, any>>;
-	current: Partial<State<IHAC, any, any, any>>;
-}
-
-export interface InHouseAdmin
-	extends CardDefaultProps,
-		CardPersonalDetails,
-		CardContactDetails {
-	addressAPI: AddressAPIType;
-	address: Partial<CardAddress>;
-}
-
-export interface InHouseAdminNoApi extends Omit<InHouseAdmin, 'addressAPI'> {}
-
-export interface InHouseAdminProviderProps extends CardProviderProps {
-	/** inHouseAdmin props from the API */
-	inHouseAdmin: Partial<InHouseAdmin>;
-	children?: RenderProps | ReactElement;
-	addressAPI: AddressAPIType;
-	/** overwrite any text that you need */
-	i18n?: RecursivePartial<InHouseAdminI18nProps>;
-}
 
 export const InHouseAdminProvider = ({
 	complete,
