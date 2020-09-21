@@ -5,3 +5,4 @@ export * from './corporateGroup';
 export * from './independentTrustee';
 export * from './inHouse';
 export * from './insurer';
+export * from './thirdParty';

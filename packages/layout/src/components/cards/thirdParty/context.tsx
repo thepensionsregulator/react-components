@@ -1,17 +1,9 @@
-import React, { createContext, useContext, ReactElement } from 'react';
+import React, { createContext, useContext } from 'react';
 import { useMachine } from '@xstate/react';
-import thirdPartyMachine, {
-	ThirdPartyContext as EC,
-} from './thirdPartyMachine';
-import { State, EventData } from 'xstate';
-import { i18n as i18nDefaults, ThirdPartyI18nProps } from './i18n';
+import thirdPartyMachine from './thirdPartyMachine';
+import { i18n as i18nDefaults } from './i18n';
 import { useI18n } from '../hooks/use-i18n';
-import {
-	CardDefaultProps,
-	CardAddress,
-	CardProviderProps,
-	RecursivePartial,
-} from '../common/interfaces';
+import { ThirdPartyContextProps, ThirdPartyProviderProps } from '@tpr/core';
 
 export const ThirdPartyContext = createContext<ThirdPartyContextProps>({
 	current: {},
@@ -20,27 +12,6 @@ export const ThirdPartyContext = createContext<ThirdPartyContextProps>({
 	onRemove: Promise.resolve,
 	i18n: i18nDefaults,
 });
-
-type RenderProps = (_props: ThirdPartyContextProps) => ReactElement;
-
-export interface ThirdPartyContextProps
-	extends Omit<ThirdPartyProviderProps, 'thirdParty'> {
-	send: (event: any, payload?: EventData) => Partial<State<EC, any, any, any>>;
-	current: Partial<State<EC, any, any, any>>;
-}
-
-export interface ThirdPartyProps extends CardDefaultProps {
-	organisationName: string;
-	address: Partial<CardAddress>;
-}
-
-export interface ThirdPartyProviderProps extends CardProviderProps {
-	/** thirdParty props from the API */
-	thirdParty: Partial<ThirdPartyProps>;
-	children?: RenderProps | ReactElement;
-	/** overwrite any text that you need */
-	i18n?: RecursivePartial<ThirdPartyI18nProps>;
-}
 
 export const ThirdPartyProvider = ({
 	complete,

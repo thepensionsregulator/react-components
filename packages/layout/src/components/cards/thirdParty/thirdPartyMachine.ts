@@ -1,5 +1,5 @@
 import { Machine, assign } from 'xstate';
-import { ThirdPartyProps } from './context';
+import { ThirdPartyContext } from '@tpr/core';
 
 interface ThirdPartyStates {
 	states: {
@@ -21,13 +21,6 @@ type ThirdPartyEvents =
 	| { type: 'NEXT'; values?: any }
 	| { type: 'BACK' }
 	| { type: 'DELETE' };
-
-export interface ThirdPartyContext {
-	complete: boolean;
-	remove: { confirm: boolean; date: string } | null;
-	thirdParty: Partial<ThirdPartyProps>;
-	preValidatedData?: boolean | null;
-}
 
 const thirdPartyMachine = Machine<
 	ThirdPartyContext,

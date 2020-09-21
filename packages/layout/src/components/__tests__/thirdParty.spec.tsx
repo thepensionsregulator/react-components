@@ -3,7 +3,7 @@ import { render } from '@testing-library/react';
 import { ThirdPartyCard } from '../cards/thirdParty/thirdParty';
 import { axe } from 'jest-axe';
 import userEvent from '@testing-library/user-event';
-import { ThirdPartyProps } from '../cards/thirdParty/context';
+import { ThirdPartyProps } from '@tpr/core';
 
 const noop = () => Promise.resolve();
 

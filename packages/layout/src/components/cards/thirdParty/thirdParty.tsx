@@ -1,10 +1,6 @@
 import React from 'react';
-import {
-	ThirdPartyProvider,
-	ThirdPartyProviderProps,
-	useThirdPartyContext,
-} from './context';
-import { Flex, H4 } from '@tpr/core';
+import { ThirdPartyProvider, useThirdPartyContext } from './context';
+import { Flex, H4, ThirdPartyProviderProps } from '@tpr/core';
 import { Toolbar } from '../components/toolbar';
 import { UnderlinedButton } from '../components/button';
 import { Preview } from './views/preview/preview';
