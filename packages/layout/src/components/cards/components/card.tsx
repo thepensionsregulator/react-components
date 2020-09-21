@@ -1,7 +1,6 @@
 import React from 'react';
-import { Flex, H3, P, classNames, Hr } from '@tpr/core';
+import { Flex, H3, P, classNames, Hr, cardType } from '@tpr/core';
 import styles from './card.module.scss';
-import { cardType } from '../common/interfaces';
 
 type StyledCardProps = { complete: boolean };
 export const StyledCard: React.FC<StyledCardProps> = ({

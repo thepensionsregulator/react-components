@@ -3,7 +3,7 @@ import { Link, P } from '@tpr/core';
 import { Footer } from '../../../components/card';
 import { Form, FFSelect } from '@tpr/forms';
 import { ArrowButton } from '../../../../buttons/buttons';
-import { AutoCompleteProps } from '../../interfaces';
+import { AutoCompleteProps } from '@tpr/core';
 
 interface AutoCompleteFormProps extends AutoCompleteProps {
 	onSubmit: (any) => void;

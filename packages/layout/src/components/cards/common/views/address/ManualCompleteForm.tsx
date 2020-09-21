@@ -1,10 +1,9 @@
 import React from 'react';
-import { Flex, P } from '@tpr/core';
+import { Flex, P, cardTypeName } from '@tpr/core';
 import { Form, renderFields, validate, FieldProps } from '@tpr/forms';
 import { Footer } from '../../../components/card';
 import { Loading } from '../../../components/content';
 import { ArrowButton } from '../../../../buttons/buttons';
-import { cardTypeName } from '../../interfaces';
 
 interface ManualCompleteFormProps {
 	loading: boolean;

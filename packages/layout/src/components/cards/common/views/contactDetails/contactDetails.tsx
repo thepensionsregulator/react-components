@@ -3,7 +3,7 @@ import { Form, validate, renderFields, FieldProps } from '@tpr/forms';
 import { Footer } from '../../../components/card';
 import { Content } from '../../../components/content';
 import { ArrowButton } from '../../../../buttons/buttons';
-import { cardType, cardTypeName } from '../../../common/interfaces';
+import { cardType, cardTypeName } from '@tpr/core';
 
 interface ContactDetailsProps {
 	type: cardType;

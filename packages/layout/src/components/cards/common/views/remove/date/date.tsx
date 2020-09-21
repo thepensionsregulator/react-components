@@ -1,10 +1,9 @@
 import React from 'react';
 import { Form, FFCheckbox, renderFields, FieldProps } from '@tpr/forms';
-import { P } from '@tpr/core';
+import { P, cardType, cardTypeName } from '@tpr/core';
 import { Content } from '../../../../components/content';
 import { Footer } from '../../../../components/card';
 import { ArrowButton } from '../../../../../buttons/buttons';
-import { cardType, cardTypeName } from '../../../../common/interfaces';
 import styles from './date.module.scss';
 
 interface DateFormProps {

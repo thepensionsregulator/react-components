@@ -1,6 +1,5 @@
 import { FieldProps } from '@tpr/forms';
-import { addressLabelsFields } from '../../interfaces';
-import { RecursivePartial } from '../../../common/interfaces';
+import { addressLabelsFields, RecursivePartial } from '@tpr/core';
 import { validPostcode } from './helpers';
 
 export const getFields = (

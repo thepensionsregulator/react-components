@@ -1,8 +1,7 @@
 import React, { useEffect, useCallback, ChangeEvent } from 'react';
-import { Flex, Button, P, Link } from '@tpr/core';
+import { Flex, Button, P, Link, PostcodeProps } from '@tpr/core';
 import { Input } from '@tpr/forms';
 import { extractToObject } from './helpers';
-import { PostcodeProps } from '../../../common/interfaces';
 import styles from './Postcode.module.scss';
 
 const Postcode: React.FC<PostcodeProps> = ({

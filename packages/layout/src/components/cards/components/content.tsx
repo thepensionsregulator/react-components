@@ -1,7 +1,6 @@
 import React from 'react';
-import { classNames } from '@tpr/core';
+import { classNames, cardType, cardTypeName } from '@tpr/core';
 import { Toolbar } from './card';
-import { cardType, cardTypeName } from '../common/interfaces';
 import styles from './content.module.scss';
 
 export const Loading = () => <div className={styles.loading} />;

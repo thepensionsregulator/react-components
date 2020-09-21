@@ -1,14 +1,15 @@
 import React from 'react';
-import { P, H4 } from '@tpr/core';
 import { Footer } from '../../../../components/card';
 import { Form, FFRadioButton, FieldProps, renderFields } from '@tpr/forms';
 import { Content } from '../../../../components/content';
 import { ArrowButton } from '../../../../../buttons/buttons';
 import {
+	P,
+	H4,
 	cardType,
 	I18nRemoveReason,
 	RemoveReasonProps,
-} from '../../../../common/interfaces';
+} from '@tpr/core';
 import styles from './reason.module.scss';
 
 interface ReasonProps {

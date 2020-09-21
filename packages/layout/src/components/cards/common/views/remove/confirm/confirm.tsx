@@ -1,9 +1,8 @@
 import React from 'react';
-import { Hr, Flex, P, H3, Link } from '@tpr/core';
+import { Hr, Flex, P, H3, Link, cardType, cardTypeName } from '@tpr/core';
 import { Content } from '../../../../components/content';
 import { ArrowButton } from '../../../../../buttons/buttons';
 import { WarningBox } from '../../../../../warning/warning';
-import { cardType, cardTypeName } from '../../../interfaces';
 
 interface ConfirmProps {
 	cardType: cardType;
