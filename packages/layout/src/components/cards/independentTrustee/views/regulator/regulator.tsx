@@ -1,12 +1,15 @@
 import React, { useState } from 'react';
 import { Form, renderFields, validate, FieldProps } from '@tpr/forms';
-import { Flex } from '@tpr/core';
 import { Content } from '../../../components/content';
 import { Footer } from '../../../components/card';
 import { ArrowButton } from '../../../../buttons/buttons';
 import { useIndependentTrusteeContext } from '../../context';
-import { IndependentTrusteeI18nProps } from '../../i18n';
-import { cardType, RecursivePartial } from '../../../common/interfaces';
+import {
+	Flex,
+	cardType,
+	RecursivePartial,
+	IndependentTrusteeI18nProps,
+} from '@tpr/core';
 
 const getIndependentTrusteeFields = (
 	labels: RecursivePartial<IndependentTrusteeI18nProps['regulator']['fields']>,

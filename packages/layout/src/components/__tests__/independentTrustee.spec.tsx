@@ -1,7 +1,7 @@
 import React from 'react';
 import { render } from '@testing-library/react';
 import { IndependentTrusteeCard } from '../cards/independentTrustee/independentTrustee';
-import { IndependentTrustee } from '../cards/independentTrustee/context';
+import { IndependentTrustee } from '@tpr/core';
 import { axe } from 'jest-axe';
 import { cleanup } from '@testing-library/react-hooks';
 import { act } from 'react-dom/test-utils';

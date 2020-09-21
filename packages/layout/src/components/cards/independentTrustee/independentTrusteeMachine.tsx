@@ -1,6 +1,5 @@
 import { Machine, assign } from 'xstate';
-import { IndependentTrustee } from './context';
-import { RemoveReasonProps } from '../common/interfaces';
+import { RemoveReasonProps, IndependentTrusteeContext } from '@tpr/core';
 
 interface IndependentTrusteeStates {
 	states: {
@@ -30,12 +29,12 @@ type IndependentTrusteeEvents =
 	| { type: 'DELETE' }
 	| { type: 'SELECT'; values?: RemoveReasonProps };
 
-export interface IndependentTrusteeContext {
-	complete: boolean;
-	remove?: RemoveReasonProps;
-	independentTrustee: Partial<IndependentTrustee>;
-	preValidatedData?: boolean | null;
-}
+// export interface IndependentTrusteeContext {
+// 	complete: boolean;
+// 	remove?: RemoveReasonProps;
+// 	independentTrustee: Partial<IndependentTrustee>;
+// 	preValidatedData?: boolean | null;
+// }
 
 const independentTrusteeMachine = Machine<
 	IndependentTrusteeContext,

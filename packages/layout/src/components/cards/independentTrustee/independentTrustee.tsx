@@ -1,10 +1,4 @@
 import React from 'react';
-import {
-	IndependentTrusteeProvider,
-	IndependentTrusteeProviderProps,
-	useIndependentTrusteeContext,
-} from './context';
-import { Flex, H4, P } from '@tpr/core';
 import { Toolbar } from '../components/toolbar';
 import { UnderlinedButton } from '../components/button';
 import RemovedBox from '../components/removedBox';
@@ -12,7 +6,17 @@ import { Preview } from './views/preview/preview';
 import { Regulator } from './views/regulator/regulator';
 import { ReasonRemove } from './views/remove/reason/reason';
 import { ConfirmRemove } from './views/remove/confirm/confirm';
-import { cardTypeName } from '../common/interfaces';
+import {
+	IndependentTrusteeProvider,
+	useIndependentTrusteeContext,
+} from './context';
+import {
+	Flex,
+	H4,
+	P,
+	IndependentTrusteeProviderProps,
+	cardTypeName,
+} from '@tpr/core';
 import styles from '../cards.module.scss';
 
 const CardContentSwitch: React.FC = () => {

@@ -5,7 +5,7 @@ import {
 	BreadcrumbLink,
 } from '../../../../components/breadcrumbs';
 import Confirm from '../../../../common/views/remove/confirm/confirm';
-import { cardType, cardTypeName } from '../../../../common/interfaces';
+import { cardType, cardTypeName } from '@tpr/core';
 
 const getBreadcrumbLinks = ({ link1, link2 }: any): BreadcrumbLink[] => [
 	{

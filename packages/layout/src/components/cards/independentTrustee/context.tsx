@@ -1,40 +1,12 @@
-import React, { createContext, ReactElement, useContext } from 'react';
+import React, { createContext, useContext } from 'react';
 import { useMachine } from '@xstate/react';
-import { State, EventData } from 'xstate';
-import independentTrusteeMachine, {
-	IndependentTrusteeContext as CGC,
-} from './independentTrusteeMachine';
-import { i18n as i18nDefaults, IndependentTrusteeI18nProps } from './i18n';
+import independentTrusteeMachine from './independentTrusteeMachine';
+import { i18n as i18nDefaults } from './i18n';
 import { useI18n } from '../hooks/use-i18n';
 import {
-	CardDefaultProps,
-	CardAddress,
-	RecursivePartial,
-	CardProviderProps,
-} from '../common/interfaces';
-
-export interface IndependentTrustee extends CardDefaultProps {
-	organisationName: string;
-	address: Partial<CardAddress>;
-	appointedByRegulator: boolean;
-}
-
-export interface IndependentTrusteeProviderProps extends CardProviderProps {
-	/** IndependentTrustee props from the API */
-	independentTrustee: Partial<IndependentTrustee>;
-	children?: RenderProps | ReactElement;
-	/** overwrite any text that you need */
-	i18n?: RecursivePartial<IndependentTrusteeI18nProps>;
-	onSaveAppointed: (...args: any[]) => Promise<any>;
-}
-
-export interface IndependentTrusteeContextProps
-	extends Omit<IndependentTrusteeProviderProps, 'independentTrustee'> {
-	send: (event: any, payload?: EventData) => Partial<State<CGC, any, any, any>>;
-	current: Partial<State<CGC, any, any, any>>;
-}
-
-type RenderProps = (_: IndependentTrusteeContextProps) => ReactElement;
+	IndependentTrusteeContextProps,
+	IndependentTrusteeProviderProps,
+} from '@tpr/core';
 
 export const IndependentTrusteeContext = createContext<
 	IndependentTrusteeContextProps
