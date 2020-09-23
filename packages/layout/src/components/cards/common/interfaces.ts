@@ -98,7 +98,7 @@ export interface addressLabelsFields {
 	};
 	addressLine2: { label: string; error?: string };
 	addressLine3: { label: string; error?: string };
-	postTown: { label: string; error?: string };
+	postTown: { label: string; emptyError?: string };
 	postcode: {
 		label: string;
 		invalidError?: string;
