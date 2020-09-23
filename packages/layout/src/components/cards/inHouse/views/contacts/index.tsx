@@ -1,11 +1,13 @@
 import React, { useState } from 'react';
-import { Form, validate, FieldProps, renderFields } from '@tpr/forms';
+import { FieldProps } from '@tpr/forms';
 import { useInHouseAdminContext } from '../../context';
-import { Footer } from '../../../components/card';
-import { Content } from '../../../components/content';
-import { ArrowButton } from '../../../../buttons/buttons';
 import { InHouseAdminI18nProps } from '../../i18n';
-import { RecursivePartial } from '../../context';
+import {
+	cardType,
+	cardTypeName,
+	RecursivePartial,
+} from '../../../common/interfaces';
+import ContactDetails from '../../../common/views/contactDetails/contactDetails';
 
 const getFields = (
 	fields: RecursivePartial<InHouseAdminI18nProps['contacts']['fields']>,
@@ -17,6 +19,7 @@ const getFields = (
 		inputWidth: 2,
 		error: fields.telephone.error,
 		cfg: { mb: 3 },
+		required: true,
 	},
 	{
 		type: 'email',
@@ -24,6 +27,7 @@ const getFields = (
 		label: fields.email.label,
 		inputWidth: 6,
 		error: fields.email.error,
+		required: true,
 	},
 ];
 
@@ -46,37 +50,18 @@ export const Contacts: React.FC = () => {
 	};
 
 	return (
-		<Content
-			type="inHouseAdmin"
-			typeName="In House Administrator"
+		<ContactDetails
+			type={cardType.inHouseAdmin}
+			typeName={cardTypeName.inHouseAdmin}
 			title={i18n.contacts.title}
 			subtitle={i18n.contacts.subtitle}
 			loading={loading}
-		>
-			<Form
-				onSubmit={onSubmit}
-				initialValues={{
-					telephoneNumber: inHouseAdmin.telephoneNumber,
-					emailAddress: inHouseAdmin.emailAddress,
-				}}
-				validate={validate(fields)}
-			>
-				{({ handleSubmit }) => (
-					<form onSubmit={handleSubmit}>
-						{renderFields(fields)}
-						<Footer>
-							<ArrowButton
-								intent="special"
-								pointsTo="up"
-								iconSide="right"
-								type="submit"
-								title="Save and close"
-								disabled={loading}
-							/>
-						</Footer>
-					</form>
-				)}
-			</Form>
-		</Content>
+			onSubmit={onSubmit}
+			initialValues={{
+				telephoneNumber: inHouseAdmin.telephoneNumber,
+				emailAddress: inHouseAdmin.emailAddress,
+			}}
+			fields={fields}
+		/>
 	);
 };

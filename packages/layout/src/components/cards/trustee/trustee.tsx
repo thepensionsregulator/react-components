@@ -11,9 +11,9 @@ import { Toolbar } from '../components/toolbar';
 import Name from './views/name';
 import Type from './views/type/type';
 import Address from './views/address';
-import Contacts from './views/contacts';
+import { Contacts } from './views/contacts';
 import RemoveReason from './views/remove/reason/reason';
-import RemoveConfirm from './views/remove/confirm';
+import { ConfirmRemove } from './views/remove/confirm';
 
 import styles from '../cards.module.scss';
 
@@ -41,7 +41,7 @@ const CardContent: React.FC = () => {
 	} else if (current.matches({ remove: 'reason' })) {
 		return <RemoveReason />;
 	} else if (current.matches({ remove: 'confirm' })) {
-		return <RemoveConfirm />;
+		return <ConfirmRemove />;
 	} else {
 		return null;
 	}
@@ -117,7 +117,9 @@ export const TrusteeCard: React.FC<Omit<TrusteeCardProps, 'children'>> = ({
 			{({ current }) => (
 				<Flex cfg={cfg} data-testid={props.testId} className={styles.card}>
 					<Toolbar
-						complete={current.context.complete}
+						complete={
+							current.context.preValidatedData ? true : current.context.complete
+						}
 						buttonLeft={() => <TrusteeButton />}
 						buttonRight={() => <RemoveButton />}
 						subtitle={() => (

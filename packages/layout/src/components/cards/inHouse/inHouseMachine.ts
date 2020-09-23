@@ -1,5 +1,5 @@
 import { Machine, assign } from 'xstate';
-import { InHouseAdminWithContactsProps } from './context';
+import { InHouseAdmin } from './context';
 
 interface InHouseAdminStates {
 	states: {
@@ -37,7 +37,8 @@ type InHouseAdminEvents =
 export interface InHouseAdminContext {
 	complete: boolean;
 	remove: { confirm: boolean; date: string } | null;
-	inHouseAdmin: Partial<InHouseAdminWithContactsProps>;
+	inHouseAdmin: Partial<InHouseAdmin>;
+	preValidatedData?: boolean | null;
 }
 
 const inHouseAdminMachine = Machine<

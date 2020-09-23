@@ -7,11 +7,15 @@ import styles from './preview.module.scss';
 
 export const Preview: React.FC<any> = () => {
 	const { current, send, onCorrect, i18n } = useThirdPartyContext();
-	const { thirdParty, complete } = current.context;
+	const { thirdParty, complete, preValidatedData } = current.context;
 
 	return (
 		<div
-			className={classNames([{ [styles.complete]: complete }, styles.content])}
+			className={
+				preValidatedData
+					? classNames([styles.content, styles.complete])
+					: classNames([{ [styles.complete]: complete }, styles.content])
+			}
 		>
 			<Flex>
 				<Flex
@@ -19,11 +23,17 @@ export const Preview: React.FC<any> = () => {
 				>
 					<UnderlinedButton>{i18n.preview.buttons.three}</UnderlinedButton>
 					<Flex cfg={{ my: 2, flexDirection: 'column' }}>
-						<P>{thirdParty.addressLine1}</P>
-						{thirdParty.addressLine2 && <P>{thirdParty.addressLine2}</P>}
-						{thirdParty.addressLine3 && <P>{thirdParty.addressLine3}</P>}
-						<P>{thirdParty.postTown}</P>
-						<P>{thirdParty.postCode}</P>
+						<P>{thirdParty.address.addressLine1}</P>
+						{thirdParty.address.addressLine2 && (
+							<P>{thirdParty.address.addressLine2}</P>
+						)}
+						{thirdParty.address.addressLine3 && (
+							<P>{thirdParty.address.addressLine3}</P>
+						)}
+						<P>{thirdParty.address.postTown}</P>
+						{thirdParty.address.county && <P>{thirdParty.address.county}</P>}
+						<P>{thirdParty.address.postcode}</P>
+						{thirdParty.address.country && <P>{thirdParty.address.country}</P>}
 					</Flex>
 				</Flex>
 				<Flex

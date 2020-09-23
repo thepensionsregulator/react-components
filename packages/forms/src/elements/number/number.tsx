@@ -3,8 +3,14 @@ import { Field, FieldRenderProps } from 'react-final-form';
 import { StyledInputLabel, InputElementHeading } from '../elements';
 import { FieldProps, FieldExtraProps } from '../../renderFields';
 import { Input } from '../input/input';
+import { parseToDecimals, handleBlur } from '../helpers';
 
-type InputNumberProps = FieldRenderProps<number> & FieldExtraProps;
+interface InputNumberProps extends FieldRenderProps<number>, FieldExtraProps {
+	after?: any;
+	callback?: (e: any) => void;
+	decimalPlaces?: number;
+}
+
 const InputNumber: React.FC<InputNumberProps> = ({
 	label,
 	hint,
@@ -15,6 +21,9 @@ const InputNumber: React.FC<InputNumberProps> = ({
 	placeholder,
 	inputWidth: width,
 	cfg,
+	after,
+	callback,
+	decimalPlaces,
 	...props
 }) => {
 	return (
@@ -35,10 +44,27 @@ const InputNumber: React.FC<InputNumberProps> = ({
 				label={label}
 				touched={meta && meta.touched && meta.error}
 				placeholder={placeholder}
+				decimalPlaces={decimalPlaces}
 				{...input}
-				onChange={(evt: ChangeEvent<HTMLInputElement>) =>
-					input.onChange(evt.target.value && parseInt(evt.target.value, 10))
-				}
+				onKeyDown={(e) => e.key.toLowerCase() === 'e' && e.preventDefault()}
+				onChange={(evt: ChangeEvent<HTMLInputElement>) => {
+					decimalPlaces
+						? input.onChange(
+								evt.target.value &&
+									parseToDecimals(evt.target.value, decimalPlaces),
+						  )
+						: input.onChange(
+								evt.target.value && parseInt(evt.target.value, 10),
+						  );
+					callback && callback(evt);
+				}}
+				onBlur={(e: any) => {
+					input.onBlur(e); // without this call, validate won't be executed even if specified
+					e.target.value = e.target.value
+						? handleBlur(e.target.value, decimalPlaces)
+						: null;
+				}}
+				after={after}
 				{...props}
 			/>
 		</StyledInputLabel>

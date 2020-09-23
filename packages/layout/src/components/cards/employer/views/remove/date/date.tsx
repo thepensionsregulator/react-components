@@ -1,84 +1,58 @@
 import React from 'react';
 import { FORM_ERROR } from 'final-form';
-import { Form, FFCheckbox, FFInputDate } from '@tpr/forms';
-import { P } from '@tpr/core';
-import { Content } from '../../../../components/content';
-import { Footer } from '../../../../components/card';
+import { FieldProps } from '@tpr/forms';
 import { useEmployerContext } from '../../../context';
-import { ArrowButton } from '../../../../../buttons/buttons';
 import { isAfter, toDate, isBefore } from 'date-fns';
-import styles from './date.module.scss';
+import DateForm from '../../../../common/views/remove/date/date';
+import { cardType, cardTypeName } from '../../../../common/interfaces';
 
-export const DateForm = () => {
+export const RemoveDateForm: React.FC = () => {
 	const { current, send, i18n } = useEmployerContext();
 	const { remove, employer } = current.context;
 
+	const DateField: FieldProps[] = [
+		{
+			type: 'date',
+			name: 'date',
+			label: i18n.remove.date.fields.date.label,
+			hint: i18n.remove.date.fields.date.hint,
+			validate: (value) => {
+				if (!value) {
+					return i18n.remove.date.errors.formIncomplete;
+				} else if (
+					isBefore(
+						toDate(new Date(value)),
+						toDate(new Date(employer.effectiveDate)),
+					)
+				) {
+					return i18n.remove.date.errors.dateAddedBeforeEffectiveDate;
+				} else if (isAfter(toDate(new Date(value)), new Date())) {
+					return i18n.remove.date.errors.dateAddedInTheFuture;
+				}
+			},
+			error: i18n.remove.date.fields.date.error,
+		},
+	];
+
 	const onSubmit = (values) => {
-		if (!values.confirm || !values.date) {
+		if (!values.confirm) {
 			return {
 				[FORM_ERROR]: i18n.remove.date.errors.formIncomplete,
 			};
-		} else if (
-			isBefore(
-				toDate(new Date(values.date)),
-				toDate(new Date(employer.effectiveDate)),
-			)
-		) {
-			return {
-				[FORM_ERROR]: i18n.remove.date.errors.dateAddedBeforeEffectiveDate,
-			};
-		} else if (isAfter(toDate(new Date(values.date)), new Date())) {
-			return {
-				[FORM_ERROR]: i18n.remove.date.errors.dateAddedInTheFuture,
-			};
 		} else {
 			send('NEXT', { values });
-			return undefined;
 		}
 	};
 
 	return (
-		<Content type="employer" title={i18n.remove.date.title}>
-			<Form
-				onSubmit={onSubmit}
-				initialValues={{
-					confirm: remove?.confirm,
-					date: remove && remove.date && new Date(remove.date),
-				}}
-			>
-				{({ handleSubmit, submitError }) => (
-					<form onSubmit={handleSubmit}>
-						<FFCheckbox
-							name="confirm"
-							type="checkbox"
-							label={i18n.remove.date.fields.confirm.label}
-							cfg={{ mb: 3 }}
-						/>
-						<div className={styles.dateWrapper}>
-							<FFInputDate
-								name="date"
-								label={i18n.remove.date.fields.date.label}
-								hint={i18n.remove.date.fields.date.hint}
-								required={true}
-								error={i18n.remove.date.fields.date.error}
-								cfg={{ mb: 3 }}
-							/>
-						</div>
-						{submitError && (
-							<P cfg={{ color: 'danger.2', mt: 5 }}>{submitError}</P>
-						)}
-						<Footer>
-							<ArrowButton
-								intent="special"
-								pointsTo="right"
-								iconSide="right"
-								title="Continue"
-								type="submit"
-							/>
-						</Footer>
-					</form>
-				)}
-			</Form>
-		</Content>
+		<DateForm
+			title={i18n.remove.date.title}
+			onSubmit={onSubmit}
+			remove={remove}
+			label={i18n.remove.date.fields.confirm.label}
+			dateField={DateField}
+			type={cardType.employer}
+			typeName={cardTypeName.employer}
+		/>
 	);
 };

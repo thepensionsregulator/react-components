@@ -9,18 +9,21 @@ export type ToolbarProps = {
 	subtitle?: Function;
 	buttonLeft: Function;
 	buttonRight: Function;
+	extraPB?: boolean;
 };
 export const Toolbar: React.FC<ToolbarProps> = ({
 	complete,
 	subtitle,
 	buttonLeft,
 	buttonRight,
+	extraPB,
 }) => {
 	return (
 		<div
 			className={classNames([
 				{ [styles.complete]: complete },
 				styles.cardToolbar,
+				extraPB && styles.extraPB,
 			])}
 		>
 			<Flex

@@ -1,17 +1,14 @@
 import React, { useState } from 'react';
-import { Flex, P } from '@tpr/core';
-import { Form, renderFields, validate } from '@tpr/forms';
 import { useInHouseAdminContext } from '../../context';
-import { Footer } from '../../../components/card';
-import { Loading } from '../../../components/content';
-import { ArrowButton } from '../../../../buttons/buttons';
-import { getFields } from './fields';
+import { getFields } from '../../../common/views/address/fields';
+import ManualCompleteForm from '../../../common/views/address/ManualCompleteForm';
+import { cardTypeName } from '../../../common/interfaces';
 
-const ManualComplete = () => {
+const ManualComplete: React.FC = () => {
 	const [loading, setLoading] = useState(false);
 	const { current, send, i18n, onSaveAddress } = useInHouseAdminContext();
 	const { inHouseAdmin } = current.context;
-	const fields = getFields(i18n?.address?.manual?.fields);
+	const fields = getFields(i18n?.address?.manual?.fields, i18n?.address.postcode.regExPattern);
 
 	const onSubmit = async (values) => {
 		setLoading(true);
@@ -27,36 +24,16 @@ const ManualComplete = () => {
 	};
 
 	return (
-		<Flex cfg={{ flexDirection: 'column' }}>
-			{loading && <Loading />}
-			<P cfg={{ fontWeight: 3 }}>{i18n.address.auto.title}</P>
-			<P cfg={{ my: 3 }}>
-				Enter the in house admin’s correspondence address manually.
-			</P>
-			<Form
-				onSubmit={onSubmit}
-				validate={validate(fields)}
-				initialValues={{
-					postcode: inHouseAdmin.address.postCode,
-				}}
-			>
-				{({ handleSubmit }) => (
-					<form onSubmit={handleSubmit}>
-						{renderFields(fields)}
-						<Footer>
-							<ArrowButton
-								intent="special"
-								pointsTo="up"
-								iconSide="right"
-								type="submit"
-								title="Save and close"
-								disabled={loading}
-							/>
-						</Footer>
-					</form>
-				)}
-			</Form>
-		</Flex>
+		<ManualCompleteForm
+			loading={loading}
+			title={i18n.address.auto.title}
+			onSubmit={onSubmit}
+			fields={fields}
+			initialValues={{
+				postcode: inHouseAdmin.address.postcode,
+			}}
+			cardTypeName={cardTypeName.inHouseAdmin}
+		/>
 	);
 };
 

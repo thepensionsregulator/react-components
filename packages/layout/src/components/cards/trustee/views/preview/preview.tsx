@@ -8,14 +8,19 @@ import styles from './preview.module.scss';
 
 export const Preview: React.FC = () => {
 	const { current, send, onCorrect, i18n } = useTrusteeContext();
-	const { trustee, complete } = current.context;
+	const { trustee, complete, preValidatedData } = current.context;
 
 	return (
 		<div
-			className={classNames([{ [styles.complete]: complete }, styles.content])}
+			className={
+				preValidatedData
+					? classNames([styles.content, styles.complete])
+					: classNames([{ [styles.complete]: complete }, styles.content])
+			}
 		>
 			<P cfg={{ mb: 4 }}>{capitalize(trustee.trusteeType)} trustee</P>
 			<Flex>
+				{/* Addres section: open for editing	 */}
 				<Flex
 					cfg={{ width: 5, flex: '0 0 auto', flexDirection: 'column', pr: 4 }}
 				>
@@ -24,12 +29,19 @@ export const Preview: React.FC = () => {
 					</UnderlinedButton>
 					<Flex cfg={{ mt: 1, flexDirection: 'column' }}>
 						<H4 cfg={{ lineHeight: 3 }}>{trustee.address.addressLine1}</H4>
-						<P>{trustee.address.addressLine2}</P>
-						<P>{trustee.address.addressLine3}</P>
+						{trustee.address.addressLine2 && (
+							<P>{trustee.address.addressLine2}</P>
+						)}
+						{trustee.address.addressLine3 && (
+							<P>{trustee.address.addressLine3}</P>
+						)}
 						<P>{trustee.address.postTown}</P>
+						{trustee.address.county && <P>{trustee.address.county}</P>}
 						<P>{trustee.address.postcode}</P>
 					</Flex>
 				</Flex>
+
+				{/* Contact details section: open for editing	 */}
 				<Flex
 					cfg={{ width: 5, flex: '0 0 auto', flexDirection: 'column', pl: 4 }}
 				>
@@ -40,10 +52,12 @@ export const Preview: React.FC = () => {
 						<H4 cfg={{ lineHeight: 3 }}>Phone</H4>
 						<P>{trustee.telephoneNumber}</P>
 						<H4 cfg={{ lineHeight: 3 }}>Email</H4>
-						<P>{trustee.emailAddress}</P>
+						<P cfg={{ wordBreak: 'all' }}>{trustee.emailAddress}</P>
 					</Flex>
 				</Flex>
 			</Flex>
+
+			{/*  All details correct - Checkbox	 */}
 			<Flex cfg={{ flexDirection: 'column' }}>
 				<Hr cfg={{ my: 4 }} />
 				<Checkbox

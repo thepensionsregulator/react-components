@@ -1,11 +1,13 @@
 import React from 'react';
-import { Form, validate, FieldProps, renderFields } from '@tpr/forms';
+import { FieldProps } from '@tpr/forms';
 import { useTrusteeContext } from '../../context';
-import { Footer } from '../../../components/card';
-import { Content } from '../../../components/content';
-import { ArrowButton } from '../../../../buttons/buttons';
 import { TrusteeI18nProps } from '../../i18n';
-import { RecursivePartial } from '../../context';
+import {
+	cardType,
+	cardTypeName,
+	RecursivePartial,
+} from '../../../common/interfaces';
+import ContactDetails from '../../../common/views/contactDetails/contactDetails';
 
 const getFields = (
 	fields: RecursivePartial<TrusteeI18nProps['contacts']['fields']>,
@@ -17,6 +19,7 @@ const getFields = (
 		inputWidth: 2,
 		error: fields.telephone.error,
 		cfg: { mb: 3 },
+		required: true,
 	},
 	{
 		type: 'email',
@@ -24,10 +27,11 @@ const getFields = (
 		label: fields.email.label,
 		inputWidth: 6,
 		error: fields.email.error,
+		required: true,
 	},
 ];
 
-const Contacts: React.FC = () => {
+export const Contacts: React.FC = () => {
 	const { current, send, i18n } = useTrusteeContext();
 	const { trustee, loading } = current.context;
 	const fields = getFields(i18n?.contacts?.fields);
@@ -37,38 +41,18 @@ const Contacts: React.FC = () => {
 	};
 
 	return (
-		<Content
-			type="trustee"
+		<ContactDetails
+			type={cardType.trustee}
+			typeName={cardTypeName.trustee}
 			title={i18n.contacts.title}
 			subtitle={i18n.contacts.subtitle}
 			loading={loading}
-		>
-			<Form
-				onSubmit={onSubmit}
-				initialValues={{
-					telephoneNumber: trustee.telephoneNumber,
-					emailAddress: trustee.emailAddress,
-				}}
-				validate={validate(fields)}
-			>
-				{({ handleSubmit }) => (
-					<form onSubmit={handleSubmit}>
-						{renderFields(fields)}
-						<Footer>
-							<ArrowButton
-								intent="special"
-								pointsTo="up"
-								iconSide="right"
-								type="submit"
-								title="Save and close"
-								disabled={loading}
-							/>
-						</Footer>
-					</form>
-				)}
-			</Form>
-		</Content>
+			onSubmit={onSubmit}
+			initialValues={{
+				telephoneNumber: trustee.telephoneNumber,
+				emailAddress: trustee.emailAddress,
+			}}
+			fields={fields}
+		/>
 	);
 };
-
-export default Contacts;

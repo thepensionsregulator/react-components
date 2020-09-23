@@ -1,13 +1,14 @@
 import React from 'react';
 import { classNames } from '@tpr/core';
 import { Toolbar } from './card';
+import { cardType, cardTypeName } from '../common/interfaces';
 import styles from './content.module.scss';
 
 export const Loading = () => <div className={styles.loading} />;
 
 type ContentProps = {
-	type: 'trustee' | 'employer' | 'insurer' | 'inHouseAdmin' | 'thirdParty';
-	typeName?: string;
+	type: cardType;
+	typeName?: cardTypeName | string;
 	title?: string;
 	loading?: boolean;
 	breadcrumbs?: any;

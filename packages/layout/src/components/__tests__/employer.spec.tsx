@@ -3,26 +3,33 @@ import { render } from '@testing-library/react';
 import { EmployerCard } from '../cards/employer/employer';
 import { axe } from 'jest-axe';
 import userEvent from '@testing-library/user-event';
+import { Employer } from '../cards/employer/context';
 
 // TODO: write more tests
 
 const noop = () => Promise.resolve();
 
-const employer = {
+const employer: Employer = {
+	id: '',
 	schemeRoleId: 123,
+	effectiveDate: '1997-04-01T00:00:00',
 	employerType: 'principal-and-participating' as 'principal-and-participating',
 	organisationReference: 0,
 	companiesHouseNumber: 'AB123456',
 	registeredCharityNumber: '123',
 	epsrNumber: '11223344',
 	organisationName: 'The Pensions Regulator',
-	addressLine1: 'Napier House',
-	addressLine2: 'Trafalgar Pl',
-	postTown: 'Brighton',
-	postCode: 'BN1 4DW',
-	county: 'West Sussex',
-	countryId: '',
-	effectiveDate: '1997-04-01T00:00:00',
+	statutoryEmployer: 'statutory',
+	address: {
+		addressLine1: 'Napier House',
+		addressLine2: 'Trafalgar Pl',
+		addressLine3: '',
+		postTown: 'Brighton',
+		postcode: 'BN1 4DW',
+		county: 'West Sussex',
+		country: '',
+		countryId: '',
+	},
 };
 
 describe('Employer Preview', () => {

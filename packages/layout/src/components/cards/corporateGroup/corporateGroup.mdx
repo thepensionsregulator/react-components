@@ -1,0 +1,68 @@
+---
+name: CorporateGroupTrustee
+menu: Cards
+route: /Cards/corporateGroup
+---
+
+import { Props } from 'docz';
+import { Playground, experianApiGet } from '@playground';
+import { Form } from 'react-final-form';
+import { useState } from 'react';
+import { CorporateGroupCard } from './corporateGroup';
+
+# Corporate Group Trustee Card
+
+Corporate Group Trustee Card for tpr apps
+
+## Usage
+
+```js
+import { CorporateGroupCard } from '@tpr/layout';
+```
+
+## Basic Usage
+
+<Playground>
+  {() => {
+    const [complete, setComplete] = useState(false);
+    const callbackFn = (values, _fullCorporateGroupObject) => {
+      console.log(values);
+      console.log(_fullCorporateGroupObject);
+      return Promise.resolve(values);
+    }
+    const corporateGroup = {
+      id: '',
+      schemeRoleId: 123,
+      title: 'Miss',
+      firstname: 'Susan',
+      lastname: 'Smith',
+      effectiveDate: '1997-04-01T00:00:00',
+			telephoneNumber: '01273 222 111',
+			emailAddress: 'john.wick@warnerbros.com',
+      organisationName: 'Acme Factory Pension Trustees Limited',
+      address: {				
+				addressLine1: 'Napier House',
+				addressLine2: 'Trafalgar Pl',
+				addressLine3: '',
+				postTown: 'Brighton',
+				county: 'West Sussex',
+				postcode: 'BN1 4DW',
+				country: '',
+				countryId: ''
+			},
+      directorIsProfessional: true
+    };
+		return (
+			<CorporateGroupCard
+				onSaveContacts={callbackFn}
+				onSaveName={callbackFn}
+        onSaveDirector={callbackFn}
+				onRemove={callbackFn}
+				onCorrect={(value) => setComplete(value)}
+				complete={complete}
+				preValidatedData={true}
+				corporateGroup={corporateGroup}
+			/>
+		);
+  }}
+</Playground>

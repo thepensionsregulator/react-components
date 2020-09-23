@@ -4,10 +4,17 @@ import inHouseAdminMachine, {
 	InHouseAdminContext as IHAC,
 } from './inHouseMachine';
 import { State, EventData } from 'xstate';
-import { SpaceProps } from '@tpr/core';
 import { i18n as i18nDefaults, InHouseAdminI18nProps } from './i18n';
 import { useI18n } from '../hooks/use-i18n';
-import { splitObjectIntoTwo } from '../../../utils';
+import {
+	RecursivePartial,
+	CardDefaultProps,
+	CardPersonalDetails,
+	CardContactDetails,
+	CardAddress,
+	CardProviderProps,
+	AddressAPIType,
+} from '../common/interfaces';
 
 export const InHouseAdminContext = createContext<InHouseAdminContextProps>({
 	current: {},
@@ -24,13 +31,6 @@ export const InHouseAdminContext = createContext<InHouseAdminContextProps>({
 	},
 });
 
-type AddressAPIType = {
-	/** API instance with auth to get a list of addresses */
-	get: (endpoint: string) => Promise<any>;
-	/** limit of items to display per search */
-	limit: number;
-};
-
 type RenderProps = (_props: InHouseAdminContextProps) => ReactElement;
 
 export interface InHouseAdminContextProps
@@ -42,102 +42,46 @@ export interface InHouseAdminContextProps
 	current: Partial<State<IHAC, any, any, any>>;
 }
 
-export type RecursivePartial<T> = {
-	[P in keyof T]?: RecursivePartial<T[P]>;
-};
-
-interface InHouseAdmin {
-	id: string;
-	schemeRoleId: string | number;
-	title: string;
-	firstname: string;
-	lastname: string;
-	effectiveDate: string;
-	countryId: string;
-	telephoneNumber: string;
-	emailAddress: string;
+export interface InHouseAdmin
+	extends CardDefaultProps,
+		CardPersonalDetails,
+		CardContactDetails {
 	addressAPI: AddressAPIType;
+	address: Partial<CardAddress>;
 }
 
-export interface InHouseAdminWithContactsProps extends InHouseAdmin {
-	address: Partial<{
-		addressLine1: string;
-		addressLine2: string;
-		addressLine3: string;
-		postTown: string;
-		county: string;
-		postCode: string;
-		country: string;
-	}>;
-}
+export interface InHouseAdminNoApi extends Omit<InHouseAdmin, 'addressAPI'> {}
 
-export interface InHouseAdminProps extends InHouseAdmin {
-	addressLine1: string;
-	addressLine2: string;
-	addressLine3: string;
-	postTown: string;
-	county: string;
-	postCode: string;
-	country: string;
-}
-
-export interface InHouseAdminProviderProps {
-	complete?: boolean;
-	onCorrect?: (...args: any[]) => void;
-	onRemove?: (...args: any[]) => Promise<any>;
-	onSaveContacts?: (...args: any[]) => Promise<any>;
-	onSaveAddress?: (...args: any[]) => Promise<any>;
-	onSaveName?: (...args: any[]) => Promise<any>;
-	testId?: string;
+export interface InHouseAdminProviderProps extends CardProviderProps {
 	/** inHouseAdmin props from the API */
-	inHouseAdmin: Partial<InHouseAdminProps>;
+	inHouseAdmin: Partial<InHouseAdmin>;
 	children?: RenderProps | ReactElement;
 	addressAPI: AddressAPIType;
 	/** overwrite any text that you need */
 	i18n?: RecursivePartial<InHouseAdminI18nProps>;
-	/** cfg space props */
-	cfg?: SpaceProps;
 }
-
-const addressFields = [
-	'addressLine1',
-	'addressLine2',
-	'addressLine3',
-	'postTown',
-	'county',
-	'country',
-	'postCode',
-	'countryId',
-];
 
 export const InHouseAdminProvider = ({
 	complete,
+	preValidatedData,
 	inHouseAdmin,
 	children,
 	i18n: i18nOverrides = {},
 	...rest
 }: InHouseAdminProviderProps) => {
 	const i18n = useI18n(i18nDefaults, i18nOverrides);
-	const [modifiedAdmin, adminAddress] = splitObjectIntoTwo(
-		inHouseAdmin,
-		addressFields,
-	);
 	const [current, send] = useMachine(inHouseAdminMachine, {
 		context: {
 			complete,
-			inHouseAdmin: {
-				...modifiedAdmin,
-				address: adminAddress,
-			},
+			preValidatedData,
+			inHouseAdmin,
 		},
 	});
 
-	const ui =
-		typeof children === 'function'
-			? children({ current, send, i18n, ...rest })
-			: children;
+	const fwdValues = { current, send, i18n, ...rest };
+	const ui = typeof children === 'function' ? children(fwdValues) : children;
 	return (
-		<InHouseAdminContext.Provider value={{ current, send, i18n, ...rest }}>
+		<InHouseAdminContext.Provider value={fwdValues}>
 			{ui}
 		</InHouseAdminContext.Provider>
 	);

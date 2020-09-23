@@ -9,6 +9,15 @@ import { SpaceProps } from '@tpr/core';
 import { i18n as i18nDefaults, TrusteeI18nProps } from './i18n';
 import { useI18n } from '../hooks/use-i18n';
 import { splitObjectIntoTwo } from '../../../utils';
+import {
+	RecursivePartial,
+	addressFields,
+	AddressAPIType,
+	CardDefaultProps,
+	CardPersonalDetails,
+	CardContactDetails,
+	CardAddress,
+} from '../common/interfaces';
 
 export const TrusteeContext = createContext<TrusteeContextProps>({
 	complete: false,
@@ -26,43 +35,21 @@ export const TrusteeContext = createContext<TrusteeContextProps>({
 });
 
 type RenderProps = (_: TrusteeContextProps) => ReactElement;
-export interface TrusteeInput {
-	schemeRoleId: string;
-	//
-	title: string;
-	firstname: string;
-	lastname: string;
+
+export interface Trustee
+	extends CardDefaultProps,
+		CardPersonalDetails,
+		CardContactDetails,
+		CardAddress {
 	trusteeType: string;
 	isProfessionalTrustee: boolean;
-	//
-	addressLine1: string;
-	addressLine2: string;
-	addressLine3: string;
-	postTown: string;
-	postcode: string;
-	county: string;
-	countryId: string;
-	//
-	telephoneNumber: string;
-	emailAddress: string;
-	effectiveDate: string;
 	[key: string]: any;
 }
 
-export type AddressAPIType = {
-	/** API instance with auth to get a list of addresses */
-	get: (endpoint: string) => Promise<any>;
-	/** limit of items to display per search */
-	limit: number;
-};
-
-export type RecursivePartial<T> = {
-	[P in keyof T]?: RecursivePartial<T[P]>;
-};
-
 export interface TrusteeContextProps {
 	complete?: boolean;
-	testId?: string;
+	preValidatedData?: boolean;
+	testId?: string | number;
 	children?: RenderProps | ReactElement;
 	cfg?: SpaceProps;
 	i18n: RecursivePartial<TrusteeI18nProps>;
@@ -74,8 +61,9 @@ export interface TrusteeContextProps {
 }
 
 export interface TrusteeCardProps {
-	trustee: TrusteeInput;
+	trustee: Trustee;
 	complete?: boolean;
+	preValidatedData?: boolean;
 	i18n?: RecursivePartial<TrusteeI18nProps>;
 	onCorrect: (...args: any[]) => void;
 	onRemove: (...args: any[]) => Promise<any>;
@@ -84,24 +72,14 @@ export interface TrusteeCardProps {
 	onAddressSave: (values: any, trustee: TrusteeProps) => Promise<any>;
 	addressAPI: AddressAPIType;
 	/** depending on your network lib, provide a path to the addressAPI results array */
-	testId?: string;
+	testId?: string | number;
 	children?: RenderProps | ReactElement;
 	cfg?: SpaceProps;
 }
 
-const addressFields = [
-	'addressLine1',
-	'addressLine2',
-	'addressLine3',
-	'postTown',
-	'county',
-	'country',
-	'postcode',
-	'countryId',
-];
-
 export const TrusteeProvider = ({
 	trustee,
+	preValidatedData,
 	complete,
 	children,
 	onDetailsSave,
@@ -119,6 +97,7 @@ export const TrusteeProvider = ({
 	const [current, send] = useMachine(trusteeMachine, {
 		context: {
 			complete,
+			preValidatedData,
 			trustee: {
 				...modifiedTrustee,
 				address: trusteeAddress,

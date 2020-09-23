@@ -1,11 +1,13 @@
-import React from 'react';
-import { Form, FieldProps, renderFields, validate } from '@tpr/forms';
+import React, { useState } from 'react';
+import { FieldProps } from '@tpr/forms';
 import { useTrusteeContext } from '../../context';
-import { Footer } from '../../../components/card';
-import { Content } from '../../../components/content';
-import { ArrowButton } from '../../../../buttons/buttons';
 import { TrusteeI18nProps } from '../../i18n';
-import { RecursivePartial } from '../../context';
+import {
+	RecursivePartial,
+	cardType,
+	cardTypeName,
+} from '../../../common/interfaces';
+import NameForm from '../../../common/views/nameForm/nameForm';
 
 const getFields = (
 	fields: RecursivePartial<TrusteeI18nProps['name']['fields']>,
@@ -35,41 +37,37 @@ const getFields = (
 ];
 
 const Name: React.FC = () => {
+	const [loading, setLoading] = useState(false);
 	const { current, send, i18n } = useTrusteeContext();
 	const fields = getFields(i18n.name.fields);
 	const state = current.context.trustee;
 
 	const onSubmit = (values) => {
-		send('NEXT', { values });
+		setLoading(true);
+		try {
+			send('NEXT', { values });
+			setLoading(false);
+		} catch (error) {
+			console.log(error);
+			setLoading(false);
+		}
 	};
 
 	return (
-		<Content type="trustee" title="Name of the trustee">
-			<Form
-				onSubmit={onSubmit}
-				validate={validate(fields)}
-				initialValues={{
-					title: state.title,
-					firstname: state.firstname,
-					lastname: state.lastname,
-				}}
-			>
-				{({ handleSubmit }) => (
-					<form onSubmit={handleSubmit}>
-						{renderFields(fields)}
-						<Footer>
-							<ArrowButton
-								intent="special"
-								pointsTo="right"
-								iconSide="right"
-								type="submit"
-								title="Continue"
-							/>
-						</Footer>
-					</form>
-				)}
-			</Form>
-		</Content>
+		<NameForm
+			type={cardType.trustee}
+			typeName={cardTypeName.trustee}
+			title={i18n.name.title}
+			onSubmit={onSubmit}
+			fields={fields}
+			initialValues={{
+				title: state.title,
+				firstname: state.firstname,
+				lastname: state.lastname,
+			}}
+			loading={loading}
+			nextStep={true}
+		/>
 	);
 };
 

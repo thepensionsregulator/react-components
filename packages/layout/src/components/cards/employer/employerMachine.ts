@@ -1,5 +1,5 @@
 import { Machine, assign } from 'xstate';
-import { EmployerProps } from './context';
+import { Employer } from './context';
 
 interface EmployerStates {
 	states: {
@@ -28,7 +28,8 @@ type EmployerEvents =
 export interface EmployerContext {
 	complete: boolean;
 	remove: { confirm: boolean; date: string } | null;
-	employer: Partial<EmployerProps>;
+	employer: Partial<Employer>;
+	preValidatedData?: boolean | null;
 }
 
 const employerMachine = Machine<

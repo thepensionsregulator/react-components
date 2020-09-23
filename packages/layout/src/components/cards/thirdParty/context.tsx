@@ -4,9 +4,14 @@ import thirdPartyMachine, {
 	ThirdPartyContext as EC,
 } from './thirdPartyMachine';
 import { State, EventData } from 'xstate';
-import { SpaceProps } from '@tpr/core';
 import { i18n as i18nDefaults, ThirdPartyI18nProps } from './i18n';
 import { useI18n } from '../hooks/use-i18n';
+import {
+	CardDefaultProps,
+	CardAddress,
+	CardProviderProps,
+	RecursivePartial,
+} from '../common/interfaces';
 
 export const ThirdPartyContext = createContext<ThirdPartyContextProps>({
 	current: {},
@@ -24,43 +29,22 @@ export interface ThirdPartyContextProps
 	current: Partial<State<EC, any, any, any>>;
 }
 
-export type RecursivePartial<T> = {
-	[P in keyof T]?: RecursivePartial<T[P]>;
-};
-
-export type ThirdPartyProps = {
-	id: string;
-	schemeRoleId: number;
-	effectiveDate: string;
+export interface ThirdPartyProps extends CardDefaultProps {
 	organisationName: string;
-	telephoneNumber: string;
-	emailAddress: string;
-	addressLine1: string;
-	addressLine2: string;
-	addressLine3: string;
-	postTown: string;
-	county: string;
-	postcode: string;
-	countryId: string;
-	[key: string]: any;
-};
+	address: Partial<CardAddress>;
+}
 
-export interface ThirdPartyProviderProps {
-	complete?: boolean;
-	onCorrect?: (...args: any[]) => void;
-	onRemove?: (...args: any[]) => Promise<any>;
-	testId?: string;
+export interface ThirdPartyProviderProps extends CardProviderProps {
 	/** thirdParty props from the API */
 	thirdParty: Partial<ThirdPartyProps>;
 	children?: RenderProps | ReactElement;
 	/** overwrite any text that you need */
 	i18n?: RecursivePartial<ThirdPartyI18nProps>;
-	/** cfg space props */
-	cfg?: SpaceProps;
 }
 
 export const ThirdPartyProvider = ({
 	complete,
+	preValidatedData,
 	thirdParty,
 	children,
 	i18n: i18nOverrides = {},
@@ -70,16 +54,15 @@ export const ThirdPartyProvider = ({
 	const [current, send] = useMachine(thirdPartyMachine, {
 		context: {
 			complete,
+			preValidatedData,
 			thirdParty,
 		},
 	});
 
-	const ui =
-		typeof children === 'function'
-			? children({ current, send, i18n, ...rest })
-			: children;
+	const fwdValues = { current, send, i18n, ...rest };
+	const ui = typeof children === 'function' ? children(fwdValues) : children;
 	return (
-		<ThirdPartyContext.Provider value={{ current, send, i18n, ...rest }}>
+		<ThirdPartyContext.Provider value={fwdValues}>
 			{ui}
 		</ThirdPartyContext.Provider>
 	);

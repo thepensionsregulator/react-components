@@ -1,0 +1,65 @@
+---
+name: Actuary
+menu: Cards
+route: /cards/actuary
+---
+
+import { Props } from 'docz';
+import { Playground, experianApiGet } from '@playground';
+import { Form } from 'react-final-form';
+import { useState } from 'react';
+import { ActuaryCard } from './actuary';
+
+# Actuary Card
+
+Actuary Card for tpr apps
+
+## Usage
+
+```js
+import { ActuaryCard } from '@tpr/layout';
+```
+
+## Basic usage
+
+<Playground>
+	{() => {
+		const [complete, setComplete] = useState(false);
+		const callbackFn = (values, _fullActuaryObject) => {
+			console.log(values);
+			console.log(_fullActuaryObject);
+			return Promise.resolve(values);
+		};
+		const actuary = {
+			schemeRoleId: 123,
+			title: 'Mr',
+			firstname: 'John',
+			lastname: 'Smith',
+			effectiveDate: '1997-04-01T00:00:00',
+			telephoneNumber: '01273 222 111',
+			emailAddress: 'john.wick@warnerbros.com',
+      organisationName: 'Actuaries Group Ltd',
+			address: {				
+				addressLine1: 'Napier House',
+				addressLine2: 'Trafalgar Pl',
+				addressLine3: '',
+				postTown: 'Brighton',
+				county: 'West Sussex',
+				postcode: 'BN1 4DW',
+				country: '',
+				countryId: ''
+			}
+		};
+		return (
+			<ActuaryCard
+				onSaveContacts={callbackFn}
+				onSaveName={callbackFn}
+				onRemove={callbackFn}
+				onCorrect={(value) => setComplete(value)}
+				complete={complete}
+				preValidatedData={true}
+				actuary={actuary}
+			/>
+		);
+	}}
+</Playground>

@@ -8,8 +8,8 @@ import { Flex, H4 } from '@tpr/core';
 import { Toolbar } from '../components/toolbar';
 import { UnderlinedButton } from '../components/button';
 import { Preview } from './views/preview/preview';
-import { DateForm } from './views/remove/date/date';
-import { Confirm } from './views/remove/confirm/confirm';
+import { RemoveDateForm } from './views/remove/date/date';
+import { ConfirmRemove } from './views/remove/confirm/confirm';
 import { Reference } from './views/reference';
 import styles from '../cards.module.scss';
 
@@ -21,9 +21,9 @@ const CardContentSwitch: React.FC = () => {
 		case current.matches({ edit: 'reference' }):
 			return <Reference />;
 		case current.matches({ remove: 'date' }):
-			return <DateForm />;
+			return <RemoveDateForm />;
 		case current.matches({ remove: 'confirm' }):
-			return <Confirm />;
+			return <ConfirmRemove />;
 		default:
 			return null;
 	}
@@ -64,7 +64,7 @@ export const InsurerCard: React.FC<InsurerProviderProps> = ({
 				return (
 					<Flex cfg={cfg} data-testid={testId} className={styles.card}>
 						<Toolbar
-							complete={context.complete}
+							complete={context.preValidatedData ? true : context.complete}
 							subtitle={() => <H4>{context.insurer.organisationName}</H4>}
 							buttonLeft={() => (
 								<UnderlinedButton>{i18n.preview.buttons.one}</UnderlinedButton>

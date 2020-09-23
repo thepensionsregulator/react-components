@@ -3,15 +3,15 @@ import { UnderlinedButton } from '../components/button';
 import { Toolbar } from '../components/toolbar';
 import { Flex, P } from '@tpr/core';
 import { Preview } from './views/preview/preview';
-import { DateForm } from './views/remove/date/date';
+import { RemoveDateForm } from './views/remove/date/date';
 import { EmployerType } from './views/type/type';
-import { Confirm } from './views/remove/confirm/confirm';
+import { ConfirmRemove } from './views/remove/confirm/confirm';
 import { capitalize } from '../../../utils';
 import {
 	EmployerProvider,
 	useEmployerContext,
 	EmployerProviderProps,
-	EmployerProps,
+	Employer,
 } from './context';
 import styles from '../cards.module.scss';
 
@@ -23,9 +23,9 @@ const CardContentSwitch: React.FC = () => {
 		case current.matches('employerType'):
 			return <EmployerType />;
 		case current.matches({ remove: 'date' }):
-			return <DateForm />;
+			return <RemoveDateForm />;
 		case current.matches({ remove: 'confirm' }):
-			return <Confirm />;
+			return <ConfirmRemove />;
 		default:
 			return null;
 	}
@@ -57,7 +57,7 @@ const ToolbarButton: React.FC<{ title: string }> = ({ title }) => {
 	);
 };
 
-const EmployerSubtitle: React.FC<Partial<EmployerProps>> = ({
+const EmployerSubtitle: React.FC<Partial<Employer>> = ({
 	employerType,
 	statutoryEmployer,
 }) => {
@@ -98,7 +98,7 @@ export const EmployerCard: React.FC<EmployerProviderProps> = ({
 				return (
 					<Flex cfg={cfg} data-testid={testId} className={styles.card}>
 						<Toolbar
-							complete={context.complete}
+							complete={context.preValidatedData ? true : context.complete}
 							subtitle={() => <EmployerSubtitle {...context.employer} />}
 							buttonLeft={() => (
 								<ToolbarButton title={i18n.preview.buttons.one} />

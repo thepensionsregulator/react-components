@@ -1,4 +1,9 @@
 import { Machine, assign } from 'xstate';
+import {
+	CardAddress,
+	CardPersonalDetails,
+	CardContactDetails,
+} from '../common/interfaces';
 
 interface TrusteeStates {
 	states: {
@@ -43,7 +48,7 @@ type TrusteeEvents =
 	| { type: 'COMPLETE' }
 	| { type: 'NEXT' }
 	| { type: 'CANCEL' }
-	| { type: 'SAVE'; address?: TrusteeAddress; values?: any }
+	| { type: 'SAVE'; address?: Partial<CardAddress>; values?: any }
 	| { type: 'BACK' }
 	| {
 			type: 'SELECT';
@@ -53,35 +58,21 @@ type TrusteeEvents =
 			};
 	  };
 
-type TrusteeAddress = Partial<{
-	addressLine1: string;
-	addressLine2: string;
-	addressLine3: string;
-	postTown: string;
-	postcode: string;
-	county: string;
-	countryId: string;
-}>;
-
-export type TrusteeProps = {
+export interface TrusteeProps extends CardPersonalDetails, CardContactDetails {
 	schemeRoleId: string;
 	//
-	title: string;
-	firstname: string;
-	lastname: string;
 	trusteeType: string;
 	isProfessionalTrustee: boolean;
 	//
-	address: TrusteeAddress;
+	address: Partial<CardAddress>;
 	//
-	telephoneNumber: string;
-	emailAddress: string;
 	[key: string]: any;
-};
+}
 
 export interface TrusteeContext {
 	loading: boolean;
 	complete: boolean;
+	preValidatedData?: boolean | null;
 	trustee: TrusteeProps;
 	remove?: {
 		reason: null | string;

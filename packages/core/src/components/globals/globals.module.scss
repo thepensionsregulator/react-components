@@ -678,6 +678,33 @@
 	line-height: $line-height-3 !important;
 }
 
+/* word breaks */
+
+.wordBreak-all {
+	word-break: break-all !important;
+}
+
+.wordBreak-word {
+	word-break: break-word !important;
+}
+
+.wordBreak-normal {
+	word-break: normal !important;
+}
+
+.wordBreak-keep {
+	word-break: keep-all !important;
+}
+
+.wordBreak-initial {
+	word-break: initial !important;
+}
+
+.wordBreak-inherit {
+	word-break: inherit !important;
+}
+
+
 /* BACKGROUND */
 
 /* background color */

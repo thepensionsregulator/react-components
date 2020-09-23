@@ -1,19 +1,10 @@
-import React, { useEffect, useCallback, ChangeEvent } from 'react';
+import React, { useEffect, useCallback } from 'react';
 import { Flex, Button, P, Link } from '@tpr/core';
-import { Input } from '@tpr/forms';
-import { extractToObject } from './helpers';
-import { useTrusteeContext } from '../../context';
+import { FFInputText, useFormState } from '@tpr/forms';
+import { extractToObject, postcodeIsValid } from './helpers';
+import { PostcodeProps } from '../../../common/interfaces';
 import styles from './Postcode.module.scss';
 
-type PostcodeProps = {
-	lookup: boolean;
-	postcode: string;
-	loading: boolean;
-	setPostcode: Function;
-	showLookup: Function;
-	setLoading: Function;
-	setOptions: Function;
-};
 const Postcode: React.FC<PostcodeProps> = ({
 	lookup,
 	loading,
@@ -22,9 +13,10 @@ const Postcode: React.FC<PostcodeProps> = ({
 	showLookup,
 	setLoading,
 	setOptions,
+	addressAPI,
+	i18n,
 }) => {
-	const { addressAPI, i18n } = useTrusteeContext();
-
+	const utils = useFormState();
 	const search = useCallback(
 		(postcode: string, country = 'GBR') => {
 			setLoading(true);
@@ -59,8 +51,8 @@ const Postcode: React.FC<PostcodeProps> = ({
 									return {
 										value: addressToOurFormat,
 										label: Object.keys(addressToOurFormat)
-											.filter((key) => addressObject[key])
-											.map((key) => addressObject[key])
+											.filter((key) => addressToOurFormat[key])
+											.map((key) => addressToOurFormat[key])
 											.join(', '),
 									};
 								});
@@ -72,7 +64,6 @@ const Postcode: React.FC<PostcodeProps> = ({
 						});
 					} else {
 						setLoading(false);
-						// console.error('NOTHING WAS FOUND');
 					}
 				})
 				.catch((err) => {
@@ -95,27 +86,28 @@ const Postcode: React.FC<PostcodeProps> = ({
 			<P cfg={{ mb: 2, fontWeight: 3 }}>{i18n.address.postcode.title}</P>
 			{lookup ? (
 				<>
-					<div className={styles.inputWrapper}>
-						<Input
-							type="text"
-							value={postcode}
-							onChange={(evt: ChangeEvent<HTMLInputElement>) =>
-								setPostcode(evt.target.value)
-							}
-							disabled={loading}
-						/>
-					</div>
-					<Flex>
-						<Button
-							onClick={() => {
-								search(postcode);
-								// form.change("address", undefined);
-							}}
-							disabled={loading}
-						>
-							{loading ? 'Loading...' : i18n.address.postcode.button}
-						</Button>
-					</Flex>
+						<div className={styles.inputWrapper}>
+							<FFInputText
+								name="postcode"
+								label=""
+								disabled={loading}
+								validate={ (value) => (postcodeIsValid(value, i18n?.address.postcode.regExPattern) ? undefined : i18n.address.auto.fields.postcode.invalidError)}
+								inputWidth={7}>
+							</FFInputText>
+						</div>
+						<Flex>
+							<Button
+								onClick={() => {
+									if (postcodeIsValid(utils.values.postcode, i18n?.address.postcode.regExPattern)) {
+										setPostcode(utils.values.postcode);
+										search(postcode);
+									}
+								}}
+								disabled={!postcodeIsValid(utils.values.postcode, i18n?.address.postcode.regExPattern) || loading}
+							>
+								{loading ? 'Loading...' : i18n.address.postcode.button}
+							</Button>
+						</Flex>
 				</>
 			) : (
 				<Flex>

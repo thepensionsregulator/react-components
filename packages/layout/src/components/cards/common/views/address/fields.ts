@@ -1,17 +1,11 @@
 import { FieldProps } from '@tpr/forms';
-import { InHouseAdminI18nProps } from '../../i18n';
-import { RecursivePartial } from '../../context';
-
-function validPostcode(postcode: string) {
-	const PC = postcode.replace(/\s/g, '');
-	const regex = /^[A-Z]{1,2}[0-9]{1,2} ?[0-9][A-Z]{2}$/i;
-	return regex.test(PC);
-}
+import { addressLabelsFields } from '../../interfaces';
+import { RecursivePartial } from '../../../common/interfaces';
+import { postcodeIsValid } from './helpers';
 
 export const getFields = (
-	labels: RecursivePartial<
-		InHouseAdminI18nProps['address']['manual']['fields']
-	>,
+	labels: RecursivePartial<addressLabelsFields>,
+	postcodeRegExPattern: string
 ): FieldProps[] => [
 	{
 		name: 'addressLine1',
@@ -19,7 +13,7 @@ export const getFields = (
 		label: labels.addressLine1.label,
 		error: (value: string) => {
 			if (!value) return labels.addressLine1.emptyError;
-			return value.length < 3 ? labels.addressLine1.invalidError : undefined;
+			return value.length < 2 ? labels.addressLine1.invalidError : undefined;
 		},
 		inputWidth: 6,
 		cfg: { mb: 3 },
@@ -44,6 +38,9 @@ export const getFields = (
 	{
 		name: 'postTown',
 		label: labels.postTown.label,
+		error: (value: string) => {
+			return !value ? labels.postTown.emptyError : undefined;
+		},
 		type: 'text',
 		inputWidth: 6,
 		cfg: { mb: 3 },
@@ -54,7 +51,7 @@ export const getFields = (
 		type: 'text',
 		error: (postcode: string) => {
 			if (!postcode) return labels.postcode.emptyError;
-			return validPostcode(postcode) ? undefined : labels.postcode.invalidError;
+			return postcodeIsValid(postcode, postcodeRegExPattern) ? undefined : labels.postcode.invalidError;
 		},
 		inputWidth: 6,
 		cfg: { mb: 3 },
