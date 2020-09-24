@@ -121,15 +121,15 @@ describe('Actuary Card', () => {
 			expect(findByText('Title (optional)')).toBeDefined();
 			expect(findByText('First name')).toBeDefined();
 			expect(findByText('Last name')).toBeDefined();
-			expect(findByText('Save and Close')).toBeDefined();
+			expect(findByText('Save and close')).toBeDefined();
 		});
 
 		test('save and close', async () => {
 			await act(async () => {
-				findByText('Save and Close').click();
+				findByText('Save and close').click();
 				const results = await axe(component);
 				expect(results).toHaveNoViolations();
-				// After clicking the "Save and Close" button, it goes back to the Preview
+				// After clicking the "Save and close" button, it goes back to the Preview
 				expect(findByText('Address')).toBeDefined();
 			});
 		});
@@ -175,7 +175,7 @@ describe('Actuary Card', () => {
 				findByText('Save and close').click();
 				const results = await axe(component);
 				expect(results).toHaveNoViolations();
-				// After clicking the "Save and Close" button, it goes back to the Preview
+				// After clicking the "Save and close" button, it goes back to the Preview
 				expect(findByText('Address')).toBeDefined();
 			});
 		});

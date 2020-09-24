@@ -51,7 +51,7 @@ const NameForm: React.FC<NameFormProps> = ({
 								iconSide="right"
 								disabled={loading}
 								type="submit"
-								title={nextStep ? 'Continue' : 'Save and Close'}
+								title={nextStep ? 'Continue' : 'Save and close'}
 							/>
 						</Footer>
 					</form>
