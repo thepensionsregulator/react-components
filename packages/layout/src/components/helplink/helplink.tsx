@@ -1,3 +1,6 @@
 import React from 'react';
+import Collapsible from 'react-collapsible';
 
-export const HelpLink = () => <h1>collapsible text</h1>;
+export const HelpLink = () => (
+	<Collapsible trigger="trigger text">Hide this text</Collapsible>
+);
