@@ -86,28 +86,42 @@ const Postcode: React.FC<PostcodeProps> = ({
 			<P cfg={{ mb: 2, fontWeight: 3 }}>{i18n.address.postcode.title}</P>
 			{lookup ? (
 				<>
-						<div className={styles.inputWrapper}>
-							<FFInputText
-								name="postcode"
-								label=""
-								disabled={loading}
-								validate={ (value) => (postcodeIsValid(value, i18n?.address.postcode.regExPattern) ? undefined : i18n.address.auto.fields.postcode.invalidError)}
-								inputWidth={7}>
-							</FFInputText>
-						</div>
-						<Flex>
-							<Button
-								onClick={() => {
-									if (postcodeIsValid(utils.values.postcode, i18n?.address.postcode.regExPattern)) {
-										setPostcode(utils.values.postcode);
-										search(postcode);
-									}
-								}}
-								disabled={!postcodeIsValid(utils.values.postcode, i18n?.address.postcode.regExPattern) || loading}
-							>
-								{loading ? 'Loading...' : i18n.address.postcode.button}
-							</Button>
-						</Flex>
+					<div className={styles.inputWrapper}>
+						<FFInputText
+							name="postcode"
+							label=""
+							disabled={loading}
+							validate={(value) =>
+								postcodeIsValid(value, i18n?.address.postcode.regExPattern)
+									? undefined
+									: i18n.address.auto.fields.postcode.invalidError
+							}
+							inputWidth={7}
+						></FFInputText>
+					</div>
+					<Flex>
+						<Button
+							onClick={() => {
+								if (
+									postcodeIsValid(
+										utils.values.postcode,
+										i18n?.address.postcode.regExPattern,
+									)
+								) {
+									setPostcode(utils.values.postcode);
+									search(postcode);
+								}
+							}}
+							disabled={
+								!postcodeIsValid(
+									utils.values.postcode,
+									i18n?.address.postcode.regExPattern,
+								) || loading
+							}
+						>
+							{loading ? 'Loading...' : i18n.address.postcode.button}
+						</Button>
+					</Flex>
 				</>
 			) : (
 				<Flex>
