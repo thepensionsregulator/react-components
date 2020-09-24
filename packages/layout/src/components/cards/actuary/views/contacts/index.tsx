@@ -43,6 +43,7 @@ export const Contacts: React.FC = () => {
 			await onSaveContacts(
 				{
 					...values,
+					schemeRoleId: actuary.schemeRoleId,
 					title: actuary.title,
 					firstName: actuary.firstName,
 					lastName: actuary.lastName,
