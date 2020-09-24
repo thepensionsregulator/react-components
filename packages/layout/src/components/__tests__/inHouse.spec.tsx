@@ -18,10 +18,10 @@ const noop = () => Promise.resolve();
 
 const inHouseAdmin: InHouseAdminNoApi = {
 	id: '',
-	schemeRoleId: '123',
+	schemeRoleId: 123,
 	title: 'Mr',
-	firstname: 'John',
-	lastname: 'Smoth',
+	firstName: 'John',
+	lastName: 'Smoth',
 	effectiveDate: '1997-04-01T00:00:00',
 	address: {
 		addressLine1: 'Napier House',

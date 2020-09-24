@@ -9,7 +9,7 @@ const noop = () => Promise.resolve();
 
 const thirdPartyAdmin: ThirdPartyProps = {
 	id: '',
-	schemeRoleId: '123',
+	schemeRoleId: 123,
 	effectiveDate: '1997-04-01T00:00:00',
 	organisationName: `McDonald's`,
 	address: {

@@ -35,6 +35,7 @@ export const ConfirmRemove: React.FC = () => {
 		try {
 			const params = {
 				schemeRoleId: insurer.schemeRoleId,
+				effectiveDate: insurer.effectiveDate,
 				date: remove.date,
 			};
 			await onRemove(params, insurer);

@@ -36,6 +36,7 @@ export const ConfirmRemove = () => {
 			{
 				schemeRoleId: actuary.schemeRoleId,
 				date: remove.date,
+				effectiveDate: actuary.effectiveDate,
 			},
 			actuary,
 		)

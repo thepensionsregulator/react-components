@@ -66,8 +66,8 @@ export const Preview: React.FC<any> = () => {
 					<Flex cfg={{ my: 2, flexDirection: 'column' }}>
 						<P cfg={{ mb: 2 }}>
 							{corporateGroup.title
-								? `${corporateGroup.title} ${corporateGroup.firstname} ${corporateGroup.lastname}`
-								: `${corporateGroup.firstname} ${corporateGroup.lastname}`}
+								? `${corporateGroup.title} ${corporateGroup.firstName} ${corporateGroup.lastName}`
+								: `${corporateGroup.firstName} ${corporateGroup.lastName}`}
 						</P>
 						{corporateGroup.telephoneNumber && (
 							<>

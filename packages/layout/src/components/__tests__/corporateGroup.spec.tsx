@@ -10,12 +10,12 @@ const noop = () => Promise.resolve();
 
 const corporateGroup: CorporateGroup = {
 	id: '',
-	schemeRoleId: '',
+	schemeRoleId: 11,
 	effectiveDate: '',
 	organisationName: 'Acme Factory Pension Trustees Limited',
 	title: 'Miss',
-	firstname: 'Susan',
-	lastname: 'Smith',
+	firstName: 'Susan',
+	lastName: 'Smith',
 	directorIsProfessional: true,
 	telephoneNumber: '01273 000 111',
 	emailAddress: 'susan@corporate-group.com',

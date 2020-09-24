@@ -104,8 +104,8 @@ export const ActuaryCard: React.FC<ActuaryProviderProps> = ({
 								<H4 cfg={{ lineHeight: 3 }}>
 									{[
 										context.actuary.title,
-										context.actuary.firstname,
-										context.actuary.lastname,
+										context.actuary.firstName,
+										context.actuary.lastName,
 									]
 										.filter(Boolean)
 										.join(' ')}

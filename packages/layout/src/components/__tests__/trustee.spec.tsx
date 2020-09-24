@@ -18,11 +18,11 @@ const noop = () => Promise.resolve();
 
 const trustee: Trustee = {
 	id: '',
-	schemeRoleId: '12345',
+	schemeRoleId: 12345,
 	//
 	title: 'Mr',
-	firstname: 'John',
-	lastname: 'Smith',
+	firstName: 'John',
+	lastName: 'Smith',
 	trusteeType: 'member-nominated',
 	isProfessionalTrustee: false,
 	//
