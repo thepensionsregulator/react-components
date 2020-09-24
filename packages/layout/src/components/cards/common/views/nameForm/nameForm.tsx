@@ -13,8 +13,8 @@ interface NameFormProps {
 	fields: FieldProps[];
 	initialValues: {
 		title: string;
-		firstname: string;
-		lastname: string;
+		firstName: string;
+		lastName: string;
 	};
 	loading: boolean;
 	nextStep?: boolean;
@@ -37,8 +37,8 @@ const NameForm: React.FC<NameFormProps> = ({
 				validate={validate(fields)}
 				initialValues={{
 					title: initialValues.title,
-					firstname: initialValues.firstname,
-					lastname: initialValues.lastname,
+					firstName: initialValues.firstName,
+					lastName: initialValues.lastName,
 				}}
 			>
 				{({ handleSubmit }) => (

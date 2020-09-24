@@ -90,8 +90,8 @@ const trusteeMachine = Machine<TrusteeContext, TrusteeStates, TrusteeEvents>({
 			schemeRoleId: '',
 			//
 			title: '',
-			firstname: '',
-			lastname: '',
+			firstName: '',
+			lastName: '',
 			trusteeType: '',
 			isProfessionalTrustee: false,
 			//

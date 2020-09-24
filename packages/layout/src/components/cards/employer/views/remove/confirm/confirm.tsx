@@ -35,6 +35,7 @@ export const ConfirmRemove: React.FC = () => {
 		await onRemove(
 			{
 				schemeRoleId: employer.schemeRoleId,
+				effectiveDate: employer.effectiveDate,
 				date: remove.date,
 			},
 			employer,

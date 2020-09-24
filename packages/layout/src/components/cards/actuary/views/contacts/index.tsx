@@ -40,7 +40,15 @@ export const Contacts: React.FC = () => {
 	const onSubmit = async (values) => {
 		setLoading(true);
 		try {
-			await onSaveContacts(values, actuary);
+			await onSaveContacts(
+				{
+					...values,
+					title: actuary.title,
+					firstName: actuary.firstName,
+					lastName: actuary.lastName,
+				},
+				actuary,
+			);
 			setLoading(false);
 			send('SAVE', { values });
 		} catch (error) {

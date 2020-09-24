@@ -10,10 +10,10 @@ const noop = () => Promise.resolve();
 
 const actuary: Actuary = {
 	id: '',
-	schemeRoleId: '123',
+	schemeRoleId: 123,
 	title: 'Mr',
-	firstname: 'John',
-	lastname: 'Johnson',
+	firstName: 'John',
+	lastName: 'Johnson',
 	effectiveDate: '2010-01-01T00:00:00',
 	telephoneNumber: '01273 000 111',
 	emailAddress: 'john@actuary.com',
