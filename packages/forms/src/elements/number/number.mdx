@@ -59,6 +59,7 @@ import { FFInputNumber } from '@tpr/forms';
 					inputWidth={5}
 					cfg={{ my: 5 }}
 					callback={(e) => console.log(e.target.value)}
+					required={true}
 				/>
 				<button type="submit" style={{ display: 'none' }} children="Submit" />
 			</form>
@@ -83,9 +84,9 @@ import { Form, validate, renderFields } from '@tpr/forms';
 				hint: 'must be expressed in miles',
 				error: 'Cannot be empty',
 				inputWidth: 5,
-				placeholder: "e.g. 456.77",
+				placeholder: 'e.g. 456.77',
 				cfg: { my: 5 },
-				after: "mi",
+				after: 'mi',
 				decimalPlaces: 2,
 				validate: (value) => {
 					if (!value) {

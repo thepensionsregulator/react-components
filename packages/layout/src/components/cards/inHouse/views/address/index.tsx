@@ -27,12 +27,13 @@ export const AddressPage: React.FC = () => {
 			typeName={cardTypeName.inHouseAdmin}
 			title={i18n.address.title}
 		>
-			<Form 
+			<Form
 				onSubmit={() => {}}
 				initialValues={{
-					postcode: postcode
-				}}>
-					{({ }) => (
+					postcode: postcode,
+				}}
+			>
+				{({}) => (
 					<form>
 						<Postcode
 							lookup={lookup}

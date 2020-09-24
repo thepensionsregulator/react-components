@@ -5,7 +5,7 @@ import { postcodeIsValid } from './helpers';
 
 export const getFields = (
 	labels: RecursivePartial<addressLabelsFields>,
-	postcodeRegExPattern: string
+	postcodeRegExPattern: string,
 ): FieldProps[] => [
 	{
 		name: 'addressLine1',
@@ -51,7 +51,9 @@ export const getFields = (
 		type: 'text',
 		error: (postcode: string) => {
 			if (!postcode) return labels.postcode.emptyError;
-			return postcodeIsValid(postcode, postcodeRegExPattern) ? undefined : labels.postcode.invalidError;
+			return postcodeIsValid(postcode, postcodeRegExPattern)
+				? undefined
+				: labels.postcode.invalidError;
 		},
 		inputWidth: 6,
 		cfg: { mb: 3 },

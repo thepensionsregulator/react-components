@@ -145,7 +145,7 @@ describe('Corporate Group Trustee Card', () => {
 				findByText('Save and close').click();
 				const results = await axe(component);
 				expect(results).toHaveNoViolations();
-				// After clicking the "Save and Close" button, it goes back to the Preview
+				// After clicking the "Save and close" button, it goes back to the Preview
 				expect(findByText('Address')).toBeDefined();
 			});
 		});

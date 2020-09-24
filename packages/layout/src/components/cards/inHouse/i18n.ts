@@ -39,7 +39,7 @@ export type InHouseAdminI18nProps = {
 				postcode: {
 					invalidError?: string;
 				};
-			},
+			};
 			dropdown: {
 				placeholder: string;
 				link: string;
@@ -56,9 +56,9 @@ export type InHouseAdminI18nProps = {
 				};
 				addressLine2: { label: string; error?: string };
 				addressLine3: { label: string; error?: string };
-				postTown: { 
-					label: string; 
-					emptyError?: string
+				postTown: {
+					label: string;
+					emptyError?: string;
 				};
 				postcode: {
 					label: string;
@@ -179,7 +179,7 @@ export const i18n: InHouseAdminI18nProps = {
 				},
 				addressLine2: { label: 'Address line 2' },
 				addressLine3: { label: 'Address line 3' },
-				postTown: { 
+				postTown: {
 					label: 'City',
 					emptyError: 'This is a required field',
 				},

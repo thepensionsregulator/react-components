@@ -8,7 +8,10 @@ const ManualComplete: React.FC = () => {
 	const [loading, setLoading] = useState(false);
 	const { current, send, i18n, onSaveAddress } = useInHouseAdminContext();
 	const { inHouseAdmin } = current.context;
-	const fields = getFields(i18n?.address?.manual?.fields, i18n?.address.postcode.regExPattern);
+	const fields = getFields(
+		i18n?.address?.manual?.fields,
+		i18n?.address.postcode.regExPattern,
+	);
 
 	const onSubmit = async (values) => {
 		setLoading(true);
