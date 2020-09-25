@@ -30,10 +30,6 @@ import { ActuaryCard } from '@tpr/layout';
 			console.log(_fullActuaryObject);
 			return Promise.resolve(values);
 		};
-		const saveName = (...args) => {
-			console.log(...args);
-			return Promise.resolve();
-		};
 		const actuary = {
 			schemeRoleId: 123,
 			title: 'Mr',
@@ -57,7 +53,7 @@ import { ActuaryCard } from '@tpr/layout';
 		return (
 			<ActuaryCard
 				onSaveContacts={callbackFn}
-				onSaveName={saveName}
+				onSaveName={callbackFn}
 				onRemove={callbackFn}
 				onCorrect={(value) => setComplete(value)}
 				complete={complete}
