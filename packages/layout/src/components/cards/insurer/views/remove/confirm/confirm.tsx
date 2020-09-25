@@ -30,21 +30,24 @@ export const ConfirmRemove: React.FC = () => {
 	);
 	const { insurer, remove } = current.context;
 
-	async function handleRemove() {
+	const handleRemove = async () => {
 		setLoading(true);
-		try {
-			const params = {
+		await onRemove(
+			{
 				schemeRoleId: insurer.schemeRoleId,
 				effectiveDate: insurer.effectiveDate,
 				date: remove.date,
-			};
-			await onRemove(params, insurer);
-			setLoading(false);
-		} catch (error) {
-			console.error(error);
-			setLoading(false);
-		}
-	}
+			},
+			insurer,
+		)
+			.then(() => {
+				setLoading(false);
+				send('DELETE');
+			})
+			.catch(() => {
+				setLoading(false);
+			});
+	};
 
 	return (
 		<Confirm

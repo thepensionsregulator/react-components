@@ -27,7 +27,7 @@ export const ConfirmRemove: React.FC = () => {
 	);
 	const { trustee, remove } = current.context;
 
-	function handleRemove() {
+	const handleRemove = async () => {
 		setLoading(true);
 		onRemove(
 			{
@@ -39,11 +39,12 @@ export const ConfirmRemove: React.FC = () => {
 		)
 			.then(() => {
 				setLoading(false);
+				send('DELETE');
 			})
 			.catch(() => {
 				setLoading(false);
 			});
-	}
+	};
 
 	return (
 		<Confirm

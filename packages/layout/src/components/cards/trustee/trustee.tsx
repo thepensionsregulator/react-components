@@ -14,6 +14,8 @@ import Address from './views/address';
 import { Contacts } from './views/contacts';
 import RemoveReason from './views/remove/reason/reason';
 import { ConfirmRemove } from './views/remove/confirm';
+import RemovedBox from '../components/removedBox';
+import { cardTypeName } from '../common/interfaces';
 
 import styles from '../cards.module.scss';
 
@@ -42,6 +44,9 @@ const CardContent: React.FC = () => {
 		return <RemoveReason />;
 	} else if (current.matches({ remove: 'confirm' })) {
 		return <ConfirmRemove />;
+	} else if (current.matches({ remove: 'deleted' })) {
+		// message to show when successfuly deleted.
+		return <RemovedBox type={cardTypeName.trustee} />;
 	} else {
 		return null;
 	}

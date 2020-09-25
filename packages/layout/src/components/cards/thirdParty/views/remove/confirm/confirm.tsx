@@ -30,7 +30,7 @@ export const ConfirmRemove: React.FC = () => {
 	);
 	const { thirdParty, remove } = current.context;
 
-	async function handleRemove() {
+	const handleRemove = async () => {
 		setLoading(true);
 		await onRemove(
 			{
@@ -42,11 +42,12 @@ export const ConfirmRemove: React.FC = () => {
 		)
 			.then(() => {
 				setLoading(false);
+				send('DELETE');
 			})
 			.catch(() => {
 				setLoading(false);
 			});
-	}
+	};
 
 	return (
 		<Confirm
