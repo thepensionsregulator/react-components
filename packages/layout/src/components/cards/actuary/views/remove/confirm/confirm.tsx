@@ -30,7 +30,7 @@ export const ConfirmRemove = () => {
 	);
 	const { actuary, remove } = current.context;
 
-	async function handleRemove() {
+	const handleRemove = async () => {
 		setLoading(true);
 		await onRemove(
 			{
@@ -47,7 +47,7 @@ export const ConfirmRemove = () => {
 			.catch(() => {
 				setLoading(false);
 			});
-	}
+	};
 
 	return (
 		<Confirm
