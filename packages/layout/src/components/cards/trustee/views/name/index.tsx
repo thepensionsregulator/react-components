@@ -20,7 +20,7 @@ const getFields = (
 		cfg: { mb: 4 },
 	},
 	{
-		name: 'firstname',
+		name: 'firstName',
 		type: 'text',
 		label: fields.firstName.label,
 		error: fields.firstName.error,
@@ -28,7 +28,7 @@ const getFields = (
 		cfg: { mb: 4 },
 	},
 	{
-		name: 'lastname',
+		name: 'lastName',
 		type: 'text',
 		label: fields.lastName.label,
 		error: fields.lastName.error,
@@ -62,8 +62,8 @@ const Name: React.FC = () => {
 			fields={fields}
 			initialValues={{
 				title: state.title,
-				firstname: state.firstname,
-				lastname: state.lastname,
+				firstName: state.firstName,
+				lastName: state.lastName,
 			}}
 			loading={loading}
 			nextStep={true}

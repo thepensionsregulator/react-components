@@ -30,11 +30,12 @@ export const ConfirmRemove: React.FC = () => {
 	);
 	const { inHouseAdmin, remove } = current.context;
 
-	async function handleRemove() {
+	const handleRemove = async () => {
 		setLoading(true);
 		await onRemove(
 			{
 				schemeRoleId: inHouseAdmin.schemeRoleId,
+				effectiveDate: inHouseAdmin.effectiveDate,
 				date: remove.date,
 			},
 			inHouseAdmin,
@@ -46,7 +47,7 @@ export const ConfirmRemove: React.FC = () => {
 			.catch(() => {
 				setLoading(false);
 			});
-	}
+	};
 
 	return (
 		<Confirm

@@ -7,6 +7,7 @@ export type TrusteeI18nProps = {
 			title: string;
 			link: string;
 			button: string;
+			regExPattern?: string;
 		};
 		auto: {
 			title: string;
@@ -15,6 +16,11 @@ export type TrusteeI18nProps = {
 				placeholder: string;
 				link: string;
 				error: string;
+			};
+			fields: {
+				postcode: {
+					invalidError?: string;
+				};
 			};
 		};
 		manual: {
@@ -27,7 +33,10 @@ export type TrusteeI18nProps = {
 				};
 				addressLine2: { label: string; error?: string };
 				addressLine3: { label: string; error?: string };
-				postTown: { label: string; error?: string };
+				postTown: {
+					label: string;
+					emptyError?: string;
+				};
 				postcode: {
 					label: string;
 					invalidError?: string;
@@ -124,10 +133,16 @@ export const i18n: TrusteeI18nProps = {
 			button: 'Find Address',
 			title: 'Postcode',
 			link: 'Change',
+			regExPattern: '^[a-z]{1,2}\\d[a-z\\d]?\\d?[a-z]{0,2}$',
 		},
 		auto: {
 			title: 'Address',
 			subtitle: "Find the trustee's correspondence address",
+			fields: {
+				postcode: {
+					invalidError: 'Incorrect postcode format',
+				},
+			},
 			dropdown: {
 				placeholder: 'Please select the address from the dropdown',
 				link: "I can't find my address in the list",
@@ -143,12 +158,12 @@ export const i18n: TrusteeI18nProps = {
 					emptyError: 'This is a required field',
 					invalidError: 'Must be at least 2 chars',
 				},
-				addressLine2: {
-					label: 'Address line 2',
-					error: 'This is a required field',
-				},
+				addressLine2: { label: 'Address line 2' },
 				addressLine3: { label: 'Address line 3' },
-				postTown: { label: 'City' },
+				postTown: {
+					label: 'City',
+					emptyError: 'This is a required field',
+				},
 				postcode: {
 					label: 'Postcode',
 					emptyError: 'This is a required field',

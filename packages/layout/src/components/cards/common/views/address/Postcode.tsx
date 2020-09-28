@@ -1,7 +1,7 @@
-import React, { useEffect, useCallback, ChangeEvent } from 'react';
+import React, { useEffect, useCallback } from 'react';
 import { Flex, Button, P, Link } from '@tpr/core';
-import { Input } from '@tpr/forms';
-import { extractToObject } from './helpers';
+import { FFInputText, useFormState } from '@tpr/forms';
+import { extractToObject, postcodeIsValid } from './helpers';
 import { PostcodeProps } from '../../../common/interfaces';
 import styles from './Postcode.module.scss';
 
@@ -16,6 +16,7 @@ const Postcode: React.FC<PostcodeProps> = ({
 	addressAPI,
 	i18n,
 }) => {
+	const utils = useFormState();
 	const search = useCallback(
 		(postcode: string, country = 'GBR') => {
 			setLoading(true);
@@ -85,21 +86,37 @@ const Postcode: React.FC<PostcodeProps> = ({
 			{lookup ? (
 				<>
 					<div className={styles.inputWrapper}>
-						<Input
-							type="text"
-							value={postcode}
-							onChange={(evt: ChangeEvent<HTMLInputElement>) =>
-								setPostcode(evt.target.value)
-							}
+						<FFInputText
+							name="postcode"
+							label=""
 							disabled={loading}
-						/>
+							validate={(value) =>
+								postcodeIsValid(value, i18n?.address.postcode.regExPattern)
+									? undefined
+									: i18n.address.auto.fields.postcode.invalidError
+							}
+							inputWidth={7}
+						></FFInputText>
 					</div>
 					<Flex>
 						<Button
 							onClick={() => {
-								search(postcode);
+								if (
+									postcodeIsValid(
+										utils.values.postcode,
+										i18n?.address.postcode.regExPattern,
+									)
+								) {
+									setPostcode(utils.values.postcode);
+									search(postcode);
+								}
 							}}
-							disabled={loading}
+							disabled={
+								!postcodeIsValid(
+									utils.values.postcode,
+									i18n?.address.postcode.regExPattern,
+								) || loading
+							}
 						>
 							{loading ? 'Loading...' : i18n.address.postcode.button}
 						</Button>

@@ -47,6 +47,15 @@ export interface ActuaryProviderProps extends CardProviderProps {
 	i18n?: RecursivePartial<ActuaryI18nProps>;
 }
 
+export type UpdateActuaryModel = {
+	schemeRoleId: number;
+	title?: string;
+	firstName: string;
+	lastName: string;
+	emailAddress: string;
+	telephoneNumber: string;
+};
+
 export const ActuaryProvider = ({
 	complete,
 	preValidatedData,

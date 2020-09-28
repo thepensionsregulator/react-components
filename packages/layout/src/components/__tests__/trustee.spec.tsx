@@ -1,8 +1,16 @@
 import React from 'react';
-import { render, waitFor } from '@testing-library/react';
+import {
+	getAllByLabelText,
+	getAllByText,
+	getByDisplayValue,
+	getByLabelText,
+	render,
+	waitFor,
+} from '@testing-library/react';
 import { TrusteeCard } from '../cards/trustee/trustee';
 import { axe } from 'jest-axe';
 import { Trustee } from '../cards/trustee/context';
+import userEvent from '@testing-library/user-event';
 
 // TODO: write more tests
 
@@ -10,11 +18,11 @@ const noop = () => Promise.resolve();
 
 const trustee: Trustee = {
 	id: '',
-	schemeRoleId: '12345',
+	schemeRoleId: 12345,
 	//
 	title: 'Mr',
-	firstname: 'John',
-	lastname: 'Smith',
+	firstName: 'John',
+	lastName: 'Smith',
 	trusteeType: 'member-nominated',
 	isProfessionalTrustee: false,
 	//
@@ -284,6 +292,39 @@ describe('Trustee Auto Address', () => {
 		const results = await axe(container);
 		expect(results).toHaveNoViolations();
 	});
+
+	test('invalid postcodes disable the find address function', async () => {
+		trustee.postcode = 'INVALID POSTCODE';
+
+		const { container, getByText } = render(
+			<TrusteeCard
+				onDetailsSave={noop}
+				onContactSave={noop}
+				onAddressSave={noop}
+				onRemove={noop}
+				onCorrect={(_value) => {}}
+				addressAPI={{
+					get: (_endpont) => Promise.resolve(),
+					limit: 100,
+				}}
+				complete={true}
+				trustee={trustee}
+				testId={trustee.schemeRoleId}
+			/>,
+		);
+
+		getByText('Correspondence address').click();
+		await waitFor(() => {});
+
+		getByText('Change').click();
+		await waitFor(() => {});
+
+		expect(getByDisplayValue(container, trustee.postcode)).toBeDefined;
+		expect(getByText('Find Address')).toBeDisabled();
+
+		const results = await axe(container);
+		expect(results).toHaveNoViolations();
+	});
 });
 
 describe('Trustee Manual Address', () => {
@@ -315,4 +356,169 @@ describe('Trustee Manual Address', () => {
 		const results = await axe(container);
 		expect(results).toHaveNoViolations();
 	});
+
+	test('address line 1 is required', async () => {
+		const { container, getByText } = render(
+			<TrusteeCard
+				onDetailsSave={noop}
+				onContactSave={noop}
+				onAddressSave={noop}
+				onRemove={noop}
+				onCorrect={(_value) => {}}
+				addressAPI={{
+					get: (_endpont) => Promise.resolve(),
+					limit: 100,
+				}}
+				complete={true}
+				trustee={trustee}
+				testId={trustee.schemeRoleId}
+			/>,
+		);
+
+		await navigateToManuallyEnteredAddress(getByText);
+
+		expect(getByText(`Address line 1`).nextSibling.textContent).toEqual(
+			'This is a required field',
+		);
+
+		userEvent.type(getByLabelText(container, `Address line 1`), 'a');
+
+		expect(getByText(`Address line 1`).nextSibling.textContent).toEqual(
+			'Must be at least 2 chars',
+		);
+
+		const results = await axe(container);
+		expect(results).toHaveNoViolations();
+	});
+
+	test('city is required', async () => {
+		const { container, getByText } = render(
+			<TrusteeCard
+				onDetailsSave={noop}
+				onContactSave={noop}
+				onAddressSave={noop}
+				onRemove={noop}
+				onCorrect={(_value) => {}}
+				addressAPI={{
+					get: (_endpont) => Promise.resolve(),
+					limit: 100,
+				}}
+				complete={true}
+				trustee={trustee}
+				testId={trustee.schemeRoleId}
+			/>,
+		);
+
+		await navigateToManuallyEnteredAddress(getByText);
+		await fillInAddressLine1(container);
+
+		expect(getByText(`City`).nextSibling.textContent).toEqual(
+			'This is a required field',
+		);
+
+		const results = await axe(container);
+		expect(results).toHaveNoViolations();
+	});
+
+	test('valid postcode is required', async () => {
+		const { container, getByText } = render(
+			<TrusteeCard
+				onDetailsSave={noop}
+				onContactSave={noop}
+				onAddressSave={noop}
+				onRemove={noop}
+				onCorrect={(_value) => {}}
+				addressAPI={{
+					get: (_endpont) => Promise.resolve(),
+					limit: 100,
+				}}
+				complete={true}
+				trustee={trustee}
+				testId={trustee.schemeRoleId}
+			/>,
+		);
+
+		await navigateToManuallyEnteredAddress(getByText);
+		await fillInAddressLine1(container);
+		await fillInCity(container);
+
+		let addressElement = getByText(`Address`).parentElement;
+
+		userEvent.clear(getAllByLabelText(addressElement, 'Postcode')[0]);
+		expect(getAllByLabelText(addressElement, 'Postcode')[0]).toBeDefined();
+
+		expect(
+			getAllByText(addressElement, 'Postcode')[0].nextSibling.textContent,
+		).toEqual('This is a required field');
+
+		userEvent.type(
+			getAllByLabelText(addressElement, 'Postcode')[0],
+			'INVALID POSTCODE',
+		);
+
+		expect(
+			getAllByText(addressElement, 'Postcode')[0].nextSibling.textContent,
+		).toEqual('Incorrect postcode format');
+
+		const results = await axe(container);
+		expect(results).toHaveNoViolations();
+	});
+
+	test('county is required', async () => {
+		const { container, getByText } = render(
+			<TrusteeCard
+				onDetailsSave={noop}
+				onContactSave={noop}
+				onAddressSave={noop}
+				onRemove={noop}
+				onCorrect={(_value) => {}}
+				addressAPI={{
+					get: (_endpont) => Promise.resolve(),
+					limit: 100,
+				}}
+				complete={true}
+				trustee={trustee}
+				testId={trustee.schemeRoleId}
+			/>,
+		);
+
+		await navigateToManuallyEnteredAddress(getByText);
+		await fillInAddressLine1(container);
+		await fillInCity(container);
+		await fillInPostcode(container);
+
+		expect(getByText(`County`).nextSibling.textContent).toEqual(
+			'This is a required field',
+		);
+
+		const results = await axe(container);
+		expect(results).toHaveNoViolations();
+	});
+
+	const navigateToManuallyEnteredAddress = async (getByText) => {
+		getByText('Correspondence address').click();
+		await waitFor(() => {});
+
+		getByText(`I can't find my address in the list`).click();
+		await waitFor(() => {});
+
+		getByText('Save and close').click();
+		await waitFor(() => {});
+	};
+
+	const fillInAddressLine1 = async (container) => {
+		userEvent.type(
+			getByLabelText(container, 'Address line 1'),
+			'Valid address line 1',
+		);
+	};
+
+	const fillInCity = async (container) => {
+		userEvent.type(getByLabelText(container, 'City'), 'Valid city');
+	};
+
+	const fillInPostcode = async (container) => {
+		userEvent.clear(getAllByLabelText(container, 'Postcode')[0]);
+		userEvent.type(getByLabelText(container, 'Postcode'), 'BN11AA');
+	};
 });

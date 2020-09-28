@@ -1,10 +1,11 @@
 import { FieldProps } from '@tpr/forms';
 import { addressLabelsFields } from '../../interfaces';
 import { RecursivePartial } from '../../../common/interfaces';
-import { validPostcode } from './helpers';
+import { postcodeIsValid } from './helpers';
 
 export const getFields = (
 	labels: RecursivePartial<addressLabelsFields>,
+	postcodeRegExPattern: string,
 ): FieldProps[] => [
 	{
 		name: 'addressLine1',
@@ -12,7 +13,7 @@ export const getFields = (
 		label: labels.addressLine1.label,
 		error: (value: string) => {
 			if (!value) return labels.addressLine1.emptyError;
-			return value.length < 3 ? labels.addressLine1.invalidError : undefined;
+			return value.length < 2 ? labels.addressLine1.invalidError : undefined;
 		},
 		inputWidth: 6,
 		cfg: { mb: 3 },
@@ -37,6 +38,9 @@ export const getFields = (
 	{
 		name: 'postTown',
 		label: labels.postTown.label,
+		error: (value: string) => {
+			return !value ? labels.postTown.emptyError : undefined;
+		},
 		type: 'text',
 		inputWidth: 6,
 		cfg: { mb: 3 },
@@ -47,7 +51,9 @@ export const getFields = (
 		type: 'text',
 		error: (postcode: string) => {
 			if (!postcode) return labels.postcode.emptyError;
-			return validPostcode(postcode) ? undefined : labels.postcode.invalidError;
+			return postcodeIsValid(postcode, postcodeRegExPattern)
+				? undefined
+				: labels.postcode.invalidError;
 		},
 		inputWidth: 6,
 		cfg: { mb: 3 },

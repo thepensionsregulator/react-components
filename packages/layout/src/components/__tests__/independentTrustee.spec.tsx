@@ -10,7 +10,7 @@ const noop = () => Promise.resolve();
 
 const independentTrustee: IndependentTrustee = {
 	id: '',
-	schemeRoleId: '',
+	schemeRoleId: 222,
 	effectiveDate: '',
 	organisationName: 'Pensions Are Us Limited',
 	appointedByRegulator: true,

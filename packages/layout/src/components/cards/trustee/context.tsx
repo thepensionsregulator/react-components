@@ -108,8 +108,8 @@ export const TrusteeProvider = ({
 				const {
 					schemeRoleId,
 					title,
-					firstname,
-					lastname,
+					firstName,
+					lastName,
 					trusteeType,
 					isProfessionalTrustee,
 				} = trustee;
@@ -117,8 +117,8 @@ export const TrusteeProvider = ({
 					{
 						schemeRoleId,
 						title,
-						firstname,
-						lastname,
+						firstName,
+						lastName,
 						trusteeType,
 						isProfessionalTrustee,
 					},

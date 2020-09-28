@@ -35,6 +35,7 @@ interface TrusteeStates {
 			states: {
 				reason: {};
 				confirm: {};
+				deleted: {};
 			};
 		};
 	};
@@ -56,7 +57,8 @@ type TrusteeEvents =
 				reason: null | string;
 				date: null | string;
 			};
-	  };
+	  }
+	| { type: 'DELETE' };
 
 export interface TrusteeProps extends CardPersonalDetails, CardContactDetails {
 	schemeRoleId: string;
@@ -90,8 +92,8 @@ const trusteeMachine = Machine<TrusteeContext, TrusteeStates, TrusteeEvents>({
 			schemeRoleId: '',
 			//
 			title: '',
-			firstname: '',
-			lastname: '',
+			firstName: '',
+			lastName: '',
 			trusteeType: '',
 			isProfessionalTrustee: false,
 			//
@@ -238,7 +240,11 @@ const trusteeMachine = Machine<TrusteeContext, TrusteeStates, TrusteeEvents>({
 						EDIT_TRUSTEE: '#edit.trustee.name',
 						BACK: 'reason',
 						CANCEL: '#preview',
+						DELETE: 'deleted',
 					},
+				},
+				deleted: {
+					type: 'final',
 				},
 			},
 		},

@@ -20,7 +20,7 @@ const getFields = (
 		cfg: { mb: 4 },
 	},
 	{
-		name: 'firstname',
+		name: 'firstName',
 		type: 'text',
 		label: fields.firstName.label,
 		error: fields.firstName.error,
@@ -28,7 +28,7 @@ const getFields = (
 		cfg: { mb: 4 },
 	},
 	{
-		name: 'lastname',
+		name: 'lastName',
 		type: 'text',
 		label: fields.lastName.label,
 		error: fields.lastName.error,
@@ -39,13 +39,21 @@ const getFields = (
 export const NameScreen: React.FC = () => {
 	const [loading, setLoading] = useState(false);
 	const { current, send, i18n, onSaveName } = useActuaryContext();
+	const { actuary } = current.context;
 	const fields = getFields(i18n.name.fields);
-	const state = current.context.actuary;
 
 	const onSubmit = async values => {
 		setLoading(true);
 		try {
-			await onSaveName(values, state);
+			await onSaveName(
+				{
+					...values,
+					schemeRoleId: actuary.schemeRoleId,
+					emailAddress: actuary.emailAddress,
+					telephoneNumber: actuary.telephoneNumber,
+				},
+				actuary,
+			);
 			setLoading(false);
 			send('SAVE', { values });
 		} catch (error) {
@@ -62,9 +70,9 @@ export const NameScreen: React.FC = () => {
 			onSubmit={onSubmit}
 			fields={fields}
 			initialValues={{
-				title: state.title,
-				firstname: state.firstname,
-				lastname: state.lastname,
+				title: actuary.title,
+				firstName: actuary.firstName,
+				lastName: actuary.lastName,
 			}}
 			loading={loading}
 		/>
