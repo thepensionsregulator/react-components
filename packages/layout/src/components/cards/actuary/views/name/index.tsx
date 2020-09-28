@@ -42,7 +42,7 @@ export const NameScreen: React.FC = () => {
 	const fields = getFields(i18n.name.fields);
 	const state = current.context.actuary;
 
-	const onSubmit = async (values) => {
+	const onSubmit = async values => {
 		setLoading(true);
 		try {
 			await onSaveName(values, state);

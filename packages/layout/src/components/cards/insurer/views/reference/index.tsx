@@ -36,7 +36,7 @@ export const Reference: React.FC = () => {
 	const { insurer } = current.context;
 	const fields = getFields(i18n?.reference?.fields);
 
-	const onSubmit = async (values) => {
+	const onSubmit = async values => {
 		setLoading(true);
 		try {
 			await onSaveRef(values, insurer);

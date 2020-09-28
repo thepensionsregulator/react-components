@@ -14,7 +14,7 @@ export const useSectionsUpdater = (
 			...accumulator,
 			{
 				...section,
-				links: section.links.map((link) => ({
+				links: section.links.map(link => ({
 					...link,
 					onClick: callAllEventHandlers(
 						({ path }) => history.push(path),
@@ -100,11 +100,11 @@ export type SidebarSectionProps = {
 
 export function useCalculateProgress(sections: SidebarSectionProps[]) {
 	const totalSections = useMemo(
-		() => flatten(sections.map((section) => section.links)),
+		() => flatten(sections.map(section => section.links)),
 		[sections],
 	);
 	const totalCompleted = useMemo(
-		() => totalSections.filter((section) => section.completed),
+		() => totalSections.filter(section => section.completed),
 		[totalSections],
 	);
 

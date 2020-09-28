@@ -65,7 +65,7 @@ describe('Email input', () => {
 					label="Email"
 					testId={testId}
 					name="email"
-					validate={(email) =>
+					validate={email =>
 						email && email.includes('tpr.gov.uk') ? undefined : errorMessage
 					}
 				/>

@@ -29,7 +29,7 @@ const AutoCompleteForm: React.FC<AutoCompleteFormProps> = ({
 						placeholder={dropdown.placeholder}
 						options={options}
 						inputWidth={6}
-						validate={(value) => (!value ? dropdown.error : undefined)}
+						validate={value => (!value ? dropdown.error : undefined)}
 						disabled={loading || submitLoading}
 					/>
 					<Link onClick={onClick} cfg={{ mt: 3 }}>

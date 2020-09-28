@@ -12,7 +12,7 @@ const getObjectValueByString = (
 export function validate(formFields: FieldProps[]) {
 	/** Save fields with errors in memory to avoid filtering on every key stroke */
 	const fieldsWithErrors = formFields.filter(
-		(field) => !field.validate && field.error,
+		field => !field.validate && field.error,
 	);
 	return (keyValuePairs: object): { [key: string]: any } => {
 		const errors = {};

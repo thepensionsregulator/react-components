@@ -21,9 +21,8 @@ const Postcode: React.FC<PostcodeProps> = ({
 			setLoading(true);
 			addressAPI
 				.get(
-					`search?country=${country}&query=${postcode}&take=${
-						addressAPI.limit || 50
-					}`,
+					`search?country=${country}&query=${postcode}&take=${addressAPI.limit ||
+						50}`,
 				)
 				.then((response: { data: any }) => {
 					if (
@@ -50,13 +49,13 @@ const Postcode: React.FC<PostcodeProps> = ({
 									return {
 										value: addressToOurFormat,
 										label: Object.keys(addressToOurFormat)
-											.filter((key) => addressToOurFormat[key])
-											.map((key) => addressToOurFormat[key])
+											.filter(key => addressToOurFormat[key])
+											.map(key => addressToOurFormat[key])
 											.join(', '),
 									};
 								});
 							}),
-						).then((results) => {
+						).then(results => {
 							setOptions(results);
 							showLookup(false);
 							setLoading(false);
@@ -65,7 +64,7 @@ const Postcode: React.FC<PostcodeProps> = ({
 						setLoading(false);
 					}
 				})
-				.catch((err) => {
+				.catch(err => {
 					console.log(err);
 					setLoading(false);
 				});

@@ -26,7 +26,7 @@ export const InHouseAdminContext = createContext<InHouseAdminContextProps>({
 	onSaveName: Promise.resolve,
 	i18n: i18nDefaults,
 	addressAPI: {
-		get: (endpoint) => Promise.resolve(endpoint),
+		get: endpoint => Promise.resolve(endpoint),
 		limit: 50,
 	},
 });

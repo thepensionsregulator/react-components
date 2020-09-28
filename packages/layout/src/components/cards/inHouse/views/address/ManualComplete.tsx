@@ -10,7 +10,7 @@ const ManualComplete: React.FC = () => {
 	const { inHouseAdmin } = current.context;
 	const fields = getFields(i18n?.address?.manual?.fields);
 
-	const onSubmit = async (values) => {
+	const onSubmit = async values => {
 		setLoading(true);
 		try {
 			const { address, ...inHouseAdminValues } = current.context.inHouseAdmin;

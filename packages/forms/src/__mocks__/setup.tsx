@@ -18,7 +18,7 @@ export function formSetup({
 	validate,
 }: FormProviderProps) {
 	let renderArg: FormRenderProps;
-	const childrenSpy = jest.fn((controllerArg) => {
+	const childrenSpy = jest.fn(controllerArg => {
 		renderArg = controllerArg;
 		return (
 			<form onSubmit={controllerArg.handleSubmit}>

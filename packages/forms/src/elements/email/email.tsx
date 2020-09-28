@@ -46,9 +46,8 @@ const InputEmail: React.FC<InputEmailProps> = ({
 	);
 };
 
-export const FFInputEmail: React.FC<FieldProps & FieldExtraProps> = (
-	fieldProps,
-) => {
+export const FFInputEmail: React.FC<FieldProps &
+	FieldExtraProps> = fieldProps => {
 	return (
 		<Field
 			{...fieldProps}

@@ -74,7 +74,7 @@ const Type: React.FC = () => {
 	const breadcrumbLinks = getBreadcrumbLinks(i18n.type);
 	const { trustee, loading } = current.context;
 
-	const onSubmit = (values) => {
+	const onSubmit = values => {
 		send('SAVE', {
 			values: {
 				...values,

@@ -38,7 +38,7 @@ export const Regulator: React.FC = () => {
 	const regulatorFields = getIndependentTrusteeFields(i18n.regulator.fields);
 	const { independentTrustee } = current.context;
 
-	const onSubmit = async (values) => {
+	const onSubmit = async values => {
 		const updatedValues = {
 			schemeRoleId: independentTrustee.schemeRoleId,
 			appointedByRegulator: values.regulator === 'yes' ? true : false,

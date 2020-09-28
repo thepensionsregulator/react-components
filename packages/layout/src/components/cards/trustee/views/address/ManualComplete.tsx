@@ -9,7 +9,7 @@ const ManualComplete: React.FC = () => {
 	const { trustee, loading } = current.context;
 	const fields = getFields(i18n?.address?.manual?.fields);
 
-	const onSubmit = (values) => {
+	const onSubmit = values => {
 		send('SAVE', { address: values });
 	};
 

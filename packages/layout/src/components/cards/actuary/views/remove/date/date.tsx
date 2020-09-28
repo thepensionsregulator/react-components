@@ -16,7 +16,7 @@ export const RemoveDateForm = () => {
 			name: 'date',
 			label: i18n.remove.date.fields.date.label,
 			hint: i18n.remove.date.fields.date.hint,
-			validate: (value) => {
+			validate: value => {
 				if (!value) {
 					return i18n.remove.date.errors.formIncomplete;
 				} else if (
@@ -35,7 +35,7 @@ export const RemoveDateForm = () => {
 		},
 	];
 
-	const onSubmit = (values) => {
+	const onSubmit = values => {
 		if (!values.confirm) {
 			return {
 				[FORM_ERROR]: i18n.remove.date.errors.formIncomplete,

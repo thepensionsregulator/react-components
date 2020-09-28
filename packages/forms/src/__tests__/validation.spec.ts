@@ -23,7 +23,7 @@ describe('form validation', () => {
 	});
 
 	test('should accept `error` key with `function` that evaluates to error message or undefined', () => {
-		const emailValidation = (email) => {
+		const emailValidation = email => {
 			return email.includes('@')
 				? undefined
 				: 'it doesn`t appear to be the correct email address';

@@ -46,7 +46,7 @@ const InputNumber: React.FC<InputNumberProps> = ({
 				placeholder={placeholder}
 				decimalPlaces={decimalPlaces}
 				{...input}
-				onKeyDown={(e) => e.key.toLowerCase() === 'e' && e.preventDefault()}
+				onKeyDown={e => e.key.toLowerCase() === 'e' && e.preventDefault()}
 				onChange={(evt: ChangeEvent<HTMLInputElement>) => {
 					decimalPlaces
 						? input.onChange(
@@ -71,6 +71,6 @@ const InputNumber: React.FC<InputNumberProps> = ({
 	);
 };
 
-export const FFInputNumber: React.FC<FieldProps> = (fieldProps) => {
+export const FFInputNumber: React.FC<FieldProps> = fieldProps => {
 	return <Field {...fieldProps} component={InputNumber} />;
 };

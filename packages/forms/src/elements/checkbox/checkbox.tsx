@@ -52,7 +52,7 @@ export const Checkbox: React.FC<Partial<CheckboxIconProps>> = ({
 	);
 };
 
-export const FFCheckbox: React.FC<FieldProps> = (fieldProps) => {
+export const FFCheckbox: React.FC<FieldProps> = fieldProps => {
 	return (
 		<Field
 			{...fieldProps}

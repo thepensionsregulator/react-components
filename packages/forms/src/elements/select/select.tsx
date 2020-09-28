@@ -126,9 +126,8 @@ export const Select: React.FC<SelectProps & FieldRenderProps<string>> = ({
 	);
 };
 
-export const FFSelect: React.FC<FieldProps & Omit<SelectProps, 'children'>> = (
-	fieldProps,
-) => {
+export const FFSelect: React.FC<FieldProps &
+	Omit<SelectProps, 'children'>> = fieldProps => {
 	return (
 		<Field
 			{...fieldProps}
