@@ -38,7 +38,7 @@ describe('Employer Preview', () => {
 			<EmployerCard
 				onSaveType={noop}
 				onRemove={noop}
-				onCorrect={(_value) => {}}
+				onCorrect={_value => {}}
 				complete={true}
 				employer={employer}
 			/>,
@@ -55,7 +55,7 @@ describe('Employer Remove', () => {
 			<EmployerCard
 				onSaveType={noop}
 				onRemove={noop}
-				onCorrect={(_value) => {}}
+				onCorrect={_value => {}}
 				complete={true}
 				employer={employer}
 			/>,
@@ -72,7 +72,7 @@ describe('Employer Remove', () => {
 			<EmployerCard
 				onSaveType={noop}
 				onRemove={noop}
-				onCorrect={(_value) => {}}
+				onCorrect={_value => {}}
 				complete={true}
 				employer={employer}
 			/>,
@@ -91,7 +91,7 @@ describe('Employer Remove', () => {
 			<EmployerCard
 				onSaveType={noop}
 				onRemove={noop}
-				onCorrect={(_value) => {}}
+				onCorrect={_value => {}}
 				complete={true}
 				employer={employer}
 			/>,
@@ -111,7 +111,7 @@ describe('Employer Remove', () => {
 			<EmployerCard
 				onSaveType={noop}
 				onRemove={noop}
-				onCorrect={(_value) => {}}
+				onCorrect={_value => {}}
 				complete={true}
 				employer={employer}
 			/>,
@@ -136,7 +136,7 @@ describe('Employer Remove', () => {
 			<EmployerCard
 				onSaveType={noop}
 				onRemove={noop}
-				onCorrect={(_value) => {}}
+				onCorrect={_value => {}}
 				complete={true}
 				employer={employer}
 			/>,

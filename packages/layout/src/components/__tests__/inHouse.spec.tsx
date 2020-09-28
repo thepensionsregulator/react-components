@@ -37,10 +37,10 @@ describe('InHouse Preview', () => {
 				onSaveAddress={noop}
 				onSaveName={noop}
 				onRemove={noop}
-				onCorrect={(_value) => {}}
+				onCorrect={_value => {}}
 				complete={true}
 				addressAPI={{
-					get: (_endpont) => Promise.resolve(),
+					get: _endpont => Promise.resolve(),
 					limit: 100,
 				}}
 				inHouseAdmin={inHouseAdmin}
@@ -60,10 +60,10 @@ describe('InHouse Remove', () => {
 				onSaveAddress={noop}
 				onSaveName={noop}
 				onRemove={noop}
-				onCorrect={(_value) => {}}
+				onCorrect={_value => {}}
 				complete={true}
 				addressAPI={{
-					get: (_endpont) => Promise.resolve(),
+					get: _endpont => Promise.resolve(),
 					limit: 100,
 				}}
 				inHouseAdmin={inHouseAdmin}
@@ -83,10 +83,10 @@ describe('InHouse Remove', () => {
 				onSaveAddress={noop}
 				onSaveName={noop}
 				onRemove={noop}
-				onCorrect={(_value) => {}}
+				onCorrect={_value => {}}
 				complete={true}
 				addressAPI={{
-					get: (_endpont) => Promise.resolve(),
+					get: _endpont => Promise.resolve(),
 					limit: 100,
 				}}
 				inHouseAdmin={inHouseAdmin}
@@ -108,10 +108,10 @@ describe('InHouse Remove', () => {
 				onSaveAddress={noop}
 				onSaveName={noop}
 				onRemove={noop}
-				onCorrect={(_value) => {}}
+				onCorrect={_value => {}}
 				complete={true}
 				addressAPI={{
-					get: (_endpont) => Promise.resolve(),
+					get: _endpont => Promise.resolve(),
 					limit: 100,
 				}}
 				inHouseAdmin={inHouseAdmin}
@@ -134,10 +134,10 @@ describe('InHouse Remove', () => {
 				onSaveAddress={noop}
 				onSaveName={noop}
 				onRemove={noop}
-				onCorrect={(_value) => {}}
+				onCorrect={_value => {}}
 				complete={true}
 				addressAPI={{
-					get: (_endpont) => Promise.resolve(),
+					get: _endpont => Promise.resolve(),
 					limit: 100,
 				}}
 				inHouseAdmin={inHouseAdmin}
@@ -165,10 +165,10 @@ describe('InHouse Remove', () => {
 				onSaveAddress={noop}
 				onSaveName={noop}
 				onRemove={noop}
-				onCorrect={(_value) => {}}
+				onCorrect={_value => {}}
 				complete={true}
 				addressAPI={{
-					get: (_endpont) => Promise.resolve(),
+					get: _endpont => Promise.resolve(),
 					limit: 100,
 				}}
 				inHouseAdmin={inHouseAdmin}

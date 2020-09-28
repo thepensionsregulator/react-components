@@ -35,7 +35,7 @@ describe('Insurer Preview', () => {
 			<InsurerCard
 				onSaveRef={noop}
 				onRemove={noop}
-				onCorrect={(_value) => {}}
+				onCorrect={_value => {}}
 				complete={true}
 				insurer={insurer}
 			/>,
@@ -52,7 +52,7 @@ describe('Insurer Remove', () => {
 			<InsurerCard
 				onSaveRef={noop}
 				onRemove={noop}
-				onCorrect={(_value) => {}}
+				onCorrect={_value => {}}
 				complete={true}
 				insurer={insurer}
 			/>,
@@ -69,7 +69,7 @@ describe('Insurer Remove', () => {
 			<InsurerCard
 				onSaveRef={noop}
 				onRemove={noop}
-				onCorrect={(_value) => {}}
+				onCorrect={_value => {}}
 				complete={true}
 				insurer={insurer}
 			/>,
@@ -88,7 +88,7 @@ describe('Insurer Remove', () => {
 			<InsurerCard
 				onSaveRef={noop}
 				onRemove={noop}
-				onCorrect={(_value) => {}}
+				onCorrect={_value => {}}
 				complete={true}
 				insurer={insurer}
 			/>,
@@ -108,7 +108,7 @@ describe('Insurer Remove', () => {
 			<InsurerCard
 				onSaveRef={noop}
 				onRemove={noop}
-				onCorrect={(_value) => {}}
+				onCorrect={_value => {}}
 				complete={true}
 				insurer={insurer}
 			/>,
@@ -133,7 +133,7 @@ describe('Insurer Remove', () => {
 			<InsurerCard
 				onSaveRef={noop}
 				onRemove={noop}
-				onCorrect={(_value) => {}}
+				onCorrect={_value => {}}
 				complete={true}
 				insurer={insurer}
 			/>,
