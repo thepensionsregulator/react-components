@@ -9,6 +9,7 @@ interface InputNumberProps extends FieldRenderProps<number>, FieldExtraProps {
 	after?: any;
 	callback?: (e: any) => void;
 	decimalPlaces?: number;
+	noLeftBorder?: boolean;
 }
 
 const InputNumber: React.FC<InputNumberProps> = ({
@@ -24,12 +25,14 @@ const InputNumber: React.FC<InputNumberProps> = ({
 	after,
 	callback,
 	decimalPlaces,
+	noLeftBorder,
 	...props
 }) => {
 	return (
 		<StyledInputLabel
 			isError={meta && meta.touched && meta.error}
 			cfg={Object.assign({ flexDirection: 'column', mt: 1 }, cfg)}
+			noLeftBorder={noLeftBorder}
 		>
 			<InputElementHeading
 				label={label}
