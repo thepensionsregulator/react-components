@@ -15,5 +15,6 @@ export default rollup({
 		'tslib',
 		'lodash',
 		'xstate',
+		'react-collapsible',
 	],
 });
