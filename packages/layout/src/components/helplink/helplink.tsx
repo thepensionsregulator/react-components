@@ -6,28 +6,24 @@ import { Flex } from '@tpr/core';
 import Styles from './helplink.module.scss';
 
 type HelpLinkProps = {
-	Title: string;
-	Content: string;
+	title: string;
+	content: string;
 };
 
-type HelpLinkPropsFields = { fields: HelpLinkProps };
-
-export const HelpLink: React.FC<HelpLinkPropsFields> = (
-	props: HelpLinkPropsFields,
-) => {
+export const HelpLink: React.FC<HelpLinkProps> = ({ title, content }) => {
 	return (
 		<Collapsible
 			trigger={
 				<Flex>
 					<ArrowDown />
-					{props.fields.Title}
+					{title}
 				</Flex>
 			}
 			transitionTime={400}
 			triggerClassName={Styles.closed}
 			triggerOpenedClassName={Styles.open}
 		>
-			<Hint>{props.fields.Content}</Hint>
+			<Hint>{content}</Hint>
 		</Collapsible>
 	);
 };
