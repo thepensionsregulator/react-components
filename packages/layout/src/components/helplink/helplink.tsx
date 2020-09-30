@@ -1,7 +1,7 @@
 import React from 'react';
 import Collapsible from 'react-collapsible';
 import { Hint } from '../hint/hint';
-import { ArrowUp } from '@tpr/icons';
+import { ArrowDown } from '@tpr/icons';
 import { Flex } from '@tpr/core';
 import Styles from './helplink.module.scss';
 
@@ -19,7 +19,7 @@ export const HelpLink: React.FC<HelpLinkPropsFields> = (
 		<Collapsible
 			trigger={
 				<Flex>
-					<ArrowUp />
+					<ArrowDown />
 					{props.fields.Title}
 				</Flex>
 			}
