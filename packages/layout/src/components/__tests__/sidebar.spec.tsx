@@ -14,17 +14,17 @@ const s1: SidebarSectionProps = {
 		{
 			name: 'Scheme name and address',
 			completed: true,
-			onClick: link => alert(`You clicked on ${link.path}`),
+			onClick: (link) => alert(`You clicked on ${link.path}`),
 			path: '/scheme-name-and-address',
 		},
 		{
 			name: 'Scheme status and membership',
-			onClick: link => alert(`You clicked on ${link.path}`),
+			onClick: (link) => alert(`You clicked on ${link.path}`),
 			path: '/scheme-status-and-membership',
 		},
 		{
 			name: 'Consent to electronic communication',
-			onClick: link => alert(`You clicked on ${link.path}`),
+			onClick: (link) => alert(`You clicked on ${link.path}`),
 			path: '/consent-to-electronic-communication',
 		},
 	],
@@ -109,10 +109,10 @@ describe('Sidebar', () => {
 			/>,
 		);
 
-		const progressText = getByText(content => content.startsWith('Progress'));
+		const progressText = getByText((content) => content.startsWith('Progress'));
 		const [currentProgress, totalProgress] = progressText.textContent
 			.split(' ')
-			.map(value => parseInt(value))
+			.map((value) => parseInt(value))
 			.filter(Boolean);
 
 		const { result } = renderHook(() => useCalculateProgress(sections));
@@ -134,7 +134,7 @@ describe('Sidebar', () => {
 			/>,
 		);
 
-		[s1.title, s2.title, s3.title].map(title => {
+		[s1.title, s2.title, s3.title].map((title) => {
 			expect(getByText(title)).toBeInTheDocument();
 		});
 	});
@@ -151,7 +151,7 @@ describe('Sidebar', () => {
 			/>,
 		);
 
-		[...s1.links, ...s2.links, ...s3.links].map(link => {
+		[...s1.links, ...s2.links, ...s3.links].map((link) => {
 			expect(getByText(link.name)).toBeInTheDocument();
 		});
 	});

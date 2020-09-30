@@ -13,7 +13,7 @@ const ManualComplete: React.FC = () => {
 		i18n?.address.postcode.regExPattern,
 	);
 
-	const onSubmit = async values => {
+	const onSubmit = async (values) => {
 		setLoading(true);
 		try {
 			const { address, ...inHouseAdminValues } = current.context.inHouseAdmin;

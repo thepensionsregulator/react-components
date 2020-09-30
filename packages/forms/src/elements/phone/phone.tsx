@@ -46,8 +46,9 @@ const InputPhone: React.FC<InputPhoneProps> = ({
 	);
 };
 
-export const FFInputPhone: React.FC<FieldProps &
-	FieldExtraProps> = fieldProps => {
+export const FFInputPhone: React.FC<FieldProps & FieldExtraProps> = (
+	fieldProps,
+) => {
 	return (
 		<Field
 			{...fieldProps}

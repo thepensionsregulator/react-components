@@ -55,7 +55,7 @@ describe('Select input', () => {
 		// todo: check that it's not open before the click
 
 		queryByTestId('select-input-button').click();
-		items.map(item => {
+		items.map((item) => {
 			expect(getByText(item.label)).toBeDefined();
 		});
 	});

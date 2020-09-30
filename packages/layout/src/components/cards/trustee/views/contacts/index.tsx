@@ -36,7 +36,7 @@ export const Contacts: React.FC = () => {
 	const { trustee, loading } = current.context;
 	const fields = getFields(i18n?.contacts?.fields);
 
-	const onSubmit = values => {
+	const onSubmit = (values) => {
 		send('SAVE', { values });
 	};
 

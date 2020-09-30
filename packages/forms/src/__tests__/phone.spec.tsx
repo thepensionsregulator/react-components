@@ -77,7 +77,7 @@ describe('Phone input', () => {
 					label="Phone number"
 					testId={testId}
 					name="phone"
-					validate={phone =>
+					validate={(phone) =>
 						phone && phone.includes('777') ? undefined : errorMessage
 					}
 				/>

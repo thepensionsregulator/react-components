@@ -62,7 +62,7 @@ export const RadioButton: React.FC<RadioButtonProps> = ({
 	);
 };
 
-export const FFRadioButton: React.FC<FieldProps> = fieldProps => {
+export const FFRadioButton: React.FC<FieldProps> = (fieldProps) => {
 	return (
 		<Field
 			{...fieldProps}

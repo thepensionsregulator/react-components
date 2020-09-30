@@ -33,7 +33,7 @@ export const Professional: React.FC = () => {
 	const professionalFields = getProfessionalFields(i18n.professional.fields);
 	const { corporateGroup } = current.context;
 
-	const onSubmit = async values => {
+	const onSubmit = async (values) => {
 		const updatedValues = {
 			schemeRoleId: corporateGroup.schemeRoleId,
 			directorIsProfessional: values.professional === 'yes' ? true : false,

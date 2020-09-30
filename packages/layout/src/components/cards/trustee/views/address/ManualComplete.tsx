@@ -12,7 +12,7 @@ const ManualComplete: React.FC = () => {
 		i18n?.address.postcode.regExPattern,
 	);
 
-	const onSubmit = values => {
+	const onSubmit = (values) => {
 		send('SAVE', { address: values });
 	};
 

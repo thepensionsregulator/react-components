@@ -11,7 +11,7 @@ const AutoComplete: React.FC<AutoCompleteProps> = ({
 	const [submitLoading, setSubmitLoading] = useState(false);
 	const { send, i18n, current, onSaveAddress } = useInHouseAdminContext();
 
-	const onSubmit = async values => {
+	const onSubmit = async (values) => {
 		if (Object.values(values).length > 0) {
 			setSubmitLoading(true);
 			try {

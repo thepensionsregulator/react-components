@@ -42,7 +42,7 @@ const Name: React.FC = () => {
 	const fields = getFields(i18n.name.fields);
 	const state = current.context.trustee;
 
-	const onSubmit = values => {
+	const onSubmit = (values) => {
 		setLoading(true);
 		try {
 			send('NEXT', { values });

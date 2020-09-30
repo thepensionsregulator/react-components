@@ -40,7 +40,7 @@ const InputText: React.FC<InputTextProps> = ({
 	);
 };
 
-export const FFInputText: React.FC<FieldProps> = fieldProps => {
+export const FFInputText: React.FC<FieldProps> = (fieldProps) => {
 	return (
 		<Field
 			{...fieldProps}

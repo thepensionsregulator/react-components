@@ -13,11 +13,7 @@ export const validateEmail = (email: string) => {
 
 export const validateUkPhone = (phone: string) => {
 	const regex = /^(?=[\w\d\+\(])([a-zA-Z\d+\s()+.-]){10,20}$/;
-	return regex.test(
-		String(phone)
-			.slice()
-			.toLowerCase(),
-	);
+	return regex.test(String(phone).slice().toLowerCase());
 };
 
 export const isEmailValid = (

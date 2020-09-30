@@ -28,7 +28,7 @@ describe('ThirdParty Preview', () => {
 		const { container } = render(
 			<ThirdPartyCard
 				onRemove={noop}
-				onCorrect={_value => {}}
+				onCorrect={(_value) => {}}
 				complete={true}
 				thirdParty={thirdPartyAdmin}
 			/>,
@@ -44,7 +44,7 @@ describe('ThirdParty Remove', () => {
 		const { container, getByText } = render(
 			<ThirdPartyCard
 				onRemove={noop}
-				onCorrect={_value => {}}
+				onCorrect={(_value) => {}}
 				complete={true}
 				thirdParty={thirdPartyAdmin}
 			/>,
@@ -60,7 +60,7 @@ describe('ThirdParty Remove', () => {
 		const { getByText } = render(
 			<ThirdPartyCard
 				onRemove={noop}
-				onCorrect={_value => {}}
+				onCorrect={(_value) => {}}
 				complete={true}
 				thirdParty={thirdPartyAdmin}
 			/>,
@@ -78,7 +78,7 @@ describe('ThirdParty Remove', () => {
 		const { getByText } = render(
 			<ThirdPartyCard
 				onRemove={noop}
-				onCorrect={_value => {}}
+				onCorrect={(_value) => {}}
 				complete={true}
 				thirdParty={thirdPartyAdmin}
 			/>,
@@ -97,7 +97,7 @@ describe('ThirdParty Remove', () => {
 		const { getByText, getByTestId } = render(
 			<ThirdPartyCard
 				onRemove={noop}
-				onCorrect={_value => {}}
+				onCorrect={(_value) => {}}
 				complete={true}
 				thirdParty={thirdPartyAdmin}
 			/>,
@@ -121,7 +121,7 @@ describe('ThirdParty Remove', () => {
 		const { getByText, getByTestId } = render(
 			<ThirdPartyCard
 				onRemove={noop}
-				onCorrect={_value => {}}
+				onCorrect={(_value) => {}}
 				complete={true}
 				thirdParty={thirdPartyAdmin}
 			/>,

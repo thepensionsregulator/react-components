@@ -10,7 +10,7 @@ const AutoComplete: React.FC<AutoCompleteProps> = ({
 }) => {
 	const { send, i18n } = useTrusteeContext();
 
-	const onSubmit = values => {
+	const onSubmit = (values) => {
 		if (Object.values(values).length > 0) {
 			send('SAVE', { address: values.address.value });
 		}

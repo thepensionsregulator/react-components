@@ -46,7 +46,7 @@ export const SVG: React.FC<SVGProps> = ({
 	);
 };
 
-export const CheckboxChecked: React.FC<SVGProps> = props => {
+export const CheckboxChecked: React.FC<SVGProps> = (props) => {
 	return (
 		<SVG
 			testId="checkbox-checked"
@@ -82,7 +82,7 @@ export const CheckboxChecked: React.FC<SVGProps> = props => {
 	);
 };
 
-export const CheckboxBlank: React.FC<SVGProps> = props => {
+export const CheckboxBlank: React.FC<SVGProps> = (props) => {
 	return (
 		<SVG testId="checkbox-blank" width="40" viewBox="0 0 40 40" {...props}>
 			<g fill="#f5f5f5" stroke="#585858" strokeWidth="1">
@@ -93,7 +93,7 @@ export const CheckboxBlank: React.FC<SVGProps> = props => {
 	);
 };
 
-export const RadioButtonChecked: React.FC<SVGProps> = props => {
+export const RadioButtonChecked: React.FC<SVGProps> = (props) => {
 	return (
 		<SVG width="40" viewBox="315 504 40 40" {...props}>
 			<path
@@ -118,7 +118,7 @@ export const RadioButtonChecked: React.FC<SVGProps> = props => {
 	);
 };
 
-export const RadioButtonUnchecked: React.FC<SVGProps> = props => {
+export const RadioButtonUnchecked: React.FC<SVGProps> = (props) => {
 	return (
 		<SVG width="40" viewBox="0 0 40 40" {...props}>
 			<g fill="#f5f5f5" stroke="#585858" strokeWidth="1">
@@ -129,7 +129,7 @@ export const RadioButtonUnchecked: React.FC<SVGProps> = props => {
 	);
 };
 
-export const UnfoldMore: React.FC<SVGProps> = props => {
+export const UnfoldMore: React.FC<SVGProps> = (props) => {
 	return (
 		<SVG testId="unfold-more" {...props}>
 			<path d="M0 0h24v24H0z" fill="none" />
@@ -138,7 +138,7 @@ export const UnfoldMore: React.FC<SVGProps> = props => {
 	);
 };
 
-export const CheckedCircle: React.FC<SVGProps> = props => {
+export const CheckedCircle: React.FC<SVGProps> = (props) => {
 	return (
 		<SVG testId="checked-circle" width="22" viewBox="0 0 22 22" {...props}>
 			<circle cx="11" cy="11" r="11" />
@@ -155,7 +155,7 @@ export const CheckedCircle: React.FC<SVGProps> = props => {
 	);
 };
 
-export const ErrorCircle: React.FC<SVGProps> = props => {
+export const ErrorCircle: React.FC<SVGProps> = (props) => {
 	return (
 		<SVG testId="error-circle" width="22" viewBox="0 0 22 22" {...props}>
 			<path
@@ -166,7 +166,7 @@ export const ErrorCircle: React.FC<SVGProps> = props => {
 	);
 };
 
-export const ArrowUp: React.FC<SVGProps> = props => {
+export const ArrowUp: React.FC<SVGProps> = (props) => {
 	return (
 		<SVG testId="arrow-up" {...props}>
 			<path d="M7.41 15.41L12 10.83l4.59 4.58L18 14l-6-6-6 6z" />
@@ -175,7 +175,7 @@ export const ArrowUp: React.FC<SVGProps> = props => {
 	);
 };
 
-export const ArrowDown: React.FC<SVGProps> = props => {
+export const ArrowDown: React.FC<SVGProps> = (props) => {
 	return (
 		<SVG testId="arrow-down" {...props}>
 			<path d="M7.41 8.59L12 13.17l4.59-4.58L18 10l-6 6-6-6 1.41-1.41z" />
@@ -184,7 +184,7 @@ export const ArrowDown: React.FC<SVGProps> = props => {
 	);
 };
 
-export const ArrowLeft: React.FC<SVGProps> = props => {
+export const ArrowLeft: React.FC<SVGProps> = (props) => {
 	return (
 		<SVG testId="arrow-up" {...props}>
 			<path d="M0 0h24v24H0V0z" fill="none" />
@@ -193,7 +193,7 @@ export const ArrowLeft: React.FC<SVGProps> = props => {
 	);
 };
 
-export const ArrowRight: React.FC<SVGProps> = props => {
+export const ArrowRight: React.FC<SVGProps> = (props) => {
 	return (
 		<SVG testId="arrow-down" {...props}>
 			<path d="M0 0h24v24H0V0z" fill="none" />

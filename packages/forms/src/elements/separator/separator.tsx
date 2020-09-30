@@ -25,7 +25,7 @@ export const SeparatorX = ({ children }) => {
  * @param children property cfg will be overwritten.
  */
 export const SeparatorY = ({ children }) => {
-	const clones = Children.map(children, child =>
+	const clones = Children.map(children, (child) =>
 		cloneElement(child, { cfg: { mt: 1, mb: 3 } }),
 	);
 

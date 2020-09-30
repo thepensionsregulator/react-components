@@ -48,9 +48,9 @@ describe('Trustee Preview', () => {
 				onContactSave={noop}
 				onAddressSave={noop}
 				onRemove={noop}
-				onCorrect={_value => {}}
+				onCorrect={(_value) => {}}
 				addressAPI={{
-					get: _endpont => Promise.resolve(),
+					get: (_endpont) => Promise.resolve(),
 					limit: 100,
 				}}
 				complete={true}
@@ -70,9 +70,9 @@ describe('Trustee Preview', () => {
 				onContactSave={noop}
 				onAddressSave={noop}
 				onRemove={noop}
-				onCorrect={_value => {}}
+				onCorrect={(_value) => {}}
 				addressAPI={{
-					get: _endpont => Promise.resolve(),
+					get: (_endpont) => Promise.resolve(),
 					limit: 100,
 				}}
 				complete={true}
@@ -96,9 +96,9 @@ describe('Trustee Preview', () => {
 				onContactSave={noop}
 				onAddressSave={noop}
 				onRemove={noop}
-				onCorrect={_value => {}}
+				onCorrect={(_value) => {}}
 				addressAPI={{
-					get: _endpont => Promise.resolve(),
+					get: (_endpont) => Promise.resolve(),
 					limit: 100,
 				}}
 				complete={true}
@@ -118,9 +118,9 @@ describe('Trustee Preview', () => {
 				onContactSave={noop}
 				onAddressSave={noop}
 				onRemove={noop}
-				onCorrect={_value => {}}
+				onCorrect={(_value) => {}}
 				addressAPI={{
-					get: _endpont => Promise.resolve(),
+					get: (_endpont) => Promise.resolve(),
 					limit: 100,
 				}}
 				complete={true}
@@ -143,9 +143,9 @@ describe('Trustee Preview', () => {
 				onContactSave={noop}
 				onAddressSave={noop}
 				onRemove={noop}
-				onCorrect={_value => {}}
+				onCorrect={(_value) => {}}
 				addressAPI={{
-					get: _endpont => Promise.resolve(),
+					get: (_endpont) => Promise.resolve(),
 					limit: 100,
 				}}
 				complete={true}
@@ -169,9 +169,9 @@ describe('Trustee Name', () => {
 				onContactSave={noop}
 				onAddressSave={noop}
 				onRemove={noop}
-				onCorrect={_value => {}}
+				onCorrect={(_value) => {}}
 				addressAPI={{
-					get: _endpont => Promise.resolve(),
+					get: (_endpont) => Promise.resolve(),
 					limit: 100,
 				}}
 				complete={true}
@@ -194,9 +194,9 @@ describe('Trustee Type', () => {
 				onContactSave={noop}
 				onAddressSave={noop}
 				onRemove={noop}
-				onCorrect={_value => {}}
+				onCorrect={(_value) => {}}
 				addressAPI={{
-					get: _endpont => Promise.resolve(),
+					get: (_endpont) => Promise.resolve(),
 					limit: 100,
 				}}
 				complete={true}
@@ -221,9 +221,9 @@ describe('Trustee Contact Details', () => {
 				onContactSave={noop}
 				onAddressSave={noop}
 				onRemove={noop}
-				onCorrect={_value => {}}
+				onCorrect={(_value) => {}}
 				addressAPI={{
-					get: _endpont => Promise.resolve(),
+					get: (_endpont) => Promise.resolve(),
 					limit: 100,
 				}}
 				complete={true}
@@ -247,9 +247,9 @@ describe('Trustee Remove', () => {
 				onContactSave={noop}
 				onAddressSave={noop}
 				onRemove={noop}
-				onCorrect={_value => {}}
+				onCorrect={(_value) => {}}
 				addressAPI={{
-					get: _endpont => Promise.resolve(),
+					get: (_endpont) => Promise.resolve(),
 					limit: 100,
 				}}
 				complete={true}
@@ -273,9 +273,9 @@ describe('Trustee Auto Address', () => {
 				onContactSave={noop}
 				onAddressSave={noop}
 				onRemove={noop}
-				onCorrect={_value => {}}
+				onCorrect={(_value) => {}}
 				addressAPI={{
-					get: _endpont => Promise.resolve(),
+					get: (_endpont) => Promise.resolve(),
 					limit: 100,
 				}}
 				complete={true}
@@ -335,9 +335,9 @@ describe('Trustee Manual Address', () => {
 				onContactSave={noop}
 				onAddressSave={noop}
 				onRemove={noop}
-				onCorrect={_value => {}}
+				onCorrect={(_value) => {}}
 				addressAPI={{
-					get: _endpont => Promise.resolve(),
+					get: (_endpont) => Promise.resolve(),
 					limit: 100,
 				}}
 				complete={true}

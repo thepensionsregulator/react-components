@@ -2,7 +2,7 @@ export const truncateString = (str: string, num: number) => {
 	return str && str.length > num ? str.slice(0, num).concat('...') : str;
 };
 
-export const capitalize = string =>
+export const capitalize = (string) =>
 	`${string.charAt(0).toUpperCase()}${string.slice(1)}`;
 
 export const getObjectValueByString = (
@@ -14,7 +14,7 @@ export const getObjectValueByString = (
 
 export const callAllEventHandlers = (...fns: Function[]) => {
 	return (event: unknown, ...args: unknown[]) =>
-		fns.some(fn => fn && fn(event, ...args));
+		fns.some((fn) => fn && fn(event, ...args));
 };
 
 export const splitObjectIntoTwo = <T>(obj: T, fields = []): [any, any] => {
