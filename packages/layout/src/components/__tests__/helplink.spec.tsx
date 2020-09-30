@@ -6,10 +6,8 @@ describe('HelpLink', () => {
 	test('displays title', () => {
 		const renderOutput = render(
 			<HelpLink
-				fields={{
-					Title: 'HelpLink Title',
-					Content: 'This is some HelpLink content',
-				}}
+				title="HelpLink Title"
+				content="This is some HelpLink content"
 			/>,
 		);
 		console.log(renderOutput);
