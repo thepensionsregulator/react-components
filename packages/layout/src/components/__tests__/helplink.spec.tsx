@@ -10,7 +10,17 @@ describe('HelpLink', () => {
 				content="This is some HelpLink content"
 			/>,
 		);
-		console.log(renderOutput);
 		expect(renderOutput.container.textContent).toContain('HelpLink Title');
+	});
+	test('display content', () => {
+		const renderOutput = render(
+			<HelpLink
+				title="HelpLink Title"
+				content="This is some HelpLink content"
+			/>,
+		);
+		expect(renderOutput.container.textContent).toContain(
+			'This is some HelpLink content',
+		);
 	});
 });
