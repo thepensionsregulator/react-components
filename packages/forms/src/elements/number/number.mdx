@@ -60,6 +60,7 @@ import { FFInputNumber } from '@tpr/forms';
 					cfg={{ my: 5 }}
 					callback={(e) => console.log(e.target.value)}
 					required={true}
+					noLeftBorder={true}
 				/>
 				<button type="submit" style={{ display: 'none' }} children="Submit" />
 			</form>
@@ -134,3 +135,4 @@ Accepted config props: FlexProps, SpaceProps
 | callback      | false    | function | callback function to be executed after onChange            |
 | after         | false    | string   | emulates text passed to ::after pseudo-selector            |
 | decimalPlaces | false    | number   | the number of decimal places used for formatting the value |
+| noLeftBorder  | false    | boolean  | disables the left border when detecting error              |
