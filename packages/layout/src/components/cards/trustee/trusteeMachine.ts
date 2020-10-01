@@ -104,7 +104,6 @@ const trusteeMachine = Machine<TrusteeContext, TrusteeStates, TrusteeEvents>({
 				postTown: '',
 				postcode: '',
 				county: '',
-				countryId: '',
 			},
 			//
 			telephoneNumber: '',

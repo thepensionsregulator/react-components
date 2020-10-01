@@ -23,20 +23,20 @@ import { IndependentTrusteeCard } from '@tpr/layout';
 ## Basic Usage
 
 <Playground>
-  {() => {
-    const [complete, setComplete] = useState(false);
-    const callbackFn = (values, _fullIndependentTrusteeObject) => {
-      console.log(values);
-      console.log(_fullIndependentTrusteeObject);
-      return Promise.resolve(values);
-    }
-    const independentTrustee = {
-      id: '',
-      schemeRoleId: 123,
-      effectiveDate: '1997-04-01T00:00:00',
-      organisationName: 'Acme Factory Pension Trustees Limited',
-      appointedByRegulator: true,
-      address: {				
+	{() => {
+		const [complete, setComplete] = useState(false);
+		const callbackFn = (values, _fullIndependentTrusteeObject) => {
+			console.log(values);
+			console.log(_fullIndependentTrusteeObject);
+			return Promise.resolve(values);
+		};
+		const independentTrustee = {
+			id: '',
+			schemeRoleId: 123,
+			effectiveDate: '1997-04-01T00:00:00',
+			organisationName: 'Acme Factory Pension Trustees Limited',
+			appointedByRegulator: true,
+			address: {
 				addressLine1: 'Napier House',
 				addressLine2: 'Trafalgar Pl',
 				addressLine3: '',
@@ -44,18 +44,17 @@ import { IndependentTrusteeCard } from '@tpr/layout';
 				county: 'West Sussex',
 				postcode: 'BN1 4DW',
 				country: '',
-				countryId: ''
-			}
-    };
+			},
+		};
 		return (
 			<IndependentTrusteeCard
-        onSaveAppointed={callbackFn}
+				onSaveAppointed={callbackFn}
 				onRemove={callbackFn}
 				onCorrect={(value) => setComplete(value)}
 				complete={complete}
-        preValidatedData={true}
+				preValidatedData={true}
 				independentTrustee={independentTrustee}
 			/>
 		);
-  }}
+	}}
 </Playground>
