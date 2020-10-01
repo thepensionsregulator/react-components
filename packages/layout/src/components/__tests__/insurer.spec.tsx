@@ -23,7 +23,7 @@ const insurer: Insurer = {
 		postTown: 'Brighton',
 		postcode: 'BN1 4DW',
 		county: 'West Sussex',
-		countryId: '',
+		countryId: 2,
 	},
 	telephoneNumber: '01273 222 111',
 	emailAddress: 'john.wick@warnerbros.com',

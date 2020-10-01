@@ -27,7 +27,7 @@ const corporateGroup: CorporateGroup = {
 		postcode: 'BN1 4DW',
 		county: 'West Sussex',
 		country: '',
-		countryId: '',
+		countryId: 2,
 	},
 };
 
