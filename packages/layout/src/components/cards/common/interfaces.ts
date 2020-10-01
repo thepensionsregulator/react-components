@@ -41,7 +41,7 @@ export interface CardAddress {
 	county: string;
 	postcode: string;
 	country: string;
-	countryId: string | number;
+	countryId: number;
 }
 
 export interface CardPersonalDetails {
