@@ -41,6 +41,12 @@ input[type='number'] {
 }
 
 .after {
+	position: absolute;
+	left: 100%;
 	line-height: 50px;
 	margin-left: 1rem;
+}
+
+.input-wrapper_relative {
+	position: relative;
 }
