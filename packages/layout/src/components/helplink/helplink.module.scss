@@ -1,0 +1,23 @@
+@import '@tpr/theming/lib/variables.scss';
+
+.closed {
+	text-decoration: underline;
+	color: $colors-primary-3;
+	cursor: pointer;
+	svg {
+		transform: rotate(0deg);
+		fill: $colors-primary-3;
+		transition: transform 0.4s;
+	}
+}
+
+.open {
+	text-decoration: underline;
+	color: $colors-primary-3;
+	cursor: pointer;
+	svg {
+		transform: rotate(180deg);
+		fill: $colors-primary-3;
+		transition: transform 0.4s;
+	}
+}
