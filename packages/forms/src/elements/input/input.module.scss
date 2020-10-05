@@ -44,7 +44,13 @@ input[type='number'] {
 	position: absolute;
 	left: 100%;
 	line-height: 50px;
-	margin-left: 1rem;
+	margin-left: 0.5rem;
+}
+
+.before {
+	line-height: 50px;
+	margin-right: 0.5rem;
+	flex-shrink: inherit;
 }
 
 .input-wrapper_relative {

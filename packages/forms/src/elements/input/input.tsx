@@ -7,7 +7,8 @@ export type InputProps = {
 	testId?: string;
 	label?: string;
 	touched?: boolean;
-	after?: any;
+	after?: string;
+	before?: string;
 	decimalPlaces?: number;
 	[key: string]: any;
 };
@@ -19,6 +20,7 @@ export const Input: React.FC<InputProps> = ({
 	touched = false,
 	className,
 	after: After,
+	before: Before,
 	decimalPlaces,
 	...rest
 }) => {
@@ -27,6 +29,7 @@ export const Input: React.FC<InputProps> = ({
 			cfg={{ flex: width ? '0 0 auto' : '1 1 auto', width }}
 			className={After ? styles['input-wrapper_relative'] : ''}
 		>
+			{Before && <span className={styles.before}>{Before}</span>}
 			<input
 				type={type}
 				data-testid={testId}

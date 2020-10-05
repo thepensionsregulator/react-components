@@ -6,10 +6,12 @@ import { Input } from '../input/input';
 import { parseToDecimals, handleBlur } from '../helpers';
 
 interface InputNumberProps extends FieldRenderProps<number>, FieldExtraProps {
-	after?: any;
+	after?: string;
+	before?: string;
 	callback?: (e: any) => void;
 	decimalPlaces?: number;
 	noLeftBorder?: boolean;
+	noOptionalText?: boolean;
 }
 
 const InputNumber: React.FC<InputNumberProps> = ({
@@ -23,9 +25,11 @@ const InputNumber: React.FC<InputNumberProps> = ({
 	inputWidth: width,
 	cfg,
 	after,
+	before,
 	callback,
 	decimalPlaces,
 	noLeftBorder,
+	optionalText,
 	...props
 }) => {
 	return (
@@ -36,7 +40,7 @@ const InputNumber: React.FC<InputNumberProps> = ({
 		>
 			<InputElementHeading
 				label={label}
-				required={required}
+				required={optionalText !== undefined ? !optionalText : required}
 				hint={hint}
 				meta={meta}
 			/>
@@ -68,6 +72,7 @@ const InputNumber: React.FC<InputNumberProps> = ({
 						: null;
 				}}
 				after={after}
+				before={before}
 				{...props}
 			/>
 		</StyledInputLabel>
