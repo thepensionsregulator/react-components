@@ -60,7 +60,6 @@ import { FFInputNumber } from '@tpr/forms';
 					cfg={{ my: 5 }}
 					callback={(e) => console.log(e.target.value)}
 					required={true}
-					noLeftBorder={true}
 				/>
 				<FFInputNumber
 					name="amount"
@@ -71,10 +70,28 @@ import { FFInputNumber } from '@tpr/forms';
 					cfg={{ my: 5 }}
 					required={false}
 					noLeftBorder={true}
-					optionalText={false}
 					decimalPlaces={2}
 					min={0}
 					before="£"
+				/>
+				<FFInputNumber
+					name="percentage"
+					label="Amount deducted from expenses"
+					hint="amount in %"
+					validate={(value) => {}}
+					inputWidth={5}
+					cfg={{ my: 5 }}
+					required={false}
+					noLeftBorder={true}
+					optionalText={false}
+					decimalPlaces={2}
+					min={0}
+					max={100}
+					after="%"
+					validate={(value) => {
+						if (value < 0 || value > 100)
+							return 'must be value between 0 and 100%';
+					}}
 				/>
 				<button type="submit" style={{ display: 'none' }} children="Submit" />
 			</form>
@@ -112,6 +129,7 @@ import { Form, validate, renderFields } from '@tpr/forms';
 					}
 					return undefined;
 				},
+				noLeftBorder: true,
 			},
 		];
 		return (
