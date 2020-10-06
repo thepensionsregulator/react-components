@@ -11,7 +11,7 @@ interface InputNumberProps extends FieldRenderProps<number>, FieldExtraProps {
 	callback?: (e: any) => void;
 	decimalPlaces?: number;
 	noLeftBorder?: boolean;
-	noOptionalText?: boolean;
+	optionalText?: boolean;
 }
 
 const InputNumber: React.FC<InputNumberProps> = ({
