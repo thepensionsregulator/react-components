@@ -1,0 +1,94 @@
+---
+name: Currency
+menu: Forms
+route: /forms/currency
+---
+
+import { Playground } from '@playground';
+import { Form } from 'react-final-form';
+import { FFInputCurrency } from './currency';
+import { validate } from '../../validation';
+import { renderFields } from '../../renderFields';
+
+# Currency Input
+
+Enter a number within certain range with the keyboard.
+
+## When To Use
+
+- When a numeric value needs to be provided and formated automatically
+
+## Usage
+
+`Inside your React project directory, run the following:`
+
+```js
+yarn add @tpr/forms
+```
+
+`or with npm`
+
+```js
+npm install @tpr/forms
+```
+
+`import items you wish to use from the library`
+
+```js
+import { FFInputCurrency } from '@tpr/forms';
+```
+
+## Examples
+
+[CodeSandbox](https://codesandbox.io)
+
+<Playground>
+	<Form onSubmit={(values) => console.log(values)}>
+		{({ handleSubmit }) => (
+			<form onSubmit={handleSubmit}>
+				<FFInputNumber
+					name="percentage"
+					label="Amount deducted from expenses"
+					hint="amount in %"
+					validate={(value) => {}}
+					inputWidth={5}
+					cfg={{ my: 5 }}
+					required={false}
+					noLeftBorder={true}
+					optionalText={false}
+					decimalPlaces={2}
+					min={0}
+					max={100}
+					after="%"
+					validate={(value) => {
+						if (value < 0 || value > 100)
+							return 'must be value between 0 and 100%';
+					}}
+				/>
+				<button type="submit" style={{ display: 'none' }} children="Submit" />
+			</form>
+		)}
+	</Form>
+</Playground>
+
+## API
+
+```
+Accepted config props: FlexProps, SpaceProps
+```
+
+### Props
+
+| Property      | Required | Type     | Description                                                |
+| ------------- | -------- | -------- | ---------------------------------------------------------- |
+| after         | false    | string   | emulates text passed to ::after pseudo-selector            |
+| before        | false    | string   | emulates text passed to ::before pseudo-selector           |
+| callback      | false    | function | callback function to be executed after onChange            |
+| cfg           | false    | object   | FlexProps & SpaceProps                                     |
+| decimalPlaces | false    | number   | the number of decimal places used for formatting the value |
+| disabled      | false    | boolean  | Disable input field                                        |
+| hint          | false    | string   | More detailed description about the field                  |
+| label         | true     | string   | Input description                                          |
+| noLeftBorder  | false    | boolean  | disables the left border when detecting error              |
+| optionalText  | false    | boolean  | allows hiding "optional" text when field is not required   |
+| testId        | false    | string   | data attribute for testers                                 |

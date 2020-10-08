@@ -16,3 +16,32 @@ export const parseToDecimals = (num: string, decimals: number): number => {
 export const fixToDecimals = (value: string, decimals: number): string => {
 	return Number(value).toFixed(decimals);
 };
+
+export const containsDecimals = (value: string): boolean => {
+	const dotPos: number = firstDotPosition(value);
+	return dotPos < value.length;
+};
+
+export const formatThousands = (value: string, decimals: number): string => {
+	console.log(decimals);
+	// get integer
+	const numInt: number = Math.floor(Number(value));
+
+	// get decimals
+	//const decPart: string = (Number(value) - numInt).toFixed(decimals);
+
+	// add commas to integer
+	const a = numInt
+		.toString()
+		.split('')
+		.reverse()
+		.join('')
+		.match(/.{1,3}/g)
+		.join(',')
+		.split('')
+		.reverse()
+		.join('');
+	//.concat('.', decPart.substr(2));
+
+	return a;
+};
