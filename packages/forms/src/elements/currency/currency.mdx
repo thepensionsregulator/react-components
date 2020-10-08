@@ -50,15 +50,12 @@ import { FFInputCurrency } from '@tpr/forms';
 					name="percentage"
 					label="Amount deducted from expenses"
 					hint="amount in %"
-					validate={(value) => {}}
 					inputWidth={5}
 					cfg={{ my: 5 }}
 					required={false}
 					noLeftBorder={true}
 					optionalText={false}
 					decimalPlaces={2}
-					min={0}
-					max={100}
 					before="£"
 					validate={(value) => {
 						if (value < 0 || value > 100)

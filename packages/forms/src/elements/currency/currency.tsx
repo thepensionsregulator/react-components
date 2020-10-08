@@ -13,7 +13,6 @@ interface InputCurrencyProps extends FieldRenderProps<number>, FieldExtraProps {
 	decimalPlaces?: number;
 	noLeftBorder?: boolean;
 	optionalText?: boolean;
-	autoformat?: boolean;
 }
 
 const InputCurrency: React.FC<InputCurrencyProps> = ({
@@ -32,7 +31,6 @@ const InputCurrency: React.FC<InputCurrencyProps> = ({
 	decimalPlaces,
 	noLeftBorder,
 	optionalText,
-	autoformat,
 	...props
 }) => {
 	const digits = ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9', ','];
@@ -70,26 +68,23 @@ const InputCurrency: React.FC<InputCurrencyProps> = ({
 
 	const handleOnChange = (e: ChangeEvent<HTMLInputElement>) => {
 		decimalPlaces
-			? autoformat // input type: 'text'
-				? input.onChange(e.target.value && formatWithCommas(e.target.value))
-				: input.onChange(
-						e.target.value && parseToDecimals(e.target.value, decimalPlaces),
-				  )
-			: input.onChange(e.target.value && parseInt(e.target.value, 10));
+			? //? autoformat // input type: 'text'
+			  input.onChange(e.target.value && formatWithCommas(e.target.value))
+			: // : input.onChange(
+			  // 		e.target.value && parseToDecimals(e.target.value, decimalPlaces),
+			  //   )
+			  input.onChange(e.target.value && parseInt(e.target.value, 10));
 		callback && callback(e);
 	};
 
 	const handleBlur = (e: any) => {
 		input.onBlur(e); // without this call, validate won't be executed even if specified
 
-		if (autoformat) {
-			return true;
-		} else {
-			const newVal = fixToDecimals(e.target.value, decimalPlaces);
-			const a = formatThousands(newVal, decimalPlaces);
-			setInputValue(a);
-			e.target.value = newVal;
-		}
+		const newVal = fixToDecimals(e.target.value, decimalPlaces);
+		const a = formatThousands(newVal, decimalPlaces);
+		setInputValue(a);
+		e.target.value = newVal;
+
 		//				e.target.value = e.target.value ? handleBlur(e.target.value) : null;
 	};
 
@@ -107,7 +102,7 @@ const InputCurrency: React.FC<InputCurrencyProps> = ({
 			/>
 			<div className={styles.inputWrapper}>
 				<Input
-					type={autoformat ? 'text' : 'number'}
+					type="text"
 					width={width}
 					testId={testId}
 					label={label}
@@ -122,13 +117,7 @@ const InputCurrency: React.FC<InputCurrencyProps> = ({
 					before={before}
 					{...props}
 				/>
-				{autoformat ? (
-					Number(inputValue) > Number(input.max) ? (
-						<span>Value not valid</span>
-					) : (
-						<span>{inputValue}</span>
-					)
-				) : null}
+				<span>{inputValue}</span>
 			</div>
 		</StyledInputLabel>
 	);
