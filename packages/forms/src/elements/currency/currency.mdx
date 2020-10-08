@@ -46,7 +46,7 @@ import { FFInputCurrency } from '@tpr/forms';
 	<Form onSubmit={(values) => console.log(values)}>
 		{({ handleSubmit }) => (
 			<form onSubmit={handleSubmit}>
-				<FFInputNumber
+				<FFInputCurrency
 					name="percentage"
 					label="Amount deducted from expenses"
 					hint="amount in %"
@@ -59,7 +59,7 @@ import { FFInputCurrency } from '@tpr/forms';
 					decimalPlaces={2}
 					min={0}
 					max={100}
-					after="%"
+					before="£"
 					validate={(value) => {
 						if (value < 0 || value > 100)
 							return 'must be value between 0 and 100%';
