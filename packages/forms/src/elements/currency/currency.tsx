@@ -4,7 +4,7 @@ import { StyledInputLabel, InputElementHeading } from '../elements';
 import { FieldProps, FieldExtraProps } from '../../renderFields';
 import { Input } from '../input/input';
 import { parseToDecimals, fixToDecimals, formatThousands } from '../helpers';
-import styles from './number.module.scss';
+import styles from './currency.module.scss';
 
 interface InputCurrencyProps extends FieldRenderProps<number>, FieldExtraProps {
 	after?: string;
