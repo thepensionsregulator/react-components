@@ -1,6 +1,10 @@
+export const firstDotPosition = (num: string): number => {
+	// detects if the number contains (.) for decimals
+	return num.indexOf('.');
+};
+
 export const parseToDecimals = (num: string, decimals: number): number => {
-	// first we detect if the number already contains decimals
-	const firstDot = num.indexOf('.');
+	const firstDot = firstDotPosition(num);
 	// if contains decimals, only allow n number of decimals
 	// to avoid unnexpected rounds when using toFixed() in handleBlur
 	if (firstDot > -1) {
@@ -9,6 +13,6 @@ export const parseToDecimals = (num: string, decimals: number): number => {
 	} else return Number(num);
 };
 
-export const handleBlur = (value: string, decimals: number): string => {
+export const fixToDecimals = (value: string, decimals: number): string => {
 	return Number(value).toFixed(decimals);
 };

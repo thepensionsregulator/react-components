@@ -3,7 +3,7 @@ import { Field, FieldRenderProps } from 'react-final-form';
 import { StyledInputLabel, InputElementHeading } from '../elements';
 import { FieldProps, FieldExtraProps } from '../../renderFields';
 import { Input } from '../input/input';
-import { parseToDecimals, handleBlur } from '../helpers';
+import { parseToDecimals, fixToDecimals } from '../helpers';
 
 interface InputNumberProps extends FieldRenderProps<number>, FieldExtraProps {
 	after?: string;
@@ -32,6 +32,21 @@ const InputNumber: React.FC<InputNumberProps> = ({
 	optionalText,
 	...props
 }) => {
+	const handleOnChange = (e: ChangeEvent<HTMLInputElement>) => {
+		decimalPlaces
+			? input.onChange(
+					e.target.value && parseToDecimals(e.target.value, decimalPlaces),
+			  )
+			: input.onChange(e.target.value && parseInt(e.target.value, 10));
+		callback && callback(e);
+	};
+
+	const handleBlur = (e: any) => {
+		input.onBlur(e); // without this call, validate won't be executed even if specified
+		const newValue = fixToDecimals(e.target.value, decimalPlaces);
+		e.target.value = e.target.value ? newValue : null;
+	};
+
 	return (
 		<StyledInputLabel
 			isError={meta && meta.touched && meta.error}
@@ -54,23 +69,8 @@ const InputNumber: React.FC<InputNumberProps> = ({
 				decimalPlaces={decimalPlaces}
 				{...input}
 				onKeyDown={(e) => e.key.toLowerCase() === 'e' && e.preventDefault()}
-				onChange={(evt: ChangeEvent<HTMLInputElement>) => {
-					decimalPlaces
-						? input.onChange(
-								evt.target.value &&
-									parseToDecimals(evt.target.value, decimalPlaces),
-						  )
-						: input.onChange(
-								evt.target.value && parseInt(evt.target.value, 10),
-						  );
-					callback && callback(evt);
-				}}
-				onBlur={(e: any) => {
-					input.onBlur(e); // without this call, validate won't be executed even if specified
-					e.target.value = e.target.value
-						? handleBlur(e.target.value, decimalPlaces)
-						: null;
-				}}
+				onChange={handleOnChange}
+				onBlur={handleBlur}
 				after={after}
 				before={before}
 				{...props}
