@@ -47,19 +47,18 @@ import { FFInputCurrency } from '@tpr/forms';
 		{({ handleSubmit }) => (
 			<form onSubmit={handleSubmit}>
 				<FFInputCurrency
-					name="percentage"
-					label="Amount deducted from expenses"
-					hint="amount in %"
+					name="income"
+					label="Annual income"
+					hint="total amount of income for last year, in GBP"
+					before="£"
 					inputWidth={5}
 					cfg={{ my: 5 }}
 					required={false}
 					noLeftBorder={true}
 					optionalText={false}
-					decimalPlaces={2}
-					before="£"
 					validate={(value) => {
-						if (value < 0 || value > 100)
-							return 'must be value between 0 and 100%';
+						if (value && value.length > 18)
+							return 'must cannot be greater than 999,999,999,999.99';
 					}}
 				/>
 				<button type="submit" style={{ display: 'none' }} children="Submit" />

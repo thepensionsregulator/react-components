@@ -19,19 +19,15 @@ export const fixToDecimals = (value: string, decimals: number): string => {
 
 export const containsDecimals = (value: string): boolean => {
 	const dotPos: number = firstDotPosition(value);
-	return dotPos < value.length;
+	return dotPos > -1 && dotPos < value.length;
 };
 
-export const formatThousands = (value: string, decimals: number): string => {
-	console.log(decimals);
-	// get integer
-	const numInt: number = Math.floor(Number(value));
-
-	// get decimals
-	//const decPart: string = (Number(value) - numInt).toFixed(decimals);
-
-	// add commas to integer
-	const a = numInt
+export const format = (value: string): string => {
+	/*
+		receives an integer and returns it with a comma separated format
+		e.g  ('12345678') => '12,345,678'
+	*/
+	const valueFormatted:string = value
 		.toString()
 		.split('')
 		.reverse()
@@ -41,7 +37,28 @@ export const formatThousands = (value: string, decimals: number): string => {
 		.split('')
 		.reverse()
 		.join('');
-	//.concat('.', decPart.substr(2));
 
-	return a;
+	return valueFormatted;
 };
+
+export const formatWithDecimals = (value: string, decimals: number): string => {
+	/*
+		takes a number with containing decimal places 
+		and returns it in a comma separated format
+		e.g value: ('123456.77') => '123,456.77'
+	*/
+	// 
+	// e.g. decimalsStartPos = 6;
+	const decimalsStartPos:number = firstDotPosition(value);
+	// e.g. decimalPart = '.77'
+	const decimalPart:string = value.slice(decimalsStartPos, decimalsStartPos+1+decimals);
+	// e.g. intValues = '123456
+	const intValues:string = value.slice(0, decimalsStartPos);
+	// e.g. intValueFormatted = '123,456'
+	const intValueFormatted:string = format(intValues);
+
+	const valueFormatted:string = intValueFormatted + decimalPart;
+	console.log(valueFormatted);
+
+	return valueFormatted;
+}
