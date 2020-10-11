@@ -3,7 +3,14 @@ import { Field, FieldRenderProps } from 'react-final-form';
 import { StyledInputLabel, InputElementHeading } from '../elements';
 import { FieldProps, FieldExtraProps } from '../../renderFields';
 import { Input } from '../input/input';
-import { format, formatWithDecimals, containsDecimals, fixToDecimals } from '../helpers';
+import {
+	format,
+	formatWithDecimals,
+	containsDecimals,
+	fixToDecimals,
+	getNumDecimalPlaces,
+	appendMissingZeros,
+} from '../helpers';
 import styles from './currency.module.scss';
 
 interface InputCurrencyProps extends FieldRenderProps<number>, FieldExtraProps {
@@ -13,6 +20,7 @@ interface InputCurrencyProps extends FieldRenderProps<number>, FieldExtraProps {
 	decimalPlaces?: number;
 	noLeftBorder?: boolean;
 	optionalText?: boolean;
+	maxInputLength?: number;
 }
 
 const InputCurrency: React.FC<InputCurrencyProps> = ({
@@ -31,6 +39,7 @@ const InputCurrency: React.FC<InputCurrencyProps> = ({
 	decimalPlaces = 2,
 	noLeftBorder,
 	optionalText,
+	maxInputLength = 16 + decimalPlaces,
 	...props
 }) => {
 	const digits = ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9', '.'];
@@ -42,91 +51,69 @@ const InputCurrency: React.FC<InputCurrencyProps> = ({
 		'ArrowDown',
 		'ArrowLeft',
 		'ArrowRight',
+		'Home',
+		'End',
 	];
-	// format: 999,999,999,999.00
-	const maxIntLengthWithCommas:number = 15;
-	const maxInputValueLength:number = maxIntLengthWithCommas + 1 + decimalPlaces;
+	// e.g. format: 999,999,999,999.00
 
 	const [inputValue, setInputValue] = useState<string>('');
-	const [numValue, setNumValue] = useState<string>('');
-	const [decimals, setDecimals] = useState<null | number>(null);
 	const [dot, setDot] = useState<boolean>(false);
 
-	const formatWithCommas = (value: string) => {
-		const numString = value.replaceAll(',', '');
+	const formatWithCommas = (value: string): string => {
+		const numString: string = value.replaceAll(',', '');
+		let numFormatted: string = '';
 		// if number is integer
-		if(!containsDecimals(value)) {
-			console.log("not-contains-decimals")
-			setNumValue(numString);
-			const numFormatted = format(numString);
-			// numFormatted = "12,345,678"
+		if (!containsDecimals(value)) {
+			// numString = "123456"
+			numFormatted = format(numString);
+			// numFormatted = "123,456"
+			const numWithDecimals: string = fixToDecimals(numString, decimalPlaces);
+			setInputValue(numFormatted + '.' + numWithDecimals.slice(-decimalPlaces));
+		}
+		// if number has decimals
+		else {
+			// numString = "123456.77"
+			numFormatted = formatWithDecimals(numString, decimalPlaces);
+			// numFormatted = "123,456.77"
 			setInputValue(numFormatted);
-			return numFormatted;
 		}
-		else {   // if number has decimals
-			console.log("does-contain-decimals");
-			const numDecimalsString = formatWithDecimals(numString, decimalPlaces);
-			// numDecimalsString = "123,456.77"
-			setInputValue(numDecimalsString);
-			setNumValue(numDecimalsString.replaceAll(',', ''));
-			return numDecimalsString;
-		}
+		return numFormatted;
 	};
 
 	const handleKeyDown = (e: any) => {
 		// typing '.' when already exists one in the value
 		if (e.key === '.') {
-			//console.log('inside IF e.key == .');
 			dot ? e.preventDefault() : setDot(true);
 			return true;
 		}
-		
 		// if the input has reached the maximum length
-		if (inputValue.length >= maxInputValueLength) {
+		if (e.target.value.length >= maxInputLength) {
 			// only allow the validKeys
-			console.log('inside first IF: inputValue.length >= maxInputValueLength');
 			!validKeys.includes(e.key) && e.preventDefault();
-		} 
-		else {
-			console.log('inside first ELSE');
+		} else {
 			if (!digits.includes(e.key) && !validKeys.includes(e.key))
 				e.preventDefault();
-			else console.log('valid key');
 		}
 	};
 
-	const handleOnChange = (e: ChangeEvent<HTMLInputElement>) => {
-		console.log('handleOnChange');
-		if(String(e.target.value)[e.target.value.length-1] == '.'){
+	const handleOnChange = (e: ChangeEvent<HTMLInputElement>): void => {
+		if (String(e.target.value)[e.target.value.length - 1] == '.') {
 			input.onChange(e.target.value);
-		}
-		else {
+		} else {
 			input.onChange(e.target.value && formatWithCommas(e.target.value));
 		}
-		if(!containsDecimals(e.target.value)) setDot(false);
-		console.log('handleOnChange value: ' + e.target.value);
-		e.target.value === '' && setNumValue(''); 
+		if (!containsDecimals(e.target.value)) setDot(false);
 		e.target.value === '' && setInputValue('');
 		callback && callback(e);
 	};
 
-	const handleBlur = (e: any) => {
-		console.log('handleBlur');
-		console.log('handleBlur value: ' + e.target.value);
-		input.onBlur(e); // without this call, validate won't be executed even if specified
-		let numFormatted:string = '';
-		if(numValue !== '') {
-			console.log('numValue != ""' , numValue);
-			if(!containsDecimals(numValue)) {
-				console.log('numValue not contains decimals');
-				numFormatted = fixToDecimals(numValue, decimalPlaces);
-			}
-			else {
-				console.log('numValue contains decimals');
-				numFormatted = formatWithCommas(e.target.value);
-			}
-		}
-		console.log('numFormatted: ' + numFormatted);
+	const handleBlur = (e: any): void => {
+		input.onBlur(e);
+		e.target.value =
+			getNumDecimalPlaces(inputValue) < decimalPlaces
+				? appendMissingZeros(inputValue.replaceAll(',', ''), decimalPlaces)
+				: inputValue;
+		input.onChange(e);
 	};
 
 	return (
@@ -158,7 +145,6 @@ const InputCurrency: React.FC<InputCurrencyProps> = ({
 					before={before}
 					{...props}
 				/>
-				<span>{inputValue}</span>
 			</div>
 		</StyledInputLabel>
 	);

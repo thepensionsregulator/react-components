@@ -1,5 +1,5 @@
 export const firstDotPosition = (num: string): number => {
-	// detects if the number contains (.) for decimals
+	// detects if the number contains '.' and returns its index
 	return num.indexOf('.');
 };
 
@@ -14,10 +14,12 @@ export const parseToDecimals = (num: string, decimals: number): number => {
 };
 
 export const fixToDecimals = (value: string, decimals: number): string => {
+	// returns the value with the specified number of decimal places
 	return Number(value).toFixed(decimals);
 };
 
 export const containsDecimals = (value: string): boolean => {
+	// returns TRUE or FALSE whether if Value contains decimals or not
 	const dotPos: number = firstDotPosition(value);
 	return dotPos > -1 && dotPos < value.length;
 };
@@ -27,7 +29,7 @@ export const format = (value: string): string => {
 		receives an integer and returns it with a comma separated format
 		e.g  ('12345678') => '12,345,678'
 	*/
-	const valueFormatted:string = value
+	const valueFormatted: string = value
 		.toString()
 		.split('')
 		.reverse()
@@ -41,24 +43,44 @@ export const format = (value: string): string => {
 	return valueFormatted;
 };
 
+export const getIntPart = (value: string): string => {
+	// e.g value: ('123456.77') => '123456'
+	return value.slice(0, firstDotPosition(value));
+};
+
+export const getDecimalPart = (value: string, decimals: number): string => {
+	// e.g value: ('123456.77') => '.77'
+	const dotPos: number = firstDotPosition(value);
+	return value.slice(dotPos, dotPos + 1 + decimals);
+};
+
+export const getNumDecimalPlaces = (value): number => {
+	// e.g value: ('123456.77') => 2
+	const dotPos: number = firstDotPosition(value);
+	return value.slice(dotPos + 1).length;
+};
+
 export const formatWithDecimals = (value: string, decimals: number): string => {
 	/*
 		takes a number with containing decimal places 
 		and returns it in a comma separated format
 		e.g value: ('123456.77') => '123,456.77'
 	*/
-	// 
-	// e.g. decimalsStartPos = 6;
-	const decimalsStartPos:number = firstDotPosition(value);
-	// e.g. decimalPart = '.77'
-	const decimalPart:string = value.slice(decimalsStartPos, decimalsStartPos+1+decimals);
-	// e.g. intValues = '123456
-	const intValues:string = value.slice(0, decimalsStartPos);
 	// e.g. intValueFormatted = '123,456'
-	const intValueFormatted:string = format(intValues);
+	const intValueFormatted: string = format(getIntPart(value));
+	// e.g. decimalPart = '.77'
+	const decimalPart: string = getDecimalPart(value, decimals);
+	// e.g. returns '123,456.77
+	return intValueFormatted + decimalPart;
+};
 
-	const valueFormatted:string = intValueFormatted + decimalPart;
-	console.log(valueFormatted);
+export const appendMissingZeros = (value: string, decimals: number): string => {
+	let decimalPart = getDecimalPart(value, decimals);
 
-	return valueFormatted;
-}
+	if (decimalPart.length < decimals + 1) {
+		const intValueFormatted: string = format(getIntPart(value));
+		decimalPart = decimalPart.padEnd(decimals + 1, '0');
+		return intValueFormatted + decimalPart;
+	}
+	return value;
+};
