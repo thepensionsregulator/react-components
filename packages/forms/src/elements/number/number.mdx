@@ -60,6 +60,7 @@ import { FFInputNumber } from '@tpr/forms';
 					cfg={{ my: 5 }}
 					callback={(e) => console.log(e.target.value)}
 					required={true}
+					maxLength={2}
 				/>
 				<FFInputNumber
 					name="amount"
@@ -156,16 +157,17 @@ Accepted config props: FlexProps, SpaceProps
 
 ### Props
 
-| Property      | Required | Type     | Description                                                |
-| ------------- | -------- | -------- | ---------------------------------------------------------- |
-| after         | false    | string   | emulates text passed to ::after pseudo-selector            |
-| before        | false    | string   | emulates text passed to ::before pseudo-selector           |
-| callback      | false    | function | callback function to be executed after onChange            |
-| cfg           | false    | object   | FlexProps & SpaceProps                                     |
-| decimalPlaces | false    | number   | the number of decimal places used for formatting the value |
-| disabled      | false    | boolean  | Disable input field                                        |
-| hint          | false    | string   | More detailed description about the field                  |
-| label         | true     | string   | Input description                                          |
-| noLeftBorder  | false    | boolean  | disables the left border when detecting error              |
-| optionalText  | false    | boolean  | allows hiding "optional" text when field is not required   |
-| testId        | false    | string   | data attribute for testers                                 |
+| Property      | Required | Type     | Description                                                   |
+| ------------- | -------- | -------- | ------------------------------------------------------------- |
+| after         | false    | string   | emulates text passed to ::after pseudo-selector               |
+| before        | false    | string   | emulates text passed to ::before pseudo-selector              |
+| callback      | false    | function | callback function to be executed after onChange               |
+| cfg           | false    | object   | FlexProps & SpaceProps                                        |
+| decimalPlaces | false    | number   | the number of decimal places used for formatting the value    |
+| disabled      | false    | boolean  | Disable input field                                           |
+| hint          | false    | string   | More detailed description about the field                     |
+| label         | true     | string   | Input description                                             |
+| maxLength     | false    | number   | sets a maximum length for the input (decimal places included) |
+| noLeftBorder  | false    | boolean  | disables the left border when detecting error                 |
+| optionalText  | false    | boolean  | allows hiding "optional" text when field is not required      |
+| testId        | false    | string   | data attribute for testers                                    |
