@@ -1,3 +1,16 @@
+export const validKeys = [
+	'Backspace',
+	'Enter',
+	'Delete',
+	'ArrowUp',
+	'ArrowDown',
+	'ArrowLeft',
+	'ArrowRight',
+	'Home',
+	'End',
+	'Tab',
+];
+
 export const firstDotPosition = (num: string): number => {
 	// detects if the number contains '.' and returns its index
 	return num.indexOf('.');

@@ -4,6 +4,7 @@ import { StyledInputLabel, InputElementHeading } from '../elements';
 import { FieldProps, FieldExtraProps } from '../../renderFields';
 import { Input } from '../input/input';
 import {
+	validKeys,
 	format,
 	formatWithDecimals,
 	containsDecimals,
@@ -42,18 +43,7 @@ const InputCurrency: React.FC<InputCurrencyProps> = ({
 	...props
 }) => {
 	const digits = ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9', '.'];
-	const validKeys = [
-		'Backspace',
-		'Enter',
-		'Delete',
-		'ArrowUp',
-		'ArrowDown',
-		'ArrowLeft',
-		'ArrowRight',
-		'Home',
-		'End',
-		'Tab',
-	];
+
 	// e.g. format: 999,999,999,999.00
 
 	const [inputValue, setInputValue] = useState<string>('');
