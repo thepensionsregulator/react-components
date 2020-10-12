@@ -21,7 +21,7 @@ export type TrusteeI18nProps = {
 				postcode: {
 					invalidError?: string;
 				};
-			}
+			};
 		};
 		manual: {
 			subtitle: string;
@@ -33,9 +33,9 @@ export type TrusteeI18nProps = {
 				};
 				addressLine2: { label: string; error?: string };
 				addressLine3: { label: string; error?: string };
-				postTown: { 
-					label: string; 
-					emptyError?: string 
+				postTown: {
+					label: string;
+					emptyError?: string;
 				};
 				postcode: {
 					label: string;
@@ -160,9 +160,9 @@ export const i18n: TrusteeI18nProps = {
 				},
 				addressLine2: { label: 'Address line 2' },
 				addressLine3: { label: 'Address line 3' },
-				postTown: { 
-					label: 'City', 
-					emptyError: 'This is a required field' 
+				postTown: {
+					label: 'City',
+					emptyError: 'This is a required field',
 				},
 				postcode: {
 					label: 'Postcode',

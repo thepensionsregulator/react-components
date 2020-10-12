@@ -27,22 +27,24 @@ export const ConfirmRemove: React.FC = () => {
 	);
 	const { trustee, remove } = current.context;
 
-	function handleRemove() {
+	const handleRemove = async () => {
 		setLoading(true);
 		onRemove(
 			{
 				schemeRoleId: trustee.schemeRoleId,
+				effectiveDate: trustee.effectiveDate,
 				...remove,
 			},
 			trustee,
 		)
 			.then(() => {
 				setLoading(false);
+				send('DELETE');
 			})
 			.catch(() => {
 				setLoading(false);
 			});
-	}
+	};
 
 	return (
 		<Confirm

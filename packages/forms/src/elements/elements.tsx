@@ -8,6 +8,7 @@ interface StyledInputLabelProps {
 	className?: string;
 	cfg?: FlexProps | SpaceProps;
 	[key: string]: any;
+	noLeftBorder?: boolean;
 }
 export const StyledInputLabel: React.FC<StyledInputLabelProps> = ({
 	element = 'label',
@@ -15,11 +16,12 @@ export const StyledInputLabel: React.FC<StyledInputLabelProps> = ({
 	isError,
 	className,
 	children,
+	noLeftBorder,
 	...props
 }) => {
 	const classNames = useClassNames(cfg, [
 		styles.label,
-		{ [styles['labelError']]: isError },
+		{ [styles['labelError']]: isError && !noLeftBorder },
 		className,
 	]);
 	return createElement(

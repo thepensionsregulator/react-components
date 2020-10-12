@@ -18,11 +18,11 @@ const noop = () => Promise.resolve();
 
 const trustee: Trustee = {
 	id: '',
-	schemeRoleId: '12345',
+	schemeRoleId: 12345,
 	//
 	title: 'Mr',
-	firstname: 'John',
-	lastname: 'Smith',
+	firstName: 'John',
+	lastName: 'Smith',
 	trusteeType: 'member-nominated',
 	isProfessionalTrustee: false,
 	//
@@ -33,7 +33,7 @@ const trustee: Trustee = {
 	postcode: 'BN1 4DW',
 	county: 'West Sussex',
 	country: '',
-	countryId: '',
+	countryId: 2,
 	//
 	telephoneNumber: '01273 000 111',
 	emailAddress: 'fred.sandoors@trp.gov.uk',

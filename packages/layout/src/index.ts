@@ -17,3 +17,5 @@ export * from './components/sidebar/sidebar';
 export * from './components/buttons/buttons';
 export * from './components/buttons/links';
 export * from './components/warning/warning';
+export * from './components/helplink/helplink';
+export * from './components/hint/hint';

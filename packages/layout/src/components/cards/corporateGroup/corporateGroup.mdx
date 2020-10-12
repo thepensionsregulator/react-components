@@ -23,24 +23,24 @@ import { CorporateGroupCard } from '@tpr/layout';
 ## Basic Usage
 
 <Playground>
-  {() => {
-    const [complete, setComplete] = useState(false);
-    const callbackFn = (values, _fullCorporateGroupObject) => {
-      console.log(values);
-      console.log(_fullCorporateGroupObject);
-      return Promise.resolve(values);
-    }
-    const corporateGroup = {
-      id: '',
-      schemeRoleId: 123,
-      title: 'Miss',
-      firstname: 'Susan',
-      lastname: 'Smith',
-      effectiveDate: '1997-04-01T00:00:00',
+	{() => {
+		const [complete, setComplete] = useState(false);
+		const callbackFn = (values, _fullCorporateGroupObject) => {
+			console.log(values);
+			console.log(_fullCorporateGroupObject);
+			return Promise.resolve(values);
+		};
+		const corporateGroup = {
+			id: '',
+			schemeRoleId: 123,
+			title: 'Miss',
+			firstName: 'Susan',
+			lastName: 'Smith',
+			effectiveDate: '1997-04-01T00:00:00',
 			telephoneNumber: '01273 222 111',
 			emailAddress: 'john.wick@warnerbros.com',
-      organisationName: 'Acme Factory Pension Trustees Limited',
-      address: {				
+			organisationName: 'Acme Factory Pension Trustees Limited',
+			address: {
 				addressLine1: 'Napier House',
 				addressLine2: 'Trafalgar Pl',
 				addressLine3: '',
@@ -48,15 +48,14 @@ import { CorporateGroupCard } from '@tpr/layout';
 				county: 'West Sussex',
 				postcode: 'BN1 4DW',
 				country: '',
-				countryId: ''
 			},
-      directorIsProfessional: true
-    };
+			directorIsProfessional: true,
+		};
 		return (
 			<CorporateGroupCard
 				onSaveContacts={callbackFn}
 				onSaveName={callbackFn}
-        onSaveDirector={callbackFn}
+				onSaveDirector={callbackFn}
 				onRemove={callbackFn}
 				onCorrect={(value) => setComplete(value)}
 				complete={complete}
@@ -64,5 +63,5 @@ import { CorporateGroupCard } from '@tpr/layout';
 				corporateGroup={corporateGroup}
 			/>
 		);
-  }}
+	}}
 </Playground>

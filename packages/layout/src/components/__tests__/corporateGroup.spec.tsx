@@ -10,12 +10,12 @@ const noop = () => Promise.resolve();
 
 const corporateGroup: CorporateGroup = {
 	id: '',
-	schemeRoleId: '',
+	schemeRoleId: 11,
 	effectiveDate: '',
 	organisationName: 'Acme Factory Pension Trustees Limited',
 	title: 'Miss',
-	firstname: 'Susan',
-	lastname: 'Smith',
+	firstName: 'Susan',
+	lastName: 'Smith',
 	directorIsProfessional: true,
 	telephoneNumber: '01273 000 111',
 	emailAddress: 'susan@corporate-group.com',
@@ -27,7 +27,7 @@ const corporateGroup: CorporateGroup = {
 		postcode: 'BN1 4DW',
 		county: 'West Sussex',
 		country: '',
-		countryId: '',
+		countryId: 2,
 	},
 };
 
@@ -145,7 +145,7 @@ describe('Corporate Group Trustee Card', () => {
 				findByText('Save and close').click();
 				const results = await axe(component);
 				expect(results).toHaveNoViolations();
-				// After clicking the "Save and Close" button, it goes back to the Preview
+				// After clicking the "Save and close" button, it goes back to the Preview
 				expect(findByText('Address')).toBeDefined();
 			});
 		});

@@ -14,9 +14,15 @@ export const extractToObject = (
 	}, {});
 };
 
-export const postcodeIsValid = ((postcodeToValidate: string, postcodeRegExPattern: any) => {
+export const postcodeIsValid = (
+	postcodeToValidate: string,
+	postcodeRegExPattern: any,
+) => {
 	if (!postcodeToValidate) return false;
 
 	const cleanedPostcode = postcodeToValidate.replace(/[\s()-.]/g, '');
-	return cleanedPostcode != null && RegExp(postcodeRegExPattern, 'i').test(cleanedPostcode);
-});
+	return (
+		cleanedPostcode != null &&
+		RegExp(postcodeRegExPattern, 'i').test(cleanedPostcode)
+	);
+};

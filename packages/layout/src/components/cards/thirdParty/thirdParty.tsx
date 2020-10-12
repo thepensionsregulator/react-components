@@ -10,6 +10,8 @@ import { UnderlinedButton } from '../components/button';
 import { Preview } from './views/preview/preview';
 import { RemoveDateForm } from './views/remove/date/date';
 import { ConfirmRemove } from './views/remove/confirm/confirm';
+import RemovedBox from '../components/removedBox';
+import { cardTypeName } from '../common/interfaces';
 import styles from '../cards.module.scss';
 
 const CardContentSwitch: React.FC = () => {
@@ -21,6 +23,9 @@ const CardContentSwitch: React.FC = () => {
 			return <RemoveDateForm />;
 		case current.matches({ remove: 'confirm' }):
 			return <ConfirmRemove />;
+		case current.matches({ remove: 'deleted' }):
+			// message to show when successfuly deleted.
+			return <RemovedBox type={cardTypeName.thirdParty} />;
 		default:
 			return null;
 	}

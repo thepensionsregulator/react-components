@@ -10,7 +10,7 @@ const noop = () => Promise.resolve();
 
 const independentTrustee: IndependentTrustee = {
 	id: '',
-	schemeRoleId: '',
+	schemeRoleId: 222,
 	effectiveDate: '',
 	organisationName: 'Pensions Are Us Limited',
 	appointedByRegulator: true,
@@ -22,7 +22,7 @@ const independentTrustee: IndependentTrustee = {
 		postcode: 'BN1 4DW',
 		county: 'West Sussex',
 		country: '',
-		countryId: '',
+		countryId: 2,
 	},
 };
 

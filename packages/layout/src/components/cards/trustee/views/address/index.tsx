@@ -23,18 +23,23 @@ const AddressPage: React.FC = () => {
 
 	return (
 		<Content type={cardType.trustee} title={i18n.address.title}>
-			<Form 
+			<Form
 				onSubmit={() => {}}
 				initialValues={{
-					postcode: postcode
-				}}>
-					{({ }) => (
+					postcode: postcode,
+				}}
+			>
+				{({}) => (
 					<form>
 						<Postcode
 							lookup={lookup}
 							loading={loading}
 							postcode={postcode}
-							setPostcode={(postcode: string) => {console.log('poscode got set'); console.log(postcode); setState({ postcode })}}
+							setPostcode={(postcode: string) => {
+								console.log('poscode got set');
+								console.log(postcode);
+								setState({ postcode });
+							}}
 							showLookup={(lookup: boolean) => setState({ lookup })}
 							setLoading={(loading: boolean) => setState({ loading })}
 							setOptions={(options: any[]) => setState({ options })}
@@ -42,7 +47,7 @@ const AddressPage: React.FC = () => {
 							i18n={i18n}
 						/>
 					</form>
-					)}
+				)}
 			</Form>
 			<Flex cfg={{ flexDirection: 'column' }}>
 				{manual ? (

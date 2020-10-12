@@ -59,6 +59,38 @@ import { FFInputNumber } from '@tpr/forms';
 					inputWidth={5}
 					cfg={{ my: 5 }}
 					callback={(e) => console.log(e.target.value)}
+					required={true}
+				/>
+				<FFInputNumber
+					name="amount"
+					label="Total expenses"
+					hint="amount in GBP"
+					validate={(value) => {}}
+					inputWidth={5}
+					cfg={{ my: 5 }}
+					required={false}
+					noLeftBorder={true}
+					decimalPlaces={2}
+					min={0}
+					before="£"
+				/>
+				<FFInputNumber
+					name="percentage"
+					label="Amount deducted from expenses"
+					hint="amount in %"
+					inputWidth={5}
+					cfg={{ my: 5 }}
+					required={false}
+					noLeftBorder={true}
+					optionalText={false}
+					decimalPlaces={2}
+					min={0}
+					max={100}
+					after="%"
+					validate={(value) => {
+						if (value < 0 || value > 100)
+							return 'must be value between 0 and 100%';
+					}}
 				/>
 				<button type="submit" style={{ display: 'none' }} children="Submit" />
 			</form>
@@ -83,9 +115,9 @@ import { Form, validate, renderFields } from '@tpr/forms';
 				hint: 'must be expressed in miles',
 				error: 'Cannot be empty',
 				inputWidth: 5,
-				placeholder: "e.g. 456.77",
+				placeholder: 'e.g. 456.77',
 				cfg: { my: 5 },
-				after: "mi",
+				after: 'mi',
 				decimalPlaces: 2,
 				validate: (value) => {
 					if (!value) {
@@ -96,6 +128,7 @@ import { Form, validate, renderFields } from '@tpr/forms';
 					}
 					return undefined;
 				},
+				noLeftBorder: true,
 			},
 		];
 		return (
@@ -125,11 +158,14 @@ Accepted config props: FlexProps, SpaceProps
 
 | Property      | Required | Type     | Description                                                |
 | ------------- | -------- | -------- | ---------------------------------------------------------- |
-| cfg           | false    | object   | FlexProps & SpaceProps                                     |
-| disabled      | false    | boolean  | Disable checkbox                                           |
-| testId        | false    | string   | data attribute for testers                                 |
-| label         | true     | string   | Checkbox description                                       |
-| hint          | false    | string   | More detailed description about the checkbox               |
-| callback      | false    | function | callback function to be executed after onChange            |
 | after         | false    | string   | emulates text passed to ::after pseudo-selector            |
+| before        | false    | string   | emulates text passed to ::before pseudo-selector           |
+| callback      | false    | function | callback function to be executed after onChange            |
+| cfg           | false    | object   | FlexProps & SpaceProps                                     |
 | decimalPlaces | false    | number   | the number of decimal places used for formatting the value |
+| disabled      | false    | boolean  | Disable input field                                        |
+| hint          | false    | string   | More detailed description about the field                  |
+| label         | true     | string   | Input description                                          |
+| noLeftBorder  | false    | boolean  | disables the left border when detecting error              |
+| optionalText  | false    | boolean  | allows hiding "optional" text when field is not required   |
+| testId        | false    | string   | data attribute for testers                                 |

@@ -9,7 +9,7 @@ const noop = () => Promise.resolve();
 
 const thirdPartyAdmin: ThirdPartyProps = {
 	id: '',
-	schemeRoleId: '123',
+	schemeRoleId: 123,
 	effectiveDate: '1997-04-01T00:00:00',
 	organisationName: `McDonald's`,
 	address: {
@@ -19,7 +19,7 @@ const thirdPartyAdmin: ThirdPartyProps = {
 		postTown: 'Brighton',
 		postcode: 'BN1 4DW',
 		county: 'West Sussex',
-		countryId: '',
+		countryId: 2,
 	},
 };
 

@@ -9,6 +9,7 @@ export * from './elements/radio/radio';
 export * from './elements/select/select';
 export * from './elements/hidden/hidden';
 export * from './elements/separator/separator';
+export * from './elements/currency/currency';
 
 export * from './renderFields';
 export * from './validation';

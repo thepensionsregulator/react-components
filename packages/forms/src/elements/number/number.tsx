@@ -3,12 +3,15 @@ import { Field, FieldRenderProps } from 'react-final-form';
 import { StyledInputLabel, InputElementHeading } from '../elements';
 import { FieldProps, FieldExtraProps } from '../../renderFields';
 import { Input } from '../input/input';
-import { parseToDecimals, handleBlur } from '../helpers';
+import { parseToDecimals, fixToDecimals } from '../helpers';
 
 interface InputNumberProps extends FieldRenderProps<number>, FieldExtraProps {
-	after?: any;
+	after?: string;
+	before?: string;
 	callback?: (e: any) => void;
 	decimalPlaces?: number;
+	noLeftBorder?: boolean;
+	optionalText?: boolean;
 }
 
 const InputNumber: React.FC<InputNumberProps> = ({
@@ -22,18 +25,37 @@ const InputNumber: React.FC<InputNumberProps> = ({
 	inputWidth: width,
 	cfg,
 	after,
+	before,
 	callback,
 	decimalPlaces,
+	noLeftBorder,
+	optionalText,
 	...props
 }) => {
+	const handleOnChange = (e: ChangeEvent<HTMLInputElement>) => {
+		decimalPlaces
+			? input.onChange(
+					e.target.value && parseToDecimals(e.target.value, decimalPlaces),
+			  )
+			: input.onChange(e.target.value && parseInt(e.target.value, 10));
+		callback && callback(e);
+	};
+
+	const handleBlur = (e: any) => {
+		input.onBlur(e); // without this call, validate won't be executed even if specified
+		const newValue = fixToDecimals(e.target.value, decimalPlaces);
+		e.target.value = e.target.value ? newValue : null;
+	};
+
 	return (
 		<StyledInputLabel
 			isError={meta && meta.touched && meta.error}
 			cfg={Object.assign({ flexDirection: 'column', mt: 1 }, cfg)}
+			noLeftBorder={noLeftBorder}
 		>
 			<InputElementHeading
 				label={label}
-				required={required}
+				required={optionalText !== undefined ? !optionalText : required}
 				hint={hint}
 				meta={meta}
 			/>
@@ -47,24 +69,10 @@ const InputNumber: React.FC<InputNumberProps> = ({
 				decimalPlaces={decimalPlaces}
 				{...input}
 				onKeyDown={(e) => e.key.toLowerCase() === 'e' && e.preventDefault()}
-				onChange={(evt: ChangeEvent<HTMLInputElement>) => {
-					decimalPlaces
-						? input.onChange(
-								evt.target.value &&
-									parseToDecimals(evt.target.value, decimalPlaces),
-						  )
-						: input.onChange(
-								evt.target.value && parseInt(evt.target.value, 10),
-						  );
-					callback && callback(evt);
-				}}
-				onBlur={(e: any) => {
-					input.onBlur(e); // without this call, validate won't be executed even if specified
-					e.target.value = e.target.value
-						? handleBlur(e.target.value, decimalPlaces)
-						: null;
-				}}
+				onChange={handleOnChange}
+				onBlur={handleBlur}
 				after={after}
+				before={before}
 				{...props}
 			/>
 		</StyledInputLabel>

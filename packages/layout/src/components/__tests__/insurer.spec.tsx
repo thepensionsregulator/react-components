@@ -11,9 +11,9 @@ const noop = () => Promise.resolve();
 
 const insurer: Insurer = {
 	id: '',
-	schemeRoleId: '123',
+	schemeRoleId: 123,
 	effectiveDate: '1997-04-01T00:00:00',
-	organisationReference: 123,
+	organisationReference: 456,
 	organisationName: 'Some Organisation Name',
 	insurerCompanyReference: '12345678',
 	address: {
@@ -23,7 +23,7 @@ const insurer: Insurer = {
 		postTown: 'Brighton',
 		postcode: 'BN1 4DW',
 		county: 'West Sussex',
-		countryId: '',
+		countryId: 2,
 	},
 	telephoneNumber: '01273 222 111',
 	emailAddress: 'john.wick@warnerbros.com',

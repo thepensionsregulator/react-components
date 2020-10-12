@@ -41,13 +41,13 @@ export interface CardAddress {
 	county: string;
 	postcode: string;
 	country: string;
-	countryId: string;
+	countryId: number;
 }
 
 export interface CardPersonalDetails {
 	title: string;
-	firstname: string;
-	lastname: string;
+	firstName: string;
+	lastName: string;
 }
 
 export interface CardContactDetails {
@@ -57,7 +57,7 @@ export interface CardContactDetails {
 
 export interface CardDefaultProps {
 	id: string;
-	schemeRoleId: string | number;
+	schemeRoleId: number;
 	effectiveDate: string;
 }
 

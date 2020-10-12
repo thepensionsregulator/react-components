@@ -108,8 +108,8 @@ export const InHouseCard: React.FC<InHouseAdminProviderProps> = ({
 								<H4 cfg={{ lineHeight: 3 }}>
 									{[
 										context.inHouseAdmin.title,
-										context.inHouseAdmin.firstname,
-										context.inHouseAdmin.lastname,
+										context.inHouseAdmin.firstName,
+										context.inHouseAdmin.lastName,
 									]
 										.filter(Boolean)
 										.join(' ')}
