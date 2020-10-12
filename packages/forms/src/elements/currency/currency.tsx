@@ -11,7 +11,6 @@ import {
 	getNumDecimalPlaces,
 	appendMissingZeros,
 } from '../helpers';
-import styles from './currency.module.scss';
 
 interface InputCurrencyProps extends FieldRenderProps<number>, FieldExtraProps {
 	after?: string;
@@ -128,24 +127,22 @@ const InputCurrency: React.FC<InputCurrencyProps> = ({
 				hint={hint}
 				meta={meta}
 			/>
-			<div className={styles.inputWrapper}>
-				<Input
-					type="text"
-					width={width}
-					testId={testId}
-					label={label}
-					touched={meta && meta.touched && meta.error}
-					placeholder={placeholder}
-					decimalPlaces={decimalPlaces}
-					{...input}
-					onKeyDown={handleKeyDown}
-					onChange={handleOnChange}
-					onBlur={handleBlur}
-					after={after}
-					before={before}
-					{...props}
-				/>
-			</div>
+			<Input
+				type="text"
+				width={width}
+				testId={testId}
+				label={label}
+				touched={meta && meta.touched && meta.error}
+				placeholder={placeholder}
+				decimalPlaces={decimalPlaces}
+				{...input}
+				onKeyDown={handleKeyDown}
+				onChange={handleOnChange}
+				onBlur={handleBlur}
+				after={after}
+				before={before}
+				{...props}
+			/>
 		</StyledInputLabel>
 	);
 };
