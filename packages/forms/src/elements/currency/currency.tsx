@@ -52,6 +52,7 @@ const InputCurrency: React.FC<InputCurrencyProps> = ({
 		'ArrowRight',
 		'Home',
 		'End',
+		'Tab',
 	];
 	// e.g. format: 999,999,999,999.00
 
