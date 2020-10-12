@@ -1,3 +1,16 @@
+export const validKeys = [
+	'Backspace',
+	'Enter',
+	'Delete',
+	'ArrowUp',
+	'ArrowDown',
+	'ArrowLeft',
+	'ArrowRight',
+	'Home',
+	'End',
+	'Tab',
+];
+
 export const firstDotPosition = (num: string): number => {
 	// detects if the number contains '.' and returns its index
 	return num.indexOf('.');
@@ -75,12 +88,14 @@ export const formatWithDecimals = (value: string, decimals: number): string => {
 };
 
 export const appendMissingZeros = (value: string, decimals: number): string => {
-	let decimalPart = getDecimalPart(value, decimals);
+	if (value !== '') {
+		let decimalPart = getDecimalPart(value, decimals);
 
-	if (decimalPart.length < decimals + 1) {
-		const intValueFormatted: string = format(getIntPart(value));
-		decimalPart = decimalPart.padEnd(decimals + 1, '0');
-		return intValueFormatted + decimalPart;
+		if (decimalPart.length < decimals + 1) {
+			const intValueFormatted: string = format(getIntPart(value));
+			decimalPart = decimalPart.padEnd(decimals + 1, '0');
+			return intValueFormatted + decimalPart;
+		}
 	}
 	return value;
 };
