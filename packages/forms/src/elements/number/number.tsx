@@ -3,7 +3,7 @@ import { Field, FieldRenderProps } from 'react-final-form';
 import { StyledInputLabel, InputElementHeading } from '../elements';
 import { FieldProps, FieldExtraProps } from '../../renderFields';
 import { Input } from '../input/input';
-import { parseToDecimals, fixToDecimals } from '../helpers';
+import { validKeys, parseToDecimals, fixToDecimals } from '../helpers';
 
 interface InputNumberProps extends FieldRenderProps<number>, FieldExtraProps {
 	after?: string;
@@ -12,6 +12,7 @@ interface InputNumberProps extends FieldRenderProps<number>, FieldExtraProps {
 	decimalPlaces?: number;
 	noLeftBorder?: boolean;
 	optionalText?: boolean;
+	maxLength?: number;
 }
 
 const InputNumber: React.FC<InputNumberProps> = ({
@@ -30,8 +31,17 @@ const InputNumber: React.FC<InputNumberProps> = ({
 	decimalPlaces,
 	noLeftBorder,
 	optionalText,
+	maxLength,
 	...props
 }) => {
+	const handleKeyDown = (e: any) => {
+		console.log(e.target.value.length);
+		e.target.value.length >= maxLength &&
+			!validKeys.includes(e.key) &&
+			e.preventDefault();
+		e.key.toLowerCase() === 'e' && e.preventDefault();
+	};
+
 	const handleOnChange = (e: ChangeEvent<HTMLInputElement>) => {
 		decimalPlaces
 			? input.onChange(
@@ -68,7 +78,7 @@ const InputNumber: React.FC<InputNumberProps> = ({
 				placeholder={placeholder}
 				decimalPlaces={decimalPlaces}
 				{...input}
-				onKeyDown={(e) => e.key.toLowerCase() === 'e' && e.preventDefault()}
+				onKeyDown={handleKeyDown}
 				onChange={handleOnChange}
 				onBlur={handleBlur}
 				after={after}
