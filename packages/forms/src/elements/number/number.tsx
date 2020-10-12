@@ -35,7 +35,6 @@ const InputNumber: React.FC<InputNumberProps> = ({
 	...props
 }) => {
 	const handleKeyDown = (e: any) => {
-		console.log(e.target.value.length);
 		e.target.value.length >= maxLength &&
 			!validKeys.includes(e.key) &&
 			e.preventDefault();
