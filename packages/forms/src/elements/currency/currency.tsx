@@ -60,7 +60,7 @@ const InputCurrency: React.FC<InputCurrencyProps> = ({
 	const [dot, setDot] = useState<boolean>(false);
 
 	const formatWithCommas = (value: string): string => {
-		const numString: string = value.replaceAll(',', '');
+		const numString: string = value.replace(/,/g, '');
 		let numFormatted: string = '';
 		// if number is integer
 		if (!containsDecimals(value)) {
@@ -111,7 +111,7 @@ const InputCurrency: React.FC<InputCurrencyProps> = ({
 		input.onBlur(e);
 		e.target.value =
 			getNumDecimalPlaces(inputValue) < decimalPlaces
-				? appendMissingZeros(inputValue.replaceAll(',', ''), decimalPlaces)
+				? appendMissingZeros(inputValue.replace(/,/g, ''), decimalPlaces)
 				: inputValue;
 		input.onChange(e);
 	};
