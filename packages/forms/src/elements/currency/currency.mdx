@@ -58,7 +58,7 @@ import { FFInputCurrency } from '@tpr/forms';
 					optionalText={false}
 					validate={(value) => {
 						if (value && value.length > 18)
-							return 'must cannot be greater than 999,999,999,999.99';
+							return 'value cannot be greater than 999,999,999,999.99';
 					}}
 				/>
 				<button type="submit" style={{ display: 'none' }} children="Submit" />
