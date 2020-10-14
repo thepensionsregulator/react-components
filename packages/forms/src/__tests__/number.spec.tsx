@@ -62,8 +62,8 @@ describe('Number', () => {
 		});
 	});
 
-	describe('specifying maxLength', () => {
-		test('adding the amount of decimal places specified', () => {
+	describe('specifying max length props', () => {
+		test('adding maxLength', () => {
 			const { getByTestId } = formSetup({
 				render: (
 					<FFInputNumber
@@ -78,6 +78,59 @@ describe('Number', () => {
 			userEvent.type(getByTestId(testId), '123456');
 			fireEvent.blur(getByTestId(testId));
 			expect(getByTestId(testId)).toHaveValue(123);
+		});
+
+		test('adding maxIntDigits', () => {
+			const { getByTestId } = formSetup({
+				render: (
+					<FFInputNumber
+						label="Number"
+						testId={testId}
+						name="number"
+						maxIntDigits={3}
+						decimalPlaces={2}
+					/>
+				),
+			});
+			userEvent.type(getByTestId(testId), '123456.5');
+			fireEvent.blur(getByTestId(testId));
+			expect(getByTestId(testId)).toHaveValue(123.50);
+		});
+
+		test('adding maxIntDigits & maxLength', () => {
+			const { getByTestId } = formSetup({
+				render: (
+					<FFInputNumber
+						label="Number"
+						testId={testId}
+						name="number"
+						maxLength={7}
+						maxIntDigits={3}
+						decimalPlaces={2}
+					/>
+				),
+			});
+			userEvent.type(getByTestId(testId), '123456.12345');
+			fireEvent.blur(getByTestId(testId));
+			expect(getByTestId(testId)).toHaveValue(123.12);
+		});
+
+		test('adding maxIntDigits & maxLength in negative number', () => {
+			const { getByTestId } = formSetup({
+				render: (
+					<FFInputNumber
+						label="Number"
+						testId={testId}
+						name="number"
+						maxLength={7}
+						maxIntDigits={3}
+						decimalPlaces={2}
+					/>
+				),
+			});
+			userEvent.type(getByTestId(testId), '-123456.12345');
+			fireEvent.blur(getByTestId(testId));
+			expect(getByTestId(testId)).toHaveValue(-123.12);
 		});
 	});
 });

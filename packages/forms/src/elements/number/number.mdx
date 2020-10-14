@@ -74,6 +74,7 @@ import { FFInputNumber } from '@tpr/forms';
 					decimalPlaces={2}
 					min={0}
 					before="£"
+					maxIntDigits={3}
 				/>
 				<FFInputNumber
 					name="percentage"
@@ -157,17 +158,18 @@ Accepted config props: FlexProps, SpaceProps
 
 ### Props
 
-| Property      | Required | Type     | Description                                                   |
-| ------------- | -------- | -------- | ------------------------------------------------------------- |
-| after         | false    | string   | emulates text passed to ::after pseudo-selector               |
-| before        | false    | string   | emulates text passed to ::before pseudo-selector              |
-| callback      | false    | function | callback function to be executed after onChange               |
-| cfg           | false    | object   | FlexProps & SpaceProps                                        |
-| decimalPlaces | false    | number   | the number of decimal places used for formatting the value    |
-| disabled      | false    | boolean  | Disable input field                                           |
-| hint          | false    | string   | More detailed description about the field                     |
-| label         | true     | string   | Input description                                             |
-| maxLength     | false    | number   | sets a maximum length for the input (decimal places included) |
-| noLeftBorder  | false    | boolean  | disables the left border when detecting error                 |
-| optionalText  | false    | boolean  | allows hiding "optional" text when field is not required      |
-| testId        | false    | string   | data attribute for testers                                    |
+| Property      | Required | Type     | Description                                                                    |
+| ------------- | -------- | -------- | ------------------------------------------------------------------------------ |
+| after         | false    | string   | emulates text passed to ::after pseudo-selector                                |
+| before        | false    | string   | emulates text passed to ::before pseudo-selector                               |
+| callback      | false    | function | callback function to be executed after onChange                                |
+| cfg           | false    | object   | FlexProps & SpaceProps                                                         |
+| decimalPlaces | false    | number   | the number of decimal places used for formatting the value                     |
+| disabled      | false    | boolean  | Disable input field                                                            |
+| hint          | false    | string   | More detailed description about the field                                      |
+| label         | true     | string   | Input description                                                              |
+| maxIntDigits  | false    | number   | sets a maximum length for the integer part of the value                        |
+| maxLength     | false    | number   | sets a maximum length for the input value (e.g. 123.00 &#x27A1; maxLength={6}) |
+| noLeftBorder  | false    | boolean  | disables the left border when detecting error                                  |
+| optionalText  | false    | boolean  | allows hiding "optional" text when field is not required                       |
+| testId        | false    | string   | data attribute for testers                                                     |
