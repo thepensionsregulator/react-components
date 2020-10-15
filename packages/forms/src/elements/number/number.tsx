@@ -38,8 +38,8 @@ const InputNumber: React.FC<InputNumberProps> = ({
 }) => {
 	const [prevValue, setPrevValue] = useState<string | null>(null);
 
-	const reachedMaxIntDigits = (value:string): boolean => {
-		const newInt:number = parseInt(value);
+	const reachedMaxIntDigits = (value: string): boolean => {
+		const newInt: number = parseInt(value);
 		return Math.abs(newInt).toString().length > maxIntDigits ? true : false;
 	};
 
@@ -51,21 +51,25 @@ const InputNumber: React.FC<InputNumberProps> = ({
 	};
 
 	const handleOnChange = (e: ChangeEvent<HTMLInputElement>): void => {
+		let newEvent = { ...e };
 		decimalPlaces
-			? input.onChange(
-					e.target.value && parseToDecimals(e.target.value, decimalPlaces),
-			  )
-			: input.onChange(e.target.value && parseInt(e.target.value, 10));
-		reachedMaxIntDigits(e.target.value)
-			? input.onChange(prevValue)
-			: setPrevValue(e.target.value);
-		callback && callback(e);
+			? (newEvent.target.value =
+					e.target.value &&
+					parseToDecimals(newEvent.target.value, decimalPlaces).toString())
+			: (newEvent.target.value =
+					e.target.value && parseInt(newEvent.target.value, 10).toString());
+		reachedMaxIntDigits(newEvent.target.value)
+			? (newEvent.target.value = prevValue)
+			: setPrevValue(newEvent.target.value);
+		input.onChange(newEvent.target.value);
+		callback && callback(newEvent);
 	};
 
 	const handleBlur = (e: any): void => {
-		input.onBlur(e); // without this call, validate won't be executed even if specified
 		const newValue = fixToDecimals(e.target.value, decimalPlaces);
-		e.target.value = e.target.value ? newValue : null;
+		e.target.value ? (e.target.value = newValue) : (e.target.value = null);
+		input.onChange(e.target.value);
+		input.onBlur(e.target.value); // without this call, validate won't be executed even if specified
 	};
 
 	return (
