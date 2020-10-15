@@ -1,4 +1,4 @@
-import React, { ChangeEvent } from 'react';
+import React, { ChangeEvent, useState } from 'react';
 import { Field, FieldRenderProps } from 'react-final-form';
 import { StyledInputLabel, InputElementHeading } from '../elements';
 import { FieldProps, FieldExtraProps } from '../../renderFields';
@@ -13,6 +13,7 @@ interface InputNumberProps extends FieldRenderProps<number>, FieldExtraProps {
 	noLeftBorder?: boolean;
 	optionalText?: boolean;
 	maxLength?: number;
+	maxIntDigits?: number;
 }
 
 const InputNumber: React.FC<InputNumberProps> = ({
@@ -32,25 +33,36 @@ const InputNumber: React.FC<InputNumberProps> = ({
 	noLeftBorder,
 	optionalText,
 	maxLength,
+	maxIntDigits,
 	...props
 }) => {
-	const handleKeyDown = (e: any) => {
+	const [prevValue, setPrevValue] = useState<string | null>(null);
+
+	const reachedMaxIntDigits = (value:string): boolean => {
+		const newInt:number = parseInt(value);
+		return Math.abs(newInt).toString().length > maxIntDigits ? true : false;
+	};
+
+	const handleKeyDown = (e: any): void => {
 		e.target.value.length >= maxLength &&
 			!validKeys.includes(e.key) &&
 			e.preventDefault();
 		e.key.toLowerCase() === 'e' && e.preventDefault();
 	};
 
-	const handleOnChange = (e: ChangeEvent<HTMLInputElement>) => {
+	const handleOnChange = (e: ChangeEvent<HTMLInputElement>): void => {
 		decimalPlaces
 			? input.onChange(
 					e.target.value && parseToDecimals(e.target.value, decimalPlaces),
 			  )
 			: input.onChange(e.target.value && parseInt(e.target.value, 10));
+		reachedMaxIntDigits(e.target.value)
+			? input.onChange(prevValue)
+			: setPrevValue(e.target.value);
 		callback && callback(e);
 	};
 
-	const handleBlur = (e: any) => {
+	const handleBlur = (e: any): void => {
 		input.onBlur(e); // without this call, validate won't be executed even if specified
 		const newValue = fixToDecimals(e.target.value, decimalPlaces);
 		e.target.value = e.target.value ? newValue : null;
