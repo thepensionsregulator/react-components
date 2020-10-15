@@ -75,6 +75,7 @@ import { FFInputNumber } from '@tpr/forms';
 					min={0}
 					before="£"
 					maxIntDigits={3}
+					callback={(e) => console.log(e.target.value)}
 				/>
 				<FFInputNumber
 					name="percentage"
