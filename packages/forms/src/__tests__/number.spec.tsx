@@ -94,7 +94,7 @@ describe('Number', () => {
 			});
 			userEvent.type(getByTestId(testId), '123456.5');
 			fireEvent.blur(getByTestId(testId));
-			expect(getByTestId(testId)).toHaveValue(123.50);
+			expect(getByTestId(testId)).toHaveValue(123.5);
 		});
 
 		test('adding maxIntDigits & maxLength', () => {

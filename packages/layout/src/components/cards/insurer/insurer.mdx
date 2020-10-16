@@ -50,13 +50,26 @@ import { InsurerCard } from '@tpr/layout';
 		};
 		return (
 			<InsurerCard
-				onSaveRef={callbackFn}
-				onRemove={callbackFn}
-				onCorrect={(value) => setComplete(value)}
 				complete={complete}
-				preValidatedData={true}
 				insurer={insurer}
+				onCorrect={(value) => setComplete(value)}
+				onRemove={callbackFn}
+				onSaveRef={callbackFn}
 			/>
 		);
 	}}
 </Playground>
+
+## API
+
+### Props
+
+| Property         | Required | Type             | Description                                                                              |
+| ---------------- | -------- | ---------------- | ---------------------------------------------------------------------------------------- |
+| complete         | true     | boolean          | changes the state of the card when All details are correct                               |
+| i18n             | false    | InsurerI18nProps | allows to override specific text in the card                                             |
+| insurer          | true     | Insurer          | the Insurer object                                                                       |
+| onCorrect        | true     | function         | actions for when the user clicks the "All details are correct" checkbox                  |
+| onRemove         | true     | function         | actions for when the insurer is removed                                                  |
+| onSaveRef        | true     | function         | actions for when the insurer reference number is modified                                |
+| prevalidatedData | false    | boolean          | allows to ignore the state of the "All details are correct" checkbox & shows "No issues" |

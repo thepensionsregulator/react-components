@@ -52,20 +52,26 @@ import { EmployerCard } from '@tpr/layout';
 		};
 		return (
 			<EmployerCard
-				onSaveType={callbackFn}
-				onRemove={callbackFn}
-				onCorrect={(value) => setComplete(value)}
 				complete={complete}
 				employer={employer}
-				preValidatedData={true}
-				i18n={{
-					preview: {
-						buttons: {
-							one: 'Employer type',
-						},
-					},
-				}}
+				onCorrect={(value) => setComplete(value)}
+				onRemove={callbackFn}
+				onSaveType={callbackFn}
 			/>
 		);
 	}}
 </Playground>
+
+## API
+
+### Props
+
+| Property         | Required | Type              | Description                                                                              |
+| ---------------- | -------- | ----------------- | ---------------------------------------------------------------------------------------- |
+| complete         | true     | boolean           | changes the state of the card when All details are correct                               |
+| employer         | true     | Employer          | the Employer object                                                                      |
+| i18n             | false    | EmployerI18nProps | allows to override specific text in the card                                             |
+| onCorrect        | true     | function          | actions for when the user clicks the "All details are correct" checkbox                  |
+| onRemove         | true     | function          | actions for when the employer is removed                                                 |
+| onSaveType       | true     | function          | actions for when the user updates the type of employer                                   |
+| prevalidatedData | false    | boolean           | allows to ignore the state of the "All details are correct" checkbox & shows "No issues" |

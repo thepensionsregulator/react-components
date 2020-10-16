@@ -50,19 +50,35 @@ import { InHouseCard } from '@tpr/layout';
 		};
 		return (
 			<InHouseCard
-				onSaveContacts={callbackFn}
-				onSaveAddress={callbackFn}
-				onSaveName={callbackFn}
-				onRemove={callbackFn}
-				onCorrect={(value) => setComplete(value)}
-				complete={complete}
-				inHouseAdmin={inHouseAdmin}
 				addressAPI={{
 					get: (endpont) => experianApiGet(endpont),
 					limit: 100,
 				}}
-				preValidatedData={true}
+				complete={complete}
+				inHouseAdmin={inHouseAdmin}
+				onCorrect={(value) => setComplete(value)}
+				onRemove={callbackFn}
+				onSaveAddress={callbackFn}
+				onSaveContacts={callbackFn}
+				onSaveName={callbackFn}
 			/>
 		);
 	}}
 </Playground>
+
+## API
+
+### Props
+
+| Property         | Required | Type                  | Description                                                                              |
+| ---------------- | -------- | --------------------- | ---------------------------------------------------------------------------------------- |
+| addressAPI       | true     | addressAPIType        | the required API params for the address search                                           |
+| complete         | true     | boolean               | changes the state of the card when All details are correct                               |
+| i18n             | false    | InHouseAdminI18nProps | allows to override specific text in the card                                             |
+| onCorrect        | true     | function              | actions for when the user clicks the "All details are correct" checkbox                  |
+| onRemove         | true     | function              | actions for when the inHouseAdmin is removed                                             |
+| onSaveAddress    | true     | function              | actions for when the user updates the inHouseAdmin's Address                             |
+| onSaveContacts   | true     | function              | actions for when the user updates the Contact Details                                    |
+| onSaveName       | true     | function              | actions for when the user updates the Name of the inHouseAdmin                           |
+| prevalidatedData | false    | boolean               | allows to ignore the state of the "All details are correct" checkbox & shows "No issues" |
+| inHouseAdmin     | true     | InHouseAdminNoApi     | the inHouseAdmin object                                                                  |
