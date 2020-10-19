@@ -10,6 +10,7 @@ export type InputProps = {
 	after?: string;
 	before?: string;
 	decimalPlaces?: number;
+	parentRef?: any;
 	[key: string]: any;
 };
 export const Input: React.FC<InputProps> = ({
@@ -22,6 +23,7 @@ export const Input: React.FC<InputProps> = ({
 	after: After,
 	before: Before,
 	decimalPlaces,
+	parentRef,
 	...rest
 }) => {
 	return (
@@ -31,6 +33,7 @@ export const Input: React.FC<InputProps> = ({
 		>
 			{Before && <span className={styles.before}>{Before}</span>}
 			<input
+				ref={parentRef}
 				type={type}
 				data-testid={testId}
 				aria-label={label}
