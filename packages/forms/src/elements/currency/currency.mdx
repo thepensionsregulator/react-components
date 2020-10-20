@@ -103,7 +103,7 @@ import { FFInputCurrency, validateCurrency } from '@tpr/forms';
 							optionalText={false}
 							callback={handleChange}
 							validate={(value) =>
-								validateCurrency(value, null, 999999999999.99)
+								validateCurrency(value, 999.99, 999999999999.99)
 							}
 						/>
 						<button
