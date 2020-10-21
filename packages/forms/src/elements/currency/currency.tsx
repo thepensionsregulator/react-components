@@ -11,6 +11,7 @@ import {
 	fixToDecimals,
 	getNumDecimalPlaces,
 	appendMissingZeros,
+	parseToDecimals,
 } from '../helpers';
 
 interface InputCurrencyProps extends FieldRenderProps<number>, FieldExtraProps {
@@ -97,7 +98,15 @@ const InputCurrency: React.FC<InputCurrencyProps> = ({
 		}
 		if (!containsDecimals(e.target.value)) setDot(false);
 		e.target.value === '' && setInputValue('');
-		callback && callback(e);
+		if (callback) {
+			const numericValue = parseToDecimals(
+				e.target.value.replace(/,/g, ''),
+				decimalPlaces,
+			);
+			e.target.value === ''
+				? callback(null)
+				: callback(Number(numericValue.toFixed(decimalPlaces)));
+		}
 	};
 
 	const handleBlur = (e: any): void => {

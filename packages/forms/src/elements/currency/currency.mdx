@@ -9,6 +9,7 @@ import { Form } from 'react-final-form';
 import { FFInputCurrency } from './currency';
 import { validate } from '../../validation';
 import { renderFields } from '../../renderFields';
+import { validateCurrency } from '../helpers';
 
 # Currency Input
 
@@ -40,47 +41,124 @@ import { FFInputCurrency } from '@tpr/forms';
 
 ## Examples
 
-[CodeSandbox](https://codesandbox.io)
+### With no validation
 
 <Playground>
-	<Form onSubmit={(values) => console.log(values)}>
-		{({ handleSubmit }) => (
-			<form onSubmit={handleSubmit}>
-				<FFInputCurrency
-					name="income"
-					label="Annual income"
-					hint="total amount of income for last year, in GBP"
-					before="£"
-					inputWidth={5}
-					cfg={{ my: 5 }}
-					required={false}
-					noLeftBorder={true}
-					optionalText={false}
-					validate={(value) => {
-						if (value && value.length > 18)
-							return 'value cannot be greater than 999,999,999,999.99';
-					}}
-				/>
-				<FFInputCurrency
-					name="income2"
-					label="Annual income with initial value"
-					hint="total amount of income for last year, in GBP"
-					before="£"
-					inputWidth={5}
-					cfg={{ my: 5 }}
-					required={false}
-					noLeftBorder={true}
-					optionalText={false}
-					initialV={22500.6}
-					validate={(value) => {
-						if (value && value.length > 18)
-							return 'value cannot be greater than 999,999,999,999.99';
-					}}
-				/>
-				<button type="submit" style={{ display: 'none' }} children="Submit" />
-			</form>
-		)}
-	</Form>
+	{() => {
+		const handleChange = (value) => {
+			console.log(value);
+		};
+		return (
+			<Form onSubmit={(values) => console.log(values)}>
+				{({ handleSubmit }) => (
+					<form onSubmit={handleSubmit}>
+						<FFInputCurrency
+							name="income"
+							label="Annual income"
+							hint="total amount of income for last year, in GBP"
+							before="£"
+							inputWidth={5}
+							cfg={{ my: 5 }}
+							required={false}
+							noLeftBorder={true}
+							optionalText={false}
+							callback={handleChange}
+						/>
+						<button
+							type="submit"
+							style={{ display: 'none' }}
+							children="Submit"
+						/>
+					</form>
+				)}
+			</Form>
+		);
+	}}
+</Playground>
+
+### Using the validateCurrency function included in @tpr/forms
+
+```js
+import { FFInputCurrency, validateCurrency } from '@tpr/forms';
+```
+
+<Playground>
+	{() => {
+		const handleChange = (value) => {
+			console.log(value);
+		};
+		return (
+			<Form onSubmit={(values) => console.log(values)}>
+				{({ handleSubmit }) => (
+					<form onSubmit={handleSubmit}>
+						<FFInputCurrency
+							name="income"
+							label="Annual income"
+							hint="total amount of income for last year, in GBP"
+							before="£"
+							inputWidth={5}
+							cfg={{ my: 5 }}
+							required={false}
+							noLeftBorder={true}
+							optionalText={false}
+							callback={handleChange}
+							validate={(value) =>
+								validateCurrency(value, 999.99, 999999999999.99)
+							}
+						/>
+						<button
+							type="submit"
+							style={{ display: 'none' }}
+							children="Submit"
+						/>
+					</form>
+				)}
+			</Form>
+		);
+	}}
+</Playground>
+
+### Using the returned value from validateCurrency as reference
+
+```js
+import { FFInputCurrency, validateCurrency } from '@tpr/forms';
+```
+
+<Playground>
+	{() => {
+		const handleChange = (value) => {
+			console.log(value);
+		};
+		return (
+			<Form onSubmit={(values) => console.log(values)}>
+				{({ handleSubmit }) => (
+					<form onSubmit={handleSubmit}>
+						<FFInputCurrency
+							name="income"
+							label="Annual income"
+							hint="total amount of income for last year, in GBP"
+							before="£"
+							inputWidth={5}
+							cfg={{ my: 5 }}
+							required={false}
+							noLeftBorder={true}
+							optionalText={false}
+							callback={handleChange}
+							validate={(value) => {
+								if (validateCurrency(value, null, 999999999999.99) === 'tooBig')
+									return 'Value cannot be greater than 999,999,999,999.99';
+							}}
+						/>
+						<button
+							type="submit"
+							style={{ display: 'none' }}
+							children="Submit"
+						/>
+					</form>
+				)}
+			</Form>
+		);
+	}}
 </Playground>
 
 ## API
@@ -95,7 +173,7 @@ Accepted config props: FlexProps, SpaceProps
 | -------------- | -------- | -------- | -------------------------------------------------------------------------------------------------------- |
 | after          | false    | string   | emulates text passed to ::after pseudo-selector                                                          |
 | before         | false    | string   | emulates text passed to ::before pseudo-selector                                                         |
-| callback       | false    | function | callback function to be executed after onChange and receives the value of the input                      |
+| callback       | false    | function | callback function to be executed after onChange, receives the input value as a number                    |
 | cfg            | false    | object   | FlexProps & SpaceProps                                                                                   |
 | decimalPlaces  | false    | number   | the number of decimal places used for formatting the value, default is 2                                 |
 | disabled       | false    | boolean  | Disable input field                                                                                      |
