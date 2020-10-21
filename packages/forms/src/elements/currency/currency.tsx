@@ -11,6 +11,7 @@ import {
 	fixToDecimals,
 	getNumDecimalPlaces,
 	appendMissingZeros,
+	parseToDecimals,
 } from '../helpers';
 
 interface InputCurrencyProps extends FieldRenderProps<number>, FieldExtraProps {
@@ -97,7 +98,15 @@ const InputCurrency: React.FC<InputCurrencyProps> = ({
 		}
 		if (!containsDecimals(e.target.value)) setDot(false);
 		e.target.value === '' && setInputValue('');
-		callback && callback(e);
+		if (callback) {
+			const numericValue = parseToDecimals(
+				e.target.value.replace(/,/g, ''),
+				decimalPlaces,
+			);
+			e.target.value === ''
+				? callback(null)
+				: callback(Number(numericValue.toFixed(decimalPlaces)));
+		}
 	};
 
 	const handleBlur = (e: any): void => {
@@ -108,13 +117,13 @@ const InputCurrency: React.FC<InputCurrencyProps> = ({
 				: inputValue;
 		input.onChange(e);
 	};
-	
+
 	const innerInput = useRef(null);
 
 	useEffect(() => {
 		// if "initialV" is specified, it needs to trigger manually the onBlur event to apply the format
-		const myEvent = new Event('blur', { bubbles: true })
-		if(initialV) {
+		const myEvent = new Event('blur', { bubbles: true });
+		if (initialV) {
 			const newInitialValue = formatWithCommas(initialV.toFixed(decimalPlaces));
 			setInputValue(newInitialValue);
 			innerInput.current.value = newInitialValue;
