@@ -15,3 +15,4 @@ export * from './renderFields';
 export * from './validation';
 export * from './finalFormExports';
 export * from './validators';
+export * from './elements/helpers';

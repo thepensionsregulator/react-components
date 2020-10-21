@@ -1,6 +1,6 @@
 {
 	"name": "@tpr/core",
-	"version": "2.2.4",
+	"version": "2.2.5",
 	"description": "TPR Core components",
 	"author": "David Alekna <david.alekna@tpr.gov.uk>",
 	"license": "MIT",
@@ -38,6 +38,7 @@
 		"@tpr/theming": "file:../theming",
 		"@xstate/react": "^0.8.1",
 		"final-form": "^4.20.0",
+		"node-sass": "^4.14.0",
 		"qs": "^6.9.4",
 		"react-final-form": "^6.5.0",
 		"tslib": "^2.0.0",

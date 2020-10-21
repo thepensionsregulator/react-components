@@ -1,6 +1,6 @@
 {
 	"name": "@tpr/theming",
-	"version": "2.2.2",
+	"version": "2.2.3",
 	"description": "TPR Theming components",
 	"author": "David Alekna <david.alekna@tpr.gov.uk>",
 	"license": "MIT",
@@ -38,6 +38,7 @@
 		"access": "public"
 	},
 	"dependencies": {
+		"node-sass": "^4.14.0",
 		"normalize.css": "^8.0.1",
 		"tslib": "^2.0.0"
 	},

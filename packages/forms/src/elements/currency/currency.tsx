@@ -1,4 +1,4 @@
-import React, { ChangeEvent, useState } from 'react';
+import React, { ChangeEvent, useState, useEffect, useRef } from 'react';
 import { Field, FieldRenderProps } from 'react-final-form';
 import { StyledInputLabel, InputElementHeading } from '../elements';
 import { FieldProps, FieldExtraProps } from '../../renderFields';
@@ -11,6 +11,7 @@ import {
 	fixToDecimals,
 	getNumDecimalPlaces,
 	appendMissingZeros,
+	parseToDecimals,
 } from '../helpers';
 
 interface InputCurrencyProps extends FieldRenderProps<number>, FieldExtraProps {
@@ -21,6 +22,7 @@ interface InputCurrencyProps extends FieldRenderProps<number>, FieldExtraProps {
 	noLeftBorder?: boolean;
 	optionalText?: boolean;
 	maxInputLength?: number;
+	initialV?: number;
 }
 
 const InputCurrency: React.FC<InputCurrencyProps> = ({
@@ -40,6 +42,7 @@ const InputCurrency: React.FC<InputCurrencyProps> = ({
 	noLeftBorder,
 	optionalText,
 	maxInputLength = 16 + decimalPlaces,
+	initialV,
 	...props
 }) => {
 	const digits = ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9', '.'];
@@ -48,6 +51,7 @@ const InputCurrency: React.FC<InputCurrencyProps> = ({
 
 	const [inputValue, setInputValue] = useState<string>('');
 	const [dot, setDot] = useState<boolean>(false);
+	const [firstLoad, setFirstLoad] = useState<boolean>(true);
 
 	const formatWithCommas = (value: string): string => {
 		const numString: string = value.replace(/,/g, '');
@@ -94,7 +98,15 @@ const InputCurrency: React.FC<InputCurrencyProps> = ({
 		}
 		if (!containsDecimals(e.target.value)) setDot(false);
 		e.target.value === '' && setInputValue('');
-		callback && callback(e);
+		if (callback) {
+			const numericValue = parseToDecimals(
+				e.target.value.replace(/,/g, ''),
+				decimalPlaces,
+			);
+			e.target.value === ''
+				? callback(null)
+				: callback(Number(numericValue.toFixed(decimalPlaces)));
+		}
 	};
 
 	const handleBlur = (e: any): void => {
@@ -105,6 +117,20 @@ const InputCurrency: React.FC<InputCurrencyProps> = ({
 				: inputValue;
 		input.onChange(e);
 	};
+
+	const innerInput = useRef(null);
+
+	useEffect(() => {
+		// if "initialV" is specified, it needs to trigger manually the onBlur event to apply the format
+		const myEvent = new Event('blur', { bubbles: true });
+		if (initialV) {
+			const newInitialValue = formatWithCommas(initialV.toFixed(decimalPlaces));
+			setInputValue(newInitialValue);
+			innerInput.current.value = newInitialValue;
+			setFirstLoad(false);
+			innerInput.current.dispatchEvent(myEvent);
+		}
+	}, [firstLoad]);
 
 	return (
 		<StyledInputLabel
@@ -119,6 +145,7 @@ const InputCurrency: React.FC<InputCurrencyProps> = ({
 				meta={meta}
 			/>
 			<Input
+				parentRef={innerInput}
 				type="text"
 				width={width}
 				testId={testId}
