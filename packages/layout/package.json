@@ -50,7 +50,8 @@
 		"react-collapsible": "^2.8.1",
 		"react-final-form": "^6.5.0",
 		"tslib": "^2.0.0",
-		"xstate": "^4.10.0"
+		"xstate": "^4.10.0",
+		"node-sass": "^4.14.0"
 	},
 	"devDependencies": {
 		"@tpr/core": "file:../core",
