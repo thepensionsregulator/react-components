@@ -39,7 +39,8 @@
 	},
 	"dependencies": {
 		"normalize.css": "^8.0.1",
-		"tslib": "^2.0.0"
+		"tslib": "^2.0.0",
+		"node-sass": "^4.14.0"
 	},
 	"devDependencies": {
 		"cross-env": "^7.0.2"
