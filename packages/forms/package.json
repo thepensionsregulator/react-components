@@ -48,7 +48,8 @@
 		"match-sorter": "^4.1.0",
 		"qs": "^6.9.4",
 		"react-final-form": "^6.5.0",
-		"tslib": "^2.0.0"
+		"tslib": "^2.0.0",
+		"node-sass": "^4.14.0"
 	},
 	"publishConfig": {
 		"access": "public"
