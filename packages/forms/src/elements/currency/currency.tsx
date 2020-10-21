@@ -108,13 +108,13 @@ const InputCurrency: React.FC<InputCurrencyProps> = ({
 				: inputValue;
 		input.onChange(e);
 	};
-	
+
 	const innerInput = useRef(null);
 
 	useEffect(() => {
 		// if "initialV" is specified, it needs to trigger manually the onBlur event to apply the format
-		const myEvent = new Event('blur', { bubbles: true })
-		if(initialV) {
+		const myEvent = new Event('blur', { bubbles: true });
+		if (initialV) {
 			const newInitialValue = formatWithCommas(initialV.toFixed(decimalPlaces));
 			setInputValue(newInitialValue);
 			innerInput.current.value = newInitialValue;
