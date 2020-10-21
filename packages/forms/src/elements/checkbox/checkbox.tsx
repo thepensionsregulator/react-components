@@ -17,6 +17,7 @@ export const Checkbox: React.FC<Partial<CheckboxIconProps>> = ({
 	label,
 	hint,
 	className,
+	name,
 }) => {
 	const msg = testId ? `${testId}-${checked ? 'checked' : 'unchecked'}` : null;
 	return (
@@ -39,6 +40,7 @@ export const Checkbox: React.FC<Partial<CheckboxIconProps>> = ({
 					checked={checked}
 					disabled={disabled}
 					onChange={onChange}
+					name={name}
 				/>
 				{checked ? (
 					<CheckboxChecked className={styles.checkbox} />
