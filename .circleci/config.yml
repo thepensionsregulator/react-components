@@ -5,7 +5,7 @@ jobs:
   build-and-test:
     working_directory: ~/react-components
     docker:
-      - image: 'cimg/base:stable'
+      - image: 'circleci/python:3.6.12'
     steps:
       - checkout
       - restore_cache:
