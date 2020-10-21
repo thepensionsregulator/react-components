@@ -5,7 +5,7 @@ jobs:
   build-and-test:
     working_directory: ~/react-components
     docker:
-      - image: 'cimg/base:stable'
+      - image: 'cimg/base:2020.01'
     steps:
       - checkout
       - restore_cache:
