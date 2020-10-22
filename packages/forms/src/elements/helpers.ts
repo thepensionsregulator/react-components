@@ -58,7 +58,9 @@ export const format = (value: string): string => {
 
 export const getIntPart = (value: string): string => {
 	// e.g value: ('123456.77') => '123456'
-	return value.slice(0, firstDotPosition(value));
+	const intPart = value.slice(0, firstDotPosition(value));
+	if (Number(intPart) === 0) return '0';
+	else return intPart;
 };
 
 export const getDecimalPart = (value: string, decimals: number): string => {
