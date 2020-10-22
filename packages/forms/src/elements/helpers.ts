@@ -116,7 +116,7 @@ export const validateCurrency = (
 						'tooBig' when the value is > max
 						'empty' when the field is empty
 	*/
-	if (value !== undefined) {
+	if (value !== undefined && value !== null) {
 		const numericValue = Number(value.replace(/,/g, ''));
 		if (min && numericValue < min) return 'tooSmall';
 		if (max && numericValue > max) return 'tooBig';
