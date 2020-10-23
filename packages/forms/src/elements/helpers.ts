@@ -16,7 +16,7 @@ export const firstDotPosition = (num: string): number => {
 	return num.indexOf('.');
 };
 
-export const parseToDecimals = (num: string, decimals: number): string => {
+export const adaptValueToFormat = (num: string, decimals: number): string => {
 	const firstDot = firstDotPosition(num);
 	// if contains decimals, only allow n number of decimals
 	// to avoid unnexpected rounds when using toFixed() in handleBlur
