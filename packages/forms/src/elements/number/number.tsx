@@ -3,7 +3,7 @@ import { Field, FieldRenderProps } from 'react-final-form';
 import { StyledInputLabel, InputElementHeading } from '../elements';
 import { FieldProps, FieldExtraProps } from '../../renderFields';
 import { Input } from '../input/input';
-import { validKeys, parseToDecimals, fixToDecimals } from '../helpers';
+import { validKeys, adaptValueToFormat, fixToDecimals } from '../helpers';
 
 interface InputNumberProps extends FieldRenderProps<number>, FieldExtraProps {
 	after?: string;
@@ -55,7 +55,7 @@ const InputNumber: React.FC<InputNumberProps> = ({
 		decimalPlaces
 			? (newEvent.target.value =
 					e.target.value &&
-					parseToDecimals(newEvent.target.value, decimalPlaces).toString())
+					adaptValueToFormat(newEvent.target.value, decimalPlaces))
 			: (newEvent.target.value =
 					e.target.value && parseInt(newEvent.target.value, 10).toString());
 		reachedMaxIntDigits(newEvent.target.value)
