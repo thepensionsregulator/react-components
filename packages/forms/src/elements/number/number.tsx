@@ -52,22 +52,28 @@ const InputNumber: React.FC<InputNumberProps> = ({
 
 	const handleOnChange = (e: ChangeEvent<HTMLInputElement>): void => {
 		let newEvent = { ...e };
+		// if decimalPlaces && value not null => e.target.value = adaptValueToFormat(value, decimalPlaces)
+		// if decimalPlaces && value is null => e.target.value = parseInt(value)
 		decimalPlaces
 			? (newEvent.target.value =
 					e.target.value &&
 					adaptValueToFormat(newEvent.target.value, decimalPlaces))
 			: (newEvent.target.value =
 					e.target.value && parseInt(newEvent.target.value, 10).toString());
+		// if the value of integers === maxIntDigits => e.target.value = prevValue
+		// if the value of integers < maxIntDigits => setPrevValue(e.target.value)
 		reachedMaxIntDigits(newEvent.target.value)
 			? (newEvent.target.value = prevValue)
 			: setPrevValue(newEvent.target.value);
+		// call input.onChange with the new value
 		input.onChange(newEvent.target.value);
+		// return the new value in the callback
 		callback && callback(newEvent);
 	};
 
 	const handleBlur = (e: any): void => {
 		const newValue = fixToDecimals(e.target.value, decimalPlaces);
-		e.target.value ? (e.target.value = newValue) : (e.target.value = null);
+		if (e.target.value) e.target.value = newValue;
 		input.onChange(e.target.value);
 		input.onBlur(e.target.value); // without this call, validate won't be executed even if specified
 	};
