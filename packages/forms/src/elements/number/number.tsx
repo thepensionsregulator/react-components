@@ -55,7 +55,7 @@ const InputNumber: React.FC<InputNumberProps> = ({
 		decimalPlaces
 			? (newEvent.target.value =
 					e.target.value &&
-					parseToDecimals(newEvent.target.value, decimalPlaces).toString())
+					parseToDecimals(newEvent.target.value, decimalPlaces))
 			: (newEvent.target.value =
 					e.target.value && parseInt(newEvent.target.value, 10).toString());
 		reachedMaxIntDigits(newEvent.target.value)
