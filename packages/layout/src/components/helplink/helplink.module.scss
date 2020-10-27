@@ -1,23 +1,29 @@
 @import '@tpr/theming/lib/variables.scss';
+@import '@tpr/theming/lib/accessibility.module.scss';
 
-.closed {
-	text-decoration: underline;
-	color: $colors-primary-3;
-	cursor: pointer;
-	svg {
-		transform: rotate(0deg);
-		fill: $colors-primary-3;
-		transition: transform 0.4s;
-	}
+.helpLink button[aria-expanded] {
+  display: inline-block;
+  border: none;
+  background: none;
+  color: $colors-primary-3;
+  text-decoration: underline;
+  font-family: $fonts-sans-serif;
+  font-weight: $font-weight-2;
+  font-size: $font-size-2;
+  cursor: pointer;
+  padding-top: $space-2;
 }
 
-.open {
-	text-decoration: underline;
-	color: $colors-primary-3;
-	cursor: pointer;
-	svg {
-		transform: rotate(180deg);
-		fill: $colors-primary-3;
-		transition: transform 0.4s;
-	}
+.helpLink [aria-expanded] svg {
+	fill: $colors-primary-3;
+  position: relative;
+  top: 6px;
+}
+
+.helpLink [aria-expanded='true'] svg {
+  transform: rotate(180deg);
+}
+
+.helpLinkContent {
+	margin-top: $space-3;
 }

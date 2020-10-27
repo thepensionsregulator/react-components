@@ -21,6 +21,7 @@ See the [CONTRIBUTING](./CONTRIBUTING.md)
 | [`@tpr/core`](packages/core)       | [![npm version][core npm version]][core npm link]       | [![Bundle Size][core size bundle]][core size link]       |
 | [`@tpr/forms`](packages/forms)     | [![npm version][forms npm version]][forms npm link]     | [![Bundle Size][forms size bundle]][forms size link]     |
 | [`@tpr/icons`](packages/icons)     | [![npm version][icons npm version]][icons npm link]     | [![Bundle Size][icons size bundle]][icons size link]     |
+| [`@tpr/layout`](packages/layout)   | [![npm version][layout npm version]][layout npm link]   | [![Bundle Size][layout size bundle]][layout size link]   |
 | [`@tpr/theming`](packages/theming) | [![npm version][theming npm version]][theming npm link] | [![Bundle Size][theming size bundle]][theming size link] |
 
 [core npm version]: https://flat.badgen.net/npm/v/@tpr/core
