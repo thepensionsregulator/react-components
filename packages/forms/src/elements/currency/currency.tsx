@@ -11,7 +11,8 @@ import {
 	fixToDecimals,
 	getNumDecimalPlaces,
 	appendMissingZeros,
-	parseToDecimals,
+	adaptValueToFormat,
+	getFinalValueWithFormat,
 } from '../helpers';
 
 interface InputCurrencyProps extends FieldRenderProps<number>, FieldExtraProps {
@@ -74,34 +75,45 @@ const InputCurrency: React.FC<InputCurrencyProps> = ({
 		return numFormatted;
 	};
 
+	const keyPressedIsNotAllowed = (e: any): boolean => {
+		if (!digits.includes(e.key) && !validKeys.includes(e.key)) return true;
+		return false;
+	};
+
 	const handleKeyDown = (e: any) => {
 		// typing '.' when already exists one in the value
 		if (e.key === '.') {
 			dot ? e.preventDefault() : setDot(true);
 			return true;
 		}
-		// if the input has reached the maximum length
-		if (e.target.value.length >= maxInputLength) {
-			// only allow the validKeys
-			!validKeys.includes(e.key) && e.preventDefault();
-		} else {
-			if (!digits.includes(e.key) && !validKeys.includes(e.key))
-				e.preventDefault();
+		keyPressedIsNotAllowed(e) && e.preventDefault();
+	};
+
+	const valueLengthValid = (value: string): boolean => {
+		// if the length of the new value (after formatting) is greater than maxInputLength => returns false
+		if (value) {
+			const newValue = getFinalValueWithFormat(value, decimalPlaces);
+			if (newValue.length > maxInputLength) return false;
 		}
+		return true;
 	};
 
 	const handleOnChange = (e: ChangeEvent<HTMLInputElement>): void => {
-		if (String(e.target.value)[e.target.value.length - 1] == '.') {
-			input.onChange(e.target.value);
+		// if the new value.length is greater than the maxLength
+		if (!valueLengthValid(e.target.value)) {
+			e.target.value = inputValue;
 		} else {
-			input.onChange(e.target.value && formatWithCommas(e.target.value));
+			if (String(e.target.value)[e.target.value.length - 1] == '.') {
+				input.onChange(e.target.value);
+			} else {
+				input.onChange(e.target.value && formatWithCommas(e.target.value));
+			}
+			if (!containsDecimals(e.target.value)) setDot(false);
+			e.target.value === '' && setInputValue('');
 		}
-		if (!containsDecimals(e.target.value)) setDot(false);
-		e.target.value === '' && setInputValue('');
 		if (callback) {
-			const numericValue = parseToDecimals(
-				e.target.value.replace(/,/g, ''),
-				decimalPlaces,
+			const numericValue = Number(
+				adaptValueToFormat(e.target.value.replace(/,/g, ''), decimalPlaces),
 			);
 			e.target.value === ''
 				? callback(null)
@@ -123,7 +135,7 @@ const InputCurrency: React.FC<InputCurrencyProps> = ({
 	useEffect(() => {
 		// if "initialV" is specified, it needs to trigger manually the onBlur event to apply the format
 		const myEvent = new Event('blur', { bubbles: true });
-		if (initialV) {
+		if (initialV !== undefined && initialV !== null) {
 			const newInitialValue = formatWithCommas(initialV.toFixed(decimalPlaces));
 			setInputValue(newInitialValue);
 			innerInput.current.value = newInitialValue;

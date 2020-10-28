@@ -50,17 +50,17 @@ import { FFInputNumber } from '@tpr/forms';
 					name="number_of_participants"
 					label="Number of participants"
 					hint="people attending this event, maximum of 20"
+					inputWidth={5}
+					cfg={{ my: 5 }}
+					required={true}
+					maxLength={2}
 					validate={(value) => {
 						if (value < 1 || value > 20 || !value || value === 0) {
 							return 'Must be between 1 and 20';
 						}
 						return undefined;
 					}}
-					inputWidth={5}
-					cfg={{ my: 5 }}
 					callback={(e) => console.log(e.target.value)}
-					required={true}
-					maxLength={2}
 				/>
 				<FFInputNumber
 					name="amount"
@@ -94,6 +94,7 @@ import { FFInputNumber } from '@tpr/forms';
 						if (value < 0 || value > 100)
 							return 'must be value between 0 and 100%';
 					}}
+					callback={(e) => console.log(e.target.value)}
 				/>
 				<button type="submit" style={{ display: 'none' }} children="Submit" />
 			</form>
@@ -132,6 +133,7 @@ import { Form, validate, renderFields } from '@tpr/forms';
 					return undefined;
 				},
 				noLeftBorder: true,
+				callback: (e) => console.log(e.target.value),
 			},
 		];
 		return (

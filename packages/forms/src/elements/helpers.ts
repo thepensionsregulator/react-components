@@ -16,14 +16,14 @@ export const firstDotPosition = (num: string): number => {
 	return num.indexOf('.');
 };
 
-export const parseToDecimals = (num: string, decimals: number): number => {
+export const adaptValueToFormat = (num: string, decimals: number): string => {
 	const firstDot = firstDotPosition(num);
 	// if contains decimals, only allow n number of decimals
 	// to avoid unnexpected rounds when using toFixed() in handleBlur
 	if (firstDot > -1) {
 		let newNum = num.slice(0, firstDot + decimals + 1);
-		return Number(newNum);
-	} else return Number(num);
+		return newNum;
+	} else return num;
 };
 
 export const fixToDecimals = (value: string, decimals: number): string => {
@@ -58,7 +58,9 @@ export const format = (value: string): string => {
 
 export const getIntPart = (value: string): string => {
 	// e.g value: ('123456.77') => '123456'
-	return value.slice(0, firstDotPosition(value));
+	const intPart = value.slice(0, firstDotPosition(value));
+	if (Number(intPart) === 0) return '0';
+	else return intPart;
 };
 
 export const getDecimalPart = (value: string, decimals: number): string => {
@@ -85,6 +87,23 @@ export const formatWithDecimals = (value: string, decimals: number): string => {
 	const decimalPart: string = getDecimalPart(value, decimals);
 	// e.g. returns '123,456.77
 	return intValueFormatted + decimalPart;
+};
+
+export const getFinalValueWithFormat = (
+	value: string,
+	decimals: number,
+): string => {
+	const newValueWithNoCommas = value.replace(/,/g, '');
+	if (firstDotPosition(newValueWithNoCommas) === -1) {
+		// if the value doesn't contain decimals, we return the value with the required format
+		const newValueWithDecimals = newValueWithNoCommas.concat(
+			'.',
+			new Array(decimals).fill('0').join(''),
+		);
+		const val = formatWithDecimals(newValueWithDecimals, decimals);
+		return val;
+	}
+	return value;
 };
 
 export const appendMissingZeros = (value: string, decimals: number): string => {
@@ -114,7 +133,7 @@ export const validateCurrency = (
 						'tooBig' when the value is > max
 						'empty' when the field is empty
 	*/
-	if (value !== undefined) {
+	if (value !== undefined && value !== null) {
 		const numericValue = Number(value.replace(/,/g, ''));
 		if (min && numericValue < min) return 'tooSmall';
 		if (max && numericValue > max) return 'tooBig';

@@ -3,7 +3,7 @@ import { Field, FieldRenderProps } from 'react-final-form';
 import { StyledInputLabel, InputElementHeading } from '../elements';
 import { FieldProps, FieldExtraProps } from '../../renderFields';
 import { Input } from '../input/input';
-import { validKeys, parseToDecimals, fixToDecimals } from '../helpers';
+import { adaptValueToFormat, fixToDecimals } from '../helpers';
 
 interface InputNumberProps extends FieldRenderProps<number>, FieldExtraProps {
 	after?: string;
@@ -44,30 +44,49 @@ const InputNumber: React.FC<InputNumberProps> = ({
 	};
 
 	const handleKeyDown = (e: any): void => {
-		e.target.value.length >= maxLength &&
-			!validKeys.includes(e.key) &&
-			e.preventDefault();
+		// avoid entering the number 'E'
 		e.key.toLowerCase() === 'e' && e.preventDefault();
+	};
+
+	const valueLengthValid = (value: string): boolean => {
+		// if maxLength specified, returns false when the length of the input is greater than maxLength
+		if (value.length > maxLength) {
+			return false;
+		}
+		return true;
 	};
 
 	const handleOnChange = (e: ChangeEvent<HTMLInputElement>): void => {
 		let newEvent = { ...e };
-		decimalPlaces
-			? (newEvent.target.value =
-					e.target.value &&
-					parseToDecimals(newEvent.target.value, decimalPlaces).toString())
-			: (newEvent.target.value =
-					e.target.value && parseInt(newEvent.target.value, 10).toString());
+		// the value is processed only when is a valid value
+		if (e.target.value !== '' && e.target.value !== '-') {
+			decimalPlaces
+				? // if decimalPlaces => newEvent.target.value = adaptValueToFormat(value, decimalPlaces)
+				  (newEvent.target.value =
+						e.target.value &&
+						adaptValueToFormat(newEvent.target.value, decimalPlaces))
+				: // if !decimalPlaces => newEvent.target.value = parseInt(value)
+				  (newEvent.target.value =
+						e.target.value && parseInt(newEvent.target.value, 10).toString());
+		}
+		// if the new value.length is greater than the maxLength
+		!valueLengthValid(newEvent.target.value) &&
+			(newEvent.target.value = prevValue);
+
 		reachedMaxIntDigits(newEvent.target.value)
-			? (newEvent.target.value = prevValue)
-			: setPrevValue(newEvent.target.value);
+			? // if the value of integers === maxIntDigits => newEvent.target.value = prevValue
+			  (newEvent.target.value = prevValue)
+			: // if the value of integers < maxIntDigits => setPrevValue(e.target.value)
+			  setPrevValue(newEvent.target.value);
+		// call input.onChange with the new value
 		input.onChange(newEvent.target.value);
+		// return the new value in the callback
 		callback && callback(newEvent);
 	};
 
 	const handleBlur = (e: any): void => {
 		const newValue = fixToDecimals(e.target.value, decimalPlaces);
-		e.target.value ? (e.target.value = newValue) : (e.target.value = null);
+		if (e.target.value) e.target.value = newValue;
 		input.onChange(e.target.value);
 		input.onBlur(e.target.value); // without this call, validate won't be executed even if specified
 	};
