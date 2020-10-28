@@ -61,12 +61,12 @@ const InputNumber: React.FC<InputNumberProps> = ({
 		// the value is processed only when is a valid value
 		if (e.target.value !== '' && e.target.value !== '-') {
 			decimalPlaces
-			// if decimalPlaces => newEvent.target.value = adaptValueToFormat(value, decimalPlaces)
-				? (newEvent.target.value =
-					e.target.value &&
-					adaptValueToFormat(newEvent.target.value, decimalPlaces))
-					// if !decimalPlaces => newEvent.target.value = parseInt(value)
-				: (newEvent.target.value =
+				? // if decimalPlaces => newEvent.target.value = adaptValueToFormat(value, decimalPlaces)
+				  (newEvent.target.value =
+						e.target.value &&
+						adaptValueToFormat(newEvent.target.value, decimalPlaces))
+				: // if !decimalPlaces => newEvent.target.value = parseInt(value)
+				  (newEvent.target.value =
 						e.target.value && parseInt(newEvent.target.value, 10).toString());
 		}
 		// if the new value.length is greater than the maxLength
@@ -74,10 +74,10 @@ const InputNumber: React.FC<InputNumberProps> = ({
 			(newEvent.target.value = prevValue);
 
 		reachedMaxIntDigits(newEvent.target.value)
-			// if the value of integers === maxIntDigits => newEvent.target.value = prevValue
-			? (newEvent.target.value = prevValue)
-			// if the value of integers < maxIntDigits => setPrevValue(e.target.value)
-			: setPrevValue(newEvent.target.value);
+			? // if the value of integers === maxIntDigits => newEvent.target.value = prevValue
+			  (newEvent.target.value = prevValue)
+			: // if the value of integers < maxIntDigits => setPrevValue(e.target.value)
+			  setPrevValue(newEvent.target.value);
 		// call input.onChange with the new value
 		input.onChange(newEvent.target.value);
 		// return the new value in the callback

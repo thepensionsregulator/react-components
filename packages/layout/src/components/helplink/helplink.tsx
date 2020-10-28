@@ -12,45 +12,45 @@ type HelpLinkProps = {
 };
 
 export const HelpLink: React.FC<HelpLinkProps> = (props) => {
-  // Use a separate component for the trigger so that we can set aria-expanded, and place the inline SVG inside the button
-  const [expanded, setExpanded] = React.useState(false);
-  const Trigger = () => (
-    <button aria-expanded={expanded}>
-      <ArrowDown />
+	// Use a separate component for the trigger so that we can set aria-expanded, and place the inline SVG inside the button
+	const [expanded, setExpanded] = React.useState(false);
+	const Trigger = () => (
+		<button aria-expanded={expanded}>
+			<ArrowDown />
 			{props.title}
-    </button>
-  );
+		</button>
+	);
 
-  // Create an alert when the component is expanded/collapsed, because the trigger button loses focus which prevents the change to aria-expanded being announced.
-  // Using a ref to get the button element and call its focus() method doesn't work.
-  const [accessibleAlert, setAccessibleAlert] = React.useState<JSX.Element>();
-  function createAccessibleAlert() {
-    return (
-      <p role="alert" className={Styles.visuallyHidden}>
-        {expanded ? 'collapsed' : 'expanded'}
-      </p>
-    );
-	}
-	
-	return (
-    <>
-		<Collapsible
-			trigger={<Trigger />}
-			classParentString={`${Styles.helpLink} ${props.className}`.trim()}
-			contentInnerClassName={`${Styles.helpLinkContent} ${props.contentClassName}`.trim()}
-			overflowWhenOpen="visible"
-			onOpening={() => {
-				setExpanded(true);
-				setAccessibleAlert(createAccessibleAlert());
-			}}
-			onClosing={() => {
-				setExpanded(false);
-				setAccessibleAlert(createAccessibleAlert());
-			}}
-		>
-			<Hint>{props.children}</Hint>
-		</Collapsible>
-		{accessibleAlert}
-		</>
+	// Create an alert when the component is expanded/collapsed, because the trigger button loses focus which prevents the change to aria-expanded being announced.
+	// Using a ref to get the button element and call its focus() method doesn't work.
+	const [accessibleAlert, setAccessibleAlert] = React.useState<JSX.Element>();
+	function createAccessibleAlert() {
+		return (
+			<p role="alert" className={Styles.visuallyHidden}>
+				{expanded ? 'collapsed' : 'expanded'}
+			</p>
 		);
+	}
+
+	return (
+		<>
+			<Collapsible
+				trigger={<Trigger />}
+				classParentString={`${Styles.helpLink} ${props.className}`.trim()}
+				contentInnerClassName={`${Styles.helpLinkContent} ${props.contentClassName}`.trim()}
+				overflowWhenOpen="visible"
+				onOpening={() => {
+					setExpanded(true);
+					setAccessibleAlert(createAccessibleAlert());
+				}}
+				onClosing={() => {
+					setExpanded(false);
+					setAccessibleAlert(createAccessibleAlert());
+				}}
+			>
+				<Hint>{props.children}</Hint>
+			</Collapsible>
+			{accessibleAlert}
+		</>
+	);
 };
