@@ -12,6 +12,7 @@ import {
 	getNumDecimalPlaces,
 	appendMissingZeros,
 	adaptValueToFormat,
+	getFinalValueWithFormat,
 } from '../helpers';
 
 interface InputCurrencyProps extends FieldRenderProps<number>, FieldExtraProps {
@@ -80,24 +81,33 @@ const InputCurrency: React.FC<InputCurrencyProps> = ({
 			dot ? e.preventDefault() : setDot(true);
 			return true;
 		}
-		// if the input has reached the maximum length
-		if (e.target.value.length >= maxInputLength) {
-			// only allow the validKeys
-			!validKeys.includes(e.key) && e.preventDefault();
-		} else {
-			if (!digits.includes(e.key) && !validKeys.includes(e.key))
-				e.preventDefault();
+		// only allow valid keys
+		if (!digits.includes(e.key) && !validKeys.includes(e.key))
+			e.preventDefault();
+	};
+
+	const valueLengthValid = (value: string): boolean => {
+		// if the length of the new value (after formatting) is greater than maxInputLength => returns false
+		if (value) {
+			const newValue = getFinalValueWithFormat(value, decimalPlaces);
+			if (newValue.length > maxInputLength) return false;
 		}
+		return true;
 	};
 
 	const handleOnChange = (e: ChangeEvent<HTMLInputElement>): void => {
-		if (String(e.target.value)[e.target.value.length - 1] == '.') {
-			input.onChange(e.target.value);
+		// if the new value.length is greater than the maxLength
+		if (!valueLengthValid(e.target.value)) {
+			e.target.value = inputValue;
 		} else {
-			input.onChange(e.target.value && formatWithCommas(e.target.value));
+			if (String(e.target.value)[e.target.value.length - 1] == '.') {
+				input.onChange(e.target.value);
+			} else {
+				input.onChange(e.target.value && formatWithCommas(e.target.value));
+			}
+			if (!containsDecimals(e.target.value)) setDot(false);
+			e.target.value === '' && setInputValue('');
 		}
-		if (!containsDecimals(e.target.value)) setDot(false);
-		e.target.value === '' && setInputValue('');
 		if (callback) {
 			const numericValue = Number(
 				adaptValueToFormat(e.target.value.replace(/,/g, ''), decimalPlaces),

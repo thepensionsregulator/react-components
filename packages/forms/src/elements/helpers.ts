@@ -89,6 +89,23 @@ export const formatWithDecimals = (value: string, decimals: number): string => {
 	return intValueFormatted + decimalPart;
 };
 
+export const getFinalValueWithFormat = (
+	value: string,
+	decimals: number,
+): string => {
+	const newValueWithNoCommas = value.replace(/,/g, '');
+	if (firstDotPosition(newValueWithNoCommas) === -1) {
+		// if the value doesn't contain decimals, we return the value with the required format
+		const newValueWithDecimals = newValueWithNoCommas.concat(
+			'.',
+			new Array(decimals).fill('0').join(''),
+		);
+		const val = formatWithDecimals(newValueWithDecimals, decimals);
+		return val;
+	}
+	return value;
+};
+
 export const appendMissingZeros = (value: string, decimals: number): string => {
 	if (value !== '') {
 		let decimalPart = getDecimalPart(value, decimals);
