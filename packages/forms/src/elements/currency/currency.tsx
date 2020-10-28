@@ -75,15 +75,18 @@ const InputCurrency: React.FC<InputCurrencyProps> = ({
 		return numFormatted;
 	};
 
+	const keyPressedIsNotAllowed = (e: any): boolean => {
+		if (!digits.includes(e.key) && !validKeys.includes(e.key)) return true;
+		return false;
+	};
+
 	const handleKeyDown = (e: any) => {
 		// typing '.' when already exists one in the value
 		if (e.key === '.') {
 			dot ? e.preventDefault() : setDot(true);
 			return true;
 		}
-		// only allow valid keys
-		if (!digits.includes(e.key) && !validKeys.includes(e.key))
-			e.preventDefault();
+		keyPressedIsNotAllowed(e) && e.preventDefault();
 	};
 
 	const valueLengthValid = (value: string): boolean => {
