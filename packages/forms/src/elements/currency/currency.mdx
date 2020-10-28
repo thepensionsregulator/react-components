@@ -63,7 +63,42 @@ import { FFInputCurrency } from '@tpr/forms';
 							noLeftBorder={true}
 							optionalText={false}
 							callback={handleChange}
-							initialV={null}
+						/>
+						<button
+							type="submit"
+							style={{ display: 'none' }}
+							children="Submit"
+						/>
+					</form>
+				)}
+			</Form>
+		);
+	}}
+</Playground>
+
+### With initial value passed to the initialV prop
+
+<Playground>
+	{() => {
+		const handleChange = (value) => {
+			console.log(value);
+		};
+		return (
+			<Form onSubmit={(values) => console.log(values)}>
+				{({ handleSubmit }) => (
+					<form onSubmit={handleSubmit}>
+						<FFInputCurrency
+							name="income"
+							label="Annual income"
+							hint="total amount of income for last year, in GBP"
+							before="£"
+							inputWidth={5}
+							cfg={{ my: 5 }}
+							required={false}
+							noLeftBorder={true}
+							optionalText={false}
+							callback={handleChange}
+							initialV={15000000}
 						/>
 						<button
 							type="submit"
