@@ -122,10 +122,13 @@ Accepted config props: FlexProps, SpaceProps
 
 ### Props
 
-| Property | Required | Type    | Description                                  |
-| -------- | -------- | ------- | -------------------------------------------- |
-| cfg      | false    | object  | FlexProps & SpaceProps                       |
-| disabled | false    | boolean | Disable checkbox                             |
-| testId   | false    | string  | data attribute for testers                   |
-| label    | true     | string  | Checkbox description                         |
-| hint     | false    | string  | More detailed description about the checkbox |
+Although neither `label` or `ariaLabel` are required props, you should always use one or the other.
+
+| Property | Required | Type    | Description                                    |
+| -------- | -------- | ------- | -----------------------------------------------|
+| cfg      | false    | object  | FlexProps & SpaceProps                         |
+| disabled | false    | boolean | Disable text field                             |
+| testId   | false    | string  | data attribute for testers                     |
+| label    | false    | string  | Visible field label                            |
+| ariaLabel| false    | string  | Invisible field label for assistive technology |
+| hint     | false    | string  | More detailed description about the checkbox   |
