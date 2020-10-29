@@ -80,7 +80,7 @@ describe('Checkbox input', () => {
 		getByLabelText(/Click me/).click();
 		const iconChecked = container.querySelector('svg');
 		expect(iconChecked.innerHTML).toMatchInlineSnapshot(
-			`"<g transform=\\"translate(2 2)\\" fill=\\"#f5f5f5\\" stroke=\\"#585858\\" stroke-width=\\"4\\"><rect width=\\"40\\" height=\\"40\\" stroke=\\"none\\"></rect><rect x=\\"0.1\\" y=\\"0.1\\" width=\\"36\\" height=\\"36\\" fill=\\"none\\"></rect></g><g transform=\\"translate(11 10)\\"><path d=\\"M3.648-.443l8.18,5.1L23.423-13.085\\" transform=\\"translate(-3.648 13.085)\\" fill=\\"none\\" stroke=\\"#006ebc\\" stroke-width=\\"5\\"></path></g>"`,
+			`"<g transform=\\"translate(2 2)\\" fill=\\"#f5f5f5\\" stroke=\\"#585858\\" stroke-width=\\"4\\"><rect width=\\"40\\" height=\\"40\\" stroke=\\"none\\" fill=\\"none\\"></rect><rect x=\\"0.1\\" y=\\"0.1\\" width=\\"36\\" height=\\"36\\" fill=\\"none\\"></rect></g><g transform=\\"translate(11 10)\\"><path d=\\"M3.648-.443l8.18,5.1L23.423-13.085\\" transform=\\"translate(-3.648 13.085)\\" fill=\\"none\\" stroke=\\"#006ebc\\" stroke-width=\\"5\\"></path></g>"`,
 		);
 	});
 });
