@@ -37,4 +37,9 @@
 	padding: 0 0 4px 2px;
 	width: 100%;
 	height: $space-5;
+
+	@media screen and (-ms-high-contrast: active), (-ms-high-contrast: none) {
+		min-height: $space-5;
+		max-height: $space-5;
+	}
 }
