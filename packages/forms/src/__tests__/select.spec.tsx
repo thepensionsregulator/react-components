@@ -59,4 +59,32 @@ describe('Select input', () => {
 			expect(getByText(item.label)).toBeDefined();
 		});
 	});
+
+	test('renders readonly', () => {
+		const testId = 'select-input';
+		const items = [
+			{ label: 'apple', value: 'apple' },
+			{ label: 'pear', value: 'pear' },
+			{ label: 'orange', value: 'orange' },
+			{ label: 'grape', value: 'grape' },
+			{ label: 'banana', value: 'banana' },
+		];
+
+		const { queryByTestId } = formSetup({
+			render: (
+				<FFSelect
+					label="Select your favourite fruit"
+					testId={testId}
+					name="fruits"
+					error="required"
+					required={true}
+					options={items}
+					readOnly={true}
+				/>
+			),
+		});
+
+		const label = queryByTestId(testId);
+		expect(label).toHaveAttribute('readonly');
+	});
 });

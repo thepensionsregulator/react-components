@@ -24,6 +24,7 @@ const InputNumber: React.FC<InputNumberProps> = ({
 	meta,
 	required,
 	placeholder,
+	readOnly,
 	inputWidth: width,
 	cfg,
 	after,
@@ -110,6 +111,7 @@ const InputNumber: React.FC<InputNumberProps> = ({
 				label={label}
 				touched={meta && meta.touched && meta.error}
 				placeholder={placeholder}
+				readOnly={readOnly}
 				decimalPlaces={decimalPlaces}
 				{...input}
 				onKeyDown={handleKeyDown}

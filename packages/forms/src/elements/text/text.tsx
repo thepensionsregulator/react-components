@@ -14,6 +14,7 @@ const InputText: React.FC<InputTextProps> = ({
 	meta,
 	required,
 	placeholder,
+	readOnly,
 	inputWidth: width,
 	cfg,
 }) => {
@@ -34,6 +35,7 @@ const InputText: React.FC<InputTextProps> = ({
 				testId={testId}
 				label={ariaLabel ? ariaLabel : label}
 				placeholder={placeholder}
+				readOnly={readOnly}
 				touched={meta && meta.touched && meta.error}
 				{...input}
 			/>

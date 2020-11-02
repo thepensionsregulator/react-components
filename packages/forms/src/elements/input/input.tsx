@@ -11,6 +11,7 @@ export type InputProps = {
 	before?: string;
 	decimalPlaces?: number;
 	parentRef?: any;
+	readOnly?: boolean;
 	[key: string]: any;
 };
 export const Input: React.FC<InputProps> = ({
@@ -20,6 +21,7 @@ export const Input: React.FC<InputProps> = ({
 	label,
 	touched = false,
 	className,
+	readOnly,
 	after: After,
 	before: Before,
 	decimalPlaces,
@@ -37,6 +39,7 @@ export const Input: React.FC<InputProps> = ({
 				type={type}
 				data-testid={testId}
 				aria-label={label}
+				readOnly={readOnly}
 				step={
 					type !== 'number'
 						? null

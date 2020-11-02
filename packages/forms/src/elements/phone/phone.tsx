@@ -18,6 +18,7 @@ const InputPhone: React.FC<InputPhoneProps> = ({
 	meta,
 	required,
 	placeholder,
+	readOnly,
 	inputWidth: width,
 	cfg,
 }) => {
@@ -38,6 +39,7 @@ const InputPhone: React.FC<InputPhoneProps> = ({
 				testId={testId}
 				label={label}
 				placeholder={placeholder}
+				readOnly={readOnly}
 				touched={meta && meta.touched && meta.error}
 				required={required}
 				{...input}
