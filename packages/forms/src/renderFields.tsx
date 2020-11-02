@@ -27,8 +27,10 @@ export type FieldOptions = {
 };
 
 export type FieldExtraProps = {
-	/** input label above the input box, it is required due to accessibility */
-	label: string;
+	/** input label above the input box */
+	label?: string;
+	/** aria-label for accessibility when label is not specified */
+	ariaLabel?: string;
 	/** field hints or requirements explained */
 	hint?: string;
 	/** for radio buttons */

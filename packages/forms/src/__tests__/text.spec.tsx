@@ -38,6 +38,22 @@ describe('Text input', () => {
 		expect(label).toBeInTheDocument();
 	});
 
+	test('renders aria-label', () => {
+		const { queryByTestId } = formSetup({
+			render: (
+				<FFInputText
+					ariaLabel="Name"
+					testId="text-input"
+					name="name"
+					type="text"
+				/>
+			),
+		});
+
+		const label = queryByTestId('text-input');
+		expect(label).toHaveAttribute('aria-label', 'Name');
+	});
+
 	test('renders hint correctly', () => {
 		const { queryByText } = formSetup({
 			render: (
