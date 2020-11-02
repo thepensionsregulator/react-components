@@ -48,6 +48,7 @@ type DateInputFieldProps = {
 	meta: any;
 	label: string;
 	disabled?: boolean;
+	readOnly: boolean;
 };
 const DateInputField: React.FC<DateInputFieldProps> = ({
 	small = true,
@@ -61,6 +62,7 @@ const DateInputField: React.FC<DateInputFieldProps> = ({
 	onBlur,
 	meta,
 	disabled,
+	readOnly
 }) => {
 	return (
 		<label className={small ? styles.inputSmall : styles.inputLarge}>
@@ -71,6 +73,7 @@ const DateInputField: React.FC<DateInputFieldProps> = ({
 				aria-label={ariaLabel}
 				data-testid={testId}
 				value={value}
+				readOnly={readOnly}
 				onFocus={({ target }: ChangeEvent<HTMLInputElement>) => target.select()}
 				onChange={handleChange(updateFn, maxInt)}
 				onBlur={(evt: ChangeEvent<HTMLInputElement>) => {
