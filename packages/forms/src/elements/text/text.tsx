@@ -32,7 +32,7 @@ const InputText: React.FC<InputTextProps> = ({
 				type="text"
 				width={width}
 				testId={testId}
-				label={ariaLabel}
+				label={ariaLabel ? ariaLabel : label}
 				placeholder={placeholder}
 				touched={meta && meta.touched && meta.error}
 				{...input}
