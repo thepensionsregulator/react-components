@@ -34,6 +34,7 @@ const InputCurrency: React.FC<InputCurrencyProps> = ({
 	meta,
 	required,
 	placeholder,
+	readOnly,
 	inputWidth: width,
 	cfg,
 	after,
@@ -164,6 +165,7 @@ const InputCurrency: React.FC<InputCurrencyProps> = ({
 				label={label}
 				touched={meta && meta.touched && meta.error}
 				placeholder={placeholder}
+				readOnly={readOnly}
 				decimalPlaces={decimalPlaces}
 				{...input}
 				onKeyDown={handleKeyDown}

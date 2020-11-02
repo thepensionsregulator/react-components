@@ -109,5 +109,16 @@ describe('Currency', () => {
 			fireEvent.blur(getByTestId(testId));
 			expect(getByTestId(testId)).toHaveValue('12,345.500');
 		});
+
+		test('renders readonly', () => {
+			const { queryByTestId } = formSetup({
+				render: (
+					<FFInputCurrency testId="text-input" name="name" readOnly={true} />
+				),
+			});
+
+			const label = queryByTestId('text-input');
+			expect(label).toHaveAttribute('readonly');
+		});
 	});
 });

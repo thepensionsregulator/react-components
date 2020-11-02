@@ -118,4 +118,20 @@ describe('Text input', () => {
 		}
 	`);
 	});
+
+	test('renders readonly', () => {
+		const { queryByTestId } = formSetup({
+			render: (
+				<FFInputText
+					testId="text-input"
+					name="name"
+					type="text"
+					readOnly={true}
+				/>
+			),
+		});
+
+		const label = queryByTestId('text-input');
+		expect(label).toHaveAttribute('readonly');
+	});
 });

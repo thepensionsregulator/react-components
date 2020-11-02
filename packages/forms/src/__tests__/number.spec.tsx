@@ -132,5 +132,16 @@ describe('Number', () => {
 			fireEvent.blur(getByTestId(testId));
 			expect(getByTestId(testId)).toHaveValue(-123.12);
 		});
+
+		test('renders readonly', () => {
+			const { queryByTestId } = formSetup({
+				render: (
+					<FFInputNumber testId="text-input" name="name" readOnly={true} />
+				),
+			});
+
+			const label = queryByTestId('text-input');
+			expect(label).toHaveAttribute('readonly');
+		});
 	});
 });

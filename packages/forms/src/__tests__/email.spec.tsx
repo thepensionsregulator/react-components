@@ -79,4 +79,13 @@ describe('Email input', () => {
 		expect(queryByText(errorMessage)).toBeInTheDocument();
 		expect(form.getState().valid).toBeFalsy();
 	});
+
+	test('renders readonly', () => {
+		const { queryByTestId } = formSetup({
+			render: <FFInputEmail testId="text-input" name="name" readOnly={true} />,
+		});
+
+		const label = queryByTestId('text-input');
+		expect(label).toHaveAttribute('readonly');
+	});
 });
