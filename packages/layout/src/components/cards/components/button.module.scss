@@ -38,6 +38,8 @@
 	width: 100%;
 	height: $space-5;
 
+	// IE ignores the height property if the height of the sibling and parent elements are not specified too.
+	// in order to make it a fixed height of $space-5 we use min-height and max-height
 	@media screen and (-ms-high-contrast: active), (-ms-high-contrast: none) {
 		min-height: $space-5;
 		max-height: $space-5;
