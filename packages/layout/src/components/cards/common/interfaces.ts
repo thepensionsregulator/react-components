@@ -112,7 +112,7 @@ export type AutoCompleteProps = {
 	onClick: (evt: any) => void;
 	options: any[];
 	loading: boolean;
-	initialValue?:[key:string]
+	initialValue?:{ [key: string]: string };
 };
 
 export type AddressAPIType = {

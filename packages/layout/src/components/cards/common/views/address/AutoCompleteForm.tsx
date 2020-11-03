@@ -33,6 +33,8 @@ const AutoCompleteForm: React.FC<AutoCompleteFormProps> = ({
 						validate={(value) => (!value ? dropdown.error : undefined)}
 						disabled={loading || submitLoading}
 						initialValue = {initialValue}
+						selectedItem ={initialValue}
+						inputValue={initialValue && initialValue.singleLineAddress}
 					/>
 					<Link onClick={onClick} cfg={{ mt: 3 }}>
 						{dropdown.link}

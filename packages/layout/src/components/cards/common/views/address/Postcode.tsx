@@ -111,6 +111,7 @@ const Postcode: React.FC<PostcodeProps> = ({
 									)
 								) {
 									setPostcode(utils.values.postcode);
+									setInitialValue({});
 									search(postcode);
 								}
 							}}

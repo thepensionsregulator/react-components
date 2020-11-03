@@ -44,7 +44,7 @@ const { loading, manual, postcode, lookup, options, initialValue } = state;
 							showLookup={(lookup: boolean) => setState({ lookup })}
 							setLoading={(loading: boolean) => setState({ loading })}
 							setOptions={(options: any[]) => setState({ options })}
-							setInitialValue={(initialValue:[key:string])=>setState({initialValue})}
+							setInitialValue={(initialValue:any)=>setState({initialValue})}
 							addressAPI={addressAPI}
 							i18n={i18n}
 						/>
