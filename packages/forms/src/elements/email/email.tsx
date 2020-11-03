@@ -18,6 +18,7 @@ const InputEmail: React.FC<InputEmailProps> = ({
 	meta,
 	required,
 	placeholder,
+	readOnly,
 	inputWidth: width,
 	cfg,
 }) => {
@@ -39,6 +40,7 @@ const InputEmail: React.FC<InputEmailProps> = ({
 				label={label}
 				required={required}
 				placeholder={placeholder}
+				readOnly={readOnly}
 				touched={meta && meta.touched && meta.error}
 				{...input}
 			/>

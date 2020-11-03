@@ -35,6 +35,7 @@ export const Select: React.FC<SelectProps & FieldRenderProps<string>> = ({
 	testId = 'select',
 	showToggleButton = true,
 	placeholder,
+	readOnly,
 	inputWidth: width,
 	cfg,
 	...rest
@@ -78,6 +79,7 @@ export const Select: React.FC<SelectProps & FieldRenderProps<string>> = ({
 								label={label}
 								disabled={disabled}
 								placeholder={placeholder}
+								readOnly={readOnly}
 								onClick={() => toggleMenu()}
 								{...getInputProps()}
 							/>

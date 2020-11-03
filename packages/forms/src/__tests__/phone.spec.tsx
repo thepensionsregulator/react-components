@@ -91,4 +91,13 @@ describe('Phone input', () => {
 		expect(queryByText(errorMessage)).toBeInTheDocument();
 		expect(form.getState().valid).toBeFalsy();
 	});
+
+	test('renders readonly', () => {
+		const { queryByTestId } = formSetup({
+			render: <FFInputPhone testId="text-input" name="name" readOnly={true} />,
+		});
+
+		const label = queryByTestId('text-input');
+		expect(label).toHaveAttribute('readonly');
+	});
 });

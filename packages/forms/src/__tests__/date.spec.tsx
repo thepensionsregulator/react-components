@@ -153,4 +153,37 @@ Object {
 `);
 		expect(handleSubmit).toBeCalledTimes(0);
 	});
+
+	test('date fields render readonly', () => {
+		const fields: FieldProps[] = [
+			{
+				name: 'date-1',
+				label: 'passport-expiry',
+				hint: 'For example, 12 11 2007',
+				type: 'date',
+				required: true,
+				readOnly: true,
+			},
+		];
+		const handleSubmit = jest.fn();
+		const { container } = formSetup({
+			render: renderFields(fields),
+			validate: validate(fields),
+			onSubmit: handleSubmit,
+		});
+
+		const dd = container.querySelector(
+			'input[aria-label="dd-passport-expiry"]',
+		);
+		const mm = container.querySelector(
+			'input[aria-label="mm-passport-expiry"]',
+		);
+		const yyyy = container.querySelector(
+			'input[aria-label="yyyy-passport-expiry"]',
+		);
+
+		expect(dd).toHaveAttribute('readonly');
+		expect(mm).toHaveAttribute('readonly');
+		expect(yyyy).toHaveAttribute('readonly');
+	});
 });
