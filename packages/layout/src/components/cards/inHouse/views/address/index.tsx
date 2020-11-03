@@ -18,9 +18,10 @@ export const AddressPage: React.FC = () => {
 		postcode: inHouseAdmin.address.postcode,
 		lookup: false,
 		options: [],
+		initialValue:{},
 	});
-	const { loading, manual, postcode, lookup, options } = state;
 
+const { loading, manual, postcode, lookup, options, initialValue } = state;
 	return (
 		<Content
 			type={cardType.inHouseAdmin}
@@ -43,6 +44,7 @@ export const AddressPage: React.FC = () => {
 							showLookup={(lookup: boolean) => setState({ lookup })}
 							setLoading={(loading: boolean) => setState({ loading })}
 							setOptions={(options: any[]) => setState({ options })}
+							setInitialValue={(initialValue:[key:string])=>setState({initialValue})}
 							addressAPI={addressAPI}
 							i18n={i18n}
 						/>
@@ -56,6 +58,7 @@ export const AddressPage: React.FC = () => {
 					<AutoComplete
 						loading={loading}
 						options={options}
+						initialValue={initialValue}
 						onClick={() => setState({ manual: true })}
 					/>
 				)}

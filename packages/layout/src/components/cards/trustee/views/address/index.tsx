@@ -18,8 +18,9 @@ const AddressPage: React.FC = () => {
 		postcode: trustee.address.postcode,
 		lookup: false,
 		options: [],
+		intitialValue:{}
 	});
-	const { loading, manual, postcode, lookup, options } = state;
+	const { loading, manual, postcode, lookup, options,intitialValue } = state;
 
 	return (
 		<Content type={cardType.trustee} title={i18n.address.title}>
@@ -43,6 +44,7 @@ const AddressPage: React.FC = () => {
 							showLookup={(lookup: boolean) => setState({ lookup })}
 							setLoading={(loading: boolean) => setState({ loading })}
 							setOptions={(options: any[]) => setState({ options })}
+							setInitialValue={(initialValue:[key:string])=>setState({initialValue})}
 							addressAPI={addressAPI}
 							i18n={i18n}
 						/>
@@ -56,6 +58,7 @@ const AddressPage: React.FC = () => {
 					<AutoComplete
 						loading={loading}
 						options={options}
+						initialValue ={intitialValue}
 						onClick={() => setState({ manual: true })}
 					/>
 				)}
