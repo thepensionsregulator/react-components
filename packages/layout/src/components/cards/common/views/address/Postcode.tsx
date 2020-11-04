@@ -130,7 +130,6 @@ const Postcode: React.FC<PostcodeProps> = ({
 				<Flex>
 					<P cfg={{ mr: 2 }}>{postcode}</P>
 					<Link onClick={() => {
-						debugger;
 						showLookup(true)
 					}} underline>
 						{i18n.address.postcode.link}
