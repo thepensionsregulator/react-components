@@ -134,7 +134,7 @@ export const validateCurrency = (
 						'empty' when the field is empty
 	*/
 	if (value !== undefined && value !== null) {
-		const numericValue = Number(value.replace(/,/g, ''));
+		const numericValue = Number(value.toString().replace(/,/g, ''));
 		if (min && numericValue < min) return 'tooSmall';
 		if (max && numericValue > max) return 'tooBig';
 		return undefined;
