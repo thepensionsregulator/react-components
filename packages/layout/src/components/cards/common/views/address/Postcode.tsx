@@ -112,7 +112,7 @@ const Postcode: React.FC<PostcodeProps> = ({
 								) {
 									setPostcode(utils.values.postcode);
 									setInitialValue({});
-									search(postcode);
+									search(utils.values.postcode);
 								}
 							}}
 							disabled={
@@ -129,7 +129,10 @@ const Postcode: React.FC<PostcodeProps> = ({
 			) : (
 				<Flex>
 					<P cfg={{ mr: 2 }}>{postcode}</P>
-					<Link onClick={() => showLookup(true)} underline>
+					<Link onClick={() => {
+						debugger;
+						showLookup(true)
+					}} underline>
 						{i18n.address.postcode.link}
 					</Link>
 				</Flex>
