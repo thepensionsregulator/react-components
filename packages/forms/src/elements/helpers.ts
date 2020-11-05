@@ -135,8 +135,8 @@ export const validateCurrency = (
 	*/
 	if (value !== undefined && value !== null) {
 		const numericValue = Number(value.toString().replace(/,/g, ''));
-		if (min && numericValue < min) return 'tooSmall';
-		if (max && numericValue > max) return 'tooBig';
+		if ((min !== null) && numericValue < min) return 'tooSmall';
+		if ((max !== null) && numericValue > max) return 'tooBig';
 		return undefined;
 	}
 	return 'empty';
