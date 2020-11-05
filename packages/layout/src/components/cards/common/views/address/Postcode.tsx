@@ -13,6 +13,7 @@ const Postcode: React.FC<PostcodeProps> = ({
 	showLookup,
 	setLoading,
 	setOptions,
+	setSelectedItem,
 	addressAPI,
 	i18n,
 }) => {
@@ -59,6 +60,7 @@ const Postcode: React.FC<PostcodeProps> = ({
 							}),
 						).then((results) => {
 							setOptions(results);
+							setSelectedItem(results ? results[0]:{})
 							showLookup(false);
 							setLoading(false);
 						});
@@ -71,7 +73,7 @@ const Postcode: React.FC<PostcodeProps> = ({
 					setLoading(false);
 				});
 		},
-		[setOptions],
+		[setOptions, setSelectedItem],
 	);
 
 	useEffect(() => {
@@ -109,7 +111,8 @@ const Postcode: React.FC<PostcodeProps> = ({
 									)
 								) {
 									setPostcode(utils.values.postcode);
-									search(postcode);
+									setSelectedItem({});
+									search(utils.values.postcode);
 								}
 							}}
 							disabled={
@@ -126,7 +129,9 @@ const Postcode: React.FC<PostcodeProps> = ({
 			) : (
 				<Flex>
 					<P cfg={{ mr: 2 }}>{postcode}</P>
-					<Link onClick={() => showLookup(true)} underline>
+					<Link onClick={() => {
+						showLookup(true)
+					}} underline>
 						{i18n.address.postcode.link}
 					</Link>
 				</Flex>

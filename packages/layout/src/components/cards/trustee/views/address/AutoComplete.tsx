@@ -6,6 +6,7 @@ import AutoCompleteForm from '../../../common/views/address/AutoCompleteForm';
 const AutoComplete: React.FC<AutoCompleteProps> = ({
 	onClick,
 	options,
+	selectedItem,
 	loading,
 }) => {
 	const { send, i18n } = useTrusteeContext();
@@ -20,6 +21,7 @@ const AutoComplete: React.FC<AutoCompleteProps> = ({
 		<AutoCompleteForm
 			onClick={onClick}
 			options={options}
+			selectedItem = {selectedItem}
 			loading={loading}
 			onSubmit={onSubmit}
 			dropdown={i18n.address.auto.dropdown}
