@@ -3,7 +3,7 @@ import { Field, FieldRenderProps } from 'react-final-form';
 import { StyledInputLabel, InputElementHeading } from '../elements';
 import { FieldProps, FieldExtraProps } from '../../renderFields';
 import { Input } from '../input/input';
-import { adaptValueToFormat, fixToDecimals } from '../helpers';
+import { adaptValueToFormat, fixToDecimals, validKeys as vk } from '../helpers';
 
 interface InputNumberProps extends FieldRenderProps<number>, FieldExtraProps {
 	after?: string;
@@ -37,6 +37,23 @@ const InputNumber: React.FC<InputNumberProps> = ({
 	maxIntDigits,
 	...props
 }) => {
+	const digits = [
+		'0',
+		'1',
+		'2',
+		'3',
+		'4',
+		'5',
+		'6',
+		'7',
+		'8',
+		'9',
+		'.',
+		'-',
+		'+',
+	];
+	const validKeys = [...vk, ...digits];
+
 	const [prevValue, setPrevValue] = useState<string | null>(null);
 
 	const reachedMaxIntDigits = (value: string): boolean => {
@@ -45,8 +62,12 @@ const InputNumber: React.FC<InputNumberProps> = ({
 	};
 
 	const handleKeyDown = (e: any): void => {
-		// avoid entering the number 'E'
-		e.key.toLowerCase() === 'e' && e.preventDefault();
+		// managing e.ctrlKey we allow to use the key combinations Ctrl+C, Ctrl+V, Ctrl+X
+		if (!(e.ctrlKey === true)) {
+			// avoid entering the number 'E'
+			e.key.toLowerCase() === 'e' && e.preventDefault();
+			!validKeys.includes(e.key) && e.preventDefault();
+		}
 	};
 
 	const valueLengthValid = (value: string): boolean => {
