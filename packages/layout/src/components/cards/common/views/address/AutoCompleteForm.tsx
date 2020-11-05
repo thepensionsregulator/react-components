@@ -14,7 +14,7 @@ interface AutoCompleteFormProps extends AutoCompleteProps {
 const AutoCompleteForm: React.FC<AutoCompleteFormProps> = ({
 	onClick,
 	options,
-	initialValue,
+	selectedItem,
 	loading,
 	onSubmit,
 	dropdown,
@@ -30,11 +30,9 @@ const AutoCompleteForm: React.FC<AutoCompleteFormProps> = ({
 						placeholder={dropdown.placeholder}
 						options={options}
 						inputWidth={6}
-						validate={(value) => (!value ? dropdown.error : undefined)}
+						validate={(value) => !value || (!(Object.keys(value).length > 0) ? dropdown.error : undefined)}
 						disabled={loading || submitLoading}
-						initialValue = {initialValue}
-						selectedItem ={initialValue}
-						inputValue={initialValue && initialValue.singleLineAddress}
+						selectedItem = {selectedItem}
 					/>
 					<Link onClick={onClick} cfg={{ mt: 3 }}>
 						{dropdown.link}

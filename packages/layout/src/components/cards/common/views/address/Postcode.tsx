@@ -13,7 +13,7 @@ const Postcode: React.FC<PostcodeProps> = ({
 	showLookup,
 	setLoading,
 	setOptions,
-	setInitialValue,
+	setSelectedItem,
 	addressAPI,
 	i18n,
 }) => {
@@ -60,7 +60,7 @@ const Postcode: React.FC<PostcodeProps> = ({
 							}),
 						).then((results) => {
 							setOptions(results);
-							setInitialValue(results ? results[0]:{})
+							setSelectedItem(results ? results[0]:{})
 							showLookup(false);
 							setLoading(false);
 						});
@@ -73,7 +73,7 @@ const Postcode: React.FC<PostcodeProps> = ({
 					setLoading(false);
 				});
 		},
-		[setOptions, setInitialValue],
+		[setOptions, setSelectedItem],
 	);
 
 	useEffect(() => {
@@ -111,7 +111,7 @@ const Postcode: React.FC<PostcodeProps> = ({
 									)
 								) {
 									setPostcode(utils.values.postcode);
-									setInitialValue({});
+									setSelectedItem({});
 									search(utils.values.postcode);
 								}
 							}}

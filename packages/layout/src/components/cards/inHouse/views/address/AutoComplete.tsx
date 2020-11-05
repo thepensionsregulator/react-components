@@ -7,7 +7,7 @@ const AutoComplete: React.FC<AutoCompleteProps> = ({
 	onClick,
 	options,
 	loading,
-	initialValue,
+	selectedItem,
 }) => {
 	const [submitLoading, setSubmitLoading] = useState(false);
 	const { send, i18n, current, onSaveAddress } = useInHouseAdminContext();
@@ -34,7 +34,7 @@ const AutoComplete: React.FC<AutoCompleteProps> = ({
 		<AutoCompleteForm
 			onClick={onClick}
 			options={options}
-			initialValue = {initialValue}
+			selectedItem = {selectedItem}
 			loading={loading}
 			onSubmit={onSubmit}
 			dropdown={i18n.address.auto.dropdown}
