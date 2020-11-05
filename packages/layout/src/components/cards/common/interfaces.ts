@@ -86,7 +86,7 @@ export interface PostcodeProps {
 	showLookup: Function;
 	setLoading: Function;
 	setOptions: Function;
-	setSelectedItem?:Function;
+	setSelectedItem?:Function; // added to fix the initial selected item issue #66184
 	addressAPI: any;
 	i18n: any;
 }
