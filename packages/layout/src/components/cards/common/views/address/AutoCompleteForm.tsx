@@ -30,7 +30,7 @@ const AutoCompleteForm: React.FC<AutoCompleteFormProps> = ({
 						placeholder={dropdown.placeholder}
 						options={options}
 						inputWidth={6}
-						validate={(value) => !value || (!(Object.keys(value).length > 0) ? dropdown.error : undefined)}
+						validate={(value) => (!value || (!(Object.keys(value).length > 0)) ? dropdown.error : undefined)}
 						disabled={loading || submitLoading}
 						selectedItem = {selectedItem}
 					/>
