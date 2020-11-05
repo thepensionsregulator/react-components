@@ -36,28 +36,30 @@ export const AddressLookup: React.FC<AddressProps> = ({ address, testId }) => {
 		case AddressView.PostcodeLookup:
 			return (
 				<>
-					<PostcodeLookup testId={testId} />
-					<button onClick={() => setAddressView(AddressView.SelectAddress)}>
-						Next
-					</button>
+					<PostcodeLookup
+						testId={testId}
+						onSubmit={() => setAddressView(AddressView.SelectAddress)}
+					/>
 				</>
 			);
 		case AddressView.SelectAddress:
 			return (
 				<>
-					<SelectAddress testId={testId} />
-					<button onClick={() => setAddressView(AddressView.EditAddress)}>
-						Next
-					</button>
+					<SelectAddress
+						testId={testId}
+						postcode={address && address.postcode}
+						onSubmit={() => setAddressView(AddressView.EditAddress)}
+					/>
 				</>
 			);
 		case AddressView.EditAddress:
 			return (
 				<>
-					<EditAddress testId={testId} />
-					<button onClick={() => setAddressView(AddressView.PostcodeLookup)}>
-						Next
-					</button>
+					<EditAddress
+						address={address}
+						testId={testId}
+						onSubmit={() => setAddressView(AddressView.PostcodeLookup)}
+					/>
 				</>
 			);
 	}

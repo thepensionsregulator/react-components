@@ -33,7 +33,7 @@ npm install @tpr/forms
 `import items you wish to use from the library`
 
 ```js
-import { Address } from '@tpr/forms';
+import { AddressLookup } from '@tpr/forms';
 ```
 
 ## Examples
@@ -46,7 +46,18 @@ import { Address } from '@tpr/forms';
 			<Form onSubmit={console.log} initialValues={{ 'checkbox-c': true }}>
 				{({ handleSubmit }) => (
 					<form onSubmit={handleSubmit}>
-						<AddressLookup />
+						<AddressLookup
+							address={{
+								addressLine1: 'Napier House',
+								addressLine2: 'Trafalgar Place',
+								addressLine3: 'Trafalgar Road',
+								postTown: 'Brighton',
+								county: 'East Sussex',
+								postcode: 'BN1 4DW',
+								country: 'UK',
+								countryId: 229,
+							}}
+						/>
 						<button
 							type="submit"
 							style={{ display: 'none' }}

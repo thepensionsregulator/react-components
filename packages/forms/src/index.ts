@@ -1,3 +1,4 @@
+export * from './elements/address/addressLookup';
 export * from './elements/text/text';
 export * from './elements/date/date';
 export * from './elements/phone/phone';
