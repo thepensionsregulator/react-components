@@ -82,12 +82,15 @@ const InputCurrency: React.FC<InputCurrencyProps> = ({
 	};
 
 	const handleKeyDown = (e: any) => {
-		// typing '.' when already exists one in the value
-		if (e.key === '.') {
-			dot ? e.preventDefault() : setDot(true);
-			return true;
+		// managing e.ctrlKey we allow to use the key combinations Ctrl+C, Ctrl+V, Ctrl+X
+		if (!(e.ctrlKey === true)) {
+			// typing '.' when already exists one in the value
+			if (e.key === '.') {
+				dot ? e.preventDefault() : setDot(true);
+				return true;
+			}
+			keyPressedIsNotAllowed(e) && e.preventDefault();
 		}
-		keyPressedIsNotAllowed(e) && e.preventDefault();
 	};
 
 	const valueLengthValid = (value: string): boolean => {
