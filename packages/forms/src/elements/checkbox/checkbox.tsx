@@ -52,7 +52,16 @@ export const Checkbox: React.FC<Partial<CheckboxIconProps>> = ({
 	);
 };
 
-export const FFCheckbox: React.FC<FieldProps> = (fieldProps) => {
+export interface CheckboxProps extends FieldProps {
+	callback?: Function;
+}
+
+export const FFCheckbox: React.FC<CheckboxProps> = (fieldProps) => {
+	const handleChange = (input: any, value: boolean) => {
+		input.onChange(!input.checked);
+		fieldProps.callback && fieldProps.callback(value);
+	};
+
 	return (
 		<Field
 			{...fieldProps}
@@ -62,7 +71,7 @@ export const FFCheckbox: React.FC<FieldProps> = (fieldProps) => {
 					<Checkbox
 						label={label}
 						checked={input.checked}
-						onChange={() => input.onChange(!input.checked)}
+						onChange={(e: any) => handleChange(input, e.target.checked)}
 						{...rest}
 					/>
 				);

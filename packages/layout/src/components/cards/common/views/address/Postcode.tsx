@@ -60,7 +60,7 @@ const Postcode: React.FC<PostcodeProps> = ({
 							}),
 						).then((results) => {
 							setOptions(results);
-							setSelectedItem(results ? results[0]:{})
+							setSelectedItem(results ? results[0] : {});
 							showLookup(false);
 							setLoading(false);
 						});
@@ -129,9 +129,12 @@ const Postcode: React.FC<PostcodeProps> = ({
 			) : (
 				<Flex>
 					<P cfg={{ mr: 2 }}>{postcode}</P>
-					<Link onClick={() => {
-						showLookup(true)
-					}} underline>
+					<Link
+						onClick={() => {
+							showLookup(true);
+						}}
+						underline
+					>
 						{i18n.address.postcode.link}
 					</Link>
 				</Flex>
