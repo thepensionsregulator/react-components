@@ -21,7 +21,7 @@ const AutoComplete: React.FC<AutoCompleteProps> = ({
 		<AutoCompleteForm
 			onClick={onClick}
 			options={options}
-			selectedItem = {selectedItem}
+			selectedItem={selectedItem}
 			loading={loading}
 			onSubmit={onSubmit}
 			dropdown={i18n.address.auto.dropdown}

@@ -86,7 +86,7 @@ export interface PostcodeProps {
 	showLookup: Function;
 	setLoading: Function;
 	setOptions: Function;
-	setSelectedItem?:Function; // added to fix the initial selected item issue #66184
+	setSelectedItem?: Function;
 	addressAPI: any;
 	i18n: any;
 }
@@ -112,7 +112,7 @@ export type AutoCompleteProps = {
 	onClick: (evt: any) => void;
 	options: any[];
 	loading: boolean;
-	selectedItem?:any;
+	selectedItem?: any;
 };
 
 export type AddressAPIType = {
