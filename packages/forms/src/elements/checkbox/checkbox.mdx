@@ -53,8 +53,13 @@ import { FFCheckbox } from '@tpr/forms';
 					label="Select option 1"
 					hint="Lorem, ipsum dolor sit amet consectetur adipisicing elit. Ea obcaecati repellat molestias nemo deleniti eveniet vel similique nesciunt fugiat nisi?"
 					cfg={{ mb: 4 }}
+					callback={(value) => console.log('callback:', value)}
 				/>
-				<FFCheckbox name="checkbox-b" label="Select option 2" />
+				<FFCheckbox
+					name="checkbox-b"
+					label="Select option 2"
+					callback={(value) => console.log('callback:', value)}
+				/>
 				<button type="submit" style={{ display: 'none' }}>
 					Submit
 				</button>
@@ -129,12 +134,13 @@ Accepted config props: FlexProps, SpaceProps
 
 ### Props
 
-| Property | Required | Type                 | Description                                                     |
-| -------- | -------- | -------------------- | --------------------------------------------------------------- |
-| cfg      | false    | object               | FlexProps & SpaceProps                                          |
-| disabled | false    | boolean              | Disable checkbox                                                |
-| testId   | false    | string               | data attribute for testers                                      |
-| checked  | true     | boolean              | Specifies whether the checkbox is selected.                     |
-| onChange | true     | function(evt: Event) | The callback function that is triggered when the state changes. |
-| label    | true     | string               | Checkbox description                                            |
-| hint     | false    | string               | More detailed description about the checkbox                    |
+| Property | Required | Type                 | Description                                                                                      |
+| -------- | -------- | -------------------- | ------------------------------------------------------------------------------------------------ |
+| callback | false    | function             | callback function that runs after every onChange event, receives a boolean indicating if checked |
+| cfg      | false    | object               | FlexProps & SpaceProps                                                                           |
+| disabled | false    | boolean              | Disable checkbox                                                                                 |
+| testId   | false    | string               | data attribute for testers                                                                       |
+| checked  | true     | boolean              | Specifies whether the checkbox is selected.                                                      |
+| onChange | true     | function(evt: Event) | The callback function that is triggered when the state changes.                                  |
+| label    | true     | string               | Checkbox description                                                                             |
+| hint     | false    | string               | More detailed description about the checkbox                                                     |
