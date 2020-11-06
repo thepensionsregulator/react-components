@@ -1,5 +1,5 @@
 ---
-name: Address Lookup
+name: Address lookup
 menu: Forms
 route: /forms/address
 ---
@@ -43,11 +43,11 @@ import { AddressLookup } from '@tpr/forms';
 <Playground>
 	{() => {
 		return (
-			<Form onSubmit={console.log} initialValues={{ 'checkbox-c': true }}>
+			<Form onSubmit={() => {}}>
 				{({ handleSubmit }) => (
 					<form onSubmit={handleSubmit}>
 						<AddressLookup
-							address={{
+							initialValue={{
 								addressLine1: 'Napier House',
 								addressLine2: 'Trafalgar Place',
 								addressLine3: 'Trafalgar Road',
@@ -57,11 +57,37 @@ import { AddressLookup } from '@tpr/forms';
 								country: 'UK',
 								countryId: 229,
 							}}
-						/>
-						<button
-							type="submit"
-							style={{ display: 'none' }}
-							children="Submit"
+							onPostcodeChanged={(postcode) => [
+								{
+									addressLine1: 'Napier House',
+									addressLine2: 'Trafalgar Place',
+									addressLine3: 'Trafalgar Road',
+									postTown: 'Brighton',
+									county: 'East Sussex',
+									postcode: 'BN1 4DW',
+									country: 'UK',
+									countryId: 229,
+								},
+								{
+									addressLine1: 'Financial Conduct Authority',
+									addressLine2: '12 Endeavour Square',
+									postTown: 'London',
+									postcode: 'E20 1JN',
+									country: 'UK',
+									countryId: 229,
+								},
+								{
+									addressLine1: 'Pension Protection Fund',
+									addressLine2: '12 Dingwall Road',
+									postTown: 'Croydon',
+									postcode: 'CR0 2NA',
+									country: 'UK',
+									countryId: 229,
+								},
+							]}
+							onAddressSaved={(address) => {
+								console.log(address);
+							}}
 						/>
 					</form>
 				)}
@@ -78,7 +104,10 @@ Accepted config props: FlexProps, SpaceProps
 
 ### Props
 
-| Property | Required | Type   | Description                |
-| -------- | -------- | ------ | -------------------------- |
-| cfg      | false    | object | FlexProps & SpaceProps     |
-| testId   | false    | string | data attribute for testers |
+| Property          | Required | Type     | Description                                                |
+| ----------------- | -------- | -------- | ---------------------------------------------------------- |
+| cfg               | false    | object   | FlexProps & SpaceProps                                     |
+| initialValue      | false    | Address  | Existing value to pre-populate the component               |
+| testId            | false    | string   | data attribute for testers                                 |
+| onPostcodeChanged | true     | function | Callback which should return addresses matching a postcode |
+| onAddressSaved    | true     | function | Callback which receives the selected address               |
