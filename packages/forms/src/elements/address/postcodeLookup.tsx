@@ -9,7 +9,7 @@ type PostcodeLookupProps = {
 	onPostcodeChanged: (postcode: string) => void;
 };
 
-const postcodeIsValid = (postcode: string): boolean => true;
+const postcodeIsValid = (postcode: string): boolean => postcode === postcode;
 
 export const PostcodeLookup: React.FC<PostcodeLookupProps> = ({
 	testId,
