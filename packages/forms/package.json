@@ -1,10 +1,6 @@
 {
 	"name": "@tpr/forms",
-<<<<<<< HEAD
-	"version": "2.3.22",
-=======
 	"version": "2.3.25",
->>>>>>> develop
 	"description": "TPR Forms components",
 	"author": "David Alekna <david.alekna@tpr.gov.uk>",
 	"license": "MIT",
