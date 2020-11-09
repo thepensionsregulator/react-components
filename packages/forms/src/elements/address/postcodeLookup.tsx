@@ -8,14 +8,19 @@ type PostcodeLookupProps = {
 	testId?: string;
 	postcode?: string;
 	onPostcodeChanged: (postcode: string) => void;
+	invalidPostcodeMessage: string;
+	postcodeLookupLabel: string;
+	postcodeLookupButton: string;
 };
-
-const validator = new PostcodeValidator('Enter a valid postcode');
 
 export const PostcodeLookup: React.FC<PostcodeLookupProps> = ({
 	testId,
 	onPostcodeChanged,
+	invalidPostcodeMessage,
+	postcodeLookupLabel,
+	postcodeLookupButton,
 }) => {
+	const validator = new PostcodeValidator(invalidPostcodeMessage);
 	let postcodeValid = true;
 	return (
 		<Form onSubmit={() => {}}>
@@ -23,24 +28,24 @@ export const PostcodeLookup: React.FC<PostcodeLookupProps> = ({
 				<>
 					<FFInputText
 						name="postcode"
-						label="Postcode"
+						label={postcodeLookupLabel}
 						validate={(value) => {
 							const result = validator.validatePostcode(value);
 							postcodeValid = typeof result === 'undefined';
 							return result;
 						}}
-						testId={testId + '-postcode-lookup'}
+						testId={(testId ? testId + '-' : '') + 'postcode-lookup-edit'}
 						inputWidth={1}
 					/>
 					<Button
-						testId={testId + '-postcode-lookup-button'}
+						testId={(testId ? testId + '-' : '') + 'postcode-lookup-button'}
 						onClick={() => {
 							if (postcodeValid) {
 								onPostcodeChanged(values.postcode);
 							}
 						}}
 					>
-						Find address
+						{postcodeLookupButton}{' '}
 					</Button>
 				</>
 			)}

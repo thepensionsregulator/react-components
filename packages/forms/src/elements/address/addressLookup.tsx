@@ -9,6 +9,24 @@ export type AddressProps = {
 	testId?: string;
 	onPostcodeChanged: (postcode: string) => Address[];
 	onAddressSaved: (address: Address) => void;
+	invalidPostcodeMessage: string;
+	postcodeLookupLabel: string;
+	postcodeLookupButton: string;
+	changePostcodeButton: string;
+	selectAddressLabel: string;
+	selectAddressPlaceholder?: string;
+	selectAddressButton: string;
+	selectAddressRequiredMessage: string;
+	noAddressesFoundMessage: string;
+	addressLine1Label: string;
+	addressLine2Label: string;
+	addressLine3Label: string;
+	townLabel: string;
+	countyLabel: string;
+	postcodeLabel: string;
+	countryLabel: string;
+	changeAddressButton: string;
+	saveAddressButton: string;
 };
 
 enum AddressView {
@@ -22,6 +40,24 @@ export const AddressLookup: React.FC<AddressProps> = ({
 	testId,
 	onPostcodeChanged,
 	onAddressSaved,
+	invalidPostcodeMessage,
+	postcodeLookupLabel,
+	postcodeLookupButton,
+	changePostcodeButton,
+	selectAddressLabel,
+	selectAddressPlaceholder,
+	selectAddressButton,
+	selectAddressRequiredMessage,
+	noAddressesFoundMessage,
+	addressLine1Label,
+	addressLine2Label,
+	addressLine3Label,
+	townLabel,
+	countyLabel,
+	postcodeLabel,
+	countryLabel,
+	changeAddressButton,
+	saveAddressButton,
 }) => {
 	// Start in postcode lookup view, unless there's already an address in which case start in edit address view
 	let initialView = AddressView.PostcodeLookup;
@@ -52,6 +88,9 @@ export const AddressLookup: React.FC<AddressProps> = ({
 						setAddresses(onPostcodeChanged(postcode));
 						setAddressView(AddressView.SelectAddress);
 					}}
+					invalidPostcodeMessage={invalidPostcodeMessage}
+					postcodeLookupLabel={postcodeLookupLabel}
+					postcodeLookupButton={postcodeLookupButton}
 				/>
 			);
 		case AddressView.SelectAddress:
@@ -67,6 +106,13 @@ export const AddressLookup: React.FC<AddressProps> = ({
 						setAddress(selectedAddress);
 						setAddressView(AddressView.EditAddress);
 					}}
+					postcodeLookupLabel={postcodeLookupLabel}
+					changePostcodeButton={changePostcodeButton}
+					selectAddressLabel={selectAddressLabel}
+					selectAddressPlaceholder={selectAddressPlaceholder}
+					selectAddressButton={selectAddressButton}
+					selectAddressRequiredMessage={selectAddressRequiredMessage}
+					noAddressesFoundMessage={noAddressesFoundMessage}
 				/>
 			);
 		case AddressView.EditAddress:
@@ -81,6 +127,15 @@ export const AddressLookup: React.FC<AddressProps> = ({
 						setAddress(savedAddress);
 						onAddressSaved(savedAddress);
 					}}
+					addressLine1Label={addressLine1Label}
+					addressLine2Label={addressLine2Label}
+					addressLine3Label={addressLine3Label}
+					townLabel={townLabel}
+					countyLabel={countyLabel}
+					postcodeLabel={postcodeLabel}
+					countryLabel={countryLabel}
+					changeAddressButton={changeAddressButton}
+					saveAddressButton={saveAddressButton}
 				/>
 			);
 	}

@@ -87,9 +87,11 @@ Accepted config props: FlexProps, SpaceProps
 
 ### Props
 
-| Property | Required | Type    | Description                                 |
-| -------- | -------- | ------- | ------------------------------------------- |
-| cfg      | false    | object  | FlexProps & SpaceProps                      |
-| disabled | false    | boolean | Disable the select                          |
-| testId   | false    | string  | data attribute for testers                  |
-| readOnly | false    | boolean | Specifies whether the control is read only like a select, or editable like a combobox. |
+| Property        | Required | Type     | Description                                                                            |
+| --------------- | -------- | -------- | -------------------------------------------------------------------------------------- |
+| cfg             | false    | object   | FlexProps & SpaceProps                                                                 |
+| disabled        | false    | boolean  | Disable the select                                                                     |
+| testId          | false    | string   | data attribute for testers                                                             |
+| readOnly        | false    | boolean  | Specifies whether the control is read only like a select, or editable like a combobox. |
+| validate        | false    | function | Validates the selected value. If not specified an 'optional' label is displayed.       |
+| notFoundMessage | false    | string   | Displayed when there are no options to select                                          |

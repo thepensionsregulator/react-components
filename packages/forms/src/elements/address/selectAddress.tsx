@@ -9,6 +9,13 @@ type SelectAddressProps = {
 	addresses: Address[];
 	onChangePostcodeClick: () => void;
 	onAddressSelected: (address: Address) => void;
+	postcodeLookupLabel: string;
+	changePostcodeButton: string;
+	selectAddressLabel: string;
+	selectAddressPlaceholder?: string;
+	selectAddressButton: string;
+	selectAddressRequiredMessage: string;
+	noAddressesFoundMessage: string;
 };
 
 export const SelectAddress: React.FC<SelectAddressProps> = ({
@@ -17,6 +24,13 @@ export const SelectAddress: React.FC<SelectAddressProps> = ({
 	addresses,
 	onChangePostcodeClick,
 	onAddressSelected,
+	postcodeLookupLabel,
+	changePostcodeButton,
+	selectAddressLabel,
+	selectAddressPlaceholder,
+	selectAddressButton,
+	selectAddressRequiredMessage,
+	noAddressesFoundMessage,
 }) => {
 	let options = addresses.map((address) => {
 		return {
@@ -25,33 +39,51 @@ export const SelectAddress: React.FC<SelectAddressProps> = ({
 		};
 	});
 
+	let selectedAddressIsValid = true;
+
 	const [selectedAddress, setSelectedAddress] = useState<Address | null>();
 
 	return (
 		<>
 			<fieldset>
-				<legend>Postcode</legend>
+				<legend>{postcodeLookupLabel}</legend>
 				<P>{postcode}</P>
 				<Button
 					onClick={onChangePostcodeClick}
 					appearance="outlined"
-					testId={testId + '-change-postcode'}
+					testId={(testId ? testId + '-' : '') + 'change-postcode'}
 				>
-					Change postcode
+					{changePostcodeButton}
 				</Button>
 			</fieldset>
 			<FFSelect
-				label="Select an address"
+				label={selectAddressLabel}
 				name="address"
 				options={options}
 				inputWidth={6}
 				onChange={(selectedItem) => setSelectedAddress(selectedItem.value)}
+				testId={(testId ? testId + '-' : '') + 'select-address-list'}
+				validate={(value) => {
+					if (value) {
+						selectedAddressIsValid = true;
+						return undefined;
+					} else {
+						selectedAddressIsValid = false;
+						return selectAddressRequiredMessage;
+					}
+				}}
+				notFoundMessage={noAddressesFoundMessage}
+				placeholder={selectAddressPlaceholder}
 			/>
 			<Button
-				testId={testId + '-select-address-button'}
-				onClick={() => onAddressSelected(selectedAddress)}
+				testId={(testId ? testId + '-' : '') + 'select-address-button'}
+				onClick={() => {
+					if (selectedAddressIsValid) {
+						onAddressSelected(selectedAddress);
+					}
+				}}
 			>
-				Continue
+				{selectAddressButton}
 			</Button>
 		</>
 	);

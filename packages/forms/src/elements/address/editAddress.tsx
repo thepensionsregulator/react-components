@@ -9,6 +9,15 @@ type EditAddressProps = {
 	testId?: string;
 	onChangeAddressClick: () => void;
 	onAddressSaved: (savedAddress: Address) => void;
+	addressLine1Label: string;
+	addressLine2Label: string;
+	addressLine3Label: string;
+	townLabel: string;
+	countyLabel: string;
+	postcodeLabel: string;
+	countryLabel: string;
+	changeAddressButton: string;
+	saveAddressButton: string;
 };
 
 export const EditAddress: React.FC<EditAddressProps> = ({
@@ -16,6 +25,15 @@ export const EditAddress: React.FC<EditAddressProps> = ({
 	testId,
 	onChangeAddressClick,
 	onAddressSaved,
+	addressLine1Label,
+	addressLine2Label,
+	addressLine3Label,
+	townLabel,
+	countyLabel,
+	postcodeLabel,
+	countryLabel,
+	changeAddressButton,
+	saveAddressButton,
 }) => {
 	initialValue = initialValue || {};
 	return (
@@ -24,45 +42,57 @@ export const EditAddress: React.FC<EditAddressProps> = ({
 				<>
 					<FFInputText
 						name="addressLine1"
-						label="Address line 1"
-						testId={testId + '-address-line-1'}
+						label={addressLine1Label}
+						testId={(testId ? testId + '-' : '') + 'address-line-1'}
 						initialValue={initialValue.addressLine1}
 						inputWidth={6}
 					/>
 					<FFInputText
 						name="addressLine2"
-						label="Address line 2"
-						testId={testId + '-address-line-2'}
+						label={addressLine2Label}
+						testId={(testId ? testId + '-' : '') + 'address-line-2'}
 						initialValue={initialValue.addressLine2}
 						inputWidth={6}
 					/>
 					<P>
-						<strong id={testId + '-address-line-3'}>Address line 3</strong>{' '}
-						<span aria-labelledby={testId + '-address-line-3'}>
+						<strong id={(testId ? testId + '-' : '') + 'address-line-3'}>
+							{addressLine3Label}
+						</strong>{' '}
+						<span
+							aria-labelledby={(testId ? testId + '-' : '') + 'address-line-3'}
+						>
 							{initialValue.addressLine3}
 						</span>
 					</P>
 					<P>
-						<strong id={testId + '-town'}>Post town</strong>{' '}
-						<span aria-labelledby={testId + '-town'}>
+						<strong id={(testId ? testId + '-' : '') + 'town'}>
+							{townLabel}
+						</strong>{' '}
+						<span aria-labelledby={(testId ? testId + '-' : '') + 'town'}>
 							{initialValue.postTown}
 						</span>
 					</P>
 					<P>
-						<strong id={testId + '-county'}>County</strong>{' '}
-						<span aria-labelledby={testId + '-county'}>
+						<strong id={(testId ? testId + '-' : '') + 'county'}>
+							{countyLabel}
+						</strong>{' '}
+						<span aria-labelledby={(testId ? testId + '-' : '') + 'county'}>
 							{initialValue.county}
 						</span>
 					</P>
 					<P>
-						<strong id={testId + '-postcode'}>Postcode</strong>{' '}
-						<span aria-labelledby={testId + '-postcode'}>
+						<strong id={(testId ? testId + '-' : '') + 'postcode'}>
+							{postcodeLabel}
+						</strong>{' '}
+						<span aria-labelledby={(testId ? testId + '-' : '') + 'postcode'}>
 							{initialValue.postcode}
 						</span>
 					</P>
 					<P>
-						<strong id={testId + '-country'}>Country</strong>{' '}
-						<span aria-labelledby={testId + '-country'}>
+						<strong id={(testId ? testId + '-' : '') + 'country'}>
+							{countryLabel}
+						</strong>{' '}
+						<span aria-labelledby={(testId ? testId + '-' : '') + 'country'}>
 							{initialValue.country}
 						</span>
 					</P>
@@ -70,13 +100,13 @@ export const EditAddress: React.FC<EditAddressProps> = ({
 					<Button
 						onClick={onChangeAddressClick}
 						appearance="outlined"
-						testId={testId + '-change-address'}
+						testId={(testId ? testId + '-' : '') + 'change-address'}
 					>
-						I need to change the address
+						{changeAddressButton}
 					</Button>
 
 					<Button
-						testId={testId + '-edit-address-button'}
+						testId={(testId ? testId + '-' : '') + 'save-address-button'}
 						onClick={() => {
 							onAddressSaved({
 								...initialValue,
@@ -85,7 +115,7 @@ export const EditAddress: React.FC<EditAddressProps> = ({
 							});
 						}}
 					>
-						Continue
+						{saveAddressButton}
 					</Button>
 				</>
 			)}

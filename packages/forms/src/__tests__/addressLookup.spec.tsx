@@ -2,7 +2,7 @@ import React from 'react';
 import { formSetup } from '../__mocks__/setup';
 import { findByText, fireEvent } from '@testing-library/react';
 import { axe } from 'jest-axe';
-import { AddressLookup } from '../elements/address/addressLookup';
+import { AddressLookup, AddressProps } from '../elements/address/addressLookup';
 // import { Address } from '../elements/address/address';
 
 const exampleAddress = {
@@ -15,6 +15,29 @@ const exampleAddress = {
 	country: 'UK',
 	countryId: 229,
 };
+
+const defaultProps: AddressProps = {
+	onPostcodeChanged: () => [],
+	onAddressSaved: () => {},
+	invalidPostcodeMessage: 'Enter a valid postcode',
+	postcodeLookupLabel: 'Postcode',
+	postcodeLookupButton: 'Find address',
+	changePostcodeButton: 'Change postcode',
+	selectAddressLabel: 'Select an address',
+	selectAddressButton: 'Select address',
+	selectAddressRequiredMessage: 'Select an address to continue',
+	noAddressesFoundMessage: 'No matching addresses were found',
+	addressLine1Label: 'Address line 1',
+	addressLine2Label: 'Address line 2',
+	addressLine3Label: 'Address line 3',
+	townLabel: 'Post town',
+	countyLabel: 'County',
+	postcodeLabel: 'Postcode',
+	countryLabel: 'Country',
+	changeAddressButton: 'I need to change the address',
+	saveAddressButton: 'Save address',
+};
+
 function searchForAPostcode(container: HTMLElement, postcode: string) {
 	const input = container.querySelector('input');
 	input.value = postcode;
@@ -25,7 +48,7 @@ function searchForAPostcode(container: HTMLElement, postcode: string) {
 
 function findFirstOptionInSelect(container: HTMLElement) {
 	const openSelect = container.querySelector(
-		'button[data-testid="select-button"]',
+		'button[data-testid="select-address-list-button"]',
 	);
 	fireEvent.click(openSelect);
 
@@ -38,6 +61,7 @@ describe('Address lookup', () => {
 			const { container } = formSetup({
 				render: (
 					<AddressLookup
+						{...defaultProps}
 						onPostcodeChanged={() => []}
 						onAddressSaved={() => {}}
 					/>
@@ -52,6 +76,7 @@ describe('Address lookup', () => {
 			const { container } = formSetup({
 				render: (
 					<AddressLookup
+						{...defaultProps}
 						initialValue={{}}
 						onPostcodeChanged={() => []}
 						onAddressSaved={() => {}}
@@ -67,6 +92,7 @@ describe('Address lookup', () => {
 			const { container } = formSetup({
 				render: (
 					<AddressLookup
+						{...defaultProps}
 						onPostcodeChanged={() => []}
 						onAddressSaved={() => {}}
 					/>
@@ -122,6 +148,7 @@ describe('Address lookup', () => {
 			const { container } = formSetup({
 				render: (
 					<AddressLookup
+						{...defaultProps}
 						onPostcodeChanged={() => []}
 						onAddressSaved={() => {}}
 					/>
@@ -138,6 +165,7 @@ describe('Address lookup', () => {
 			const { container } = formSetup({
 				render: (
 					<AddressLookup
+						{...defaultProps}
 						onPostcodeChanged={() => []}
 						onAddressSaved={() => {}}
 					/>
@@ -155,6 +183,7 @@ describe('Address lookup', () => {
 			const { container } = formSetup({
 				render: (
 					<AddressLookup
+						{...defaultProps}
 						onPostcodeChanged={() => [exampleAddress]}
 						onAddressSaved={() => {}}
 					/>
@@ -172,6 +201,7 @@ describe('Address lookup', () => {
 			const { container } = formSetup({
 				render: (
 					<AddressLookup
+						{...defaultProps}
 						onPostcodeChanged={() => [exampleAddress]}
 						onAddressSaved={() => {}}
 					/>
@@ -199,6 +229,7 @@ describe('Address lookup', () => {
 			const { container } = formSetup({
 				render: (
 					<AddressLookup
+						{...defaultProps}
 						initialValue={exampleAddress}
 						onPostcodeChanged={() => []}
 						onAddressSaved={() => {}}
@@ -214,6 +245,7 @@ describe('Address lookup', () => {
 			const { container } = formSetup({
 				render: (
 					<AddressLookup
+						{...defaultProps}
 						initialValue={exampleAddress}
 						onPostcodeChanged={() => []}
 						onAddressSaved={() => {}}
@@ -228,6 +260,7 @@ describe('Address lookup', () => {
 			const { container } = formSetup({
 				render: (
 					<AddressLookup
+						{...defaultProps}
 						initialValue={exampleAddress}
 						onPostcodeChanged={() => []}
 						onAddressSaved={() => {}}
@@ -262,7 +295,7 @@ describe('Address lookup', () => {
 		// 	input.setAttribute('value', 'TPR');
 
 		// 	const button = container.querySelector(
-		// 		'button[data-testid$="edit-address-button"]',
+		// 		'button[data-testid$="save-address-button"]',
 		// 	);
 		// 	fireEvent.click(button);
 
