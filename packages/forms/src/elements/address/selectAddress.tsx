@@ -82,6 +82,7 @@ export const SelectAddress: React.FC<SelectAddressProps> = ({
 						meta={valid}
 						notFoundMessage={noAddressesFoundMessage}
 						placeholder={selectAddressPlaceholder}
+						readOnly={true}
 					/>
 					<Button
 						testId={(testId ? testId + '-' : '') + 'select-address-button'}

@@ -81,6 +81,7 @@ export const Select: React.FC<SelectProps & FieldRenderProps<string>> = ({
 								placeholder={placeholder}
 								readOnly={readOnly}
 								onClick={() => toggleMenu()}
+								className={styles.input}
 								{...getInputProps()}
 							/>
 							{showToggleButton && (

@@ -1,5 +1,9 @@
 @import '@tpr/theming/lib/variables.scss';
 
+.input {
+	cursor: default;
+}
+
 .popup {
 	display: none;
 	flex: 0 0 auto;
@@ -8,7 +12,6 @@
 	min-height: 30px;
 	height: auto;
 	color: $black;
-	border: 1px dashed red;
 	background: white;
 	width: 100%;
 	max-height: 280px;
@@ -33,12 +36,12 @@
 	display: flex;
 	align-items: center;
 	position: absolute;
-	background: none;
+	background: white;
 	top: 9px;
 	right: 4px;
 	width: 30px;
 	height: 32px;
-	cursor: pointer;
+	cursor: default;
 	outline: none;
 }
 
