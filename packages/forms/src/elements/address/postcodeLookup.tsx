@@ -2,7 +2,7 @@ import React from 'react';
 import { Form } from 'react-final-form';
 import { FFInputText } from '../text/text';
 import { Button } from '@tpr/core';
-import PostcodeValidator from './PostcodeValidator';
+import PostcodeValidator from './postcodeValidator';
 
 type PostcodeLookupProps = {
 	testId?: string;
