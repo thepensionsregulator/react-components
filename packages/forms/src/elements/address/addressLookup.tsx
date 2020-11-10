@@ -13,6 +13,7 @@ export type AddressProps = {
 	postcodeLookupLabel: string;
 	postcodeLookupButton: string;
 	changePostcodeButton: string;
+	changePostcodeAriaLabel?: string;
 	selectAddressLabel: string;
 	selectAddressPlaceholder?: string;
 	selectAddressButton: string;
@@ -27,6 +28,7 @@ export type AddressProps = {
 	postcodeLabel: string;
 	countryLabel: string;
 	changeAddressButton: string;
+	changeAddressAriaLabel?: string;
 	saveAddressButton: string;
 };
 
@@ -45,6 +47,7 @@ export const AddressLookup: React.FC<AddressProps> = ({
 	postcodeLookupLabel,
 	postcodeLookupButton,
 	changePostcodeButton,
+	changePostcodeAriaLabel,
 	selectAddressLabel,
 	selectAddressPlaceholder,
 	selectAddressButton,
@@ -59,6 +62,7 @@ export const AddressLookup: React.FC<AddressProps> = ({
 	postcodeLabel,
 	countryLabel,
 	changeAddressButton,
+	changeAddressAriaLabel,
 	saveAddressButton,
 }) => {
 	// Start in postcode lookup view, unless there's already an address in which case start in edit address view
@@ -110,6 +114,7 @@ export const AddressLookup: React.FC<AddressProps> = ({
 					}}
 					postcodeLookupLabel={postcodeLookupLabel}
 					changePostcodeButton={changePostcodeButton}
+					changePostcodeAriaLabel={changePostcodeAriaLabel}
 					selectAddressLabel={selectAddressLabel}
 					selectAddressPlaceholder={selectAddressPlaceholder}
 					selectAddressButton={selectAddressButton}
@@ -138,6 +143,7 @@ export const AddressLookup: React.FC<AddressProps> = ({
 					postcodeLabel={postcodeLabel}
 					countryLabel={countryLabel}
 					changeAddressButton={changeAddressButton}
+					changeAddressAriaLabel={changeAddressAriaLabel}
 					saveAddressButton={saveAddressButton}
 				/>
 			);

@@ -1,7 +1,7 @@
 import React from 'react';
 import { Form } from 'react-final-form';
 import { FFInputText } from '../text/text';
-import { P, Button, Flex } from '@tpr/core';
+import { P, Link, Button, Flex } from '@tpr/core';
 import { Address } from './address';
 import { ArrowRight } from '@tpr/icons';
 import elementStyles from '../elements.module.scss';
@@ -21,6 +21,7 @@ type EditAddressProps = {
 	postcodeLabel: string;
 	countryLabel: string;
 	changeAddressButton: string;
+	changeAddressAriaLabel?: string;
 	saveAddressButton: string;
 };
 
@@ -38,6 +39,7 @@ export const EditAddress: React.FC<EditAddressProps> = ({
 	postcodeLabel,
 	countryLabel,
 	changeAddressButton,
+	changeAddressAriaLabel,
 	saveAddressButton,
 }) => {
 	initialValue = initialValue || {};
@@ -122,14 +124,14 @@ export const EditAddress: React.FC<EditAddressProps> = ({
 						</span>
 					</P>
 
-					<Button
+					<Link
 						onClick={onChangeAddressClick}
-						appearance="outlined"
 						testId={(testId ? testId + '-' : '') + 'change-address'}
 						className={styles.button}
+						aria-label={changeAddressAriaLabel}
 					>
 						{changeAddressButton}
-					</Button>
+					</Link>
 
 					<Button
 						testId={(testId ? testId + '-' : '') + 'save-address-button'}

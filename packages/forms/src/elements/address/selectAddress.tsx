@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { Form } from 'react-final-form';
 import { FFSelect } from '../select/select';
-import { P, Button, Flex } from '@tpr/core';
+import { P, Button, Link, Flex } from '@tpr/core';
 import { ArrowRight } from '@tpr/icons';
 import { Address } from './address';
 import PostcodeFormatter from './postcodeFormatter';
@@ -16,6 +16,7 @@ type SelectAddressProps = {
 	onAddressSelected: (address: Address) => void;
 	postcodeLookupLabel: string;
 	changePostcodeButton: string;
+	changePostcodeAriaLabel?: string;
 	selectAddressLabel: string;
 	selectAddressPlaceholder?: string;
 	selectAddressButton: string;
@@ -31,6 +32,7 @@ export const SelectAddress: React.FC<SelectAddressProps> = ({
 	onAddressSelected,
 	postcodeLookupLabel,
 	changePostcodeButton,
+	changePostcodeAriaLabel,
 	selectAddressLabel,
 	selectAddressPlaceholder,
 	selectAddressButton,
@@ -66,14 +68,14 @@ export const SelectAddress: React.FC<SelectAddressProps> = ({
 								{postcodeFormatter.formatPostcode(postcode)}
 							</span>
 						</P>
-						<Button
+						<Link
 							onClick={onChangePostcodeClick}
-							appearance="outlined"
 							testId={(testId ? testId + '-' : '') + 'change-postcode'}
 							className={styles.changePostcode}
+							aria-label={changePostcodeAriaLabel}
 						>
 							{changePostcodeButton}
-						</Button>
+						</Link>
 					</Flex>
 					<FFSelect
 						label={selectAddressLabel}
