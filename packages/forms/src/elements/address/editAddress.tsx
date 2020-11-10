@@ -12,6 +12,7 @@ type EditAddressProps = {
 	onChangeAddressClick: () => void;
 	onAddressSaved: (savedAddress: Address) => void;
 	addressLine1Label: string;
+	addressLine1RequiredMessage: string;
 	addressLine2Label: string;
 	addressLine3Label: string;
 	townLabel: string;
@@ -28,6 +29,7 @@ export const EditAddress: React.FC<EditAddressProps> = ({
 	onChangeAddressClick,
 	onAddressSaved,
 	addressLine1Label,
+	addressLine1RequiredMessage,
 	addressLine2Label,
 	addressLine3Label,
 	townLabel,
@@ -47,6 +49,9 @@ export const EditAddress: React.FC<EditAddressProps> = ({
 						label={addressLine1Label}
 						testId={(testId ? testId + '-' : '') + 'address-line-1'}
 						initialValue={initialValue.addressLine1}
+						validate={(value) =>
+							value ? undefined : addressLine1RequiredMessage
+						}
 						inputWidth={6}
 					/>
 					<FFInputText

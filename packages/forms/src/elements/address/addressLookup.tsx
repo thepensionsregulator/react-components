@@ -19,6 +19,7 @@ export type AddressProps = {
 	selectAddressRequiredMessage: string;
 	noAddressesFoundMessage: string;
 	addressLine1Label: string;
+	addressLine1RequiredMessage: string;
 	addressLine2Label: string;
 	addressLine3Label: string;
 	townLabel: string;
@@ -50,6 +51,7 @@ export const AddressLookup: React.FC<AddressProps> = ({
 	selectAddressRequiredMessage,
 	noAddressesFoundMessage,
 	addressLine1Label,
+	addressLine1RequiredMessage,
 	addressLine2Label,
 	addressLine3Label,
 	townLabel,
@@ -128,6 +130,7 @@ export const AddressLookup: React.FC<AddressProps> = ({
 						onAddressSaved(savedAddress);
 					}}
 					addressLine1Label={addressLine1Label}
+					addressLine1RequiredMessage={addressLine1RequiredMessage}
 					addressLine2Label={addressLine2Label}
 					addressLine3Label={addressLine3Label}
 					townLabel={townLabel}
