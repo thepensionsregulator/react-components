@@ -1,0 +1,22 @@
+@import '@tpr/theming/lib/variables.scss';
+
+.nonEditable {
+	margin: 0 0 $space-3;
+}
+
+.nonEditable.selectedPostcode {
+	margin-top: 9px; /* Aligns with the field label on the postcode lookup view */
+}
+
+.changePostcode {
+	margin-left: $space-4;
+}
+
+.nonEditableLabel {
+	margin: 0 0 $space-1;
+}
+
+.button {
+	display: block;
+	margin-top: $space-2;
+}

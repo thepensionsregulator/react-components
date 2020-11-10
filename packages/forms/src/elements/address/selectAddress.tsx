@@ -1,8 +1,11 @@
 import React, { useState } from 'react';
 import { Form } from 'react-final-form';
 import { FFSelect } from '../select/select';
-import { P, Button } from '@tpr/core';
+import { P, Button, Flex } from '@tpr/core';
 import { Address } from './address';
+import PostcodeFormatter from './postcodeFormatter';
+import elementStyles from '../elements.module.scss';
+import styles from './addressLookup.module.scss';
 
 type SelectAddressProps = {
 	testId?: string;
@@ -40,25 +43,37 @@ export const SelectAddress: React.FC<SelectAddressProps> = ({
 		};
 	});
 
+	const postcodeFormatter = new PostcodeFormatter();
+
 	// Setting a 'valid' object is the only way to control validity of FFSelect.
 	// validate() will run immediately. Initialise to null so that validate() can detect the initial load and set an initial value rather than validating.
-	let [valid, setValid] = useState(null);
+	let [selectAddressValid, setSelectAddressValid] = useState(null);
 
 	return (
 		<Form onSubmit={() => {}}>
 			{({ values }) => (
 				<>
-					<fieldset>
-						<legend>{postcodeLookupLabel}</legend>
-						<P>{postcode}</P>
+					<Flex>
+						<P className={`${styles.nonEditable} ${styles.selectedPostcode}`}>
+							<strong
+								id={(testId ? testId + '-' : '') + 'postcode'}
+								className={`${elementStyles.labelText} ${styles.nonEditableLabel}`}
+							>
+								{postcodeLookupLabel}
+							</strong>{' '}
+							<span aria-labelledby={(testId ? testId + '-' : '') + 'postcode'}>
+								{postcodeFormatter.formatPostcode(postcode)}
+							</span>
+						</P>
 						<Button
 							onClick={onChangePostcodeClick}
 							appearance="outlined"
 							testId={(testId ? testId + '-' : '') + 'change-postcode'}
+							className={styles.changePostcode}
 						>
 							{changePostcodeButton}
 						</Button>
-					</fieldset>
+					</Flex>
 					<FFSelect
 						label={selectAddressLabel}
 						name="address"
@@ -67,8 +82,8 @@ export const SelectAddress: React.FC<SelectAddressProps> = ({
 						testId={(testId ? testId + '-' : '') + 'select-address-list'}
 						validate={(value) => {
 							// On initial load, setup the validation object
-							if (!valid) {
-								setValid({ error: '', touched: false });
+							if (!selectAddressValid) {
+								setSelectAddressValid({ error: '', touched: false });
 								return;
 							}
 
@@ -76,10 +91,10 @@ export const SelectAddress: React.FC<SelectAddressProps> = ({
 							// In this case it can only go from invalid (initial load) to valid (address selected).
 							// You can't select an invalid option from the list because there aren't any, and if you don't select one this never runs.
 							if (value) {
-								setValid({ touched: true, error: '' });
+								setSelectAddressValid({ touched: true, error: '' });
 							}
 						}}
-						meta={valid}
+						meta={selectAddressValid}
 						notFoundMessage={noAddressesFoundMessage}
 						placeholder={selectAddressPlaceholder}
 						readOnly={true}
@@ -88,15 +103,20 @@ export const SelectAddress: React.FC<SelectAddressProps> = ({
 						testId={(testId ? testId + '-' : '') + 'select-address-button'}
 						onClick={() => {
 							// If validate() has set the 'valid' object to a valid state, continue; otherwise set it to an invalid state.
-							if (valid && valid.touched && !valid.error) {
+							if (
+								selectAddressValid &&
+								selectAddressValid.touched &&
+								!selectAddressValid.error
+							) {
 								onAddressSelected(values.address.value);
 							} else {
-								setValid({
+								setSelectAddressValid({
 									touched: true,
 									error: selectAddressRequiredMessage,
 								});
 							}
 						}}
+						className={styles.button}
 					>
 						{selectAddressButton}
 					</Button>

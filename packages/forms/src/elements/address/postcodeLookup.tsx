@@ -3,6 +3,7 @@ import { Form } from 'react-final-form';
 import { FFInputText } from '../text/text';
 import { Button } from '@tpr/core';
 import PostcodeValidator from './postcodeValidator';
+import styles from './addressLookup.module.scss';
 
 type PostcodeLookupProps = {
 	testId?: string;
@@ -44,6 +45,7 @@ export const PostcodeLookup: React.FC<PostcodeLookupProps> = ({
 								onPostcodeChanged(values.postcode);
 							}
 						}}
+						className={styles.button}
 					>
 						{postcodeLookupButton}{' '}
 					</Button>

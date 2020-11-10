@@ -3,6 +3,8 @@ import { Form } from 'react-final-form';
 import { FFInputText } from '../text/text';
 import { P, Button } from '@tpr/core';
 import { Address } from './address';
+import elementStyles from '../elements.module.scss';
+import styles from './addressLookup.module.scss';
 
 type EditAddressProps = {
 	initialValue?: Address;
@@ -54,8 +56,11 @@ export const EditAddress: React.FC<EditAddressProps> = ({
 						initialValue={initialValue.addressLine2}
 						inputWidth={6}
 					/>
-					<P>
-						<strong id={(testId ? testId + '-' : '') + 'address-line-3'}>
+					<P className={styles.nonEditable} cfg={{ mt: 3 }}>
+						<strong
+							id={(testId ? testId + '-' : '') + 'address-line-3'}
+							className={`${elementStyles.labelText} ${styles.nonEditableLabel}`}
+						>
 							{addressLine3Label}
 						</strong>{' '}
 						<span
@@ -64,32 +69,46 @@ export const EditAddress: React.FC<EditAddressProps> = ({
 							{initialValue.addressLine3}
 						</span>
 					</P>
-					<P>
-						<strong id={(testId ? testId + '-' : '') + 'town'}>
+					<P className={styles.nonEditable}>
+						<strong
+							id={(testId ? testId + '-' : '') + 'town'}
+							className={`${`${elementStyles.labelText} ${styles.nonEditableLabel}`} ${
+								styles.nonEditableLabel
+							}`}
+						>
 							{townLabel}
 						</strong>{' '}
 						<span aria-labelledby={(testId ? testId + '-' : '') + 'town'}>
 							{initialValue.postTown}
 						</span>
 					</P>
-					<P>
-						<strong id={(testId ? testId + '-' : '') + 'county'}>
+					<P className={styles.nonEditable}>
+						<strong
+							id={(testId ? testId + '-' : '') + 'county'}
+							className={`${elementStyles.labelText} ${styles.nonEditableLabel}`}
+						>
 							{countyLabel}
 						</strong>{' '}
 						<span aria-labelledby={(testId ? testId + '-' : '') + 'county'}>
 							{initialValue.county}
 						</span>
 					</P>
-					<P>
-						<strong id={(testId ? testId + '-' : '') + 'postcode'}>
+					<P className={styles.nonEditable}>
+						<strong
+							id={(testId ? testId + '-' : '') + 'postcode'}
+							className={`${elementStyles.labelText} ${styles.nonEditableLabel}`}
+						>
 							{postcodeLabel}
 						</strong>{' '}
 						<span aria-labelledby={(testId ? testId + '-' : '') + 'postcode'}>
 							{initialValue.postcode}
 						</span>
 					</P>
-					<P>
-						<strong id={(testId ? testId + '-' : '') + 'country'}>
+					<P className={styles.nonEditable}>
+						<strong
+							id={(testId ? testId + '-' : '') + 'country'}
+							className={`${elementStyles.labelText} ${styles.nonEditableLabel}`}
+						>
 							{countryLabel}
 						</strong>{' '}
 						<span aria-labelledby={(testId ? testId + '-' : '') + 'country'}>
@@ -101,6 +120,7 @@ export const EditAddress: React.FC<EditAddressProps> = ({
 						onClick={onChangeAddressClick}
 						appearance="outlined"
 						testId={(testId ? testId + '-' : '') + 'change-address'}
+						className={styles.button}
 					>
 						{changeAddressButton}
 					</Button>
@@ -114,6 +134,7 @@ export const EditAddress: React.FC<EditAddressProps> = ({
 								addressLine2: values.addressLine2,
 							});
 						}}
+						className={styles.button}
 					>
 						{saveAddressButton}
 					</Button>
