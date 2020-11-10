@@ -127,32 +127,49 @@ const InputCurrency: React.FC<InputCurrencyProps> = React.memo(
 			}
 		};
 
+		const getCurrencyValueFormattedWithDecimalPlaces = (value: string): string => {
+			return getNumDecimalPlaces(value) < decimalPlaces
+					? appendMissingZeros(value.replace(/,/g, ''), decimalPlaces)
+					: value;
+		};
+
+		const setTargetValue = (target: any, value: string) => {
+			target.value = getCurrencyValueFormattedWithDecimalPlaces(value);
+			input.onChange({target});
+		}
+
 		const handleBlur = (e: any): void => {
 			input.onBlur(e);
-			e.target.value =
-				getNumDecimalPlaces(inputValue) < decimalPlaces
-					? appendMissingZeros(inputValue.replace(/,/g, ''), decimalPlaces)
-					: inputValue;
+			e.target.value = getCurrencyValueFormattedWithDecimalPlaces(inputValue);
 			input.onChange(e);
 		};
 
-		const formatInitialValue = (value: number) => {
+		const formatInitialValue = (value: number): string => {
 			const newInitialValue = formatWithCommas(value.toFixed(decimalPlaces));
 			setInputValue(newInitialValue);
 			innerInput.current.value = newInitialValue;
+			return newInitialValue;
+		};
+
+		const executeWithDelay = (action: () => void) => {
+			setTimeout(() => {
+				action();
+			}, 50);
 		};
 
 		const innerInput = useRef(null);
 
 		useEffect(() => {
-			if (initialV !== undefined && initialV !== null) {
-				const myEvent = new Event('blur', { bubbles: true });
-				formatInitialValue(initialV);
-
-				setTimeout(() => {
-					innerInput.current.dispatchEvent(myEvent);
-				}, 50);
+			if (initialV === null) {
+				setInputValue('');
+				executeWithDelay(() => setTargetValue(innerInput.current, ''));
 			}
+
+			if (initialV !== undefined && initialV !== null) {
+				var formattedInitialValue = formatInitialValue(initialV);
+				executeWithDelay(() => setTargetValue(innerInput.current, formattedInitialValue));
+			}
+
 		}, [initialV]);
 
 		return (
