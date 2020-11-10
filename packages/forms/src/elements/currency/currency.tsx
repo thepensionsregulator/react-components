@@ -23,7 +23,6 @@ interface InputCurrencyProps extends FieldRenderProps<number>, FieldExtraProps {
 	noLeftBorder?: boolean;
 	optionalText?: boolean;
 	maxInputLength?: number;
-	initialV?: number;
 }
 
 const InputCurrency: React.FC<InputCurrencyProps> = React.memo(
@@ -45,7 +44,7 @@ const InputCurrency: React.FC<InputCurrencyProps> = React.memo(
 		noLeftBorder,
 		optionalText,
 		maxInputLength = 16 + decimalPlaces,
-		initialV,
+		initialValue,
 		...props
 	}) => {
 		const digits = ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9', '.'];
@@ -145,15 +144,18 @@ const InputCurrency: React.FC<InputCurrencyProps> = React.memo(
 		const innerInput = useRef(null);
 
 		useEffect(() => {
-			if (initialV !== undefined && initialV !== null) {
+			if (initialValue !== undefined && initialValue !== null) {
 				const myEvent = new Event('blur', { bubbles: true });
-				formatInitialValue(initialV);
-
+				formatInitialValue(initialValue);
 				setTimeout(() => {
 					innerInput.current.dispatchEvent(myEvent);
 				}, 50);
+			} else {
+				setInputValue('');
+				innerInput.current.value = null;
+				input.onChange(null);
 			}
-		}, [initialV]);
+		}, [initialValue]);
 
 		return (
 			<StyledInputLabel
@@ -191,5 +193,10 @@ const InputCurrency: React.FC<InputCurrencyProps> = React.memo(
 );
 
 export const FFInputCurrency: React.FC<FieldProps> = (fieldProps) => {
-	return <Field {...fieldProps} component={InputCurrency} />;
+	return (
+		<Field
+			{...fieldProps}
+			render={(props) => <InputCurrency {...props} {...fieldProps} />}
+		/>
+	);
 };
