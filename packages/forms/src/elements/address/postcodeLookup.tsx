@@ -47,7 +47,7 @@ export const PostcodeLookup: React.FC<PostcodeLookupProps> = ({
 						}}
 						className={styles.button}
 					>
-						{postcodeLookupButton}{' '}
+						{postcodeLookupButton}
 					</Button>
 				</>
 			)}

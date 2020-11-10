@@ -1,8 +1,9 @@
 import React from 'react';
 import { Form } from 'react-final-form';
 import { FFInputText } from '../text/text';
-import { P, Button } from '@tpr/core';
+import { P, Button, Flex } from '@tpr/core';
 import { Address } from './address';
+import { ArrowRight } from '@tpr/icons';
 import elementStyles from '../elements.module.scss';
 import styles from './addressLookup.module.scss';
 
@@ -139,9 +140,18 @@ export const EditAddress: React.FC<EditAddressProps> = ({
 								addressLine2: values.addressLine2,
 							});
 						}}
-						className={styles.button}
+						className={`${styles.button} ${styles.arrowButton}`}
 					>
-						{saveAddressButton}
+						<Flex
+							cfg={{
+								alignItems: 'center',
+								pl: 4,
+								pr: 2,
+							}}
+						>
+							{saveAddressButton}
+							<ArrowRight cfg={{ fill: 'white' }} width={'32'} />
+						</Flex>
 					</Button>
 				</>
 			)}

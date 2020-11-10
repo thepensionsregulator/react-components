@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { Form } from 'react-final-form';
 import { FFSelect } from '../select/select';
 import { P, Button, Flex } from '@tpr/core';
+import { ArrowRight } from '@tpr/icons';
 import { Address } from './address';
 import PostcodeFormatter from './postcodeFormatter';
 import elementStyles from '../elements.module.scss';
@@ -116,9 +117,18 @@ export const SelectAddress: React.FC<SelectAddressProps> = ({
 								});
 							}
 						}}
-						className={styles.button}
+						className={`${styles.button} ${styles.arrowButton}`}
 					>
-						{selectAddressButton}
+						<Flex
+							cfg={{
+								alignItems: 'center',
+								pl: 4,
+								pr: 2,
+							}}
+						>
+							{selectAddressButton}
+							<ArrowRight cfg={{ fill: 'white' }} width={'32'} />
+						</Flex>
 					</Button>
 				</>
 			)}
