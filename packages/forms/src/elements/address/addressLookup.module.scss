@@ -8,6 +8,12 @@
 	margin-top: 9px; /* Aligns with the field label on the postcode lookup view */
 }
 
+/* Ensure there is a space for the data even if the field is empty */
+.nonEditable [aria-labelledby]::after {
+	content: ' ';
+	display: inline-block;
+}
+
 .changePostcode {
 	margin-left: $space-6;
 }
