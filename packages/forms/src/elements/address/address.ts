@@ -5,6 +5,8 @@ export interface Address {
 	postTown?: string;
 	county?: string;
 	postcode?: string;
+	nationId?: number;
 	country?: string;
 	countryId?: number;
+	uprn?: number;
 }
