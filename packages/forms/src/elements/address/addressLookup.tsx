@@ -80,8 +80,8 @@ export const AddressLookup: React.FC<AddressProps> = ({
 	}
 	const [addressView, setAddressView] = useState<AddressView>(initialView);
 	const [addresses, setAddresses] = useState<Address[]>([]);
-	const [address, setAddress] = useState<Address | null>(initialValue);
-	const [postcode, setPostcode] = useState<string>(address && address.postcode);
+	const [address, setAddress] = useState<Address | null>(null);
+	const [postcode, setPostcode] = useState<string>(null);
 
 	// Render a different child component depending on the state
 	switch (addressView) {
@@ -125,7 +125,7 @@ export const AddressLookup: React.FC<AddressProps> = ({
 		case AddressView.EditAddress:
 			return (
 				<EditAddress
-					initialValue={address}
+					value={address}
 					testId={testId}
 					onChangeAddressClick={() =>
 						setAddressView(AddressView.PostcodeLookup)

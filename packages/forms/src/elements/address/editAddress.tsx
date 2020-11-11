@@ -9,6 +9,7 @@ import styles from './addressLookup.module.scss';
 
 type EditAddressProps = {
 	initialValue?: Address;
+	value?: Address;
 	testId?: string;
 	onChangeAddressClick: () => void;
 	onAddressSaved: (savedAddress: Address) => void;
@@ -27,6 +28,7 @@ type EditAddressProps = {
 
 export const EditAddress: React.FC<EditAddressProps> = ({
 	initialValue,
+	value,
 	testId,
 	onChangeAddressClick,
 	onAddressSaved,
@@ -51,7 +53,9 @@ export const EditAddress: React.FC<EditAddressProps> = ({
 						name="addressLine1"
 						label={addressLine1Label}
 						testId={(testId ? testId + '-' : '') + 'address-line-1'}
-						initialValue={initialValue.addressLine1}
+						initialValue={
+							value ? value.addressLine1 : initialValue.addressLine1
+						}
 						validate={(value) =>
 							value ? undefined : addressLine1RequiredMessage
 						}
@@ -61,7 +65,9 @@ export const EditAddress: React.FC<EditAddressProps> = ({
 						name="addressLine2"
 						label={addressLine2Label}
 						testId={(testId ? testId + '-' : '') + 'address-line-2'}
-						initialValue={initialValue.addressLine2}
+						initialValue={
+							value ? value.addressLine2 : initialValue.addressLine2
+						}
 						inputWidth={6}
 					/>
 					<P className={styles.nonEditable} cfg={{ mt: 3 }}>
@@ -74,7 +80,7 @@ export const EditAddress: React.FC<EditAddressProps> = ({
 						<span
 							aria-labelledby={(testId ? testId + '-' : '') + 'address-line-3'}
 						>
-							{initialValue.addressLine3}
+							{value ? value.addressLine3 : initialValue.addressLine3}
 						</span>
 					</P>
 					<P className={styles.nonEditable}>
@@ -87,7 +93,7 @@ export const EditAddress: React.FC<EditAddressProps> = ({
 							{townLabel}
 						</strong>{' '}
 						<span aria-labelledby={(testId ? testId + '-' : '') + 'town'}>
-							{initialValue.postTown}
+							{value ? value.postTown : initialValue.postTown}
 						</span>
 					</P>
 					<P className={styles.nonEditable}>
@@ -98,7 +104,7 @@ export const EditAddress: React.FC<EditAddressProps> = ({
 							{countyLabel}
 						</strong>{' '}
 						<span aria-labelledby={(testId ? testId + '-' : '') + 'county'}>
-							{initialValue.county}
+							{value ? value.county : initialValue.county}
 						</span>
 					</P>
 					<P className={styles.nonEditable}>
@@ -109,7 +115,7 @@ export const EditAddress: React.FC<EditAddressProps> = ({
 							{postcodeLabel}
 						</strong>{' '}
 						<span aria-labelledby={(testId ? testId + '-' : '') + 'postcode'}>
-							{initialValue.postcode}
+							{value ? value.postcode : initialValue.postcode}
 						</span>
 					</P>
 					<P className={styles.nonEditable}>
@@ -120,7 +126,7 @@ export const EditAddress: React.FC<EditAddressProps> = ({
 							{countryLabel}
 						</strong>{' '}
 						<span aria-labelledby={(testId ? testId + '-' : '') + 'country'}>
-							{initialValue.country}
+							{value ? value.country : initialValue.country}
 						</span>
 					</P>
 
@@ -136,11 +142,16 @@ export const EditAddress: React.FC<EditAddressProps> = ({
 					<Button
 						testId={(testId ? testId + '-' : '') + 'save-address-button'}
 						onClick={() => {
-							onAddressSaved({
-								...initialValue,
-								addressLine1: values.addressLine1,
-								addressLine2: values.addressLine2,
-							});
+							if (
+								values.addressLine1 !== initialValue.addressLine1 ||
+								values.addressLine2 !== initialValue.addressLine2
+							) {
+								onAddressSaved({
+									...initialValue,
+									addressLine1: values.addressLine1,
+									addressLine2: values.addressLine2,
+								});
+							}
 						}}
 						className={`${styles.button} ${styles.arrowButton}`}
 					>
