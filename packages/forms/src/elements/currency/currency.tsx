@@ -201,7 +201,9 @@ export const FFInputCurrency: React.FC<FieldProps> = (fieldProps) => {
 	return (
 		<Field
 			{...fieldProps}
-			render={(props) => <InputCurrency {...props} {...fieldProps} />}
+			render={(props) => (
+				<InputCurrency {...props} initialValue={fieldProps.initialValue} />
+			)}
 		/>
 	);
 };
