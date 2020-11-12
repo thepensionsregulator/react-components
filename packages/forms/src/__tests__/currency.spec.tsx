@@ -109,5 +109,74 @@ describe('Currency', () => {
 			fireEvent.blur(getByTestId(testId));
 			expect(getByTestId(testId)).toHaveValue('12,345.500');
 		});
+
+		test('renders readonly', () => {
+			const { queryByTestId } = formSetup({
+				render: (
+					<FFInputCurrency testId="text-input" name="name" readOnly={true} />
+				),
+			});
+
+			const label = queryByTestId('text-input');
+			expect(label).toHaveAttribute('readonly');
+		});
+	});
+
+	describe('passing initial value', () => {
+		test('receives a number and applies the format', () => {
+			const { getByTestId } = formSetup({
+				render: (
+					<FFInputCurrency
+						label="Currency"
+						testId={testId}
+						name="currency"
+						maxInputLength={11}
+						decimalPlaces={2}
+						initialValue={35050}
+					/>
+				),
+			});
+			setTimeout(() => {
+				expect(getByTestId(testId)).toHaveValue('35,050.00');
+			}, 100);
+		});
+
+		test('receives null', () => {
+			const { getByTestId } = formSetup({
+				render: (
+					<FFInputCurrency
+						label="Currency"
+						testId={testId}
+						name="currency"
+						maxInputLength={11}
+						decimalPlaces={2}
+						initialValue={null}
+					/>
+				),
+			});
+			expect(getByTestId(testId)).toHaveValue('');
+		});
+
+		test('receives null and then changes to number', () => {
+			let val = null;
+			const { getByTestId } = formSetup({
+				render: (
+					<FFInputCurrency
+						label="Currency"
+						testId={testId}
+						name="currency"
+						maxInputLength={11}
+						decimalPlaces={2}
+						initialValue={val}
+					/>
+				),
+			});
+			setTimeout(() => {
+				val = 45000;
+			}, 100);
+			setTimeout(() => {
+				expect(getByTestId(testId)).toHaveValue('45,000.00');
+			}, 100);
+		});
 	});
 });

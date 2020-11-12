@@ -48,6 +48,7 @@ type DateInputFieldProps = {
 	meta: any;
 	label: string;
 	disabled?: boolean;
+	readOnly?: boolean;
 };
 const DateInputField: React.FC<DateInputFieldProps> = ({
 	small = true,
@@ -61,6 +62,7 @@ const DateInputField: React.FC<DateInputFieldProps> = ({
 	onBlur,
 	meta,
 	disabled,
+	readOnly,
 }) => {
 	return (
 		<label className={small ? styles.inputSmall : styles.inputLarge}>
@@ -71,6 +73,7 @@ const DateInputField: React.FC<DateInputFieldProps> = ({
 				aria-label={ariaLabel}
 				data-testid={testId}
 				value={value}
+				readOnly={readOnly}
 				onFocus={({ target }: ChangeEvent<HTMLInputElement>) => target.select()}
 				onChange={handleChange(updateFn, maxInt)}
 				onBlur={(evt: ChangeEvent<HTMLInputElement>) => {
@@ -88,7 +91,17 @@ const DateInputField: React.FC<DateInputFieldProps> = ({
 
 type InputDateProps = FieldRenderProps<string> & FieldExtraProps;
 export const InputDate: React.FC<InputDateProps> = memo(
-	({ label, hint, required, input, meta, testId = 'field', cfg, disabled }) => {
+	({
+		label,
+		hint,
+		required,
+		input,
+		meta,
+		testId = 'field',
+		cfg,
+		disabled,
+		readOnly,
+	}) => {
 		// react-final-form types says it's a string, incorrect, it's a date object.
 		const { dd, mm, yyyy } = transformDate(meta.initial);
 		const [{ dd: day, mm: month, yyyy: year }, setState] = useReducer(
@@ -141,6 +154,7 @@ export const InputDate: React.FC<InputDateProps> = memo(
 						onBlur={input.onBlur}
 						meta={meta}
 						disabled={disabled}
+						readOnly={readOnly}
 					/>
 					<DateInputField
 						label="Month"
@@ -153,6 +167,7 @@ export const InputDate: React.FC<InputDateProps> = memo(
 						onBlur={input.onBlur}
 						meta={meta}
 						disabled={disabled}
+						readOnly={readOnly}
 					/>
 					<DateInputField
 						label="Year"
@@ -166,6 +181,7 @@ export const InputDate: React.FC<InputDateProps> = memo(
 						onBlur={input.onBlur}
 						meta={meta}
 						disabled={disabled}
+						readOnly={readOnly}
 					/>
 				</Flex>
 			</StyledInputLabel>

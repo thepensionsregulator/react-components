@@ -7,12 +7,14 @@ import { Input } from '../input/input';
 type InputTextProps = FieldRenderProps<string> & FieldExtraProps;
 const InputText: React.FC<InputTextProps> = ({
 	label,
+	ariaLabel,
 	hint,
 	input,
 	testId,
 	meta,
 	required,
 	placeholder,
+	readOnly,
 	inputWidth: width,
 	cfg,
 }) => {
@@ -31,8 +33,9 @@ const InputText: React.FC<InputTextProps> = ({
 				type="text"
 				width={width}
 				testId={testId}
-				label={label}
+				label={ariaLabel ? ariaLabel : label}
 				placeholder={placeholder}
+				readOnly={readOnly}
 				touched={meta && meta.touched && meta.error}
 				{...input}
 			/>

@@ -36,6 +36,10 @@ See the [CONTRIBUTING](./CONTRIBUTING.md)
 [icons npm link]: https://www.npmjs.com/package/@tpr/icons
 [icons size bundle]: https://flat.badgen.net/bundlephobia/minzip/@tpr/icons
 [icons size link]: https://bundlephobia.com/result?p=@tpr/icons
+[layout npm version]: https://flat.badgen.net/npm/v/@tpr/layout
+[layout npm link]: https://www.npmjs.com/package/@tpr/layout
+[layout size bundle]: https://flat.badgen.net/bundlephobia/minzip/@tpr/layout
+[layout size link]: https://bundlephobia.com/result?p=@tpr/layout
 [theming npm version]: https://flat.badgen.net/npm/v/@tpr/theming
 [theming npm link]: https://www.npmjs.com/package/@tpr/theming
 [theming size bundle]: https://flat.badgen.net/bundlephobia/minzip/@tpr/theming

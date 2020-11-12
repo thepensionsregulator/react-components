@@ -15,7 +15,7 @@ export const CheckboxChecked: React.FC<any> = ({ className }) => {
 				stroke="#585858"
 				strokeWidth="4"
 			>
-				<rect width="40" height="40" stroke="none" />
+				<rect width="40" height="40" stroke="none" fill="none" />
 				<rect x="0.1" y="0.1" width="36" height="36" fill="none" />
 			</g>
 			<g transform="translate(11 10)">
