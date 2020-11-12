@@ -147,6 +147,11 @@ const InputCurrency: React.FC<InputCurrencyProps> = React.memo(
 			if (initialValue !== undefined && initialValue !== null) {
 				const myEvent = new Event('blur', { bubbles: true });
 				formatInitialValue(initialValue);
+				/*
+					When initialValue changes from null to a numeric value there is a situation where the format 
+					is not correctly applied because somehow the blur event triggers before the value is formatted. 
+					Delaying minimally the execution of the blur event solves this problem.
+				*/
 				setTimeout(() => {
 					innerInput.current.dispatchEvent(myEvent);
 				}, 50);
