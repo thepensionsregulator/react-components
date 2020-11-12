@@ -157,8 +157,9 @@ describe('Currency', () => {
 			expect(getByTestId(testId)).toHaveValue('');
 		});
 
-		test('receives null and then changes to number', () => {
+		test('receives null and then changes to number && custom validator', () => {
 			let val = null;
+			let validateExecuted = false;
 			const { getByTestId } = formSetup({
 				render: (
 					<FFInputCurrency
@@ -168,6 +169,7 @@ describe('Currency', () => {
 						maxInputLength={11}
 						decimalPlaces={2}
 						initialValue={val}
+						validate={() => (validateExecuted = true)}
 					/>
 				),
 			});
@@ -177,6 +179,7 @@ describe('Currency', () => {
 			setTimeout(() => {
 				expect(getByTestId(testId)).toHaveValue('45,000.00');
 			}, 100);
+			expect(validateExecuted).toEqual(true);
 		});
 	});
 });
