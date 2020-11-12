@@ -1,9 +1,9 @@
 import React from 'react';
-import { Form } from 'react-final-form';
-import { FFInputText } from '../text/text';
-import { P, Link, Button, Flex } from '@tpr/core';
+import { Field, useForm } from 'react-final-form';
 import { Address } from './address';
-import { ArrowRight } from '@tpr/icons';
+import { FFInputText } from '../text/text';
+import { HiddenInput } from '../hidden/hidden';
+import { P, Link } from '@tpr/core';
 import elementStyles from '../elements.module.scss';
 import styles from './addressLookup.module.scss';
 
@@ -12,7 +12,6 @@ type EditAddressProps = {
 	value?: Address;
 	testId?: string;
 	onChangeAddressClick: () => void;
-	onAddressSaved: (savedAddress: Address) => void;
 	addressLine1Label: string;
 	addressLine1RequiredMessage: string;
 	addressLine2Label: string;
@@ -23,7 +22,6 @@ type EditAddressProps = {
 	countryLabel: string;
 	changeAddressButton: string;
 	changeAddressAriaLabel?: string;
-	saveAddressButton: string;
 };
 
 export const EditAddress: React.FC<EditAddressProps> = ({
@@ -31,7 +29,6 @@ export const EditAddress: React.FC<EditAddressProps> = ({
 	value,
 	testId,
 	onChangeAddressClick,
-	onAddressSaved,
 	addressLine1Label,
 	addressLine1RequiredMessage,
 	addressLine2Label,
@@ -42,132 +39,110 @@ export const EditAddress: React.FC<EditAddressProps> = ({
 	countryLabel,
 	changeAddressButton,
 	changeAddressAriaLabel,
-	saveAddressButton,
 }) => {
+	const form = useForm();
+
+	function isDirty() {
+		const selectedAddress = form.getFieldState('selectedAddress');
+		return selectedAddress && selectedAddress.dirty;
+	}
+
+	function renderNonEditableFieldWithUpdates(
+		fieldName: string,
+		label?: string,
+	) {
+		return (
+			<>
+				{label && (
+					<P className={styles.nonEditable}>
+						<strong
+							id={(testId ? testId + '-' : '') + fieldName}
+							className={`${elementStyles.labelText} ${styles.nonEditableLabel}`}
+						>
+							{label}
+						</strong>{' '}
+						<span aria-labelledby={(testId ? testId + '-' : '') + fieldName}>
+							{value ? value[fieldName] : initialValue[fieldName]}
+						</span>
+					</P>
+				)}
+				<Field
+					name={fieldName}
+					type="hidden"
+					data-testid={(testId ? testId + '-' : '') + fieldName + '-hidden'}
+					initialValue={isDirty() ? value[fieldName] : initialValue[fieldName]}
+					updatedValue={value ? value[fieldName] : ''}
+					render={(props) => <HiddenInput type="hidden" {...props} />}
+				/>
+			</>
+		);
+	}
+
+	function renderInitialValueField(fieldName: string) {
+		return (
+			<Field
+				name={fieldName + 'InitialValue'}
+				data-testid={
+					(testId ? testId + '-' : '') + fieldName + 'InitialValue-hidden'
+				}
+				initialValue={initialValue[fieldName]}
+				render={(props) => <HiddenInput type="hidden" {...props} />}
+			/>
+		);
+	}
+
 	initialValue = initialValue || {};
 	return (
-		<Form onSubmit={() => {}}>
-			{({ values }) => (
-				<>
-					<FFInputText
-						name="addressLine1"
-						label={addressLine1Label}
-						testId={(testId ? testId + '-' : '') + 'address-line-1'}
-						initialValue={
-							value ? value.addressLine1 : initialValue.addressLine1
-						}
-						validate={(value) =>
-							value ? undefined : addressLine1RequiredMessage
-						}
-						inputWidth={6}
-					/>
-					<FFInputText
-						name="addressLine2"
-						label={addressLine2Label}
-						testId={(testId ? testId + '-' : '') + 'address-line-2'}
-						initialValue={
-							value ? value.addressLine2 : initialValue.addressLine2
-						}
-						inputWidth={6}
-					/>
-					<P className={styles.nonEditable} cfg={{ mt: 3 }}>
-						<strong
-							id={(testId ? testId + '-' : '') + 'address-line-3'}
-							className={`${elementStyles.labelText} ${styles.nonEditableLabel}`}
-						>
-							{addressLine3Label}
-						</strong>{' '}
-						<span
-							aria-labelledby={(testId ? testId + '-' : '') + 'address-line-3'}
-						>
-							{value ? value.addressLine3 : initialValue.addressLine3}
-						</span>
-					</P>
-					<P className={styles.nonEditable}>
-						<strong
-							id={(testId ? testId + '-' : '') + 'town'}
-							className={`${`${elementStyles.labelText} ${styles.nonEditableLabel}`} ${
-								styles.nonEditableLabel
-							}`}
-						>
-							{townLabel}
-						</strong>{' '}
-						<span aria-labelledby={(testId ? testId + '-' : '') + 'town'}>
-							{value ? value.postTown : initialValue.postTown}
-						</span>
-					</P>
-					<P className={styles.nonEditable}>
-						<strong
-							id={(testId ? testId + '-' : '') + 'county'}
-							className={`${elementStyles.labelText} ${styles.nonEditableLabel}`}
-						>
-							{countyLabel}
-						</strong>{' '}
-						<span aria-labelledby={(testId ? testId + '-' : '') + 'county'}>
-							{value ? value.county : initialValue.county}
-						</span>
-					</P>
-					<P className={styles.nonEditable}>
-						<strong
-							id={(testId ? testId + '-' : '') + 'postcode'}
-							className={`${elementStyles.labelText} ${styles.nonEditableLabel}`}
-						>
-							{postcodeLabel}
-						</strong>{' '}
-						<span aria-labelledby={(testId ? testId + '-' : '') + 'postcode'}>
-							{value ? value.postcode : initialValue.postcode}
-						</span>
-					</P>
-					<P className={styles.nonEditable}>
-						<strong
-							id={(testId ? testId + '-' : '') + 'country'}
-							className={`${elementStyles.labelText} ${styles.nonEditableLabel}`}
-						>
-							{countryLabel}
-						</strong>{' '}
-						<span aria-labelledby={(testId ? testId + '-' : '') + 'country'}>
-							{value ? value.country : initialValue.country}
-						</span>
-					</P>
+		<>
+			<FFInputText
+				name="addressLine1"
+				label={addressLine1Label}
+				testId={(testId ? testId + '-' : '') + 'addressLine1'}
+				initialValue={
+					isDirty() ? value.addressLine1 : initialValue.addressLine1
+				}
+				updatedValue={value ? value.addressLine1 : ''}
+				validate={(value) => (value ? undefined : addressLine1RequiredMessage)}
+				inputWidth={6}
+			/>
+			<FFInputText
+				name="addressLine2"
+				label={addressLine2Label}
+				testId={(testId ? testId + '-' : '') + 'addressLine2'}
+				initialValue={
+					isDirty() ? value.addressLine2 : initialValue.addressLine2
+				}
+				updatedValue={value ? value.addressLine2 : ''}
+				inputWidth={6}
+			/>
+			{renderNonEditableFieldWithUpdates('addressLine3', addressLine3Label)}
+			{renderNonEditableFieldWithUpdates('postTown', townLabel)}
+			{renderNonEditableFieldWithUpdates('county', countyLabel)}
+			{renderNonEditableFieldWithUpdates('postcode', postcodeLabel)}
+			{renderNonEditableFieldWithUpdates('nationId')}
+			{renderNonEditableFieldWithUpdates('country', countryLabel)}
+			{renderNonEditableFieldWithUpdates('countryId')}
+			{renderNonEditableFieldWithUpdates('uprn')}
 
-					<Link
-						onClick={onChangeAddressClick}
-						testId={(testId ? testId + '-' : '') + 'change-address'}
-						className={styles.button}
-						aria-label={changeAddressAriaLabel}
-					>
-						{changeAddressButton}
-					</Link>
+			{renderInitialValueField('addressLine1')}
+			{renderInitialValueField('addressLine2')}
+			{renderInitialValueField('addressLine3')}
+			{renderInitialValueField('postTown')}
+			{renderInitialValueField('county')}
+			{renderInitialValueField('postcode')}
+			{renderInitialValueField('nationId')}
+			{renderInitialValueField('country')}
+			{renderInitialValueField('countryId')}
+			{renderInitialValueField('uprn')}
 
-					<Button
-						testId={(testId ? testId + '-' : '') + 'save-address-button'}
-						onClick={() => {
-							if (
-								values.addressLine1 !== initialValue.addressLine1 ||
-								values.addressLine2 !== initialValue.addressLine2
-							) {
-								onAddressSaved({
-									...initialValue,
-									addressLine1: values.addressLine1,
-									addressLine2: values.addressLine2,
-								});
-							}
-						}}
-						className={`${styles.button} ${styles.arrowButton}`}
-					>
-						<Flex
-							cfg={{
-								alignItems: 'center',
-								pl: 4,
-								pr: 2,
-							}}
-						>
-							{saveAddressButton}
-							<ArrowRight cfg={{ fill: 'white' }} width={'32'} />
-						</Flex>
-					</Button>
-				</>
-			)}
-		</Form>
+			<Link
+				onClick={onChangeAddressClick}
+				testId={(testId ? testId + '-' : '') + 'change-address'}
+				className={styles.button}
+				aria-label={changeAddressAriaLabel}
+			>
+				{changeAddressButton}
+			</Link>
+		</>
 	);
 };

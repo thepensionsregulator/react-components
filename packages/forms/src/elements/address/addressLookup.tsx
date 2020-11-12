@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
 import { Address } from './address';
-import { EditAddress } from './editAddress';
 import { PostcodeLookup } from './postcodeLookup';
 import { SelectAddress } from './selectAddress';
+import { EditAddress } from './editAddress';
 
 export type AddressProps = {
 	initialValue?: Address;
@@ -42,7 +42,6 @@ export const AddressLookup: React.FC<AddressProps> = ({
 	initialValue,
 	testId,
 	onPostcodeChanged,
-	onAddressSaved,
 	invalidPostcodeMessage,
 	postcodeLookupLabel,
 	postcodeLookupButton,
@@ -63,7 +62,6 @@ export const AddressLookup: React.FC<AddressProps> = ({
 	countryLabel,
 	changeAddressButton,
 	changeAddressAriaLabel,
-	saveAddressButton,
 }) => {
 	// Start in postcode lookup view, unless there's already an address in which case start in edit address view
 	let initialView = AddressView.PostcodeLookup;
@@ -83,24 +81,43 @@ export const AddressLookup: React.FC<AddressProps> = ({
 	const [address, setAddress] = useState<Address | null>(null);
 	const [postcode, setPostcode] = useState<string>(null);
 
+	// if missing fields are undefined rather than empty string they remain at their previous values
+	function ensureNoUndefinedFields(addresses: Address[]) {
+		return addresses.map((address) => {
+			return {
+				addressLine1: address.addressLine1 || '',
+				addressLine2: address.addressLine2 || '',
+				addressLine3: address.addressLine3 || '',
+				postTown: address.postTown || '',
+				county: address.county || '',
+				postcode: address.postcode || '',
+				nationId: address.nationId || null,
+				country: address.country || '',
+				countryId: address.countryId || null,
+				uprn: address.uprn || null,
+			};
+		});
+	}
+
 	// Render a different child component depending on the state
-	switch (addressView) {
-		case AddressView.PostcodeLookup:
-			return (
+	return (
+		<>
+			{addressView === AddressView.PostcodeLookup && (
 				<PostcodeLookup
+					postcode={postcode}
 					testId={testId}
-					onPostcodeChanged={(postcode) => {
-						setPostcode(postcode);
-						setAddresses(onPostcodeChanged(postcode));
+					onPostcodeChanged={(newPostcode) => {
+						setPostcode(newPostcode);
+						const matchingAddresses = onPostcodeChanged(newPostcode);
+						setAddresses(ensureNoUndefinedFields(matchingAddresses));
 						setAddressView(AddressView.SelectAddress);
 					}}
 					invalidPostcodeMessage={invalidPostcodeMessage}
 					postcodeLookupLabel={postcodeLookupLabel}
 					postcodeLookupButton={postcodeLookupButton}
 				/>
-			);
-		case AddressView.SelectAddress:
-			return (
+			)}
+			{addressView === AddressView.SelectAddress && (
 				<SelectAddress
 					testId={testId}
 					postcode={postcode}
@@ -121,19 +138,15 @@ export const AddressLookup: React.FC<AddressProps> = ({
 					selectAddressRequiredMessage={selectAddressRequiredMessage}
 					noAddressesFoundMessage={noAddressesFoundMessage}
 				/>
-			);
-		case AddressView.EditAddress:
-			return (
+			)}
+			{addressView === AddressView.EditAddress && (
 				<EditAddress
+					initialValue={initialValue}
 					value={address}
 					testId={testId}
 					onChangeAddressClick={() =>
 						setAddressView(AddressView.PostcodeLookup)
 					}
-					onAddressSaved={(savedAddress) => {
-						setAddress(savedAddress);
-						onAddressSaved(savedAddress);
-					}}
 					addressLine1Label={addressLine1Label}
 					addressLine1RequiredMessage={addressLine1RequiredMessage}
 					addressLine2Label={addressLine2Label}
@@ -144,8 +157,8 @@ export const AddressLookup: React.FC<AddressProps> = ({
 					countryLabel={countryLabel}
 					changeAddressButton={changeAddressButton}
 					changeAddressAriaLabel={changeAddressAriaLabel}
-					saveAddressButton={saveAddressButton}
 				/>
-			);
-	}
+			)}
+		</>
+	);
 };

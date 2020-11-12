@@ -3,8 +3,12 @@ import { Field, FieldRenderProps } from 'react-final-form';
 import { StyledInputLabel, InputElementHeading } from '../elements';
 import { FieldProps, FieldExtraProps } from '../../renderFields';
 import { Input } from '../input/input';
+import { useEffect } from 'react';
 
-type InputTextProps = FieldRenderProps<string> & FieldExtraProps;
+type InputTextProps = FieldRenderProps<string> &
+	FieldExtraProps & {
+		updatedValue: string;
+	};
 const InputText: React.FC<InputTextProps> = ({
 	label,
 	ariaLabel,
@@ -17,7 +21,14 @@ const InputText: React.FC<InputTextProps> = ({
 	readOnly,
 	inputWidth: width,
 	cfg,
+	updatedValue,
 }) => {
+	useEffect(() => {
+		if (typeof updatedValue !== 'undefined') {
+			input.onChange(updatedValue);
+		}
+	}, [updatedValue]);
+
 	return (
 		<StyledInputLabel
 			isError={meta && meta.touched && meta.error}
@@ -48,7 +59,7 @@ export const FFInputText: React.FC<FieldProps> = (fieldProps) => {
 		<Field
 			{...fieldProps}
 			required={typeof fieldProps.validate === 'function' || fieldProps.error}
-			component={InputText}
+			render={(props) => <InputText {...props} {...fieldProps} />}
 		/>
 	);
 };

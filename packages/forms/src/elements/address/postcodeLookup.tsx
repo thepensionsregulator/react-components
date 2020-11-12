@@ -1,8 +1,8 @@
 import React from 'react';
-import { Form } from 'react-final-form';
+import { useForm } from 'react-final-form';
+import PostcodeValidator from './postcodeValidator';
 import { FFInputText } from '../text/text';
 import { Button } from '@tpr/core';
-import PostcodeValidator from './postcodeValidator';
 import styles from './addressLookup.module.scss';
 
 type PostcodeLookupProps = {
@@ -16,41 +16,42 @@ type PostcodeLookupProps = {
 
 export const PostcodeLookup: React.FC<PostcodeLookupProps> = ({
 	testId,
+	postcode,
 	onPostcodeChanged,
 	invalidPostcodeMessage,
 	postcodeLookupLabel,
 	postcodeLookupButton,
 }) => {
+	const form = useForm();
 	const validator = new PostcodeValidator(invalidPostcodeMessage);
-	let postcodeValid = true;
+	let postcodeValid = false;
+
 	return (
-		<Form onSubmit={() => {}}>
-			{({ values }) => (
-				<>
-					<FFInputText
-						name="postcode"
-						label={postcodeLookupLabel}
-						validate={(value) => {
-							const result = validator.validatePostcode(value);
-							postcodeValid = typeof result === 'undefined';
-							return result;
-						}}
-						testId={(testId ? testId + '-' : '') + 'postcode-lookup-edit'}
-						inputWidth={1}
-					/>
-					<Button
-						testId={(testId ? testId + '-' : '') + 'postcode-lookup-button'}
-						onClick={() => {
-							if (postcodeValid) {
-								onPostcodeChanged(values.postcode);
-							}
-						}}
-						className={styles.button}
-					>
-						{postcodeLookupButton}
-					</Button>
-				</>
-			)}
-		</Form>
+		<>
+			<FFInputText
+				name="postcodeLookup"
+				value={postcode}
+				label={postcodeLookupLabel}
+				validate={(value) => {
+					console.log(value);
+					const result = validator.validatePostcode(value);
+					postcodeValid = typeof result === 'undefined';
+					return result;
+				}}
+				testId={(testId ? testId + '-' : '') + 'postcode-lookup-edit'}
+				inputWidth={1}
+			/>
+			<Button
+				testId={(testId ? testId + '-' : '') + 'postcode-lookup-button'}
+				onClick={(e) => {
+					if (postcodeValid) {
+						onPostcodeChanged(form.getFieldState('postcodeLookup').value);
+					}
+				}}
+				className={styles.button}
+			>
+				{postcodeLookupButton}
+			</Button>
+		</>
 	);
 };

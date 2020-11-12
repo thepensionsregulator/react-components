@@ -5,8 +5,10 @@ route: /forms/address
 ---
 
 import { Playground } from '@playground';
-import { Form } from 'react-final-form';
+import { Form, Field } from 'react-final-form';
+import { Button } from '@tpr/core';
 import { AddressLookup } from './addressLookup';
+import { FFInputText } from '../text/text';
 
 # Address lookup
 
@@ -28,6 +30,17 @@ yarn add @tpr/forms
 
 ```js
 npm install @tpr/forms
+// initialValue={{
+// 								addressLine1: 'Napier House',
+// 								addressLine2: 'Trafalgar Place',
+// 								addressLine3: 'Trafalgar Road',
+// 								postTown: 'Brighton',
+// 								county: 'East Sussex',
+// 								postcode: 'BN1 4DW',
+// 								country: 'UK',
+// 								countryId: 229,
+// 								uprn: 22063565,
+// 							}}
 ```
 
 `import items you wish to use from the library`
@@ -43,21 +56,16 @@ import { AddressLookup } from '@tpr/forms';
 <Playground>
 	{() => {
 		return (
-			<Form onSubmit={() => {}}>
-				{({ handleSubmit }) => (
+			<Form
+				onSubmit={(values) => {
+					console.log('submit');
+					console.log(values);
+				}}
+			>
+				{({ handleSubmit, values }) => (
 					<form onSubmit={handleSubmit}>
 						<AddressLookup
-							initialValue={{
-								addressLine1: 'Napier House',
-								addressLine2: 'Trafalgar Place',
-								addressLine3: 'Trafalgar Road',
-								postTown: 'Brighton',
-								county: 'East Sussex',
-								postcode: 'BN1 4DW',
-								country: 'UK',
-								countryId: 229,
-								uprn: 22063565,
-							}}
+							
 							onPostcodeChanged={(postcode) => [
 								{
 									addressLine1: 'Napier House',
@@ -82,7 +90,7 @@ import { AddressLookup } from '@tpr/forms';
 								},
 								{
 									addressLine1: 'Pension Protection Fund',
-									addressLine2: '12 Dingwall Road',
+									addressLine3: '12 Dingwall Road',
 									postTown: 'Croydon',
 									postcode: 'CR0 2NA',
 									country: 'UK',
@@ -90,9 +98,6 @@ import { AddressLookup } from '@tpr/forms';
 									uprn: 10091767168,
 								},
 							]}
-							onAddressSaved={(address) => {
-								console.log(address);
-							}}
 							invalidPostcodeMessage="Enter a valid postcode"
 							postcodeLookupLabel="Postcode"
 							postcodeLookupButton="Find address"
@@ -113,13 +118,15 @@ import { AddressLookup } from '@tpr/forms';
 							countryLabel="Country"
 							changeAddressButton="I need to change the address"
 							changeAddressAriaLabel={null}
-							saveAddressButton="Save address"
-						/>
-					</form>
-				)}
-			</Form>
-		);
-	}}
+							/>
+    					<Button type="submit" cfg={{mt:3}}>What happens if I click this?</Button>
+    					<pre>{JSON.stringify(values, 0, 2)}</pre>
+    				</form>
+    			)}
+    		</Form>
+    	);
+    }}
+
 </Playground>
 
 ## API
