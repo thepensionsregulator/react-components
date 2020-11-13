@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useRef } from 'react';
 import { Field, useForm } from 'react-final-form';
 import { Address } from './address';
 import { FFInputText } from '../text/text';
@@ -24,7 +24,7 @@ type EditAddressProps = {
 	changeAddressAriaLabel?: string;
 };
 
-export const EditAddress: React.FC<EditAddressProps> = ({
+export const EditAddress: React.FC<EditAddressProps> = React.memo(({
 	initialValue,
 	value,
 	testId,
@@ -41,6 +41,8 @@ export const EditAddress: React.FC<EditAddressProps> = ({
 	changeAddressAriaLabel,
 }) => {
 	const form = useForm();
+	
+	const blurEvent = new Event('blur', { bubbles: true });
 
 	function isDirty() {
 		const selectedAddress = form.getFieldState('selectedAddress');
@@ -91,10 +93,22 @@ export const EditAddress: React.FC<EditAddressProps> = ({
 		);
 	}
 
-	initialValue = initialValue || {};
+	const address1ref = useRef(null);
+	const address2ref = useRef(null);
+
+	useEffect(() => {
+		// in some cases when 'value'=='initialValue', 
+		// the input fields do not refresh the view and keep the previous values,
+		// dispatching a 'blur' event will refresh the view with the correct values.
+		address1ref.current.dispatchEvent(blurEvent);
+		address2ref.current.dispatchEvent(blurEvent);
+	}, [value]);
+
+
 	return (
 		<>
 			<FFInputText
+				ref={address1ref}
 				name="addressLine1"
 				label={addressLine1Label}
 				testId={(testId ? testId + '-' : '') + 'addressLine1'}
@@ -106,6 +120,7 @@ export const EditAddress: React.FC<EditAddressProps> = ({
 				inputWidth={6}
 			/>
 			<FFInputText
+				ref={address2ref}
 				name="addressLine2"
 				label={addressLine2Label}
 				testId={(testId ? testId + '-' : '') + 'addressLine2'}
@@ -145,4 +160,4 @@ export const EditAddress: React.FC<EditAddressProps> = ({
 			</Link>
 		</>
 	);
-};
+});
