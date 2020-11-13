@@ -1,6 +1,7 @@
 import React from 'react';
 import { formSetup } from '../__mocks__/setup';
 import { findByText, fireEvent } from '@testing-library/react';
+import userEvent from '@testing-library/user-event';
 import { axe } from 'jest-axe';
 import { AddressLookup, AddressProps } from '../elements/address/addressLookup';
 // import { Address } from '../elements/address/address';
@@ -19,6 +20,7 @@ const exampleAddress = {
 const defaultProps: AddressProps = {
 	onPostcodeChanged: () => [],
 	onAddressSaved: () => {},
+	loading:false,
 	invalidPostcodeMessage: 'Enter a valid postcode',
 	postcodeLookupLabel: 'Postcode',
 	postcodeLookupButton: 'Find address',
@@ -41,7 +43,7 @@ const defaultProps: AddressProps = {
 
 function searchForAPostcode(container: HTMLElement, postcode: string) {
 	const input = container.querySelector('input');
-	input.value = postcode;
+	userEvent.type(input, postcode);
 
 	const submit = container.querySelector('button');
 	fireEvent.click(submit);
@@ -59,7 +61,7 @@ function findFirstOptionInSelect(container: HTMLElement) {
 describe('Address lookup', () => {
 	describe('postcode lookup view', () => {
 		test('to be the default when initialValue is null', async () => {
-			const { container } = formSetup({
+			const { getByTestId } = formSetup({
 				render: (
 					<AddressLookup
 						{...defaultProps}
@@ -69,12 +71,11 @@ describe('Address lookup', () => {
 				),
 			});
 
-			const input = container.querySelector('input[name="postcode"]');
-			expect(input).not.toBeNull();
+			expect(getByTestId('postcode-lookup-edit')).toBeInTheDocument();
 		});
 
 		test('to be the default when all properties of initialValue are falsy', async () => {
-			const { container } = formSetup({
+			const { getByTestId } = formSetup({
 				render: (
 					<AddressLookup
 						{...defaultProps}
@@ -85,8 +86,7 @@ describe('Address lookup', () => {
 				),
 			});
 
-			const input = container.querySelector('input[name="postcode"]');
-			expect(input).not.toBeNull();
+			expect(getByTestId('postcode-lookup-edit')).toBeInTheDocument();
 		});
 
 		test('passes accessibility checks', async () => {
@@ -274,7 +274,7 @@ describe('Address lookup', () => {
 			);
 			fireEvent.click(button);
 
-			const input = container.querySelector('input[name="postcode"]');
+			const input = container.querySelector('input[name="postcodeLookup"]');
 			expect(input).not.toBeNull();
 		});
 
