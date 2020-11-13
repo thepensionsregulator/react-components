@@ -9,7 +9,7 @@ type InputTextProps = FieldRenderProps<string> &
 	FieldExtraProps & {
 		updatedValue: string;
 	};
-const InputText: React.FC<InputTextProps> = ({
+const InputText: React.FC<InputTextProps> = React.forwardRef(({
 	label,
 	ariaLabel,
 	hint,
@@ -22,7 +22,7 @@ const InputText: React.FC<InputTextProps> = ({
 	inputWidth: width,
 	cfg,
 	updatedValue,
-}) => {
+}, ref) => {
 	useEffect(() => {
 		if (typeof updatedValue !== 'undefined') {
 			input.onChange(updatedValue);
@@ -41,6 +41,7 @@ const InputText: React.FC<InputTextProps> = ({
 				meta={meta}
 			/>
 			<Input
+				parentRef={ref}
 				type="text"
 				width={width}
 				testId={testId}
@@ -52,14 +53,14 @@ const InputText: React.FC<InputTextProps> = ({
 			/>
 		</StyledInputLabel>
 	);
-};
+});
 
-export const FFInputText: React.FC<FieldProps> = (fieldProps) => {
+export const FFInputText: React.FC<FieldProps> = React.forwardRef((fieldProps, ref) => {
 	return (
 		<Field
 			{...fieldProps}
 			required={typeof fieldProps.validate === 'function' || fieldProps.error}
-			render={(props) => <InputText {...props} {...fieldProps} />}
+			render={(props) => <InputText {...props} {...fieldProps} ref={ref} />}
 		/>
 	);
-};
+});
