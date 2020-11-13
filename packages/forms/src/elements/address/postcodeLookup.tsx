@@ -33,14 +33,17 @@ export const PostcodeLookup: React.FC<PostcodeLookupProps> = ({
 		const myEvent = new Event('blur', { bubbles: true });
 		searchFieldRef.current.dispatchEvent(myEvent);
 
-		postcodeValid && onPostcodeChanged(form.getFieldState('postcodeLookup').value);
-	}
+		postcodeValid &&
+			onPostcodeChanged(form.getFieldState('postcodeLookup').value);
+	};
 
 	const validatePostcode = (value) => {
 		const result = validator.validatePostcode(value);
-		typeof result === 'undefined' ? setPostcodeValid(true) : setPostcodeValid(false);
+		typeof result === 'undefined'
+			? setPostcodeValid(true)
+			: setPostcodeValid(false);
 		return result;
-	}
+	};
 
 	return (
 		<>
@@ -51,7 +54,7 @@ export const PostcodeLookup: React.FC<PostcodeLookupProps> = ({
 				label={postcodeLookupLabel}
 				validate={(value) => validatePostcode(value)}
 				testId={(testId ? testId + '-' : '') + 'postcode-lookup-edit'}
-				inputWidth={1}
+				inputClassName={styles.editPostcode}
 			/>
 			<Button
 				testId={(testId ? testId + '-' : '') + 'postcode-lookup-button'}
