@@ -102,7 +102,11 @@ export const EditAddress: React.FC<EditAddressProps> = ({
 					isDirty() ? value.addressLine1 : initialValue.addressLine1
 				}
 				updatedValue={value ? value.addressLine1 : ''}
-				validate={(value) => (value ? undefined : addressLine1RequiredMessage)}
+				validate={(value) =>
+					value && value.trim().length > 1
+						? undefined
+						: addressLine1RequiredMessage
+				}
 				inputWidth={6}
 			/>
 			<FFInputText
