@@ -2,7 +2,7 @@ import React from 'react';
 import { formSetup } from '../__mocks__/setup';
 import { FFRadioButton } from '../elements/radio/radio';
 import { renderFields } from '../index';
-import { fireEvent } from '@testing-library/react';
+import { fireEvent, getByTestId } from '@testing-library/react';
 import { axe } from 'jest-axe';
 
 describe('Radio input', () => {
@@ -116,5 +116,29 @@ describe('Radio input', () => {
 		expect(radioChecked.innerHTML).toMatchInlineSnapshot(
 			`"<g transform=\\"translate(0.5 0.5)\\" fill=\\"#f5f5f5\\" stroke=\\"#585858\\" stroke-width=\\"4\\"><circle cx=\\"19.6\\" cy=\\"19.6\\" r=\\"20\\" stroke=\\"none\\"></circle><circle cx=\\"19.6\\" cy=\\"19.6\\" r=\\"18\\" fill=\\"none\\"></circle></g><circle cx=\\"10\\" cy=\\"10\\" r=\\"10\\" transform=\\"translate(10.3 10.3)\\" fill=\\"#006ebc\\"></circle>"`,
 		);
+	});
+
+
+	test('callback function', () => {
+		const updateSpanContent = (value: boolean) => {
+			getByTestId(container, 'my-span').innerText = value.toString();
+		};
+		const { getByLabelText, container } = formSetup({
+			render: (
+				<>
+					<FFRadioButton
+						required
+						label="My radiobutton"
+						name="my-radiobutton"
+						value="my checkbox value"
+						callback={(value) => updateSpanContent(value)}
+					/>
+					<span data-testid="my-span"></span>
+				</>
+			),
+		});
+
+		getByLabelText('My radiobutton').click();
+		expect(getByTestId(container, 'my-span').innerText).toBe('my checkbox value');
 	});
 });
