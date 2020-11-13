@@ -9,6 +9,7 @@ import elementStyles from '../elements.module.scss';
 import styles from './addressLookup.module.scss';
 
 type SelectAddressProps = {
+	loading: boolean;
 	testId?: string;
 	postcode?: string;
 	addresses: Address[];
@@ -25,6 +26,7 @@ type SelectAddressProps = {
 };
 
 export const SelectAddress: React.FC<SelectAddressProps> = ({
+	loading,
 	testId,
 	postcode,
 	addresses,
@@ -62,6 +64,18 @@ export const SelectAddress: React.FC<SelectAddressProps> = ({
 	// Setting a 'valid' object appears to be the only way to control validity of FFSelect.
 	// validate() will run immediately. Initialise to null so that validate() can detect the initial load and set an initial value rather than validating.
 	let [selectAddressValid, setSelectAddressValid] = useState(null);
+	function getAddressIfValid(): Address | undefined {
+		const selectedAddressField = form.getFieldState('selectedAddress');
+		if (
+			selectAddressValid &&
+			selectAddressValid.touched &&
+			!selectAddressValid.error &&
+			selectedAddressField &&
+			selectedAddressField.value.value
+		) {
+			return selectedAddressField.value.value;
+		}
+	}
 
 	return (
 		<>
@@ -82,6 +96,7 @@ export const SelectAddress: React.FC<SelectAddressProps> = ({
 					testId={(testId ? testId + '-' : '') + 'change-postcode'}
 					className={styles.changePostcode}
 					aria-label={changePostcodeAriaLabel}
+					disabled={loading}
 				>
 					{changePostcodeButton}
 				</Link>
@@ -109,21 +124,17 @@ export const SelectAddress: React.FC<SelectAddressProps> = ({
 				notFoundMessage={noAddressesFoundMessage}
 				placeholder={selectAddressPlaceholder}
 				readOnly={true}
+				disabled={loading}
 				selectedItem={{}} // don't reselect if the same address turns up again
 			/>
 			<Button
+				disabled={loading || !getAddressIfValid()}
 				testId={(testId ? testId + '-' : '') + 'select-address-button'}
 				onClick={() => {
 					// If validate() has set the 'valid' object to a valid state, continue; otherwise set it to an invalid state.
-					const selectedAddressField = form.getFieldState('selectedAddress');
-					if (
-						selectAddressValid &&
-						selectAddressValid.touched &&
-						!selectAddressValid.error &&
-						selectedAddressField &&
-						selectedAddressField.value.value
-					) {
-						onAddressSelected(selectedAddressField.value.value);
+					const validAddress = getAddressIfValid();
+					if (validAddress) {
+						onAddressSelected(validAddress);
 					} else {
 						setSelectAddressValid({
 							touched: true,

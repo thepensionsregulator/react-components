@@ -6,6 +6,7 @@ import { Button } from '@tpr/core';
 import styles from './addressLookup.module.scss';
 
 type PostcodeLookupProps = {
+	loading: boolean;
 	testId?: string;
 	postcode?: string;
 	onPostcodeChanged: (postcode: string) => void;
@@ -15,6 +16,7 @@ type PostcodeLookupProps = {
 };
 
 export const PostcodeLookup: React.FC<PostcodeLookupProps> = ({
+	loading,
 	testId,
 	postcode,
 	onPostcodeChanged,
@@ -55,11 +57,13 @@ export const PostcodeLookup: React.FC<PostcodeLookupProps> = ({
 				validate={(value) => validatePostcode(value)}
 				testId={(testId ? testId + '-' : '') + 'postcode-lookup-edit'}
 				inputClassName={styles.editPostcode}
+				disabled={loading}
 			/>
 			<Button
 				testId={(testId ? testId + '-' : '') + 'postcode-lookup-button'}
 				onClick={clickFindAddress}
 				className={styles.button}
+				disabled={loading || !postcodeValid}
 			>
 				{postcodeLookupButton}
 			</Button>

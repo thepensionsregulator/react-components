@@ -21,6 +21,7 @@ const InputText: React.FC<InputTextProps> = React.forwardRef(
 			meta,
 			required,
 			placeholder,
+			disabled,
 			readOnly,
 			inputWidth: width,
 			cfg,
@@ -52,6 +53,7 @@ const InputText: React.FC<InputTextProps> = React.forwardRef(
 					testId={testId}
 					label={ariaLabel ? ariaLabel : label}
 					placeholder={placeholder}
+					disabled={disabled}
 					readOnly={readOnly}
 					touched={meta && meta.touched && meta.error}
 					className={inputClassName}

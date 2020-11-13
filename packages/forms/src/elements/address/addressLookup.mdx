@@ -54,6 +54,7 @@ import { AddressLookup } from '@tpr/forms';
 				{({ handleSubmit, values }) => (
 					<form onSubmit={handleSubmit}>
 						<AddressLookup
+							loading={false}
 							initialValue={{
 								addressLine1: 'Napier House',
 								addressLine2: 'Trafalgar Place',

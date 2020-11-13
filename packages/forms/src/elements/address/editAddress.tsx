@@ -10,6 +10,7 @@ import styles from './addressLookup.module.scss';
 type EditAddressProps = {
 	initialValue?: Address;
 	value?: Address;
+	loading: boolean;
 	testId?: string;
 	onChangeAddressClick: () => void;
 	addressLine1Label: string;
@@ -27,6 +28,7 @@ type EditAddressProps = {
 export const EditAddress: React.FC<EditAddressProps> = ({
 	initialValue,
 	value,
+	loading,
 	testId,
 	onChangeAddressClick,
 	addressLine1Label,
@@ -97,6 +99,7 @@ export const EditAddress: React.FC<EditAddressProps> = ({
 			<FFInputText
 				name="addressLine1"
 				label={addressLine1Label}
+				disabled={loading}
 				testId={(testId ? testId + '-' : '') + 'addressLine1'}
 				initialValue={
 					isDirty() ? value.addressLine1 : initialValue.addressLine1
@@ -112,6 +115,7 @@ export const EditAddress: React.FC<EditAddressProps> = ({
 			<FFInputText
 				name="addressLine2"
 				label={addressLine2Label}
+				disabled={loading}
 				testId={(testId ? testId + '-' : '') + 'addressLine2'}
 				initialValue={
 					isDirty() ? value.addressLine2 : initialValue.addressLine2
