@@ -10,6 +10,7 @@ import styles from './addressLookup.module.scss';
 type EditAddressProps = {
 	initialValue?: Address;
 	value?: Address;
+	loading: boolean;
 	testId?: string;
 	onChangeAddressClick: () => void;
 	addressLine1Label: string;
@@ -27,6 +28,7 @@ type EditAddressProps = {
 export const EditAddress: React.FC<EditAddressProps> = React.memo(({
 	initialValue,
 	value,
+	loading,
 	testId,
 	onChangeAddressClick,
 	addressLine1Label,
@@ -111,18 +113,24 @@ export const EditAddress: React.FC<EditAddressProps> = React.memo(({
 				ref={address1ref}
 				name="addressLine1"
 				label={addressLine1Label}
+				disabled={loading}
 				testId={(testId ? testId + '-' : '') + 'addressLine1'}
 				initialValue={
 					isDirty() ? value.addressLine1 : initialValue.addressLine1
 				}
 				updatedValue={value ? value.addressLine1 : ''}
-				validate={(value) => (value ? undefined : addressLine1RequiredMessage)}
+				validate={(value) =>
+					value && value.trim().length > 1
+						? undefined
+						: addressLine1RequiredMessage
+				}
 				inputWidth={6}
 			/>
 			<FFInputText
 				ref={address2ref}
 				name="addressLine2"
 				label={addressLine2Label}
+				disabled={loading}
 				testId={(testId ? testId + '-' : '') + 'addressLine2'}
 				initialValue={
 					isDirty() ? value.addressLine2 : initialValue.addressLine2

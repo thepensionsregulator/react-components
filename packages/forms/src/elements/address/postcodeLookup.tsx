@@ -6,6 +6,7 @@ import { Button } from '@tpr/core';
 import styles from './addressLookup.module.scss';
 
 type PostcodeLookupProps = {
+	loading: boolean;
 	testId?: string;
 	postcode?: string;
 	onPostcodeChanged: (postcode: string) => void;
@@ -15,6 +16,7 @@ type PostcodeLookupProps = {
 };
 
 export const PostcodeLookup: React.FC<PostcodeLookupProps> = ({
+	loading,
 	testId,
 	postcode,
 	onPostcodeChanged,
@@ -33,14 +35,17 @@ export const PostcodeLookup: React.FC<PostcodeLookupProps> = ({
 		const myEvent = new Event('blur', { bubbles: true });
 		searchFieldRef.current.dispatchEvent(myEvent);
 
-		postcodeValid && onPostcodeChanged(form.getFieldState('postcodeLookup').value);
-	}
+		postcodeValid &&
+			onPostcodeChanged(form.getFieldState('postcodeLookup').value);
+	};
 
 	const validatePostcode = (value) => {
 		const result = validator.validatePostcode(value);
-		typeof result === 'undefined' ? setPostcodeValid(true) : setPostcodeValid(false);
+		typeof result === 'undefined'
+			? setPostcodeValid(true)
+			: setPostcodeValid(false);
 		return result;
-	}
+	};
 
 	return (
 		<>
@@ -51,13 +56,15 @@ export const PostcodeLookup: React.FC<PostcodeLookupProps> = ({
 				label={postcodeLookupLabel}
 				validate={(value) => validatePostcode(value)}
 				testId={(testId ? testId + '-' : '') + 'postcode-lookup-edit'}
-				inputWidth={1}
+				inputClassName={styles.editPostcode}
+				disabled={loading}
 				defaultValue={''}
 			/>
 			<Button
 				testId={(testId ? testId + '-' : '') + 'postcode-lookup-button'}
 				onClick={clickFindAddress}
 				className={styles.button}
+				disabled={loading || !postcodeValid}
 			>
 				{postcodeLookupButton}
 			</Button>

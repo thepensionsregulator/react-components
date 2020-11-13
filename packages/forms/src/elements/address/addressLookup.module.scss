@@ -18,6 +18,10 @@ label + .nonEditable {
 	margin-top: $space-3;
 }
 
+.editPostcode {
+	width: 7em;
+}
+
 .changePostcode {
 	margin-left: $space-6;
 }
