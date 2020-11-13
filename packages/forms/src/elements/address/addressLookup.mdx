@@ -30,17 +30,6 @@ yarn add @tpr/forms
 
 ```js
 npm install @tpr/forms
-// initialValue={{
-// 								addressLine1: 'Napier House',
-// 								addressLine2: 'Trafalgar Place',
-// 								addressLine3: 'Trafalgar Road',
-// 								postTown: 'Brighton',
-// 								county: 'East Sussex',
-// 								postcode: 'BN1 4DW',
-// 								country: 'UK',
-// 								countryId: 229,
-// 								uprn: 22063565,
-// 							}}
 ```
 
 `import items you wish to use from the library`
@@ -65,7 +54,17 @@ import { AddressLookup } from '@tpr/forms';
 				{({ handleSubmit, values }) => (
 					<form onSubmit={handleSubmit}>
 						<AddressLookup
-							
+							initialValue={{
+								addressLine1: 'Napier House',
+								addressLine2: 'Trafalgar Place',
+								addressLine3: 'Trafalgar Road',
+								postTown: 'Brighton',
+								county: 'East Sussex',
+								postcode: 'BN1 4DW',
+								country: 'UK',
+								countryId: 229,
+								uprn: 22063565,
+							}}
 							onPostcodeChanged={(postcode) => [
 								{
 									addressLine1: 'Napier House',
