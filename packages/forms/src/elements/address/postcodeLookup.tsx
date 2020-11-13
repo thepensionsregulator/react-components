@@ -52,6 +52,7 @@ export const PostcodeLookup: React.FC<PostcodeLookupProps> = ({
 				validate={(value) => validatePostcode(value)}
 				testId={(testId ? testId + '-' : '') + 'postcode-lookup-edit'}
 				inputWidth={1}
+				defaultValue={''}
 			/>
 			<Button
 				testId={(testId ? testId + '-' : '') + 'postcode-lookup-button'}
