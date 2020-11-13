@@ -42,7 +42,17 @@ export const SelectAddress: React.FC<SelectAddressProps> = ({
 	let options = addresses.map((address) => {
 		return {
 			value: address,
-			label: Object.values(address).join(', '),
+			label: [
+				address.addressLine1,
+				address.addressLine2,
+				address.addressLine3,
+				address.postTown,
+				address.county,
+				address.postcode,
+				address.country,
+			]
+				.filter((x) => (x ? true : false))
+				.join(', '),
 		};
 	});
 
