@@ -14,7 +14,6 @@ interface SelectProps extends DownshiftProps<any>, FieldExtraProps {
 	options?: FieldOptions[];
 	notFoundMessage?: string;
 	showToggleButton?: boolean;
-	searchable?: boolean;
 }
 
 export const selectStateChangeTypes = Downshift.stateChangeTypes;
@@ -31,7 +30,6 @@ export const Select: React.FC<SelectProps & FieldRenderProps<string>> = ({
 	initialSelectedItem,
 	onChange,
 	disabled,
-	searchable,
 	testId = 'select',
 	showToggleButton = true,
 	placeholder,
@@ -40,6 +38,7 @@ export const Select: React.FC<SelectProps & FieldRenderProps<string>> = ({
 	cfg,
 	...rest
 }) => {
+	let searchable = !readOnly;
 	return (
 		<Downshift
 			onChange={onChange}
