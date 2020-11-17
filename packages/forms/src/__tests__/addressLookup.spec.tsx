@@ -4,7 +4,7 @@ import { findByText, fireEvent } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { axe } from 'jest-axe';
 import { AddressLookup, AddressProps } from '../elements/address/addressLookup';
-// import { Address } from '../elements/address/address';
+import { Address } from '../elements/address/address';
 
 const exampleAddress = {
 	addressLine1: 'Napier House',
@@ -20,7 +20,7 @@ const exampleAddress = {
 const defaultProps: AddressProps = {
 	onPostcodeChanged: () => [],
 	onAddressSaved: () => {},
-	loading:false,
+	loading: false,
 	invalidPostcodeMessage: 'Enter a valid postcode',
 	postcodeLookupLabel: 'Postcode',
 	postcodeLookupButton: 'Find address',
@@ -44,6 +44,7 @@ const defaultProps: AddressProps = {
 function searchForAPostcode(container: HTMLElement, postcode: string) {
 	const input = container.querySelector('input');
 	userEvent.type(input, postcode);
+	fireEvent.blur(input);
 
 	const submit = container.querySelector('button');
 	fireEvent.click(submit);
@@ -103,45 +104,46 @@ describe('Address lookup', () => {
 			expect(results).toHaveNoViolations();
 		});
 
-		// TODO: This worked until validation was introduced
-		//
-		// test('should go to select address view when button is clicked', async () => {
-		// 	const { container } = formSetup({
-		// 		render: (
-		// 			<AddressLookup
-		// 				onPostcodeChanged={() => []}
-		// 				onAddressSaved={() => {}}
-		// 			/>
-		// 		),
-		// 	});
+		test('should go to select address view when button is clicked', async () => {
+			const { container } = formSetup({
+				render: (
+					<AddressLookup
+						{...defaultProps}
+						onPostcodeChanged={() => []}
+						onAddressSaved={() => {}}
+					/>
+				),
+			});
 
-		// 	searchForAPostcode(container, exampleAddress.postcode);
+			searchForAPostcode(container, exampleAddress.postcode);
 
-		// 	const changePostcode = container.querySelector(
-		// 		'button[data-testid$="change-postcode"]',
-		// 	);
+			const changePostcode = container.querySelector(
+				'button[data-testid$="change-postcode"]',
+			);
 
-		// 	expect(changePostcode).not.toBeNull();
-		// });
+			expect(changePostcode).not.toBeNull();
+		});
 
-		// TODO: Test validation, but this won't work until the test above is fixed
-		//
-		// 	test('should validate the postcode when button is clicked', async () => {
-		// 		const { container } = formSetup({
-		// 			render: (
-		// 				<AddressLookup
-		// 					onPostcodeChanged={() => []}
-		// 					onAddressSaved={() => {}}
-		// 				/>
-		// 			),
-		// 		});
+		test('should validate the postcode when button is clicked', async () => {
+			const { container } = formSetup({
+				render: (
+					<AddressLookup
+						{...defaultProps}
+						onPostcodeChanged={() => []}
+						onAddressSaved={() => {}}
+					/>
+				),
+			});
 
-		// 		searchForAPostcode(container, 'AB12 3MV'); // invalid postcode due to MV in the incode
+			searchForAPostcode(container, 'AB12 3MV'); // invalid postcode due to MV in the incode
 
-		// 		const errorMessage = findByText(container, 'Enter a valid postcode');
+			const errorMessage = findByText(
+				container,
+				defaultProps.invalidPostcodeMessage,
+			);
 
-		// 		expect(errormessage).not.toBeNull();
-		// 	});
+			expect(errorMessage).not.toBeNull();
+		});
 	});
 
 	describe('select address view', () => {
@@ -277,30 +279,5 @@ describe('Address lookup', () => {
 			const input = container.querySelector('input[name="postcodeLookup"]');
 			expect(input).not.toBeNull();
 		});
-
-		// TODO: WORKS IN THE UI BUT NOT HERE
-
-		// test('to make edited address available in onAddressSaved', async () => {
-		// 	let savedAddress: Address = null;
-		// 	const { container } = formSetup({
-		// 		render: (
-		// 			<AddressLookup
-		// 				initialValue={exampleAddress}
-		// 				onPostcodeChanged={() => []}
-		// 				onAddressSaved={(address) => (savedAddress = address)}
-		// 			/>
-		// 		),
-		// 	});
-
-		// 	const input = container.querySelector('input[name="addressLine1"]');
-		// 	input.setAttribute('value', 'TPR');
-
-		// 	const button = container.querySelector(
-		// 		'button[data-testid$="save-address-button"]',
-		// 	);
-		// 	fireEvent.click(button);
-
-		// 	expect(savedAddress).toEqual({ ...exampleAddress, addressLine1: 'TPR' });
-		// });
 	});
 });
