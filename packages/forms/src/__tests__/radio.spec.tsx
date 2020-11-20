@@ -118,7 +118,6 @@ describe('Radio input', () => {
 		);
 	});
 
-
 	test('callback function', () => {
 		const updateSpanContent = (value: boolean) => {
 			getByTestId(container, 'my-span').innerText = value.toString();
@@ -139,6 +138,8 @@ describe('Radio input', () => {
 		});
 
 		getByLabelText('My radiobutton').click();
-		expect(getByTestId(container, 'my-span').innerText).toBe('my checkbox value');
+		expect(getByTestId(container, 'my-span').innerText).toBe(
+			'my checkbox value',
+		);
 	});
 });
