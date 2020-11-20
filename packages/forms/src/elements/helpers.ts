@@ -144,7 +144,7 @@ export const validateCurrency = (
 	return 'empty';
 };
 
-export const getNumCommas = (value: string, pos?: number): number => {
+export const getNumberOfCommas = (value: string, pos?: number): number => {
 	if (!value) return 0;
 	if (pos > 0) {
 		return value.slice(0, pos).match(/,/g)
@@ -155,7 +155,7 @@ export const getNumCommas = (value: string, pos?: number): number => {
 
 export const calculateCursorPosition = (
 	cursor: number,
-	ev: ChangeEvent<HTMLInputElement>,
+	ev: ChangeEvent<HTMLInputElement> | any,
 	prevValue: string,
 	commasBefore: number,
 ) => {
@@ -179,7 +179,7 @@ export const calculateCursorPosition = (
 		}
 	} else {
 		// when the cursor is NOT at the beggining of the input.value
-		const newCommasBefore: number = getNumCommas(ev.target.value, cursor);
+		const newCommasBefore: number = getNumberOfCommas(ev.target.value, cursor);
 		if (ev.target.value.length > prevValue.length) {
 			// when the new value is longer than the previous there might be a case
 			// where the number of commas before the cursor is greater than before

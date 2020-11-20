@@ -13,7 +13,7 @@ import {
 	appendMissingZeros,
 	adaptValueToFormat,
 	getFinalValueWithFormat,
-	getNumCommas,
+	getNumberOfCommas,
 	calculateCursorPosition,
 } from '../helpers';
 
@@ -110,7 +110,7 @@ const InputCurrency: React.FC<InputCurrencyProps> = React.memo(
 		};
 
 		const handleOnChange = (e: ChangeEvent<HTMLInputElement>): void => {
-			const commasBefore: number = getNumCommas(inputValue, cursorPos);
+			const commasBefore: number = getNumberOfCommas(inputValue, cursorPos);
 			// if the new value.length is greater than the maxLength, keeps the previous value
 			if (!valueLengthValid(e.target.value)) {
 				e.target.value = formattedInputValue;
