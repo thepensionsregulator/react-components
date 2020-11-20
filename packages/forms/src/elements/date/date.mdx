@@ -72,6 +72,39 @@ import { FFInputDate } from '@tpr/forms';
 	}}
 </Playground>
 
+### only displaying Month & Year, with the monthYearOnly prop
+
+<Playground>
+	{() => {
+		const fields = [
+			{
+				type: 'date',
+				name: 'passport-issued',
+				label: 'When was your passport issued?',
+				hint: 'For example, 11 2007',
+				error: 'The date your passport was issued must be in the past',
+				monthYearOnly: true,
+			},
+		];
+		return (
+			<Form
+				onSubmit={(val) => console.log(val)}
+				initialValues={{ 'passport-issued': null }}
+				validate={validate(fields)}
+			>
+				{({ handleSubmit }) => (
+					<form onSubmit={handleSubmit} style={{ padding: 10 }}>
+						{renderFields(fields)}
+						<button type="submit" style={{ display: 'none' }}>
+							Submit
+						</button>
+					</form>
+				)}
+			</Form>
+		);
+	}}
+</Playground>
+
 ## API
 
 ```
@@ -80,11 +113,12 @@ Accepted config props: FlexProps, SpaceProps
 
 ### Props
 
-| Property | Required | Type    | Description                                    |
-| -------- | -------- | ------- | --------------------------------------------   |
-| cfg      | false    | object  | FlexProps & SpaceProps                         |
-| disabled | false    | boolean | Disable date field                             |
-| testId   | false    | string  | data attribute for testers                     |
-| label    | true     | string  | Date field description                         |
-| hint     | false    | string  | More detailed description about the date field |
-| readOnly | false    | boolean | Sets whether the field is read only            |
+| Property      | Required | Type    | Description                                     |
+| ------------- | -------- | ------- | ----------------------------------------------- |
+| cfg           | false    | object  | FlexProps & SpaceProps                          |
+| disabled      | false    | boolean | Disable date field                              |
+| testId        | false    | string  | data attribute for testers                      |
+| label         | true     | string  | Date field description                          |
+| hint          | false    | string  | More detailed description about the date field  |
+| monthYearOnly | false    | boolean | hides the Day input and only shows Month & Year |
+| readOnly      | false    | boolean | Sets whether the field is read only             |

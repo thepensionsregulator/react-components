@@ -90,7 +90,10 @@ const DateInputField: React.FC<DateInputFieldProps> = ({
 };
 
 type InputDateProps = FieldRenderProps<string> & FieldExtraProps;
-export const InputDate: React.FC<InputDateProps> = memo(
+interface InputDateComponentProps extends InputDateProps {
+	monthYearOnly?: boolean;
+}
+export const InputDate: React.FC<InputDateComponentProps> = memo(
 	({
 		label,
 		hint,
@@ -101,6 +104,7 @@ export const InputDate: React.FC<InputDateProps> = memo(
 		cfg,
 		disabled,
 		readOnly,
+		monthYearOnly,
 	}) => {
 		// react-final-form types says it's a string, incorrect, it's a date object.
 		const { dd, mm, yyyy } = transformDate(meta.initial);
@@ -110,7 +114,7 @@ export const InputDate: React.FC<InputDateProps> = memo(
 		);
 
 		useEffect(() => {
-			setState({ dd: dd, mm: mm, yyyy: yyyy });
+			setState({ dd: monthYearOnly ? 1 : dd, mm: mm, yyyy: yyyy });
 		}, [dd, mm, yyyy]);
 
 		useEffect(() => {
@@ -143,19 +147,21 @@ export const InputDate: React.FC<InputDateProps> = memo(
 					meta={meta}
 				/>
 				<Flex>
-					<DateInputField
-						label="Day"
-						ariaLabel={`dd-${label}`}
-						testId={`dd-${testId}`}
-						value={day}
-						updateFn={(dd: number) => setState({ dd })}
-						maxInt={32}
-						setMonth={(mm: number) => setState({ mm })}
-						onBlur={input.onBlur}
-						meta={meta}
-						disabled={disabled}
-						readOnly={readOnly}
-					/>
+					{!monthYearOnly && (
+						<DateInputField
+							label="Day"
+							ariaLabel={`dd-${label}`}
+							testId={`dd-${testId}`}
+							value={day}
+							updateFn={(dd: number) => setState({ dd })}
+							maxInt={32}
+							setMonth={(mm: number) => setState({ mm })}
+							onBlur={input.onBlur}
+							meta={meta}
+							disabled={disabled}
+							readOnly={readOnly}
+						/>
+					)}
 					<DateInputField
 						label="Month"
 						ariaLabel={`mm-${label}`}
