@@ -147,10 +147,10 @@ describe('Date input', () => {
 		}
 	`);
 		expect(formState.errors).toMatchInlineSnapshot(`
-Object {
-  "date-1": "This is a required field",
-}
-`);
+		Object {
+		  "date-1": "This is a required field",
+		}
+	`);
 		expect(handleSubmit).toBeCalledTimes(0);
 	});
 
@@ -185,5 +185,50 @@ Object {
 		expect(dd).toHaveAttribute('readonly');
 		expect(mm).toHaveAttribute('readonly');
 		expect(yyyy).toHaveAttribute('readonly');
+	});
+
+	test('using the monthYearOnly prop', () => {
+		const fields: FieldProps[] = [
+			{
+				name: 'month-year-only',
+				label: 'month-year-only',
+				hint: 'For example, 11 2007',
+				type: 'date',
+				required: true,
+				monthYearOnly: true,
+			},
+		];
+		const handleSubmit = jest.fn();
+		const { container, form } = formSetup({
+			render: renderFields(fields),
+			validate: validate(fields),
+			onSubmit: handleSubmit,
+		});
+
+		const dd = container.querySelector(
+			'input[aria-label="dd-month-year-only"]',
+		);
+		const mm = container.querySelector(
+			'input[aria-label="mm-month-year-only"]',
+		);
+		const yyyy = container.querySelector(
+			'input[aria-label="yyyy-month-year-only"]',
+		);
+
+		expect(dd).toBe(null);
+		expect(mm).toBeDefined();
+		expect(yyyy).toBeDefined();
+
+		const submit = container.querySelector('button[type="submit"]');
+
+		userEvent.type(mm, '10');
+		userEvent.type(yyyy, '2020');
+
+		userEvent.click(submit);
+
+		expect(handleSubmit).toBeCalledTimes(1);
+		expect(form.getState().values).toEqual({
+			'month-year-only': '2020-10-01',
+		});
 	});
 });
