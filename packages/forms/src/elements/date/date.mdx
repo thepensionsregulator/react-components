@@ -129,7 +129,9 @@ import { FFInputDate } from '@tpr/forms';
 				{({ handleSubmit }) => (
 					<form onSubmit={handleSubmit} style={{ padding: 10 }}>
 						{renderFields(fields)}
-						<button type="submit">Submit</button>
+						<button type="submit" style={{ display: 'none' }}>
+							Submit
+						</button>
 					</form>
 				)}
 			</Form>
