@@ -72,7 +72,6 @@ export const FFRadioButton: React.FC<FieldProps> = (fieldProps) => {
 		fieldProps.callback && fieldProps.callback(value);
 	};
 
-
 	return (
 		<Field
 			{...fieldProps}
