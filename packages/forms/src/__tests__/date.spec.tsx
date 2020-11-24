@@ -45,13 +45,13 @@ describe('Date input', () => {
 		});
 
 		const dd = container.querySelector(
-			'input[aria-label="dd-passport-expiry"]',
+			'input[aria-label="passport-expiry: Day"]',
 		);
 		const mm = container.querySelector(
-			'input[aria-label="mm-passport-expiry"]',
+			'input[aria-label="passport-expiry: Month"]',
 		);
 		const yyyy = container.querySelector(
-			'input[aria-label="yyyy-passport-expiry"]',
+			'input[aria-label="passport-expiry: Month"]',
 		);
 
 		const submit = container.querySelector('button[type="submit"]');
@@ -84,18 +84,18 @@ describe('Date input', () => {
 		});
 
 		const dd = container.querySelector(
-			'input[aria-label="dd-passport-expiry"]',
+			'input[aria-label="passport-expiry: Day"]',
 		);
 		const mm = container.querySelector(
-			'input[aria-label="mm-passport-expiry"]',
+			'input[aria-label="passport-expiry: Month"]',
 		);
 		const yyyy = container.querySelector(
-			'input[aria-label="yyyy-passport-expiry"]',
+			'input[aria-label="passport-expiry: Year"]',
 		);
 
-		expect(dd).toHaveAttribute('aria-label', 'dd-passport-expiry');
-		expect(mm).toHaveAttribute('aria-label', 'mm-passport-expiry');
-		expect(yyyy).toHaveAttribute('aria-label', 'yyyy-passport-expiry');
+		expect(dd).toHaveAttribute('aria-label', 'passport-expiry: Day');
+		expect(mm).toHaveAttribute('aria-label', 'passport-expiry: Month');
+		expect(yyyy).toHaveAttribute('aria-label', 'passport-expiry: Year');
 		expect(dd).toHaveAttribute('type', 'string');
 		expect(mm).toHaveAttribute('type', 'string');
 		expect(yyyy).toHaveAttribute('type', 'string');
@@ -173,13 +173,13 @@ describe('Date input', () => {
 		});
 
 		const dd = container.querySelector(
-			'input[aria-label="dd-passport-expiry"]',
+			'input[aria-label="passport-expiry: Day"]',
 		);
 		const mm = container.querySelector(
-			'input[aria-label="mm-passport-expiry"]',
+			'input[aria-label="passport-expiry: Month"]',
 		);
 		const yyyy = container.querySelector(
-			'input[aria-label="yyyy-passport-expiry"]',
+			'input[aria-label="passport-expiry: Year"]',
 		);
 
 		expect(dd).toHaveAttribute('readonly');
@@ -187,7 +187,7 @@ describe('Date input', () => {
 		expect(yyyy).toHaveAttribute('readonly');
 	});
 
-	test('using the monthYearOnly prop', () => {
+	test('using the hideDay prop', () => {
 		const fields: FieldProps[] = [
 			{
 				name: 'month-year-only',
@@ -195,7 +195,7 @@ describe('Date input', () => {
 				hint: 'For example, 11 2007',
 				type: 'date',
 				required: true,
-				monthYearOnly: true,
+				hideDay: true,
 			},
 		];
 		const handleSubmit = jest.fn();
@@ -206,13 +206,13 @@ describe('Date input', () => {
 		});
 
 		const dd = container.querySelector(
-			'input[aria-label="dd-month-year-only"]',
+			'input[aria-label="month-year-only: Day"]',
 		);
 		const mm = container.querySelector(
-			'input[aria-label="mm-month-year-only"]',
+			'input[aria-label="month-year-only: Month"]',
 		);
 		const yyyy = container.querySelector(
-			'input[aria-label="yyyy-month-year-only"]',
+			'input[aria-label="month-year-only: Year"]',
 		);
 
 		expect(dd).toBe(null);
@@ -229,6 +229,51 @@ describe('Date input', () => {
 		expect(handleSubmit).toBeCalledTimes(1);
 		expect(form.getState().values).toEqual({
 			'month-year-only': '2020-10-01',
+		});
+	});
+
+	test('using the hideDay & hideMonth props', () => {
+		const fields: FieldProps[] = [
+			{
+				name: 'month-year-only',
+				label: 'month-year-only',
+				hint: 'For example, 11 2007',
+				type: 'date',
+				required: true,
+				hideDay: true,
+				hideMonth: true,
+			},
+		];
+		const handleSubmit = jest.fn();
+		const { container, form } = formSetup({
+			render: renderFields(fields),
+			validate: validate(fields),
+			onSubmit: handleSubmit,
+		});
+
+		const dd = container.querySelector(
+			'input[aria-label="month-year-only: Day"]',
+		);
+		const mm = container.querySelector(
+			'input[aria-label="month-year-only: Month"]',
+		);
+		const yyyy = container.querySelector(
+			'input[aria-label="month-year-only: Year"]',
+		);
+
+		expect(dd).toBe(null);
+		expect(mm).toBe(null);
+		expect(yyyy).toBeDefined();
+
+		const submit = container.querySelector('button[type="submit"]');
+
+		userEvent.type(yyyy, '2020');
+
+		userEvent.click(submit);
+
+		expect(handleSubmit).toBeCalledTimes(1);
+		expect(form.getState().values).toEqual({
+			'month-year-only': '2020-01-01',
 		});
 	});
 });
