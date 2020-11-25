@@ -37,7 +37,10 @@ export const RadioButton: React.FC<RadioButtonProps> = ({
 				cfg,
 			)}
 		>
-			<label className={styles.wrapper} data-testid={msg}>
+			<label
+				className={`${styles.wrapper} ${disabled ? styles.disabled : ''}`}
+				data-testid={msg}
+			>
 				<HiddenInput
 					type="radio"
 					id={id}

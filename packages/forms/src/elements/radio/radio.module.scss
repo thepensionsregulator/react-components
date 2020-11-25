@@ -8,8 +8,8 @@
 	height: 25px;
 	user-select: none;
 
-	input[type='radio']:focus + .radio{  
-		box-shadow: 0 0 0 4px #ffd300; 
+	input[type='radio']:focus + .radio {
+		box-shadow: 0 0 0 4px #ffd300;
 	}
 
 	.radio {
@@ -23,7 +23,7 @@
 	cursor: pointer;
 }
 
-.wrapper:disabled {
+.disabled {
 	cursor: not-allowed;
 	color: $colors-neutral-7;
 }
