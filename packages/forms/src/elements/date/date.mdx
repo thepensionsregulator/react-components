@@ -47,7 +47,7 @@ import { FFInputDate } from '@tpr/forms';
 		const fields = [
 			{
 				type: 'date',
-				name: 'passport-issued',
+				name: 'passport-issued1',
 				label: 'When was your passport issued?',
 				hint: 'For example, 12 11 2007',
 				error: 'The date your passport was issued must be in the past',
@@ -56,7 +56,74 @@ import { FFInputDate } from '@tpr/forms';
 		return (
 			<Form
 				onSubmit={(val) => console.log(val)}
-				initialValues={{ 'passport-issued': null }}
+				initialValues={{ 'passport-issued1': null }}
+				validate={validate(fields)}
+			>
+				{({ handleSubmit }) => (
+					<form onSubmit={handleSubmit} style={{ padding: 10 }}>
+						{renderFields(fields)}
+						<button type="submit" style={{ display: 'none' }}>
+							Submit
+						</button>
+					</form>
+				)}
+			</Form>
+		);
+	}}
+</Playground>
+
+### hiding Day and only displaying Month & Year
+
+<Playground>
+	{() => {
+		const fields = [
+			{
+				type: 'date',
+				name: 'passport-issued2',
+				label: 'When was your passport issued?',
+				hint: 'For example, 11 2007',
+				error: 'The date your passport was issued must be in the past',
+				hideDay: true,
+			},
+		];
+		return (
+			<Form
+				onSubmit={(val) => console.log(val)}
+				initialValues={{ 'passport-issued2': null }}
+				validate={validate(fields)}
+			>
+				{({ handleSubmit }) => (
+					<form onSubmit={handleSubmit} style={{ padding: 10 }}>
+						{renderFields(fields)}
+						<button type="submit" style={{ display: 'none' }}>
+							Submit
+						</button>
+					</form>
+				)}
+			</Form>
+		);
+	}}
+</Playground>
+
+### hiding Day & Month and only displaying Year
+
+<Playground>
+	{() => {
+		const fields = [
+			{
+				type: 'date',
+				name: 'passport-issued3',
+				label: 'When was your passport issued?',
+				hint: 'For example, 2007',
+				error: 'The year your passport was issued must be in the past',
+				hideDay: true,
+				hideMonth: true,
+			},
+		];
+		return (
+			<Form
+				onSubmit={(val) => console.log(val)}
+				initialValues={{ 'passport-issued3': null }}
 				validate={validate(fields)}
 			>
 				{({ handleSubmit }) => (
@@ -80,11 +147,13 @@ Accepted config props: FlexProps, SpaceProps
 
 ### Props
 
-| Property | Required | Type    | Description                                    |
-| -------- | -------- | ------- | --------------------------------------------   |
-| cfg      | false    | object  | FlexProps & SpaceProps                         |
-| disabled | false    | boolean | Disable date field                             |
-| testId   | false    | string  | data attribute for testers                     |
-| label    | true     | string  | Date field description                         |
-| hint     | false    | string  | More detailed description about the date field |
-| readOnly | false    | boolean | Sets whether the field is read only            |
+| Property  | Required | Type    | Description                                                          |
+| --------- | -------- | ------- | -------------------------------------------------------------------- |
+| cfg       | false    | object  | FlexProps & SpaceProps                                               |
+| disabled  | false    | boolean | Disable date field                                                   |
+| testId    | false    | string  | data attribute for testers                                           |
+| label     | true     | string  | Date field description                                               |
+| hint      | false    | string  | More detailed description about the date field                       |
+| hideDay   | false    | boolean | hides the Day input and assigns a default value of 1 for the day     |
+| hideMonth | false    | boolean | hides the Month input and assigns a default value of 1 for the month |
+| readOnly  | false    | boolean | Sets whether the field is read only                                  |
