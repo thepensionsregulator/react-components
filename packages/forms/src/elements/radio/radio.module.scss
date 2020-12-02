@@ -26,6 +26,10 @@
 .disabled {
 	color: $colors-neutral-6;
 	cursor: not-allowed;
+
+	p {
+		cursor: not-allowed;
+	}
 }
 
 .hint {
