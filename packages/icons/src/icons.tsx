@@ -214,7 +214,7 @@ export const Cross: React.FC<CrossProps> = ({ svgProps, colour }) => {
 			: '#000000'
 		: '#000000';
 	return (
-		<SVG testId="cross" {...svgProps} width="20px">
+		<SVG testId="cross" {...svgProps} width="15px">
 			<line
 				x1="2"
 				x2="20"
