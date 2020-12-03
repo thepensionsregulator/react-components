@@ -1,0 +1,29 @@
+---
+name: Poscon
+menu: Layout
+route: /layout/poscon
+---
+
+import { Playground } from '@playground';
+import { Props } from 'docz';
+import { Poscon } from './poscon';
+
+# Poscon Banner
+
+Positive Confirmation banner component for tpr apps
+
+```js
+import { Poscon } from '@tpr/layout';
+```
+
+<Playground>
+	<Poscon colour={'green'} enableClose={false}>
+		{'Example of a poscon with no dismiss button'}
+	</Poscon>
+</Playground>
+
+<Playground>
+	<Poscon colour={'green'} enableClose={true}>
+		{'Example of a poscon with a dismiss button'}
+	</Poscon>
+</Playground>
