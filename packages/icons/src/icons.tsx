@@ -201,3 +201,38 @@ export const ArrowRight: React.FC<SVGProps> = (props) => {
 		</SVG>
 	);
 };
+
+export type CrossProps = {
+	svgProps?: SVGProps;
+	colour?: 'white' | 'black';
+};
+
+export const Cross: React.FC<CrossProps> = ({ svgProps, colour }) => {
+	const strokeColour = colour
+		? colour === 'white'
+			? '#FFFFFF'
+			: '#000000'
+		: '#000000';
+	return (
+		<SVG testId="cross" {...svgProps} width="20px">
+			<line
+				x1="2"
+				x2="20"
+				y1="2"
+				y2="20"
+				stroke={strokeColour}
+				strokeWidth="2"
+				strokeLinecap="round"
+			/>
+			<line
+				x1="2"
+				x2="20"
+				y1="20"
+				y2="2"
+				stroke={strokeColour}
+				strokeWidth="2"
+				strokeLinecap="round"
+			/>
+		</SVG>
+	);
+};
