@@ -2,6 +2,7 @@ import React, { ChangeEvent } from 'react';
 import { Flex, Button, ButtonProps, ColorProps, P } from '@tpr/core';
 import { ArrowIcon } from './icons';
 import styles from './buttons.module.scss';
+import { Cross } from '@tpr/icons';
 
 export interface ArrowButtonProps extends ButtonProps {
 	title: string;
@@ -57,5 +58,22 @@ export const ArrowButton: React.FC<ArrowButtonProps> = ({
 				</Flex>
 			)}
 		</Button>
+	);
+};
+
+type CrossButtonProps = {
+	colour: 'white' | 'black';
+	onClick: () => void;
+};
+
+export const CrossButton: React.FC<CrossButtonProps> = ({
+	onClick,
+	colour,
+}) => {
+	return (
+		<div className={styles.crossButton}>
+			<Cross colour={colour} />
+			<button type={'button'} onClick={onClick}></button>
+		</div>
 	);
 };
