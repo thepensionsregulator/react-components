@@ -7,6 +7,7 @@ route: /layout/buttons
 import { Playground } from '@playground';
 import { ArrowLink } from './links';
 import { ArrowButton } from './buttons';
+import { CrossButton } from './buttons';
 
 # Buttons and Links
 
@@ -15,7 +16,7 @@ Styled buttons
 ## Basic usage
 
 ```js
-import { ArrowLink, ArrowButton } from '@tpr/layout';
+import { ArrowLink, ArrowButton, CrossButton } from '@tpr/layout';
 ```
 
 ### Link Arrows based on the left
@@ -159,5 +160,27 @@ import { ArrowLink, ArrowButton } from '@tpr/layout';
 		onClick={() => console.log('clicked')}
 		disabled
 		disabledText="Loading..."
+	/>
+</Playground>
+
+### Cross (black)
+
+<Playground>
+	<CrossButton
+		colour={'black'}
+		onClick={() => {
+			console.log('clicked');
+		}}
+	/>
+</Playground>
+
+### Cross (white)
+
+<Playground>
+	<CrossButton
+		colour={'white'}
+		onClick={() => {
+			console.log('clicked');
+		}}
 	/>
 </Playground>

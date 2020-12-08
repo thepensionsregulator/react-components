@@ -8,6 +8,7 @@
 		"postbuild": "npm run bundle",
 		"test": "jest",
 		"test:watch": "jest --watch",
+		"test:clean": "jest --no-cache",
 		"posttest": "yarn lint",
 		"lint": "prettier --list-different --write \"packages/*/src/**/*.{ts,tsx}\"",
 		"lint-fix": "prettier --write \"packages/*/src/**/*.{ts,tsx}\"",

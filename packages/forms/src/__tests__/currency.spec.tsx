@@ -4,6 +4,10 @@ import { FFInputCurrency } from '../elements/currency/currency';
 import { axe } from 'jest-axe';
 import userEvent from '@testing-library/user-event';
 import { fireEvent } from '@testing-library/react';
+import {
+	calculateCursorPosition,
+	getNumberOfCommas,
+} from '../elements/helpers';
 
 const testId = 'currency-input';
 
@@ -180,6 +184,156 @@ describe('Currency', () => {
 				expect(getByTestId(testId)).toHaveValue('45,000.00');
 			}, 100);
 			expect(validateExecuted).toEqual(true);
+		});
+	});
+
+	describe('testing helper function: getNumberOfCommas', () => {
+		test('no value & no pos? received', () => {
+			const commasNull = getNumberOfCommas(null);
+			const commasUndefined = getNumberOfCommas(undefined);
+			expect(commasNull).toBe(0);
+			expect(commasUndefined).toBe(0);
+		});
+
+		test('value received, no pos? received', () => {
+			const commas = getNumberOfCommas('111,222,333.44');
+			expect(commas).toBe(2);
+		});
+
+		test('value received, with no commas before pos? received', () => {
+			const commas = getNumberOfCommas('111,222,333.44', 2);
+			expect(commas).toBe(0);
+		});
+
+		test('value received, with commas before pos? received', () => {
+			const commas = getNumberOfCommas('111,222,333.44', 6);
+			expect(commas).toBe(1);
+		});
+	});
+
+	describe('testing helper function: calculateCursorPosition', () => {
+		describe('cursor at the beggining', () => {
+			const prevValue = '1,223.55';
+
+			test('new value is greater', () => {
+				// '1,223.55' & cursor:0 & commasBefore:0
+				// add a new digit '1' => value: '11,223.55'
+				const myFakeEvent = {
+					target: {
+						selectionStart: 9,
+						selectionEnd: 9,
+						value: '11,223.55',
+					},
+				};
+				const newCursorPosition = calculateCursorPosition(
+					0,
+					myFakeEvent,
+					prevValue,
+					0,
+				);
+				expect(newCursorPosition).toStrictEqual([1, 1]);
+			});
+
+			test('new value is smaller', () => {
+				// '1,223.55' & cursor:0 & commasBefore:0
+				// pressing 'Delete' key => value: '223.55'
+				const myFakeEvent = {
+					target: {
+						selectionStart: 6,
+						selectionEnd: 6,
+						value: '223.55',
+					},
+				};
+				const newCursorPosition = calculateCursorPosition(
+					0,
+					myFakeEvent,
+					prevValue,
+					0,
+				);
+				expect(newCursorPosition).toStrictEqual([0, 0]);
+			});
+		});
+
+		describe('cursor not at the beggining', () => {
+			test('new value is greater and contains same number of commas', () => {
+				// '1,112,223.55' & cursor:4 (before '2') & commasBefore:1
+				// type '3' using => value: '11,132,223.55'
+				const prevValue = '1,112,223.55';
+				const myFakeEvent = {
+					target: {
+						selectionStart: 13,
+						selectionEnd: 13,
+						value: '11,132,223.55',
+					},
+				};
+				const newCursorPosition = calculateCursorPosition(
+					4,
+					myFakeEvent,
+					prevValue,
+					1,
+				);
+				expect(newCursorPosition).toStrictEqual([5, 5]);
+			});
+
+			test('new value is greater and contains more number of commas', () => {
+				// '112,223.55' & cursor:6 (before '3') & commasBefore:1
+				// type '4' using => value: '1,122,243.55'
+				const prevValue = '112,223.55';
+				const myFakeEvent = {
+					target: {
+						selectionStart: 12,
+						selectionEnd: 12,
+						value: '1,122,243.55',
+					},
+				};
+				const newCursorPosition = calculateCursorPosition(
+					6,
+					myFakeEvent,
+					prevValue,
+					1,
+				);
+				expect(newCursorPosition).toStrictEqual([8, 8]);
+			});
+
+			test('new value is smaller and contains same number of commas', () => {
+				// '11,112,223.55' & cursor:9 (before '3') & commasBefore:2
+				// delete '2' using 'Backspace' key => value: '1,111,223.55'
+				const prevValue = '11,112,223.55';
+				const myFakeEvent = {
+					target: {
+						selectionStart: 10,
+						selectionEnd: 10,
+						value: '1,111,223.55',
+					},
+				};
+				const newCursorPosition = calculateCursorPosition(
+					9,
+					myFakeEvent,
+					prevValue,
+					2,
+				);
+				expect(newCursorPosition).toStrictEqual([8, 8]);
+			});
+
+			test('new value is smaller and contains less number of commas', () => {
+				// '1,112,223.55' & cursor:9 (after '3') & commasBefore:2
+				// delete '3' using 'Backspace' key => value: '111,222.55'
+				const prevValue = '1,112,223.55';
+				const myFakeEvent = {
+					target: {
+						selectionStart: 10,
+						selectionEnd: 10,
+						value: '111,222.55',
+					},
+				};
+				const newCursorPosition = calculateCursorPosition(
+					9,
+					myFakeEvent,
+					prevValue,
+					2,
+				);
+				expect(newCursorPosition).toStrictEqual([7, 7]);
+			});
 		});
 	});
 });
