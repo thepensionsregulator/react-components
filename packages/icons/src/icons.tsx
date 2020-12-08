@@ -16,6 +16,9 @@ type SVGProps = Partial<{
 	viewBox: string;
 	/** test id for testing */
 	testId: string;
+	/** for accessibility */
+	role: string;
+	ariaLabel: string;
 }>;
 
 export const SVG: React.FC<SVGProps> = ({
@@ -26,6 +29,8 @@ export const SVG: React.FC<SVGProps> = ({
 	className,
 	viewBox = '0 0 24 24',
 	testId,
+	role,
+	ariaLabel,
 	children,
 }) => {
 	const classNames = useClassNames(cfg, [className]);
@@ -40,6 +45,8 @@ export const SVG: React.FC<SVGProps> = ({
 			className={classNames}
 			xmlnsXlink="http://www.w3.org/1999/xlink"
 			data-testid={testId}
+			role={role}
+			aria-label={ariaLabel}
 		>
 			{children}
 		</svg>
@@ -198,6 +205,38 @@ export const ArrowRight: React.FC<SVGProps> = (props) => {
 		<SVG testId="arrow-down" {...props}>
 			<path d="M0 0h24v24H0V0z" fill="none" />
 			<path d="M8.59 16.59L13.17 12 8.59 7.41 10 6l6 6-6 6-1.41-1.41z" />
+		</SVG>
+	);
+};
+
+export type CrossProps = {
+	svgProps?: SVGProps;
+	colour?: 'white' | 'black';
+};
+
+export const Cross: React.FC<CrossProps> = ({ svgProps, colour }) => {
+	const strokeColour = colour || 'black';
+
+	return (
+		<SVG testId="cross" {...svgProps} width="20px">
+			<line
+				x1="2"
+				x2="20"
+				y1="2"
+				y2="20"
+				stroke={strokeColour}
+				strokeWidth="2"
+				strokeLinecap="round"
+			/>
+			<line
+				x1="2"
+				x2="20"
+				y1="20"
+				y2="2"
+				stroke={strokeColour}
+				strokeWidth="2"
+				strokeLinecap="round"
+			/>
 		</SVG>
 	);
 };
