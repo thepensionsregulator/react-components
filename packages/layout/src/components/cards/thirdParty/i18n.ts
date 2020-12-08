@@ -87,7 +87,7 @@ export const i18n: ThirdPartyI18nProps = {
 			title: 'Are you sure you want to remove this third party admin?',
 			dialog: {
 				message1:
-					'Removing an third party admin here does not absolve them of their legal responsabilities. You must ensure that all nescessary steps to administer their withdrawl or cessation have been carried out before proceeding.',
+					'Removing an third party admin here does not absolve them of their legal responsabilities. You must ensure that all necessary steps to administer their withdrawal or cessation have been carried out before proceeding.',
 				message2: "This can't be undone.",
 			},
 			buttons: {
