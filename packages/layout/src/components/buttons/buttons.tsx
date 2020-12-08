@@ -71,9 +71,8 @@ export const CrossButton: React.FC<CrossButtonProps> = ({
 	colour,
 }) => {
 	return (
-		<div className={styles.crossButton}>
-			<Cross colour={colour} />
-			<button type={'button'} onClick={onClick}></button>
-		</div>
+		<button type={'button'} onClick={onClick} className={styles.crossButton}>
+			<Cross colour={colour} svgProps={{ role: 'img', ariaLabel: 'Close' }} />
+		</button>
 	);
 };
