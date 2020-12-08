@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { ColorsFullRange, Flex } from '@tpr/core';
+import { ColorsFullRange, Flex, ValuesFullRange } from '@tpr/core';
 import { CrossButton } from '../buttons/buttons';
 import Styles from './poscon.module.scss';
 
@@ -27,31 +27,46 @@ export const Poscon: React.FC<PosconProps> = ({
 const ClosablePoscon: React.FC<ColorProps> = ({ color, children }) => {
 	const [closed, setClosed] = useState<boolean>(false);
 	return !closed ? (
-		<div role="alert">
-			<Flex cfg={{ justifyContent: 'space-between', bg: color }}>
-				<div></div>
-				<div className={Styles.content}>{children}</div>
-				<div className={Styles.enableClose}>
-					<CrossButton
-						colour={'white'}
-						onClick={() => {
-							setClosed(!closed);
-						}}
-					/>
-				</div>
-			</Flex>
-		</div>
+		<PersistentPoscon color={color} pt={4}>
+			<div className={Styles.enableClose}>
+				<CrossButton
+					colour={'white'}
+					onClick={() => {
+						setClosed(!closed);
+					}}
+				/>
+			</div>
+			{children}
+		</PersistentPoscon>
 	) : (
 		<></>
 	);
 };
 
-const PersistentPoscon: React.FC<ColorProps> = ({ color, children }) => {
+export type PersistentPosconProps = {
+	color?: ColorsFullRange;
+	pt?: ValuesFullRange;
+};
+
+const PersistentPoscon: React.FC<PersistentPosconProps> = ({
+	color,
+	pt = 8,
+	children,
+}) => {
 	return (
-		<div role="alert">
-			<Flex cfg={{ justifyContent: 'center', bg: color, py: 8 }}>
-				{children}
-			</Flex>
-		</div>
+		<Flex
+			cfg={{
+				alignItems: 'center',
+				justifyContent: 'center',
+				bg: color,
+				pb: 6,
+				pt: pt,
+				flexDirection: 'column',
+				textAlign: 'center',
+			}}
+			role="alert"
+		>
+			{children}
+		</Flex>
 	);
 };
