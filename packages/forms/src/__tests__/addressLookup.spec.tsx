@@ -4,7 +4,6 @@ import { findByText, fireEvent } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { axe } from 'jest-axe';
 import { AddressLookup, AddressProps } from '../elements/address/addressLookup';
-import { Address } from '../elements/address/address';
 
 const exampleAddress = {
 	addressLine1: 'Napier House',
