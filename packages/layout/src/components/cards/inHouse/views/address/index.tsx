@@ -12,15 +12,12 @@ const AddressPage: React.FC = () => {
 	const [loading, setLoading] = useState(false);
 
 	const onSubmit = async (values) => {
-		setLoading(true);
 		try {
 			const { address, ...inHouseAdminValues } = current.context.inHouseAdmin;
 			await onSaveAddress(values, Object.assign(inHouseAdminValues, address));
 			send('SAVE', { values });
-			setLoading(false);
 		} catch (error) {
 			console.log(error);
-			setLoading(false);
 		}
 	};
 
