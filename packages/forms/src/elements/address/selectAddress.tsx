@@ -41,7 +41,6 @@ export const SelectAddress: React.FC<SelectAddressProps> = ({
 	selectAddressRequiredMessage,
 	noAddressesFoundMessage,
 }) => {
-
 	// if missing fields are undefined rather than empty string they remain at their previous values
 	function ensureNoUndefinedFields(addresses: Address[]) {
 		return addresses && addresses.length

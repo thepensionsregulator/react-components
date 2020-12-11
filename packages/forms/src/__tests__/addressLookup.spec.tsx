@@ -4,6 +4,7 @@ import { findByText, fireEvent } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { axe } from 'jest-axe';
 import { AddressLookup, AddressProps } from '../elements/address/addressLookup';
+import FakeAddressLookupProvider from '../elements/address/fakeAddressLookupProvider';
 
 const exampleAddress = {
 	addressLine1: 'Napier House',
@@ -16,13 +17,15 @@ const exampleAddress = {
 	countryId: 229,
 };
 
+const addressLookupProvider = new FakeAddressLookupProvider();
+
 const defaultProps: AddressProps = {
-	onPostcodeChanged: () => [],
-	onAddressSaved: () => {},
 	loading: false,
+	setLoading: () => {},
 	invalidPostcodeMessage: 'Enter a valid postcode',
 	postcodeLookupLabel: 'Postcode',
 	postcodeLookupButton: 'Find address',
+	addressLookupProvider: addressLookupProvider,
 	changePostcodeButton: 'Change postcode',
 	selectAddressLabel: 'Select an address',
 	selectAddressButton: 'Select address',
@@ -37,7 +40,6 @@ const defaultProps: AddressProps = {
 	postcodeLabel: 'Postcode',
 	countryLabel: 'Country',
 	changeAddressButton: 'I need to change the address',
-	saveAddressButton: 'Save address',
 };
 
 function searchForAPostcode(container: HTMLElement, postcode: string) {
@@ -49,26 +51,18 @@ function searchForAPostcode(container: HTMLElement, postcode: string) {
 	fireEvent.click(submit);
 }
 
-function findFirstOptionInSelect(container: HTMLElement) {
+function openAddressDropdown(container: HTMLElement) {
 	const openSelect = container.querySelector(
 		'button[data-testid="select-address-list-button"]',
 	);
 	fireEvent.click(openSelect);
-
-	return container.querySelector('div[role="option"]');
 }
 
 describe('Address lookup', () => {
 	describe('postcode lookup view', () => {
 		test('to be the default when initialValue is null', async () => {
 			const { getByTestId } = formSetup({
-				render: (
-					<AddressLookup
-						{...defaultProps}
-						onPostcodeChanged={() => []}
-						onAddressSaved={() => {}}
-					/>
-				),
+				render: <AddressLookup {...defaultProps} />,
 			});
 
 			expect(getByTestId('postcode-lookup-edit')).toBeInTheDocument();
@@ -76,14 +70,7 @@ describe('Address lookup', () => {
 
 		test('to be the default when all properties of initialValue are falsy', async () => {
 			const { getByTestId } = formSetup({
-				render: (
-					<AddressLookup
-						{...defaultProps}
-						initialValue={{}}
-						onPostcodeChanged={() => []}
-						onAddressSaved={() => {}}
-					/>
-				),
+				render: <AddressLookup {...defaultProps} initialValue={{}} />,
 			});
 
 			expect(getByTestId('postcode-lookup-edit')).toBeInTheDocument();
@@ -91,13 +78,7 @@ describe('Address lookup', () => {
 
 		test('passes accessibility checks', async () => {
 			const { container } = formSetup({
-				render: (
-					<AddressLookup
-						{...defaultProps}
-						onPostcodeChanged={() => []}
-						onAddressSaved={() => {}}
-					/>
-				),
+				render: <AddressLookup {...defaultProps} />,
 			});
 			const results = await axe(container);
 			expect(results).toHaveNoViolations();
@@ -105,13 +86,7 @@ describe('Address lookup', () => {
 
 		test('should go to select address view when button is clicked', async () => {
 			const { container } = formSetup({
-				render: (
-					<AddressLookup
-						{...defaultProps}
-						onPostcodeChanged={() => []}
-						onAddressSaved={() => {}}
-					/>
-				),
+				render: <AddressLookup {...defaultProps} />,
 			});
 
 			searchForAPostcode(container, exampleAddress.postcode);
@@ -125,13 +100,7 @@ describe('Address lookup', () => {
 
 		test('should validate the postcode when button is clicked', async () => {
 			const { container } = formSetup({
-				render: (
-					<AddressLookup
-						{...defaultProps}
-						onPostcodeChanged={() => []}
-						onAddressSaved={() => {}}
-					/>
-				),
+				render: <AddressLookup {...defaultProps} />,
 			});
 
 			searchForAPostcode(container, 'AB12 3MV'); // invalid postcode due to MV in the incode
@@ -148,13 +117,7 @@ describe('Address lookup', () => {
 	describe('select address view', () => {
 		test('passes accessibility checks', async () => {
 			const { container } = formSetup({
-				render: (
-					<AddressLookup
-						{...defaultProps}
-						onPostcodeChanged={() => []}
-						onAddressSaved={() => {}}
-					/>
-				),
+				render: <AddressLookup {...defaultProps} />,
 			});
 
 			searchForAPostcode(container, exampleAddress.postcode);
@@ -165,13 +128,7 @@ describe('Address lookup', () => {
 
 		test('should display the postcode', async () => {
 			const { container } = formSetup({
-				render: (
-					<AddressLookup
-						{...defaultProps}
-						onPostcodeChanged={() => []}
-						onAddressSaved={() => {}}
-					/>
-				),
+				render: <AddressLookup {...defaultProps} />,
 			});
 
 			searchForAPostcode(container, exampleAddress.postcode);
@@ -183,46 +140,41 @@ describe('Address lookup', () => {
 
 		test('should list matching addresses', async () => {
 			const { container } = formSetup({
-				render: (
-					<AddressLookup
-						{...defaultProps}
-						onPostcodeChanged={() => [exampleAddress]}
-						onAddressSaved={() => {}}
-					/>
-				),
+				render: <AddressLookup {...defaultProps} />,
 			});
 
 			searchForAPostcode(container, exampleAddress.postcode);
 
-			const option = findFirstOptionInSelect(container);
+			openAddressDropdown(container);
 
-			expect(option.textContent).toMatch(exampleAddress.addressLine1);
+			setTimeout(() => {
+				const option = container.querySelector('div[role="option"]');
+				expect(option.textContent).toMatch(exampleAddress.addressLine1);
+			}, 1000);
 		});
 
 		test('should pass selected address to edit address view', async () => {
 			const { container } = formSetup({
-				render: (
-					<AddressLookup
-						{...defaultProps}
-						onPostcodeChanged={() => [exampleAddress]}
-						onAddressSaved={() => {}}
-					/>
-				),
+				render: <AddressLookup {...defaultProps} />,
 			});
 
 			searchForAPostcode(container, exampleAddress.postcode);
 
-			const option = findFirstOptionInSelect(container);
-			fireEvent.click(option);
+			openAddressDropdown(container);
 
-			const selectAddress = container.querySelector(
-				'button[data-testid$="select-address-button"]',
-			);
-			fireEvent.click(selectAddress);
+			setTimeout(() => {
+				const option = container.querySelector('div[role="option"]');
+				fireEvent.click(option);
 
-			const input = container.querySelector('input[name="addressLine1"]');
+				const selectAddress = container.querySelector(
+					'button[data-testid$="select-address-button"]',
+				);
+				fireEvent.click(selectAddress);
 
-			expect(input).toHaveAttribute('value', exampleAddress.addressLine1);
+				const input = container.querySelector('input[name="addressLine1"]');
+
+				expect(input).toHaveAttribute('value', exampleAddress.addressLine1);
+			}, 1000);
 		});
 	});
 
@@ -230,12 +182,7 @@ describe('Address lookup', () => {
 		test('to be the default when initialValue is not null', async () => {
 			const { container } = formSetup({
 				render: (
-					<AddressLookup
-						{...defaultProps}
-						initialValue={exampleAddress}
-						onPostcodeChanged={() => []}
-						onAddressSaved={() => {}}
-					/>
+					<AddressLookup {...defaultProps} initialValue={exampleAddress} />
 				),
 			});
 
@@ -246,12 +193,7 @@ describe('Address lookup', () => {
 		test('passes accessibility checks', async () => {
 			const { container } = formSetup({
 				render: (
-					<AddressLookup
-						{...defaultProps}
-						initialValue={exampleAddress}
-						onPostcodeChanged={() => []}
-						onAddressSaved={() => {}}
-					/>
+					<AddressLookup {...defaultProps} initialValue={exampleAddress} />
 				),
 			});
 			const results = await axe(container);
@@ -261,12 +203,7 @@ describe('Address lookup', () => {
 		test('to go to postcode lookup view when button clicked', async () => {
 			const { container } = formSetup({
 				render: (
-					<AddressLookup
-						{...defaultProps}
-						initialValue={exampleAddress}
-						onPostcodeChanged={() => []}
-						onAddressSaved={() => {}}
-					/>
+					<AddressLookup {...defaultProps} initialValue={exampleAddress} />
 				),
 			});
 

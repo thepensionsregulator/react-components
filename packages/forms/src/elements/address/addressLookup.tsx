@@ -95,18 +95,20 @@ export const AddressLookup: React.FC<AddressProps> = ({
 					onPostcodeChanged={(newPostcode) => {
 						setPostcode(newPostcode);
 						setLoading(true);
-						addressLookupProvider.lookupAddress(newPostcode)
+						addressLookupProvider
+							.lookupAddress(newPostcode)
 							.then((rawAddresses) => {
-									addressLookupProvider.transformResults(rawAddresses)
-									.then((processedResults) =>{
+								addressLookupProvider
+									.transformResults(rawAddresses)
+									.then((processedResults) => {
 										setAddresses(processedResults);
 										setLoading(false);
 									});
-						})
-						.catch((err) => {
-							console.log(err);
-							setLoading(false);
-						});
+							})
+							.catch((err) => {
+								console.log(err);
+								setLoading(false);
+							});
 						setAddressView(AddressView.SelectAddress);
 					}}
 					invalidPostcodeMessage={invalidPostcodeMessage}

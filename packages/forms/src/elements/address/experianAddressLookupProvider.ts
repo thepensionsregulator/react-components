@@ -1,63 +1,64 @@
-import { AddressAPIType } from "@tpr/layout/lib/components/cards/common/interfaces";
-import { Address } from "./address";
-import { AddressLookupProvider } from "./addressLookupProvider";
+import { AddressAPIType } from '@tpr/layout/lib/components/cards/common/interfaces';
+import { Address } from './address';
+import { AddressLookupProvider } from './addressLookupProvider';
 
 export class ExperianAddressLookupProvider implements AddressLookupProvider {
-  private addressApi;
+	private addressApi;
 
-  public constructor(addressApi: AddressAPIType){
-    this.addressApi = addressApi;
-  }
+	public constructor(addressApi: AddressAPIType) {
+		this.addressApi = addressApi;
+	}
 
-  public lookupAddress(postcode: string, limit = 50): Promise<any> {
-    return this.addressApi.get(
-      `search?country=GBR&query=${postcode}&take=${limit}`,
-    )
-  }
-    
-  public transformResults(response: { data: any }): Promise<Address[]> {
-    if (
-      response &&
-      Array.isArray(response.data.results) &&
-      response.data.results.length > 0
-    ) {
-      return Promise.all(
-        response.data.results.map(({ format }: { format: string }) => {
-          const [url] = format.split('v2/').slice(-1);
-          return this.addressApi.get(url).then(({ data }) => {
-            const addressObject = this.extractToObject(data.address);
+	public lookupAddress(postcode: string, limit = 50): Promise<any> {
+		return this.addressApi.get(
+			`search?country=GBR&query=${postcode}&take=${limit}`,
+		);
+	}
 
-            const addressToOurFormat = {
-              addressLine1: addressObject.addressLine1 || '',
-              addressLine2: addressObject.addressLine2 || '',
-              addressLine3: addressObject.addressLine3 || '',
-              postTown: addressObject.locality || '',
-              postcode: addressObject.postalCode || '',
-              county: addressObject.province || '',
-              country: addressObject.country || '',
-            };
+	public transformResults(response: { data: any }): Promise<Address[]> {
+		if (
+			response &&
+			Array.isArray(response.data.results) &&
+			response.data.results.length > 0
+		) {
+			return Promise.all(
+				response.data.results.map(({ format }: { format: string }) => {
+					const [url] = format.split('v2/').slice(-1);
+					return this.addressApi.get(url).then(({ data }) => {
+						const addressObject = this.extractToObject(data.address);
 
-            return addressToOurFormat;
-          });
-        }),
-      )} else {
-        return Promise.resolve([]);
-      }
-  };
+						const addressToOurFormat = {
+							addressLine1: addressObject.addressLine1 || '',
+							addressLine2: addressObject.addressLine2 || '',
+							addressLine3: addressObject.addressLine3 || '',
+							postTown: addressObject.locality || '',
+							postcode: addressObject.postalCode || '',
+							county: addressObject.province || '',
+							country: addressObject.country || '',
+						};
 
-  private extractToObject (address: object[] = []): { [key: string]: string } {
-    return address.reduce((acc: any, val: any) => {
-      const [key] = Object.keys(val);
-      if (key) {
-        return {
-          ...acc,
-          [key]: val[key],
-        };
-      } else {
-        return acc;
-      }
-    }, {});
-  }
+						return addressToOurFormat;
+					});
+				}),
+			);
+		} else {
+			return Promise.resolve([]);
+		}
+	}
+
+	private extractToObject(address: object[] = []): { [key: string]: string } {
+		return address.reduce((acc: any, val: any) => {
+			const [key] = Object.keys(val);
+			if (key) {
+				return {
+					...acc,
+					[key]: val[key],
+				};
+			} else {
+				return acc;
+			}
+		}, {});
+	}
 }
 
 export default ExperianAddressLookupProvider;
