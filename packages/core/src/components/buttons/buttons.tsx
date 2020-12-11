@@ -70,6 +70,11 @@ export type LinkProps = {
 	className?: string;
 	underline?: boolean;
 	testId?: string;
+	anchorTag?: boolean;
+	buttonAppearance?: boolean;
+	appearance?: 'primary' | 'outlined';
+	intent?: 'none' | 'success' | 'warning' | 'danger' | 'special';
+	size?: 'small' | 'medium' | 'large';
 	[key: string]: any;
 };
 export const Link: React.FC<LinkProps> = ({
@@ -77,19 +82,32 @@ export const Link: React.FC<LinkProps> = ({
 	underline = false,
 	className,
 	testId,
+	anchorTag,
+	buttonAppearance,
+	appearance = 'primary',
+	intent = 'none',
+	size = 'medium',
 	children,
 	...props
 }) => {
-	const classNames = useClassNames(globalStyles, [
+	const classNames = buttonAppearance ? useClassNames(globalStyles, [
+		styles.button,
+		styles[`appearance-${appearance}`],
+		styles[`intent-${intent}`],
+		styles[`size-${size}`],
+		buttonAppearance && styles[`link-button-${size}`],
+		className,
+	])
+	: useClassNames(globalStyles, [
 		styles.link,
 		{ [styles['link-underline']]: underline },
 		className,
 	]);
 
 	return React.createElement(
-		'button',
+		anchorTag ? 'a' :	'button',
 		{
-			type: 'button',
+			type: anchorTag ? null : 'button',
 			'data-testid': testId,
 			className: classNames,
 			...props,
