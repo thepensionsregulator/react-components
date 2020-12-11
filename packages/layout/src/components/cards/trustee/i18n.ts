@@ -1,51 +1,6 @@
 import { I18nRemoveReason } from '../common/interfaces';
 
 export type TrusteeI18nProps = {
-	address: {
-		title: string;
-		postcode: {
-			title: string;
-			link: string;
-			button: string;
-			regExPattern?: string;
-		};
-		auto: {
-			title: string;
-			subtitle: string;
-			dropdown: {
-				placeholder: string;
-				link: string;
-				error: string;
-			};
-			fields: {
-				postcode: {
-					invalidError?: string;
-				};
-			};
-		};
-		manual: {
-			subtitle: string;
-			fields: {
-				addressLine1: {
-					label: string;
-					emptyError?: string;
-					invalidError: string;
-				};
-				addressLine2: { label: string; error?: string };
-				addressLine3: { label: string; error?: string };
-				postTown: {
-					label: string;
-					emptyError?: string;
-				};
-				postcode: {
-					label: string;
-					invalidError?: string;
-					emptyError?: string;
-				};
-				county: { label: string; error?: string };
-			};
-		};
-	};
 	contacts: {
 		title: string;
 		subtitle: string;
@@ -127,55 +82,6 @@ export type TrusteeI18nProps = {
 };
 
 export const i18n: TrusteeI18nProps = {
-	address: {
-		title: 'What is this trustee’s address?',
-		postcode: {
-			button: 'Find Address',
-			title: 'Postcode',
-			link: 'Change',
-			regExPattern: '^[a-z]{1,2}\\d[a-z\\d]?\\d?[a-z]{0,2}$',
-		},
-		auto: {
-			title: 'Address',
-			subtitle: "Find the trustee's correspondence address",
-			fields: {
-				postcode: {
-					invalidError: 'Incorrect postcode format',
-				},
-			},
-			dropdown: {
-				placeholder: 'Please select the address from the dropdown',
-				link: "I can't find my address in the list",
-				error:
-					'Please select one of the address from the dropdown menu. If you cannot find your address, please click the link below to enter it manually.',
-			},
-		},
-		manual: {
-			subtitle: 'Enter the trustee’s correspondence address manually.',
-			fields: {
-				addressLine1: {
-					label: 'Address line 1',
-					emptyError: 'This is a required field',
-					invalidError: 'Must be at least 2 chars',
-				},
-				addressLine2: { label: 'Address line 2' },
-				addressLine3: { label: 'Address line 3' },
-				postTown: {
-					label: 'City',
-					emptyError: 'This is a required field',
-				},
-				postcode: {
-					label: 'Postcode',
-					emptyError: 'This is a required field',
-					invalidError: 'Incorrect postcode format',
-				},
-				county: {
-					label: 'County',
-					error: 'This is a required field',
-				},
-			},
-		},
-	},
 	contacts: {
 		title: 'Contact details for this trustee',
 		subtitle:
