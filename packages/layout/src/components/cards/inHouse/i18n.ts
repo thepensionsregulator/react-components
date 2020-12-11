@@ -1,7 +1,7 @@
+import { I18nAddressLookup, i18n as AddressI18n } from '@tpr/forms';
+
 export type InHouseAdminI18nProps = {
-	address: {
-		title: string;
-	};
+	address: I18nAddressLookup;
 	preview: {
 		buttons: {
 			one: string;
@@ -81,6 +81,7 @@ export type InHouseAdminI18nProps = {
 export const i18n: InHouseAdminI18nProps = {
 	address: {
 		title: 'What is this in house admin’s address?',
+		...AddressI18n
 	},
 	preview: {
 		buttons: {

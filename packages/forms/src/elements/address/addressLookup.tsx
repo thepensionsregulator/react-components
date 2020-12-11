@@ -30,7 +30,6 @@ export type AddressProps = {
 	postcodeLabel: string;
 	countryLabel: string;
 	changeAddressButton: string;
-	changeAddressAriaLabel?: string;
 };
 
 enum AddressView {
@@ -64,7 +63,6 @@ export const AddressLookup: React.FC<AddressProps> = ({
 	postcodeLabel,
 	countryLabel,
 	changeAddressButton,
-	changeAddressAriaLabel,
 }) => {
 	// Start in postcode lookup view, unless there's already an address in which case start in edit address view
 	let initialView = AddressView.PostcodeLookup;
@@ -157,7 +155,6 @@ export const AddressLookup: React.FC<AddressProps> = ({
 					postcodeLabel={postcodeLabel}
 					countryLabel={countryLabel}
 					changeAddressButton={changeAddressButton}
-					changeAddressAriaLabel={changeAddressAriaLabel}
 				/>
 			)}
 		</>

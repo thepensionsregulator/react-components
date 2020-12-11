@@ -22,7 +22,6 @@ type EditAddressProps = {
 	postcodeLabel: string;
 	countryLabel: string;
 	changeAddressButton: string;
-	changeAddressAriaLabel?: string;
 };
 
 export const EditAddress: React.FC<EditAddressProps> = React.memo(
@@ -41,7 +40,6 @@ export const EditAddress: React.FC<EditAddressProps> = React.memo(
 		postcodeLabel,
 		countryLabel,
 		changeAddressButton,
-		changeAddressAriaLabel,
 	}) => {
 		const form = useForm();
 
@@ -182,7 +180,6 @@ export const EditAddress: React.FC<EditAddressProps> = React.memo(
 					onClick={onChangeAddressClick}
 					testId={(testId ? testId + '-' : '') + 'change-address'}
 					className={styles.button}
-					aria-label={changeAddressAriaLabel}
 				>
 					{changeAddressButton}
 				</Link>

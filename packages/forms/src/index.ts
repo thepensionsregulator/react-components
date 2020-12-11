@@ -3,6 +3,7 @@ export * from './elements/address/addressComparer';
 export * from './elements/address/addressLookup';
 export * from './elements/address/addressLookupProvider';
 export * from './elements/address/experianAddressLookupProvider';
+export * from './elements/address/i18nAddressLookup';
 export * from './elements/text/text';
 export * from './elements/date/date';
 export * from './elements/phone/phone';

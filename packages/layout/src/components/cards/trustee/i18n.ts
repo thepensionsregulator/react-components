@@ -1,9 +1,8 @@
+import { I18nAddressLookup, i18n as AddressI18n } from '@tpr/forms';
 import { I18nRemoveReason } from '../common/interfaces';
 
 export type TrusteeI18nProps = {
-	address: {
-		title: string;
-	};
+	address: I18nAddressLookup;
 	contacts: {
 		title: string;
 		subtitle: string;
@@ -87,6 +86,7 @@ export type TrusteeI18nProps = {
 export const i18n: TrusteeI18nProps = {
 	address: {
 		title: 'What is this trustee’s address?',
+		...AddressI18n
 	},
 	contacts: {
 		title: 'Contact details for this trustee',
