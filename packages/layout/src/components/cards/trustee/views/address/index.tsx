@@ -1,21 +1,15 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { useTrusteeContext } from '../../context';
 import { Content } from '../../../components/content';
-import useSetState from '../../../hooks/use-set-state';
 import { Footer } from '../../../components/card';
 import { ArrowButton } from '../../../../buttons/buttons';
 import { cardType } from '../../../common/interfaces';
-import { ExperianAddressLookupProvider, Form } from '@tpr/forms';
-import { AddressLookup } from '@tpr/forms';
-
+import { ExperianAddressLookupProvider, Form, AddressLookup } from '@tpr/forms';
 
 const AddressPage: React.FC = () => {
 	const { current, i18n, send, addressAPI } = useTrusteeContext();
 	const { trustee } = current.context;
-	const [state, setState] = useSetState({
-		loading: false
-	});
-	const { loading } = state;
+	const [loading, setLoading] = useState(false);
 
 	const onSubmit = (values) => {
 		send('SAVE', { address: values || {} });
@@ -34,7 +28,7 @@ const AddressPage: React.FC = () => {
 							<>
 							<AddressLookup
 								loading={loading}
-								setLoading={(loading: boolean) => { setState({ loading: loading })}}
+								setLoading={(loading: boolean) => { setLoading(loading)}}
 								initialValue={trustee.address}
 								addressLookupProvider={addressLookupProvider}
 								invalidPostcodeMessage="Enter a valid postcode"

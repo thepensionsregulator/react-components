@@ -1,27 +1,31 @@
-import React from 'react';
-import { Flex } from '@tpr/core';
+import React, { useState } from 'react';
 import { useInHouseAdminContext } from '../../context';
 import { Content } from '../../../components/content';
-import useSetState from '../../../hooks/use-set-state';
-import AutoComplete from './AutoComplete';
-import ManualComplete from './ManualComplete';
-import Postcode from '../../../common/views/address/Postcode';
+import { Footer } from '../../../components/card';
+import { ArrowButton } from '../../../../buttons/buttons';
 import { cardType, cardTypeName } from '../../../common/interfaces';
-import { Form } from '@tpr/forms';
+import { ExperianAddressLookupProvider, Form, AddressLookup } from '@tpr/forms';
 
-export const AddressPage: React.FC = () => {
-	const { current, i18n, addressAPI } = useInHouseAdminContext();
+const AddressPage: React.FC = () => {
+	const { current, i18n, send, addressAPI, onSaveAddress } = useInHouseAdminContext();
 	const { inHouseAdmin } = current.context;
-	const [state, setState] = useSetState({
-		loading: false,
-		manual: false,
-		postcode: inHouseAdmin.address.postcode,
-		lookup: false,
-		options: [],
-		selectedItem: {},
-	});
+	const [loading, setLoading] = useState(false);
 
-	const { loading, manual, postcode, lookup, options, selectedItem } = state;
+	const onSubmit = async (values) => {
+		setLoading(true);
+		try {
+			const { address, ...inHouseAdminValues } = current.context.inHouseAdmin;
+			await onSaveAddress(values, Object.assign(inHouseAdminValues, address));
+			send('SAVE', { values });
+			setLoading(false);
+		} catch (error) {
+			console.log(error);
+			setLoading(false);
+		}
+	};
+
+	const addressLookupProvider = new ExperianAddressLookupProvider(addressAPI);
+
 	return (
 		<Content
 			type={cardType.inHouseAdmin}
@@ -29,42 +33,55 @@ export const AddressPage: React.FC = () => {
 			title={i18n.address.title}
 		>
 			<Form
-				onSubmit={() => {}}
-				initialValues={{
-					postcode: postcode,
-				}}
+				onSubmit={onSubmit}
 			>
-				{({}) => (
-					<form>
-						<Postcode
-							lookup={lookup}
-							loading={loading}
-							postcode={postcode}
-							setPostcode={(postcode: string) => setState({ postcode })}
-							showLookup={(lookup: boolean) => setState({ lookup })}
-							setLoading={(loading: boolean) => setState({ loading })}
-							setOptions={(options: any[]) => setState({ options })}
-							setSelectedItem={(selectedItem: any) =>
-								setState({ selectedItem })
-							}
-							addressAPI={addressAPI}
-							i18n={i18n}
-						/>
+				{({handleSubmit}) => (
+					<form onSubmit={handleSubmit}>
+						{
+							<>
+							<AddressLookup
+								loading={loading}
+								setLoading={(loading: boolean) => { setLoading(loading)}}
+								initialValue={inHouseAdmin.address}
+								addressLookupProvider={addressLookupProvider}
+								invalidPostcodeMessage="Enter a valid postcode"
+								postcodeLookupLabel="Postcode"
+								postcodeLookupButton="Find address"
+								changePostcodeButton="Change"
+								changePostcodeAriaLabel="Change postcode"
+								selectAddressLabel="Select an address"
+								selectAddressPlaceholder="Select an address from the list"
+								selectAddressButton="Select address"
+								selectAddressRequiredMessage="Select an address to continue"
+								noAddressesFoundMessage="No matching addresses were found"
+								addressLine1Label="Address line 1"
+								addressLine1RequiredMessage="You must complete this field"
+								addressLine2Label="Address line 2"
+								addressLine3Label="Address line 3"
+								townLabel="Post town"
+								countyLabel="County"
+								postcodeLabel="Postcode"
+								countryLabel="Country"
+								changeAddressButton="I need to change the address"
+								changeAddressAriaLabel={null}
+							/>
+							<Footer>
+							<ArrowButton
+								intent="special"
+								pointsTo="up"
+								iconSide="right"
+								type="submit"
+								title="Save and close"
+								disabled={loading}
+							/>
+						</Footer>
+						</>
+						}
 					</form>
 				)}
 			</Form>
-			<Flex cfg={{ flexDirection: 'column' }}>
-				{manual ? (
-					<ManualComplete />
-				) : (
-					<AutoComplete
-						loading={loading}
-						options={options}
-						selectedItem={selectedItem}
-						onClick={() => setState({ manual: true })}
-					/>
-				)}
-			</Flex>
 		</Content>
 	);
 };
+
+export default AddressPage;

@@ -10,15 +10,12 @@ export class ExperianAddressLookupProvider implements AddressLookupProvider {
   }
 
   public lookupAddress(postcode: string, limit = 50): Promise<any> {
-    console.log("in Experian lookupAddress " + postcode);
     return this.addressApi.get(
       `search?country=GBR&query=${postcode}&take=${limit}`,
     )
   }
     
   public transformResults(response: { data: any }): Promise<Address[]> {
-    console.log("transformResults");
-    console.log(response);
     if (
       response &&
       Array.isArray(response.data.results) &&

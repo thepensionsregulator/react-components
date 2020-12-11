@@ -11,7 +11,7 @@ import { Preview } from './views/preview/preview';
 import { Contacts } from './views/contacts';
 import { RemoveDateForm } from './views/remove/date/date';
 import { ConfirmRemove } from './views/remove/confirm/confirm';
-import { AddressPage } from './views/address/index';
+import Address from './views/address';
 import { NameScreen } from './views/name';
 import RemovedBox from '../components/removedBox';
 import { cardTypeName } from '../common/interfaces';
@@ -24,7 +24,7 @@ const CardContentSwitch: React.FC = () => {
 		case current.matches('preview'):
 			return <Preview />;
 		case current.matches({ edit: 'address' }):
-			return <AddressPage />;
+			return <Address />;
 		case current.matches({ edit: 'contacts' }):
 			return <Contacts />;
 		case current.matches({ edit: 'name' }):
