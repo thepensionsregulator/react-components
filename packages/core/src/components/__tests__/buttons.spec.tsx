@@ -124,17 +124,18 @@ describe('Buttons', () => {
 	});
 });
 
-
 describe('Links', () => {
 	test('Link with button appearance', () => {
 		const { getByTestId } = render(
-			<Link 
+			<Link
 				testId="link-anchor"
 				anchorTag={true}
 				buttonAppearance={true}
 				href="http://www.google.com"
 				target="_blank"
-			>Home</Link>
+			>
+				Home
+			</Link>,
 		);
 		expect(getByTestId('link-anchor')).toBeDefined();
 		expect(getByTestId('link-anchor')).toHaveAttribute('href');

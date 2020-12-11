@@ -96,30 +96,35 @@ export const Link: React.FC<LinkProps> = ({
 	children,
 	...props
 }) => {
-	const classNames = buttonAppearance ? useClassNames(globalStyles, [
-		styles.button,
-		styles[`appearance-${appearance}`],
-		styles[`intent-${intent}`],
-		styles[`size-${btnSize}`],
-		buttonAppearance && styles[`link-button-${btnSize}`],
-		arrowBtn && styles.linkArrowBtn,
-		className,
-	])
-	: useClassNames(globalStyles, [
-		styles.link,
-		{ [styles['link-underline']]: underline },
-		className,
-	]);
+	const classNames = buttonAppearance
+		? useClassNames(globalStyles, [
+				styles.button,
+				styles[`appearance-${appearance}`],
+				styles[`intent-${intent}`],
+				styles[`size-${btnSize}`],
+				buttonAppearance && styles[`link-button-${btnSize}`],
+				arrowBtn && styles.linkArrowBtn,
+				className,
+		  ])
+		: useClassNames(globalStyles, [
+				styles.link,
+				{ [styles['link-underline']]: underline },
+				className,
+		  ]);
 
 	return React.createElement(
-		anchorTag ? 'a' :	'button',
+		anchorTag ? 'a' : 'button',
 		{
 			type: anchorTag ? null : 'button',
 			'data-testid': testId,
 			className: classNames,
 			...props,
 		},
-		arrowBtn && <Flex><ArrowRight fill={arrowColor} /></Flex>,
+		arrowBtn && (
+			<Flex>
+				<ArrowRight fill={arrowColor} />
+			</Flex>
+		),
 		children,
 	);
 };
