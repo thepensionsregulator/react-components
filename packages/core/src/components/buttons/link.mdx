@@ -103,6 +103,47 @@ Using the anchorTag prop will create an `<a>` element, therefore the "disabled" 
 	</Link>
 </Playground>
 
+### Anchor tag with ArrowButton appearance
+
+<Playground>
+	<Link
+		cfg={{ mr: 3 }}
+		anchorTag={true}
+		buttonAppearance={true}
+		btnSize="large"
+		href="http://www.google.com"
+		target="_blank"
+		arrowBtn={true}
+	>
+		Home
+	</Link>
+	<Link
+		cfg={{ mr: 3, color: 'black' }}
+		anchorTag={true}
+		buttonAppearance={true}
+		arrowBtn={true}
+		arrowColor="black"
+		btnSize="medium"
+		intent="warning"
+		href="http://www.google.com"
+		target="_blank"
+	>
+		Home
+	</Link>
+	<Link
+		cfg={{ mr: 3 }}
+		anchorTag={true}
+		buttonAppearance={true}
+		arrowBtn={true}
+		btnSize="small"
+		intent="danger"
+		href="http://www.google.com"
+		target="_blank"
+	>
+		Home
+	</Link>
+</Playground>
+
 ## API
 
 ```
