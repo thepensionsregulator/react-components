@@ -1,4 +1,7 @@
 export type InHouseAdminI18nProps = {
+	address: {
+		title: string;
+	};
 	preview: {
 		buttons: {
 			one: string;
@@ -76,6 +79,9 @@ export type InHouseAdminI18nProps = {
 };
 
 export const i18n: InHouseAdminI18nProps = {
+	address: {
+		title: 'What is this in house admin’s address?',
+	},
 	preview: {
 		buttons: {
 			one: 'In House Administrator',

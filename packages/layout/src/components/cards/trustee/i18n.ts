@@ -1,6 +1,9 @@
 import { I18nRemoveReason } from '../common/interfaces';
 
 export type TrusteeI18nProps = {
+	address: {
+		title: string;
+	};
 	contacts: {
 		title: string;
 		subtitle: string;
@@ -82,6 +85,9 @@ export type TrusteeI18nProps = {
 };
 
 export const i18n: TrusteeI18nProps = {
+	address: {
+		title: 'What is this trustee’s address?',
+	},
 	contacts: {
 		title: 'Contact details for this trustee',
 		subtitle:
