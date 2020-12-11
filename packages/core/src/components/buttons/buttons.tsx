@@ -7,7 +7,7 @@ import {
 	Flex,
 } from '../globals/globals';
 import { useClassNames } from '../../hooks/use-class-names';
-import { ArrowRight } from '@tpr/icons';
+import { ArrowRight } from './icons';
 import styles from './buttons.module.scss';
 
 export type ButtonProps = {
