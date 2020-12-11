@@ -74,7 +74,9 @@ export type LinkProps = {
 	buttonAppearance?: boolean;
 	appearance?: 'primary' | 'outlined';
 	intent?: 'none' | 'success' | 'warning' | 'danger' | 'special';
-	size?: 'small' | 'medium' | 'large';
+	btnSize?: 'small' | 'medium' | 'large';
+	pointsTo?: 'left' | 'up' | 'right' | 'down';
+	iconColor?: ColorProps['fill'];
 	[key: string]: any;
 };
 export const Link: React.FC<LinkProps> = ({
@@ -86,7 +88,9 @@ export const Link: React.FC<LinkProps> = ({
 	buttonAppearance,
 	appearance = 'primary',
 	intent = 'none',
-	size = 'medium',
+	btnSize = 'medium',
+	pointsTo = 'left',
+	iconColor = 'white',
 	children,
 	...props
 }) => {
@@ -94,8 +98,8 @@ export const Link: React.FC<LinkProps> = ({
 		styles.button,
 		styles[`appearance-${appearance}`],
 		styles[`intent-${intent}`],
-		styles[`size-${size}`],
-		buttonAppearance && styles[`link-button-${size}`],
+		styles[`size-${btnSize}`],
+		buttonAppearance && styles[`link-button-${btnSize}`],
 		className,
 	])
 	: useClassNames(globalStyles, [
