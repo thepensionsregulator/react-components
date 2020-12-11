@@ -41,7 +41,29 @@ export const SelectAddress: React.FC<SelectAddressProps> = ({
 	selectAddressRequiredMessage,
 	noAddressesFoundMessage,
 }) => {
-	let options = addresses.map((address) => {
+
+	// if missing fields are undefined rather than empty string they remain at their previous values
+	function ensureNoUndefinedFields(addresses: Address[]) {
+		return addresses && addresses.length
+			? addresses.map((address) => {
+					return {
+						addressLine1: address.addressLine1 || '',
+						addressLine2: address.addressLine2 || '',
+						addressLine3: address.addressLine3 || '',
+						postTown: address.postTown || '',
+						county: address.county || '',
+						postcode: address.postcode || '',
+						nationId: address.nationId || null,
+						country: address.country || '',
+						countryId: address.countryId || null,
+						uprn: address.uprn || null,
+					};
+			  })
+			: [];
+	}
+
+	const addressesToTransform = ensureNoUndefinedFields(addresses);
+	let options = addressesToTransform.map((address) => {
 		return {
 			value: address,
 			label: [

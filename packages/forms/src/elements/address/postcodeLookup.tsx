@@ -34,7 +34,6 @@ export const PostcodeLookup: React.FC<PostcodeLookupProps> = ({
 		// the blur event will trigger 'validate' in FFInputText when clicking 'Find address' without having visited the input field.
 		const myEvent = new Event('blur', { bubbles: true });
 		searchFieldRef.current.dispatchEvent(myEvent);
-
 		postcodeValid &&
 			onPostcodeChanged(form.getFieldState('postcodeLookup').value);
 	};

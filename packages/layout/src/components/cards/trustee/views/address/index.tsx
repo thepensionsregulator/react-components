@@ -1,70 +1,78 @@
 import React from 'react';
-import { Flex } from '@tpr/core';
 import { useTrusteeContext } from '../../context';
 import { Content } from '../../../components/content';
 import useSetState from '../../../hooks/use-set-state';
-import AutoComplete from './AutoComplete';
-import ManualComplete from './ManualComplete';
-import Postcode from '../../../common/views/address/Postcode';
+import { Footer } from '../../../components/card';
+import { ArrowButton } from '../../../../buttons/buttons';
 import { cardType } from '../../../common/interfaces';
-import { Form } from '@tpr/forms';
+import { ExperianAddressLookupProvider, Form } from '@tpr/forms';
+import { AddressLookup } from '@tpr/forms';
+
 
 const AddressPage: React.FC = () => {
-	const { current, i18n, addressAPI } = useTrusteeContext();
+	const { current, i18n, send, addressAPI } = useTrusteeContext();
 	const { trustee } = current.context;
 	const [state, setState] = useSetState({
-		loading: false,
-		manual: false,
-		postcode: trustee.address.postcode,
-		lookup: false,
-		options: [],
-		selectedItem: {},
+		loading: false
 	});
-	const { loading, manual, postcode, lookup, options, selectedItem } = state;
+	const { loading } = state;
+
+	const onSubmit = (values) => {
+		send('SAVE', { address: values || {} });
+	};
+
+	const addressLookupProvider = new ExperianAddressLookupProvider(addressAPI);
 
 	return (
 		<Content type={cardType.trustee} title={i18n.address.title}>
 			<Form
-				onSubmit={() => {}}
-				initialValues={{
-					postcode: postcode,
-				}}
+				onSubmit={onSubmit}
 			>
-				{({}) => (
-					<form>
-						<Postcode
-							lookup={lookup}
-							loading={loading}
-							postcode={postcode}
-							setPostcode={(postcode: string) => {
-								console.log('poscode got set');
-								console.log(postcode);
-								setState({ postcode });
-							}}
-							showLookup={(lookup: boolean) => setState({ lookup })}
-							setLoading={(loading: boolean) => setState({ loading })}
-							setOptions={(options: any[]) => setState({ options })}
-							setSelectedItem={(selectedItem: any) =>
-								setState({ selectedItem })
-							}
-							addressAPI={addressAPI}
-							i18n={i18n}
-						/>
+				{({handleSubmit}) => (
+					<form onSubmit={handleSubmit}>
+						{
+							<>
+							<AddressLookup
+								loading={loading}
+								setLoading={(loading: boolean) => { setState({ loading: loading })}}
+								initialValue={trustee.address}
+								addressLookupProvider={addressLookupProvider}
+								invalidPostcodeMessage="Enter a valid postcode"
+								postcodeLookupLabel="Postcode"
+								postcodeLookupButton="Find address"
+								changePostcodeButton="Change"
+								changePostcodeAriaLabel="Change postcode"
+								selectAddressLabel="Select an address"
+								selectAddressPlaceholder="Select an address from the list"
+								selectAddressButton="Select address"
+								selectAddressRequiredMessage="Select an address to continue"
+								noAddressesFoundMessage="No matching addresses were found"
+								addressLine1Label="Address line 1"
+								addressLine1RequiredMessage="You must complete this field"
+								addressLine2Label="Address line 2"
+								addressLine3Label="Address line 3"
+								townLabel="Post town"
+								countyLabel="County"
+								postcodeLabel="Postcode"
+								countryLabel="Country"
+								changeAddressButton="I need to change the address"
+								changeAddressAriaLabel={null}
+							/>
+							<Footer>
+							<ArrowButton
+								intent="special"
+								pointsTo="up"
+								iconSide="right"
+								type="submit"
+								title="Save and close"
+								disabled={loading}
+							/>
+						</Footer>
+						</>
+						}
 					</form>
 				)}
 			</Form>
-			<Flex cfg={{ flexDirection: 'column' }}>
-				{manual ? (
-					<ManualComplete />
-				) : (
-					<AutoComplete
-						loading={loading}
-						options={options}
-						selectedItem={selectedItem}
-						onClick={() => setState({ manual: true })}
-					/>
-				)}
-			</Flex>
 		</Content>
 	);
 };
