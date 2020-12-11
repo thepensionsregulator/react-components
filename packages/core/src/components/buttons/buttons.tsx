@@ -1,12 +1,14 @@
 import React from 'react';
-import styles from './buttons.module.scss';
 import {
 	SpaceProps,
 	ColorProps,
 	TypographyProps,
 	LayoutProps,
+	Flex,
 } from '../globals/globals';
 import { useClassNames } from '../../hooks/use-class-names';
+import { ArrowRight } from './icons';
+import styles from './buttons.module.scss';
 
 export type ButtonProps = {
 	className?: string;
@@ -70,6 +72,13 @@ export type LinkProps = {
 	className?: string;
 	underline?: boolean;
 	testId?: string;
+	anchorTag?: boolean;
+	buttonAppearance?: boolean;
+	appearance?: 'primary' | 'outlined';
+	intent?: 'none' | 'success' | 'warning' | 'danger' | 'special';
+	btnSize?: 'small' | 'medium' | 'large';
+	arrowBtn?: boolean;
+	arrowColor?: ColorProps['fill'];
 	[key: string]: any;
 };
 export const Link: React.FC<LinkProps> = ({
@@ -77,23 +86,45 @@ export const Link: React.FC<LinkProps> = ({
 	underline = false,
 	className,
 	testId,
+	anchorTag,
+	buttonAppearance,
+	appearance = 'primary',
+	intent = 'none',
+	btnSize = 'medium',
+	arrowBtn,
+	arrowColor = 'white',
 	children,
 	...props
 }) => {
-	const classNames = useClassNames(globalStyles, [
-		styles.link,
-		{ [styles['link-underline']]: underline },
-		className,
-	]);
+	const classNames = buttonAppearance
+		? useClassNames(globalStyles, [
+				styles.button,
+				styles[`appearance-${appearance}`],
+				styles[`intent-${intent}`],
+				styles[`size-${btnSize}`],
+				buttonAppearance && styles[`link-button-${btnSize}`],
+				arrowBtn && styles.linkArrowBtn,
+				className,
+		  ])
+		: useClassNames(globalStyles, [
+				styles.link,
+				{ [styles['link-underline']]: underline },
+				className,
+		  ]);
 
 	return React.createElement(
-		'button',
+		anchorTag ? 'a' : 'button',
 		{
-			type: 'button',
+			type: anchorTag ? null : 'button',
 			'data-testid': testId,
 			className: classNames,
 			...props,
 		},
+		arrowBtn && (
+			<Flex>
+				<ArrowRight fill={arrowColor} />
+			</Flex>
+		),
 		children,
 	);
 };
