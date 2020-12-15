@@ -17,6 +17,7 @@ const RemoveReason: React.FC = () => {
 			label: i18n.remove.reason.fields.date.label,
 			hint: 'For example, 31 3 2019',
 			cfg: { mb: 3 },
+			required: true,
 			validate: (value) => {
 				if (!value) {
 					return i18n.remove.reason.errors.pristine;
