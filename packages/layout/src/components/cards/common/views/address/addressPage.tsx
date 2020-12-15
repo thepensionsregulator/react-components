@@ -3,18 +3,24 @@ import { Content } from '../../../components/content';
 import { Footer } from '../../../components/card';
 import { ArrowButton } from '../../../../buttons/buttons';
 import { cardType } from '../../../common/interfaces';
-import { ExperianAddressLookupProvider, Form, AddressLookup, Address, I18nAddressLookup } from '@tpr/forms';
+import {
+	ExperianAddressLookupProvider,
+	Form,
+	AddressLookup,
+	Address,
+	I18nAddressLookup,
+} from '@tpr/forms';
 import { AddressAPIType } from '@tpr/layout/lib/components/cards/common/interfaces';
 import { cardTypeName } from '@tpr/layout/lib/components/cards/common/interfaces';
 
 export type AddressPageProps = {
-	onSubmit: (values: Address) => void,
-	initialValue?: Address,
-	addressAPI: AddressAPIType,
-	cardType: cardType,
-	cardTypeName: cardTypeName,
-	i18n: I18nAddressLookup
-}
+	onSubmit: (values: Address & { initialValue?: Address }) => void;
+	initialValue?: Address;
+	addressAPI: AddressAPIType;
+	cardType: cardType;
+	cardTypeName: cardTypeName;
+	i18n: I18nAddressLookup;
+};
 
 const AddressPage: React.FC<AddressPageProps> = ({
 	onSubmit,
@@ -22,7 +28,7 @@ const AddressPage: React.FC<AddressPageProps> = ({
 	addressAPI,
 	cardType,
 	cardTypeName,
-	i18n
+	i18n,
 }) => {
 	const [loading, setLoading] = useState(false);
 
@@ -50,7 +56,9 @@ const AddressPage: React.FC<AddressPageProps> = ({
 									selectAddressLabel={i18n.selectAddressLabel}
 									selectAddressPlaceholder={i18n.selectAddressPlaceholder}
 									selectAddressButton={i18n.selectAddressButton}
-									selectAddressRequiredMessage={i18n.selectAddressRequiredMessage}
+									selectAddressRequiredMessage={
+										i18n.selectAddressRequiredMessage
+									}
 									noAddressesFoundMessage={i18n.noAddressesFoundMessage}
 									addressLine1Label={i18n.addressLine1Label}
 									addressLine1RequiredMessage={i18n.addressLine1RequiredMessage}

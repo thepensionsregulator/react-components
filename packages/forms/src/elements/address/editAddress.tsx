@@ -86,7 +86,7 @@ export const EditAddress: React.FC<EditAddressProps> = React.memo(
 		function renderInitialValueField(fieldName: string, value: string) {
 			return (
 				<Field
-					name={fieldName + 'InitialValue'}
+					name={'initialValue.' + fieldName}
 					data-testid={
 						(testId ? testId + '-' : '') + fieldName + 'InitialValue-hidden'
 					}

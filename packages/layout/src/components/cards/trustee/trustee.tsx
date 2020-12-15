@@ -18,6 +18,7 @@ import RemovedBox from '../components/removedBox';
 import { cardType, cardTypeName } from '../common/interfaces';
 
 import styles from '../cards.module.scss';
+import AddressComparer from '@tpr/forms/lib/elements/address/addressComparer';
 
 const CardContent: React.FC = () => {
 	const { current, i18n, send, addressAPI } = useTrusteeContext();
@@ -36,16 +37,23 @@ const CardContent: React.FC = () => {
 		current.matches({ edit: { company: 'address' } }) ||
 		current.matches({ edit: { company: 'save' } })
 	) {
-		return <Address
-			onSubmit={(values) => {
-				send('SAVE', { address: values || {} });
-			}}
-			initialValue={trustee.address}
-			addressAPI={addressAPI}
-			cardType={cardType.trustee}
-			cardTypeName={cardTypeName.trustee}
-			i18n={i18n.address}
-		/>;
+		return (
+			<Address
+				onSubmit={(values) => {
+					const comparer = new AddressComparer();
+					if (comparer.areEqual(values.initialValue, values)) {
+						send('CANCEL');
+					} else {
+						send('SAVE', { address: values || {} });
+					}
+				}}
+				initialValue={trustee.address}
+				addressAPI={addressAPI}
+				cardType={cardType.trustee}
+				cardTypeName={cardTypeName.trustee}
+				i18n={i18n.address}
+			/>
+		);
 	} else if (
 		current.matches({ edit: { contact: 'details' } }) ||
 		current.matches({ edit: { contact: 'save' } })

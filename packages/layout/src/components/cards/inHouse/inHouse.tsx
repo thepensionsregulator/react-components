@@ -16,31 +16,52 @@ import { NameScreen } from './views/name';
 import RemovedBox from '../components/removedBox';
 import { cardType, cardTypeName } from '../common/interfaces';
 import styles from '../cards.module.scss';
+import AddressComparer from '@tpr/forms/lib/elements/address/addressComparer';
 
 const CardContentSwitch: React.FC = () => {
-	const { current, i18n, send, addressAPI, onSaveAddress } = useInHouseAdminContext();
+	const {
+		current,
+		i18n,
+		send,
+		addressAPI,
+		onSaveAddress,
+	} = useInHouseAdminContext();
 	const { inHouseAdmin } = current.context;
 
 	switch (true) {
 		case current.matches('preview'):
 			return <Preview />;
 		case current.matches({ edit: 'address' }):
-			return <Address 
-				onSubmit={async (values) => {
-					try {
-						const { address, ...inHouseAdminValues } = current.context.inHouseAdmin;
-						await onSaveAddress(values, Object.assign(inHouseAdminValues, address));
-						send('SAVE', { values });
-					} catch (error) {
-						console.log(error);
-					}
-				}}
-				initialValue={inHouseAdmin.address}
-				addressAPI={addressAPI}
-				cardType={cardType.inHouseAdmin}
-				cardTypeName={cardTypeName.inHouseAdmin}
-				i18n={i18n.address}
-			/>;
+			return (
+				<Address
+					onSubmit={async (values) => {
+						try {
+							const {
+								address,
+								...inHouseAdminValues
+							} = current.context.inHouseAdmin;
+
+							const comparer = new AddressComparer();
+							if (comparer.areEqual(values.initialValue, values)) {
+								send('CANCEL');
+							} else {
+								await onSaveAddress(
+									values,
+									Object.assign(inHouseAdminValues, address),
+								);
+								send('SAVE', { values });
+							}
+						} catch (error) {
+							console.log(error);
+						}
+					}}
+					initialValue={inHouseAdmin.address}
+					addressAPI={addressAPI}
+					cardType={cardType.inHouseAdmin}
+					cardTypeName={cardTypeName.inHouseAdmin}
+					i18n={i18n.address}
+				/>
+			);
 		case current.matches({ edit: 'contacts' }):
 			return <Contacts />;
 		case current.matches({ edit: 'name' }):
