@@ -57,6 +57,7 @@ const InputCurrency: React.FC<InputCurrencyProps> = React.memo(
 		const [formattedInputValue, setFormattedInputValue] = useState<string>('');
 		const [dot, setDot] = useState<boolean>(false);
 		const [cursorPos, setCursorPos] = useState(null);
+		const [delKey, setDelKey] = useState<boolean>(false);
 
 		const formatWithCommas = (value: string): string => {
 			const numString: string = value.replace(/,/g, '');
@@ -97,6 +98,7 @@ const InputCurrency: React.FC<InputCurrencyProps> = React.memo(
 				keyPressedIsNotAllowed(e) && e.preventDefault();
 				// we save the position of the cursorwhen the key is pressed
 				setCursorPos(e.target.selectionStart);
+				e.key === 'Delete' ? setDelKey(true) : setDelKey(false);
 			}
 		};
 
@@ -131,6 +133,7 @@ const InputCurrency: React.FC<InputCurrencyProps> = React.memo(
 								e,
 								inputValue,
 								commasBefore,
+								delKey,
 							);
 						}
 						setInputValue(e.target.value);
