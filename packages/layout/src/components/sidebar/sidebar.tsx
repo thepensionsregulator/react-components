@@ -1,10 +1,19 @@
 import React, { useMemo } from 'react';
-import { H3, Flex, Hr, Link, P, flatten } from '@tpr/core';
-import { CheckedCircle, ErrorCircle } from '@tpr/icons';
+import { Flex, Link, P, flatten } from '@tpr/core';
 import { callAllEventHandlers } from '../../utils';
 import styles from './sidebar.module.scss';
+import SidebarMenu from './components/SidebarMenu';
+import { ReactRouterDomProps, SidebarSectionProps } from './components/types';
 
-type ReactRouterDomProps = { history: any; matchPath: any; location: any };
+
+export const isActive = (settings: { matchPath: any; location: any }) => (
+	path: string,
+): boolean => {
+	const { matchPath = () => {}, location } = settings;
+	const matched = matchPath(location.pathname, { path });
+	return matched ? true : false;
+};
+
 export const useSectionsUpdater = (
 	sections: SidebarSectionProps[],
 	{ history, matchPath, location }: ReactRouterDomProps,
@@ -25,77 +34,6 @@ export const useSectionsUpdater = (
 			},
 		];
 	}, []);
-};
-
-export const isActive = (settings: { matchPath: any; location: any }) => (
-	path: string,
-): boolean => {
-	const { matchPath = () => {}, location } = settings;
-	const matched = matchPath(location.pathname, { path });
-	return matched ? true : false;
-};
-
-const StatusIcon: React.FC<{ link: SidebarLinkProps }> = ({ link }) => {
-	return link.completed ? (
-		<CheckedCircle cfg={{ fill: 'success.1' }} />
-	) : (
-		<ErrorCircle cfg={{ fill: link.disabled ? 'danger.1' : 'danger.2' }} />
-	);
-};
-
-type SidebarMenuProps = {
-	title: string;
-	links: SidebarLinkProps[];
-	maintenanceMode: boolean;
-};
-const SidebarMenu: React.FC<SidebarMenuProps> = ({
-	title,
-	links,
-	maintenanceMode,
-}) => {
-	return (
-		<Flex cfg={{ flexDirection: 'column' }} className={styles.sidebarMenu}>
-			<H3 cfg={{ fontWeight: 2, mt: 4 }}>{title}</H3>
-			<Hr cfg={{ my: 4 }} />
-			{links.map(
-				({ onClick = () => {}, active = () => false, ...link }, key) => (
-					<Flex key={key} cfg={{ justifyContent: 'space-between', mb: 5 }}>
-						<Link
-							cfg={{
-								color: 'primary.2',
-								textAlign: 'left',
-								fontWeight: 3,
-								width: 8,
-							}}
-							disabled={link.disabled}
-							underline={active(link.path)}
-							className={active(link.path) ? styles.activeLink : undefined}
-							onClick={() => onClick(link)}
-						>
-							{link.name}
-						</Link>
-						{!maintenanceMode && <StatusIcon link={link} />}
-					</Flex>
-				),
-			)}
-		</Flex>
-	);
-};
-
-export type SidebarLinkProps = {
-	name: string;
-	/** route url path for react router, must match with Route path that is already declared */
-	path: string;
-	completed?: boolean;
-	onClick?: (link: Omit<SidebarLinkProps, 'onClick'>) => void;
-	disabled?: boolean;
-	active?: (path: string) => boolean;
-};
-
-export type SidebarSectionProps = {
-	title: string;
-	links: SidebarLinkProps[];
-	order: number;
 };
 
 export function useCalculateProgress(sections: SidebarSectionProps[]) {

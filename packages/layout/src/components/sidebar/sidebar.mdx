@@ -27,8 +27,16 @@ import { Sidebar } from '@tpr/layout';
 					{
 						name: 'Scheme name and address',
 						completed: true,
-						onClick: (link) => alert(`You clicked on ${link.path}`),
-						path: '/scheme-name-and-address',
+						//onClick: (link) => alert(`You clicked on ${link.path}`),
+						//path: '/scheme-name-and-address',
+						links: [
+							{
+								name: 'Scheme name and address',
+								completed: true,
+								onClick: (link) => alert(`You clicked on ${link.path}`),
+								path: '/scheme-name-and-address',
+							},
+						],
 					},
 					{
 						name: 'Scheme status and membership',
