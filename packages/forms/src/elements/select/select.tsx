@@ -38,7 +38,6 @@ export const Select: React.FC<SelectProps & FieldRenderProps<string>> = ({
 	cfg,
 	...rest
 }) => {
-	let searchable = !readOnly;
 	return (
 		<Downshift
 			onChange={onChange}
@@ -109,7 +108,6 @@ export const Select: React.FC<SelectProps & FieldRenderProps<string>> = ({
 							{isOpen && (
 								<PopupBox
 									{...{
-										searchable,
 										getItemProps,
 										inputValue,
 										options,
