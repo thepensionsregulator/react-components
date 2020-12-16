@@ -2,7 +2,11 @@ import React, { useState } from 'react';
 import { Content } from '../../../components/content';
 import { Footer } from '../../../components/card';
 import { ArrowButton } from '../../../../buttons/buttons';
-import { cardType } from '../../../common/interfaces';
+import {
+	cardType,
+	AddressAPIType,
+	cardTypeName,
+} from '../../../common/interfaces';
 import {
 	ExperianAddressLookupProvider,
 	Form,
@@ -10,8 +14,6 @@ import {
 	Address,
 	I18nAddressLookup,
 } from '@tpr/forms';
-import { AddressAPIType } from '@tpr/layout/lib/components/cards/common/interfaces';
-import { cardTypeName } from '@tpr/layout/lib/components/cards/common/interfaces';
 
 export type AddressPageProps = {
 	onSubmit: (values: Address & { initialValue?: Address }) => void;

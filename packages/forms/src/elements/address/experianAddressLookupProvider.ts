@@ -1,6 +1,12 @@
-import { AddressAPIType } from '@tpr/layout/lib/components/cards/common/interfaces';
 import { Address } from './address';
 import { AddressLookupProvider } from './addressLookupProvider';
+
+export type AddressAPIType = {
+	/** API instance with auth to get a list of addresses */
+	get: (endpoint: string) => Promise<any>;
+	/** limit of items to display per search */
+	limit: number;
+};
 
 export class ExperianAddressLookupProvider implements AddressLookupProvider {
 	private addressApi;
