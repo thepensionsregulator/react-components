@@ -133,13 +133,13 @@ import { Sidebar } from '@tpr/layout';
         { 
           name: 'Employer details', 
           path: '/employers', 
-          completed: true,
+          completed: false,
           links: [
-            { name: 'Employer Memberships', path: '/employers/employer-membership', completed: true },
-            { name: 'Multi-employer scheme structure', path: '/employers/multi-employer-scheme-structure', completed: true, 
+            { name: 'Employer Memberships', path: '/employers/employer-membership', completed: false },
+            { name: 'Multi-employer scheme structure', path: '/employers/multi-employer-scheme-structure', completed: false, 
               links: [
-                { name: 'Employer Memberships', path: '/employers/employer-membership', completed: true },
-                { name: 'Multi-employer scheme structure', path: '/employers/multi-employer-scheme-structure', completed: true },
+                { name: 'Second-submenu-item-1', path: '/employers/employer-membership', completed: true },
+                { name: 'Second-submenu-item-2', path: '/employers/multi-employer-scheme-structure', completed: true },
               ]
             },
           ],
