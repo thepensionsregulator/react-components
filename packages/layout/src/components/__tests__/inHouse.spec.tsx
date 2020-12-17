@@ -1,7 +1,5 @@
 import React from 'react';
-import {
-	render
-} from '@testing-library/react';
+import { render } from '@testing-library/react';
 import { InHouseCard } from '../cards/inHouse/inHouse';
 import { axe } from 'jest-axe';
 import userEvent from '@testing-library/user-event';

@@ -1,7 +1,5 @@
 import React from 'react';
-import {
-	render,
-} from '@testing-library/react';
+import { render } from '@testing-library/react';
 import { TrusteeCard } from '../cards/trustee/trustee';
 import { axe } from 'jest-axe';
 import { Trustee } from '../cards/trustee/context';

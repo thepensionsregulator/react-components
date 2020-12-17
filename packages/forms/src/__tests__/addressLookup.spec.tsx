@@ -150,7 +150,7 @@ describe('Address lookup', () => {
 			setTimeout(() => {
 				const option = container.querySelector('div[role="option"]');
 				expect(option.textContent).toMatch(exampleAddress.addressLine1);
-			}, 2000);
+			}, 3000);
 		});
 
 		test('should pass selected address to edit address view', async () => {
@@ -174,7 +174,7 @@ describe('Address lookup', () => {
 				const input = container.querySelector('input[name="addressLine1"]');
 
 				expect(input).toHaveAttribute('value', exampleAddress.addressLine1);
-			}, 2000);
+			}, 3000);
 		});
 	});
 
