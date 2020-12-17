@@ -78,13 +78,6 @@ export interface CardProviderProps {
 	cfg?: SpaceProps;
 }
 
-export type AddressAPIType = {
-	/** API instance with auth to get a list of addresses */
-	get: (endpoint: string) => Promise<any>;
-	/** limit of items to display per search */
-	limit: number;
-};
-
 export interface RemoveReasonProps {
 	reason: null | string;
 	date: null | string;

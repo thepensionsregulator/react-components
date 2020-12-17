@@ -86,7 +86,7 @@ export type TrusteeI18nProps = {
 export const i18n: TrusteeI18nProps = {
 	address: {
 		title: 'What is this trustee’s address?',
-		...AddressI18n
+		...AddressI18n,
 	},
 	contacts: {
 		title: 'Contact details for this trustee',

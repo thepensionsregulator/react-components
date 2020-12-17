@@ -2,12 +2,9 @@ import React, { useState } from 'react';
 import { Content } from '../../../components/content';
 import { Footer } from '../../../components/card';
 import { ArrowButton } from '../../../../buttons/buttons';
+import { cardType, cardTypeName } from '../../../common/interfaces';
 import {
-	cardType,
 	AddressAPIType,
-	cardTypeName,
-} from '../../../common/interfaces';
-import {
 	ExperianAddressLookupProvider,
 	Form,
 	AddressLookup,

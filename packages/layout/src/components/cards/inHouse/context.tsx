@@ -13,8 +13,8 @@ import {
 	CardContactDetails,
 	CardAddress,
 	CardProviderProps,
-	AddressAPIType,
 } from '../common/interfaces';
+import { AddressAPIType } from '@tpr/forms';
 
 export const InHouseAdminContext = createContext<InHouseAdminContextProps>({
 	current: {},

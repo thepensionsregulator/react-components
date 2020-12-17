@@ -81,7 +81,7 @@ export type InHouseAdminI18nProps = {
 export const i18n: InHouseAdminI18nProps = {
 	address: {
 		title: 'What is this in house admin’s address?',
-		...AddressI18n
+		...AddressI18n,
 	},
 	preview: {
 		buttons: {
