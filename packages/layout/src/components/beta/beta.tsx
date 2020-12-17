@@ -1,15 +1,12 @@
-import React, { useMemo } from 'react';
-import { AppWidth, DocWidth, Flex, P } from '@tpr/core';
+import React from 'react';
+import { AppWidth, DocWidth, Flex, Link, P } from '@tpr/core';
 import style from './beta.module.scss';
 
 type BetaHeaderProps = {
-	text: any;
+	text?: string;
 };
-export const BetaHeader: React.FC<BetaHeaderProps> = ({ text }) => {
-	const TextComponent = useMemo(() => {
-		return typeof text === 'function' ? text : () => text;
-	}, [text]);
 
+export const BetaHeader: React.FC<BetaHeaderProps> = ({ text }) => {
 	return (
 		<DocWidth className={style.beta}>
 			<AppWidth>
@@ -27,7 +24,22 @@ export const BetaHeader: React.FC<BetaHeaderProps> = ({ text }) => {
 						BETA
 					</P>
 					<P cfg={{ fontSize: 1, color: 'neutral.6' }}>
-						<TextComponent />
+						{text ? (
+							text
+						) : (
+							<>
+								This is a new service - your{' '}
+								<Link
+									onClick={() => {
+										location.href =
+											'mailto:webfeedback@tpr.gov.uk&subject=Portal Scheme Return feedback';
+									}}
+								>
+									feedback
+								</Link>{' '}
+								will help us improve it
+							</>
+						)}
 					</P>
 				</Flex>
 			</AppWidth>
