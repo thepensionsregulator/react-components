@@ -183,7 +183,7 @@ const InputCurrency: React.FC<InputCurrencyProps> = React.memo(
 				*/
 				setTimeout(() => {
 					innerInput.current.dispatchEvent(myEvent);
-				}, 50);
+				}, 100);
 			} else {
 				setFormattedInputValue('');
 				setInputValue('');

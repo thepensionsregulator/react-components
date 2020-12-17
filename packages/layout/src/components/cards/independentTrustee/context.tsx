@@ -36,16 +36,16 @@ export interface IndependentTrusteeContextProps
 
 type RenderProps = (_: IndependentTrusteeContextProps) => ReactElement;
 
-export const IndependentTrusteeContext = createContext<
-	IndependentTrusteeContextProps
->({
-	current: {},
-	send: (_, __) => ({}),
-	i18n: i18nDefaults,
-	onCorrect: () => {},
-	onRemove: Promise.resolve,
-	onSaveAppointed: Promise.resolve,
-});
+export const IndependentTrusteeContext = createContext<IndependentTrusteeContextProps>(
+	{
+		current: {},
+		send: (_, __) => ({}),
+		i18n: i18nDefaults,
+		onCorrect: () => {},
+		onRemove: Promise.resolve,
+		onSaveAppointed: Promise.resolve,
+	},
+);
 
 export const IndependentTrusteeProvider = ({
 	complete,
