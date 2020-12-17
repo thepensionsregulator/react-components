@@ -33,7 +33,7 @@ export const Select: React.FC<SelectProps & FieldRenderProps<string>> = ({
 	testId = 'select',
 	showToggleButton = true,
 	placeholder,
-	readOnly,
+	readOnly = false,
 	inputWidth: width,
 	cfg,
 	...rest
@@ -107,6 +107,7 @@ export const Select: React.FC<SelectProps & FieldRenderProps<string>> = ({
 						>
 							{isOpen && (
 								<PopupBox
+									searchable={!readOnly}
 									{...{
 										getItemProps,
 										inputValue,

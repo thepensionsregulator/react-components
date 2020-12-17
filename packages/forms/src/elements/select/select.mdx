@@ -41,6 +41,8 @@ import { FFSelect } from '@tpr/forms';
 
 [CodeSandbox](https://codesandbox.io)
 
+## Read-Only & receiving initialValue
+
 <Playground>
 	{() => {
 		const FIELD_NAME = 'fruit';
@@ -49,6 +51,44 @@ import { FFSelect } from '@tpr/forms';
 				onSubmit={console.log}
 				initialValues={{ [FIELD_NAME]: { label: 'Apple', value: 1 } }}
 			>
+				{({ handleSubmit }) => (
+					<form onSubmit={handleSubmit}>
+						<div style={{ padding: 10 }}>
+							<FFSelect
+								name={FIELD_NAME}
+								label="Select Fruit"
+								hint="Please select one of the fruit from the dropdown menu"
+								inputWidth={5}
+								onChange={({ value }, send) => send(value)}
+								validate={(value) =>
+									value
+										? undefined
+										: 'Cannot be left empty, please select a value!'
+								}
+								options={[
+									{ label: 'Apple', value: 1 },
+									{ label: 'Pear', value: 2 },
+									{ label: 'Orange', value: 3 },
+									{ label: 'Grape', value: 4 },
+									{ label: 'Banana', value: 5 },
+								]}
+								readOnly={true}
+							/>
+						</div>
+					</form>
+				)}
+			</Form>
+		);
+	}}
+</Playground>
+
+## Searchable without initialValue
+
+<Playground>
+	{() => {
+		const FIELD_NAME = 'fruit';
+		return (
+			<Form onSubmit={console.log}>
 				{({ handleSubmit }) => (
 					<form onSubmit={handleSubmit}>
 						<div style={{ padding: 10 }}>
