@@ -1,0 +1,128 @@
+---
+name: Address lookup
+menu: Forms
+route: /forms/address
+---
+
+import { Playground } from '@playground';
+import { Form, Field } from 'react-final-form';
+import { Button } from '@tpr/core';
+import { AddressLookup } from './addressLookup';
+import { FFInputText } from '../text/text';
+import FakeAddressLookupProvider from './fakeAddressLookupProvider';
+
+# Address lookup
+
+Address lookup component.
+
+## When To Use
+
+- For selecting or editing an address using a postcode lookup, where only address lines 1 and 2 are editable without using the lookup.
+
+## Usage
+
+`Inside your React project directory, run the following:`
+
+```js
+yarn add @tpr/forms
+```
+
+`or with npm`
+
+```js
+npm install @tpr/forms
+```
+
+`import items you wish to use from the library`
+
+```js
+import { AddressLookup } from '@tpr/forms';
+```
+
+## Examples
+
+[CodeSandbox](https://codesandbox.io)
+
+<Playground>
+	{() => {
+		return (
+			<Form
+				onSubmit={(values) => {
+					console.log('submit');
+					console.log(values);
+				}}
+			>
+				{({ handleSubmit, values }) => (
+					<form onSubmit={handleSubmit}>
+						<AddressLookup
+							loading={false}
+							setLoading={() =>{}}
+							initialValue={{
+								addressLine1: 'Napier House',
+								addressLine2: 'Trafalgar Place',
+								addressLine3: 'Trafalgar Road',
+								postTown: 'Brighton',
+								county: 'East Sussex',
+								postcode: 'BN1 4DW',
+								country: 'UK',
+								countryId: 229,
+								uprn: 22063565,
+							}}
+							addressLookupProvider={new FakeAddressLookupProvider()}
+							invalidPostcodeMessage="Enter a valid postcode"
+							postcodeLookupLabel="Postcode"
+							postcodeLookupButton="Find address"
+							changePostcodeButton="Change"
+							changePostcodeAriaLabel="Change postcode"
+							selectAddressLabel="Select an address"
+							selectAddressPlaceholder="Select an address from the list"
+							selectAddressButton="Select address"
+							selectAddressRequiredMessage="Select an address to continue"
+							noAddressesFoundMessage="No matching addresses were found"
+							addressLine1Label="Address line 1"
+							addressLine1RequiredMessage="You must complete this field"
+							addressLine2Label="Address line 2"
+							addressLine3Label="Address line 3"
+							townLabel="Post town"
+							countyLabel="County"
+							postcodeLabel="Postcode"
+							countryLabel="Country"
+							changeAddressButton="I need to change the address"
+							/>
+    					<Button type="submit" cfg={{mt:3}}>Submit form</Button>
+    				</form>
+    			)}
+    		</Form>
+    	);
+    }}
+
+</Playground>
+
+### Props
+
+| Property                     | Required | Type                  | Description                                                                            |
+| ---------------------------- | -------- | --------------------- | -------------------------------------------------------------------------------------- |
+| initialValue                 | false    | Address               | Existing value to pre-populate the component                                           |
+| testId                       | false    | string                | data attribute for testers                                                             |
+| loading                      | true     | boolean               | Whether the component is currently loading data                                        |
+| setLoading                   | true     | function              | Function the component can use to set the value of `loading`                           |
+| addressLookupProvider        | true     | AddressLookupProvider | A provider to look up addresses by postcode, then transform them to the Address format |
+| invalidPostcodeMessage       | true     | string                | Error message when an invalid or incomplete postcode is looked up                      |
+| postcodeLookupLabel          | true     | string                | Label for the postcode lookup field                                                    |
+| postcodeLookupButton         | true     | string                | Text of the button which triggers a postcode lookup                                    |
+| changePostcodeButton         | true     | string                | Text of the button which allows a different postcode to be looked up                   |
+| changePostcodeAriaLabel?     | true     | string                | Accessible label of the button which allows a different postcode to be looked up       |
+| selectAddressLabel           | true     | string                | Label for the dropdown list of matching addresses                                      |
+| selectAddressPlaceholder?    | true     | string                | Placeholder text within the dropdown list of matching addresses                        |
+| selectAddressButton          | true     | string                | Text of the button which selects a matching address                                    |
+| selectAddressRequiredMessage | true     | string                | Error when a matched address is not selected                                           |
+| noAddressesFoundMessage      | true     | string                | Message indicating no addresses matched the postcode                                   |
+| addressLine1Label            | true     | string                | Label for Address Line 1 field                                                         |
+| addressLine1RequiredMessage  | true     | string                | Error message when Address Line 1 is left blank or < 2 characters                      |
+| addressLine2Label            | true     | string                | Label for Address Line 2 field                                                         |
+| addressLine3Label            | true     | string                | Label for Address Line 3 field                                                         |
+| townLabel                    | true     | string                | Label for the town field                                                               |
+| countyLabel                  | true     | string                | Label for the county field                                                             |
+| postcodeLabel                | true     | string                | Label for the postcode field                                                           |
+| countryLabel                 | true     | string                | Label for the country field                                                            |
+| changeAddressButton          | true     | string                | Text for the button to change the selected address and start a new postcode lookup     |
