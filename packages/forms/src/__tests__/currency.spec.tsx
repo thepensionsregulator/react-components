@@ -230,6 +230,7 @@ describe('Currency', () => {
 					myFakeEvent,
 					prevValue,
 					0,
+					false,
 				);
 				expect(newCursorPosition).toStrictEqual([1, 1]);
 			});
@@ -249,6 +250,7 @@ describe('Currency', () => {
 					myFakeEvent,
 					prevValue,
 					0,
+					true,
 				);
 				expect(newCursorPosition).toStrictEqual([0, 0]);
 			});
@@ -271,6 +273,7 @@ describe('Currency', () => {
 					myFakeEvent,
 					prevValue,
 					1,
+					false,
 				);
 				expect(newCursorPosition).toStrictEqual([5, 5]);
 			});
@@ -291,6 +294,7 @@ describe('Currency', () => {
 					myFakeEvent,
 					prevValue,
 					1,
+					false,
 				);
 				expect(newCursorPosition).toStrictEqual([8, 8]);
 			});
@@ -311,6 +315,7 @@ describe('Currency', () => {
 					myFakeEvent,
 					prevValue,
 					2,
+					false,
 				);
 				expect(newCursorPosition).toStrictEqual([8, 8]);
 			});
@@ -331,6 +336,7 @@ describe('Currency', () => {
 					myFakeEvent,
 					prevValue,
 					2,
+					false,
 				);
 				expect(newCursorPosition).toStrictEqual([7, 7]);
 			});
