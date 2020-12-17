@@ -27,16 +27,8 @@ import { Sidebar } from '@tpr/layout';
 					{
 						name: 'Scheme name and address',
 						completed: true,
-						//onClick: (link) => alert(`You clicked on ${link.path}`),
-						//path: '/scheme-name-and-address',
-						links: [
-							{
-								name: 'Scheme name and address',
-								completed: true,
-								onClick: (link) => alert(`You clicked on ${link.path}`),
-								path: '/scheme-name-and-address',
-							},
-						],
+						onClick: (link) => alert(`You clicked on ${link.path}`),
+						path: '/scheme-name-and-address',
 					},
 					{
 						name: 'Scheme status and membership',
@@ -97,6 +89,145 @@ import { Sidebar } from '@tpr/layout';
 			/>
 		);
 	}}
+</Playground>
+
+## Menu with submenus
+
+<Playground>
+	{() => {
+		const sections = [
+    {
+      title: 'Scheme details (DB)',
+      links: [
+        {
+          name: 'Scheme name, address and contact details',
+          completed: true,
+          path: '/scheme-name-and-address',
+        },
+        {
+          name: 'Scheme status and membership',
+          completed: true,
+          path: '/scheme-status-and-membership',
+        },
+        {
+          name: 'Consent to electronic communication',
+          completed: true,
+          path: '/consent-to-electronic-communication',
+        },
+        {
+          name: 'Record keeping',
+          completed: false,
+          path: '/record-keeping',
+        },
+      ],
+      order: 1,
+    },
+    {
+      title: 'Roles',
+      links: [
+        {
+          name: 'Trustee details',
+          completed: false,
+          path: '/trustees',
+        },
+        { 
+          name: 'Employer details', 
+          path: '/employers', 
+          completed: true,
+          links: [
+            { name: 'Employer Memberships', path: '/employers/employer-membership', completed: true },
+            { name: 'Multi-employer scheme structure', path: '/employers/multi-employer-scheme-structure', completed: true, 
+              links: [
+                { name: 'Employer Memberships', path: '/employers/employer-membership', completed: true },
+                { name: 'Multi-employer scheme structure', path: '/employers/multi-employer-scheme-structure', completed: true },
+              ]
+            },
+          ],
+        },
+        {
+          name: 'Service provider details',
+          path: '/service-providers',
+        },
+        {
+          name: 'Named contact details',
+          completed: false,
+          path: '/name-contact-details',
+        },
+      ],
+      order: 2,
+    },
+    {
+      title: 'Financial details',
+      links: [
+        {
+          name: 'Asset Breakdown',
+          completed: false,
+          path: '/asset-breakdown',
+        },
+        {
+          name: 'Buyout Valuation',
+          completed: false,
+          path: '/buyout-valuation',
+        },
+        {
+          name: 'S179 Valuation',
+          completed: false,
+          path: '/s179-valuation',
+        },
+        {
+          name: 'Part 3 Valuation',
+          completed: false,
+          path: '/part-3-valuation',
+        },
+        {
+          name: 'Liability Hedging',
+          completed: false,
+          path: '/liability-hedging',
+        },
+        {
+          name: 'Employer Covenant',
+          completed: false,
+          path: '/employer-covenant',
+        },
+        {
+          name: 'Statement of Investment Principles',
+          completed: false,
+          path: '/statement-of-investment-principles',
+        },
+      ],
+      order: 3,
+    },
+    {
+      title: 'Review and submit',
+      links: [
+        {
+          name: 'Step 1: review and print',
+          completed: false,
+          disabled: true,
+          path: '/review-and-submit',
+        },
+        {
+          name: 'Step 2: submit',
+          completed: false,
+          disabled: true,
+          path: '/review-and-submit',
+        },
+      ],
+      order: 4,
+    },
+  ];
+    return (
+    	<Sidebar
+    		title="Scheme return home"
+    		sections={sections}
+    		maintenanceMode={false}
+    		matchPath={() => {}}
+    		location={{}}
+    		history={{ push: () => {} }}
+    	/>
+    );
+    }}
+
 </Playground>
 
 ## API

@@ -9,6 +9,7 @@ export type SidebarLinkProps = {
 	onClick?: (link: Omit<SidebarLinkProps, 'onClick'>) => void;
 	disabled?: boolean;
 	active?: (path: string) => boolean;
+	links?: SidebarLinkProps[];
 };
 
 export type SidebarSectionProps = {
