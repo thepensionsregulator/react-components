@@ -1,6 +1,6 @@
 import { Address } from './address';
 
-class AddressComparer {
+export class AddressComparer {
 	constructor() {}
 	public areEqual(address1: Address, address2: Address): boolean {
 		// Use == because an address is the same address if it's undefined on one side and null or empty string on the other
