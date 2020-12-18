@@ -5,7 +5,6 @@ import styles from './sidebar.module.scss';
 import SidebarMenu from './components/SidebarMenu';
 import { ReactRouterDomProps, SidebarSectionProps } from './components/types';
 
-
 export const isActive = (settings: { matchPath: any; location: any }) => (
 	path: string,
 ): boolean => {

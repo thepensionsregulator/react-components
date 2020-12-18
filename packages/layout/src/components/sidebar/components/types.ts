@@ -1,5 +1,8 @@
-
-export type ReactRouterDomProps = { history: any; matchPath: any; location: any };
+export type ReactRouterDomProps = {
+	history: any;
+	matchPath: any;
+	location: any;
+};
 
 export type SidebarLinkProps = {
 	name: string;
@@ -17,7 +20,6 @@ export type SidebarSectionProps = {
 	links: SidebarLinkProps[];
 	order: number;
 };
-
 
 export type SidebarMenuProps = {
 	title: string;
