@@ -10,7 +10,6 @@ export const isActive = (settings: { matchPath: any; location: any }) => (
 	path: string,
 ): boolean => {
 	const { matchPath = () => {}, location } = settings;
-	console.log("location.pathname", location.pathname);
 	const matched = matchPath(location.pathname, { path });
 	return matched ? true : false;
 };
@@ -19,7 +18,6 @@ export const useSectionsUpdater = (
 	sections: SidebarSectionProps[],
 	{ history, matchPath, location }: ReactRouterDomProps,
 ): SidebarSectionProps[] => {
-	//console.log("location", location);
 	return sections.reduce<SidebarSectionProps[]>((accumulator, section) => {
 		return [
 			...accumulator,
