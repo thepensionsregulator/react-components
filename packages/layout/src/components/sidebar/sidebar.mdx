@@ -7,6 +7,7 @@ route: /layout/sidebar
 import { Playground } from '@playground';
 import { Props } from 'docz';
 import { Sidebar } from './sidebar';
+import { matchPath } from 'react-router-dom';
 
 # Sidebar
 
@@ -20,6 +21,7 @@ import { Sidebar } from '@tpr/layout';
 
 <Playground>
 	{() => {
+		const location = window.location;
 		const sections = [
 			{
 				title: 'Scheme details',
@@ -28,7 +30,7 @@ import { Sidebar } from '@tpr/layout';
 						name: 'Scheme name and address',
 						completed: true,
 						onClick: (link) => alert(`You clicked on ${link.path}`),
-						path: '/scheme-name-and-address',
+						path: '/layout/sidebar',
 					},
 					{
 						name: 'Scheme status and membership',
@@ -83,8 +85,8 @@ import { Sidebar } from '@tpr/layout';
 				title="Scheme return home"
 				sections={sections}
 				maintenanceMode={false}
-				matchPath={() => {}}
-				location={{}}
+				matchPath={matchPath}
+				location={location}
 				history={{ push: () => {} }}
 			/>
 		);
@@ -95,6 +97,7 @@ import { Sidebar } from '@tpr/layout';
 
 <Playground>
 	{() => {
+		const location = window.location;
 		const sections = [
     {
       title: 'Scheme details (DB)',
@@ -138,7 +141,7 @@ import { Sidebar } from '@tpr/layout';
             { name: 'Employer Memberships', path: '/employers/employer-membership', completed: false },
             { name: 'Multi-employer scheme structure', path: '/employers/multi-employer-scheme-structure', completed: false, 
               links: [
-                { name: 'Second-submenu-item-1', path: '/employers/employer-membership', completed: true },
+                { name: 'Second-submenu-item-1', path: '/layout/sidebar', completed: true },
                 { name: 'Second-submenu-item-2', path: '/employers/multi-employer-scheme-structure', completed: true },
               ]
             },
@@ -221,8 +224,8 @@ import { Sidebar } from '@tpr/layout';
     		title="Scheme return home"
     		sections={sections}
     		maintenanceMode={false}
-    		matchPath={() => {}}
-    		location={{}}
+    		matchPath={matchPath}
+    		location={location}
     		history={{ push: () => {} }}
     	/>
     );
