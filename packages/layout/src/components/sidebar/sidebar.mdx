@@ -93,7 +93,7 @@ import { Sidebar } from '@tpr/layout';
 	}}
 </Playground>
 
-## Menu with submenus
+## With submenu (nested elements)
 
 <Playground>
 	{() => {
@@ -119,7 +119,7 @@ import { Sidebar } from '@tpr/layout';
         },
         {
           name: 'Record keeping',
-          completed: false,
+          completed: true,
           path: '/record-keeping',
         },
       ],
@@ -130,21 +130,16 @@ import { Sidebar } from '@tpr/layout';
       links: [
         {
           name: 'Trustee details',
-          completed: false,
+          completed: true,
           path: '/trustees',
         },
         { 
           name: 'Employer details', 
-          path: '/employers', 
+          path: '/layout', 
           completed: false,
           links: [
-            { name: 'Employer Memberships', path: '/employers/employer-membership', completed: false },
-            { name: 'Multi-employer scheme structure', path: '/employers/multi-employer-scheme-structure', completed: false, 
-              links: [
-                { name: 'Second-submenu-item-1', path: '/layout/sidebar', completed: true },
-                { name: 'Second-submenu-item-2', path: '/employers/multi-employer-scheme-structure', completed: true },
-              ]
-            },
+            { name: 'Employer Memberships', path: '/layout/employer', completed: false },
+            { name: 'Multi-employer scheme structure', path: '/layout/sidebar', completed: false },
           ],
         },
         {
@@ -229,8 +224,59 @@ import { Sidebar } from '@tpr/layout';
     		history={{ push: () => {} }}
     	/>
     );
-    }}
+  }}
+</Playground>
 
+## With multiple levels of submenus
+
+<Playground>
+	{() => {
+		const location = window.location;
+		const sections = [
+    {
+      title: 'Roles',
+      links: [
+        {
+          name: 'Trustee details',
+          completed: true,
+          path: '/trustees',
+        },
+        { 
+          name: 'Employer details', 
+          path: '/layout', 
+          completed: false,
+          links: [
+            { name: 'Employer Memberships', path: '/layout/employer', completed: true },
+            { 
+              name: 'Multi-employer scheme structure', 
+              path: '/layout/multi-employer', 
+              completed: false,
+              links: [
+                { name: 'Page 1', path: '/layout/multi-employer/page1', completed: true },
+                { name: 'Page 2', path: '/layout/multi-employer/page2', completed: false},
+              ],
+            },
+          ],
+        },
+        {
+          name: 'Service provider details',
+          path: '/service-providers',
+        },
+      ],
+      order: 1,
+    },
+  ];
+    return (
+    	<Sidebar
+    		title="Scheme return home"
+    		sections={sections}
+    		maintenanceMode={false}
+    		matchPath={matchPath}
+    		location={location}
+    		history={{ push: () => {} }}
+    	/>
+    );
+  }}
 </Playground>
 
 ## API
