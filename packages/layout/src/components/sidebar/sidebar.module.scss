@@ -18,6 +18,19 @@
 
 .activeLink {
 	position: relative;
+
+	.nested {
+		position: relative;
+		
+		.line {
+			position: absolute;
+			top: 50%;
+			left: -$space-8;
+			width: $space-7;
+			height: 1px;
+			border-bottom: 1px solid $colors-primary-3;
+		}
+	}
 }
 
 .activeLink::before {
@@ -25,7 +38,8 @@
 	position: absolute;
 	left: -20px;
 	top: -8px;
-	height: 40px;
+	height: 100%;
+	min-height: 40px;
 	width: 5px;
 	background: $colors-primary-3;
 	// to hide outline from pseudo element

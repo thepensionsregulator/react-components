@@ -15,7 +15,12 @@ const SidebarMenu: React.FC<SidebarMenuProps> = ({
 				{links.map(
 					({ onClick = () => {}, active = () => false, ...innerLink }, key) => (
 						<React.Fragment key={key}>
-							<Flex key={key} cfg={{ justifyContent: 'space-between', mb: links ? 5 : 1 }}>
+							<Flex 
+								key={key} 
+								cfg={{ justifyContent: 'space-between', mb: links ? 5 : 1 }}
+								className={styles.nested}
+							>
+								<div className={styles.line}></div>
 								<Link
 									cfg={{
 										color: 'primary.2',
@@ -25,7 +30,6 @@ const SidebarMenu: React.FC<SidebarMenuProps> = ({
 									}}
 									disabled={innerLink.disabled}
 									underline={active(innerLink.path)}
-									className={active(innerLink.path) ? styles.activeLink : undefined}
 									onClick={() => onClick(innerLink)}
 								>
 									{innerLink.name}
@@ -46,7 +50,11 @@ const SidebarMenu: React.FC<SidebarMenuProps> = ({
 			<Hr cfg={{ my: 4 }} />
 			{links.map(
 				({ onClick = () => {}, active = () => false, ...link }, key) => (
-						<Flex key={key} cfg={{ justifyContent: 'space-between', mb: link.links ? 1 : 5, flexDirection: link.links ? 'column' : 'row' }}>
+						<Flex 
+							key={key} 
+							cfg={{ justifyContent: 'space-between', mb: link.links ? 1 : 5, flexDirection: link.links ? 'column' : 'row' }} 
+							className={active(link.path) ? styles.activeLink : undefined}
+						>
 							<Flex cfg={{ justifyContent: 'space-between', width: 10, mb: link.links ? 5 : 1 }}>
 								<Link
 									cfg={{
@@ -57,7 +65,6 @@ const SidebarMenu: React.FC<SidebarMenuProps> = ({
 									}}
 									disabled={link.disabled}
 									underline={active(link.path)}
-									className={active(link.path) ? styles.activeLink : undefined}
 									onClick={() => onClick(link)}
 								>
 									{link.name}
