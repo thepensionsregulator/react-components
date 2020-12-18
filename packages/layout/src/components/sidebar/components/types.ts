@@ -25,4 +25,5 @@ export type SidebarMenuProps = {
 	title: string;
 	links: SidebarLinkProps[];
 	maintenanceMode: boolean;
+	collapsed: boolean;
 };

@@ -135,11 +135,11 @@ import { Sidebar } from '@tpr/layout';
         },
         { 
           name: 'Employer details', 
-          path: '/layout', 
+          path: '/as', 
           completed: false,
           links: [
-            { name: 'Employer Memberships', path: '/layout/employer', completed: false },
-            { name: 'Multi-employer scheme structure', path: '/layout/sidebar', completed: false },
+            { name: 'Employer Memberships', path: '/as/employer', completed: false },
+            { name: 'Multi-employer scheme structure', path: '/as/sidebar', completed: false },
           ],
         },
         {
@@ -227,7 +227,7 @@ import { Sidebar } from '@tpr/layout';
   }}
 </Playground>
 
-## With multiple levels of submenus
+## With multiple levels of submenus & collapsed on first load
 
 <Playground>
 	{() => {
@@ -246,13 +246,23 @@ import { Sidebar } from '@tpr/layout';
           path: '/layout', 
           completed: false,
           links: [
-            { name: 'Employer Memberships', path: '/layout/employer', completed: true },
+            { 
+              name: 'Employer Memberships', 
+              path: '/layout/employer', 
+              completed: true,
+						  onClick: (link) => alert(`You clicked on ${link.path}`),
+            },
             { 
               name: 'Multi-employer scheme structure', 
               path: '/layout/multi-employer', 
               completed: false,
               links: [
-                { name: 'Page 1', path: '/layout/multi-employer/page1', completed: true },
+                { 
+                  name: 'Page 1', 
+                  path: '/layout/multi-employer/page1', 
+                  completed: true,
+						      onClick: (link) => alert(`You clicked on ${link.path}`),
+                },
                 { name: 'Page 2', path: '/layout/multi-employer/page2', completed: false},
               ],
             },
@@ -274,6 +284,7 @@ import { Sidebar } from '@tpr/layout';
     		matchPath={matchPath}
     		location={location}
     		history={{ push: () => {} }}
+        collapseNested={true}
     	/>
     );
   }}

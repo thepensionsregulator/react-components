@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { H3, Flex, Hr, Link } from '@tpr/core';
 import { SidebarLinkProps, SidebarMenuProps } from './types';
 import StatusIcon from './StatusIcon';
@@ -8,10 +8,22 @@ const SidebarMenu: React.FC<SidebarMenuProps> = ({
 	title,
 	links,
 	maintenanceMode,
+	collapsed,
 }) => {
+	const collapsedClass = styles.nestedWrapper + ' ' + styles.collapsed;
+	const [classes, setClasses] = useState(styles.nestedWrapper);
+
+	const toggleCollapse = () => {
+		classes === collapsedClass ? setClasses(styles.nestedWrapper) : setClasses(collapsedClass);
+	}
+
+	useEffect(() => {
+		collapsed && setClasses(collapsedClass);
+	}, []);
+
 	const generateSubmenu = (links: SidebarLinkProps[]) => {
 		return (
-			<Flex cfg={{ flexDirection: 'column', pl: 6 }}>
+			<Flex cfg={{ flexDirection: 'column', pl: 6 }} className={classes}>
 				{links.map(
 					({ onClick = () => {}, active = () => false, ...innerLink }, key) => (
 						<React.Fragment key={key}>
@@ -75,7 +87,7 @@ const SidebarMenu: React.FC<SidebarMenuProps> = ({
 								}}
 								disabled={link.disabled}
 								underline={active(link.path)}
-								onClick={() => onClick(link)}
+								onClick={() => { onClick(link); link.links && toggleCollapse();}}
 							>
 								{link.name}
 							</Link>

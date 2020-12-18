@@ -59,6 +59,7 @@ export type SidebarProps = {
 	location: any;
 	/** import from react-router-dom */
 	history: any;
+	collapseNested?: boolean;
 };
 
 export const Sidebar: React.FC<SidebarProps> = ({
@@ -69,6 +70,7 @@ export const Sidebar: React.FC<SidebarProps> = ({
 	matchPath,
 	location,
 	history,
+	collapseNested = false,
 }) => {
 	const routerProps = { matchPath, location, history };
 	const sections = useSectionsUpdater(originalSections, routerProps);
@@ -106,6 +108,7 @@ export const Sidebar: React.FC<SidebarProps> = ({
 						title={item.title}
 						links={item.links}
 						maintenanceMode={maintenanceMode}
+						collapsed={collapseNested}
 					/>
 				))}
 		</div>
