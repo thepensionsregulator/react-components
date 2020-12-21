@@ -7,6 +7,7 @@ route: /layout/sidebar
 import { Playground } from '@playground';
 import { Props } from 'docz';
 import { Sidebar } from './sidebar';
+import { matchPath } from 'react-router-dom';
 
 # Sidebar
 
@@ -20,6 +21,7 @@ import { Sidebar } from '@tpr/layout';
 
 <Playground>
 	{() => {
+		const location = window.location;
 		const sections = [
 			{
 				title: 'Scheme details',
@@ -28,7 +30,7 @@ import { Sidebar } from '@tpr/layout';
 						name: 'Scheme name and address',
 						completed: true,
 						onClick: (link) => alert(`You clicked on ${link.path}`),
-						path: '/scheme-name-and-address',
+						path: '/layout/sidebar',
 					},
 					{
 						name: 'Scheme status and membership',
@@ -83,12 +85,209 @@ import { Sidebar } from '@tpr/layout';
 				title="Scheme return home"
 				sections={sections}
 				maintenanceMode={false}
-				matchPath={() => {}}
-				location={{}}
+				matchPath={matchPath}
+				location={location}
 				history={{ push: () => {} }}
 			/>
 		);
 	}}
+</Playground>
+
+## With submenu (nested elements)
+
+<Playground>
+	{() => {
+		const location = window.location;
+		const sections = [
+    {
+      title: 'Scheme details (DB)',
+      links: [
+        {
+          name: 'Scheme name, address and contact details',
+          completed: true,
+          path: '/scheme-name-and-address',
+        },
+        {
+          name: 'Scheme status and membership',
+          completed: true,
+          path: '/scheme-status-and-membership',
+        },
+        {
+          name: 'Consent to electronic communication',
+          completed: true,
+          path: '/consent-to-electronic-communication',
+        },
+        {
+          name: 'Record keeping',
+          completed: true,
+          path: '/record-keeping',
+        },
+      ],
+      order: 1,
+    },
+    {
+      title: 'Roles',
+      links: [
+        {
+          name: 'Trustee details',
+          completed: true,
+          path: '/trustees',
+        },
+        { 
+          name: 'Employer details', 
+          path: '/as', 
+          completed: false,
+          links: [
+            { name: 'Employer Memberships', path: '/as/employer', completed: false },
+            { name: 'Multi-employer scheme structure', path: '/as/sidebar', completed: false },
+          ],
+        },
+        {
+          name: 'Service provider details',
+          path: '/service-providers',
+        },
+        {
+          name: 'Named contact details',
+          completed: false,
+          path: '/name-contact-details',
+        },
+      ],
+      order: 2,
+    },
+    {
+      title: 'Financial details',
+      links: [
+        {
+          name: 'Asset Breakdown',
+          completed: false,
+          path: '/asset-breakdown',
+        },
+        {
+          name: 'Buyout Valuation',
+          completed: false,
+          path: '/buyout-valuation',
+        },
+        {
+          name: 'S179 Valuation',
+          completed: false,
+          path: '/s179-valuation',
+        },
+        {
+          name: 'Part 3 Valuation',
+          completed: false,
+          path: '/part-3-valuation',
+        },
+        {
+          name: 'Liability Hedging',
+          completed: false,
+          path: '/liability-hedging',
+        },
+        {
+          name: 'Employer Covenant',
+          completed: false,
+          path: '/employer-covenant',
+        },
+        {
+          name: 'Statement of Investment Principles',
+          completed: false,
+          path: '/statement-of-investment-principles',
+        },
+      ],
+      order: 3,
+    },
+    {
+      title: 'Review and submit',
+      links: [
+        {
+          name: 'Step 1: review and print',
+          completed: false,
+          disabled: true,
+          path: '/review-and-submit',
+        },
+        {
+          name: 'Step 2: submit',
+          completed: false,
+          disabled: true,
+          path: '/review-and-submit',
+        },
+      ],
+      order: 4,
+    },
+  ];
+    return (
+    	<Sidebar
+    		title="Scheme return home"
+    		sections={sections}
+    		maintenanceMode={false}
+    		matchPath={matchPath}
+    		location={location}
+    		history={{ push: () => {} }}
+    	/>
+    );
+  }}
+</Playground>
+
+## With multiple levels of submenus & collapsed on first load
+
+<Playground>
+	{() => {
+		const location = window.location;
+		const sections = [
+    {
+      title: 'Roles',
+      links: [
+        {
+          name: 'Trustee details',
+          completed: true,
+          path: '/trustees',
+        },
+        { 
+          name: 'Employer details', 
+          path: '/layout', 
+          completed: false,
+          links: [
+            { 
+              name: 'Employer Memberships', 
+              path: '/layout/employer', 
+              completed: true,
+						  onClick: (link) => alert(`You clicked on ${link.path}`),
+            },
+            { 
+              name: 'Multi-employer scheme structure', 
+              path: '/layout/multi-employer', 
+              completed: false,
+              links: [
+                { 
+                  name: 'Page 1', 
+                  path: '/layout/multi-employer/page1', 
+                  completed: true,
+						      onClick: (link) => alert(`You clicked on ${link.path}`),
+                },
+                { name: 'Page 2', path: '/layout/multi-employer/page2', completed: false},
+              ],
+            },
+          ],
+        },
+        {
+          name: 'Service provider details',
+          path: '/service-providers',
+        },
+      ],
+      order: 1,
+    },
+  ];
+    return (
+    	<Sidebar
+    		title="Scheme return home"
+    		sections={sections}
+    		maintenanceMode={false}
+    		matchPath={matchPath}
+    		location={location}
+    		history={{ push: () => {} }}
+        collapseNested={true}
+    	/>
+    );
+  }}
 </Playground>
 
 ## API
