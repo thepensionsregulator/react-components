@@ -13,13 +13,10 @@ const SidebarMenu: React.FC<SidebarMenuProps> = ({
 	const collapsedClass = styles.nestedWrapper + ' ' + styles.collapsed;
 	const [classes, setClasses] = useState(styles.nestedWrapper);
 
-	const toggleCollapse = () => {
-		classes === collapsedClass ? setClasses(styles.nestedWrapper) : setClasses(collapsedClass);
-	}
-
 	useEffect(() => {
 		collapsed && setClasses(collapsedClass);
-	}, []);
+		!collapsed && setClasses(styles.nestedWrapper);
+	}, [collapsed]);
 
 	const generateSubmenu = (links: SidebarLinkProps[]) => {
 		return (
@@ -87,7 +84,7 @@ const SidebarMenu: React.FC<SidebarMenuProps> = ({
 								}}
 								disabled={link.disabled}
 								underline={active(link.path)}
-								onClick={() => { onClick(link); link.links && toggleCollapse();}}
+								onClick={() => onClick(link)}
 							>
 								{link.name}
 							</Link>
