@@ -1,12 +1,39 @@
-import React from 'react';
+import React, { useMemo } from 'react';
 import { AppWidth, DocWidth, Flex, Link, P } from '@tpr/core';
 import style from './beta.module.scss';
 
 type BetaHeaderProps = {
 	text?: string;
+	mail?: MailToProps;
 };
 
-export const BetaHeader: React.FC<BetaHeaderProps> = ({ text }) => {
+type MailToProps = {
+	email: string;
+	subject: string;
+};
+
+export const BetaHeader: React.FC<BetaHeaderProps> = ({ text, mail }) => {
+	const TextComponent = useMemo(() => {
+		return text
+			? () => <P>{text}</P>
+			: () => (
+					<P>
+						This is a new service - your{' '}
+						<Link
+							anchorTag={true}
+							href={
+								mail
+									? `mailto:${mail.email || ''}&subject=${mail.subject || ''}`
+									: 'mailto:'
+							}
+						>
+							feedback
+						</Link>{' '}
+						will help us improve
+					</P>
+			  );
+	}, [text, mail]);
+
 	return (
 		<DocWidth className={style.beta}>
 			<AppWidth>
@@ -24,22 +51,7 @@ export const BetaHeader: React.FC<BetaHeaderProps> = ({ text }) => {
 						BETA
 					</P>
 					<P cfg={{ fontSize: 1, color: 'neutral.6' }}>
-						{text ? (
-							text
-						) : (
-							<>
-								This is a new service - your{' '}
-								<Link
-									onClick={() => {
-										location.href =
-											'mailto:webfeedback@tpr.gov.uk&subject=Portal Scheme Return feedback';
-									}}
-								>
-									feedback
-								</Link>{' '}
-								will help us improve it
-							</>
-						)}
+						<TextComponent />
 					</P>
 				</Flex>
 			</AppWidth>
