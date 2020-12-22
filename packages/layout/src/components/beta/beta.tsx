@@ -15,9 +15,9 @@ type MailToProps = {
 export const BetaHeader: React.FC<BetaHeaderProps> = ({ text, mail }) => {
 	const TextComponent = useMemo(() => {
 		return text
-			? () => <P>{text}</P>
+			? () => text
 			: () => (
-					<P>
+					<>
 						This is a new service - your{' '}
 						<Link
 							anchorTag={true}
@@ -30,7 +30,7 @@ export const BetaHeader: React.FC<BetaHeaderProps> = ({ text, mail }) => {
 							feedback
 						</Link>{' '}
 						will help us improve
-					</P>
+					</>
 			  );
 	}, [text, mail]);
 
