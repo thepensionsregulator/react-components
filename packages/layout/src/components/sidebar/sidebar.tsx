@@ -1,9 +1,9 @@
 import React, { useMemo } from 'react';
 import { Flex, Link, P, flatten } from '@tpr/core';
 import { callAllEventHandlers } from '../../utils';
-import styles from './sidebar.module.scss';
 import SidebarMenu from './components/SidebarMenu';
 import { ReactRouterDomProps, SidebarSectionProps } from './components/types';
+import styles from './sidebar.module.scss';
 
 export const isActive = (settings: { matchPath: any; location: any }) => (
 	path: string,
@@ -29,6 +29,14 @@ export const useSectionsUpdater = (
 						link.onClick,
 					),
 					active: isActive({ matchPath, location }),
+					links: link.links && link.links.map((innerLink) => ({
+						...innerLink,
+						onClick: callAllEventHandlers(
+							({ path }) => history.push(path),
+							innerLink.onClick,
+						),
+						active: isActive({ matchPath, location }),
+					}))
 				})),
 			},
 		];
