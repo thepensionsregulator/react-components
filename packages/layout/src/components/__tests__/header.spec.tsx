@@ -7,7 +7,8 @@ describe('Header', () => {
 	test('is accessible', async () => {
 		const { container } = render(
 			<Header
-				logoUrl="https://www.thepensionsregulator.gov.uk"
+				logoSrc="https://www.thepensionsregulator.gov.uk/logo.png"
+				logoHref="https://www.thepensionsregulator.gov.uk"
 				title="Exchange - Scheme return"
 				onClickSchemeOptions={jest.fn()}
 				onClickLogout={jest.fn()}
@@ -23,7 +24,8 @@ describe('Header', () => {
 		const onClickLogout = jest.fn();
 		const { getByTestId, getByText, getByAltText } = render(
 			<Header
-				logoUrl="https://www.thepensionsregulator.gov.uk"
+				logoSrc="https://www.thepensionsregulator.gov.uk/logo.png"
+				logoHref="https://www.thepensionsregulator.gov.uk"
 				title="Exchange - Scheme return"
 				onClickSchemeOptions={onClickSchemeOptions}
 				onClickLogout={onClickLogout}
@@ -36,6 +38,12 @@ describe('Header', () => {
 
 		expect(image).toHaveAttribute(
 			'src',
+			'https://www.thepensionsregulator.gov.uk/logo.png',
+		);
+
+		const anchor = image.parentElement;
+		expect(anchor).toHaveAttribute(
+			'href',
 			'https://www.thepensionsregulator.gov.uk',
 		);
 		expect(onClickSchemeOptions).toHaveBeenCalledTimes(1);
