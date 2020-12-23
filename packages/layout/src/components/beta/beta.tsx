@@ -29,7 +29,7 @@ export const BetaHeader: React.FC<BetaHeaderProps> = ({ text, mail }) => {
 						>
 							feedback
 						</Link>{' '}
-						will help us improve
+						will help us improve it.
 					</>
 			  );
 	}, [text, mail]);
