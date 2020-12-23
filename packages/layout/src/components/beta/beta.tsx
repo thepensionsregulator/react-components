@@ -1,14 +1,38 @@
 import React, { useMemo } from 'react';
-import { AppWidth, DocWidth, Flex, P } from '@tpr/core';
+import { AppWidth, DocWidth, Flex, Link, P } from '@tpr/core';
 import style from './beta.module.scss';
 
 type BetaHeaderProps = {
-	text: any;
+	text?: string;
+	mail?: MailToProps;
 };
-export const BetaHeader: React.FC<BetaHeaderProps> = ({ text }) => {
+
+type MailToProps = {
+	email: string;
+	subject: string;
+};
+
+export const BetaHeader: React.FC<BetaHeaderProps> = ({ text, mail }) => {
 	const TextComponent = useMemo(() => {
-		return typeof text === 'function' ? text : () => text;
-	}, [text]);
+		return text
+			? () => <>{text}</>
+			: () => (
+					<>
+						This is a new service - your{' '}
+						<Link
+							anchorTag={true}
+							href={
+								mail
+									? `mailto:${mail.email || ''}&subject=${mail.subject || ''}`
+									: 'mailto:'
+							}
+						>
+							feedback
+						</Link>{' '}
+						will help us improve it.
+					</>
+			  );
+	}, [text, mail]);
 
 	return (
 		<DocWidth className={style.beta}>
