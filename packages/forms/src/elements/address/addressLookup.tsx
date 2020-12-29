@@ -39,7 +39,7 @@ enum AddressView {
 }
 
 export const AddressLookup: React.FC<AddressProps> = ({
-	initialValue,
+	initialValue = {},
 	loading,
 	setLoading,
 	testId,
