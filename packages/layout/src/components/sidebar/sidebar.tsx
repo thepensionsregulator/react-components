@@ -29,14 +29,16 @@ export const useSectionsUpdater = (
 						link.onClick,
 					),
 					active: isActive({ matchPath, location }),
-					links: link.links && link.links.map((innerLink) => ({
-						...innerLink,
-						onClick: callAllEventHandlers(
-							({ path }) => history.push(path),
-							innerLink.onClick,
-						),
-						active: isActive({ matchPath, location }),
-					}))
+					links:
+						link.links &&
+						link.links.map((innerLink) => ({
+							...innerLink,
+							onClick: callAllEventHandlers(
+								({ path }) => history.push(path),
+								innerLink.onClick,
+							),
+							active: isActive({ matchPath, location }),
+						})),
 				})),
 			},
 		];

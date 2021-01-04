@@ -5,6 +5,7 @@ import { DocWidth, AppWidth, Flex, Link, P } from '@tpr/core';
 type HeaderProps = {
 	logoSrc: string;
 	logoHref: string;
+	logoAlt?: string;
 	title: string;
 	onClickSchemeOptions: () => void;
 	onClickLogout: () => void;
@@ -13,6 +14,7 @@ type HeaderProps = {
 export const Header: React.FC<HeaderProps> = ({
 	logoSrc,
 	logoHref,
+	logoAlt = 'Go to The Pensions Regulator website',
 	title = 'Exchange - Scheme Return',
 	onClickLogout,
 	onClickSchemeOptions,
@@ -22,11 +24,15 @@ export const Header: React.FC<HeaderProps> = ({
 			<AppWidth>
 				<Flex cfg={{ justifyContent: 'space-between', py: 2, pr: 3 }}>
 					<Flex cfg={{ alignItems: 'center' }}>
-						<div className={styles.logo}>
-							<a href={logoHref} style={{display: "inline-flex"}}>
-								<img className={styles.img} src={logoSrc} alt="TPR Logo" />
-							</a>
-						</div>
+						<a href={logoHref} className={styles.logo}>
+							<img
+								className={styles.img}
+								src={logoSrc}
+								alt={logoAlt}
+								width="180"
+								height="75"
+							/>
+						</a>
 						<P cfg={{ color: 'white', fontWeight: 2 }}>{title}</P>
 					</Flex>
 					<Flex cfg={{ alignItems: 'center' }}>

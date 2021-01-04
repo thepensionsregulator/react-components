@@ -5,19 +5,6 @@
 	border-top: 5px solid $colors-neutral-7;
 }
 
-.logo {
-	display: flex;
-	flex: 0 0 auto;
-	align-items: flex-start;
-	justify-content: flex-start;
-	width: $sidebar-width;
-	margin-right: $space-4;
-
-	img {
-		width: 180px;
-	}
-}
-
 .footerText {
 	align-items: center;
 	height: 50px;
