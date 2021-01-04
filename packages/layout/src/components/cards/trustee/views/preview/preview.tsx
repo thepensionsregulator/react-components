@@ -4,7 +4,10 @@ import { useTrusteeContext } from '../../context';
 import { UnderlinedButton } from '../../../components/button';
 import { Checkbox } from '@tpr/forms';
 import { capitalize } from '../../../../../utils';
-import { PhonePreview, EmailPreview } from '../../../common/views/preview/components';
+import {
+	PhonePreview,
+	EmailPreview,
+} from '../../../common/views/preview/components';
 import styles from './preview.module.scss';
 
 export const Preview: React.FC = () => {
@@ -50,8 +53,12 @@ export const Preview: React.FC = () => {
 						{i18n.preview.buttons.four}
 					</UnderlinedButton>
 					<Flex cfg={{ mt: 1, flexDirection: 'column' }}>
-						{trustee.telephoneNumber && <PhonePreview value={trustee.telephoneNumber} />}
-						{trustee.emailAddress && <EmailPreview value={trustee.emailAddress} />}
+						{trustee.telephoneNumber && (
+							<PhonePreview value={trustee.telephoneNumber} />
+						)}
+						{trustee.emailAddress && (
+							<EmailPreview value={trustee.emailAddress} />
+						)}
 					</Flex>
 				</Flex>
 			</Flex>
