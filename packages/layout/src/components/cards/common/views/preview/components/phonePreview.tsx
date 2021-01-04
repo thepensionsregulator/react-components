@@ -13,7 +13,7 @@ export const PhonePreview:React.FC<PhonePreviewProps> = React.memo(({
   return (
     <>
       <H4 cfg={{ lineHeight: 3 }}>{label}</H4>
-      <P>{value}</P>
+      <P x-ms-format-detection="none">{value}</P>
     </>
   )
 });
