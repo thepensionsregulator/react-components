@@ -65,10 +65,6 @@ export const RadioButton: React.FC<RadioButtonProps> = ({
 	);
 };
 
-// export interface FFRadioButtonProps extends FieldProps {
-// 	callback?: Function;
-// }
-
 export const FFRadioButton: React.FC<FieldProps> = (fieldProps) => {
 	const handleChange = (input: any, value: any) => {
 		input.onChange(value);
