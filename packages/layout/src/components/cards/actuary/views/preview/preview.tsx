@@ -3,7 +3,10 @@ import { Checkbox } from '@tpr/forms';
 import { Flex, P, Hr, classNames } from '@tpr/core';
 import { UnderlinedButton } from '../../../components/button';
 import { useActuaryContext } from '../../context';
-import { PhonePreview, EmailPreview } from '../../../common/views/preview/components';
+import {
+	PhonePreview,
+	EmailPreview,
+} from '../../../common/views/preview/components';
 import styles from './preview.module.scss';
 
 export const Preview: React.FC<any> = () => {
@@ -50,8 +53,12 @@ export const Preview: React.FC<any> = () => {
 						{i18n.preview.buttons.four}
 					</UnderlinedButton>
 					<Flex cfg={{ my: 2, flexDirection: 'column' }}>
-						{actuary.telephoneNumber && <PhonePreview value={actuary.telephoneNumber} />}
-						{actuary.emailAddress && <EmailPreview value={actuary.emailAddress} />}
+						{actuary.telephoneNumber && (
+							<PhonePreview value={actuary.telephoneNumber} />
+						)}
+						{actuary.emailAddress && (
+							<EmailPreview value={actuary.emailAddress} />
+						)}
 					</Flex>
 				</Flex>
 			</Flex>

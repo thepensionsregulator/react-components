@@ -3,7 +3,10 @@ import { Checkbox } from '@tpr/forms';
 import { Flex, P, Hr, classNames } from '@tpr/core';
 import { UnderlinedButton } from '../../../components/button';
 import { useInsurerContext } from '../../context';
-import { PhonePreview, EmailPreview } from '../../../common/views/preview/components';
+import {
+	PhonePreview,
+	EmailPreview,
+} from '../../../common/views/preview/components';
 import styles from './preview.module.scss';
 
 export const Preview: React.FC<any> = () => {
@@ -45,8 +48,12 @@ export const Preview: React.FC<any> = () => {
 				>
 					<UnderlinedButton>{i18n.preview.buttons.four}</UnderlinedButton>
 					<Flex cfg={{ my: 2, flexDirection: 'column' }}>
-						{insurer.telephoneNumber && <PhonePreview value={insurer.telephoneNumber} />}
-						{insurer.emailAddress && <EmailPreview value={insurer.emailAddress} />}
+						{insurer.telephoneNumber && (
+							<PhonePreview value={insurer.telephoneNumber} />
+						)}
+						{insurer.emailAddress && (
+							<EmailPreview value={insurer.emailAddress} />
+						)}
 					</Flex>
 
 					{/* Contact details block: display only	 */}
