@@ -15,11 +15,13 @@ type FooterProps = {
 	links: FooterLinkProps[];
 	/** accepts a valid logo url, must be https */
 	logoUrl?: string;
+	logoAlt?: string;
 	/** accepts copyright description */
 	copyright?: string;
 };
 export const Footer: React.FC<FooterProps> = ({
 	logoUrl,
+	logoAlt = 'The Pensions Regulator logo',
 	copyright = '© 2020 The Pensions Regulator',
 	onLinkClickHandler,
 	links,
@@ -31,9 +33,7 @@ export const Footer: React.FC<FooterProps> = ({
 					<Flex
 						cfg={{ justifyContent: 'flex-start', py: 6, alignItems: 'center' }}
 					>
-						<div className={styles.logo}>
-							<img src={logoUrl} alt="TPR Logo" />
-						</div>
+						<img src={logoUrl} alt={logoAlt} width="180" height="75" />
 					</Flex>
 					<Flex
 						cfg={{ justifyContent: 'space-between', mt: 3 }}

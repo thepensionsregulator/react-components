@@ -32,7 +32,7 @@ describe('Header', () => {
 			/>,
 		);
 
-		const image = getByAltText('TPR Logo');
+		const image = getByAltText('Go to The Pensions Regulator website');
 		getByTestId('onClickSchemeOptions').click();
 		getByTestId('onClickLogout').click();
 

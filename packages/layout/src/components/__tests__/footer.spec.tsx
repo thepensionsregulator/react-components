@@ -44,7 +44,7 @@ describe('Footer', () => {
 			/>,
 		);
 
-		const image = getByAltText('TPR Logo');
+		const image = getByAltText('The Pensions Regulator logo');
 		expect(image).toHaveAttribute(
 			'src',
 			'https://www.thepensionsregulator.gov.uk',
