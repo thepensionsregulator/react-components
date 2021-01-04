@@ -1,8 +1,9 @@
 import React from 'react';
 import { Checkbox } from '@tpr/forms';
-import { Flex, P, Hr, H4, classNames } from '@tpr/core';
+import { Flex, P, Hr, classNames } from '@tpr/core';
 import { UnderlinedButton } from '../../../components/button';
 import { useCorporateGroupContext } from '../../context';
+import { PhonePreview, EmailPreview } from '../../../common/views/preview/components';
 import styles from './preview.module.scss';
 
 export const Preview: React.FC<any> = () => {
@@ -69,18 +70,8 @@ export const Preview: React.FC<any> = () => {
 								? `${corporateGroup.title} ${corporateGroup.firstName} ${corporateGroup.lastName}`
 								: `${corporateGroup.firstName} ${corporateGroup.lastName}`}
 						</P>
-						{corporateGroup.telephoneNumber && (
-							<>
-								<H4 cfg={{ lineHeight: 3 }}>Phone</H4>
-								<P>{corporateGroup.telephoneNumber}</P>
-							</>
-						)}
-						{corporateGroup.emailAddress && (
-							<>
-								<H4 cfg={{ lineHeight: 3 }}>Email</H4>
-								<P cfg={{ wordBreak: 'all' }}>{corporateGroup.emailAddress}</P>
-							</>
-						)}
+						{corporateGroup.telephoneNumber && <PhonePreview value={corporateGroup.telephoneNumber} />}
+						{corporateGroup.emailAddress && <EmailPreview value={corporateGroup.emailAddress} />}
 					</Flex>
 				</Flex>
 			</Flex>
