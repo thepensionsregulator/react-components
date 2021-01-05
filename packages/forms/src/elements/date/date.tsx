@@ -167,6 +167,7 @@ export const InputDate: React.FC<InputDateComponentProps> = memo(
 							meta={meta}
 							disabled={disabled}
 							readOnly={readOnly}
+							maxLength={2}
 						/>
 					)}
 					{!hideMonth && (
@@ -182,6 +183,7 @@ export const InputDate: React.FC<InputDateComponentProps> = memo(
 							meta={meta}
 							disabled={disabled}
 							readOnly={readOnly}
+							maxLength={2}
 						/>
 					)}
 					<DateInputField
