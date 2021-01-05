@@ -11,7 +11,7 @@ import styles from './date.module.scss';
 const handleChange = (onChange: Function, value: number) => ({
 	target,
 }: ChangeEvent<HTMLInputElement>) => {
-	const newValue = target.value.replace(/[^0-9]{4}/g, '').trim();
+	const newValue = target.value.replace(/[^0-9]/g, '').trim();
 	if (!newValue) return onChange('');
 	if (parseInt(newValue, 10) < value) {
 		return onChange(newValue);
