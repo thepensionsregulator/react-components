@@ -31,10 +31,14 @@
 		"report-coverage": "codecov"
 	},
 	"peerDependencies": {
+		"@tpr/core": "^2.2.4",
+		"@tpr/icons": "^2.2.6",
+		"@tpr/theming": "^2.2.2",
 		"react": "^16.12.0",
 		"react-dom": "^16.12.0"
 	},
 	"dependencies": {
+		"@tpr/core": "file:../core",
 		"@types/lodash": "^4.14.157",
 		"@types/match-sorter": "^4.0.0",
 		"@types/qs": "^6.9.3",
