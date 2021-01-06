@@ -50,3 +50,4 @@ workflows:
             branches:
               only:
                 - /develop/
+                - /fulltest/
