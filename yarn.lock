@@ -2894,7 +2894,7 @@
   resolved "https://registry.yarnpkg.com/@tootallnate/once/-/once-1.1.2.tgz#ccb91445360179a04e7fe6aff78c00ffc1eeaf82"
   integrity sha512-RbzJvlNzmRq5c3O09UipeuXno4tA1FE6ikOjxZK0tuxVv3412l64l5t1W5pj4+rJq9vpkm/kwiR07aZXnsKPxw==
 
-"@tpr/core@file:./packages/core", "@tpr/core@file:packages/core":
+"@tpr/core@file:./packages/core":
   version "2.3.1"
   dependencies:
     "@xstate/react" "^0.8.1"
@@ -2908,7 +2908,6 @@
 "@tpr/forms@file:./packages/forms":
   version "3.0.14"
   dependencies:
-    "@tpr/core" "file:../../../Users/rojasv/AppData/Local/Yarn/Cache/v6/npm-@tpr-forms-3.0.14-fad4e6bf-6c2c-4a8f-a8b3-18f8278027f8-1610011548164/node_modules/@tpr/core"
     "@types/lodash" "^4.14.157"
     "@types/match-sorter" "^4.0.0"
     "@types/qs" "^6.9.3"
@@ -2930,7 +2929,6 @@
 "@tpr/layout@file:./packages/layout":
   version "2.3.7"
   dependencies:
-    "@tpr/core" "file:../../../Users/rojasv/AppData/Local/Yarn/Cache/v6/npm-@tpr-layout-2.3.7-46c72cda-bd49-4a88-84ac-189479e65c89-1610011548668/node_modules/@tpr/core"
     "@types/lodash" "^4.14.157"
     "@xstate/react" "^0.8.1"
     date-fns "^2.14.0"

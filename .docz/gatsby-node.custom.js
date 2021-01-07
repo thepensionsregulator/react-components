@@ -5,6 +5,7 @@ exports.onCreateWebpackConfig = ({ actions }) => {
 		resolve: {
 			alias: {
 				'@playground': path.resolve(__dirname, '../docs/Playground'),
+				'@tpr/core': path.resolve(__dirname, '../packages/core'),
 			},
 		},
 	};
