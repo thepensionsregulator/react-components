@@ -31,13 +31,14 @@
 		"report-coverage": "codecov"
 	},
 	"peerDependencies": {
+		"@tpr/core": "^2.2.4",
+		"@tpr/icons": "^2.2.6",
+		"@tpr/theming": "^2.2.2",
 		"react": "^16.12.0",
 		"react-dom": "^16.12.0"
 	},
 	"dependencies": {
 		"@tpr/core": "file:../core",
-		"@tpr/icons": "file:../icons",
-		"@tpr/theming": "file:../theming",
 		"@types/lodash": "^4.14.157",
 		"@types/match-sorter": "^4.0.0",
 		"@types/qs": "^6.9.3",
@@ -55,6 +56,9 @@
 		"access": "public"
 	},
 	"devDependencies": {
+		"@tpr/core": "file:../core",
+		"@tpr/icons": "file:../icons",
+		"@tpr/theming": "file:../theming",
 		"cross-env": "^7.0.2"
 	},
 	"gitHead": "57aec9c9de22596d6343bae07eb6b198322a0bee"

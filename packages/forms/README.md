@@ -8,7 +8,7 @@ Form components for TPR apps.
 npm install @tpr/forms
 
 # Peer Dependencies - Also Required
-npm install react react-dom @tpr/theming
+npm install react react-dom @tpr/core @tpr/icons @tpr/theming
 ```
 
 ## Helpers
@@ -18,11 +18,15 @@ npm install react react-dom @tpr/theming
 
 ## Components
 
+- AddressLookup
 - Checkbox
+- Currency
 - Date
+- Email
 - Hidden input
 - Input
 - Number
+- Phone
 - Radio
 - Select
 - Text
