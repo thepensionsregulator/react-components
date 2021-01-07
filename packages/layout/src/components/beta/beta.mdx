@@ -17,6 +17,22 @@ Beta toolbar
 import { BetaHeader } from '@tpr/layout';
 ```
 
+### No Props
+
 <Playground>
-	<BetaHeader text="This is a new service - your feedback will help us improve it." />
+	<BetaHeader />
+</Playground>
+
+## With Mail Prop
+
+<Playground>
+	<BetaHeader
+		mail={{ email: 'example@mail.com', subject: 'Example Subject' }}
+	/>
+</Playground>
+
+## With Text Prop
+
+<Playground>
+	<BetaHeader text="You are using a service that is in beta" />
 </Playground>

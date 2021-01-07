@@ -10,17 +10,20 @@ import { Preview } from './views/preview';
 import { Toolbar } from '../components/toolbar';
 import Name from './views/name';
 import Type from './views/type/type';
-import Address from './views/address';
+import Address from '../common/views/address/addressPage';
 import { Contacts } from './views/contacts';
 import RemoveReason from './views/remove/reason/reason';
 import { ConfirmRemove } from './views/remove/confirm';
 import RemovedBox from '../components/removedBox';
-import { cardTypeName } from '../common/interfaces';
+import { cardType, cardTypeName } from '../common/interfaces';
 
 import styles from '../cards.module.scss';
+import AddressComparer from '@tpr/forms/lib/elements/address/addressComparer';
 
 const CardContent: React.FC = () => {
-	const { current } = useTrusteeContext();
+	const { current, i18n, send, addressAPI } = useTrusteeContext();
+	const { trustee } = current.context;
+
 	if (current.matches('preview')) {
 		return <Preview />;
 	} else if (current.matches({ edit: { trustee: 'name' } })) {
@@ -34,7 +37,23 @@ const CardContent: React.FC = () => {
 		current.matches({ edit: { company: 'address' } }) ||
 		current.matches({ edit: { company: 'save' } })
 	) {
-		return <Address />;
+		return (
+			<Address
+				onSubmit={(values) => {
+					const comparer = new AddressComparer();
+					if (comparer.areEqual(values.initialValue, values)) {
+						send('CANCEL');
+					} else {
+						send('SAVE', { address: values || {} });
+					}
+				}}
+				initialValue={trustee.address}
+				addressAPI={addressAPI}
+				cardType={cardType.trustee}
+				cardTypeName={cardTypeName.trustee}
+				i18n={i18n.address}
+			/>
+		);
 	} else if (
 		current.matches({ edit: { contact: 'details' } }) ||
 		current.matches({ edit: { contact: 'save' } })

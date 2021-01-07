@@ -7,7 +7,8 @@ describe('Header', () => {
 	test('is accessible', async () => {
 		const { container } = render(
 			<Header
-				logoUrl="https://www.thepensionsregulator.gov.uk"
+				logoSrc="https://www.thepensionsregulator.gov.uk/logo.png"
+				logoHref="https://www.thepensionsregulator.gov.uk"
 				title="Exchange - Scheme return"
 				onClickSchemeOptions={jest.fn()}
 				onClickLogout={jest.fn()}
@@ -23,19 +24,26 @@ describe('Header', () => {
 		const onClickLogout = jest.fn();
 		const { getByTestId, getByText, getByAltText } = render(
 			<Header
-				logoUrl="https://www.thepensionsregulator.gov.uk"
+				logoSrc="https://www.thepensionsregulator.gov.uk/logo.png"
+				logoHref="https://www.thepensionsregulator.gov.uk"
 				title="Exchange - Scheme return"
 				onClickSchemeOptions={onClickSchemeOptions}
 				onClickLogout={onClickLogout}
 			/>,
 		);
 
-		const image = getByAltText('TPR Logo');
+		const image = getByAltText('Go to The Pensions Regulator website');
 		getByTestId('onClickSchemeOptions').click();
 		getByTestId('onClickLogout').click();
 
 		expect(image).toHaveAttribute(
 			'src',
+			'https://www.thepensionsregulator.gov.uk/logo.png',
+		);
+
+		const anchor = image.parentElement;
+		expect(anchor).toHaveAttribute(
+			'href',
 			'https://www.thepensionsregulator.gov.uk',
 		);
 		expect(onClickSchemeOptions).toHaveBeenCalledTimes(1);

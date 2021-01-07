@@ -1,0 +1,40 @@
+@import '@tpr/theming/lib/variables.scss';
+
+.nonEditable {
+	margin: 0 0 $space-3;
+}
+
+.nonEditable.selectedPostcode {
+	margin-top: 9px; /* Aligns with the field label on the postcode lookup view */
+}
+
+/* Ensure there is a space for the data even if the field is empty */
+.nonEditable [aria-labelledby]::after {
+	content: ' ';
+	display: inline-block;
+}
+
+label + .nonEditable {
+	margin-top: $space-3;
+}
+
+.editPostcode {
+	width: 7em;
+}
+
+.changePostcode {
+	margin-left: $space-6;
+}
+
+.nonEditableLabel {
+	margin: 0 0 $space-1;
+}
+
+.button {
+	display: block;
+	margin-top: $space-2;
+}
+
+.arrowButton {
+	padding: 0;
+}

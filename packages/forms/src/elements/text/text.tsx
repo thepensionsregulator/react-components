@@ -3,52 +3,75 @@ import { Field, FieldRenderProps } from 'react-final-form';
 import { StyledInputLabel, InputElementHeading } from '../elements';
 import { FieldProps, FieldExtraProps } from '../../renderFields';
 import { Input } from '../input/input';
+import { useEffect } from 'react';
 
-type InputTextProps = FieldRenderProps<string> & FieldExtraProps;
-const InputText: React.FC<InputTextProps> = ({
-	label,
-	ariaLabel,
-	hint,
-	input,
-	testId,
-	meta,
-	required,
-	placeholder,
-	readOnly,
-	inputWidth: width,
-	cfg,
-}) => {
-	return (
-		<StyledInputLabel
-			isError={meta && meta.touched && meta.error}
-			cfg={Object.assign({ flexDirection: 'column', mt: 1 }, cfg)}
-		>
-			<InputElementHeading
-				label={label}
-				required={required}
-				hint={hint}
-				meta={meta}
-			/>
-			<Input
-				type="text"
-				width={width}
-				testId={testId}
-				label={ariaLabel ? ariaLabel : label}
-				placeholder={placeholder}
-				readOnly={readOnly}
-				touched={meta && meta.touched && meta.error}
-				{...input}
-			/>
-		</StyledInputLabel>
-	);
-};
+type InputTextProps = FieldRenderProps<string> &
+	FieldExtraProps & {
+		updatedValue: string;
+	};
+const InputText: React.FC<InputTextProps> = React.forwardRef(
+	(
+		{
+			label,
+			ariaLabel,
+			hint,
+			input,
+			inputClassName,
+			testId,
+			meta,
+			required,
+			placeholder,
+			disabled,
+			readOnly,
+			inputWidth: width,
+			cfg,
+			updatedValue,
+		},
+		ref,
+	) => {
+		useEffect(() => {
+			if (typeof updatedValue !== 'undefined') {
+				input.onChange(updatedValue);
+			}
+		}, [updatedValue]);
 
-export const FFInputText: React.FC<FieldProps> = (fieldProps) => {
-	return (
-		<Field
-			{...fieldProps}
-			required={typeof fieldProps.validate === 'function' || fieldProps.error}
-			component={InputText}
-		/>
-	);
-};
+		return (
+			<StyledInputLabel
+				isError={meta && meta.touched && meta.error}
+				cfg={Object.assign({ flexDirection: 'column', mt: 1 }, cfg)}
+			>
+				<InputElementHeading
+					label={label}
+					required={required}
+					hint={hint}
+					meta={meta}
+				/>
+				<Input
+					parentRef={ref}
+					type="text"
+					width={width}
+					testId={testId}
+					label={ariaLabel ? ariaLabel : label}
+					placeholder={placeholder}
+					disabled={disabled}
+					readOnly={readOnly}
+					touched={meta && meta.touched && meta.error}
+					className={inputClassName}
+					{...input}
+				/>
+			</StyledInputLabel>
+		);
+	},
+);
+
+export const FFInputText: React.FC<FieldProps> = React.forwardRef(
+	(fieldProps, ref) => {
+		return (
+			<Field
+				{...fieldProps}
+				required={typeof fieldProps.validate === 'function' || fieldProps.error}
+				render={(props) => <InputText {...props} {...fieldProps} ref={ref} />}
+			/>
+		);
+	},
+);

@@ -1,11 +1,8 @@
 import React from 'react';
 import { render } from '@testing-library/react';
 import { renderHook } from '@testing-library/react-hooks';
-import {
-	Sidebar,
-	SidebarSectionProps,
-	useCalculateProgress,
-} from '../sidebar/sidebar';
+import { Sidebar, useCalculateProgress } from '../sidebar/sidebar';
+import { SidebarSectionProps } from '../sidebar/components/types';
 import { axe } from 'jest-axe';
 
 const s1: SidebarSectionProps = {

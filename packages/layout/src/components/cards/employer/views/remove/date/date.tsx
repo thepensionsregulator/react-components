@@ -16,6 +16,7 @@ export const RemoveDateForm: React.FC = () => {
 			name: 'date',
 			label: i18n.remove.date.fields.date.label,
 			hint: i18n.remove.date.fields.date.hint,
+			required: true,
 			validate: (value) => {
 				if (!value) {
 					return i18n.remove.date.errors.formIncomplete;

@@ -131,6 +131,7 @@ export type FlexBoxProps = {
 		CursorProps &
 		TypographyProps;
 	[key: string]: any;
+	role?: string;
 };
 export const Flex: React.FC<FlexBoxProps> = ({
 	className,

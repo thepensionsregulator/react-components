@@ -1,0 +1,45 @@
+---
+name: Poscon
+menu: Layout
+route: /layout/poscon
+---
+
+import { Playground } from '@playground';
+import { Props } from 'docz';
+import { Poscon } from './poscon';
+import { H3, P } from '@tpr/core';
+
+# Poscon Banner
+
+Positive Confirmation banner component for tpr apps
+
+```js
+import { Poscon } from '@tpr/layout';
+```
+
+Poscons with no props will default to green with no closable button.
+
+<Playground>
+	<Poscon>
+		<p>Section Complete</p>
+		<p>Information about section</p>
+	</Poscon>
+</Playground>
+
+Poscons can be closable and have their color changed with props.
+
+<Playground>
+	<Poscon color={'warning.1'} enableClose={true}>
+		<p>Section Complete</p>
+		<p>Information about section</p>
+	</Poscon>
+</Playground>
+
+Poscons can accept any HTML element as a child. These elements will be displayed inside the banner.
+
+<Playground>
+	<Poscon enableClose={true}>
+		<H3>Poscon section</H3>
+		<P>Section complete</P>
+	</Poscon>
+</Playground>

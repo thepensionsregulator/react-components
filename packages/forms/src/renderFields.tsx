@@ -19,7 +19,8 @@ export type FieldInputTypes =
 	| 'date'
 	| 'select'
 	| 'phone'
-	| 'email';
+	| 'email'
+	| 'hidden';
 
 export type FieldOptions = {
 	label: string;

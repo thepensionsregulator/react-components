@@ -13,6 +13,8 @@ import {
 	appendMissingZeros,
 	adaptValueToFormat,
 	getFinalValueWithFormat,
+	getNumberOfCommas,
+	calculateCursorPosition,
 } from '../helpers';
 
 interface InputCurrencyProps extends FieldRenderProps<number>, FieldExtraProps {
@@ -52,7 +54,10 @@ const InputCurrency: React.FC<InputCurrencyProps> = React.memo(
 		// e.g. format: 999,999,999,999.00
 
 		const [inputValue, setInputValue] = useState<string>('');
+		const [formattedInputValue, setFormattedInputValue] = useState<string>('');
 		const [dot, setDot] = useState<boolean>(false);
+		const [cursorPos, setCursorPos] = useState(null);
+		const [delKey, setDelKey] = useState<boolean>(false);
 
 		const formatWithCommas = (value: string): string => {
 			const numString: string = value.replace(/,/g, '');
@@ -63,7 +68,7 @@ const InputCurrency: React.FC<InputCurrencyProps> = React.memo(
 				numFormatted = format(numString);
 				// numFormatted = "123,456"
 				const numWithDecimals: string = fixToDecimals(numString, decimalPlaces);
-				setInputValue(
+				setFormattedInputValue(
 					numFormatted + '.' + numWithDecimals.slice(-decimalPlaces),
 				);
 			}
@@ -72,7 +77,7 @@ const InputCurrency: React.FC<InputCurrencyProps> = React.memo(
 				// numString = "123456.77"
 				numFormatted = formatWithDecimals(numString, decimalPlaces);
 				// numFormatted = "123,456.77"
-				setInputValue(numFormatted);
+				setFormattedInputValue(numFormatted);
 			}
 			return numFormatted;
 		};
@@ -91,6 +96,9 @@ const InputCurrency: React.FC<InputCurrencyProps> = React.memo(
 					return true;
 				}
 				keyPressedIsNotAllowed(e) && e.preventDefault();
+				// we save the position of the cursorwhen the key is pressed
+				setCursorPos(e.target.selectionStart);
+				e.key === 'Delete' ? setDelKey(true) : setDelKey(false);
 			}
 		};
 
@@ -104,17 +112,36 @@ const InputCurrency: React.FC<InputCurrencyProps> = React.memo(
 		};
 
 		const handleOnChange = (e: ChangeEvent<HTMLInputElement>): void => {
-			// if the new value.length is greater than the maxLength
+			const commasBefore: number = getNumberOfCommas(inputValue, cursorPos);
+			// if the new value.length is greater than the maxLength, keeps the previous value
 			if (!valueLengthValid(e.target.value)) {
-				e.target.value = inputValue;
+				e.target.value = formattedInputValue;
 			} else {
+				setInputValue(e.target.value);
 				if (String(e.target.value)[e.target.value.length - 1] == '.') {
 					input.onChange(e.target.value);
 				} else {
-					input.onChange(e.target.value && formatWithCommas(e.target.value));
+					if (e.target.value) {
+						e.target.value = formatWithCommas(e.target.value);
+						// we only adjust the cursor position when the cursor is not at the end of the input.value
+						if (cursorPos !== e.target.value.length) {
+							[
+								e.target.selectionStart,
+								e.target.selectionEnd,
+							] = calculateCursorPosition(
+								cursorPos,
+								e,
+								inputValue,
+								commasBefore,
+								delKey,
+							);
+						}
+						setInputValue(e.target.value);
+						input.onChange(e.target.value && e.target.value);
+					} else input.onChange(null);
 				}
 				if (!containsDecimals(e.target.value)) setDot(false);
-				e.target.value === '' && setInputValue('');
+				e.target.value === '' && setFormattedInputValue('');
 			}
 			if (callback) {
 				const numericValue = Number(
@@ -129,14 +156,16 @@ const InputCurrency: React.FC<InputCurrencyProps> = React.memo(
 		const handleBlur = (e: any): void => {
 			input.onBlur(e);
 			e.target.value =
-				getNumDecimalPlaces(inputValue) < decimalPlaces
+				getNumDecimalPlaces(formattedInputValue) < decimalPlaces
 					? appendMissingZeros(inputValue.replace(/,/g, ''), decimalPlaces)
-					: inputValue;
+					: formattedInputValue;
+			setInputValue(e.target.value);
 			input.onChange(e);
 		};
 
 		const formatInitialValue = (value: number) => {
 			const newInitialValue = formatWithCommas(value.toFixed(decimalPlaces));
+			setFormattedInputValue(newInitialValue);
 			setInputValue(newInitialValue);
 			innerInput.current.value = newInitialValue;
 		};
@@ -154,8 +183,9 @@ const InputCurrency: React.FC<InputCurrencyProps> = React.memo(
 				*/
 				setTimeout(() => {
 					innerInput.current.dispatchEvent(myEvent);
-				}, 50);
+				}, 100);
 			} else {
+				setFormattedInputValue('');
 				setInputValue('');
 				innerInput.current.value = null;
 				input.onChange(null);
@@ -201,7 +231,9 @@ export const FFInputCurrency: React.FC<FieldProps> = (fieldProps) => {
 	return (
 		<Field
 			{...fieldProps}
-			render={(props) => <InputCurrency {...props} {...fieldProps} />}
+			render={(props) => (
+				<InputCurrency {...props} initialValue={fieldProps.initialValue} />
+			)}
 		/>
 	);
 };

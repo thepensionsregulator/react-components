@@ -12,12 +12,12 @@ import { splitObjectIntoTwo } from '../../../utils';
 import {
 	RecursivePartial,
 	addressFields,
-	AddressAPIType,
 	CardDefaultProps,
 	CardPersonalDetails,
 	CardContactDetails,
 	CardAddress,
 } from '../common/interfaces';
+import { AddressAPIType } from '@tpr/forms';
 
 export const TrusteeContext = createContext<TrusteeContextProps>({
 	complete: false,

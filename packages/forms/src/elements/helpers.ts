@@ -1,3 +1,5 @@
+import { ChangeEvent } from 'react';
+
 export const validKeys = [
 	'Backspace',
 	'Enter',
@@ -140,4 +142,82 @@ export const validateCurrency = (
 		return undefined;
 	}
 	return 'empty';
+};
+
+export const getNumberOfCommas = (value: string, pos?: number): number => {
+	if (!value) return 0;
+	if (pos > 0) {
+		return value.slice(0, pos).match(/,/g)
+			? value.slice(0, pos).match(/,/g).length
+			: 0;
+	} else return value.match(/,/g) ? value.match(/,/g).length : 0;
+};
+
+export const calculateCursorPosition = (
+	cursor: number,
+	ev: ChangeEvent<HTMLInputElement> | any,
+	prevValue: string,
+	commasBefore: number,
+	delKey: boolean,
+) => {
+	/*
+		Calculates the position of the cursor for the FFInputCurrency component when the onChange event occurs.
+		Because the component applies the comma-separated format to the value, it is very often when the number of chars,
+		in specific, the number of 'commas' before the cursor is not always the same when adding or deleting digits.
+		Therefore we need to calculate many different scenarios.
+		This calculations will be accurate only when the user adds or deletes digits one at the time and not when selecting multiple digits.
+	*/
+
+	if (delKey) {
+		// when pressing the 'Delete' key
+		if (cursor === 0) {
+			// cursor at the beggining of the input.value
+			ev.target.selectionStart = cursor;
+			ev.target.selectionEnd = cursor;
+		} else {
+			const newCommasBefore: number = getNumberOfCommas(
+				ev.target.value,
+				cursor,
+			);
+			ev.target.selectionStart =
+				commasBefore > newCommasBefore ? cursor - 1 : cursor;
+			ev.target.selectionEnd =
+				commasBefore > newCommasBefore ? cursor - 1 : cursor;
+		}
+	} else {
+		if (cursor === 0) {
+			// cursor at the beggining of the input.value
+			ev.target.selectionStart = 1;
+			ev.target.selectionEnd = 1;
+		} else {
+			// when the cursor is NOT at the beggining of the input.value
+			const newCommasBefore: number = getNumberOfCommas(
+				ev.target.value,
+				cursor,
+			);
+			if (ev.target.value.length > prevValue.length) {
+				// when the new value is longer than the previous there might be a case
+				// where the number of commas before the cursor is greater than before
+				ev.target.selectionStart =
+					newCommasBefore > commasBefore ? cursor + 2 : cursor + 1;
+				ev.target.selectionEnd =
+					newCommasBefore > commasBefore ? cursor + 2 : cursor + 1;
+			}
+			if (ev.target.value.length < prevValue.length) {
+				if (newCommasBefore < commasBefore) {
+					// this will only be accurate when deleting one char and not when deleting multiple
+					ev.target.selectionStart = cursor - 2;
+					ev.target.selectionEnd = cursor - 2;
+				} else {
+					// newCommasBefore > commasBefore  || newCommasBefore === commasBefore
+					ev.target.selectionStart =
+						ev.target.value[cursor - 2] === ',' ? cursor - 2 : cursor - 1;
+					ev.target.selectionEnd =
+						ev.target.value[cursor - 2] === ',' ? cursor - 2 : cursor - 1;
+				}
+			}
+		}
+	}
+
+	return [ev.target.selectionStart, ev.target.selectionEnd];
 };

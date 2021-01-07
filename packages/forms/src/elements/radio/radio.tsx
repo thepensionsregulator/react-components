@@ -37,7 +37,10 @@ export const RadioButton: React.FC<RadioButtonProps> = ({
 				cfg,
 			)}
 		>
-			<label className={styles.wrapper} data-testid={msg}>
+			<label
+				className={`${styles.wrapper} ${disabled ? styles.disabled : ''}`}
+				data-testid={msg}
+			>
 				<HiddenInput
 					type="radio"
 					id={id}
@@ -63,6 +66,11 @@ export const RadioButton: React.FC<RadioButtonProps> = ({
 };
 
 export const FFRadioButton: React.FC<FieldProps> = (fieldProps) => {
+	const handleChange = (input: any, value: any) => {
+		input.onChange(value);
+		fieldProps.callback && fieldProps.callback(value);
+	};
+
 	return (
 		<Field
 			{...fieldProps}
@@ -74,7 +82,7 @@ export const FFRadioButton: React.FC<FieldProps> = (fieldProps) => {
 						value={input.value}
 						checked={input.checked}
 						label={label}
-						onChange={input.onChange}
+						onChange={(e: any) => handleChange(input, e.target.value)}
 						{...rest}
 					/>
 				);
