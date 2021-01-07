@@ -8,5 +8,5 @@ Icon components for TPR apps.
 npm install @tpr/icons
 
 # Peer Dependencies - Also Required
-npm install react react-dom @tpr/theming
+npm install react react-dom @tpr/core @tpr/theming
 ```
