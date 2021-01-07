@@ -19,6 +19,7 @@ import { cardType, cardTypeName } from '../common/interfaces';
 
 import styles from '../cards.module.scss';
 import AddressComparer from '@tpr/forms/lib/elements/address/addressComparer';
+import { TrusteeContext } from './trusteeMachine';
 
 const CardContent: React.FC = () => {
 	const { current, i18n, send, addressAPI } = useTrusteeContext();
@@ -132,18 +133,20 @@ const RemoveButton: React.FC = () => {
 	);
 };
 
+const isComplete = (context: TrusteeContext) => {
+	return context.preValidatedData ? true : context.complete;
+}
+
 export const TrusteeCard: React.FC<Omit<TrusteeCardProps, 'children'>> = ({
 	cfg,
 	...props
 }) => {
 	return (
 		<TrusteeProvider {...props}>
-			{({ current }) => (
+			{({ current, i18n }) => (
 				<Flex cfg={cfg} data-testid={props.testId} className={styles.card}>
 					<Toolbar
-						complete={
-							current.context.preValidatedData ? true : current.context.complete
-						}
+						complete={isComplete(current.context)}
 						buttonLeft={() => <TrusteeButton />}
 						buttonRight={() => <RemoveButton />}
 						subtitle={() => (
@@ -157,6 +160,7 @@ export const TrusteeCard: React.FC<Omit<TrusteeCardProps, 'children'>> = ({
 									.join(' ')}
 							</H4>
 						)}
+						statusText={isComplete(current.context) ? i18n.preview.statusText.confirmed: i18n.preview.statusText.unconfirmed}
 					/>
 					<CardContent />
 				</Flex>

@@ -6,6 +6,10 @@ export type ActuaryI18nProps = {
 			three: string;
 			four: string;
 		};
+		statusText: {
+			confirmed: string;
+			unconfirmed: string;
+		};
 		checkboxLabel: string;
 	};
 	name: {
@@ -82,6 +86,10 @@ export const i18n: ActuaryI18nProps = {
 			three: 'Address',
 			four: 'Contact details',
 		},
+		statusText: {
+			confirmed: 'Confirmed',
+			unconfirmed: 'Unconfirmed'
+		}, 
 		checkboxLabel: 'All details are correct.',
 	},
 	name: {

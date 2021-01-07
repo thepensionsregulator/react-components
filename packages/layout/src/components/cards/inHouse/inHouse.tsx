@@ -17,6 +17,7 @@ import RemovedBox from '../components/removedBox';
 import { cardType, cardTypeName } from '../common/interfaces';
 import styles from '../cards.module.scss';
 import AddressComparer from '@tpr/forms/lib/elements/address/addressComparer';
+import { InHouseAdminContext } from './inHouseMachine';
 
 const CardContentSwitch: React.FC = () => {
 	const {
@@ -129,6 +130,10 @@ const RemoveButton: React.FC<{ title: string }> = ({ title }) => {
 	);
 };
 
+const isComplete = (context: InHouseAdminContext) => {
+	return context.preValidatedData ? true : context.complete;
+}
+
 export const InHouseCard: React.FC<InHouseAdminProviderProps> = ({
 	testId,
 	cfg,
@@ -140,7 +145,7 @@ export const InHouseCard: React.FC<InHouseAdminProviderProps> = ({
 				return (
 					<Flex cfg={cfg} data-testid={testId} className={styles.card}>
 						<Toolbar
-							complete={context.preValidatedData ? true : context.complete}
+							complete={isComplete(context)}
 							subtitle={() => (
 								<H4 cfg={{ lineHeight: 3 }}>
 									{[
@@ -152,6 +157,7 @@ export const InHouseCard: React.FC<InHouseAdminProviderProps> = ({
 										.join(' ')}
 								</H4>
 							)}
+							statusText={isComplete(context) ? i18n.preview.statusText.confirmed: i18n.preview.statusText.unconfirmed}
 							buttonLeft={() => <InHouseAdminButton />}
 							buttonRight={() => (
 								<RemoveButton title={i18n.preview.buttons.two} />

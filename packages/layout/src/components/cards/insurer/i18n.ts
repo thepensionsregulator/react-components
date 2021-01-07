@@ -7,6 +7,10 @@ export type InsurerI18nProps = {
 			four: string;
 			five: string;
 		};
+		statusText: {
+			confirmed: string;
+			unconfirmed: string;
+		};
 		checkboxLabel: string;
 	};
 	reference: {
@@ -67,6 +71,10 @@ export const i18n: InsurerI18nProps = {
 			four: 'Contact details',
 			five: 'Insurer reference number',
 		},
+		statusText: {
+			confirmed: 'Confirmed',
+			unconfirmed: 'Unconfirmed'
+		}, 
 		checkboxLabel: 'All details are correct.',
 	},
 	reference: {

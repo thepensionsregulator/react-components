@@ -14,6 +14,7 @@ import { Reference } from './views/reference';
 import RemovedBox from '../components/removedBox';
 import { cardTypeName } from '../common/interfaces';
 import styles from '../cards.module.scss';
+import { InsurerContext } from './insurerMachine';
 
 const CardContentSwitch: React.FC = () => {
 	const { current } = useInsurerContext();
@@ -58,6 +59,10 @@ const ToolbarButton: React.FC<{ title: string }> = ({ title }) => {
 	);
 };
 
+const isComplete = (context: InsurerContext) => {
+	return context.preValidatedData ? true : context.complete;
+}
+
 export const InsurerCard: React.FC<InsurerProviderProps> = ({
 	testId,
 	cfg,
@@ -69,8 +74,9 @@ export const InsurerCard: React.FC<InsurerProviderProps> = ({
 				return (
 					<Flex cfg={cfg} data-testid={testId} className={styles.card}>
 						<Toolbar
-							complete={context.preValidatedData ? true : context.complete}
+							complete={isComplete(context)}
 							subtitle={() => <H4>{context.insurer.organisationName}</H4>}
+							statusText={isComplete(context) ? i18n.preview.statusText.confirmed: i18n.preview.statusText.unconfirmed}
 							buttonLeft={() => (
 								<UnderlinedButton>{i18n.preview.buttons.one}</UnderlinedButton>
 							)}

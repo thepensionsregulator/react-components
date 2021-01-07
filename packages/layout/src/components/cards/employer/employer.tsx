@@ -16,6 +16,7 @@ import {
 import RemovedBox from '../components/removedBox';
 import { cardTypeName } from '../common/interfaces';
 import styles from '../cards.module.scss';
+import { EmployerContext } from './employerMachine';
 
 const CardContentSwitch: React.FC = () => {
 	const { current } = useEmployerContext();
@@ -92,6 +93,10 @@ const EmployerSubtitle: React.FC<Partial<Employer>> = ({
 	);
 };
 
+const isComplete = (context: EmployerContext) => {
+	return context.preValidatedData ? true : context.complete;
+}
+
 export const EmployerCard: React.FC<EmployerProviderProps> = ({
 	testId,
 	cfg,
@@ -103,8 +108,9 @@ export const EmployerCard: React.FC<EmployerProviderProps> = ({
 				return (
 					<Flex cfg={cfg} data-testid={testId} className={styles.card}>
 						<Toolbar
-							complete={context.preValidatedData ? true : context.complete}
+							complete={isComplete(context)}
 							subtitle={() => <EmployerSubtitle {...context.employer} />}
+							statusText={isComplete(context) ? i18n.preview.statusText.confirmed: i18n.preview.statusText.unconfirmed}
 							buttonLeft={() => (
 								<ToolbarButton title={i18n.preview.buttons.one} />
 							)}

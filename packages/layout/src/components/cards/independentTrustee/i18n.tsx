@@ -8,6 +8,10 @@ export type IndependentTrusteeI18nProps = {
 			three: string;
 			four: string;
 		};
+		statusText: {
+			confirmed: string;
+			unconfirmed: string;
+		};
 		checkboxLabel: string;
 		trusteeType: string;
 	};
@@ -51,6 +55,10 @@ export const i18n: IndependentTrusteeI18nProps = {
 			three: 'Address',
 			four: 'Appointed by the regulator',
 		},
+		statusText: {
+			confirmed: 'Confirmed',
+			unconfirmed: 'Unconfirmed'
+		}, 
 		checkboxLabel: 'All details are correct.',
 		trusteeType: 'Professional / Independent Trustee',
 	},

@@ -10,6 +10,7 @@ export type ToolbarProps = {
 	buttonLeft: Function;
 	buttonRight: Function;
 	extraPB?: boolean;
+	statusText: string;
 };
 export const Toolbar: React.FC<ToolbarProps> = ({
 	complete,
@@ -17,6 +18,7 @@ export const Toolbar: React.FC<ToolbarProps> = ({
 	buttonLeft,
 	buttonRight,
 	extraPB,
+	statusText
 }) => {
 	return (
 		<div
@@ -50,9 +52,9 @@ export const Toolbar: React.FC<ToolbarProps> = ({
 				}}
 			>
 				{complete ? (
-					<StatusMessage complete={complete} icon={CheckedCircle} />
+					<StatusMessage complete={complete} icon={CheckedCircle} text={statusText} />
 				) : (
-					<StatusMessage complete={complete} icon={ErrorCircle} />
+					<StatusMessage complete={complete} icon={ErrorCircle} text={statusText} />
 				)}
 				<div className={styles.verticalHr} />
 				<Flex cfg={{ alignItems: 'flex-start' }}>{buttonRight()}</Flex>

@@ -13,6 +13,7 @@ import { ConfirmRemove } from './views/remove/confirm/confirm';
 import RemovedBox from '../components/removedBox';
 import { cardTypeName } from '../common/interfaces';
 import styles from '../cards.module.scss';
+import { ThirdPartyContext } from './thirdPartyMachine';
 
 const CardContentSwitch: React.FC = () => {
 	const { current } = useThirdPartyContext();
@@ -55,6 +56,10 @@ const ToolbarButton: React.FC<{ title: string }> = ({ title }) => {
 	);
 };
 
+const isComplete = (context: ThirdPartyContext) => {
+	return context.preValidatedData ? true : context.complete;
+}
+
 export const ThirdPartyCard: React.FC<ThirdPartyProviderProps> = ({
 	testId,
 	cfg,
@@ -66,8 +71,9 @@ export const ThirdPartyCard: React.FC<ThirdPartyProviderProps> = ({
 				return (
 					<Flex cfg={cfg} data-testid={testId} className={styles.card}>
 						<Toolbar
-							complete={context.preValidatedData ? true : context.complete}
+							complete={isComplete(context)}
 							subtitle={() => <H4>{context.thirdParty.organisationName}</H4>}
+							statusText={isComplete(context) ? i18n.preview.statusText.confirmed: i18n.preview.statusText.unconfirmed}
 							buttonLeft={() => (
 								<UnderlinedButton>{i18n.preview.buttons.one}</UnderlinedButton>
 							)}
