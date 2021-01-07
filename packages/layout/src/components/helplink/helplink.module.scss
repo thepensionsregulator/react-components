@@ -2,26 +2,27 @@
 @import '@tpr/theming/lib/accessibility.module.scss';
 
 .helpLink button[aria-expanded] {
-  display: inline-block;
-  border: none;
-  background: none;
-  color: $colors-primary-3;
-  text-decoration: underline;
-  font-family: $fonts-sans-serif;
-  font-weight: $font-weight-2;
-  font-size: $font-size-2;
-  cursor: pointer;
-  padding-top: $space-2;
+	display: inline-block;
+	border: none;
+	background: none;
+	color: $colors-primary-3;
+	text-decoration: underline;
+	font-family: $fonts-sans-serif;
+	font-weight: $font-weight-2;
+	font-size: $font-size-2;
+	cursor: pointer;
+	padding-top: $space-1;
+	padding-bottom: $space-1;
 }
 
 .helpLink [aria-expanded] svg {
 	fill: $colors-primary-3;
-  position: relative;
-  top: 6px;
+	position: relative;
+	top: 6px;
 }
 
 .helpLink [aria-expanded='true'] svg {
-  transform: rotate(180deg);
+	transform: rotate(180deg);
 }
 
 .helpLinkContent {
