@@ -6,25 +6,34 @@ import Styles from './poscon.module.scss';
 export type PosconProps = {
 	color?: ColorsFullRange;
 	enableClose?: boolean;
-};
-
-export type ColorProps = {
-	color?: ColorsFullRange;
+	callback?: Function;
 };
 
 export const Poscon: React.FC<PosconProps> = ({
 	color = 'success.1',
 	enableClose = false,
+	callback,
 	children,
 }) => {
 	return enableClose ? (
-		<ClosablePoscon color={color}>{children}</ClosablePoscon>
+		<ClosablePoscon color={color} callback={callback}>
+			{children}
+		</ClosablePoscon>
 	) : (
 		<PersistentPoscon color={color}>{children}</PersistentPoscon>
 	);
 };
 
-const ClosablePoscon: React.FC<ColorProps> = ({ color, children }) => {
+export type ClosablePosconProps = {
+	color?: ColorsFullRange;
+	callback?: Function;
+};
+
+const ClosablePoscon: React.FC<ClosablePosconProps> = ({
+	color,
+	callback,
+	children,
+}) => {
 	const [closed, setClosed] = useState<boolean>(false);
 	return !closed ? (
 		<PersistentPoscon color={color} pt={4}>
@@ -33,6 +42,7 @@ const ClosablePoscon: React.FC<ColorProps> = ({ color, children }) => {
 					colour={'white'}
 					onClick={() => {
 						setClosed(!closed);
+						callback && callback();
 					}}
 				/>
 			</div>

@@ -29,10 +29,17 @@ Poscons with no props will default to green with no closable button.
 Poscons can be closable and have their color changed with props.
 
 <Playground>
-	<Poscon color={'warning.1'} enableClose={true}>
-		<p>Section Complete</p>
-		<p>Information about section</p>
-	</Poscon>
+	{() => {
+		const cb = () => {
+			console.log('Poscon Callback');
+		};
+		return (
+			<Poscon color={'warning.1'} enableClose={true} callback={cb}>
+				<p>Section Complete</p>
+				<p>Information about section</p>
+			</Poscon>
+		);
+	}}
 </Playground>
 
 Poscons can accept any HTML element as a child. These elements will be displayed inside the banner.
