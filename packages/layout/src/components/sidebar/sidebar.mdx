@@ -22,7 +22,7 @@ import { Sidebar } from '@tpr/layout';
 <Playground>
 	{() => {
 		const location = {
-			pathname: '/layout/sidebar',
+			pathname: '/scheme-name-and-address',
 		};
 		const sections = [
 			{
@@ -32,7 +32,7 @@ import { Sidebar } from '@tpr/layout';
 						name: 'Scheme name and address',
 						completed: true,
 						onClick: (link) => alert(`You clicked on ${link.path}`),
-						path: '/layout/sidebar',
+						path: '/scheme-name-and-address',
 					},
 					{
 						name: 'Scheme status and membership',
@@ -100,7 +100,7 @@ import { Sidebar } from '@tpr/layout';
 <Playground>
 	{() => {
 		const location = {
-			pathname: '/layout/sidebar',
+			pathname: '/employer/multiemployer',
 		};
 		const sections = [
 			{
@@ -139,17 +139,18 @@ import { Sidebar } from '@tpr/layout';
 					},
 					{
 						name: 'Employer details',
-						path: '/layout',
+						path: '/employer',
 						completed: false,
 						links: [
 							{
 								name: 'Employer Memberships',
-								path: '/layout/sidebar',
+								path: '/employer/membership',
 								completed: false,
+								hideIcon: true,
 							},
 							{
 								name: 'Multi-employer scheme structure',
-								path: '/layout/sidebar2',
+								path: '/employer/multiemployer',
 								completed: false,
 							},
 						],
@@ -244,39 +245,40 @@ import { Sidebar } from '@tpr/layout';
 <Playground>
 	{() => {
 		const location = {
-			pathname: '/layout/sidebar',
+			pathname: '/review',
 		};
 		const sections = [
 			{
 				title: 'Roles',
 				links: [
 					{
-						name: 'Trustee details',
-						completed: true,
-						path: '/trustees',
-					},
-					{
 						name: 'Employer details',
-						path: '/layout',
+						path: '/employer',
 						completed: false,
 						links: [
 							{
 								name: 'Employer Memberships',
-								path: '/layout/employer',
+								path: '/employer/membership',
 								completed: true,
 								onClick: (link) => console.log(`You clicked on ${link.path}`),
 							},
 							{
 								name: 'Multi-employer scheme structure',
-								path: '/layout/sidebar',
+								path: '/employer/multiemployer',
 								completed: false,
 								onClick: (link) => console.log(`You clicked on ${link.path}`),
 							},
 						],
 					},
 					{
-						name: 'Service provider details',
-						path: '/service-providers',
+						name: 'Step 1: review and print',
+						completed: true,
+						path: '/review',
+						hideIcon: true,
+					},
+					{
+						name: 'Step 2: submit',
+						path: '/submit',
 					},
 				],
 				order: 1,

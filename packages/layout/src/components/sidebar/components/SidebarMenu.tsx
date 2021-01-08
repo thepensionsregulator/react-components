@@ -35,7 +35,7 @@ const SidebarMenu: React.FC<SidebarMenuProps> = ({
 										color: 'primary.2',
 										textAlign: 'left',
 										fontWeight: 3,
-										width: 8,
+										width: innerLink.hideIcon ? 10 : 8,
 									}}
 									disabled={innerLink.disabled}
 									underline={active(innerLink.path)}
@@ -43,7 +43,9 @@ const SidebarMenu: React.FC<SidebarMenuProps> = ({
 								>
 									{innerLink.name}
 								</Link>
-								{!maintenanceMode && <StatusIcon link={innerLink} />}
+								{!maintenanceMode && !innerLink.hideIcon && (
+									<StatusIcon link={innerLink} />
+								)}
 							</Flex>
 							{innerLink.links && generateSubmenu(innerLink.links)}
 						</React.Fragment>
@@ -80,7 +82,7 @@ const SidebarMenu: React.FC<SidebarMenuProps> = ({
 									color: 'primary.2',
 									textAlign: 'left',
 									fontWeight: 3,
-									width: 8,
+									width: link.hideIcon ? 10 : 8,
 								}}
 								disabled={link.disabled}
 								underline={active(link.path)}
@@ -88,7 +90,7 @@ const SidebarMenu: React.FC<SidebarMenuProps> = ({
 							>
 								{link.name}
 							</Link>
-							{!maintenanceMode && <StatusIcon link={link} />}
+							{!maintenanceMode && !link.hideIcon && <StatusIcon link={link} />}
 						</Flex>
 						{link.links && generateSubmenu(link.links)}
 					</Flex>
