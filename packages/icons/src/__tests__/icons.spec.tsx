@@ -1,5 +1,5 @@
 import React from 'react';
-import { CheckboxChecked } from '../icons';
+import { CheckboxChecked } from '../components/form/form';
 import { render } from '@testing-library/react';
 
 describe('Icons', () => {
