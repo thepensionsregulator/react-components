@@ -1,3 +1,5 @@
+type PropertyFunction<T> = () => T;
+
 export type ActuaryI18nProps = {
 	preview: {
 		buttons: {
@@ -17,14 +19,18 @@ export type ActuaryI18nProps = {
 		fields: {
 			title: {
 				label: string;
+				error: string | PropertyFunction<string | undefined>;
+				maxlength: number;
 			};
 			firstName: {
 				label: string;
-				error: string;
+				error: string | PropertyFunction<string | undefined>;
+				maxlength: number;
 			};
 			lastName: {
 				label: string;
-				error: string;
+				error: string | PropertyFunction<string | undefined>;
+				maxlength: number;
 			};
 		};
 	};
@@ -97,14 +103,18 @@ export const i18n: ActuaryI18nProps = {
 		fields: {
 			title: {
 				label: 'Title',
+				error: undefined,
+				maxlength: 35,
 			},
 			firstName: {
 				label: 'First name',
 				error: 'field is required',
+				maxlength: 70,
 			},
 			lastName: {
 				label: 'Last name',
 				error: 'field is required',
+				maxlength: 70,
 			},
 		},
 	},

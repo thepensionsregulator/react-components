@@ -26,6 +26,7 @@ const InputText: React.FC<InputTextProps> = React.forwardRef(
 			inputWidth: width,
 			cfg,
 			updatedValue,
+			maxLength,
 		},
 		ref,
 	) => {
@@ -57,6 +58,7 @@ const InputText: React.FC<InputTextProps> = React.forwardRef(
 					readOnly={readOnly}
 					touched={meta && meta.touched && meta.error}
 					className={inputClassName}
+					maxLength={maxLength}
 					{...input}
 				/>
 			</StyledInputLabel>
