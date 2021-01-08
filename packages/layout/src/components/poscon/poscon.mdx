@@ -17,7 +17,9 @@ Positive Confirmation banner component for tpr apps
 import { Poscon } from '@tpr/layout';
 ```
 
-Poscons with no props will default to green with no closable button.
+## Examples
+
+### Poscons with no props will default to green with no closable button.
 
 <Playground>
 	<Poscon>
@@ -26,7 +28,7 @@ Poscons with no props will default to green with no closable button.
 	</Poscon>
 </Playground>
 
-Poscons can be closable and have their color changed with props.
+### Poscons can be closable and have their color changed with props.
 
 <Playground>
 	{() => {
@@ -42,7 +44,7 @@ Poscons can be closable and have their color changed with props.
 	}}
 </Playground>
 
-Poscons can accept any HTML element as a child. These elements will be displayed inside the banner.
+### Poscons can accept any HTML element as a child. These elements will be displayed inside the banner.
 
 <Playground>
 	<Poscon enableClose={true}>
@@ -50,3 +52,7 @@ Poscons can accept any HTML element as a child. These elements will be displayed
 		<P>Section complete</P>
 	</Poscon>
 </Playground>
+
+## API
+
+<Props of={Poscon} />
