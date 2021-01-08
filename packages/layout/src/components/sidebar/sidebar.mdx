@@ -146,6 +146,7 @@ import { Sidebar } from '@tpr/layout';
 								name: 'Employer Memberships',
 								path: '/layout/sidebar',
 								completed: false,
+								hideIcon: true,
 							},
 							{
 								name: 'Multi-employer scheme structure',
@@ -251,32 +252,33 @@ import { Sidebar } from '@tpr/layout';
 				title: 'Roles',
 				links: [
 					{
-						name: 'Trustee details',
-						completed: true,
-						path: '/trustees',
-					},
-					{
 						name: 'Employer details',
-						path: '/layout',
+						path: '/employer',
 						completed: false,
 						links: [
 							{
 								name: 'Employer Memberships',
-								path: '/layout/employer',
+								path: '/employer/membership',
 								completed: true,
 								onClick: (link) => console.log(`You clicked on ${link.path}`),
 							},
 							{
 								name: 'Multi-employer scheme structure',
-								path: '/layout/sidebar',
+								path: '/employer/multiemployer',
 								completed: false,
 								onClick: (link) => console.log(`You clicked on ${link.path}`),
 							},
 						],
 					},
 					{
-						name: 'Service provider details',
-						path: '/service-providers',
+						name: 'Step 1: review and print',
+						completed: true,
+						path: '/layout/sidebar',
+						hideIcon: true,
+					},
+					{
+						name: 'Step 2: submit',
+						path: '/submit',
 					},
 				],
 				order: 1,
