@@ -1,4 +1,5 @@
 import { I18nAddressLookup, i18n as AddressI18n } from '@tpr/forms';
+type PropertyFunction<T> = () => T;
 
 export type InHouseAdminI18nProps = {
 	address: I18nAddressLookup;
@@ -16,14 +17,18 @@ export type InHouseAdminI18nProps = {
 		fields: {
 			title: {
 				label: string;
+				error: string | PropertyFunction<string | undefined>;
+				maxlength: number;
 			};
 			firstName: {
 				label: string;
-				error: string;
+				error: string | PropertyFunction<string | undefined>;
+				maxlength: number;
 			};
 			lastName: {
 				label: string;
-				error: string;
+				error: string | PropertyFunction<string | undefined>;
+				maxlength: number;
 			};
 		};
 	};
@@ -97,14 +102,18 @@ export const i18n: InHouseAdminI18nProps = {
 		fields: {
 			title: {
 				label: 'Title',
+				error: undefined,
+				maxlength: 35,
 			},
 			firstName: {
 				label: 'First name',
 				error: 'field is required',
+				maxlength: 70,
 			},
 			lastName: {
 				label: 'Last name',
 				error: 'field is required',
+				maxlength: 70,
 			},
 		},
 	},
