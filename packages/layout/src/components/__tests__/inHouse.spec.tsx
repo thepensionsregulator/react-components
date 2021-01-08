@@ -30,8 +30,9 @@ const inHouseAdmin: InHouseAdminNoApi = {
 };
 
 describe('InHouse Preview', () => {
-	test('is accessible', async () => {
-		const { container } = render(
+	let component, findByText, findByTestId;
+	beforeEach(async () => {
+		const { container, getByText, getByTestId } = render(
 			<InHouseCard
 				onSaveContacts={noop}
 				onSaveAddress={noop}
@@ -47,8 +48,40 @@ describe('InHouse Preview', () => {
 			/>,
 		);
 
-		const results = await axe(container);
+		component = container;
+		findByText = getByText;
+		findByTestId = getByTestId;
+	});
+
+	test('is accessible', async () => {
+		const results = await axe(component);
 		expect(results).toHaveNoViolations();
+	});
+
+	test('editing in house name', () => {
+		findByText('In House Administrator').click();
+		expect(findByTestId('inHouseAdmin-name-form')).not.toBe(null);
+
+		var titleHtmlElement = findByText('Title (optional)') as HTMLElement;
+		var firstNameHtmlElement = findByText('First name') as HTMLElement;
+		var lastNameHtmlElement = findByText('Last name') as HTMLElement;
+
+		expect(titleHtmlElement).toBeDefined();
+		expect(titleHtmlElement.nextSibling.childNodes[0]).toHaveAttribute(
+			'maxlength',
+			'35',
+		);
+		expect(firstNameHtmlElement).toBeDefined();
+		expect(firstNameHtmlElement.nextSibling.childNodes[0]).toHaveAttribute(
+			'maxlength',
+			'70',
+		);
+		expect(lastNameHtmlElement).toBeDefined();
+		expect(lastNameHtmlElement.nextSibling.childNodes[0]).toHaveAttribute(
+			'maxlength',
+			'70',
+		);
+		expect(findByText('Save and close')).toBeDefined();
 	});
 });
 
