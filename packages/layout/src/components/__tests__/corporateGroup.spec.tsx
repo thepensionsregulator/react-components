@@ -117,6 +117,29 @@ describe('Corporate Group Trustee Card', () => {
 			findByText('Chair of board').click();
 			const results = await axe(component);
 			expect(results).toHaveNoViolations();
+
+			expect(getByTestId('corporateGroup-name-form')).not.toBe(null);
+
+			var titleHtmlElement = getByText('Title (optional)') as HTMLElement;
+			var firstNameHtmlElement = getByText('First name') as HTMLElement;
+			var lastNameHtmlElement = getByText('Last name') as HTMLElement;
+
+			expect(titleHtmlElement).toBeDefined();
+			expect(titleHtmlElement.nextSibling.childNodes[0]).toHaveAttribute(
+				'maxlength',
+				'35',
+			);
+			expect(firstNameHtmlElement).toBeDefined();
+			expect(firstNameHtmlElement.nextSibling.childNodes[0]).toHaveAttribute(
+				'maxlength',
+				'70',
+			);
+			expect(lastNameHtmlElement).toBeDefined();
+			expect(lastNameHtmlElement.nextSibling.childNodes[0]).toHaveAttribute(
+				'maxlength',
+				'70',
+			);
+			expect(getByText('Continue')).toBeDefined();
 		});
 
 		afterEach(() => {

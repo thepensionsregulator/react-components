@@ -1,5 +1,6 @@
 import React from 'react';
 import { fireEvent } from '@testing-library/react';
+import userEvent from '@testing-library/user-event';
 import { formSetup } from '../__mocks__/setup';
 import { FFInputText } from '../elements/text/text';
 import { validate, renderFields } from '../index';
@@ -133,5 +134,18 @@ describe('Text input', () => {
 
 		const label = queryByTestId('text-input');
 		expect(label).toHaveAttribute('readonly');
+	});
+
+	test('renders maxLength', () => {
+		const { queryByTestId } = formSetup({
+			render: <FFInputText testId="text-input" name="name" maxLength={3} />,
+		});
+
+		var textInput = queryByTestId('text-input');
+		userEvent.type(textInput, 'ABCDEF');
+		fireEvent.blur(textInput);
+
+		expect(textInput).toHaveAttribute('maxlength');
+		expect(textInput).toHaveValue('ABC');
 	});
 });

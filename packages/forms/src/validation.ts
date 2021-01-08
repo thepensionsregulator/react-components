@@ -30,7 +30,7 @@ export function validate(formFields: FieldProps[]) {
 			}
 			// typof error is a string and there is no field value, assign error to errors
 			if (
-				!fieldValue ||
+				(typeof error === 'string' && !fieldValue) ||
 				(typeof fieldValue === 'string' && !fieldValue.trim()) ||
 				(Array.isArray(fieldValue) && !fieldValue.length)
 			) {
