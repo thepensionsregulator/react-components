@@ -2895,7 +2895,7 @@
   integrity sha512-RbzJvlNzmRq5c3O09UipeuXno4tA1FE6ikOjxZK0tuxVv3412l64l5t1W5pj4+rJq9vpkm/kwiR07aZXnsKPxw==
 
 "@tpr/core@file:./packages/core":
-  version "2.3.1"
+  version "2.3.2"
   dependencies:
     "@xstate/react" "^0.8.1"
     final-form "^4.20.0"
@@ -2906,7 +2906,7 @@
     xstate "^4.10.0"
 
 "@tpr/forms@file:./packages/forms":
-  version "3.0.14"
+  version "3.0.15"
   dependencies:
     "@types/lodash" "^4.14.157"
     "@types/match-sorter" "^4.0.0"
@@ -2922,12 +2922,12 @@
     tslib "^2.0.0"
 
 "@tpr/icons@file:./packages/icons":
-  version "2.2.11"
+  version "2.2.12"
   dependencies:
     tslib "^2.0.0"
 
 "@tpr/layout@file:./packages/layout":
-  version "2.3.7"
+  version "2.3.8"
   dependencies:
     "@types/lodash" "^4.14.157"
     "@xstate/react" "^0.8.1"
@@ -2942,7 +2942,7 @@
     xstate "^4.10.0"
 
 "@tpr/theming@file:./packages/theming":
-  version "2.2.4"
+  version "2.2.5"
   dependencies:
     node-sass "^4.14.0"
     normalize.css "^8.0.1"
@@ -6362,11 +6362,6 @@ csstype@^2.2.0, csstype@^2.5.7:
   version "2.6.14"
   resolved "https://registry.yarnpkg.com/csstype/-/csstype-2.6.14.tgz#004822a4050345b55ad4dcc00be1d9cf2f4296de"
   integrity sha512-2mSc+VEpGPblzAxyeR+vZhJKgYg0Og0nnRi7pmRXFYYxSfnOnW8A5wwQb4n4cE2nIOzqKOAzLCaEX6aBmNEv8A==
-
-csstype@^3.0.2:
-  version "3.0.5"
-  resolved "https://registry.yarnpkg.com/csstype/-/csstype-3.0.5.tgz#7fdec6a28a67ae18647c51668a9ff95bb2fa7bb8"
-  integrity sha512-uVDi8LpBUKQj6sdxNaTetL6FpeCqTjOvAQuQUa/qAqq8oOd4ivkbhgnqayl0dnPal8Tb/yB1tF+gOvCBiicaiQ==
 
 currently-unhandled@^0.4.1:
   version "0.4.1"

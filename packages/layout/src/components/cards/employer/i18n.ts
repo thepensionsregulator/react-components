@@ -11,6 +11,10 @@ export type EmployerI18nProps = {
 			registeredCharityNo: string;
 			epsrNumber: string;
 		};
+		statusText: {
+			confirmed: string;
+			unconfirmed: string;
+		};
 		checkboxLabel: string;
 	};
 	type: {
@@ -98,7 +102,11 @@ export const i18n: EmployerI18nProps = {
 			registeredCharityNo: 'Registered Charity number',
 			epsrNumber: 'Employer Pension Scheme Reference number',
 		},
-		checkboxLabel: 'All details are correct.',
+		statusText: {
+			confirmed: 'Confirmed',
+			unconfirmed: 'Unconfirmed',
+		},
+		checkboxLabel: 'Confirm details are correct.',
 	},
 	type: {
 		title: 'Type of employer',

@@ -9,6 +9,10 @@ export type CorporateGroupI18nProps = {
 			four: string;
 			five: string;
 		};
+		statusText: {
+			confirmed: string;
+			unconfirmed: string;
+		};
 		checkboxLabel: string;
 		trusteeType: string;
 	};
@@ -83,7 +87,11 @@ export const i18n: CorporateGroupI18nProps = {
 			four: 'Chair of board',
 			five: 'Director(s) are Professional Trustees',
 		},
-		checkboxLabel: 'All details are correct.',
+		statusText: {
+			confirmed: 'Confirmed',
+			unconfirmed: 'Unconfirmed',
+		},
+		checkboxLabel: 'Confirm details are correct.',
 		trusteeType: 'Corporate Group trustee',
 	},
 	name: {
