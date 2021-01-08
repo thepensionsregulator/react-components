@@ -15,6 +15,7 @@ import { NameScreen } from './views/name';
 import RemovedBox from '../components/removedBox';
 import { cardTypeName } from '../common/interfaces';
 import styles from '../cards.module.scss';
+import { ActuaryContext } from './actuaryMachine';
 
 const CardContentSwitch: React.FC = () => {
 	const { current } = useActuaryContext();
@@ -88,6 +89,10 @@ const RemoveButton: React.FC<{ title: string }> = ({ title }) => {
 	);
 };
 
+const isComplete = (context: ActuaryContext) => {
+	return context.preValidatedData ? true : context.complete;
+};
+
 export const ActuaryCard: React.FC<ActuaryProviderProps> = ({
 	testId,
 	cfg,
@@ -99,7 +104,7 @@ export const ActuaryCard: React.FC<ActuaryProviderProps> = ({
 				return (
 					<Flex cfg={cfg} data-testid={testId} className={styles.card}>
 						<Toolbar
-							complete={context.preValidatedData ? true : context.complete}
+							complete={isComplete(context)}
 							subtitle={() => (
 								<H4 cfg={{ lineHeight: 3 }}>
 									{[
@@ -111,6 +116,11 @@ export const ActuaryCard: React.FC<ActuaryProviderProps> = ({
 										.join(' ')}
 								</H4>
 							)}
+							statusText={
+								isComplete(context)
+									? i18n.preview.statusText.confirmed
+									: i18n.preview.statusText.unconfirmed
+							}
 							buttonLeft={() => <ActuaryButton />}
 							buttonRight={() => (
 								<RemoveButton title={i18n.preview.buttons.two} />

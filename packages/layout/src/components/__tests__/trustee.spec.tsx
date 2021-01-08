@@ -99,8 +99,8 @@ describe('Trustee Preview', () => {
 			/>,
 		);
 
-		expect(getByText('No issues')).toBeDefined();
-		expect(getByText('All details are correct.')).toBeDefined();
+		expect(getByText('Confirmed')).toBeDefined();
+		expect(getByText('Confirm details are correct.')).toBeDefined();
 	});
 
 	test('address shows up correctly', () => {

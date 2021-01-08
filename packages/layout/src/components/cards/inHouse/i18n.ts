@@ -10,6 +10,10 @@ export type InHouseAdminI18nProps = {
 			three: string;
 			four: string;
 		};
+		statusText: {
+			confirmed: string;
+			unconfirmed: string;
+		};
 		checkboxLabel: string;
 	};
 	name: {
@@ -95,7 +99,11 @@ export const i18n: InHouseAdminI18nProps = {
 			three: 'Address',
 			four: 'Contact details',
 		},
-		checkboxLabel: 'All details are correct.',
+		statusText: {
+			confirmed: 'Confirmed',
+			unconfirmed: 'Unconfirmed',
+		},
+		checkboxLabel: 'Confirm details are correct.',
 	},
 	name: {
 		title: 'Name of in house administrator',

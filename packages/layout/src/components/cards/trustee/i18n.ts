@@ -45,6 +45,10 @@ export type TrusteeI18nProps = {
 			three: string;
 			four: string;
 		};
+		statusText: {
+			confirmed: string;
+			unconfirmed: string;
+		};
 		checkboxLabel: string;
 	};
 	remove: {
@@ -136,7 +140,11 @@ export const i18n: TrusteeI18nProps = {
 			three: 'Correspondence address',
 			four: 'Contact details',
 		},
-		checkboxLabel: 'All details are correct.',
+		statusText: {
+			confirmed: 'Confirmed',
+			unconfirmed: 'Unconfirmed',
+		},
+		checkboxLabel: 'Confirm details are correct.',
 	},
 	remove: {
 		confirm: {
