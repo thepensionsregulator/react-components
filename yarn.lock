@@ -2924,10 +2924,12 @@
 "@tpr/icons@file:./packages/icons":
   version "2.2.12"
   dependencies:
+    node-sass "^4.14.0"
+    normalize.css "^8.0.1"
     tslib "^2.0.0"
 
 "@tpr/layout@file:./packages/layout":
-  version "2.3.8"
+  version "2.3.10"
   dependencies:
     "@types/lodash" "^4.14.157"
     "@xstate/react" "^0.8.1"
