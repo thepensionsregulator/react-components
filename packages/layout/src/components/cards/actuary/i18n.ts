@@ -88,9 +88,9 @@ export const i18n: ActuaryI18nProps = {
 		},
 		statusText: {
 			confirmed: 'Confirmed',
-			unconfirmed: 'Unconfirmed'
-		}, 
-		checkboxLabel: 'All details are correct.',
+			unconfirmed: 'Unconfirmed',
+		},
+		checkboxLabel: 'Confirm details are correct.',
 	},
 	name: {
 		title: 'Name of Actuary',

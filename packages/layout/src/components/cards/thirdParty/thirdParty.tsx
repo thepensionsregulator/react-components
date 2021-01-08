@@ -58,7 +58,7 @@ const ToolbarButton: React.FC<{ title: string }> = ({ title }) => {
 
 const isComplete = (context: ThirdPartyContext) => {
 	return context.preValidatedData ? true : context.complete;
-}
+};
 
 export const ThirdPartyCard: React.FC<ThirdPartyProviderProps> = ({
 	testId,
@@ -73,7 +73,11 @@ export const ThirdPartyCard: React.FC<ThirdPartyProviderProps> = ({
 						<Toolbar
 							complete={isComplete(context)}
 							subtitle={() => <H4>{context.thirdParty.organisationName}</H4>}
-							statusText={isComplete(context) ? i18n.preview.statusText.confirmed: i18n.preview.statusText.unconfirmed}
+							statusText={
+								isComplete(context)
+									? i18n.preview.statusText.confirmed
+									: i18n.preview.statusText.unconfirmed
+							}
 							buttonLeft={() => (
 								<UnderlinedButton>{i18n.preview.buttons.one}</UnderlinedButton>
 							)}

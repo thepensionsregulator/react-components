@@ -135,7 +135,7 @@ const RemoveButton: React.FC = () => {
 
 const isComplete = (context: TrusteeContext) => {
 	return context.preValidatedData ? true : context.complete;
-}
+};
 
 export const TrusteeCard: React.FC<Omit<TrusteeCardProps, 'children'>> = ({
 	cfg,
@@ -160,7 +160,11 @@ export const TrusteeCard: React.FC<Omit<TrusteeCardProps, 'children'>> = ({
 									.join(' ')}
 							</H4>
 						)}
-						statusText={isComplete(current.context) ? i18n.preview.statusText.confirmed: i18n.preview.statusText.unconfirmed}
+						statusText={
+							isComplete(current.context)
+								? i18n.preview.statusText.confirmed
+								: i18n.preview.statusText.unconfirmed
+						}
 					/>
 					<CardContent />
 				</Flex>

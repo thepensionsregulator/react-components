@@ -18,7 +18,7 @@ export const Toolbar: React.FC<ToolbarProps> = ({
 	buttonLeft,
 	buttonRight,
 	extraPB,
-	statusText
+	statusText,
 }) => {
 	return (
 		<div
@@ -52,9 +52,17 @@ export const Toolbar: React.FC<ToolbarProps> = ({
 				}}
 			>
 				{complete ? (
-					<StatusMessage complete={complete} icon={CheckedCircle} text={statusText} />
+					<StatusMessage
+						complete={complete}
+						icon={CheckedCircle}
+						text={statusText}
+					/>
 				) : (
-					<StatusMessage complete={complete} icon={ErrorCircle} text={statusText} />
+					<StatusMessage
+						complete={complete}
+						icon={ErrorCircle}
+						text={statusText}
+					/>
 				)}
 				<div className={styles.verticalHr} />
 				<Flex cfg={{ alignItems: 'flex-start' }}>{buttonRight()}</Flex>

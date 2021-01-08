@@ -104,8 +104,8 @@ export const i18n: EmployerI18nProps = {
 		},
 		statusText: {
 			confirmed: 'Confirmed',
-			unconfirmed: 'Unconfirmed'
-		}, 
+			unconfirmed: 'Unconfirmed',
+		},
 		checkboxLabel: 'Confirm details are correct.',
 	},
 	type: {

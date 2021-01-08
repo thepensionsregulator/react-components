@@ -132,7 +132,7 @@ const RemoveButton: React.FC<{ title: string }> = ({ title }) => {
 
 const isComplete = (context: InHouseAdminContext) => {
 	return context.preValidatedData ? true : context.complete;
-}
+};
 
 export const InHouseCard: React.FC<InHouseAdminProviderProps> = ({
 	testId,
@@ -157,7 +157,11 @@ export const InHouseCard: React.FC<InHouseAdminProviderProps> = ({
 										.join(' ')}
 								</H4>
 							)}
-							statusText={isComplete(context) ? i18n.preview.statusText.confirmed: i18n.preview.statusText.unconfirmed}
+							statusText={
+								isComplete(context)
+									? i18n.preview.statusText.confirmed
+									: i18n.preview.statusText.unconfirmed
+							}
 							buttonLeft={() => <InHouseAdminButton />}
 							buttonRight={() => (
 								<RemoveButton title={i18n.preview.buttons.two} />

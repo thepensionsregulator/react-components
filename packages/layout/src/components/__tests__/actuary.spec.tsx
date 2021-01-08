@@ -63,8 +63,8 @@ describe('Actuary Card', () => {
 		});
 
 		test('initial status is correct', () => {
-			expect(findByText('No issues')).toBeDefined();
-			expect(findByText('All details are correct.')).toBeDefined();
+			expect(findByText('Confirmed')).toBeDefined();
+			expect(findByText('Confirm details are correct.')).toBeDefined();
 		});
 
 		test('displays Name Correctly', () => {

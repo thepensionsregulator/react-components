@@ -69,9 +69,9 @@ export const i18n: ThirdPartyI18nProps = {
 		},
 		statusText: {
 			confirmed: 'Confirmed',
-			unconfirmed: 'Unconfirmed'
-		}, 
-		checkboxLabel: 'All details are correct.',
+			unconfirmed: 'Unconfirmed',
+		},
+		checkboxLabel: 'Confirm details are correct.',
 	},
 	reference: {
 		title: 'Reference details for this third party admin',

@@ -61,7 +61,7 @@ const ToolbarButton: React.FC<{ title: string }> = ({ title }) => {
 
 const isComplete = (context: InsurerContext) => {
 	return context.preValidatedData ? true : context.complete;
-}
+};
 
 export const InsurerCard: React.FC<InsurerProviderProps> = ({
 	testId,
@@ -76,7 +76,11 @@ export const InsurerCard: React.FC<InsurerProviderProps> = ({
 						<Toolbar
 							complete={isComplete(context)}
 							subtitle={() => <H4>{context.insurer.organisationName}</H4>}
-							statusText={isComplete(context) ? i18n.preview.statusText.confirmed: i18n.preview.statusText.unconfirmed}
+							statusText={
+								isComplete(context)
+									? i18n.preview.statusText.confirmed
+									: i18n.preview.statusText.unconfirmed
+							}
 							buttonLeft={() => (
 								<UnderlinedButton>{i18n.preview.buttons.one}</UnderlinedButton>
 							)}

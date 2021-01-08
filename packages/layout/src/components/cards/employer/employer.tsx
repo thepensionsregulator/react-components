@@ -95,7 +95,7 @@ const EmployerSubtitle: React.FC<Partial<Employer>> = ({
 
 const isComplete = (context: EmployerContext) => {
 	return context.preValidatedData ? true : context.complete;
-}
+};
 
 export const EmployerCard: React.FC<EmployerProviderProps> = ({
 	testId,
@@ -110,7 +110,11 @@ export const EmployerCard: React.FC<EmployerProviderProps> = ({
 						<Toolbar
 							complete={isComplete(context)}
 							subtitle={() => <EmployerSubtitle {...context.employer} />}
-							statusText={isComplete(context) ? i18n.preview.statusText.confirmed: i18n.preview.statusText.unconfirmed}
+							statusText={
+								isComplete(context)
+									? i18n.preview.statusText.confirmed
+									: i18n.preview.statusText.unconfirmed
+							}
 							buttonLeft={() => (
 								<ToolbarButton title={i18n.preview.buttons.one} />
 							)}

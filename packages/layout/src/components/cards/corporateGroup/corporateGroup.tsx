@@ -68,7 +68,7 @@ const RemoveButton: React.FC<{ title: string }> = ({ title }) => {
 
 const isComplete = (context: CorporateGroupContext) => {
 	return context.preValidatedData ? true : context.complete;
-}
+};
 export const CorporateGroupCard: React.FC<CorporateGroupProviderProps> = ({
 	testId,
 	cfg,
@@ -89,7 +89,11 @@ export const CorporateGroupCard: React.FC<CorporateGroupProviderProps> = ({
 									<P>{i18n.preview.trusteeType}</P>
 								</>
 							)}
-							statusText={isComplete(context) ? i18n.preview.statusText.confirmed: i18n.preview.statusText.unconfirmed}
+							statusText={
+								isComplete(context)
+									? i18n.preview.statusText.confirmed
+									: i18n.preview.statusText.unconfirmed
+							}
 							buttonLeft={() => (
 								<UnderlinedButton>{i18n.preview.buttons.one}</UnderlinedButton>
 							)}

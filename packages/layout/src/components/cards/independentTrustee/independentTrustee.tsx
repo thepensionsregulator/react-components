@@ -62,7 +62,7 @@ const RemoveButton: React.FC<{ title: string }> = ({ title }) => {
 
 const isComplete = (context: IndependentTrusteeContext) => {
 	return context.preValidatedData ? true : context.complete;
-}
+};
 
 export const IndependentTrusteeCard: React.FC<IndependentTrusteeProviderProps> = ({
 	testId,
@@ -84,7 +84,11 @@ export const IndependentTrusteeCard: React.FC<IndependentTrusteeProviderProps> =
 									<P>{i18n.preview.trusteeType}</P>
 								</>
 							)}
-							statusText={isComplete(context) ? i18n.preview.statusText.confirmed: i18n.preview.statusText.unconfirmed}
+							statusText={
+								isComplete(context)
+									? i18n.preview.statusText.confirmed
+									: i18n.preview.statusText.unconfirmed
+							}
 							buttonLeft={() => (
 								<UnderlinedButton>{i18n.preview.buttons.one}</UnderlinedButton>
 							)}

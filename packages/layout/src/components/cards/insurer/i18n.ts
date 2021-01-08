@@ -73,9 +73,9 @@ export const i18n: InsurerI18nProps = {
 		},
 		statusText: {
 			confirmed: 'Confirmed',
-			unconfirmed: 'Unconfirmed'
-		}, 
-		checkboxLabel: 'All details are correct.',
+			unconfirmed: 'Unconfirmed',
+		},
+		checkboxLabel: 'Confirm details are correct.',
 	},
 	reference: {
 		title: 'Reference details for this insurer',

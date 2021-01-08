@@ -91,7 +91,7 @@ const RemoveButton: React.FC<{ title: string }> = ({ title }) => {
 
 const isComplete = (context: ActuaryContext) => {
 	return context.preValidatedData ? true : context.complete;
-}
+};
 
 export const ActuaryCard: React.FC<ActuaryProviderProps> = ({
 	testId,
@@ -116,7 +116,11 @@ export const ActuaryCard: React.FC<ActuaryProviderProps> = ({
 										.join(' ')}
 								</H4>
 							)}
-							statusText={isComplete(context) ? i18n.preview.statusText.confirmed: i18n.preview.statusText.unconfirmed}
+							statusText={
+								isComplete(context)
+									? i18n.preview.statusText.confirmed
+									: i18n.preview.statusText.unconfirmed
+							}
 							buttonLeft={() => <ActuaryButton />}
 							buttonRight={() => (
 								<RemoveButton title={i18n.preview.buttons.two} />
