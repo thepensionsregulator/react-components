@@ -7,8 +7,8 @@ export const LoadingSpinnerCircle: React.FC<SpinnerProps> = ({
 	iconOnly,
 }) => {
 	return (
-		<div className={styles.wrapper1}>
-			<div className={styles.spinner1}>
+		<div className={styles.spinnerCircle}>
+			<div className={styles.spinner}>
 				<div></div>
 				<div></div>
 			</div>
@@ -22,8 +22,8 @@ export const LoadingSpinnerProgress: React.FC<SpinnerProps> = ({
 	iconOnly,
 }) => {
 	return (
-		<div className={styles.wrapper2}>
-			<div className={styles.spinner2}>
+		<div className={styles.spinnerProgress}>
+			<div className={styles.spinner}>
 				<div></div>
 				<div></div>
 				<div></div>
