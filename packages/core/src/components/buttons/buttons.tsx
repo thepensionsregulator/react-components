@@ -14,7 +14,7 @@ export type ButtonProps = {
 	className?: string;
 	cfg?: SpaceProps;
 	appearance?: 'primary' | 'outlined';
-	intent?: 'none' | 'success' | 'warning' | 'danger' | 'special';
+	intent?: 'none' | 'success' | 'warning' | 'danger' | 'special' | 'white';
 	size?: 'small' | 'medium' | 'large';
 	before?: any;
 	after?: any;
