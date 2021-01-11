@@ -51,7 +51,12 @@ export const CheckboxBlank: React.FC<SVGProps> = (props) => {
 
 export const RadioButtonChecked: React.FC<SVGProps> = (props) => {
 	return (
-		<SVG width="40" viewBox="315 504 40 40" {...props}>
+		<SVG
+			testId="radio-button-checked"
+			width="40"
+			viewBox="315 504 40 40"
+			{...props}
+		>
 			<path
 				d="M 335 507  C 344.52 507  352 514.48  352 524  C 352 533.52  344.52 541  335 541  C 325.48 541  318 533.52  318 524  C 318 514.48  325.48 507  335 507  Z "
 				fillRule="nonzero"
@@ -76,7 +81,12 @@ export const RadioButtonChecked: React.FC<SVGProps> = (props) => {
 
 export const RadioButtonUnchecked: React.FC<SVGProps> = (props) => {
 	return (
-		<SVG width="40" viewBox="0 0 40 40" {...props}>
+		<SVG
+			testId="radio-button-unchecked"
+			width="40"
+			viewBox="0 0 40 40"
+			{...props}
+		>
 			<g fill="#f5f5f5" stroke="#585858" strokeWidth="1">
 				<circle cx="20" cy="20" r="20" stroke="none" />
 				<circle cx="20" cy="20" r="19.5" fill="none" />

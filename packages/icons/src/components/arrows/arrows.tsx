@@ -22,7 +22,7 @@ export const ArrowDown: React.FC<SVGProps> = (props) => {
 
 export const ArrowLeft: React.FC<SVGProps> = (props) => {
 	return (
-		<SVG testId="arrow-up" {...props}>
+		<SVG testId="arrow-left" {...props}>
 			<path d="M0 0h24v24H0V0z" fill="none" />
 			<path d="M15.41 16.59L10.83 12l4.58-4.59L14 6l-6 6 6 6 1.41-1.41z" />
 		</SVG>
@@ -31,7 +31,7 @@ export const ArrowLeft: React.FC<SVGProps> = (props) => {
 
 export const ArrowRight: React.FC<SVGProps> = (props) => {
 	return (
-		<SVG testId="arrow-down" {...props}>
+		<SVG testId="arrow-right" {...props}>
 			<path d="M0 0h24v24H0V0z" fill="none" />
 			<path d="M8.59 16.59L13.17 12 8.59 7.41 10 6l6 6-6 6-1.41-1.41z" />
 		</SVG>

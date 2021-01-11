@@ -1,17 +1,117 @@
 import React from 'react';
-import { CheckboxChecked } from '../components/form/form';
+import {
+	ArrowUp,
+	ArrowDown,
+	ArrowLeft,
+	ArrowRight,
+	UnfoldMore,
+} from '../components/arrows/arrows';
+import { CheckedCircle, ErrorCircle } from '../components/circle/circle';
+import { Cross } from '../components/cross/cross';
+import {
+	CheckboxChecked,
+	CheckboxBlank,
+	RadioButtonChecked,
+	RadioButtonUnchecked,
+} from '../components/form/form';
+import {
+	LoadingSpinnerCircle,
+	LoadingSpinnerProgress,
+} from '../components/spinners/spinners';
+import { SVG } from '../components/global';
 import { render } from '@testing-library/react';
 
 describe('Icons', () => {
-	test('SVG component renders it`s children', () => {
-		const testId = 'svg-icon';
-		const { getByTestId } = render(
-			<CheckboxChecked cfg={{ fill: 'danger.1' }} testId={testId} />,
-		);
+	describe('SVG', () => {
+		test('SVG component renders it`s children', () => {
+			const testId = 'svg-icon';
+			const { getByTestId } = render(
+				<SVG cfg={{ fill: 'danger.1' }} testId={testId}>
+					<span>Children</span>
+				</SVG>,
+			);
+			expect(getByTestId(testId)).toBeDefined();
+			expect(getByTestId(testId)).toContainHTML('<span>Children</span>');
+		});
+	});
 
-		expect(getByTestId(testId)).toBeDefined();
-		expect(getByTestId(testId).innerHTML).toMatchInlineSnapshot(
-			`"<path d=\\"M 354.5 1304.5  L 387.5 1304.5  L 387.5 1337.5  L 354.5 1337.5  L 354.5 1304.5  Z \\" fill-rule=\\"nonzero\\" fill=\\"#f2f2f2\\" stroke=\\"none\\"></path><path d=\\"M 353 1303  L 389 1303  L 389 1339  L 353 1339  L 353 1303  Z \\" stroke-width=\\"4\\" stroke=\\"#585858\\" fill=\\"none\\"></path><path d=\\"M 359.571428571429 1321  L 368.142857142857 1329.57142857143  \\" stroke-width=\\"8.57142857142857\\" stroke=\\"#036db8\\" fill=\\"none\\"></path><path d=\\"M 368.142857142857 1329.57142857143  L 382.428571428571 1309.57142857143  \\" stroke-width=\\"8.57142857142857\\" stroke=\\"#036db8\\" fill=\\"none\\"></path>"`,
-		);
+	describe('Arrows', () => {
+		test('Arrow Up', () => {
+			const { getByTestId } = render(<ArrowUp />);
+			expect(getByTestId('arrow-up')).toBeDefined();
+		});
+
+		test('Arrow Down', () => {
+			const { getByTestId } = render(<ArrowDown />);
+			expect(getByTestId('arrow-down')).toBeDefined();
+		});
+
+		test('Arrow Left', () => {
+			const { getByTestId } = render(<ArrowLeft />);
+			expect(getByTestId('arrow-left')).toBeDefined();
+		});
+
+		test('Arrow Right', () => {
+			const { getByTestId } = render(<ArrowRight />);
+			expect(getByTestId('arrow-right')).toBeDefined();
+		});
+
+		test('Unfold More', () => {
+			const { getByTestId } = render(<UnfoldMore />);
+			expect(getByTestId('unfold-more')).toBeDefined();
+		});
+	});
+
+	describe('Circle', () => {
+		test('Checked Circle', () => {
+			const { getByTestId } = render(<CheckedCircle />);
+			expect(getByTestId('checked-circle')).toBeDefined();
+		});
+
+		test('Error Circle', () => {
+			const { getByTestId } = render(<ErrorCircle />);
+			expect(getByTestId('error-circle')).toBeDefined();
+		});
+	});
+
+	describe('Cross', () => {
+		test('Cross', () => {
+			const { getByTestId } = render(<Cross />);
+			expect(getByTestId('cross')).toBeDefined();
+		});
+	});
+
+	describe('Form', () => {
+		test('Checkbox Checked', () => {
+			const { getByTestId } = render(<CheckboxChecked />);
+			expect(getByTestId('checkbox-checked')).toBeDefined();
+		});
+
+		test('Checkbox Blank', () => {
+			const { getByTestId } = render(<CheckboxBlank />);
+			expect(getByTestId('checkbox-blank')).toBeDefined();
+		});
+
+		test('Radio Button Checked', () => {
+			const { getByTestId } = render(<RadioButtonChecked />);
+			expect(getByTestId('radio-button-checked')).toBeDefined();
+		});
+
+		test('Radio Button Unchecked', () => {
+			const { getByTestId } = render(<RadioButtonUnchecked />);
+			expect(getByTestId('radio-button-unchecked')).toBeDefined();
+		});
+	});
+
+	describe('Spinners', () => {
+		test('Loading Spinner Circle', () => {
+			const { getByTestId } = render(<LoadingSpinnerCircle />);
+			expect(getByTestId('spinner-circle')).toBeDefined();
+		});
+
+		test('Loading Spinner Progress', () => {
+			const { getByTestId } = render(<LoadingSpinnerProgress />);
+			expect(getByTestId('spinner-progress')).toBeDefined();
+		});
 	});
 });
