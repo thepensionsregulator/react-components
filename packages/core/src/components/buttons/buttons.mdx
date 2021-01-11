@@ -78,24 +78,32 @@ import { Button } from '@tpr/core';
 ### Primary appearance with intent
 
 <Playground>
-	<Button cfg={{ mr: 3 }} intent="none">
-		Click me
-	</Button>
-	<Button cfg={{ mr: 3 }} intent="success">
-		Click me
-	</Button>
-	<Button cfg={{ mr: 3 }} intent="warning">
-		Click me
-	</Button>
-	<Button cfg={{ mr: 3 }} intent="danger">
-		Click me
-	</Button>
-	<Button cfg={{ mr: 3 }} intent="special">
-		Click me
-	</Button>
-	<Button cfg={{ mr: 3 }} disabled>
-		Click me
-	</Button>
+	<div style={{ background: '#e1e1e1' }}>
+		<Button cfg={{ mr: 3, my: 3 }} intent="none">
+			Click me
+		</Button>
+		<Button cfg={{ mr: 3 }} intent="success">
+			Click me
+		</Button>
+		<Button cfg={{ mr: 3 }} intent="warning">
+			Click me
+		</Button>
+		<Button cfg={{ mr: 3 }} intent="danger">
+			Click me
+		</Button>
+		<Button cfg={{ mr: 3 }} intent="special">
+			Click me
+		</Button>
+		<Button cfg={{ mr: 3 }} intent="white">
+			Click me
+		</Button>
+		<Button cfg={{ mr: 3 }} intent="black">
+			Click me
+		</Button>
+		<Button cfg={{ mr: 3 }} disabled>
+			Click me
+		</Button>
+	</div>
 </Playground>
 
 ### Outlined appearance with intent
@@ -114,6 +122,9 @@ import { Button } from '@tpr/core';
 		Click me
 	</Button>
 	<Button cfg={{ mr: 3 }} appearance="outlined" intent="special">
+		Click me
+	</Button>
+	<Button cfg={{ mr: 3 }} appearance="outlined" intent="black">
 		Click me
 	</Button>
 	<Button cfg={{ mr: 3 }} appearance="outlined" disabled>

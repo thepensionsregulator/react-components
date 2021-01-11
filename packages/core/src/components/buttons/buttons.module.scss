@@ -27,6 +27,14 @@
 	border: 2px solid $colors-primary-3;
 	background: transparent !important;
 	border-radius: 6px;
+
+	&.intent-black {
+		color: $black;
+
+		&:hover {
+			color: $white !important;
+		}
+	}
 }
 
 .appearance-outlined:disabled {
@@ -41,56 +49,76 @@
 	}
 }
 
-/* 'none' | 'success' | 'warning' | 'danger'; */
+/* 'none' | 'success' | 'warning' | 'danger' | 'special' | 'white'; */
 
 .intent-none {
 	background: $colors-primary-3;
 	border-color: $colors-primary-3;
-}
 
-.intent-none:hover {
-	background: $colors-primary-3 !important;
-	color: white;
+	&:hover {
+		background: $colors-primary-3 !important;
+		color: white;
+	}
 }
 
 .intent-success {
 	background: $colors-success-1;
 	border-color: $colors-success-1;
-}
 
-.intent-success:hover {
-	background: $colors-success-1 !important;
-	color: white;
+	&:hover {
+		background: $colors-success-1 !important;
+		color: white;
+	}
 }
 
 .intent-warning {
 	background: $colors-warning-1;
 	border-color: $colors-warning-1;
-}
 
-.intent-warning:hover {
-	background: $colors-warning-1 !important;
-	color: white;
+	&:hover {
+		background: $colors-warning-1 !important;
+		color: white;
+	}
 }
 
 .intent-danger {
 	background: $colors-danger-2;
 	border-color: $colors-danger-2;
-}
 
-.intent-danger:hover {
-	background: $colors-danger-2 !important;
-	color: white;
+	&:hover {
+		background: $colors-danger-2 !important;
+		color: white;
+	}
 }
 
 .intent-special {
 	background: $colors-primary-a2;
 	border-color: $colors-primary-a2;
+
+	&:hover {
+		background: $colors-primary-a2 !important;
+		color: white;
+	}
 }
 
-.intent-special:hover {
-	background: $colors-primary-a2 !important;
-	color: white;
+.intent-white {
+	background: $white;
+	color: $colors-neutral-8;
+	border-color: $colors-neutral-8;
+
+	&:hover {
+		background: $white !important;
+	}
+}
+
+.intent-black {
+	background: $black;
+	color: $colors-neutral-1;
+	border-color: $black;
+
+	&:hover {
+		background: $black !important;
+	}
 }
 
 /* 'small' | 'medium' | 'large'; */
