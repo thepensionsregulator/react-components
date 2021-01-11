@@ -1,4 +1,5 @@
 import { I18nAddressLookup, i18n as AddressI18n } from '@tpr/forms';
+type PropertyFunction<T> = () => T;
 
 export type InHouseAdminI18nProps = {
 	address: I18nAddressLookup;
@@ -9,6 +10,10 @@ export type InHouseAdminI18nProps = {
 			three: string;
 			four: string;
 		};
+		statusText: {
+			confirmed: string;
+			unconfirmed: string;
+		};
 		checkboxLabel: string;
 	};
 	name: {
@@ -16,14 +21,18 @@ export type InHouseAdminI18nProps = {
 		fields: {
 			title: {
 				label: string;
+				error: string | PropertyFunction<string | undefined>;
+				maxlength: number;
 			};
 			firstName: {
 				label: string;
-				error: string;
+				error: string | PropertyFunction<string | undefined>;
+				maxlength: number;
 			};
 			lastName: {
 				label: string;
-				error: string;
+				error: string | PropertyFunction<string | undefined>;
+				maxlength: number;
 			};
 		};
 	};
@@ -90,21 +99,29 @@ export const i18n: InHouseAdminI18nProps = {
 			three: 'Address',
 			four: 'Contact details',
 		},
-		checkboxLabel: 'All details are correct.',
+		statusText: {
+			confirmed: 'Confirmed',
+			unconfirmed: 'Unconfirmed',
+		},
+		checkboxLabel: 'Confirm details are correct.',
 	},
 	name: {
 		title: 'Name of in house administrator',
 		fields: {
 			title: {
 				label: 'Title',
+				error: undefined,
+				maxlength: 35,
 			},
 			firstName: {
 				label: 'First name',
 				error: 'field is required',
+				maxlength: 70,
 			},
 			lastName: {
 				label: 'Last name',
 				error: 'field is required',
+				maxlength: 70,
 			},
 		},
 	},

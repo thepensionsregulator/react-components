@@ -16,6 +16,7 @@ import { ReasonRemove } from './views/remove/reason/reason';
 import { ConfirmRemove } from './views/remove/confirm/confirm';
 import { cardTypeName } from '../common/interfaces';
 import styles from '../cards.module.scss';
+import { CorporateGroupContext } from './corporateGroupMachine';
 
 const CardContentSwitch: React.FC = () => {
 	const { current } = useCorporateGroupContext();
@@ -65,6 +66,9 @@ const RemoveButton: React.FC<{ title: string }> = ({ title }) => {
 	);
 };
 
+const isComplete = (context: CorporateGroupContext) => {
+	return context.preValidatedData ? true : context.complete;
+};
 export const CorporateGroupCard: React.FC<CorporateGroupProviderProps> = ({
 	testId,
 	cfg,
@@ -76,7 +80,7 @@ export const CorporateGroupCard: React.FC<CorporateGroupProviderProps> = ({
 				return (
 					<Flex cfg={cfg} data-testid={testId} className={styles.card}>
 						<Toolbar
-							complete={context.preValidatedData ? true : context.complete}
+							complete={isComplete(context)}
 							subtitle={() => (
 								<>
 									<H4 cfg={{ lineHeight: 3 }}>
@@ -85,6 +89,11 @@ export const CorporateGroupCard: React.FC<CorporateGroupProviderProps> = ({
 									<P>{i18n.preview.trusteeType}</P>
 								</>
 							)}
+							statusText={
+								isComplete(context)
+									? i18n.preview.statusText.confirmed
+									: i18n.preview.statusText.unconfirmed
+							}
 							buttonLeft={() => (
 								<UnderlinedButton>{i18n.preview.buttons.one}</UnderlinedButton>
 							)}

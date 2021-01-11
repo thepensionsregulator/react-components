@@ -1,3 +1,5 @@
+type PropertyFunction<T> = () => T;
+
 export type ActuaryI18nProps = {
 	preview: {
 		buttons: {
@@ -6,6 +8,10 @@ export type ActuaryI18nProps = {
 			three: string;
 			four: string;
 		};
+		statusText: {
+			confirmed: string;
+			unconfirmed: string;
+		};
 		checkboxLabel: string;
 	};
 	name: {
@@ -13,14 +19,18 @@ export type ActuaryI18nProps = {
 		fields: {
 			title: {
 				label: string;
+				error: string | PropertyFunction<string | undefined>;
+				maxlength: number;
 			};
 			firstName: {
 				label: string;
-				error: string;
+				error: string | PropertyFunction<string | undefined>;
+				maxlength: number;
 			};
 			lastName: {
 				label: string;
-				error: string;
+				error: string | PropertyFunction<string | undefined>;
+				maxlength: number;
 			};
 		};
 	};
@@ -82,21 +92,29 @@ export const i18n: ActuaryI18nProps = {
 			three: 'Address',
 			four: 'Contact details',
 		},
-		checkboxLabel: 'All details are correct.',
+		statusText: {
+			confirmed: 'Confirmed',
+			unconfirmed: 'Unconfirmed',
+		},
+		checkboxLabel: 'Confirm details are correct.',
 	},
 	name: {
 		title: 'Name of Actuary',
 		fields: {
 			title: {
 				label: 'Title',
+				error: undefined,
+				maxlength: 35,
 			},
 			firstName: {
 				label: 'First name',
 				error: 'field is required',
+				maxlength: 70,
 			},
 			lastName: {
 				label: 'Last name',
 				error: 'field is required',
+				maxlength: 70,
 			},
 		},
 	},

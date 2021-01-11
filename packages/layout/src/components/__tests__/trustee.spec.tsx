@@ -99,8 +99,8 @@ describe('Trustee Preview', () => {
 			/>,
 		);
 
-		expect(getByText('No issues')).toBeDefined();
-		expect(getByText('All details are correct.')).toBeDefined();
+		expect(getByText('Confirmed')).toBeDefined();
+		expect(getByText('Confirm details are correct.')).toBeDefined();
 	});
 
 	test('address shows up correctly', () => {
@@ -155,7 +155,7 @@ describe('Trustee Preview', () => {
 
 describe('Trustee Name', () => {
 	test('is accessible', async () => {
-		const { container, getByText } = render(
+		const { container, getByText, getByTestId } = render(
 			<TrusteeCard
 				onDetailsSave={noop}
 				onContactSave={noop}
@@ -175,6 +175,29 @@ describe('Trustee Name', () => {
 		getByText('Trustee').click();
 		const results = await axe(container);
 		expect(results).toHaveNoViolations();
+
+		expect(getByTestId('trustee-name-form')).not.toBe(null);
+
+		var titleHtmlElement = getByText('Title (optional)') as HTMLElement;
+		var firstNameHtmlElement = getByText('First name') as HTMLElement;
+		var lastNameHtmlElement = getByText('Last name') as HTMLElement;
+
+		expect(titleHtmlElement).toBeDefined();
+		expect(titleHtmlElement.nextSibling.childNodes[0]).toHaveAttribute(
+			'maxlength',
+			'35',
+		);
+		expect(firstNameHtmlElement).toBeDefined();
+		expect(firstNameHtmlElement.nextSibling.childNodes[0]).toHaveAttribute(
+			'maxlength',
+			'70',
+		);
+		expect(lastNameHtmlElement).toBeDefined();
+		expect(lastNameHtmlElement.nextSibling.childNodes[0]).toHaveAttribute(
+			'maxlength',
+			'70',
+		);
+		expect(getByText('Continue')).toBeDefined();
 	});
 });
 

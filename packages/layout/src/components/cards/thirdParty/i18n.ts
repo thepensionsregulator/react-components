@@ -5,6 +5,10 @@ export type ThirdPartyI18nProps = {
 			two: string;
 			three: string;
 		};
+		statusText: {
+			confirmed: string;
+			unconfirmed: string;
+		};
 		checkboxLabel: string;
 	};
 	reference: {
@@ -63,7 +67,11 @@ export const i18n: ThirdPartyI18nProps = {
 			two: 'Remove',
 			three: 'Address',
 		},
-		checkboxLabel: 'All details are correct.',
+		statusText: {
+			confirmed: 'Confirmed',
+			unconfirmed: 'Unconfirmed',
+		},
+		checkboxLabel: 'Confirm details are correct.',
 	},
 	reference: {
 		title: 'Reference details for this third party admin',

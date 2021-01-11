@@ -13,6 +13,7 @@ export type SidebarLinkProps = {
 	disabled?: boolean;
 	active?: (path: string) => boolean;
 	links?: SidebarLinkProps[];
+	hideIcon?: boolean;
 };
 
 export type SidebarSectionProps = {

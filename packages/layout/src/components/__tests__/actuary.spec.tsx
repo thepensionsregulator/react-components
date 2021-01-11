@@ -63,8 +63,8 @@ describe('Actuary Card', () => {
 		});
 
 		test('initial status is correct', () => {
-			expect(findByText('No issues')).toBeDefined();
-			expect(findByText('All details are correct.')).toBeDefined();
+			expect(findByText('Confirmed')).toBeDefined();
+			expect(findByText('Confirm details are correct.')).toBeDefined();
 		});
 
 		test('displays Name Correctly', () => {
@@ -118,9 +118,26 @@ describe('Actuary Card', () => {
 
 		test('editing actuary Name', () => {
 			expect(findByTestId('actuary-name-form')).not.toBe(null);
-			expect(findByText('Title (optional)')).toBeDefined();
-			expect(findByText('First name')).toBeDefined();
-			expect(findByText('Last name')).toBeDefined();
+
+			var titleHtmlElement = findByText('Title (optional)') as HTMLElement;
+			var firstNameHtmlElement = findByText('First name') as HTMLElement;
+			var lastNameHtmlElement = findByText('Last name') as HTMLElement;
+
+			expect(titleHtmlElement).toBeDefined();
+			expect(titleHtmlElement.nextSibling.childNodes[0]).toHaveAttribute(
+				'maxlength',
+				'35',
+			);
+			expect(firstNameHtmlElement).toBeDefined();
+			expect(firstNameHtmlElement.nextSibling.childNodes[0]).toHaveAttribute(
+				'maxlength',
+				'70',
+			);
+			expect(lastNameHtmlElement).toBeDefined();
+			expect(lastNameHtmlElement.nextSibling.childNodes[0]).toHaveAttribute(
+				'maxlength',
+				'70',
+			);
 			expect(findByText('Save and close')).toBeDefined();
 		});
 
