@@ -5,7 +5,7 @@ import { P, Flex } from '@tpr/core';
 import { StyledInputLabel, InputElementHeading } from '../elements';
 import { Input } from '../input/input';
 import { FieldProps, FieldExtraProps } from '../../renderFields';
-import { isEqual } from 'lodash';
+import isEqual from 'lodash.isequal';
 import styles from './date.module.scss';
 
 const handleChange = (onChange: Function, value: number) => ({
