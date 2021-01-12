@@ -157,11 +157,12 @@
 	font-family: $fonts-sans-serif;
 	font-weight: $font-weight-2;
 	font-size: $font-size-2;
+	font-weight: $font-weight-3;
 	cursor: pointer;
 }
 
 .link:hover {
-	color: $colors-primary-3;
+	color: $colors-neutral-a1;
 	text-decoration: underline;
 }
 
@@ -169,6 +170,15 @@
 	color: $colors-neutral-6;
 	text-decoration: none;
 	cursor: not-allowed;
+}
+
+.link:visited {
+	color: $colors-accents-2;
+	background-color: $colors-warning-1;
+}
+
+.link:focus {
+	color: $colors-neutral-8;
 }
 
 .link-underline {
