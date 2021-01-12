@@ -84,7 +84,7 @@ export type WordBreak =
 export type TypographyProps = Partial<{
 	fontSize: ValuesFullRange;
 	textAlign: 'left' | 'center' | 'right';
-	fontWeight: 1 | 2 | 3;
+	fontWeight: 1 | 2 | 3 | 4;
 	lineHeight: 1 | 2 | 3;
 	wordBreak: WordBreak;
 }>;
