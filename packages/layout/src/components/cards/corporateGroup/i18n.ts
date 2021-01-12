@@ -1,4 +1,5 @@
 import { I18nRemoveReason } from '../common/interfaces';
+type PropertyFunction<T> = () => T;
 
 export type CorporateGroupI18nProps = {
 	preview: {
@@ -9,6 +10,10 @@ export type CorporateGroupI18nProps = {
 			four: string;
 			five: string;
 		};
+		statusText: {
+			confirmed: string;
+			unconfirmed: string;
+		};
 		checkboxLabel: string;
 		trusteeType: string;
 	};
@@ -17,14 +22,18 @@ export type CorporateGroupI18nProps = {
 		fields: {
 			title: {
 				label: string;
+				error: string | PropertyFunction<string | undefined>;
+				maxlength: number;
 			};
 			firstName: {
 				label: string;
-				error: string;
+				error: string | PropertyFunction<string | undefined>;
+				maxlength: number;
 			};
 			lastName: {
 				label: string;
-				error: string;
+				error: string | PropertyFunction<string | undefined>;
+				maxlength: number;
 			};
 		};
 	};
@@ -83,7 +92,11 @@ export const i18n: CorporateGroupI18nProps = {
 			four: 'Chair of board',
 			five: 'Director(s) are Professional Trustees',
 		},
-		checkboxLabel: 'All details are correct.',
+		statusText: {
+			confirmed: 'Confirmed',
+			unconfirmed: 'Unconfirmed',
+		},
+		checkboxLabel: 'Confirm details are correct.',
 		trusteeType: 'Corporate Group trustee',
 	},
 	name: {
@@ -91,14 +104,18 @@ export const i18n: CorporateGroupI18nProps = {
 		fields: {
 			title: {
 				label: 'Title',
+				error: undefined,
+				maxlength: 35,
 			},
 			firstName: {
 				label: 'First name',
 				error: 'field is required',
+				maxlength: 70,
 			},
 			lastName: {
 				label: 'Last name',
 				error: 'field is required',
+				maxlength: 70,
 			},
 		},
 	},
