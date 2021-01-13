@@ -21,6 +21,7 @@
 		background: $colors-warning-1;
 		color: $colors-neutral-8;
 		box-shadow: 0px 2px 0px $colors-neutral-8;
+		outline: none;
 	}
 
 	&:disabled {
@@ -40,9 +41,10 @@
 	border-radius: 8px;
 
 	&:focus {
-		background: $colors-warning-1;
-		color: $colors-neutral-8;
+		background: $colors-warning-1!important;
+		color: white;
 		box-shadow: 0px 2px 0px $colors-neutral-8;
+		outline: none;
 	}
 
 	&:disabled {
@@ -129,9 +131,7 @@
 	}
 
 	&:focus {
-		background: $colors-warning-1!important;
 		color: $colors-neutral-8;
-		box-shadow: 0px 2px 0px $colors-neutral-8;
 	}
 }
 
