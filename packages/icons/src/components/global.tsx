@@ -1,0 +1,35 @@
+import React from 'react';
+import { useClassNames } from '@tpr/core';
+import { SVGProps } from 'components/types';
+
+export const SVG: React.FC<SVGProps> = ({
+	cfg,
+	fill = '',
+	stroke = '',
+	width = '24',
+	className,
+	viewBox = '0 0 24 24',
+	testId,
+	role,
+	ariaLabel,
+	children,
+}) => {
+	const classNames = useClassNames(cfg, [className]);
+	return (
+		<svg
+			width={width}
+			height={width}
+			fill={fill}
+			stroke={stroke}
+			viewBox={viewBox}
+			xmlns="http://www.w3.org/2000/svg"
+			className={classNames}
+			xmlnsXlink="http://www.w3.org/1999/xlink"
+			data-testid={testId}
+			role={role}
+			aria-label={ariaLabel}
+		>
+			{children}
+		</svg>
+	);
+};

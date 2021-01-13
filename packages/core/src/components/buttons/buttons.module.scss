@@ -6,17 +6,54 @@
 	cursor: pointer;
 }
 
-/* 'primary' | 'link' | 'outlined'; */
+/* 'primary' | 'secondary' | 'link' | 'outlined'; */
 
 .appearance-primary {
 	color: white;
+	background: $colors-primary-a2 !important;
 	border: none;
-	border-radius: 6px;
+	border-radius: 8px;
+
+	&:hover {
+		background: $colors-accents-2 !important;
+	}
+
+	&:focus {
+		background: $colors-warning-1!important;
+		color: $colors-neutral-8;
+		box-shadow: 0px 2px 0px $colors-neutral-8;
+	}
 }
 
 .appearance-primary:disabled {
 	cursor: not-allowed !important;
-	background: $colors-neutral-6;
+	background: $colors-primary-a1;
+
+	&:hover {
+		background: $colors-neutral-6 !important;
+	}
+}
+
+.appearance-secondary {
+	color: white;
+	background: $colors-primary-3;
+	border: none;
+	border-radius: 8px;
+
+	&:hover {
+		background: $colors-neutral-a1 !important;
+	}
+
+	&:focus {
+		background: $colors-warning-1!important;
+		color: $colors-neutral-8;
+		box-shadow: 0px 2px 0px $colors-neutral-8;
+	}
+}
+
+.appearance-secondary:disabled {
+	cursor: not-allowed !important;
+	background: $colors-primary-1;
 
 	&:hover {
 		background: $colors-neutral-6 !important;
@@ -27,6 +64,14 @@
 	border: 2px solid $colors-primary-3;
 	background: transparent !important;
 	border-radius: 6px;
+
+	&.intent-black {
+		color: $black;
+
+		&:hover {
+			color: $white !important;
+		}
+	}
 }
 
 .appearance-outlined:disabled {
@@ -41,56 +86,81 @@
 	}
 }
 
-/* 'none' | 'success' | 'warning' | 'danger'; */
-
-.intent-none {
-	background: $colors-primary-3;
-	border-color: $colors-primary-3;
-}
-
-.intent-none:hover {
-	background: $colors-primary-3 !important;
-	color: white;
-}
+/* 'none' | 'success' | 'warning' | 'danger' | 'special' | 'white'; */
 
 .intent-success {
 	background: $colors-success-1;
 	border-color: $colors-success-1;
-}
 
-.intent-success:hover {
-	background: $colors-success-1 !important;
-	color: white;
+	&:hover {
+		background: $colors-success-1 !important;
+		color: white;
+	}
 }
 
 .intent-warning {
-	background: $colors-warning-1;
-	border-color: $colors-warning-1;
+	background: $colors-danger-2;
+	border-color: $colors-danger-2;
+
+	&:hover {
+		background: $colors-danger-3 !important;
+		color: white;
+	}
+
+	&:focus {
+		background: $colors-warning-1!important;
+		color: $colors-neutral-8;
+		box-shadow: 0px 2px 0px $colors-neutral-8;
+	}
 }
 
-.intent-warning:hover {
-	background: $colors-warning-1 !important;
-	color: white;
+.intent-warning:disabled {
+	cursor: not-allowed !important;
+	background: $colors-danger-1;
+
+	&:hover {
+		background: $colors-neutral-6 !important;
+	}
 }
 
 .intent-danger {
 	background: $colors-danger-2;
 	border-color: $colors-danger-2;
-}
 
-.intent-danger:hover {
-	background: $colors-danger-2 !important;
-	color: white;
+	&:hover {
+		background: $colors-danger-2 !important;
+		color: white;
+	}
 }
 
 .intent-special {
 	background: $colors-primary-a2;
 	border-color: $colors-primary-a2;
+
+	&:hover {
+		background: $colors-primary-a2 !important;
+		color: white;
+	}
 }
 
-.intent-special:hover {
-	background: $colors-primary-a2 !important;
-	color: white;
+.intent-white {
+	background: $white;
+	color: $colors-neutral-8;
+	border-color: $colors-neutral-8;
+
+	&:hover {
+		background: $white !important;
+	}
+}
+
+.intent-black {
+	background: $black;
+	color: $colors-neutral-1;
+	border-color: $black;
+
+	&:hover {
+		background: $black !important;
+	}
 }
 
 /* 'small' | 'medium' | 'large'; */
@@ -104,7 +174,7 @@
 }
 
 .size-medium {
-	font-weight: $font-weight-2;
+	font-weight: $font-weight-3;
 	font-size: $font-size-2;
 	text-align: center;
 	height: 50px;
@@ -129,11 +199,12 @@
 	font-family: $fonts-sans-serif;
 	font-weight: $font-weight-2;
 	font-size: $font-size-2;
+	font-weight: $font-weight-3;
 	cursor: pointer;
 }
 
 .link:hover {
-	color: $colors-primary-3;
+	color: $colors-neutral-a1;
 	text-decoration: underline;
 }
 
@@ -141,6 +212,15 @@
 	color: $colors-neutral-6;
 	text-decoration: none;
 	cursor: not-allowed;
+}
+
+.link:visited {
+	color: $colors-accents-2;
+	background-color: $colors-warning-1;
+}
+
+.link:focus {
+	color: $colors-neutral-8;
 }
 
 .link-underline {

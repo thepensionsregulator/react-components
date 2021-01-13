@@ -1,5 +1,5 @@
 import qs from 'qs';
-import { merge } from 'lodash';
+import merge from 'lodash.merge';
 import { FieldProps } from './renderFields';
 
 const getObjectValueByString = (
