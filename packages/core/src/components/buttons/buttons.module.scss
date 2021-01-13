@@ -10,7 +10,6 @@
 
 .appearance-primary {
 	color: white;
-	background: $colors-primary-a2;
 	border: none;
 	border-radius: 8px;
 
@@ -23,40 +22,36 @@
 		color: $colors-neutral-8;
 		box-shadow: 0px 2px 0px $colors-neutral-8;
 	}
-}
 
-.appearance-primary:disabled {
-	cursor: not-allowed !important;
-	background: $colors-neutral-6;
-
-	&:hover {
-		background: $colors-neutral-6 !important;
+	&:disabled {
+		cursor: not-allowed !important;
+		background: $colors-neutral-6;
+	
+		&:hover {
+			background: $colors-neutral-6 !important;
+		}
 	}
 }
 
 .appearance-secondary {
 	color: white;
-	background: $colors-primary-3;
+	background: $colors-primary-3!important;
 	border: none;
 	border-radius: 8px;
-
-	&:hover {
-		background: $colors-neutral-a1;
-	}
 
 	&:focus {
 		background: $colors-warning-1;
 		color: $colors-neutral-8;
 		box-shadow: 0px 2px 0px $colors-neutral-8;
 	}
-}
 
-.appearance-secondary:disabled {
-	cursor: not-allowed !important;
-	background: $colors-primary-1;
-
-	&:hover {
-		background: $colors-neutral-6;
+	&:disabled {
+		cursor: not-allowed !important;
+		background: $colors-primary-1;
+	
+		&:hover {
+			background: $colors-neutral-6;
+		}
 	}
 }
 
@@ -72,17 +67,17 @@
 			color: $white !important;
 		}
 	}
-}
-
-.appearance-outlined:disabled {
-	color: $colors-neutral-6;
-	cursor: not-allowed !important;
-	border: 2px solid $colors-neutral-6;
-
-	&:hover {
+	
+	&:disabled {
 		color: $colors-neutral-6;
-		background: none !important;
-		border: 2px solid $colors-neutral-6 !important;
+		cursor: not-allowed !important;
+		border: 2px solid $colors-neutral-6;
+	
+		&:hover {
+			color: $colors-neutral-6;
+			background: none !important;
+			border: 2px solid $colors-neutral-6 !important;
+		}
 	}
 }
 
@@ -97,9 +92,18 @@
 			color: white;
 	}
 
+	&.appearance-secondary:hover {
+		background: $colors-neutral-a1!important;
+	}
+
 	&.appearance-outlined:hover {
 		background: $colors-primary-a2 !important;
 		border-color: $colors-primary-a2 !important;	
+
+		&:disabled {
+			background: none !important;
+			border-color: $colors-neutral-6 !important;		
+		}
 	}
 }
 
