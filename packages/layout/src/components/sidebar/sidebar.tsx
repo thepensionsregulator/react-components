@@ -102,6 +102,7 @@ export const Sidebar: React.FC<SidebarProps> = ({
 				className={styles.sidebarMenu}
 			>
 				<Link
+					underline={isHomePageActive}
 					cfg={{
 						fontWeight: 3,
 						color: 'primary.2',
