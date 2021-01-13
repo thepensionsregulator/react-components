@@ -1,4 +1,4 @@
-import React, { useMemo } from 'react';
+import React, { useEffect, useMemo, useState } from 'react';
 import { Flex, Link, P, flatten } from '@tpr/core';
 import { callAllEventHandlers } from '../../utils';
 import SidebarMenu from './components/SidebarMenu';
@@ -85,6 +85,15 @@ export const Sidebar: React.FC<SidebarProps> = ({
 	const routerProps = { matchPath, location, history };
 	const sections = useSectionsUpdater(originalSections, routerProps);
 	const [totalSections, totalCompleted] = useCalculateProgress(sections);
+	const [isHomePageActive, setIsHomePageActive] = useState(false);
+
+	useEffect(() => {
+		const match = matchPath(location.pathname, {
+			path: titlePath,
+			exact: true,
+		});
+		match ? setIsHomePageActive(true) : setIsHomePageActive(false);
+	}, [location.pathname]);
 
 	return (
 		<div className={styles.sidebar}>
@@ -100,6 +109,7 @@ export const Sidebar: React.FC<SidebarProps> = ({
 						fontSize: 4,
 					}}
 					onClick={() => history.push(titlePath)}
+					className={isHomePageActive ? styles.activeLink : ''}
 				>
 					{title}
 				</Link>
