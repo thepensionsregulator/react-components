@@ -219,30 +219,33 @@
 	border: none;
 	color: $colors-primary-3;
 	font-family: $fonts-sans-serif;
-	font-weight: $font-weight-2;
 	font-size: $font-size-2;
 	font-weight: $font-weight-3;
-	cursor: pointer;
-}
-
-.link:hover {
-	color: $colors-neutral-a1;
 	text-decoration: underline;
-}
+	cursor: pointer;
 
-.link:disabled {
-	color: $colors-neutral-6;
-	text-decoration: none;
-	cursor: not-allowed;
-}
-
-.link:visited {
-	color: $colors-accents-2;
-	background-color: $colors-warning-1;
-}
-
-.link:focus {
-	color: $colors-neutral-8;
+	&:hover {
+		color: $colors-neutral-a1;
+	}
+	
+	&:disabled {
+		color: $colors-neutral-6;
+		text-decoration: none;
+		cursor: not-allowed;
+	}
+	
+	&:visited {
+		color: $colors-accents-2;
+		background-color: $colors-warning-1;
+	}
+	
+	&:focus {
+		color: $colors-neutral-8;
+		background: $colors-warning-1;
+		outline: none;
+		text-decoration: none;
+		box-shadow: 0px -2px $colors-warning-1, 0px 4px $colors-neutral-8;
+	}
 }
 
 .link-underline {
