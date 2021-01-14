@@ -70,7 +70,17 @@ const DateInputField: React.FC<DateInputFieldProps> = ({
 }) => {
 	return (
 		<label className={small ? styles.inputSmall : styles.inputLarge}>
-			<P cfg={{ fontSize: 2, fontWeight: 3, mb: 1 }}>{label}</P>
+			<P
+				cfg={{
+					fontSize: 2,
+					fontWeight: 4,
+					mb: 1,
+					lineHeight: 3,
+					color: 'neutral.8',
+				}}
+			>
+				{label}
+			</P>
 			<Input
 				type="string"
 				disabled={disabled}

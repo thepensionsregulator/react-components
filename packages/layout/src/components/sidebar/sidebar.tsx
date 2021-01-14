@@ -115,8 +115,24 @@ export const Sidebar: React.FC<SidebarProps> = ({
 					{title}
 				</Link>
 				<Flex cfg={{ justifyContent: 'space-between', mt: 4, mb: 2 }}>
-					<P>Section</P>
-					<P>
+					<P
+						cfg={{
+							color: 'neutral.8',
+							fontSize: 3,
+							fontWeight: 3,
+							lineHeight: 6,
+						}}
+					>
+						Section
+					</P>
+					<P
+						cfg={{
+							color: 'neutral.8',
+							fontSize: 3,
+							fontWeight: 3,
+							lineHeight: 6,
+						}}
+					>
 						Progress {totalCompleted.length} / {totalSections.length}
 					</P>
 				</Flex>
