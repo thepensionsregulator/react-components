@@ -9,7 +9,7 @@
 /* 'primary' | 'secondary' | 'link' | 'outlined'; */
 
 .appearance-primary {
-	color: white;
+	color: $white;
 	border: none;
 	border-radius: 8px;
 
@@ -35,7 +35,7 @@
 }
 
 .appearance-secondary {
-	color: white;
+	color: $white;
 	background: $colors-primary-3!important;
 	border: none;
 	border-radius: 8px;
@@ -87,7 +87,7 @@
 	&:hover {
 			background: $colors-accents-2 !important;
 			border-color: $colors-accents-2 !important;
-			color: white;
+			color: $white;
 	}
 
 	&.appearance-secondary:hover {
@@ -116,7 +116,7 @@
 	&:hover {
 		background: $colors-success-1 !important;
 		border-color: $colors-success-1 !important;
-		color: white;
+		color: $white;
 	}
 }
 
@@ -127,7 +127,7 @@
 	&:hover {
 		background: $colors-danger-3 !important;
 		border-color: $colors-danger-3 !important;
-		color: white;
+		color: $white;
 	}
 
 	&:focus {
@@ -151,7 +151,7 @@
 
 	&:hover {
 		background: $colors-danger-2 !important;
-		color: white;
+		color: $white;
 	}
 }
 
@@ -161,7 +161,7 @@
 
 	&:hover {
 		background: $colors-primary-a2 !important;
-		color: white;
+		color: $white;
 	}
 }
 
