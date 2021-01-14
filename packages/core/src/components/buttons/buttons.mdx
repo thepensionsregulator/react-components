@@ -16,9 +16,10 @@ To trigger an operation.
 
 A button means an operation (or a series of operations). Clicking a button will trigger corresponding business logic.
 
-We provide 2 types of button.
+We provide 3 types of button.
 
 - Primary button
+- Secondary button
 - Outlined button
 
 And 6 other properties additionally.
@@ -42,6 +43,16 @@ import { Button } from '@tpr/core';
 
 <Playground>
 	<Button>Click me</Button>
+</Playground>
+
+### Secondary appearance
+
+<Playground>
+	<Button
+		appearance="secondary"
+		>
+			Click me
+		</Button>
 </Playground>
 
 ### Usage with props
@@ -100,9 +111,6 @@ import { Button } from '@tpr/core';
 		<Button cfg={{ mr: 3 }} intent="black">
 			Click me
 		</Button>
-		<Button cfg={{ mr: 3 }} disabled>
-			Click me
-		</Button>
 	</div>
 </Playground>
 
@@ -130,6 +138,22 @@ import { Button } from '@tpr/core';
 	<Button cfg={{ mr: 3 }} appearance="outlined" disabled>
 		Click me
 	</Button>
+</Playground>
+
+### Disabled
+
+<Playground>
+	<div style={{ background: '#e1e1e1' }}>
+		<Button cfg={{ mr: 3 }} disabled>
+			Click me
+		</Button>
+		<Button cfg={{ mr: 3 }} appearance="secondary" disabled>
+			Click me
+		</Button>
+		<Button cfg={{ mr: 3, my: 3 }} intent="warning" disabled>
+			Click me
+		</Button>
+	</div>
 </Playground>
 
 ## API
