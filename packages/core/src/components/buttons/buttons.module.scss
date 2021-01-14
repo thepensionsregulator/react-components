@@ -26,10 +26,10 @@
 
 	&:disabled {
 		cursor: not-allowed !important;
-		background: $colors-neutral-6;
+		background: $colors-primary-a1;
 	
 		&:hover {
-			background: $colors-neutral-6 !important;
+			background: $colors-primary-a1 !important;
 		}
 	}
 }
@@ -94,7 +94,7 @@
 		background: $colors-neutral-a1!important;
 	
 		&:disabled {
-			background: $colors-neutral-6 !important;
+			background: $colors-primary-1 !important;
 		}
 	}
 
@@ -139,7 +139,7 @@
 		background: $colors-danger-1;
 	
 		&:hover {
-			background: $colors-neutral-6 !important;
+			background: $colors-danger-1 !important;
 		}
 	
 	}
