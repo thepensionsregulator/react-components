@@ -40,17 +40,18 @@ export const BetaHeader: React.FC<BetaHeaderProps> = ({ text, mail }) => {
 				<Flex cfg={{ alignItems: 'center' }}>
 					<P
 						cfg={{
-							fontSize: 1,
+							fontSize: 2,
+							fontWeight: 4,
 							color: 'white',
 							bg: 'primary.3',
-							p: 1,
+							p: 2,
 							my: 2,
 							mr: 3,
 						}}
 					>
 						BETA
 					</P>
-					<P cfg={{ fontSize: 1, color: 'neutral.6' }}>
+					<P cfg={{ fontSize: 2, color: 'neutral.8' }}>
 						<TextComponent />
 					</P>
 				</Flex>

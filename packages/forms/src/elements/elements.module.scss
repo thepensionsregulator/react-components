@@ -13,11 +13,12 @@
 .labelText {
 	display: block;
 	font-family: $fonts-sans-serif;
-	color: $colors-neutral-7;
-	font-weight: $font-weight-3;
+	color: $colors-neutral-8;
+	font-weight: $font-weight-4;
 	font-size: $font-size-2;
 	margin-bottom: $space-1;
 	white-space: nowrap;
+	line-height: $line-height-3;
 }
 
 .hint {

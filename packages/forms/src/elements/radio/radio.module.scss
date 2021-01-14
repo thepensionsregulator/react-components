@@ -18,7 +18,9 @@
 }
 
 .label {
-	line-height: 27px;
+	color: $colors-neutral-8;
+	font-weight: $font-weight-3;
+	line-height: $line-height-3;
 	padding-left: $space-1;
 	cursor: pointer;
 }

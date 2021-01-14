@@ -33,21 +33,30 @@ export const Header: React.FC<HeaderProps> = ({
 								height="75"
 							/>
 						</a>
-						<P cfg={{ color: 'white', fontWeight: 2 }}>{title}</P>
+						<P
+							cfg={{
+								color: 'white',
+								fontSize: 3,
+								fontWeight: 3,
+								lineHeight: 5,
+							}}
+						>
+							{title}
+						</P>
 					</Flex>
 					<Flex cfg={{ alignItems: 'center' }}>
 						<Link
 							onClick={onClickSchemeOptions}
 							underline
 							data-testid="onClickSchemeOptions"
-							cfg={{ color: 'white', mr: 4 }}
+							cfg={{ color: 'white', mr: 4, fontWeight: 3, lineHeight: 3 }}
 						>
 							Scheme Options
 						</Link>
 						<Link
 							onClick={onClickLogout}
 							underline
-							cfg={{ color: 'white' }}
+							cfg={{ color: 'white', fontWeight: 3, lineHeight: 3 }}
 							data-testid="onClickLogout"
 						>
 							Log out
