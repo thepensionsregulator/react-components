@@ -49,11 +49,7 @@
 
 	&:disabled {
 		cursor: not-allowed !important;
-		background: $colors-primary-1;
-	
-		&:hover {
-			background: $colors-neutral-6;
-		}
+		background: $colors-primary-1!important;	
 	}
 }
 
@@ -96,6 +92,10 @@
 
 	&.appearance-secondary:hover {
 		background: $colors-neutral-a1!important;
+	
+		&:disabled {
+			background: $colors-neutral-6 !important;
+		}
 	}
 
 	&.appearance-outlined:hover {
@@ -133,14 +133,15 @@
 	&:focus {
 		color: $colors-neutral-8;
 	}
-}
 
-.intent-warning:disabled {
-	cursor: not-allowed !important;
-	background: $colors-danger-1;
-
-	&:hover {
-		background: $colors-neutral-6 !important;
+	&:disabled {
+		cursor: not-allowed !important;
+		background: $colors-danger-1;
+	
+		&:hover {
+			background: $colors-neutral-6 !important;
+		}
+	
 	}
 }
 
