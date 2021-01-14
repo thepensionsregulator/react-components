@@ -13,7 +13,7 @@ import styles from './buttons.module.scss';
 export type ButtonProps = {
 	className?: string;
 	cfg?: SpaceProps;
-	appearance?: 'primary' | 'outlined';
+	appearance?: 'primary' | 'secondary' | 'outlined';
 	intent?: 'none' | 'success' | 'warning' | 'danger' | 'special' | 'white';
 	size?: 'small' | 'medium' | 'large';
 	before?: any;

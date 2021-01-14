@@ -1,5 +1,5 @@
 import qs from 'qs';
-import { merge } from 'lodash';
+import merge from 'lodash.merge';
 import { FieldProps } from './renderFields';
 
 const getObjectValueByString = (
@@ -29,10 +29,10 @@ export function validate(formFields: FieldProps[]) {
 				if (errorMessage) return merge(errors, errorObject);
 			}
 			// typof error is a string and there is no field value, assign error to errors
-			if (
-				(typeof error === 'string' && !fieldValue) ||
+			if (typeof error === 'string' &&
+				(!fieldValue ||
 				(typeof fieldValue === 'string' && !fieldValue.trim()) ||
-				(Array.isArray(fieldValue) && !fieldValue.length)
+				(Array.isArray(fieldValue) && !fieldValue.length))
 			) {
 				// construct object from string with errors
 				const errorObject = qs.parse(`${name}=${error}`, {
