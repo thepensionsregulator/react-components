@@ -20,6 +20,11 @@
 	white-space: nowrap;
 }
 
+.hint {
+	color: $colors-neutral-7;
+	line-height: $line-height-3;
+}
+
 .errorMessage {
 	color: $colors-danger-2;
 	font-size: $font-size-2;
