@@ -57,7 +57,9 @@ const SidebarMenu: React.FC<SidebarMenuProps> = ({
 
 	return (
 		<Flex cfg={{ flexDirection: 'column' }} className={styles.sidebarMenu}>
-			<H3 cfg={{ fontWeight: 2, mt: 4 }}>{title}</H3>
+			<H3 cfg={{ fontWeight: 3, mt: 4, color: 'neutral.8', lineHeight: 6 }}>
+				{title}
+			</H3>
 			<Hr cfg={{ my: 4 }} />
 			{links.map(
 				({ onClick = () => {}, active = () => false, ...link }, key) => (

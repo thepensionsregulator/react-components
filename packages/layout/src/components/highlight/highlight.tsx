@@ -18,7 +18,16 @@ export const Highlight: React.FC<HighlightProps> = ({
 			<div className={styles.leftBackground} />
 			<AppWidth className={styles.highlightContent}>
 				<Flex cfg={{ flex: '0 0 auto' }} className={styles.schemeReturn}>
-					<P cfg={{ fontWeight: 3 }}>{title}</P>
+					<P
+						cfg={{
+							fontWeight: 4,
+							fontSize: 3,
+							lineHeight: 5,
+							color: 'white',
+						}}
+					>
+						{title}
+					</P>
 				</Flex>
 				<Flex
 					cfg={{
@@ -27,7 +36,16 @@ export const Highlight: React.FC<HighlightProps> = ({
 						justifyContent: 'space-between',
 					}}
 				>
-					<P cfg={{ fontWeight: 3, px: 4 }} className={styles.truncate}>
+					<P
+						cfg={{
+							fontWeight: 4,
+							fontSize: 3,
+							lineHeight: 5,
+							px: 4,
+							color: 'white',
+						}}
+						className={styles.truncate}
+					>
 						{name}
 					</P>
 					<Flex
@@ -39,7 +57,17 @@ export const Highlight: React.FC<HighlightProps> = ({
 						}}
 						className={styles.psrNumber}
 					>
-						<P cfg={{ fontWeight: 3 }}>PSR: {psr}</P>
+						<P
+							cfg={{
+								fontWeight: 4,
+								fontSize: 3,
+								lineHeight: 5,
+								color: 'white',
+								px: 3,
+							}}
+						>
+							PSR: {psr}
+						</P>
 					</Flex>
 				</Flex>
 			</AppWidth>

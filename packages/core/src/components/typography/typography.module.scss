@@ -2,10 +2,11 @@
 
 .h1 {
 	font-family: $fonts-sans-serif;
-	font-weight: $font-weight-2;
+	font-weight: $font-weight-3;
 	font-size: $font-size-6;
 	letter-spacing: 0px;
-	line-height: $line-height-1;
+	line-height: $line-height-4;
+	color: $colors-neutral-8;
 }
 
 .h2 {
@@ -49,11 +50,12 @@
 }
 
 .p {
+	color: $colors-neutral-8;
 	font-family: $fonts-sans-serif;
 	font-weight: $font-weight-2;
 	font-size: $font-size-2;
 	letter-spacing: 0px;
-	line-height: $line-height-1;
+	line-height: $line-height-3;
 }
 
 .span {
@@ -61,12 +63,12 @@
 	font-weight: $font-weight-2;
 	font-size: $font-size-2;
 	letter-spacing: 0px;
-	line-height: $line-height-1
+	line-height: $line-height-1;
 }
 
 .hr {
 	width: 100%;
-	border-bottom: 1px solid $colors-neutral-6;
+	border-bottom: 1px solid $colors-neutral-4;
 }
 
 .bold {
