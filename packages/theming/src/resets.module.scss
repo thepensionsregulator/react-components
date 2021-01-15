@@ -1,3 +1,4 @@
+@import './variables.scss';
 .bodyreset {
 	margin: 0;
 	font-family: 'Open Sans', sans-serif;
@@ -8,6 +9,7 @@
 // apply css resets for all elements within a div. We don't want to reset default docz styles.
 
 .bodyreset * {
+	color: $colors-neutral-8;
 	border: 0;
 	margin: 0;
 	padding: 0;

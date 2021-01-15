@@ -29,8 +29,14 @@
 	color: $colors-neutral-6;
 	cursor: not-allowed;
 
+	g {
+		stroke: $colors-neutral-5;
+		fill: $colors-neutral-1;
+	}
+
 	p {
 		cursor: not-allowed;
+		color: $colors-neutral-6;
 	}
 }
 
