@@ -135,23 +135,23 @@ import { Button } from '@tpr/core';
 	<Button cfg={{ mr: 3 }} appearance="outlined" intent="black">
 		Click me
 	</Button>
-	<Button cfg={{ mr: 3 }} appearance="outlined" disabled>
-		Click me
-	</Button>
 </Playground>
 
 ### Disabled
 
 <Playground>
-	<div style={{ background: '#e1e1e1' }}>
+	<div>
 		<Button cfg={{ mr: 3 }} disabled>
-			Click me
+			Primary
 		</Button>
 		<Button cfg={{ mr: 3 }} appearance="secondary" disabled>
-			Click me
+			Secondary
 		</Button>
 		<Button cfg={{ mr: 3, my: 3 }} intent="warning" disabled>
-			Click me
+			Warning
+		</Button>
+		<Button cfg={{ mr: 3 }} appearance="outlined" disabled>
+			Outlined
 		</Button>
 	</div>
 </Playground>
