@@ -49,7 +49,7 @@ const DateForm: React.FC<DateFormProps> = ({
 						)}
 						<Footer>
 							<ArrowButton
-								intent="special"
+								appearance="secondary"
 								pointsTo="right"
 								iconSide="right"
 								title="Continue"
