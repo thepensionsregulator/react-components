@@ -29,7 +29,6 @@ const SidebarMenu: React.FC<SidebarMenuProps> = ({
 								cfg={{ justifyContent: 'space-between', mb: links ? 5 : 1 }}
 								className={styles.nested}
 							>
-								<div className={styles.line}></div>
 								<Link
 									cfg={{
 										color: 'primary.2',

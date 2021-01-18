@@ -6,6 +6,19 @@
 	flex: 0 0 auto;
 	width: $sidebar-width;
 	background: $white;
+
+	button {
+		text-decoration: none;
+
+		&:hover {
+			color: $colors-neutral-a1 !important;
+			text-decoration: underline;
+		}
+
+		&:focus {
+			color: $colors-neutral-8 !important;
+		}
+	}
 }
 
 .sidebarMenu {
@@ -41,15 +54,11 @@
 	}
 
 	.nested {
-		position: relative;
-		
-		.line {
-			position: absolute;
-			top: 50%;
-			left: -$space-6;
-			width: $space-5;
-			height: 1px;
-			border-bottom: 1px solid $colors-primary-3;
+		&::before {
+			content: "—";
+			color: $colors-neutral-8;
+			padding-right: 2px;
 		}
+	
 	}
 }
