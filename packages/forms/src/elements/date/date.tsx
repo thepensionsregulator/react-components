@@ -18,10 +18,22 @@ const handleChange = (onChange: Function, value: number) => ({
 	}
 };
 
+function datePassesFebruaryCheck(yyyy: string, mm: string, dd: string){
+	let year =parseInt(yyyy);
+	let month =parseInt(mm);
+	let day= parseInt(dd);
+	let date = new Date(year, month,day);
+	if (date.getFullYear() == year && date.getMonth() == month && date.getDate() == day) {
+		return true;
+	}
+	return false;
+}
 function getValidDate(yyyy: string, mm: string, dd: string) {
+
 	const date = toDate(new Date(parseInt(yyyy), parseInt(mm) - 1, parseInt(dd)));
-	if (isValid(date) && yyyy.length === 4) {
-		return format(date, 'yyyy-MM-dd');
+
+	if (isValid(date) && yyyy.length === 4 && datePassesFebruaryCheck(yyyy,mm,dd)) {
+			return format(date, 'yyyy-MM-dd');
 	}
 	return undefined;
 }
