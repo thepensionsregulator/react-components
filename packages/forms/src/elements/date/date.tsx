@@ -7,6 +7,7 @@ import { Input } from '../input/input';
 import { FieldProps, FieldExtraProps } from '../../renderFields';
 import isEqual from 'lodash.isequal';
 import styles from './date.module.scss';
+import {SameMonthDateValidator} from './services/SameMonthDateValidator';
 
 const handleChange = (onChange: Function, value: number) => ({
 	target,
@@ -18,23 +19,12 @@ const handleChange = (onChange: Function, value: number) => ({
 	}
 };
 
-// JS new Date(2020,02,31) evaluates to a valid date in March, this check is to validate that we still
-// have the same values for yyy,mm,dd as passed in after we convert to JS Date
-function datePassesFebruaryCheck(yyyy: string, mm: string, dd: string){
-	let year =parseInt(yyyy);
-	let month =parseInt(mm)-1;
-	let day= parseInt(dd);
-	let date = new Date(year, month,day);
-	if (date.getFullYear() == year && date.getMonth() == month && date.getDate() == day) {
-		return true;
-	}
-	return false;
-}
+const sameMonthValidator = new SameMonthDateValidator();
 function getValidDate(yyyy: string, mm: string, dd: string) {
 
 	const date = toDate(new Date(parseInt(yyyy), parseInt(mm) - 1, parseInt(dd)));
 
-	if (isValid(date) && yyyy.length === 4 && datePassesFebruaryCheck(yyyy,mm,dd)) {
+	if (isValid(date) && yyyy.length === 4 && sameMonthValidator.ResolvedDateIsInSameMonth(yyyy,mm,dd)) {
 			return format(date, 'yyyy-MM-dd');
 	}
 	return undefined;
