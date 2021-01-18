@@ -1,4 +1,4 @@
-import {SameMonthDateValidator} from "../SameMonthDateValidator";;
+import {SameMonthDateValidator} from "../elements/date/services/SameMonthDateValidator";;
 
 let validator = new SameMonthDateValidator();
 
