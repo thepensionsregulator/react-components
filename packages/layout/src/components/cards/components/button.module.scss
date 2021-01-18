@@ -13,6 +13,10 @@
 	width: 100%;
 	height: $space-5;
 	min-height: $space-5;
+
+	p {
+		color: $colors-primary-3;
+	}
 }
 
 .button:hover {
