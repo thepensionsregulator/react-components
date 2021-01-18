@@ -20,7 +20,7 @@ const handleChange = (onChange: Function, value: number) => ({
 
 function datePassesFebruaryCheck(yyyy: string, mm: string, dd: string){
 	let year =parseInt(yyyy);
-	let month =parseInt(mm);
+	let month =parseInt(mm)-1;
 	let day= parseInt(dd);
 	let date = new Date(year, month,day);
 	if (date.getFullYear() == year && date.getMonth() == month && date.getDate() == day) {
