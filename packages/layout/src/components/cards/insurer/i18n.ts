@@ -5,7 +5,6 @@ export type InsurerI18nProps = {
 			two: string;
 			three: string;
 			four: string;
-			five: string;
 		};
 		statusText: {
 			confirmed: string;
@@ -68,8 +67,7 @@ export const i18n: InsurerI18nProps = {
 			one: 'Insurer administrator',
 			two: 'Remove',
 			three: 'Address',
-			four: 'Contact details',
-			five: 'Insurer reference number',
+			four: 'Insurer reference number',
 		},
 		statusText: {
 			confirmed: 'Confirmed',
