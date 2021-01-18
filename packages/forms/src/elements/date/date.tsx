@@ -18,6 +18,8 @@ const handleChange = (onChange: Function, value: number) => ({
 	}
 };
 
+// JS new Date(2020,02,31) evaluates to a valid date in March, this check is to validate that we still
+// have the same values for yyy,mm,dd as passed in after we convert to JS Date
 function datePassesFebruaryCheck(yyyy: string, mm: string, dd: string){
 	let year =parseInt(yyyy);
 	let month =parseInt(mm)-1;
