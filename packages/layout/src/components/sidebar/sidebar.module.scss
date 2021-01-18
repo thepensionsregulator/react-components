@@ -6,7 +6,49 @@
 	flex: 0 0 auto;
 	width: $sidebar-width;
 	background: $white;
-}
+
+	button {
+		text-decoration: none;
+
+		&:hover {
+			color: $colors-neutral-a1 !important;
+			text-decoration: underline;
+		}
+
+		&:focus {
+			color: $colors-neutral-8 !important;
+		}
+	}
+
+	.activeLink {
+		position: relative;
+	
+		button {
+			text-decoration: underline;	
+		
+			&:hover {
+				text-decoration: underline !important;
+			}
+
+			&:focus {
+				color: $colors-neutral-8 !important;
+				text-decoration: none;
+			}	
+
+			&::before {
+				content: ' ';
+				position: absolute;
+				left: -20px;
+				top: -8px;
+				height: 100%;
+				min-height: 40px;
+				width: 5px;
+				background: $colors-primary-3;
+				// to hide outline from pseudo element
+				box-shadow: 0px 0px 0px 1px white;
+			}		
+		}
+	}}
 
 .sidebarMenu {
 	border-bottom: 5px solid $colors-neutral-4;
@@ -14,23 +56,6 @@
 
 .sidebarMenu:last-child {
 	border-bottom: none;
-}
-
-.activeLink {
-	position: relative;
-}
-
-.activeLink::before {
-	content: ' ';
-	position: absolute;
-	left: -20px;
-	top: -8px;
-	height: 100%;
-	min-height: 40px;
-	width: 5px;
-	background: $colors-primary-3;
-	// to hide outline from pseudo element
-	box-shadow: 0px 0px 0px 1px white;
 }
 
 .nestedWrapper {
@@ -41,15 +66,11 @@
 	}
 
 	.nested {
-		position: relative;
-		
-		.line {
-			position: absolute;
-			top: 50%;
-			left: -$space-6;
-			width: $space-5;
-			height: 1px;
-			border-bottom: 1px solid $colors-primary-3;
+		&::before {
+			content: "—";
+			color: $colors-neutral-8;
+			padding-right: 2px;
 		}
+	
 	}
 }

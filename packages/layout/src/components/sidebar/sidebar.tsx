@@ -92,7 +92,7 @@ export const Sidebar: React.FC<SidebarProps> = ({
 			path: titlePath,
 			exact: true,
 		});
-		match ? setIsHomePageActive(true) : setIsHomePageActive(false);
+		setIsHomePageActive(match) ;
 	}, [location.pathname]);
 
 	return (
@@ -102,7 +102,6 @@ export const Sidebar: React.FC<SidebarProps> = ({
 				className={styles.sidebarMenu}
 			>
 				<Link
-					underline={isHomePageActive}
 					cfg={{
 						fontWeight: 3,
 						color: 'primary.2',

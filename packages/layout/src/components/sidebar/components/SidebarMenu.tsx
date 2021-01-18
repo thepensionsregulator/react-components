@@ -29,7 +29,6 @@ const SidebarMenu: React.FC<SidebarMenuProps> = ({
 								cfg={{ justifyContent: 'space-between', mb: links ? 5 : 1 }}
 								className={styles.nested}
 							>
-								<div className={styles.line}></div>
 								<Link
 									cfg={{
 										color: 'primary.2',
@@ -38,7 +37,6 @@ const SidebarMenu: React.FC<SidebarMenuProps> = ({
 										width: innerLink.hideIcon ? 10 : 8,
 									}}
 									disabled={innerLink.disabled}
-									underline={active(innerLink.path)}
 									onClick={() => onClick(innerLink)}
 								>
 									{innerLink.name}
@@ -87,7 +85,6 @@ const SidebarMenu: React.FC<SidebarMenuProps> = ({
 									width: link.hideIcon ? 10 : 8,
 								}}
 								disabled={link.disabled}
-								underline={active(link.path)}
 								onClick={() => onClick(link)}
 							>
 								{link.name}
