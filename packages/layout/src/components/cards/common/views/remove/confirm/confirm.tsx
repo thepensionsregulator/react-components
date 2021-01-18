@@ -41,7 +41,7 @@ const Confirm: React.FC<ConfirmProps> = ({
 				{removeMessage2 && <P cfg={{ mt: 3 }}>{removeMessage2}</P>}
 				<Flex cfg={{ mt: 3 }}>
 					<ArrowButton
-						intent="danger"
+						intent="warning"
 						pointsTo="right"
 						iconSide="right"
 						title={removeBtnTitle}

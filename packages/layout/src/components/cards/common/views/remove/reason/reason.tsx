@@ -66,7 +66,7 @@ export const Reason: React.FC<ReasonProps> = ({
 							)}
 							<Footer>
 								<ArrowButton
-									intent="special"
+									appearance="secondary"
 									pointsTo="right"
 									iconSide="right"
 									type="submit"
