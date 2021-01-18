@@ -37,7 +37,6 @@ const SidebarMenu: React.FC<SidebarMenuProps> = ({
 										width: innerLink.hideIcon ? 10 : 8,
 									}}
 									disabled={innerLink.disabled}
-									underline={active(innerLink.path)}
 									onClick={() => onClick(innerLink)}
 								>
 									{innerLink.name}
@@ -86,7 +85,6 @@ const SidebarMenu: React.FC<SidebarMenuProps> = ({
 									width: link.hideIcon ? 10 : 8,
 								}}
 								disabled={link.disabled}
-								underline={active(link.path)}
 								onClick={() => onClick(link)}
 							>
 								{link.name}
