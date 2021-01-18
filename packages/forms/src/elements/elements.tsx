@@ -62,7 +62,9 @@ export const InputElementHeading: React.FC<InputElementHeadingProps> = ({
 				</FormLabelText>
 			)}
 			{hint && (
-				<Span cfg={{ mb: 2 }} className={styles.hint}>{hint}</Span>
+				<Span cfg={{ mb: 2 }} className={styles.hint}>
+					{hint}
+				</Span>
 			)}
 			{meta && meta.touched && meta.error && (
 				<ErrorMessage>{meta.error}</ErrorMessage>
