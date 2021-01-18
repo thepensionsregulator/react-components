@@ -15,7 +15,7 @@ export const HelpLink: React.FC<HelpLinkProps> = (props) => {
 	// Use a separate component for the trigger so that we can set aria-expanded, and place the inline SVG inside the button
 	const [expanded, setExpanded] = React.useState(false);
 	const Trigger = () => (
-		<button aria-expanded={expanded}>
+		<button aria-expanded={expanded} data-gtm="helpLink">
 			<ArrowDown />
 			{props.title}
 		</button>
