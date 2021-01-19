@@ -22,3 +22,4 @@ export * from './validation';
 export * from './finalFormExports';
 export * from './validators';
 export * from './elements/helpers';
+export * from './elements/elements';
