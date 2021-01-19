@@ -9,6 +9,6 @@ describe('Date input', ()=>{
 	});
 
 	test('date field is valid for day 31 for other months', () => {
-		expect(validator.ResolvedDateIsInSameMonth('2020', '01', '30')).toBeTruthy();
+		expect(validator.ResolvedDateIsInSameMonth('2020', '01', '31')).toBeTruthy();
 	});
 })
