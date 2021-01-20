@@ -126,6 +126,27 @@ import { FFCheckbox } from '@tpr/forms';
 	</Form>
 </Playground>
 
+### Disabled
+
+<Playground>
+	<Form onSubmit={console.log} initialValues={{ 'checkbox-c': true }}>
+		{({ handleSubmit }) => (
+			<form onSubmit={handleSubmit}>
+				<FFCheckbox name="checkbox-a" label="Select option 1" disabled={true}/>
+				<FFCheckbox
+					name="checkbox-b"
+					disabled={true}
+					label="Select option 2"
+					hint="Lorem, ipsum dolor sit amet consectetur adipisicing elit. Ea obcaecati repellat molestias nemo deleniti eveniet vel similique nesciunt fugiat nisi?"
+				/>
+				<button type="submit" style={{ display: 'none' }}>
+					Submit
+				</button>
+			</form>
+		)}
+	</Form>
+</Playground>
+
 ## API
 
 ```
