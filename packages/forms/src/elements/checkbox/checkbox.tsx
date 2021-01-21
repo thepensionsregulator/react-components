@@ -9,6 +9,7 @@ import styles from './checkbox.module.scss';
 
 type CheckboxIconProps = FieldRenderProps<string> & FieldExtraProps;
 export const Checkbox: React.FC<Partial<CheckboxIconProps>> = ({
+	id,
 	cfg,
 	disabled = false,
 	testId,
@@ -33,8 +34,9 @@ export const Checkbox: React.FC<Partial<CheckboxIconProps>> = ({
 				cfg,
 			)}
 		>
-			<label data-testid={msg} className={styles.wrapper}>
+			<label data-testid={msg} className={styles.wrapper} htmlFor={id}>
 				<HiddenInput
+					id={id}
 					type="checkbox"
 					checked={checked}
 					disabled={disabled}
