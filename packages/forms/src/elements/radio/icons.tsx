@@ -8,6 +8,7 @@ export const RadioButtonChecked: React.FC<any> = ({ className }) => {
 			height="40"
 			viewBox="0 0 40 40"
 			className={className}
+			focusable="false"
 		>
 			<g
 				transform="translate(0.5 0.5)"
@@ -37,6 +38,7 @@ export const RadioButtonUnchecked: React.FC<any> = ({ className }) => {
 			height="40"
 			viewBox="0 0 40 40"
 			className={className}
+			focusable="false"
 		>
 			<g fill="#f5f5f5" stroke="#585858" strokeWidth="1">
 				<circle cx="20" cy="20" r="20" stroke="none" />

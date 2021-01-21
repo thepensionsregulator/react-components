@@ -7,7 +7,7 @@ import { Input } from '../input/input';
 import { FieldProps, FieldExtraProps } from '../../renderFields';
 import isEqual from 'lodash.isequal';
 import styles from './date.module.scss';
-import {SameMonthDateValidator} from './services/SameMonthDateValidator';
+import { SameMonthDateValidator } from './services/SameMonthDateValidator';
 
 const handleChange = (onChange: Function, value: number) => ({
 	target,
@@ -21,11 +21,14 @@ const handleChange = (onChange: Function, value: number) => ({
 
 const sameMonthValidator = new SameMonthDateValidator();
 function getValidDate(yyyy: string, mm: string, dd: string) {
-
 	const date = toDate(new Date(parseInt(yyyy), parseInt(mm) - 1, parseInt(dd)));
 
-	if (isValid(date) && yyyy.length === 4 && sameMonthValidator.ResolvedDateIsInSameMonth(yyyy,mm,dd)) {
-			return format(date, 'yyyy-MM-dd');
+	if (
+		isValid(date) &&
+		yyyy.length === 4 &&
+		sameMonthValidator.ResolvedDateIsInSameMonth(yyyy, mm, dd)
+	) {
+		return format(date, 'yyyy-MM-dd');
 	}
 	return undefined;
 }

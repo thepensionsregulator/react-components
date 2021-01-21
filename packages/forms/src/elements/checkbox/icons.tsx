@@ -8,6 +8,7 @@ export const CheckboxChecked: React.FC<any> = ({ className }) => {
 			height="40"
 			viewBox="0 0 40 40"
 			className={className}
+			focusable="false"
 		>
 			<g
 				transform="translate(2 2)"
@@ -39,6 +40,7 @@ export const CheckboxBlank: React.FC<any> = ({ className }) => {
 			height="40"
 			viewBox="0 0 40 40"
 			className={className}
+			focusable="false"
 		>
 			<g fill="#f5f5f5" stroke="#585858" strokeWidth="1">
 				<rect width="40" height="40" stroke="none" />
