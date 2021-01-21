@@ -92,7 +92,7 @@ export const Sidebar: React.FC<SidebarProps> = ({
 			path: titlePath,
 			exact: true,
 		});
-		setIsHomePageActive(match) ;
+		setIsHomePageActive(match);
 	}, [location.pathname]);
 
 	return (
