@@ -12,6 +12,7 @@ export const SVG: React.FC<SVGProps> = ({
 	testId,
 	role,
 	ariaLabel,
+	allowFocus = false,
 	children,
 }) => {
 	const classNames = useClassNames(cfg, [className]);
@@ -27,6 +28,7 @@ export const SVG: React.FC<SVGProps> = ({
 			xmlnsXlink="http://www.w3.org/1999/xlink"
 			data-testid={testId}
 			role={role}
+			focusable={allowFocus}
 			aria-label={ariaLabel}
 		>
 			{children}
