@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { H3, Flex, Hr, Link } from '@tpr/core';
+import { H2, Flex, Hr, Link } from '@tpr/core';
 import { SidebarLinkProps, SidebarMenuProps } from './types';
 import StatusIcon from './StatusIcon';
 import styles from '../sidebar.module.scss';
@@ -55,9 +55,9 @@ const SidebarMenu: React.FC<SidebarMenuProps> = ({
 
 	return (
 		<Flex cfg={{ flexDirection: 'column' }} className={styles.sidebarMenu}>
-			<H3 cfg={{ fontWeight: 3, mt: 4, color: 'neutral.8', lineHeight: 6 }}>
+			<H2 cfg={{ fontWeight: 3, mt: 4, color: 'neutral.8', lineHeight: 6 }} className={styles.styledAsH3}>
 				{title}
-			</H3>
+			</H2>
 			<Hr cfg={{ my: 4 }} />
 			{links.map(
 				({ onClick = () => {}, active = () => false, ...link }, key) => (
