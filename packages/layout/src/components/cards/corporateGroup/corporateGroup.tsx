@@ -4,7 +4,7 @@ import {
 	CorporateGroupProviderProps,
 	useCorporateGroupContext,
 } from './context';
-import { Flex, H4, P } from '@tpr/core';
+import { Flex, P, Span } from '@tpr/core';
 import { Toolbar } from '../components/toolbar';
 import { UnderlinedButton } from '../components/button';
 import RemovedBox from '../components/removedBox';
@@ -83,9 +83,9 @@ export const CorporateGroupCard: React.FC<CorporateGroupProviderProps> = ({
 							complete={isComplete(context)}
 							subtitle={() => (
 								<>
-									<H4 cfg={{ lineHeight: 3 }}>
+									<Span cfg={{ lineHeight: 3 }} className={styles.styledAsH4}>
 										{context.corporateGroup.organisationName}
-									</H4>
+									</Span>
 									<P>{i18n.preview.trusteeType}</P>
 								</>
 							)}

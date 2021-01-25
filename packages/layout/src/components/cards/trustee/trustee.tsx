@@ -4,7 +4,7 @@ import {
 	useTrusteeContext,
 	TrusteeCardProps,
 } from './context';
-import { H4, Flex } from '@tpr/core';
+import { Flex, Span } from '@tpr/core';
 import { UnderlinedButton } from '../components/button';
 import { Preview } from './views/preview';
 import { Toolbar } from '../components/toolbar';
@@ -150,7 +150,7 @@ export const TrusteeCard: React.FC<Omit<TrusteeCardProps, 'children'>> = ({
 						buttonLeft={() => <TrusteeButton />}
 						buttonRight={() => <RemoveButton />}
 						subtitle={() => (
-							<H4 cfg={{ lineHeight: 3 }}>
+							<Span cfg={{ lineHeight: 3 }} className={styles.styledAsH4}>
 								{[
 									current.context.trustee.title,
 									current.context.trustee.firstName,
@@ -158,7 +158,7 @@ export const TrusteeCard: React.FC<Omit<TrusteeCardProps, 'children'>> = ({
 								]
 									.filter(Boolean)
 									.join(' ')}
-							</H4>
+							</Span>
 						)}
 						statusText={
 							isComplete(current.context)
