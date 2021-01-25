@@ -1,6 +1,6 @@
 @import '@tpr/theming/lib/variables.scss';
 
-.h1 {
+@mixin styled-as-h1 {
 	font-family: $fonts-sans-serif;
 	font-weight: $font-weight-3;
 	font-size: $font-size-6;
@@ -9,7 +9,7 @@
 	color: $colors-neutral-8;
 }
 
-.h2 {
+@mixin styled-as-h2 {
 	font-family: $fonts-sans-serif;
 	font-weight: $font-weight-2;
 	font-size: $font-size-5;
@@ -17,7 +17,7 @@
 	line-height: $line-height-1;
 }
 
-.h3 {
+@mixin styled-as-h3 {
 	font-family: $fonts-sans-serif;
 	font-weight: $font-weight-1;
 	font-size: $font-size-4;
@@ -25,7 +25,7 @@
 	line-height: $line-height-1;
 }
 
-.h4 {
+@mixin styled-as-h4 {
 	font-family: $fonts-sans-serif;
 	font-weight: $font-weight-3;
 	font-size: $font-size-3;
@@ -33,7 +33,7 @@
 	line-height: $line-height-1;
 }
 
-.h5 {
+@mixin styled-as-h5 {
 	font-family: $fonts-sans-serif;
 	font-weight: $font-weight-2;
 	font-size: $font-size-2;
@@ -41,12 +41,60 @@
 	line-height: $line-height-1;
 }
 
-.h6 {
+@mixin styled-as-h6 {
 	font-family: $fonts-sans-serif;
 	font-weight: $font-weight-2;
-	font-size: $font-size-1;
+	font-size: $font-size-2;
 	letter-spacing: 0px;
 	line-height: $line-height-1;
+}
+
+.h1 {
+	@include styled-as-h1;
+}
+
+.h2 {
+	@include styled-as-h2;
+}
+
+.h3 {
+	@include styled-as-h3;
+}
+
+.h4 {
+	@include styled-as-h4;
+}
+
+.h5 {
+	@include styled-as-h5;
+}
+
+.h6 {
+	@include styled-as-h6;
+}
+
+.styledAsH1 {
+	@include styled-as-h1;
+}
+
+.styledAsH2 {
+	@include styled-as-h2;
+}
+
+.styledAsH3 {
+	@include styled-as-h3;
+}
+
+.styledAsH4 {
+	@include styled-as-h4;
+}
+
+.styledAsH5 {
+	@include styled-as-h5;
+}
+
+.styledAsH6 {
+	@include styled-as-h5;
 }
 
 .p {
