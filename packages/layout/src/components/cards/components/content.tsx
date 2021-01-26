@@ -16,8 +16,6 @@ type ContentProps = {
 	sectionTitle?: string;
 };
 export const Content: React.FC<ContentProps> = ({
-	type,
-	typeName,
 	children,
 	title,
 	loading = false,
@@ -36,8 +34,6 @@ export const Content: React.FC<ContentProps> = ({
 			{Breadcrumbs && <Breadcrumbs />}
 			{title && (
 				<Toolbar
-					type={type}
-					typeName={typeName}
 					title={title}
 					subtitle={subtitle}
 					sectionTitle={sectionTitle}
