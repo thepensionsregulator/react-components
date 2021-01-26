@@ -18,6 +18,7 @@ export type SVGProps = Partial<{
 	/** for accessibility */
 	role: string;
 	ariaLabel: string;
+	focusable?: boolean;
 }>;
 
 export type CrossProps = {

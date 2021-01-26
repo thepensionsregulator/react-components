@@ -4,7 +4,7 @@ import {
 	ActuaryProviderProps,
 	useActuaryContext,
 } from './context';
-import { Flex, H4 } from '@tpr/core';
+import { Flex, Span } from '@tpr/core';
 import { Toolbar } from '../components/toolbar';
 import { UnderlinedButton } from '../components/button';
 import { Preview } from './views/preview/preview';
@@ -106,7 +106,7 @@ export const ActuaryCard: React.FC<ActuaryProviderProps> = ({
 						<Toolbar
 							complete={isComplete(context)}
 							subtitle={() => (
-								<H4 cfg={{ lineHeight: 3 }}>
+								<Span cfg={{ lineHeight: 3 }} className={styles.styledAsH4}>
 									{[
 										context.actuary.title,
 										context.actuary.firstName,
@@ -114,7 +114,7 @@ export const ActuaryCard: React.FC<ActuaryProviderProps> = ({
 									]
 										.filter(Boolean)
 										.join(' ')}
-								</H4>
+								</Span>
 							)}
 							statusText={
 								isComplete(context)
