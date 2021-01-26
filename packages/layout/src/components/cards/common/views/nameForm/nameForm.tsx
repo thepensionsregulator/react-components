@@ -31,7 +31,13 @@ const NameForm: React.FC<NameFormProps> = ({
 	nextStep,
 }) => {
 	return (
-		<Content type={type} typeName={typeName} title={title} loading={loading}>
+		<Content
+			type={type}
+			typeName={typeName}
+			title={title}
+			loading={loading}
+			sectionTitle={`Edit ${typeName ? typeName : type}`}
+		>
 			<Form
 				onSubmit={onSubmit}
 				validate={validate(fields)}

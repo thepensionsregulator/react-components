@@ -56,7 +56,11 @@ export const Regulator: React.FC = () => {
 	};
 
 	return (
-		<Content type={cardType.trustee} title={i18n.regulator.title}>
+		<Content
+			type={cardType.trustee}
+			title={i18n.regulator.title}
+			sectionTitle={`Edit ${cardType.trustee}`}
+		>
 			<Form
 				onSubmit={onSubmit}
 				initialValues={{

@@ -34,7 +34,12 @@ const AddressPage: React.FC<AddressPageProps> = ({
 	const addressLookupProvider = new ExperianAddressLookupProvider(addressAPI);
 
 	return (
-		<Content type={cardType} typeName={cardTypeName} title={i18n.title}>
+		<Content
+			type={cardType}
+			typeName={cardTypeName}
+			title={i18n.title}
+			sectionTitle={`Edit ${cardTypeName ? cardTypeName : cardType}`}
+		>
 			<Form onSubmit={onSubmit}>
 				{({ handleSubmit }) => (
 					<form onSubmit={handleSubmit}>

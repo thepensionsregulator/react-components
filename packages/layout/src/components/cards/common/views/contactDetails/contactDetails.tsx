@@ -36,6 +36,7 @@ const ContactDetails: React.FC<ContactDetailsProps> = ({
 			title={title}
 			subtitle={subtitle}
 			loading={loading}
+			sectionTitle={`Edit ${typeName ? typeName : type}`}
 		>
 			<Form
 				onSubmit={onSubmit}
