@@ -29,12 +29,14 @@ type ToolbarProps = {
 	typeName?: string;
 	title: string;
 	subtitle?: string;
+	sectionTitle?: string;
 };
 export const Toolbar: React.FC<ToolbarProps> = ({
 	type = 'trustee',
 	typeName,
 	title,
 	subtitle,
+	sectionTitle,
 }) => {
 	return (
 		<Flex cfg={{ flexDirection: 'column', mt: 4, mb: 3 }}>
@@ -42,9 +44,10 @@ export const Toolbar: React.FC<ToolbarProps> = ({
 				cfg={{ flexDirection: 'column', pb: 2 }}
 				className={styles.toolbarBottomBorder}
 			>
-				<P cfg={{ color: 'neutral.6', fontSize: 3 }}>
-					Edit {typeName ? typeName : type}
-				</P>
+				{sectionTitle && (
+					<P cfg={{ color: 'neutral.6', fontSize: 3 }}>{sectionTitle}</P>
+				)}
+
 				<H3 cfg={{ fontWeight: 3 }}>{title}</H3>
 			</Flex>
 			{subtitle && (

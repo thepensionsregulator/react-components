@@ -13,6 +13,7 @@ type ContentProps = {
 	loading?: boolean;
 	breadcrumbs?: any;
 	subtitle?: string;
+	sectionTitle?: string;
 };
 export const Content: React.FC<ContentProps> = ({
 	type,
@@ -22,6 +23,7 @@ export const Content: React.FC<ContentProps> = ({
 	loading = false,
 	breadcrumbs: Breadcrumbs,
 	subtitle,
+	sectionTitle,
 }) => {
 	return (
 		<div
@@ -38,6 +40,7 @@ export const Content: React.FC<ContentProps> = ({
 					typeName={typeName}
 					title={title}
 					subtitle={subtitle}
+					sectionTitle={sectionTitle}
 				/>
 			)}
 			{children}
