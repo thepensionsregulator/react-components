@@ -13,6 +13,7 @@ type EditAddressProps = {
 	loading: boolean;
 	testId?: string;
 	onChangeAddressClick: () => void;
+	addressLengthMessage: string;
 	addressLine1Label: string;
 	addressLine1RequiredMessage: string;
 	addressLine2Label: string;
@@ -31,6 +32,7 @@ export const EditAddress: React.FC<EditAddressProps> = React.memo(
 		loading,
 		testId,
 		onChangeAddressClick,
+		addressLengthMessage,
 		addressLine1Label,
 		addressLine1RequiredMessage,
 		addressLine2Label,
@@ -120,7 +122,9 @@ export const EditAddress: React.FC<EditAddressProps> = React.memo(
 					updatedValue={value ? value.addressLine1 : ''}
 					validate={(value) =>
 						value && value.trim().length > 1
-							? undefined
+							? value.trim().length > 100
+								? addressLengthMessage
+								: undefined
 							: addressLine1RequiredMessage
 					}
 					inputWidth={6}
@@ -135,6 +139,11 @@ export const EditAddress: React.FC<EditAddressProps> = React.memo(
 						isDirty() ? value.addressLine2 : initialValue.addressLine2
 					}
 					updatedValue={value ? value.addressLine2 : ''}
+					validate={(value) =>
+						value && value.trim().length > 100
+							? addressLengthMessage
+							: undefined
+					}
 					inputWidth={6}
 				/>
 				{renderNonEditableFieldWithUpdates('addressLine3', addressLine3Label)}

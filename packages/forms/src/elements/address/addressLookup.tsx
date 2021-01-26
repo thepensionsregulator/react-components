@@ -21,6 +21,7 @@ export type AddressProps = {
 	selectAddressButton: string;
 	selectAddressRequiredMessage: string;
 	noAddressesFoundMessage: string;
+	addressLengthMessage: string;
 	addressLine1Label: string;
 	addressLine1RequiredMessage: string;
 	addressLine2Label: string;
@@ -54,6 +55,7 @@ export const AddressLookup: React.FC<AddressProps> = ({
 	selectAddressButton,
 	selectAddressRequiredMessage,
 	noAddressesFoundMessage,
+	addressLengthMessage,
 	addressLine1Label,
 	addressLine1RequiredMessage,
 	addressLine2Label,
@@ -146,6 +148,7 @@ export const AddressLookup: React.FC<AddressProps> = ({
 					onChangeAddressClick={() =>
 						setAddressView(AddressView.PostcodeLookup)
 					}
+					addressLengthMessage={addressLengthMessage}
 					addressLine1Label={addressLine1Label}
 					addressLine1RequiredMessage={addressLine1RequiredMessage}
 					addressLine2Label={addressLine2Label}
