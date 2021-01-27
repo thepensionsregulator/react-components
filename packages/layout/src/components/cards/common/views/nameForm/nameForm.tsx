@@ -9,6 +9,7 @@ interface NameFormProps {
 	type: cardType;
 	typeName: cardTypeName | string;
 	title: string;
+	sectionTitle?: string;
 	onSubmit: (any) => void;
 	fields: FieldProps[];
 	initialValues: {
@@ -24,6 +25,7 @@ const NameForm: React.FC<NameFormProps> = ({
 	type,
 	typeName,
 	title,
+	sectionTitle,
 	onSubmit,
 	fields,
 	initialValues,
@@ -36,7 +38,7 @@ const NameForm: React.FC<NameFormProps> = ({
 			typeName={typeName}
 			title={title}
 			loading={loading}
-			sectionTitle={`Edit ${typeName ? typeName : type}`}
+			sectionTitle={sectionTitle}
 		>
 			<Form
 				onSubmit={onSubmit}
