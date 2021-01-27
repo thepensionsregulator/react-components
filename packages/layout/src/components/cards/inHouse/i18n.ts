@@ -18,7 +18,7 @@ export type InHouseAdminI18nProps = {
 	};
 	name: {
 		title: string;
-		sectionTitle: string;
+		sectionTitle?: string;
 		fields: {
 			title: {
 				label: string;
@@ -40,7 +40,7 @@ export type InHouseAdminI18nProps = {
 	contacts: {
 		title: string;
 		subtitle: string;
-		sectionTitle: string;
+		sectionTitle?: string;
 		fields: {
 			telephone: {
 				label: string;

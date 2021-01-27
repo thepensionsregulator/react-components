@@ -15,7 +15,7 @@ export type InsurerI18nProps = {
 	reference: {
 		title: string;
 		subtitle: string;
-		sectionTitle: string;
+		sectionTitle?: string;
 		fields: {
 			insurerCompanyReference: {
 				label: string;

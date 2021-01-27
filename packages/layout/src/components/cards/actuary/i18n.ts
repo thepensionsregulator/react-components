@@ -16,7 +16,7 @@ export type ActuaryI18nProps = {
 	};
 	name: {
 		title: string;
-		sectionTitle: string;
+		sectionTitle?: string;
 		fields: {
 			title: {
 				label: string;
@@ -38,7 +38,7 @@ export type ActuaryI18nProps = {
 	contacts: {
 		title: string;
 		subtitle: string;
-		sectionTitle: string;
+		sectionTitle?: string;
 		fields: {
 			telephone: {
 				label: string;

@@ -20,7 +20,7 @@ export type EmployerI18nProps = {
 	type: {
 		title: string;
 		subtitle: string;
-		sectionTitle: string;
+		sectionTitle?: string;
 		fields: {
 			employerType: {
 				principal: {

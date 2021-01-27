@@ -19,7 +19,7 @@ export type CorporateGroupI18nProps = {
 	};
 	name: {
 		title: string;
-		sectionTitle: string;
+		sectionTitle?: string;
 		fields: {
 			title: {
 				label: string;
@@ -54,7 +54,7 @@ export type CorporateGroupI18nProps = {
 	professional: {
 		title: string;
 		subtitle: string;
-		sectionTitle: string;
+		sectionTitle?: string;
 		fields: {
 			isProfessional: {
 				labels: {

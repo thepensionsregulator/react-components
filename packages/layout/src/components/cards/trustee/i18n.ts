@@ -7,7 +7,7 @@ export type TrusteeI18nProps = {
 	contacts: {
 		title: string;
 		subtitle: string;
-		sectionTitle: string;
+		sectionTitle?: string;
 		fields: {
 			telephone: {
 				label: string;
@@ -21,7 +21,7 @@ export type TrusteeI18nProps = {
 	};
 	name: {
 		title: string;
-		sectionTitle: string;
+		sectionTitle?: string;
 		fields: {
 			title: {
 				label: string;
@@ -71,7 +71,7 @@ export type TrusteeI18nProps = {
 	type: {
 		title: string;
 		subtitle: string;
-		sectionTitle: string;
+		sectionTitle?: string;
 		fields: {
 			trusteeType: {
 				labels: {

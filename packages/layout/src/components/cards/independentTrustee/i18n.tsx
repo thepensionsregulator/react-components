@@ -18,7 +18,7 @@ export type IndependentTrusteeI18nProps = {
 	regulator: {
 		title: string;
 		subtitle: string;
-		sectionTitle: string;
+		sectionTitle?: string;
 		fields: {
 			appointedByRegulator: {
 				labels: {
