@@ -56,7 +56,9 @@ export const FFInputEmail: React.FC<FieldProps & FieldExtraProps> = (
 			{...fieldProps}
 			validate={composeValidators(
 				executeClientValidation(fieldProps.validate),
-				isEmailValid('Invalid email address'),
+				isEmailValid(
+					fieldProps.error ? fieldProps.error : 'Invalid email address',
+				),
 			)}
 			component={InputEmail}
 		/>
