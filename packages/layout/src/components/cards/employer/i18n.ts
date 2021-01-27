@@ -20,6 +20,7 @@ export type EmployerI18nProps = {
 	type: {
 		title: string;
 		subtitle: string;
+		sectionTitle: string;
 		fields: {
 			employerType: {
 				principal: {
@@ -112,6 +113,7 @@ export const i18n: EmployerI18nProps = {
 		title: 'Type of employer',
 		subtitle:
 			"A scheme can only have one principal employer at any point in time. Not all schemes will have a principal employer. If the employer type has defaulted to 'Participating’, but this employer is actually the principal employer, you will need to correct the employer recorded as principal before you can correct this employer.",
+		sectionTitle: 'Edit Employer',
 		fields: {
 			employerType: {
 				principal: {

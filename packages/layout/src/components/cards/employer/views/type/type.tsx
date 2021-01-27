@@ -87,7 +87,7 @@ export const EmployerType: React.FC = () => {
 			type={cardType.employer}
 			title={i18n.type.title}
 			subtitle={i18n.type.subtitle}
-			sectionTitle={`Edit Employer`}
+			sectionTitle={i18n.type.sectionTitle}
 		>
 			<Form
 				onSubmit={onSubmit}
