@@ -46,6 +46,7 @@ export const Contacts: React.FC = () => {
 			typeName={cardTypeName.trustee}
 			title={i18n.contacts.title}
 			subtitle={i18n.contacts.subtitle}
+			sectionTitle={i18n.contacts.sectionTitle}
 			loading={loading}
 			onSubmit={onSubmit}
 			initialValues={{

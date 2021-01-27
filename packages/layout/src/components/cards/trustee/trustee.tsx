@@ -52,6 +52,7 @@ const CardContent: React.FC = () => {
 				addressAPI={addressAPI}
 				cardType={cardType.trustee}
 				cardTypeName={cardTypeName.trustee}
+				sectionTitle={i18n.address.sectionTitle}
 				i18n={i18n.address}
 			/>
 		);
