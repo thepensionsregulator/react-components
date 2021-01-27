@@ -38,7 +38,7 @@ const AddressPage: React.FC<AddressPageProps> = ({
 			type={cardType}
 			typeName={cardTypeName}
 			title={i18n.title}
-			sectionTitle={`Edit ${cardTypeName ? cardTypeName : cardType}`}
+			sectionTitle={i18n.sectionTitle}
 		>
 			<Form onSubmit={onSubmit}>
 				{({ handleSubmit }) => (

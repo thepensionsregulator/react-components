@@ -18,6 +18,7 @@ export type InHouseAdminI18nProps = {
 	};
 	name: {
 		title: string;
+		sectionTitle: string;
 		fields: {
 			title: {
 				label: string;
@@ -39,6 +40,7 @@ export type InHouseAdminI18nProps = {
 	contacts: {
 		title: string;
 		subtitle: string;
+		sectionTitle: string;
 		fields: {
 			telephone: {
 				label: string;
@@ -90,6 +92,7 @@ export type InHouseAdminI18nProps = {
 export const i18n: InHouseAdminI18nProps = {
 	address: {
 		title: 'What is this in house admin’s address?',
+		sectionTitle: 'Edit In House Administrator',
 		...AddressI18n,
 	},
 	preview: {
@@ -107,6 +110,7 @@ export const i18n: InHouseAdminI18nProps = {
 	},
 	name: {
 		title: 'Name of in house administrator',
+		sectionTitle: 'Edit In House Administrator',
 		fields: {
 			title: {
 				label: 'Title',
@@ -128,6 +132,7 @@ export const i18n: InHouseAdminI18nProps = {
 	contacts: {
 		title: 'Contact details for this in house admin',
 		subtitle: 'Provide contact details for the in house admin.',
+		sectionTitle: 'Edit In House Administator',
 		fields: {
 			telephone: {
 				label: 'Telephone number',
