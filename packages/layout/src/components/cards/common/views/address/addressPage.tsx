@@ -18,6 +18,7 @@ export type AddressPageProps = {
 	addressAPI: AddressAPIType;
 	cardType: cardType;
 	cardTypeName: cardTypeName;
+	sectionTitle?: string;
 	i18n: I18nAddressLookup;
 };
 
@@ -27,6 +28,7 @@ const AddressPage: React.FC<AddressPageProps> = ({
 	addressAPI,
 	cardType,
 	cardTypeName,
+	sectionTitle,
 	i18n,
 }) => {
 	const [loading, setLoading] = useState(false);
@@ -38,7 +40,7 @@ const AddressPage: React.FC<AddressPageProps> = ({
 			type={cardType}
 			typeName={cardTypeName}
 			title={i18n.title}
-			sectionTitle={i18n.sectionTitle}
+			sectionTitle={sectionTitle}
 		>
 			<Form onSubmit={onSubmit}>
 				{({ handleSubmit }) => (
