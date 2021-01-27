@@ -15,6 +15,7 @@ export type InsurerI18nProps = {
 	reference: {
 		title: string;
 		subtitle: string;
+		sectionTitle: string;
 		fields: {
 			insurerCompanyReference: {
 				label: string;
@@ -78,6 +79,7 @@ export const i18n: InsurerI18nProps = {
 	reference: {
 		title: 'Reference details for this insurer',
 		subtitle: 'Provide reference details for the insurer.',
+		sectionTitle: 'Edit Insurer',
 		fields: {
 			insurerCompanyReference: {
 				label: 'Reference Number',

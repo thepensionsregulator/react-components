@@ -55,7 +55,7 @@ export const Reference: React.FC = () => {
 			title={i18n.reference.title}
 			subtitle={i18n.reference.subtitle}
 			loading={false}
-			sectionTitle={`Edit ${cardType.insurer}`}
+			sectionTitle={i18n.reference.sectionTitle}
 		>
 			<Form
 				onSubmit={onSubmit}
