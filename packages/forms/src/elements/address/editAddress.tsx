@@ -124,6 +124,7 @@ export const EditAddress: React.FC<EditAddressProps> = React.memo(
 							: addressLine1RequiredMessage
 					}
 					inputWidth={6}
+					maxLength={100}
 				/>
 				<FFInputText
 					ref={address2ref}
@@ -136,6 +137,7 @@ export const EditAddress: React.FC<EditAddressProps> = React.memo(
 					}
 					updatedValue={value ? value.addressLine2 : ''}
 					inputWidth={6}
+					maxLength={100}
 				/>
 				{renderNonEditableFieldWithUpdates('addressLine3', addressLine3Label)}
 				{renderNonEditableFieldWithUpdates('postTown', townLabel)}
