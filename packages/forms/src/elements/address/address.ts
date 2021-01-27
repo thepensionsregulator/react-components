@@ -8,5 +8,6 @@ export interface Address {
 	nationId?: number;
 	country?: string;
 	countryId?: number;
+	countryCode?: string;
 	uprn?: number;
 }
