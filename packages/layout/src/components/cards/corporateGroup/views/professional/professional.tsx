@@ -54,7 +54,7 @@ export const Professional: React.FC = () => {
 		<Content
 			type={cardType.trustee}
 			title={i18n.professional.title}
-			sectionTitle={`Edit ${cardType.trustee}`}
+			sectionTitle={i18n.professional.sectionTitle}
 		>
 			<Form
 				onSubmit={onSubmit}
