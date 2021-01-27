@@ -56,7 +56,9 @@ export const FFInputPhone: React.FC<FieldProps & FieldExtraProps> = (
 			{...fieldProps}
 			validate={composeValidators(
 				executeClientValidation(fieldProps.validate),
-				isPhoneValid('Invalid phone number'),
+				isPhoneValid(
+					fieldProps.error ? fieldProps.error : 'Invalid phone number',
+				),
 			)}
 			component={InputPhone}
 		/>
