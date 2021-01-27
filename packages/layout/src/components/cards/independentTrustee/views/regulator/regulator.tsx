@@ -59,7 +59,7 @@ export const Regulator: React.FC = () => {
 		<Content
 			type={cardType.trustee}
 			title={i18n.regulator.title}
-			sectionTitle={`Edit ${cardType.trustee}`}
+			sectionTitle={i18n.regulator.sectionTitle}
 		>
 			<Form
 				onSubmit={onSubmit}
