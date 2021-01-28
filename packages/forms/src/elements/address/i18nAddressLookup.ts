@@ -1,5 +1,6 @@
 export interface I18nAddressLookup {
 	title?: string;
+	sectionTitle?: string;
 	invalidPostcodeMessage?: string;
 	postcodeLookupLabel?: string;
 	postcodeLookupButton?: string;

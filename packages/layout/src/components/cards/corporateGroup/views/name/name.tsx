@@ -63,6 +63,7 @@ export const NameScreen: React.FC = () => {
 			type={cardType.corporateGroup}
 			typeName={cardTypeName.trustee}
 			title={i18n.name.title}
+			sectionTitle={i18n.name.sectionTitle}
 			onSubmit={onSubmit}
 			fields={fields}
 			initialValues={{
