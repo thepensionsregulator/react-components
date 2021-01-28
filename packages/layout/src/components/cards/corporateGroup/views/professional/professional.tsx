@@ -51,7 +51,11 @@ export const Professional: React.FC = () => {
 	};
 
 	return (
-		<Content type={cardType.trustee} title={i18n.professional.title}>
+		<Content
+			type={cardType.trustee}
+			title={i18n.professional.title}
+			sectionTitle={i18n.professional.sectionTitle}
+		>
 			<Form
 				onSubmit={onSubmit}
 				initialValues={{

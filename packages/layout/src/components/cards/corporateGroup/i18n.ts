@@ -19,6 +19,7 @@ export type CorporateGroupI18nProps = {
 	};
 	name: {
 		title: string;
+		sectionTitle?: string;
 		fields: {
 			title: {
 				label: string;
@@ -39,7 +40,6 @@ export type CorporateGroupI18nProps = {
 	};
 	contacts: {
 		title: string;
-		subtitle: string;
 		fields: {
 			telephone: {
 				label: string;
@@ -54,6 +54,7 @@ export type CorporateGroupI18nProps = {
 	professional: {
 		title: string;
 		subtitle: string;
+		sectionTitle?: string;
 		fields: {
 			isProfessional: {
 				labels: {
@@ -101,6 +102,7 @@ export const i18n: CorporateGroupI18nProps = {
 	},
 	name: {
 		title: 'Name of the chair of the board',
+		sectionTitle: 'Edit Corporate Trustee',
 		fields: {
 			title: {
 				label: 'Title',
@@ -121,7 +123,6 @@ export const i18n: CorporateGroupI18nProps = {
 	},
 	contacts: {
 		title: 'Contact details for the chair of the board',
-		subtitle: 'subtitle',
 		fields: {
 			telephone: {
 				label: 'Telephone number',
@@ -138,6 +139,7 @@ export const i18n: CorporateGroupI18nProps = {
 		title:
 			'Are any of the directors  of this corporate trustee a professional trustee?',
 		subtitle: 'subtitle',
+		sectionTitle: 'Edit Corporate Trustee',
 		fields: {
 			isProfessional: {
 				labels: {
