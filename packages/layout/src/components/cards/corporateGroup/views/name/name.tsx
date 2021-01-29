@@ -49,6 +49,9 @@ export const NameScreen: React.FC = () => {
 	const onSubmit = async (values) => {
 		setLoading(true);
 		try {
+			if (!values.title) {
+				values.title = '';
+			}
 			await onSaveName(values, state);
 			setLoading(false);
 			send('SAVE', { values });
