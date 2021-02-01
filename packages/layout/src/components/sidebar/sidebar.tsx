@@ -96,7 +96,7 @@ export const Sidebar: React.FC<SidebarProps> = ({
 	}, [location.pathname]);
 
 	return (
-		<div className={styles.sidebar}>
+		<nav className={styles.sidebar}>
 			<Flex
 				cfg={{ flexDirection: 'column', mt: 4 }}
 				className={styles.sidebarMenu}
@@ -136,17 +136,20 @@ export const Sidebar: React.FC<SidebarProps> = ({
 					</P>
 				</Flex>
 			</Flex>
-			{sections
-				.sort((a, b) => a.order - b.order)
-				.map((item, key) => (
-					<SidebarMenu
-						key={key}
-						title={item.title}
-						links={item.links}
-						maintenanceMode={maintenanceMode}
-						collapsed={collapseNested}
-					/>
-				))}
-		</div>
+			<ul className={styles.list}>
+				{sections
+					.sort((a, b) => a.order - b.order)
+					.map((item, key) => (
+						<li key={key}>
+							<SidebarMenu
+								title={item.title}
+								links={item.links}
+								maintenanceMode={maintenanceMode}
+								collapsed={collapseNested}
+							/>
+						</li>
+					))}
+				</ul>
+		</nav>
 	);
 };
