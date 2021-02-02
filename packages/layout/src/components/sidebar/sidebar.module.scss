@@ -23,10 +23,10 @@
 
 	.activeLink {
 		position: relative;
-	
+
 		button {
-			text-decoration: underline;	
-		
+			text-decoration: underline;
+
 			&:hover {
 				text-decoration: underline !important;
 			}
@@ -34,7 +34,7 @@
 			&:focus {
 				color: $colors-neutral-8 !important;
 				text-decoration: none;
-			}	
+			}
 
 			&::before {
 				content: ' ';
@@ -47,9 +47,21 @@
 				background: $colors-primary-3;
 				// to hide outline from pseudo element
 				box-shadow: 0px 0px 0px 1px white;
-			}		
+			}
 		}
-	}}
+	}
+}
+
+.list {
+	list-style-type: none;
+	margin: 0;
+	padding: 0;
+
+	li {
+		margin: 0;
+		padding: 0;
+	}
+}
 
 .sidebarMenu {
 	border-bottom: 5px solid $colors-neutral-4;
@@ -60,7 +72,6 @@
 }
 
 .nestedWrapper {
-
 	&.collapsed {
 		height: 0;
 		overflow: hidden;
@@ -68,10 +79,9 @@
 
 	.nested {
 		&::before {
-			content: "—";
+			content: '—';
 			color: $colors-neutral-8;
 			padding-right: 2px;
 		}
-	
 	}
 }
