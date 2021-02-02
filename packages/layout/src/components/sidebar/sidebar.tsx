@@ -149,7 +149,7 @@ export const Sidebar: React.FC<SidebarProps> = ({
 							/>
 						</li>
 					))}
-				</ul>
+			</ul>
 		</nav>
 	);
 };

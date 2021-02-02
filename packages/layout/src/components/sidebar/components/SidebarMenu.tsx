@@ -23,7 +23,10 @@ const SidebarMenu: React.FC<SidebarMenuProps> = ({
 			<Flex cfg={{ flexDirection: 'column', pl: 6 }} className={classes}>
 				<ul className={styles.list}>
 					{links.map(
-						({ onClick = () => {}, active = () => false, ...innerLink }, key) => (
+						(
+							{ onClick = () => {}, active = () => false, ...innerLink },
+							key,
+						) => (
 							<li key={key}>
 								<Flex
 									cfg={{ justifyContent: 'space-between', mb: links ? 5 : 1 }}
@@ -56,8 +59,8 @@ const SidebarMenu: React.FC<SidebarMenuProps> = ({
 
 	return (
 		<Flex cfg={{ flexDirection: 'column' }} className={styles.sidebarMenu}>
-			<H2 
-				cfg={{ fontWeight: 3, mt: 4, color: 'neutral.8', lineHeight: 6 }} 
+			<H2
+				cfg={{ fontWeight: 3, mt: 4, color: 'neutral.8', lineHeight: 6 }}
 				className={styles.styledAsH3}
 			>
 				{title}
@@ -67,7 +70,7 @@ const SidebarMenu: React.FC<SidebarMenuProps> = ({
 				{links.map(
 					({ onClick = () => {}, active = () => false, ...link }, key) => (
 						<li key={key}>
-							<Flex								
+							<Flex
 								cfg={{
 									justifyContent: 'space-between',
 									mb: link.links ? 1 : 5,
@@ -94,7 +97,9 @@ const SidebarMenu: React.FC<SidebarMenuProps> = ({
 									>
 										{link.name}
 									</Link>
-									{!maintenanceMode && !link.hideIcon && <StatusIcon link={link} />}
+									{!maintenanceMode && !link.hideIcon && (
+										<StatusIcon link={link} />
+									)}
 								</Flex>
 								{link.links && generateSubmenu(link.links)}
 							</Flex>
