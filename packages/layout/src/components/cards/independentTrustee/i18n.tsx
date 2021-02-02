@@ -18,6 +18,7 @@ export type IndependentTrusteeI18nProps = {
 	regulator: {
 		title: string;
 		subtitle: string;
+		sectionTitle?: string;
 		fields: {
 			appointedByRegulator: {
 				labels: {
@@ -65,6 +66,7 @@ export const i18n: IndependentTrusteeI18nProps = {
 	regulator: {
 		title: 'Was this trustee appointed to this scheme by the regulator?',
 		subtitle: 'subtitle',
+		sectionTitle: 'Edit Independent Trustee',
 		fields: {
 			appointedByRegulator: {
 				labels: {

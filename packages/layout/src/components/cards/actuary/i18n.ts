@@ -16,6 +16,7 @@ export type ActuaryI18nProps = {
 	};
 	name: {
 		title: string;
+		sectionTitle?: string;
 		fields: {
 			title: {
 				label: string;
@@ -37,6 +38,7 @@ export type ActuaryI18nProps = {
 	contacts: {
 		title: string;
 		subtitle: string;
+		sectionTitle?: string;
 		fields: {
 			telephone: {
 				label: string;
@@ -100,6 +102,7 @@ export const i18n: ActuaryI18nProps = {
 	},
 	name: {
 		title: 'Name of Actuary',
+		sectionTitle: 'Edit Actuary',
 		fields: {
 			title: {
 				label: 'Title',
@@ -121,6 +124,7 @@ export const i18n: ActuaryI18nProps = {
 	contacts: {
 		title: 'Contact details for this actuary',
 		subtitle: 'Provide contact details for the actuary.',
+		sectionTitle: 'Edit Actuary',
 		fields: {
 			telephone: {
 				label: 'Telephone number',

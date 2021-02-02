@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Flex, P, Hr, H4, classNames } from '@tpr/core';
+import { Flex, P, Hr, classNames, Span } from '@tpr/core';
 import { UnderlinedButton } from '../../../components/button';
 import { Checkbox } from '@tpr/forms';
 import styles from './preview.module.scss';
@@ -9,7 +9,9 @@ type IdentifiersItemProps = { title: string; number: string | number };
 const IdentifiersItem: React.FC<IdentifiersItemProps> = ({ title, number }) => {
 	return (
 		<>
-			<H4 cfg={{ lineHeight: 3 }}>{title}</H4>
+			<Span cfg={{ lineHeight: 3 }} className={styles.styledAsH4}>
+				{title}
+			</Span>
 			<P>{number}</P>
 		</>
 	);
@@ -49,7 +51,9 @@ export const Preview: React.FC<any> = () => {
 				>
 					<UnderlinedButton>{i18n.preview.buttons.three}</UnderlinedButton>
 					<Flex cfg={{ my: 2, flexDirection: 'column' }}>
-						<H4 cfg={{ lineHeight: 3 }}>{employer.organisationName}</H4>
+						<Span cfg={{ lineHeight: 3 }} className={styles.styledAsH4}>
+							{employer.organisationName}
+						</Span>
 						<P>{employer.address.addressLine1}</P>
 						{employer.address.addressLine2 && (
 							<P>{employer.address.addressLine2}</P>

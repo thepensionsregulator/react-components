@@ -4,7 +4,7 @@ import {
 	IndependentTrusteeProviderProps,
 	useIndependentTrusteeContext,
 } from './context';
-import { Flex, H4, P } from '@tpr/core';
+import { Flex, P, Span } from '@tpr/core';
 import { Toolbar } from '../components/toolbar';
 import { UnderlinedButton } from '../components/button';
 import RemovedBox from '../components/removedBox';
@@ -78,9 +78,9 @@ export const IndependentTrusteeCard: React.FC<IndependentTrusteeProviderProps> =
 							complete={isComplete(context)}
 							subtitle={() => (
 								<>
-									<H4 cfg={{ lineHeight: 3 }}>
+									<Span cfg={{ lineHeight: 3 }} className={styles.styledAsH4}>
 										{context.independentTrustee.organisationName}
-									</H4>
+									</Span>
 									<P>{i18n.preview.trusteeType}</P>
 								</>
 							)}
