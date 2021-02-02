@@ -49,6 +49,9 @@ export const NameScreen: React.FC = () => {
 	const onSubmit = async (values) => {
 		setLoading(true);
 		try {
+			if (!values.title) {
+				values.title = '';
+			}
 			await onSaveName(values, state);
 			setLoading(false);
 			send('SAVE', { values });
@@ -63,6 +66,7 @@ export const NameScreen: React.FC = () => {
 			type={cardType.corporateGroup}
 			typeName={cardTypeName.trustee}
 			title={i18n.name.title}
+			sectionTitle={i18n.name.sectionTitle}
 			onSubmit={onSubmit}
 			fields={fields}
 			initialValues={{

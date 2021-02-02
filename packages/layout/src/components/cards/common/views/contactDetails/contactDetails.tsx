@@ -10,6 +10,7 @@ interface ContactDetailsProps {
 	typeName: cardTypeName;
 	title: string;
 	subtitle?: string;
+	sectionTitle?: string;
 	loading: boolean;
 	onSubmit: (any) => void;
 	initialValues: {
@@ -24,6 +25,7 @@ const ContactDetails: React.FC<ContactDetailsProps> = ({
 	typeName,
 	title,
 	subtitle,
+	sectionTitle,
 	loading,
 	onSubmit,
 	initialValues,
@@ -36,6 +38,7 @@ const ContactDetails: React.FC<ContactDetailsProps> = ({
 			title={title}
 			subtitle={subtitle}
 			loading={loading}
+			sectionTitle={sectionTitle}
 		>
 			<Form
 				onSubmit={onSubmit}

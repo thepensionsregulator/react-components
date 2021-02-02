@@ -60,6 +60,7 @@ const CardContentSwitch: React.FC = () => {
 					addressAPI={addressAPI}
 					cardType={cardType.inHouseAdmin}
 					cardTypeName={cardTypeName.inHouseAdmin}
+					sectionTitle={i18n.address.sectionTitle}
 					i18n={i18n.address}
 				/>
 			);
