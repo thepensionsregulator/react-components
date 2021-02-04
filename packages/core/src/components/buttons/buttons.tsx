@@ -120,12 +120,12 @@ export const Link: React.FC<LinkProps> = ({
 
 	const anchorProps = {
 		href: null,
-		...genericProps
+		...genericProps,
 	};
 
 	const buttonProps = {
 		type: 'button',
-		...genericProps
+		...genericProps,
 	};
 
 	return React.createElement(
