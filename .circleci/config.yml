@@ -5,7 +5,7 @@ jobs:
   build-and-test:
     working_directory: ~/react-components
     docker:
-      - image: 'circleci/python:3.6.12'
+      - image: 'circleci/python@sha256:95f82da99df4e072238e2893529f0a05ce0d4fea1d2ce0462f626bba92cea24b'
     steps:
       - checkout
       #- restore_cache:
@@ -24,7 +24,7 @@ jobs:
   deploy-rc:
     working_directory: ~/react-components
     docker:
-      - image: 'circleci/python:3.6.12'
+      - image: 'circleci/python@sha256:95f82da99df4e072238e2893529f0a05ce0d4fea1d2ce0462f626bba92cea24b'
     steps:
       - checkout
       - restore_cache:
