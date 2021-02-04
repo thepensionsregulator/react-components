@@ -8,8 +8,8 @@ jobs:
       - image: 'circleci/python:3.6.12'
     steps:
       - checkout
-      - restore_cache:
-          key: dependency-cache-{{ checksum "package.json" }}
+      #- restore_cache:
+      #    key: dependency-cache-{{ checksum "package.json" }}
       - node/install:
           install-yarn: true
           node-version: 15.7.0
