@@ -12,7 +12,7 @@ jobs:
           key: dependency-cache-{{ checksum "package.json" }}
       - node/install:
           install-yarn: true
-          node-version: latest
+          node-version: 15.7.0
       - run: node --version
       - run: yarn install
       - run: yarn build
