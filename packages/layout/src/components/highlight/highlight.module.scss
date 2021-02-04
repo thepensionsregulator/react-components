@@ -38,7 +38,7 @@
 
 .psrNumber {
 	min-width: 160px;
-	border-left: 1px solid $colors-accents-2;
+	//border-left: 1px solid $colors-accents-2;
 }
 
 .truncate {
@@ -47,4 +47,11 @@
 	white-space: nowrap;
 	overflow: hidden;
 	text-overflow: ellipsis;
+}
+
+.separator {
+	width: 1px;
+	height: 40px;
+	background-color: $colors-neutral-4;
+	opacity: 0.5;
 }
