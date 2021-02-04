@@ -180,7 +180,9 @@ export const i18n: CorporateGroupI18nProps = {
 				},
 			},
 			errors: {
-				pristine: 'Please select one of the options',
+				pristine: 'Please select one of the options.',
+				pristineDate:
+					'Please fill in the date fields.',
 				dateAddedBeforeEffectiveDate:
 					'Date must be after the Trustee was added.',
 				dateAddedInTheFuture: 'Date cannot be in the future.',

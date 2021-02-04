@@ -183,7 +183,7 @@ export const i18n: TrusteeI18nProps = {
 				pristine:
 					'Please select one of the options.',
 				pristineDate:
-					'Leaving date is required.',
+					'Please fill in the date fields.',
 				dateAddedBeforeEffectiveDate:
 					'Date must be after the Trustee was added.',
 				dateAddedInTheFuture: 'Date cannot be in the future.',
