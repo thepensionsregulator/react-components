@@ -1,6 +1,23 @@
 @import '@tpr/theming/lib/variables.scss';
 @import '@tpr/core/lib/components/typography/typography.module.scss';
 
+
+@mixin activeButton {
+	text-decoration: underline;
+	&::before {
+		content: ' ';
+		position: absolute;
+		left: -20px;
+		top: -8px;
+		height: 100%;
+		min-height: 40px;
+		width: 5px;
+		background: $colors-primary-3;
+		// to hide outline from pseudo element
+		box-shadow: 0px 0px 0px 1px white;
+	}
+}
+
 .sidebar {
 	display: flex;
 	flex-direction: column;
@@ -21,11 +38,15 @@
 		}
 	}
 
+	button.activeLink {
+		@include activeButton;
+	}
+
 	.activeLink {
 		position: relative;
 
 		button {
-			text-decoration: underline;
+			@include activeButton;
 
 			&:hover {
 				text-decoration: underline !important;
@@ -34,19 +55,6 @@
 			&:focus {
 				color: $colors-neutral-8 !important;
 				text-decoration: none;
-			}
-
-			&::before {
-				content: ' ';
-				position: absolute;
-				left: -20px;
-				top: -8px;
-				height: 100%;
-				min-height: 40px;
-				width: 5px;
-				background: $colors-primary-3;
-				// to hide outline from pseudo element
-				box-shadow: 0px 0px 0px 1px white;
 			}
 		}
 	}
