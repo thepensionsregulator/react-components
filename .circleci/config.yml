@@ -12,7 +12,7 @@ jobs:
           key: dependency-cache-{{ checksum "package.json" }}
       - node/install:
           install-yarn: true
-          node-version: 14.15.0
+          node-version: 15.7.0
           npm-version: 6.14.11
       - run: node --version
       - run: yarn install
@@ -32,7 +32,7 @@ jobs:
           key: dependency-cache-{{ checksum "package.json" }}
       - node/install:
           install-yarn: true
-          node-version: 14.15.0
+          node-version: 15.7.0
           npm-version: 6.14.11
       - run: yarn postinstall
       - run:
