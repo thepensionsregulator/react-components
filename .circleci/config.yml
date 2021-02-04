@@ -17,7 +17,7 @@ jobs:
       - run: yarn install
       - run: yarn build
       - run: yarn test:clean
-      - run: yarn test
+      - run: yarn test:noCache
       - save_cache:
           key: dependency-cache-{{ checksum "package.json" }}
           paths:
