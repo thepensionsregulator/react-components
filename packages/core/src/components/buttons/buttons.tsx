@@ -112,14 +112,25 @@ export const Link: React.FC<LinkProps> = ({
 				className,
 		  ]);
 
+	const genericProps = {
+		'data-testid': testId,
+		className: classNames,
+		...props,
+	};
+
+	const anchorProps = {
+		href: null,
+		...genericProps
+	};
+
+	const buttonProps = {
+		type: 'button',
+		...genericProps
+	};
+
 	return React.createElement(
 		anchorTag ? 'a' : 'button',
-		{
-			type: anchorTag ? null : 'button',
-			'data-testid': testId,
-			className: classNames,
-			...props,
-		},
+		anchorTag ? anchorProps : buttonProps,
 		arrowBtn && (
 			<Flex>
 				<ArrowRight fill={arrowColor} />
