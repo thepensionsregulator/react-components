@@ -101,18 +101,20 @@ export const Sidebar: React.FC<SidebarProps> = ({
 				cfg={{ flexDirection: 'column', mt: 4 }}
 				className={styles.sidebarMenu}
 			>
-				<Link
-					cfg={{
-						fontWeight: 3,
-						color: 'primary.2',
-						textAlign: 'left',
-						fontSize: 4,
-					}}
-					onClick={() => history.push(titlePath)}
-					className={isHomePageActive ? styles.activeLink : ''}
-				>
-					{title}
-				</Link>
+				<Flex className={isHomePageActive ? styles.activeLink : ''}>
+					<Link
+						cfg={{
+							fontWeight: 3,
+							color: 'primary.2',
+							textAlign: 'left',
+							fontSize: 4,
+						}}
+						onClick={() => history.push(titlePath)}
+						anchorTag={true}
+					>
+						{title}
+					</Link>
+				</Flex>
 				<Flex cfg={{ justifyContent: 'space-between', mt: 4, mb: 2 }}>
 					<P
 						cfg={{

@@ -41,6 +41,7 @@ const SidebarMenu: React.FC<SidebarMenuProps> = ({
 										}}
 										disabled={innerLink.disabled}
 										onClick={() => onClick(innerLink)}
+										anchorTag={true}
 									>
 										{innerLink.name}
 									</Link>
@@ -94,6 +95,7 @@ const SidebarMenu: React.FC<SidebarMenuProps> = ({
 										}}
 										disabled={link.disabled}
 										onClick={() => onClick(link)}
+										anchorTag={true}
 									>
 										{link.name}
 									</Link>
