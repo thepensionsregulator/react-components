@@ -31,12 +31,12 @@ export const Footer: React.FC<FooterProps> = ({
 			<AppWidth>
 				<Flex cfg={{ flexDirection: 'column' }}>
 					<Flex
-						cfg={{ justifyContent: 'flex-start', py: 6, alignItems: 'center' }}
+						cfg={{ justifyContent: 'flex-start', p: 6, alignItems: 'center' }}
 					>
 						<img src={logoUrl} alt={logoAlt} width="180" height="75" />
 					</Flex>
 					<Flex
-						cfg={{ justifyContent: 'space-between', mt: 3 }}
+						cfg={{ justifyContent: 'space-between', mt: 3, px: 6 }}
 						className={styles.footerText}
 					>
 						<Flex>
