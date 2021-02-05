@@ -98,7 +98,7 @@ export const Sidebar: React.FC<SidebarProps> = ({
 	return (
 		<nav className={styles.sidebar}>
 			<Flex
-				cfg={{ flexDirection: 'column', mt: 4 }}
+				cfg={{ flexDirection: 'column', mt: 8 }}
 				className={styles.sidebarMenu}
 			>
 				<Flex className={isHomePageActive ? styles.activeLink : ''}>
