@@ -34,7 +34,13 @@ export const Header: React.FC<HeaderProps> = ({
 							/>
 						</a>
 					</Flex>
-					<Flex cfg={{ alignItems: 'center', justifyContent: 'space-between', width: 10 }}>
+					<Flex
+						cfg={{
+							alignItems: 'center',
+							justifyContent: 'space-between',
+							width: 10,
+						}}
+					>
 						<P
 							cfg={{
 								color: 'white',
