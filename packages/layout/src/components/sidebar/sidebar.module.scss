@@ -8,7 +8,7 @@
 	width: $sidebar-width;
 	background: $white;
 
-	button {
+	a {
 		text-decoration: none;
 
 		&:hover {
@@ -21,10 +21,10 @@
 		}
 	}
 
-	.activeLink {
+	div.activeLink {
 		position: relative;
 
-		button {
+		a {
 			text-decoration: underline;
 
 			&:hover {
