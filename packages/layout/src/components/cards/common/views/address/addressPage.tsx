@@ -20,6 +20,7 @@ export type AddressPageProps = {
 	cardTypeName: cardTypeName;
 	sectionTitle?: string;
 	i18n: I18nAddressLookup;
+	onCancelChanges?: () => void;
 };
 
 const AddressPage: React.FC<AddressPageProps> = ({
@@ -30,6 +31,7 @@ const AddressPage: React.FC<AddressPageProps> = ({
 	cardTypeName,
 	sectionTitle,
 	i18n,
+	onCancelChanges,
 }) => {
 	const [loading, setLoading] = useState(false);
 
@@ -75,6 +77,8 @@ const AddressPage: React.FC<AddressPageProps> = ({
 									postcodeLabel={i18n.postcodeLabel}
 									countryLabel={i18n.countryLabel}
 									changeAddressButton={i18n.changeAddressButton}
+									findAddressCancelledButton={i18n.findAddressCancelledButton}
+									onFindAddressCancelled={onCancelChanges}
 								/>
 								<Footer>
 									<ArrowButton
@@ -82,7 +86,7 @@ const AddressPage: React.FC<AddressPageProps> = ({
 										pointsTo="up"
 										iconSide="right"
 										type="submit"
-										title="Save and close"
+										title={i18n.saveAndClose}
 										disabled={loading}
 									/>
 								</Footer>
