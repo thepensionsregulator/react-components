@@ -15,7 +15,7 @@ type PostcodeLookupProps = {
 	postcodeLookupButton: string;
 	findAddressCancelledButton?: string;
 	onFindAddressCancelled?: () => void;
-	validatePostCode:(isValid:boolean)=>void | null;
+	onValidatePostCode:(isValid:boolean)=>void | null;
 };
 
 export const PostcodeLookup: React.FC<PostcodeLookupProps> = ({
@@ -28,6 +28,7 @@ export const PostcodeLookup: React.FC<PostcodeLookupProps> = ({
 	postcodeLookupButton,
 	findAddressCancelledButton,
 	onFindAddressCancelled,
+	onValidatePostCode,
 }) => {
 	const form = useForm();
 	const validator = new PostcodeValidator(invalidPostcodeMessage);
@@ -55,10 +56,10 @@ export const PostcodeLookup: React.FC<PostcodeLookupProps> = ({
 			isValid=false;
 		}
 
-		if(validatePostcode !== null){
+		if(onValidatePostCode !== null){
 			validatePostcode(isValid);
 		}
-		
+
 		return result;
 	};
 

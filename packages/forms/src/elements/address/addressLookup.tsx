@@ -32,7 +32,7 @@ export type AddressProps = {
 	changeAddressButton: string;
 	findAddressCancelledButton?: string;
 	onFindAddressCancelled?: () => void;
-	validatePostCode:(isValid:boolean)=>void | null;
+	onValidatePostCode:(isValid:boolean)=>void | null;
 };
 
 enum AddressView {
@@ -68,7 +68,7 @@ export const AddressLookup: React.FC<AddressProps> = ({
 	changeAddressButton,
 	findAddressCancelledButton,
 	onFindAddressCancelled,
-	validatePostCode,
+	onValidatePostCode,
 }) => {
 	// Start in postcode lookup view, unless there's already an address in which case start in edit address view
 	let initialView = AddressView.PostcodeLookup;
@@ -120,7 +120,7 @@ export const AddressLookup: React.FC<AddressProps> = ({
 					postcodeLookupButton={postcodeLookupButton}
 					findAddressCancelledButton={findAddressCancelledButton}
 					onFindAddressCancelled={onFindAddressCancelled}
-					validatePostCode= {validatePostCode}
+					onValidatePostCode= {onValidatePostCode}
 				/>
 			)}
 			{addressView === AddressView.SelectAddress && (
