@@ -62,6 +62,7 @@ const CardContentSwitch: React.FC = () => {
 					cardTypeName={cardTypeName.inHouseAdmin}
 					sectionTitle={i18n.address.sectionTitle}
 					i18n={i18n.address}
+					onCancelChanges={() => send('CANCEL')}
 				/>
 			);
 		case current.matches({ edit: 'contacts' }):
