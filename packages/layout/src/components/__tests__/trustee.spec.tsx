@@ -279,3 +279,61 @@ describe('Trustee Remove', () => {
 		expect(results).toHaveNoViolations();
 	});
 });
+
+describe('Trustee correspondence address', () => {
+	test('Change address is accessible', async () => {
+		const { container, getByText } = render(
+			<TrusteeCard
+				onDetailsSave={noop}
+				onContactSave={noop}
+				onAddressSave={noop}
+				onRemove={noop}
+				onCorrect={(_value) => {}}
+				addressAPI={{
+					get: (_endpont) => Promise.resolve(),
+					limit: 100,
+				}}
+				complete={true}
+				trustee={trustee}
+				testId={trustee.schemeRoleId}
+			/>,
+		);
+
+		getByText('Correspondence address').click();
+		getByText(/I need to change the address/).click();
+
+		const results = await axe(container);
+
+		expect(results).toHaveNoViolations();
+		expect(getByText('Find address')).toBeInTheDocument();
+		expect(getByText('Cancel')).toBeInTheDocument();
+	});
+
+	test('Cancel change address returns to preview', async () => {
+		const { container, getByText } = render(
+			<TrusteeCard
+				onDetailsSave={noop}
+				onContactSave={noop}
+				onAddressSave={noop}
+				onRemove={noop}
+				onCorrect={(_value) => {}}
+				addressAPI={{
+					get: (_endpont) => Promise.resolve(),
+					limit: 100,
+				}}
+				complete={true}
+				trustee={trustee}
+				testId={trustee.schemeRoleId}
+			/>,
+		);
+
+		getByText('Correspondence address').click();
+		getByText(/I need to change the address/).click();
+		getByText(/Cancel/).click();
+
+		const results = await axe(container);
+
+		expect(results).toHaveNoViolations();
+		expect(getByText('Correspondence address')).toBeInTheDocument();
+	});
+});

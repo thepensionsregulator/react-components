@@ -224,3 +224,59 @@ describe('InHouse Remove', () => {
 		).toBeInTheDocument();
 	});
 });
+
+describe('In house admin correspondence address', () => {
+	test('Change address is accessible', async () => {
+		const { container, getByText } = render(
+			<InHouseCard
+				onSaveContacts={noop}
+				onSaveAddress={noop}
+				onSaveName={noop}
+				onRemove={noop}
+				onCorrect={(_value) => {}}
+				complete={true}
+				addressAPI={{
+					get: (_endpont) => Promise.resolve(),
+					limit: 100,
+				}}
+				inHouseAdmin={inHouseAdmin}
+			/>,
+		);
+
+		getByText('Address').click();
+		getByText(/I need to change the address/).click();
+
+		const results = await axe(container);
+
+		expect(results).toHaveNoViolations();
+		expect(getByText('Find address')).toBeInTheDocument();
+		expect(getByText('Cancel')).toBeInTheDocument();
+	});
+
+	test('Cancel change address returns to preview', async () => {
+		const { container, getByText } = render(
+			<InHouseCard
+				onSaveContacts={noop}
+				onSaveAddress={noop}
+				onSaveName={noop}
+				onRemove={noop}
+				onCorrect={(_value) => {}}
+				complete={true}
+				addressAPI={{
+					get: (_endpont) => Promise.resolve(),
+					limit: 100,
+				}}
+				inHouseAdmin={inHouseAdmin}
+			/>,
+		);
+
+		getByText('Address').click();
+		getByText(/I need to change the address/).click();
+		getByText(/Cancel/).click();
+
+		const results = await axe(container);
+
+		expect(results).toHaveNoViolations();
+		expect(getByText('Address')).toBeInTheDocument();
+	});
+});

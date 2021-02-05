@@ -76,9 +76,7 @@ export const PostcodeLookup: React.FC<PostcodeLookupProps> = ({
 						cfg={{ m: 3 }}
 						underline
 						onClick={onFindAddressCancelled}
-						testId={
-							(testId ? testId + '-' : '') + 'find-address-cancel-button'
-						}
+						testId={(testId ? testId + '-' : '') + 'find-address-cancel-button'}
 					>
 						{findAddressCancelledButton}
 					</Link>
