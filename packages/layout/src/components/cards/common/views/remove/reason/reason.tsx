@@ -10,6 +10,7 @@ import {
 	RemoveReasonProps,
 } from '../../../../common/interfaces';
 import styles from './reason.module.scss';
+import elementStyles from '@tpr/forms/lib/elements/elements.module.scss';
 
 interface ReasonProps {
 	type: cardType;
@@ -28,9 +29,6 @@ export const Reason: React.FC<ReasonProps> = ({
 }) => {
 	return (
 		<Content type={type} title={i18nRemoveReason.title}>
-			<H4 fontWeight="bold" mb={0}>
-				{i18nRemoveReason.subtitle}
-			</H4>
 			<Form
 				onSubmit={onSubmit}
 				initialValues={{
@@ -39,31 +37,42 @@ export const Reason: React.FC<ReasonProps> = ({
 				}}
 			>
 				{({ handleSubmit, submitError, form }) => {
-					const leftScheme =
-						form.getState().values.reason === 'left_the_scheme';
+					const reason = form.getState().values.reason;
+					const hasError: boolean = !!submitError && !reason;
+					const leftScheme: boolean = reason === 'left_the_scheme';
 					return (
 						<form onSubmit={handleSubmit} data-testid={`remove-${type}-form`}>
-							<FFRadioButton
-								name="reason"
-								type="radio"
-								label={i18nRemoveReason.fields.leftTheScheme.label}
-								value="left_the_scheme"
-								cfg={{ my: 4 }}
-							/>
-							{leftScheme && (
-								<div className={styles.dateWrapper}>
-									{renderFields(dateField)}
-								</div>
-							)}
-							<FFRadioButton
-								name="reason"
-								type="radio"
-								label={i18nRemoveReason.fields.neverPartOfTheScheme.label}
-								value="not_part_of_scheme"
-							/>
-							{submitError && (
-								<P cfg={{ color: 'danger.2', mt: 5 }}>{submitError}</P>
-							)}
+							<div className={hasError && elementStyles.labelError}>
+								<H4 fontWeight="bold" mb={0}>
+									{i18nRemoveReason.subtitle}
+								</H4>
+								<FFRadioButton
+									name="reason"
+									type="radio"
+									label={i18nRemoveReason.fields.leftTheScheme.label}
+									value="left_the_scheme"
+									cfg={{ my: 4 }}
+								/>
+								{leftScheme && (
+									<div className={styles.dateWrapper}>
+										{renderFields(dateField)}
+									</div>
+								)}
+								<FFRadioButton
+									name="reason"
+									type="radio"
+									label={i18nRemoveReason.fields.neverPartOfTheScheme.label}
+									value="not_part_of_scheme"
+								/>
+								{hasError && (
+									<P
+										cfg={{ color: 'danger.2', mt: 5 }}
+										className={elementStyles.errorMessage}
+									>
+										{submitError}
+									</P>
+								)}
+							</div>
 							<Footer>
 								<ArrowButton
 									appearance="secondary"
