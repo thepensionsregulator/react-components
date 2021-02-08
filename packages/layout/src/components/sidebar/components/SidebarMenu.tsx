@@ -103,7 +103,9 @@ const SidebarMenu: React.FC<SidebarMenuProps> = ({
 										<StatusIcon link={link} />
 									)}
 								</Flex>
-								{link.links && generateSubmenu(link.links)}
+								{link.links &&
+									link.links.length > 0 &&
+									generateSubmenu(link.links)}
 							</Flex>
 						</li>
 					),

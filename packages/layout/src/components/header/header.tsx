@@ -22,7 +22,7 @@ export const Header: React.FC<HeaderProps> = ({
 	return (
 		<DocWidth className={styles.headerBackground}>
 			<AppWidth>
-				<Flex cfg={{ justifyContent: 'space-between', py: 2, px: 6 }}>
+				<Flex cfg={{ justifyContent: 'space-between', py: 2, pr: 6 }}>
 					<Flex cfg={{ alignItems: 'center' }}>
 						<a href={logoHref} className={styles.logo}>
 							<img
