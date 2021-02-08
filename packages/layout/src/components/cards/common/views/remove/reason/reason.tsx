@@ -38,11 +38,11 @@ export const Reason: React.FC<ReasonProps> = ({
 			>
 				{({ handleSubmit, submitError, form }) => {
 					const reason = form.getState().values.reason;
-					const hasError: boolean = !!submitError && !reason;
+					const showError: boolean = !!submitError && !reason;
 					const leftScheme: boolean = reason === 'left_the_scheme';
 					return (
 						<form onSubmit={handleSubmit} data-testid={`remove-${type}-form`}>
-							<div className={hasError && elementStyles.labelError}>
+							<div className={showError && elementStyles.labelError}>
 								<H4 fontWeight="bold" mb={0}>
 									{i18nRemoveReason.subtitle}
 								</H4>
@@ -64,7 +64,7 @@ export const Reason: React.FC<ReasonProps> = ({
 									label={i18nRemoveReason.fields.neverPartOfTheScheme.label}
 									value="not_part_of_scheme"
 								/>
-								{hasError && (
+								{showError && (
 									<P
 										cfg={{ color: 'danger.2', mt: 5 }}
 										className={elementStyles.errorMessage}
