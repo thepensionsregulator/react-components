@@ -32,7 +32,7 @@ export type AddressProps = {
 	changeAddressButton: string;
 	findAddressCancelledButton?: string;
 	onFindAddressCancelled?: () => void;
-	onValidatePostcode:(isValid:boolean)=>void | null;
+	onValidatePostcode?:(isValid:boolean)=>void | null;
 };
 
 enum AddressView {

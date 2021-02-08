@@ -15,7 +15,7 @@ type PostcodeLookupProps = {
 	postcodeLookupButton: string;
 	findAddressCancelledButton?: string;
 	onFindAddressCancelled?: () => void;
-	onValidatePostcode:(isValid:boolean)=>void | null;
+	onValidatePostcode?:(isValid:boolean)=>void | null;
 };
 
 export const PostcodeLookup: React.FC<PostcodeLookupProps> = ({
