@@ -40,7 +40,7 @@ const defaultProps: AddressProps = {
 	postcodeLabel: 'Postcode',
 	countryLabel: 'Country',
 	changeAddressButton: 'I need to change the address',
-	onValidatePostCode: null,
+	onValidatePostcode: null,
 };
 
 function searchForAPostcode(container: HTMLElement, postcode: string) {
