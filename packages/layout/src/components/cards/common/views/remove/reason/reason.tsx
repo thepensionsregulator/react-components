@@ -49,6 +49,7 @@ export const Reason: React.FC<ReasonProps> = ({
 								<FFRadioButton
 									name="reason"
 									type="radio"
+									testId="leftTheScheme"
 									label={i18nRemoveReason.fields.leftTheScheme.label}
 									value="left_the_scheme"
 									cfg={{ my: 4 }}

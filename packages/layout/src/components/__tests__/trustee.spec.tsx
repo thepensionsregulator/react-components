@@ -280,6 +280,42 @@ describe('Trustee Remove', () => {
 	});
 });
 
+describe('Trustee Remove', () => {
+	test('displays correct validation messages', async () => {
+		const { container, getByText, getByTestId } = render(
+			<TrusteeCard
+				onDetailsSave={noop}
+				onContactSave={noop}
+				onAddressSave={noop}
+				onRemove={noop}
+				onCorrect={(_value) => {}}
+				addressAPI={{
+					get: (_endpont) => Promise.resolve(),
+					limit: 100,
+				}}
+				complete={true}
+				trustee={trustee}
+				testId={trustee.schemeRoleId}
+			/>,
+		);
+
+		getByText('Remove').click();
+		getByText('Continue').click();
+		const msg1 = getByText('Select a reason for removing the trustee.');
+		expect(msg1).toBeDefined();
+		expect(msg1.className.includes('errorMessage')).toBeTruthy();
+
+		getByTestId('leftTheScheme').click();
+		getByText('Continue').click();
+		const msg2 = getByText('Enter the date the trustee left the scheme.');
+		expect(msg2).toBeDefined();
+		expect(msg2.className.includes('errorMessage')).toBeTruthy();
+
+		const results = await axe(container);
+		expect(results).toHaveNoViolations();
+	});
+});
+
 describe('Trustee correspondence address', () => {
 	test('Change address is accessible', async () => {
 		const { container, getByText } = render(
