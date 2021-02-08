@@ -180,9 +180,9 @@ export const i18n: CorporateGroupI18nProps = {
 				},
 			},
 			errors: {
-				pristine: 'Please select one of the options.',
+				pristine: 'Select a reason for removing the trustee.',
 				pristineDate:
-					'Please fill in the date fields.',
+					'Enter the date the trustee left the scheme.',
 				dateAddedBeforeEffectiveDate:
 					'Date must be after the Trustee was added.',
 				dateAddedInTheFuture: 'Date cannot be in the future.',
