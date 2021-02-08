@@ -54,6 +54,7 @@ const CardContent: React.FC = () => {
 				cardTypeName={cardTypeName.trustee}
 				sectionTitle={i18n.address.sectionTitle}
 				i18n={i18n.address}
+				onCancelChanges={() => send('CANCEL')}
 			/>
 		);
 	} else if (

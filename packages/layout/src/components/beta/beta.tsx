@@ -37,7 +37,7 @@ export const BetaHeader: React.FC<BetaHeaderProps> = ({ text, mail }) => {
 	return (
 		<DocWidth className={style.beta}>
 			<AppWidth>
-				<Flex cfg={{ alignItems: 'center' }}>
+				<Flex cfg={{ alignItems: 'center', px: 6 }}>
 					<P
 						cfg={{
 							fontSize: 2,
