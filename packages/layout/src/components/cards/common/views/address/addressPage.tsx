@@ -79,7 +79,6 @@ const AddressPage: React.FC<AddressPageProps> = ({
 									changeAddressButton={i18n.changeAddressButton}
 									findAddressCancelledButton={i18n.findAddressCancelledButton}
 									onFindAddressCancelled={onCancelChanges}
-									onValidatePostcode ={null}
 								/>
 								<Footer>
 									<ArrowButton
