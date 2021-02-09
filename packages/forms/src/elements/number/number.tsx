@@ -67,6 +67,7 @@ const InputNumber: React.FC<InputNumberProps> = ({
 			// avoid entering the number 'E'
 			e.key.toLowerCase() === 'e' && e.preventDefault();
 			!validKeys.includes(e.key) && e.preventDefault();
+			e.key === '.' && !decimalPlaces && e.preventDefault();
 		}
 	};
 
