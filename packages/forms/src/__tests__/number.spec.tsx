@@ -144,4 +144,61 @@ describe('Number', () => {
 			expect(label).toHaveAttribute('readonly');
 		});
 	});
+
+	describe('When decimal places are zero', () => {
+		test('decimal point cannot be used', () => {
+			const { getByTestId } = formSetup({
+				render: (
+					<FFInputNumber
+						label="Number"
+						testId={testId}
+						name="number"
+						maxLength={3}
+						decimalPlaces={0}
+					/>
+				),
+			});
+
+			userEvent.type(getByTestId(testId), '1.2');
+			fireEvent.blur(getByTestId(testId));
+			expect(getByTestId(testId)).toHaveValue(12);
+		});
+	});
+	describe('When decimal places are not specified', () => {
+		test('decimal point cannot be used', () => {
+			const { getByTestId } = formSetup({
+				render: (
+					<FFInputNumber
+						label="Number"
+						testId={testId}
+						name="number"
+						maxLength={3}
+					/>
+				),
+			});
+
+			userEvent.type(getByTestId(testId), '1.2');
+			fireEvent.blur(getByTestId(testId));
+			expect(getByTestId(testId)).toHaveValue(12);
+		});
+	});
+	describe('When decimal places are non-zero', () => {
+		test('decimal point can be used', () => {
+			const { getByTestId } = formSetup({
+				render: (
+					<FFInputNumber
+						label="Number"
+						testId={testId}
+						name="number"
+						maxLength={3}
+						decimalPlaces={1}
+					/>
+				),
+			});
+
+			userEvent.type(getByTestId(testId), '1.2');
+			fireEvent.blur(getByTestId(testId));
+			expect(getByTestId(testId)).toHaveValue(1.2);
+		});
+	});
 });
