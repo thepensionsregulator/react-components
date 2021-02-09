@@ -1,5 +1,5 @@
 import React from 'react';
-import { render } from '@testing-library/react';
+import { cleanup, render } from '@testing-library/react';
 import { TrusteeCard } from '../cards/trustee/trustee';
 import { axe } from 'jest-axe';
 import { Trustee } from '../cards/trustee/context';
@@ -255,33 +255,8 @@ describe('Trustee Contact Details', () => {
 });
 
 describe('Trustee Remove', () => {
-	test('is accessible', async () => {
-		const { container, getByText } = render(
-			<TrusteeCard
-				onDetailsSave={noop}
-				onContactSave={noop}
-				onAddressSave={noop}
-				onRemove={noop}
-				onCorrect={(_value) => {}}
-				addressAPI={{
-					get: (_endpont) => Promise.resolve(),
-					limit: 100,
-				}}
-				complete={true}
-				trustee={trustee}
-				testId={trustee.schemeRoleId}
-			/>,
-		);
-
-		getByText('Remove').click();
-
-		const results = await axe(container);
-		expect(results).toHaveNoViolations();
-	});
-});
-
-describe('Trustee Remove', () => {
-	test('displays correct validation messages', async () => {
+	let component, findByText, findByTestId;
+	beforeEach(async () => {
 		const { container, getByText, getByTestId } = render(
 			<TrusteeCard
 				onDetailsSave={noop}
@@ -299,19 +274,36 @@ describe('Trustee Remove', () => {
 			/>,
 		);
 
-		getByText('Remove').click();
-		getByText('Continue').click();
-		const msg1 = getByText('Select a reason for removing the trustee.');
+		component = container;
+		findByText = getByText;
+		findByTestId = getByTestId;
+	});
+
+	afterEach(() => {
+		cleanup();
+	});
+
+	test('is accessible', async () => {
+		findByText('Remove').click();
+
+		const results = await axe(component);
+		expect(results).toHaveNoViolations();
+	});
+
+	test('displays correct validation messages', async () => {
+		findByText('Remove').click();
+		findByText('Continue').click();
+		const msg1 = findByText('Select a reason for removing the trustee.');
 		expect(msg1).toBeDefined();
 		expect(msg1.className.includes('errorMessage')).toBeTruthy();
 
-		getByTestId('leftTheScheme').click();
-		getByText('Continue').click();
-		const msg2 = getByText('Enter the date the trustee left the scheme.');
+		findByTestId('leftTheScheme').click();
+		findByText('Continue').click();
+		const msg2 = findByText('Enter the date the trustee left the scheme.');
 		expect(msg2).toBeDefined();
 		expect(msg2.className.includes('errorMessage')).toBeTruthy();
 
-		const results = await axe(container);
+		const results = await axe(component);
 		expect(results).toHaveNoViolations();
 	});
 });
