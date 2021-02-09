@@ -88,6 +88,7 @@ import { AddressLookup } from '@tpr/forms';
 							postcodeLabel="Postcode"
 							countryLabel="Country"
 							changeAddressButton="I need to change the address"
+							onValidatePostcode={(isValid)=>{console.log('isValid postcode: ',isValid)}}
 							/>
     					<Button type="submit" cfg={{mt:3}}>Submit form</Button>
     				</form>
