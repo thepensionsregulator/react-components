@@ -31,156 +31,80 @@ const trustee: Trustee = {
 	emailAddress: 'fred.sandoors@trp.gov.uk',
 	effectiveDate: '1997-04-01T00:00:00',
 };
+let component, findByText, findByTestId;
+beforeEach(async () => {
+	const { container, getByText, getByTestId } = render(
+		<TrusteeCard
+			onDetailsSave={noop}
+			onContactSave={noop}
+			onAddressSave={noop}
+			onRemove={noop}
+			onCorrect={(_value) => {}}
+			addressAPI={{
+				get: (_endpont) => Promise.resolve(),
+				limit: 100,
+			}}
+			complete={true}
+			trustee={trustee}
+			testId={trustee.schemeRoleId}
+		/>,
+	);
+
+	component = container;
+	findByText = getByText;
+	findByTestId = getByTestId;
+});
+
+afterEach(() => {
+	cleanup();
+});
 
 describe('Trustee Preview', () => {
 	test('is accessible', async () => {
-		const { container } = render(
-			<TrusteeCard
-				onDetailsSave={noop}
-				onContactSave={noop}
-				onAddressSave={noop}
-				onRemove={noop}
-				onCorrect={(_value) => {}}
-				addressAPI={{
-					get: (_endpont) => Promise.resolve(),
-					limit: 100,
-				}}
-				complete={true}
-				trustee={trustee}
-				testId={trustee.schemeRoleId}
-			/>,
-		);
-
-		const results = await axe(container);
+		const results = await axe(component);
 		expect(results).toHaveNoViolations();
 	});
 
 	test('buttons renders correctly', () => {
-		const { getByText } = render(
-			<TrusteeCard
-				onDetailsSave={noop}
-				onContactSave={noop}
-				onAddressSave={noop}
-				onRemove={noop}
-				onCorrect={(_value) => {}}
-				addressAPI={{
-					get: (_endpont) => Promise.resolve(),
-					limit: 100,
-				}}
-				complete={true}
-				trustee={trustee}
-				testId={trustee.schemeRoleId}
-			/>,
-		);
-
 		// Buttons are visible
-
-		expect(getByText('Trustee')).toBeDefined();
-		expect(getByText('Correspondence address')).toBeDefined();
-		expect(getByText('Contact details')).toBeDefined();
-		expect(getByText('Remove')).toBeDefined();
+		expect(findByText('Trustee')).toBeDefined();
+		expect(findByText('Correspondence address')).toBeDefined();
+		expect(findByText('Contact details')).toBeDefined();
+		expect(findByText('Remove')).toBeDefined();
 	});
 
 	test('initial status is correct', () => {
-		const { getByText } = render(
-			<TrusteeCard
-				onDetailsSave={noop}
-				onContactSave={noop}
-				onAddressSave={noop}
-				onRemove={noop}
-				onCorrect={(_value) => {}}
-				addressAPI={{
-					get: (_endpont) => Promise.resolve(),
-					limit: 100,
-				}}
-				complete={true}
-				trustee={trustee}
-				testId={trustee.schemeRoleId}
-			/>,
-		);
-
-		expect(getByText('Confirmed')).toBeDefined();
-		expect(getByText('Confirm details are correct.')).toBeDefined();
+		expect(findByText('Confirmed')).toBeDefined();
+		expect(findByText('Confirm details are correct.')).toBeDefined();
 	});
 
 	test('address shows up correctly', () => {
-		const { getByText } = render(
-			<TrusteeCard
-				onDetailsSave={noop}
-				onContactSave={noop}
-				onAddressSave={noop}
-				onRemove={noop}
-				onCorrect={(_value) => {}}
-				addressAPI={{
-					get: (_endpont) => Promise.resolve(),
-					limit: 100,
-				}}
-				complete={true}
-				trustee={trustee}
-				testId={trustee.schemeRoleId}
-			/>,
-		);
-
-		expect(getByText(trustee.addressLine1)).toBeDefined();
-		expect(getByText(trustee.addressLine2)).toBeDefined();
-		expect(getByText(trustee.addressLine3)).toBeDefined();
-		expect(getByText(trustee.postTown)).toBeDefined();
-		expect(getByText(trustee.postcode)).toBeDefined();
+		expect(findByText(trustee.addressLine1)).toBeDefined();
+		expect(findByText(trustee.addressLine2)).toBeDefined();
+		expect(findByText(trustee.addressLine3)).toBeDefined();
+		expect(findByText(trustee.postTown)).toBeDefined();
+		expect(findByText(trustee.postcode)).toBeDefined();
 	});
 
 	test('contact details shows up correctly', () => {
-		const { getByText } = render(
-			<TrusteeCard
-				onDetailsSave={noop}
-				onContactSave={noop}
-				onAddressSave={noop}
-				onRemove={noop}
-				onCorrect={(_value) => {}}
-				addressAPI={{
-					get: (_endpont) => Promise.resolve(),
-					limit: 100,
-				}}
-				complete={true}
-				trustee={trustee}
-				testId={trustee.schemeRoleId}
-			/>,
-		);
-
-		expect(getByText('Phone')).toBeDefined();
-		expect(getByText(trustee.telephoneNumber)).toBeDefined();
-		expect(getByText('Email')).toBeDefined();
-		expect(getByText(trustee.emailAddress)).toBeDefined();
+		expect(findByText('Phone')).toBeDefined();
+		expect(findByText(trustee.telephoneNumber)).toBeDefined();
+		expect(findByText('Email')).toBeDefined();
+		expect(findByText(trustee.emailAddress)).toBeDefined();
 	});
 });
 
 describe('Trustee Name', () => {
 	test('is accessible', async () => {
-		const { container, getByText, getByTestId } = render(
-			<TrusteeCard
-				onDetailsSave={noop}
-				onContactSave={noop}
-				onAddressSave={noop}
-				onRemove={noop}
-				onCorrect={(_value) => {}}
-				addressAPI={{
-					get: (_endpont) => Promise.resolve(),
-					limit: 100,
-				}}
-				complete={true}
-				trustee={trustee}
-				testId={trustee.schemeRoleId}
-			/>,
-		);
-
-		getByText('Trustee').click();
-		const results = await axe(container);
+		findByText('Trustee').click();
+		const results = await axe(component);
 		expect(results).toHaveNoViolations();
 
-		expect(getByTestId('trustee-name-form')).not.toBe(null);
+		expect(findByTestId('trustee-name-form')).not.toBe(null);
 
-		var titleHtmlElement = getByText('Title (optional)') as HTMLElement;
-		var firstNameHtmlElement = getByText('First name') as HTMLElement;
-		var lastNameHtmlElement = getByText('Last name') as HTMLElement;
+		var titleHtmlElement = findByText('Title (optional)') as HTMLElement;
+		var firstNameHtmlElement = findByText('First name') as HTMLElement;
+		var lastNameHtmlElement = findByText('Last name') as HTMLElement;
 
 		expect(titleHtmlElement).toBeDefined();
 		expect(titleHtmlElement.nextSibling.childNodes[0]).toHaveAttribute(
@@ -197,92 +121,30 @@ describe('Trustee Name', () => {
 			'maxlength',
 			'70',
 		);
-		expect(getByText('Continue')).toBeDefined();
+		expect(findByText('Continue')).toBeDefined();
 	});
 });
 
 describe('Trustee Type', () => {
 	test('is accessible', async () => {
-		const { container, getByText } = render(
-			<TrusteeCard
-				onDetailsSave={noop}
-				onContactSave={noop}
-				onAddressSave={noop}
-				onRemove={noop}
-				onCorrect={(_value) => {}}
-				addressAPI={{
-					get: (_endpont) => Promise.resolve(),
-					limit: 100,
-				}}
-				complete={true}
-				trustee={trustee}
-				testId={trustee.schemeRoleId}
-			/>,
-		);
+		findByText(/Trustee/).click();
+		findByText(/Continue/).click();
 
-		getByText(/Trustee/).click();
-		getByText(/Continue/).click();
-
-		const results = await axe(container);
+		const results = await axe(component);
 		expect(results).toHaveNoViolations();
 	});
 });
 
 describe('Trustee Contact Details', () => {
 	test('is accessible', async () => {
-		const { container, getByText } = render(
-			<TrusteeCard
-				onDetailsSave={noop}
-				onContactSave={noop}
-				onAddressSave={noop}
-				onRemove={noop}
-				onCorrect={(_value) => {}}
-				addressAPI={{
-					get: (_endpont) => Promise.resolve(),
-					limit: 100,
-				}}
-				complete={true}
-				trustee={trustee}
-				testId={trustee.schemeRoleId}
-			/>,
-		);
+		findByText('Contact details').click();
 
-		getByText('Contact details').click();
-
-		const results = await axe(container);
+		const results = await axe(component);
 		expect(results).toHaveNoViolations();
 	});
 });
 
 describe('Trustee Remove', () => {
-	let component, findByText, findByTestId;
-	beforeEach(async () => {
-		const { container, getByText, getByTestId } = render(
-			<TrusteeCard
-				onDetailsSave={noop}
-				onContactSave={noop}
-				onAddressSave={noop}
-				onRemove={noop}
-				onCorrect={(_value) => {}}
-				addressAPI={{
-					get: (_endpont) => Promise.resolve(),
-					limit: 100,
-				}}
-				complete={true}
-				trustee={trustee}
-				testId={trustee.schemeRoleId}
-			/>,
-		);
-
-		component = container;
-		findByText = getByText;
-		findByTestId = getByTestId;
-	});
-
-	afterEach(() => {
-		cleanup();
-	});
-
 	test('is accessible', async () => {
 		findByText('Remove').click();
 
@@ -310,58 +172,24 @@ describe('Trustee Remove', () => {
 
 describe('Trustee correspondence address', () => {
 	test('Change address is accessible', async () => {
-		const { container, getByText } = render(
-			<TrusteeCard
-				onDetailsSave={noop}
-				onContactSave={noop}
-				onAddressSave={noop}
-				onRemove={noop}
-				onCorrect={(_value) => {}}
-				addressAPI={{
-					get: (_endpont) => Promise.resolve(),
-					limit: 100,
-				}}
-				complete={true}
-				trustee={trustee}
-				testId={trustee.schemeRoleId}
-			/>,
-		);
+		findByText('Correspondence address').click();
+		findByText(/I need to change the address/).click();
 
-		getByText('Correspondence address').click();
-		getByText(/I need to change the address/).click();
-
-		const results = await axe(container);
+		const results = await axe(component);
 
 		expect(results).toHaveNoViolations();
-		expect(getByText('Find address')).toBeInTheDocument();
-		expect(getByText('Cancel')).toBeInTheDocument();
+		expect(findByText('Find address')).toBeInTheDocument();
+		expect(findByText('Cancel')).toBeInTheDocument();
 	});
 
 	test('Cancel change address returns to preview', async () => {
-		const { container, getByText } = render(
-			<TrusteeCard
-				onDetailsSave={noop}
-				onContactSave={noop}
-				onAddressSave={noop}
-				onRemove={noop}
-				onCorrect={(_value) => {}}
-				addressAPI={{
-					get: (_endpont) => Promise.resolve(),
-					limit: 100,
-				}}
-				complete={true}
-				trustee={trustee}
-				testId={trustee.schemeRoleId}
-			/>,
-		);
+		findByText('Correspondence address').click();
+		findByText(/I need to change the address/).click();
+		findByText(/Cancel/).click();
 
-		getByText('Correspondence address').click();
-		getByText(/I need to change the address/).click();
-		getByText(/Cancel/).click();
-
-		const results = await axe(container);
+		const results = await axe(component);
 
 		expect(results).toHaveNoViolations();
-		expect(getByText('Correspondence address')).toBeInTheDocument();
+		expect(findByText('Correspondence address')).toBeInTheDocument();
 	});
 });
