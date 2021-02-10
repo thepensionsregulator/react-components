@@ -1,0 +1,60 @@
+---
+name: Link
+menu: Core
+route: /core/links
+---
+
+import { Props } from 'docz';
+import { Playground } from '@playground';
+import { Link } from './links';
+
+# Link
+
+To trigger an operation.
+
+## When To Use
+
+A link means an operation (or a series of operations). Clicking a link will trigger corresponding business logic.
+
+## Usage
+
+```js
+import { Link } from '@tpr/core';
+```
+
+## Examples
+
+### Basic usage
+
+<Playground>
+	<Link>Click to go back</Link>
+</Playground>
+
+### Usage with props
+
+<Playground>
+	<Link cfg={{ mr: 3 }}>Home</Link>
+	<Link cfg={{ mr: 3 }}>Gallery</Link>
+	<Link cfg={{ mr: 3 }} underline={true}>
+		Log out
+	</Link>
+	<Link cfg={{ mr: 3 }} disabled>
+		Disabled Link
+	</Link>
+</Playground>
+
+### Usage with colours from the theme
+
+<Playground>
+	<Link cfg={{ mr: 3, color: 'danger.2' }}>Home</Link>
+	<Link cfg={{ mr: 3, color: 'warning.1' }}>Gallery</Link>
+	<Link cfg={{ mr: 3, color: 'success.1' }}>Log out</Link>
+</Playground>
+
+## API
+
+```
+Accepted config props: SpaceProps, ColorProps, TypographyProps, LayoutProps
+```
+
+<Props of={Link} />

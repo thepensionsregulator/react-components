@@ -92,7 +92,7 @@ describe('Address lookup', () => {
 			searchForAPostcode(container, exampleAddress.postcode);
 
 			const changePostcode = container.querySelector(
-				'button[data-testid$="change-postcode"]',
+				'a[data-testid$="change-postcode"]',
 			);
 
 			expect(changePostcode).not.toBeNull();
@@ -208,7 +208,7 @@ describe('Address lookup', () => {
 			});
 
 			const button = container.querySelector(
-				'button[data-testid$="change-address"]',
+				'a[data-testid$="change-address"]',
 			);
 			fireEvent.click(button);
 
