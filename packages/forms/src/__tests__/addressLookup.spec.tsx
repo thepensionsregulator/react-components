@@ -51,6 +51,12 @@ function searchForAPostcode(container: HTMLElement, postcode: string) {
 	fireEvent.click(submit);
 }
 
+function updateAPostcode(container: HTMLElement, postcode: string) {
+	const input = container.querySelector('input');
+	userEvent.type(input, postcode);
+	fireEvent.blur(input);
+}
+
 function openAddressDropdown(container: HTMLElement) {
 	const openSelect = container.querySelector(
 		'button[data-testid="select-address-list-button"]',
@@ -111,6 +117,23 @@ describe('Address lookup', () => {
 			);
 
 			expect(errorMessage).not.toBeNull();
+		});
+
+		test('should call onValidatePostcode when postcode is entered', () => {
+			defaultProps.onValidatePostcode = (inValid) => {
+				console.log(inValid);
+			};
+			const onValidatePostcodeSpy = jest.spyOn(
+				defaultProps,
+				'onValidatePostcode',
+			);
+
+			const { container } = formSetup({
+				render: <AddressLookup {...defaultProps} />,
+			});
+			updateAPostcode(container, 's6 2nr');
+
+			expect(onValidatePostcodeSpy).toHaveBeenCalled();
 		});
 	});
 

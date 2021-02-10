@@ -102,6 +102,7 @@ export interface I18nRemoveReason {
 	};
 	errors?: {
 		pristine?: string;
+		pristineDate?: string;
 		dateAddedBeforeEffectiveDate?: string;
 		dateAddedInTheFuture?: string;
 	};
