@@ -39,7 +39,6 @@ export const Link: React.FC<LinkProps> = ({
 
 	if (props.onClick && !props.href) {
 		anchorProps.onClick = function (e) {
-			debugger;
 			props.onClick();
 			e.preventDefault();
 		};
