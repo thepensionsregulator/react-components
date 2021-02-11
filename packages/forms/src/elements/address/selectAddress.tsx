@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { useForm } from 'react-final-form';
 import { Address } from './address';
 import { FFSelect } from '../select/select';
-import { P, Button, Link, Flex } from '@tpr/core';
+import { P, Button, Flex } from '@tpr/core';
 import { ArrowRight } from '@tpr/icons';
 import PostcodeFormatter from './postcodeFormatter';
 import elementStyles from '../elements.module.scss';
@@ -100,7 +100,7 @@ export const SelectAddress: React.FC<SelectAddressProps> = ({
 
 	return (
 		<>
-			<Flex>
+			<Flex cfg={{ alignItems: 'center' }}>
 				<P className={`${styles.nonEditable} ${styles.selectedPostcode}`}>
 					<strong
 						id={(testId ? testId + '-' : '') + 'postcode'}
@@ -112,15 +112,17 @@ export const SelectAddress: React.FC<SelectAddressProps> = ({
 						{postcodeFormatter.formatPostcode(postcode)}
 					</span>
 				</P>
-				<Link
+				<Button
 					onClick={onChangePostcodeClick}
 					testId={(testId ? testId + '-' : '') + 'change-postcode'}
 					className={styles.changePostcode}
 					aria-label={changePostcodeAriaLabel}
 					disabled={loading}
+					appearance="secondary"
+					size="small"
 				>
 					{changePostcodeButton}
-				</Link>
+				</Button>
 			</Flex>
 			<FFSelect
 				label={selectAddressLabel}

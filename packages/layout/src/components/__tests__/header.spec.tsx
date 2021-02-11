@@ -10,7 +10,7 @@ describe('Header', () => {
 				logoSrc="https://www.thepensionsregulator.gov.uk/logo.png"
 				logoHref="https://www.thepensionsregulator.gov.uk"
 				title="Exchange - Scheme return"
-				onClickSchemeOptions={jest.fn()}
+				schemeOptionsHref="https://www.thepensionsregulator.gov.uk/scheme-options"
 				onClickLogout={jest.fn()}
 			/>,
 		);
@@ -20,20 +20,21 @@ describe('Header', () => {
 	});
 
 	test('it renders correctly', () => {
-		const onClickSchemeOptions = jest.fn();
+		const schemeOptionsHref =
+			'https://www.thepensionsregulator.gov.uk/scheme-options';
 		const onClickLogout = jest.fn();
 		const { getByTestId, getByText, getByAltText } = render(
 			<Header
 				logoSrc="https://www.thepensionsregulator.gov.uk/logo.png"
 				logoHref="https://www.thepensionsregulator.gov.uk"
 				title="Exchange - Scheme return"
-				onClickSchemeOptions={onClickSchemeOptions}
+				schemeOptionsHref={schemeOptionsHref}
 				onClickLogout={onClickLogout}
 			/>,
 		);
 
 		const image = getByAltText('Go to The Pensions Regulator website');
-		getByTestId('onClickSchemeOptions').click();
+		const schemeOptionsLink = getByTestId('onClickSchemeOptions');
 		getByTestId('onClickLogout').click();
 
 		expect(image).toHaveAttribute(
@@ -46,7 +47,8 @@ describe('Header', () => {
 			'href',
 			'https://www.thepensionsregulator.gov.uk',
 		);
-		expect(onClickSchemeOptions).toHaveBeenCalledTimes(1);
+		expect(schemeOptionsLink).toBeInTheDocument();
+		expect(schemeOptionsLink).toHaveAttribute('href', schemeOptionsHref);
 		expect(onClickLogout).toHaveBeenCalledTimes(1);
 		expect(getByText('Exchange - Scheme return')).toBeInTheDocument();
 	});

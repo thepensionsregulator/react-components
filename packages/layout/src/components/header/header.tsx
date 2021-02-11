@@ -7,7 +7,7 @@ type HeaderProps = {
 	logoHref: string;
 	logoAlt?: string;
 	title: string;
-	onClickSchemeOptions: () => void;
+	schemeOptionsHref: string;
 	onClickLogout: () => void;
 };
 
@@ -17,7 +17,7 @@ export const Header: React.FC<HeaderProps> = ({
 	logoAlt = 'Go to The Pensions Regulator website',
 	title = 'Exchange - Scheme Return',
 	onClickLogout,
-	onClickSchemeOptions,
+	schemeOptionsHref,
 }) => {
 	return (
 		<DocWidth className={styles.headerBackground}>
@@ -53,7 +53,7 @@ export const Header: React.FC<HeaderProps> = ({
 						</P>
 						<Flex>
 							<Link
-								onClick={onClickSchemeOptions}
+								href={schemeOptionsHref}
 								underline
 								data-testid="onClickSchemeOptions"
 								cfg={{ color: 'white', mr: 4, fontWeight: 3, lineHeight: 3 }}

@@ -2,7 +2,7 @@ import React, { useState, useRef } from 'react';
 import { useForm } from 'react-final-form';
 import PostcodeValidator from './postcodeValidator';
 import { FFInputText } from '../text/text';
-import { Button, Flex, Link } from '@tpr/core';
+import { Button, Flex } from '@tpr/core';
 import styles from './addressLookup.module.scss';
 
 type PostcodeLookupProps = {
@@ -15,7 +15,7 @@ type PostcodeLookupProps = {
 	postcodeLookupButton: string;
 	findAddressCancelledButton?: string;
 	onFindAddressCancelled?: () => void;
-	onValidatePostcode?:(isValid:boolean)=>void | null;
+	onValidatePostcode?: (isValid: boolean) => void | null;
 };
 
 export const PostcodeLookup: React.FC<PostcodeLookupProps> = ({
@@ -46,17 +46,17 @@ export const PostcodeLookup: React.FC<PostcodeLookupProps> = ({
 
 	const validatePostcode = (value) => {
 		const result = validator.validatePostcode(value);
-	 let isValid:boolean;
+		let isValid: boolean;
 
-		if(typeof result === 'undefined'){
+		if (typeof result === 'undefined') {
 			setPostcodeValid(true);
-			isValid=true;
-		}else{
+			isValid = true;
+		} else {
 			setPostcodeValid(false);
-			isValid=false;
+			isValid = false;
 		}
 
-		if(onValidatePostcode !== null){
+		if (onValidatePostcode !== null) {
 			onValidatePostcode(isValid);
 		}
 
@@ -76,7 +76,7 @@ export const PostcodeLookup: React.FC<PostcodeLookupProps> = ({
 				disabled={loading}
 				defaultValue={''}
 			/>
-			<Flex cfg={{ flexDirection: 'row', mt: 2 }}>
+			<Flex cfg={{ flexDirection: 'row', mt: 2, alignItems: 'center' }}>
 				<Button
 					testId={(testId ? testId + '-' : '') + 'postcode-lookup-button'}
 					onClick={clickFindAddress}
@@ -85,14 +85,15 @@ export const PostcodeLookup: React.FC<PostcodeLookupProps> = ({
 					{postcodeLookupButton}
 				</Button>
 				{onFindAddressCancelled && (
-					<Link
-						cfg={{ m: 3 }}
-						underline
+					<Button
+						cfg={{ ml: 3 }}
 						onClick={onFindAddressCancelled}
 						testId={(testId ? testId + '-' : '') + 'find-address-cancel-button'}
+						appearance="secondary"
+						size="small"
 					>
 						{findAddressCancelledButton}
-					</Link>
+					</Button>
 				)}
 			</Flex>
 		</>

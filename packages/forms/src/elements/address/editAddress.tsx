@@ -3,7 +3,7 @@ import { Field, useForm } from 'react-final-form';
 import { Address } from './address';
 import { FFInputText } from '../text/text';
 import { HiddenInput } from '../hidden/hidden';
-import { P, Link } from '@tpr/core';
+import { P, Button } from '@tpr/core';
 import elementStyles from '../elements.module.scss';
 import styles from './addressLookup.module.scss';
 
@@ -177,13 +177,15 @@ export const EditAddress: React.FC<EditAddressProps> = React.memo(
 						initialValue.uprn && initialValue.uprn.toString(),
 					)}
 
-				<Link
+				<Button
 					onClick={onChangeAddressClick}
 					testId={(testId ? testId + '-' : '') + 'change-address'}
+					appearance="secondary"
+					size="small"
 					className={styles.button}
 				>
 					{changeAddressButton}
-				</Link>
+				</Button>
 			</>
 		);
 	},

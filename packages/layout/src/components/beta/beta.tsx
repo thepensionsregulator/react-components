@@ -20,7 +20,6 @@ export const BetaHeader: React.FC<BetaHeaderProps> = ({ text, mail }) => {
 					<>
 						This is a new service - your{' '}
 						<Link
-							anchorTag={true}
 							href={
 								mail
 									? `mailto:${mail.email || ''}&subject=${mail.subject || ''}`
