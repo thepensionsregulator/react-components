@@ -85,8 +85,8 @@ import { FFRadioButton } from '@tpr/forms';
 			<Form onSubmit={console.log} initialValues={{ [FIELD_NAME]: 'value_b' }}>
 				{({ handleSubmit }) => (
 					<form onSubmit={handleSubmit}>
-						<SeparatorY>
-							<fieldset>
+						<fieldset>
+							<SeparatorY>
 								<legend>Select a value</legend>
 								<FFRadioButton
 									name={FIELD_NAME}
@@ -115,8 +115,8 @@ import { FFRadioButton } from '@tpr/forms';
 									value="value_e"
 									label="Select Value E"
 								/>
-							</fieldset>
-						</SeparatorY>
+							</SeparatorY>
+						</fieldset>
 						<button type="submit" style={{ display: 'none' }}>
 							Submit
 						</button>
@@ -136,8 +136,8 @@ import { FFRadioButton } from '@tpr/forms';
 			<Form onSubmit={console.log} initialValues={{ [FIELD_NAME]: 'value_b' }}>
 				{({ handleSubmit }) => (
 					<form onSubmit={handleSubmit}>
-						<SeparatorX>
-							<fieldset>
+						<fieldset>
+							<SeparatorX>
 								<legend>Select a value</legend>
 								<FFRadioButton
 									name={FIELD_NAME}
@@ -155,8 +155,8 @@ import { FFRadioButton } from '@tpr/forms';
 									value="value_c"
 									label="Select Value C"
 								/>
-							</fieldset>
-						</SeparatorX>
+							</SeparatorX>
+						</fieldset>
 						<button type="submit" style={{ display: 'none' }}>
 							Submit
 						</button>
