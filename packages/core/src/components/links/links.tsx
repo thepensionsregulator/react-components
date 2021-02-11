@@ -32,7 +32,7 @@ export const Link: React.FC<LinkProps> = ({
 	const anchorProps = {
 		'data-testid': testId,
 		className: classNames,
-		href: null,
+		tabIndex: props.href ? null : 0,
 		...props,
 	};
 
