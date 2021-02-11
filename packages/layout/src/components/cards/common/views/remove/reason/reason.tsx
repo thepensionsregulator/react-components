@@ -42,7 +42,7 @@ export const Reason: React.FC<ReasonProps> = ({
 					const leftScheme: boolean = reason === 'left_the_scheme';
 					return (
 						<form onSubmit={handleSubmit} data-testid={`remove-${type}-form`}>
-							<div className={showError && elementStyles.labelError}>
+							<div className={showError ? elementStyles.labelError : null}>
 								<H4 fontWeight="bold" mb={0}>
 									{i18nRemoveReason.subtitle}
 								</H4>
