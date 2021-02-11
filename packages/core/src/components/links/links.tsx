@@ -29,13 +29,21 @@ export const Link: React.FC<LinkProps> = ({
 		className,
 	]);
 
-	const anchorProps = {
+	let anchorProps = {
 		'data-testid': testId,
 		className: classNames,
-		tabIndex: props.href ? null : 0,
-		href: props.href ? props.href : 'javascript:;',
+		href: props.href ? props.href : '#',
+		onClick: null,
 		...props,
 	};
+
+	if (props.onClick && !props.href) {
+		anchorProps.onClick = function (e) {
+			debugger;
+			props.onClick();
+			e.preventDefault();
+		};
+	}
 
 	return React.createElement('a', anchorProps, children);
 };
