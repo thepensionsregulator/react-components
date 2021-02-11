@@ -44,6 +44,7 @@ export const ArrowButton: React.FC<ArrowButtonProps> = ({
 				<Flex
 					cfg={{
 						alignItems: 'center',
+						justifyContent: 'center',
 						pl: iconSide === 'left' ? 2 : 4,
 						pr: iconSide === 'right' ? 2 : 4,
 					}}
