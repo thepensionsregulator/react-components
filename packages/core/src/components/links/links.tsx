@@ -33,6 +33,7 @@ export const Link: React.FC<LinkProps> = ({
 		'data-testid': testId,
 		className: classNames,
 		tabIndex: props.href ? null : 0,
+		href: props.href ? props.href : 'javascript:;',
 		...props,
 	};
 
