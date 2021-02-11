@@ -29,9 +29,21 @@ describe('Footer', () => {
 
 		expect(bottomLinks).toBeDefined();
 		expect(bottomLinks).toHaveLength(links.length);
-		assertThatLinkIsRenderedCorrectly(bottomLinks[0], links[0].title, links[0].url);
-		assertThatLinkIsRenderedCorrectly(bottomLinks[1], links[1].title, links[1].url);
-		assertThatLinkIsRenderedCorrectly(bottomLinks[2], links[2].title, links[2].url);
+		assertThatLinkIsRenderedCorrectly(
+			bottomLinks[0],
+			links[0].title,
+			links[0].url,
+		);
+		assertThatLinkIsRenderedCorrectly(
+			bottomLinks[1],
+			links[1].title,
+			links[1].url,
+		);
+		assertThatLinkIsRenderedCorrectly(
+			bottomLinks[2],
+			links[2].title,
+			links[2].url,
+		);
 	});
 
 	test('it renders correctly', () => {
@@ -52,7 +64,11 @@ describe('Footer', () => {
 		expect(getByText('Copyright TPR')).toBeInTheDocument();
 	});
 
-	function assertThatLinkIsRenderedCorrectly(link: HTMLElement, expectedTitle: string, expectedUrl: string): void {
+	function assertThatLinkIsRenderedCorrectly(
+		link: HTMLElement,
+		expectedTitle: string,
+		expectedUrl: string,
+	): void {
 		expect(link.innerHTML).toEqual(expectedTitle);
 		expect(link).toHaveAttribute('href', expectedUrl);
 	}
