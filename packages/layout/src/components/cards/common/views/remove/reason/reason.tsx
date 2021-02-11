@@ -43,28 +43,32 @@ export const Reason: React.FC<ReasonProps> = ({
 					return (
 						<form onSubmit={handleSubmit} data-testid={`remove-${type}-form`}>
 							<div className={showError && elementStyles.labelError}>
-								<H4 fontWeight="bold" mb={0}>
-									{i18nRemoveReason.subtitle}
-								</H4>
-								<FFRadioButton
-									name="reason"
-									type="radio"
-									testId="leftTheScheme"
-									label={i18nRemoveReason.fields.leftTheScheme.label}
-									value="left_the_scheme"
-									cfg={{ my: 4 }}
-								/>
-								{leftScheme && (
-									<div className={styles.dateWrapper}>
-										{renderFields(dateField)}
-									</div>
-								)}
-								<FFRadioButton
-									name="reason"
-									type="radio"
-									label={i18nRemoveReason.fields.neverPartOfTheScheme.label}
-									value="not_part_of_scheme"
-								/>
+								<fieldset>
+									<legend>
+										<H4 fontWeight="bold" mb={0}>
+											{i18nRemoveReason.subtitle}
+										</H4>
+									</legend>
+									<FFRadioButton
+										name="reason"
+										type="radio"
+										testId="leftTheScheme"
+										label={i18nRemoveReason.fields.leftTheScheme.label}
+										value="left_the_scheme"
+										cfg={{ my: 4 }}
+									/>
+									{leftScheme && (
+										<div className={styles.dateWrapper}>
+											{renderFields(dateField)}
+										</div>
+									)}
+									<FFRadioButton
+										name="reason"
+										type="radio"
+										label={i18nRemoveReason.fields.neverPartOfTheScheme.label}
+										value="not_part_of_scheme"
+									/>
+								</fieldset>
 								{showError && (
 									<P
 										cfg={{ color: 'danger.2', mt: 5 }}

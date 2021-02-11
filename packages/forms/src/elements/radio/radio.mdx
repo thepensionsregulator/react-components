@@ -51,18 +51,21 @@ import { FFRadioButton } from '@tpr/forms';
 			<Form onSubmit={console.log} initialValues={{ [FIELD_NAME]: 'value_b' }}>
 				{({ handleSubmit }) => (
 					<form onSubmit={handleSubmit}>
-						<FFRadioButton
-							name={FIELD_NAME}
-							value="value_a"
-							label="Select Value A"
-							cfg={{ mb: 4 }}
-						/>
-						<FFRadioButton
-							name={FIELD_NAME}
-							value="value_b"
-							label="Select Value B"
-							hint="Lorem, ipsum dolor sit amet consectetur adipisicing elit. Ea obcaecati repellat molestias nemo deleniti eveniet vel similique nesciunt fugiat nisi?"
-						/>
+						<fieldset>
+							<legend>Select a value</legend>
+							<FFRadioButton
+								name={FIELD_NAME}
+								value="value_a"
+								label="Select Value A"
+								cfg={{ mb: 4 }}
+							/>
+							<FFRadioButton
+								name={FIELD_NAME}
+								value="value_b"
+								label="Select Value B"
+								hint="Lorem, ipsum dolor sit amet consectetur adipisicing elit. Ea obcaecati repellat molestias nemo deleniti eveniet vel similique nesciunt fugiat nisi?"
+							/>
+						</fieldset>
 						<button type="submit" style={{ display: 'none' }}>
 							Submit
 						</button>
@@ -83,33 +86,36 @@ import { FFRadioButton } from '@tpr/forms';
 				{({ handleSubmit }) => (
 					<form onSubmit={handleSubmit}>
 						<SeparatorY>
-							<FFRadioButton
-								name={FIELD_NAME}
-								value="value_a"
-								label="Select Value A"
-							/>
-							<FFRadioButton
-								name={FIELD_NAME}
-								value="value_b"
-								label="Select Value B"
-								hint="Lorem, ipsum dolor sit amet consectetur adipisicing elit. Ea obcaecati repellat molestias nemo deleniti eveniet vel similique nesciunt fugiat nisi?"
-							/>
-							<FFRadioButton
-								name={FIELD_NAME}
-								value="value_c"
-								label="Select Value C"
-							/>
-							<FFRadioButton
-								name={FIELD_NAME}
-								value="value_d"
-								label="Select Value D"
-								hint="Lorem, ipsum dolor sit amet consectetur adipisicing elit."
-							/>
-							<FFRadioButton
-								name={FIELD_NAME}
-								value="value_e"
-								label="Select Value E"
-							/>
+							<fieldset>
+								<legend>Select a value</legend>
+								<FFRadioButton
+									name={FIELD_NAME}
+									value="value_a"
+									label="Select Value A"
+								/>
+								<FFRadioButton
+									name={FIELD_NAME}
+									value="value_b"
+									label="Select Value B"
+									hint="Lorem, ipsum dolor sit amet consectetur adipisicing elit. Ea obcaecati repellat molestias nemo deleniti eveniet vel similique nesciunt fugiat nisi?"
+								/>
+								<FFRadioButton
+									name={FIELD_NAME}
+									value="value_c"
+									label="Select Value C"
+								/>
+								<FFRadioButton
+									name={FIELD_NAME}
+									value="value_d"
+									label="Select Value D"
+									hint="Lorem, ipsum dolor sit amet consectetur adipisicing elit."
+								/>
+								<FFRadioButton
+									name={FIELD_NAME}
+									value="value_e"
+									label="Select Value E"
+								/>
+							</fieldset>
 						</SeparatorY>
 						<button type="submit" style={{ display: 'none' }}>
 							Submit
@@ -131,22 +137,25 @@ import { FFRadioButton } from '@tpr/forms';
 				{({ handleSubmit }) => (
 					<form onSubmit={handleSubmit}>
 						<SeparatorX>
-							<FFRadioButton
-								name={FIELD_NAME}
-								value="value_a"
-								label="Select Value A"
-								hint="Lorem, ipsum dolor sit amet consectetur adipisicing elit."
-							/>
-							<FFRadioButton
-								name={FIELD_NAME}
-								value="value_b"
-								label="Select Value B"
-							/>
-							<FFRadioButton
-								name={FIELD_NAME}
-								value="value_c"
-								label="Select Value C"
-							/>
+							<fieldset>
+								<legend>Select a value</legend>
+								<FFRadioButton
+									name={FIELD_NAME}
+									value="value_a"
+									label="Select Value A"
+									hint="Lorem, ipsum dolor sit amet consectetur adipisicing elit."
+								/>
+								<FFRadioButton
+									name={FIELD_NAME}
+									value="value_b"
+									label="Select Value B"
+								/>
+								<FFRadioButton
+									name={FIELD_NAME}
+									value="value_c"
+									label="Select Value C"
+								/>
+							</fieldset>
 						</SeparatorX>
 						<button type="submit" style={{ display: 'none' }}>
 							Submit
@@ -158,7 +167,6 @@ import { FFRadioButton } from '@tpr/forms';
 	}}
 </Playground>
 
-
 ### Disabled
 
 <Playground>
@@ -168,20 +176,23 @@ import { FFRadioButton } from '@tpr/forms';
 			<Form onSubmit={console.log} initialValues={{ [FIELD_NAME]: 'value_b' }}>
 				{({ handleSubmit }) => (
 					<form onSubmit={handleSubmit}>
-						<FFRadioButton
-							name={FIELD_NAME}
-							value="value_a"
-							label="Select Value A"
-							cfg={{ mb: 4 }}
-							disabled
-						/>
-						<FFRadioButton
-							name={FIELD_NAME}
-							value="value_b"
-							label="Select Value B"
-							hint="Lorem, ipsum dolor sit amet consectetur adipisicing elit. Ea obcaecati repellat molestias nemo deleniti eveniet vel similique nesciunt fugiat nisi?"
-							disabled
-						/>
+						<fieldset>
+							<legend>Select a value</legend>
+							<FFRadioButton
+								name={FIELD_NAME}
+								value="value_a"
+								label="Select Value A"
+								cfg={{ mb: 4 }}
+								disabled
+							/>
+							<FFRadioButton
+								name={FIELD_NAME}
+								value="value_b"
+								label="Select Value B"
+								hint="Lorem, ipsum dolor sit amet consectetur adipisicing elit. Ea obcaecati repellat molestias nemo deleniti eveniet vel similique nesciunt fugiat nisi?"
+								disabled
+							/>
+						</fieldset>
 						<button type="submit" style={{ display: 'none' }}>
 							Submit
 						</button>
