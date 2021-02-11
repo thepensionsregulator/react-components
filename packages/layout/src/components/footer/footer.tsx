@@ -9,8 +9,6 @@ type FooterLinkProps = {
 };
 
 type FooterProps = {
-	/** function to handle link clicks */
-	onLinkClickHandler: (url: string) => void;
 	/** accepts an array of type FooterLinkProps objects */
 	links: FooterLinkProps[];
 	/** accepts a valid logo url, must be https */
@@ -23,7 +21,6 @@ export const Footer: React.FC<FooterProps> = ({
 	logoUrl,
 	logoAlt = 'The Pensions Regulator logo',
 	copyright = '© 2020 The Pensions Regulator',
-	onLinkClickHandler,
 	links,
 }) => {
 	return (
@@ -43,7 +40,7 @@ export const Footer: React.FC<FooterProps> = ({
 							{links.map(({ url, title, ...linkProps }, key: number) => (
 								<Link
 									key={key}
-									onClick={() => onLinkClickHandler(url)}
+									href={url}
 									cfg={{ mr: 3, color: 'neutral.a2' }}
 									{...linkProps}
 								>
