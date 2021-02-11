@@ -1,5 +1,5 @@
 import React from 'react';
-import { Button, Link } from '../buttons/buttons';
+import { Button } from '../buttons/buttons';
 import { render } from '@testing-library/react';
 import { axe } from 'jest-axe';
 
@@ -121,24 +121,5 @@ describe('Buttons', () => {
 		expect(getByTestId('btn').className).toMatchInlineSnapshot(
 			`"button appearance-outlined intent-none size-medium"`,
 		);
-	});
-});
-
-describe('Links', () => {
-	test('Link with button appearance', () => {
-		const { getByTestId } = render(
-			<Link
-				testId="link-anchor"
-				anchorTag={true}
-				buttonAppearance={true}
-				href="http://www.google.com"
-				target="_blank"
-			>
-				Home
-			</Link>,
-		);
-		expect(getByTestId('link-anchor')).toBeDefined();
-		expect(getByTestId('link-anchor')).toHaveAttribute('href');
-		expect(getByTestId('link-anchor')).toHaveAttribute('target');
 	});
 });

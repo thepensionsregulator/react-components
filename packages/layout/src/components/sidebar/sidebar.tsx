@@ -110,7 +110,6 @@ export const Sidebar: React.FC<SidebarProps> = ({
 							fontSize: 4,
 						}}
 						onClick={() => history.push(titlePath)}
-						anchorTag={true}
 					>
 						{title}
 					</Link>
