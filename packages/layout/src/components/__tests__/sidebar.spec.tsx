@@ -171,7 +171,7 @@ describe('Sidebar', () => {
 		expect(totalSections.length).toMatchInlineSnapshot(`8`);
 	});
 
-	test('each section status icon hass accessibility attributes', () => {
+	test('each section status icon has accessibility attributes', () => {
 		const title = 'Scheme return home';
 		const sectionCompleteLabel = 'Section complete';
 		const sectionIncompleteLabel = 'Section not complete';
