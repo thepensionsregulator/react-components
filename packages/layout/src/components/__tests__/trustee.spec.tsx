@@ -31,9 +31,15 @@ const trustee: Trustee = {
 	emailAddress: 'fred.sandoors@trp.gov.uk',
 	effectiveDate: '1997-04-01T00:00:00',
 };
-let component, findByText, findByTestId;
+let component, findByText, findAllByText, findByTitle, findByTestId;
 beforeEach(async () => {
-	const { container, getByText, getByTestId } = render(
+	const {
+		container,
+		getByText,
+		getAllByText,
+		queryByTitle,
+		getByTestId,
+	} = render(
 		<TrusteeCard
 			onDetailsSave={noop}
 			onContactSave={noop}
@@ -53,6 +59,8 @@ beforeEach(async () => {
 	component = container;
 	findByText = getByText;
 	findByTestId = getByTestId;
+	findAllByText = getAllByText;
+	findByTitle = queryByTitle;
 });
 
 afterEach(() => {
@@ -74,7 +82,8 @@ describe('Trustee Preview', () => {
 	});
 
 	test('initial status is correct', () => {
-		expect(findByText('Confirmed')).toBeDefined();
+		expect(findAllByText('Confirmed').length).toEqual(2);
+		expect(findByTitle('Confirmed')).toBeDefined();
 		expect(findByText('Confirm details are correct.')).toBeDefined();
 	});
 
