@@ -70,6 +70,8 @@ export type SidebarProps = {
 	/** import from react-router-dom */
 	history: any;
 	collapseNested?: boolean;
+	sectionCompleteLabel: string;
+	sectionIncompleteLabel: string;
 };
 
 export const Sidebar: React.FC<SidebarProps> = ({
@@ -81,6 +83,8 @@ export const Sidebar: React.FC<SidebarProps> = ({
 	location,
 	history,
 	collapseNested = false,
+	sectionCompleteLabel,
+	sectionIncompleteLabel,
 }) => {
 	const routerProps = { matchPath, location, history };
 	const sections = useSectionsUpdater(originalSections, routerProps);
@@ -147,6 +151,8 @@ export const Sidebar: React.FC<SidebarProps> = ({
 								links={item.links}
 								maintenanceMode={maintenanceMode}
 								collapsed={collapseNested}
+								sectionCompleteLabel={sectionCompleteLabel}
+								sectionIncompleteLabel={sectionIncompleteLabel}
 							/>
 						</li>
 					))}
