@@ -23,7 +23,7 @@ export const UnderlinedButton: React.FC<UnderlinedButtonProps> = ({
 	}
 
 	return (
-		<button className={styles.button} onClick={onClick}>
+		<button className={styles.button} onClick={onClick} aria-expanded={isOpen}>
 			<Flex cfg={{ flex: '0 0 auto', alignItems: 'center' }}>
 				<P cfg={{ fontSize: 2, fontWeight: 3 }}>{children}</P>
 				{isOpen ? (
