@@ -1,6 +1,7 @@
 import React, { createElement } from 'react';
 import { SpaceProps, FlexProps, useClassNames, Span } from '@tpr/core';
 import styles from './elements.module.scss';
+import { ReactNode } from 'react';
 
 interface StyledInputLabelProps {
 	element?: 'label' | 'div';
@@ -38,18 +39,27 @@ export const FormLabelText: React.FC = ({ children }) => (
 	<div className={styles.labelText}>{children}</div>
 );
 
-export const ErrorMessage: React.FC = ({ children }) => (
-	<div className={styles.errorMessage}>{children}</div>
+export const ErrorMessage: React.FC<ErrorMessageProps> = ({ id, children }) => (
+	<div id={id} className={styles.errorMessage}>
+		{children}
+	</div>
 );
+
+type ErrorMessageProps = {
+	id?: string;
+	children: ReactNode;
+};
 
 type InputElementHeadingProps = {
 	label?: string;
+	errorId?: string;
 	required?: boolean;
 	hint?: string;
 	meta?: any;
 };
 export const InputElementHeading: React.FC<InputElementHeadingProps> = ({
 	label,
+	errorId,
 	required,
 	hint,
 	meta,
@@ -67,7 +77,7 @@ export const InputElementHeading: React.FC<InputElementHeadingProps> = ({
 				</Span>
 			)}
 			{meta && meta.touched && meta.error && (
-				<ErrorMessage>{meta.error}</ErrorMessage>
+				<ErrorMessage id={errorId}>{meta.error}</ErrorMessage>
 			)}
 		</>
 	);

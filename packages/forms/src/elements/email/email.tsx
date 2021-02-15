@@ -12,6 +12,7 @@ import {
 type InputEmailProps = FieldRenderProps<string> & FieldExtraProps;
 const InputEmail: React.FC<InputEmailProps> = ({
 	label,
+	name,
 	hint,
 	input,
 	testId,
@@ -22,6 +23,7 @@ const InputEmail: React.FC<InputEmailProps> = ({
 	inputWidth: width,
 	cfg,
 }) => {
+	const errorId = `${name}_error`;
 	return (
 		<StyledInputLabel
 			isError={meta && meta.touched && meta.error}
@@ -29,6 +31,7 @@ const InputEmail: React.FC<InputEmailProps> = ({
 		>
 			<InputElementHeading
 				label={label}
+				errorId={errorId}
 				required={required}
 				hint={hint}
 				meta={meta}
@@ -38,6 +41,7 @@ const InputEmail: React.FC<InputEmailProps> = ({
 				width={width}
 				testId={testId}
 				label={label}
+				errorId={errorId}
 				required={required}
 				placeholder={placeholder}
 				readOnly={readOnly}
@@ -48,9 +52,9 @@ const InputEmail: React.FC<InputEmailProps> = ({
 	);
 };
 
-export const FFInputEmail: React.FC<FieldProps & FieldExtraProps> = (
-	fieldProps,
-) => {
+export const FFInputEmail: React.FC<
+	FieldProps & FieldExtraProps
+> = React.forwardRef((fieldProps, ref) => {
 	return (
 		<Field
 			{...fieldProps}
@@ -60,7 +64,7 @@ export const FFInputEmail: React.FC<FieldProps & FieldExtraProps> = (
 					fieldProps.error ? fieldProps.error : 'Invalid email address',
 				),
 			)}
-			component={InputEmail}
+			render={(props) => <InputEmail {...props} {...fieldProps} ref={ref} />}
 		/>
 	);
-};
+});

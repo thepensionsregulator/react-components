@@ -5,6 +5,7 @@ export type InputProps = {
 	type: string;
 	width?: LayoutProps['width'];
 	testId?: string;
+	errorId?: string;
 	label?: string;
 	touched?: boolean;
 	after?: string;
@@ -18,6 +19,7 @@ export const Input: React.FC<InputProps> = ({
 	type = 'text',
 	width,
 	testId,
+	errorId,
 	label,
 	touched = false,
 	className,
@@ -54,6 +56,8 @@ export const Input: React.FC<InputProps> = ({
 						[styles['inputText-error']]: touched,
 					},
 				])}
+				aria-invalid={touched != false}
+				aria-describedby={touched != false ? errorId : ''}
 				{...rest}
 			/>
 			{After && <span className={styles.after}>{After}</span>}
