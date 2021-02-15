@@ -44,15 +44,23 @@ const SidebarMenu: React.FC<SidebarMenuProps> = ({
 										disabled={innerLink.disabled}
 										onClick={() => onClick(innerLink)}
 									>
-										{innerLink.name}
+										<Flex
+											cfg={{
+												flexDirection: 'row',
+												justifyContent: 'space-between',
+												alignItems: 'center',
+											}}
+										>
+											<span>{innerLink.name}</span>
+											{!maintenanceMode && !innerLink.hideIcon && (
+												<StatusIcon
+													link={innerLink}
+													sectionCompleteLabel={sectionCompleteLabel}
+													sectionIncompleteLabel={sectionIncompleteLabel}
+												/>
+											)}
+										</Flex>
 									</Link>
-									{!maintenanceMode && !innerLink.hideIcon && (
-										<StatusIcon
-											link={innerLink}
-											sectionCompleteLabel={sectionCompleteLabel}
-											sectionIncompleteLabel={sectionIncompleteLabel}
-										/>
-									)}
 								</Flex>
 								{innerLink.links && generateSubmenu(innerLink.links)}
 							</li>
@@ -101,15 +109,23 @@ const SidebarMenu: React.FC<SidebarMenuProps> = ({
 										disabled={link.disabled}
 										onClick={() => onClick(link)}
 									>
-										{link.name}
+										<Flex
+											cfg={{
+												flexDirection: 'row',
+												justifyContent: 'space-between',
+												alignItems: 'center',
+											}}
+										>
+											<span>{link.name}</span>
+											{!maintenanceMode && !link.hideIcon && (
+												<StatusIcon
+													link={link}
+													sectionCompleteLabel={sectionCompleteLabel}
+													sectionIncompleteLabel={sectionIncompleteLabel}
+												/>
+											)}
+										</Flex>
 									</Link>
-									{!maintenanceMode && !link.hideIcon && (
-										<StatusIcon
-											link={link}
-											sectionCompleteLabel={sectionCompleteLabel}
-											sectionIncompleteLabel={sectionIncompleteLabel}
-										/>
-									)}
 								</Flex>
 								{link.links &&
 									link.links.length > 0 &&
