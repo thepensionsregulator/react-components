@@ -73,6 +73,8 @@ describe('Sidebar', () => {
 				matchPath={() => {}}
 				location={{}}
 				history={{ push: () => {} }}
+				sectionCompleteLabel="Section complete"
+				sectionIncompleteLabel="Section not complete"
 			/>,
 		);
 		const results = await axe(container);
@@ -88,6 +90,8 @@ describe('Sidebar', () => {
 				matchPath={() => {}}
 				location={{}}
 				history={{ push: () => {} }}
+				sectionCompleteLabel="Section complete"
+				sectionIncompleteLabel="Section not complete"
 			/>,
 		);
 		expect(getByText(title)).toBeInTheDocument();
@@ -103,6 +107,8 @@ describe('Sidebar', () => {
 				matchPath={() => {}}
 				location={{}}
 				history={{ push: () => {} }}
+				sectionCompleteLabel="Section complete"
+				sectionIncompleteLabel="Section not complete"
 			/>,
 		);
 
@@ -128,6 +134,8 @@ describe('Sidebar', () => {
 				matchPath={() => {}}
 				location={{}}
 				history={{ push: () => {} }}
+				sectionCompleteLabel="Section complete"
+				sectionIncompleteLabel="Section not complete"
 			/>,
 		);
 
@@ -145,6 +153,8 @@ describe('Sidebar', () => {
 				matchPath={() => {}}
 				location={{}}
 				history={{ push: () => {} }}
+				sectionCompleteLabel="Section complete"
+				sectionIncompleteLabel="Section not complete"
 			/>,
 		);
 
@@ -160,4 +170,44 @@ describe('Sidebar', () => {
 		expect(totalCompleted.length).toMatchInlineSnapshot(`3`);
 		expect(totalSections.length).toMatchInlineSnapshot(`8`);
 	});
+
+	test('each section status icon hass accessibility attributes', () => {
+		const title = 'Scheme return home';
+		const sectionCompleteLabel = 'Section complete';
+		const sectionIncompleteLabel = 'Section not complete';
+
+		const { getByText } = render(
+			<Sidebar
+				title={title}
+				sections={sections}
+				matchPath={() => {}}
+				location={{}}
+				history={{ push: () => {} }}
+				sectionCompleteLabel={sectionCompleteLabel}
+				sectionIncompleteLabel={sectionIncompleteLabel}
+			/>,
+		);
+
+		[...s1.links, ...s2.links, ...s3.links].map((link) => {
+			let statusIcon = getByText(link.name).nextSibling as HTMLElement;
+			expect(statusIcon).toHaveAttribute('role', 'img');
+			assertStatusIconHasAccessibilityAttributes(
+				statusIcon,
+				link.completed ? 'checked-circle' : 'error-circle',
+				link.completed ? sectionCompleteLabel : sectionIncompleteLabel,
+			);
+		});
+	});
 });
+
+const assertStatusIconHasAccessibilityAttributes = (
+	statusIcon: HTMLElement,
+	expectedTestId: string,
+	expectedLabel: string,
+) => {
+	expect(statusIcon).toHaveAttribute('data-testid', expectedTestId);
+	expect(statusIcon).toHaveAttribute('aria-label', expectedLabel);
+	expect(statusIcon.getElementsByTagName('title')[0].innerHTML).toEqual(
+		expectedLabel,
+	);
+};

@@ -9,6 +9,8 @@ const SidebarMenu: React.FC<SidebarMenuProps> = ({
 	links,
 	maintenanceMode,
 	collapsed,
+	sectionCompleteLabel,
+	sectionIncompleteLabel,
 }) => {
 	const collapsedClass = styles.nestedWrapper + ' ' + styles.collapsed;
 	const [classes, setClasses] = useState(styles.nestedWrapper);
@@ -45,7 +47,11 @@ const SidebarMenu: React.FC<SidebarMenuProps> = ({
 										{innerLink.name}
 									</Link>
 									{!maintenanceMode && !innerLink.hideIcon && (
-										<StatusIcon link={innerLink} />
+										<StatusIcon
+											link={innerLink}
+											sectionCompleteLabel={sectionCompleteLabel}
+											sectionIncompleteLabel={sectionIncompleteLabel}
+										/>
 									)}
 								</Flex>
 								{innerLink.links && generateSubmenu(innerLink.links)}
@@ -98,7 +104,11 @@ const SidebarMenu: React.FC<SidebarMenuProps> = ({
 										{link.name}
 									</Link>
 									{!maintenanceMode && !link.hideIcon && (
-										<StatusIcon link={link} />
+										<StatusIcon
+											link={link}
+											sectionCompleteLabel={sectionCompleteLabel}
+											sectionIncompleteLabel={sectionIncompleteLabel}
+										/>
 									)}
 								</Flex>
 								{link.links &&
