@@ -3,6 +3,7 @@ import { formSetup } from '../__mocks__/setup';
 import { FFInputEmail } from '../elements/email/email';
 import { axe } from 'jest-axe';
 import userEvent from '@testing-library/user-event';
+import { CheckDescribedByTag } from './aria-describedByTest';
 
 describe('Email input', () => {
 	test('is accessible', async () => {
@@ -91,25 +92,21 @@ describe('Email input', () => {
 
 	test('has correct describedby tag when an error is shown', () => {
 		const testId = 'email-input';
+		const name = 'email';
+
 		const handleSubmit = jest.fn();
 
-		const { getByText, getByTestId, form } = formSetup({
-			render: <FFInputEmail label="Email" testId={testId} name="email" />,
+		const { getByText, getByTestId } = formSetup({
+			render: <FFInputEmail label="Email" testId={testId} name={name} />,
 			onSubmit: handleSubmit,
 		});
 
-		userEvent.type(getByTestId(testId), 'this is not an email address');
+		const emailTest = getByTestId(testId);
+
+		userEvent.type(emailTest, 'this is not an email address');
 		getByText('Submit').click();
 
-		expect(form.getState().valid).toBeFalsy();
-
-		const errorMessage = getByText(/Invalid email address/);
-		expect(errorMessage).toBeInTheDocument();
-		expect(errorMessage).toHaveAttribute('id', 'email_error');
-		expect(getByTestId(testId)).toHaveAttribute('aria-invalid', 'true');
-		expect(getByTestId(testId)).toHaveAttribute(
-			'aria-describedby',
-			'email_error',
-		);
+		const errorElement = getByText(/Invalid email address/);
+		CheckDescribedByTag(emailTest, errorElement, name);
 	});
 });

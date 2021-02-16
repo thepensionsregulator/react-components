@@ -8,6 +8,7 @@ import {
 	calculateCursorPosition,
 	getNumberOfCommas,
 } from '../elements/helpers';
+import { CheckDescribedByTag } from './aria-describedByTest';
 
 const testId = 'currency-input';
 
@@ -345,6 +346,7 @@ describe('Currency', () => {
 
 	test('has correct describedby tag when an error is shown', () => {
 		const numberRequired = 'Currency is required';
+		const name = 'currency';
 
 		const handleSubmit = jest.fn();
 		const { getByTestId, queryByText } = formSetup({
@@ -352,7 +354,7 @@ describe('Currency', () => {
 				<FFInputCurrency
 					label="Currency"
 					testId={testId}
-					name="currency"
+					name={name}
 					required={true}
 					validate={(value) => (value ? undefined : numberRequired)}
 				/>
@@ -360,16 +362,12 @@ describe('Currency', () => {
 			onSubmit: handleSubmit,
 		});
 
-		getByTestId(testId).focus();
-		getByTestId(testId).blur();
+		const currencyTest = getByTestId(testId);
 
-		const errorMessage = queryByText(numberRequired);
-		expect(errorMessage).toBeInTheDocument();
-		expect(errorMessage).toHaveAttribute('id', 'currency_error');
-		expect(getByTestId(testId)).toHaveAttribute('aria-invalid', 'true');
-		expect(getByTestId(testId)).toHaveAttribute(
-			'aria-describedby',
-			'currency_error',
-		);
+		currencyTest.focus();
+		currencyTest.blur();
+
+		const errorElement = queryByText(numberRequired);
+		CheckDescribedByTag(currencyTest, errorElement, name);
 	});
 });

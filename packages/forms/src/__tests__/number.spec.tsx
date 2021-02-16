@@ -4,6 +4,7 @@ import { FFInputNumber } from '../elements/number/number';
 import { axe } from 'jest-axe';
 import userEvent from '@testing-library/user-event';
 import { fireEvent } from '@testing-library/react';
+import { CheckDescribedByTag } from './aria-describedByTest';
 
 const testId = 'number-input';
 
@@ -204,6 +205,7 @@ describe('Number', () => {
 
 	test('has correct describedby tag when an error is shown', () => {
 		const numberRequired = 'Number is required';
+		const name = 'numberInput';
 
 		const handleSubmit = jest.fn();
 		const { getByTestId, queryByText } = formSetup({
@@ -211,7 +213,7 @@ describe('Number', () => {
 				<FFInputNumber
 					label="Number"
 					testId={testId}
-					name="number"
+					name={name}
 					required={true}
 					maxLength={3}
 					decimalPlaces={1}
@@ -221,16 +223,12 @@ describe('Number', () => {
 			onSubmit: handleSubmit,
 		});
 
-		getByTestId(testId).focus();
-		getByTestId(testId).blur();
+		const numberTest = getByTestId(testId);
 
-		const errorMessage = queryByText(numberRequired);
-		expect(errorMessage).toBeInTheDocument();
-		expect(errorMessage).toHaveAttribute('id', 'number_error');
-		expect(getByTestId(testId)).toHaveAttribute('aria-invalid', 'true');
-		expect(getByTestId(testId)).toHaveAttribute(
-			'aria-describedby',
-			'number_error',
-		);
+		numberTest.focus();
+		numberTest.blur();
+
+		const errorElement = queryByText(numberRequired);
+		CheckDescribedByTag(numberTest, errorElement, name);
 	});
 });

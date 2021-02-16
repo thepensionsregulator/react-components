@@ -3,6 +3,7 @@ import { formSetup } from '../__mocks__/setup';
 import { FFInputPhone } from '../elements/phone/phone';
 import { axe } from 'jest-axe';
 import userEvent from '@testing-library/user-event';
+import { CheckDescribedByTag } from './aria-describedByTest';
 
 describe('Phone input', () => {
 	test('is accessible', async () => {
@@ -104,6 +105,7 @@ describe('Phone input', () => {
 	test('has correct describedby tag when an error is shown', () => {
 		const numberRequired = 'Invalid phone number';
 		const testId = 'phoneTest';
+		const name = 'phoneNumber';
 
 		const handleSubmit = jest.fn();
 		const { getByTestId, queryByText } = formSetup({
@@ -111,7 +113,7 @@ describe('Phone input', () => {
 				<FFInputPhone
 					label="Phone Number"
 					testId={testId}
-					name="phoneNumber"
+					name={name}
 					required={true}
 					validate={(number) => (number ? undefined : numberRequired)}
 				/>
@@ -119,16 +121,12 @@ describe('Phone input', () => {
 			onSubmit: handleSubmit,
 		});
 
-		getByTestId(testId).focus();
-		getByTestId(testId).blur();
+		const phoneTest = getByTestId(testId);
 
-		const errorMessage = queryByText(numberRequired);
-		expect(errorMessage).toBeInTheDocument();
-		expect(errorMessage).toHaveAttribute('id', 'phoneNumber_error');
-		expect(getByTestId(testId)).toHaveAttribute('aria-invalid', 'true');
-		expect(getByTestId(testId)).toHaveAttribute(
-			'aria-describedby',
-			'phoneNumber_error',
-		);
+		phoneTest.focus();
+		phoneTest.blur();
+
+		const errorElement = queryByText(numberRequired);
+		CheckDescribedByTag(phoneTest, errorElement, name);
 	});
 });

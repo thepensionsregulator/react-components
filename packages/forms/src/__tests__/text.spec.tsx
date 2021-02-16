@@ -6,6 +6,7 @@ import { FFInputText } from '../elements/text/text';
 import { validate, renderFields } from '../index';
 import { FieldProps } from '../renderFields';
 import { axe } from 'jest-axe';
+import { CheckDescribedByTag } from './aria-describedByTest';
 
 describe('Text input', () => {
 	test('is accessible', async () => {
@@ -150,34 +151,34 @@ describe('Text input', () => {
 	});
 
 	test('has correct describedby tag when an error is shown', () => {
+		const testId = 'texTest';
+		const name = 'textInput';
+		const error = 'This is a required field';
+		const handleSubmit = jest.fn();
+
 		const fields: FieldProps[] = [
 			{
-				name: 'line_1',
-				label: 'Address line 1',
+				name: name,
+				testId: testId,
+				label: 'Text Line 1',
 				type: 'text',
-				error: 'This is a required field',
+				error: error,
 				required: true,
 			},
 		];
 
-		const { queryByText, getByLabelText } = formSetup({
+		const { getByTestId, queryByText } = formSetup({
 			render: renderFields(fields),
 			validate: validate(fields),
+			onSubmit: handleSubmit,
 		});
 
-		getByLabelText(/Address line 1/).focus();
-		getByLabelText(/Address line 1/).blur();
+		const textTest = getByTestId(testId);
 
-		const errorMessage = queryByText(/This is a required field/);
-		expect(errorMessage).toBeInTheDocument();
-		expect(errorMessage).toHaveAttribute('id', 'line_1_error');
-		expect(getByLabelText(/Address line 1/)).toHaveAttribute(
-			'aria-invalid',
-			'true',
-		);
-		expect(getByLabelText(/Address line 1/)).toHaveAttribute(
-			'aria-describedby',
-			'line_1_error',
-		);
+		textTest.focus();
+		textTest.blur();
+
+		const errorElement = queryByText(error);
+		CheckDescribedByTag(textTest, errorElement, name);
 	});
 });
