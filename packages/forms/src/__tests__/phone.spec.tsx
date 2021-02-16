@@ -100,4 +100,35 @@ describe('Phone input', () => {
 		const label = queryByTestId('text-input');
 		expect(label).toHaveAttribute('readonly');
 	});
+
+	test('has correct describedby tag when an error is shown', () => {
+		const numberRequired = 'Invalid phone number';
+		const testId = 'phoneTest';
+
+		const handleSubmit = jest.fn();
+		const { getByTestId, queryByText } = formSetup({
+			render: (
+				<FFInputPhone
+					label="Phone Number"
+					testId={testId}
+					name="phoneNumber"
+					required={true}
+					validate={(number) => (number ? undefined : numberRequired)}
+				/>
+			),
+			onSubmit: handleSubmit,
+		});
+
+		getByTestId(testId).focus();
+		getByTestId(testId).blur();
+
+		const errorMessage = queryByText(numberRequired);
+		expect(errorMessage).toBeInTheDocument();
+		expect(errorMessage).toHaveAttribute('id', 'phoneNumber_error');
+		expect(getByTestId(testId)).toHaveAttribute('aria-invalid', 'true');
+		expect(getByTestId(testId)).toHaveAttribute(
+			'aria-describedby',
+			'phoneNumber_error',
+		);
+	});
 });

@@ -342,4 +342,34 @@ describe('Currency', () => {
 			});
 		});
 	});
+
+	test('has correct describedby tag when an error is shown', () => {
+		const numberRequired = 'Currency is required';
+
+		const handleSubmit = jest.fn();
+		const { getByTestId, queryByText } = formSetup({
+			render: (
+				<FFInputCurrency
+					label="Currency"
+					testId={testId}
+					name="currency"
+					required={true}
+					validate={(value) => (value ? undefined : numberRequired)}
+				/>
+			),
+			onSubmit: handleSubmit,
+		});
+
+		getByTestId(testId).focus();
+		getByTestId(testId).blur();
+
+		const errorMessage = queryByText(numberRequired);
+		expect(errorMessage).toBeInTheDocument();
+		expect(errorMessage).toHaveAttribute('id', 'currency_error');
+		expect(getByTestId(testId)).toHaveAttribute('aria-invalid', 'true');
+		expect(getByTestId(testId)).toHaveAttribute(
+			'aria-describedby',
+			'currency_error',
+		);
+	});
 });

@@ -40,9 +40,9 @@ export const FormLabelText: React.FC = ({ children }) => (
 );
 
 export const ErrorMessage: React.FC<ErrorMessageProps> = ({ id, children }) => (
-	<div id={id} className={styles.errorMessage}>
+	<p id={id} className={styles.errorMessage}>
 		{children}
-	</div>
+	</p>
 );
 
 type ErrorMessageProps = {

@@ -148,4 +148,36 @@ describe('Text input', () => {
 		expect(textInput).toHaveAttribute('maxlength');
 		expect(textInput).toHaveValue('ABC');
 	});
+
+	test('has correct describedby tag when an error is shown', () => {
+		const fields: FieldProps[] = [
+			{
+				name: 'line_1',
+				label: 'Address line 1',
+				type: 'text',
+				error: 'This is a required field',
+				required: true,
+			},
+		];
+
+		const { queryByText, getByLabelText } = formSetup({
+			render: renderFields(fields),
+			validate: validate(fields),
+		});
+
+		getByLabelText(/Address line 1/).focus();
+		getByLabelText(/Address line 1/).blur();
+
+		const errorMessage = queryByText(/This is a required field/);
+		expect(errorMessage).toBeInTheDocument();
+		expect(errorMessage).toHaveAttribute('id', 'line_1_error');
+		expect(getByLabelText(/Address line 1/)).toHaveAttribute(
+			'aria-invalid',
+			'true',
+		);
+		expect(getByLabelText(/Address line 1/)).toHaveAttribute(
+			'aria-describedby',
+			'line_1_error',
+		);
+	});
 });

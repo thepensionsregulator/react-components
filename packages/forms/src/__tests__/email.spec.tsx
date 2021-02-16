@@ -88,4 +88,28 @@ describe('Email input', () => {
 		const label = queryByTestId('text-input');
 		expect(label).toHaveAttribute('readonly');
 	});
+
+	test('has correct describedby tag when an error is shown', () => {
+		const testId = 'email-input';
+		const handleSubmit = jest.fn();
+
+		const { getByText, getByTestId, form } = formSetup({
+			render: <FFInputEmail label="Email" testId={testId} name="email" />,
+			onSubmit: handleSubmit,
+		});
+
+		userEvent.type(getByTestId(testId), 'this is not an email address');
+		getByText('Submit').click();
+
+		expect(form.getState().valid).toBeFalsy();
+
+		const errorMessage = getByText(/Invalid email address/);
+		expect(errorMessage).toBeInTheDocument();
+		expect(errorMessage).toHaveAttribute('id', 'email_error');
+		expect(getByTestId(testId)).toHaveAttribute('aria-invalid', 'true');
+		expect(getByTestId(testId)).toHaveAttribute(
+			'aria-describedby',
+			'email_error',
+		);
+	});
 });

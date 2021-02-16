@@ -201,4 +201,36 @@ describe('Number', () => {
 			expect(getByTestId(testId)).toHaveValue(1.2);
 		});
 	});
+
+	test('has correct describedby tag when an error is shown', () => {
+		const numberRequired = 'Number is required';
+
+		const handleSubmit = jest.fn();
+		const { getByTestId, queryByText } = formSetup({
+			render: (
+				<FFInputNumber
+					label="Number"
+					testId={testId}
+					name="number"
+					required={true}
+					maxLength={3}
+					decimalPlaces={1}
+					validate={(value) => (value ? undefined : numberRequired)}
+				/>
+			),
+			onSubmit: handleSubmit,
+		});
+
+		getByTestId(testId).focus();
+		getByTestId(testId).blur();
+
+		const errorMessage = queryByText(numberRequired);
+		expect(errorMessage).toBeInTheDocument();
+		expect(errorMessage).toHaveAttribute('id', 'number_error');
+		expect(getByTestId(testId)).toHaveAttribute('aria-invalid', 'true');
+		expect(getByTestId(testId)).toHaveAttribute(
+			'aria-describedby',
+			'number_error',
+		);
+	});
 });
