@@ -1,9 +1,15 @@
 export const CheckDescribedByTag = (
+	getByText,
 	inputElement: HTMLElement,
-	errorElement: HTMLElement,
-	name: string,
+	errorText: string,
 ) => {
+	const name = inputElement.getAttribute('name');
 	const errorName = `${name}_error`;
+
+	inputElement.focus();
+	inputElement.blur();
+
+	const errorElement = getByText(errorText);
 
 	expect(errorElement).toBeInTheDocument();
 	expect(errorElement).toHaveAttribute('id', errorName);

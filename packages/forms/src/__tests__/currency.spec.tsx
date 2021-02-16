@@ -349,7 +349,7 @@ describe('Currency', () => {
 		const name = 'currency';
 
 		const handleSubmit = jest.fn();
-		const { getByTestId, queryByText } = formSetup({
+		const { getByTestId, getByText } = formSetup({
 			render: (
 				<FFInputCurrency
 					label="Currency"
@@ -363,11 +363,6 @@ describe('Currency', () => {
 		});
 
 		const currencyTest = getByTestId(testId);
-
-		currencyTest.focus();
-		currencyTest.blur();
-
-		const errorElement = queryByText(numberRequired);
-		CheckDescribedByTag(currencyTest, errorElement, name);
+		CheckDescribedByTag(getByText, currencyTest, numberRequired);
 	});
 });

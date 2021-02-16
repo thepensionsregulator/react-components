@@ -167,18 +167,13 @@ describe('Text input', () => {
 			},
 		];
 
-		const { getByTestId, queryByText } = formSetup({
+		const { getByTestId, getByText } = formSetup({
 			render: renderFields(fields),
 			validate: validate(fields),
 			onSubmit: handleSubmit,
 		});
 
 		const textTest = getByTestId(testId);
-
-		textTest.focus();
-		textTest.blur();
-
-		const errorElement = queryByText(error);
-		CheckDescribedByTag(textTest, errorElement, name);
+		CheckDescribedByTag(getByText, textTest, error);
 	});
 });

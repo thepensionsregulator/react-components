@@ -103,10 +103,6 @@ describe('Email input', () => {
 
 		const emailTest = getByTestId(testId);
 
-		userEvent.type(emailTest, 'this is not an email address');
-		getByText('Submit').click();
-
-		const errorElement = getByText(/Invalid email address/);
-		CheckDescribedByTag(emailTest, errorElement, name);
+		CheckDescribedByTag(getByText, emailTest, 'Invalid email address');
 	});
 });

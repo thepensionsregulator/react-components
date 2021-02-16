@@ -108,7 +108,7 @@ describe('Phone input', () => {
 		const name = 'phoneNumber';
 
 		const handleSubmit = jest.fn();
-		const { getByTestId, queryByText } = formSetup({
+		const { getByTestId, getByText } = formSetup({
 			render: (
 				<FFInputPhone
 					label="Phone Number"
@@ -122,11 +122,6 @@ describe('Phone input', () => {
 		});
 
 		const phoneTest = getByTestId(testId);
-
-		phoneTest.focus();
-		phoneTest.blur();
-
-		const errorElement = queryByText(numberRequired);
-		CheckDescribedByTag(phoneTest, errorElement, name);
+		CheckDescribedByTag(getByText, phoneTest, numberRequired);
 	});
 });
