@@ -11,6 +11,7 @@
 
 	a {
 		text-decoration: none;
+		width: 100%;
 
 		&:hover {
 			color: $colors-neutral-a1 !important;
@@ -19,6 +20,13 @@
 
 		&:focus {
 			color: $colors-neutral-8 !important;
+		}
+
+		> div {
+			height: 100%;
+			> svg {
+				min-width: 22px;
+			}
 		}
 	}
 

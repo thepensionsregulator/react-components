@@ -32,9 +32,9 @@ const actuary: Actuary = {
 
 describe('Actuary Card', () => {
 	describe('Preview', () => {
-		let component, findByText;
+		let component, findByText, findAllByText, findByTitle;
 		beforeEach(() => {
-			const { container, getByText } = render(
+			const { container, getByText, getAllByText, queryByTitle } = render(
 				<ActuaryCard
 					actuary={actuary}
 					complete={true}
@@ -48,6 +48,8 @@ describe('Actuary Card', () => {
 
 			component = container;
 			findByText = getByText;
+			findAllByText = getAllByText;
+			findByTitle = queryByTitle;
 		});
 
 		test('no Violations', async () => {
@@ -63,7 +65,8 @@ describe('Actuary Card', () => {
 		});
 
 		test('initial status is correct', () => {
-			expect(findByText('Confirmed')).toBeDefined();
+			expect(findAllByText('Confirmed').length).toEqual(2);
+			expect(findByTitle('Confirmed')).toBeDefined();
 			expect(findByText('Confirm details are correct.')).toBeDefined();
 		});
 
