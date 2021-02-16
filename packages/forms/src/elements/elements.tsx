@@ -4,7 +4,7 @@ import styles from './elements.module.scss';
 import { ReactNode } from 'react';
 
 interface StyledInputLabelProps {
-	element?: 'label' | 'div';
+	element?: 'label' | 'div' | 'fieldset';
 	isError?: boolean;
 	className?: string;
 	cfg?: FlexProps | SpaceProps;
@@ -35,9 +35,22 @@ export const StyledInputLabel: React.FC<StyledInputLabelProps> = ({
 	);
 };
 
-export const FormLabelText: React.FC = ({ children }) => (
-	<div className={styles.labelText}>{children}</div>
-);
+interface FormLabelTextProps {
+	element?: 'div' | 'legend' | 'label' | null;
+}
+
+export const FormLabelText: React.FC<FormLabelTextProps> = ({ 	
+	element = 'div',
+	children 
+}) => { 
+	return createElement(
+		element,
+		{
+			className: styles.labelText,
+		},
+		children,
+	);
+};
 
 export const ErrorMessage: React.FC<ErrorMessageProps> = ({ id, children }) => (
 	<p id={id} className={styles.errorMessage}>
@@ -51,6 +64,7 @@ type ErrorMessageProps = {
 };
 
 type InputElementHeadingProps = {
+	element?: 'div' | 'legend' | null;
 	label?: string;
 	errorId?: string;
 	required?: boolean;
@@ -58,6 +72,7 @@ type InputElementHeadingProps = {
 	meta?: any;
 };
 export const InputElementHeading: React.FC<InputElementHeadingProps> = ({
+	element = 'div',
 	label,
 	errorId,
 	required,
@@ -67,7 +82,7 @@ export const InputElementHeading: React.FC<InputElementHeadingProps> = ({
 	return (
 		<>
 			{label && (
-				<FormLabelText>
+				<FormLabelText element={element}>
 					{label} {!required && '(optional)'}
 				</FormLabelText>
 			)}
