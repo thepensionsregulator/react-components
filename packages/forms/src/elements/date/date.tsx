@@ -155,7 +155,7 @@ export const InputDate: React.FC<InputDateComponentProps> = memo(
 		return (
 			<StyledInputLabel
 				isError={meta && meta.touched && meta.error}
-				element="div"
+				element="fieldset"
 				onFocus={input.onFocus}
 				onBlur={input.onBlur}
 				data-testid={`date-input-${testId}`}
@@ -164,12 +164,13 @@ export const InputDate: React.FC<InputDateComponentProps> = memo(
 					cfg,
 				)}
 			>
-				<InputElementHeading
-					label={label}
-					required={required}
-					hint={hint}
-					meta={meta}
-				/>
+					<InputElementHeading
+						element='legend'
+						label={label}
+						required={required}
+						hint={hint}
+						meta={meta}
+					/>
 				<Flex>
 					{!hideDay && (
 						<DateInputField
