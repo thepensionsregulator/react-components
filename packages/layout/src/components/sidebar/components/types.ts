@@ -27,4 +27,12 @@ export type SidebarMenuProps = {
 	links: SidebarLinkProps[];
 	maintenanceMode: boolean;
 	collapsed: boolean;
+	sectionCompleteLabel: string;
+	sectionIncompleteLabel: string;
+};
+
+export type StatusIconProps = {
+	link: SidebarLinkProps;
+	sectionCompleteLabel: string;
+	sectionIncompleteLabel: string;
 };

@@ -28,9 +28,9 @@ const independentTrustee: IndependentTrustee = {
 
 describe('Professional / Independent Trustee Card', () => {
 	describe('Preview', () => {
-		let component, findByText;
+		let component, findByText, findAllByText, findByTitle;
 		beforeEach(() => {
-			const { container, getByText } = render(
+			const { container, getByText, getAllByText, queryByTitle } = render(
 				<IndependentTrusteeCard
 					independentTrustee={independentTrustee}
 					complete={true}
@@ -42,6 +42,8 @@ describe('Professional / Independent Trustee Card', () => {
 
 			component = container;
 			findByText = getByText;
+			findAllByText = getAllByText;
+			findByTitle = queryByTitle;
 		});
 
 		test('no Violations', async () => {
@@ -58,7 +60,8 @@ describe('Professional / Independent Trustee Card', () => {
 		});
 
 		test('initial status is correct', () => {
-			expect(findByText('Confirmed')).toBeDefined();
+			expect(findAllByText('Confirmed').length).toEqual(2);
+			expect(findByTitle('Confirmed')).toBeDefined();
 			expect(findByText('Confirm details are correct.')).toBeDefined();
 		});
 
