@@ -3,6 +3,7 @@ import { formSetup } from '../__mocks__/setup';
 import { FFInputEmail } from '../elements/email/email';
 import { axe } from 'jest-axe';
 import userEvent from '@testing-library/user-event';
+import { CheckDescribedByTag } from '../utils/aria-describedByTest';
 
 describe('Email input', () => {
 	test('is accessible', async () => {
@@ -87,5 +88,21 @@ describe('Email input', () => {
 
 		const label = queryByTestId('text-input');
 		expect(label).toHaveAttribute('readonly');
+	});
+
+	test('has correct describedby tag when an error is shown', () => {
+		const testId = 'email-input';
+		const name = 'email';
+
+		const handleSubmit = jest.fn();
+
+		const { getByText, getByTestId } = formSetup({
+			render: <FFInputEmail label="Email" testId={testId} name={name} />,
+			onSubmit: handleSubmit,
+		});
+
+		const emailTest = getByTestId(testId);
+
+		CheckDescribedByTag(getByText, emailTest, 'Invalid email address');
 	});
 });

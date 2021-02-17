@@ -1,4 +1,4 @@
-import { classNames, filterProps } from '../utils';
+import { classNames, filterProps, toKebabCase } from '../utils';
 // import { matchClassName } from '../utils';
 
 describe('classNames', () => {
@@ -61,5 +61,13 @@ describe('filterProps', () => {
 	test('filterProps will pass on truthy names', () => {
 		const result: any = filterProps({ 'some-other-style-name': true });
 		expect(result['some-other-style-name']).toBeTruthy();
+	});
+});
+
+describe('toKebabCase', () => {
+	test('turns strings into kebab case', () => {
+		expect(toKebabCase('ThisIsMyText')).toEqual('this-is-my-text');
+		expect(toKebabCase('This Is My Text')).toEqual('this-is-my-text');
+		expect(toKebabCase('ThisIsMy Text')).toEqual('this-is-my-text');
 	});
 });

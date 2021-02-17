@@ -3,6 +3,7 @@ import { formSetup } from '../__mocks__/setup';
 import { FFInputPhone } from '../elements/phone/phone';
 import { axe } from 'jest-axe';
 import userEvent from '@testing-library/user-event';
+import { CheckDescribedByTag } from '../utils/aria-describedByTest';
 
 describe('Phone input', () => {
 	test('is accessible', async () => {
@@ -99,5 +100,28 @@ describe('Phone input', () => {
 
 		const label = queryByTestId('text-input');
 		expect(label).toHaveAttribute('readonly');
+	});
+
+	test('has correct describedby tag when an error is shown', () => {
+		const numberRequired = 'Invalid phone number';
+		const testId = 'phoneTest';
+		const name = 'phoneNumber';
+
+		const handleSubmit = jest.fn();
+		const { getByTestId, getByText } = formSetup({
+			render: (
+				<FFInputPhone
+					label="Phone Number"
+					testId={testId}
+					name={name}
+					required={true}
+					validate={(number) => (number ? undefined : numberRequired)}
+				/>
+			),
+			onSubmit: handleSubmit,
+		});
+
+		const phoneTest = getByTestId(testId);
+		CheckDescribedByTag(getByText, phoneTest, numberRequired);
 	});
 });
