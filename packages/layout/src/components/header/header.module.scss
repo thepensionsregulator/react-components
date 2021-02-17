@@ -19,3 +19,14 @@
 .img {
 	max-width: 180px;
 }
+
+a.headerlink {
+	font-weight: $font-weight-3;
+	line-height: $line-height-3;
+	&:not(:focus) {
+		color: $white;
+	}
+	&:focus {
+		color: $colors-neutral-8;
+	}
+}
