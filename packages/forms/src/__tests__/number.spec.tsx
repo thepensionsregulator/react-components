@@ -4,7 +4,7 @@ import { FFInputNumber } from '../elements/number/number';
 import { axe } from 'jest-axe';
 import userEvent from '@testing-library/user-event';
 import { fireEvent } from '@testing-library/react';
-import { CheckDescribedByTag } from './aria-describedByTest';
+import { CheckDescribedByTag } from '../utils/aria-describedByTest';
 
 const testId = 'number-input';
 

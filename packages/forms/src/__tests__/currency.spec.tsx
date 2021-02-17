@@ -8,7 +8,7 @@ import {
 	calculateCursorPosition,
 	getNumberOfCommas,
 } from '../elements/helpers';
-import { CheckDescribedByTag } from './aria-describedByTest';
+import { CheckDescribedByTag } from '../utils/aria-describedByTest';
 
 const testId = 'currency-input';
 

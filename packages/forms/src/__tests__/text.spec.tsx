@@ -6,7 +6,7 @@ import { FFInputText } from '../elements/text/text';
 import { validate, renderFields } from '../index';
 import { FieldProps } from '../renderFields';
 import { axe } from 'jest-axe';
-import { CheckDescribedByTag } from './aria-describedByTest';
+import { CheckDescribedByTag } from '../utils/aria-describedByTest';
 
 describe('Text input', () => {
 	test('is accessible', async () => {

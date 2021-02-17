@@ -3,7 +3,7 @@ import { formSetup } from '../__mocks__/setup';
 import { FFInputEmail } from '../elements/email/email';
 import { axe } from 'jest-axe';
 import userEvent from '@testing-library/user-event';
-import { CheckDescribedByTag } from './aria-describedByTest';
+import { CheckDescribedByTag } from '../utils/aria-describedByTest';
 
 describe('Email input', () => {
 	test('is accessible', async () => {
