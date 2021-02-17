@@ -33,6 +33,7 @@ const InputCurrency: React.FC<InputCurrencyProps> = React.memo(
 		hint,
 		input,
 		testId,
+		name,
 		meta,
 		required,
 		placeholder,
@@ -177,8 +178,8 @@ const InputCurrency: React.FC<InputCurrencyProps> = React.memo(
 				const myEvent = new Event('blur', { bubbles: true });
 				formatInitialValue(initialValue);
 				/*
-					When initialValue changes from null to a numeric value there is a situation where the format 
-					is not correctly applied because somehow the blur event triggers before the value is formatted. 
+					When initialValue changes from null to a numeric value there is a situation where the format
+					is not correctly applied because somehow the blur event triggers before the value is formatted.
 					Delaying minimally the execution of the blur event solves this problem.
 				*/
 				setTimeout(() => {
@@ -192,6 +193,8 @@ const InputCurrency: React.FC<InputCurrencyProps> = React.memo(
 			}
 		}, [initialValue]);
 
+		const errorId = `${name}_error`;
+
 		return (
 			<StyledInputLabel
 				isError={meta && meta.touched && meta.error}
@@ -200,6 +203,7 @@ const InputCurrency: React.FC<InputCurrencyProps> = React.memo(
 			>
 				<InputElementHeading
 					label={label}
+					errorId={errorId}
 					required={optionalText !== undefined ? !optionalText : required}
 					hint={hint}
 					meta={meta}
@@ -211,6 +215,7 @@ const InputCurrency: React.FC<InputCurrencyProps> = React.memo(
 					width={width}
 					testId={testId}
 					label={label}
+					errorId={errorId}
 					touched={meta && meta.touched && meta.error}
 					placeholder={placeholder}
 					readOnly={readOnly}
@@ -233,7 +238,11 @@ export const FFInputCurrency: React.FC<FieldProps> = (fieldProps) => {
 		<Field
 			{...fieldProps}
 			render={(props) => (
-				<InputCurrency {...props} initialValue={fieldProps.initialValue} />
+				<InputCurrency
+					{...props}
+					name={fieldProps.name}
+					initialValue={fieldProps.initialValue}
+				/>
 			)}
 		/>
 	);

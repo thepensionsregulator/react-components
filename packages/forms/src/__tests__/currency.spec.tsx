@@ -8,6 +8,7 @@ import {
 	calculateCursorPosition,
 	getNumberOfCommas,
 } from '../elements/helpers';
+import { CheckDescribedByTag } from '../utils/aria-describedByTest';
 
 const testId = 'currency-input';
 
@@ -352,5 +353,27 @@ describe('Currency', () => {
 				expect(newCursorPosition).toStrictEqual([7, 7]);
 			});
 		});
+	});
+
+	test('has correct describedby tag when an error is shown', () => {
+		const numberRequired = 'Currency is required';
+		const name = 'currency';
+
+		const handleSubmit = jest.fn();
+		const { getByTestId, getByText } = formSetup({
+			render: (
+				<FFInputCurrency
+					label="Currency"
+					testId={testId}
+					name={name}
+					required={true}
+					validate={(value) => (value ? undefined : numberRequired)}
+				/>
+			),
+			onSubmit: handleSubmit,
+		});
+
+		const currencyTest = getByTestId(testId);
+		CheckDescribedByTag(getByText, currencyTest, numberRequired);
 	});
 });

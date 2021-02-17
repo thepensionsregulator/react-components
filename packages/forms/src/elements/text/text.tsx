@@ -13,6 +13,7 @@ const InputText: React.FC<InputTextProps> = React.forwardRef(
 	(
 		{
 			label,
+			name,
 			ariaLabel,
 			hint,
 			input,
@@ -36,12 +37,15 @@ const InputText: React.FC<InputTextProps> = React.forwardRef(
 			}
 		}, [updatedValue]);
 
+		const errorId = `${name}_error`;
+
 		return (
 			<StyledInputLabel
 				isError={meta && meta.touched && meta.error}
 				cfg={Object.assign({ flexDirection: 'column', mt: 1 }, cfg)}
 			>
 				<InputElementHeading
+					errorId={errorId}
 					label={label}
 					required={required}
 					hint={hint}
@@ -53,6 +57,7 @@ const InputText: React.FC<InputTextProps> = React.forwardRef(
 					type="text"
 					width={width}
 					testId={testId}
+					errorId={errorId}
 					label={ariaLabel ? ariaLabel : label}
 					placeholder={placeholder}
 					disabled={disabled}
