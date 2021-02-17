@@ -38,6 +38,17 @@ describe('Number', () => {
 			userEvent.type(getByTestId(testId), '123');
 			expect(getByTestId(testId)).toHaveValue(123);
 		});
+
+		test('label renders with an id attribute', () => {
+			const { getByText } = formSetup({
+				render: numberComponent,
+			});
+
+			const label = getByText(/Number/);
+
+			expect(label).toBeDefined();
+			expect(label).toHaveAttribute('id', 'number-label');
+		});
 	});
 
 	describe('formatting values with decimal places specified on onBlur event', () => {

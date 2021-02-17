@@ -46,6 +46,7 @@ const InputText: React.FC<InputTextProps> = React.forwardRef(
 					required={required}
 					hint={hint}
 					meta={meta}
+					inputName={input.name}
 				/>
 				<Input
 					parentRef={ref}

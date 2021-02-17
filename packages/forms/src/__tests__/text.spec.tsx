@@ -19,14 +19,15 @@ describe('Text input', () => {
 	});
 
 	test('renders label', () => {
-		const { queryByTestId } = formSetup({
+		const { getByText } = formSetup({
 			render: (
 				<FFInputText label="Name" testId="text-input" name="name" type="text" />
 			),
 		});
 
-		const label = queryByTestId('text-input');
+		const label = getByText(/Name/);
 		expect(label).toBeInTheDocument();
+		expect(label).toHaveAttribute('id', 'name-label');
 	});
 
 	test('renders label with title optional', () => {
