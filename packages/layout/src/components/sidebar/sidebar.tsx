@@ -100,63 +100,65 @@ export const Sidebar: React.FC<SidebarProps> = ({
 	}, [location.pathname]);
 
 	return (
-		<nav className={styles.sidebar}>
-			<Flex
-				cfg={{ flexDirection: 'column', mt: 8 }}
-				className={styles.sidebarMenu}
-			>
-				<Flex className={isHomePageActive ? styles.activeLink : ''}>
-					<Link
-						cfg={{
-							fontWeight: 3,
-							color: 'primary.2',
-							textAlign: 'left',
-							fontSize: 4,
-						}}
-						onClick={() => history.push(titlePath)}
-					>
-						{title}
-					</Link>
+		<aside>
+			<nav className={styles.sidebar}>
+				<Flex
+					cfg={{ flexDirection: 'column', mt: 8 }}
+					className={styles.sidebarMenu}
+				>
+					<Flex className={isHomePageActive ? styles.activeLink : ''}>
+						<Link
+							cfg={{
+								fontWeight: 3,
+								color: 'primary.2',
+								textAlign: 'left',
+								fontSize: 4,
+							}}
+							onClick={() => history.push(titlePath)}
+						>
+							{title}
+						</Link>
+					</Flex>
+					<Flex cfg={{ justifyContent: 'space-between', mt: 4, mb: 2 }}>
+						<P
+							cfg={{
+								color: 'neutral.8',
+								fontSize: 3,
+								fontWeight: 3,
+								lineHeight: 6,
+							}}
+						>
+							Section
+						</P>
+						<P
+							cfg={{
+								color: 'neutral.8',
+								fontSize: 3,
+								fontWeight: 3,
+								lineHeight: 6,
+							}}
+						>
+							Progress {totalCompleted.length} / {totalSections.length}
+						</P>
+					</Flex>
 				</Flex>
-				<Flex cfg={{ justifyContent: 'space-between', mt: 4, mb: 2 }}>
-					<P
-						cfg={{
-							color: 'neutral.8',
-							fontSize: 3,
-							fontWeight: 3,
-							lineHeight: 6,
-						}}
-					>
-						Section
-					</P>
-					<P
-						cfg={{
-							color: 'neutral.8',
-							fontSize: 3,
-							fontWeight: 3,
-							lineHeight: 6,
-						}}
-					>
-						Progress {totalCompleted.length} / {totalSections.length}
-					</P>
-				</Flex>
-			</Flex>
-			<ul className={styles.list}>
-				{sections
-					.sort((a, b) => a.order - b.order)
-					.map((item, key) => (
-						<li key={key}>
-							<SidebarMenu
-								title={item.title}
-								links={item.links}
-								maintenanceMode={maintenanceMode}
-								collapsed={collapseNested}
-								sectionCompleteLabel={sectionCompleteLabel}
-								sectionIncompleteLabel={sectionIncompleteLabel}
-							/>
-						</li>
-					))}
-			</ul>
-		</nav>
+				<ul className={styles.list}>
+					{sections
+						.sort((a, b) => a.order - b.order)
+						.map((item, key) => (
+							<li key={key}>
+								<SidebarMenu
+									title={item.title}
+									links={item.links}
+									maintenanceMode={maintenanceMode}
+									collapsed={collapseNested}
+									sectionCompleteLabel={sectionCompleteLabel}
+									sectionIncompleteLabel={sectionIncompleteLabel}
+								/>
+							</li>
+						))}
+				</ul>
+			</nav>
+		</aside>
 	);
 };
