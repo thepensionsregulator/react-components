@@ -33,10 +33,10 @@
 		"report-coverage": "codecov"
 	},
 	"peerDependencies": {
-		"@tpr/core": "^2.4.19",
-		"@tpr/forms": "^3.0.51",
-		"@tpr/icons": "^3.0.21",
-		"@tpr/theming": "^2.2.17",
+		"@tpr/core": "^2.4.17",
+		"@tpr/forms": "^3.0.49",
+		"@tpr/icons": "^3.0.19",
+		"@tpr/theming": "^2.2.16",
 		"react": "^16.12.0",
 		"react-dom": "^16.12.0"
 	},
