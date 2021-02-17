@@ -8,8 +8,8 @@ series [How to Contribute to an Open Source Project on GitHub][egghead]
 ## Project setup
 
 1. Fork and clone the repo
-2. `npm` or `yarn install` to setup and validate your clone of the project
-3. `npm` or `yarn build` to lerna link dependencies
+2. `yarn install` to setup and validate your clone of the project
+3. `yarn build` to lerna link dependencies
 4. Create a branch for your PR
 5. Create `.env` file in the root of the project and add environment variables (GATSBY_LOOKUP_API_URL)
 6. `yarn docz:dev` to start gatsby components site for components development
@@ -45,9 +45,9 @@ Automatic deployment:
 
 Manual deployment:
 
-- When you're ready to deploy `minor` or `major` versions you can do so from updated `develop` branch in your terminal running command `yarn deploy` and follow the instructions in your terminal. `Lerna` will bump all versions to chosen ones and will push git refs to Github and new packages to the NPM registry.
+- When you're ready to deploy `minor` or `major` versions you can do so from updated `develop` branch in your terminal running command `yarn deploy --message "Release AB#12345"` and follow the instructions in your terminal. Update `AB#12345` to refer to the Azure Boards work item relevant to your work. `Lerna` will bump all versions to chosen ones and will push git refs to Github and new packages to the NPM registry.
 
-- If CircleCI doesn't automatically publish, you can also run `yarn deploy --dist-tag next` locally to add the `next` tag.
+- If CircleCI doesn't automatically publish, you can also run `yarn deploy --message "Release AB#12345" --dist-tag next` locally to add the `next` tag.
 
 - Sometimes, you need github to publish to npm on your behalf. To do this, try `npx lerna publish from-git`
 
