@@ -1,0 +1,62 @@
+---
+name: Link
+menu: Core
+route: /core/links
+---
+
+import { Props } from 'docz';
+import { Playground } from '@playground';
+import { Link } from './links';
+
+# Link
+
+To navigate to a new page.
+
+## When To Use
+
+A link means redirecting the user to a new page in the app, or outside of it.
+
+## Usage
+
+```js
+import { Link } from '@tpr/core';
+```
+
+## Examples
+
+### Basic usage
+
+<Playground>
+	<Link onClick={() => console.log('Back clicked')} >Click to go back</Link>
+</Playground>
+
+### Usage with props
+
+<Playground>
+	<Link cfg={{ mr: 3 }} href="https://www.thepensionsregulator.gov.uk">Home</Link>
+	<Link cfg={{ mr: 3 }} href="https://www.thepensionsregulator.gov.uk">Gallery</Link>
+	<Link cfg={{ mr: 3 }} onClick={() => console.log('Log out clicked')} underline={true}>
+		Log out
+	</Link>
+</Playground>
+
+### Usage with colours from the theme
+
+<Playground>
+	<Link cfg={{ mr: 3, color: 'danger.2' }} href="https://www.thepensionsregulator.gov.uk">Home</Link>
+	<Link cfg={{ mr: 3, color: 'warning.1' }} href="https://www.thepensionsregulator.gov.uk">Gallery</Link>
+	<Link cfg={{ mr: 3, color: 'success.1' }} onClick={() => console.log('Log out clicked')}>Log out</Link>
+</Playground>
+
+## API
+
+```
+Accepted config props: SpaceProps, ColorProps, TypographyProps, LayoutProps
+```
+
+<Props of={Link} />
+
+| Property         | Required | Type             | Description                                                                              |
+| ---------------- | -------- | ---------------- | ---------------------------------------------------------------------------------------- |
+| href             | false    | string           | the href to navigate to when the link is clicked                                         |
+| onClick          | false    | function         | javascript function to execute on click, use instead of an href when required            |

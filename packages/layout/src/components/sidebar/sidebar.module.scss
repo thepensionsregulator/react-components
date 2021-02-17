@@ -1,4 +1,5 @@
 @import '@tpr/theming/lib/variables.scss';
+@import '@tpr/core/lib/components/typography/typography.module.scss';
 
 .sidebar {
 	display: flex;
@@ -6,6 +7,69 @@
 	flex: 0 0 auto;
 	width: $sidebar-width;
 	background: $white;
+	padding-left: $space-6;
+
+	a {
+		text-decoration: none;
+		width: 100%;
+
+		&:hover {
+			color: $colors-neutral-a1 !important;
+			text-decoration: underline;
+		}
+
+		&:focus {
+			color: $colors-neutral-8 !important;
+		}
+
+		> div {
+			height: 100%;
+			> svg {
+				min-width: 22px;
+			}
+		}
+	}
+
+	div.activeLink {
+		position: relative;
+
+		a {
+			text-decoration: underline;
+
+			&:hover {
+				text-decoration: underline !important;
+			}
+
+			&:focus {
+				color: $colors-neutral-8 !important;
+				text-decoration: none;
+			}
+
+			&::before {
+				content: ' ';
+				position: absolute;
+				left: -20px;
+				top: -8px;
+				height: 100%;
+				min-height: 40px;
+				width: 5px;
+				background: $colors-primary-3;
+				// to hide outline from pseudo element
+				box-shadow: 0px 0px 0px 1px white;
+			}
+		}
+	}
+}
+
+.list {
+	list-style-type: none;
+	margin: 0;
+	padding: 0;
+
+	li {
+		margin: 0;
+		padding: 0;
+	}
 }
 
 .sidebarMenu {
@@ -16,40 +80,17 @@
 	border-bottom: none;
 }
 
-.activeLink {
-	position: relative;
-}
-
-.activeLink::before {
-	content: ' ';
-	position: absolute;
-	left: -20px;
-	top: -8px;
-	height: 100%;
-	min-height: 40px;
-	width: 5px;
-	background: $colors-primary-3;
-	// to hide outline from pseudo element
-	box-shadow: 0px 0px 0px 1px white;
-}
-
 .nestedWrapper {
-
 	&.collapsed {
 		height: 0;
 		overflow: hidden;
 	}
 
 	.nested {
-		position: relative;
-		
-		.line {
-			position: absolute;
-			top: 50%;
-			left: -$space-6;
-			width: $space-5;
-			height: 1px;
-			border-bottom: 1px solid $colors-primary-3;
+		&::before {
+			content: '—';
+			color: $colors-neutral-8;
+			padding-right: 2px;
 		}
 	}
 }

@@ -1,6 +1,6 @@
 {
 	"name": "@tpr/core",
-	"version": "2.4.7",
+	"version": "2.4.19",
 	"description": "TPR Core components",
 	"author": "David Alekna <david.alekna@tpr.gov.uk>",
 	"license": "MIT",
@@ -31,24 +31,26 @@
 		"report-coverage": "codecov"
 	},
 	"peerDependencies": {
+		"@tpr/theming": "^2.2.16",
 		"react": "^16.12.0",
 		"react-dom": "^16.12.0"
 	},
 	"dependencies": {
-		"@xstate/react": "^0.8.1",
-		"final-form": "^4.20.0",
-		"node-sass": "^4.14.0",
-		"qs": "^6.9.4",
-		"react-final-form": "^6.5.0",
-		"tslib": "^2.0.0",
-		"xstate": "^4.10.0"
+		"@xstate/react": "^1.2.2",
+		"final-form": "^4.20.1",
+		"node-sass": "^5.0.0",
+		"qs": "^6.9.6",
+		"react-final-form": "^6.5.2",
+		"tslib": "^2.1.0",
+		"xstate": "^4.16.2"
 	},
 	"publishConfig": {
 		"access": "public"
 	},
 	"devDependencies": {
 		"@tpr/theming": "file:../theming",
-		"cross-env": "^7.0.2"
+		"cross-env": "^7.0.3",
+		"postcss": "^8.2.6"
 	},
 	"gitHead": "57aec9c9de22596d6343bae07eb6b198322a0bee"
 }

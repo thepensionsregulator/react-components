@@ -3,10 +3,6 @@ import { Checkbox } from '@tpr/forms';
 import { Flex, P, Hr, classNames } from '@tpr/core';
 import { UnderlinedButton } from '../../../components/button';
 import { useInsurerContext } from '../../context';
-import {
-	PhonePreview,
-	EmailPreview,
-} from '../../../common/views/preview/components';
 import styles from './preview.module.scss';
 
 export const Preview: React.FC<any> = () => {
@@ -42,23 +38,12 @@ export const Preview: React.FC<any> = () => {
 					</Flex>
 				</Flex>
 
-				{/* Contact details block: display only	 */}
+				{/* Insurer reference number */}
 				<Flex
 					cfg={{ width: 5, flex: '0 0 auto', flexDirection: 'column', pl: 4 }}
 				>
-					<UnderlinedButton>{i18n.preview.buttons.four}</UnderlinedButton>
-					<Flex cfg={{ my: 2, flexDirection: 'column' }}>
-						{insurer.telephoneNumber && (
-							<PhonePreview value={insurer.telephoneNumber} />
-						)}
-						{insurer.emailAddress && (
-							<EmailPreview value={insurer.emailAddress} />
-						)}
-					</Flex>
-
-					{/* Contact details block: display only	 */}
 					<UnderlinedButton isOpen={false} onClick={() => send('EDIT_INSURER')}>
-						{i18n.preview.buttons.five}
+						{i18n.preview.buttons.four}
 					</UnderlinedButton>
 					<Flex cfg={{ mt: 1, flexDirection: 'column' }}>
 						<P>{insurer.insurerCompanyReference}</P>

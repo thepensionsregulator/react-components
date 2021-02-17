@@ -7,6 +7,7 @@ export type TrusteeI18nProps = {
 	contacts: {
 		title: string;
 		subtitle: string;
+		sectionTitle?: string;
 		fields: {
 			telephone: {
 				label: string;
@@ -20,6 +21,7 @@ export type TrusteeI18nProps = {
 	};
 	name: {
 		title: string;
+		sectionTitle?: string;
 		fields: {
 			title: {
 				label: string;
@@ -69,6 +71,7 @@ export type TrusteeI18nProps = {
 	type: {
 		title: string;
 		subtitle: string;
+		sectionTitle?: string;
 		fields: {
 			trusteeType: {
 				labels: {
@@ -95,12 +98,14 @@ export type TrusteeI18nProps = {
 export const i18n: TrusteeI18nProps = {
 	address: {
 		title: 'What is this trustee’s address?',
+		sectionTitle: 'Edit Trustee',
 		...AddressI18n,
 	},
 	contacts: {
 		title: 'Contact details for this trustee',
 		subtitle:
 			'Provide contact details for the trustee, not a third-party such as an administrator.',
+		sectionTitle: 'Edit Trustee',
 		fields: {
 			telephone: {
 				label: 'Telephone number',
@@ -115,6 +120,7 @@ export const i18n: TrusteeI18nProps = {
 	},
 	name: {
 		title: 'Name of trustee',
+		sectionTitle: 'Edit Trustee',
 		fields: {
 			title: {
 				label: 'Title',
@@ -174,8 +180,8 @@ export const i18n: TrusteeI18nProps = {
 				},
 			},
 			errors: {
-				pristine:
-					'Please select one of the options and fill in required fields.',
+				pristine: 'Select a reason for removing the trustee.',
+				pristineDate: 'Enter the date the trustee left the scheme.',
 				dateAddedBeforeEffectiveDate:
 					'Date must be after the Trustee was added.',
 				dateAddedInTheFuture: 'Date cannot be in the future.',
@@ -185,6 +191,7 @@ export const i18n: TrusteeI18nProps = {
 	type: {
 		title: 'Type of trustee',
 		subtitle: 'Select the option that best describes the type of trustee.',
+		sectionTitle: 'Edit Trustee',
 		fields: {
 			trusteeType: {
 				labels: {

@@ -1,6 +1,6 @@
 {
 	"name": "@tpr/forms",
-	"version": "3.0.26",
+	"version": "3.0.51",
 	"description": "TPR Forms components",
 	"author": "David Alekna <david.alekna@tpr.gov.uk>",
 	"license": "MIT",
@@ -31,9 +31,9 @@
 		"report-coverage": "codecov"
 	},
 	"peerDependencies": {
-		"@tpr/core": "^2.2.4",
-		"@tpr/icons": "^2.2.6",
-		"@tpr/theming": "^2.2.2",
+		"@tpr/core": "^2.4.17",
+		"@tpr/icons": "^3.0.19",
+		"@tpr/theming": "^2.2.16",
 		"react": "^16.12.0",
 		"react-dom": "^16.12.0"
 	},
@@ -41,17 +41,17 @@
 		"@types/lodash.isequal": "^4.5.5",
 		"@types/lodash.merge": "^4.6.6",
 		"@types/match-sorter": "^4.0.0",
-		"@types/qs": "^6.9.3",
-		"date-fns": "^2.14.0",
-		"downshift": "^5.4.2",
-		"final-form": "^4.20.0",
+		"@types/qs": "^6.9.5",
+		"date-fns": "^2.17.0",
+		"downshift": "^6.1.0",
+		"final-form": "^4.20.1",
 		"lodash.isequal": "^4.5.0",
 		"lodash.merge": "^4.6.2",
 		"match-sorter": "^4.1.0",
-		"node-sass": "^4.14.0",
-		"qs": "^6.9.4",
-		"react-final-form": "^6.5.0",
-		"tslib": "^2.0.0"
+		"node-sass": "^5.0.0",
+		"qs": "^6.9.6",
+		"react-final-form": "^6.5.2",
+		"tslib": "^2.1.0"
 	},
 	"publishConfig": {
 		"access": "public"
@@ -60,7 +60,7 @@
 		"@tpr/core": "file:../core",
 		"@tpr/icons": "file:../icons",
 		"@tpr/theming": "file:../theming",
-		"cross-env": "^7.0.2"
+		"cross-env": "^7.0.3"
 	},
 	"gitHead": "57aec9c9de22596d6343bae07eb6b198322a0bee"
 }

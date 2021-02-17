@@ -1,5 +1,5 @@
 import React from 'react';
-import { Flex, P, H4, Hr, classNames } from '@tpr/core';
+import { Flex, P, Hr, classNames, Span } from '@tpr/core';
 import { useTrusteeContext } from '../../context';
 import { UnderlinedButton } from '../../../components/button';
 import { Checkbox } from '@tpr/forms';
@@ -32,7 +32,9 @@ export const Preview: React.FC = () => {
 						{i18n.preview.buttons.three}
 					</UnderlinedButton>
 					<Flex cfg={{ mt: 1, flexDirection: 'column' }}>
-						<H4 cfg={{ lineHeight: 3 }}>{trustee.address.addressLine1}</H4>
+						<Span cfg={{ lineHeight: 3 }} className={styles.styledAsH4}>
+							{trustee.address.addressLine1}
+						</Span>
 						{trustee.address.addressLine2 && (
 							<P>{trustee.address.addressLine2}</P>
 						)}

@@ -70,6 +70,8 @@ export type SidebarProps = {
 	/** import from react-router-dom */
 	history: any;
 	collapseNested?: boolean;
+	sectionCompleteLabel: string;
+	sectionIncompleteLabel: string;
 };
 
 export const Sidebar: React.FC<SidebarProps> = ({
@@ -81,6 +83,8 @@ export const Sidebar: React.FC<SidebarProps> = ({
 	location,
 	history,
 	collapseNested = false,
+	sectionCompleteLabel,
+	sectionIncompleteLabel,
 }) => {
 	const routerProps = { matchPath, location, history };
 	const sections = useSectionsUpdater(originalSections, routerProps);
@@ -92,28 +96,28 @@ export const Sidebar: React.FC<SidebarProps> = ({
 			path: titlePath,
 			exact: true,
 		});
-		match ? setIsHomePageActive(true) : setIsHomePageActive(false);
+		setIsHomePageActive(match);
 	}, [location.pathname]);
 
 	return (
-		<div className={styles.sidebar}>
+		<nav className={styles.sidebar}>
 			<Flex
-				cfg={{ flexDirection: 'column', mt: 4 }}
+				cfg={{ flexDirection: 'column', mt: 8 }}
 				className={styles.sidebarMenu}
 			>
-				<Link
-					underline={isHomePageActive}
-					cfg={{
-						fontWeight: 3,
-						color: 'primary.2',
-						textAlign: 'left',
-						fontSize: 4,
-					}}
-					onClick={() => history.push(titlePath)}
-					className={isHomePageActive ? styles.activeLink : ''}
-				>
-					{title}
-				</Link>
+				<Flex className={isHomePageActive ? styles.activeLink : ''}>
+					<Link
+						cfg={{
+							fontWeight: 3,
+							color: 'primary.2',
+							textAlign: 'left',
+							fontSize: 4,
+						}}
+						onClick={() => history.push(titlePath)}
+					>
+						{title}
+					</Link>
+				</Flex>
 				<Flex cfg={{ justifyContent: 'space-between', mt: 4, mb: 2 }}>
 					<P
 						cfg={{
@@ -137,17 +141,22 @@ export const Sidebar: React.FC<SidebarProps> = ({
 					</P>
 				</Flex>
 			</Flex>
-			{sections
-				.sort((a, b) => a.order - b.order)
-				.map((item, key) => (
-					<SidebarMenu
-						key={key}
-						title={item.title}
-						links={item.links}
-						maintenanceMode={maintenanceMode}
-						collapsed={collapseNested}
-					/>
-				))}
-		</div>
+			<ul className={styles.list}>
+				{sections
+					.sort((a, b) => a.order - b.order)
+					.map((item, key) => (
+						<li key={key}>
+							<SidebarMenu
+								title={item.title}
+								links={item.links}
+								maintenanceMode={maintenanceMode}
+								collapsed={collapseNested}
+								sectionCompleteLabel={sectionCompleteLabel}
+								sectionIncompleteLabel={sectionIncompleteLabel}
+							/>
+						</li>
+					))}
+			</ul>
+		</nav>
 	);
 };

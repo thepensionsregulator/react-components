@@ -37,8 +37,6 @@ import { InsurerCard } from '@tpr/layout';
 			organisationReference: 123,
 			organisationName: 'Nike Inc.',
 			insurerCompanyReference: '12345678',
-			telephoneNumber: '01273 222 111',
-			emailAddress: 'john.wick@warnerbros.com',
 			address: {
 				addressLine1: 'Napier House',
 				addressLine2: 'Trafalgar Pl',
@@ -47,6 +45,8 @@ import { InsurerCard } from '@tpr/layout';
 				postcode: 'BN1 4DW',
 				county: 'West Sussex',
 			},
+			telephoneNumber: '',
+			emailAddress: '',
 		};
 		return (
 			<InsurerCard
@@ -64,12 +64,12 @@ import { InsurerCard } from '@tpr/layout';
 
 ### Props
 
-| Property         | Required | Type             | Description                                                                              |
-| ---------------- | -------- | ---------------- | ---------------------------------------------------------------------------------------- |
-| complete         | true     | boolean          | changes the state of the card when All details are correct                               |
-| i18n             | false    | InsurerI18nProps | allows to override specific text in the card                                             |
-| insurer          | true     | Insurer          | the Insurer object                                                                       |
+| Property         | Required | Type             | Description                                                                                  |
+| ---------------- | -------- | ---------------- | -------------------------------------------------------------------------------------------- |
+| complete         | true     | boolean          | changes the state of the card when All details are correct                                   |
+| i18n             | false    | InsurerI18nProps | allows to override specific text in the card                                                 |
+| insurer          | true     | Insurer          | the Insurer object                                                                           |
 | onCorrect        | true     | function         | actions for when the user clicks the "Confirm details are correct" checkbox                  |
-| onRemove         | true     | function         | actions for when the insurer is removed                                                  |
-| onSaveRef        | true     | function         | actions for when the insurer reference number is modified                                |
+| onRemove         | true     | function         | actions for when the insurer is removed                                                      |
+| onSaveRef        | true     | function         | actions for when the insurer reference number is modified                                    |
 | prevalidatedData | false    | boolean          | allows to ignore the state of the "Confirm details are correct" checkbox & shows "No issues" |

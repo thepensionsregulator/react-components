@@ -7,7 +7,7 @@ type HeaderProps = {
 	logoHref: string;
 	logoAlt?: string;
 	title: string;
-	onClickSchemeOptions: () => void;
+	schemeOptionsHref: string;
 	onClickLogout: () => void;
 };
 
@@ -17,12 +17,12 @@ export const Header: React.FC<HeaderProps> = ({
 	logoAlt = 'Go to The Pensions Regulator website',
 	title = 'Exchange - Scheme Return',
 	onClickLogout,
-	onClickSchemeOptions,
+	schemeOptionsHref,
 }) => {
 	return (
 		<DocWidth className={styles.headerBackground}>
 			<AppWidth>
-				<Flex cfg={{ justifyContent: 'space-between', py: 2, pr: 3 }}>
+				<Flex cfg={{ justifyContent: 'space-between', py: 2, pr: 6 }}>
 					<Flex cfg={{ alignItems: 'center' }}>
 						<a href={logoHref} className={styles.logo}>
 							<img
@@ -33,6 +33,14 @@ export const Header: React.FC<HeaderProps> = ({
 								height="75"
 							/>
 						</a>
+					</Flex>
+					<Flex
+						cfg={{
+							alignItems: 'center',
+							justifyContent: 'space-between',
+							width: 10,
+						}}
+					>
 						<P
 							cfg={{
 								color: 'white',
@@ -43,24 +51,24 @@ export const Header: React.FC<HeaderProps> = ({
 						>
 							{title}
 						</P>
-					</Flex>
-					<Flex cfg={{ alignItems: 'center' }}>
-						<Link
-							onClick={onClickSchemeOptions}
-							underline
-							data-testid="onClickSchemeOptions"
-							cfg={{ color: 'white', mr: 4, fontWeight: 3, lineHeight: 3 }}
-						>
-							Scheme Options
-						</Link>
-						<Link
-							onClick={onClickLogout}
-							underline
-							cfg={{ color: 'white', fontWeight: 3, lineHeight: 3 }}
-							data-testid="onClickLogout"
-						>
-							Log out
-						</Link>
+						<Flex>
+							<Link
+								href={schemeOptionsHref}
+								underline
+								data-testid="onClickSchemeOptions"
+								cfg={{ color: 'white', mr: 4, fontWeight: 3, lineHeight: 3 }}
+							>
+								Scheme Options
+							</Link>
+							<Link
+								onClick={onClickLogout}
+								underline
+								cfg={{ color: 'white', fontWeight: 3, lineHeight: 3 }}
+								data-testid="onClickLogout"
+							>
+								Log out
+							</Link>
+						</Flex>
 					</Flex>
 				</Flex>
 			</AppWidth>

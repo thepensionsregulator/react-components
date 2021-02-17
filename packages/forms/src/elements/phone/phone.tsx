@@ -12,6 +12,7 @@ import {
 type InputPhoneProps = FieldRenderProps<string> & FieldExtraProps;
 const InputPhone: React.FC<InputPhoneProps> = ({
 	label,
+	name,
 	hint,
 	input,
 	testId,
@@ -22,6 +23,8 @@ const InputPhone: React.FC<InputPhoneProps> = ({
 	inputWidth: width,
 	cfg,
 }) => {
+	const errorId = `${name}_error`;
+
 	return (
 		<StyledInputLabel
 			isError={meta && meta.touched && meta.error}
@@ -29,6 +32,7 @@ const InputPhone: React.FC<InputPhoneProps> = ({
 		>
 			<InputElementHeading
 				label={label}
+				errorId={errorId}
 				required={required}
 				hint={hint}
 				meta={meta}
@@ -38,6 +42,7 @@ const InputPhone: React.FC<InputPhoneProps> = ({
 				width={width}
 				testId={testId}
 				label={label}
+				errorId={errorId}
 				placeholder={placeholder}
 				readOnly={readOnly}
 				touched={meta && meta.touched && meta.error}
@@ -56,9 +61,11 @@ export const FFInputPhone: React.FC<FieldProps & FieldExtraProps> = (
 			{...fieldProps}
 			validate={composeValidators(
 				executeClientValidation(fieldProps.validate),
-				isPhoneValid('Invalid phone number'),
+				isPhoneValid(
+					fieldProps.error ? fieldProps.error : 'Invalid phone number',
+				),
 			)}
-			component={InputPhone}
+			render={(props) => <InputPhone {...props} {...fieldProps} />}
 		/>
 	);
 };

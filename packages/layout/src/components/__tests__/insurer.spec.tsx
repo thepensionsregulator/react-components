@@ -25,8 +25,8 @@ const insurer: Insurer = {
 		county: 'West Sussex',
 		countryId: 2,
 	},
-	telephoneNumber: '01273 222 111',
-	emailAddress: 'john.wick@warnerbros.com',
+	telephoneNumber: '',
+	emailAddress: '',
 };
 
 describe('Insurer Preview', () => {

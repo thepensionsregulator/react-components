@@ -20,7 +20,7 @@ const RemoveReason: React.FC = () => {
 			required: true,
 			validate: (value) => {
 				if (!value) {
-					return i18n.remove.reason.errors.pristine;
+					return i18n.remove.reason.errors.pristineDate;
 				} else if (
 					isBefore(
 						toDate(new Date(value)),

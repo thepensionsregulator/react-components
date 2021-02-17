@@ -4,7 +4,7 @@ import {
 	useTrusteeContext,
 	TrusteeCardProps,
 } from './context';
-import { H4, Flex } from '@tpr/core';
+import { Flex, Span } from '@tpr/core';
 import { UnderlinedButton } from '../components/button';
 import { Preview } from './views/preview';
 import { Toolbar } from '../components/toolbar';
@@ -18,7 +18,7 @@ import RemovedBox from '../components/removedBox';
 import { cardType, cardTypeName } from '../common/interfaces';
 
 import styles from '../cards.module.scss';
-import AddressComparer from '@tpr/forms/lib/elements/address/addressComparer';
+import { AddressComparer } from '@tpr/forms';
 import { TrusteeContext } from './trusteeMachine';
 
 const CardContent: React.FC = () => {
@@ -52,7 +52,9 @@ const CardContent: React.FC = () => {
 				addressAPI={addressAPI}
 				cardType={cardType.trustee}
 				cardTypeName={cardTypeName.trustee}
+				sectionTitle={i18n.address.sectionTitle}
 				i18n={i18n.address}
+				onCancelChanges={() => send('CANCEL')}
 			/>
 		);
 	} else if (
@@ -150,7 +152,7 @@ export const TrusteeCard: React.FC<Omit<TrusteeCardProps, 'children'>> = ({
 						buttonLeft={() => <TrusteeButton />}
 						buttonRight={() => <RemoveButton />}
 						subtitle={() => (
-							<H4 cfg={{ lineHeight: 3 }}>
+							<Span cfg={{ lineHeight: 3 }} className={styles.styledAsH4}>
 								{[
 									current.context.trustee.title,
 									current.context.trustee.firstName,
@@ -158,7 +160,7 @@ export const TrusteeCard: React.FC<Omit<TrusteeCardProps, 'children'>> = ({
 								]
 									.filter(Boolean)
 									.join(' ')}
-							</H4>
+							</Span>
 						)}
 						statusText={
 							isComplete(current.context)

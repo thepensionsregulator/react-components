@@ -18,7 +18,9 @@ export type AddressPageProps = {
 	addressAPI: AddressAPIType;
 	cardType: cardType;
 	cardTypeName: cardTypeName;
+	sectionTitle?: string;
 	i18n: I18nAddressLookup;
+	onCancelChanges?: () => void;
 };
 
 const AddressPage: React.FC<AddressPageProps> = ({
@@ -27,14 +29,21 @@ const AddressPage: React.FC<AddressPageProps> = ({
 	addressAPI,
 	cardType,
 	cardTypeName,
+	sectionTitle,
 	i18n,
+	onCancelChanges,
 }) => {
 	const [loading, setLoading] = useState(false);
 
 	const addressLookupProvider = new ExperianAddressLookupProvider(addressAPI);
 
 	return (
-		<Content type={cardType} typeName={cardTypeName} title={i18n.title}>
+		<Content
+			type={cardType}
+			typeName={cardTypeName}
+			title={i18n.title}
+			sectionTitle={sectionTitle}
+		>
 			<Form onSubmit={onSubmit}>
 				{({ handleSubmit }) => (
 					<form onSubmit={handleSubmit}>
@@ -50,7 +59,7 @@ const AddressPage: React.FC<AddressPageProps> = ({
 									invalidPostcodeMessage={i18n.invalidPostcodeMessage}
 									postcodeLookupLabel={i18n.postcodeLookupLabel}
 									postcodeLookupButton={i18n.postcodeLookupButton}
-									changePostcodeButton={i18n.changeAddressButton}
+									changePostcodeButton={i18n.changePostcodeButton}
 									changePostcodeAriaLabel={i18n.changePostcodeAriaLabel}
 									selectAddressLabel={i18n.selectAddressLabel}
 									selectAddressPlaceholder={i18n.selectAddressPlaceholder}
@@ -68,6 +77,8 @@ const AddressPage: React.FC<AddressPageProps> = ({
 									postcodeLabel={i18n.postcodeLabel}
 									countryLabel={i18n.countryLabel}
 									changeAddressButton={i18n.changeAddressButton}
+									findAddressCancelledButton={i18n.findAddressCancelledButton}
+									onFindAddressCancelled={onCancelChanges}
 								/>
 								<Footer>
 									<ArrowButton
@@ -75,7 +86,7 @@ const AddressPage: React.FC<AddressPageProps> = ({
 										pointsTo="up"
 										iconSide="right"
 										type="submit"
-										title="Save and close"
+										title={i18n.saveAndClose}
 										disabled={loading}
 									/>
 								</Footer>

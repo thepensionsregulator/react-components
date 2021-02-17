@@ -2,7 +2,7 @@ import React, { useState, useRef } from 'react';
 import { useForm } from 'react-final-form';
 import PostcodeValidator from './postcodeValidator';
 import { FFInputText } from '../text/text';
-import { Button } from '@tpr/core';
+import { Button, Flex } from '@tpr/core';
 import styles from './addressLookup.module.scss';
 
 type PostcodeLookupProps = {
@@ -13,6 +13,9 @@ type PostcodeLookupProps = {
 	invalidPostcodeMessage: string;
 	postcodeLookupLabel: string;
 	postcodeLookupButton: string;
+	findAddressCancelledButton?: string;
+	onFindAddressCancelled?: () => void;
+	onValidatePostcode?: (isValid: boolean) => void | null;
 };
 
 export const PostcodeLookup: React.FC<PostcodeLookupProps> = ({
@@ -23,6 +26,9 @@ export const PostcodeLookup: React.FC<PostcodeLookupProps> = ({
 	invalidPostcodeMessage,
 	postcodeLookupLabel,
 	postcodeLookupButton,
+	findAddressCancelledButton,
+	onFindAddressCancelled,
+	onValidatePostcode,
 }) => {
 	const form = useForm();
 	const validator = new PostcodeValidator(invalidPostcodeMessage);
@@ -40,9 +46,20 @@ export const PostcodeLookup: React.FC<PostcodeLookupProps> = ({
 
 	const validatePostcode = (value) => {
 		const result = validator.validatePostcode(value);
-		typeof result === 'undefined'
-			? setPostcodeValid(true)
-			: setPostcodeValid(false);
+		let isValid: boolean;
+
+		if (typeof result === 'undefined') {
+			setPostcodeValid(true);
+			isValid = true;
+		} else {
+			setPostcodeValid(false);
+			isValid = false;
+		}
+
+		if (onValidatePostcode !== null) {
+			onValidatePostcode(isValid);
+		}
+
 		return result;
 	};
 
@@ -59,14 +76,26 @@ export const PostcodeLookup: React.FC<PostcodeLookupProps> = ({
 				disabled={loading}
 				defaultValue={''}
 			/>
-			<Button
-				testId={(testId ? testId + '-' : '') + 'postcode-lookup-button'}
-				onClick={clickFindAddress}
-				className={styles.button}
-				disabled={loading || !postcodeValid}
-			>
-				{postcodeLookupButton}
-			</Button>
+			<Flex cfg={{ flexDirection: 'row', mt: 2, alignItems: 'center' }}>
+				<Button
+					testId={(testId ? testId + '-' : '') + 'postcode-lookup-button'}
+					onClick={clickFindAddress}
+					disabled={loading || !postcodeValid}
+				>
+					{postcodeLookupButton}
+				</Button>
+				{onFindAddressCancelled && (
+					<Button
+						cfg={{ ml: 3 }}
+						onClick={onFindAddressCancelled}
+						testId={(testId ? testId + '-' : '') + 'find-address-cancel-button'}
+						appearance="secondary"
+						size="small"
+					>
+						{findAddressCancelledButton}
+					</Button>
+				)}
+			</Flex>
 		</>
 	);
 };

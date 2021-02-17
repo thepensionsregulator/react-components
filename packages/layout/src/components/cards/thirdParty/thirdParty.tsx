@@ -4,7 +4,7 @@ import {
 	ThirdPartyProviderProps,
 	useThirdPartyContext,
 } from './context';
-import { Flex, H4 } from '@tpr/core';
+import { Flex, Span } from '@tpr/core';
 import { Toolbar } from '../components/toolbar';
 import { UnderlinedButton } from '../components/button';
 import { Preview } from './views/preview/preview';
@@ -72,7 +72,11 @@ export const ThirdPartyCard: React.FC<ThirdPartyProviderProps> = ({
 					<Flex cfg={cfg} data-testid={testId} className={styles.card}>
 						<Toolbar
 							complete={isComplete(context)}
-							subtitle={() => <H4>{context.thirdParty.organisationName}</H4>}
+							subtitle={() => (
+								<Span className={styles.styledAsH4}>
+									{context.thirdParty.organisationName}
+								</Span>
+							)}
 							statusText={
 								isComplete(context)
 									? i18n.preview.statusText.confirmed

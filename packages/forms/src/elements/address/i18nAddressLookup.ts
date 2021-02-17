@@ -1,8 +1,10 @@
 export interface I18nAddressLookup {
 	title?: string;
+	sectionTitle?: string;
 	invalidPostcodeMessage?: string;
 	postcodeLookupLabel?: string;
 	postcodeLookupButton?: string;
+	findAddressCancelledButton?: string;
 	changePostcodeButton?: string;
 	changePostcodeAriaLabel?: string;
 	selectAddressLabel?: string;
@@ -20,12 +22,14 @@ export interface I18nAddressLookup {
 	countryLabel?: string;
 	changeAddressButton?: string;
 	changeAddressAriaLabel?: string;
+	saveAndClose?: string;
 }
 
 export const i18n: I18nAddressLookup = {
 	invalidPostcodeMessage: 'Enter a valid postcode',
 	postcodeLookupLabel: 'Postcode',
 	postcodeLookupButton: 'Find address',
+	findAddressCancelledButton: 'Cancel',
 	changePostcodeButton: 'Change',
 	changePostcodeAriaLabel: 'Change postcode',
 	selectAddressLabel: 'Select an address',
@@ -42,4 +46,5 @@ export const i18n: I18nAddressLookup = {
 	postcodeLabel: 'Postcode',
 	countryLabel: 'Country',
 	changeAddressButton: 'I need to change the address',
+	saveAndClose: 'Save and close',
 };

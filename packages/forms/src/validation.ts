@@ -29,10 +29,11 @@ export function validate(formFields: FieldProps[]) {
 				if (errorMessage) return merge(errors, errorObject);
 			}
 			// typof error is a string and there is no field value, assign error to errors
-			if (typeof error === 'string' &&
+			if (
+				typeof error === 'string' &&
 				(!fieldValue ||
-				(typeof fieldValue === 'string' && !fieldValue.trim()) ||
-				(Array.isArray(fieldValue) && !fieldValue.length))
+					(typeof fieldValue === 'string' && !fieldValue.trim()) ||
+					(Array.isArray(fieldValue) && !fieldValue.length))
 			) {
 				// construct object from string with errors
 				const errorObject = qs.parse(`${name}=${error}`, {

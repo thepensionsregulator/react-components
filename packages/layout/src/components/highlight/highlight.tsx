@@ -24,6 +24,7 @@ export const Highlight: React.FC<HighlightProps> = ({
 							fontSize: 3,
 							lineHeight: 5,
 							color: 'white',
+							ml: 6,
 						}}
 					>
 						{title}
@@ -53,17 +54,17 @@ export const Highlight: React.FC<HighlightProps> = ({
 							flex: '0 0 auto',
 							alignItems: 'center',
 							justifyContent: 'flex-end',
-							pl: 3,
 						}}
 						className={styles.psrNumber}
 					>
+						<div className={styles.separator}></div>
 						<P
 							cfg={{
 								fontWeight: 4,
 								fontSize: 3,
-								lineHeight: 5,
+								lineHeight: 6,
 								color: 'white',
-								px: 3,
+								px: 6,
 							}}
 						>
 							PSR: {psr}

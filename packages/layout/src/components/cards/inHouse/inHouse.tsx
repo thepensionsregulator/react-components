@@ -4,7 +4,7 @@ import {
 	InHouseAdminProviderProps,
 	useInHouseAdminContext,
 } from './context';
-import { Flex, H4 } from '@tpr/core';
+import { Flex, Span } from '@tpr/core';
 import { Toolbar } from '../components/toolbar';
 import { UnderlinedButton } from '../components/button';
 import { Preview } from './views/preview/preview';
@@ -16,7 +16,7 @@ import { NameScreen } from './views/name';
 import RemovedBox from '../components/removedBox';
 import { cardType, cardTypeName } from '../common/interfaces';
 import styles from '../cards.module.scss';
-import AddressComparer from '@tpr/forms/lib/elements/address/addressComparer';
+import { AddressComparer } from '@tpr/forms';
 import { InHouseAdminContext } from './inHouseMachine';
 
 const CardContentSwitch: React.FC = () => {
@@ -60,7 +60,9 @@ const CardContentSwitch: React.FC = () => {
 					addressAPI={addressAPI}
 					cardType={cardType.inHouseAdmin}
 					cardTypeName={cardTypeName.inHouseAdmin}
+					sectionTitle={i18n.address.sectionTitle}
 					i18n={i18n.address}
+					onCancelChanges={() => send('CANCEL')}
 				/>
 			);
 		case current.matches({ edit: 'contacts' }):
@@ -147,7 +149,7 @@ export const InHouseCard: React.FC<InHouseAdminProviderProps> = ({
 						<Toolbar
 							complete={isComplete(context)}
 							subtitle={() => (
-								<H4 cfg={{ lineHeight: 3 }}>
+								<Span cfg={{ lineHeight: 3 }} className={styles.styledAsH4}>
 									{[
 										context.inHouseAdmin.title,
 										context.inHouseAdmin.firstName,
@@ -155,7 +157,7 @@ export const InHouseCard: React.FC<InHouseAdminProviderProps> = ({
 									]
 										.filter(Boolean)
 										.join(' ')}
-								</H4>
+								</Span>
 							)}
 							statusText={
 								isComplete(context)

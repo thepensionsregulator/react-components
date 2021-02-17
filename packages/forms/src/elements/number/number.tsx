@@ -18,6 +18,7 @@ interface InputNumberProps extends FieldRenderProps<number>, FieldExtraProps {
 
 const InputNumber: React.FC<InputNumberProps> = ({
 	label,
+	name,
 	hint,
 	input,
 	testId,
@@ -67,6 +68,7 @@ const InputNumber: React.FC<InputNumberProps> = ({
 			// avoid entering the number 'E'
 			e.key.toLowerCase() === 'e' && e.preventDefault();
 			!validKeys.includes(e.key) && e.preventDefault();
+			e.key === '.' && !decimalPlaces && e.preventDefault();
 		}
 	};
 
@@ -113,6 +115,8 @@ const InputNumber: React.FC<InputNumberProps> = ({
 		input.onBlur(e.target.value); // without this call, validate won't be executed even if specified
 	};
 
+	const errorId = `${name}_error`;
+
 	return (
 		<StyledInputLabel
 			isError={meta && meta.touched && meta.error}
@@ -121,15 +125,18 @@ const InputNumber: React.FC<InputNumberProps> = ({
 		>
 			<InputElementHeading
 				label={label}
+				errorId={errorId}
 				required={optionalText !== undefined ? !optionalText : required}
 				hint={hint}
 				meta={meta}
+				inputName={input.name}
 			/>
 			<Input
 				type="number"
 				width={width}
 				testId={testId}
 				label={label}
+				errorId={errorId}
 				touched={meta && meta.touched && meta.error}
 				placeholder={placeholder}
 				readOnly={readOnly}
@@ -147,5 +154,10 @@ const InputNumber: React.FC<InputNumberProps> = ({
 };
 
 export const FFInputNumber: React.FC<FieldProps> = (fieldProps) => {
-	return <Field {...fieldProps} component={InputNumber} />;
+	return (
+		<Field
+			{...fieldProps}
+			render={(props) => <InputNumber {...props} name={fieldProps.name} />}
+		/>
+	);
 };

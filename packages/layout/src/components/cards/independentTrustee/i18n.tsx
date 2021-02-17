@@ -18,6 +18,7 @@ export type IndependentTrusteeI18nProps = {
 	regulator: {
 		title: string;
 		subtitle: string;
+		sectionTitle?: string;
 		fields: {
 			appointedByRegulator: {
 				labels: {
@@ -65,6 +66,7 @@ export const i18n: IndependentTrusteeI18nProps = {
 	regulator: {
 		title: 'Was this trustee appointed to this scheme by the regulator?',
 		subtitle: 'subtitle',
+		sectionTitle: 'Edit Independent Trustee',
 		fields: {
 			appointedByRegulator: {
 				labels: {
@@ -105,7 +107,8 @@ export const i18n: IndependentTrusteeI18nProps = {
 				},
 			},
 			errors: {
-				pristine: 'Please select one of the options',
+				pristine: 'Select a reason for removing the trustee.',
+				pristineDate: 'Enter the date the trustee left the scheme.',
 				dateAddedBeforeEffectiveDate:
 					'Date must be after the Trustee was added.',
 				dateAddedInTheFuture: 'Date cannot be in the future.',

@@ -1,9 +1,16 @@
 import React, { createElement } from 'react';
-import { SpaceProps, FlexProps, useClassNames, Span } from '@tpr/core';
+import {
+	SpaceProps,
+	FlexProps,
+	useClassNames,
+	Span,
+	toKebabCase,
+} from '@tpr/core';
 import styles from './elements.module.scss';
+import { ReactNode } from 'react';
 
 interface StyledInputLabelProps {
-	element?: 'label' | 'div';
+	element?: 'label' | 'div' | 'fieldset';
 	isError?: boolean;
 	className?: string;
 	cfg?: FlexProps | SpaceProps;
@@ -34,38 +41,72 @@ export const StyledInputLabel: React.FC<StyledInputLabelProps> = ({
 	);
 };
 
-export const FormLabelText: React.FC = ({ children }) => (
-	<div className={styles.labelText}>{children}</div>
+interface FormLabelTextProps {
+	element?: 'div' | 'legend' | 'label' | null;
+	id?: string;
+}
+
+export const FormLabelText: React.FC<FormLabelTextProps> = ({
+	element = 'div',
+	id = null,
+	children,
+}) => {
+	return createElement(
+		element,
+		{
+			id: id,
+			className: styles.labelText,
+		},
+		children,
+	);
+};
+
+export const ErrorMessage: React.FC<ErrorMessageProps> = ({ id, children }) => (
+	<p id={id} className={styles.errorMessage}>
+		{children}
+	</p>
 );
 
-export const ErrorMessage: React.FC = ({ children }) => (
-	<div className={styles.errorMessage}>{children}</div>
-);
+type ErrorMessageProps = {
+	id?: string;
+	children: ReactNode;
+};
 
 type InputElementHeadingProps = {
+	element?: 'div' | 'legend' | null;
 	label?: string;
+	errorId?: string;
 	required?: boolean;
 	hint?: string;
 	meta?: any;
+	inputName?: string;
 };
 export const InputElementHeading: React.FC<InputElementHeadingProps> = ({
+	element = 'div',
 	label,
+	errorId,
 	required,
 	hint,
 	meta,
+	inputName,
 }) => {
 	return (
 		<>
 			{label && (
-				<FormLabelText>
+				<FormLabelText
+					element={element}
+					id={inputName ? `${toKebabCase(inputName + 'Label')}` : null}
+				>
 					{label} {!required && '(optional)'}
 				</FormLabelText>
 			)}
 			{hint && (
-				<Span cfg={{ mb: 2 }} className={styles.hint}>{hint}</Span>
+				<Span cfg={{ mb: 2 }} className={styles.hint}>
+					{hint}
+				</Span>
 			)}
 			{meta && meta.touched && meta.error && (
-				<ErrorMessage>{meta.error}</ErrorMessage>
+				<ErrorMessage id={errorId}>{meta.error}</ErrorMessage>
 			)}
 		</>
 	);

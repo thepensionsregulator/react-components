@@ -1,7 +1,6 @@
 import React from 'react';
 import { Flex, H3, P, classNames, Hr } from '@tpr/core';
 import styles from './card.module.scss';
-import { cardType } from '../common/interfaces';
 
 type StyledCardProps = { complete: boolean };
 export const StyledCard: React.FC<StyledCardProps> = ({
@@ -25,16 +24,14 @@ export const StyledCardToolbar: React.FC = ({ children }) => {
 };
 
 type ToolbarProps = {
-	type: cardType;
-	typeName?: string;
 	title: string;
 	subtitle?: string;
+	sectionTitle?: string;
 };
 export const Toolbar: React.FC<ToolbarProps> = ({
-	type = 'trustee',
-	typeName,
 	title,
 	subtitle,
+	sectionTitle,
 }) => {
 	return (
 		<Flex cfg={{ flexDirection: 'column', mt: 4, mb: 3 }}>
@@ -42,9 +39,10 @@ export const Toolbar: React.FC<ToolbarProps> = ({
 				cfg={{ flexDirection: 'column', pb: 2 }}
 				className={styles.toolbarBottomBorder}
 			>
-				<P cfg={{ color: 'neutral.6', fontSize: 3 }}>
-					Edit {typeName ? typeName : type}
-				</P>
+				{sectionTitle && (
+					<P cfg={{ color: 'neutral.6', fontSize: 3 }}>{sectionTitle}</P>
+				)}
+
 				<H3 cfg={{ fontWeight: 3 }}>{title}</H3>
 			</Flex>
 			{subtitle && (
@@ -77,7 +75,11 @@ export const Footer: React.FC = ({ children }) => {
 export const StatusMessage = ({ complete, icon: Icon, text }) => {
 	return (
 		<Flex cfg={{ alignItems: 'center' }} height="22px">
-			<Icon size={18} fill={complete ? '#207e3b' : '#d4351c'} />
+			<Icon
+				size={18}
+				fill={complete ? '#207e3b' : '#d4351c'}
+				ariaLabel={text}
+			/>
 			<P
 				cfg={{
 					ml: 1,

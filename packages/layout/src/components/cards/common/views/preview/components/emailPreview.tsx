@@ -1,5 +1,6 @@
 import React from 'react';
-import { H4, P } from '@tpr/core';
+import { P, Span } from '@tpr/core';
+import styles from '../../../../cards.module.scss';
 
 interface EmailPreviewProps {
 	label?: string;
@@ -10,7 +11,9 @@ export const EmailPreview: React.FC<EmailPreviewProps> = React.memo(
 	({ label = 'Email', value }) => {
 		return (
 			<>
-				<H4 cfg={{ lineHeight: 3 }}>{label}</H4>
+				<Span cfg={{ lineHeight: 3 }} className={styles.styledAsH4}>
+					{label}
+				</Span>
 				<P cfg={{ wordBreak: 'all' }}>{value}</P>
 			</>
 		);
