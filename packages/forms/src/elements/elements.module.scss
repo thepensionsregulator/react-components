@@ -1,5 +1,13 @@
 @import '@tpr/theming/lib/variables.scss';
 
+fieldset {
+  padding: 0;
+}
+
+fieldset > legend {
+  float:left;   //position legend within the fieldset
+}
+
 .label {
 	display: flex;
 	cursor: default;
