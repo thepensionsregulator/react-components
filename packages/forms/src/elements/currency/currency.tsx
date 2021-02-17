@@ -207,6 +207,7 @@ const InputCurrency: React.FC<InputCurrencyProps> = React.memo(
 					required={optionalText !== undefined ? !optionalText : required}
 					hint={hint}
 					meta={meta}
+					inputName={input.name}
 				/>
 				<Input
 					parentRef={innerInput}

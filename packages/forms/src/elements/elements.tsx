@@ -1,5 +1,11 @@
 import React, { createElement } from 'react';
-import { SpaceProps, FlexProps, useClassNames, Span } from '@tpr/core';
+import {
+	SpaceProps,
+	FlexProps,
+	useClassNames,
+	Span,
+	toKebabCase,
+} from '@tpr/core';
 import styles from './elements.module.scss';
 import { ReactNode } from 'react';
 
@@ -37,15 +43,18 @@ export const StyledInputLabel: React.FC<StyledInputLabelProps> = ({
 
 interface FormLabelTextProps {
 	element?: 'div' | 'legend' | 'label' | null;
+	id?: string;
 }
 
-export const FormLabelText: React.FC<FormLabelTextProps> = ({ 	
+export const FormLabelText: React.FC<FormLabelTextProps> = ({
 	element = 'div',
-	children 
-}) => { 
+	id = null,
+	children,
+}) => {
 	return createElement(
 		element,
 		{
+			id: id,
 			className: styles.labelText,
 		},
 		children,
@@ -70,6 +79,7 @@ type InputElementHeadingProps = {
 	required?: boolean;
 	hint?: string;
 	meta?: any;
+	inputName?: string;
 };
 export const InputElementHeading: React.FC<InputElementHeadingProps> = ({
 	element = 'div',
@@ -78,11 +88,15 @@ export const InputElementHeading: React.FC<InputElementHeadingProps> = ({
 	required,
 	hint,
 	meta,
+	inputName,
 }) => {
 	return (
 		<>
 			{label && (
-				<FormLabelText element={element}>
+				<FormLabelText
+					element={element}
+					id={inputName ? `${toKebabCase(inputName + 'Label')}` : null}
+				>
 					{label} {!required && '(optional)'}
 				</FormLabelText>
 			)}

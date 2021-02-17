@@ -129,6 +129,7 @@ const InputNumber: React.FC<InputNumberProps> = ({
 				required={optionalText !== undefined ? !optionalText : required}
 				hint={hint}
 				meta={meta}
+				inputName={input.name}
 			/>
 			<Input
 				type="number"

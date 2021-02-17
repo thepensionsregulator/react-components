@@ -34,6 +34,17 @@ describe('Currency', () => {
 			userEvent.type(getByTestId(testId), '123');
 			expect(getByTestId(testId)).toHaveValue('123');
 		});
+
+		test('label renders with an id attribute', () => {
+			const { getByText } = formSetup({
+				render: currencyComponent,
+			});
+
+			const label = getByText(/Currency/);
+
+			expect(label).toBeDefined();
+			expect(label).toHaveAttribute('id', 'currency-label');
+		});
 	});
 
 	describe('formatting integers', () => {
