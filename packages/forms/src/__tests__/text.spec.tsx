@@ -6,6 +6,7 @@ import { FFInputText } from '../elements/text/text';
 import { validate, renderFields } from '../index';
 import { FieldProps } from '../renderFields';
 import { axe } from 'jest-axe';
+import { CheckDescribedByTag } from '../utils/aria-describedByTest';
 
 describe('Text input', () => {
 	test('is accessible', async () => {
@@ -19,14 +20,15 @@ describe('Text input', () => {
 	});
 
 	test('renders label', () => {
-		const { queryByTestId } = formSetup({
+		const { getByText } = formSetup({
 			render: (
 				<FFInputText label="Name" testId="text-input" name="name" type="text" />
 			),
 		});
 
-		const label = queryByTestId('text-input');
+		const label = getByText(/Name/);
 		expect(label).toBeInTheDocument();
+		expect(label).toHaveAttribute('id', 'name-label');
 	});
 
 	test('renders label with title optional', () => {
@@ -147,5 +149,32 @@ describe('Text input', () => {
 
 		expect(textInput).toHaveAttribute('maxlength');
 		expect(textInput).toHaveValue('ABC');
+	});
+
+	test('has correct describedby tag when an error is shown', () => {
+		const testId = 'texTest';
+		const name = 'textInput';
+		const error = 'This is a required field';
+		const handleSubmit = jest.fn();
+
+		const fields: FieldProps[] = [
+			{
+				name: name,
+				testId: testId,
+				label: 'Text Line 1',
+				type: 'text',
+				error: error,
+				required: true,
+			},
+		];
+
+		const { getByTestId, getByText } = formSetup({
+			render: renderFields(fields),
+			validate: validate(fields),
+			onSubmit: handleSubmit,
+		});
+
+		const textTest = getByTestId(testId);
+		CheckDescribedByTag(getByText, textTest, error);
 	});
 });

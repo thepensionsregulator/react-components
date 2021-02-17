@@ -4,6 +4,7 @@ import { FFInputNumber } from '../elements/number/number';
 import { axe } from 'jest-axe';
 import userEvent from '@testing-library/user-event';
 import { fireEvent } from '@testing-library/react';
+import { CheckDescribedByTag } from '../utils/aria-describedByTest';
 
 const testId = 'number-input';
 
@@ -37,6 +38,17 @@ describe('Number', () => {
 
 			userEvent.type(getByTestId(testId), '123');
 			expect(getByTestId(testId)).toHaveValue(123);
+		});
+
+		test('label renders with an id attribute', () => {
+			const { getByText } = formSetup({
+				render: numberComponent,
+			});
+
+			const label = getByText(/Number/);
+
+			expect(label).toBeDefined();
+			expect(label).toHaveAttribute('id', 'number-label');
 		});
 	});
 
@@ -200,5 +212,29 @@ describe('Number', () => {
 			fireEvent.blur(getByTestId(testId));
 			expect(getByTestId(testId)).toHaveValue(1.2);
 		});
+	});
+
+	test('has correct describedby tag when an error is shown', () => {
+		const numberRequired = 'Number is required';
+		const name = 'numberInput';
+
+		const handleSubmit = jest.fn();
+		const { getByTestId, getByText } = formSetup({
+			render: (
+				<FFInputNumber
+					label="Number"
+					testId={testId}
+					name={name}
+					required={true}
+					maxLength={3}
+					decimalPlaces={1}
+					validate={(value) => (value ? undefined : numberRequired)}
+				/>
+			),
+			onSubmit: handleSubmit,
+		});
+
+		const numberTest = getByTestId(testId);
+		CheckDescribedByTag(getByText, numberTest, numberRequired);
 	});
 });
