@@ -16,7 +16,7 @@ import { NameScreen } from './views/name';
 import RemovedBox from '../components/removedBox';
 import { cardType, cardTypeName } from '../common/interfaces';
 import styles from '../cards.module.scss';
-import AddressComparer from '@tpr/forms/lib/elements/address/addressComparer';
+import { AddressComparer } from '@tpr/forms';
 import { InHouseAdminContext } from './inHouseMachine';
 
 const CardContentSwitch: React.FC = () => {
