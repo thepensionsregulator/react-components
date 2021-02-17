@@ -40,6 +40,7 @@ const defaultProps: AddressProps = {
 	postcodeLabel: 'Postcode',
 	countryLabel: 'Country',
 	changeAddressButton: 'I need to change the address',
+	onValidatePostcode: jest.fn(),
 };
 
 function searchForAPostcode(container: HTMLElement, postcode: string) {
@@ -57,13 +58,6 @@ function updateAPostcode(container: HTMLElement, postcode: string) {
 	fireEvent.blur(input);
 }
 
-function openAddressDropdown(container: HTMLElement) {
-	const openSelect = container.querySelector(
-		'button[data-testid="select-address-list-button"]',
-	);
-	fireEvent.click(openSelect);
-}
-
 describe('Address lookup', () => {
 	describe('postcode lookup view', () => {
 		test('to be the default when initialValue is null', async () => {
@@ -71,7 +65,7 @@ describe('Address lookup', () => {
 				render: <AddressLookup {...defaultProps} />,
 			});
 
-			expect(getByTestId('postcode-lookup-edit')).toBeInTheDocument();
+			expect(getByTestId('postcode-lookup-edit')).toBeDefined();
 		});
 
 		test('to be the default when all properties of initialValue are falsy', async () => {
@@ -79,7 +73,7 @@ describe('Address lookup', () => {
 				render: <AddressLookup {...defaultProps} initialValue={{}} />,
 			});
 
-			expect(getByTestId('postcode-lookup-edit')).toBeInTheDocument();
+			expect(getByTestId('postcode-lookup-edit')).toBeDefined();
 		});
 
 		test('passes accessibility checks', async () => {
@@ -120,20 +114,12 @@ describe('Address lookup', () => {
 		});
 
 		test('should call onValidatePostcode when postcode is entered', () => {
-			defaultProps.onValidatePostcode = (inValid) => {
-				console.log(inValid);
-			};
-			const onValidatePostcodeSpy = jest.spyOn(
-				defaultProps,
-				'onValidatePostcode',
-			);
-
 			const { container } = formSetup({
 				render: <AddressLookup {...defaultProps} />,
 			});
 			updateAPostcode(container, 's6 2nr');
 
-			expect(onValidatePostcodeSpy).toHaveBeenCalled();
+			expect(defaultProps.onValidatePostcode).toHaveBeenCalled();
 		});
 	});
 
@@ -168,8 +154,6 @@ describe('Address lookup', () => {
 
 			searchForAPostcode(container, exampleAddress.postcode);
 
-			openAddressDropdown(container);
-
 			setTimeout(() => {
 				const option = container.querySelector('div[role="option"]');
 				expect(option.textContent).toMatch(exampleAddress.addressLine1);
@@ -183,8 +167,6 @@ describe('Address lookup', () => {
 
 			searchForAPostcode(container, exampleAddress.postcode);
 
-			openAddressDropdown(container);
-
 			setTimeout(() => {
 				const option = container.querySelector('div[role="option"]');
 				fireEvent.click(option);
@@ -192,11 +174,12 @@ describe('Address lookup', () => {
 				const selectAddress = container.querySelector(
 					'button[data-testid$="select-address-button"]',
 				);
+
 				fireEvent.click(selectAddress);
 
 				const input = container.querySelector('input[name="addressLine1"]');
 
-				expect(input).toHaveAttribute('value', exampleAddress.addressLine1);
+				expect(input).toHaveProperty('value', exampleAddress.addressLine1);
 			}, 3000);
 		});
 	});
