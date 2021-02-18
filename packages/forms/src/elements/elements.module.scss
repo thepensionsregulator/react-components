@@ -2,10 +2,16 @@
 
 fieldset {
   padding: 0;
-}
+	display: flex;
+	flex-direction: column;
+	
+	> legend {
+		float:left;   //position legend within the fieldset
 
-fieldset.internalLegend > legend {
-  float:left;   //position legend within the fieldset
+		+ * {
+			clear: left;
+		}		
+	}
 }
 
 .label {
