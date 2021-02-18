@@ -2,9 +2,15 @@
 
 fieldset {
   padding: 0;
-
-	legend {
+	display: flex;
+	flex-direction: column;
+	
+	> legend {
 		float:left;   //position legend within the fieldset
+
+		+ * {
+			clear: left;
+		}		
 	}
 }
 
