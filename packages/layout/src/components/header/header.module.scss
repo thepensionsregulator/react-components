@@ -26,7 +26,4 @@ a.headerlink {
 	&:not(:focus) {
 		color: $white;
 	}
-	&:focus {
-		color: $colors-neutral-8;
-	}
 }
