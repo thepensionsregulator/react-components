@@ -2,10 +2,10 @@
 
 fieldset {
   padding: 0;
-}
 
-fieldset.internalLegend > legend {
-  float:left;   //position legend within the fieldset
+	legend {
+		float:left;   //position legend within the fieldset
+	}
 }
 
 .label {

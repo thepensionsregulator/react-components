@@ -7,7 +7,6 @@ import { Input } from '../input/input';
 import { FieldProps, FieldExtraProps } from '../../renderFields';
 import isEqual from 'lodash.isequal';
 import styles from './date.module.scss';
-import elements from '../elements.module.scss';
 import { SameMonthDateValidator } from './services/SameMonthDateValidator';
 
 const handleChange = (onChange: Function, value: number) => ({
@@ -160,7 +159,6 @@ export const InputDate: React.FC<InputDateComponentProps> = memo(
 				onFocus={input.onFocus}
 				onBlur={input.onBlur}
 				data-testid={`date-input-${testId}`}
-				className={elements.internalLegend}
 				cfg={Object.assign(
 					{ mt: 1, py: 1, alignItems: 'flex-start', flexDirection: 'column' },
 					cfg,
