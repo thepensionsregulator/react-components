@@ -26,7 +26,7 @@ const numberComponentWithExtendedArialLabel = (
 		label="Number"
 		testId={testId}
 		name="number"
-		i18n={{ ariaLabelExtension: ', extended aria label' }}
+		i18n={{ ariaLabelExtension: ' extended aria label' }}
 	/>
 );
 
@@ -79,10 +79,7 @@ describe('Number', () => {
 			const input = getByTestId(testId);
 
 			expect(input).toBeDefined();
-			expect(input).toHaveAttribute(
-				'aria-label',
-				'Number, extended aria label',
-			);
+			expect(input).toHaveAttribute('aria-label', 'Number extended aria label');
 		});
 	});
 

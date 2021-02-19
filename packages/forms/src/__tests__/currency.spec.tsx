@@ -21,7 +21,7 @@ const currencyComponentWithExtendedArialLabel = (
 		label="Currency"
 		testId={testId}
 		name="currency"
-		i18n={{ ariaLabelExtension: ', extended aria label' }}
+		i18n={{ ariaLabelExtension: ' extended aria label' }}
 	/>
 );
 
@@ -76,7 +76,7 @@ describe('Currency', () => {
 			expect(input).toBeDefined();
 			expect(input).toHaveAttribute(
 				'aria-label',
-				'Currency, extended aria label',
+				'Currency extended aria label',
 			);
 		});
 	});

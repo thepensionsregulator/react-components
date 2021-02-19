@@ -16,6 +16,7 @@ export type InputProps = {
 	ariaLabelSuffix?: string;
 	[key: string]: any;
 };
+
 export const Input: React.FC<InputProps> = ({
 	type = 'text',
 	width,
@@ -32,6 +33,12 @@ export const Input: React.FC<InputProps> = ({
 	ariaLabelSuffix,
 	...rest
 }) => {
+	const getAriaLabel = (): string => {
+		const ariaLabel = rest.ariaLabel ?? label;
+
+		return ariaLabelSuffix ? `${ariaLabel}${ariaLabelSuffix}` : ariaLabel;
+	};
+
 	return (
 		<Flex
 			cfg={{ flex: width ? '0 0 auto' : '1 1 auto', width }}
@@ -42,7 +49,6 @@ export const Input: React.FC<InputProps> = ({
 				ref={parentRef}
 				type={type}
 				data-testid={testId}
-				aria-label={`${label}${ariaLabelSuffix ? ariaLabelSuffix : ''}`}
 				readOnly={readOnly}
 				step={
 					type !== 'number'
@@ -61,6 +67,7 @@ export const Input: React.FC<InputProps> = ({
 				aria-invalid={touched != false}
 				aria-describedby={touched != false ? errorId : ''}
 				{...rest}
+				aria-label={getAriaLabel()}
 			/>
 			{After && <span className={styles.after}>{After}</span>}
 		</Flex>
