@@ -13,6 +13,7 @@ export type InputProps = {
 	decimalPlaces?: number;
 	parentRef?: any;
 	readOnly?: boolean;
+	ariaLabelSuffix?: string;
 	[key: string]: any;
 };
 export const Input: React.FC<InputProps> = ({
@@ -28,6 +29,7 @@ export const Input: React.FC<InputProps> = ({
 	before: Before,
 	decimalPlaces,
 	parentRef,
+	ariaLabelSuffix,
 	...rest
 }) => {
 	return (
@@ -40,7 +42,7 @@ export const Input: React.FC<InputProps> = ({
 				ref={parentRef}
 				type={type}
 				data-testid={testId}
-				aria-label={label}
+				aria-label={`${label}${ariaLabelSuffix ? ariaLabelSuffix : ''}`}
 				readOnly={readOnly}
 				step={
 					type !== 'number'
