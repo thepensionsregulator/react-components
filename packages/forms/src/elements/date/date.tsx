@@ -44,6 +44,7 @@ const transformDate = (initialDate: any) => {
 };
 
 type DateInputFieldProps = {
+	id?: string;
 	small?: boolean;
 	ariaLabel?: string;
 	testId?: string;
@@ -60,6 +61,7 @@ type DateInputFieldProps = {
 	maxLength?: number;
 };
 const DateInputField: React.FC<DateInputFieldProps> = ({
+	id,
 	small = true,
 	label,
 	ariaLabel,
@@ -90,6 +92,7 @@ const DateInputField: React.FC<DateInputFieldProps> = ({
 			</P>
 			<Input
 				type="string"
+				id={id}
 				disabled={disabled}
 				aria-label={ariaLabel}
 				data-testid={testId}
@@ -118,6 +121,7 @@ interface InputDateComponentProps extends InputDateProps {
 }
 export const InputDate: React.FC<InputDateComponentProps> = memo(
 	({
+		id,
 		label,
 		hint,
 		required,
@@ -136,7 +140,10 @@ export const InputDate: React.FC<InputDateComponentProps> = memo(
 			(p: any, n: any) => ({ ...p, ...n }),
 			{ dd, mm, yyyy },
 		);
-
+		const hintId: string = id && hint && `${id}-hint` || '';
+		const errorId: string = id && meta.touched && meta.error && `${id}-error` || '';
+		const ariaDescribedBy: string = `${hintId} ${errorId}`.trim() || null;
+		
 		useEffect(() => {
 			setState({ dd: hideDay ? 1 : dd, mm: hideMonth ? 1 : mm, yyyy: yyyy });
 		}, [dd, mm, yyyy]);
@@ -159,6 +166,7 @@ export const InputDate: React.FC<InputDateComponentProps> = memo(
 				onFocus={input.onFocus}
 				onBlur={input.onBlur}
 				data-testid={`date-input-${testId}`}
+				aria-describedby={ariaDescribedBy}
 				cfg={Object.assign(
 					{ mt: 1, py: 1, alignItems: 'flex-start', flexDirection: 'column' },
 					cfg,
@@ -170,6 +178,8 @@ export const InputDate: React.FC<InputDateComponentProps> = memo(
 						required={required}
 						hint={hint}
 						meta={meta}
+						hintId={hintId}
+						errorId={errorId}
 					/>
 				<Flex>
 					{!hideDay && (

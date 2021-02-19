@@ -4,7 +4,6 @@ import {
 	FlexProps,
 	useClassNames,
 	Span,
-	toKebabCase,
 } from '@tpr/core';
 import styles from './elements.module.scss';
 import { ReactNode } from 'react';
@@ -75,33 +74,35 @@ type ErrorMessageProps = {
 type InputElementHeadingProps = {
 	element?: 'div' | 'legend' | null;
 	label?: string;
+	labelId?: string;
 	errorId?: string;
+	hintId?: string;
 	required?: boolean;
 	hint?: string;
 	meta?: any;
-	inputName?: string;
 };
 export const InputElementHeading: React.FC<InputElementHeadingProps> = ({
 	element = 'div',
 	label,
+	labelId,
 	errorId,
+	hintId,
 	required,
 	hint,
 	meta,
-	inputName,
 }) => {
 	return (
 		<>
 			{label && (
 				<FormLabelText
 					element={element}
-					id={inputName ? `${toKebabCase(inputName + 'Label')}` : null}
+					id={labelId}
 				>
 					{label} {!required && '(optional)'}
 				</FormLabelText>
 			)}
 			{hint && (
-				<Span cfg={{ mb: 2 }} className={styles.hint}>
+				<Span id={hintId} cfg={{ mb: 2 }} className={styles.hint}>
 					{hint}
 				</Span>
 			)}

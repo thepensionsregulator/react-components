@@ -50,7 +50,7 @@ const InputText: React.FC<InputTextProps> = React.forwardRef(
 					required={required}
 					hint={hint}
 					meta={meta}
-					inputName={input.name}
+					labelId={input.name}
 				/>
 				<Input
 					parentRef={ref}

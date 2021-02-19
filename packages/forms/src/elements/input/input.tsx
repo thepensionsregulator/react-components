@@ -57,7 +57,7 @@ export const Input: React.FC<InputProps> = ({
 					},
 				])}
 				aria-invalid={touched != false}
-				aria-describedby={touched != false ? errorId : ''}
+				aria-describedby={touched != false ? errorId : null}
 				{...rest}
 			/>
 			{After && <span className={styles.after}>{After}</span>}
