@@ -140,9 +140,9 @@ export const InputDate: React.FC<InputDateComponentProps> = memo(
 			(p: any, n: any) => ({ ...p, ...n }),
 			{ dd, mm, yyyy },
 		);
-		const hintId: string = id && hint && `${id}-hint` || '';
-		const errorId: string = id && meta.touched && meta.error && `${id}-error` || '';
-		const ariaDescribedBy: string = `${hintId} ${errorId}`.trim() || null;
+		const hintId: string = id && hint && `${id}-hint` || null;
+		const errorId: string = id && meta.touched && meta.error && `${id}-error` || null;
+		const ariaDescribedBy: string = `${hintId || ''} ${errorId || ''}`.trim() || null;
 		
 		useEffect(() => {
 			setState({ dd: hideDay ? 1 : dd, mm: hideMonth ? 1 : mm, yyyy: yyyy });
