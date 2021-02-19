@@ -38,6 +38,7 @@ export const Checkbox: React.FC<Partial<CheckboxIconProps>> = ({
 				<HiddenInput
 					id={id}
 					type="checkbox"
+					aria-describedby={id && `${id}-hint`}
 					checked={checked}
 					disabled={disabled}
 					onChange={onChange}
@@ -49,7 +50,7 @@ export const Checkbox: React.FC<Partial<CheckboxIconProps>> = ({
 				)}
 				<P cfg={{ ml: 3, fontWeight: 3 }}>{label}</P>
 			</label>
-			{hint && <P className={styles.hint}>{hint}</P>}
+			{hint && <P id={id && `${id}-hint`} className={styles.hint}>{hint}</P>}
 		</StyledInputLabel>
 	);
 };

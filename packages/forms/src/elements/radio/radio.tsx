@@ -44,6 +44,7 @@ export const RadioButton: React.FC<RadioButtonProps> = ({
 				<HiddenInput
 					type="radio"
 					id={id}
+					aria-describedby={id && `${id}-hint`}
 					name={name}
 					checked={checked}
 					value={value}
@@ -60,7 +61,7 @@ export const RadioButton: React.FC<RadioButtonProps> = ({
 					{label}
 				</P>
 			</label>
-			{hint && <P className={styles.hint}>{hint}</P>}
+			{hint && <P id={id && `${id}-hint`} className={styles.hint}>{hint}</P>}
 		</StyledInputLabel>
 	);
 };

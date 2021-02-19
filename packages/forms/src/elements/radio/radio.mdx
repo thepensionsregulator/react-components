@@ -213,20 +213,20 @@ import { FFRadioButton } from '@tpr/forms';
 		const fields = [
 			{
 				type: 'radio',
+				id: 'radio-a',
 				name: FIELD_NAME,
 				label: 'Value A',
 				value: 'value_a',
 				hint: 'Either option A',
-				error: 'The date your passport was issued must be in the past',
 				cfg: { mb: 4 }
 			},
 			{
 				type: 'radio',
+				id: 'radio-b',
 				name: FIELD_NAME,
 				label: 'Value B',
 				value: 'value_b',
 				hint: 'Or option B',
-				error: 'The date your passport was issued must be in the past'
 			}
 		];
 		const validateForm = (values) => {
