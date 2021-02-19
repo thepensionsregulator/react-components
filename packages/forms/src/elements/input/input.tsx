@@ -34,7 +34,7 @@ export const Input: React.FC<InputProps> = ({
 	...rest
 }) => {
 	const getAriaLabel = (): string => {
-		const ariaLabel = rest.ariaLabel ?? label;
+		const ariaLabel = rest['aria-label'] ?? label;
 
 		return ariaLabelSuffix ? `${ariaLabel}${ariaLabelSuffix}` : ariaLabel;
 	};
