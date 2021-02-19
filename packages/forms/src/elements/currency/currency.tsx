@@ -16,9 +16,9 @@ import {
 	getNumberOfCommas,
 	calculateCursorPosition,
 } from '../helpers';
-import { RecursivePartial } from '@tpr/layout/lib/components/cards/common/interfaces';
 import { FieldWithAriaLabelExtenstionI18nProps } from 'types/FieldWithAriaLabelExtensionI18nProps';
 import { FieldWithAriaLabelExtensionProps } from '../../types/FieldWithAriaLabelExtensionProps';
+import { RecursivePartial } from 'types/RecursivePartial';
 
 let currencyFieldI18nDefaults: FieldWithAriaLabelExtenstionI18nProps = {
 	ariaLabelExtension: ', in pounds',

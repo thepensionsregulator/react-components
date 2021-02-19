@@ -4,9 +4,9 @@ import { StyledInputLabel, InputElementHeading } from '../elements';
 import { FieldExtraProps } from '../../renderFields';
 import { Input } from '../input/input';
 import { adaptValueToFormat, fixToDecimals, validKeys as vk } from '../helpers';
-import { RecursivePartial } from '@tpr/layout/lib/components/cards/common/interfaces';
 import { FieldWithAriaLabelExtenstionI18nProps } from 'types/FieldWithAriaLabelExtensionI18nProps';
 import { FieldWithAriaLabelExtensionProps } from '../../types/FieldWithAriaLabelExtensionProps';
+import { RecursivePartial } from 'types/RecursivePartial';
 
 let numberFieldI18nDefaults: FieldWithAriaLabelExtenstionI18nProps = {
 	ariaLabelExtension: null,
