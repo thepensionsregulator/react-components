@@ -21,7 +21,7 @@ const currencyComponentWithi18n = (
 		label="Currency"
 		testId={testId}
 		name="currency"
-		i18n={{ ariaLabelExtension: ' extended aria label' }}
+		i18n={{ ariaLabelExtension: 'extended aria label' }}
 	/>
 );
 
@@ -30,7 +30,7 @@ const currencyComponentWithArialLabelAndi18n = (
 		aria-label="Currency"
 		testId={testId}
 		name="currency"
-		i18n={{ ariaLabelExtension: ' extended aria label' }}
+		i18n={{ ariaLabelExtension: 'extended aria label' }}
 	/>
 );
 

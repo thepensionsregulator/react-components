@@ -34,9 +34,17 @@ export const Input: React.FC<InputProps> = ({
 	...rest
 }) => {
 	const getAriaLabel = (): string => {
-		const ariaLabel = rest['aria-label'] ?? label;
+		var ariaLabel = rest['aria-label'] ?? label;
 
-		return ariaLabelSuffix ? `${ariaLabel}${ariaLabelSuffix}` : ariaLabel;
+		if (!ariaLabelSuffix) {
+			return ariaLabel;
+		}
+
+		if (/^[a-z0-9]/i.test(ariaLabelSuffix)) {
+			ariaLabel = ariaLabel + ' ';
+		}
+
+		return `${ariaLabel}${ariaLabelSuffix}`;
 	};
 
 	return (

@@ -26,7 +26,7 @@ const numberComponentWithi18n = (
 		label="Number"
 		testId={testId}
 		name="number"
-		i18n={{ ariaLabelExtension: ' extended aria label' }}
+		i18n={{ ariaLabelExtension: 'extended aria label' }}
 	/>
 );
 
@@ -35,7 +35,7 @@ const numberComponentWithArialLabelAndi18n = (
 		aria-label="Number"
 		testId={testId}
 		name="number"
-		i18n={{ ariaLabelExtension: ' extended aria label' }}
+		i18n={{ ariaLabelExtension: 'extended aria label' }}
 	/>
 );
 
