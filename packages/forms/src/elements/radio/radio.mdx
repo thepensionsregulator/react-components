@@ -8,6 +8,8 @@ import { Playground } from '@playground';
 import { Form } from 'react-final-form';
 import { FFRadioButton } from './radio';
 import { SeparatorY, SeparatorX } from '../separator';
+import { renderFields } from '../../renderFields';
+import styles from '../elements.module.scss';
 
 # Radio
 
@@ -196,6 +198,68 @@ import { FFRadioButton } from '@tpr/forms';
 						<button type="submit" style={{ display: 'none' }}>
 							Submit
 						</button>
+					</form>
+				)}
+			</Form>
+		);
+	}}
+</Playground>
+
+### Validation
+
+<Playground>
+	{() => {
+		const FIELD_NAME = 'radio_button';
+		const fields = [
+			{
+				type: 'radio',
+				name: FIELD_NAME,
+				label: 'Value A',
+				value: 'value_a',
+				hint: 'Either option A',
+				error: 'The date your passport was issued must be in the past',
+				cfg: { mb: 4 }
+			},
+			{
+				type: 'radio',
+				name: FIELD_NAME,
+				label: 'Value B',
+				value: 'value_b',
+				hint: 'Or option B',
+				error: 'The date your passport was issued must be in the past'
+			}
+		];
+		const validateForm = (values) => {
+			console.log('validateForm');
+			console.log(values);
+			if (!values[FIELD_NAME]) {
+				return {
+					message: 'You must choose an option'
+				};
+			}
+		};
+		return (
+			<Form 
+				onSubmit={(value, form) => {
+					setTimeout(() => {
+						form.reset();
+					}, 500)
+				}} 
+				initialValues={{ [FIELD_NAME]: null }}
+				validate={validateForm}
+			>
+				{({ handleSubmit, errors }) => (
+					<form onSubmit={handleSubmit}>
+						<fieldset className={errors.message && styles.labelError} aria-describedby="error-message">
+							<legend>Choose an option</legend>
+		          {errors.message && <p id="error-message" className={styles.errorMessage}>{errors.message}</p>}
+							{renderFields(fields)}
+						</fieldset>
+						<button type="submit" style={{ display: 'none' }}>
+							Submit
+						</button>
+						<br />
+						<p>(Press ENTER to reset)</p>
 					</form>
 				)}
 			</Form>
