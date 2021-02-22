@@ -16,6 +16,24 @@ const currencyComponent = (
 	<FFInputCurrency label="Currency" testId={testId} name="currency" />
 );
 
+const currencyComponentWithi18n = (
+	<FFInputCurrency
+		label="Currency"
+		testId={testId}
+		name="currency"
+		i18n={{ ariaLabelExtension: 'extended aria label' }}
+	/>
+);
+
+const currencyComponentWithArialLabelAndi18n = (
+	<FFInputCurrency
+		aria-label="Currency"
+		testId={testId}
+		name="currency"
+		i18n={{ ariaLabelExtension: 'extended aria label' }}
+	/>
+);
+
 describe('Currency', () => {
 	describe('normal behaviour', () => {
 		test('is accessible', async () => {
@@ -44,6 +62,45 @@ describe('Currency', () => {
 
 			expect(label).toBeDefined();
 			expect(label).toHaveAttribute('id', 'currency-label');
+		});
+
+		test('renders with a default aria-label', () => {
+			const { getByTestId } = formSetup({
+				render: currencyComponent,
+			});
+
+			const input = getByTestId(testId);
+
+			expect(input).toBeDefined();
+			expect(input).toHaveAttribute('aria-label', 'Currency, in pounds');
+		});
+
+		test('renders an aria-label when given a label and an aria label extension', () => {
+			const { getByTestId } = formSetup({
+				render: currencyComponentWithi18n,
+			});
+
+			const input = getByTestId(testId);
+
+			expect(input).toBeDefined();
+			expect(input).toHaveAttribute(
+				'aria-label',
+				'Currency extended aria label',
+			);
+		});
+
+		test('renders an aria-label when given an aria-label and an aria label extension', () => {
+			const { getByTestId } = formSetup({
+				render: currencyComponentWithArialLabelAndi18n,
+			});
+
+			const input = getByTestId(testId);
+
+			expect(input).toBeDefined();
+			expect(input).toHaveAttribute(
+				'aria-label',
+				'Currency extended aria label',
+			);
 		});
 	});
 
