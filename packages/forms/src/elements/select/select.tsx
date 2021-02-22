@@ -3,7 +3,7 @@ import Downshift, { DownshiftProps } from 'downshift';
 import { UnfoldMore } from '@tpr/icons';
 import { Field, FieldRenderProps } from 'react-final-form';
 import { Flex, classNames } from '@tpr/core';
-import { StyledInputLabel, InputElementHeading } from '../elements';
+import { StyledInputLabel, InputElementHeading, getElementDescriptors, InputElementDescriptorProps } from '../elements';
 import { FieldProps, FieldOptions, FieldExtraProps } from '../../renderFields';
 import { Input } from '../input/input';
 import PopupBox from './popup';
@@ -19,6 +19,7 @@ interface SelectProps extends DownshiftProps<any>, FieldExtraProps {
 export const selectStateChangeTypes = Downshift.stateChangeTypes;
 
 export const Select: React.FC<SelectProps & FieldRenderProps<string>> = ({
+	id,
 	options,
 	label,
 	required,
@@ -38,6 +39,9 @@ export const Select: React.FC<SelectProps & FieldRenderProps<string>> = ({
 	cfg,
 	...rest
 }) => {
+	
+	const descriptors: InputElementDescriptorProps = getElementDescriptors(id, !!label, !!hint);
+
 	return (
 		<Downshift
 			onChange={onChange}
@@ -64,6 +68,9 @@ export const Select: React.FC<SelectProps & FieldRenderProps<string>> = ({
 						{...getLabelProps()}
 					>
 						<InputElementHeading
+							labelId={descriptors && descriptors.labelId}
+							hintId={descriptors && descriptors.hintId}
+							errorId={descriptors && descriptors.errorId}
 							label={label}
 							required={required}
 							hint={hint}
@@ -73,6 +80,8 @@ export const Select: React.FC<SelectProps & FieldRenderProps<string>> = ({
 							<Input
 								autoComplete="off"
 								type="text"
+								hintId={descriptors && descriptors.hintId}
+								errorId={descriptors && descriptors.errorId}
 								testId={testId}
 								label={label}
 								disabled={disabled}

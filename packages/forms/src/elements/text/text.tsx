@@ -1,9 +1,10 @@
 import React from 'react';
 import { Field, FieldRenderProps } from 'react-final-form';
-import { StyledInputLabel, InputElementHeading } from '../elements';
+import { StyledInputLabel, InputElementHeading, getElementDescriptors, InputElementDescriptorProps } from '../elements';
 import { FieldProps, FieldExtraProps } from '../../renderFields';
 import { Input } from '../input/input';
 import { useEffect } from 'react';
+import { id } from 'date-fns/locale';
 
 type InputTextProps = FieldRenderProps<string> &
 	FieldExtraProps & {
@@ -37,7 +38,7 @@ const InputText: React.FC<InputTextProps> = React.forwardRef(
 			}
 		}, [updatedValue]);
 
-		const errorId = `${name}_error`;
+		const descriptors: InputElementDescriptorProps = getElementDescriptors(name, !!label, !!hint);
 
 		return (
 			<StyledInputLabel
@@ -45,24 +46,25 @@ const InputText: React.FC<InputTextProps> = React.forwardRef(
 				cfg={Object.assign({ flexDirection: 'column', mt: 1 }, cfg)}
 			>
 				<InputElementHeading
-					errorId={errorId}
+					labelId={descriptors && descriptors.labelId}
+					hintId={descriptors && descriptors.hintId}
+					errorId={descriptors && descriptors.errorId}
 					label={label}
 					required={required}
 					hint={hint}
 					meta={meta}
-					labelId={input.name}
 				/>
 				<Input
 					parentRef={ref}
 					type="text"
 					width={width}
 					testId={testId}
-					errorId={errorId}
+					errorId={descriptors && descriptors.errorId}
 					label={ariaLabel ? ariaLabel : label}
 					placeholder={placeholder}
 					disabled={disabled}
 					readOnly={readOnly}
-					touched={meta && meta.touched && meta.error}
+					isError={meta && meta.touched && meta.error}
 					className={inputClassName}
 					maxLength={maxLength}
 					{...input}

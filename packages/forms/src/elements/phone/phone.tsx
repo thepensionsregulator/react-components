@@ -1,6 +1,6 @@
 import React from 'react';
 import { Field, FieldRenderProps } from 'react-final-form';
-import { StyledInputLabel, InputElementHeading } from '../elements';
+import { StyledInputLabel, InputElementHeading, getElementDescriptors, InputElementDescriptorProps } from '../elements';
 import { FieldProps, FieldExtraProps } from '../../renderFields';
 import { Input } from '../input/input';
 import {
@@ -23,7 +23,7 @@ const InputPhone: React.FC<InputPhoneProps> = ({
 	inputWidth: width,
 	cfg,
 }) => {
-	const errorId = `${name}_error`;
+	const descriptors: InputElementDescriptorProps = getElementDescriptors(name, !!label, !!hint);
 
 	return (
 		<StyledInputLabel
@@ -32,7 +32,9 @@ const InputPhone: React.FC<InputPhoneProps> = ({
 		>
 			<InputElementHeading
 				label={label}
-				errorId={errorId}
+				labelId={descriptors && descriptors.labelId}
+				hintId={descriptors && descriptors.hintId}
+				errorId={descriptors && descriptors.errorId}
 				required={required}
 				hint={hint}
 				meta={meta}
@@ -42,10 +44,11 @@ const InputPhone: React.FC<InputPhoneProps> = ({
 				width={width}
 				testId={testId}
 				label={label}
-				errorId={errorId}
+				hintId={descriptors && descriptors.hintId}
+				errorId={descriptors && descriptors.errorId}
 				placeholder={placeholder}
 				readOnly={readOnly}
-				touched={meta && meta.touched && meta.error}
+				isError={meta && meta.touched && meta.error}
 				required={required}
 				{...input}
 			/>

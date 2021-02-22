@@ -1,6 +1,6 @@
 import React, { ChangeEvent, useState } from 'react';
 import { Field, FieldRenderProps } from 'react-final-form';
-import { StyledInputLabel, InputElementHeading } from '../elements';
+import { StyledInputLabel, InputElementHeading, getElementDescriptors, InputElementDescriptorProps } from '../elements';
 import { FieldExtraProps } from '../../renderFields';
 import { Input } from '../input/input';
 import { adaptValueToFormat, fixToDecimals, validKeys as vk } from '../helpers';
@@ -124,7 +124,7 @@ const InputNumber: React.FC<InputNumberProps> = ({
 		input.onBlur(e.target.value); // without this call, validate won't be executed even if specified
 	};
 
-	const errorId = `${name}_error`;
+	const descriptors: InputElementDescriptorProps = getElementDescriptors(name, !!label, !!hint);
 
 	return (
 		<StyledInputLabel
@@ -133,20 +133,22 @@ const InputNumber: React.FC<InputNumberProps> = ({
 			noLeftBorder={noLeftBorder}
 		>
 			<InputElementHeading
+				labelId={descriptors && descriptors.labelId}
+				hintId={descriptors && descriptors.hintId}
+				errorId={descriptors && descriptors.errorId}
 				label={label}
-				errorId={errorId}
 				required={optionalText !== undefined ? !optionalText : required}
 				hint={hint}
 				meta={meta}
-				labelId={input.name}
 			/>
 			<Input
 				type="number"
 				width={width}
+				hintId={descriptors && descriptors.hintId}
+				errorId={descriptors && descriptors.errorId}
 				testId={testId}
 				label={label}
-				errorId={errorId}
-				touched={meta && meta.touched && meta.error}
+				isError={meta && meta.touched && meta.error}
 				placeholder={placeholder}
 				readOnly={readOnly}
 				decimalPlaces={decimalPlaces}

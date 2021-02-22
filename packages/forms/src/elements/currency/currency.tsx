@@ -1,7 +1,7 @@
 import React, { ChangeEvent, useState, useEffect, useRef } from 'react';
 import { Field, FieldRenderProps } from 'react-final-form';
-import { StyledInputLabel, InputElementHeading } from '../elements';
 import { FieldExtraProps } from '../../renderFields';
+import { StyledInputLabel, InputElementHeading, getElementDescriptors, InputElementDescriptorProps } from '../elements';
 import { Input } from '../input/input';
 import {
 	validKeys,
@@ -202,7 +202,7 @@ const InputCurrency: React.FC<InputCurrencyProps> = React.memo(
 			}
 		}, [initialValue]);
 
-		const errorId = `${name}_error`;
+		const descriptors: InputElementDescriptorProps = getElementDescriptors(name, !!label, !!hint);
 
 		return (
 			<StyledInputLabel
@@ -211,12 +211,13 @@ const InputCurrency: React.FC<InputCurrencyProps> = React.memo(
 				noLeftBorder={noLeftBorder}
 			>
 				<InputElementHeading
+					labelId={descriptors && descriptors.labelId}
+					hintId={descriptors && descriptors.hintId}
+					errorId={descriptors && descriptors.errorId}
 					label={label}
-					errorId={errorId}
 					required={optionalText !== undefined ? !optionalText : required}
 					hint={hint}
 					meta={meta}
-					labelId={input.name}
 				/>
 				<Input
 					parentRef={innerInput}
@@ -225,8 +226,9 @@ const InputCurrency: React.FC<InputCurrencyProps> = React.memo(
 					testId={testId}
 					label={label}
 					ariaLabelExtension={i18n.ariaLabelExtension}
-					errorId={errorId}
-					touched={meta && meta.touched && meta.error}
+					hintId={descriptors && descriptors.hintId}
+					errorId={descriptors && descriptors.errorId}
+					isError={meta && meta.touched && meta.error}
 					placeholder={placeholder}
 					readOnly={readOnly}
 					decimalPlaces={decimalPlaces}

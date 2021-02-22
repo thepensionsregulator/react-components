@@ -75,8 +75,8 @@ type InputElementHeadingProps = {
 	element?: 'div' | 'legend' | null;
 	label?: string;
 	labelId?: string;
-	errorId?: string;
 	hintId?: string;
+	errorId?: string;
 	required?: boolean;
 	hint?: string;
 	meta?: any;
@@ -85,12 +85,11 @@ export const InputElementHeading: React.FC<InputElementHeadingProps> = ({
 	element = 'div',
 	label,
 	labelId,
-	errorId,
 	hintId,
+	errorId,
 	required,
 	hint,
-	meta,
-}) => {
+	meta}) => {
 	return (
 		<>
 			{label && (
@@ -112,3 +111,41 @@ export const InputElementHeading: React.FC<InputElementHeadingProps> = ({
 		</>
 	);
 };
+
+const getLabelId = (rootId: string): string => {
+	return rootId && `${rootId}-label` || null;
+};
+const getHintId = (rootId: string): string => {
+	return rootId && `${rootId}-hint` || null;
+};
+const getErrorId = (rootId: string): string => {
+	return rootId && `${rootId}-error` || null;
+};
+
+export type InputElementDescriptorProps = {
+	labelId?: string;
+	hintId?: string;
+	errorId?: string;
+}
+
+export const getElementDescriptors = (rootId: string, hasLabel: boolean, hasHint: boolean): InputElementDescriptorProps => {
+	const labelId = hasLabel? getLabelId(rootId): null;
+	const hintId = hasHint? getHintId(rootId): null;
+	const errorId = getErrorId(rootId);
+	return {
+		labelId: labelId,
+		hintId: hintId,
+		errorId: errorId,
+	} as InputElementDescriptorProps;
+}	
+
+export const formatAriaDescribedBy = (hintId: string, errorId: string, isError: boolean) => {
+	var describedBy: string;
+	if (isError) {
+		describedBy =  `${hintId || ''} ${errorId || ''}`
+	}
+	else {
+		describedBy = `${hintId || ''}`
+	}
+	return describedBy.trim() || null;
+}

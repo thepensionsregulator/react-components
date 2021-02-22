@@ -1,6 +1,6 @@
 import React from 'react';
 import { Field, FieldRenderProps } from 'react-final-form';
-import { StyledInputLabel, InputElementHeading } from '../elements';
+import { StyledInputLabel, InputElementHeading, getElementDescriptors, InputElementDescriptorProps } from '../elements';
 import { FieldProps, FieldExtraProps } from '../../renderFields';
 import { Input } from '../input/input';
 import {
@@ -23,15 +23,18 @@ const InputEmail: React.FC<InputEmailProps> = ({
 	inputWidth: width,
 	cfg,
 }) => {
-	const errorId = `${name}_error`;
+	const descriptors: InputElementDescriptorProps = getElementDescriptors(name, !!label, !!hint);
+
 	return (
 		<StyledInputLabel
 			isError={meta && meta.touched && meta.error}
 			cfg={Object.assign({ flexDirection: 'column', mt: 1 }, cfg)}
 		>
 			<InputElementHeading
+				labelId={descriptors && descriptors.labelId}
+				hintId={descriptors && descriptors.hintId}
+				errorId={descriptors && descriptors.errorId}
 				label={label}
-				errorId={errorId}
 				required={required}
 				hint={hint}
 				meta={meta}
@@ -39,13 +42,14 @@ const InputEmail: React.FC<InputEmailProps> = ({
 			<Input
 				type="email"
 				width={width}
+				hintId={descriptors && descriptors.hintId}
+				errorId={descriptors && descriptors.errorId}
 				testId={testId}
 				label={label}
-				errorId={errorId}
 				required={required}
 				placeholder={placeholder}
 				readOnly={readOnly}
-				touched={meta && meta.touched && meta.error}
+				isError={meta && meta.touched && meta.error}
 				{...input}
 			/>
 		</StyledInputLabel>

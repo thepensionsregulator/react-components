@@ -2,7 +2,7 @@ import React, { ChangeEvent, useEffect, memo, useReducer } from 'react';
 import { Field, FieldRenderProps } from 'react-final-form';
 import { isValid, toDate, format } from 'date-fns';
 import { P, Flex } from '@tpr/core';
-import { StyledInputLabel, InputElementHeading } from '../elements';
+import { StyledInputLabel, InputElementHeading, InputElementDescriptorProps, getElementDescriptors, formatAriaDescribedBy } from '../elements';
 import { Input } from '../input/input';
 import { FieldProps, FieldExtraProps } from '../../renderFields';
 import isEqual from 'lodash.isequal';
@@ -140,9 +140,6 @@ export const InputDate: React.FC<InputDateComponentProps> = memo(
 			(p: any, n: any) => ({ ...p, ...n }),
 			{ dd, mm, yyyy },
 		);
-		const hintId: string = id && hint && `${id}-hint` || null;
-		const errorId: string = id && meta.touched && meta.error && `${id}-error` || null;
-		const ariaDescribedBy: string = `${hintId || ''} ${errorId || ''}`.trim() || null;
 		
 		useEffect(() => {
 			setState({ dd: hideDay ? 1 : dd, mm: hideMonth ? 1 : mm, yyyy: yyyy });
@@ -159,6 +156,10 @@ export const InputDate: React.FC<InputDateComponentProps> = memo(
 			}
 		}, [day, month, year, input]);
 
+		const isError: boolean = meta && meta.touched && meta.error;
+		const descriptors: InputElementDescriptorProps = getElementDescriptors(id, !!label, !!hint);
+		const ariaDescribedBy = descriptors && formatAriaDescribedBy(descriptors.hintId, descriptors.errorId, isError);
+
 		return (
 			<StyledInputLabel
 				isError={meta && meta.touched && meta.error}
@@ -172,15 +173,16 @@ export const InputDate: React.FC<InputDateComponentProps> = memo(
 					cfg,
 				)}
 			>
-					<InputElementHeading
-						element='legend'
-						label={label}
-						required={required}
-						hint={hint}
-						meta={meta}
-						hintId={hintId}
-						errorId={errorId}
-					/>
+				<InputElementHeading
+					element='legend'
+					labelId={descriptors && descriptors.labelId}
+					hintId={descriptors && descriptors.hintId}
+					errorId={descriptors && descriptors.errorId}
+					label={label}
+					required={required}
+					hint={hint}
+					meta={meta}
+				/>
 				<Flex>
 					{!hideDay && (
 						<DateInputField

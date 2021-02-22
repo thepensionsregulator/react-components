@@ -1,13 +1,16 @@
 import React from 'react';
 import { classNames, Flex, LayoutProps } from '@tpr/core';
 import styles from './input.module.scss';
+import { formatAriaDescribedBy } from '../elements';
 export type InputProps = {
 	type: string;
 	width?: LayoutProps['width'];
 	testId?: string;
+	labelId?: string;
+	hintId?: string;
 	errorId?: string;
 	label?: string;
-	touched?: boolean;
+	isError?: boolean;
 	after?: string;
 	before?: string;
 	decimalPlaces?: number;
@@ -21,9 +24,11 @@ export const Input: React.FC<InputProps> = ({
 	type = 'text',
 	width,
 	testId,
+	labelId,
+	hintId,
 	errorId,
 	label,
-	touched = false,
+	isError = false,
 	className,
 	readOnly,
 	after: After,
@@ -69,11 +74,11 @@ export const Input: React.FC<InputProps> = ({
 					styles.inputText,
 					className,
 					{
-						[styles['inputText-error']]: touched,
+						[styles['inputText-error']]: isError,
 					},
 				])}
-				aria-invalid={touched != false}
-				aria-describedby={touched != false ? errorId : null}
+				aria-invalid={isError}
+				aria-describedby={formatAriaDescribedBy(hintId, errorId, isError)}
 				{...rest}
 				aria-label={getAriaLabel()}
 			/>
