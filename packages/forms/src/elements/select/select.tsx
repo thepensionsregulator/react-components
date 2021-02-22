@@ -24,7 +24,6 @@ interface SelectProps extends DownshiftProps<any>, FieldExtraProps {
 export const selectStateChangeTypes = Downshift.stateChangeTypes;
 
 export const Select: React.FC<SelectProps & FieldRenderProps<string>> = ({
-	id,
 	options,
 	label,
 	required,
@@ -45,7 +44,7 @@ export const Select: React.FC<SelectProps & FieldRenderProps<string>> = ({
 	...rest
 }) => {
 	const descriptors: InputElementDescriptorProps = getElementDescriptors(
-		id,
+		rest["id"],
 		!!label,
 		!!hint,
 	);
@@ -70,13 +69,12 @@ export const Select: React.FC<SelectProps & FieldRenderProps<string>> = ({
 			}) => (
 				<div>
 					<StyledInputLabel
-						element="div"
+						element='label'
 						isError={meta && meta.touched && meta.error}
 						cfg={Object.assign({ flexDirection: 'column' }, cfg)}
 						{...getLabelProps()}
 					>
 						<InputElementHeading
-							labelId={descriptors && descriptors.labelId}
 							hintId={descriptors && descriptors.hintId}
 							errorId={descriptors && descriptors.errorId}
 							label={label}
