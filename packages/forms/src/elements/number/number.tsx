@@ -1,9 +1,16 @@
 import React, { ChangeEvent, useState } from 'react';
 import { Field, FieldRenderProps } from 'react-final-form';
 import { StyledInputLabel, InputElementHeading } from '../elements';
-import { FieldProps, FieldExtraProps } from '../../renderFields';
+import { FieldExtraProps } from '../../renderFields';
 import { Input } from '../input/input';
 import { adaptValueToFormat, fixToDecimals, validKeys as vk } from '../helpers';
+import { FieldWithAriaLabelExtenstionI18nProps } from 'types/FieldWithAriaLabelExtensionI18nProps';
+import { FieldWithAriaLabelExtensionProps } from '../../types/FieldWithAriaLabelExtensionProps';
+import { RecursivePartial } from 'types/RecursivePartial';
+
+let numberFieldI18nDefaults: FieldWithAriaLabelExtenstionI18nProps = {
+	ariaLabelExtension: null,
+};
 
 interface InputNumberProps extends FieldRenderProps<number>, FieldExtraProps {
 	after?: string;
@@ -14,6 +21,7 @@ interface InputNumberProps extends FieldRenderProps<number>, FieldExtraProps {
 	optionalText?: boolean;
 	maxLength?: number;
 	maxIntDigits?: number;
+	i18n?: RecursivePartial<FieldWithAriaLabelExtenstionI18nProps>;
 }
 
 const InputNumber: React.FC<InputNumberProps> = ({
@@ -36,6 +44,7 @@ const InputNumber: React.FC<InputNumberProps> = ({
 	optionalText,
 	maxLength,
 	maxIntDigits,
+	i18n = numberFieldI18nDefaults,
 	...props
 }) => {
 	const digits = [
@@ -147,13 +156,16 @@ const InputNumber: React.FC<InputNumberProps> = ({
 				onBlur={handleBlur}
 				after={after}
 				before={before}
+				ariaLabelExtension={i18n.ariaLabelExtension}
 				{...props}
 			/>
 		</StyledInputLabel>
 	);
 };
 
-export const FFInputNumber: React.FC<FieldProps> = (fieldProps) => {
+export const FFInputNumber: React.FC<FieldWithAriaLabelExtensionProps> = (
+	fieldProps,
+) => {
 	return (
 		<Field
 			{...fieldProps}

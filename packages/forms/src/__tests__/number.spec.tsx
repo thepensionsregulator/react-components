@@ -21,6 +21,24 @@ const numberComponentWithDecimals = (
 	/>
 );
 
+const numberComponentWithi18n = (
+	<FFInputNumber
+		label="Number"
+		testId={testId}
+		name="number"
+		i18n={{ ariaLabelExtension: 'extended aria label' }}
+	/>
+);
+
+const numberComponentWithArialLabelAndi18n = (
+	<FFInputNumber
+		aria-label="Number"
+		testId={testId}
+		name="number"
+		i18n={{ ariaLabelExtension: 'extended aria label' }}
+	/>
+);
+
 describe('Number', () => {
 	describe('normal behaviour', () => {
 		test('is accessible', async () => {
@@ -49,6 +67,39 @@ describe('Number', () => {
 
 			expect(label).toBeDefined();
 			expect(label).toHaveAttribute('id', 'number-label');
+		});
+
+		test('renders with a default aria-label', () => {
+			const { getByTestId } = formSetup({
+				render: numberComponent,
+			});
+
+			const input = getByTestId(testId);
+
+			expect(input).toBeDefined();
+			expect(input).toHaveAttribute('aria-label', 'Number');
+		});
+
+		test('renders an aria-label when given a label and an aria label extension', () => {
+			const { getByTestId } = formSetup({
+				render: numberComponentWithi18n,
+			});
+
+			const input = getByTestId(testId);
+
+			expect(input).toBeDefined();
+			expect(input).toHaveAttribute('aria-label', 'Number extended aria label');
+		});
+
+		test('renders an aria-label when given an aria-label and an aria label extension', () => {
+			const { getByTestId } = formSetup({
+				render: numberComponentWithArialLabelAndi18n,
+			});
+
+			const input = getByTestId(testId);
+
+			expect(input).toBeDefined();
+			expect(input).toHaveAttribute('aria-label', 'Number extended aria label');
 		});
 	});
 

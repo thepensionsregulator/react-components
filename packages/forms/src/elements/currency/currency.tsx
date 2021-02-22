@@ -1,7 +1,7 @@
 import React, { ChangeEvent, useState, useEffect, useRef } from 'react';
 import { Field, FieldRenderProps } from 'react-final-form';
 import { StyledInputLabel, InputElementHeading } from '../elements';
-import { FieldProps, FieldExtraProps } from '../../renderFields';
+import { FieldExtraProps } from '../../renderFields';
 import { Input } from '../input/input';
 import {
 	validKeys,
@@ -16,6 +16,13 @@ import {
 	getNumberOfCommas,
 	calculateCursorPosition,
 } from '../helpers';
+import { FieldWithAriaLabelExtenstionI18nProps } from 'types/FieldWithAriaLabelExtensionI18nProps';
+import { FieldWithAriaLabelExtensionProps } from '../../types/FieldWithAriaLabelExtensionProps';
+import { RecursivePartial } from 'types/RecursivePartial';
+
+let currencyFieldI18nDefaults: FieldWithAriaLabelExtenstionI18nProps = {
+	ariaLabelExtension: ', in pounds',
+};
 
 interface InputCurrencyProps extends FieldRenderProps<number>, FieldExtraProps {
 	after?: string;
@@ -25,6 +32,7 @@ interface InputCurrencyProps extends FieldRenderProps<number>, FieldExtraProps {
 	noLeftBorder?: boolean;
 	optionalText?: boolean;
 	maxInputLength?: number;
+	i18n?: RecursivePartial<FieldWithAriaLabelExtenstionI18nProps>;
 }
 
 const InputCurrency: React.FC<InputCurrencyProps> = React.memo(
@@ -48,6 +56,7 @@ const InputCurrency: React.FC<InputCurrencyProps> = React.memo(
 		optionalText,
 		maxInputLength = 16 + decimalPlaces,
 		initialValue,
+		i18n = currencyFieldI18nDefaults,
 		...props
 	}) => {
 		const digits = ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9', '.'];
@@ -215,6 +224,7 @@ const InputCurrency: React.FC<InputCurrencyProps> = React.memo(
 					width={width}
 					testId={testId}
 					label={label}
+					ariaLabelExtension={i18n.ariaLabelExtension}
 					errorId={errorId}
 					touched={meta && meta.touched && meta.error}
 					placeholder={placeholder}
@@ -233,7 +243,9 @@ const InputCurrency: React.FC<InputCurrencyProps> = React.memo(
 	},
 );
 
-export const FFInputCurrency: React.FC<FieldProps> = (fieldProps) => {
+export const FFInputCurrency: React.FC<FieldWithAriaLabelExtensionProps> = (
+	fieldProps,
+) => {
 	return (
 		<Field
 			{...fieldProps}
