@@ -113,13 +113,13 @@ describe('Checkbox input', () => {
 		const { getByLabelText } = formSetup({
 			render: (
 				<FFCheckbox
-				id={id}
-				required
-				label={labelText}
-				hint={hint}
-				name="my-checkbox"
-			/>
-	),
+					id={id}
+					required
+					label={labelText}
+					hint={hint}
+					name="my-checkbox"
+				/>
+			),
 		});
 		const checkbox = getByLabelText(labelText);
 		expect(checkbox).not.toBeNull();
@@ -133,13 +133,13 @@ describe('Checkbox input', () => {
 		const { container } = formSetup({
 			render: (
 				<FFCheckbox
-				id={id}
-				required
-				label={labelText}
-				hint={hint}
-				name="my-checkbox"
-			/>
-	),
+					id={id}
+					required
+					label={labelText}
+					hint={hint}
+					name="my-checkbox"
+				/>
+			),
 		});
 		const label = container.querySelector(`[id=${id}-label]`);
 		expect(label).not.toBeNull();
