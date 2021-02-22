@@ -13,7 +13,7 @@ export type InputProps = {
 	decimalPlaces?: number;
 	parentRef?: any;
 	readOnly?: boolean;
-	ariaLabelSuffix?: string;
+	ariaLabelExtension?: string;
 	[key: string]: any;
 };
 
@@ -30,21 +30,21 @@ export const Input: React.FC<InputProps> = ({
 	before: Before,
 	decimalPlaces,
 	parentRef,
-	ariaLabelSuffix,
+	ariaLabelExtension,
 	...rest
 }) => {
 	const getAriaLabel = (): string => {
 		var ariaLabel = rest['aria-label'] ?? label;
 
-		if (!ariaLabelSuffix) {
+		if (!ariaLabelExtension) {
 			return ariaLabel;
 		}
 
-		if (/^[a-z0-9]/i.test(ariaLabelSuffix)) {
+		if (/^[a-z0-9]/i.test(ariaLabelExtension)) {
 			ariaLabel = ariaLabel + ' ';
 		}
 
-		return `${ariaLabel}${ariaLabelSuffix}`;
+		return `${ariaLabel}${ariaLabelExtension}`;
 	};
 
 	return (

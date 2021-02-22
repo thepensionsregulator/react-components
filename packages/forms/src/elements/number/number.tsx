@@ -156,7 +156,7 @@ const InputNumber: React.FC<InputNumberProps> = ({
 				onBlur={handleBlur}
 				after={after}
 				before={before}
-				ariaLabelSuffix={i18n.ariaLabelExtension}
+				ariaLabelExtension={i18n.ariaLabelExtension}
 				{...props}
 			/>
 		</StyledInputLabel>
