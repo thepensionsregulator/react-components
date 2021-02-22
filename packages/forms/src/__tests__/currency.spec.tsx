@@ -415,6 +415,7 @@ describe('Currency', () => {
 	test('has correct describedby tag when an error is shown', () => {
 		const numberRequired = 'Currency is required';
 		const name = 'currency';
+		const hint = 'This explains how to complete the field';
 
 		const handleSubmit = jest.fn();
 		const { getByTestId, getByText } = formSetup({
@@ -422,6 +423,7 @@ describe('Currency', () => {
 				<FFInputCurrency
 					label="Currency"
 					testId={testId}
+					hint={hint}
 					name={name}
 					required={true}
 					validate={(value) => (value ? undefined : numberRequired)}
@@ -431,6 +433,6 @@ describe('Currency', () => {
 		});
 
 		const currencyTest = getByTestId(testId);
-		CheckDescribedByTag(getByText, currencyTest, numberRequired);
+		CheckDescribedByTag(getByText, currencyTest, numberRequired, hint);
 	});
 });

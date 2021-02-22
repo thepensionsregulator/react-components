@@ -68,6 +68,7 @@ const InputText: React.FC<InputTextProps> = React.forwardRef(
 					type="text"
 					width={width}
 					testId={testId}
+					hintId={descriptors && descriptors.hintId}
 					errorId={descriptors && descriptors.errorId}
 					label={ariaLabel ? ariaLabel : label}
 					placeholder={placeholder}

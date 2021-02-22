@@ -106,6 +106,7 @@ describe('Phone input', () => {
 		const numberRequired = 'Invalid phone number';
 		const testId = 'phoneTest';
 		const name = 'phoneNumber';
+		const hint = 'This explains how to complete the field';
 
 		const handleSubmit = jest.fn();
 		const { getByTestId, getByText } = formSetup({
@@ -114,6 +115,7 @@ describe('Phone input', () => {
 					label="Phone Number"
 					testId={testId}
 					name={name}
+					hint={hint}
 					required={true}
 					validate={(number) => (number ? undefined : numberRequired)}
 				/>
@@ -122,6 +124,6 @@ describe('Phone input', () => {
 		});
 
 		const phoneTest = getByTestId(testId);
-		CheckDescribedByTag(getByText, phoneTest, numberRequired);
+		CheckDescribedByTag(getByText, phoneTest, numberRequired, hint);
 	});
 });

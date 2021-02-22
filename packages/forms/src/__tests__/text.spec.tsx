@@ -155,6 +155,7 @@ describe('Text input', () => {
 		const testId = 'texTest';
 		const name = 'textInput';
 		const error = 'This is a required field';
+		const hint = 'This explains how to complete the field';
 		const handleSubmit = jest.fn();
 
 		const fields: FieldProps[] = [
@@ -163,6 +164,7 @@ describe('Text input', () => {
 				testId: testId,
 				label: 'Text Line 1',
 				type: 'text',
+				hint: hint,
 				error: error,
 				required: true,
 			},
@@ -175,6 +177,6 @@ describe('Text input', () => {
 		});
 
 		const textTest = getByTestId(testId);
-		CheckDescribedByTag(getByText, textTest, error);
+		CheckDescribedByTag(getByText, textTest, error, hint);
 	});
 });
