@@ -3,7 +3,7 @@ import { Field, FieldRenderProps } from 'react-final-form';
 import { P } from '@tpr/core';
 import { FieldProps, FieldExtraProps } from '../../renderFields';
 import { CheckboxChecked, CheckboxBlank } from './icons';
-import { StyledInputLabel } from '../elements';
+import { getElementDescriptors, StyledInputLabel } from '../elements';
 import { HiddenInput } from '../hidden/hidden';
 import styles from './checkbox.module.scss';
 
@@ -20,6 +20,8 @@ export const Checkbox: React.FC<Partial<CheckboxIconProps>> = ({
 	className,
 }) => {
 	const msg = testId ? `${testId}-${checked ? 'checked' : 'unchecked'}` : null;
+	const descriptors = getElementDescriptors(id, !!label, !!hint);
+
 	return (
 		<StyledInputLabel
 			element="div"
@@ -34,11 +36,16 @@ export const Checkbox: React.FC<Partial<CheckboxIconProps>> = ({
 				cfg,
 			)}
 		>
-			<label data-testid={msg} className={styles.wrapper} htmlFor={id}>
+			<label
+				id={descriptors && descriptors.labelId}
+				data-testid={msg}
+				className={styles.wrapper}
+				htmlFor={id}
+			>
 				<HiddenInput
 					id={id}
 					type="checkbox"
-					aria-describedby={id && `${id}-hint`}
+					aria-describedby={descriptors && descriptors.hintId}
 					checked={checked}
 					disabled={disabled}
 					onChange={onChange}

@@ -9,7 +9,6 @@ import {
 import { FieldProps, FieldExtraProps } from '../../renderFields';
 import { Input } from '../input/input';
 import { useEffect } from 'react';
-import { id } from 'date-fns/locale';
 
 type InputTextProps = FieldRenderProps<string> &
 	FieldExtraProps & {
