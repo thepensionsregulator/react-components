@@ -61,7 +61,11 @@ export const RadioButton: React.FC<RadioButtonProps> = ({
 					{label}
 				</P>
 			</label>
-			{hint && <P id={id && `${id}-hint`} className={styles.hint}>{hint}</P>}
+			{hint && (
+				<P id={id && `${id}-hint`} className={styles.hint}>
+					{hint}
+				</P>
+			)}
 		</StyledInputLabel>
 	);
 };

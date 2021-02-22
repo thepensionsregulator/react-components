@@ -3,7 +3,12 @@ import Downshift, { DownshiftProps } from 'downshift';
 import { UnfoldMore } from '@tpr/icons';
 import { Field, FieldRenderProps } from 'react-final-form';
 import { Flex, classNames } from '@tpr/core';
-import { StyledInputLabel, InputElementHeading, getElementDescriptors, InputElementDescriptorProps } from '../elements';
+import {
+	StyledInputLabel,
+	InputElementHeading,
+	getElementDescriptors,
+	InputElementDescriptorProps,
+} from '../elements';
 import { FieldProps, FieldOptions, FieldExtraProps } from '../../renderFields';
 import { Input } from '../input/input';
 import PopupBox from './popup';
@@ -39,8 +44,11 @@ export const Select: React.FC<SelectProps & FieldRenderProps<string>> = ({
 	cfg,
 	...rest
 }) => {
-	
-	const descriptors: InputElementDescriptorProps = getElementDescriptors(id, !!label, !!hint);
+	const descriptors: InputElementDescriptorProps = getElementDescriptors(
+		id,
+		!!label,
+		!!hint,
+	);
 
 	return (
 		<Downshift

@@ -1,7 +1,12 @@
 import React, { ChangeEvent, useState, useEffect, useRef } from 'react';
 import { Field, FieldRenderProps } from 'react-final-form';
 import { FieldExtraProps } from '../../renderFields';
-import { StyledInputLabel, InputElementHeading, getElementDescriptors, InputElementDescriptorProps } from '../elements';
+import {
+	StyledInputLabel,
+	InputElementHeading,
+	getElementDescriptors,
+	InputElementDescriptorProps,
+} from '../elements';
 import { Input } from '../input/input';
 import {
 	validKeys,
@@ -202,7 +207,11 @@ const InputCurrency: React.FC<InputCurrencyProps> = React.memo(
 			}
 		}, [initialValue]);
 
-		const descriptors: InputElementDescriptorProps = getElementDescriptors(name, !!label, !!hint);
+		const descriptors: InputElementDescriptorProps = getElementDescriptors(
+			name,
+			!!label,
+			!!hint,
+		);
 
 		return (
 			<StyledInputLabel

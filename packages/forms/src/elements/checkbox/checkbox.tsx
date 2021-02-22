@@ -50,7 +50,11 @@ export const Checkbox: React.FC<Partial<CheckboxIconProps>> = ({
 				)}
 				<P cfg={{ ml: 3, fontWeight: 3 }}>{label}</P>
 			</label>
-			{hint && <P id={id && `${id}-hint`} className={styles.hint}>{hint}</P>}
+			{hint && (
+				<P id={id && `${id}-hint`} className={styles.hint}>
+					{hint}
+				</P>
+			)}
 		</StyledInputLabel>
 	);
 };

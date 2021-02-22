@@ -1,10 +1,5 @@
 import React, { createElement } from 'react';
-import {
-	SpaceProps,
-	FlexProps,
-	useClassNames,
-	Span,
-} from '@tpr/core';
+import { SpaceProps, FlexProps, useClassNames, Span } from '@tpr/core';
 import styles from './elements.module.scss';
 import { ReactNode } from 'react';
 
@@ -89,14 +84,12 @@ export const InputElementHeading: React.FC<InputElementHeadingProps> = ({
 	errorId,
 	required,
 	hint,
-	meta}) => {
+	meta,
+}) => {
 	return (
 		<>
 			{label && (
-				<FormLabelText
-					element={element}
-					id={labelId}
-				>
+				<FormLabelText element={element} id={labelId}>
 					{label} {!required && '(optional)'}
 				</FormLabelText>
 			)}
@@ -113,39 +106,46 @@ export const InputElementHeading: React.FC<InputElementHeadingProps> = ({
 };
 
 const getLabelId = (rootId: string): string => {
-	return rootId && `${rootId}-label` || null;
+	return (rootId && `${rootId}-label`) || null;
 };
 const getHintId = (rootId: string): string => {
-	return rootId && `${rootId}-hint` || null;
+	return (rootId && `${rootId}-hint`) || null;
 };
 const getErrorId = (rootId: string): string => {
-	return rootId && `${rootId}-error` || null;
+	return (rootId && `${rootId}-error`) || null;
 };
 
 export type InputElementDescriptorProps = {
 	labelId?: string;
 	hintId?: string;
 	errorId?: string;
-}
+};
 
-export const getElementDescriptors = (rootId: string, hasLabel: boolean, hasHint: boolean): InputElementDescriptorProps => {
-	const labelId = hasLabel? getLabelId(rootId): null;
-	const hintId = hasHint? getHintId(rootId): null;
+export const getElementDescriptors = (
+	rootId: string,
+	hasLabel: boolean,
+	hasHint: boolean,
+): InputElementDescriptorProps => {
+	const labelId = hasLabel ? getLabelId(rootId) : null;
+	const hintId = hasHint ? getHintId(rootId) : null;
 	const errorId = getErrorId(rootId);
 	return {
 		labelId: labelId,
 		hintId: hintId,
 		errorId: errorId,
 	} as InputElementDescriptorProps;
-}	
+};
 
-export const formatAriaDescribedBy = (hintId: string, errorId: string, isError: boolean) => {
+export const formatAriaDescribedBy = (
+	hintId: string,
+	errorId: string,
+	isError: boolean,
+) => {
 	var describedBy: string;
 	if (isError) {
-		describedBy =  `${hintId || ''} ${errorId || ''}`
-	}
-	else {
-		describedBy = `${hintId || ''}`
+		describedBy = `${hintId || ''} ${errorId || ''}`;
+	} else {
+		describedBy = `${hintId || ''}`;
 	}
 	return describedBy.trim() || null;
-}
+};

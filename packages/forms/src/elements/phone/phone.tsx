@@ -1,6 +1,11 @@
 import React from 'react';
 import { Field, FieldRenderProps } from 'react-final-form';
-import { StyledInputLabel, InputElementHeading, getElementDescriptors, InputElementDescriptorProps } from '../elements';
+import {
+	StyledInputLabel,
+	InputElementHeading,
+	getElementDescriptors,
+	InputElementDescriptorProps,
+} from '../elements';
 import { FieldProps, FieldExtraProps } from '../../renderFields';
 import { Input } from '../input/input';
 import {
@@ -23,7 +28,11 @@ const InputPhone: React.FC<InputPhoneProps> = ({
 	inputWidth: width,
 	cfg,
 }) => {
-	const descriptors: InputElementDescriptorProps = getElementDescriptors(name, !!label, !!hint);
+	const descriptors: InputElementDescriptorProps = getElementDescriptors(
+		name,
+		!!label,
+		!!hint,
+	);
 
 	return (
 		<StyledInputLabel

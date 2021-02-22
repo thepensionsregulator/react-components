@@ -4,7 +4,7 @@ export const CheckDescribedByTag = (
 	errorText: string,
 ) => {
 	const name = inputElement.getAttribute('name');
-	const errorName = `${name}_error`;
+	const errorName = `${name}-error`;
 
 	inputElement.focus();
 	inputElement.blur();

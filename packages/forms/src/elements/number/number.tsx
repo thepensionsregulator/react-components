@@ -1,6 +1,11 @@
 import React, { ChangeEvent, useState } from 'react';
 import { Field, FieldRenderProps } from 'react-final-form';
-import { StyledInputLabel, InputElementHeading, getElementDescriptors, InputElementDescriptorProps } from '../elements';
+import {
+	StyledInputLabel,
+	InputElementHeading,
+	getElementDescriptors,
+	InputElementDescriptorProps,
+} from '../elements';
 import { FieldExtraProps } from '../../renderFields';
 import { Input } from '../input/input';
 import { adaptValueToFormat, fixToDecimals, validKeys as vk } from '../helpers';
@@ -124,7 +129,11 @@ const InputNumber: React.FC<InputNumberProps> = ({
 		input.onBlur(e.target.value); // without this call, validate won't be executed even if specified
 	};
 
-	const descriptors: InputElementDescriptorProps = getElementDescriptors(name, !!label, !!hint);
+	const descriptors: InputElementDescriptorProps = getElementDescriptors(
+		name,
+		!!label,
+		!!hint,
+	);
 
 	return (
 		<StyledInputLabel

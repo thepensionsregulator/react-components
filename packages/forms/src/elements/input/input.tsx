@@ -77,7 +77,7 @@ export const Input: React.FC<InputProps> = ({
 						[styles['inputText-error']]: isError,
 					},
 				])}
-				aria-invalid={isError}
+				aria-invalid={!!isError}
 				aria-describedby={formatAriaDescribedBy(hintId, errorId, isError)}
 				{...rest}
 				aria-label={getAriaLabel()}
