@@ -1,3 +1,5 @@
+import { toKebabCase } from '@tpr/core';
+
 export const CheckDescribedByTag = (
 	getByText,
 	inputElement: HTMLElement,
@@ -5,7 +7,7 @@ export const CheckDescribedByTag = (
 	hintText: string,
 ) => {
 	const name = inputElement.getAttribute('name');
-	const errorName = `${name}-error`;
+	const errorName = `${toKebabCase(name)}-error`;
 
 	inputElement.focus();
 	inputElement.blur();
@@ -17,7 +19,7 @@ export const CheckDescribedByTag = (
 
 	var describedBy = errorName;
 	if (hintText) {
-		const hintName = hintText ? `${name}-hint` : '';
+		const hintName = hintText ? `${toKebabCase(name)}-hint` : '';
 		const hintElement = hintText ? getByText(hintText) : null;
 		expect(hintElement).toBeInTheDocument();
 		expect(hintElement).toHaveAttribute('id', hintName);
