@@ -17,6 +17,7 @@ interface ConfirmProps {
 	handleRemove: () => void;
 	handleCancel: () => void;
 	loading: boolean;
+	warningLabel?: string;
 }
 
 const Confirm: React.FC<ConfirmProps> = ({
@@ -31,12 +32,13 @@ const Confirm: React.FC<ConfirmProps> = ({
 	handleRemove,
 	handleCancel,
 	loading,
+	warningLabel = 'Warning',
 }) => {
 	return (
 		<Content type={cardType} typeName={cardTypeName} breadcrumbs={breadcrumbs}>
 			<H3 cfg={{ mt: 3, fontWeight: 2 }}>{removeTitle}</H3>
 			<Hr cfg={{ my: 4 }} />
-			<WarningBox>
+			<WarningBox warningLabel={warningLabel}>
 				<P>{removeMessage1}</P>
 				{removeMessage2 && <P cfg={{ mt: 3 }}>{removeMessage2}</P>}
 				<Flex cfg={{ mt: 3 }}>
