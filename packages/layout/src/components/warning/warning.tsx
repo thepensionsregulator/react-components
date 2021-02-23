@@ -5,8 +5,13 @@ import { WarningCircle } from '@tpr/icons';
 
 export type WarningBoxProps = {
 	cfg?: SpaceProps & FlexProps;
+	warningLabel?: string;
 };
-export const WarningBox: React.FC<WarningBoxProps> = ({ children, cfg }) => {
+export const WarningBox: React.FC<WarningBoxProps> = ({
+	children,
+	cfg,
+	warningLabel,
+}) => {
 	return (
 		<Flex
 			cfg={Object.assign({ flexDirection: 'column', p: 4, my: 4 }, cfg)}
@@ -14,7 +19,7 @@ export const WarningBox: React.FC<WarningBoxProps> = ({ children, cfg }) => {
 			role="alert"
 		>
 			<Flex cfg={{ flexDirection: 'row' }}>
-				<WarningCircle cfg={{ mr: 4 }} />
+				<WarningCircle cfg={{ mr: 4 }} ariaLabel={warningLabel} />
 				{children}
 			</Flex>
 		</Flex>
