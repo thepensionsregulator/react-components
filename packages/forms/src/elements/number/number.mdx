@@ -76,6 +76,7 @@ import { FFInputNumber } from '@tpr/forms';
 					before="£"
 					maxIntDigits={3}
 					callback={(e) => console.log(e.target.value)}
+					i18n={{ ariaLabelExtension: ', in pounds' }}
 				/>
 				<FFInputNumber
 					name="percentage"
@@ -95,6 +96,7 @@ import { FFInputNumber } from '@tpr/forms';
 							return 'must be value between 0 and 100%';
 					}}
 					callback={(e) => console.log(e.target.value)}
+					i18n={{ ariaLabelExtension: ' as a percentage' }}
 				/>
 				<button type="submit" style={{ display: 'none' }} children="Submit" />
 			</form>
@@ -153,6 +155,113 @@ import { Form, validate, renderFields } from '@tpr/forms';
 	}}
 </Playground>
 
+### With default aria label
+
+<Playground>
+	{() => {
+		const handleChange = (value) => {
+			console.log(value);
+		};
+		return (
+			<Form onSubmit={(values) => console.log(values)}>
+				{({ handleSubmit }) => (
+					<form onSubmit={handleSubmit}>
+						<FFInputNumber
+							name="ageOfApplicant"
+							label="Age of the applicant"
+							after="years"
+							inputWidth={1}
+							required={false}
+							noLeftBorder={true}
+							optionalText={false}
+							callback={handleChange}
+						/>
+						<button
+							type="submit"
+							style={{ display: 'none' }}
+							children="Submit"
+						/>
+					</form>
+				)}
+			</Form>
+		);
+	}}
+</Playground>
+
+### With aria label extension
+```js
+i18n={{ ariaLabelExtension: 'in years' }}
+```
+
+<Playground>
+	{() => {
+		const handleChange = (value) => {
+			console.log(value);
+		};
+		return (
+			<Form onSubmit={(values) => console.log(values)}>
+				{({ handleSubmit }) => (
+					<form onSubmit={handleSubmit}>
+						<FFInputNumber
+							name="ageOfApplicant"
+							label="Age of the applicant"
+							after="years"
+							inputWidth={1}
+							required={false}
+							noLeftBorder={true}
+							optionalText={false}
+							callback={handleChange}
+							i18n={{ ariaLabelExtension: 'in years' }}
+						/>
+						<button
+							type="submit"
+							style={{ display: 'none' }}
+							children="Submit"
+						/>
+					</form>
+				)}
+			</Form>
+		);
+	}}
+</Playground>
+
+### With customised aria label
+```js
+aria-label="Age of the applicant in years.  Use whole numbers only."
+```
+
+<Playground>
+	{() => {
+		const handleChange = (value) => {
+			console.log(value);
+		};
+		return (
+			<Form onSubmit={(values) => console.log(values)}>
+				{({ handleSubmit }) => (
+					<form onSubmit={handleSubmit}>
+						<FFInputNumber
+							name="ageOfApplicant"
+							label="Age of the applicant"
+							aria-label="Age of the applicant in years.  Use whole numbers only."
+							after="years"
+							inputWidth={1}
+							required={false}
+							noLeftBorder={true}
+							optionalText={false}
+							callback={handleChange}
+						/>
+						<button
+							type="submit"
+							style={{ display: 'none' }}
+							children="Submit"
+						/>
+					</form>
+				)}
+			</Form>
+		);
+	}}
+</Playground>
+
 ## API
 
 ```
@@ -161,19 +270,21 @@ Accepted config props: FlexProps, SpaceProps
 
 ### Props
 
-| Property      | Required | Type     | Description                                                                    |
-| ------------- | -------- | -------- | ------------------------------------------------------------------------------ |
-| after         | false    | string   | emulates text passed to ::after pseudo-selector                                |
-| before        | false    | string   | emulates text passed to ::before pseudo-selector                               |
-| callback      | false    | function | callback function to be executed after onChange                                |
-| cfg           | false    | object   | FlexProps & SpaceProps                                                         |
-| decimalPlaces | false    | number   | the number of decimal places used for formatting the value                     |
-| disabled      | false    | boolean  | Disable input field                                                            |
-| hint          | false    | string   | More detailed description about the field                                      |
-| label         | true     | string   | Input description                                                              |
-| maxIntDigits  | false    | number   | sets a maximum length for the integer part of the value                        |
-| maxLength     | false    | number   | sets a maximum length for the input value (e.g. 123.00 &#x27A1; maxLength={6}) |
-| noLeftBorder  | false    | boolean  | disables the left border when detecting error                                  |
-| optionalText  | false    | boolean  | allows hiding "optional" text when field is not required                       |
-| testId        | false    | string   | data attribute for testers                                                     |
-| readOnly      | false    | boolean  | Sets whether the field is read only                                            |
+| Property      | Required | Type     | Description                                                                                                                                                                   |
+| ------------- | -------- | -------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| after         | false    | string                                | emulates text passed to ::after pseudo-selector                                                                                                  |
+| before        | false    | string                                | emulates text passed to ::before pseudo-selector                                                                                                 |
+| callback      | false    | function                              | callback function to be executed after onChange                                                                                                  |
+| cfg           | false    | object                                | FlexProps & SpaceProps                                                                                                                           |
+| decimalPlaces | false    | number                                | the number of decimal places used for formatting the value                                                                                       |
+| disabled      | false    | boolean                               | Disable input field                                                                                                                              |
+| hint          | false    | string                                | More detailed description about the field                                                                                                        |
+| label         | true     | string                                | The visible label displayed above the input field                                                                                                |
+| aria-label    | true     | string                                | Use to provide descriptive labelling to assistive technology in situations where the visible label does not convey the full context of the input |
+| maxIntDigits  | false    | number                                | sets a maximum length for the integer part of the value                                                                                          |
+| maxLength     | false    | number                                | sets a maximum length for the input value (e.g. 123.00 &#x27A1; maxLength={6})                                                                   |
+| noLeftBorder  | false    | boolean                               | disables the left border when detecting error                                                                                                    |
+| optionalText  | false    | boolean                               | allows hiding "optional" text when field is not required                                                                                         |
+| testId        | false    | string                                | data attribute for testers                                                                                                                       |
+| readOnly      | false    | boolean                               | Sets whether the field is read only                                                                                                              |
+| i18n          | false    | FieldWithAriaLabelExtenstionI18nProps | allows the overridding of default text in the number input                                                                                       |

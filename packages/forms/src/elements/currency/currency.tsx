@@ -1,7 +1,7 @@
 import React, { ChangeEvent, useState, useEffect, useRef } from 'react';
 import { Field, FieldRenderProps } from 'react-final-form';
+import { FieldExtraProps } from '../../renderFields';
 import { StyledInputLabel, InputElementHeading } from '../elements';
-import { FieldProps, FieldExtraProps } from '../../renderFields';
 import { Input } from '../input/input';
 import {
 	validKeys,
@@ -16,6 +16,14 @@ import {
 	getNumberOfCommas,
 	calculateCursorPosition,
 } from '../helpers';
+import { FieldWithAriaLabelExtenstionI18nProps } from 'types/FieldWithAriaLabelExtensionI18nProps';
+import { FieldWithAriaLabelExtensionProps } from '../../types/FieldWithAriaLabelExtensionProps';
+import { RecursivePartial } from 'types/RecursivePartial';
+import AccessibilityHelper from '../accessibilityHelper';
+
+let currencyFieldI18nDefaults: FieldWithAriaLabelExtenstionI18nProps = {
+	ariaLabelExtension: ', in pounds',
+};
 
 interface InputCurrencyProps extends FieldRenderProps<number>, FieldExtraProps {
 	after?: string;
@@ -25,6 +33,7 @@ interface InputCurrencyProps extends FieldRenderProps<number>, FieldExtraProps {
 	noLeftBorder?: boolean;
 	optionalText?: boolean;
 	maxInputLength?: number;
+	i18n?: RecursivePartial<FieldWithAriaLabelExtenstionI18nProps>;
 }
 
 const InputCurrency: React.FC<InputCurrencyProps> = React.memo(
@@ -48,9 +57,24 @@ const InputCurrency: React.FC<InputCurrencyProps> = React.memo(
 		optionalText,
 		maxInputLength = 16 + decimalPlaces,
 		initialValue,
+		i18n = currencyFieldI18nDefaults,
 		...props
 	}) => {
-		const digits = ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9', '.'];
+		const currencySymbol = '£';
+		const digits = [
+			'0',
+			'1',
+			'2',
+			'3',
+			'4',
+			'5',
+			'6',
+			'7',
+			'8',
+			'9',
+			'.',
+			currencySymbol,
+		];
 
 		// e.g. format: 999,999,999,999.00
 
@@ -61,12 +85,20 @@ const InputCurrency: React.FC<InputCurrencyProps> = React.memo(
 		const [delKey, setDelKey] = useState<boolean>(false);
 
 		const formatWithCommas = (value: string): string => {
-			const numString: string = value.replace(/,/g, '');
+			const hasCurrencySymbol = value && value[0] === currencySymbol;
+
+			const numString: string = value
+				.replace(/,/g, '')
+				.replace(currencySymbol, '');
+
+			if (numString === '') return value;
+
 			let numFormatted: string = '';
 			// if number is integer
 			if (!containsDecimals(value)) {
 				// numString = "123456"
-				numFormatted = format(numString);
+				numFormatted =
+					(hasCurrencySymbol ? currencySymbol : '') + format(numString);
 				// numFormatted = "123,456"
 				const numWithDecimals: string = fixToDecimals(numString, decimalPlaces);
 				setFormattedInputValue(
@@ -76,7 +108,9 @@ const InputCurrency: React.FC<InputCurrencyProps> = React.memo(
 			// if number has decimals
 			else {
 				// numString = "123456.77"
-				numFormatted = formatWithDecimals(numString, decimalPlaces);
+				numFormatted =
+					(hasCurrencySymbol ? currencySymbol : '') +
+					formatWithDecimals(numString, decimalPlaces);
 				// numFormatted = "123,456.77"
 				setFormattedInputValue(numFormatted);
 			}
@@ -94,6 +128,10 @@ const InputCurrency: React.FC<InputCurrencyProps> = React.memo(
 				// typing '.' when already exists one in the value
 				if (e.key === '.') {
 					dot ? e.preventDefault() : setDot(true);
+					return true;
+				}
+				if (e.key === currencySymbol) {
+					if (e.target.value.length !== 0) e.preventDefault();
 					return true;
 				}
 				keyPressedIsNotAllowed(e) && e.preventDefault();
@@ -158,8 +196,11 @@ const InputCurrency: React.FC<InputCurrencyProps> = React.memo(
 			input.onBlur(e);
 			e.target.value =
 				getNumDecimalPlaces(formattedInputValue) < decimalPlaces
-					? appendMissingZeros(inputValue.replace(/,/g, ''), decimalPlaces)
-					: formattedInputValue;
+					? appendMissingZeros(
+							inputValue.replace(/,/g, '').replace(currencySymbol, ''),
+							decimalPlaces,
+					  )
+					: formattedInputValue.replace(currencySymbol, '');
 			setInputValue(e.target.value);
 			input.onChange(e);
 		};
@@ -193,7 +234,7 @@ const InputCurrency: React.FC<InputCurrencyProps> = React.memo(
 			}
 		}, [initialValue]);
 
-		const errorId = `${name}_error`;
+		const helper = new AccessibilityHelper(name, !!label, !!hint);
 
 		return (
 			<StyledInputLabel
@@ -203,11 +244,10 @@ const InputCurrency: React.FC<InputCurrencyProps> = React.memo(
 			>
 				<InputElementHeading
 					label={label}
-					errorId={errorId}
 					required={optionalText !== undefined ? !optionalText : required}
 					hint={hint}
 					meta={meta}
-					inputName={input.name}
+					accessibilityHelper={helper}
 				/>
 				<Input
 					parentRef={innerInput}
@@ -215,8 +255,8 @@ const InputCurrency: React.FC<InputCurrencyProps> = React.memo(
 					width={width}
 					testId={testId}
 					label={label}
-					errorId={errorId}
-					touched={meta && meta.touched && meta.error}
+					ariaLabelExtension={i18n.ariaLabelExtension}
+					isError={meta && meta.touched && meta.error}
 					placeholder={placeholder}
 					readOnly={readOnly}
 					decimalPlaces={decimalPlaces}
@@ -226,6 +266,7 @@ const InputCurrency: React.FC<InputCurrencyProps> = React.memo(
 					onBlur={handleBlur}
 					after={after}
 					before={before}
+					accessibilityHelper={helper}
 					{...props}
 				/>
 			</StyledInputLabel>
@@ -233,7 +274,9 @@ const InputCurrency: React.FC<InputCurrencyProps> = React.memo(
 	},
 );
 
-export const FFInputCurrency: React.FC<FieldProps> = (fieldProps) => {
+export const FFInputCurrency: React.FC<FieldWithAriaLabelExtensionProps> = (
+	fieldProps,
+) => {
 	return (
 		<Field
 			{...fieldProps}

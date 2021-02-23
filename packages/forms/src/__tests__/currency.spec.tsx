@@ -7,6 +7,7 @@ import { fireEvent } from '@testing-library/react';
 import {
 	calculateCursorPosition,
 	getNumberOfCommas,
+	validateCurrency,
 } from '../elements/helpers';
 import { CheckDescribedByTag } from '../utils/aria-describedByTest';
 
@@ -14,6 +15,24 @@ const testId = 'currency-input';
 
 const currencyComponent = (
 	<FFInputCurrency label="Currency" testId={testId} name="currency" />
+);
+
+const currencyComponentWithi18n = (
+	<FFInputCurrency
+		label="Currency"
+		testId={testId}
+		name="currency"
+		i18n={{ ariaLabelExtension: 'extended aria label' }}
+	/>
+);
+
+const currencyComponentWithArialLabelAndi18n = (
+	<FFInputCurrency
+		aria-label="Currency"
+		testId={testId}
+		name="currency"
+		i18n={{ ariaLabelExtension: 'extended aria label' }}
+	/>
 );
 
 describe('Currency', () => {
@@ -35,6 +54,15 @@ describe('Currency', () => {
 			expect(getByTestId(testId)).toHaveValue('123');
 		});
 
+		test('Currency symbol can be typed as the first character only', async () => {
+			const { getByTestId } = formSetup({
+				render: currencyComponent,
+			});
+
+			userEvent.type(getByTestId(testId), '£10£0');
+			expect(getByTestId(testId)).toHaveValue('£100');
+		});
+
 		test('label renders with an id attribute', () => {
 			const { getByText } = formSetup({
 				render: currencyComponent,
@@ -44,6 +72,45 @@ describe('Currency', () => {
 
 			expect(label).toBeDefined();
 			expect(label).toHaveAttribute('id', 'currency-label');
+		});
+
+		test('renders with a default aria-label', () => {
+			const { getByTestId } = formSetup({
+				render: currencyComponent,
+			});
+
+			const input = getByTestId(testId);
+
+			expect(input).toBeDefined();
+			expect(input).toHaveAttribute('aria-label', 'Currency, in pounds');
+		});
+
+		test('renders an aria-label when given a label and an aria label extension', () => {
+			const { getByTestId } = formSetup({
+				render: currencyComponentWithi18n,
+			});
+
+			const input = getByTestId(testId);
+
+			expect(input).toBeDefined();
+			expect(input).toHaveAttribute(
+				'aria-label',
+				'Currency extended aria label',
+			);
+		});
+
+		test('renders an aria-label when given an aria-label and an aria label extension', () => {
+			const { getByTestId } = formSetup({
+				render: currencyComponentWithArialLabelAndi18n,
+			});
+
+			const input = getByTestId(testId);
+
+			expect(input).toBeDefined();
+			expect(input).toHaveAttribute(
+				'aria-label',
+				'Currency extended aria label',
+			);
 		});
 	});
 
@@ -84,6 +151,16 @@ describe('Currency', () => {
 			});
 
 			userEvent.type(getByTestId(testId), '123456789.4');
+			fireEvent.blur(getByTestId(testId));
+			expect(getByTestId(testId)).toHaveValue('123,456,789.40');
+		});
+
+		test('value with currency symbol gets formatted correctly on onBlur event', async () => {
+			const { getByTestId } = formSetup({
+				render: currencyComponent,
+			});
+
+			userEvent.type(getByTestId(testId), '£123456789.4');
 			fireEvent.blur(getByTestId(testId));
 			expect(getByTestId(testId)).toHaveValue('123,456,789.40');
 		});
@@ -196,6 +273,33 @@ describe('Currency', () => {
 				expect(getByTestId(testId)).toHaveValue('45,000.00');
 			}, 100);
 			expect(validateExecuted).toEqual(true);
+		});
+	});
+
+	describe('testing helper function: validateCurrency', () => {
+		test('when value is too large, tooBig validation result is returned', () => {
+			expect(validateCurrency('1000', 0, 10)).toEqual('tooBig');
+		});
+		test('when value with thousand separators is too large, tooBig validation result is returned', () => {
+			expect(validateCurrency('1,000', 0, 10)).toEqual('tooBig');
+		});
+		test('when value with thousand separators and currency symbol is too large, tooBig validation result is returned', () => {
+			expect(validateCurrency('£1,000', 0, 10)).toEqual('tooBig');
+		});
+		test('when value is too small, tooSmall validation result is returned', () => {
+			expect(validateCurrency('1000', 10000, 15000)).toEqual('tooSmall');
+		});
+		test('when value with thousand separators is too small, tooSmall validation result is returned', () => {
+			expect(validateCurrency('1,000', 10000, 15000)).toEqual('tooSmall');
+		});
+		test('when value with thousand separators and currency symbol is too small, tooSmall validation result is returned', () => {
+			expect(validateCurrency('£1,000', 10000, 15000)).toEqual('tooSmall');
+		});
+		test('when value is undefined, empty validation result is returned', () => {
+			expect(validateCurrency(undefined, 0, 0)).toEqual('empty');
+		});
+		test('when value is null, empty validation result is returned', () => {
+			expect(validateCurrency(null, 0, 0)).toEqual('empty');
 		});
 	});
 
@@ -358,6 +462,7 @@ describe('Currency', () => {
 	test('has correct describedby tag when an error is shown', () => {
 		const numberRequired = 'Currency is required';
 		const name = 'currency';
+		const hint = 'This explains how to complete the field';
 
 		const handleSubmit = jest.fn();
 		const { getByTestId, getByText } = formSetup({
@@ -365,6 +470,7 @@ describe('Currency', () => {
 				<FFInputCurrency
 					label="Currency"
 					testId={testId}
+					hint={hint}
 					name={name}
 					required={true}
 					validate={(value) => (value ? undefined : numberRequired)}
@@ -374,6 +480,6 @@ describe('Currency', () => {
 		});
 
 		const currencyTest = getByTestId(testId);
-		CheckDescribedByTag(getByText, currencyTest, numberRequired);
+		CheckDescribedByTag(getByText, currencyTest, numberRequired, hint);
 	});
 });

@@ -8,6 +8,7 @@ import { FieldProps, FieldOptions, FieldExtraProps } from '../../renderFields';
 import { Input } from '../input/input';
 import PopupBox from './popup';
 import styles from './select.module.scss';
+import AccessibilityHelper from '../accessibilityHelper';
 
 interface SelectProps extends DownshiftProps<any>, FieldExtraProps {
 	handleNotFoundButtonClick?: Function;
@@ -38,6 +39,8 @@ export const Select: React.FC<SelectProps & FieldRenderProps<string>> = ({
 	cfg,
 	...rest
 }) => {
+	const helper = new AccessibilityHelper(rest['id'], !!label, !!hint);
+
 	return (
 		<Downshift
 			onChange={onChange}
@@ -58,7 +61,7 @@ export const Select: React.FC<SelectProps & FieldRenderProps<string>> = ({
 			}) => (
 				<div>
 					<StyledInputLabel
-						element="div"
+						element="label"
 						isError={meta && meta.touched && meta.error}
 						cfg={Object.assign({ flexDirection: 'column' }, cfg)}
 						{...getLabelProps()}
@@ -68,6 +71,7 @@ export const Select: React.FC<SelectProps & FieldRenderProps<string>> = ({
 							required={required}
 							hint={hint}
 							meta={meta}
+							accessibilityHelper={helper}
 						/>
 						<Flex cfg={{ width }} className={styles.relative}>
 							<Input
@@ -80,6 +84,7 @@ export const Select: React.FC<SelectProps & FieldRenderProps<string>> = ({
 								readOnly={readOnly}
 								onClick={() => toggleMenu()}
 								className={styles.input}
+								accessibilityHelper={helper}
 								{...getInputProps()}
 							/>
 							{showToggleButton && (
