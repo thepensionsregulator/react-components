@@ -7,7 +7,7 @@ import { adaptValueToFormat, fixToDecimals, validKeys as vk } from '../helpers';
 import { FieldWithAriaLabelExtenstionI18nProps } from 'types/FieldWithAriaLabelExtensionI18nProps';
 import { FieldWithAriaLabelExtensionProps } from '../../types/FieldWithAriaLabelExtensionProps';
 import { RecursivePartial } from 'types/RecursivePartial';
-import AccessibilityHelper from 'elements/accessibilityHelper';
+import AccessibilityHelper from '../accessibilityHelper';
 
 let numberFieldI18nDefaults: FieldWithAriaLabelExtenstionI18nProps = {
 	ariaLabelExtension: null,

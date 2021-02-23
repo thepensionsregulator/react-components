@@ -6,7 +6,7 @@ import { RadioButtonChecked, RadioButtonUnchecked } from './icons';
 import { StyledInputLabel } from '../elements';
 import { HiddenInput } from '../hidden/hidden';
 import styles from './radio.module.scss';
-import AccessibilityHelper from 'elements/accessibilityHelper';
+import AccessibilityHelper from '../accessibilityHelper';
 
 type RadioButtonProps = FieldRenderProps<string> & FieldExtraProps;
 export const RadioButton: React.FC<RadioButtonProps> = ({

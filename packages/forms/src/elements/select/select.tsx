@@ -8,7 +8,7 @@ import { FieldProps, FieldOptions, FieldExtraProps } from '../../renderFields';
 import { Input } from '../input/input';
 import PopupBox from './popup';
 import styles from './select.module.scss';
-import AccessibilityHelper from 'elements/accessibilityHelper';
+import AccessibilityHelper from '../accessibilityHelper';
 
 interface SelectProps extends DownshiftProps<any>, FieldExtraProps {
 	handleNotFoundButtonClick?: Function;

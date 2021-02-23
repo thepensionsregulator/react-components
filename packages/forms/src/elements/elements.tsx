@@ -73,7 +73,7 @@ type InputElementHeadingProps = {
 	required?: boolean;
 	hint?: string;
 	meta?: any;
-	accessibilityHelper: AccessibilityHelper
+	accessibilityHelper: AccessibilityHelper;
 };
 export const InputElementHeading: React.FC<InputElementHeadingProps> = ({
 	element = 'div',
@@ -81,7 +81,7 @@ export const InputElementHeading: React.FC<InputElementHeadingProps> = ({
 	required,
 	hint,
 	meta,
-	accessibilityHelper
+	accessibilityHelper,
 }) => {
 	return (
 		<>
@@ -91,12 +91,18 @@ export const InputElementHeading: React.FC<InputElementHeadingProps> = ({
 				</FormLabelText>
 			)}
 			{hint && (
-				<Span id={accessibilityHelper.hintId} cfg={{ mb: 2 }} className={styles.hint}>
+				<Span
+					id={accessibilityHelper.hintId}
+					cfg={{ mb: 2 }}
+					className={styles.hint}
+				>
 					{hint}
 				</Span>
 			)}
 			{meta && meta.touched && meta.error && (
-				<ErrorMessage id={accessibilityHelper.errorId}>{meta.error}</ErrorMessage>
+				<ErrorMessage id={accessibilityHelper.errorId}>
+					{meta.error}
+				</ErrorMessage>
 			)}
 		</>
 	);

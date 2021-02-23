@@ -1,7 +1,7 @@
 import React from 'react';
 import { classNames, Flex, LayoutProps } from '@tpr/core';
 import styles from './input.module.scss';
-import AccessibilityHelper from 'elements/accessibilityHelper';
+import AccessibilityHelper from '../accessibilityHelper';
 
 export type InputProps = {
 	type: string;
@@ -16,7 +16,7 @@ export type InputProps = {
 	readOnly?: boolean;
 	ariaLabelExtension?: string;
 	[key: string]: any;
-	accessibilityHelper: AccessibilityHelper
+	accessibilityHelper: AccessibilityHelper;
 };
 
 export const Input: React.FC<InputProps> = ({

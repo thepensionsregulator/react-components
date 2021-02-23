@@ -8,7 +8,7 @@ import {
 	isPhoneValid,
 	executeClientValidation,
 } from '../../validators';
-import AccessibilityHelper from 'elements/accessibilityHelper';
+import AccessibilityHelper from '../accessibilityHelper';
 
 type InputPhoneProps = FieldRenderProps<string> & FieldExtraProps;
 const InputPhone: React.FC<InputPhoneProps> = ({
@@ -24,7 +24,6 @@ const InputPhone: React.FC<InputPhoneProps> = ({
 	inputWidth: width,
 	cfg,
 }) => {
-	
 	const helper = new AccessibilityHelper(name, !!label, !!hint);
 
 	return (

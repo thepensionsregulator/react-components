@@ -6,7 +6,7 @@ import { CheckboxChecked, CheckboxBlank } from './icons';
 import { StyledInputLabel } from '../elements';
 import { HiddenInput } from '../hidden/hidden';
 import styles from './checkbox.module.scss';
-import AccessibilityHelper from 'elements/accessibilityHelper';
+import AccessibilityHelper from '../accessibilityHelper';
 
 type CheckboxIconProps = FieldRenderProps<string> & FieldExtraProps;
 export const Checkbox: React.FC<Partial<CheckboxIconProps>> = ({

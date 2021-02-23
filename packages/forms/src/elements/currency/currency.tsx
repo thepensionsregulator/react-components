@@ -19,7 +19,7 @@ import {
 import { FieldWithAriaLabelExtenstionI18nProps } from 'types/FieldWithAriaLabelExtensionI18nProps';
 import { FieldWithAriaLabelExtensionProps } from '../../types/FieldWithAriaLabelExtensionProps';
 import { RecursivePartial } from 'types/RecursivePartial';
-import AccessibilityHelper from 'elements/accessibilityHelper';
+import AccessibilityHelper from '../accessibilityHelper';
 
 let currencyFieldI18nDefaults: FieldWithAriaLabelExtenstionI18nProps = {
 	ariaLabelExtension: ', in pounds',

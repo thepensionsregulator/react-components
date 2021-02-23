@@ -4,7 +4,7 @@ import { StyledInputLabel, InputElementHeading } from '../elements';
 import { FieldProps, FieldExtraProps } from '../../renderFields';
 import { Input } from '../input/input';
 import { useEffect } from 'react';
-import AccessibilityHelper from 'elements/accessibilityHelper';
+import AccessibilityHelper from '../accessibilityHelper';
 
 type InputTextProps = FieldRenderProps<string> &
 	FieldExtraProps & {

@@ -8,7 +8,7 @@ import {
 	isEmailValid,
 	executeClientValidation,
 } from '../../validators';
-import AccessibilityHelper from 'elements/accessibilityHelper';
+import AccessibilityHelper from '../accessibilityHelper';
 
 type InputEmailProps = FieldRenderProps<string> & FieldExtraProps;
 const InputEmail: React.FC<InputEmailProps> = ({

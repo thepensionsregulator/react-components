@@ -8,7 +8,7 @@ import { FieldProps, FieldExtraProps } from '../../renderFields';
 import isEqual from 'lodash.isequal';
 import styles from './date.module.scss';
 import { SameMonthDateValidator } from './services/SameMonthDateValidator';
-import AccessibilityHelper from 'elements/accessibilityHelper';
+import AccessibilityHelper from '../accessibilityHelper';
 
 const handleChange = (onChange: Function, value: number) => ({
 	target,
