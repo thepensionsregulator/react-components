@@ -10,6 +10,7 @@ export const WarningBox: React.FC<WarningBoxProps> = ({ children, cfg }) => {
 		<Flex
 			cfg={Object.assign({ flexDirection: 'column', p: 4, my: 4 }, cfg)}
 			className={styles.warning}
+			role="alert"
 		>
 			{children}
 		</Flex>
