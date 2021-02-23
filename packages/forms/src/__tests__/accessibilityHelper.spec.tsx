@@ -10,7 +10,6 @@ describe('getElementDescriptors', () => {
 		expect(helper.errorId).toBe(`${rootId}-error`);
 	});
 	test('returns null for unavailable elements', async () => {
-		const rootId = 'test-id';
 		const helper = new AccessibilityHelper(rootId, false, false);
 		expect(helper.labelId).toBeNull();
 		expect(helper.hintId).toBeNull();
