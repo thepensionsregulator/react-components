@@ -6,6 +6,7 @@ import { RadioButtonChecked, RadioButtonUnchecked } from './icons';
 import { StyledInputLabel } from '../elements';
 import { HiddenInput } from '../hidden/hidden';
 import styles from './radio.module.scss';
+import AccessibilityHelper from '../accessibilityHelper';
 
 type RadioButtonProps = FieldRenderProps<string> & FieldExtraProps;
 export const RadioButton: React.FC<RadioButtonProps> = ({
@@ -22,6 +23,8 @@ export const RadioButton: React.FC<RadioButtonProps> = ({
 	className,
 }) => {
 	const msg = testId ? `${testId}-${checked ? 'checked' : 'unchecked'}` : null;
+	const helper = new AccessibilityHelper(id, !!label, !!hint);
+
 	return (
 		<StyledInputLabel
 			element="div"
@@ -38,12 +41,15 @@ export const RadioButton: React.FC<RadioButtonProps> = ({
 			)}
 		>
 			<label
+				id={helper && helper.labelId}
 				className={`${styles.wrapper} ${disabled ? styles.disabled : ''}`}
 				data-testid={msg}
+				htmlFor={id}
 			>
 				<HiddenInput
 					type="radio"
 					id={id}
+					aria-describedby={helper && helper.hintId}
 					name={name}
 					checked={checked}
 					value={value}
@@ -60,7 +66,11 @@ export const RadioButton: React.FC<RadioButtonProps> = ({
 					{label}
 				</P>
 			</label>
-			{hint && <P className={styles.hint}>{hint}</P>}
+			{hint && (
+				<P id={id && `${id}-hint`} className={styles.hint}>
+					{hint}
+				</P>
+			)}
 		</StyledInputLabel>
 	);
 };

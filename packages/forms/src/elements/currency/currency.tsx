@@ -1,7 +1,7 @@
 import React, { ChangeEvent, useState, useEffect, useRef } from 'react';
 import { Field, FieldRenderProps } from 'react-final-form';
-import { StyledInputLabel, InputElementHeading } from '../elements';
 import { FieldExtraProps } from '../../renderFields';
+import { StyledInputLabel, InputElementHeading } from '../elements';
 import { Input } from '../input/input';
 import {
 	validKeys,
@@ -19,6 +19,7 @@ import {
 import { FieldWithAriaLabelExtenstionI18nProps } from 'types/FieldWithAriaLabelExtensionI18nProps';
 import { FieldWithAriaLabelExtensionProps } from '../../types/FieldWithAriaLabelExtensionProps';
 import { RecursivePartial } from 'types/RecursivePartial';
+import AccessibilityHelper from '../accessibilityHelper';
 
 let currencyFieldI18nDefaults: FieldWithAriaLabelExtenstionI18nProps = {
 	ariaLabelExtension: ', in pounds',
@@ -233,7 +234,7 @@ const InputCurrency: React.FC<InputCurrencyProps> = React.memo(
 			}
 		}, [initialValue]);
 
-		const errorId = `${name}_error`;
+		const helper = new AccessibilityHelper(name, !!label, !!hint);
 
 		return (
 			<StyledInputLabel
@@ -243,11 +244,10 @@ const InputCurrency: React.FC<InputCurrencyProps> = React.memo(
 			>
 				<InputElementHeading
 					label={label}
-					errorId={errorId}
 					required={optionalText !== undefined ? !optionalText : required}
 					hint={hint}
 					meta={meta}
-					inputName={input.name}
+					accessibilityHelper={helper}
 				/>
 				<Input
 					parentRef={innerInput}
@@ -256,8 +256,7 @@ const InputCurrency: React.FC<InputCurrencyProps> = React.memo(
 					testId={testId}
 					label={label}
 					ariaLabelExtension={i18n.ariaLabelExtension}
-					errorId={errorId}
-					touched={meta && meta.touched && meta.error}
+					isError={meta && meta.touched && meta.error}
 					placeholder={placeholder}
 					readOnly={readOnly}
 					decimalPlaces={decimalPlaces}
@@ -267,6 +266,7 @@ const InputCurrency: React.FC<InputCurrencyProps> = React.memo(
 					onBlur={handleBlur}
 					after={after}
 					before={before}
+					accessibilityHelper={helper}
 					{...props}
 				/>
 			</StyledInputLabel>

@@ -1,13 +1,8 @@
 import React, { createElement } from 'react';
-import {
-	SpaceProps,
-	FlexProps,
-	useClassNames,
-	Span,
-	toKebabCase,
-} from '@tpr/core';
+import { SpaceProps, FlexProps, useClassNames, Span } from '@tpr/core';
 import styles from './elements.module.scss';
 import { ReactNode } from 'react';
+import AccessibilityHelper from './accessibilityHelper';
 
 interface StyledInputLabelProps {
 	element?: 'label' | 'div' | 'fieldset';
@@ -75,38 +70,39 @@ type ErrorMessageProps = {
 type InputElementHeadingProps = {
 	element?: 'div' | 'legend' | null;
 	label?: string;
-	errorId?: string;
 	required?: boolean;
 	hint?: string;
 	meta?: any;
-	inputName?: string;
+	accessibilityHelper: AccessibilityHelper;
 };
 export const InputElementHeading: React.FC<InputElementHeadingProps> = ({
 	element = 'div',
 	label,
-	errorId,
 	required,
 	hint,
 	meta,
-	inputName,
+	accessibilityHelper,
 }) => {
 	return (
 		<>
 			{label && (
-				<FormLabelText
-					element={element}
-					id={inputName ? `${toKebabCase(inputName + 'Label')}` : null}
-				>
+				<FormLabelText element={element} id={accessibilityHelper.labelId}>
 					{label} {!required && '(optional)'}
 				</FormLabelText>
 			)}
 			{hint && (
-				<Span cfg={{ mb: 2 }} className={styles.hint}>
+				<Span
+					id={accessibilityHelper.hintId}
+					cfg={{ mb: 2 }}
+					className={styles.hint}
+				>
 					{hint}
 				</Span>
 			)}
 			{meta && meta.touched && meta.error && (
-				<ErrorMessage id={errorId}>{meta.error}</ErrorMessage>
+				<ErrorMessage id={accessibilityHelper.errorId}>
+					{meta.error}
+				</ErrorMessage>
 			)}
 		</>
 	);

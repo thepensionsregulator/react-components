@@ -105,4 +105,44 @@ describe('Checkbox input', () => {
 		getByLabelText('My checkbox').click();
 		expect(getByTestId(container, 'my-span').innerText).toBe('true');
 	});
+
+	test('has correct describedby tag', () => {
+		const hint = 'This explains how to complete the field';
+		const labelText = 'My checkbox';
+		const id = 'test-checkbox';
+		const { getByLabelText } = formSetup({
+			render: (
+				<FFCheckbox
+					id={id}
+					required
+					label={labelText}
+					hint={hint}
+					name="my-checkbox"
+				/>
+			),
+		});
+		const checkbox = getByLabelText(labelText);
+		expect(checkbox).not.toBeNull();
+		expect(checkbox).toHaveAttribute('aria-describedby', `${id}-hint`);
+	});
+
+	test('has correct label reference', () => {
+		const hint = 'This explains how to complete the field';
+		const labelText = 'My checkbox';
+		const id = 'test-checkbox';
+		const { container } = formSetup({
+			render: (
+				<FFCheckbox
+					id={id}
+					required
+					label={labelText}
+					hint={hint}
+					name="my-checkbox"
+				/>
+			),
+		});
+		const label = container.querySelector(`[id=${id}-label]`);
+		expect(label).not.toBeNull();
+		expect(label).toHaveAttribute('for', id);
+	});
 });

@@ -1,13 +1,14 @@
 import React from 'react';
 import { classNames, Flex, LayoutProps } from '@tpr/core';
 import styles from './input.module.scss';
+import AccessibilityHelper from '../accessibilityHelper';
+
 export type InputProps = {
 	type: string;
 	width?: LayoutProps['width'];
 	testId?: string;
-	errorId?: string;
 	label?: string;
-	touched?: boolean;
+	isError?: boolean;
 	after?: string;
 	before?: string;
 	decimalPlaces?: number;
@@ -15,15 +16,15 @@ export type InputProps = {
 	readOnly?: boolean;
 	ariaLabelExtension?: string;
 	[key: string]: any;
+	accessibilityHelper?: AccessibilityHelper;
 };
 
 export const Input: React.FC<InputProps> = ({
 	type = 'text',
 	width,
 	testId,
-	errorId,
 	label,
-	touched = false,
+	isError = false,
 	className,
 	readOnly,
 	after: After,
@@ -31,6 +32,7 @@ export const Input: React.FC<InputProps> = ({
 	decimalPlaces,
 	parentRef,
 	ariaLabelExtension,
+	accessibilityHelper,
 	...rest
 }) => {
 	const getAriaLabel = (): string => {
@@ -69,11 +71,14 @@ export const Input: React.FC<InputProps> = ({
 					styles.inputText,
 					className,
 					{
-						[styles['inputText-error']]: touched,
+						[styles['inputText-error']]: isError,
 					},
 				])}
-				aria-invalid={touched != false}
-				aria-describedby={touched != false ? errorId : ''}
+				aria-invalid={!!isError}
+				aria-describedby={
+					accessibilityHelper &&
+					accessibilityHelper.formatAriaDescribedBy(isError)
+				}
 				{...rest}
 				aria-label={getAriaLabel()}
 			/>

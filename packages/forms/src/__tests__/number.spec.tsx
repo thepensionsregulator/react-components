@@ -268,6 +268,7 @@ describe('Number', () => {
 	test('has correct describedby tag when an error is shown', () => {
 		const numberRequired = 'Number is required';
 		const name = 'numberInput';
+		const hint = 'This explains how to complete the field';
 
 		const handleSubmit = jest.fn();
 		const { getByTestId, getByText } = formSetup({
@@ -276,6 +277,7 @@ describe('Number', () => {
 					label="Number"
 					testId={testId}
 					name={name}
+					hint={hint}
 					required={true}
 					maxLength={3}
 					decimalPlaces={1}
@@ -286,6 +288,6 @@ describe('Number', () => {
 		});
 
 		const numberTest = getByTestId(testId);
-		CheckDescribedByTag(getByText, numberTest, numberRequired);
+		CheckDescribedByTag(getByText, numberTest, numberRequired, hint);
 	});
 });
