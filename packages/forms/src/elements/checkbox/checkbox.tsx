@@ -3,9 +3,10 @@ import { Field, FieldRenderProps } from 'react-final-form';
 import { P } from '@tpr/core';
 import { FieldProps, FieldExtraProps } from '../../renderFields';
 import { CheckboxChecked, CheckboxBlank } from './icons';
-import { getElementDescriptors, StyledInputLabel } from '../elements';
+import { StyledInputLabel } from '../elements';
 import { HiddenInput } from '../hidden/hidden';
 import styles from './checkbox.module.scss';
+import AccessibilityHelper from 'elements/accessibilityHelper';
 
 type CheckboxIconProps = FieldRenderProps<string> & FieldExtraProps;
 export const Checkbox: React.FC<Partial<CheckboxIconProps>> = ({
@@ -20,7 +21,7 @@ export const Checkbox: React.FC<Partial<CheckboxIconProps>> = ({
 	className,
 }) => {
 	const msg = testId ? `${testId}-${checked ? 'checked' : 'unchecked'}` : null;
-	const descriptors = getElementDescriptors(id, !!label, !!hint);
+	const helper = new AccessibilityHelper(id, !!label, !!hint);
 
 	return (
 		<StyledInputLabel
@@ -37,7 +38,7 @@ export const Checkbox: React.FC<Partial<CheckboxIconProps>> = ({
 			)}
 		>
 			<label
-				id={descriptors && descriptors.labelId}
+				id={helper && helper.labelId}
 				data-testid={msg}
 				className={styles.wrapper}
 				htmlFor={id}
@@ -45,7 +46,7 @@ export const Checkbox: React.FC<Partial<CheckboxIconProps>> = ({
 				<HiddenInput
 					id={id}
 					type="checkbox"
-					aria-describedby={descriptors && descriptors.hintId}
+					aria-describedby={helper && helper.hintId}
 					checked={checked}
 					disabled={disabled}
 					onChange={onChange}

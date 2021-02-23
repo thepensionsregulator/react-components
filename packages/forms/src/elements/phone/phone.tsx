@@ -1,11 +1,6 @@
 import React from 'react';
 import { Field, FieldRenderProps } from 'react-final-form';
-import {
-	StyledInputLabel,
-	InputElementHeading,
-	getElementDescriptors,
-	InputElementDescriptorProps,
-} from '../elements';
+import { StyledInputLabel, InputElementHeading } from '../elements';
 import { FieldProps, FieldExtraProps } from '../../renderFields';
 import { Input } from '../input/input';
 import {
@@ -13,6 +8,7 @@ import {
 	isPhoneValid,
 	executeClientValidation,
 } from '../../validators';
+import AccessibilityHelper from 'elements/accessibilityHelper';
 
 type InputPhoneProps = FieldRenderProps<string> & FieldExtraProps;
 const InputPhone: React.FC<InputPhoneProps> = ({
@@ -28,11 +24,8 @@ const InputPhone: React.FC<InputPhoneProps> = ({
 	inputWidth: width,
 	cfg,
 }) => {
-	const descriptors: InputElementDescriptorProps = getElementDescriptors(
-		name,
-		!!label,
-		!!hint,
-	);
+	
+	const helper = new AccessibilityHelper(name, !!label, !!hint);
 
 	return (
 		<StyledInputLabel
@@ -41,24 +34,21 @@ const InputPhone: React.FC<InputPhoneProps> = ({
 		>
 			<InputElementHeading
 				label={label}
-				labelId={descriptors && descriptors.labelId}
-				hintId={descriptors && descriptors.hintId}
-				errorId={descriptors && descriptors.errorId}
 				required={required}
 				hint={hint}
 				meta={meta}
+				accessibilityHelper={helper}
 			/>
 			<Input
 				type="tel"
 				width={width}
 				testId={testId}
 				label={label}
-				hintId={descriptors && descriptors.hintId}
-				errorId={descriptors && descriptors.errorId}
 				placeholder={placeholder}
 				readOnly={readOnly}
 				isError={meta && meta.touched && meta.error}
 				required={required}
+				accessibilityHelper={helper}
 				{...input}
 			/>
 		</StyledInputLabel>

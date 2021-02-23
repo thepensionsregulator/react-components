@@ -3,9 +3,10 @@ import { Field, FieldRenderProps } from 'react-final-form';
 import { P } from '@tpr/core';
 import { FieldProps, FieldExtraProps } from '../../renderFields';
 import { RadioButtonChecked, RadioButtonUnchecked } from './icons';
-import { getElementDescriptors, StyledInputLabel } from '../elements';
+import { StyledInputLabel } from '../elements';
 import { HiddenInput } from '../hidden/hidden';
 import styles from './radio.module.scss';
+import AccessibilityHelper from 'elements/accessibilityHelper';
 
 type RadioButtonProps = FieldRenderProps<string> & FieldExtraProps;
 export const RadioButton: React.FC<RadioButtonProps> = ({
@@ -22,7 +23,7 @@ export const RadioButton: React.FC<RadioButtonProps> = ({
 	className,
 }) => {
 	const msg = testId ? `${testId}-${checked ? 'checked' : 'unchecked'}` : null;
-	const descriptors = getElementDescriptors(id, !!label, !!hint);
+	const helper = new AccessibilityHelper(id, !!label, !!hint);
 
 	return (
 		<StyledInputLabel
@@ -40,7 +41,7 @@ export const RadioButton: React.FC<RadioButtonProps> = ({
 			)}
 		>
 			<label
-				id={descriptors && descriptors.labelId}
+				id={helper && helper.labelId}
 				className={`${styles.wrapper} ${disabled ? styles.disabled : ''}`}
 				data-testid={msg}
 				htmlFor={id}
@@ -48,7 +49,7 @@ export const RadioButton: React.FC<RadioButtonProps> = ({
 				<HiddenInput
 					type="radio"
 					id={id}
-					aria-describedby={descriptors && descriptors.hintId}
+					aria-describedby={helper && helper.hintId}
 					name={name}
 					checked={checked}
 					value={value}

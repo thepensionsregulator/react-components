@@ -3,16 +3,12 @@ import Downshift, { DownshiftProps } from 'downshift';
 import { UnfoldMore } from '@tpr/icons';
 import { Field, FieldRenderProps } from 'react-final-form';
 import { Flex, classNames } from '@tpr/core';
-import {
-	StyledInputLabel,
-	InputElementHeading,
-	getElementDescriptors,
-	InputElementDescriptorProps,
-} from '../elements';
+import { StyledInputLabel, InputElementHeading } from '../elements';
 import { FieldProps, FieldOptions, FieldExtraProps } from '../../renderFields';
 import { Input } from '../input/input';
 import PopupBox from './popup';
 import styles from './select.module.scss';
+import AccessibilityHelper from 'elements/accessibilityHelper';
 
 interface SelectProps extends DownshiftProps<any>, FieldExtraProps {
 	handleNotFoundButtonClick?: Function;
@@ -43,11 +39,7 @@ export const Select: React.FC<SelectProps & FieldRenderProps<string>> = ({
 	cfg,
 	...rest
 }) => {
-	const descriptors: InputElementDescriptorProps = getElementDescriptors(
-		rest["id"],
-		!!label,
-		!!hint,
-	);
+	const helper = new AccessibilityHelper(rest['id'], !!label, !!hint);
 
 	return (
 		<Downshift
@@ -69,25 +61,22 @@ export const Select: React.FC<SelectProps & FieldRenderProps<string>> = ({
 			}) => (
 				<div>
 					<StyledInputLabel
-						element='label'
+						element="label"
 						isError={meta && meta.touched && meta.error}
 						cfg={Object.assign({ flexDirection: 'column' }, cfg)}
 						{...getLabelProps()}
 					>
 						<InputElementHeading
-							hintId={descriptors && descriptors.hintId}
-							errorId={descriptors && descriptors.errorId}
 							label={label}
 							required={required}
 							hint={hint}
 							meta={meta}
+							accessibilityHelper={helper}
 						/>
 						<Flex cfg={{ width }} className={styles.relative}>
 							<Input
 								autoComplete="off"
 								type="text"
-								hintId={descriptors && descriptors.hintId}
-								errorId={descriptors && descriptors.errorId}
 								testId={testId}
 								label={label}
 								disabled={disabled}
@@ -95,6 +84,7 @@ export const Select: React.FC<SelectProps & FieldRenderProps<string>> = ({
 								readOnly={readOnly}
 								onClick={() => toggleMenu()}
 								className={styles.input}
+								accessibilityHelper={helper}
 								{...getInputProps()}
 							/>
 							{showToggleButton && (

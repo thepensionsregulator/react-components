@@ -1,11 +1,6 @@
 import React from 'react';
 import { Field, FieldRenderProps } from 'react-final-form';
-import {
-	StyledInputLabel,
-	InputElementHeading,
-	getElementDescriptors,
-	InputElementDescriptorProps,
-} from '../elements';
+import { StyledInputLabel, InputElementHeading } from '../elements';
 import { FieldProps, FieldExtraProps } from '../../renderFields';
 import { Input } from '../input/input';
 import {
@@ -13,6 +8,7 @@ import {
 	isEmailValid,
 	executeClientValidation,
 } from '../../validators';
+import AccessibilityHelper from 'elements/accessibilityHelper';
 
 type InputEmailProps = FieldRenderProps<string> & FieldExtraProps;
 const InputEmail: React.FC<InputEmailProps> = ({
@@ -28,11 +24,7 @@ const InputEmail: React.FC<InputEmailProps> = ({
 	inputWidth: width,
 	cfg,
 }) => {
-	const descriptors: InputElementDescriptorProps = getElementDescriptors(
-		name,
-		!!label,
-		!!hint,
-	);
+	const helper = new AccessibilityHelper(name, !!label, !!hint);
 
 	return (
 		<StyledInputLabel
@@ -40,25 +32,22 @@ const InputEmail: React.FC<InputEmailProps> = ({
 			cfg={Object.assign({ flexDirection: 'column', mt: 1 }, cfg)}
 		>
 			<InputElementHeading
-				labelId={descriptors && descriptors.labelId}
-				hintId={descriptors && descriptors.hintId}
-				errorId={descriptors && descriptors.errorId}
 				label={label}
 				required={required}
 				hint={hint}
 				meta={meta}
+				accessibilityHelper={helper}
 			/>
 			<Input
 				type="email"
 				width={width}
-				hintId={descriptors && descriptors.hintId}
-				errorId={descriptors && descriptors.errorId}
 				testId={testId}
 				label={label}
 				required={required}
 				placeholder={placeholder}
 				readOnly={readOnly}
 				isError={meta && meta.touched && meta.error}
+				accessibilityHelper={helper}
 				{...input}
 			/>
 		</StyledInputLabel>

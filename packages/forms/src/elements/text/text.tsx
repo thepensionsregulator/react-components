@@ -1,14 +1,10 @@
 import React from 'react';
 import { Field, FieldRenderProps } from 'react-final-form';
-import {
-	StyledInputLabel,
-	InputElementHeading,
-	getElementDescriptors,
-	InputElementDescriptorProps,
-} from '../elements';
+import { StyledInputLabel, InputElementHeading } from '../elements';
 import { FieldProps, FieldExtraProps } from '../../renderFields';
 import { Input } from '../input/input';
 import { useEffect } from 'react';
+import AccessibilityHelper from 'elements/accessibilityHelper';
 
 type InputTextProps = FieldRenderProps<string> &
 	FieldExtraProps & {
@@ -42,11 +38,7 @@ const InputText: React.FC<InputTextProps> = React.forwardRef(
 			}
 		}, [updatedValue]);
 
-		const descriptors: InputElementDescriptorProps = getElementDescriptors(
-			name,
-			!!label,
-			!!hint,
-		);
+		const helper = new AccessibilityHelper(name, !!label, !!hint);
 
 		return (
 			<StyledInputLabel
@@ -54,21 +46,17 @@ const InputText: React.FC<InputTextProps> = React.forwardRef(
 				cfg={Object.assign({ flexDirection: 'column', mt: 1 }, cfg)}
 			>
 				<InputElementHeading
-					labelId={descriptors && descriptors.labelId}
-					hintId={descriptors && descriptors.hintId}
-					errorId={descriptors && descriptors.errorId}
 					label={label}
 					required={required}
 					hint={hint}
 					meta={meta}
+					accessibilityHelper={helper}
 				/>
 				<Input
 					parentRef={ref}
 					type="text"
 					width={width}
 					testId={testId}
-					hintId={descriptors && descriptors.hintId}
-					errorId={descriptors && descriptors.errorId}
 					label={ariaLabel ? ariaLabel : label}
 					placeholder={placeholder}
 					disabled={disabled}
@@ -76,6 +64,7 @@ const InputText: React.FC<InputTextProps> = React.forwardRef(
 					isError={meta && meta.touched && meta.error}
 					className={inputClassName}
 					maxLength={maxLength}
+					accessibilityHelper={helper}
 					{...input}
 				/>
 			</StyledInputLabel>

@@ -1,17 +1,13 @@
 import React, { ChangeEvent, useState } from 'react';
 import { Field, FieldRenderProps } from 'react-final-form';
-import {
-	StyledInputLabel,
-	InputElementHeading,
-	getElementDescriptors,
-	InputElementDescriptorProps,
-} from '../elements';
+import { StyledInputLabel, InputElementHeading } from '../elements';
 import { FieldExtraProps } from '../../renderFields';
 import { Input } from '../input/input';
 import { adaptValueToFormat, fixToDecimals, validKeys as vk } from '../helpers';
 import { FieldWithAriaLabelExtenstionI18nProps } from 'types/FieldWithAriaLabelExtensionI18nProps';
 import { FieldWithAriaLabelExtensionProps } from '../../types/FieldWithAriaLabelExtensionProps';
 import { RecursivePartial } from 'types/RecursivePartial';
+import AccessibilityHelper from 'elements/accessibilityHelper';
 
 let numberFieldI18nDefaults: FieldWithAriaLabelExtenstionI18nProps = {
 	ariaLabelExtension: null,
@@ -129,11 +125,7 @@ const InputNumber: React.FC<InputNumberProps> = ({
 		input.onBlur(e.target.value); // without this call, validate won't be executed even if specified
 	};
 
-	const descriptors: InputElementDescriptorProps = getElementDescriptors(
-		name,
-		!!label,
-		!!hint,
-	);
+	const helper = new AccessibilityHelper(name, !!label, !!hint);
 
 	return (
 		<StyledInputLabel
@@ -142,19 +134,15 @@ const InputNumber: React.FC<InputNumberProps> = ({
 			noLeftBorder={noLeftBorder}
 		>
 			<InputElementHeading
-				labelId={descriptors && descriptors.labelId}
-				hintId={descriptors && descriptors.hintId}
-				errorId={descriptors && descriptors.errorId}
 				label={label}
 				required={optionalText !== undefined ? !optionalText : required}
 				hint={hint}
 				meta={meta}
+				accessibilityHelper={helper}
 			/>
 			<Input
 				type="number"
 				width={width}
-				hintId={descriptors && descriptors.hintId}
-				errorId={descriptors && descriptors.errorId}
 				testId={testId}
 				label={label}
 				isError={meta && meta.touched && meta.error}
@@ -168,6 +156,7 @@ const InputNumber: React.FC<InputNumberProps> = ({
 				after={after}
 				before={before}
 				ariaLabelExtension={i18n.ariaLabelExtension}
+				accessibilityHelper={helper}
 				{...props}
 			/>
 		</StyledInputLabel>

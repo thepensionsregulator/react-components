@@ -2,6 +2,7 @@ import React, { createElement } from 'react';
 import { SpaceProps, FlexProps, useClassNames, Span } from '@tpr/core';
 import styles from './elements.module.scss';
 import { ReactNode } from 'react';
+import AccessibilityHelper from './accessibilityHelper';
 
 interface StyledInputLabelProps {
 	element?: 'label' | 'div' | 'fieldset';
@@ -69,83 +70,34 @@ type ErrorMessageProps = {
 type InputElementHeadingProps = {
 	element?: 'div' | 'legend' | null;
 	label?: string;
-	labelId?: string;
-	hintId?: string;
-	errorId?: string;
 	required?: boolean;
 	hint?: string;
 	meta?: any;
+	accessibilityHelper: AccessibilityHelper
 };
 export const InputElementHeading: React.FC<InputElementHeadingProps> = ({
 	element = 'div',
 	label,
-	labelId,
-	hintId,
-	errorId,
 	required,
 	hint,
 	meta,
+	accessibilityHelper
 }) => {
 	return (
 		<>
 			{label && (
-				<FormLabelText element={element} id={labelId}>
+				<FormLabelText element={element} id={accessibilityHelper.labelId}>
 					{label} {!required && '(optional)'}
 				</FormLabelText>
 			)}
 			{hint && (
-				<Span id={hintId} cfg={{ mb: 2 }} className={styles.hint}>
+				<Span id={accessibilityHelper.hintId} cfg={{ mb: 2 }} className={styles.hint}>
 					{hint}
 				</Span>
 			)}
 			{meta && meta.touched && meta.error && (
-				<ErrorMessage id={errorId}>{meta.error}</ErrorMessage>
+				<ErrorMessage id={accessibilityHelper.errorId}>{meta.error}</ErrorMessage>
 			)}
 		</>
 	);
-};
-
-const getLabelId = (rootId: string): string => {
-	return (rootId && `${rootId}-label`) || null;
-};
-const getHintId = (rootId: string): string => {
-	return (rootId && `${rootId}-hint`) || null;
-};
-const getErrorId = (rootId: string): string => {
-	return (rootId && `${rootId}-error`) || null;
-};
-
-export type InputElementDescriptorProps = {
-	labelId?: string;
-	hintId?: string;
-	errorId?: string;
-};
-
-export const getElementDescriptors = (
-	rootId: string,
-	hasLabel: boolean,
-	hasHint: boolean,
-): InputElementDescriptorProps => {
-	const labelId = hasLabel ? getLabelId(rootId) : null;
-	const hintId = hasHint ? getHintId(rootId) : null;
-	const errorId = getErrorId(rootId);
-	return {
-		labelId: labelId,
-		hintId: hintId,
-		errorId: errorId,
-	} as InputElementDescriptorProps;
-};
-
-export const formatAriaDescribedBy = (
-	hintId: string,
-	errorId: string,
-	isError: boolean,
-) => {
-	var describedBy: string;
-	if (isError) {
-		describedBy = `${hintId || ''} ${errorId || ''}`;
-	} else {
-		describedBy = `${hintId || ''}`;
-	}
-	return describedBy.trim() || null;
 };

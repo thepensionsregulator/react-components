@@ -1,14 +1,12 @@
 import React from 'react';
 import { classNames, Flex, LayoutProps } from '@tpr/core';
 import styles from './input.module.scss';
-import { formatAriaDescribedBy } from '../elements';
+import AccessibilityHelper from 'elements/accessibilityHelper';
+
 export type InputProps = {
 	type: string;
 	width?: LayoutProps['width'];
 	testId?: string;
-	labelId?: string;
-	hintId?: string;
-	errorId?: string;
 	label?: string;
 	isError?: boolean;
 	after?: string;
@@ -18,15 +16,13 @@ export type InputProps = {
 	readOnly?: boolean;
 	ariaLabelExtension?: string;
 	[key: string]: any;
+	accessibilityHelper: AccessibilityHelper
 };
 
 export const Input: React.FC<InputProps> = ({
 	type = 'text',
 	width,
 	testId,
-	labelId,
-	hintId,
-	errorId,
 	label,
 	isError = false,
 	className,
@@ -36,6 +32,7 @@ export const Input: React.FC<InputProps> = ({
 	decimalPlaces,
 	parentRef,
 	ariaLabelExtension,
+	accessibilityHelper,
 	...rest
 }) => {
 	const getAriaLabel = (): string => {
@@ -78,7 +75,7 @@ export const Input: React.FC<InputProps> = ({
 					},
 				])}
 				aria-invalid={!!isError}
-				aria-describedby={formatAriaDescribedBy(hintId, errorId, isError)}
+				aria-describedby={accessibilityHelper.formatAriaDescribedBy(isError)}
 				{...rest}
 				aria-label={getAriaLabel()}
 			/>

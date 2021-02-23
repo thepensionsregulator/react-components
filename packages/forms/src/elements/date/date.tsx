@@ -2,18 +2,13 @@ import React, { ChangeEvent, useEffect, memo, useReducer } from 'react';
 import { Field, FieldRenderProps } from 'react-final-form';
 import { isValid, toDate, format } from 'date-fns';
 import { P, Flex } from '@tpr/core';
-import {
-	StyledInputLabel,
-	InputElementHeading,
-	InputElementDescriptorProps,
-	getElementDescriptors,
-	formatAriaDescribedBy,
-} from '../elements';
+import { StyledInputLabel, InputElementHeading } from '../elements';
 import { Input } from '../input/input';
 import { FieldProps, FieldExtraProps } from '../../renderFields';
 import isEqual from 'lodash.isequal';
 import styles from './date.module.scss';
 import { SameMonthDateValidator } from './services/SameMonthDateValidator';
+import AccessibilityHelper from 'elements/accessibilityHelper';
 
 const handleChange = (onChange: Function, value: number) => ({
 	target,
@@ -115,6 +110,7 @@ const DateInputField: React.FC<DateInputFieldProps> = ({
 				meta={meta}
 				autoComplete="off"
 				maxLength={maxLength}
+				accessibilityHelper={null}
 			/>
 		</label>
 	);
@@ -163,14 +159,7 @@ export const InputDate: React.FC<InputDateComponentProps> = memo(
 		}, [day, month, year, input]);
 
 		const isError: boolean = meta && meta.touched && meta.error;
-		const descriptors: InputElementDescriptorProps = getElementDescriptors(
-			id,
-			!!label,
-			!!hint,
-		);
-		const ariaDescribedBy =
-			descriptors &&
-			formatAriaDescribedBy(descriptors.hintId, descriptors.errorId, isError);
+		const helper = new AccessibilityHelper(id, !!label, !!hint);
 
 		return (
 			<StyledInputLabel
@@ -179,7 +168,7 @@ export const InputDate: React.FC<InputDateComponentProps> = memo(
 				onFocus={input.onFocus}
 				onBlur={input.onBlur}
 				data-testid={`date-input-${testId}`}
-				aria-describedby={ariaDescribedBy}
+				aria-describedby={helper.formatAriaDescribedBy(isError)}
 				cfg={Object.assign(
 					{ mt: 1, py: 1, alignItems: 'flex-start', flexDirection: 'column' },
 					cfg,
@@ -187,13 +176,11 @@ export const InputDate: React.FC<InputDateComponentProps> = memo(
 			>
 				<InputElementHeading
 					element="legend"
-					labelId={descriptors && descriptors.labelId}
-					hintId={descriptors && descriptors.hintId}
-					errorId={descriptors && descriptors.errorId}
 					label={label}
 					required={required}
 					hint={hint}
 					meta={meta}
+					accessibilityHelper={helper}
 				/>
 				<Flex>
 					{!hideDay && (
