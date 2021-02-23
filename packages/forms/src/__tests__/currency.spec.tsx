@@ -7,6 +7,7 @@ import { fireEvent } from '@testing-library/react';
 import {
 	calculateCursorPosition,
 	getNumberOfCommas,
+	validateCurrency,
 } from '../elements/helpers';
 import { CheckDescribedByTag } from '../utils/aria-describedByTest';
 
@@ -51,6 +52,15 @@ describe('Currency', () => {
 
 			userEvent.type(getByTestId(testId), '123');
 			expect(getByTestId(testId)).toHaveValue('123');
+		});
+
+		test('Currency symbol can be typed as the first character only', async () => {
+			const { getByTestId } = formSetup({
+				render: currencyComponent,
+			});
+
+			userEvent.type(getByTestId(testId), '£10£0');
+			expect(getByTestId(testId)).toHaveValue('£100');
 		});
 
 		test('label renders with an id attribute', () => {
@@ -141,6 +151,16 @@ describe('Currency', () => {
 			});
 
 			userEvent.type(getByTestId(testId), '123456789.4');
+			fireEvent.blur(getByTestId(testId));
+			expect(getByTestId(testId)).toHaveValue('123,456,789.40');
+		});
+
+		test('value with currency symbol gets formatted correctly on onBlur event', async () => {
+			const { getByTestId } = formSetup({
+				render: currencyComponent,
+			});
+
+			userEvent.type(getByTestId(testId), '£123456789.4');
 			fireEvent.blur(getByTestId(testId));
 			expect(getByTestId(testId)).toHaveValue('123,456,789.40');
 		});
@@ -253,6 +273,33 @@ describe('Currency', () => {
 				expect(getByTestId(testId)).toHaveValue('45,000.00');
 			}, 100);
 			expect(validateExecuted).toEqual(true);
+		});
+	});
+
+	describe('testing helper function: validateCurrency', () => {
+		test('when value is too large, tooBig validation result is returned', () => {
+			expect(validateCurrency('1000', 0, 10)).toEqual('tooBig');
+		});
+		test('when value with thousand separators is too large, tooBig validation result is returned', () => {
+			expect(validateCurrency('1,000', 0, 10)).toEqual('tooBig');
+		});
+		test('when value with thousand separators and currency symbol is too large, tooBig validation result is returned', () => {
+			expect(validateCurrency('£1,000', 0, 10)).toEqual('tooBig');
+		});
+		test('when value is too small, tooSmall validation result is returned', () => {
+			expect(validateCurrency('1000', 10000, 15000)).toEqual('tooSmall');
+		});
+		test('when value with thousand separators is too small, tooSmall validation result is returned', () => {
+			expect(validateCurrency('1,000', 10000, 15000)).toEqual('tooSmall');
+		});
+		test('when value with thousand separators and currency symbol is too small, tooSmall validation result is returned', () => {
+			expect(validateCurrency('£1,000', 10000, 15000)).toEqual('tooSmall');
+		});
+		test('when value is undefined, empty validation result is returned', () => {
+			expect(validateCurrency(undefined, 0, 0)).toEqual('empty');
+		});
+		test('when value is null, empty validation result is returned', () => {
+			expect(validateCurrency(null, 0, 0)).toEqual('empty');
 		});
 	});
 
