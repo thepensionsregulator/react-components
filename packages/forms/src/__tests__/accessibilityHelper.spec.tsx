@@ -2,14 +2,14 @@ import AccessibilityHelper from '../elements/accessibilityHelper';
 
 const rootId = 'test-id';
 
-describe('getElementDescriptors', () => {
-	test('returns correctly formatted ids', async () => {
+describe('helper properties', () => {
+	test('return correctly formatted ids', async () => {
 		const helper = new AccessibilityHelper(rootId, true, true);
 		expect(helper.labelId).toBe(`${rootId}-label`);
 		expect(helper.hintId).toBe(`${rootId}-hint`);
 		expect(helper.errorId).toBe(`${rootId}-error`);
 	});
-	test('returns null for unavailable elements', async () => {
+	test('return null for unavailable elements', async () => {
 		const helper = new AccessibilityHelper(rootId, false, false);
 		expect(helper.labelId).toBeNull();
 		expect(helper.hintId).toBeNull();
