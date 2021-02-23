@@ -16,9 +16,9 @@ describe('helper properties', () => {
 		expect(helper.errorId).toBe(`${rootId}-error`);
 	});
 	test('correctly apply kebab case', async () => {
-		const rootId = 'camelCaseId';
+		const camelCaseId = 'camelCaseId';
 		const formattedId = 'camel-case-id';
-		const helper = new AccessibilityHelper(rootId, true, true);
+		const helper = new AccessibilityHelper(camelCaseId, true, true);
 		expect(helper.labelId).toBe(`${formattedId}-label`);
 		expect(helper.hintId).toBe(`${formattedId}-hint`);
 		expect(helper.errorId).toBe(`${formattedId}-error`);
