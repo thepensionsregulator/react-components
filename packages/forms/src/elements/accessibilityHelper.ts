@@ -1,9 +1,3 @@
-export type InputElementDescriptorProps = {
-	labelId?: string;
-	hintId?: string;
-	errorId?: string;
-};
-
 export default class AccessibilityHelper {
 	constructor(
 		private rootId: string,
