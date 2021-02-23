@@ -1,5 +1,7 @@
 import { ChangeEvent } from 'react';
 
+const currencySymbol = '£';
+
 export const validKeys = [
 	'Backspace',
 	'Enter',
@@ -95,10 +97,12 @@ export const getFinalValueWithFormat = (
 	value: string,
 	decimals: number,
 ): string => {
-	const newValueWithNoCommas = value.replace(/,/g, '');
-	if (firstDotPosition(newValueWithNoCommas) === -1) {
+	const newValueWithNoCommasOrCurrencySymbol = value
+		.replace(/,/g, '')
+		.replace(currencySymbol, '');
+	if (firstDotPosition(newValueWithNoCommasOrCurrencySymbol) === -1) {
 		// if the value doesn't contain decimals, we return the value with the required format
-		const newValueWithDecimals = newValueWithNoCommas.concat(
+		const newValueWithDecimals = newValueWithNoCommasOrCurrencySymbol.concat(
 			'.',
 			new Array(decimals).fill('0').join(''),
 		);
@@ -136,7 +140,9 @@ export const validateCurrency = (
 						'empty' when the field is empty
 	*/
 	if (value !== undefined && value !== null) {
-		const numericValue = Number(value.toString().replace(/,/g, ''));
+		const numericValue = Number(
+			value.toString().replace(/,/g, '').replace(currencySymbol, ''),
+		);
 		if (min !== null && numericValue < min) return 'tooSmall';
 		if (max !== null && numericValue > max) return 'tooBig';
 		return undefined;
