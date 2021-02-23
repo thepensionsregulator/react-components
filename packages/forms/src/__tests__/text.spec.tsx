@@ -7,6 +7,7 @@ import { validate, renderFields } from '../index';
 import { FieldProps } from '../renderFields';
 import { axe } from 'jest-axe';
 import { CheckDescribedByTag } from '../utils/aria-describedByTest';
+import AccessibilityHelper from '../elements/accessibilityHelper';
 
 describe('Text input', () => {
 	test('is accessible', async () => {
@@ -154,6 +155,7 @@ describe('Text input', () => {
 	test('has correct describedby tag when an error is shown', () => {
 		const testId = 'texTest';
 		const name = 'textInput';
+		const label = 'Text Line 1';
 		const error = 'This is a required field';
 		const hint = 'This explains how to complete the field';
 		const handleSubmit = jest.fn();
@@ -162,11 +164,12 @@ describe('Text input', () => {
 			{
 				name: name,
 				testId: testId,
-				label: 'Text Line 1',
+				label: label,
 				type: 'text',
 				hint: hint,
 				error: error,
 				required: true,
+				accessibilityHelper: new AccessibilityHelper(name, !!label, !!hint),
 			},
 		];
 

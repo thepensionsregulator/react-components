@@ -16,7 +16,7 @@ export type InputProps = {
 	readOnly?: boolean;
 	ariaLabelExtension?: string;
 	[key: string]: any;
-	accessibilityHelper: AccessibilityHelper;
+	accessibilityHelper?: AccessibilityHelper;
 };
 
 export const Input: React.FC<InputProps> = ({
@@ -75,7 +75,10 @@ export const Input: React.FC<InputProps> = ({
 					},
 				])}
 				aria-invalid={!!isError}
-				aria-describedby={accessibilityHelper.formatAriaDescribedBy(isError)}
+				aria-describedby={
+					accessibilityHelper &&
+					accessibilityHelper.formatAriaDescribedBy(isError)
+				}
 				{...rest}
 				aria-label={getAriaLabel()}
 			/>
