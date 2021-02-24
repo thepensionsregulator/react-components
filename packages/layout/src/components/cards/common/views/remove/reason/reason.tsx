@@ -27,6 +27,7 @@ export const Reason: React.FC<ReasonProps> = ({
 	remove,
 	dateField,
 }) => {
+
 	return (
 		<Content type={type} title={i18nRemoveReason.title}>
 			<Form
@@ -40,6 +41,7 @@ export const Reason: React.FC<ReasonProps> = ({
 					const reason = form.getState().values.reason;
 					const showError: boolean = !!submitError && !reason;
 					const leftScheme: boolean = reason === 'left_the_scheme';
+
 					return (
 						<form onSubmit={handleSubmit} data-testid={`remove-${type}-form`}>
 							<div className={showError ? elementStyles.labelError : null}>
@@ -49,6 +51,7 @@ export const Reason: React.FC<ReasonProps> = ({
 											{i18nRemoveReason.subtitle}
 										</H4>
 									</legend>
+
 									<FFRadioButton
 										name="reason"
 										type="radio"
@@ -68,9 +71,10 @@ export const Reason: React.FC<ReasonProps> = ({
 										label={i18nRemoveReason.fields.neverPartOfTheScheme.label}
 										value="not_part_of_scheme"
 									/>
+
 								</fieldset>
 								{showError && (
-									<P
+									<P role="alert"
 										cfg={{ color: 'danger.2', mt: 5 }}
 										className={elementStyles.errorMessage}
 									>
