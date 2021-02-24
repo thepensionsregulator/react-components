@@ -5,7 +5,7 @@ import { CorporateGroup } from '../cards/corporateGroup/context';
 import { axe } from 'jest-axe';
 import { cleanup } from '@testing-library/react-hooks';
 import { act } from 'react-dom/test-utils';
-import { assertThatButtonHasAriaExpanded } from './testHelpers';
+import { assertThatButtonHasAriaExpanded } from '../testHelpers/testHelpers';
 
 const noop = () => Promise.resolve();
 

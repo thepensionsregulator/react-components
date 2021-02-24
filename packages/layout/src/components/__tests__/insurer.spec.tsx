@@ -4,7 +4,7 @@ import { InsurerCard } from '../cards/insurer/insurer';
 import { axe } from 'jest-axe';
 import userEvent from '@testing-library/user-event';
 import { Insurer } from '../cards/insurer/context';
-import { assertThatButtonHasAriaExpanded } from './testHelpers';
+import { assertThatButtonHasAriaExpanded } from '../testHelpers/testHelpers';
 
 const noop = () => Promise.resolve();
 

@@ -8,7 +8,7 @@ import { cleanup } from '@testing-library/react-hooks';
 import {
 	assertThatButtonHasAriaExpanded,
 	assertThatButtonHasBeenRemovedFromTheTabFlow,
-} from './testHelpers';
+} from '../testHelpers/testHelpers';
 
 const noop = () => Promise.resolve();
 

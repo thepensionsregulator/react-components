@@ -7,7 +7,7 @@ import { InHouseAdminNoApi } from '../cards/inHouse/context';
 import {
 	assertThatButtonHasAriaExpanded,
 	assertThatButtonHasBeenRemovedFromTheTabFlow,
-} from './testHelpers';
+} from '../testHelpers/testHelpers';
 
 const noop = () => Promise.resolve();
 

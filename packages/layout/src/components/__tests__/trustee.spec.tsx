@@ -6,7 +6,7 @@ import { Trustee } from '../cards/trustee/context';
 import {
 	assertThatButtonHasAriaExpanded,
 	assertThatButtonHasBeenRemovedFromTheTabFlow,
-} from './testHelpers';
+} from '../testHelpers/testHelpers';
 
 const noop = () => Promise.resolve();
 
