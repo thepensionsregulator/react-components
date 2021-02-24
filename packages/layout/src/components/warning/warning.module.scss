@@ -5,8 +5,8 @@
 	font-weight: $font-weight-3;
 
 	svg {
-		width: 35px;
-		height: 35px;
+		min-width: 35px;
+		min-height: 35px;
    	margin-top: 2px;
 	}
 }

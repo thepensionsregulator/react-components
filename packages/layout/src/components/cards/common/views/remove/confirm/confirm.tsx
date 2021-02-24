@@ -39,20 +39,22 @@ const Confirm: React.FC<ConfirmProps> = ({
 			<H3 cfg={{ mt: 3, fontWeight: 2 }}>{removeTitle}</H3>
 			<Hr cfg={{ my: 4 }} />
 			<WarningBox warningLabel={warningLabel}>
-				<P>{removeMessage1}</P>
-				{removeMessage2 && <P cfg={{ mt: 3 }}>{removeMessage2}</P>}
-				<Flex cfg={{ mt: 3 }}>
-					<ArrowButton
-						intent="warning"
-						pointsTo="right"
-						iconSide="right"
-						title={removeBtnTitle}
-						onClick={handleRemove}
-						disabled={loading}
-					/>
-					<Link cfg={{ m: 3 }} underline onClick={handleCancel}>
-						{cancelBtnTitle}
-					</Link>
+				<Flex cfg={{ flexDirection: 'column' }}>
+					<P>{removeMessage1}</P>
+					{removeMessage2 && <P cfg={{ mt: 3 }}>{removeMessage2}</P>}
+					<Flex cfg={{ mt: 3 }}>
+						<ArrowButton
+							intent="warning"
+							pointsTo="right"
+							iconSide="right"
+							title={removeBtnTitle}
+							onClick={handleRemove}
+							disabled={loading}
+						/>
+						<Link cfg={{ m: 3 }} underline onClick={handleCancel}>
+							{cancelBtnTitle}
+						</Link>
+					</Flex>
 				</Flex>
 			</WarningBox>
 		</Content>
