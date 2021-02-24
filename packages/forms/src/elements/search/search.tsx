@@ -16,11 +16,12 @@ interface SearchProps extends FieldRenderProps<string>, FieldExtraProps {
 	callback?: Function;
 }
 
-type panelVisibility = 
-	'visible'|
-	'hidden'|
-	'complete'
-;
+type PanelVisibility = 'visible' | 'hidden' | 'complete';
+
+interface ResultsFiltered {
+	objects: any[],
+	strings: string[]
+}
 
 const Search: React.FC<SearchProps> = React.memo(
 	({
@@ -40,54 +41,42 @@ const Search: React.FC<SearchProps> = React.memo(
 		name,
 		...rest
 	}) => {
-		const [panelVisible, setPanelVisible] = useState<panelVisibility>('hidden');
+		const [panelVisible, setPanelVisible] = useState<PanelVisibility>('hidden');
 		const [classes, setClasses] = useState(styles.autocomplete);
 		const [optionsArrayStrings, setOptionsArrayStrings] = useState([]);
 		const [optionsArrayObjects, setOptionsArrayObjects] = useState([]);
 
-		const setGlobalArrays = (resultsFiltered) => {			
+		const setGlobalArrays = (resultsFiltered:ResultsFiltered) => {			
 			setOptionsArrayObjects(resultsFiltered.objects);
 			setOptionsArrayStrings(resultsFiltered.strings);
+			if (panelVisible == 'hidden') setPanelVisible('visible');
 		}
 
-		const showResults = (query) => {
-			// Function that filters the results when the options are passed directly as an array of values
-			console.log('showResults');
-			// set panelVisible=visible in case it was hidden
-			if (panelVisible == 'hidden') setPanelVisible('visible');
-
-			const resultsFiltered = filterResults(query, optionsArray, keyValue);
-			console.log('resultsFiltered', resultsFiltered);
-
-			setGlobalArrays(resultsFiltered);
-			return resultsFiltered.strings;
+		// Function that filters the results when the options are passed directly as an array of values
+		const showResults = (query:string):string[] => {
+			const results = filterResults(query, optionsArray, keyValue);
+			setGlobalArrays(results);
+			return results.strings;
 		};
 
-		const useSearchService = async (query:string) => {
-			// Function that process the results when receiving 'searchService' for making the search
-			console.log('useSearchService');
-			let resutsFormatted = [];
-
-			await searchService(query).then(resultsFiltered => {
-				resutsFormatted = formatResults(resultsFiltered);
-				setGlobalArrays(resultsFiltered);
-				console.log('resultsFiltered', resultsFiltered);
-				// set panelVisible=visible in case it was hidden
-				if (panelVisible == 'hidden') setPanelVisible('visible');
-				console.log('resutsFormatted', resutsFormatted);
-			});
-			//const resutsFormatted = formatResults(resultsFiltered)
-			console.log('resutsFormatted', resutsFormatted);
-
-			return resutsFormatted;
+		// Function that process the results when receiving 'searchService' for making the search
+		const useSearchService = (apiResponse):string[] => {
+			const results:ResultsFiltered = {
+				objects: apiResponse,
+				strings: formatResults(apiResponse)
+			};
+			setGlobalArrays(results);
+			return results.strings;
 		}
 
-		const getResults = (query, syncResults) => {
-			syncResults(query ? searchService ? useSearchService(query) : showResults(query) : []);
+		const getResults = async (query:string, populateResults:Function) => {
+			searchService
+			? await searchService(query)
+							.then(response => populateResults(query ? useSearchService(response) : []))
+			: populateResults(query ? showResults(query) : []);
 		};
 
 		const toggleResultsPanel = () => {
-			console.log('toggleResultsPanel');
 			const newClasses = panelVisible == 'complete'
 				? styles.autocomplete + ' ' + styles.hide
 				: panelVisible == 'visible'
@@ -97,19 +86,16 @@ const Search: React.FC<SearchProps> = React.memo(
 		};
 
 		const chooseOption = (value: string) => {
-			console.log('chooseOption');
 			if (value) {
-				// set panelVisible=complete when option has been selected
 				setPanelVisible('complete');
 				const objectSelected =
 					optionsArrayObjects[optionsArrayStrings.indexOf(value)];
 
-				callback(objectSelected);
+				callback && callback(objectSelected);
 			}
 		};
 
 		useEffect(() => {
-			console.log('useEffect');
 			toggleResultsPanel();
 		}, [panelVisible]);
 
