@@ -1,17 +1,27 @@
 import React from 'react';
 import { Flex, SpaceProps, FlexProps } from '@tpr/core';
 import styles from './warning.module.scss';
+import { WarningCircle } from '@tpr/icons';
 
 export type WarningBoxProps = {
 	cfg?: SpaceProps & FlexProps;
+	warningLabel?: string;
 };
-export const WarningBox: React.FC<WarningBoxProps> = ({ children, cfg }) => {
+export const WarningBox: React.FC<WarningBoxProps> = ({
+	children,
+	cfg,
+	warningLabel = 'Warning',
+}) => {
 	return (
 		<Flex
 			cfg={Object.assign({ flexDirection: 'column', p: 4, my: 4 }, cfg)}
 			className={styles.warning}
+			role="alert"
 		>
-			{children}
+			<Flex cfg={{ flexDirection: 'row' }}>
+				<WarningCircle cfg={{ mr: 4 }} ariaLabel={warningLabel} />
+				{children}
+			</Flex>
 		</Flex>
 	);
 };
