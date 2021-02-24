@@ -2,5 +2,11 @@
 
 .warning {
 	border: 4px solid $colors-danger-2;
-	outline: 4px solid $colors-warning-1;
+	font-weight: $font-weight-3;
+
+	svg {
+		min-width: 35px;
+		min-height: 35px;
+   	margin-top: 2px;
+	}
 }
