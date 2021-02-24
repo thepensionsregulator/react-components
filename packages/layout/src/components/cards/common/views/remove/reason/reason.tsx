@@ -70,7 +70,7 @@ export const Reason: React.FC<ReasonProps> = ({
 									/>
 								</fieldset>
 								{showError && (
-									<P
+									<P role="alert"
 										cfg={{ color: 'danger.2', mt: 5 }}
 										className={elementStyles.errorMessage}
 									>
