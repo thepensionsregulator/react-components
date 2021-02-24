@@ -6,6 +6,7 @@ route: /forms/search
 
 import { Playground } from '@playground';
 import { Form } from 'react-final-form';
+import { Button } from '@tpr/core';
 import { FFSearch } from './search';
 import { useState } from 'react';
 
@@ -52,7 +53,7 @@ import { FFSearch } from '@tpr/forms';
 				addressLine3: 'address13',
 				postTown: 'London',
 				postCounty: '',
-				postcode: 'SE11 5DD',
+				postcode: 'SE11 5AA',
 			},
 			{
 				organisationName: 'BBBBBB',
@@ -61,7 +62,7 @@ import { FFSearch } from '@tpr/forms';
 				addressLine3: 'address23',
 				postTown: 'Manchester',
 				postCounty: '',
-				postcode: 'SE12 5DD',
+				postcode: 'SE12 5BB',
 			},
 			{
 				organisationName: 'CCCCCC',
@@ -70,7 +71,7 @@ import { FFSearch } from '@tpr/forms';
 				addressLine3: 'address33',
 				postTown: 'Liverpool',
 				postCounty: '',
-				postcode: 'SE13 5DD',
+				postcode: 'SE13 5CC',
 			},
 			{
 				organisationName: 'DDDDDD',
@@ -88,7 +89,7 @@ import { FFSearch } from '@tpr/forms';
 				addressLine3: 'address53',
 				postTown: 'Cardiff',
 				postCounty: '',
-				postcode: 'SE15 5DD',
+				postcode: 'SE15 5EE',
 			},
 			{
 				organisationName: 'BBABBB',
@@ -97,7 +98,7 @@ import { FFSearch } from '@tpr/forms';
 				addressLine3: 'address63',
 				postTown: 'Manchester',
 				postCounty: '',
-				postcode: 'SE12 6DD',
+				postcode: 'SE16 6FF',
 			},
 		];
 		const [valueSelected, setValueSelected] = useState(null);
@@ -106,24 +107,42 @@ import { FFSearch } from '@tpr/forms';
 			setValueSelected(selection);
 		};
 		return (
-			<Form onSubmit={() => console.log('onSubmit:', valueSelected)}>
-				{({ handleSubmit }) => (
-					<form onSubmit={handleSubmit}>
-						<FFSearch
-							name="accessible-search"
-							label="Search Organisation"
-							hint="Search by organisation name."
-							inputWidth={5}
-							options={values}
-							keyValue="organisationName"
-							readOnly={true}
-							required={true}
-							callback={cb}
-						/>
-						<input type="submit" value="Send" style={{ marginTop: '20px' }} />
-					</form>
+			<>
+				{valueSelected == null && (
+					<Form onSubmit={() => console.log('onSubmit:', valueSelected)}>
+						{({ handleSubmit }) => (
+							<form onSubmit={handleSubmit}>
+								<FFSearch
+									name="accessible-search"
+									label="Search Organisation"
+									hint="Search by organisation name."
+									inputWidth={5}
+									optionsArray={values}
+									keyValue="organisationName"
+									readOnly={true}
+									required={true}
+									callback={cb}
+								/>
+								<Button type="submit" cfg={{ mt: 3 }}>
+									Submit form
+								</Button>
+							</form>
+						)}
+					</Form>
 				)}
-			</Form>
+				{valueSelected !== null && (
+					<>
+						<p>{valueSelected.organisationName}</p>
+						<Button
+							type="button"
+							cfg={{ mt: 3 }}
+							onClick={() => setValueSelected(null)}
+						>
+							Change Organisation
+						</Button>
+					</>
+				)}
+			</>
 		);
 	}}
 </Playground>
@@ -193,6 +212,12 @@ import { FFSearch } from '@tpr/forms';
 			console.log('callback function: ', selection);
 			setValueSelected(selection);
 		};
+		const searchService = () => {
+			setTimeout(() => {
+				console.log('setTimeout', values);
+				return values;
+			}, 1500);
+		};
 		return (
 			<Form onSubmit={() => console.log('onSubmit:', valueSelected)}>
 				{({ handleSubmit }) => (
@@ -201,13 +226,15 @@ import { FFSearch } from '@tpr/forms';
 							name="accessible-search"
 							label="Search Organisation"
 							inputWidth={5}
-							options={values}
+							searchService={searchService}
 							keyValue="organisationName"
 							readOnly={true}
 							required={true}
 							callback={cb}
 						/>
-						<input type="submit" value="Send" style={{ marginTop: '20px' }} />
+						<Button type="submit" cfg={{ mt: 3 }}>
+							Submit form
+						</Button>
 					</form>
 				)}
 			</Form>
