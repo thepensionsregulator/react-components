@@ -42,7 +42,10 @@ export const Preview: React.FC<any> = () => {
 				<Flex
 					cfg={{ width: 5, flex: '0 0 auto', flexDirection: 'column', pl: 4 }}
 				>
-					<UnderlinedButton isOpen={false} onClick={() => send('EDIT_INSURER')}>
+					<UnderlinedButton
+						isOpen={current.matches({ edit: 'reference' })}
+						onClick={() => send('EDIT_INSURER')}
+					>
 						{i18n.preview.buttons.four}
 					</UnderlinedButton>
 					<Flex cfg={{ mt: 1, flexDirection: 'column' }}>

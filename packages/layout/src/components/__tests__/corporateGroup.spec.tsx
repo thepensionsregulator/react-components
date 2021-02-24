@@ -5,6 +5,7 @@ import { CorporateGroup } from '../cards/corporateGroup/context';
 import { axe } from 'jest-axe';
 import { cleanup } from '@testing-library/react-hooks';
 import { act } from 'react-dom/test-utils';
+import { assertThatButtonHasAriaExpanded } from './testHelpers';
 
 const noop = () => Promise.resolve();
 
@@ -64,7 +65,13 @@ describe('Corporate Group Trustee Card', () => {
 			expect(findByText('Remove')).toBeDefined();
 			expect(findByText('Address')).toBeDefined();
 			expect(findByText('Chair of board')).toBeDefined();
+			assertThatButtonHasAriaExpanded(findByText, 'Chair of board', false);
 			expect(findByText('Director(s) are Professional Trustees')).toBeDefined();
+			assertThatButtonHasAriaExpanded(
+				findByText,
+				'Director(s) are Professional Trustees',
+				false,
+			);
 		});
 
 		test('initial status is correct', () => {

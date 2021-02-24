@@ -1,3 +1,5 @@
+import { State } from 'xstate';
+
 export const truncateString = (str: string, num: number) => {
 	return str && str.length > num ? str.slice(0, num).concat('...') : str;
 };
@@ -32,3 +34,10 @@ export const splitObjectIntoTwo = <T>(obj: T, fields = []): [any, any] => {
 
 	return [mainObj, extractedObj];
 };
+
+export function removeFromTabFlowIfMatches<T>(
+	current: Partial<State<T, any, any, any>>,
+	match: any,
+): number | null {
+	return current.matches(match) ? -1 : null;
+}

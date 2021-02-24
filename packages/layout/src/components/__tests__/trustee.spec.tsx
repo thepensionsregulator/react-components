@@ -3,8 +3,10 @@ import { cleanup, render } from '@testing-library/react';
 import { TrusteeCard } from '../cards/trustee/trustee';
 import { axe } from 'jest-axe';
 import { Trustee } from '../cards/trustee/context';
-
-// TODO: write more tests
+import {
+	assertThatButtonHasAriaExpanded,
+	assertThatButtonHasBeenRemovedFromTheTabFlow,
+} from './testHelpers';
 
 const noop = () => Promise.resolve();
 
@@ -77,7 +79,13 @@ describe('Trustee Preview', () => {
 		// Buttons are visible
 		expect(findByText('Trustee')).toBeDefined();
 		expect(findByText('Correspondence address')).toBeDefined();
+		assertThatButtonHasAriaExpanded(
+			findByText,
+			'Correspondence address',
+			false,
+		);
 		expect(findByText('Contact details')).toBeDefined();
+		assertThatButtonHasAriaExpanded(findByText, 'Contact details', false);
 		expect(findByText('Remove')).toBeDefined();
 	});
 
@@ -131,6 +139,8 @@ describe('Trustee Name', () => {
 			'70',
 		);
 		expect(findByText('Continue')).toBeDefined();
+
+		assertThatButtonHasBeenRemovedFromTheTabFlow(findByText, 'Remove');
 	});
 });
 

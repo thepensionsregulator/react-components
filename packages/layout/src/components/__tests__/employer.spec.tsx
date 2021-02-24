@@ -4,8 +4,7 @@ import { EmployerCard } from '../cards/employer/employer';
 import { axe } from 'jest-axe';
 import userEvent from '@testing-library/user-event';
 import { Employer } from '../cards/employer/context';
-
-// TODO: write more tests
+import { assertThatButtonHasBeenRemovedFromTheTabFlow } from './testHelpers';
 
 const noop = () => Promise.resolve();
 
@@ -46,6 +45,27 @@ describe('Employer Preview', () => {
 
 		const results = await axe(container);
 		expect(results).toHaveNoViolations();
+	});
+});
+
+describe('Employer type', () => {
+	test('Remove button is taken out of the tab flow', async () => {
+		const { container, getByText } = render(
+			<EmployerCard
+				onSaveType={noop}
+				onRemove={noop}
+				onCorrect={(_value) => {}}
+				complete={true}
+				employer={employer}
+			/>,
+		);
+
+		getByText('Employer type').click();
+
+		const results = await axe(container);
+		expect(results).toHaveNoViolations();
+
+		assertThatButtonHasBeenRemovedFromTheTabFlow(getByText, 'Remove');
 	});
 });
 
