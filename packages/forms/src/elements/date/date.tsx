@@ -60,6 +60,7 @@ type DateInputFieldProps = {
 	readOnly?: boolean;
 	hideMonth?: boolean;
 	maxLength?: number;
+	accessibilityHelper?: AccessibilityHelper;
 };
 const DateInputField: React.FC<DateInputFieldProps> = ({
 	id,
@@ -77,6 +78,7 @@ const DateInputField: React.FC<DateInputFieldProps> = ({
 	readOnly,
 	hideMonth,
 	maxLength,
+	accessibilityHelper,
 }) => {
 	return (
 		<label className={small ? styles.inputSmall : styles.inputLarge}>
@@ -110,6 +112,8 @@ const DateInputField: React.FC<DateInputFieldProps> = ({
 				meta={meta}
 				autoComplete="off"
 				maxLength={maxLength}
+				isError={meta && meta.touched && meta.error}
+				accessibilityHelper={accessibilityHelper}
 			/>
 		</label>
 	);
@@ -196,6 +200,7 @@ export const InputDate: React.FC<InputDateComponentProps> = memo(
 							disabled={disabled}
 							readOnly={readOnly}
 							maxLength={2}
+							accessibilityHelper={helper}
 						/>
 					)}
 					{!hideMonth && (
@@ -212,6 +217,7 @@ export const InputDate: React.FC<InputDateComponentProps> = memo(
 							disabled={disabled}
 							readOnly={readOnly}
 							maxLength={2}
+							accessibilityHelper={helper}
 						/>
 					)}
 					<DateInputField
@@ -229,6 +235,7 @@ export const InputDate: React.FC<InputDateComponentProps> = memo(
 						readOnly={readOnly}
 						hideMonth={hideMonth}
 						maxLength={4}
+						accessibilityHelper={helper}
 					/>
 				</Flex>
 			</StyledInputLabel>
