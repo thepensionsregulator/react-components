@@ -32,7 +32,7 @@ const Confirm: React.FC<ConfirmProps> = ({
 	handleRemove,
 	handleCancel,
 	loading,
-	warningLabel = 'Warning',
+	warningLabel,
 }) => {
 	return (
 		<Content type={cardType} typeName={cardTypeName} breadcrumbs={breadcrumbs}>

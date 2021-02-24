@@ -10,7 +10,7 @@ export type WarningBoxProps = {
 export const WarningBox: React.FC<WarningBoxProps> = ({
 	children,
 	cfg,
-	warningLabel,
+	warningLabel = 'Warning',
 }) => {
 	return (
 		<Flex
