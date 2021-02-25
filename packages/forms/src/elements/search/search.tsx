@@ -16,7 +16,7 @@ interface SearchProps extends FieldRenderProps<string>, FieldExtraProps {
 	keyValue: string;
 	notFoundMessage?: string;
 	optionsArray?: any[];
-	searchService?: (x:string) => Promise<any>;
+	searchService?: (x: string) => Promise<any>;
 }
 
 type PanelVisibility = 'visible' | 'hidden' | 'complete';
@@ -47,35 +47,39 @@ const Search: React.FC<SearchProps> = React.memo(
 
 		const getSelectedItemDefault = (item) => {
 			return item && item[keyValue];
-		}
+		};
 
-		const saveResultsInState = (resultsFiltered) => {	
-			act(() =>	setOptionsArrayObjects(resultsFiltered));
-			if (panelVisible == 'hidden') act(() =>	setPanelVisible('visible'));
-		}
+		const saveResultsInState = (resultsFiltered) => {
+			act(() => setOptionsArrayObjects(resultsFiltered));
+			if (panelVisible == 'hidden') act(() => setPanelVisible('visible'));
+		};
 
-		const showResultsFromOptionsArray = (query:string):any[] => {
+		const showResultsFromOptionsArray = (query: string): any[] => {
 			const results = filterResults(query, optionsArray, keyValue);
 			saveResultsInState(results);
 			return results;
 		};
 
-		const showResultsFromSearchService = (apiResponse):any[] => {
+		const showResultsFromSearchService = (apiResponse): any[] => {
 			saveResultsInState(apiResponse);
 			return apiResponse;
-		}
+		};
 
-		const getResults = async (query:string, populateResults:Function) => {
+		const getResults = async (query: string, populateResults: Function) => {
 			searchService
-			? await searchService(query)
-							.then(response => populateResults(query ? showResultsFromSearchService(response) : []))
-			: populateResults(query ? showResultsFromOptionsArray(query) : []);
+				? await searchService(query).then((response) =>
+						populateResults(
+							query ? showResultsFromSearchService(response) : [],
+						),
+				  )
+				: populateResults(query ? showResultsFromOptionsArray(query) : []);
 		};
 
 		const toggleResultsPanel = () => {
-			const newClasses = panelVisible == 'complete'
-				? styles.autocomplete + ' ' + styles.hide
-				: panelVisible == 'visible'
+			const newClasses =
+				panelVisible == 'complete'
+					? styles.autocomplete + ' ' + styles.hide
+					: panelVisible == 'visible'
 					? styles.autocomplete + ' ' + styles.panelVisible
 					: styles.autocomplete;
 			if (newClasses !== classes) setClasses(newClasses);
@@ -84,7 +88,8 @@ const Search: React.FC<SearchProps> = React.memo(
 		const chooseOption = (value: string) => {
 			if (value) {
 				setPanelVisible('complete');
-				const objectSelected = optionsArrayObjects[optionsArrayObjects.indexOf(value)];
+				const objectSelected =
+					optionsArrayObjects[optionsArrayObjects.indexOf(value)];
 				callback && callback(objectSelected);
 			}
 		};
@@ -124,8 +129,10 @@ const Search: React.FC<SearchProps> = React.memo(
 							tNoResults={() => notFoundMessage}
 							placeholder={placeholder}
 							templates={{
-								inputValue: getSelectedItem ? getSelectedItem : getSelectedItemDefault,
-								suggestion: formatItem
+								inputValue: getSelectedItem
+									? getSelectedItem
+									: getSelectedItemDefault,
+								suggestion: formatItem,
 							}}
 						/>
 					</Flex>

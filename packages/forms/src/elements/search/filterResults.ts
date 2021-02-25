@@ -5,9 +5,9 @@ export const filterResults = (query, optionsArray, keyValue) => {
 };
 
 export const formatItemDefault = (item) => {
-	let formatted:string = '';
+	let formatted: string = '';
 	for (let x in item) {
 		formatted += `<p>${item[x]}</p>`;
 	}
-	return formatted;			
-}
+	return formatted;
+};
