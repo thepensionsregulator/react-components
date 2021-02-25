@@ -4,8 +4,10 @@ import { InHouseCard } from '../cards/inHouse/inHouse';
 import { axe } from 'jest-axe';
 import userEvent from '@testing-library/user-event';
 import { InHouseAdminNoApi } from '../cards/inHouse/context';
-
-// TODO: write more tests
+import {
+	assertThatButtonHasAriaExpanded,
+	assertThatButtonHasBeenRemovedFromTheTabFlow,
+} from '../testHelpers/testHelpers';
 
 const noop = () => Promise.resolve();
 
@@ -58,6 +60,15 @@ describe('InHouse Preview', () => {
 		expect(results).toHaveNoViolations();
 	});
 
+	test('it renders preview correctly', () => {
+		expect(findByText('In House Administrator')).toBeDefined();
+		expect(findByText('Remove')).toBeDefined();
+		expect(findByText('Address')).toBeDefined();
+		assertThatButtonHasAriaExpanded(findByText, 'Address', false);
+		expect(findByText('Contact details')).toBeDefined();
+		assertThatButtonHasAriaExpanded(findByText, 'Contact details', false);
+	});
+
 	test('editing in house name', () => {
 		findByText('In House Administrator').click();
 		expect(findByTestId('inHouseAdmin-name-form')).not.toBe(null);
@@ -82,6 +93,8 @@ describe('InHouse Preview', () => {
 			'70',
 		);
 		expect(findByText('Save and close')).toBeDefined();
+
+		assertThatButtonHasBeenRemovedFromTheTabFlow(findByText, 'Remove');
 	});
 });
 

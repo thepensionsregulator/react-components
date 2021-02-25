@@ -16,10 +16,10 @@ import RemoveReason from './views/remove/reason/reason';
 import { ConfirmRemove } from './views/remove/confirm';
 import RemovedBox from '../components/removedBox';
 import { cardType, cardTypeName } from '../common/interfaces';
-
 import styles from '../cards.module.scss';
 import { AddressComparer } from '@tpr/forms';
 import { TrusteeContext } from './trusteeMachine';
+import { removeFromTabFlowIfMatches } from '../../../utils';
 
 const CardContent: React.FC = () => {
 	const { current, i18n, send, addressAPI } = useTrusteeContext();
@@ -110,7 +110,7 @@ const TrusteeButton: React.FC = () => {
 	);
 };
 
-const RemoveButton: React.FC = () => {
+const RemoveButton: React.FC<{ tabIndex?: number }> = ({ tabIndex }) => {
 	const { current, send, i18n } = useTrusteeContext();
 
 	return (
@@ -129,6 +129,7 @@ const RemoveButton: React.FC = () => {
 					send('REMOVE');
 				}
 			}}
+			tabIndex={tabIndex}
 		>
 			{i18n.preview.buttons.two}
 		</UnderlinedButton>
@@ -150,7 +151,13 @@ export const TrusteeCard: React.FC<Omit<TrusteeCardProps, 'children'>> = ({
 					<Toolbar
 						complete={isComplete(current.context)}
 						buttonLeft={() => <TrusteeButton />}
-						buttonRight={() => <RemoveButton />}
+						buttonRight={() => (
+							<RemoveButton
+								tabIndex={removeFromTabFlowIfMatches(current, {
+									edit: { trustee: 'name' },
+								})}
+							/>
+						)}
 						subtitle={() => (
 							<Span cfg={{ lineHeight: 3 }} className={styles.styledAsH4}>
 								{[
