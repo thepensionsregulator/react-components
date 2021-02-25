@@ -48,29 +48,27 @@ const Search: React.FC<SearchProps> = React.memo(
 			return item && item[keyValue];
 		}
 
-		const setGlobalArrays = (resultsFiltered) => {			
+		const saveResultsInState = (resultsFiltered) => {			
 			setOptionsArrayObjects(resultsFiltered);
 			if (panelVisible == 'hidden') setPanelVisible('visible');
 		}
 
-		// Function that filters the results when the options are passed directly as an array of values
-		const showResults = (query:string):any[] => {
+		const showResultsFromOptionsArray = (query:string):any[] => {
 			const results = filterResults(query, optionsArray, keyValue);
-			setGlobalArrays(results);
+			saveResultsInState(results);
 			return results;
 		};
 
-		// Function that process the results when receiving 'searchService' for making the search
-		const useSearchService = (apiResponse):any[] => {
-			setGlobalArrays(apiResponse);
+		const showResultsFromSearchService = (apiResponse):any[] => {
+			saveResultsInState(apiResponse);
 			return apiResponse;
 		}
 
 		const getResults = async (query:string, populateResults:Function) => {
 			searchService
 			? await searchService(query)
-							.then(response => populateResults(query ? useSearchService(response) : []))
-			: populateResults(query ? showResults(query) : []);
+							.then(response => populateResults(query ? showResultsFromSearchService(response) : []))
+			: populateResults(query ? showResultsFromOptionsArray(query) : []);
 		};
 
 		const toggleResultsPanel = () => {
