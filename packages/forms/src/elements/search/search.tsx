@@ -25,20 +25,20 @@ interface ResultsFiltered {
 
 const Search: React.FC<SearchProps> = React.memo(
 	({
-		optionsArray = [],
-		label,
-		required,
-		hint,
-		meta,
-		notFoundMessage = 'Your search criteria has no match',
-		testId = 'search',
-		placeholder,
-		inputWidth,
-		cfg,
-		keyValue,
 		callback,
-		searchService,
+		cfg,
+		hint,
+		inputWidth = 10,
+		keyValue,
+		label,
+		meta,
 		name,
+		notFoundMessage = 'Your search criteria has no match',
+		optionsArray = [],
+		placeholder,
+		required = true,
+		searchService,
+		testId = 'search',
 		...rest
 	}) => {
 		const [panelVisible, setPanelVisible] = useState<PanelVisibility>('hidden');
@@ -122,6 +122,7 @@ const Search: React.FC<SearchProps> = React.memo(
 					>
 						<Autocomplete
 							name={name}
+							id={testId}
 							source={getResults}
 							onConfirm={chooseOption}
 							showAllValues={false}

@@ -114,18 +114,13 @@ import { FFSearch } from '@tpr/forms';
 							<form onSubmit={handleSubmit}>
 								<FFSearch
 									name="accessible-search"
-									label="Search Organisation"
+									label="Organisation"
 									hint="Search by organisation name."
-									inputWidth={5}
 									optionsArray={values}
 									keyValue="organisationName"
-									readOnly={true}
-									required={true}
+									inputWidth={5}
 									callback={cb}
 								/>
-								<Button type="submit" cfg={{ mt: 3 }}>
-									Submit form
-								</Button>
 							</form>
 						)}
 					</Form>
@@ -147,7 +142,7 @@ import { FFSearch } from '@tpr/forms';
 	}}
 </Playground>
 
-### Search input without hint
+### Search input without hint & using searchService prop
 
 <Playground>
 	{() => {
@@ -207,54 +202,69 @@ import { FFSearch } from '@tpr/forms';
 				postcode: 'SE12 6DD',
 			},
 		];
+		const keyValue = 'organisationName';
 		const [valueSelected, setValueSelected] = useState(null);
 		const cb = (selection) => {
 			console.log('callback function: ', selection);
 			setValueSelected(selection);
 		};
-		const searchService = () => {
-			setTimeout(() => {
-				console.log('setTimeout', values);
-				return values;
-			}, 1500);
+		const searchService = (query) => {
+			const resultsFiltered = values.filter((option) => {
+				return (
+					option[keyValue].toLowerCase().indexOf(query.toLowerCase()) !== -1
+				);
+			});
+			return Promise.resolve([...resultsFiltered]);
 		};
 		return (
-			<Form onSubmit={() => console.log('onSubmit:', valueSelected)}>
-				{({ handleSubmit }) => (
-					<form onSubmit={handleSubmit}>
-						<FFSearch
-							name="accessible-search"
-							label="Search Organisation"
-							inputWidth={5}
-							searchService={searchService}
-							keyValue="organisationName"
-							readOnly={true}
-							required={true}
-							callback={cb}
-						/>
-						<Button type="submit" cfg={{ mt: 3 }}>
-							Submit form
-						</Button>
-					</form>
+			<>
+				{valueSelected == null && (
+					<Form onSubmit={() => console.log('onSubmit:', valueSelected)}>
+						{({ handleSubmit }) => (
+							<form onSubmit={handleSubmit}>
+								<FFSearch
+									name="accessible-search"
+									label="Search Organisation"
+									searchService={searchService}
+									keyValue={keyValue}
+									callback={cb}
+									testId="auto"
+								/>
+							</form>
+						)}
+					</Form>
 				)}
-			</Form>
+				{valueSelected !== null && (
+					<>
+						<p>{valueSelected.organisationName}</p>
+						<Button
+							type="button"
+							cfg={{ mt: 3 }}
+							onClick={() => setValueSelected(null)}
+						>
+							Change Organisation
+						</Button>
+					</>
+				)}
+			</>
 		);
 	}}
 </Playground>
 
 ## API
 
-```
-Accepted config props: FlexProps, SpaceProps
-```
-
 ### Props
 
-| Property        | Required | Type     | Description                                                                            |
-| --------------- | -------- | -------- | -------------------------------------------------------------------------------------- |
-| cfg             | false    | object   | FlexProps & SpaceProps                                                                 |
-| disabled        | false    | boolean  | Disable the select                                                                     |
-| testId          | false    | string   | data attribute for testers                                                             |
-| readOnly        | false    | boolean  | Specifies whether the control is read only like a select, or editable like a combobox. |
-| validate        | false    | function | Validates the selected value. If not specified an 'optional' label is displayed.       |
-| notFoundMessage | false    | string   | Displayed when there are no options to select                                          |
+| Property        | Required | Type       | Description                                                                       |
+| --------------- | -------- | ---------- | --------------------------------------------------------------------------------- |
+| callback        | false    | function   | callback function that runs when the user chooses an option                       |
+| cfg             | false    | object     | FlexProps & SpaceProps                                                            |
+| inputWidth      | false    | SpaceProps | the width of the input                                                            |
+| keyValue        | true     | string     | the key value that will be used for the search                                    |
+| label           | true     | string     | text to be displayed as the label of the input                                    |
+| name            | true     | string     | name/id for the input                                                             |
+| notFoundMessage | false    | string     | text displayed when there are no options to select                                |
+| optionsArray    | false    | array      | Array of objects with the options to filter                                       |
+| placeholder     | false    | string     | placeholder for the input (not recommended)                                       |
+| searchService   | false    | function   | function that performs the search and returns a promise with the array of results |
+| testId          | false    | string     | data attribute for testers                                                        |
