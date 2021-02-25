@@ -2,7 +2,7 @@ import React from 'react';
 import { formSetup } from '../__mocks__/setup';
 import { FFSearch } from '../elements/search/search';
 import userEvent from '@testing-library/user-event';
-import { fireEvent } from '@testing-library/react';
+import { cleanup, fireEvent } from '@testing-library/react';
 
 const values = [
   {
@@ -34,82 +34,128 @@ const values = [
   },
 ];
 
+const searchService = (query) => {
+  const resultsFiltered = values.filter((option) => {
+    return (
+      option.organisationName.toLowerCase().indexOf(query.toLowerCase()) !== -1
+    );
+  });
+  return Promise.resolve([...resultsFiltered]);
+};
+
 const cb = jest.fn();
 
 describe('Search input', () => {
-  test('renders input', async () => {
-    const { getByRole, getByText } = formSetup({
-			render: (
-				<FFSearch
-          name="accessible-search"
-          label="Organisation"
-          hint="Search by organisation name."
-          optionsArray={values}
-          keyValue="organisationName"
-          inputWidth={5}
-          callback={cb}
-        />
-			),
-		});
-		const autocomplete = getByRole('combobox');
-		expect(autocomplete).toBeInTheDocument();
-    expect(autocomplete).toHaveAttribute('aria-owns');
-    expect(autocomplete).toHaveAttribute('aria-autocomplete');
-    expect(autocomplete).toHaveAttribute('aria-describedby');
-    expect(autocomplete).toHaveAttribute('aria-expanded');
 
-    const hint = getByText('Search by organisation name.');
-		expect(hint).toBeInTheDocument();
+  describe('receiving optionsArray prop', () => {
+    let pickByRole, pickByText;
 
-    const label = getByText('Organisation');
-		expect(label).toBeInTheDocument();
-  });
+    beforeEach(() => {
+      const { getByRole, getByText } = formSetup({
+        render: (
+          <FFSearch
+            name="accessible-search"
+            label="Organisation"
+            hint="Search by organisation name."
+            optionsArray={values}
+            keyValue="organisationName"
+            inputWidth={5}
+            callback={cb}
+          />
+        ),
+      });
+      pickByRole = getByRole;
+      pickByText = getByText;
+    });
+
+    afterAll(() => {
+      cleanup();
+    });
+
+    test('renders input', () => {      
+      const autocomplete = pickByRole('combobox');
+      expect(autocomplete).toBeInTheDocument();
+      expect(autocomplete).toHaveAttribute('aria-owns');
+      expect(autocomplete).toHaveAttribute('aria-autocomplete');
+      expect(autocomplete).toHaveAttribute('aria-describedby');
+      expect(autocomplete).toHaveAttribute('aria-expanded');
+
+      const hint = pickByText('Search by organisation name.');
+      expect(hint).toBeInTheDocument();
+
+      const label = pickByText('Organisation');
+      expect(label).toBeInTheDocument();
+    });
   
-  test('renders results correctly', async () => {
-    const { getByRole, getByText } = formSetup({
-			render: (
-				<FFSearch
-          name="accessible-search"
-          label="Organisation"
-          hint="Search by organisation name."
-          optionsArray={values}
-          keyValue="organisationName"
-          inputWidth={5}
-          callback={cb}
-        />
-			),
-		});
-		const autocomplete = getByRole('combobox');
-		userEvent.type(autocomplete, 'aaa');
-
-    const list = getByRole('listbox');
-		expect(list).toBeInTheDocument();
-    expect(autocomplete).toHaveAttribute('aria-expanded', "true");
-
-    const item = getByText('AAAAAA');
-    expect(item).toBeInTheDocument();
-  });
+    test('renders results correctly', () => {
+      const autocomplete = pickByRole('combobox');
+      userEvent.type(autocomplete, 'aaa');
   
-  test('callback function called when selecting an option', async () => {
-    const { getByRole, getByText } = formSetup({
-			render: (
-				<FFSearch
-          name="accessible-search"
-          label="Organisation"
-          hint="Search by organisation name."
-          optionsArray={values}
-          keyValue="organisationName"
-          inputWidth={5}
-          callback={cb}
-        />
-			),
-		});
-		const autocomplete = getByRole('combobox');
-		userEvent.type(autocomplete, 'aaa');
+      const list = pickByRole('listbox');
+      expect(list).toBeInTheDocument();
+      expect(autocomplete).toHaveAttribute('aria-expanded', "true");
+  
+      const item = pickByText('AAAAAA');
+      expect(item).toBeInTheDocument();
+    });
+  
+    test('callback function called when selecting an option', () => {
+      const autocomplete = pickByRole('combobox');
+      userEvent.type(autocomplete, 'aaa');
+  
+      const item = pickByText('AAAAAA');
+      expect(item).toBeInTheDocument();
+      fireEvent.click(item);
+      expect(cb).toHaveBeenCalledWith(values[0]);
+    });
+  });
 
-    const item = getByText('AAAAAA');
-    expect(item).toBeInTheDocument();
-		fireEvent.click(item);
-    expect(cb).toHaveBeenCalledWith(values[0]);
+  describe('receiving searchService prop', () => {
+    let pickByRole, pickByText;
+
+    beforeEach(() => {
+      const { getByRole, getByText } = formSetup({
+        render: (
+          <FFSearch
+            name="accessible-search"
+            label="Organisation"
+            hint="Search by organisation name."
+            searchService={searchService}
+            keyValue="organisationName"
+            callback={cb}
+          />
+        ),
+      });
+      pickByRole = getByRole;
+      pickByText = getByText;
+    });
+
+    afterAll(() => {
+      cleanup();
+    });
+  
+    test('renders results correctly', async () => {
+      const autocomplete = pickByRole('combobox');
+      await userEvent.type(autocomplete, 'bbbb');
+  
+      const list = pickByRole('listbox');
+      expect(list).toBeInTheDocument();
+      expect(autocomplete).toHaveAttribute('aria-expanded', "true");
+  
+      const item = pickByText('BBBBBB');
+      expect(item).toBeInTheDocument();
+    });
+  
+    test('callback function called after selection', async () => {
+      const autocomplete = pickByRole('combobox');
+      await userEvent.type(autocomplete, 'bbbb');
+  
+      const item = pickByText('BBBBBB');
+      expect(item).toBeInTheDocument();
+      fireEvent.click(item);
+      expect(cb).toHaveBeenCalledWith(values[1]);
+    });
+
+
   });
 });

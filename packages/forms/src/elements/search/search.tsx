@@ -6,6 +6,7 @@ import { FieldProps, FieldExtraProps } from '../../renderFields';
 import AccessibilityHelper from '../accessibilityHelper';
 import Autocomplete from 'accessible-autocomplete/react';
 import { filterResults, formatItemDefault } from './filterResults';
+import { act } from 'react-dom/test-utils';
 import styles from './search.module.scss';
 
 interface SearchProps extends FieldRenderProps<string>, FieldExtraProps {
@@ -48,9 +49,9 @@ const Search: React.FC<SearchProps> = React.memo(
 			return item && item[keyValue];
 		}
 
-		const saveResultsInState = (resultsFiltered) => {			
-			setOptionsArrayObjects(resultsFiltered);
-			if (panelVisible == 'hidden') setPanelVisible('visible');
+		const saveResultsInState = (resultsFiltered) => {	
+			act(() =>	setOptionsArrayObjects(resultsFiltered));
+				if (panelVisible == 'hidden') act(() =>	setPanelVisible('visible'));
 		}
 
 		const showResultsFromOptionsArray = (query:string):any[] => {
