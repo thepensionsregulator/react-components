@@ -49,8 +49,8 @@ beforeEach(async () => {
 		getByTestId,
 	} = render(
 		<TrusteeCard
-			onDetailsSave={(trustee) => {
-				updatedTrustee = trustee;
+			onDetailsSave={(values) => {
+				updatedTrustee = values;
 				return noop();
 			}}
 			onContactSave={noop}

@@ -109,8 +109,8 @@ describe('Actuary Card', () => {
 					onCorrect={() => {}}
 					onRemove={noop}
 					onSaveContacts={noop}
-					onSaveName={(actuary) => {
-						updatedActuary = actuary;
+					onSaveName={(values) => {
+						updatedActuary = values;
 						return noop();
 					}}
 					testId={actuary.schemeRoleId.toString()}

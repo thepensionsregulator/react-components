@@ -38,8 +38,8 @@ describe('InHouse Preview', () => {
 			<InHouseCard
 				onSaveContacts={noop}
 				onSaveAddress={noop}
-				onSaveName={(inHouseAdmin) => {
-					updatedInHouseAdmin = inHouseAdmin;
+				onSaveName={(values) => {
+					updatedInHouseAdmin = values;
 					return noop();
 				}}
 				onRemove={noop}
