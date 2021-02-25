@@ -51,7 +51,7 @@ const Search: React.FC<SearchProps> = React.memo(
 
 		const saveResultsInState = (resultsFiltered) => {	
 			act(() =>	setOptionsArrayObjects(resultsFiltered));
-				if (panelVisible == 'hidden') act(() =>	setPanelVisible('visible'));
+			if (panelVisible == 'hidden') act(() =>	setPanelVisible('visible'));
 		}
 
 		const showResultsFromOptionsArray = (query:string):any[] => {

@@ -19,5 +19,6 @@ export default rollup({
 		'match-sorter',
 		'qs',
 		'react-final-form',
+		'react-dom/test-utils',
 	],
 });
