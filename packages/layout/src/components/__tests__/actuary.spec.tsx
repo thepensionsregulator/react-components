@@ -5,6 +5,10 @@ import { Actuary } from '../cards/actuary/context';
 import { axe } from 'jest-axe';
 import { act } from 'react-dom/test-utils';
 import { cleanup } from '@testing-library/react-hooks';
+import {
+	assertThatButtonHasAriaExpanded,
+	assertThatButtonHasBeenRemovedFromTheTabFlow,
+} from '../testHelpers/testHelpers';
 
 const noop = () => Promise.resolve();
 
@@ -60,8 +64,11 @@ describe('Actuary Card', () => {
 		test('it renders buttons correctly', () => {
 			expect(component.querySelector('button')).not.toBe(null);
 			expect(findByText('Actuary')).toBeDefined();
+			assertThatButtonHasAriaExpanded(findByText, 'Actuary', false);
 			expect(findByText('Remove')).toBeDefined();
+			assertThatButtonHasAriaExpanded(findByText, 'Remove', false);
 			expect(findByText('Contact details')).toBeDefined();
+			assertThatButtonHasAriaExpanded(findByText, 'Contact details', false);
 		});
 
 		test('initial status is correct', () => {
@@ -113,6 +120,7 @@ describe('Actuary Card', () => {
 			findByText('Actuary').click();
 			const results = await axe(component);
 			expect(results).toHaveNoViolations();
+			assertThatButtonHasBeenRemovedFromTheTabFlow(getByText, 'Remove');
 		});
 
 		afterEach(() => {

@@ -5,6 +5,7 @@ import { IndependentTrustee } from '../cards/independentTrustee/context';
 import { axe } from 'jest-axe';
 import { cleanup } from '@testing-library/react-hooks';
 import { act } from 'react-dom/test-utils';
+import { assertThatButtonHasAriaExpanded } from '../testHelpers/testHelpers';
 
 const noop = () => Promise.resolve();
 
@@ -57,6 +58,11 @@ describe('Professional / Independent Trustee Card', () => {
 			expect(findByText('Remove')).toBeDefined();
 			expect(findByText('Address')).toBeDefined();
 			expect(findByText('Appointed by the regulator')).toBeDefined();
+			assertThatButtonHasAriaExpanded(
+				findByText,
+				'Appointed by the regulator',
+				false,
+			);
 		});
 
 		test('initial status is correct', () => {

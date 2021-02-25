@@ -44,7 +44,10 @@ export const Preview: React.FC<any> = () => {
 
 				{/* Appointed By Regulator section: open for editing	 */}
 				<Flex cfg={{ flexDirection: 'column' }}>
-					<UnderlinedButton onClick={() => send('EDIT_REGULATOR')}>
+					<UnderlinedButton
+						onClick={() => send('EDIT_REGULATOR')}
+						isOpen={current.matches({ edit: 'regulator' })}
+					>
 						{i18n.preview.buttons.four}
 					</UnderlinedButton>
 					<P cfg={{ pt: 3 }}>

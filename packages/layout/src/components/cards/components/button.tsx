@@ -6,11 +6,13 @@ import styles from './button.module.scss';
 type UnderlinedButtonProps = {
 	isOpen?: boolean;
 	onClick?: any;
+	tabIndex?: number;
 };
 export const UnderlinedButton: React.FC<UnderlinedButtonProps> = ({
 	children,
 	isOpen,
 	onClick,
+	tabIndex,
 }) => {
 	if (typeof onClick === 'undefined') {
 		return (
@@ -23,7 +25,12 @@ export const UnderlinedButton: React.FC<UnderlinedButtonProps> = ({
 	}
 
 	return (
-		<button className={styles.button} onClick={onClick} aria-expanded={isOpen}>
+		<button
+			className={styles.button}
+			onClick={onClick}
+			aria-expanded={isOpen}
+			tabIndex={tabIndex}
+		>
 			<Flex cfg={{ flex: '0 0 auto', alignItems: 'center' }}>
 				<P cfg={{ fontSize: 2, fontWeight: 3 }}>{children}</P>
 				{isOpen ? (
