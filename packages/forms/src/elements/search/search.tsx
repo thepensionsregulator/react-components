@@ -5,28 +5,27 @@ import { StyledInputLabel, InputElementHeading } from '../elements';
 import { FieldProps, FieldExtraProps } from '../../renderFields';
 import AccessibilityHelper from '../accessibilityHelper';
 import Autocomplete from 'accessible-autocomplete/react';
-import { filterResults, formatResults } from './filterResults';
+import { filterResults, formatItemDefault } from './filterResults';
 import styles from './search.module.scss';
 
 interface SearchProps extends FieldRenderProps<string>, FieldExtraProps {
-	optionsArray?: any[];
-	notFoundMessage?: string;
-	keyValue: string;
-	searchService?: (x:string) => Promise<any>;
 	callback?: Function;
+	formatItem?: (item: any) => string;
+	getSelectedItem?: (item: any) => string;
+	keyValue: string;
+	notFoundMessage?: string;
+	optionsArray?: any[];
+	searchService?: (x:string) => Promise<any>;
 }
 
 type PanelVisibility = 'visible' | 'hidden' | 'complete';
-
-interface ResultsFiltered {
-	objects: any[],
-	strings: string[]
-}
 
 const Search: React.FC<SearchProps> = React.memo(
 	({
 		callback,
 		cfg,
+		formatItem = formatItemDefault,
+		getSelectedItem,
 		hint,
 		inputWidth = 10,
 		keyValue,
@@ -43,30 +42,28 @@ const Search: React.FC<SearchProps> = React.memo(
 	}) => {
 		const [panelVisible, setPanelVisible] = useState<PanelVisibility>('hidden');
 		const [classes, setClasses] = useState(styles.autocomplete);
-		const [optionsArrayStrings, setOptionsArrayStrings] = useState([]);
 		const [optionsArrayObjects, setOptionsArrayObjects] = useState([]);
 
-		const setGlobalArrays = (resultsFiltered:ResultsFiltered) => {			
-			setOptionsArrayObjects(resultsFiltered.objects);
-			setOptionsArrayStrings(resultsFiltered.strings);
+		const getSelectedItemDefault = (item) => {
+			return item && item[keyValue];
+		}
+
+		const setGlobalArrays = (resultsFiltered) => {			
+			setOptionsArrayObjects(resultsFiltered);
 			if (panelVisible == 'hidden') setPanelVisible('visible');
 		}
 
 		// Function that filters the results when the options are passed directly as an array of values
-		const showResults = (query:string):string[] => {
+		const showResults = (query:string):any[] => {
 			const results = filterResults(query, optionsArray, keyValue);
 			setGlobalArrays(results);
-			return results.strings;
+			return results;
 		};
 
 		// Function that process the results when receiving 'searchService' for making the search
-		const useSearchService = (apiResponse):string[] => {
-			const results:ResultsFiltered = {
-				objects: apiResponse,
-				strings: formatResults(apiResponse)
-			};
-			setGlobalArrays(results);
-			return results.strings;
+		const useSearchService = (apiResponse):any[] => {
+			setGlobalArrays(apiResponse);
+			return apiResponse;
 		}
 
 		const getResults = async (query:string, populateResults:Function) => {
@@ -88,9 +85,7 @@ const Search: React.FC<SearchProps> = React.memo(
 		const chooseOption = (value: string) => {
 			if (value) {
 				setPanelVisible('complete');
-				const objectSelected =
-					optionsArrayObjects[optionsArrayStrings.indexOf(value)];
-
+				const objectSelected = optionsArrayObjects[optionsArrayObjects.indexOf(value)];
 				callback && callback(objectSelected);
 			}
 		};
@@ -129,6 +124,10 @@ const Search: React.FC<SearchProps> = React.memo(
 							minLength={3}
 							tNoResults={() => notFoundMessage}
 							placeholder={placeholder}
+							templates={{
+								inputValue: getSelectedItem ? getSelectedItem : getSelectedItemDefault,
+								suggestion: formatItem
+							}}
 						/>
 					</Flex>
 				</StyledInputLabel>
