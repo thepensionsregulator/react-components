@@ -8,6 +8,7 @@ import {
 	cardTypeName,
 } from '../../../common/interfaces';
 import NameForm from '../../../common/views/nameForm/nameForm';
+import { RestoreMissingNullValues } from '../../../common/services/NullValueFieldRestorer';
 
 const getFields = (
 	fields: RecursivePartial<ActuaryI18nProps['name']['fields']>,
@@ -46,8 +47,16 @@ export const NameScreen: React.FC = () => {
 	const { actuary } = current.context;
 	const fields = getFields(i18n.name.fields);
 
+	const originalValues = {
+		title: actuary.title,
+		firstName: actuary.firstName,
+		lastName: actuary.lastName,
+	};
+
 	const onSubmit = async (values) => {
+		RestoreMissingNullValues(originalValues, values);
 		setLoading(true);
+
 		try {
 			await onSaveName(
 				{
@@ -74,11 +83,7 @@ export const NameScreen: React.FC = () => {
 			sectionTitle={i18n.name.sectionTitle}
 			onSubmit={onSubmit}
 			fields={fields}
-			initialValues={{
-				title: actuary.title,
-				firstName: actuary.firstName,
-				lastName: actuary.lastName,
-			}}
+			initialValues={originalValues}
 			loading={loading}
 		/>
 	);

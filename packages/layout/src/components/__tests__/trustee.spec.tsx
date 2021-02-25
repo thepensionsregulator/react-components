@@ -1,5 +1,6 @@
 import React from 'react';
 import { cleanup, render } from '@testing-library/react';
+import userEvent from '@testing-library/user-event';
 import { TrusteeCard } from '../cards/trustee/trustee';
 import { axe } from 'jest-axe';
 import { Trustee } from '../cards/trustee/context';
@@ -33,7 +34,12 @@ const trustee: Trustee = {
 	emailAddress: 'fred.sandoors@trp.gov.uk',
 	effectiveDate: '1997-04-01T00:00:00',
 };
-let component, findByText, findAllByText, findByTitle, findByTestId;
+let component,
+	findByText,
+	findAllByText,
+	findByTitle,
+	findByTestId,
+	updatedTrustee;
 beforeEach(async () => {
 	const {
 		container,
@@ -43,7 +49,10 @@ beforeEach(async () => {
 		getByTestId,
 	} = render(
 		<TrusteeCard
-			onDetailsSave={noop}
+			onDetailsSave={(trustee) => {
+				updatedTrustee = trustee;
+				return noop();
+			}}
 			onContactSave={noop}
 			onAddressSave={noop}
 			onRemove={noop}
@@ -141,6 +150,25 @@ describe('Trustee Name', () => {
 		expect(findByText('Continue')).toBeDefined();
 
 		assertThatButtonHasBeenRemovedFromTheTabFlow(findByText, 'Remove');
+	});
+
+	test('title can be left empty when name is updated', async () => {
+		findByText(/Trustee/).click();
+
+		var titleInput = (findByText('Title (optional)') as HTMLElement).nextSibling
+			.firstChild as HTMLElement;
+		expect(titleInput).toBeDefined();
+		userEvent.clear(titleInput);
+
+		findByText(/Continue/).click();
+		findByText(/Save and close/).click();
+
+		const results = await axe(component);
+		expect(results).toHaveNoViolations();
+
+		expect(updatedTrustee.title).toBeNull();
+		expect(updatedTrustee.firstName).toEqual(trustee.firstName);
+		expect(updatedTrustee.lastName).toEqual(trustee.lastName);
 	});
 });
 

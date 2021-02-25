@@ -1,5 +1,6 @@
 import React from 'react';
 import { render } from '@testing-library/react';
+import userEvent from '@testing-library/user-event';
 import { ActuaryCard } from '../cards/actuary/actuary';
 import { Actuary } from '../cards/actuary/context';
 import { axe } from 'jest-axe';
@@ -99,7 +100,7 @@ describe('Actuary Card', () => {
 	});
 
 	describe('updating Actuary Name', () => {
-		let component, findByText, findByTestId;
+		let component, findByText, findByTestId, updatedActuary;
 		beforeEach(async () => {
 			const { container, getByText, getByTestId } = render(
 				<ActuaryCard
@@ -108,7 +109,10 @@ describe('Actuary Card', () => {
 					onCorrect={() => {}}
 					onRemove={noop}
 					onSaveContacts={noop}
-					onSaveName={noop}
+					onSaveName={(actuary) => {
+						updatedActuary = actuary;
+						return noop();
+					}}
 					testId={actuary.schemeRoleId.toString()}
 				/>,
 			);
@@ -120,7 +124,6 @@ describe('Actuary Card', () => {
 			findByText('Actuary').click();
 			const results = await axe(component);
 			expect(results).toHaveNoViolations();
-			assertThatButtonHasBeenRemovedFromTheTabFlow(getByText, 'Remove');
 		});
 
 		afterEach(() => {
@@ -150,6 +153,7 @@ describe('Actuary Card', () => {
 				'70',
 			);
 			expect(findByText('Save and close')).toBeDefined();
+			assertThatButtonHasBeenRemovedFromTheTabFlow(findByText, 'Remove');
 		});
 
 		test('save and close', async () => {
@@ -160,6 +164,22 @@ describe('Actuary Card', () => {
 				// After clicking the "Save and close" button, it goes back to the Preview
 				expect(findByText('Address')).toBeDefined();
 			});
+		});
+
+		test('title can be left empty when name is updated', async () => {
+			var titleInput = (findByText('Title (optional)') as HTMLElement)
+				.nextSibling.firstChild as HTMLElement;
+			expect(titleInput).toBeDefined();
+			userEvent.clear(titleInput);
+
+			findByText(/Save and close/).click();
+
+			const results = await axe(component);
+			expect(results).toHaveNoViolations();
+
+			expect(updatedActuary.title).toBeNull();
+			expect(updatedActuary.firstName).toEqual(actuary.firstName);
+			expect(updatedActuary.lastName).toEqual(actuary.lastName);
 		});
 	});
 
