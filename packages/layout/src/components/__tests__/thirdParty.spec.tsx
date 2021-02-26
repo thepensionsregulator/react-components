@@ -37,6 +37,24 @@ describe('ThirdParty Preview', () => {
 		const results = await axe(container);
 		expect(results).toHaveNoViolations();
 	});
+
+	test('renders with a section containing an aria label', () => {
+		const { getByRole } = render(
+			<ThirdPartyCard
+				onRemove={noop}
+				onCorrect={(_value) => {}}
+				complete={true}
+				thirdParty={thirdPartyAdmin}
+			/>,
+		);
+
+		const section = getByRole('region');
+		expect(section).toBeDefined();
+		expect(section).toHaveAttribute(
+			'aria-label',
+			`${thirdPartyAdmin.organisationName} Third Party Administrator`,
+		);
+	});
 });
 
 describe('ThirdParty Remove', () => {

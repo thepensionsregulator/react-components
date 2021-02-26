@@ -4,7 +4,7 @@ import {
 	ActuaryProviderProps,
 	useActuaryContext,
 } from './context';
-import { Flex, Span } from '@tpr/core';
+import { Section, Span } from '@tpr/core';
 import { Toolbar } from '../components/toolbar';
 import { UnderlinedButton } from '../components/button';
 import { Preview } from './views/preview/preview';
@@ -16,7 +16,7 @@ import RemovedBox from '../components/removedBox';
 import { cardTypeName } from '../common/interfaces';
 import styles from '../cards.module.scss';
 import { ActuaryContext } from './actuaryMachine';
-import { removeFromTabFlowIfMatches } from '../../../utils';
+import { removeFromTabFlowIfMatches, concatenateStrings } from '../../../utils';
 
 const CardContentSwitch: React.FC = () => {
 	const { current } = useActuaryContext();
@@ -107,18 +107,26 @@ export const ActuaryCard: React.FC<ActuaryProviderProps> = ({
 		<ActuaryProvider {...rest}>
 			{({ current, i18n }) => {
 				return (
-					<Flex cfg={cfg} data-testid={testId} className={styles.card}>
+					<Section
+						cfg={cfg}
+						data-testid={testId}
+						className={styles.card}
+						ariaLabel={concatenateStrings([
+							current.context.actuary.title,
+							current.context.actuary.firstName,
+							current.context.actuary.lastName,
+							i18n.preview.buttons.one,
+						])}
+					>
 						<Toolbar
 							complete={isComplete(current.context)}
 							subtitle={() => (
 								<Span cfg={{ lineHeight: 3 }} className={styles.styledAsH4}>
-									{[
+									{concatenateStrings([
 										current.context.actuary.title,
 										current.context.actuary.firstName,
 										current.context.actuary.lastName,
-									]
-										.filter(Boolean)
-										.join(' ')}
+									])}
 								</Span>
 							)}
 							statusText={
@@ -137,7 +145,7 @@ export const ActuaryCard: React.FC<ActuaryProviderProps> = ({
 							)}
 						/>
 						<CardContentSwitch />
-					</Flex>
+					</Section>
 				);
 			}}
 		</ActuaryProvider>

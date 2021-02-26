@@ -51,6 +51,25 @@ describe('Insurer Preview', () => {
 			false,
 		);
 	});
+
+	test('renders with a section containing an aria label', () => {
+		const { getByRole } = render(
+			<InsurerCard
+				onSaveRef={noop}
+				onRemove={noop}
+				onCorrect={(_value) => {}}
+				complete={true}
+				insurer={insurer}
+			/>,
+		);
+
+		const section = getByRole('region');
+		expect(section).toBeDefined();
+		expect(section).toHaveAttribute(
+			'aria-label',
+			`${insurer.organisationName} Insurer administrator`,
+		);
+	});
 });
 
 describe('Insurer Remove', () => {

@@ -34,9 +34,15 @@ const corporateGroup: CorporateGroup = {
 
 describe('Corporate Group Trustee Card', () => {
 	describe('Preview', () => {
-		let component, findByText, findAllByText, findByTitle;
+		let component, findByText, findAllByText, findByTitle, findByRole;
 		beforeEach(() => {
-			const { container, getByText, getAllByText, queryByTitle } = render(
+			const {
+				container,
+				getByText,
+				getAllByText,
+				queryByTitle,
+				getByRole,
+			} = render(
 				<CorporateGroupCard
 					corporateGroup={corporateGroup}
 					complete={true}
@@ -52,6 +58,7 @@ describe('Corporate Group Trustee Card', () => {
 			findByText = getByText;
 			findAllByText = getAllByText;
 			findByTitle = queryByTitle;
+			findByRole = getByRole;
 		});
 
 		test('no Violations', async () => {
@@ -102,6 +109,15 @@ describe('Corporate Group Trustee Card', () => {
 
 		test('Director(s) block displays values correctly', () => {
 			expect(findByText('Yes')).toBeDefined();
+		});
+
+		test('renders with a section containing an aria label', () => {
+			const section = findByRole('region');
+			expect(section).toBeDefined();
+			expect(section).toHaveAttribute(
+				'aria-label',
+				`${corporateGroup.organisationName} Corporate Group trustee`,
+			);
 		});
 	});
 

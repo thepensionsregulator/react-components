@@ -29,9 +29,15 @@ const independentTrustee: IndependentTrustee = {
 
 describe('Professional / Independent Trustee Card', () => {
 	describe('Preview', () => {
-		let component, findByText, findAllByText, findByTitle;
+		let component, findByText, findAllByText, findByTitle, findByRole;
 		beforeEach(() => {
-			const { container, getByText, getAllByText, queryByTitle } = render(
+			const {
+				container,
+				getByText,
+				getAllByText,
+				queryByTitle,
+				getByRole,
+			} = render(
 				<IndependentTrusteeCard
 					independentTrustee={independentTrustee}
 					complete={true}
@@ -45,6 +51,7 @@ describe('Professional / Independent Trustee Card', () => {
 			findByText = getByText;
 			findAllByText = getAllByText;
 			findByTitle = queryByTitle;
+			findByRole = getByRole;
 		});
 
 		test('no Violations', async () => {
@@ -87,6 +94,15 @@ describe('Professional / Independent Trustee Card', () => {
 
 		test('Appointed by the regulator block displays value correctly', () => {
 			expect(findByText('Yes')).toBeDefined();
+		});
+
+		test('renders with a section containing an aria label', () => {
+			const section = findByRole('region');
+			expect(section).toBeDefined();
+			expect(section).toHaveAttribute(
+				'aria-label',
+				`${independentTrustee.organisationName} Professional / Independent Trustee`,
+			);
 		});
 	});
 

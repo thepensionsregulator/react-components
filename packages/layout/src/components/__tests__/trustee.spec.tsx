@@ -35,7 +35,7 @@ const trustee: Trustee = {
 	emailAddress: 'fred.sandoors@trp.gov.uk',
 	effectiveDate: '1997-04-01T00:00:00',
 };
-let component, findByText, findAllByText, findByTitle, findByTestId;
+let component, findByText, findAllByText, findByTitle, findByTestId, findByRole;
 let updatedTrustee = null;
 
 beforeEach(async () => {
@@ -45,6 +45,7 @@ beforeEach(async () => {
 		getAllByText,
 		queryByTitle,
 		getByTestId,
+		getByRole,
 	} = render(
 		<TrusteeCard
 			onDetailsSave={(values) => {
@@ -70,6 +71,7 @@ beforeEach(async () => {
 	findByTestId = getByTestId;
 	findAllByText = getAllByText;
 	findByTitle = queryByTitle;
+	findByRole = getByRole;
 });
 
 afterEach(() => {
@@ -115,6 +117,15 @@ describe('Trustee Preview', () => {
 		expect(findByText(trustee.telephoneNumber)).toBeDefined();
 		expect(findByText('Email')).toBeDefined();
 		expect(findByText(trustee.emailAddress)).toBeDefined();
+	});
+
+	test('renders with a section containing an aria label', () => {
+		const section = findByRole('region');
+		expect(section).toBeDefined();
+		expect(section).toHaveAttribute(
+			'aria-label',
+			`${trustee.title} ${trustee.firstName} ${trustee.lastName} ${trustee.trusteeType} Trustee`,
+		);
 	});
 });
 

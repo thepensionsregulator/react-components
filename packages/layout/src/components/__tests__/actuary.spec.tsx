@@ -38,9 +38,15 @@ const actuary: Actuary = {
 
 describe('Actuary Card', () => {
 	describe('Preview', () => {
-		let component, findByText, findAllByText, findByTitle;
+		let component, findByText, findAllByText, findByTitle, findByRole;
 		beforeEach(() => {
-			const { container, getByText, getAllByText, queryByTitle } = render(
+			const {
+				container,
+				getByText,
+				getAllByText,
+				queryByTitle,
+				getByRole,
+			} = render(
 				<ActuaryCard
 					actuary={actuary}
 					complete={true}
@@ -56,6 +62,7 @@ describe('Actuary Card', () => {
 			findByText = getByText;
 			findAllByText = getAllByText;
 			findByTitle = queryByTitle;
+			findByRole = getByRole;
 		});
 
 		test('no Violations', async () => {
@@ -97,6 +104,15 @@ describe('Actuary Card', () => {
 
 		test('displays email correctly', () => {
 			expect(findByText('john@actuary.com')).toBeDefined();
+		});
+
+		test('renders with a section containing an aria label', () => {
+			const section = findByRole('region');
+			expect(section).toBeDefined();
+			expect(section).toHaveAttribute(
+				'aria-label',
+				`${actuary.title} ${actuary.firstName} ${actuary.lastName} Actuary`,
+			);
 		});
 	});
 

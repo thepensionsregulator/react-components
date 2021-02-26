@@ -34,11 +34,11 @@ const inHouseAdmin: InHouseAdminNoApi = {
 };
 
 describe('InHouse Preview', () => {
-	let component, findByText, findByTestId;
+	let component, findByText, findByTestId, findByRole;
 	let updatedInHouseAdmin = null;
 
 	beforeEach(async () => {
-		const { container, getByText, getByTestId } = render(
+		const { container, getByText, getByTestId, getByRole } = render(
 			<InHouseCard
 				onSaveContacts={noop}
 				onSaveAddress={noop}
@@ -60,6 +60,7 @@ describe('InHouse Preview', () => {
 		component = container;
 		findByText = getByText;
 		findByTestId = getByTestId;
+		findByRole = getByRole;
 	});
 
 	test('is accessible', async () => {
@@ -113,6 +114,15 @@ describe('InHouse Preview', () => {
 			component,
 			inHouseAdmin,
 			updatedInHouseAdmin,
+		);
+	});
+
+	test('renders with a section containing an aria label', () => {
+		const section = findByRole('region');
+		expect(section).toBeDefined();
+		expect(section).toHaveAttribute(
+			'aria-label',
+			`${inHouseAdmin.title} ${inHouseAdmin.firstName} ${inHouseAdmin.lastName} In House Administrator`,
 		);
 	});
 });

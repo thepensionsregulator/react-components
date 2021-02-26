@@ -45,6 +45,21 @@ describe('Employer Preview', () => {
 		const results = await axe(container);
 		expect(results).toHaveNoViolations();
 	});
+
+	test('renders with a section containing an aria label', () => {
+		const { getByRole } = render(
+			<EmployerCard
+				onSaveType={noop}
+				onRemove={noop}
+				complete={true}
+				employer={employer}
+			/>,
+		);
+
+		const section = getByRole('region');
+		expect(section).toBeDefined();
+		expect(section).toHaveAttribute('aria-label', employer.organisationName);
+	});
 });
 
 describe('Employer type', () => {
