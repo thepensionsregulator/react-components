@@ -57,7 +57,7 @@ describe('Insurer Preview', () => {
 			<InsurerCard
 				onSaveRef={noop}
 				onRemove={noop}
-				onCorrect={(_value) => {}}
+				onCorrect={noop}
 				complete={true}
 				insurer={insurer}
 			/>,

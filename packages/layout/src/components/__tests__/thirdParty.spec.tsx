@@ -42,7 +42,7 @@ describe('ThirdParty Preview', () => {
 		const { getByRole } = render(
 			<ThirdPartyCard
 				onRemove={noop}
-				onCorrect={(_value) => {}}
+				onCorrect={noop}
 				complete={true}
 				thirdParty={thirdPartyAdmin}
 			/>,
