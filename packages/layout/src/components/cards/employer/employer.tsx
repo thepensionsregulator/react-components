@@ -1,12 +1,16 @@
 import React, { useMemo } from 'react';
 import { UnderlinedButton } from '../components/button';
 import { Toolbar } from '../components/toolbar';
-import { Flex, P } from '@tpr/core';
+import { Section, P } from '@tpr/core';
 import { Preview } from './views/preview/preview';
 import { RemoveDateForm } from './views/remove/date/date';
 import { EmployerType } from './views/type/type';
 import { ConfirmRemove } from './views/remove/confirm/confirm';
-import { capitalize, removeFromTabFlowIfMatches } from '../../../utils';
+import {
+	capitalize,
+	removeFromTabFlowIfMatches,
+	concatenateStrings,
+} from '../../../utils';
 import {
 	EmployerProvider,
 	useEmployerContext,
@@ -110,7 +114,14 @@ export const EmployerCard: React.FC<EmployerProviderProps> = ({
 		<EmployerProvider {...rest}>
 			{({ current, i18n }) => {
 				return (
-					<Flex cfg={cfg} data-testid={testId} className={styles.card}>
+					<Section
+						cfg={cfg}
+						data-testid={testId}
+						className={styles.card}
+						ariaLabel={concatenateStrings([
+							current.context.employer.organisationName,
+						])}
+					>
 						<Toolbar
 							complete={isComplete(current.context)}
 							subtitle={() => (
@@ -132,7 +143,7 @@ export const EmployerCard: React.FC<EmployerProviderProps> = ({
 							)}
 						/>
 						<CardContentSwitch />
-					</Flex>
+					</Section>
 				);
 			}}
 		</EmployerProvider>

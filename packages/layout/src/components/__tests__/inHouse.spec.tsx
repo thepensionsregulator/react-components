@@ -5,6 +5,7 @@ import { axe } from 'jest-axe';
 import userEvent from '@testing-library/user-event';
 import { InHouseAdminNoApi } from '../cards/inHouse/context';
 import {
+	assertThatASectionExistsWithAnAriaLabel,
 	assertThatButtonHasAriaExpanded,
 	assertThatButtonHasBeenRemovedFromTheTabFlow,
 	assertThatTitleWasSetToNullWhileFirstAndLastNamesWereLeftUnchanged,
@@ -34,11 +35,11 @@ const inHouseAdmin: InHouseAdminNoApi = {
 };
 
 describe('InHouse Preview', () => {
-	let component, findByText, findByTestId;
+	let component, findByText, findByTestId, findByRole;
 	let updatedInHouseAdmin = null;
 
 	beforeEach(async () => {
-		const { container, getByText, getByTestId } = render(
+		const { container, getByText, getByTestId, getByRole } = render(
 			<InHouseCard
 				onSaveContacts={noop}
 				onSaveAddress={noop}
@@ -60,6 +61,7 @@ describe('InHouse Preview', () => {
 		component = container;
 		findByText = getByText;
 		findByTestId = getByTestId;
+		findByRole = getByRole;
 	});
 
 	test('is accessible', async () => {
@@ -113,6 +115,13 @@ describe('InHouse Preview', () => {
 			component,
 			inHouseAdmin,
 			updatedInHouseAdmin,
+		);
+	});
+
+	test('renders with a section containing an aria label', () => {
+		assertThatASectionExistsWithAnAriaLabel(
+			findByRole,
+			`${inHouseAdmin.title} ${inHouseAdmin.firstName} ${inHouseAdmin.lastName} In House Administrator`,
 		);
 	});
 });

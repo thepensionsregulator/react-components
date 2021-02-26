@@ -4,7 +4,7 @@ import {
 	InHouseAdminProviderProps,
 	useInHouseAdminContext,
 } from './context';
-import { Flex, Span } from '@tpr/core';
+import { Section, Span } from '@tpr/core';
 import { Toolbar } from '../components/toolbar';
 import { UnderlinedButton } from '../components/button';
 import { Preview } from './views/preview/preview';
@@ -18,7 +18,7 @@ import { cardType, cardTypeName } from '../common/interfaces';
 import styles from '../cards.module.scss';
 import { AddressComparer } from '@tpr/forms';
 import { InHouseAdminContext } from './inHouseMachine';
-import { removeFromTabFlowIfMatches } from '../../../utils';
+import { removeFromTabFlowIfMatches, concatenateStrings } from '../../../utils';
 
 const CardContentSwitch: React.FC = () => {
 	const {
@@ -150,18 +150,26 @@ export const InHouseCard: React.FC<InHouseAdminProviderProps> = ({
 		<InHouseAdminProvider {...rest}>
 			{({ current, i18n }) => {
 				return (
-					<Flex cfg={cfg} data-testid={testId} className={styles.card}>
+					<Section
+						cfg={cfg}
+						data-testid={testId}
+						className={styles.card}
+						ariaLabel={concatenateStrings([
+							current.context.inHouseAdmin.title,
+							current.context.inHouseAdmin.firstName,
+							current.context.inHouseAdmin.lastName,
+							i18n.preview.buttons.one,
+						])}
+					>
 						<Toolbar
 							complete={isComplete(current.context)}
 							subtitle={() => (
 								<Span cfg={{ lineHeight: 3 }} className={styles.styledAsH4}>
-									{[
+									{concatenateStrings([
 										current.context.inHouseAdmin.title,
 										current.context.inHouseAdmin.firstName,
 										current.context.inHouseAdmin.lastName,
-									]
-										.filter(Boolean)
-										.join(' ')}
+									])}
 								</Span>
 							)}
 							statusText={
@@ -180,7 +188,7 @@ export const InHouseCard: React.FC<InHouseAdminProviderProps> = ({
 							)}
 						/>
 						<CardContentSwitch />
-					</Flex>
+					</Section>
 				);
 			}}
 		</InHouseAdminProvider>

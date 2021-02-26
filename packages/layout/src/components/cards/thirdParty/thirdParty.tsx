@@ -4,7 +4,7 @@ import {
 	ThirdPartyProviderProps,
 	useThirdPartyContext,
 } from './context';
-import { Flex, Span } from '@tpr/core';
+import { Section, Span } from '@tpr/core';
 import { Toolbar } from '../components/toolbar';
 import { UnderlinedButton } from '../components/button';
 import { Preview } from './views/preview/preview';
@@ -14,6 +14,7 @@ import RemovedBox from '../components/removedBox';
 import { cardTypeName } from '../common/interfaces';
 import styles from '../cards.module.scss';
 import { ThirdPartyContext } from './thirdPartyMachine';
+import { concatenateStrings } from '../../../utils';
 
 const CardContentSwitch: React.FC = () => {
 	const { current } = useThirdPartyContext();
@@ -69,7 +70,15 @@ export const ThirdPartyCard: React.FC<ThirdPartyProviderProps> = ({
 		<ThirdPartyProvider {...rest}>
 			{({ current: { context }, i18n }) => {
 				return (
-					<Flex cfg={cfg} data-testid={testId} className={styles.card}>
+					<Section
+						cfg={cfg}
+						data-testid={testId}
+						className={styles.card}
+						ariaLabel={concatenateStrings([
+							context.thirdParty.organisationName,
+							i18n.preview.buttons.one,
+						])}
+					>
 						<Toolbar
 							complete={isComplete(context)}
 							subtitle={() => (
@@ -90,7 +99,7 @@ export const ThirdPartyCard: React.FC<ThirdPartyProviderProps> = ({
 							)}
 						/>
 						<CardContentSwitch />
-					</Flex>
+					</Section>
 				);
 			}}
 		</ThirdPartyProvider>

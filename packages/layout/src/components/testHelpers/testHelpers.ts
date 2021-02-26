@@ -33,6 +33,15 @@ export const assertThatTitleWasSetToNullWhileFirstAndLastNamesWereLeftUnchanged 
 	expect(updatedName.lastName).toEqual(originalName.lastName);
 };
 
+export const assertThatASectionExistsWithAnAriaLabel = (
+	findByRole,
+	expectedAriaLabel,
+) => {
+	const section = findByRole('region');
+	expect(section).toBeDefined();
+	expect(section).toHaveAttribute('aria-label', expectedAriaLabel);
+};
+
 export const clearTitleField = (findByText: any) => {
 	var titleInput = (findByText('Title (optional)') as HTMLElement).nextSibling
 		.firstChild as HTMLElement;
