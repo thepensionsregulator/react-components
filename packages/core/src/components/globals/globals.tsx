@@ -170,7 +170,6 @@ export const Section: React.FC<SectionProps> = ({
 	return createElement(
 		'section',
 		{
-			role: 'region',
 			className: classNames,
 			'data-testid': testId,
 			'aria-label': ariaLabel,
