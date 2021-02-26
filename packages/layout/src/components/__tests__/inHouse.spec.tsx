@@ -5,6 +5,7 @@ import { axe } from 'jest-axe';
 import userEvent from '@testing-library/user-event';
 import { InHouseAdminNoApi } from '../cards/inHouse/context';
 import {
+	assertThatASectionExistsWithAnAriaLabel,
 	assertThatButtonHasAriaExpanded,
 	assertThatButtonHasBeenRemovedFromTheTabFlow,
 	assertThatTitleWasSetToNullWhileFirstAndLastNamesWereLeftUnchanged,
@@ -118,10 +119,8 @@ describe('InHouse Preview', () => {
 	});
 
 	test('renders with a section containing an aria label', () => {
-		const section = findByRole('region');
-		expect(section).toBeDefined();
-		expect(section).toHaveAttribute(
-			'aria-label',
+		assertThatASectionExistsWithAnAriaLabel(
+			findByRole,
 			`${inHouseAdmin.title} ${inHouseAdmin.firstName} ${inHouseAdmin.lastName} In House Administrator`,
 		);
 	});

@@ -4,6 +4,7 @@ import { TrusteeCard } from '../cards/trustee/trustee';
 import { axe } from 'jest-axe';
 import { Trustee } from '../cards/trustee/context';
 import {
+	assertThatASectionExistsWithAnAriaLabel,
 	assertThatButtonHasAriaExpanded,
 	assertThatButtonHasBeenRemovedFromTheTabFlow,
 	assertThatTitleWasSetToNullWhileFirstAndLastNamesWereLeftUnchanged,
@@ -120,10 +121,8 @@ describe('Trustee Preview', () => {
 	});
 
 	test('renders with a section containing an aria label', () => {
-		const section = findByRole('region');
-		expect(section).toBeDefined();
-		expect(section).toHaveAttribute(
-			'aria-label',
+		assertThatASectionExistsWithAnAriaLabel(
+			findByRole,
 			`${trustee.title} ${trustee.firstName} ${trustee.lastName} ${trustee.trusteeType} Trustee`,
 		);
 	});

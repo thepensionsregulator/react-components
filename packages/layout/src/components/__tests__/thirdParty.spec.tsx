@@ -4,6 +4,7 @@ import { ThirdPartyCard } from '../cards/thirdParty/thirdParty';
 import { axe } from 'jest-axe';
 import userEvent from '@testing-library/user-event';
 import { ThirdPartyProps } from '../cards/thirdParty/context';
+import { assertThatASectionExistsWithAnAriaLabel } from '../testHelpers/testHelpers';
 
 const noop = () => Promise.resolve();
 
@@ -48,10 +49,8 @@ describe('ThirdParty Preview', () => {
 			/>,
 		);
 
-		const section = getByRole('region');
-		expect(section).toBeDefined();
-		expect(section).toHaveAttribute(
-			'aria-label',
+		assertThatASectionExistsWithAnAriaLabel(
+			getByRole,
 			`${thirdPartyAdmin.organisationName} Third Party Administrator`,
 		);
 	});

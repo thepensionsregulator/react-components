@@ -6,6 +6,7 @@ import { axe } from 'jest-axe';
 import { act } from 'react-dom/test-utils';
 import { cleanup } from '@testing-library/react-hooks';
 import {
+	assertThatASectionExistsWithAnAriaLabel,
 	assertThatButtonHasAriaExpanded,
 	assertThatButtonHasBeenRemovedFromTheTabFlow,
 	assertThatTitleWasSetToNullWhileFirstAndLastNamesWereLeftUnchanged,
@@ -107,10 +108,8 @@ describe('Actuary Card', () => {
 		});
 
 		test('renders with a section containing an aria label', () => {
-			const section = findByRole('region');
-			expect(section).toBeDefined();
-			expect(section).toHaveAttribute(
-				'aria-label',
+			assertThatASectionExistsWithAnAriaLabel(
+				findByRole,
 				`${actuary.title} ${actuary.firstName} ${actuary.lastName} Actuary`,
 			);
 		});

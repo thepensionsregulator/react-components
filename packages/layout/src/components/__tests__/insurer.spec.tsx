@@ -4,7 +4,10 @@ import { InsurerCard } from '../cards/insurer/insurer';
 import { axe } from 'jest-axe';
 import userEvent from '@testing-library/user-event';
 import { Insurer } from '../cards/insurer/context';
-import { assertThatButtonHasAriaExpanded } from '../testHelpers/testHelpers';
+import {
+	assertThatASectionExistsWithAnAriaLabel,
+	assertThatButtonHasAriaExpanded,
+} from '../testHelpers/testHelpers';
 
 const noop = () => Promise.resolve();
 
@@ -63,10 +66,8 @@ describe('Insurer Preview', () => {
 			/>,
 		);
 
-		const section = getByRole('region');
-		expect(section).toBeDefined();
-		expect(section).toHaveAttribute(
-			'aria-label',
+		assertThatASectionExistsWithAnAriaLabel(
+			getByRole,
 			`${insurer.organisationName} Insurer administrator`,
 		);
 	});

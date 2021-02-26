@@ -5,7 +5,10 @@ import { IndependentTrustee } from '../cards/independentTrustee/context';
 import { axe } from 'jest-axe';
 import { cleanup } from '@testing-library/react-hooks';
 import { act } from 'react-dom/test-utils';
-import { assertThatButtonHasAriaExpanded } from '../testHelpers/testHelpers';
+import {
+	assertThatASectionExistsWithAnAriaLabel,
+	assertThatButtonHasAriaExpanded,
+} from '../testHelpers/testHelpers';
 
 const noop = () => Promise.resolve();
 
@@ -97,10 +100,8 @@ describe('Professional / Independent Trustee Card', () => {
 		});
 
 		test('renders with a section containing an aria label', () => {
-			const section = findByRole('region');
-			expect(section).toBeDefined();
-			expect(section).toHaveAttribute(
-				'aria-label',
+			assertThatASectionExistsWithAnAriaLabel(
+				findByRole,
 				`${independentTrustee.organisationName} Professional / Independent Trustee`,
 			);
 		});
