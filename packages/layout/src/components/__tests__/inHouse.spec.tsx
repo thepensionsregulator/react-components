@@ -7,6 +7,8 @@ import { InHouseAdminNoApi } from '../cards/inHouse/context';
 import {
 	assertThatButtonHasAriaExpanded,
 	assertThatButtonHasBeenRemovedFromTheTabFlow,
+	assertThatTitleWasSetToNullWhileFirstAndLastNamesWereLeftUnchanged,
+	clearTitleField,
 } from '../testHelpers/testHelpers';
 
 const noop = () => Promise.resolve();
@@ -32,7 +34,9 @@ const inHouseAdmin: InHouseAdminNoApi = {
 };
 
 describe('InHouse Preview', () => {
-	let component, findByText, findByTestId, updatedInHouseAdmin;
+	let component, findByText, findByTestId;
+	let updatedInHouseAdmin = null;
+
 	beforeEach(async () => {
 		const { container, getByText, getByTestId } = render(
 			<InHouseCard
@@ -100,22 +104,16 @@ describe('InHouse Preview', () => {
 		assertThatButtonHasBeenRemovedFromTheTabFlow(findByText, 'Remove');
 	});
 
-	test('title can be left empty when name is updated', async () => {
+	test('in house title can be left empty when name is updated', async () => {
 		findByText(/In House Administrator/).click();
-
-		var titleInput = (findByText('Title (optional)') as HTMLElement).nextSibling
-			.firstChild as HTMLElement;
-		expect(titleInput).toBeDefined();
-		userEvent.clear(titleInput);
-
+		clearTitleField(findByText);
 		findByText(/Save and close/).click();
 
-		const results = await axe(component);
-		expect(results).toHaveNoViolations();
-
-		expect(updatedInHouseAdmin.title).toBeNull();
-		expect(updatedInHouseAdmin.firstName).toEqual(inHouseAdmin.firstName);
-		expect(updatedInHouseAdmin.lastName).toEqual(inHouseAdmin.lastName);
+		await assertThatTitleWasSetToNullWhileFirstAndLastNamesWereLeftUnchanged(
+			component,
+			inHouseAdmin,
+			updatedInHouseAdmin,
+		);
 	});
 });
 

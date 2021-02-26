@@ -1,12 +1,13 @@
 import React from 'react';
 import { cleanup, render } from '@testing-library/react';
-import userEvent from '@testing-library/user-event';
 import { TrusteeCard } from '../cards/trustee/trustee';
 import { axe } from 'jest-axe';
 import { Trustee } from '../cards/trustee/context';
 import {
 	assertThatButtonHasAriaExpanded,
 	assertThatButtonHasBeenRemovedFromTheTabFlow,
+	assertThatTitleWasSetToNullWhileFirstAndLastNamesWereLeftUnchanged,
+	clearTitleField,
 } from '../testHelpers/testHelpers';
 
 const noop = () => Promise.resolve();
@@ -34,12 +35,9 @@ const trustee: Trustee = {
 	emailAddress: 'fred.sandoors@trp.gov.uk',
 	effectiveDate: '1997-04-01T00:00:00',
 };
-let component,
-	findByText,
-	findAllByText,
-	findByTitle,
-	findByTestId,
-	updatedTrustee;
+let component, findByText, findAllByText, findByTitle, findByTestId;
+let updatedTrustee = null;
+
 beforeEach(async () => {
 	const {
 		container,
@@ -152,23 +150,17 @@ describe('Trustee Name', () => {
 		assertThatButtonHasBeenRemovedFromTheTabFlow(findByText, 'Remove');
 	});
 
-	test('title can be left empty when name is updated', async () => {
+	test('trustee title can be left empty when name is updated', async () => {
 		findByText(/Trustee/).click();
-
-		var titleInput = (findByText('Title (optional)') as HTMLElement).nextSibling
-			.firstChild as HTMLElement;
-		expect(titleInput).toBeDefined();
-		userEvent.clear(titleInput);
-
+		clearTitleField(findByText);
 		findByText(/Continue/).click();
 		findByText(/Save and close/).click();
 
-		const results = await axe(component);
-		expect(results).toHaveNoViolations();
-
-		expect(updatedTrustee.title).toBeNull();
-		expect(updatedTrustee.firstName).toEqual(trustee.firstName);
-		expect(updatedTrustee.lastName).toEqual(trustee.lastName);
+		await assertThatTitleWasSetToNullWhileFirstAndLastNamesWereLeftUnchanged(
+			component,
+			trustee,
+			updatedTrustee,
+		);
 	});
 });
 

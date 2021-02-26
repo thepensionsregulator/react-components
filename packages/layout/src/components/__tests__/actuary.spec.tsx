@@ -1,6 +1,5 @@
 import React from 'react';
 import { render } from '@testing-library/react';
-import userEvent from '@testing-library/user-event';
 import { ActuaryCard } from '../cards/actuary/actuary';
 import { Actuary } from '../cards/actuary/context';
 import { axe } from 'jest-axe';
@@ -9,6 +8,8 @@ import { cleanup } from '@testing-library/react-hooks';
 import {
 	assertThatButtonHasAriaExpanded,
 	assertThatButtonHasBeenRemovedFromTheTabFlow,
+	assertThatTitleWasSetToNullWhileFirstAndLastNamesWereLeftUnchanged,
+	clearTitleField,
 } from '../testHelpers/testHelpers';
 
 const noop = () => Promise.resolve();
@@ -100,7 +101,9 @@ describe('Actuary Card', () => {
 	});
 
 	describe('updating Actuary Name', () => {
-		let component, findByText, findByTestId, updatedActuary;
+		let component, findByText, findByTestId;
+		let updatedActuary = null;
+
 		beforeEach(async () => {
 			const { container, getByText, getByTestId } = render(
 				<ActuaryCard
@@ -166,20 +169,15 @@ describe('Actuary Card', () => {
 			});
 		});
 
-		test('title can be left empty when name is updated', async () => {
-			var titleInput = (findByText('Title (optional)') as HTMLElement)
-				.nextSibling.firstChild as HTMLElement;
-			expect(titleInput).toBeDefined();
-			userEvent.clear(titleInput);
-
+		test('actuary title can be left empty when name is updated', async () => {
+			clearTitleField(findByText);
 			findByText(/Save and close/).click();
 
-			const results = await axe(component);
-			expect(results).toHaveNoViolations();
-
-			expect(updatedActuary.title).toBeNull();
-			expect(updatedActuary.firstName).toEqual(actuary.firstName);
-			expect(updatedActuary.lastName).toEqual(actuary.lastName);
+			await assertThatTitleWasSetToNullWhileFirstAndLastNamesWereLeftUnchanged(
+				component,
+				actuary,
+				updatedActuary,
+			);
 		});
 	});
 
