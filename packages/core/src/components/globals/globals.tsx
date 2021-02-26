@@ -175,6 +175,6 @@ export const Section: React.FC<SectionProps> = ({
 			'aria-label': ariaLabel,
 			...props,
 		},
-		children,
+		children, 
 	);
 };
