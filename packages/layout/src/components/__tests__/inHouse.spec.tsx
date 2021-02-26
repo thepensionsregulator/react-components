@@ -7,6 +7,8 @@ import { InHouseAdminNoApi } from '../cards/inHouse/context';
 import {
 	assertThatButtonHasAriaExpanded,
 	assertThatButtonHasBeenRemovedFromTheTabFlow,
+	assertThatTitleWasSetToNullWhileFirstAndLastNamesWereLeftUnchanged,
+	clearTitleField,
 } from '../testHelpers/testHelpers';
 
 const noop = () => Promise.resolve();
@@ -33,12 +35,17 @@ const inHouseAdmin: InHouseAdminNoApi = {
 
 describe('InHouse Preview', () => {
 	let component, findByText, findByTestId;
+	let updatedInHouseAdmin = null;
+
 	beforeEach(async () => {
 		const { container, getByText, getByTestId } = render(
 			<InHouseCard
 				onSaveContacts={noop}
 				onSaveAddress={noop}
-				onSaveName={noop}
+				onSaveName={(values) => {
+					updatedInHouseAdmin = values;
+					return noop();
+				}}
 				onRemove={noop}
 				onCorrect={(_value) => {}}
 				complete={true}
@@ -95,6 +102,18 @@ describe('InHouse Preview', () => {
 		expect(findByText('Save and close')).toBeDefined();
 
 		assertThatButtonHasBeenRemovedFromTheTabFlow(findByText, 'Remove');
+	});
+
+	test('in house title can be left empty when name is updated', async () => {
+		findByText(/In House Administrator/).click();
+		clearTitleField(findByText);
+		findByText(/Save and close/).click();
+
+		await assertThatTitleWasSetToNullWhileFirstAndLastNamesWereLeftUnchanged(
+			component,
+			inHouseAdmin,
+			updatedInHouseAdmin,
+		);
 	});
 });
 

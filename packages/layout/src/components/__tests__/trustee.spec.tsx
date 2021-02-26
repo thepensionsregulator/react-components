@@ -6,6 +6,8 @@ import { Trustee } from '../cards/trustee/context';
 import {
 	assertThatButtonHasAriaExpanded,
 	assertThatButtonHasBeenRemovedFromTheTabFlow,
+	assertThatTitleWasSetToNullWhileFirstAndLastNamesWereLeftUnchanged,
+	clearTitleField,
 } from '../testHelpers/testHelpers';
 
 const noop = () => Promise.resolve();
@@ -34,6 +36,8 @@ const trustee: Trustee = {
 	effectiveDate: '1997-04-01T00:00:00',
 };
 let component, findByText, findAllByText, findByTitle, findByTestId;
+let updatedTrustee = null;
+
 beforeEach(async () => {
 	const {
 		container,
@@ -43,7 +47,10 @@ beforeEach(async () => {
 		getByTestId,
 	} = render(
 		<TrusteeCard
-			onDetailsSave={noop}
+			onDetailsSave={(values) => {
+				updatedTrustee = values;
+				return noop();
+			}}
 			onContactSave={noop}
 			onAddressSave={noop}
 			onRemove={noop}
@@ -141,6 +148,19 @@ describe('Trustee Name', () => {
 		expect(findByText('Continue')).toBeDefined();
 
 		assertThatButtonHasBeenRemovedFromTheTabFlow(findByText, 'Remove');
+	});
+
+	test('trustee title can be left empty when name is updated', async () => {
+		findByText(/Trustee/).click();
+		clearTitleField(findByText);
+		findByText(/Continue/).click();
+		findByText(/Save and close/).click();
+
+		await assertThatTitleWasSetToNullWhileFirstAndLastNamesWereLeftUnchanged(
+			component,
+			trustee,
+			updatedTrustee,
+		);
 	});
 });
 
