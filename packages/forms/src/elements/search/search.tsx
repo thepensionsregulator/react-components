@@ -66,13 +66,13 @@ const Search: React.FC<SearchProps> = React.memo(
 		};
 
 		const getResults = async (query: string, populateResults: Function) => {
-			searchService
-				? await searchService(query).then((response) =>
-						populateResults(
-							query ? showResultsFromSearchService(response) : [],
-						),
-				  )
-				: populateResults(query ? showResultsFromOptionsArray(query) : []);
+			if (searchService) {
+				await searchService(query).then((response) =>
+					populateResults(query ? showResultsFromSearchService(response) : []),
+				);
+			} else {
+				populateResults(query ? showResultsFromOptionsArray(query) : []);
+			}
 		};
 
 		const toggleResultsPanel = () => {
