@@ -1,0 +1,96 @@
+@import '@tpr/theming/lib/variables.scss';
+
+.relative {
+	position: relative;
+}
+
+.autocomplete {
+	> label {
+		> div:nth-of-type(2) {
+			// autocomplete-wrapper
+
+			> div {
+				width: 100%;
+				font-size: $font-size-2;
+
+				input {
+					width: 100%;
+					border: 2px solid $colors-neutral-7;
+					height: $space-10;
+					outline: none;
+					padding: 0 8px;
+
+					&:focus {
+						box-shadow: 0 0 0 3px $colors-warning-1;
+						border: 4px solid $colors-neutral-7;
+					}
+
+					&.hiddenInput {
+						display: none;
+						visibility: hidden;
+						border: none !important;
+						height: 0;
+						width: 0;
+						padding: 0;
+						overflow: hidden;
+						box-shadow: none !important;
+					}
+				}
+
+				ul {
+					display: none;
+					list-style-type: none;
+					border: none;
+					box-shadow: none;
+					margin-top: 2px;
+
+					li {
+						padding: $space-2 $space-3;
+						cursor: pointer;
+
+						&:hover {
+							background-color: $colors-primary-3;
+							color: $white;
+						}
+					}
+				}
+			}
+		}
+	}
+
+	&.panelVisible {
+		> label {
+			> div:nth-of-type(2) {
+				// autocomplete-wrapper
+
+				> div {
+					ul {
+						display: block;
+						border: 1px solid #ddd;
+						box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+					}
+				}
+			}
+		}
+	}
+
+	&.hide {
+		animation-name: hideAutocomplete;
+		animation-duration: 1s;
+		animation-iteration-count: 1;
+		max-height: 0;
+		overflow: hidden;
+	}
+}
+
+@keyframes hideAutocomplete {
+	0% {
+		max-height: 100px;
+		opacity: 0.2;
+	}
+	100% {
+		max-height: 0;
+		opacity: 0;
+		overflow: hidden;
+	}
+}
