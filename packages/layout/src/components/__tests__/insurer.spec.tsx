@@ -4,7 +4,10 @@ import { InsurerCard } from '../cards/insurer/insurer';
 import { axe } from 'jest-axe';
 import userEvent from '@testing-library/user-event';
 import { Insurer } from '../cards/insurer/context';
-import { assertThatButtonHasAriaExpanded } from '../testHelpers/testHelpers';
+import {
+	assertThatASectionExistsWithAnAriaLabel,
+	assertThatButtonHasAriaExpanded,
+} from '../testHelpers/testHelpers';
 
 const noop = () => Promise.resolve();
 
@@ -49,6 +52,23 @@ describe('Insurer Preview', () => {
 			getByText,
 			'Insurer reference number',
 			false,
+		);
+	});
+
+	test('renders with a section containing an aria label', () => {
+		const { getByRole } = render(
+			<InsurerCard
+				onSaveRef={noop}
+				onRemove={noop}
+				onCorrect={noop}
+				complete={true}
+				insurer={insurer}
+			/>,
+		);
+
+		assertThatASectionExistsWithAnAriaLabel(
+			getByRole,
+			`${insurer.organisationName} Insurer administrator`,
 		);
 	});
 });

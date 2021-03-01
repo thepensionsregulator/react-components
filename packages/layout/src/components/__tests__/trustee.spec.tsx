@@ -4,8 +4,11 @@ import { TrusteeCard } from '../cards/trustee/trustee';
 import { axe } from 'jest-axe';
 import { Trustee } from '../cards/trustee/context';
 import {
+	assertThatASectionExistsWithAnAriaLabel,
 	assertThatButtonHasAriaExpanded,
 	assertThatButtonHasBeenRemovedFromTheTabFlow,
+	assertThatTitleWasSetToNullWhileFirstAndLastNamesWereLeftUnchanged,
+	clearTitleField,
 } from '../testHelpers/testHelpers';
 
 const noop = () => Promise.resolve();
@@ -33,7 +36,9 @@ const trustee: Trustee = {
 	emailAddress: 'fred.sandoors@trp.gov.uk',
 	effectiveDate: '1997-04-01T00:00:00',
 };
-let component, findByText, findAllByText, findByTitle, findByTestId;
+let component, findByText, findAllByText, findByTitle, findByTestId, findByRole;
+let updatedTrustee = null;
+
 beforeEach(async () => {
 	const {
 		container,
@@ -41,9 +46,13 @@ beforeEach(async () => {
 		getAllByText,
 		queryByTitle,
 		getByTestId,
+		getByRole,
 	} = render(
 		<TrusteeCard
-			onDetailsSave={noop}
+			onDetailsSave={(values) => {
+				updatedTrustee = values;
+				return noop();
+			}}
 			onContactSave={noop}
 			onAddressSave={noop}
 			onRemove={noop}
@@ -63,6 +72,7 @@ beforeEach(async () => {
 	findByTestId = getByTestId;
 	findAllByText = getAllByText;
 	findByTitle = queryByTitle;
+	findByRole = getByRole;
 });
 
 afterEach(() => {
@@ -109,6 +119,13 @@ describe('Trustee Preview', () => {
 		expect(findByText('Email')).toBeDefined();
 		expect(findByText(trustee.emailAddress)).toBeDefined();
 	});
+
+	test('renders with a section containing an aria label', () => {
+		assertThatASectionExistsWithAnAriaLabel(
+			findByRole,
+			`${trustee.title} ${trustee.firstName} ${trustee.lastName} ${trustee.trusteeType} Trustee`,
+		);
+	});
 });
 
 describe('Trustee Name', () => {
@@ -141,6 +158,19 @@ describe('Trustee Name', () => {
 		expect(findByText('Continue')).toBeDefined();
 
 		assertThatButtonHasBeenRemovedFromTheTabFlow(findByText, 'Remove');
+	});
+
+	test('trustee title can be left empty when name is updated', async () => {
+		findByText(/Trustee/).click();
+		clearTitleField(findByText);
+		findByText(/Continue/).click();
+		findByText(/Save and close/).click();
+
+		await assertThatTitleWasSetToNullWhileFirstAndLastNamesWereLeftUnchanged(
+			component,
+			trustee,
+			updatedTrustee,
+		);
 	});
 });
 

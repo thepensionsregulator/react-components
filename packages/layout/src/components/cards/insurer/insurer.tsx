@@ -4,7 +4,7 @@ import {
 	InsurerProviderProps,
 	useInsurerContext,
 } from './context';
-import { Flex, Span } from '@tpr/core';
+import { Section, Span } from '@tpr/core';
 import { Toolbar } from '../components/toolbar';
 import { UnderlinedButton } from '../components/button';
 import { Preview } from './views/preview/preview';
@@ -15,6 +15,7 @@ import RemovedBox from '../components/removedBox';
 import { cardTypeName } from '../common/interfaces';
 import styles from '../cards.module.scss';
 import { InsurerContext } from './insurerMachine';
+import { concatenateStrings } from '../../../utils';
 
 const CardContentSwitch: React.FC = () => {
 	const { current } = useInsurerContext();
@@ -72,7 +73,15 @@ export const InsurerCard: React.FC<InsurerProviderProps> = ({
 		<InsurerProvider {...rest}>
 			{({ current: { context }, i18n }) => {
 				return (
-					<Flex cfg={cfg} data-testid={testId} className={styles.card}>
+					<Section
+						cfg={cfg}
+						data-testid={testId}
+						className={styles.card}
+						ariaLabel={concatenateStrings([
+							context.insurer.organisationName,
+							i18n.preview.buttons.one,
+						])}
+					>
 						<Toolbar
 							complete={isComplete(context)}
 							subtitle={() => (
@@ -93,7 +102,7 @@ export const InsurerCard: React.FC<InsurerProviderProps> = ({
 							)}
 						/>
 						<CardContentSwitch />
-					</Flex>
+					</Section>
 				);
 			}}
 		</InsurerProvider>

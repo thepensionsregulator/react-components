@@ -41,3 +41,7 @@ export function removeFromTabFlowIfMatches<T>(
 ): number | null {
 	return current.matches(match) ? -1 : null;
 }
+
+export function concatenateStrings(strings: string[]): string {
+	return strings.filter(Boolean).join(' ');
+}

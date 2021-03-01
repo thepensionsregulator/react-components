@@ -4,7 +4,7 @@ import {
 	IndependentTrusteeProviderProps,
 	useIndependentTrusteeContext,
 } from './context';
-import { Flex, P, Span } from '@tpr/core';
+import { P, Section, Span } from '@tpr/core';
 import { Toolbar } from '../components/toolbar';
 import { UnderlinedButton } from '../components/button';
 import RemovedBox from '../components/removedBox';
@@ -15,6 +15,7 @@ import { ConfirmRemove } from './views/remove/confirm/confirm';
 import { cardTypeName } from '../common/interfaces';
 import styles from '../cards.module.scss';
 import { IndependentTrusteeContext } from './independentTrusteeMachine';
+import { concatenateStrings } from '../../../utils';
 
 const CardContentSwitch: React.FC = () => {
 	const { current } = useIndependentTrusteeContext();
@@ -73,7 +74,15 @@ export const IndependentTrusteeCard: React.FC<IndependentTrusteeProviderProps> =
 		<IndependentTrusteeProvider {...rest}>
 			{({ current: { context }, i18n }) => {
 				return (
-					<Flex cfg={cfg} data-testid={testId} className={styles.card}>
+					<Section
+						cfg={cfg}
+						data-testid={testId}
+						className={styles.card}
+						ariaLabel={concatenateStrings([
+							context.independentTrustee.organisationName,
+							i18n.preview.trusteeType,
+						])}
+					>
 						<Toolbar
 							complete={isComplete(context)}
 							subtitle={() => (
@@ -98,7 +107,7 @@ export const IndependentTrusteeCard: React.FC<IndependentTrusteeProviderProps> =
 							extraPB={true}
 						/>
 						<CardContentSwitch />
-					</Flex>
+					</Section>
 				);
 			}}
 		</IndependentTrusteeProvider>
