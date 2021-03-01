@@ -2,6 +2,7 @@ import React from 'react';
 import { render } from '@testing-library/react';
 import { InHouseCard } from '../cards/inHouse/inHouse';
 import { axe } from 'jest-axe';
+import { act } from 'react-dom/test-utils';
 import userEvent from '@testing-library/user-event';
 import { InHouseAdminNoApi } from '../cards/inHouse/context';
 import {
@@ -107,9 +108,12 @@ describe('InHouse Preview', () => {
 	});
 
 	test('in house title can be left empty when name is updated', async () => {
-		findByText(/In House Administrator/).click();
-		clearTitleField(findByText);
-		findByText(/Save and close/).click();
+		await act(async () => {
+			findByText(/In House Administrator/).click();
+			await axe(component);
+			clearTitleField(findByText);
+			findByText(/Save and close/).click();
+		});
 
 		await assertThatTitleWasSetToNullWhileFirstAndLastNamesWereLeftUnchanged(
 			component,

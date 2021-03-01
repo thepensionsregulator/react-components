@@ -2,6 +2,7 @@ import React from 'react';
 import { cleanup, render } from '@testing-library/react';
 import { TrusteeCard } from '../cards/trustee/trustee';
 import { axe } from 'jest-axe';
+import { act } from 'react-dom/test-utils';
 import { Trustee } from '../cards/trustee/context';
 import {
 	assertThatASectionExistsWithAnAriaLabel,
@@ -161,10 +162,13 @@ describe('Trustee Name', () => {
 	});
 
 	test('trustee title can be left empty when name is updated', async () => {
-		findByText(/Trustee/).click();
-		clearTitleField(findByText);
-		findByText(/Continue/).click();
-		findByText(/Save and close/).click();
+		await act(async () => {
+			findByText(/Trustee/).click();
+			await axe(component);
+			clearTitleField(findByText);
+			findByText(/Continue/).click();
+			findByText(/Save and close/).click();
+		});
 
 		await assertThatTitleWasSetToNullWhileFirstAndLastNamesWereLeftUnchanged(
 			component,

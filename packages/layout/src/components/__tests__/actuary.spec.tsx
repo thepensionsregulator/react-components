@@ -185,8 +185,10 @@ describe('Actuary Card', () => {
 		});
 
 		test('actuary title can be left empty when name is updated', async () => {
-			clearTitleField(findByText);
-			findByText(/Save and close/).click();
+			await act(async () => {
+				clearTitleField(findByText);
+				findByText(/Save and close/).click();
+			});
 
 			await assertThatTitleWasSetToNullWhileFirstAndLastNamesWereLeftUnchanged(
 				component,
