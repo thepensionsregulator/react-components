@@ -33,7 +33,7 @@ const Search: React.FC<SearchProps> = React.memo(
 		label,
 		meta,
 		name,
-		notFoundMessage = 'Your search criteria has no match',
+		notFoundMessage = 'There are no matches for your search criteria',
 		optionsArray = [],
 		placeholder,
 		required = true,
@@ -46,7 +46,7 @@ const Search: React.FC<SearchProps> = React.memo(
 		const [optionsArrayObjects, setOptionsArrayObjects] = useState([]);
 
 		const getSelectedItemDefault = (item) => {
-			return item && item[keyValue];
+			return getSelectedItem ? getSelectedItem(item) : item && item[keyValue];
 		};
 
 		const saveResultsInState = (resultsFiltered) => {
@@ -76,12 +76,15 @@ const Search: React.FC<SearchProps> = React.memo(
 		};
 
 		const toggleResultsPanel = () => {
-			const newClasses =
-				panelVisible == 'complete'
-					? styles.autocomplete + ' ' + styles.hide
-					: panelVisible == 'visible'
-					? styles.autocomplete + ' ' + styles.panelVisible
-					: styles.autocomplete;
+			let newClasses = '';
+			if (panelVisible == 'complete') {
+				newClasses = styles.autocomplete + ' ' + styles.hide;
+			} else {
+				newClasses =
+					panelVisible == 'visible'
+						? styles.autocomplete + ' ' + styles.panelVisible
+						: styles.autocomplete;
+			}
 			if (newClasses !== classes) setClasses(newClasses);
 		};
 
@@ -129,9 +132,7 @@ const Search: React.FC<SearchProps> = React.memo(
 							tNoResults={() => notFoundMessage}
 							placeholder={placeholder}
 							templates={{
-								inputValue: getSelectedItem
-									? getSelectedItem
-									: getSelectedItemDefault,
+								inputValue: getSelectedItemDefault,
 								suggestion: formatItem,
 							}}
 						/>
