@@ -6,8 +6,11 @@ import { axe } from 'jest-axe';
 import { act } from 'react-dom/test-utils';
 import { cleanup } from '@testing-library/react-hooks';
 import {
+	assertThatASectionExistsWithAnAriaLabel,
 	assertThatButtonHasAriaExpanded,
 	assertThatButtonHasBeenRemovedFromTheTabFlow,
+	assertThatTitleWasSetToNullWhileFirstAndLastNamesWereLeftUnchanged,
+	clearTitleField,
 } from '../testHelpers/testHelpers';
 
 const noop = () => Promise.resolve();
@@ -36,9 +39,15 @@ const actuary: Actuary = {
 
 describe('Actuary Card', () => {
 	describe('Preview', () => {
-		let component, findByText, findAllByText, findByTitle;
+		let component, findByText, findAllByText, findByTitle, findByRole;
 		beforeEach(() => {
-			const { container, getByText, getAllByText, queryByTitle } = render(
+			const {
+				container,
+				getByText,
+				getAllByText,
+				queryByTitle,
+				getByRole,
+			} = render(
 				<ActuaryCard
 					actuary={actuary}
 					complete={true}
@@ -54,6 +63,7 @@ describe('Actuary Card', () => {
 			findByText = getByText;
 			findAllByText = getAllByText;
 			findByTitle = queryByTitle;
+			findByRole = getByRole;
 		});
 
 		test('no Violations', async () => {
@@ -96,10 +106,19 @@ describe('Actuary Card', () => {
 		test('displays email correctly', () => {
 			expect(findByText('john@actuary.com')).toBeDefined();
 		});
+
+		test('renders with a section containing an aria label', () => {
+			assertThatASectionExistsWithAnAriaLabel(
+				findByRole,
+				`${actuary.title} ${actuary.firstName} ${actuary.lastName} Actuary`,
+			);
+		});
 	});
 
 	describe('updating Actuary Name', () => {
 		let component, findByText, findByTestId;
+		let updatedActuary = null;
+
 		beforeEach(async () => {
 			const { container, getByText, getByTestId } = render(
 				<ActuaryCard
@@ -108,7 +127,10 @@ describe('Actuary Card', () => {
 					onCorrect={() => {}}
 					onRemove={noop}
 					onSaveContacts={noop}
-					onSaveName={noop}
+					onSaveName={(values) => {
+						updatedActuary = values;
+						return noop();
+					}}
 					testId={actuary.schemeRoleId.toString()}
 				/>,
 			);
@@ -120,7 +142,6 @@ describe('Actuary Card', () => {
 			findByText('Actuary').click();
 			const results = await axe(component);
 			expect(results).toHaveNoViolations();
-			assertThatButtonHasBeenRemovedFromTheTabFlow(getByText, 'Remove');
 		});
 
 		afterEach(() => {
@@ -150,6 +171,7 @@ describe('Actuary Card', () => {
 				'70',
 			);
 			expect(findByText('Save and close')).toBeDefined();
+			assertThatButtonHasBeenRemovedFromTheTabFlow(findByText, 'Remove');
 		});
 
 		test('save and close', async () => {
@@ -160,6 +182,17 @@ describe('Actuary Card', () => {
 				// After clicking the "Save and close" button, it goes back to the Preview
 				expect(findByText('Address')).toBeDefined();
 			});
+		});
+
+		test('actuary title can be left empty when name is updated', async () => {
+			clearTitleField(findByText);
+			findByText(/Save and close/).click();
+
+			await assertThatTitleWasSetToNullWhileFirstAndLastNamesWereLeftUnchanged(
+				component,
+				actuary,
+				updatedActuary,
+			);
 		});
 	});
 

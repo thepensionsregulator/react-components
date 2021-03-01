@@ -151,3 +151,30 @@ export const Flex: React.FC<FlexBoxProps> = ({
 		children,
 	);
 };
+
+export type SectionProps = {
+	ariaLabel: string;
+	testId?: string;
+	className?: string;
+	cfg?: SpaceProps;
+};
+export const Section: React.FC<SectionProps> = ({
+	ariaLabel,
+	testId,
+	className,
+	children,
+	cfg = {},
+	...props
+}) => {
+	const classNames = useClassNames(cfg, [className]);
+	return createElement(
+		'section',
+		{
+			className: classNames,
+			'data-testid': testId,
+			'aria-label': ariaLabel,
+			...props,
+		},
+		children,
+	);
+};

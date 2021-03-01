@@ -4,7 +4,7 @@ import {
 	useTrusteeContext,
 	TrusteeCardProps,
 } from './context';
-import { Flex, Span } from '@tpr/core';
+import { Section, Span } from '@tpr/core';
 import { UnderlinedButton } from '../components/button';
 import { Preview } from './views/preview';
 import { Toolbar } from '../components/toolbar';
@@ -19,7 +19,7 @@ import { cardType, cardTypeName } from '../common/interfaces';
 import styles from '../cards.module.scss';
 import { AddressComparer } from '@tpr/forms';
 import { TrusteeContext } from './trusteeMachine';
-import { removeFromTabFlowIfMatches } from '../../../utils';
+import { concatenateStrings, removeFromTabFlowIfMatches } from '../../../utils';
 
 const CardContent: React.FC = () => {
 	const { current, i18n, send, addressAPI } = useTrusteeContext();
@@ -147,7 +147,18 @@ export const TrusteeCard: React.FC<Omit<TrusteeCardProps, 'children'>> = ({
 	return (
 		<TrusteeProvider {...props}>
 			{({ current, i18n }) => (
-				<Flex cfg={cfg} data-testid={props.testId} className={styles.card}>
+				<Section
+					cfg={cfg}
+					data-testid={props.testId}
+					className={styles.card}
+					ariaLabel={concatenateStrings([
+						current.context.trustee.title,
+						current.context.trustee.firstName,
+						current.context.trustee.lastName,
+						current.context.trustee.trusteeType,
+						i18n.preview.buttons.one,
+					])}
+				>
 					<Toolbar
 						complete={isComplete(current.context)}
 						buttonLeft={() => <TrusteeButton />}
@@ -160,13 +171,11 @@ export const TrusteeCard: React.FC<Omit<TrusteeCardProps, 'children'>> = ({
 						)}
 						subtitle={() => (
 							<Span cfg={{ lineHeight: 3 }} className={styles.styledAsH4}>
-								{[
+								{concatenateStrings([
 									current.context.trustee.title,
 									current.context.trustee.firstName,
 									current.context.trustee.lastName,
-								]
-									.filter(Boolean)
-									.join(' ')}
+								])}
 							</Span>
 						)}
 						statusText={
@@ -176,7 +185,7 @@ export const TrusteeCard: React.FC<Omit<TrusteeCardProps, 'children'>> = ({
 						}
 					/>
 					<CardContent />
-				</Flex>
+				</Section>
 			)}
 		</TrusteeProvider>
 	);

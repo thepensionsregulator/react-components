@@ -5,8 +5,11 @@ import { axe } from 'jest-axe';
 import userEvent from '@testing-library/user-event';
 import { InHouseAdminNoApi } from '../cards/inHouse/context';
 import {
+	assertThatASectionExistsWithAnAriaLabel,
 	assertThatButtonHasAriaExpanded,
 	assertThatButtonHasBeenRemovedFromTheTabFlow,
+	assertThatTitleWasSetToNullWhileFirstAndLastNamesWereLeftUnchanged,
+	clearTitleField,
 } from '../testHelpers/testHelpers';
 
 const noop = () => Promise.resolve();
@@ -32,13 +35,18 @@ const inHouseAdmin: InHouseAdminNoApi = {
 };
 
 describe('InHouse Preview', () => {
-	let component, findByText, findByTestId;
+	let component, findByText, findByTestId, findByRole;
+	let updatedInHouseAdmin = null;
+
 	beforeEach(async () => {
-		const { container, getByText, getByTestId } = render(
+		const { container, getByText, getByTestId, getByRole } = render(
 			<InHouseCard
 				onSaveContacts={noop}
 				onSaveAddress={noop}
-				onSaveName={noop}
+				onSaveName={(values) => {
+					updatedInHouseAdmin = values;
+					return noop();
+				}}
 				onRemove={noop}
 				onCorrect={(_value) => {}}
 				complete={true}
@@ -53,6 +61,7 @@ describe('InHouse Preview', () => {
 		component = container;
 		findByText = getByText;
 		findByTestId = getByTestId;
+		findByRole = getByRole;
 	});
 
 	test('is accessible', async () => {
@@ -95,6 +104,25 @@ describe('InHouse Preview', () => {
 		expect(findByText('Save and close')).toBeDefined();
 
 		assertThatButtonHasBeenRemovedFromTheTabFlow(findByText, 'Remove');
+	});
+
+	test('in house title can be left empty when name is updated', async () => {
+		findByText(/In House Administrator/).click();
+		clearTitleField(findByText);
+		findByText(/Save and close/).click();
+
+		await assertThatTitleWasSetToNullWhileFirstAndLastNamesWereLeftUnchanged(
+			component,
+			inHouseAdmin,
+			updatedInHouseAdmin,
+		);
+	});
+
+	test('renders with a section containing an aria label', () => {
+		assertThatASectionExistsWithAnAriaLabel(
+			findByRole,
+			`${inHouseAdmin.title} ${inHouseAdmin.firstName} ${inHouseAdmin.lastName} In House Administrator`,
+		);
 	});
 });
 

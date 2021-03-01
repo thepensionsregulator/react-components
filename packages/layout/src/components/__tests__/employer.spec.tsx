@@ -4,7 +4,10 @@ import { EmployerCard } from '../cards/employer/employer';
 import { axe } from 'jest-axe';
 import userEvent from '@testing-library/user-event';
 import { Employer } from '../cards/employer/context';
-import { assertThatButtonHasBeenRemovedFromTheTabFlow } from '../testHelpers/testHelpers';
+import {
+	assertThatASectionExistsWithAnAriaLabel,
+	assertThatButtonHasBeenRemovedFromTheTabFlow,
+} from '../testHelpers/testHelpers';
 
 const noop = () => Promise.resolve();
 
@@ -44,6 +47,22 @@ describe('Employer Preview', () => {
 
 		const results = await axe(container);
 		expect(results).toHaveNoViolations();
+	});
+
+	test('renders with a section containing an aria label', () => {
+		const { getByRole } = render(
+			<EmployerCard
+				onSaveType={noop}
+				onRemove={noop}
+				complete={true}
+				employer={employer}
+			/>,
+		);
+
+		assertThatASectionExistsWithAnAriaLabel(
+			getByRole,
+			employer.organisationName,
+		);
 	});
 });
 
