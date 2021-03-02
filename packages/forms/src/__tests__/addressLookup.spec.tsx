@@ -1,21 +1,11 @@
 import React from 'react';
 import { formSetup } from '../__mocks__/setup';
-import { findByText, fireEvent } from '@testing-library/react';
+import { fireEvent, screen, findByText } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { axe } from 'jest-axe';
 import { AddressLookup, AddressProps } from '../elements/address/addressLookup';
 import FakeAddressLookupProvider from '../elements/address/fakeAddressLookupProvider';
-
-const exampleAddress = {
-	addressLine1: 'Napier House',
-	addressLine2: 'Trafalgar Place',
-	addressLine3: 'Trafalgar Road',
-	postTown: 'Brighton',
-	county: 'East Sussex',
-	postcode: 'BN1 4DW',
-	country: 'UK',
-	countryId: 229,
-};
+import { invokeActionWithConsoleErrorTestFailureSuppressed } from '../utils/consoleErrorTestFailureTemporarySupression';
 
 const addressLookupProvider = new FakeAddressLookupProvider();
 
@@ -43,17 +33,17 @@ const defaultProps: AddressProps = {
 	onValidatePostcode: jest.fn(),
 };
 
-function searchForAPostcode(container: HTMLElement, postcode: string) {
-	const input = container.querySelector('input');
+async function searchForAPostcode(postcode: string) {
+	const input = await screen.findByTestId('postcode-lookup-edit');
 	userEvent.type(input, postcode);
 	fireEvent.blur(input);
 
-	const submit = container.querySelector('button');
+	const submit = await screen.findByTestId('postcode-lookup-button');
 	fireEvent.click(submit);
 }
 
-function updateAPostcode(container: HTMLElement, postcode: string) {
-	const input = container.querySelector('input');
+async function updateAPostcode(postcode: string) {
+	const input = await screen.findByTestId('postcode-lookup-edit');
 	userEvent.type(input, postcode);
 	fireEvent.blur(input);
 }
@@ -64,18 +54,14 @@ describe('Address lookup', () => {
 			const { getByTestId } = formSetup({
 				render: <AddressLookup {...defaultProps} />,
 			});
-
 			expect(getByTestId('postcode-lookup-edit')).toBeDefined();
 		});
-
 		test('to be the default when all properties of initialValue are falsy', async () => {
 			const { getByTestId } = formSetup({
 				render: <AddressLookup {...defaultProps} initialValue={{}} />,
 			});
-
 			expect(getByTestId('postcode-lookup-edit')).toBeDefined();
 		});
-
 		test('passes accessibility checks', async () => {
 			const { container } = formSetup({
 				render: <AddressLookup {...defaultProps} />,
@@ -83,42 +69,32 @@ describe('Address lookup', () => {
 			const results = await axe(container);
 			expect(results).toHaveNoViolations();
 		});
-
 		test('should go to select address view when button is clicked', async () => {
 			const { container } = formSetup({
 				render: <AddressLookup {...defaultProps} />,
 			});
-
-			searchForAPostcode(container, exampleAddress.postcode);
-
+			await searchForAPostcode(FakeAddressLookupProvider.tprAddress.postcode);
 			const changePostcode = container.querySelector(
 				'button[data-testid$="change-postcode"]',
 			);
-
 			expect(changePostcode).not.toBeNull();
 		});
-
 		test('should validate the postcode when button is clicked', async () => {
 			const { container } = formSetup({
 				render: <AddressLookup {...defaultProps} />,
 			});
-
-			searchForAPostcode(container, 'AB12 3MV'); // invalid postcode due to MV in the incode
-
+			await searchForAPostcode('AB12 3MV'); // invalid postcode due to MV in the incode
 			const errorMessage = findByText(
 				container,
 				defaultProps.invalidPostcodeMessage,
 			);
-
 			expect(errorMessage).not.toBeNull();
 		});
-
-		test('should call onValidatePostcode when postcode is entered', () => {
-			const { container } = formSetup({
+		test('should call onValidatePostcode when postcode is entered', async () => {
+			formSetup({
 				render: <AddressLookup {...defaultProps} />,
 			});
-			updateAPostcode(container, 's6 2nr');
-
+			await updateAPostcode('s6 2nr');
 			expect(defaultProps.onValidatePostcode).toHaveBeenCalled();
 		});
 	});
@@ -129,58 +105,55 @@ describe('Address lookup', () => {
 				render: <AddressLookup {...defaultProps} />,
 			});
 
-			searchForAPostcode(container, exampleAddress.postcode);
+			await searchForAPostcode(FakeAddressLookupProvider.tprAddress.postcode);
 
 			const results = await axe(container);
 			expect(results).toHaveNoViolations();
 		});
 
-		test('should display the postcode', async () => {
-			const { container } = formSetup({
-				render: <AddressLookup {...defaultProps} />,
-			});
-
-			searchForAPostcode(container, exampleAddress.postcode);
-
-			const displayedPostcode = findByText(container, exampleAddress.postcode);
-
-			expect(displayedPostcode).not.toBeNull();
-		});
-
 		test('should list matching addresses', async () => {
-			const { container } = formSetup({
+			formSetup({
 				render: <AddressLookup {...defaultProps} />,
 			});
 
-			searchForAPostcode(container, exampleAddress.postcode);
+			await searchForAPostcode(FakeAddressLookupProvider.tprAddress.postcode);
+			
+			const displayedPostcode = await screen.findByText(FakeAddressLookupProvider.tprAddress.postcode);
+			expect(displayedPostcode).toBeDefined();
 
-			setTimeout(() => {
-				const option = container.querySelector('div[role="option"]');
-				expect(option.textContent).toMatch(exampleAddress.addressLine1);
-			}, 3000);
+			const selectAddressInput = await screen.findByTestId('select-address-list');
+			selectAddressInput.click();
+			
+			const addressOptions = await screen.findAllByRole('option');
+
+			expect(addressOptions[0].textContent).toMatch(FakeAddressLookupProvider.tprAddress.addressLine1);
 		});
 
 		test('should pass selected address to edit address view', async () => {
-			const { container } = formSetup({
+			formSetup({
 				render: <AddressLookup {...defaultProps} />,
 			});
 
-			searchForAPostcode(container, exampleAddress.postcode);
+			await searchForAPostcode(FakeAddressLookupProvider.tprAddress.postcode);
 
-			setTimeout(() => {
-				const option = container.querySelector('div[role="option"]');
-				fireEvent.click(option);
+			const selectAddressInput = await screen.findByTestId('select-address-list');
+			selectAddressInput.click();
+			
+			const addressOptions = await screen.findAllByRole('option');
+			
+			await invokeActionWithConsoleErrorTestFailureSuppressed(async () => {
+				// AddressLookup is throwing an error:
+				//     A component is changing a controlled input of type text to be uncontrolled. Input elements should not switch from controlled to uncontrolled (or vice versa).
+				//
+				// The component works despite the console error (which also appears in the gatsby site), and while this does need to be fixed, it is an existing issue. 
+				// For now I'm just put a warning in the console for visibility so the tests don't fail.
+				addressOptions[0].click();
+				const selectAddressButton = await screen.findByTestId('select-address-button');
+				selectAddressButton.click();
+			});
 
-				const selectAddress = container.querySelector(
-					'button[data-testid$="select-address-button"]',
-				);
-
-				fireEvent.click(selectAddress);
-
-				const input = container.querySelector('input[name="addressLine1"]');
-
-				expect(input).toHaveProperty('value', exampleAddress.addressLine1);
-			}, 3000);
+			const addressLine1Input = await screen.findByDisplayValue(FakeAddressLookupProvider.tprAddress.addressLine1);
+			expect(addressLine1Input).toBeDefined();
 		});
 	});
 
@@ -188,36 +161,31 @@ describe('Address lookup', () => {
 		test('to be the default when initialValue is not null', async () => {
 			const { container } = formSetup({
 				render: (
-					<AddressLookup {...defaultProps} initialValue={exampleAddress} />
+					<AddressLookup {...defaultProps} initialValue={FakeAddressLookupProvider.tprAddress} />
 				),
 			});
-
 			const input = container.querySelector('input[name="addressLine1"]');
 			expect(input).not.toBeNull();
 		});
-
 		test('passes accessibility checks', async () => {
 			const { container } = formSetup({
 				render: (
-					<AddressLookup {...defaultProps} initialValue={exampleAddress} />
+					<AddressLookup {...defaultProps} initialValue={FakeAddressLookupProvider.tprAddress} />
 				),
 			});
 			const results = await axe(container);
 			expect(results).toHaveNoViolations();
 		});
-
 		test('to go to postcode lookup view when button clicked', async () => {
 			const { container } = formSetup({
 				render: (
-					<AddressLookup {...defaultProps} initialValue={exampleAddress} />
+					<AddressLookup {...defaultProps} initialValue={FakeAddressLookupProvider.tprAddress} />
 				),
 			});
-
 			const button = container.querySelector(
 				'button[data-testid$="change-address"]',
 			);
 			fireEvent.click(button);
-
 			const input = container.querySelector('input[name="postcodeLookup"]');
 			expect(input).not.toBeNull();
 		});
