@@ -32,16 +32,18 @@ class FakeAddressLookupProvider implements AddressLookupProvider {
 		country: 'UK',
 		countryId: 229,
 		uprn: 10091767168,
-	}
+	};
 
 	constructor() {}
 	lookupAddress(postcode): Promise<any> {
-		
 		var matchedAddresses = [];
 
-		if (postcode === FakeAddressLookupProvider.tprAddress.postcode) matchedAddresses.push(FakeAddressLookupProvider.tprAddress);
-		if (postcode === FakeAddressLookupProvider.fcaAddress.postcode) matchedAddresses.push(FakeAddressLookupProvider.fcaAddress);
-		if (postcode === FakeAddressLookupProvider.ppfAddress.postcode) matchedAddresses.push(FakeAddressLookupProvider.ppfAddress);
+		if (postcode === FakeAddressLookupProvider.tprAddress.postcode)
+			matchedAddresses.push(FakeAddressLookupProvider.tprAddress);
+		if (postcode === FakeAddressLookupProvider.fcaAddress.postcode)
+			matchedAddresses.push(FakeAddressLookupProvider.fcaAddress);
+		if (postcode === FakeAddressLookupProvider.ppfAddress.postcode)
+			matchedAddresses.push(FakeAddressLookupProvider.ppfAddress);
 
 		return Promise.resolve(matchedAddresses);
 	}
