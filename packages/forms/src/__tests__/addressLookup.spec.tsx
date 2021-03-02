@@ -117,16 +117,22 @@ describe('Address lookup', () => {
 			});
 
 			await searchForAPostcode(FakeAddressLookupProvider.tprAddress.postcode);
-			
-			const displayedPostcode = await screen.findByText(FakeAddressLookupProvider.tprAddress.postcode);
+
+			const displayedPostcode = await screen.findByText(
+				FakeAddressLookupProvider.tprAddress.postcode,
+			);
 			expect(displayedPostcode).toBeDefined();
 
-			const selectAddressInput = await screen.findByTestId('select-address-list');
+			const selectAddressInput = await screen.findByTestId(
+				'select-address-list',
+			);
 			selectAddressInput.click();
-			
+
 			const addressOptions = await screen.findAllByRole('option');
 
-			expect(addressOptions[0].textContent).toMatch(FakeAddressLookupProvider.tprAddress.addressLine1);
+			expect(addressOptions[0].textContent).toMatch(
+				FakeAddressLookupProvider.tprAddress.addressLine1,
+			);
 		});
 
 		test('should pass selected address to edit address view', async () => {
@@ -136,23 +142,29 @@ describe('Address lookup', () => {
 
 			await searchForAPostcode(FakeAddressLookupProvider.tprAddress.postcode);
 
-			const selectAddressInput = await screen.findByTestId('select-address-list');
+			const selectAddressInput = await screen.findByTestId(
+				'select-address-list',
+			);
 			selectAddressInput.click();
-			
+
 			const addressOptions = await screen.findAllByRole('option');
-			
+
 			await invokeActionWithConsoleErrorTestFailureSuppressed(async () => {
 				// AddressLookup is throwing an error:
 				//     A component is changing a controlled input of type text to be uncontrolled. Input elements should not switch from controlled to uncontrolled (or vice versa).
 				//
-				// The component works despite the console error (which also appears in the gatsby site), and while this does need to be fixed, it is an existing issue. 
+				// The component works despite the console error (which also appears in the gatsby site), and while this does need to be fixed, it is an existing issue.
 				// For now I'm just put a warning in the console for visibility so the tests don't fail.
 				addressOptions[0].click();
-				const selectAddressButton = await screen.findByTestId('select-address-button');
+				const selectAddressButton = await screen.findByTestId(
+					'select-address-button',
+				);
 				selectAddressButton.click();
 			});
 
-			const addressLine1Input = await screen.findByDisplayValue(FakeAddressLookupProvider.tprAddress.addressLine1);
+			const addressLine1Input = await screen.findByDisplayValue(
+				FakeAddressLookupProvider.tprAddress.addressLine1,
+			);
 			expect(addressLine1Input).toBeDefined();
 		});
 	});
@@ -161,7 +173,10 @@ describe('Address lookup', () => {
 		test('to be the default when initialValue is not null', async () => {
 			const { container } = formSetup({
 				render: (
-					<AddressLookup {...defaultProps} initialValue={FakeAddressLookupProvider.tprAddress} />
+					<AddressLookup
+						{...defaultProps}
+						initialValue={FakeAddressLookupProvider.tprAddress}
+					/>
 				),
 			});
 			const input = container.querySelector('input[name="addressLine1"]');
@@ -170,7 +185,10 @@ describe('Address lookup', () => {
 		test('passes accessibility checks', async () => {
 			const { container } = formSetup({
 				render: (
-					<AddressLookup {...defaultProps} initialValue={FakeAddressLookupProvider.tprAddress} />
+					<AddressLookup
+						{...defaultProps}
+						initialValue={FakeAddressLookupProvider.tprAddress}
+					/>
 				),
 			});
 			const results = await axe(container);
@@ -179,7 +197,10 @@ describe('Address lookup', () => {
 		test('to go to postcode lookup view when button clicked', async () => {
 			const { container } = formSetup({
 				render: (
-					<AddressLookup {...defaultProps} initialValue={FakeAddressLookupProvider.tprAddress} />
+					<AddressLookup
+						{...defaultProps}
+						initialValue={FakeAddressLookupProvider.tprAddress}
+					/>
 				),
 			});
 			const button = container.querySelector(
