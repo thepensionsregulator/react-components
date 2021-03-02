@@ -13,7 +13,6 @@ interface SearchProps extends FieldRenderProps<string>, FieldExtraProps {
 	callback?: Function;
 	formatItem?: (item: any) => string;
 	getSelectedItem?: (item: any) => string;
-	placeholder?: string;
 	keyValue: string;
 	minLength?: number;
 	notFoundMessage?: string;
