@@ -33,17 +33,17 @@ const defaultProps: AddressProps = {
 	onValidatePostcode: jest.fn(),
 };
 
-function searchForAPostcode(container: HTMLElement, postcode: string) {
-	const input = container.querySelector('input');
+async function searchForAPostcode(postcode: string) {
+	const input = await screen.findByTestId('postcode-lookup-edit');
 	userEvent.type(input, postcode);
 	fireEvent.blur(input);
 
-	const submit = container.querySelector('button');
+	const submit = await screen.findByTestId('postcode-lookup-button');
 	fireEvent.click(submit);
 }
 
-function updateAPostcode(container: HTMLElement, postcode: string) {
-	const input = container.querySelector('input');
+async function updateAPostcode(postcode: string) {
+	const input = await screen.findByTestId('postcode-lookup-edit');
 	userEvent.type(input, postcode);
 	fireEvent.blur(input);
 }
@@ -73,7 +73,7 @@ describe('Address lookup', () => {
 			const { container } = formSetup({
 				render: <AddressLookup {...defaultProps} />,
 			});
-			searchForAPostcode(container, FakeAddressLookupProvider.tprAddress.postcode);
+			await searchForAPostcode(FakeAddressLookupProvider.tprAddress.postcode);
 			const changePostcode = container.querySelector(
 				'button[data-testid$="change-postcode"]',
 			);
@@ -83,18 +83,18 @@ describe('Address lookup', () => {
 			const { container } = formSetup({
 				render: <AddressLookup {...defaultProps} />,
 			});
-			searchForAPostcode(container, 'AB12 3MV'); // invalid postcode due to MV in the incode
+			await searchForAPostcode('AB12 3MV'); // invalid postcode due to MV in the incode
 			const errorMessage = findByText(
 				container,
 				defaultProps.invalidPostcodeMessage,
 			);
 			expect(errorMessage).not.toBeNull();
 		});
-		test('should call onValidatePostcode when postcode is entered', () => {
-			const { container } = formSetup({
+		test('should call onValidatePostcode when postcode is entered', async () => {
+			const { } = formSetup({
 				render: <AddressLookup {...defaultProps} />,
 			});
-			updateAPostcode(container, 's6 2nr');
+			await updateAPostcode('s6 2nr');
 			expect(defaultProps.onValidatePostcode).toHaveBeenCalled();
 		});
 	});
@@ -105,18 +105,18 @@ describe('Address lookup', () => {
 				render: <AddressLookup {...defaultProps} />,
 			});
 
-			searchForAPostcode(container, FakeAddressLookupProvider.tprAddress.postcode);
+			await searchForAPostcode(FakeAddressLookupProvider.tprAddress.postcode);
 
 			const results = await axe(container);
 			expect(results).toHaveNoViolations();
 		});
 
 		test('should list matching addresses', async () => {
-			const { container } = formSetup({
+			const { } = formSetup({
 				render: <AddressLookup {...defaultProps} />,
 			});
 
-			searchForAPostcode(container, FakeAddressLookupProvider.tprAddress.postcode);
+			await searchForAPostcode(FakeAddressLookupProvider.tprAddress.postcode);
 			
 			const displayedPostcode = await screen.findByText(FakeAddressLookupProvider.tprAddress.postcode);
 			expect(displayedPostcode).toBeDefined();
@@ -130,11 +130,11 @@ describe('Address lookup', () => {
 		});
 
 		test('should pass selected address to edit address view', async () => {
-			const { container } = formSetup({
+			const { } = formSetup({
 				render: <AddressLookup {...defaultProps} />,
 			});
 
-			searchForAPostcode(container, FakeAddressLookupProvider.tprAddress.postcode);
+			await searchForAPostcode(FakeAddressLookupProvider.tprAddress.postcode);
 
 			const selectAddressInput = await screen.findByTestId('select-address-list');
 			selectAddressInput.click();
