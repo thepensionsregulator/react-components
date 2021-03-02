@@ -91,7 +91,7 @@ describe('Address lookup', () => {
 			expect(errorMessage).not.toBeNull();
 		});
 		test('should call onValidatePostcode when postcode is entered', async () => {
-			const { } = formSetup({
+			formSetup({
 				render: <AddressLookup {...defaultProps} />,
 			});
 			await updateAPostcode('s6 2nr');
@@ -112,7 +112,7 @@ describe('Address lookup', () => {
 		});
 
 		test('should list matching addresses', async () => {
-			const { } = formSetup({
+			formSetup({
 				render: <AddressLookup {...defaultProps} />,
 			});
 
@@ -130,7 +130,7 @@ describe('Address lookup', () => {
 		});
 
 		test('should pass selected address to edit address view', async () => {
-			const { } = formSetup({
+			formSetup({
 				render: <AddressLookup {...defaultProps} />,
 			});
 
