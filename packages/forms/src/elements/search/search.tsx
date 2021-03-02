@@ -15,6 +15,7 @@ interface SearchProps extends FieldRenderProps<string>, FieldExtraProps {
 	formatItem?: (item: any) => string;
 	getSelectedItem?: (item: any) => string;
 	keyValue: string;
+	labelNotBold?: boolean;
 	minLength?: number;
 	notFoundMessage?: string;
 	optionsArray?: any[];
@@ -35,6 +36,7 @@ const Search: React.FC<SearchProps> = React.memo(
 		inputWidth = 10,
 		keyValue,
 		label,
+		labelNotBold = false,
 		meta,
 		minLength,
 		name,
@@ -111,17 +113,18 @@ const Search: React.FC<SearchProps> = React.memo(
 		return (
 			<div className={classes}>
 				<StyledInputLabel
+					cfg={Object.assign({ flexDirection: 'column' }, cfg)}
 					element="label"
 					isError={meta && meta.touched && meta.error}
-					cfg={Object.assign({ flexDirection: 'column' }, cfg)}
 					{...rest.ariaLabel}
 				>
 					<InputElementHeading
-						label={label}
-						required={required}
-						hint={hint}
-						meta={meta}
 						accessibilityHelper={helper}
+						hint={hint}
+						label={label}
+						labelNotBold={labelNotBold}
+						meta={meta}
+						required={required}
 					/>
 					<Flex
 						cfg={{ width: inputWidth, flexDirection: 'column' }}

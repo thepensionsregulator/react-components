@@ -40,18 +40,25 @@ interface FormLabelTextProps {
 	element?: 'div' | 'legend' | 'label' | null;
 	id?: string;
 	className?: string;
+	labelNotBold?: boolean;
 }
 
 export const FormLabelText: React.FC<FormLabelTextProps> = ({
 	element = 'div',
 	id = null,
 	children,
+	labelNotBold,
 }) => {
+	const classNames = useClassNames({},[
+			styles.labelText,
+			labelNotBold && styles.labelNoBold
+		]
+	)
 	return createElement(
 		element,
 		{
 			id: id,
-			className: styles.labelText,
+			className: classNames,
 		},
 		children,
 	);
@@ -75,6 +82,7 @@ type InputElementHeadingProps = {
 	hint?: string;
 	meta?: any;
 	accessibilityHelper: AccessibilityHelper;
+	labelNotBold?: boolean;
 };
 export const InputElementHeading: React.FC<InputElementHeadingProps> = ({
 	element = 'div',
@@ -83,11 +91,12 @@ export const InputElementHeading: React.FC<InputElementHeadingProps> = ({
 	hint,
 	meta,
 	accessibilityHelper,
+	labelNotBold,
 }) => {
 	return (
 		<>
 			{label && (
-				<FormLabelText element={element} id={accessibilityHelper.labelId}>
+				<FormLabelText element={element} id={accessibilityHelper.labelId} labelNotBold={labelNotBold}>
 					{label} {!required && '(optional)'}
 				</FormLabelText>
 			)}
