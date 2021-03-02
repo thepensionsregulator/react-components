@@ -3,6 +3,11 @@ import '@testing-library/jest-dom/extend-expect';
 
 expect.extend(toHaveNoViolations);
 
+global.throwOnConsoleError = true;
+
 global.console.error = (message) => {
-  throw message
+  if (global.throwOnConsoleError)
+    throw message
+  else 
+    global.console.warn(message);
 }
