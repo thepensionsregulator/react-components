@@ -26,6 +26,7 @@ interface InputNumberProps extends FieldRenderProps<number>, FieldExtraProps {
 }
 
 const InputNumber: React.FC<InputNumberProps> = ({
+	id,
 	label,
 	name,
 	hint,
@@ -141,6 +142,7 @@ const InputNumber: React.FC<InputNumberProps> = ({
 				accessibilityHelper={helper}
 			/>
 			<Input
+				id={id}
 				type="number"
 				width={width}
 				testId={testId}

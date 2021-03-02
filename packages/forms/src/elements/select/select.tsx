@@ -20,6 +20,7 @@ interface SelectProps extends DownshiftProps<any>, FieldExtraProps {
 export const selectStateChangeTypes = Downshift.stateChangeTypes;
 
 export const Select: React.FC<SelectProps & FieldRenderProps<string>> = ({
+	id,
 	options,
 	label,
 	required,
@@ -39,7 +40,7 @@ export const Select: React.FC<SelectProps & FieldRenderProps<string>> = ({
 	cfg,
 	...rest
 }) => {
-	const helper = new AccessibilityHelper(rest['id'], !!label, !!hint);
+	const helper = new AccessibilityHelper(id, !!label, !!hint);
 
 	return (
 		<Downshift

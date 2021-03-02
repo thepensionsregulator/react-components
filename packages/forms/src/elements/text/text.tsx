@@ -13,6 +13,7 @@ type InputTextProps = FieldRenderProps<string> &
 const InputText: React.FC<InputTextProps> = React.forwardRef(
 	(
 		{
+			id,
 			label,
 			name,
 			ariaLabel,
@@ -53,6 +54,7 @@ const InputText: React.FC<InputTextProps> = React.forwardRef(
 					accessibilityHelper={helper}
 				/>
 				<Input
+					id={id}
 					parentRef={ref}
 					type="text"
 					width={width}

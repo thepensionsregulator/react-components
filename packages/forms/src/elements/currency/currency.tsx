@@ -38,6 +38,7 @@ interface InputCurrencyProps extends FieldRenderProps<number>, FieldExtraProps {
 
 const InputCurrency: React.FC<InputCurrencyProps> = React.memo(
 	({
+		id,
 		label,
 		hint,
 		input,
@@ -250,6 +251,7 @@ const InputCurrency: React.FC<InputCurrencyProps> = React.memo(
 					accessibilityHelper={helper}
 				/>
 				<Input
+					id={id}
 					parentRef={innerInput}
 					type="text"
 					width={width}
