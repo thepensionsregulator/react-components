@@ -37,7 +37,6 @@ const Search: React.FC<SearchProps> = React.memo(
 		name,
 		notFoundMessage = 'There are no matches for your search criteria',
 		optionsArray = [],
-		placeholder,
 		minLength,
 		required = true,
 		searchService,
@@ -112,7 +111,6 @@ const Search: React.FC<SearchProps> = React.memo(
 					element="label"
 					isError={meta && meta.touched && meta.error}
 					cfg={Object.assign({ flexDirection: 'column' }, cfg)}
-					{...rest.ariaLabel}
 				>
 					<InputElementHeading
 						label={label}
@@ -133,7 +131,7 @@ const Search: React.FC<SearchProps> = React.memo(
 							showAllValues={false}
 							minLength={minLength}
 							tNoResults={() => notFoundMessage}
-							placeholder={placeholder}
+							placeholder={rest.placeholder}
 							templates={{
 								inputValue: getSelectedItemDefault,
 								suggestion: formatItem,
