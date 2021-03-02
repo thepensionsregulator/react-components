@@ -7,17 +7,6 @@ import { AddressLookup, AddressProps } from '../elements/address/addressLookup';
 import FakeAddressLookupProvider from '../elements/address/fakeAddressLookupProvider';
 import { invokeActionWithConsoleErrorTestFailureSuppressed } from '../utils/consoleErrorTestFailureTemporarySupression';
 
-// const exampleAddress = {
-// 	addressLine1: 'Napier House',
-// 	addressLine2: 'Trafalgar Place',
-// 	addressLine3: 'Trafalgar Road',
-// 	postTown: 'Brighton',
-// 	county: 'East Sussex',
-// 	postcode: 'BN1 4DW',
-// 	country: 'UK',
-// 	countryId: 229,
-// };
-
 const addressLookupProvider = new FakeAddressLookupProvider();
 
 const defaultProps: AddressProps = {
