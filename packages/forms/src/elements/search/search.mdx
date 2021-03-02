@@ -224,11 +224,11 @@ import { FFSearch } from '@tpr/forms';
 							<form onSubmit={handleSubmit}>
 								<FFSearch
 									callback={cb}
-									id="accessible-search"
+									id="accessible-search-2"
 									keyValue={keyValue}
 									label="Search Organisation by town"
 									minLength={3}
-									name="accessible-search"
+									name="accessible-search-2"
 									searchService={searchService}
 								/>
 							</form>
@@ -312,7 +312,7 @@ import { FFSearch } from '@tpr/forms';
 				postcode: 'SE12 6DD',
 			},
 		];
-		const keyValue = 'organinationName';
+		const keyValue = 'organisationName';
 		const [valueSelected, setValueSelected] = useState(null);
 		const cb = (selection) => {
 			console.log('callback function: ', selection);
@@ -335,10 +335,11 @@ import { FFSearch } from '@tpr/forms';
 								<FFSearch
 									assistiveHint="This is the new assistive hint"
 									callback={cb}
-									id="accessible-search"
+									id="accessible-search-3"
 									keyValue={keyValue}
-									minLength={5}
-									name="accessible-search"
+									minLength={2}
+									name="accessible-search-3"
+									placeholder="type here the name of the organisation"
 									searchService={searchService}
 								/>
 							</form>
