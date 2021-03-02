@@ -23,8 +23,11 @@ export const RadioButton: React.FC<RadioButtonProps> = ({
 	className,
 }) => {
 	const msg = testId ? `${testId}-${checked ? 'checked' : 'unchecked'}` : null;
-	const helper = new AccessibilityHelper(id, !!label, !!hint);
-
+	const helper = new AccessibilityHelper(
+		id ? id : `${name}_${value}`,
+		!!label,
+		!!hint,
+	);
 	return (
 		<StyledInputLabel
 			element="div"
@@ -67,7 +70,7 @@ export const RadioButton: React.FC<RadioButtonProps> = ({
 				</P>
 			</label>
 			{hint && (
-				<P id={id && `${id}-hint`} className={styles.hint}>
+				<P id={helper && helper.hintId} className={styles.hint}>
 					{hint}
 				</P>
 			)}
