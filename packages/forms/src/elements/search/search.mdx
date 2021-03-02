@@ -223,11 +223,120 @@ import { FFSearch } from '@tpr/forms';
 						{({ handleSubmit }) => (
 							<form onSubmit={handleSubmit}>
 								<FFSearch
+									callback={cb}
+									id="accessible-search"
+									keyValue={keyValue}
+									label="Search Organisation by town"
+									minLength={3}
+									name="accessible-search"
+									searchService={searchService}
+								/>
+							</form>
+						)}
+					</Form>
+				)}
+				{valueSelected !== null && (
+					<>
+						<p>{valueSelected.organisationName}</p>
+						<Button
+							type="button"
+							cfg={{ mt: 3 }}
+							onClick={() => setValueSelected(null)}
+						>
+							Change Organisation
+						</Button>
+					</>
+				)}
+			</>
+		);
+	}}
+</Playground>
+
+### Search input without label & hint
+
+<Playground>
+	{() => {
+		const values = [
+			{
+				organisationName: 'AAAAAA',
+				addressLine1: 'address1',
+				addressLine2: '',
+				addressLine3: 'address13',
+				postTown: 'London',
+				postCounty: '',
+				postcode: 'SE11 5DD',
+			},
+			{
+				organisationName: 'BBBBBB',
+				addressLine1: 'address2',
+				addressLine2: 'address22',
+				addressLine3: 'address23',
+				postTown: 'Manchester',
+				postCounty: '',
+				postcode: 'SE12 5DD',
+			},
+			{
+				organisationName: 'CCCCCC',
+				addressLine1: 'address3',
+				addressLine2: 'address32',
+				addressLine3: 'address33',
+				postTown: 'Liverpool',
+				postCounty: '',
+				postcode: 'SE13 5DD',
+			},
+			{
+				organisationName: 'DDDDDD',
+				addressLine1: 'address4',
+				addressLine2: 'address42',
+				addressLine3: 'address43',
+				postTown: 'Brighton',
+				postCounty: '',
+				postcode: 'SE14 5DD',
+			},
+			{
+				organisationName: 'EEEEEE',
+				addressLine1: 'address5',
+				addressLine2: 'address52',
+				addressLine3: 'address53',
+				postTown: 'Cardiff',
+				postCounty: '',
+				postcode: 'SE15 5DD',
+			},
+			{
+				organisationName: 'BBABBB',
+				addressLine1: 'address6',
+				addressLine2: 'address62',
+				addressLine3: 'address63',
+				postTown: 'Manchester',
+				postCounty: '',
+				postcode: 'SE12 6DD',
+			},
+		];
+		const keyValue = 'organinationName';
+		const [valueSelected, setValueSelected] = useState(null);
+		const cb = (selection) => {
+			console.log('callback function: ', selection);
+			setValueSelected(selection);
+		};
+		const searchService = (query) => {
+			const resultsFiltered = values.filter((option) => {
+				return (
+					option[keyValue].toLowerCase().indexOf(query.toLowerCase()) !== -1
+				);
+			});
+			return Promise.resolve([...resultsFiltered]);
+		};
+		return (
+			<>
+				{valueSelected == null && (
+					<Form onSubmit={() => console.log('onSubmit:', valueSelected)}>
+						{({ handleSubmit }) => (
+							<form onSubmit={handleSubmit}>
+								<FFSearch
 									assistiveHint="This is the new assistive hint"
 									callback={cb}
 									id="accessible-search"
 									keyValue={keyValue}
-									label="Search Organisation"
 									minLength={5}
 									name="accessible-search"
 									searchService={searchService}
@@ -266,6 +375,7 @@ import { FFSearch } from '@tpr/forms';
 | inputWidth      | false    | SpaceProps | the width of the input                                                                             |
 | keyValue        | true     | string     | the key value that will be used for the search                                                     |
 | label           | true     | string     | text to be displayed as the label of the input                                                     |
+| labelNotBold    | false    | boolean    | allow to display the label text in a normal font-weight instead of bold                            |
 | minLength       | false    | number     | the minimum amount of characters before the search starts                                          |
 | name            | true     | string     | name/id for the input                                                                              |
 | notFoundMessage | false    | string     | text displayed when there are no options to select                                                 |
