@@ -42,7 +42,6 @@ const Search: React.FC<SearchProps> = React.memo(
 		name,
 		notFoundMessage = 'There are no matches for your search criteria',
 		optionsArray = [],
-		placeholder,
 		required = true,
 		searchService,
 		testId = 'search',
@@ -116,7 +115,6 @@ const Search: React.FC<SearchProps> = React.memo(
 					cfg={Object.assign({ flexDirection: 'column' }, cfg)}
 					element="label"
 					isError={meta && meta.touched && meta.error}
-					{...rest.ariaLabel}
 				>
 					<InputElementHeading
 						accessibilityHelper={helper}
@@ -135,7 +133,7 @@ const Search: React.FC<SearchProps> = React.memo(
 							minLength={minLength}
 							name={name}
 							onConfirm={chooseOption}
-							placeholder={placeholder}
+							placeholder={rest.placeholder}
 							showAllValues={false}
 							source={getResults}
 							tAssistiveHint={() => assistiveHint}
