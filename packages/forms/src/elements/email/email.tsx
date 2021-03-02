@@ -12,6 +12,7 @@ import AccessibilityHelper from '../accessibilityHelper';
 
 type InputEmailProps = FieldRenderProps<string> & FieldExtraProps;
 const InputEmail: React.FC<InputEmailProps> = ({
+	id,
 	label,
 	name,
 	hint,
@@ -39,6 +40,7 @@ const InputEmail: React.FC<InputEmailProps> = ({
 				accessibilityHelper={helper}
 			/>
 			<Input
+				id={id}
 				type="email"
 				width={width}
 				testId={testId}

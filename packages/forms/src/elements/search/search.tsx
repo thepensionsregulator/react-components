@@ -14,6 +14,7 @@ interface SearchProps extends FieldRenderProps<string>, FieldExtraProps {
 	formatItem?: (item: any) => string;
 	getSelectedItem?: (item: any) => string;
 	keyValue: string;
+	minLength?: number;
 	notFoundMessage?: string;
 	optionsArray?: any[];
 	searchService?: (x: string) => Promise<any>;
@@ -23,6 +24,7 @@ type PanelVisibility = 'visible' | 'hidden' | 'complete';
 
 const Search: React.FC<SearchProps> = React.memo(
 	({
+		id,
 		callback,
 		cfg,
 		formatItem = formatItemDefault,
@@ -36,6 +38,7 @@ const Search: React.FC<SearchProps> = React.memo(
 		notFoundMessage = 'There are no matches for your search criteria',
 		optionsArray = [],
 		placeholder,
+		minLength,
 		required = true,
 		searchService,
 		testId = 'search',
@@ -101,7 +104,7 @@ const Search: React.FC<SearchProps> = React.memo(
 			toggleResultsPanel();
 		}, [panelVisible]);
 
-		const helper = new AccessibilityHelper(rest['id'], !!label, !!hint);
+		const helper = new AccessibilityHelper(id, !!label, !!hint);
 
 		return (
 			<div className={classes}>
@@ -124,17 +127,18 @@ const Search: React.FC<SearchProps> = React.memo(
 					>
 						<Autocomplete
 							name={name}
-							id={testId}
+							id={id}
 							source={getResults}
 							onConfirm={chooseOption}
 							showAllValues={false}
-							minLength={3}
+							minLength={minLength}
 							tNoResults={() => notFoundMessage}
 							placeholder={placeholder}
 							templates={{
 								inputValue: getSelectedItemDefault,
 								suggestion: formatItem,
 							}}
+							testId={testId}
 						/>
 					</Flex>
 				</StyledInputLabel>
