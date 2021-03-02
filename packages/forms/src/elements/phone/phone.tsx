@@ -12,6 +12,7 @@ import AccessibilityHelper from '../accessibilityHelper';
 
 type InputPhoneProps = FieldRenderProps<string> & FieldExtraProps;
 const InputPhone: React.FC<InputPhoneProps> = ({
+	id,
 	label,
 	name,
 	hint,
@@ -39,6 +40,7 @@ const InputPhone: React.FC<InputPhoneProps> = ({
 				accessibilityHelper={helper}
 			/>
 			<Input
+				id={id}
 				type="tel"
 				width={width}
 				testId={testId}

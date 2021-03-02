@@ -28,6 +28,8 @@ export type FieldOptions = {
 };
 
 export type FieldExtraProps = {
+	/** an id that identifies the input on the page **/
+	id?: string;
 	/** input label above the input box */
 	label?: string;
 	/** aria-label for accessibility when label is not specified */

@@ -4,6 +4,7 @@ import styles from './input.module.scss';
 import AccessibilityHelper from '../accessibilityHelper';
 
 export type InputProps = {
+	id?: string;
 	type: string;
 	width?: LayoutProps['width'];
 	testId?: string;
@@ -20,6 +21,7 @@ export type InputProps = {
 };
 
 export const Input: React.FC<InputProps> = ({
+	id,
 	type = 'text',
 	width,
 	testId,
@@ -56,6 +58,7 @@ export const Input: React.FC<InputProps> = ({
 		>
 			{Before && <span className={styles.before}>{Before}</span>}
 			<input
+				id={id}
 				ref={parentRef}
 				type={type}
 				data-testid={testId}
