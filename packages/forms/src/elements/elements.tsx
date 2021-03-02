@@ -39,6 +39,7 @@ export const StyledInputLabel: React.FC<StyledInputLabelProps> = ({
 interface FormLabelTextProps {
 	element?: 'div' | 'legend' | 'label' | null;
 	id?: string;
+	className?: string;
 }
 
 export const FormLabelText: React.FC<FormLabelTextProps> = ({
