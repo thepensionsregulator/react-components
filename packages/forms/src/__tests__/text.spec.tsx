@@ -45,12 +45,7 @@ describe('Text input', () => {
 	test('renders aria-label', () => {
 		const { queryByTestId } = formSetup({
 			render: (
-				<FFInputText
-					ariaLabel="Name"
-					testId="text-input"
-					name="name"
-					type="text"
-				/>
+				<FFInputText label="Name" testId="text-input" name="name" type="text" />
 			),
 		});
 

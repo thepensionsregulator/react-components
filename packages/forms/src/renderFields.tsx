@@ -32,8 +32,6 @@ export type FieldExtraProps = {
 	id?: string;
 	/** input label above the input box */
 	label?: string;
-	/** aria-label for accessibility when label is not specified */
-	ariaLabel?: string;
 	/** field hints or requirements explained */
 	hint?: string;
 	/** for radio buttons */
