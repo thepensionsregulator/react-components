@@ -112,13 +112,14 @@ import { FFSearch } from '@tpr/forms';
 						{({ handleSubmit }) => (
 							<form onSubmit={handleSubmit}>
 								<FFSearch
-									name="accessible-search"
-									label="Organisation"
-									hint="Search by organisation name."
-									optionsArray={values}
-									keyValue="organisationName"
-									inputWidth={5}
 									callback={cb}
+									hint="Search by organisation name."
+									id="accessible-search"
+									inputWidth={5}
+									keyValue="organisationName"
+									label="Organisation"
+									name="accessible-search"
+									optionsArray={values}
 								/>
 							</form>
 						)}

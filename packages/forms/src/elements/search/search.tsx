@@ -10,6 +10,7 @@ import { act } from 'react-dom/test-utils';
 import styles from './search.module.scss';
 
 interface SearchProps extends FieldRenderProps<string>, FieldExtraProps {
+	assistiveHint?: string;
 	callback?: Function;
 	formatItem?: (item: any) => string;
 	getSelectedItem?: (item: any) => string;
@@ -18,32 +19,31 @@ interface SearchProps extends FieldRenderProps<string>, FieldExtraProps {
 	notFoundMessage?: string;
 	optionsArray?: any[];
 	searchService?: (x: string) => Promise<any>;
-	assistiveHint?: string;
 }
 
 type PanelVisibility = 'visible' | 'hidden' | 'complete';
 
 const Search: React.FC<SearchProps> = React.memo(
 	({
-		id,
+		assistiveHint = 'When autocomplete results are available use up and down arrows to review and enter to select. Touch device users, explore by touch or with swipe gestures.',
 		callback,
 		cfg,
 		formatItem = formatItemDefault,
 		getSelectedItem,
 		hint,
+		id,
 		inputWidth = 10,
 		keyValue,
 		label,
 		meta,
+		minLength,
 		name,
 		notFoundMessage = 'There are no matches for your search criteria',
 		optionsArray = [],
 		placeholder,
-		minLength,
 		required = true,
 		searchService,
 		testId = 'search',
-		assistiveHint,
 		...rest
 	}) => {
 		const [panelVisible, setPanelVisible] = useState<PanelVisibility>('hidden');
@@ -128,20 +128,20 @@ const Search: React.FC<SearchProps> = React.memo(
 						className={styles.relative}
 					>
 						<Autocomplete
-							name={name}
 							id={id}
-							source={getResults}
-							onConfirm={chooseOption}
-							showAllValues={false}
 							minLength={minLength}
-							tNoResults={() => notFoundMessage}
+							name={name}
+							onConfirm={chooseOption}
 							placeholder={placeholder}
+							showAllValues={false}
+							source={getResults}
+							tAssistiveHint={() => assistiveHint}
 							templates={{
 								inputValue: getSelectedItemDefault,
 								suggestion: formatItem,
 							}}
 							testId={testId}
-							tAssistiveHint={() => assistiveHint}
+							tNoResults={() => notFoundMessage}
 						/>
 					</Flex>
 				</StyledInputLabel>
