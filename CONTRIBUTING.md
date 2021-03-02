@@ -43,7 +43,7 @@ Automatic deployment:
 
 - Branch names that start with `rc`, `feature` or `bug` will be automatically published to NPM with a `next` tag on a `patch` version, only if they pass build and tests on CircleCI. The status of deployment will be visible on a pull request.
 
-Manual deployment:
+Manual deployment: 
 
 - When you're ready to deploy `minor` or `major` versions you can do so from updated `develop` branch in your terminal running command `yarn deploy --message "Release AB#12345"` and follow the instructions in your terminal. Update `AB#12345` to refer to the Azure Boards work item relevant to your work. `Lerna` will bump all versions to chosen ones and will push git refs to Github and new packages to the NPM registry.
 
