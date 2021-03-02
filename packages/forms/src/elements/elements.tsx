@@ -49,11 +49,10 @@ export const FormLabelText: React.FC<FormLabelTextProps> = ({
 	children,
 	labelNotBold,
 }) => {
-	const classNames = useClassNames({},[
-			styles.labelText,
-			labelNotBold && styles.labelNoBold
-		]
-	)
+	const classNames = useClassNames({}, [
+		styles.labelText,
+		labelNotBold && styles.labelNoBold,
+	]);
 	return createElement(
 		element,
 		{
@@ -96,7 +95,11 @@ export const InputElementHeading: React.FC<InputElementHeadingProps> = ({
 	return (
 		<>
 			{label && (
-				<FormLabelText element={element} id={accessibilityHelper.labelId} labelNotBold={labelNotBold}>
+				<FormLabelText
+					element={element}
+					id={accessibilityHelper.labelId}
+					labelNotBold={labelNotBold}
+				>
 					{label} {!required && '(optional)'}
 				</FormLabelText>
 			)}
