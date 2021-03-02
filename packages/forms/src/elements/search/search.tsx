@@ -18,6 +18,7 @@ interface SearchProps extends FieldRenderProps<string>, FieldExtraProps {
 	notFoundMessage?: string;
 	optionsArray?: any[];
 	searchService?: (x: string) => Promise<any>;
+	assistiveHint?: string;
 }
 
 type PanelVisibility = 'visible' | 'hidden' | 'complete';
@@ -42,6 +43,7 @@ const Search: React.FC<SearchProps> = React.memo(
 		required = true,
 		searchService,
 		testId = 'search',
+		assistiveHint,
 		...rest
 	}) => {
 		const [panelVisible, setPanelVisible] = useState<PanelVisibility>('hidden');
@@ -139,6 +141,7 @@ const Search: React.FC<SearchProps> = React.memo(
 								suggestion: formatItem,
 							}}
 							testId={testId}
+							tAssistiveHint={() => assistiveHint}
 						/>
 					</Flex>
 				</StyledInputLabel>

@@ -222,12 +222,14 @@ import { FFSearch } from '@tpr/forms';
 						{({ handleSubmit }) => (
 							<form onSubmit={handleSubmit}>
 								<FFSearch
-									name="accessible-search"
-									label="Search Organisation"
-									searchService={searchService}
-									keyValue={keyValue}
+									assistiveHint="This is the new assistive hint"
 									callback={cb}
-									testId="auto"
+									id="accessible-search"
+									keyValue={keyValue}
+									label="Search Organisation"
+									minLength={5}
+									name="accessible-search"
+									searchService={searchService}
 								/>
 							</form>
 						)}
@@ -254,17 +256,19 @@ import { FFSearch } from '@tpr/forms';
 
 ### Props
 
-| Property        | Required | Type       | Description                                                                           |
-| --------------- | -------- | ---------- | ------------------------------------------------------------------------------------- |
-| callback        | false    | function   | callback function that runs when the user chooses an option                           |
-| formatItem      | false    | function   | optional function to specify how to display the results                               |
-| getSelectedItem | false    | function   | optional function for the Autocomplete component to specify how to filter the results |
-| inputWidth      | false    | SpaceProps | the width of the input                                                                |
-| keyValue        | true     | string     | the key value that will be used for the search                                        |
-| label           | true     | string     | text to be displayed as the label of the input                                        |
-| name            | true     | string     | name/id for the input                                                                 |
-| notFoundMessage | false    | string     | text displayed when there are no options to select                                    |
-| optionsArray    | false    | array      | Array of objects with the options to filter                                           |
-| placeholder     | false    | string     | placeholder for the input (not recommended)                                           |
-| searchService   | false    | function   | function that performs the search and returns a promise with the array of results     |
-| testId          | false    | string     | data attribute for testers                                                            |
+| Property        | Required | Type       | Description                                                                                        |
+| --------------- | -------- | ---------- | -------------------------------------------------------------------------------------------------- |
+| assistiveHint   | false    | string     | Accessibility: description of the usage of the component for users with accessibility requirements |
+| callback        | false    | function   | callback function that runs when the user chooses an option                                        |
+| formatItem      | false    | function   | optional function to specify how to display the results                                            |
+| getSelectedItem | false    | function   | optional function for the Autocomplete component to specify how to filter the results              |
+| inputWidth      | false    | SpaceProps | the width of the input                                                                             |
+| keyValue        | true     | string     | the key value that will be used for the search                                                     |
+| label           | true     | string     | text to be displayed as the label of the input                                                     |
+| minLength       | false    | number     | the minimum amount of characters before the search starts                                          |
+| name            | true     | string     | name/id for the input                                                                              |
+| notFoundMessage | false    | string     | text displayed when there are no options to select                                                 |
+| optionsArray    | false    | array      | Array of objects with the options to filter                                                        |
+| placeholder     | false    | string     | placeholder for the input (not recommended)                                                        |
+| searchService   | false    | function   | function that performs the search and returns a promise with the array of results                  |
+| testId          | false    | string     | data attribute for testers                                                                         |
