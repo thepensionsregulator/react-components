@@ -1,5 +1,5 @@
 import React from 'react';
-import { P, H4 } from '@tpr/core';
+import { P } from '@tpr/core';
 import { Footer } from '../../../../components/card';
 import { Form, FFRadioButton, FieldProps, renderFields } from '@tpr/forms';
 import { Content } from '../../../../components/content';
@@ -44,10 +44,8 @@ export const Reason: React.FC<ReasonProps> = ({
 						<form onSubmit={handleSubmit} data-testid={`remove-${type}-form`}>
 							<div className={showError ? elementStyles.labelError : null}>
 								<fieldset>
-									<legend>
-										<H4 fontWeight="bold" mb={0}>
-											{i18nRemoveReason.subtitle}
-										</H4>
+									<legend>										
+											{i18nRemoveReason.subtitle}										
 									</legend>
 									<FFRadioButton
 										name="reason"

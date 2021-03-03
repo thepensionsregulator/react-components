@@ -21,7 +21,7 @@ export const RadioButton: React.FC<RadioButtonProps> = ({
 	hint,
 	className,
 }) => {
-	const msg = testId ? `${testId}-${checked ? 'checked' : 'unchecked'}` : null;
+	const msg = testId ? `${testId}-${checked ? 'checked' : 'unchecked'}` : null;	
 	return (
 		<StyledInputLabel
 			element="div"
@@ -37,7 +37,7 @@ export const RadioButton: React.FC<RadioButtonProps> = ({
 				cfg,
 			)}
 		>
-			<label
+			<label htmlFor={id}
 				className={`${styles.wrapper} ${disabled ? styles.disabled : ''}`}
 				data-testid={msg}
 			>
@@ -70,13 +70,13 @@ export const FFRadioButton: React.FC<FieldProps> = (fieldProps) => {
 		input.onChange(value);
 		fieldProps.callback && fieldProps.callback(value);
 	};
-
-	return (
+	
+	return (		
 		<Field
 			{...fieldProps}
 			type="radio"
 			render={({ label, input, ...rest }: any) => {
-				return (
+				return (										
 					<RadioButton
 						name={input.name}
 						value={input.value}
@@ -84,9 +84,9 @@ export const FFRadioButton: React.FC<FieldProps> = (fieldProps) => {
 						label={label}
 						onChange={(e: any) => handleChange(input, e.target.value)}
 						{...rest}
-					/>
+					/>					
 				);
 			}}
-		/>
+		/>		
 	);
 };
