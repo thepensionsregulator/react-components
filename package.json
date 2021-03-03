@@ -25,7 +25,6 @@
 		"packages/*"
 	],
 	"dependencies": {
-		"@tpr/core": "file:./packages/core",
 		"@tpr/forms": "file:./packages/forms",
 		"@tpr/icons": "file:./packages/icons",
 		"@tpr/layout": "file:./packages/layout",
