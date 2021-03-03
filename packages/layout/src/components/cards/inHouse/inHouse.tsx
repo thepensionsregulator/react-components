@@ -4,7 +4,7 @@ import {
 	InHouseAdminProviderProps,
 	useInHouseAdminContext,
 } from './context';
-import { Flex, Span } from '@tpr/core';
+import { Section, Span } from '@tpr/core';
 import { Toolbar } from '../components/toolbar';
 import { UnderlinedButton } from '../components/button';
 import { Preview } from './views/preview/preview';
@@ -18,6 +18,7 @@ import { cardType, cardTypeName } from '../common/interfaces';
 import styles from '../cards.module.scss';
 import { AddressComparer } from '@tpr/forms';
 import { InHouseAdminContext } from './inHouseMachine';
+import { removeFromTabFlowIfMatches, concatenateStrings } from '../../../utils';
 
 const CardContentSwitch: React.FC = () => {
 	const {
@@ -108,7 +109,10 @@ const InHouseAdminButton: React.FC = () => {
 	);
 };
 
-const RemoveButton: React.FC<{ title: string }> = ({ title }) => {
+const RemoveButton: React.FC<{ title: string; tabIndex?: number }> = ({
+	title,
+	tabIndex,
+}) => {
 	const { current, send } = useInHouseAdminContext();
 	return (
 		<UnderlinedButton
@@ -126,6 +130,7 @@ const RemoveButton: React.FC<{ title: string }> = ({ title }) => {
 					send('REMOVE');
 				}
 			}}
+			tabIndex={tabIndex}
 		>
 			{title}
 		</UnderlinedButton>
@@ -143,34 +148,47 @@ export const InHouseCard: React.FC<InHouseAdminProviderProps> = ({
 }) => {
 	return (
 		<InHouseAdminProvider {...rest}>
-			{({ current: { context }, i18n }) => {
+			{({ current, i18n }) => {
 				return (
-					<Flex cfg={cfg} data-testid={testId} className={styles.card}>
+					<Section
+						cfg={cfg}
+						data-testid={testId}
+						className={styles.card}
+						ariaLabel={concatenateStrings([
+							current.context.inHouseAdmin.title,
+							current.context.inHouseAdmin.firstName,
+							current.context.inHouseAdmin.lastName,
+							i18n.preview.buttons.one,
+						])}
+					>
 						<Toolbar
-							complete={isComplete(context)}
+							complete={isComplete(current.context)}
 							subtitle={() => (
 								<Span cfg={{ lineHeight: 3 }} className={styles.styledAsH4}>
-									{[
-										context.inHouseAdmin.title,
-										context.inHouseAdmin.firstName,
-										context.inHouseAdmin.lastName,
-									]
-										.filter(Boolean)
-										.join(' ')}
+									{concatenateStrings([
+										current.context.inHouseAdmin.title,
+										current.context.inHouseAdmin.firstName,
+										current.context.inHouseAdmin.lastName,
+									])}
 								</Span>
 							)}
 							statusText={
-								isComplete(context)
+								isComplete(current.context)
 									? i18n.preview.statusText.confirmed
 									: i18n.preview.statusText.unconfirmed
 							}
 							buttonLeft={() => <InHouseAdminButton />}
 							buttonRight={() => (
-								<RemoveButton title={i18n.preview.buttons.two} />
+								<RemoveButton
+									title={i18n.preview.buttons.two}
+									tabIndex={removeFromTabFlowIfMatches(current, {
+										edit: 'name',
+									})}
+								/>
 							)}
 						/>
 						<CardContentSwitch />
-					</Flex>
+					</Section>
 				);
 			}}
 		</InHouseAdminProvider>

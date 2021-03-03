@@ -1,9 +1,17 @@
 import React, { ChangeEvent, useState } from 'react';
 import { Field, FieldRenderProps } from 'react-final-form';
 import { StyledInputLabel, InputElementHeading } from '../elements';
-import { FieldProps, FieldExtraProps } from '../../renderFields';
+import { FieldExtraProps } from '../../renderFields';
 import { Input } from '../input/input';
 import { adaptValueToFormat, fixToDecimals, validKeys as vk } from '../helpers';
+import { FieldWithAriaLabelExtenstionI18nProps } from 'types/FieldWithAriaLabelExtensionI18nProps';
+import { FieldWithAriaLabelExtensionProps } from '../../types/FieldWithAriaLabelExtensionProps';
+import { RecursivePartial } from 'types/RecursivePartial';
+import AccessibilityHelper from '../accessibilityHelper';
+
+let numberFieldI18nDefaults: FieldWithAriaLabelExtenstionI18nProps = {
+	ariaLabelExtension: null,
+};
 
 interface InputNumberProps extends FieldRenderProps<number>, FieldExtraProps {
 	after?: string;
@@ -14,9 +22,11 @@ interface InputNumberProps extends FieldRenderProps<number>, FieldExtraProps {
 	optionalText?: boolean;
 	maxLength?: number;
 	maxIntDigits?: number;
+	i18n?: RecursivePartial<FieldWithAriaLabelExtenstionI18nProps>;
 }
 
 const InputNumber: React.FC<InputNumberProps> = ({
+	id,
 	label,
 	name,
 	hint,
@@ -36,6 +46,7 @@ const InputNumber: React.FC<InputNumberProps> = ({
 	optionalText,
 	maxLength,
 	maxIntDigits,
+	i18n = numberFieldI18nDefaults,
 	...props
 }) => {
 	const digits = [
@@ -115,7 +126,7 @@ const InputNumber: React.FC<InputNumberProps> = ({
 		input.onBlur(e.target.value); // without this call, validate won't be executed even if specified
 	};
 
-	const errorId = `${name}_error`;
+	const helper = new AccessibilityHelper(name, !!label, !!hint);
 
 	return (
 		<StyledInputLabel
@@ -125,19 +136,18 @@ const InputNumber: React.FC<InputNumberProps> = ({
 		>
 			<InputElementHeading
 				label={label}
-				errorId={errorId}
 				required={optionalText !== undefined ? !optionalText : required}
 				hint={hint}
 				meta={meta}
-				inputName={input.name}
+				accessibilityHelper={helper}
 			/>
 			<Input
+				id={id}
 				type="number"
 				width={width}
 				testId={testId}
 				label={label}
-				errorId={errorId}
-				touched={meta && meta.touched && meta.error}
+				isError={meta && meta.touched && meta.error}
 				placeholder={placeholder}
 				readOnly={readOnly}
 				decimalPlaces={decimalPlaces}
@@ -147,13 +157,17 @@ const InputNumber: React.FC<InputNumberProps> = ({
 				onBlur={handleBlur}
 				after={after}
 				before={before}
+				ariaLabelExtension={i18n.ariaLabelExtension}
+				accessibilityHelper={helper}
 				{...props}
 			/>
 		</StyledInputLabel>
 	);
 };
 
-export const FFInputNumber: React.FC<FieldProps> = (fieldProps) => {
+export const FFInputNumber: React.FC<FieldWithAriaLabelExtensionProps> = (
+	fieldProps,
+) => {
 	return (
 		<Field
 			{...fieldProps}

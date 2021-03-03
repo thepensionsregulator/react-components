@@ -6,6 +6,7 @@ import { CheckboxChecked, CheckboxBlank } from './icons';
 import { StyledInputLabel } from '../elements';
 import { HiddenInput } from '../hidden/hidden';
 import styles from './checkbox.module.scss';
+import AccessibilityHelper from '../accessibilityHelper';
 
 type CheckboxIconProps = FieldRenderProps<string> & FieldExtraProps;
 export const Checkbox: React.FC<Partial<CheckboxIconProps>> = ({
@@ -20,6 +21,8 @@ export const Checkbox: React.FC<Partial<CheckboxIconProps>> = ({
 	className,
 }) => {
 	const msg = testId ? `${testId}-${checked ? 'checked' : 'unchecked'}` : null;
+	const helper = new AccessibilityHelper(id, !!label, !!hint);
+
 	return (
 		<StyledInputLabel
 			element="div"
@@ -34,10 +37,16 @@ export const Checkbox: React.FC<Partial<CheckboxIconProps>> = ({
 				cfg,
 			)}
 		>
-			<label data-testid={msg} className={styles.wrapper} htmlFor={id}>
+			<label
+				id={helper && helper.labelId}
+				data-testid={msg}
+				className={styles.wrapper}
+				htmlFor={id}
+			>
 				<HiddenInput
 					id={id}
 					type="checkbox"
+					aria-describedby={helper && helper.hintId}
 					checked={checked}
 					disabled={disabled}
 					onChange={onChange}
@@ -49,7 +58,11 @@ export const Checkbox: React.FC<Partial<CheckboxIconProps>> = ({
 				)}
 				<P cfg={{ ml: 3, fontWeight: 3 }}>{label}</P>
 			</label>
-			{hint && <P className={styles.hint}>{hint}</P>}
+			{hint && (
+				<P id={helper.hintId} className={styles.hint}>
+					{hint}
+				</P>
+			)}
 		</StyledInputLabel>
 	);
 };

@@ -5,6 +5,10 @@ import { CorporateGroup } from '../cards/corporateGroup/context';
 import { axe } from 'jest-axe';
 import { cleanup } from '@testing-library/react-hooks';
 import { act } from 'react-dom/test-utils';
+import {
+	assertThatASectionExistsWithAnAriaLabel,
+	assertThatButtonHasAriaExpanded,
+} from '../testHelpers/testHelpers';
 
 const noop = () => Promise.resolve();
 
@@ -33,9 +37,15 @@ const corporateGroup: CorporateGroup = {
 
 describe('Corporate Group Trustee Card', () => {
 	describe('Preview', () => {
-		let component, findByText, findAllByText, findByTitle;
+		let component, findByText, findAllByText, findByTitle, findByRole;
 		beforeEach(() => {
-			const { container, getByText, getAllByText, queryByTitle } = render(
+			const {
+				container,
+				getByText,
+				getAllByText,
+				queryByTitle,
+				getByRole,
+			} = render(
 				<CorporateGroupCard
 					corporateGroup={corporateGroup}
 					complete={true}
@@ -51,6 +61,7 @@ describe('Corporate Group Trustee Card', () => {
 			findByText = getByText;
 			findAllByText = getAllByText;
 			findByTitle = queryByTitle;
+			findByRole = getByRole;
 		});
 
 		test('no Violations', async () => {
@@ -64,7 +75,13 @@ describe('Corporate Group Trustee Card', () => {
 			expect(findByText('Remove')).toBeDefined();
 			expect(findByText('Address')).toBeDefined();
 			expect(findByText('Chair of board')).toBeDefined();
+			assertThatButtonHasAriaExpanded(findByText, 'Chair of board', false);
 			expect(findByText('Director(s) are Professional Trustees')).toBeDefined();
+			assertThatButtonHasAriaExpanded(
+				findByText,
+				'Director(s) are Professional Trustees',
+				false,
+			);
 		});
 
 		test('initial status is correct', () => {
@@ -95,6 +112,13 @@ describe('Corporate Group Trustee Card', () => {
 
 		test('Director(s) block displays values correctly', () => {
 			expect(findByText('Yes')).toBeDefined();
+		});
+
+		test('renders with a section containing an aria label', () => {
+			assertThatASectionExistsWithAnAriaLabel(
+				findByRole,
+				`${corporateGroup.organisationName} Corporate Group trustee`,
+			);
 		});
 	});
 

@@ -13,6 +13,7 @@ export * from './elements/input/input';
 export * from './elements/checkbox/checkbox';
 export * from './elements/radio/radio';
 export * from './elements/select/select';
+export * from './elements/search/search';
 export * from './elements/hidden/hidden';
 export * from './elements/separator/separator';
 export * from './elements/currency/currency';

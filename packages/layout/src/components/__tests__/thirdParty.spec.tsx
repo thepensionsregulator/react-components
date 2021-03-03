@@ -4,6 +4,7 @@ import { ThirdPartyCard } from '../cards/thirdParty/thirdParty';
 import { axe } from 'jest-axe';
 import userEvent from '@testing-library/user-event';
 import { ThirdPartyProps } from '../cards/thirdParty/context';
+import { assertThatASectionExistsWithAnAriaLabel } from '../testHelpers/testHelpers';
 
 const noop = () => Promise.resolve();
 
@@ -36,6 +37,22 @@ describe('ThirdParty Preview', () => {
 
 		const results = await axe(container);
 		expect(results).toHaveNoViolations();
+	});
+
+	test('renders with a section containing an aria label', () => {
+		const { getByRole } = render(
+			<ThirdPartyCard
+				onRemove={noop}
+				onCorrect={noop}
+				complete={true}
+				thirdParty={thirdPartyAdmin}
+			/>,
+		);
+
+		assertThatASectionExistsWithAnAriaLabel(
+			getByRole,
+			`${thirdPartyAdmin.organisationName} Third Party Administrator`,
+		);
 	});
 });
 

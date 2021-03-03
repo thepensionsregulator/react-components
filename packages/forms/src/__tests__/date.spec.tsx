@@ -188,8 +188,10 @@ describe('Date input', () => {
 	});
 
 	test('using the hideDay prop', () => {
+		const id = 'test-date';
 		const fields: FieldProps[] = [
 			{
+				id: id,
 				name: 'month-year-only',
 				label: 'month-year-only',
 				hint: 'For example, 11 2007',
@@ -233,8 +235,10 @@ describe('Date input', () => {
 	});
 
 	test('using the hideDay & hideMonth props', () => {
+		const id = 'test-date';
 		const fields: FieldProps[] = [
 			{
+				id: id,
 				name: 'month-year-only',
 				label: 'month-year-only',
 				hint: 'For example, 11 2007',

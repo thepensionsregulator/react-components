@@ -8,7 +8,7 @@ interface RemovedBoxProps {
 
 const RemovedBox: React.FC<RemovedBoxProps> = ({ type }) => {
 	return (
-		<div className={styles.confirmationBox}>
+		<div role="alert" className={styles.confirmationBox}>
 			<Flex
 				cfg={{
 					flex: '0 0 auto',

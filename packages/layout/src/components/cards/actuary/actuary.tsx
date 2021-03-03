@@ -4,7 +4,7 @@ import {
 	ActuaryProviderProps,
 	useActuaryContext,
 } from './context';
-import { Flex, Span } from '@tpr/core';
+import { Section, Span } from '@tpr/core';
 import { Toolbar } from '../components/toolbar';
 import { UnderlinedButton } from '../components/button';
 import { Preview } from './views/preview/preview';
@@ -16,6 +16,7 @@ import RemovedBox from '../components/removedBox';
 import { cardTypeName } from '../common/interfaces';
 import styles from '../cards.module.scss';
 import { ActuaryContext } from './actuaryMachine';
+import { removeFromTabFlowIfMatches, concatenateStrings } from '../../../utils';
 
 const CardContentSwitch: React.FC = () => {
 	const { current } = useActuaryContext();
@@ -65,7 +66,10 @@ const ActuaryButton: React.FC = () => {
 	);
 };
 
-const RemoveButton: React.FC<{ title: string }> = ({ title }) => {
+const RemoveButton: React.FC<{ title: string; tabIndex?: number }> = ({
+	title,
+	tabIndex,
+}) => {
 	const { current, send } = useActuaryContext();
 	return (
 		<UnderlinedButton
@@ -83,6 +87,7 @@ const RemoveButton: React.FC<{ title: string }> = ({ title }) => {
 					send('REMOVE');
 				}
 			}}
+			tabIndex={tabIndex}
 		>
 			{title}
 		</UnderlinedButton>
@@ -100,34 +105,47 @@ export const ActuaryCard: React.FC<ActuaryProviderProps> = ({
 }) => {
 	return (
 		<ActuaryProvider {...rest}>
-			{({ current: { context }, i18n }) => {
+			{({ current, i18n }) => {
 				return (
-					<Flex cfg={cfg} data-testid={testId} className={styles.card}>
+					<Section
+						cfg={cfg}
+						data-testid={testId}
+						className={styles.card}
+						ariaLabel={concatenateStrings([
+							current.context.actuary.title,
+							current.context.actuary.firstName,
+							current.context.actuary.lastName,
+							i18n.preview.buttons.one,
+						])}
+					>
 						<Toolbar
-							complete={isComplete(context)}
+							complete={isComplete(current.context)}
 							subtitle={() => (
 								<Span cfg={{ lineHeight: 3 }} className={styles.styledAsH4}>
-									{[
-										context.actuary.title,
-										context.actuary.firstName,
-										context.actuary.lastName,
-									]
-										.filter(Boolean)
-										.join(' ')}
+									{concatenateStrings([
+										current.context.actuary.title,
+										current.context.actuary.firstName,
+										current.context.actuary.lastName,
+									])}
 								</Span>
 							)}
 							statusText={
-								isComplete(context)
+								isComplete(current.context)
 									? i18n.preview.statusText.confirmed
 									: i18n.preview.statusText.unconfirmed
 							}
 							buttonLeft={() => <ActuaryButton />}
 							buttonRight={() => (
-								<RemoveButton title={i18n.preview.buttons.two} />
+								<RemoveButton
+									title={i18n.preview.buttons.two}
+									tabIndex={removeFromTabFlowIfMatches(current, {
+										edit: 'name',
+									})}
+								/>
 							)}
 						/>
 						<CardContentSwitch />
-					</Flex>
+					</Section>
 				);
 			}}
 		</ActuaryProvider>

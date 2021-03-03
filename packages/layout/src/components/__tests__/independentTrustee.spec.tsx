@@ -5,6 +5,10 @@ import { IndependentTrustee } from '../cards/independentTrustee/context';
 import { axe } from 'jest-axe';
 import { cleanup } from '@testing-library/react-hooks';
 import { act } from 'react-dom/test-utils';
+import {
+	assertThatASectionExistsWithAnAriaLabel,
+	assertThatButtonHasAriaExpanded,
+} from '../testHelpers/testHelpers';
 
 const noop = () => Promise.resolve();
 
@@ -28,9 +32,15 @@ const independentTrustee: IndependentTrustee = {
 
 describe('Professional / Independent Trustee Card', () => {
 	describe('Preview', () => {
-		let component, findByText, findAllByText, findByTitle;
+		let component, findByText, findAllByText, findByTitle, findByRole;
 		beforeEach(() => {
-			const { container, getByText, getAllByText, queryByTitle } = render(
+			const {
+				container,
+				getByText,
+				getAllByText,
+				queryByTitle,
+				getByRole,
+			} = render(
 				<IndependentTrusteeCard
 					independentTrustee={independentTrustee}
 					complete={true}
@@ -44,6 +54,7 @@ describe('Professional / Independent Trustee Card', () => {
 			findByText = getByText;
 			findAllByText = getAllByText;
 			findByTitle = queryByTitle;
+			findByRole = getByRole;
 		});
 
 		test('no Violations', async () => {
@@ -57,6 +68,11 @@ describe('Professional / Independent Trustee Card', () => {
 			expect(findByText('Remove')).toBeDefined();
 			expect(findByText('Address')).toBeDefined();
 			expect(findByText('Appointed by the regulator')).toBeDefined();
+			assertThatButtonHasAriaExpanded(
+				findByText,
+				'Appointed by the regulator',
+				false,
+			);
 		});
 
 		test('initial status is correct', () => {
@@ -81,6 +97,13 @@ describe('Professional / Independent Trustee Card', () => {
 
 		test('Appointed by the regulator block displays value correctly', () => {
 			expect(findByText('Yes')).toBeDefined();
+		});
+
+		test('renders with a section containing an aria label', () => {
+			assertThatASectionExistsWithAnAriaLabel(
+				findByRole,
+				`${independentTrustee.organisationName} Professional / Independent Trustee`,
+			);
 		});
 	});
 

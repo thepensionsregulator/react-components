@@ -27,7 +27,7 @@
 	&:disabled {
 		cursor: not-allowed !important;
 		background: $colors-primary-a1;
-	
+
 		&:hover {
 			background: $colors-primary-a1 !important;
 		}
@@ -36,12 +36,12 @@
 
 .appearance-secondary {
 	color: $white;
-	background: $colors-primary-3!important;
+	background: $colors-primary-3 !important;
 	border: none;
 	border-radius: 8px;
 
 	&:focus {
-		background: $colors-warning-1!important;
+		background: $colors-warning-1 !important;
 		color: $colors-neutral-8;
 		box-shadow: 0px 2px 0px $colors-neutral-8;
 		outline: none;
@@ -49,7 +49,7 @@
 
 	&:disabled {
 		cursor: not-allowed !important;
-		background: $colors-primary-1!important;	
+		background: $colors-primary-1 !important;
 	}
 }
 
@@ -65,12 +65,12 @@
 			color: $white !important;
 		}
 	}
-	
+
 	&:disabled {
 		color: $colors-neutral-6;
 		cursor: not-allowed !important;
 		border: 2px solid $colors-neutral-6;
-	
+
 		&:hover {
 			color: $colors-neutral-6;
 			background: none !important;
@@ -85,14 +85,14 @@
 	border-color: $colors-primary-a2;
 
 	&:hover {
-			background: $colors-accents-2 !important;
-			border-color: $colors-accents-2 !important;
-			color: $white;
+		background: $colors-accents-2 !important;
+		border-color: $colors-accents-2 !important;
+		color: $white;
 	}
 
 	&.appearance-secondary:hover {
-		background: $colors-neutral-a1!important;
-	
+		background: $colors-neutral-a1 !important;
+
 		&:disabled {
 			background: $colors-primary-1 !important;
 		}
@@ -100,11 +100,11 @@
 
 	&.appearance-outlined:hover {
 		background: $colors-primary-a2 !important;
-		border-color: $colors-primary-a2 !important;	
+		border-color: $colors-primary-a2 !important;
 
 		&:disabled {
 			background: none !important;
-			border-color: $colors-neutral-6 !important;		
+			border-color: $colors-neutral-6 !important;
 		}
 	}
 }
@@ -137,11 +137,10 @@
 	&:disabled {
 		cursor: not-allowed !important;
 		background: $colors-danger-1;
-	
+
 		&:hover {
 			background: $colors-danger-1 !important;
 		}
-	
 	}
 }
 
@@ -188,7 +187,6 @@
 /* 'small' | 'medium' | 'large'; */
 
 .size-small {
-	font-weight: $font-weight-1;
 	font-size: $font-size-1;
 	text-align: center;
 	height: 40px;
