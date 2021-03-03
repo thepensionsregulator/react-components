@@ -10,6 +10,7 @@ export default rollup({
 		'@types/lodash.isequal',
 		'@types/match-sorter',
 		'@types/qs',
+		'accessible-autocomplete/react',
 		'date-fns',
 		'downshift',
 		'final-form',
@@ -18,5 +19,6 @@ export default rollup({
 		'match-sorter',
 		'qs',
 		'react-final-form',
+		'react-dom/test-utils',
 	],
 });

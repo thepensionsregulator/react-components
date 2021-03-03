@@ -2,10 +2,16 @@ import React from 'react';
 import { render } from '@testing-library/react';
 import { InHouseCard } from '../cards/inHouse/inHouse';
 import { axe } from 'jest-axe';
+import { act } from 'react-dom/test-utils';
 import userEvent from '@testing-library/user-event';
 import { InHouseAdminNoApi } from '../cards/inHouse/context';
-
-// TODO: write more tests
+import {
+	assertThatASectionExistsWithAnAriaLabel,
+	assertThatButtonHasAriaExpanded,
+	assertThatButtonHasBeenRemovedFromTheTabFlow,
+	assertThatTitleWasSetToNullWhileFirstAndLastNamesWereLeftUnchanged,
+	clearTitleField,
+} from '../testHelpers/testHelpers';
 
 const noop = () => Promise.resolve();
 
@@ -30,13 +36,18 @@ const inHouseAdmin: InHouseAdminNoApi = {
 };
 
 describe('InHouse Preview', () => {
-	let component, findByText, findByTestId;
+	let component, findByText, findByTestId, findByRole;
+	let updatedInHouseAdmin = null;
+
 	beforeEach(async () => {
-		const { container, getByText, getByTestId } = render(
+		const { container, getByText, getByTestId, getByRole } = render(
 			<InHouseCard
 				onSaveContacts={noop}
 				onSaveAddress={noop}
-				onSaveName={noop}
+				onSaveName={(values) => {
+					updatedInHouseAdmin = values;
+					return noop();
+				}}
 				onRemove={noop}
 				onCorrect={(_value) => {}}
 				complete={true}
@@ -51,11 +62,21 @@ describe('InHouse Preview', () => {
 		component = container;
 		findByText = getByText;
 		findByTestId = getByTestId;
+		findByRole = getByRole;
 	});
 
 	test('is accessible', async () => {
 		const results = await axe(component);
 		expect(results).toHaveNoViolations();
+	});
+
+	test('it renders preview correctly', () => {
+		expect(findByText('In House Administrator')).toBeDefined();
+		expect(findByText('Remove')).toBeDefined();
+		expect(findByText('Address')).toBeDefined();
+		assertThatButtonHasAriaExpanded(findByText, 'Address', false);
+		expect(findByText('Contact details')).toBeDefined();
+		assertThatButtonHasAriaExpanded(findByText, 'Contact details', false);
 	});
 
 	test('editing in house name', () => {
@@ -82,6 +103,30 @@ describe('InHouse Preview', () => {
 			'70',
 		);
 		expect(findByText('Save and close')).toBeDefined();
+
+		assertThatButtonHasBeenRemovedFromTheTabFlow(findByText, 'Remove');
+	});
+
+	test('in house title can be left empty when name is updated', async () => {
+		await act(async () => {
+			findByText(/In House Administrator/).click();
+			await axe(component);
+			clearTitleField(findByText);
+			findByText(/Save and close/).click();
+		});
+
+		await assertThatTitleWasSetToNullWhileFirstAndLastNamesWereLeftUnchanged(
+			component,
+			inHouseAdmin,
+			updatedInHouseAdmin,
+		);
+	});
+
+	test('renders with a section containing an aria label', () => {
+		assertThatASectionExistsWithAnAriaLabel(
+			findByRole,
+			`${inHouseAdmin.title} ${inHouseAdmin.firstName} ${inHouseAdmin.lastName} In House Administrator`,
+		);
 	});
 });
 

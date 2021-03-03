@@ -8,6 +8,7 @@ import { Playground } from '@playground';
 import { Form } from 'react-final-form';
 import { FFCheckbox } from './checkbox';
 import { SeparatorY, SeparatorX } from '../separator';
+import styles from '../elements.module.scss';
 
 # Checkbox
 
@@ -74,21 +75,23 @@ import { FFCheckbox } from '@tpr/forms';
 	<Form onSubmit={console.log} initialValues={{ 'checkbox-c': true }}>
 		{({ handleSubmit }) => (
 			<form onSubmit={handleSubmit}>
-				<SeparatorY>
-					<FFCheckbox name="checkbox-a" label="Select option 1" />
-					<FFCheckbox
-						name="checkbox-b"
-						label="Select option 2"
-						hint="Lorem, ipsum dolor sit amet consectetur adipisicing elit. Ea obcaecati repellat molestias nemo deleniti eveniet vel similique nesciunt fugiat nisi?"
-					/>
-					<FFCheckbox name="checkbox-c" label="Select option 3" />
-					<FFCheckbox
-						name="checkbox-d"
-						label="Select option 4"
-						hint="Lorem, ipsum dolor sit amet consectetur adipisicing elit."
-					/>
-					<FFCheckbox name="checkbox-e" label="Select option 5" />
-				</SeparatorY>
+				<fieldset>
+					<SeparatorY>
+						<FFCheckbox name="checkbox-a" label="Select option 1" />
+						<FFCheckbox
+							name="checkbox-b"
+							label="Select option 2"
+							hint="Lorem, ipsum dolor sit amet consectetur adipisicing elit. Ea obcaecati repellat molestias nemo deleniti eveniet vel similique nesciunt fugiat nisi?"
+						/>
+						<FFCheckbox name="checkbox-c" label="Select option 3" />
+						<FFCheckbox
+							name="checkbox-d"
+							label="Select option 4"
+							hint="Lorem, ipsum dolor sit amet consectetur adipisicing elit."
+						/>
+						<FFCheckbox name="checkbox-e" label="Select option 5" />
+					</SeparatorY>
+				</fieldset>
 				<button type="submit" style={{ display: 'none' }}>
 					Submit
 				</button>
@@ -103,21 +106,23 @@ import { FFCheckbox } from '@tpr/forms';
 	<Form onSubmit={console.log} initialValues={{ 'checkbox-c': true }}>
 		{({ handleSubmit }) => (
 			<form onSubmit={handleSubmit}>
-				<SeparatorX>
-					<FFCheckbox name="checkbox-a" label="Select option 1" />
-					<FFCheckbox
-						name="checkbox-b"
-						label="Select option 2"
-						hint="Lorem, ipsum dolor sit amet consectetur adipisicing elit. Ea obcaecati repellat molestias nemo deleniti eveniet vel similique nesciunt fugiat nisi?"
-					/>
-					<FFCheckbox name="checkbox-c" label="Select option 3" />
-					<FFCheckbox
-						name="checkbox-d"
-						label="Select option 4"
-						hint="Lorem, ipsum dolor sit amet consectetur adipisicing elit."
-					/>
-					<FFCheckbox name="checkbox-e" label="Select option 5" />
-				</SeparatorX>
+				<fieldset>
+					<SeparatorX>
+						<FFCheckbox name="checkbox-a" label="Select option 1" />
+						<FFCheckbox
+							name="checkbox-b"
+							label="Select option 2"
+							hint="Lorem, ipsum dolor sit amet consectetur adipisicing elit. Ea obcaecati repellat molestias nemo deleniti eveniet vel similique nesciunt fugiat nisi?"
+						/>
+						<FFCheckbox name="checkbox-c" label="Select option 3" />
+						<FFCheckbox
+							name="checkbox-d"
+							label="Select option 4"
+							hint="Lorem, ipsum dolor sit amet consectetur adipisicing elit."
+						/>
+						<FFCheckbox name="checkbox-e" label="Select option 5" />
+					</SeparatorX>
+				</fieldset>
 				<button type="submit" style={{ display: 'none' }}>
 					Submit
 				</button>
@@ -132,7 +137,7 @@ import { FFCheckbox } from '@tpr/forms';
 	<Form onSubmit={console.log} initialValues={{ 'checkbox-c': true }}>
 		{({ handleSubmit }) => (
 			<form onSubmit={handleSubmit}>
-				<FFCheckbox name="checkbox-a" label="Select option 1" disabled={true}/>
+				<FFCheckbox name="checkbox-a" label="Select option 1" disabled={true} />
 				<FFCheckbox
 					name="checkbox-b"
 					disabled={true}
@@ -145,6 +150,57 @@ import { FFCheckbox } from '@tpr/forms';
 			</form>
 		)}
 	</Form>
+</Playground>
+
+### Validation
+
+<Playground>
+{() => {
+	const validateForm = (values) => {
+		console.log('validateForm');
+		console.log(values);
+		if (!values['checkbox-a'] && !values['checkbox-b']) {
+			return {
+				message: 'You must choose an option'
+			};
+		}
+	};
+	return (
+    <Form
+    	onSubmit={console.log}
+    	initialValues={{ 'checkbox-a': false, 'checkbox-b': false }}
+    	validate={validateForm}
+    >
+    	{({ handleSubmit, errors }) => (
+    		<form onSubmit={handleSubmit}>
+    			<fieldset className={errors.message && styles.labelError} aria-describedby="error-message">
+    				<legend>Choose at least one</legend>
+						{errors.message && <p id="error-message" className={styles.errorMessage}>{errors.message}</p>}
+    				<FFCheckbox
+							id="checkbox-a"
+    					name="checkbox-a"
+    					label="Option 1"
+    					hint="This one?"
+    					cfg={{ mb: 4 }}
+    					callback={(value) => console.log('callback:', value)}
+    				/>
+    				<FFCheckbox
+							id="checkbox-b"
+    					name="checkbox-b"
+    					label="Option 2"
+    					hint="What about this one?"
+    					callback={(value) => console.log('callback:', value)}
+    				/>
+    			</fieldset>
+    			<button type="submit" style={{ display: 'none' }}>
+    				Submit
+    			</button>
+    		</form>
+    	)}
+    </Form>
+	);
+}}
+
 </Playground>
 
 ## API

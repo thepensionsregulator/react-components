@@ -93,16 +93,19 @@ describe('Email input', () => {
 	test('has correct describedby tag when an error is shown', () => {
 		const testId = 'email-input';
 		const name = 'email';
+		const hint = 'This explains how to complete the field';
 
 		const handleSubmit = jest.fn();
 
 		const { getByText, getByTestId } = formSetup({
-			render: <FFInputEmail label="Email" testId={testId} name={name} />,
+			render: (
+				<FFInputEmail label="Email" testId={testId} name={name} hint={hint} />
+			),
 			onSubmit: handleSubmit,
 		});
 
 		const emailTest = getByTestId(testId);
 
-		CheckDescribedByTag(getByText, emailTest, 'Invalid email address');
+		CheckDescribedByTag(getByText, emailTest, 'Invalid email address', hint);
 	});
 });

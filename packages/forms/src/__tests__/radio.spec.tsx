@@ -142,4 +142,44 @@ describe('Radio input', () => {
 			'my checkbox value',
 		);
 	});
+
+	test('has correct describedby tag', () => {
+		const hint = 'This explains how to complete the field';
+		const labelText = 'My radiobutton';
+		const id = 'test-radiobutton';
+		const { getByLabelText } = formSetup({
+			render: (
+				<FFRadioButton
+					id={id}
+					required
+					label={labelText}
+					hint={hint}
+					name="my-radiobutton"
+				/>
+			),
+		});
+		const radio = getByLabelText(labelText);
+		expect(radio).not.toBeNull();
+		expect(radio).toHaveAttribute('aria-describedby', `${id}-hint`);
+	});
+
+	test('has correct label reference', () => {
+		const hint = 'This explains how to complete the field';
+		const labelText = 'My radiobutton';
+		const id = 'test-radiobutton';
+		const { container } = formSetup({
+			render: (
+				<FFRadioButton
+					id={id}
+					required
+					label={labelText}
+					hint={hint}
+					name="my-radiobutton"
+				/>
+			),
+		});
+		const label = container.querySelector(`[id=${id}-label]`);
+		expect(label).not.toBeNull();
+		expect(label).toHaveAttribute('for', id);
+	});
 });

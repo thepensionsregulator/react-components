@@ -47,7 +47,10 @@ export const Preview: React.FC<any> = () => {
 
 					{/* Professional Trustee section: open for editing	 */}
 					<Flex cfg={{ flexDirection: 'column', mt: 5 }}>
-						<UnderlinedButton onClick={() => send('EDIT_PROFESSIONAL')}>
+						<UnderlinedButton
+							onClick={() => send('EDIT_PROFESSIONAL')}
+							isOpen={current.matches({ edit: 'professional' })}
+						>
 							{i18n.preview.buttons.five}
 						</UnderlinedButton>
 						<P cfg={{ pt: 3 }}>
@@ -64,7 +67,10 @@ export const Preview: React.FC<any> = () => {
 				<Flex
 					cfg={{ width: 5, flex: '0 0 auto', flexDirection: 'column', pr: 4 }}
 				>
-					<UnderlinedButton onClick={() => send('EDIT_NAME')}>
+					<UnderlinedButton
+						onClick={() => send('EDIT_NAME')}
+						isOpen={current.matches({ edit: 'contacts' })}
+					>
 						{i18n.preview.buttons.four}
 					</UnderlinedButton>
 					<Flex cfg={{ my: 2, flexDirection: 'column' }}>

@@ -56,15 +56,16 @@ export const Header: React.FC<HeaderProps> = ({
 								href={schemeOptionsHref}
 								underline
 								data-testid="onClickSchemeOptions"
-								cfg={{ color: 'white', mr: 4, fontWeight: 3, lineHeight: 3 }}
+								cfg={{ mr: 4 }}
+								className={styles.headerlink}
 							>
 								Scheme Options
 							</Link>
 							<Link
 								onClick={onClickLogout}
 								underline
-								cfg={{ color: 'white', fontWeight: 3, lineHeight: 3 }}
 								data-testid="onClickLogout"
+								className={styles.headerlink}
 							>
 								Log out
 							</Link>

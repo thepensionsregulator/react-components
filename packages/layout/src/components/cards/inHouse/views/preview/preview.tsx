@@ -26,7 +26,10 @@ export const Preview: React.FC<any> = () => {
 				<Flex
 					cfg={{ width: 5, flex: '0 0 auto', flexDirection: 'column', pr: 4 }}
 				>
-					<UnderlinedButton onClick={() => send('EDIT_ADDRESS')}>
+					<UnderlinedButton
+						onClick={() => send('EDIT_ADDRESS')}
+						isOpen={current.matches({ edit: 'address' })}
+					>
 						{i18n.preview.buttons.three}
 					</UnderlinedButton>
 					<Flex cfg={{ my: 2, flexDirection: 'column' }}>
@@ -52,7 +55,10 @@ export const Preview: React.FC<any> = () => {
 				<Flex
 					cfg={{ width: 5, flex: '0 0 auto', flexDirection: 'column', pl: 4 }}
 				>
-					<UnderlinedButton onClick={() => send('EDIT_CONTACTS')}>
+					<UnderlinedButton
+						onClick={() => send('EDIT_CONTACTS')}
+						isOpen={current.matches({ edit: 'contacts' })}
+					>
 						{i18n.preview.buttons.four}
 					</UnderlinedButton>
 					<Flex cfg={{ my: 2, flexDirection: 'column' }}>

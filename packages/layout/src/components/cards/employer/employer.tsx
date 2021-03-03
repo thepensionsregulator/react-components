@@ -1,12 +1,16 @@
 import React, { useMemo } from 'react';
 import { UnderlinedButton } from '../components/button';
 import { Toolbar } from '../components/toolbar';
-import { Flex, P } from '@tpr/core';
+import { Section, P } from '@tpr/core';
 import { Preview } from './views/preview/preview';
 import { RemoveDateForm } from './views/remove/date/date';
 import { EmployerType } from './views/type/type';
 import { ConfirmRemove } from './views/remove/confirm/confirm';
-import { capitalize } from '../../../utils';
+import {
+	capitalize,
+	removeFromTabFlowIfMatches,
+	concatenateStrings,
+} from '../../../utils';
 import {
 	EmployerProvider,
 	useEmployerContext,
@@ -37,7 +41,10 @@ const CardContentSwitch: React.FC = () => {
 	}
 };
 
-const ToolbarButton: React.FC<{ title: string }> = ({ title }) => {
+const ToolbarButton: React.FC<{ title: string; tabIndex?: number }> = ({
+	title,
+	tabIndex,
+}) => {
 	const { current, send } = useEmployerContext();
 	return (
 		<UnderlinedButton
@@ -57,6 +64,7 @@ const ToolbarButton: React.FC<{ title: string }> = ({ title }) => {
 					send(title === 'Remove' ? 'REMOVE' : 'CHANGE_TYPE');
 				}
 			}}
+			tabIndex={tabIndex}
 		>
 			{title}
 		</UnderlinedButton>
@@ -104,14 +112,23 @@ export const EmployerCard: React.FC<EmployerProviderProps> = ({
 }) => {
 	return (
 		<EmployerProvider {...rest}>
-			{({ current: { context }, i18n }) => {
+			{({ current, i18n }) => {
 				return (
-					<Flex cfg={cfg} data-testid={testId} className={styles.card}>
+					<Section
+						cfg={cfg}
+						data-testid={testId}
+						className={styles.card}
+						ariaLabel={concatenateStrings([
+							current.context.employer.organisationName,
+						])}
+					>
 						<Toolbar
-							complete={isComplete(context)}
-							subtitle={() => <EmployerSubtitle {...context.employer} />}
+							complete={isComplete(current.context)}
+							subtitle={() => (
+								<EmployerSubtitle {...current.context.employer} />
+							)}
 							statusText={
-								isComplete(context)
+								isComplete(current.context)
 									? i18n.preview.statusText.confirmed
 									: i18n.preview.statusText.unconfirmed
 							}
@@ -119,11 +136,14 @@ export const EmployerCard: React.FC<EmployerProviderProps> = ({
 								<ToolbarButton title={i18n.preview.buttons.one} />
 							)}
 							buttonRight={() => (
-								<ToolbarButton title={i18n.preview.buttons.two} />
+								<ToolbarButton
+									title={i18n.preview.buttons.two}
+									tabIndex={removeFromTabFlowIfMatches(current, 'employerType')}
+								/>
 							)}
 						/>
 						<CardContentSwitch />
-					</Flex>
+					</Section>
 				);
 			}}
 		</EmployerProvider>

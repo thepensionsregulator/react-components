@@ -4,8 +4,10 @@ import { InsurerCard } from '../cards/insurer/insurer';
 import { axe } from 'jest-axe';
 import userEvent from '@testing-library/user-event';
 import { Insurer } from '../cards/insurer/context';
-
-// TODO: write more tests
+import {
+	assertThatASectionExistsWithAnAriaLabel,
+	assertThatButtonHasAriaExpanded,
+} from '../testHelpers/testHelpers';
 
 const noop = () => Promise.resolve();
 
@@ -31,7 +33,7 @@ const insurer: Insurer = {
 
 describe('Insurer Preview', () => {
 	test('is accessible', async () => {
-		const { container } = render(
+		const { container, getByText } = render(
 			<InsurerCard
 				onSaveRef={noop}
 				onRemove={noop}
@@ -43,6 +45,31 @@ describe('Insurer Preview', () => {
 
 		const results = await axe(container);
 		expect(results).toHaveNoViolations();
+		expect(getByText('Insurer administrator')).toBeDefined();
+		expect(getByText('Remove')).toBeDefined();
+		expect(getByText('Insurer reference number')).toBeDefined();
+		assertThatButtonHasAriaExpanded(
+			getByText,
+			'Insurer reference number',
+			false,
+		);
+	});
+
+	test('renders with a section containing an aria label', () => {
+		const { getByRole } = render(
+			<InsurerCard
+				onSaveRef={noop}
+				onRemove={noop}
+				onCorrect={noop}
+				complete={true}
+				insurer={insurer}
+			/>,
+		);
+
+		assertThatASectionExistsWithAnAriaLabel(
+			getByRole,
+			`${insurer.organisationName} Insurer administrator`,
+		);
 	});
 });
 

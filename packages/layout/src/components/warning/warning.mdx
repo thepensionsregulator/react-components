@@ -7,6 +7,8 @@ route: /layout/warning
 import { Props } from 'docz';
 import { Playground } from '@playground';
 import { WarningBox } from './warning';
+import { useState } from 'react'; 
+import { Button } from '@tpr/core';
 
 # Warning Box
 
@@ -20,10 +22,37 @@ import { WarningBox } from '@tpr/layout';
 
 <Playground>
 	<WarningBox>
-		Lorem ipsum dolor sit, amet consectetur adipisicing elit. Molestias
-		voluptatibus quaerat consequatur deleniti nobis explicabo eius.
-	</WarningBox>
+			Lorem ipsum dolor sit, amet consectetur adipisicing elit. Molestias
+			voluptatibus quaerat consequatur deleniti nobis explicabo eius.
+		</WarningBox>
 </Playground>
+
+## Accessibility
+
+The warning box has the role type of 'alert' so if it is toggled into view then assistive technology will immediately alert the user of it's presence.
+
+```js
+import { WarningBox } from '@tpr/layout';
+```
+
+<Playground>
+	{() => {
+		const [toggleWarning, setToggleWarning] = useState(false);
+		
+		return (
+			<>
+			<Button
+				onClick={() => setToggleWarning(!toggleWarning)}>
+				Toggle warning
+			</Button>
+			{(toggleWarning && <WarningBox>
+			Lorem ipsum dolor sit, amet consectetur adipisicing elit. Molestias
+			voluptatibus quaerat consequatur deleniti nobis explicabo eius.
+		</WarningBox>)}
+		</>)
+	}}
+</Playground>
+
 
 ## API
 
@@ -31,4 +60,8 @@ import { WarningBox } from '@tpr/layout';
 Accepted config props: SpaceProps, FlexProps
 ```
 
-<Props of={WarningBox} />
+### Props
+
+| Property         | Required | Type              | Description                                                                                                |
+| ---------------- | -------- | ----------------- | ---------------------------------------------------------------------------------------------------------- |
+| warningLabel     | false    | boolean           | Optionally overrides the default title text on the svg image (the exclamation mark) within the warning box |

@@ -8,9 +8,11 @@ import {
 	isEmailValid,
 	executeClientValidation,
 } from '../../validators';
+import AccessibilityHelper from '../accessibilityHelper';
 
 type InputEmailProps = FieldRenderProps<string> & FieldExtraProps;
 const InputEmail: React.FC<InputEmailProps> = ({
+	id,
 	label,
 	name,
 	hint,
@@ -23,7 +25,8 @@ const InputEmail: React.FC<InputEmailProps> = ({
 	inputWidth: width,
 	cfg,
 }) => {
-	const errorId = `${name}_error`;
+	const helper = new AccessibilityHelper(name, !!label, !!hint);
+
 	return (
 		<StyledInputLabel
 			isError={meta && meta.touched && meta.error}
@@ -31,21 +34,22 @@ const InputEmail: React.FC<InputEmailProps> = ({
 		>
 			<InputElementHeading
 				label={label}
-				errorId={errorId}
 				required={required}
 				hint={hint}
 				meta={meta}
+				accessibilityHelper={helper}
 			/>
 			<Input
+				id={id}
 				type="email"
 				width={width}
 				testId={testId}
 				label={label}
-				errorId={errorId}
 				required={required}
 				placeholder={placeholder}
 				readOnly={readOnly}
-				touched={meta && meta.touched && meta.error}
+				isError={meta && meta.touched && meta.error}
+				accessibilityHelper={helper}
 				{...input}
 			/>
 		</StyledInputLabel>

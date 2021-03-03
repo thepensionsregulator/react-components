@@ -8,9 +8,11 @@ import {
 	isPhoneValid,
 	executeClientValidation,
 } from '../../validators';
+import AccessibilityHelper from '../accessibilityHelper';
 
 type InputPhoneProps = FieldRenderProps<string> & FieldExtraProps;
 const InputPhone: React.FC<InputPhoneProps> = ({
+	id,
 	label,
 	name,
 	hint,
@@ -23,7 +25,7 @@ const InputPhone: React.FC<InputPhoneProps> = ({
 	inputWidth: width,
 	cfg,
 }) => {
-	const errorId = `${name}_error`;
+	const helper = new AccessibilityHelper(name, !!label, !!hint);
 
 	return (
 		<StyledInputLabel
@@ -32,21 +34,22 @@ const InputPhone: React.FC<InputPhoneProps> = ({
 		>
 			<InputElementHeading
 				label={label}
-				errorId={errorId}
 				required={required}
 				hint={hint}
 				meta={meta}
+				accessibilityHelper={helper}
 			/>
 			<Input
+				id={id}
 				type="tel"
 				width={width}
 				testId={testId}
 				label={label}
-				errorId={errorId}
 				placeholder={placeholder}
 				readOnly={readOnly}
-				touched={meta && meta.touched && meta.error}
+				isError={meta && meta.touched && meta.error}
 				required={required}
+				accessibilityHelper={helper}
 				{...input}
 			/>
 		</StyledInputLabel>

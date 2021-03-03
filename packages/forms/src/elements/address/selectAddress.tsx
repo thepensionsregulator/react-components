@@ -84,7 +84,10 @@ export const SelectAddress: React.FC<SelectAddressProps> = ({
 
 	// Setting a 'valid' object appears to be the only way to control validity of FFSelect.
 	// validate() will run immediately. Initialise to null so that validate() can detect the initial load and set an initial value rather than validating.
-	let [selectAddressValid, setSelectAddressValid] = useState(null);
+	let [selectAddressValid, setSelectAddressValid] = useState({
+		error: '',
+		touched: false,
+	});
 	function getAddressIfValid(): Address | undefined {
 		const selectedAddressField = form.getFieldState('selectedAddress');
 		if (

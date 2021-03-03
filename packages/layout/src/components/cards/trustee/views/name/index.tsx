@@ -8,6 +8,7 @@ import {
 	cardTypeName,
 } from '../../../common/interfaces';
 import NameForm from '../../../common/views/nameForm/nameForm';
+import { RestoreMissingNullValues } from '../../../common/services/NullValueFieldRestorer';
 
 const getFields = (
 	fields: RecursivePartial<TrusteeI18nProps['name']['fields']>,
@@ -46,8 +47,16 @@ const Name: React.FC = () => {
 	const fields = getFields(i18n.name.fields);
 	const state = current.context.trustee;
 
+	const originalValues = {
+		title: state.title,
+		firstName: state.firstName,
+		lastName: state.lastName,
+	};
+
 	const onSubmit = (values) => {
+		RestoreMissingNullValues(originalValues, values);
 		setLoading(true);
+
 		try {
 			send('NEXT', { values });
 			setLoading(false);
@@ -65,11 +74,7 @@ const Name: React.FC = () => {
 			sectionTitle={i18n.name.sectionTitle}
 			onSubmit={onSubmit}
 			fields={fields}
-			initialValues={{
-				title: state.title,
-				firstName: state.firstName,
-				lastName: state.lastName,
-			}}
+			initialValues={originalValues}
 			loading={loading}
 			nextStep={true}
 		/>
