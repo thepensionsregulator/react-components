@@ -10,10 +10,12 @@ import { act } from 'react-dom/test-utils';
 import styles from './search.module.scss';
 
 interface SearchProps extends FieldRenderProps<string>, FieldExtraProps {
+	assistiveHint?: string;
 	callback?: Function;
 	formatItem?: (item: any) => string;
 	getSelectedItem?: (item: any) => string;
 	keyValue: string;
+	labelNotBold?: boolean;
 	minLength?: number;
 	notFoundMessage?: string;
 	optionsArray?: any[];
@@ -24,21 +26,22 @@ type PanelVisibility = 'visible' | 'hidden' | 'complete';
 
 const Search: React.FC<SearchProps> = React.memo(
 	({
-		id,
+		assistiveHint = 'When autocomplete results are available use up and down arrows to review and enter to select. Touch device users, explore by touch or with swipe gestures.',
 		callback,
 		cfg,
 		formatItem = formatItemDefault,
 		getSelectedItem,
 		hint,
+		id,
 		inputWidth = 10,
 		keyValue,
 		label,
+		labelNotBold = false,
 		meta,
+		minLength,
 		name,
 		notFoundMessage = 'There are no matches for your search criteria',
 		optionsArray = [],
-		placeholder,
-		minLength,
 		required = true,
 		searchService,
 		testId = 'search',
@@ -109,36 +112,37 @@ const Search: React.FC<SearchProps> = React.memo(
 		return (
 			<div className={classes}>
 				<StyledInputLabel
+					cfg={Object.assign({ flexDirection: 'column' }, cfg)}
 					element="label"
 					isError={meta && meta.touched && meta.error}
-					cfg={Object.assign({ flexDirection: 'column' }, cfg)}
-					{...rest.ariaLabel}
 				>
 					<InputElementHeading
-						label={label}
-						required={required}
-						hint={hint}
-						meta={meta}
 						accessibilityHelper={helper}
+						hint={hint}
+						label={label}
+						labelNotBold={labelNotBold}
+						meta={meta}
+						required={required}
 					/>
 					<Flex
 						cfg={{ width: inputWidth, flexDirection: 'column' }}
 						className={styles.relative}
 					>
 						<Autocomplete
-							name={name}
 							id={id}
-							source={getResults}
-							onConfirm={chooseOption}
-							showAllValues={false}
 							minLength={minLength}
-							tNoResults={() => notFoundMessage}
-							placeholder={placeholder}
+							name={name}
+							onConfirm={chooseOption}
+							placeholder={rest.placeholder}
+							showAllValues={false}
+							source={getResults}
+							tAssistiveHint={() => assistiveHint}
 							templates={{
 								inputValue: getSelectedItemDefault,
 								suggestion: formatItem,
 							}}
 							testId={testId}
+							tNoResults={() => notFoundMessage}
 						/>
 					</Flex>
 				</StyledInputLabel>
