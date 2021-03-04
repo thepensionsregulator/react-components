@@ -23,17 +23,35 @@ export const Preview: React.FC<any> = () => {
 				>
 					<UnderlinedButton>{i18n.preview.buttons.three}</UnderlinedButton>
 					<Flex cfg={{ my: 2, flexDirection: 'column' }}>
-						<P>{thirdParty.address.addressLine1}</P>
+						<P className={styles.noMarginBottom}>
+							{thirdParty.address.addressLine1}
+						</P>
 						{thirdParty.address.addressLine2 && (
-							<P>{thirdParty.address.addressLine2}</P>
+							<P className={styles.noMarginBottom}>
+								{thirdParty.address.addressLine2}
+							</P>
 						)}
 						{thirdParty.address.addressLine3 && (
-							<P>{thirdParty.address.addressLine3}</P>
+							<P className={styles.noMarginBottom}>
+								{thirdParty.address.addressLine3}
+							</P>
 						)}
-						<P>{thirdParty.address.postTown}</P>
-						{thirdParty.address.county && <P>{thirdParty.address.county}</P>}
-						<P>{thirdParty.address.postcode}</P>
-						{thirdParty.address.country && <P>{thirdParty.address.country}</P>}
+						<P className={styles.noMarginBottom}>
+							{thirdParty.address.postTown}
+						</P>
+						{thirdParty.address.county && (
+							<P className={styles.noMarginBottom}>
+								{thirdParty.address.county}
+							</P>
+						)}
+						<P className={styles.noMarginBottom}>
+							{thirdParty.address.postcode}
+						</P>
+						{thirdParty.address.country && (
+							<P className={styles.noMarginBottom}>
+								{thirdParty.address.country}
+							</P>
+						)}
 					</Flex>
 				</Flex>
 				<Flex
