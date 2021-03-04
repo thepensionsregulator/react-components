@@ -49,6 +49,15 @@ export const Reason: React.FC<ReasonProps> = ({
 											{i18nRemoveReason.subtitle}
 										</H4>
 									</legend>
+									{showError && (
+										<P
+											role="alert"
+											cfg={{ color: 'danger.2', mt: 5 }}
+											className={elementStyles.errorMessage}
+										>
+											{submitError}
+										</P>
+									)}
 									<FFRadioButton
 										name="reason"
 										type="radio"
@@ -69,15 +78,6 @@ export const Reason: React.FC<ReasonProps> = ({
 										value="not_part_of_scheme"
 									/>
 								</fieldset>
-								{showError && (
-									<P
-										role="alert"
-										cfg={{ color: 'danger.2', mt: 5 }}
-										className={elementStyles.errorMessage}
-									>
-										{submitError}
-									</P>
-								)}
 							</div>
 							<Footer>
 								<ArrowButton
