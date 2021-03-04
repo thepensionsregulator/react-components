@@ -5,6 +5,9 @@ import { axe } from 'jest-axe';
 import userEvent from '@testing-library/user-event';
 import { CheckDescribedByTag } from '../utils/aria-describedByTest';
 
+const wrongFormatMsg = 'Invalid email format';
+const emptyFieldMsg = 'email cannot be empty';
+
 describe('Email input', () => {
 	test('is accessible', async () => {
 		const { container } = formSetup({
@@ -28,7 +31,7 @@ describe('Email input', () => {
 		expect(getByTestId(testId)).toHaveValue('david.alekna@tpr.gov.uk');
 	});
 
-	test('should not accept invalid email addresses', async () => {
+	test('should not accept invalid email address', async () => {
 		const testId = 'email-input';
 		const handleSubmit = jest.fn();
 		const { getByText, getByTestId, form } = formSetup({
@@ -39,10 +42,11 @@ describe('Email input', () => {
 		userEvent.type(getByTestId(testId), 'this is not an email address');
 		getByText('Submit').click();
 
+		expect(getByText(wrongFormatMsg)).toBeInTheDocument();
 		expect(form.getState().valid).toBeFalsy();
 	});
 
-	test('accepts only valid emails', async () => {
+	test('accepts valid email', async () => {
 		const testId = 'email-input';
 		const handleSubmit = jest.fn();
 		const { getByText, getByTestId, form } = formSetup({
@@ -54,31 +58,6 @@ describe('Email input', () => {
 		getByText('Submit').click();
 
 		expect(form.getState().valid).toBeTruthy();
-	});
-
-	test('composes custom validation function', async () => {
-		const testId = 'email-input';
-		const errorMessage = 'Must be a TPR email';
-		const handleSubmit = jest.fn();
-		const { getByText, getByTestId, queryByText, form } = formSetup({
-			render: (
-				<FFInputEmail
-					label="Email"
-					testId={testId}
-					name="email"
-					validate={(email) =>
-						email && email.includes('tpr.gov.uk') ? undefined : errorMessage
-					}
-				/>
-			),
-			onSubmit: handleSubmit,
-		});
-
-		userEvent.type(getByTestId(testId), 'david.alekna@gmail.com');
-		getByText('Submit').click();
-
-		expect(queryByText(errorMessage)).toBeInTheDocument();
-		expect(form.getState().valid).toBeFalsy();
 	});
 
 	test('renders readonly', () => {
@@ -99,13 +78,72 @@ describe('Email input', () => {
 
 		const { getByText, getByTestId } = formSetup({
 			render: (
-				<FFInputEmail label="Email" testId={testId} name={name} hint={hint} />
+				<FFInputEmail
+					label="Email"
+					testId={testId}
+					name={name}
+					hint={hint}
+					required={true}
+				/>
 			),
 			onSubmit: handleSubmit,
 		});
 
 		const emailTest = getByTestId(testId);
 
-		CheckDescribedByTag(getByText, emailTest, 'Invalid email address', hint);
+		CheckDescribedByTag(getByText, emailTest, emptyFieldMsg, hint);
+	});
+
+	describe('custom error messages', () => {
+		test('displaying custom error messages', () => {
+			const testId = 'email-input';
+			const errorEmptyValue = 'please provide an email address';
+			const errorInvalidValue = 'this is not a valid email';
+			const handleSubmit = jest.fn();
+			const { getByText, form } = formSetup({
+				render: (
+					<FFInputEmail
+						label="Email"
+						testId={testId}
+						name="email"
+						required={true}
+						errorEmptyValue={errorEmptyValue}
+						errorInvalidValue={errorInvalidValue}
+					/>
+				),
+				onSubmit: handleSubmit,
+			});
+
+			getByText('Submit').click();
+
+			expect(getByText(errorEmptyValue)).toBeInTheDocument();
+			expect(form.getState().valid).toBeFalsy();
+		});
+
+		test('displaying custom error messages', () => {
+			const testId = 'email-input';
+			const errorEmptyValue = 'please provide an email address';
+			const errorInvalidValue = 'this is not a valid email';
+			const handleSubmit = jest.fn();
+			const { getByText, getByTestId, form } = formSetup({
+				render: (
+					<FFInputEmail
+						label="Email"
+						testId={testId}
+						name="email"
+						required={true}
+						errorEmptyValue={errorEmptyValue}
+						errorInvalidValue={errorInvalidValue}
+					/>
+				),
+				onSubmit: handleSubmit,
+			});
+
+			userEvent.type(getByTestId(testId), 'david.alekna');
+			getByText('Submit').click();
+
+			expect(getByText(errorInvalidValue)).toBeInTheDocument();
+			expect(form.getState().valid).toBeFalsy();
+		});
 	});
 });
