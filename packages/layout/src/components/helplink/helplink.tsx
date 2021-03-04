@@ -48,7 +48,7 @@ export const HelpLink: React.FC<HelpLinkProps> = (props) => {
 					setAccessibleAlert(createAccessibleAlert());
 				}}
 			>
-				<Hint>{props.children}</Hint>
+				<Hint expanded={expanded}>{props.children}</Hint>
 			</Collapsible>
 			{accessibleAlert}
 		</>
