@@ -6,6 +6,7 @@ import { Footer } from '../../../../components/card';
 import { ArrowButton } from '../../../../../buttons/buttons';
 import { cardType, cardTypeName } from '../../../../common/interfaces';
 import styles from './date.module.scss';
+import CommonStyles from '../../../../cards.module.scss';
 
 interface DateFormProps {
 	title: string;
@@ -45,7 +46,12 @@ const DateForm: React.FC<DateFormProps> = ({
 						/>
 						<div className={styles.dateWrapper}>{renderFields(dateField)}</div>
 						{submitError && (
-							<P cfg={{ color: 'danger.2', mt: 5 }}>{submitError}</P>
+							<P
+								cfg={{ color: 'danger.2', mt: 5 }}
+								className={CommonStyles.noMarginBottom}
+							>
+								{submitError}
+							</P>
 						)}
 						<Footer>
 							<ArrowButton
