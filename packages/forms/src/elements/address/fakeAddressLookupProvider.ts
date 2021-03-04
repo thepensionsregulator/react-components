@@ -45,6 +45,14 @@ class FakeAddressLookupProvider implements AddressLookupProvider {
 		if (postcode === FakeAddressLookupProvider.ppfAddress.postcode)
 			matchedAddresses.push(FakeAddressLookupProvider.ppfAddress);
 
+		if (matchedAddresses.length === 0) {
+			return Promise.resolve([
+				FakeAddressLookupProvider.tprAddress,
+				FakeAddressLookupProvider.fcaAddress,
+				FakeAddressLookupProvider.ppfAddress,
+			]);
+		}
+
 		return Promise.resolve(matchedAddresses);
 	}
 
