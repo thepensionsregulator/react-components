@@ -47,6 +47,7 @@ export const Header: React.FC<HeaderProps> = ({
 								fontSize: 3,
 								fontWeight: 3,
 								lineHeight: 5,
+								my: 1,
 							}}
 						>
 							{title}
