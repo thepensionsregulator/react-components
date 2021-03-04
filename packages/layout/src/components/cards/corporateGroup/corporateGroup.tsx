@@ -95,7 +95,9 @@ export const CorporateGroupCard: React.FC<CorporateGroupProviderProps> = ({
 									<Span cfg={{ lineHeight: 3 }} className={styles.styledAsH4}>
 										{context.corporateGroup.organisationName}
 									</Span>
-									<P>{i18n.preview.trusteeType}</P>
+									<P className={styles.noMarginBottom}>
+										{i18n.preview.trusteeType}
+									</P>
 								</>
 							)}
 							statusText={
