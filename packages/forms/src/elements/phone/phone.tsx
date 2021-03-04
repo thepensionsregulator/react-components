@@ -1,16 +1,14 @@
 import React from 'react';
 import { Field, FieldRenderProps } from 'react-final-form';
 import { StyledInputLabel, InputElementHeading } from '../elements';
-import { FieldProps, FieldExtraProps } from '../../renderFields';
+import { FieldExtraProps } from '../../renderFields';
+import { FFInputCommonProps } from 'types/fieldProps';
 import { Input } from '../input/input';
-import {
-	composeValidators,
-	isPhoneValid,
-	executeClientValidation,
-} from '../../validators';
+import { isPhoneValid } from '../../validators';
 import AccessibilityHelper from '../accessibilityHelper';
 
-type InputPhoneProps = FieldRenderProps<string> & FieldExtraProps;
+interface InputPhoneProps extends FieldRenderProps<string>, FieldExtraProps {}
+
 const InputPhone: React.FC<InputPhoneProps> = ({
 	id,
 	label,
@@ -56,17 +54,14 @@ const InputPhone: React.FC<InputPhoneProps> = ({
 	);
 };
 
-export const FFInputPhone: React.FC<FieldProps & FieldExtraProps> = (
-	fieldProps,
-) => {
+export const FFInputPhone: React.FC<FFInputCommonProps> = (fieldProps) => {
 	return (
 		<Field
 			{...fieldProps}
-			validate={composeValidators(
-				executeClientValidation(fieldProps.validate),
-				isPhoneValid(
-					fieldProps.error ? fieldProps.error : 'Invalid phone number',
-				),
+			validate={isPhoneValid(
+				fieldProps.errorEmptyValue,
+				fieldProps.errorInvalidValue,
+				fieldProps.required,
 			)}
 			render={(props) => <InputPhone {...props} {...fieldProps} />}
 		/>
