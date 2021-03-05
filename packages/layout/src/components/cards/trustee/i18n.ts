@@ -1,6 +1,6 @@
 import { I18nAddressLookup, i18n as AddressI18n } from '@tpr/forms';
-import { I18nRemoveReason } from '../common/interfaces';
 import {
+	I18nRemoveReason,
 	InputErrorMessages,
 	defaultEmailErrorMessages,
 	defaultPhoneErrorMessages,

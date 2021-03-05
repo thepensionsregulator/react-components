@@ -1,5 +1,5 @@
-import { I18nRemoveReason } from '../common/interfaces';
 import {
+	I18nRemoveReason,
 	InputErrorMessages,
 	defaultEmailErrorMessages,
 	defaultPhoneErrorMessages,
