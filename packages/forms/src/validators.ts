@@ -17,12 +17,28 @@ export const validateUkPhone = (phone: string) => {
 };
 
 export const isEmailValid = (
-	errorMessage: string = 'Invalid email address',
-) => (email: string) => (validateEmail(email) ? undefined : errorMessage);
+	empty: string = 'email cannot be empty',
+	invalid: string = 'Invalid email format',
+	required: boolean = false,
+) => (email: string) => {
+	if (!email || email == '') {
+		return required ? empty : undefined;
+	} else {
+		return validateEmail(email) ? undefined : invalid;
+	}
+};
 
-export const isPhoneValid = (errorMessage: string = 'Invalid phone number') => (
-	phone: string,
-) => (validateUkPhone(phone) ? undefined : errorMessage);
+export const isPhoneValid = (
+	empty: string = 'phone number cannot be empty',
+	invalid: string = 'Invalid phone number format',
+	required: boolean = false,
+) => (phone: string) => {
+	if (!phone || phone == '') {
+		return required ? empty : undefined;
+	} else {
+		return validateUkPhone(phone) ? undefined : invalid;
+	}
+};
 
 export const executeClientValidation = (validate: Function | void) => (
 	email: string,

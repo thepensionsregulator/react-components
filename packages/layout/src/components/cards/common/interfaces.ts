@@ -107,3 +107,18 @@ export interface I18nRemoveReason {
 		dateAddedInTheFuture?: string;
 	};
 }
+
+export interface InputErrorMessages {
+	empty: string;
+	invalid: string;
+}
+
+export const defaultEmailErrorMessages: InputErrorMessages = {
+	empty: 'Email cannot be empty',
+	invalid: 'Invalid email format',
+};
+
+export const defaultPhoneErrorMessages: InputErrorMessages = {
+	empty: 'Phone number cannot be empty',
+	invalid: 'Enter a telephone number, like 0163 960 598 or +44 7700 900 359',
+};
