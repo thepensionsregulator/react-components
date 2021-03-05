@@ -6,15 +6,13 @@ import { axe } from 'jest-axe';
 import { AddressLookup, AddressProps } from '../elements/address/addressLookup';
 import FakeAddressLookupProvider from '../elements/address/fakeAddressLookupProvider';
 
-const addressLookupProvider = new FakeAddressLookupProvider();
-
 const defaultProps: AddressProps = {
 	loading: false,
 	setLoading: () => {},
 	invalidPostcodeMessage: 'Enter a valid postcode',
 	postcodeLookupLabel: 'Postcode',
 	postcodeLookupButton: 'Find address',
-	addressLookupProvider: addressLookupProvider,
+	addressLookupProvider: null,
 	changePostcodeButton: 'Change postcode',
 	selectAddressLabel: 'Select an address',
 	selectAddressButton: 'Select address',
@@ -46,6 +44,10 @@ async function updateAPostcode(postcode: string) {
 	userEvent.type(input, postcode);
 	fireEvent.blur(input);
 }
+
+beforeEach(() => {
+	defaultProps.addressLookupProvider = new FakeAddressLookupProvider();
+});
 
 describe('Address lookup', () => {
 	describe('postcode lookup view', () => {
@@ -98,7 +100,7 @@ describe('Address lookup', () => {
 		});
 	});
 
-	describe('select address view', () => {
+	describe('select address view', () => {		
 		test('passes accessibility checks', async () => {
 			const { container } = formSetup({
 				render: <AddressLookup {...defaultProps} />,
