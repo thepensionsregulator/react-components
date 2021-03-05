@@ -121,9 +121,6 @@ export const AddressLookup: React.FC<AddressProps> = ({
 					postcodeLookupButton={postcodeLookupButton}
 					findAddressCancelledButton={findAddressCancelledButton}
 					onFindAddressCancelled={onFindAddressCancelled}
-					onValidatePostcode={(isValid) =>
-						onValidatePostcode ? onValidatePostcode(isValid) : null
-					}
 				/>
 			)}
 			{addressView === AddressView.SelectAddress && (
@@ -147,6 +144,9 @@ export const AddressLookup: React.FC<AddressProps> = ({
 					selectAddressButton={selectAddressButton}
 					selectAddressRequiredMessage={selectAddressRequiredMessage}
 					noAddressesFoundMessage={noAddressesFoundMessage}
+						onValidatePostcode={(isValid) =>
+						onValidatePostcode ? onValidatePostcode(isValid) : null
+					}
 				/>
 			)}
 			{addressView === AddressView.EditAddress && (
