@@ -87,8 +87,8 @@ export const SelectAddress: React.FC<SelectAddressProps> = ({
 	// Setting a 'valid' object appears to be the only way to control validity of FFSelect.
 	// validate() will run immediately. Initialise to null so that validate() can detect the initial load and set an initial value rather than validating.
 	let [selectAddressValid, setSelectAddressValid] = useState({
-		error: '',
 		touched: false,
+		error: '',
 	});
 	function getAddressIfValid(): Address | undefined {
 		const selectedAddressField = form.getFieldState('selectedAddress');
@@ -102,6 +102,26 @@ export const SelectAddress: React.FC<SelectAddressProps> = ({
 			return selectedAddressField.value.value;
 		}
 	}
+
+	function clearSelectedAddress(): void {
+		const selectedAddressField = form.getFieldState('selectedAddress');
+		if (
+			selectedAddressField &&
+			selectedAddressField.value &&
+			selectedAddressField.value.value
+		) {
+			selectedAddressField.value.value = null;
+		}
+	}
+
+	const updateAddressValidationIfChanged = (updatedSelectAddressValid) => {
+		if (
+			selectAddressValid.touched !== updatedSelectAddressValid.touched ||
+			selectAddressValid.error !== updatedSelectAddressValid.error
+		) {
+			setSelectAddressValid(updatedSelectAddressValid);
+		}
+	};
 
 	return (
 		<>
@@ -138,14 +158,14 @@ export const SelectAddress: React.FC<SelectAddressProps> = ({
 				validate={(value) => {
 					// On initial load, setup the validation object
 					if (!selectAddressValid) {
-						setSelectAddressValid({ error: '', touched: false });
+						updateAddressValidationIfChanged({ touched: false, error: '' });
 						return;
 					}
 					// On subsequent runs, update the validation object.
 					// In this case it can only go from invalid (initial load) to valid (address selected).
 					// You can't select an invalid option from the list because there aren't any, and if you don't select one this never runs.
-					if (value) {
-						setSelectAddressValid({ touched: true, error: '' });
+					if (value && value.value) {
+						updateAddressValidationIfChanged({ touched: true, error: '' });
 					}
 				}}
 				meta={selectAddressValid}
@@ -153,7 +173,7 @@ export const SelectAddress: React.FC<SelectAddressProps> = ({
 				placeholder={selectAddressPlaceholder}
 				readOnly={true}
 				disabled={loading}
-				selectedItem={{}} // don't reselect if the same address turns up again
+				selectedItem={null} // don't reselect if the same address turns up again
 			/>
 			<Button
 				disabled={loading || !getAddressIfValid()}
@@ -166,8 +186,9 @@ export const SelectAddress: React.FC<SelectAddressProps> = ({
 							onValidatePostcode(true);
 						}
 						onAddressSelected(validAddress);
+						clearSelectedAddress();
 					} else {
-						setSelectAddressValid({
+						updateAddressValidationIfChanged({
 							touched: true,
 							error: selectAddressRequiredMessage,
 						});

@@ -5,125 +5,130 @@ import { axe } from 'jest-axe';
 import userEvent from '@testing-library/user-event';
 import { CheckDescribedByTag } from '../utils/aria-describedByTest';
 
+const phoneWrongFormatMsg = 'Invalid phone number format';
+const phoneEmptyFieldMsg = 'phone number cannot be empty';
+const phoneTestId = 'phone-input';
+const phoneName = 'phoneNumber';
+const phoneLabel = 'Phone number';
+const phoneHint = 'This explains how to complete the phone number field';
+const customErrorEmptyValue = 'please provide a phone number';
+const customErrorInvalidValue = 'this is not a valid phone number';
+
+const basicProps = {
+	hint: phoneHint,
+	label: phoneLabel,
+	name: phoneName,
+	testId: phoneTestId,
+};
+
+const handleSubmit = jest.fn();
+
 describe('Phone input', () => {
 	test('is accessible', async () => {
 		const { container } = formSetup({
-			render: (
-				<FFInputPhone label="Phone number" testId="phone-input" name="phone" />
-			),
+			render: <FFInputPhone {...basicProps} />,
 		});
 		const results = await axe(container);
 		expect(results).toHaveNoViolations();
 	});
 
 	test('values get captured correctly', async () => {
-		const testId = 'phone-input';
-		const handleSubmit = jest.fn();
 		const { getByText, getByTestId } = formSetup({
-			render: (
-				<FFInputPhone label="Phone number" testId={testId} name="phone" />
-			),
+			render: <FFInputPhone {...basicProps} />,
 			onSubmit: handleSubmit,
 		});
 
-		userEvent.type(getByTestId(testId), '07543 221 321');
+		userEvent.type(getByTestId(phoneTestId), '07543 221 321');
 		getByText('Submit').click();
 
-		expect(getByTestId(testId)).toHaveValue('07543 221 321');
+		expect(getByTestId(phoneTestId)).toHaveValue('07543 221 321');
 	});
 
 	test('should not accept invalid numbers', async () => {
-		const testId = 'phone-input';
-		const handleSubmit = jest.fn();
 		const { getByText, getByTestId, form } = formSetup({
-			render: (
-				<FFInputPhone label="Phone number" testId={testId} name="phone" />
-			),
+			render: <FFInputPhone {...basicProps} />,
 			onSubmit: handleSubmit,
 		});
 
 		userEvent.type(
-			getByTestId(testId),
+			getByTestId(phoneTestId),
 			'this is not a valid phone number address',
 		);
 		getByText('Submit').click();
 
 		expect(form.getState().valid).toBeFalsy();
-		expect(getByText('Invalid phone number')).toBeInTheDocument();
+		expect(getByText(phoneWrongFormatMsg)).toBeInTheDocument();
 	});
 
 	test('accepts only valid numbers', async () => {
-		const testId = 'phone-input';
-		const handleSubmit = jest.fn();
 		const { getByText, getByTestId, form } = formSetup({
-			render: (
-				<FFInputPhone label="Phone number" testId={testId} name="phone" />
-			),
+			render: <FFInputPhone {...basicProps} />,
 			onSubmit: handleSubmit,
 		});
 
-		userEvent.type(getByTestId(testId), '07543 221 321');
+		userEvent.type(getByTestId(phoneTestId), '07543 221 321');
 		getByText('Submit').click();
 
 		expect(form.getState().valid).toBeTruthy();
 	});
 
-	test('composes custom validation function', async () => {
-		const testId = 'phone-input';
-		const errorMessage = 'Must include tripple 7';
-		const handleSubmit = jest.fn();
-		const { getByText, getByTestId, queryByText, form } = formSetup({
-			render: (
-				<FFInputPhone
-					label="Phone number"
-					testId={testId}
-					name="phone"
-					validate={(phone) =>
-						phone && phone.includes('777') ? undefined : errorMessage
-					}
-				/>
-			),
-			onSubmit: handleSubmit,
-		});
-
-		userEvent.type(getByTestId(testId), '07543 221 321');
-		getByText('Submit').click();
-
-		expect(queryByText(errorMessage)).toBeInTheDocument();
-		expect(form.getState().valid).toBeFalsy();
-	});
-
 	test('renders readonly', () => {
 		const { queryByTestId } = formSetup({
-			render: <FFInputPhone testId="text-input" name="name" readOnly={true} />,
+			render: <FFInputPhone {...basicProps} readOnly={true} />,
 		});
 
-		const label = queryByTestId('text-input');
+		const label = queryByTestId(phoneTestId);
 		expect(label).toHaveAttribute('readonly');
 	});
 
 	test('has correct describedby tag when an error is shown', () => {
-		const numberRequired = 'Invalid phone number';
-		const testId = 'phoneTest';
-		const name = 'phoneNumber';
-		const hint = 'This explains how to complete the field';
-
-		const handleSubmit = jest.fn();
 		const { getByTestId, getByText } = formSetup({
-			render: (
-				<FFInputPhone
-					label="Phone Number"
-					testId={testId}
-					name={name}
-					hint={hint}
-					required={true}
-					validate={(number) => (number ? undefined : numberRequired)}
-				/>
-			),
+			render: <FFInputPhone {...basicProps} required={true} />,
 			onSubmit: handleSubmit,
 		});
 
-		const phoneTest = getByTestId(testId);
-		CheckDescribedByTag(getByText, phoneTest, numberRequired, hint);
+		const phoneTest = getByTestId(phoneTestId);
+		CheckDescribedByTag(getByText, phoneTest, phoneEmptyFieldMsg, phoneHint);
+	});
+
+	describe('custom error messages for Phone Number input', () => {
+		test('Empty Value error message', () => {
+			const { getByText, form } = formSetup({
+				render: (
+					<FFInputPhone
+						{...basicProps}
+						required={true}
+						errorEmptyValue={customErrorEmptyValue}
+						errorInvalidValue={customErrorInvalidValue}
+					/>
+				),
+				onSubmit: handleSubmit,
+			});
+
+			getByText('Submit').click();
+
+			expect(getByText(customErrorEmptyValue)).toBeInTheDocument();
+			expect(form.getState().valid).toBeFalsy();
+		});
+
+		test('Invalid format error message', () => {
+			const { getByText, getByTestId, form } = formSetup({
+				render: (
+					<FFInputPhone
+						{...basicProps}
+						required={true}
+						errorEmptyValue={customErrorEmptyValue}
+						errorInvalidValue={customErrorInvalidValue}
+					/>
+				),
+				onSubmit: handleSubmit,
+			});
+
+			userEvent.type(getByTestId(phoneTestId), '234');
+			getByText('Submit').click();
+
+			expect(getByText(customErrorInvalidValue)).toBeInTheDocument();
+			expect(form.getState().valid).toBeFalsy();
+		});
 	});
 });

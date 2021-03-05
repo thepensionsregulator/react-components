@@ -5,9 +5,6 @@ import userEvent from '@testing-library/user-event';
 import { axe } from 'jest-axe';
 import { AddressLookup, AddressProps } from '../elements/address/addressLookup';
 import FakeAddressLookupProvider from '../elements/address/fakeAddressLookupProvider';
-import { invokeActionWithConsoleErrorTestFailureSuppressed } from '../utils/consoleErrorTestFailureTemporarySupression';
-
-const addressLookupProvider = new FakeAddressLookupProvider();
 
 const defaultProps: AddressProps = {
 	loading: false,
@@ -15,7 +12,7 @@ const defaultProps: AddressProps = {
 	invalidPostcodeMessage: 'Enter a valid postcode',
 	postcodeLookupLabel: 'Postcode',
 	postcodeLookupButton: 'Find address',
-	addressLookupProvider: addressLookupProvider,
+	addressLookupProvider: null,
 	changePostcodeButton: 'Change postcode',
 	selectAddressLabel: 'Select an address',
 	selectAddressButton: 'Select address',
@@ -47,6 +44,10 @@ async function updateAPostcode(postcode: string) {
 	userEvent.type(input, postcode);
 	fireEvent.blur(input);
 }
+
+beforeEach(() => {
+	defaultProps.addressLookupProvider = new FakeAddressLookupProvider();
+});
 
 describe('Address lookup', () => {
 	describe('postcode lookup view', () => {
@@ -99,7 +100,7 @@ describe('Address lookup', () => {
 		});
 	});
 
-	describe('select address view', () => {
+	describe('select address view', () => {		
 		test('passes accessibility checks', async () => {
 			const { container } = formSetup({
 				render: <AddressLookup {...defaultProps} />,
@@ -148,19 +149,11 @@ describe('Address lookup', () => {
 			selectAddressInput.click();
 
 			const addressOptions = await screen.findAllByRole('option');
-
-			await invokeActionWithConsoleErrorTestFailureSuppressed(async () => {
-				// AddressLookup is throwing an error:
-				//     A component is changing a controlled input of type text to be uncontrolled. Input elements should not switch from controlled to uncontrolled (or vice versa).
-				//
-				// The component works despite the console error (which also appears in the gatsby site), and while this does need to be fixed, it is an existing issue.
-				// For now I'm just put a warning in the console for visibility so the tests don't fail.
-				addressOptions[0].click();
-				const selectAddressButton = await screen.findByTestId(
-					'select-address-button',
-				);
-				selectAddressButton.click();
-			});
+			addressOptions[0].click();
+			const selectAddressButton = await screen.findByTestId(
+				'select-address-button',
+			);
+			selectAddressButton.click();
 
 			const addressLine1Input = await screen.findByDisplayValue(
 				FakeAddressLookupProvider.tprAddress.addressLine1,
