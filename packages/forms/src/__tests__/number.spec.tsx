@@ -5,6 +5,7 @@ import { axe } from 'jest-axe';
 import userEvent from '@testing-library/user-event';
 import { fireEvent } from '@testing-library/react';
 import { CheckDescribedByTag } from '../utils/aria-describedByTest';
+import { sleep } from '@tpr/core/src/testHelpers';
 
 const testId = 'number-input';
 
@@ -262,6 +263,48 @@ describe('Number', () => {
 			userEvent.type(getByTestId(testId), '1.2');
 			fireEvent.blur(getByTestId(testId));
 			expect(getByTestId(testId)).toHaveValue(1.2);
+		});
+		test('field with initial value renders with decimal places set', async () => {
+			const { getByTestId } = formSetup({
+				render: (
+					<FFInputNumber
+						label="Number"
+						testId={testId}
+						name="number"
+						decimalPlaces={2}
+						initialValue={15}
+					/>
+				),
+			});
+
+			// There is a setTimeout function in the number.tsx so we
+			// need to wait for that to complete before running the
+			// test assertions
+			await sleep(1000);
+
+			var inputNumberField = await getByTestId(testId);
+			expect(inputNumberField).toHaveAttribute('value', '15.00');
+		});
+		test('form with initial values renders with decimal places set', async () => {
+			const { getByTestId } = formSetup({
+				render: (
+					<FFInputNumber
+						label="Number"
+						testId={testId}
+						name="rpiIncrease"
+						decimalPlaces={2}
+					/>
+				),
+				initialValues: { rpiIncrease: 2.5 },
+			});
+
+			// There is a setTimeout function in the number.tsx so we
+			// need to wait for that to complete before running the
+			// test assertions
+			await sleep(1000);
+
+			var inputNumberField = await getByTestId(testId);
+			expect(inputNumberField).toHaveAttribute('value', '2.50');
 		});
 	});
 

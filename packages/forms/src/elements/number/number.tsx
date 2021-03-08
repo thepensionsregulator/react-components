@@ -1,4 +1,4 @@
-import React, { ChangeEvent, useState } from 'react';
+import React, { ChangeEvent, useEffect, useRef, useState } from 'react';
 import { Field, FieldRenderProps } from 'react-final-form';
 import { StyledInputLabel, InputElementHeading } from '../elements';
 import { FieldExtraProps } from '../../renderFields';
@@ -47,6 +47,7 @@ const InputNumber: React.FC<InputNumberProps> = ({
 	maxLength,
 	maxIntDigits,
 	i18n = numberFieldI18nDefaults,
+	initialValue,
 	...props
 }) => {
 	const digits = [
@@ -67,6 +68,40 @@ const InputNumber: React.FC<InputNumberProps> = ({
 	const validKeys = [...vk, ...digits];
 
 	const [prevValue, setPrevValue] = useState<string | null>(null);
+	const innerInput = useRef(null);
+
+	const setInitialDisplayValue = (initialDisplayValue) => {
+		const formattedInitialValue = fixToDecimals(
+			initialDisplayValue.toString(),
+			decimalPlaces,
+		);
+
+		if (innerInput.current.value === formattedInitialValue) {
+			return;
+		}
+
+		innerInput.current.value = formattedInitialValue;
+		// /*
+		// 		When initialValue changes from null to a numeric value there is a situation where the format
+		// 		is not correctly applied because somehow the blur event triggers before the value is formatted.
+		// 		Delaying minimally the execution of the blur event solves this problem.
+		// 	*/
+		setTimeout(() => {
+			innerInput.current.dispatchEvent(new Event('blur', { bubbles: true }));
+		}, 100);
+	};
+
+	useEffect(() => {
+		if (
+			innerInput.current.defaultValue === undefined ||
+			innerInput.current.defaultValue === null ||
+			innerInput.current.defaultValue === ''
+		) {
+			return;
+		}
+
+		setInitialDisplayValue(innerInput.current.defaultValue);
+	}, [innerInput.current]);
 
 	const reachedMaxIntDigits = (value: string): boolean => {
 		const newInt: number = parseInt(value);
@@ -159,6 +194,7 @@ const InputNumber: React.FC<InputNumberProps> = ({
 				before={before}
 				ariaLabelExtension={i18n.ariaLabelExtension}
 				accessibilityHelper={helper}
+				parentRef={innerInput}
 				{...props}
 			/>
 		</StyledInputLabel>
@@ -171,7 +207,13 @@ export const FFInputNumber: React.FC<FieldWithAriaLabelExtensionProps> = (
 	return (
 		<Field
 			{...fieldProps}
-			render={(props) => <InputNumber {...props} name={fieldProps.name} />}
+			render={(props) => (
+				<InputNumber
+					{...props}
+					name={fieldProps.name}
+					initialValue={fieldProps.initialValue}
+				/>
+			)}
 		/>
 	);
 };
