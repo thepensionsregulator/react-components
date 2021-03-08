@@ -103,18 +103,6 @@ const InputNumber: React.FC<InputNumberProps> = ({
 		setInitialDisplayValue(innerInput.current.defaultValue);
 	}, [innerInput.current]);
 
-	useEffect(() => {
-		if (
-			initialValue === undefined ||
-			initialValue === null ||
-			initialValue === ''
-		) {
-			return;
-		}
-
-		setInitialDisplayValue(initialValue);
-	}, [initialValue]);
-
 	const reachedMaxIntDigits = (value: string): boolean => {
 		const newInt: number = parseInt(value);
 		return Math.abs(newInt).toString().length > maxIntDigits ? true : false;
