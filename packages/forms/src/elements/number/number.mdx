@@ -43,7 +43,10 @@ import { FFInputNumber } from '@tpr/forms';
 [CodeSandbox](https://codesandbox.io)
 
 <Playground>
-	<Form onSubmit={(values) => console.log(values)}>
+	<Form 
+		onSubmit={(values) => console.log(values)}
+		initialValues={{rpiIncrease: 2.5}}
+	>
 		{({ handleSubmit }) => (
 			<form onSubmit={handleSubmit}>
 				<FFInputNumber
@@ -82,7 +85,27 @@ import { FFInputNumber } from '@tpr/forms';
 					name="percentage"
 					label="Amount deducted from expenses"
 					hint="amount in %"
-					inputWidth={5}
+					inputWidth={1}
+					cfg={{ my: 5 }}
+					required={false}
+					noLeftBorder={true}
+					optionalText={false}
+					decimalPlaces={2}
+					min={0}
+					max={100}
+					after="%"
+					validate={(value) => {
+						if (value < 0 || value > 100)
+							return 'must be value between 0 and 100%';
+					}}
+					callback={(e) => console.log(e.target.value)}
+					i18n={{ ariaLabelExtension: ' as a percentage' }}
+					initialValue={10}
+				/>
+				<FFInputNumber
+					name="rpiIncrease"
+					label="Increase in RPI"
+					inputWidth={1}
 					cfg={{ my: 5 }}
 					required={false}
 					noLeftBorder={true}
