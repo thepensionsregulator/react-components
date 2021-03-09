@@ -181,10 +181,9 @@ export const SelectAddress: React.FC<SelectAddressProps> = ({
 				onClick={() => {
 					// If validate() has set the 'valid' object to a valid state, continue; otherwise set it to an invalid state.
 					const validAddress = getAddressIfValid();
+					let isValidAddress = false;
 					if (validAddress) {
-						if (onValidatePostcode !== null) {
-							onValidatePostcode(true);
-						}
+						isValidAddress = true;
 						onAddressSelected(validAddress);
 						clearSelectedAddress();
 					} else {
@@ -192,6 +191,9 @@ export const SelectAddress: React.FC<SelectAddressProps> = ({
 							touched: true,
 							error: selectAddressRequiredMessage,
 						});
+					}
+					if (onValidatePostcode !== null) {
+						onValidatePostcode(isValidAddress);
 					}
 				}}
 				className={`${styles.button} ${styles.arrowButton}`}
