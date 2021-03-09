@@ -1,4 +1,5 @@
 @import '@tpr/theming/lib/variables.scss';
+@import '@tpr/theming/lib/resets.module.scss';
 
 .button {
 	text-align: left;
@@ -15,6 +16,7 @@
 
 	p {
 		color: $colors-primary-3;
+		@include removeMarginBottom;
 	}
 }
 
@@ -41,4 +43,7 @@
 	padding: 0 0 4px 2px;
 	width: 100%;
 	min-height: $space-5;
+	p {
+		@include removeMarginBottom;
+	}
 }

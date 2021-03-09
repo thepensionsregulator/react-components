@@ -90,7 +90,9 @@ export const IndependentTrusteeCard: React.FC<IndependentTrusteeProviderProps> =
 									<Span cfg={{ lineHeight: 3 }} className={styles.styledAsH4}>
 										{context.independentTrustee.organisationName}
 									</Span>
-									<P>{i18n.preview.trusteeType}</P>
+									<P className={styles.noMarginBottom}>
+										{i18n.preview.trusteeType}
+									</P>
 								</>
 							)}
 							statusText={

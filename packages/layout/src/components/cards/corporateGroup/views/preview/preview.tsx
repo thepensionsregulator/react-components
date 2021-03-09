@@ -28,20 +28,34 @@ export const Preview: React.FC<any> = () => {
 				>
 					<UnderlinedButton>{i18n.preview.buttons.three}</UnderlinedButton>
 					<Flex cfg={{ my: 2, flexDirection: 'column' }}>
-						<P>{corporateGroup.address.addressLine1}</P>
+						<P className={styles.noMarginBottom}>
+							{corporateGroup.address.addressLine1}
+						</P>
 						{corporateGroup.address.addressLine2 && (
-							<P>{corporateGroup.address.addressLine2}</P>
+							<P className={styles.noMarginBottom}>
+								{corporateGroup.address.addressLine2}
+							</P>
 						)}
 						{corporateGroup.address.addressLine3 && (
-							<P>{corporateGroup.address.addressLine3}</P>
+							<P className={styles.noMarginBottom}>
+								{corporateGroup.address.addressLine3}
+							</P>
 						)}
-						<P>{corporateGroup.address.postTown}</P>
+						<P className={styles.noMarginBottom}>
+							{corporateGroup.address.postTown}
+						</P>
 						{corporateGroup.address.county && (
-							<P>{corporateGroup.address.county}</P>
+							<P className={styles.noMarginBottom}>
+								{corporateGroup.address.county}
+							</P>
 						)}
-						<P>{corporateGroup.address.postcode}</P>
+						<P className={styles.noMarginBottom}>
+							{corporateGroup.address.postcode}
+						</P>
 						{corporateGroup.address.country && (
-							<P>{corporateGroup.address.country}</P>
+							<P className={styles.noMarginBottom}>
+								{corporateGroup.address.country}
+							</P>
 						)}
 					</Flex>
 
@@ -53,7 +67,7 @@ export const Preview: React.FC<any> = () => {
 						>
 							{i18n.preview.buttons.five}
 						</UnderlinedButton>
-						<P cfg={{ pt: 3 }}>
+						<P cfg={{ pt: 3 }} className={styles.noMarginBottom}>
 							{corporateGroup.directorIsProfessional
 								? i18n.professional.fields.isProfessional.labels
 										.isProfessionalYes
@@ -74,7 +88,7 @@ export const Preview: React.FC<any> = () => {
 						{i18n.preview.buttons.four}
 					</UnderlinedButton>
 					<Flex cfg={{ my: 2, flexDirection: 'column' }}>
-						<P cfg={{ mb: 2 }}>
+						<P cfg={{ mb: 2 }} className={styles.noMarginBottom}>
 							{corporateGroup.title
 								? `${corporateGroup.title} ${corporateGroup.firstName} ${corporateGroup.lastName}`
 								: `${corporateGroup.firstName} ${corporateGroup.lastName}`}

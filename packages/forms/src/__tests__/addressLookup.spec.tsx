@@ -100,7 +100,7 @@ describe('Address lookup', () => {
 		});
 	});
 
-	describe('select address view', () => {		
+	describe('select address view', () => {
 		test('passes accessibility checks', async () => {
 			const { container } = formSetup({
 				render: <AddressLookup {...defaultProps} />,

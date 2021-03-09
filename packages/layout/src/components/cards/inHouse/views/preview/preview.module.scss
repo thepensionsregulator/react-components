@@ -1,4 +1,5 @@
 @import '@tpr/theming/lib/variables.scss';
+@import '@tpr/theming/lib/resets.module.scss';
 
 .content {
 	display: flex;
@@ -10,4 +11,8 @@
 
 .complete {
 	border-color: $colors-success-1;
+}
+
+.noMarginBottom {
+	@include removeMarginBottom;
 }

@@ -1,3 +1,5 @@
+@import '@tpr/theming/lib/resets.module.scss';
+
 .removepadding {
 	padding-left: 0px !important;
 	padding-right: 0px !important;
@@ -6,4 +8,8 @@
 .crossButton {
 	background: none;
 	cursor: pointer;
+}
+
+.moMarginBottom {
+	@include removeMarginBottom;
 }

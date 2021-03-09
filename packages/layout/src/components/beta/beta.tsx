@@ -50,7 +50,7 @@ export const BetaHeader: React.FC<BetaHeaderProps> = ({ text, mail }) => {
 					>
 						BETA
 					</P>
-					<P cfg={{ fontSize: 2, color: 'neutral.8' }}>
+					<P cfg={{ fontSize: 2, color: 'neutral.8', my: 1 }}>
 						<TextComponent />
 					</P>
 				</Flex>
