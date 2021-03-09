@@ -48,7 +48,7 @@
 			&::before {
 				content: ' ';
 				position: absolute;
-				left: -20px;
+				left: -25px;
 				top: -8px;
 				height: 100%;
 				min-height: 40px;
@@ -91,6 +91,9 @@
 			content: '—';
 			color: $colors-neutral-8;
 			padding-right: 2px;
+		}
+		a {
+			text-decoration: none!important;
 		}
 	}
 }

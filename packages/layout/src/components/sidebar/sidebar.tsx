@@ -111,6 +111,7 @@ export const Sidebar: React.FC<SidebarProps> = ({
 							fontWeight: 3,
 							color: 'primary.2',
 							textAlign: 'left',
+							lineHeight: 6,
 							fontSize: 4,
 						}}
 						onClick={() => history.push(titlePath)}
