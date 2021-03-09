@@ -24,17 +24,27 @@ export const Preview: React.FC<any> = () => {
 				>
 					<UnderlinedButton>{i18n.preview.buttons.three}</UnderlinedButton>
 					<Flex cfg={{ my: 2, flexDirection: 'column' }}>
-						<P>{insurer.address.addressLine1}</P>
+						<P className={styles.noMarginBottom}>
+							{insurer.address.addressLine1}
+						</P>
 						{insurer.address.addressLine2 && (
-							<P>{insurer.address.addressLine2}</P>
+							<P className={styles.noMarginBottom}>
+								{insurer.address.addressLine2}
+							</P>
 						)}
 						{insurer.address.addressLine3 && (
-							<P>{insurer.address.addressLine3}</P>
+							<P className={styles.noMarginBottom}>
+								{insurer.address.addressLine3}
+							</P>
 						)}
-						<P>{insurer.address.postTown}</P>
-						{insurer.address.county && <P>{insurer.address.county}</P>}
-						<P>{insurer.address.postcode}</P>
-						{insurer.address.country && <P>{insurer.address.country}</P>}
+						<P className={styles.noMarginBottom}>{insurer.address.postTown}</P>
+						{insurer.address.county && (
+							<P className={styles.noMarginBottom}>{insurer.address.county}</P>
+						)}
+						<P className={styles.noMarginBottom}>{insurer.address.postcode}</P>
+						{insurer.address.country && (
+							<P className={styles.noMarginBottom}>{insurer.address.country}</P>
+						)}
 					</Flex>
 				</Flex>
 
@@ -49,7 +59,9 @@ export const Preview: React.FC<any> = () => {
 						{i18n.preview.buttons.four}
 					</UnderlinedButton>
 					<Flex cfg={{ mt: 1, flexDirection: 'column' }}>
-						<P>{insurer.insurerCompanyReference}</P>
+						<P className={styles.noMarginBottom}>
+							{insurer.insurerCompanyReference}
+						</P>
 					</Flex>
 				</Flex>
 			</Flex>

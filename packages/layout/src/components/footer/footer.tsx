@@ -48,7 +48,7 @@ export const Footer: React.FC<FooterProps> = ({
 								</Link>
 							))}
 						</Flex>
-						<P cfg={{ fontSize: 1, color: 'neutral.a2' }}>{copyright}</P>
+						<P cfg={{ fontSize: 1, color: 'neutral.a2', my: 1 }}>{copyright}</P>
 					</Flex>
 				</Flex>
 			</AppWidth>
