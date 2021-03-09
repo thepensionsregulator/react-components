@@ -39,7 +39,7 @@ export const ArrowButton: React.FC<ArrowButtonProps> = ({
 			className={styles.removepadding}
 		>
 			{disabled && disabledText ? (
-				<Span cfg={{ px: 4 }} className={styles.noMarginBottom}>
+				<Span cfg={{ px: 4 }}>
 					{disabledText}
 				</Span>
 			) : (
