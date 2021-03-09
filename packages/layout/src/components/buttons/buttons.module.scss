@@ -1,3 +1,5 @@
+@import '@tpr/theming/lib/resets.module.scss';
+
 .removepadding {
 	padding-left: 0px !important;
 	padding-right: 0px !important;
@@ -9,5 +11,5 @@
 }
 
 .moMarginBottom {
-	margin-bottom: 0;
+	@include removeMarginBottom;
 }

@@ -1,5 +1,6 @@
 @import '@tpr/theming/lib/variables.scss';
 @import '@tpr/core/lib/components/typography/typography.module.scss';
+@import '@tpr/theming/lib/resets.module.scss';
 
 .content {
 	display: flex;
@@ -14,5 +15,5 @@
 }
 
 .noMarginBottom {
-	margin-bottom: 0;
+	@include removeMarginBottom;
 }
