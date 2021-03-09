@@ -1,5 +1,5 @@
 import React from 'react';
-import { AppWidth, DocWidth, Flex, P } from '@tpr/core';
+import { AppWidth, DocWidth, Flex, Span } from '@tpr/core';
 import styles from './highlight.module.scss';
 
 type HighlightProps = {
@@ -18,7 +18,7 @@ export const Highlight: React.FC<HighlightProps> = ({
 			<div className={styles.leftBackground} />
 			<AppWidth className={styles.highlightContent}>
 				<Flex cfg={{ flex: '0 0 auto' }} className={styles.schemeReturn}>
-					<P
+					<Span
 						cfg={{
 							fontWeight: 4,
 							fontSize: 3,
@@ -28,7 +28,7 @@ export const Highlight: React.FC<HighlightProps> = ({
 						}}
 					>
 						{title}
-					</P>
+					</Span>
 				</Flex>
 				<Flex
 					cfg={{
@@ -37,7 +37,7 @@ export const Highlight: React.FC<HighlightProps> = ({
 						justifyContent: 'space-between',
 					}}
 				>
-					<P
+					<Span
 						cfg={{
 							fontWeight: 4,
 							fontSize: 3,
@@ -48,7 +48,7 @@ export const Highlight: React.FC<HighlightProps> = ({
 						className={styles.truncate}
 					>
 						{name}
-					</P>
+					</Span>
 					<Flex
 						cfg={{
 							flex: '0 0 auto',
@@ -58,7 +58,7 @@ export const Highlight: React.FC<HighlightProps> = ({
 						className={styles.psrNumber}
 					>
 						<div className={styles.separator}></div>
-						<P
+						<Span
 							cfg={{
 								fontWeight: 4,
 								fontSize: 3,
@@ -68,7 +68,7 @@ export const Highlight: React.FC<HighlightProps> = ({
 							}}
 						>
 							PSR: {psr}
-						</P>
+						</Span>
 					</Flex>
 				</Flex>
 			</AppWidth>
