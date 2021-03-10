@@ -34,7 +34,7 @@
 		position: relative;
 
 		a {
-			text-decoration: underline;
+			text-decoration: none;
 
 			&:hover {
 				text-decoration: underline !important;
@@ -44,8 +44,15 @@
 				color: $colors-neutral-8 !important;
 				text-decoration: none;
 			}
-
-			&::before {
+		}
+		&.nested {
+			a {
+				color: $colors-neutral-8!important;
+				text-decoration: underline !important;
+			}
+		}
+		&.topLevel > div:not(.nestedWrapper) {
+			a::before {
 				content: ' ';
 				position: absolute;
 				left: -25px;
@@ -93,7 +100,7 @@
 			padding-right: 2px;
 		}
 		a {
-			text-decoration: none!important;
+			text-decoration: none !important;
 		}
 	}
 }

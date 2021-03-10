@@ -19,7 +19,7 @@ const SidebarMenu: React.FC<SidebarMenuProps> = ({
 		collapsed && setClasses(collapsedClass);
 		!collapsed && setClasses(styles.nestedWrapper);
 	}, [collapsed]);
-
+	
 	const generateSubmenu = (links: SidebarLinkProps[]) => {
 		return (
 			<Flex cfg={{ flexDirection: 'column', pl: 6 }} className={classes}>
@@ -32,8 +32,8 @@ const SidebarMenu: React.FC<SidebarMenuProps> = ({
 							<li key={key}>
 								<Flex
 									cfg={{ justifyContent: 'space-between', mb: links ? 5 : 1 }}
-									className={styles.nested}
-								>
+									className={active(innerLink.path, true) ? `${styles.nested} ${styles.activeLink}` : styles.nested}
+									>
 									<Link
 										cfg={{
 											color: 'primary.2',
@@ -90,7 +90,7 @@ const SidebarMenu: React.FC<SidebarMenuProps> = ({
 									mb: link.links ? 1 : 5,
 									flexDirection: link.links ? 'column' : 'row',
 								}}
-								className={active(link.path) ? styles.activeLink : undefined}
+								className={active(link.path, false) ? `${styles.topLevel} ${styles.activeLink}` : styles.topLevel}
 							>
 								<Flex
 									cfg={{

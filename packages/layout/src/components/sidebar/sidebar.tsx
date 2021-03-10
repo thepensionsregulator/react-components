@@ -7,9 +7,10 @@ import styles from './sidebar.module.scss';
 
 export const isActive = (settings: { matchPath: any; location: any }) => (
 	path: string,
+	exact: boolean
 ): boolean => {
 	const { matchPath = () => {}, location } = settings;
-	const matched = matchPath(location.pathname, { path });
+	const matched = matchPath(location.pathname, { path, exact });
 	return matched ? true : false;
 };
 
