@@ -39,12 +39,6 @@ async function searchForAPostcode(postcode: string) {
 	fireEvent.click(submit);
 }
 
-async function updateAPostcode(postcode: string) {
-	const input = await screen.findByTestId('postcode-lookup-edit');
-	userEvent.type(input, postcode);
-	fireEvent.blur(input);
-}
-
 beforeEach(() => {
 	defaultProps.addressLookupProvider = new FakeAddressLookupProvider();
 });
@@ -90,13 +84,6 @@ describe('Address lookup', () => {
 				defaultProps.invalidPostcodeMessage,
 			);
 			expect(errorMessage).not.toBeNull();
-		});
-		test('should call onValidatePostcode when postcode is entered', async () => {
-			formSetup({
-				render: <AddressLookup {...defaultProps} />,
-			});
-			await updateAPostcode('s6 2nr');
-			expect(defaultProps.onValidatePostcode).toHaveBeenCalled();
 		});
 	});
 
@@ -159,6 +146,24 @@ describe('Address lookup', () => {
 				FakeAddressLookupProvider.tprAddress.addressLine1,
 			);
 			expect(addressLine1Input).toBeDefined();
+		});
+		test('should call onValidatePostcode when select address button is clicked', async () => {
+			formSetup({
+				render: <AddressLookup {...defaultProps} />,
+			});
+			await searchForAPostcode(FakeAddressLookupProvider.tprAddress.postcode);
+
+			const selectAddressInput = await screen.findByTestId(
+				'select-address-list',
+			);
+			selectAddressInput.click();
+			const addressOptions = await screen.findAllByRole('option');
+			addressOptions[0].click();
+			const selectAddressButton = await screen.findByTestId(
+				'select-address-button',
+			);
+			selectAddressButton.click();
+			expect(defaultProps.onValidatePostcode).toHaveBeenCalled();
 		});
 	});
 
