@@ -11,7 +11,7 @@ export type SidebarLinkProps = {
 	completed?: boolean;
 	onClick?: (link: Omit<SidebarLinkProps, 'onClick'>) => void;
 	disabled?: boolean;
-	active?: (path: string, exact: boolean) => boolean;
+	active?: (path: string) => boolean;
 	links?: SidebarLinkProps[];
 	hideIcon?: boolean;
 };

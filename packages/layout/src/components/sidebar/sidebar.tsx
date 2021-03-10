@@ -6,11 +6,10 @@ import { ReactRouterDomProps, SidebarSectionProps } from './components/types';
 import styles from './sidebar.module.scss';
 
 export const isActive = (settings: { matchPath: any; location: any }) => (
-	path: string,
-	exact: boolean
+	path: string
 ): boolean => {
 	const { matchPath = () => {}, location } = settings;
-	const matched = matchPath(location.pathname, { path, exact });
+	const matched = matchPath(location.pathname, { path });
 	return matched ? true : false;
 };
 
