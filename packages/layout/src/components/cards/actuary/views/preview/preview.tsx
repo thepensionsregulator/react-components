@@ -8,7 +8,7 @@ import {
 	EmailPreview,
 } from '../../../common/views/preview/components';
 import styles from './preview.module.scss';
-
+import CommonStyles from '../../../cards.module.scss';
 export const Preview: React.FC<any> = () => {
 	const { current, send, onCorrect, i18n } = useActuaryContext();
 	const { actuary, complete, preValidatedData } = current.context;
@@ -22,7 +22,9 @@ export const Preview: React.FC<any> = () => {
 			}
 		>
 			{/* Actuary's Organisation name: display only	 */}
-			<P cfg={{ mb: 4 }}>{actuary.organisationName}</P>
+			<P cfg={{ mb: 4 }} className={CommonStyles.noMarginBottom}>
+				{actuary.organisationName}
+			</P>
 
 			<Flex>
 				{/* Address section: display only	 */}
@@ -31,17 +33,35 @@ export const Preview: React.FC<any> = () => {
 				>
 					<UnderlinedButton>{i18n.preview.buttons.three}</UnderlinedButton>
 					<Flex cfg={{ my: 2, flexDirection: 'column' }}>
-						<P>{actuary.address.addressLine1}</P>
+						<P className={CommonStyles.noMarginBottom}>
+							{actuary.address.addressLine1}
+						</P>
 						{actuary.address.addressLine2 && (
-							<P>{actuary.address.addressLine2}</P>
+							<P className={CommonStyles.noMarginBottom}>
+								{actuary.address.addressLine2}
+							</P>
 						)}
 						{actuary.address.addressLine3 && (
-							<P>{actuary.address.addressLine3}</P>
+							<P className={CommonStyles.noMarginBottom}>
+								{actuary.address.addressLine3}
+							</P>
 						)}
-						<P>{actuary.address.postTown}</P>
-						{actuary.address.county && <P>{actuary.address.county}</P>}
-						<P>{actuary.address.postcode}</P>
-						{actuary.address.country && <P>{actuary.address.country}</P>}
+						<P className={CommonStyles.noMarginBottom}>
+							{actuary.address.postTown}
+						</P>
+						{actuary.address.county && (
+							<P className={CommonStyles.noMarginBottom}>
+								{actuary.address.county}
+							</P>
+						)}
+						<P className={CommonStyles.noMarginBottom}>
+							{actuary.address.postcode}
+						</P>
+						{actuary.address.country && (
+							<P className={CommonStyles.noMarginBottom}>
+								{actuary.address.country}
+							</P>
+						)}
 					</Flex>
 				</Flex>
 

@@ -1,5 +1,5 @@
 import React, { ChangeEvent } from 'react';
-import { Flex, Button, ButtonProps, ColorProps, P } from '@tpr/core';
+import { Flex, Button, ButtonProps, ColorProps, Span } from '@tpr/core';
 import { ArrowIcon } from './icons';
 import styles from './buttons.module.scss';
 import { Cross } from '@tpr/icons';
@@ -39,7 +39,9 @@ export const ArrowButton: React.FC<ArrowButtonProps> = ({
 			className={styles.removepadding}
 		>
 			{disabled && disabledText ? (
-				<P cfg={{ px: 4 }}>{disabledText}</P>
+				<Span cfg={{ px: 4 }}>
+					{disabledText}
+				</Span>
 			) : (
 				<Flex
 					cfg={{

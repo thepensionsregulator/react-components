@@ -33,20 +33,34 @@ export const Preview: React.FC<any> = () => {
 						{i18n.preview.buttons.three}
 					</UnderlinedButton>
 					<Flex cfg={{ my: 2, flexDirection: 'column' }}>
-						<P>{inHouseAdmin.address.addressLine1}</P>
+						<P className={styles.noMarginBottom}>
+							{inHouseAdmin.address.addressLine1}
+						</P>
 						{inHouseAdmin.address.addressLine2 && (
-							<P>{inHouseAdmin.address.addressLine2}</P>
+							<P className={styles.noMarginBottom}>
+								{inHouseAdmin.address.addressLine2}
+							</P>
 						)}
 						{inHouseAdmin.address.addressLine3 && (
-							<P>{inHouseAdmin.address.addressLine3}</P>
+							<P className={styles.noMarginBottom}>
+								{inHouseAdmin.address.addressLine3}
+							</P>
 						)}
-						<P>{inHouseAdmin.address.postTown}</P>
+						<P className={styles.noMarginBottom}>
+							{inHouseAdmin.address.postTown}
+						</P>
 						{inHouseAdmin.address.county && (
-							<P>{inHouseAdmin.address.county}</P>
+							<P className={styles.noMarginBottom}>
+								{inHouseAdmin.address.county}
+							</P>
 						)}
-						<P>{inHouseAdmin.address.postcode}</P>
+						<P className={styles.noMarginBottom}>
+							{inHouseAdmin.address.postcode}
+						</P>
 						{inHouseAdmin.address.country && (
-							<P>{inHouseAdmin.address.country}</P>
+							<P className={styles.noMarginBottom}>
+								{inHouseAdmin.address.country}
+							</P>
 						)}
 					</Flex>
 				</Flex>

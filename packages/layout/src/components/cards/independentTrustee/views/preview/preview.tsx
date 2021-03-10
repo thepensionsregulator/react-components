@@ -24,20 +24,34 @@ export const Preview: React.FC<any> = () => {
 				>
 					<UnderlinedButton>{i18n.preview.buttons.three}</UnderlinedButton>
 					<Flex cfg={{ my: 2, flexDirection: 'column' }}>
-						<P>{independentTrustee.address.addressLine1}</P>
+						<P className={styles.noMarginBottom}>
+							{independentTrustee.address.addressLine1}
+						</P>
 						{independentTrustee.address.addressLine2 && (
-							<P>{independentTrustee.address.addressLine2}</P>
+							<P className={styles.noMarginBottom}>
+								{independentTrustee.address.addressLine2}
+							</P>
 						)}
 						{independentTrustee.address.addressLine3 && (
-							<P>{independentTrustee.address.addressLine3}</P>
+							<P className={styles.noMarginBottom}>
+								{independentTrustee.address.addressLine3}
+							</P>
 						)}
-						<P>{independentTrustee.address.postTown}</P>
+						<P className={styles.noMarginBottom}>
+							{independentTrustee.address.postTown}
+						</P>
 						{independentTrustee.address.county && (
-							<P>{independentTrustee.address.county}</P>
+							<P className={styles.noMarginBottom}>
+								{independentTrustee.address.county}
+							</P>
 						)}
-						<P>{independentTrustee.address.postcode}</P>
+						<P className={styles.noMarginBottom}>
+							{independentTrustee.address.postcode}
+						</P>
 						{independentTrustee.address.country && (
-							<P>{independentTrustee.address.country}</P>
+							<P className={styles.noMarginBottom}>
+								{independentTrustee.address.country}
+							</P>
 						)}
 					</Flex>
 				</Flex>
@@ -50,7 +64,7 @@ export const Preview: React.FC<any> = () => {
 					>
 						{i18n.preview.buttons.four}
 					</UnderlinedButton>
-					<P cfg={{ pt: 3 }}>
+					<P cfg={{ pt: 3 }} className={styles.noMarginBottom}>
 						{independentTrustee.appointedByRegulator
 							? i18n.regulator.fields.appointedByRegulator.labels
 									.isAppointedByRegulatorYes
