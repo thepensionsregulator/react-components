@@ -88,6 +88,8 @@
 }
 
 .nestedWrapper {
+	padding-left: 0!important;
+	
 	&.collapsed {
 		height: 0;
 		overflow: hidden;
