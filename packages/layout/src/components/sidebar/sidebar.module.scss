@@ -1,5 +1,6 @@
 @import '@tpr/theming/lib/variables.scss';
 @import '@tpr/core/lib/components/typography/typography.module.scss';
+@import '@tpr/theming/lib/resets.module.scss';
 
 .sidebar {
 	display: flex;
@@ -105,4 +106,8 @@
 			text-decoration: none !important;
 		}
 	}
+}
+
+.label {
+	@include removeMarginBottom;
 }

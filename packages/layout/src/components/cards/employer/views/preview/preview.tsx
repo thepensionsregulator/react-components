@@ -12,7 +12,7 @@ const IdentifiersItem: React.FC<IdentifiersItemProps> = ({ title, number }) => {
 			<Span cfg={{ lineHeight: 3 }} className={styles.styledAsH4}>
 				{title}
 			</Span>
-			<P>{number}</P>
+			<P className={styles.noMarginBottom}>{number}</P>
 		</>
 	);
 };
@@ -54,16 +54,22 @@ export const Preview: React.FC<any> = () => {
 						<Span cfg={{ lineHeight: 3 }} className={styles.styledAsH4}>
 							{employer.organisationName}
 						</Span>
-						<P>{employer.address.addressLine1}</P>
+						<P className={styles.noMarginBottom}>
+							{employer.address.addressLine1}
+						</P>
 						{employer.address.addressLine2 && (
-							<P>{employer.address.addressLine2}</P>
+							<P className={styles.noMarginBottom}>
+								{employer.address.addressLine2}
+							</P>
 						)}
 						{employer.address.addressLine3 && (
-							<P>{employer.address.addressLine3}</P>
+							<P className={styles.noMarginBottom}>
+								{employer.address.addressLine3}
+							</P>
 						)}
-						<P>{employer.address.postTown}</P>
+						<P className={styles.noMarginBottom}>{employer.address.postTown}</P>
 						{employer.address.county && <P>{employer.address.county}</P>}
-						<P>{employer.address.postcode}</P>
+						<P className={styles.noMarginBottom}>{employer.address.postcode}</P>
 					</Flex>
 				</Flex>
 				<Flex

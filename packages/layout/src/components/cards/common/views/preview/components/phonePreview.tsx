@@ -14,7 +14,9 @@ export const PhonePreview: React.FC<PhonePreviewProps> = React.memo(
 				<Span cfg={{ lineHeight: 3 }} className={styles.styledAsH4}>
 					{label}
 				</Span>
-				<P x-ms-format-detection="none">{value}</P>
+				<P x-ms-format-detection="none" className={styles.noMarginBottom}>
+					{value}
+				</P>
 			</>
 		);
 	},

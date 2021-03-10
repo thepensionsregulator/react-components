@@ -22,7 +22,9 @@ export const Preview: React.FC = () => {
 					: classNames([{ [styles.complete]: complete }, styles.content])
 			}
 		>
-			<P cfg={{ mb: 4 }}>{capitalize(trustee.trusteeType)} trustee</P>
+			<P cfg={{ mb: 4 }} className={styles.noMarginBottom}>
+				{capitalize(trustee.trusteeType)} trustee
+			</P>
 			<Flex>
 				{/* Addres section: open for editing	 */}
 				<Flex
@@ -39,14 +41,20 @@ export const Preview: React.FC = () => {
 							{trustee.address.addressLine1}
 						</Span>
 						{trustee.address.addressLine2 && (
-							<P>{trustee.address.addressLine2}</P>
+							<P className={styles.noMarginBottom}>
+								{trustee.address.addressLine2}
+							</P>
 						)}
 						{trustee.address.addressLine3 && (
-							<P>{trustee.address.addressLine3}</P>
+							<P className={styles.noMarginBottom}>
+								{trustee.address.addressLine3}
+							</P>
 						)}
-						<P>{trustee.address.postTown}</P>
-						{trustee.address.county && <P>{trustee.address.county}</P>}
-						<P>{trustee.address.postcode}</P>
+						<P className={styles.noMarginBottom}>{trustee.address.postTown}</P>
+						{trustee.address.county && (
+							<P className={styles.noMarginBottom}>{trustee.address.county}</P>
+						)}
+						<P className={styles.noMarginBottom}>{trustee.address.postcode}</P>
 					</Flex>
 				</Flex>
 

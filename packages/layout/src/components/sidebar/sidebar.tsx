@@ -127,6 +127,7 @@ export const Sidebar: React.FC<SidebarProps> = ({
 							fontWeight: 3,
 							lineHeight: 6,
 						}}
+						className={styles.label}
 					>
 						Section
 					</P>
@@ -137,6 +138,7 @@ export const Sidebar: React.FC<SidebarProps> = ({
 							fontWeight: 3,
 							lineHeight: 6,
 						}}
+						className={styles.label}
 					>
 						Progress {totalCompleted.length} / {totalSections.length}
 					</P>

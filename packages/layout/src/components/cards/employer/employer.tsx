@@ -95,8 +95,8 @@ const EmployerSubtitle: React.FC<Partial<Employer>> = ({
 
 	return (
 		<>
-			<P>{title}</P>
-			<P>{subtitle}</P>
+			<P className={styles.noMarginBottom}>{title}</P>
+			<P className={styles.noMarginBottom}>{subtitle}</P>
 		</>
 	);
 };

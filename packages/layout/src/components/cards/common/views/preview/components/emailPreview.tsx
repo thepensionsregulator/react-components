@@ -14,7 +14,9 @@ export const EmailPreview: React.FC<EmailPreviewProps> = React.memo(
 				<Span cfg={{ lineHeight: 3 }} className={styles.styledAsH4}>
 					{label}
 				</Span>
-				<P cfg={{ wordBreak: 'all' }}>{value}</P>
+				<P cfg={{ wordBreak: 'all' }} className={styles.noMarginBottom}>
+					{value}
+				</P>
 			</>
 		);
 	},

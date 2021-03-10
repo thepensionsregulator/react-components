@@ -1,4 +1,5 @@
 @import '@tpr/theming/lib/variables.scss';
+@import '@tpr/theming/lib/resets.module.scss';
 
 .wrapper {
 	display: flex;
@@ -32,4 +33,9 @@
 	font-weight: $font-weight-2;
 	margin-top: $space-2;
 	margin-left: 55px;
+	margin-bottom: 0;
+}
+
+.label {
+	@include removeMarginBottom;
 }
