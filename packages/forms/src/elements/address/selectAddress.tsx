@@ -144,7 +144,6 @@ export const SelectAddress: React.FC<SelectAddressProps> = ({
 					aria-label={changePostcodeAriaLabel}
 					disabled={loading}
 					appearance="secondary"
-					size="small"
 				>
 					{changePostcodeButton}
 				</Button>
@@ -178,6 +177,7 @@ export const SelectAddress: React.FC<SelectAddressProps> = ({
 			<Button
 				disabled={loading || !getAddressIfValid()}
 				testId={(testId ? testId + '-' : '') + 'select-address-button'}
+				appearance='secondary'
 				onClick={() => {
 					// If validate() has set the 'valid' object to a valid state, continue; otherwise set it to an invalid state.
 					const validAddress = getAddressIfValid();
