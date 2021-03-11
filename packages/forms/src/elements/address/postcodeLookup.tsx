@@ -67,7 +67,7 @@ export const PostcodeLookup: React.FC<PostcodeLookupProps> = ({
 				<Button
 					testId={(testId ? testId + '-' : '') + 'postcode-lookup-button'}
 					onClick={clickFindAddress}
-					appearance='secondary'
+					appearance="secondary"
 					disabled={loading || !postcodeValid}
 				>
 					{postcodeLookupButton}
