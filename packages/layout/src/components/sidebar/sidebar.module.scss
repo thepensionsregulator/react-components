@@ -35,7 +35,7 @@
 		position: relative;
 
 		a {
-			text-decoration: none;
+			text-decoration: underline;
 
 			&:hover {
 				text-decoration: underline !important;
@@ -66,6 +66,31 @@
 				box-shadow: 0px 0px 0px 1px white;
 			}
 		}
+		&.topLevel.withSelectedChild {
+			a {
+				text-decoration: none;
+			}	
+		}
+	}
+
+	.nestedWrapper {
+		padding-left: 0!important;
+		
+		&.collapsed {
+			height: 0;
+			overflow: hidden;
+		}
+	
+		.nested {
+			&::before {
+				content: '—';
+				color: $colors-neutral-8;
+				padding-right: 2px;
+			}
+			a {
+				text-decoration: none;
+			}
+		}
 	}
 }
 
@@ -86,26 +111,6 @@
 
 .sidebarMenu:last-child {
 	border-bottom: none;
-}
-
-.nestedWrapper {
-	padding-left: 0!important;
-	
-	&.collapsed {
-		height: 0;
-		overflow: hidden;
-	}
-
-	.nested {
-		&::before {
-			content: '—';
-			color: $colors-neutral-8;
-			padding-right: 2px;
-		}
-		a {
-			text-decoration: none !important;
-		}
-	}
 }
 
 .label {

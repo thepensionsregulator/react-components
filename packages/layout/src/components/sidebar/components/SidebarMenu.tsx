@@ -14,7 +14,16 @@ const SidebarMenu: React.FC<SidebarMenuProps> = ({
 }) => {
 	const collapsedClass = styles.nestedWrapper + ' ' + styles.collapsed;
 	const [classes, setClasses] = useState(styles.nestedWrapper);
-
+	const getTopLevelStyles = (link: SidebarLinkProps, isActive: (path: string, exact: boolean) => {}) => {
+		if (isActive(link.path, false)) {
+			return (isActive(link.path, true)) ?  
+				`${styles.topLevel} ${styles.activeLink}` :
+				`${styles.topLevel} ${styles.activeLink} ${styles.withSelectedChild}`;
+		}
+		else {
+			return styles.topLevel;
+		} 
+	}
 	useEffect(() => {
 		collapsed && setClasses(collapsedClass);
 		!collapsed && setClasses(styles.nestedWrapper);
@@ -32,7 +41,7 @@ const SidebarMenu: React.FC<SidebarMenuProps> = ({
 							<li key={key}>
 								<Flex
 									cfg={{ justifyContent: 'space-between', mb: links ? 5 : 1 }}
-									className={active(innerLink.path) ? `${styles.nested} ${styles.activeLink}` : styles.nested}
+									className={active(innerLink.path, true) ? `${styles.nested} ${styles.activeLink}` : styles.nested}
 									>
 									<Link
 										cfg={{
@@ -90,7 +99,7 @@ const SidebarMenu: React.FC<SidebarMenuProps> = ({
 									mb: link.links ? 1 : 5,
 									flexDirection: link.links ? 'column' : 'row',
 								}}
-								className={active(link.path) ? `${styles.topLevel} ${styles.activeLink}` : styles.topLevel}
+								className={getTopLevelStyles(link, active)}
 							>
 								<Flex
 									cfg={{
