@@ -15,15 +15,11 @@ const SidebarMenu: React.FC<SidebarMenuProps> = ({
 	const collapsedClass = styles.nestedWrapper + ' ' + styles.collapsed;
 	const [classes, setClasses] = useState(styles.nestedWrapper);
 	const getTopLevelStyles = (link: SidebarLinkProps, isActive: (path: string, exact: boolean) => {}) => {
-		if (isActive(link.path, false)) {
-			return (isActive(link.path, true)) ?  
-				`${styles.topLevel} ${styles.activeLink}` :
-				`${styles.topLevel} ${styles.activeLink} ${styles.withSelectedChild}`;
-		}
-		else {
-			return styles.topLevel;
-		} 
+		return isActive(link.path, false) ? 
+			`${styles.topLevel} ${styles.activeLink} ${styles.withSelectedChild}` :
+			styles.topLevel;
 	}
+
 	useEffect(() => {
 		collapsed && setClasses(collapsedClass);
 		!collapsed && setClasses(styles.nestedWrapper);
@@ -99,7 +95,7 @@ const SidebarMenu: React.FC<SidebarMenuProps> = ({
 									mb: link.links ? 1 : 5,
 									flexDirection: link.links ? 'column' : 'row',
 								}}
-								className={getTopLevelStyles(link, active)}
+								className={active(link.path, false) ? `${styles.topLevelWrapper} ${styles.containsSelectedLink}` :styles.topLevelWrapper}
 							>
 								<Flex
 									cfg={{
@@ -107,7 +103,7 @@ const SidebarMenu: React.FC<SidebarMenuProps> = ({
 										width: 10,
 										mb: link.links ? 5 : 1,
 									}}
-									className={styles.topLevelWrapper}
+									className={active(link.path, true) ? `${styles.topLevelLink} ${styles.activeLink}`: styles.topLevelLink}
 								>
 									<Link
 										cfg={{

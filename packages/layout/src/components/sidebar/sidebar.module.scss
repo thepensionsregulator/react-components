@@ -31,14 +31,31 @@
 		}
 	}
 
-	div.activeLink {
+	div.topLevelWrapper {
 		position: relative;
 
+		&.containsSelectedLink>.topLevelLink {
+				a::before {
+					content: ' ';
+					position: absolute;
+					left: -25px;
+					top: -8px;
+					height: 100%;
+					min-height: 40px;
+					width: 5px;
+					background: $colors-primary-3;
+					// to hide outline from pseudo element
+					box-shadow: 0px 0px 0px 1px white;
+			}
+		}
+	}
+
+	div.activeLink {
 		a {
 			text-decoration: underline;
 
 			&:hover {
-				text-decoration: underline !important;
+				text-decoration: underline;
 			}
 
 			&:focus {
@@ -49,27 +66,11 @@
 		&.nested {
 			a {
 				color: $colors-neutral-8!important;
-				text-decoration: underline !important;
+
+				&:hover {
+					color: $colors-neutral-a1!important;
+				}
 			}
-		}
-		&.topLevel > .topLevelWrapper {
-			a::before {
-				content: ' ';
-				position: absolute;
-				left: -25px;
-				top: -8px;
-				height: 100%;
-				min-height: 40px;
-				width: 5px;
-				background: $colors-primary-3;
-				// to hide outline from pseudo element
-				box-shadow: 0px 0px 0px 1px white;
-			}
-		}
-		&.topLevel.withSelectedChild {
-			a {
-				text-decoration: none;
-			}	
 		}
 	}
 
@@ -86,9 +87,6 @@
 				content: '—';
 				color: $colors-neutral-8;
 				padding-right: 2px;
-			}
-			a {
-				text-decoration: none;
 			}
 		}
 	}
