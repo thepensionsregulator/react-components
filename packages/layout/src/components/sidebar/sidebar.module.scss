@@ -50,7 +50,7 @@
 		}
 	}
 
-	div.activeLink {
+	div[aria-current] {
 		a {
 			text-decoration: underline;
 

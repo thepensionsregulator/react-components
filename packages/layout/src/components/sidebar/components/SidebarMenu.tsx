@@ -32,7 +32,8 @@ const SidebarMenu: React.FC<SidebarMenuProps> = ({
 							<li key={key}>
 								<Flex
 									cfg={{ justifyContent: 'space-between', mb: links ? 5 : 1 }}
-									className={active(innerLink.path, true) ? `${styles.nested} ${styles.activeLink}` : styles.nested}
+									className={styles.nested}
+									aria-current={active(innerLink.path, true) ? 'page': null}
 									>
 									<Link
 										cfg={{
@@ -98,7 +99,8 @@ const SidebarMenu: React.FC<SidebarMenuProps> = ({
 										width: 10,
 										mb: link.links ? 5 : 1,
 									}}
-									className={active(link.path, true) ? `${styles.topLevelLink} ${styles.activeLink}`: styles.topLevelLink}
+									className={styles.topLevelLink}
+									aria-current={active(link.path, true) ? 'page': null}
 								>
 									<Link
 										cfg={{
