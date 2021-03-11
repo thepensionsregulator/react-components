@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { H2, Flex, Hr, Link } from '@tpr/core';
+import { H2, Flex, Hr, Link, classNames } from '@tpr/core';
 import { SidebarLinkProps, SidebarMenuProps } from './types';
 import StatusIcon from './StatusIcon';
 import styles from '../sidebar.module.scss';
@@ -107,6 +107,7 @@ const SidebarMenu: React.FC<SidebarMenuProps> = ({
 										width: 10,
 										mb: link.links ? 5 : 1,
 									}}
+									className={styles.topLevelWrapper}
 								>
 									<Link
 										cfg={{

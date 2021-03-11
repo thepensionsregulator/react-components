@@ -52,7 +52,7 @@
 				text-decoration: underline !important;
 			}
 		}
-		&.topLevel > div:not(.nestedWrapper) {
+		&.topLevel > .topLevelWrapper {
 			a::before {
 				content: ' ';
 				position: absolute;
