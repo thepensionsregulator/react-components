@@ -14,11 +14,6 @@ const SidebarMenu: React.FC<SidebarMenuProps> = ({
 }) => {
 	const collapsedClass = styles.nestedWrapper + ' ' + styles.collapsed;
 	const [classes, setClasses] = useState(styles.nestedWrapper);
-	const getTopLevelStyles = (link: SidebarLinkProps, isActive: (path: string, exact: boolean) => {}) => {
-		return isActive(link.path, false) ? 
-			`${styles.topLevel} ${styles.activeLink} ${styles.withSelectedChild}` :
-			styles.topLevel;
-	}
 
 	useEffect(() => {
 		collapsed && setClasses(collapsedClass);
