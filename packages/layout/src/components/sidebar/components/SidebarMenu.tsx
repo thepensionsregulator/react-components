@@ -19,7 +19,7 @@ const SidebarMenu: React.FC<SidebarMenuProps> = ({
 		collapsed && setClasses(collapsedClass);
 		!collapsed && setClasses(styles.nestedWrapper);
 	}, [collapsed]);
-	
+
 	const generateSubmenu = (links: SidebarLinkProps[]) => {
 		return (
 			<Flex cfg={{ flexDirection: 'column', pl: 6 }} className={classes}>
@@ -33,8 +33,8 @@ const SidebarMenu: React.FC<SidebarMenuProps> = ({
 								<Flex
 									cfg={{ justifyContent: 'space-between', mb: links ? 5 : 1 }}
 									className={styles.nested}
-									aria-current={active(innerLink.path, true) ? 'page': null}
-									>
+									aria-current={active(innerLink.path, true) ? 'page' : null}
+								>
 									<Link
 										cfg={{
 											color: 'primary.2',
@@ -91,7 +91,11 @@ const SidebarMenu: React.FC<SidebarMenuProps> = ({
 									mb: link.links ? 1 : 5,
 									flexDirection: link.links ? 'column' : 'row',
 								}}
-								className={active(link.path, false) ? `${styles.topLevelWrapper} ${styles.containsSelectedLink}` :styles.topLevelWrapper}
+								className={
+									active(link.path, false)
+										? `${styles.topLevelWrapper} ${styles.containsSelectedLink}`
+										: styles.topLevelWrapper
+								}
 							>
 								<Flex
 									cfg={{
@@ -100,7 +104,7 @@ const SidebarMenu: React.FC<SidebarMenuProps> = ({
 										mb: link.links ? 5 : 1,
 									}}
 									className={styles.topLevelLink}
-									aria-current={active(link.path, true) ? 'page': null}
+									aria-current={active(link.path, true) ? 'page' : null}
 								>
 									<Link
 										cfg={{

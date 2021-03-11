@@ -44,7 +44,9 @@ export const PostcodeLookup: React.FC<PostcodeLookupProps> = ({
 
 	const validatePostcode = (value) => {
 		const result = validator.validatePostcode(value);
-		(typeof result === 'undefined') ?	setPostcodeValid(true): setPostcodeValid(false);
+		typeof result === 'undefined'
+			? setPostcodeValid(true)
+			: setPostcodeValid(false);
 		return result;
 	};
 
