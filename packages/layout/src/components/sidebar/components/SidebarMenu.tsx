@@ -33,6 +33,7 @@ const SidebarMenu: React.FC<SidebarMenuProps> = ({
 								<Flex
 									cfg={{ justifyContent: 'space-between', mb: links ? 5 : 1 }}
 									className={styles.nested}
+									aria-current={active(innerLink.path, true) ? 'page' : null}
 								>
 									<Link
 										cfg={{
@@ -90,7 +91,11 @@ const SidebarMenu: React.FC<SidebarMenuProps> = ({
 									mb: link.links ? 1 : 5,
 									flexDirection: link.links ? 'column' : 'row',
 								}}
-								className={active(link.path) ? styles.activeLink : undefined}
+								className={
+									active(link.path, false)
+										? `${styles.topLevelWrapper} ${styles.containsSelectedLink}`
+										: styles.topLevelWrapper
+								}
 							>
 								<Flex
 									cfg={{
@@ -98,6 +103,8 @@ const SidebarMenu: React.FC<SidebarMenuProps> = ({
 										width: 10,
 										mb: link.links ? 5 : 1,
 									}}
+									className={styles.topLevelLink}
+									aria-current={active(link.path, true) ? 'page' : null}
 								>
 									<Link
 										cfg={{

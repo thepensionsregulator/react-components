@@ -7,10 +7,10 @@ import styles from './sidebar.module.scss';
 
 export const isActive = (settings: { matchPath: any; location: any }) => (
 	path: string,
+	exact: boolean,
 ): boolean => {
 	const { matchPath = () => {}, location } = settings;
-	const matched = matchPath(location.pathname, { path });
-	return matched ? true : false;
+	return matchPath(location.pathname, { path, exact });
 };
 
 export const useSectionsUpdater = (
@@ -111,6 +111,7 @@ export const Sidebar: React.FC<SidebarProps> = ({
 							fontWeight: 3,
 							color: 'primary.2',
 							textAlign: 'left',
+							lineHeight: 6,
 							fontSize: 4,
 						}}
 						onClick={() => history.push(titlePath)}
