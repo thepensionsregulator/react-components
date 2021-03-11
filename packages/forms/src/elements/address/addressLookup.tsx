@@ -144,7 +144,7 @@ export const AddressLookup: React.FC<AddressProps> = ({
 					selectAddressButton={selectAddressButton}
 					selectAddressRequiredMessage={selectAddressRequiredMessage}
 					noAddressesFoundMessage={noAddressesFoundMessage}
-						onValidatePostcode={(isValid) =>
+					onValidatePostcode={(isValid) =>
 						onValidatePostcode ? onValidatePostcode(isValid) : null
 					}
 				/>
