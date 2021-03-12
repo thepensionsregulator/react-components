@@ -36,7 +36,7 @@ export type AddressProps = {
 	onValidatePostcode?: (isValid: boolean) => void | null;
 };
 
-enum AddressView {
+export enum AddressView {
 	PostcodeLookup,
 	SelectAddress,
 	EditAddress,
