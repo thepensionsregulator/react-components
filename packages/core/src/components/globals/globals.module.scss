@@ -823,6 +823,20 @@
 	background: $colors-danger-2;
 }
 
+.bg-danger-3 {
+	background: $colors-danger-3;
+}
+
+/* background confirmation */
+
+.bg-confirmed {
+	background: $colors-confirmed;
+}
+
+.bg-unconfirmed {
+	background: $colors-unconfirmed;
+}
+
 /* COLOR */
 
 /* color background */
@@ -939,6 +953,20 @@
 	color: $colors-danger-2 !important;
 }
 
+.color-danger-3 {
+	color: $colors-danger-3 !important;
+}
+
+/* color confirmation */
+
+.color-confirmed {
+	color: $colors-confirmed !important;
+}
+
+.color-unconfirmed {
+	color: $colors-unconfirmed !important;
+}
+
 /* FILL FOR SVG */
 
 .fill-white {
@@ -1051,6 +1079,20 @@
 
 .fill-danger-2 {
 	fill: $colors-danger-2 !important;
+}
+
+.fill-danger-3 {
+	fill: $colors-danger-3 !important;
+}
+
+/* color confirmation */
+
+.fill-confirmed {
+	fill: $colors-confirmed !important;
+}
+
+.fill-unconfirmed {
+	fill: $colors-unconfirmed !important;
 }
 
 /* cursor */
