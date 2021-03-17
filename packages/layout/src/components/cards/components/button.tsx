@@ -34,9 +34,9 @@ export const UnderlinedButton: React.FC<UnderlinedButtonProps> = ({
 			<Flex cfg={{ flex: '0 0 auto', alignItems: 'center' }}>
 				<P cfg={{ fontSize: 2, fontWeight: 3 }}>{children}</P>
 				{isOpen ? (
-					<ArrowUp width="24px" fill="#036db8" />
+					<ArrowUp width="24px" fill={styles.arrowColor} />
 				) : (
-					<ArrowDown width="24px" fill="#036db8" />
+					<ArrowDown width="24px" fill={styles.arrowColor} />
 				)}
 			</Flex>
 		</button>

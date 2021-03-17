@@ -70,7 +70,7 @@ export const Reference: React.FC = () => {
 						<Footer>
 							<Flex>
 								<ArrowButton
-									intent="special"
+									appearance="secondary"
 									pointsTo="up"
 									iconSide="right"
 									type="submit"

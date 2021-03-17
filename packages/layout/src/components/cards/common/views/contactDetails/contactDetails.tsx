@@ -53,7 +53,7 @@ const ContactDetails: React.FC<ContactDetailsProps> = ({
 						{renderFields(fields)}
 						<Footer>
 							<ArrowButton
-								intent="special"
+								appearance="secondary"
 								pointsTo="up"
 								iconSide="right"
 								type="submit"
