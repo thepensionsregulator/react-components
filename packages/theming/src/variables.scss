@@ -1,6 +1,6 @@
 /**** SCREEN SETTINGS ****/
 $app-width: 1170px;
-$sidebar-width: 275px;
+$sidebar-width: 285px;
 /**** COLORS ****/
 $white: #ffffff;
 $black: #000000;
@@ -34,6 +34,9 @@ $colors-warning-a1: #cdd500;
 $colors-danger-1: #dca1a1;
 $colors-danger-2: #a91717;
 $colors-danger-3: #cd2e25;
+/* colors confirmation */
+$colors-confirmed: #1e7e34;
+$colors-unconfirmed: #a91717 ;
 
 /**** FONTS ****/
 $fonts-sans-serif: 'Open Sans', sans-serif;

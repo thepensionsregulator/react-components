@@ -1,7 +1,6 @@
 import React from 'react';
 import { Flex, H3, P, classNames, Hr } from '@tpr/core';
 import styles from './card.module.scss';
-import CommonStyles from '../cards.module.scss';
 
 type StyledCardProps = { complete: boolean };
 export const StyledCard: React.FC<StyledCardProps> = ({
@@ -43,7 +42,7 @@ export const Toolbar: React.FC<ToolbarProps> = ({
 				{sectionTitle && (
 					<P
 						cfg={{ color: 'neutral.6', fontSize: 3 }}
-						className={CommonStyles.noMarginBottom}
+						className={styles.noMarginBottom}
 					>
 						{sectionTitle}
 					</P>
@@ -53,10 +52,7 @@ export const Toolbar: React.FC<ToolbarProps> = ({
 			</Flex>
 			{subtitle && (
 				<Flex cfg={{ py: 3 }} className={styles.toolbarBottomBorder}>
-					<P
-						cfg={{ color: 'neutral.6' }}
-						className={CommonStyles.noMarginBottom}
-					>
+					<P cfg={{ color: 'neutral.6' }} className={styles.noMarginBottom}>
 						{subtitle}
 					</P>
 				</Flex>
@@ -88,7 +84,7 @@ export const StatusMessage = ({ complete, icon: Icon, text }) => {
 		<Flex cfg={{ alignItems: 'center' }} height="22px">
 			<Icon
 				size={18}
-				fill={complete ? '#207e3b' : '#d4351c'}
+				fill={complete ? styles.confirmed : styles.unconfirmed}
 				ariaLabel={text}
 			/>
 			<P
@@ -96,9 +92,9 @@ export const StatusMessage = ({ complete, icon: Icon, text }) => {
 					ml: 1,
 					fontSize: 2,
 					fontWeight: 3,
-					color: complete ? 'success.1' : 'danger.2',
+					color: complete ? 'confirmed' : 'unconfirmed',
 				}}
-				className={CommonStyles.noMarginBottom}
+				className={styles.noMarginBottom}
 			>
 				{text}
 			</P>

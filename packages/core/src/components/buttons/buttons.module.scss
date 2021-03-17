@@ -159,7 +159,8 @@
 	border-color: $colors-primary-a2;
 
 	&:hover {
-		background: $colors-primary-a2 !important;
+		background: $colors-accents-2 !important;
+		border-color: $colors-accents-2!important;
 		color: $white;
 	}
 }

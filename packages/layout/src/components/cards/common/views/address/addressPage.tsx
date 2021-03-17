@@ -82,7 +82,7 @@ const AddressPage: React.FC<AddressPageProps> = ({
 								/>
 								<Footer>
 									<ArrowButton
-										intent="special"
+										appearance="secondary"
 										pointsTo="up"
 										iconSide="right"
 										type="submit"

@@ -12,6 +12,7 @@ export type ToolbarProps = {
 	extraPB?: boolean;
 	statusText: string;
 };
+
 export const Toolbar: React.FC<ToolbarProps> = ({
 	complete,
 	subtitle,
@@ -51,19 +52,11 @@ export const Toolbar: React.FC<ToolbarProps> = ({
 					pl: 4,
 				}}
 			>
-				{complete ? (
-					<StatusMessage
-						complete={complete}
-						icon={CheckedCircle}
-						text={statusText}
-					/>
-				) : (
-					<StatusMessage
-						complete={complete}
-						icon={ErrorCircle}
-						text={statusText}
-					/>
-				)}
+				<StatusMessage
+					complete={complete}
+					icon={complete ? CheckedCircle : ErrorCircle}
+					text={statusText}
+				/>
 				<div className={styles.verticalHr} />
 				<Flex cfg={{ alignItems: 'flex-start' }}>{buttonRight()}</Flex>
 			</Flex>
