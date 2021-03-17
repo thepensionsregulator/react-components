@@ -44,7 +44,9 @@ export const PostcodeLookup: React.FC<PostcodeLookupProps> = ({
 
 	const validatePostcode = (value) => {
 		const result = validator.validatePostcode(value);
-		(typeof result === 'undefined') ?	setPostcodeValid(true): setPostcodeValid(false);
+		typeof result === 'undefined'
+			? setPostcodeValid(true)
+			: setPostcodeValid(false);
 		return result;
 	};
 
@@ -65,6 +67,7 @@ export const PostcodeLookup: React.FC<PostcodeLookupProps> = ({
 				<Button
 					testId={(testId ? testId + '-' : '') + 'postcode-lookup-button'}
 					onClick={clickFindAddress}
+					appearance="secondary"
 					disabled={loading || !postcodeValid}
 				>
 					{postcodeLookupButton}
@@ -75,7 +78,6 @@ export const PostcodeLookup: React.FC<PostcodeLookupProps> = ({
 						onClick={onFindAddressCancelled}
 						testId={(testId ? testId + '-' : '') + 'find-address-cancel-button'}
 						appearance="secondary"
-						size="small"
 					>
 						{findAddressCancelledButton}
 					</Button>
