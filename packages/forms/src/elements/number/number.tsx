@@ -177,7 +177,8 @@ const InputNumber: React.FC<InputNumberProps> = ({
 				accessibilityHelper={helper}
 			/>
 			<Input
-				id={name}
+				id={id}
+				name={name}
 				type="number"
 				width={width}
 				testId={testId}
