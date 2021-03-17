@@ -25,6 +25,7 @@ export const Input: React.FC<InputProps> = ({
 	type = 'text',
 	width,
 	testId,
+	name,
 	label,
 	isError = false,
 	className,
@@ -56,7 +57,15 @@ export const Input: React.FC<InputProps> = ({
 			cfg={{ flex: width ? '0 0 auto' : '1 1 auto', width }}
 			className={After ? styles['input-wrapper_relative'] : ''}
 		>
-			{Before && <span className={styles.before}>{Before}</span>}
+			{Before && (
+				<span
+					className={styles.before}
+					id={name && name + '-before'}
+					aria-label={Before.match('£') ? 'in pounds' : ''}
+				>
+					{Before}
+				</span>
+			)}
 			<input
 				id={id}
 				ref={parentRef}
@@ -85,7 +94,11 @@ export const Input: React.FC<InputProps> = ({
 				{...rest}
 				aria-label={getAriaLabel()}
 			/>
-			{After && <span className={styles.after}>{After}</span>}
+			{After && (
+				<span className={styles.after} id={id && id + '-after'}>
+					{After}
+				</span>
+			)}
 		</Flex>
 	);
 };
