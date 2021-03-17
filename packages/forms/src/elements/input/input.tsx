@@ -1,5 +1,5 @@
 import React from 'react';
-import { classNames, Flex, LayoutProps } from '@tpr/core';
+import { classNames, Flex, LayoutProps, toKebabCase } from '@tpr/core';
 import styles from './input.module.scss';
 import AccessibilityHelper from '../accessibilityHelper';
 
@@ -60,7 +60,7 @@ export const Input: React.FC<InputProps> = ({
 			{Before && (
 				<span
 					className={styles.before}
-					id={name && name + '-before'}
+					id={name && toKebabCase(name) + '-before'}
 					aria-label={Before.match('£') ? 'in pounds' : ''}
 				>
 					{Before}

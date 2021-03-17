@@ -5,8 +5,6 @@ export default class AccessibilityHelper {
 		private rootId: string,
 		private hasLabel: boolean,
 		private hasHint: boolean,
-		private hasBefore: boolean,
-		private hasAfter: boolean,
 	) {
 		this.rootId = toKebabCase(rootId);
 	}
@@ -32,9 +30,10 @@ export default class AccessibilityHelper {
 		if (isError) {
 			describedBy = `${this.hintId || ''} ${this.errorId || ''}`;
 		} else {
-			describedBy = `${this.hintId || ''} ${this.beforeId || ''} ${
-				this.afterId || ''
-			}`;
+			describedBy = `${this.hintId || ''}`;
+			//  ${
+			// this.hasBefore ? this.beforeId : ''
+			// } ${this.hasAfter ? this.afterId : ''}`;
 		}
 		return describedBy.trim() || null;
 	};

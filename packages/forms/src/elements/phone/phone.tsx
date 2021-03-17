@@ -23,7 +23,7 @@ const InputPhone: React.FC<InputPhoneProps> = ({
 	inputWidth: width,
 	cfg,
 }) => {
-	const helper = new AccessibilityHelper(name, !!label, !!hint, false, false);
+	const helper = new AccessibilityHelper(name, !!label, !!hint);
 
 	return (
 		<StyledInputLabel

@@ -235,13 +235,7 @@ const InputCurrency: React.FC<InputCurrencyProps> = React.memo(
 			}
 		}, [initialValue]);
 
-		const helper = new AccessibilityHelper(
-			name,
-			!!label,
-			!!hint,
-			!!before,
-			!!after,
-		);
+		const helper = new AccessibilityHelper(name, !!label, !!hint);
 
 		return (
 			<StyledInputLabel

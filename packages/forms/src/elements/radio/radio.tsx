@@ -27,8 +27,6 @@ export const RadioButton: React.FC<RadioButtonProps> = ({
 		id ? id : `${name}_${value}`,
 		!!label,
 		!!hint,
-		false,
-		false,
 	);
 	return (
 		<StyledInputLabel
