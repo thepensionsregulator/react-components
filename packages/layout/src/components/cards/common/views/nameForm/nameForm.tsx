@@ -54,7 +54,7 @@ const NameForm: React.FC<NameFormProps> = ({
 						{renderFields(fields)}
 						<Footer>
 							<ArrowButton
-								intent="special"
+								appearance="secondary"
 								pointsTo={nextStep ? 'right' : 'up'}
 								iconSide="right"
 								disabled={loading}
