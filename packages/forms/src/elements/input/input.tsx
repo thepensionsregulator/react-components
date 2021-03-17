@@ -95,7 +95,7 @@ export const Input: React.FC<InputProps> = ({
 				aria-label={getAriaLabel()}
 			/>
 			{After && (
-				<span className={styles.after} id={id && id + '-after'}>
+				<span className={styles.after} id={id && toKebabCase(id) + '-after'}>
 					{After}
 				</span>
 			)}
