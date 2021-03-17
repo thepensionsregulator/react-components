@@ -161,7 +161,13 @@ const InputNumber: React.FC<InputNumberProps> = ({
 		input.onBlur(e.target.value); // without this call, validate won't be executed even if specified
 	};
 
-	const helper = new AccessibilityHelper(name, !!label, !!hint);
+	const helper = new AccessibilityHelper(
+		name,
+		!!label,
+		!!hint,
+		!!before,
+		!!after,
+	);
 
 	return (
 		<StyledInputLabel

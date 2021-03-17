@@ -107,7 +107,7 @@ const Search: React.FC<SearchProps> = React.memo(
 			toggleResultsPanel();
 		}, [panelVisible]);
 
-		const helper = new AccessibilityHelper(id, !!label, !!hint);
+		const helper = new AccessibilityHelper(id, !!label, !!hint, false, false);
 
 		return (
 			<div className={classes}>

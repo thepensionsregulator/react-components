@@ -21,7 +21,7 @@ export const Checkbox: React.FC<Partial<CheckboxIconProps>> = ({
 	className,
 }) => {
 	const msg = testId ? `${testId}-${checked ? 'checked' : 'unchecked'}` : null;
-	const helper = new AccessibilityHelper(id, !!label, !!hint);
+	const helper = new AccessibilityHelper(id, !!label, !!hint, false, false);
 
 	return (
 		<StyledInputLabel

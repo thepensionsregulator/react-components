@@ -40,7 +40,7 @@ export const Select: React.FC<SelectProps & FieldRenderProps<string>> = ({
 	cfg,
 	...rest
 }) => {
-	const helper = new AccessibilityHelper(id, !!label, !!hint);
+	const helper = new AccessibilityHelper(id, !!label, !!hint, false, false);
 
 	return (
 		<Downshift

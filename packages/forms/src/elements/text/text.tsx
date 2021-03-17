@@ -39,7 +39,7 @@ const InputText: React.FC<InputTextProps> = React.forwardRef(
 			}
 		}, [updatedValue]);
 
-		const helper = new AccessibilityHelper(name, !!label, !!hint);
+		const helper = new AccessibilityHelper(name, !!label, !!hint, false, false);
 
 		return (
 			<StyledInputLabel

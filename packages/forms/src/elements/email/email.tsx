@@ -23,7 +23,7 @@ const InputEmail: React.FC<InputEmailProps> = ({
 	testId,
 	cfg,
 }) => {
-	const helper = new AccessibilityHelper(name, !!label, !!hint);
+	const helper = new AccessibilityHelper(name, !!label, !!hint, false, false);
 
 	return (
 		<StyledInputLabel
