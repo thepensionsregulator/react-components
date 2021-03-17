@@ -5,6 +5,8 @@ export default class AccessibilityHelper {
 		private rootId: string,
 		private hasLabel: boolean,
 		private hasHint: boolean,
+		private hasBefore: boolean,
+		private hasAfter: boolean,
 	) {
 		this.rootId = toKebabCase(rootId);
 	}
@@ -18,13 +20,21 @@ export default class AccessibilityHelper {
 	get errorId(): string {
 		return (this.rootId && `${this.rootId}-error`) || null;
 	}
+	get beforeId(): string {
+		return (this.rootId && `${this.rootId}-before`) || null;
+	}
+	get afterId(): string {
+		return (this.rootId && `${this.rootId}-after`) || null;
+	}
 
 	formatAriaDescribedBy = (isError: boolean) => {
 		var describedBy: string;
 		if (isError) {
 			describedBy = `${this.hintId || ''} ${this.errorId || ''}`;
 		} else {
-			describedBy = `${this.hintId || ''}`;
+			describedBy = `${this.hintId || ''} ${this.beforeId || ''} ${
+				this.afterId || ''
+			}`;
 		}
 		return describedBy.trim() || null;
 	};
