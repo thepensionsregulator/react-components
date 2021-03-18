@@ -178,6 +178,7 @@ const InputNumber: React.FC<InputNumberProps> = ({
 			/>
 			<Input
 				id={id}
+				name={name}
 				type="number"
 				width={width}
 				testId={testId}
