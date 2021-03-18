@@ -1,5 +1,5 @@
 import React from 'react';
-import { classNames, Flex, LayoutProps } from '@tpr/core';
+import { classNames, Flex, LayoutProps, toKebabCase } from '@tpr/core';
 import styles from './input.module.scss';
 import AccessibilityHelper from '../accessibilityHelper';
 
@@ -60,8 +60,8 @@ export const Input: React.FC<InputProps> = ({
 			{Before && (
 				<span
 					className={styles.before}
-					// id={name && toKebabCase(name) + '-before'}
-					// aria-label={Before.match('£') ? 'in pounds' : ''}
+					id={name && toKebabCase(name) + '-before'}
+					aria-label={Before.match('£') ? 'in pounds' : ''}
 				>
 					{Before}
 				</span>
@@ -92,12 +92,13 @@ export const Input: React.FC<InputProps> = ({
 					accessibilityHelper.formatAriaDescribedBy(isError)
 				}
 				{...rest}
+				name={name}
 				aria-label={getAriaLabel()}
 			/>
 			{After && (
 				<span
 					className={styles.after}
-					// id={id && toKebabCase(id) + '-after'}
+					id={name && toKebabCase(name) + '-after'}
 				>
 					{After}
 				</span>
