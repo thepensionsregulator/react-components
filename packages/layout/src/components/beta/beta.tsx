@@ -1,5 +1,5 @@
 import React, { useMemo } from 'react';
-import { AppWidth, DocWidth, Flex, Link, P } from '@tpr/core';
+import { AppWidth, DocWidth, Flex, Link, Span } from '@tpr/core';
 import style from './beta.module.scss';
 
 type BetaHeaderProps = {
@@ -14,11 +14,13 @@ type MailToProps = {
 
 export const BetaHeader: React.FC<BetaHeaderProps> = ({ text, mail }) => {
 	const TextComponent = useMemo(() => {
-		return text
-			? () => <>{text}</>
-			: () => (
+		return () => (
+			<Span cfg={{ fontSize: 2, color: 'neutral.8', my: 1 }}>
+				{text ? (
+					text
+				) : (
 					<>
-						This is a new service - your{' '}
+						This is a new service &mdash; your{' '}
 						<Link
 							href={
 								mail
@@ -30,14 +32,16 @@ export const BetaHeader: React.FC<BetaHeaderProps> = ({ text, mail }) => {
 						</Link>{' '}
 						will help us improve it.
 					</>
-			  );
+				)}
+			</Span>
+		);
 	}, [text, mail]);
 
 	return (
 		<DocWidth className={style.beta}>
 			<AppWidth>
 				<Flex cfg={{ alignItems: 'center', px: 6 }}>
-					<P
+					<Span
 						cfg={{
 							fontSize: 2,
 							fontWeight: 4,
@@ -49,10 +53,8 @@ export const BetaHeader: React.FC<BetaHeaderProps> = ({ text, mail }) => {
 						}}
 					>
 						BETA
-					</P>
-					<P cfg={{ fontSize: 2, color: 'neutral.8', my: 1 }}>
-						<TextComponent />
-					</P>
+					</Span>
+					<TextComponent />
 				</Flex>
 			</AppWidth>
 		</DocWidth>
