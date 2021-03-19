@@ -14,11 +14,13 @@ type MailToProps = {
 
 export const BetaHeader: React.FC<BetaHeaderProps> = ({ text, mail }) => {
 	const TextComponent = useMemo(() => {
-		return text
-			? () => <>{text}</>
-			: () => (
+		return () => (
+			<P cfg={{ fontSize: 2, color: 'neutral.8', my: 1 }}>
+				{text ? (
+					text
+				) : (
 					<>
-						This is a new service - your{' '}
+						This is a new service — your{' '}
 						<Link
 							href={
 								mail
@@ -30,7 +32,9 @@ export const BetaHeader: React.FC<BetaHeaderProps> = ({ text, mail }) => {
 						</Link>{' '}
 						will help us improve it.
 					</>
-			  );
+				)}
+			</P>
+		);
 	}, [text, mail]);
 
 	return (
@@ -50,9 +54,7 @@ export const BetaHeader: React.FC<BetaHeaderProps> = ({ text, mail }) => {
 					>
 						BETA
 					</P>
-					<P cfg={{ fontSize: 2, color: 'neutral.8', my: 1 }}>
-						<TextComponent />
-					</P>
+					<TextComponent />
 				</Flex>
 			</AppWidth>
 		</DocWidth>
