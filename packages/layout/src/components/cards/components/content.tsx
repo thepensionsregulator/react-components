@@ -1,5 +1,4 @@
 import React from 'react';
-import { classNames } from '@tpr/core';
 import { Toolbar } from './card';
 import { cardType, cardTypeName } from '../common/interfaces';
 import styles from './content.module.scss';
@@ -24,12 +23,7 @@ export const Content: React.FC<ContentProps> = ({
 	sectionTitle,
 }) => {
 	return (
-		<div
-			className={classNames([
-				{ [styles.noTopPadding]: typeof Breadcrumbs === 'function' },
-				styles.content,
-			])}
-		>
+		<div className={styles.content}>
 			{loading && <Loading />}
 			{Breadcrumbs && <Breadcrumbs />}
 			{title && (
