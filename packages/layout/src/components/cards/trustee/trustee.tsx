@@ -18,7 +18,11 @@ import RemovedBox from '../components/removedBox';
 import { cardType, cardTypeName } from '../common/interfaces';
 import { AddressComparer } from '@tpr/forms';
 import { TrusteeContext } from './trusteeMachine';
-import { concatenateStrings, removeFromTabFlowIfMatches, capitalize } from '../../../utils';
+import {
+	concatenateStrings,
+	removeFromTabFlowIfMatches,
+	capitalize,
+} from '../../../utils';
 import { ParagraphNoMB } from '../components/paragraphNoMB';
 import styles from '../cards.module.scss';
 
@@ -179,7 +183,9 @@ export const TrusteeCard: React.FC<Omit<TrusteeCardProps, 'children'>> = ({
 										current.context.trustee.lastName,
 									])}
 								</Span>
-								<ParagraphNoMB>{capitalize(current.context.trustee.trusteeType)} trustee</ParagraphNoMB>
+								<ParagraphNoMB>
+									{capitalize(current.context.trustee.trusteeType)} trustee
+								</ParagraphNoMB>
 							</>
 						)}
 						statusText={
