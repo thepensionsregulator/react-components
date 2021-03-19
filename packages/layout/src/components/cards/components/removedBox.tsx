@@ -1,7 +1,6 @@
 import React from 'react';
 import { Flex, P } from '@tpr/core';
 import styles from './removedBox.module.scss';
-import CommonStyles from '../cards.module.scss';
 
 interface RemovedBoxProps {
 	type: string;
@@ -26,7 +25,7 @@ const RemovedBox: React.FC<RemovedBoxProps> = ({ type }) => {
 						lineHeight: 3,
 						p: 10,
 					}}
-					className={CommonStyles.noMarginBottom}
+					className={styles.noMarginBottom}
 				>
 					{type} removed successfully
 				</P>

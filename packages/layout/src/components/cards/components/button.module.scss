@@ -43,7 +43,12 @@
 	padding: 0 0 4px 2px;
 	width: 100%;
 	min-height: $space-5;
+
 	p {
 		@include removeMarginBottom;
 	}
+}
+
+:export {
+	arrowColor : $colors-primary-3;
 }

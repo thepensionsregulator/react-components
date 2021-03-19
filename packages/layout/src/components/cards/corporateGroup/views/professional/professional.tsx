@@ -72,7 +72,7 @@ export const Professional: React.FC = () => {
 						<Footer>
 							<Flex>
 								<ArrowButton
-									intent="special"
+									appearance="secondary"
 									pointsTo="up"
 									iconSide="right"
 									disabled={loading}
