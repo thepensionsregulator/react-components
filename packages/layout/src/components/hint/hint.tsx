@@ -1,5 +1,5 @@
-import { Flex } from '@tpr/core';
 import React from 'react';
+import { Flex } from '@tpr/core';
 import Styles from './hint.module.scss';
 
 type HintProps = {

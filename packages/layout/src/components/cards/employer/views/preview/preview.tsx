@@ -2,8 +2,8 @@ import React, { useState } from 'react';
 import { Flex, P, Hr, classNames, Span } from '@tpr/core';
 import { UnderlinedButton } from '../../../components/button';
 import { Checkbox } from '@tpr/forms';
-import styles from './preview.module.scss';
 import { useEmployerContext } from '../../context';
+import styles from './preview.module.scss';
 
 type IdentifiersItemProps = { title: string; number: string | number };
 const IdentifiersItem: React.FC<IdentifiersItemProps> = ({ title, number }) => {

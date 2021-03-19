@@ -1,6 +1,6 @@
 import React from 'react';
-import styles from './header.module.scss';
 import { DocWidth, AppWidth, Flex, Link, P } from '@tpr/core';
+import styles from './header.module.scss';
 
 type HeaderProps = {
 	logoSrc: string;

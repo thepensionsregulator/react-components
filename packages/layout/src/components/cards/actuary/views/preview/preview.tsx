@@ -8,7 +8,7 @@ import {
 	EmailPreview,
 } from '../../../common/views/preview/components';
 import styles from './preview.module.scss';
-//import CommonStyles from '../../../cards.module.scss';
+
 export const Preview: React.FC<any> = () => {
 	const { current, send, onCorrect, i18n } = useActuaryContext();
 	const { actuary, complete, preValidatedData } = current.context;
@@ -41,21 +41,13 @@ export const Preview: React.FC<any> = () => {
 								{actuary.address.addressLine3}
 							</P>
 						)}
-						<P className={styles.noMarginBottom}>
-							{actuary.address.postTown}
-						</P>
+						<P className={styles.noMarginBottom}>{actuary.address.postTown}</P>
 						{actuary.address.county && (
-							<P className={styles.noMarginBottom}>
-								{actuary.address.county}
-							</P>
+							<P className={styles.noMarginBottom}>{actuary.address.county}</P>
 						)}
-						<P className={styles.noMarginBottom}>
-							{actuary.address.postcode}
-						</P>
+						<P className={styles.noMarginBottom}>{actuary.address.postcode}</P>
 						{actuary.address.country && (
-							<P className={styles.noMarginBottom}>
-								{actuary.address.country}
-							</P>
+							<P className={styles.noMarginBottom}>{actuary.address.country}</P>
 						)}
 					</Flex>
 				</Flex>

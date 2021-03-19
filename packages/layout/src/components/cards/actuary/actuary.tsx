@@ -129,9 +129,7 @@ export const ActuaryCard: React.FC<ActuaryProviderProps> = ({
 											current.context.actuary.lastName,
 										])}
 									</Span>
-									<P>
-										{current.context.actuary.organisationName}
-									</P>
+									<P>{current.context.actuary.organisationName}</P>
 								</>
 							)}
 							statusText={

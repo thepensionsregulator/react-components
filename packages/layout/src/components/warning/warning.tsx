@@ -1,7 +1,7 @@
 import React from 'react';
 import { Flex, SpaceProps, FlexProps } from '@tpr/core';
-import styles from './warning.module.scss';
 import { WarningCircle } from '@tpr/icons';
+import styles from './warning.module.scss';
 
 export type WarningBoxProps = {
 	cfg?: SpaceProps & FlexProps;
