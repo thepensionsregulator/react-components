@@ -10,7 +10,6 @@ import {
 	RemoveReasonProps,
 } from '../../../../common/interfaces';
 import styles from './reason.module.scss';
-import elementStyles from '@tpr/forms/lib/elements/elements.module.scss';
 
 interface ReasonProps {
 	type: cardType;
@@ -42,7 +41,7 @@ export const Reason: React.FC<ReasonProps> = ({
 					const leftScheme: boolean = reason === 'left_the_scheme';
 					return (
 						<form onSubmit={handleSubmit} data-testid={`remove-${type}-form`}>
-							<div className={showError ? elementStyles.labelError : null}>
+							<div className={showError ? styles.labelError : null}>
 								<fieldset>
 									<legend>
 										<H4 fontWeight="bold" mb={0}>
@@ -53,7 +52,7 @@ export const Reason: React.FC<ReasonProps> = ({
 										<P
 											role="alert"
 											cfg={{ color: 'danger.2', mt: 5 }}
-											className={elementStyles.errorMessage}
+											className={styles.errorMessage}
 										>
 											{submitError}
 										</P>

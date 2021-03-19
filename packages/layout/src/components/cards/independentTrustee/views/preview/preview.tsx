@@ -1,9 +1,10 @@
 import React from 'react';
 import { Checkbox } from '@tpr/forms';
-import { Flex, P, Hr, classNames } from '@tpr/core';
+import { Flex, Hr, classNames } from '@tpr/core';
 import { UnderlinedButton } from '../../../components/button';
 import { useIndependentTrusteeContext } from '../../context';
-import styles from './preview.module.scss';
+import { ParagraphNoMB } from '../../../components/paragraphNoMB';
+import styles from '../../../cards.module.scss';
 
 export const Preview: React.FC<any> = () => {
 	const { current, send, onCorrect, i18n } = useIndependentTrusteeContext();
@@ -24,34 +25,28 @@ export const Preview: React.FC<any> = () => {
 				>
 					<UnderlinedButton>{i18n.preview.buttons.three}</UnderlinedButton>
 					<Flex cfg={{ my: 2, flexDirection: 'column' }}>
-						<P className={styles.noMarginBottom}>
+						<ParagraphNoMB>
 							{independentTrustee.address.addressLine1}
-						</P>
+						</ParagraphNoMB>
 						{independentTrustee.address.addressLine2 && (
-							<P className={styles.noMarginBottom}>
+							<ParagraphNoMB>
 								{independentTrustee.address.addressLine2}
-							</P>
+							</ParagraphNoMB>
 						)}
 						{independentTrustee.address.addressLine3 && (
-							<P className={styles.noMarginBottom}>
+							<ParagraphNoMB>
 								{independentTrustee.address.addressLine3}
-							</P>
+							</ParagraphNoMB>
 						)}
-						<P className={styles.noMarginBottom}>
-							{independentTrustee.address.postTown}
-						</P>
+						<ParagraphNoMB>{independentTrustee.address.postTown}</ParagraphNoMB>
 						{independentTrustee.address.county && (
-							<P className={styles.noMarginBottom}>
-								{independentTrustee.address.county}
-							</P>
+							<ParagraphNoMB>{independentTrustee.address.county}</ParagraphNoMB>
 						)}
-						<P className={styles.noMarginBottom}>
-							{independentTrustee.address.postcode}
-						</P>
+						<ParagraphNoMB>{independentTrustee.address.postcode}</ParagraphNoMB>
 						{independentTrustee.address.country && (
-							<P className={styles.noMarginBottom}>
+							<ParagraphNoMB>
 								{independentTrustee.address.country}
-							</P>
+							</ParagraphNoMB>
 						)}
 					</Flex>
 				</Flex>
@@ -64,13 +59,13 @@ export const Preview: React.FC<any> = () => {
 					>
 						{i18n.preview.buttons.four}
 					</UnderlinedButton>
-					<P cfg={{ pt: 3 }} className={styles.noMarginBottom}>
+					<ParagraphNoMB cfg={{ pt: 3 }}>
 						{independentTrustee.appointedByRegulator
 							? i18n.regulator.fields.appointedByRegulator.labels
 									.isAppointedByRegulatorYes
 							: i18n.regulator.fields.appointedByRegulator.labels
 									.isAppointedByRegulatorNo}
-					</P>
+					</ParagraphNoMB>
 				</Flex>
 			</Flex>
 

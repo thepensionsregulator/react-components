@@ -4,7 +4,7 @@ import { Content } from '../../../../components/content';
 import { ArrowButton } from '../../../../../buttons/buttons';
 import { WarningBox } from '../../../../../warning/warning';
 import { cardType, cardTypeName } from '../../../interfaces';
-import styles from '../../../../cards.module.scss';
+import { ParagraphNoMB } from '../../../../components/paragraphNoMB';
 
 interface ConfirmProps {
 	cardType: cardType;
@@ -41,7 +41,7 @@ const Confirm: React.FC<ConfirmProps> = ({
 			<Hr cfg={{ my: 4 }} />
 			<WarningBox warningLabel={warningLabel}>
 				<Flex cfg={{ flexDirection: 'column' }}>
-					<P className={styles.noMarginBottom}>{removeMessage1}</P>
+					<ParagraphNoMB>{removeMessage1}</ParagraphNoMB>
 					{removeMessage2 && <P cfg={{ mt: 3 }}>{removeMessage2}</P>}
 					<Flex cfg={{ mt: 3 }}>
 						<ArrowButton

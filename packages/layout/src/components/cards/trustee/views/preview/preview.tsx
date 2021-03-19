@@ -1,5 +1,5 @@
 import React from 'react';
-import { Flex, P, Hr, classNames, Span } from '@tpr/core';
+import { Flex, Hr, classNames, Span } from '@tpr/core';
 import { useTrusteeContext } from '../../context';
 import { UnderlinedButton } from '../../../components/button';
 import { Checkbox } from '@tpr/forms';
@@ -8,7 +8,8 @@ import {
 	PhonePreview,
 	EmailPreview,
 } from '../../../common/views/preview/components';
-import styles from './preview.module.scss';
+import { ParagraphNoMB } from '../../../components/paragraphNoMB';
+import styles from '../../../cards.module.scss';
 
 export const Preview: React.FC = () => {
 	const { current, send, onCorrect, i18n } = useTrusteeContext();
@@ -22,9 +23,7 @@ export const Preview: React.FC = () => {
 					: classNames([{ [styles.complete]: complete }, styles.content])
 			}
 		>
-			<P cfg={{ mb: 4 }} className={styles.noMarginBottom}>
-				{capitalize(trustee.trusteeType)} trustee
-			</P>
+			<ParagraphNoMB>{capitalize(trustee.trusteeType)} trustee</ParagraphNoMB>
 			<Flex>
 				{/* Addres section: open for editing	 */}
 				<Flex
@@ -41,20 +40,16 @@ export const Preview: React.FC = () => {
 							{trustee.address.addressLine1}
 						</Span>
 						{trustee.address.addressLine2 && (
-							<P className={styles.noMarginBottom}>
-								{trustee.address.addressLine2}
-							</P>
+							<ParagraphNoMB>{trustee.address.addressLine2}</ParagraphNoMB>
 						)}
 						{trustee.address.addressLine3 && (
-							<P className={styles.noMarginBottom}>
-								{trustee.address.addressLine3}
-							</P>
+							<ParagraphNoMB>{trustee.address.addressLine3}</ParagraphNoMB>
 						)}
-						<P className={styles.noMarginBottom}>{trustee.address.postTown}</P>
+						<ParagraphNoMB>{trustee.address.postTown}</ParagraphNoMB>
 						{trustee.address.county && (
-							<P className={styles.noMarginBottom}>{trustee.address.county}</P>
+							<ParagraphNoMB>{trustee.address.county}</ParagraphNoMB>
 						)}
-						<P className={styles.noMarginBottom}>{trustee.address.postcode}</P>
+						<ParagraphNoMB>{trustee.address.postcode}</ParagraphNoMB>
 					</Flex>
 				</Flex>
 

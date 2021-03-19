@@ -4,7 +4,7 @@ import {
 	CorporateGroupProviderProps,
 	useCorporateGroupContext,
 } from './context';
-import { P, Section, Span } from '@tpr/core';
+import { Section, Span } from '@tpr/core';
 import { Toolbar } from '../components/toolbar';
 import { UnderlinedButton } from '../components/button';
 import RemovedBox from '../components/removedBox';
@@ -15,9 +15,10 @@ import { Professional } from './views/professional/professional';
 import { ReasonRemove } from './views/remove/reason/reason';
 import { ConfirmRemove } from './views/remove/confirm/confirm';
 import { cardTypeName } from '../common/interfaces';
-import styles from '../cards.module.scss';
 import { CorporateGroupContext } from './corporateGroupMachine';
 import { concatenateStrings } from '../../../utils';
+import { ParagraphNoMB } from '../components/paragraphNoMB';
+import styles from '../cards.module.scss';
 
 const CardContentSwitch: React.FC = () => {
 	const { current } = useCorporateGroupContext();
@@ -95,9 +96,7 @@ export const CorporateGroupCard: React.FC<CorporateGroupProviderProps> = ({
 									<Span cfg={{ lineHeight: 3 }} className={styles.styledAsH4}>
 										{context.corporateGroup.organisationName}
 									</Span>
-									<P className={styles.noMarginBottom}>
-										{i18n.preview.trusteeType}
-									</P>
+									<ParagraphNoMB>{i18n.preview.trusteeType}</ParagraphNoMB>
 								</>
 							)}
 							statusText={
@@ -111,7 +110,6 @@ export const CorporateGroupCard: React.FC<CorporateGroupProviderProps> = ({
 							buttonRight={() => (
 								<RemoveButton title={i18n.preview.buttons.two} />
 							)}
-							extraPB={true}
 						/>
 						<CardContentSwitch />
 					</Section>

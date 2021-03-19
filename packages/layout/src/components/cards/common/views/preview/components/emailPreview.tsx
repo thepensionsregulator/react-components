@@ -1,5 +1,6 @@
 import React from 'react';
-import { P, Span } from '@tpr/core';
+import { Span } from '@tpr/core';
+import { ParagraphNoMB } from '../../../../components/paragraphNoMB';
 import styles from '../../../../cards.module.scss';
 
 interface EmailPreviewProps {
@@ -14,9 +15,7 @@ export const EmailPreview: React.FC<EmailPreviewProps> = React.memo(
 				<Span cfg={{ lineHeight: 3 }} className={styles.styledAsH4}>
 					{label}
 				</Span>
-				<P cfg={{ wordBreak: 'all' }} className={styles.noMarginBottom}>
-					{value}
-				</P>
+				<ParagraphNoMB cfg={{ wordBreak: 'all' }}>{value}</ParagraphNoMB>
 			</>
 		);
 	},

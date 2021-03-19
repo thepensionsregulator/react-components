@@ -1,13 +1,14 @@
 import React from 'react';
 import { Checkbox } from '@tpr/forms';
-import { Flex, P, Hr, classNames } from '@tpr/core';
+import { Flex, Hr, classNames } from '@tpr/core';
 import { UnderlinedButton } from '../../../components/button';
 import { useActuaryContext } from '../../context';
 import {
 	PhonePreview,
 	EmailPreview,
 } from '../../../common/views/preview/components';
-import styles from './preview.module.scss';
+import { ParagraphNoMB } from '../../../components/paragraphNoMB';
+import styles from '../../../cards.module.scss';
 
 export const Preview: React.FC<any> = () => {
 	const { current, send, onCorrect, i18n } = useActuaryContext();
@@ -28,26 +29,20 @@ export const Preview: React.FC<any> = () => {
 				>
 					<UnderlinedButton>{i18n.preview.buttons.three}</UnderlinedButton>
 					<Flex cfg={{ my: 2, flexDirection: 'column' }}>
-						<P className={styles.noMarginBottom}>
-							{actuary.address.addressLine1}
-						</P>
+						<ParagraphNoMB>{actuary.address.addressLine1}</ParagraphNoMB>
 						{actuary.address.addressLine2 && (
-							<P className={styles.noMarginBottom}>
-								{actuary.address.addressLine2}
-							</P>
+							<ParagraphNoMB>{actuary.address.addressLine2}</ParagraphNoMB>
 						)}
 						{actuary.address.addressLine3 && (
-							<P className={styles.noMarginBottom}>
-								{actuary.address.addressLine3}
-							</P>
+							<ParagraphNoMB>{actuary.address.addressLine3}</ParagraphNoMB>
 						)}
-						<P className={styles.noMarginBottom}>{actuary.address.postTown}</P>
+						<ParagraphNoMB>{actuary.address.postTown}</ParagraphNoMB>
 						{actuary.address.county && (
-							<P className={styles.noMarginBottom}>{actuary.address.county}</P>
+							<ParagraphNoMB>{actuary.address.county}</ParagraphNoMB>
 						)}
-						<P className={styles.noMarginBottom}>{actuary.address.postcode}</P>
+						<ParagraphNoMB>{actuary.address.postcode}</ParagraphNoMB>
 						{actuary.address.country && (
-							<P className={styles.noMarginBottom}>{actuary.address.country}</P>
+							<ParagraphNoMB>{actuary.address.country}</ParagraphNoMB>
 						)}
 					</Flex>
 				</Flex>

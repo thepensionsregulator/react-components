@@ -1,5 +1,6 @@
 import React from 'react';
-import { Flex, H3, P, classNames, Hr } from '@tpr/core';
+import { classNames, Flex, H3, Hr } from '@tpr/core';
+import { ParagraphNoMB } from '../components/paragraphNoMB';
 import styles from './card.module.scss';
 
 type StyledCardProps = { complete: boolean };
@@ -40,21 +41,16 @@ export const Toolbar: React.FC<ToolbarProps> = ({
 				className={styles.toolbarBottomBorder}
 			>
 				{sectionTitle && (
-					<P
-						cfg={{ color: 'neutral.6', fontSize: 3 }}
-						className={styles.noMarginBottom}
-					>
+					<ParagraphNoMB cfg={{ color: 'neutral.6', fontSize: 3 }}>
 						{sectionTitle}
-					</P>
+					</ParagraphNoMB>
 				)}
 
 				<H3 cfg={{ fontWeight: 3 }}>{title}</H3>
 			</Flex>
 			{subtitle && (
 				<Flex cfg={{ py: 3 }} className={styles.toolbarBottomBorder}>
-					<P cfg={{ color: 'neutral.6' }} className={styles.noMarginBottom}>
-						{subtitle}
-					</P>
+					<ParagraphNoMB cfg={{ color: 'neutral.6' }}>{subtitle}</ParagraphNoMB>
 				</Flex>
 			)}
 		</Flex>
@@ -87,17 +83,16 @@ export const StatusMessage = ({ complete, icon: Icon, text }) => {
 				fill={complete ? styles.confirmed : styles.unconfirmed}
 				ariaLabel={text}
 			/>
-			<P
+			<ParagraphNoMB
 				cfg={{
 					ml: 1,
 					fontSize: 2,
 					fontWeight: 3,
 					color: complete ? 'confirmed' : 'unconfirmed',
 				}}
-				className={styles.noMarginBottom}
 			>
 				{text}
-			</P>
+			</ParagraphNoMB>
 		</Flex>
 	);
 };

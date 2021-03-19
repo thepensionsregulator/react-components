@@ -15,10 +15,10 @@ import Address from '../common/views/address/addressPage';
 import { NameScreen } from './views/name';
 import RemovedBox from '../components/removedBox';
 import { cardType, cardTypeName } from '../common/interfaces';
-import styles from '../cards.module.scss';
 import { AddressComparer } from '@tpr/forms';
 import { InHouseAdminContext } from './inHouseMachine';
 import { removeFromTabFlowIfMatches, concatenateStrings } from '../../../utils';
+import styles from '../cards.module.scss';
 
 const CardContentSwitch: React.FC = () => {
 	const {

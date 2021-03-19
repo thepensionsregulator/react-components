@@ -7,7 +7,8 @@ import {
 	PhonePreview,
 	EmailPreview,
 } from '../../../common/views/preview/components';
-import styles from './preview.module.scss';
+import { ParagraphNoMB } from '../../../components/paragraphNoMB';
+import styles from '../../../cards.module.scss';
 
 export const Preview: React.FC<any> = () => {
 	const { current, send, onCorrect, i18n } = useCorporateGroupContext();
@@ -28,34 +29,24 @@ export const Preview: React.FC<any> = () => {
 				>
 					<UnderlinedButton>{i18n.preview.buttons.three}</UnderlinedButton>
 					<Flex cfg={{ my: 2, flexDirection: 'column' }}>
-						<P className={styles.noMarginBottom}>
-							{corporateGroup.address.addressLine1}
-						</P>
+						<ParagraphNoMB>{corporateGroup.address.addressLine1}</ParagraphNoMB>
 						{corporateGroup.address.addressLine2 && (
-							<P className={styles.noMarginBottom}>
+							<ParagraphNoMB>
 								{corporateGroup.address.addressLine2}
-							</P>
+							</ParagraphNoMB>
 						)}
 						{corporateGroup.address.addressLine3 && (
-							<P className={styles.noMarginBottom}>
+							<ParagraphNoMB>
 								{corporateGroup.address.addressLine3}
-							</P>
+							</ParagraphNoMB>
 						)}
-						<P className={styles.noMarginBottom}>
-							{corporateGroup.address.postTown}
-						</P>
+						<ParagraphNoMB>{corporateGroup.address.postTown}</ParagraphNoMB>
 						{corporateGroup.address.county && (
-							<P className={styles.noMarginBottom}>
-								{corporateGroup.address.county}
-							</P>
+							<ParagraphNoMB>{corporateGroup.address.county}</ParagraphNoMB>
 						)}
-						<P className={styles.noMarginBottom}>
-							{corporateGroup.address.postcode}
-						</P>
+						<ParagraphNoMB>{corporateGroup.address.postcode}</ParagraphNoMB>
 						{corporateGroup.address.country && (
-							<P className={styles.noMarginBottom}>
-								{corporateGroup.address.country}
-							</P>
+							<ParagraphNoMB>{corporateGroup.address.country}</ParagraphNoMB>
 						)}
 					</Flex>
 
@@ -67,13 +58,13 @@ export const Preview: React.FC<any> = () => {
 						>
 							{i18n.preview.buttons.five}
 						</UnderlinedButton>
-						<P cfg={{ pt: 3 }} className={styles.noMarginBottom}>
+						<ParagraphNoMB cfg={{ pt: 3 }}>
 							{corporateGroup.directorIsProfessional
 								? i18n.professional.fields.isProfessional.labels
 										.isProfessionalYes
 								: i18n.professional.fields.isProfessional.labels
 										.isProfessionalNo}
-						</P>
+						</ParagraphNoMB>
 					</Flex>
 				</Flex>
 
@@ -88,7 +79,7 @@ export const Preview: React.FC<any> = () => {
 						{i18n.preview.buttons.four}
 					</UnderlinedButton>
 					<Flex cfg={{ my: 2, flexDirection: 'column' }}>
-						<P cfg={{ mb: 2 }} className={styles.noMarginBottom}>
+						<P cfg={{ mb: 2 }}>
 							{corporateGroup.title
 								? `${corporateGroup.title} ${corporateGroup.firstName} ${corporateGroup.lastName}`
 								: `${corporateGroup.firstName} ${corporateGroup.lastName}`}

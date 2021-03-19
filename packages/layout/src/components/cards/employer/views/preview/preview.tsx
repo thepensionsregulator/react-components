@@ -3,7 +3,8 @@ import { Flex, P, Hr, classNames, Span } from '@tpr/core';
 import { UnderlinedButton } from '../../../components/button';
 import { Checkbox } from '@tpr/forms';
 import { useEmployerContext } from '../../context';
-import styles from './preview.module.scss';
+import { ParagraphNoMB } from '../../../components/paragraphNoMB';
+import styles from '../../../cards.module.scss';
 
 type IdentifiersItemProps = { title: string; number: string | number };
 const IdentifiersItem: React.FC<IdentifiersItemProps> = ({ title, number }) => {
@@ -12,7 +13,7 @@ const IdentifiersItem: React.FC<IdentifiersItemProps> = ({ title, number }) => {
 			<Span cfg={{ lineHeight: 3 }} className={styles.styledAsH4}>
 				{title}
 			</Span>
-			<P className={styles.noMarginBottom}>{number}</P>
+			<ParagraphNoMB>{number}</ParagraphNoMB>
 		</>
 	);
 };
@@ -54,22 +55,16 @@ export const Preview: React.FC<any> = () => {
 						<Span cfg={{ lineHeight: 3 }} className={styles.styledAsH4}>
 							{employer.organisationName}
 						</Span>
-						<P className={styles.noMarginBottom}>
-							{employer.address.addressLine1}
-						</P>
+						<ParagraphNoMB>{employer.address.addressLine1}</ParagraphNoMB>
 						{employer.address.addressLine2 && (
-							<P className={styles.noMarginBottom}>
-								{employer.address.addressLine2}
-							</P>
+							<ParagraphNoMB>{employer.address.addressLine2}</ParagraphNoMB>
 						)}
 						{employer.address.addressLine3 && (
-							<P className={styles.noMarginBottom}>
-								{employer.address.addressLine3}
-							</P>
+							<ParagraphNoMB>{employer.address.addressLine3}</ParagraphNoMB>
 						)}
-						<P className={styles.noMarginBottom}>{employer.address.postTown}</P>
+						<ParagraphNoMB>{employer.address.postTown}</ParagraphNoMB>
 						{employer.address.county && <P>{employer.address.county}</P>}
-						<P className={styles.noMarginBottom}>{employer.address.postcode}</P>
+						<ParagraphNoMB>{employer.address.postcode}</ParagraphNoMB>
 					</Flex>
 				</Flex>
 				<Flex

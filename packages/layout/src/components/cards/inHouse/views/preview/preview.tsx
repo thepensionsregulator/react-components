@@ -1,13 +1,14 @@
 import React from 'react';
 import { Checkbox } from '@tpr/forms';
-import { Flex, P, Hr, classNames } from '@tpr/core';
+import { Flex, Hr, classNames } from '@tpr/core';
 import { UnderlinedButton } from '../../../components/button';
 import { useInHouseAdminContext } from '../../context';
 import {
 	PhonePreview,
 	EmailPreview,
 } from '../../../common/views/preview/components';
-import styles from './preview.module.scss';
+import { ParagraphNoMB } from '../../../components/paragraphNoMB';
+import styles from '../../../cards.module.scss';
 
 export const Preview: React.FC<any> = () => {
 	const { current, send, onCorrect, i18n } = useInHouseAdminContext();
@@ -33,34 +34,20 @@ export const Preview: React.FC<any> = () => {
 						{i18n.preview.buttons.three}
 					</UnderlinedButton>
 					<Flex cfg={{ my: 2, flexDirection: 'column' }}>
-						<P className={styles.noMarginBottom}>
-							{inHouseAdmin.address.addressLine1}
-						</P>
+						<ParagraphNoMB>{inHouseAdmin.address.addressLine1}</ParagraphNoMB>
 						{inHouseAdmin.address.addressLine2 && (
-							<P className={styles.noMarginBottom}>
-								{inHouseAdmin.address.addressLine2}
-							</P>
+							<ParagraphNoMB>{inHouseAdmin.address.addressLine2}</ParagraphNoMB>
 						)}
 						{inHouseAdmin.address.addressLine3 && (
-							<P className={styles.noMarginBottom}>
-								{inHouseAdmin.address.addressLine3}
-							</P>
+							<ParagraphNoMB>{inHouseAdmin.address.addressLine3}</ParagraphNoMB>
 						)}
-						<P className={styles.noMarginBottom}>
-							{inHouseAdmin.address.postTown}
-						</P>
+						<ParagraphNoMB>{inHouseAdmin.address.postTown}</ParagraphNoMB>
 						{inHouseAdmin.address.county && (
-							<P className={styles.noMarginBottom}>
-								{inHouseAdmin.address.county}
-							</P>
+							<ParagraphNoMB>{inHouseAdmin.address.county}</ParagraphNoMB>
 						)}
-						<P className={styles.noMarginBottom}>
-							{inHouseAdmin.address.postcode}
-						</P>
+						<ParagraphNoMB>{inHouseAdmin.address.postcode}</ParagraphNoMB>
 						{inHouseAdmin.address.country && (
-							<P className={styles.noMarginBottom}>
-								{inHouseAdmin.address.country}
-							</P>
+							<ParagraphNoMB>{inHouseAdmin.address.country}</ParagraphNoMB>
 						)}
 					</Flex>
 				</Flex>

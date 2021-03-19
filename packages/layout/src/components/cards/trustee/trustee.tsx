@@ -16,10 +16,10 @@ import RemoveReason from './views/remove/reason/reason';
 import { ConfirmRemove } from './views/remove/confirm';
 import RemovedBox from '../components/removedBox';
 import { cardType, cardTypeName } from '../common/interfaces';
-import styles from '../cards.module.scss';
 import { AddressComparer } from '@tpr/forms';
 import { TrusteeContext } from './trusteeMachine';
 import { concatenateStrings, removeFromTabFlowIfMatches } from '../../../utils';
+import styles from '../cards.module.scss';
 
 const CardContent: React.FC = () => {
 	const { current, i18n, send, addressAPI } = useTrusteeContext();
