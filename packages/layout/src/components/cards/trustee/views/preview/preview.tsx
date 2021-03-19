@@ -3,7 +3,6 @@ import { Flex, Hr, classNames, Span } from '@tpr/core';
 import { useTrusteeContext } from '../../context';
 import { UnderlinedButton } from '../../../components/button';
 import { Checkbox } from '@tpr/forms';
-import { capitalize } from '../../../../../utils';
 import {
 	PhonePreview,
 	EmailPreview,
@@ -23,7 +22,6 @@ export const Preview: React.FC = () => {
 					: classNames([{ [styles.complete]: complete }, styles.content])
 			}
 		>
-			<ParagraphNoMB>{capitalize(trustee.trusteeType)} trustee</ParagraphNoMB>
 			<Flex>
 				{/* Addres section: open for editing	 */}
 				<Flex

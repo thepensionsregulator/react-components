@@ -18,7 +18,8 @@ import RemovedBox from '../components/removedBox';
 import { cardType, cardTypeName } from '../common/interfaces';
 import { AddressComparer } from '@tpr/forms';
 import { TrusteeContext } from './trusteeMachine';
-import { concatenateStrings, removeFromTabFlowIfMatches } from '../../../utils';
+import { concatenateStrings, removeFromTabFlowIfMatches, capitalize } from '../../../utils';
+import { ParagraphNoMB } from '../components/paragraphNoMB';
 import styles from '../cards.module.scss';
 
 const CardContent: React.FC = () => {
@@ -170,13 +171,16 @@ export const TrusteeCard: React.FC<Omit<TrusteeCardProps, 'children'>> = ({
 							/>
 						)}
 						subtitle={() => (
-							<Span cfg={{ lineHeight: 3 }} className={styles.styledAsH4}>
-								{concatenateStrings([
-									current.context.trustee.title,
-									current.context.trustee.firstName,
-									current.context.trustee.lastName,
-								])}
-							</Span>
+							<>
+								<Span cfg={{ lineHeight: 3 }} className={styles.styledAsH4}>
+									{concatenateStrings([
+										current.context.trustee.title,
+										current.context.trustee.firstName,
+										current.context.trustee.lastName,
+									])}
+								</Span>
+								<ParagraphNoMB>{capitalize(current.context.trustee.trusteeType)} trustee</ParagraphNoMB>
+							</>
 						)}
 						statusText={
 							isComplete(current.context)
