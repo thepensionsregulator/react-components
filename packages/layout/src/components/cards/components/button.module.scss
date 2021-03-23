@@ -1,18 +1,22 @@
 @import '@tpr/theming/lib/variables.scss';
 @import '@tpr/theming/lib/resets.module.scss';
 
-.button {
+@mixin button-base {
 	text-align: left;
 	background: transparent;
 	box-shadow: none;
 	border: none;
-	cursor: pointer;
-	color: $colors-primary-3;
 	border-bottom: 1px solid;
-	border-bottom-color: $colors-primary-3;
-	padding: 0 0 4px 2px;
+	padding: 0 0 4px 0;
 	width: 100%;
 	min-height: $space-5;
+}
+
+.button {
+	@include button-base;
+	cursor: pointer;
+	color: $colors-primary-3;
+	border-bottom-color: $colors-primary-3;
 
 	p {
 		color: $colors-primary-3;
@@ -32,17 +36,10 @@
 }
 
 .buttonPlaceholder {
-	text-align: left;
-	background: transparent;
-	box-shadow: none;
-	border: none;
+	@include button-base;
 	cursor: default;
 	color: $colors-neutral-7;
-	border-bottom: 1px solid;
 	border-bottom-color: $colors-neutral-7;
-	padding: 0 0 4px 2px;
-	width: 100%;
-	min-height: $space-5;
 
 	p {
 		@include removeMarginBottom;
@@ -50,5 +47,5 @@
 }
 
 :export {
-	arrowColor : $colors-primary-3;
+	arrowColor: $colors-primary-3;
 }
