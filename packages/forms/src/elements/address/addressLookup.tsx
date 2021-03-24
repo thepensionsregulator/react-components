@@ -147,11 +147,12 @@ export const AddressLookup: React.FC<AddressProps> = ({
 					noAddressesFoundMessage={noAddressesFoundMessage}
 					onValidatePostcode={(isValid) =>
 					{
-						if(onAddressChanging !== null && isValid)
-						{
+						if(onAddressChanging !== null && isValid){
 							 onAddressChanging(false);
 						}
-						onValidatePostcode ? onValidatePostcode(isValid) : null
+						if(onValidatePostcode !== null){
+							onValidatePostcode(isValid) ;
+						}
 					}
 				}
 				/>
@@ -163,7 +164,9 @@ export const AddressLookup: React.FC<AddressProps> = ({
 					value={address}
 					testId={testId}
 					onChangeAddressClick={() => {
-						onAddressChanging ? onAddressChanging(true) : null;
+						if(onAddressChanging !== null){
+							onAddressChanging(true)
+						}
 						setAddressView(AddressView.PostcodeLookup);
 					}}
 					addressLine1Label={addressLine1Label}
