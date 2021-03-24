@@ -1,4 +1,4 @@
-import React, { useState, useRef } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import { useForm } from 'react-final-form';
 import PostcodeValidator from './postcodeValidator';
 import { FFInputText } from '../text/text';
@@ -41,6 +41,10 @@ export const PostcodeLookup: React.FC<PostcodeLookupProps> = ({
 		postcodeValid &&
 			onPostcodeChanged(form.getFieldState('postcodeLookup').value);
 	};
+
+	useEffect(() => {
+		searchFieldRef.current.value = null;
+	});
 
 	const validatePostcode = (value) => {
 		const result = validator.validatePostcode(value);
