@@ -6,8 +6,8 @@ import { useInHouseAdminContext } from '../../context';
 import {
 	PhonePreview,
 	EmailPreview,
+	AddressPreview,
 } from '../../../common/views/preview/components';
-import { ParagraphNoMB } from '../../../components/paragraphNoMB';
 import styles from '../../../cards.module.scss';
 
 export const Preview: React.FC<any> = () => {
@@ -33,23 +33,17 @@ export const Preview: React.FC<any> = () => {
 					>
 						{i18n.preview.buttons.three}
 					</UnderlinedButton>
-					<Flex cfg={{ my: 2, flexDirection: 'column' }}>
-						<ParagraphNoMB>{inHouseAdmin.address.addressLine1}</ParagraphNoMB>
-						{inHouseAdmin.address.addressLine2 && (
-							<ParagraphNoMB>{inHouseAdmin.address.addressLine2}</ParagraphNoMB>
-						)}
-						{inHouseAdmin.address.addressLine3 && (
-							<ParagraphNoMB>{inHouseAdmin.address.addressLine3}</ParagraphNoMB>
-						)}
-						<ParagraphNoMB>{inHouseAdmin.address.postTown}</ParagraphNoMB>
-						{inHouseAdmin.address.county && (
-							<ParagraphNoMB>{inHouseAdmin.address.county}</ParagraphNoMB>
-						)}
-						<ParagraphNoMB>{inHouseAdmin.address.postcode}</ParagraphNoMB>
-						{inHouseAdmin.address.country && (
-							<ParagraphNoMB>{inHouseAdmin.address.country}</ParagraphNoMB>
-						)}
-					</Flex>
+					<AddressPreview
+						address={{
+							addressLine1: inHouseAdmin.address.addressLine1,
+							addressLine2: inHouseAdmin.address.addressLine2,
+							addressLine3: inHouseAdmin.address.addressLine3,
+							postTown: inHouseAdmin.address.postTown,
+							county: inHouseAdmin.address.county,
+							postcode: inHouseAdmin.address.postcode,
+							country: inHouseAdmin.address.country,
+						}}
+					/>
 				</Flex>
 
 				{/* Contact details section: open for editing	 */}

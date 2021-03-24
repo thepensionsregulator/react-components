@@ -1,4 +1,13 @@
+@import '@tpr/core/lib/components/typography/typography.module.scss';
+// typography.module.scss includes '@tpr/theming/lib/variables.scss'
+
 .dateWrapper {
 	margin-left: 55px;
 	margin-bottom: 20px;
+}
+
+.errorMsg {
+	color: $colors-danger-2;
+	margin-top: $space-5;
+	@include removeMarginBottom;
 }

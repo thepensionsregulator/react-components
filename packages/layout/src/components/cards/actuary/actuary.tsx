@@ -4,7 +4,7 @@ import {
 	ActuaryProviderProps,
 	useActuaryContext,
 } from './context';
-import { Section, Span } from '@tpr/core';
+import { Section, P } from '@tpr/core';
 import { Toolbar } from '../components/toolbar';
 import { UnderlinedButton } from '../components/button';
 import { Preview } from './views/preview/preview';
@@ -16,7 +16,6 @@ import RemovedBox from '../components/removedBox';
 import { cardTypeName } from '../common/interfaces';
 import { ActuaryContext } from './actuaryMachine';
 import { removeFromTabFlowIfMatches, concatenateStrings } from '../../../utils';
-import { ParagraphNoMB } from '../components/paragraphNoMB';
 import styles from '../cards.module.scss';
 
 const CardContentSwitch: React.FC = () => {
@@ -123,16 +122,16 @@ export const ActuaryCard: React.FC<ActuaryProviderProps> = ({
 							complete={isComplete(current.context)}
 							subtitle={() => (
 								<>
-									<Span cfg={{ lineHeight: 3 }} className={styles.styledAsH4}>
+									<P className={styles.personOrCompanyName}>
 										{concatenateStrings([
 											current.context.actuary.title,
 											current.context.actuary.firstName,
 											current.context.actuary.lastName,
 										])}
-									</Span>
-									<ParagraphNoMB>
+									</P>
+									<P className={styles.personOrCompanyRole}>
 										{current.context.actuary.organisationName}
-									</ParagraphNoMB>
+									</P>
 								</>
 							)}
 							statusText={

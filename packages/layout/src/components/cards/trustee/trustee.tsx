@@ -4,7 +4,7 @@ import {
 	useTrusteeContext,
 	TrusteeCardProps,
 } from './context';
-import { Section, Span } from '@tpr/core';
+import { Section, P } from '@tpr/core';
 import { UnderlinedButton } from '../components/button';
 import { Preview } from './views/preview';
 import { Toolbar } from '../components/toolbar';
@@ -23,7 +23,6 @@ import {
 	removeFromTabFlowIfMatches,
 	capitalize,
 } from '../../../utils';
-import { ParagraphNoMB } from '../components/paragraphNoMB';
 import styles from '../cards.module.scss';
 
 const CardContent: React.FC = () => {
@@ -176,16 +175,16 @@ export const TrusteeCard: React.FC<Omit<TrusteeCardProps, 'children'>> = ({
 						)}
 						subtitle={() => (
 							<>
-								<Span cfg={{ lineHeight: 3 }} className={styles.styledAsH4}>
+								<P className={styles.personOrCompanyName}>
 									{concatenateStrings([
 										current.context.trustee.title,
 										current.context.trustee.firstName,
 										current.context.trustee.lastName,
 									])}
-								</Span>
-								<ParagraphNoMB>
+								</P>
+								<P className={styles.personOrCompanyRole}>
 									{capitalize(current.context.trustee.trusteeType)} trustee
-								</ParagraphNoMB>
+								</P>
 							</>
 						)}
 						statusText={

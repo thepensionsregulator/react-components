@@ -6,9 +6,9 @@ import { useCorporateGroupContext } from '../../context';
 import {
 	PhonePreview,
 	EmailPreview,
+	AddressPreview,
 } from '../../../common/views/preview/components';
-import { ParagraphNoMB } from '../../../components/paragraphNoMB';
-import styles from '../../../cards.module.scss';
+import styles from './preview.module.scss';
 
 export const Preview: React.FC<any> = () => {
 	const { current, send, onCorrect, i18n } = useCorporateGroupContext();
@@ -28,27 +28,17 @@ export const Preview: React.FC<any> = () => {
 					cfg={{ width: 5, flex: '0 0 auto', flexDirection: 'column', pr: 4 }}
 				>
 					<UnderlinedButton>{i18n.preview.buttons.three}</UnderlinedButton>
-					<Flex cfg={{ my: 2, flexDirection: 'column' }}>
-						<ParagraphNoMB>{corporateGroup.address.addressLine1}</ParagraphNoMB>
-						{corporateGroup.address.addressLine2 && (
-							<ParagraphNoMB>
-								{corporateGroup.address.addressLine2}
-							</ParagraphNoMB>
-						)}
-						{corporateGroup.address.addressLine3 && (
-							<ParagraphNoMB>
-								{corporateGroup.address.addressLine3}
-							</ParagraphNoMB>
-						)}
-						<ParagraphNoMB>{corporateGroup.address.postTown}</ParagraphNoMB>
-						{corporateGroup.address.county && (
-							<ParagraphNoMB>{corporateGroup.address.county}</ParagraphNoMB>
-						)}
-						<ParagraphNoMB>{corporateGroup.address.postcode}</ParagraphNoMB>
-						{corporateGroup.address.country && (
-							<ParagraphNoMB>{corporateGroup.address.country}</ParagraphNoMB>
-						)}
-					</Flex>
+					<AddressPreview
+						address={{
+							addressLine1: corporateGroup.address.addressLine1,
+							addressLine2: corporateGroup.address.addressLine2,
+							addressLine3: corporateGroup.address.addressLine3,
+							postTown: corporateGroup.address.postTown,
+							county: corporateGroup.address.county,
+							postcode: corporateGroup.address.postcode,
+							country: corporateGroup.address.country,
+						}}
+					/>
 
 					{/* Professional Trustee section: open for editing	 */}
 					<Flex cfg={{ flexDirection: 'column', mt: 5 }}>
@@ -58,13 +48,13 @@ export const Preview: React.FC<any> = () => {
 						>
 							{i18n.preview.buttons.five}
 						</UnderlinedButton>
-						<ParagraphNoMB cfg={{ pt: 3 }}>
+						<P className={styles.isProfessional}>
 							{corporateGroup.directorIsProfessional
 								? i18n.professional.fields.isProfessional.labels
 										.isProfessionalYes
 								: i18n.professional.fields.isProfessional.labels
 										.isProfessionalNo}
-						</ParagraphNoMB>
+						</P>
 					</Flex>
 				</Flex>
 

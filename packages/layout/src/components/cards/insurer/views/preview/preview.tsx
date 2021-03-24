@@ -1,9 +1,9 @@
 import React from 'react';
 import { Checkbox } from '@tpr/forms';
-import { Flex, Hr, classNames } from '@tpr/core';
+import { Flex, Hr, P, classNames } from '@tpr/core';
 import { UnderlinedButton } from '../../../components/button';
 import { useInsurerContext } from '../../context';
-import { ParagraphNoMB } from '../../../components/paragraphNoMB';
+import { AddressPreview } from '../../../common/views/preview/components';
 import styles from '../../../cards.module.scss';
 
 export const Preview: React.FC<any> = () => {
@@ -24,23 +24,17 @@ export const Preview: React.FC<any> = () => {
 					cfg={{ width: 5, flex: '0 0 auto', flexDirection: 'column', pr: 4 }}
 				>
 					<UnderlinedButton>{i18n.preview.buttons.three}</UnderlinedButton>
-					<Flex cfg={{ my: 2, flexDirection: 'column' }}>
-						<ParagraphNoMB>{insurer.address.addressLine1}</ParagraphNoMB>
-						{insurer.address.addressLine2 && (
-							<ParagraphNoMB>{insurer.address.addressLine2}</ParagraphNoMB>
-						)}
-						{insurer.address.addressLine3 && (
-							<ParagraphNoMB>{insurer.address.addressLine3}</ParagraphNoMB>
-						)}
-						<ParagraphNoMB>{insurer.address.postTown}</ParagraphNoMB>
-						{insurer.address.county && (
-							<ParagraphNoMB>{insurer.address.county}</ParagraphNoMB>
-						)}
-						<ParagraphNoMB>{insurer.address.postcode}</ParagraphNoMB>
-						{insurer.address.country && (
-							<ParagraphNoMB>{insurer.address.country}</ParagraphNoMB>
-						)}
-					</Flex>
+					<AddressPreview
+						address={{
+							addressLine1: insurer.address.addressLine1,
+							addressLine2: insurer.address.addressLine2,
+							addressLine3: insurer.address.addressLine3,
+							postTown: insurer.address.postTown,
+							county: insurer.address.county,
+							postcode: insurer.address.postcode,
+							country: insurer.address.country,
+						}}
+					/>
 				</Flex>
 
 				{/* Insurer reference number */}
@@ -54,7 +48,9 @@ export const Preview: React.FC<any> = () => {
 						{i18n.preview.buttons.four}
 					</UnderlinedButton>
 					<Flex cfg={{ mt: 1, flexDirection: 'column' }}>
-						<ParagraphNoMB>{insurer.insurerCompanyReference}</ParagraphNoMB>
+						<P className={styles.insurerCompanyRef}>
+							{insurer.insurerCompanyReference}
+						</P>
 					</Flex>
 				</Flex>
 			</Flex>

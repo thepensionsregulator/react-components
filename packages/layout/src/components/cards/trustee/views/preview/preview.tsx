@@ -1,13 +1,13 @@
 import React from 'react';
-import { Flex, Hr, classNames, Span } from '@tpr/core';
+import { Flex, Hr, classNames } from '@tpr/core';
 import { useTrusteeContext } from '../../context';
 import { UnderlinedButton } from '../../../components/button';
 import { Checkbox } from '@tpr/forms';
 import {
 	PhonePreview,
 	EmailPreview,
+	AddressPreview,
 } from '../../../common/views/preview/components';
-import { ParagraphNoMB } from '../../../components/paragraphNoMB';
 import styles from '../../../cards.module.scss';
 
 export const Preview: React.FC = () => {
@@ -33,22 +33,17 @@ export const Preview: React.FC = () => {
 					>
 						{i18n.preview.buttons.three}
 					</UnderlinedButton>
-					<Flex cfg={{ mt: 1, flexDirection: 'column' }}>
-						<Span cfg={{ lineHeight: 3 }} className={styles.styledAsH4}>
-							{trustee.address.addressLine1}
-						</Span>
-						{trustee.address.addressLine2 && (
-							<ParagraphNoMB>{trustee.address.addressLine2}</ParagraphNoMB>
-						)}
-						{trustee.address.addressLine3 && (
-							<ParagraphNoMB>{trustee.address.addressLine3}</ParagraphNoMB>
-						)}
-						<ParagraphNoMB>{trustee.address.postTown}</ParagraphNoMB>
-						{trustee.address.county && (
-							<ParagraphNoMB>{trustee.address.county}</ParagraphNoMB>
-						)}
-						<ParagraphNoMB>{trustee.address.postcode}</ParagraphNoMB>
-					</Flex>
+					<AddressPreview
+						address={{
+							addressLine1: trustee.address.addressLine1,
+							addressLine2: trustee.address.addressLine2,
+							addressLine3: trustee.address.addressLine3,
+							postTown: trustee.address.postTown,
+							county: trustee.address.county,
+							postcode: trustee.address.postcode,
+							country: trustee.address.country,
+						}}
+					/>
 				</Flex>
 
 				{/* Contact details section: open for editing	 */}

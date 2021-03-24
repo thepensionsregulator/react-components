@@ -2,6 +2,29 @@
 
 .toolbarBottomBorder {
 	border-bottom: 1px solid $colors-neutral-6;
+
+	.sectionTitle {
+		color: $colors-neutral-6;
+		font-size: $font-size-3;
+		@include removeMarginBottom;
+	}
+
+	.subtitle {
+		color: $colors-neutral-6;
+		@include removeMarginBottom;
+	}
+}
+
+.statusMsg {
+	align-items: 'center';
+	height: '22px';
+
+	.paragraph {
+		margin-left: $space-1;
+		font-size: $font-size-2;
+		font-weight: $space-3;
+		@include removeMarginBottom;
+	}
 }
 
 :export {

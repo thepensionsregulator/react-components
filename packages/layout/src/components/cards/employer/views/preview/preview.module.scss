@@ -1,0 +1,14 @@
+@import '../../../cards.module.scss';
+
+.identifierItem {
+	margin-top: $space-1;
+	flex-direction: column;
+
+	.title {
+		@include styled-as-h4;
+	}
+
+	.number {
+		@include removeMarginBottom;
+	}
+}

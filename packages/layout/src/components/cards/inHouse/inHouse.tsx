@@ -4,7 +4,7 @@ import {
 	InHouseAdminProviderProps,
 	useInHouseAdminContext,
 } from './context';
-import { Section, Span } from '@tpr/core';
+import { Section, P } from '@tpr/core';
 import { Toolbar } from '../components/toolbar';
 import { UnderlinedButton } from '../components/button';
 import { Preview } from './views/preview/preview';
@@ -164,13 +164,13 @@ export const InHouseCard: React.FC<InHouseAdminProviderProps> = ({
 						<Toolbar
 							complete={isComplete(current.context)}
 							subtitle={() => (
-								<Span cfg={{ lineHeight: 3 }} className={styles.styledAsH4}>
+								<P className={styles.personOrCompanyName}>
 									{concatenateStrings([
 										current.context.inHouseAdmin.title,
 										current.context.inHouseAdmin.firstName,
 										current.context.inHouseAdmin.lastName,
 									])}
-								</Span>
+								</P>
 							)}
 							statusText={
 								isComplete(current.context)

@@ -4,7 +4,7 @@ import {
 	IndependentTrusteeProviderProps,
 	useIndependentTrusteeContext,
 } from './context';
-import { Section, Span } from '@tpr/core';
+import { Section, P } from '@tpr/core';
 import { Toolbar } from '../components/toolbar';
 import { UnderlinedButton } from '../components/button';
 import RemovedBox from '../components/removedBox';
@@ -15,7 +15,6 @@ import { ConfirmRemove } from './views/remove/confirm/confirm';
 import { cardTypeName } from '../common/interfaces';
 import { IndependentTrusteeContext } from './independentTrusteeMachine';
 import { concatenateStrings } from '../../../utils';
-import { ParagraphNoMB } from '../components/paragraphNoMB';
 import styles from '../cards.module.scss';
 
 const CardContentSwitch: React.FC = () => {
@@ -88,12 +87,12 @@ export const IndependentTrusteeCard: React.FC<IndependentTrusteeProviderProps> =
 							complete={isComplete(context)}
 							subtitle={() => (
 								<>
-									<Span cfg={{ lineHeight: 3 }} className={styles.styledAsH4}>
+									<P className={styles.personOrCompanyName}>
 										{context.independentTrustee.organisationName}
-									</Span>
-									<ParagraphNoMB className={styles.noMarginBottom}>
+									</P>
+									<P className={styles.personOrCompanyRole}>
 										{i18n.preview.trusteeType}
-									</ParagraphNoMB>
+									</P>
 								</>
 							)}
 							statusText={

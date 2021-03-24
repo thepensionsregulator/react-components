@@ -6,8 +6,8 @@ import { useActuaryContext } from '../../context';
 import {
 	PhonePreview,
 	EmailPreview,
+	AddressPreview,
 } from '../../../common/views/preview/components';
-import { ParagraphNoMB } from '../../../components/paragraphNoMB';
 import styles from '../../../cards.module.scss';
 
 export const Preview: React.FC<any> = () => {
@@ -28,23 +28,17 @@ export const Preview: React.FC<any> = () => {
 					cfg={{ width: 5, flex: '0 0 auto', flexDirection: 'column', pr: 4 }}
 				>
 					<UnderlinedButton>{i18n.preview.buttons.three}</UnderlinedButton>
-					<Flex cfg={{ my: 2, flexDirection: 'column' }}>
-						<ParagraphNoMB>{actuary.address.addressLine1}</ParagraphNoMB>
-						{actuary.address.addressLine2 && (
-							<ParagraphNoMB>{actuary.address.addressLine2}</ParagraphNoMB>
-						)}
-						{actuary.address.addressLine3 && (
-							<ParagraphNoMB>{actuary.address.addressLine3}</ParagraphNoMB>
-						)}
-						<ParagraphNoMB>{actuary.address.postTown}</ParagraphNoMB>
-						{actuary.address.county && (
-							<ParagraphNoMB>{actuary.address.county}</ParagraphNoMB>
-						)}
-						<ParagraphNoMB>{actuary.address.postcode}</ParagraphNoMB>
-						{actuary.address.country && (
-							<ParagraphNoMB>{actuary.address.country}</ParagraphNoMB>
-						)}
-					</Flex>
+					<AddressPreview
+						address={{
+							addressLine1: actuary.address.addressLine1,
+							addressLine2: actuary.address.addressLine2,
+							addressLine3: actuary.address.addressLine3,
+							postTown: actuary.address.postTown,
+							county: actuary.address.county,
+							postcode: actuary.address.postcode,
+							country: actuary.address.country,
+						}}
+					/>
 				</Flex>
 
 				{/* Contact details section: open for editing	 */}

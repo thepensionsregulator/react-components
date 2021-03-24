@@ -1,7 +1,7 @@
 import React, { useMemo } from 'react';
 import { UnderlinedButton } from '../components/button';
 import { Toolbar } from '../components/toolbar';
-import { Section } from '@tpr/core';
+import { Section, P } from '@tpr/core';
 import { Preview } from './views/preview/preview';
 import { RemoveDateForm } from './views/remove/date/date';
 import { EmployerType } from './views/type/type';
@@ -20,7 +20,6 @@ import {
 import RemovedBox from '../components/removedBox';
 import { cardTypeName } from '../common/interfaces';
 import { EmployerContext } from './employerMachine';
-import { ParagraphNoMB } from '../components/paragraphNoMB';
 import styles from '../cards.module.scss';
 
 const CardContentSwitch: React.FC = () => {
@@ -96,8 +95,8 @@ const EmployerSubtitle: React.FC<Partial<Employer>> = ({
 
 	return (
 		<>
-			<ParagraphNoMB>{title}</ParagraphNoMB>
-			<ParagraphNoMB>{subtitle}</ParagraphNoMB>
+			<P className={styles.personOrCompanyRole}>{title}</P>
+			<P className={styles.personOrCompanyRole}>{subtitle}</P>
 		</>
 	);
 };

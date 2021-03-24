@@ -1,10 +1,10 @@
 import React from 'react';
+import { P } from '@tpr/core';
 import { Form, FFCheckbox, renderFields, FieldProps } from '@tpr/forms';
 import { Content } from '../../../../components/content';
 import { Footer } from '../../../../components/card';
 import { ArrowButton } from '../../../../../buttons/buttons';
 import { cardType, cardTypeName } from '../../../../common/interfaces';
-import { ParagraphNoMB } from '../../../../components/paragraphNoMB';
 import styles from './date.module.scss';
 
 interface DateFormProps {
@@ -44,11 +44,7 @@ const DateForm: React.FC<DateFormProps> = ({
 							cfg={{ mb: 3 }}
 						/>
 						<div className={styles.dateWrapper}>{renderFields(dateField)}</div>
-						{submitError && (
-							<ParagraphNoMB cfg={{ color: 'danger.2', mt: 5 }}>
-								{submitError}
-							</ParagraphNoMB>
-						)}
+						{submitError && <P className={styles.errorMsg}>{submitError}</P>}
 						<Footer>
 							<ArrowButton
 								appearance="secondary"

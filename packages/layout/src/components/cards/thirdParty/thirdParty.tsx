@@ -4,7 +4,7 @@ import {
 	ThirdPartyProviderProps,
 	useThirdPartyContext,
 } from './context';
-import { Section, Span } from '@tpr/core';
+import { Section, P } from '@tpr/core';
 import { Toolbar } from '../components/toolbar';
 import { UnderlinedButton } from '../components/button';
 import { Preview } from './views/preview/preview';
@@ -82,9 +82,9 @@ export const ThirdPartyCard: React.FC<ThirdPartyProviderProps> = ({
 						<Toolbar
 							complete={isComplete(context)}
 							subtitle={() => (
-								<Span className={styles.styledAsH4}>
+								<P className={styles.personOrCompanyName}>
 									{context.thirdParty.organisationName}
-								</Span>
+								</P>
 							)}
 							statusText={
 								isComplete(context)

@@ -1,19 +1,17 @@
 import React, { useState } from 'react';
-import { Flex, P, Hr, classNames, Span } from '@tpr/core';
+import { Flex, P, Hr, classNames } from '@tpr/core';
 import { UnderlinedButton } from '../../../components/button';
 import { Checkbox } from '@tpr/forms';
 import { useEmployerContext } from '../../context';
-import { ParagraphNoMB } from '../../../components/paragraphNoMB';
-import styles from '../../../cards.module.scss';
+import { AddressPreview } from '../../../common/views/preview/components';
+import styles from './preview.module.scss';
 
 type IdentifiersItemProps = { title: string; number: string | number };
 const IdentifiersItem: React.FC<IdentifiersItemProps> = ({ title, number }) => {
 	return (
 		<>
-			<Span cfg={{ lineHeight: 3 }} className={styles.styledAsH4}>
-				{title}
-			</Span>
-			<ParagraphNoMB>{number}</ParagraphNoMB>
+			<P className={styles.title}>{title}</P>
+			<P className={styles.number}>{number}</P>
 		</>
 	);
 };
@@ -51,27 +49,23 @@ export const Preview: React.FC<any> = () => {
 					cfg={{ width: 5, flex: '0 0 auto', flexDirection: 'column', pr: 4 }}
 				>
 					<UnderlinedButton>{i18n.preview.buttons.three}</UnderlinedButton>
-					<Flex cfg={{ my: 2, flexDirection: 'column' }}>
-						<Span cfg={{ lineHeight: 3 }} className={styles.styledAsH4}>
-							{employer.organisationName}
-						</Span>
-						<ParagraphNoMB>{employer.address.addressLine1}</ParagraphNoMB>
-						{employer.address.addressLine2 && (
-							<ParagraphNoMB>{employer.address.addressLine2}</ParagraphNoMB>
-						)}
-						{employer.address.addressLine3 && (
-							<ParagraphNoMB>{employer.address.addressLine3}</ParagraphNoMB>
-						)}
-						<ParagraphNoMB>{employer.address.postTown}</ParagraphNoMB>
-						{employer.address.county && <P>{employer.address.county}</P>}
-						<ParagraphNoMB>{employer.address.postcode}</ParagraphNoMB>
-					</Flex>
+					<AddressPreview
+						name={employer.organisationName}
+						address={{
+							addressLine1: employer.address.addressLine1,
+							addressLine2: employer.address.addressLine2,
+							addressLine3: employer.address.addressLine3,
+							postTown: employer.address.postTown,
+							county: employer.address.county,
+							postcode: employer.address.postcode,
+						}}
+					/>
 				</Flex>
 				<Flex
 					cfg={{ width: 5, flex: '0 0 auto', flexDirection: 'column', pl: 4 }}
 				>
 					<UnderlinedButton>{i18n.preview.buttons.four}</UnderlinedButton>
-					<Flex cfg={{ mt: 1, flexDirection: 'column' }}>
+					<Flex className={styles.identifierItem}>
 						{items.map((item, key) => (
 							<IdentifiersItem key={key} {...item} />
 						))}
