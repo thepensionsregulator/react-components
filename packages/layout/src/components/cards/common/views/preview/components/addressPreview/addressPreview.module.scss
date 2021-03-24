@@ -1,0 +1,8 @@
+@import '../../../../../cards.module.scss';
+
+.name {
+	@include styled-as-h4;
+}
+
+.address {
+}
