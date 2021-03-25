@@ -1,6 +1,6 @@
 import React from 'react';
 import { formSetup } from '../__mocks__/setup';
-import { fireEvent, screen, findByText } from '@testing-library/react';
+import { fireEvent, screen, findByText, cleanup } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { axe } from 'jest-axe';
 import { AddressLookup, AddressProps } from '../elements/address/addressLookup';
@@ -41,6 +41,10 @@ async function searchForAPostcode(postcode: string) {
 
 beforeEach(() => {
 	defaultProps.addressLookupProvider = new FakeAddressLookupProvider();
+});
+
+afterEach(() => {
+	cleanup();
 });
 
 describe('Address lookup', () => {
