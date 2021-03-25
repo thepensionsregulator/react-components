@@ -4,7 +4,7 @@ import { UnderlinedButton } from '../../../components/button';
 import { Checkbox } from '@tpr/forms';
 import { useEmployerContext } from '../../context';
 import { AddressPreview } from '../../../common/views/preview/components';
-import styles from './preview.module.scss';
+import styles from '../../../cards.module.scss';
 
 type IdentifiersItemProps = { title: string; number: string | number };
 const IdentifiersItem: React.FC<IdentifiersItemProps> = ({ title, number }) => {

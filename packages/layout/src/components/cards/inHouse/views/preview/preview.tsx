@@ -4,8 +4,7 @@ import { Flex, Hr, classNames } from '@tpr/core';
 import { UnderlinedButton } from '../../../components/button';
 import { useInHouseAdminContext } from '../../context';
 import {
-	PhonePreview,
-	EmailPreview,
+	ContactDetailsPreview,
 	AddressPreview,
 } from '../../../common/views/preview/components';
 import styles from '../../../cards.module.scss';
@@ -56,14 +55,10 @@ export const Preview: React.FC<any> = () => {
 					>
 						{i18n.preview.buttons.four}
 					</UnderlinedButton>
-					<Flex cfg={{ my: 2, flexDirection: 'column' }}>
-						{inHouseAdmin.telephoneNumber && (
-							<PhonePreview value={inHouseAdmin.telephoneNumber} />
-						)}
-						{inHouseAdmin.emailAddress && (
-							<EmailPreview value={inHouseAdmin.emailAddress} />
-						)}
-					</Flex>
+					<ContactDetailsPreview
+						phone={{ value: inHouseAdmin.telephoneNumber }}
+						email={{ value: inHouseAdmin.emailAddress }}
+					/>
 				</Flex>
 			</Flex>
 

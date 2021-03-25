@@ -47,11 +47,9 @@ export const Preview: React.FC<any> = () => {
 					>
 						{i18n.preview.buttons.four}
 					</UnderlinedButton>
-					<Flex cfg={{ mt: 1, flexDirection: 'column' }}>
-						<P className={styles.insurerCompanyRef}>
-							{insurer.insurerCompanyReference}
-						</P>
-					</Flex>
+					<P className={styles.insurerCompanyRef}>
+						{insurer.insurerCompanyReference}
+					</P>
 				</Flex>
 			</Flex>
 

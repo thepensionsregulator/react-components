@@ -4,11 +4,10 @@ import { Flex, P, Hr, classNames } from '@tpr/core';
 import { UnderlinedButton } from '../../../components/button';
 import { useCorporateGroupContext } from '../../context';
 import {
-	PhonePreview,
-	EmailPreview,
+	ContactDetailsPreview,
 	AddressPreview,
 } from '../../../common/views/preview/components';
-import styles from './preview.module.scss';
+import styles from '../../../cards.module.scss';
 
 export const Preview: React.FC<any> = () => {
 	const { current, send, onCorrect, i18n } = useCorporateGroupContext();
@@ -68,19 +67,15 @@ export const Preview: React.FC<any> = () => {
 					>
 						{i18n.preview.buttons.four}
 					</UnderlinedButton>
-					<Flex cfg={{ my: 2, flexDirection: 'column' }}>
-						<P cfg={{ mb: 2 }}>
-							{corporateGroup.title
+					<ContactDetailsPreview
+						name={
+							corporateGroup.title
 								? `${corporateGroup.title} ${corporateGroup.firstName} ${corporateGroup.lastName}`
-								: `${corporateGroup.firstName} ${corporateGroup.lastName}`}
-						</P>
-						{corporateGroup.telephoneNumber && (
-							<PhonePreview value={corporateGroup.telephoneNumber} />
-						)}
-						{corporateGroup.emailAddress && (
-							<EmailPreview value={corporateGroup.emailAddress} />
-						)}
-					</Flex>
+								: `${corporateGroup.firstName} ${corporateGroup.lastName}`
+						}
+						phone={{ value: corporateGroup.telephoneNumber }}
+						email={{ value: corporateGroup.emailAddress }}
+					/>
 				</Flex>
 			</Flex>
 

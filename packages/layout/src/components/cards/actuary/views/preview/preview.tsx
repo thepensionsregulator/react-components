@@ -4,9 +4,8 @@ import { Flex, Hr, classNames } from '@tpr/core';
 import { UnderlinedButton } from '../../../components/button';
 import { useActuaryContext } from '../../context';
 import {
-	PhonePreview,
-	EmailPreview,
 	AddressPreview,
+	ContactDetailsPreview,
 } from '../../../common/views/preview/components';
 import styles from '../../../cards.module.scss';
 
@@ -51,14 +50,10 @@ export const Preview: React.FC<any> = () => {
 					>
 						{i18n.preview.buttons.four}
 					</UnderlinedButton>
-					<Flex cfg={{ my: 2, flexDirection: 'column' }}>
-						{actuary.telephoneNumber && (
-							<PhonePreview value={actuary.telephoneNumber} />
-						)}
-						{actuary.emailAddress && (
-							<EmailPreview value={actuary.emailAddress} />
-						)}
-					</Flex>
+					<ContactDetailsPreview
+						phone={{ value: actuary.telephoneNumber }}
+						email={{ value: actuary.emailAddress }}
+					/>
 				</Flex>
 			</Flex>
 

@@ -4,8 +4,7 @@ import { useTrusteeContext } from '../../context';
 import { UnderlinedButton } from '../../../components/button';
 import { Checkbox } from '@tpr/forms';
 import {
-	PhonePreview,
-	EmailPreview,
+	ContactDetailsPreview,
 	AddressPreview,
 } from '../../../common/views/preview/components';
 import styles from '../../../cards.module.scss';
@@ -34,8 +33,8 @@ export const Preview: React.FC = () => {
 						{i18n.preview.buttons.three}
 					</UnderlinedButton>
 					<AddressPreview
+						name={trustee.address.addressLine1}
 						address={{
-							addressLine1: trustee.address.addressLine1,
 							addressLine2: trustee.address.addressLine2,
 							addressLine3: trustee.address.addressLine3,
 							postTown: trustee.address.postTown,
@@ -56,14 +55,10 @@ export const Preview: React.FC = () => {
 					>
 						{i18n.preview.buttons.four}
 					</UnderlinedButton>
-					<Flex cfg={{ mt: 1, flexDirection: 'column' }}>
-						{trustee.telephoneNumber && (
-							<PhonePreview value={trustee.telephoneNumber} />
-						)}
-						{trustee.emailAddress && (
-							<EmailPreview value={trustee.emailAddress} />
-						)}
-					</Flex>
+					<ContactDetailsPreview
+						phone={{ value: trustee.telephoneNumber }}
+						email={{ value: trustee.emailAddress }}
+					/>
 				</Flex>
 			</Flex>
 
