@@ -29,10 +29,12 @@
 		.personOrCompanyName {
 			@include styled-as-h4;
 			@include removeMarginBottom;
+			line-height: $line-height-3;
 		}
 
 		.personOrCompanyRole {
 			@include removeMarginBottom;
+			line-height: $line-height-3;
 		}
 	}
 
@@ -45,14 +47,39 @@
 
 		.emailPhonePreviewLabel {
 			@include styled-as-h4;
+			@include removeMarginBottom;
+			line-height: $line-height-3;
 		}
 
 		.emailPhonePreviewValue {
 			@include removeMarginBottom;
+			line-height: $line-height-3;
+		}
+
+		.identifierItem {
+			margin-top: $space-2;
+			flex-direction: column;
+
+			.title {
+				@include styled-as-h4;
+				line-height: $line-height-3;
+				@include removeMarginBottom;
+			}
+
+			.number {
+				@include removeMarginBottom;
+			}
+		}
+
+		.isProfessional,
+		.appointedByRegulator,
+		.insurerCompanyRef {
+			margin-top: $space-2;
+			@include removeMarginBottom;
 		}
 	}
-}
 
-.complete {
-	border-left-color: $colors-success-1;
+	.complete {
+		border-left-color: $colors-success-1;
+	}
 }

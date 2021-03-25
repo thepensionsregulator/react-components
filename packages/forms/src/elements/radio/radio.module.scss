@@ -23,8 +23,8 @@
 	font-weight: $font-weight-3;
 	line-height: $line-height-3;
 	padding-left: $space-1;
-	@include removeMarginBottom;
 	cursor: pointer;
+	@include removeMarginBottom;
 }
 
 .disabled {
@@ -48,7 +48,7 @@
 	font-size: $font-size-2;
 	font-weight: $font-weight-2;
 	margin-top: $space-2;
-	@include removeMarginBottom;
 	padding-left: 55px;
 	max-width: 100%;
+	@include removeMarginBottom;
 }
