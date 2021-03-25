@@ -32,7 +32,12 @@ const independentTrustee: IndependentTrustee = {
 
 describe('Professional / Independent Trustee Card', () => {
 	describe('Preview', () => {
-		let component, findByText, findAllByText, findByTitle, findByRole;
+		let component,
+			findByText,
+			findAllByText,
+			findByTitle,
+			findByRole,
+			findByTestId;
 		beforeEach(() => {
 			const {
 				container,
@@ -40,6 +45,7 @@ describe('Professional / Independent Trustee Card', () => {
 				getAllByText,
 				queryByTitle,
 				getByRole,
+				getByTestId,
 			} = render(
 				<IndependentTrusteeCard
 					independentTrustee={independentTrustee}
@@ -55,6 +61,7 @@ describe('Professional / Independent Trustee Card', () => {
 			findAllByText = getAllByText;
 			findByTitle = queryByTitle;
 			findByRole = getByRole;
+			findByTestId = getByTestId;
 		});
 
 		test('no Violations', async () => {
@@ -87,12 +94,10 @@ describe('Professional / Independent Trustee Card', () => {
 		});
 
 		test('Address block displays values correctly', () => {
-			expect(findByText('The Pensions Regulator')).toBeDefined();
-			expect(findByText('Napier House')).toBeDefined();
-			expect(findByText('Trafalgar Pl')).toBeDefined();
-			expect(findByText('Brighton')).toBeDefined();
-			expect(findByText('BN1 4DW')).toBeDefined();
-			expect(findByText('West Sussex')).toBeDefined();
+			const addressPreview = findByTestId('address-preview');
+			const addressExpected = `${independentTrustee.address.addressLine1}<br>${independentTrustee.address.addressLine2}<br>${independentTrustee.address.addressLine3}<br>${independentTrustee.address.postTown}<br>${independentTrustee.address.county}<br>${independentTrustee.address.postcode}<br>`;
+			expect(addressPreview).toBeDefined();
+			expect(addressPreview.innerHTML).toEqual(addressExpected);
 		});
 
 		test('Appointed by the regulator block displays value correctly', () => {

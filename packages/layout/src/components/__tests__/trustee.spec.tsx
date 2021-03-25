@@ -107,11 +107,12 @@ describe('Trustee Preview', () => {
 	});
 
 	test('address shows up correctly', () => {
-		expect(findByText(trustee.addressLine1)).toBeDefined();
-		expect(findByText(trustee.addressLine2)).toBeDefined();
-		expect(findByText(trustee.addressLine3)).toBeDefined();
-		expect(findByText(trustee.postTown)).toBeDefined();
-		expect(findByText(trustee.postcode)).toBeDefined();
+		const organisationName = findByText(trustee.addressLine1);
+		const addressPreview = findByTestId('address-preview');
+		const addressExpected = `${trustee.addressLine2}<br>${trustee.addressLine3}<br>${trustee.postTown}<br>${trustee.county}<br>${trustee.postcode}<br>`;
+		expect(organisationName).toBeDefined();
+		expect(addressPreview).toBeDefined();
+		expect(addressPreview.innerHTML).toEqual(addressExpected);
 	});
 
 	test('contact details shows up correctly', () => {

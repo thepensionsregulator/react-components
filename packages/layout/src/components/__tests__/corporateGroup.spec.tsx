@@ -37,7 +37,12 @@ const corporateGroup: CorporateGroup = {
 
 describe('Corporate Group Trustee Card', () => {
 	describe('Preview', () => {
-		let component, findByText, findAllByText, findByTitle, findByRole;
+		let component,
+			findByText,
+			findAllByText,
+			findByTitle,
+			findByRole,
+			findByTestId;
 		beforeEach(() => {
 			const {
 				container,
@@ -45,6 +50,7 @@ describe('Corporate Group Trustee Card', () => {
 				getAllByText,
 				queryByTitle,
 				getByRole,
+				getByTestId,
 			} = render(
 				<CorporateGroupCard
 					corporateGroup={corporateGroup}
@@ -62,6 +68,7 @@ describe('Corporate Group Trustee Card', () => {
 			findAllByText = getAllByText;
 			findByTitle = queryByTitle;
 			findByRole = getByRole;
+			findByTestId = getByTestId;
 		});
 
 		test('no Violations', async () => {
@@ -96,12 +103,10 @@ describe('Corporate Group Trustee Card', () => {
 		});
 
 		test('Address block displays values correctly', () => {
-			expect(findByText('The Pensions Regulator')).toBeDefined();
-			expect(findByText('Napier House')).toBeDefined();
-			expect(findByText('Trafalgar Pl')).toBeDefined();
-			expect(findByText('Brighton')).toBeDefined();
-			expect(findByText('BN1 4DW')).toBeDefined();
-			expect(findByText('West Sussex')).toBeDefined();
+			const addressPreview = findByTestId('address-preview');
+			const addressExpected = `${corporateGroup.address.addressLine1}<br>${corporateGroup.address.addressLine2}<br>${corporateGroup.address.addressLine3}<br>${corporateGroup.address.postTown}<br>${corporateGroup.address.county}<br>${corporateGroup.address.postcode}<br>`;
+			expect(addressPreview).toBeDefined();
+			expect(addressPreview.innerHTML).toEqual(addressExpected);
 		});
 
 		test('Chair-of-board block displays values correctly', () => {

@@ -39,7 +39,12 @@ const actuary: Actuary = {
 
 describe('Actuary Card', () => {
 	describe('Preview', () => {
-		let component, findByText, findAllByText, findByTitle, findByRole;
+		let component,
+			findByText,
+			findAllByText,
+			findByTitle,
+			findByRole,
+			findByTestId;
 		beforeEach(() => {
 			const {
 				container,
@@ -47,6 +52,7 @@ describe('Actuary Card', () => {
 				getAllByText,
 				queryByTitle,
 				getByRole,
+				getByTestId,
 			} = render(
 				<ActuaryCard
 					actuary={actuary}
@@ -64,6 +70,7 @@ describe('Actuary Card', () => {
 			findAllByText = getAllByText;
 			findByTitle = queryByTitle;
 			findByRole = getByRole;
+			findByTestId = getByTestId;
 		});
 
 		test('no Violations', async () => {
@@ -96,7 +103,10 @@ describe('Actuary Card', () => {
 		});
 
 		test('displays Address correctly', () => {
-			expect(findByText('Napier House')).toBeDefined();
+			const addressPreview = findByTestId('address-preview');
+			const addressExpected = `${actuary.address.addressLine1}<br>${actuary.address.addressLine2}<br>${actuary.address.addressLine3}<br>${actuary.address.postTown}<br>${actuary.address.county}<br>${actuary.address.postcode}<br>`;
+			expect(addressPreview).toBeDefined();
+			expect(addressPreview.innerHTML).toEqual(addressExpected);
 		});
 
 		test('displays telephone number correctly', () => {
