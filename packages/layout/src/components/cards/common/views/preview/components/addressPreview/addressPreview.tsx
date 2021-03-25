@@ -15,13 +15,46 @@ export const AddressPreview: React.FC<AddressPreviewProps> = ({
 	return (
 		<Flex cfg={{ my: 2, flexDirection: 'column' }}>
 			{name && <P className={styles.name}>{name}</P>}
-			<P className={styles.address}>{address.addressLine1}</P>
-			{address.addressLine2 && <P>{address.addressLine2}</P>}
-			{address.addressLine3 && <P>{address.addressLine3}</P>}
-			<P>{address.postTown}</P>
-			{address.county && <P>{address.county}</P>}
-			<P>{address.postcode}</P>
-			{address.country && <P>{address.country}</P>}
+
+			<P className={styles.address} data-testid="address-preview">
+				{address.addressLine1 && (
+					<>
+						{address.addressLine1}
+						<br />
+					</>
+				)}
+				{address.addressLine2 && (
+					<>
+						{address.addressLine2}
+						<br />
+					</>
+				)}
+				{address.addressLine3 && (
+					<>
+						{address.addressLine3}
+						<br />
+					</>
+				)}
+				{address.postTown && (
+					<>
+						{address.postTown}
+						<br />
+					</>
+				)}
+				{address.county && (
+					<>
+						{address.county}
+						<br />
+					</>
+				)}
+				{address.postcode && (
+					<>
+						{address.postcode}
+						<br />
+					</>
+				)}
+				{address.country && <>{address.country}</>}
+			</P>
 		</Flex>
 	);
 };
