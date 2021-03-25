@@ -1,4 +1,4 @@
-import React, { ChangeEvent, useEffect, memo, useReducer, useState } from 'react';
+import React, { ChangeEvent, useEffect, memo, useReducer } from 'react';
 import { Field, FieldRenderProps } from 'react-final-form';
 import { isValid, toDate, format } from 'date-fns';
 import { P, Flex } from '@tpr/core';
@@ -46,8 +46,8 @@ const transformDate = (initialDate: any) => {
 
 type DateInputFieldProps = {
 	id?: string;
-	parentId?: string;
 	small?: boolean;
+	ariaLabel?: string;
 	testId?: string;
 	value: any;
 	updateFn: Function;
@@ -60,12 +60,13 @@ type DateInputFieldProps = {
 	readOnly?: boolean;
 	hideMonth?: boolean;
 	maxLength?: number;
+	accessibilityHelper?: AccessibilityHelper;
 };
 const DateInputField: React.FC<DateInputFieldProps> = ({
 	id,
-	parentId,
 	small = true,
 	label,
+	ariaLabel,
 	testId,
 	value,
 	updateFn,
@@ -77,10 +78,8 @@ const DateInputField: React.FC<DateInputFieldProps> = ({
 	readOnly,
 	hideMonth,
 	maxLength,
+	accessibilityHelper,
 }) => {
-
-	const [hasFocus, setHasFocus] = useState(false);
-	const helper = new AccessibilityHelper(parentId, false, false)
 	return (
 		<label className={small ? styles.inputSmall : styles.inputLarge}>
 			<P
@@ -98,18 +97,15 @@ const DateInputField: React.FC<DateInputFieldProps> = ({
 				type="string"
 				id={id}
 				disabled={disabled}
+				aria-label={ariaLabel}
 				data-testid={testId}
 				value={value}
 				readOnly={readOnly}
-				onFocus={({ target }: ChangeEvent<HTMLInputElement>) => {
-					target.select();
-					setHasFocus(true);
-				}}
+				onFocus={({ target }: ChangeEvent<HTMLInputElement>) => target.select()}
 				onChange={handleChange(updateFn, maxInt)}
 				onBlur={(evt: ChangeEvent<HTMLInputElement>) => {
 					if (!evt.target.value || evt.target.value === '0') {
 						!hideMonth && setMonth('');
-						setHasFocus(false);
 						onBlur();
 					}
 				}}
@@ -117,7 +113,7 @@ const DateInputField: React.FC<DateInputFieldProps> = ({
 				autoComplete="off"
 				maxLength={maxLength}
 				isError={meta && meta.touched && meta.error}
-				accessibilityHelper={!hasFocus ? helper: null}
+				accessibilityHelper={accessibilityHelper}
 			/>
 		</label>
 	);
@@ -171,7 +167,6 @@ export const InputDate: React.FC<InputDateComponentProps> = memo(
 		return (
 			<StyledInputLabel
 				isError={meta && meta.touched && meta.error}
-				aria-labelled-by={helper.labelId}
 				element="fieldset"
 				onFocus={input.onFocus}
 				onBlur={input.onBlur}
@@ -193,8 +188,8 @@ export const InputDate: React.FC<InputDateComponentProps> = memo(
 				<Flex>
 					{!hideDay && (
 						<DateInputField
-							parentId={id}
 							label="Day"
+							ariaLabel={`${label}: Day`}
 							testId={`dd-${testId}`}
 							value={day}
 							updateFn={(dd: number) => setState({ dd })}
@@ -205,12 +200,13 @@ export const InputDate: React.FC<InputDateComponentProps> = memo(
 							disabled={disabled}
 							readOnly={readOnly}
 							maxLength={2}
+							accessibilityHelper={helper}
 						/>
 					)}
 					{!hideMonth && (
 						<DateInputField
-							parentId={id}
 							label="Month"
+							ariaLabel={`${label}: Month`}
 							testId={`mm-${testId}`}
 							value={month}
 							updateFn={(mm: number) => setState({ mm })}
@@ -221,12 +217,13 @@ export const InputDate: React.FC<InputDateComponentProps> = memo(
 							disabled={disabled}
 							readOnly={readOnly}
 							maxLength={2}
+							accessibilityHelper={helper}
 						/>
 					)}
 					<DateInputField
-						parentId={id}
 						label="Year"
 						small={false}
+						ariaLabel={`${label}: Year`}
 						testId={`yyyy-${testId}`}
 						value={year}
 						updateFn={(yyyy: number) => setState({ yyyy })}
@@ -238,6 +235,7 @@ export const InputDate: React.FC<InputDateComponentProps> = memo(
 						readOnly={readOnly}
 						hideMonth={hideMonth}
 						maxLength={4}
+						accessibilityHelper={helper}
 					/>
 				</Flex>
 			</StyledInputLabel>
