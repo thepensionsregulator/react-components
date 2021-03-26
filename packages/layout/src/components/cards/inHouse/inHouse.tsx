@@ -4,7 +4,7 @@ import {
 	InHouseAdminProviderProps,
 	useInHouseAdminContext,
 } from './context';
-import { Section, P } from '@tpr/core';
+import { Section } from '@tpr/core';
 import { Toolbar } from '../components/toolbar';
 import { UnderlinedButton } from '../components/button';
 import { Preview } from './views/preview/preview';
@@ -17,6 +17,7 @@ import RemovedBox from '../components/removedBox';
 import { cardType, cardTypeName } from '../common/interfaces';
 import { AddressComparer } from '@tpr/forms';
 import { InHouseAdminContext } from './inHouseMachine';
+import { Subtitle } from '../common/views/preview/components';
 import { removeFromTabFlowIfMatches, concatenateStrings } from '../../../utils';
 import styles from '../cards.module.scss';
 
@@ -164,13 +165,13 @@ export const InHouseCard: React.FC<InHouseAdminProviderProps> = ({
 						<Toolbar
 							complete={isComplete(current.context)}
 							subtitle={() => (
-								<P className={styles.personOrCompanyName}>
-									{concatenateStrings([
+								<Subtitle
+									main={concatenateStrings([
 										current.context.inHouseAdmin.title,
 										current.context.inHouseAdmin.firstName,
 										current.context.inHouseAdmin.lastName,
 									])}
-								</P>
+								/>
 							)}
 							statusText={
 								isComplete(current.context)

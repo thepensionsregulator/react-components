@@ -4,7 +4,7 @@ import {
 	InsurerProviderProps,
 	useInsurerContext,
 } from './context';
-import { Section, P } from '@tpr/core';
+import { Section } from '@tpr/core';
 import { Toolbar } from '../components/toolbar';
 import { UnderlinedButton } from '../components/button';
 import { Preview } from './views/preview/preview';
@@ -14,6 +14,7 @@ import { Reference } from './views/reference';
 import RemovedBox from '../components/removedBox';
 import { cardTypeName } from '../common/interfaces';
 import { InsurerContext } from './insurerMachine';
+import { Subtitle } from '../common/views/preview/components';
 import { concatenateStrings } from '../../../utils';
 import styles from '../cards.module.scss';
 
@@ -85,9 +86,7 @@ export const InsurerCard: React.FC<InsurerProviderProps> = ({
 						<Toolbar
 							complete={isComplete(context)}
 							subtitle={() => (
-								<P className={styles.personOrCompanyName}>
-									{context.insurer.organisationName}
-								</P>
+								<Subtitle main={context.insurer.organisationName} />
 							)}
 							statusText={
 								isComplete(context)

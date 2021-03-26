@@ -4,7 +4,7 @@ import {
 	CorporateGroupProviderProps,
 	useCorporateGroupContext,
 } from './context';
-import { Section, P } from '@tpr/core';
+import { Section } from '@tpr/core';
 import { Toolbar } from '../components/toolbar';
 import { UnderlinedButton } from '../components/button';
 import RemovedBox from '../components/removedBox';
@@ -16,6 +16,7 @@ import { ReasonRemove } from './views/remove/reason/reason';
 import { ConfirmRemove } from './views/remove/confirm/confirm';
 import { cardTypeName } from '../common/interfaces';
 import { CorporateGroupContext } from './corporateGroupMachine';
+import { Subtitle } from '../common/views/preview/components';
 import { concatenateStrings } from '../../../utils';
 import styles from '../cards.module.scss';
 
@@ -70,6 +71,7 @@ const RemoveButton: React.FC<{ title: string }> = ({ title }) => {
 const isComplete = (context: CorporateGroupContext) => {
 	return context.preValidatedData ? true : context.complete;
 };
+
 export const CorporateGroupCard: React.FC<CorporateGroupProviderProps> = ({
 	testId,
 	cfg,
@@ -91,14 +93,10 @@ export const CorporateGroupCard: React.FC<CorporateGroupProviderProps> = ({
 						<Toolbar
 							complete={isComplete(context)}
 							subtitle={() => (
-								<>
-									<P className={styles.personOrCompanyName}>
-										{context.corporateGroup.organisationName}
-									</P>
-									<P className={styles.personOrCompanyRole}>
-										{i18n.preview.trusteeType}
-									</P>
-								</>
+								<Subtitle
+									main={context.corporateGroup.organisationName}
+									secondary={i18n.preview.trusteeType}
+								/>
 							)}
 							statusText={
 								isComplete(context)

@@ -4,7 +4,7 @@ import {
 	useTrusteeContext,
 	TrusteeCardProps,
 } from './context';
-import { Section, P } from '@tpr/core';
+import { Section } from '@tpr/core';
 import { UnderlinedButton } from '../components/button';
 import { Preview } from './views/preview';
 import { Toolbar } from '../components/toolbar';
@@ -18,6 +18,7 @@ import RemovedBox from '../components/removedBox';
 import { cardType, cardTypeName } from '../common/interfaces';
 import { AddressComparer } from '@tpr/forms';
 import { TrusteeContext } from './trusteeMachine';
+import { Subtitle } from '../common/views/preview/components';
 import {
 	concatenateStrings,
 	removeFromTabFlowIfMatches,
@@ -174,18 +175,16 @@ export const TrusteeCard: React.FC<Omit<TrusteeCardProps, 'children'>> = ({
 							/>
 						)}
 						subtitle={() => (
-							<>
-								<P className={styles.personOrCompanyName}>
-									{concatenateStrings([
-										current.context.trustee.title,
-										current.context.trustee.firstName,
-										current.context.trustee.lastName,
-									])}
-								</P>
-								<P className={styles.personOrCompanyRole}>
-									{capitalize(current.context.trustee.trusteeType)} trustee
-								</P>
-							</>
+							<Subtitle
+								main={concatenateStrings([
+									current.context.trustee.title,
+									current.context.trustee.firstName,
+									current.context.trustee.lastName,
+								])}
+								secondary={`${capitalize(
+									current.context.trustee.trusteeType,
+								)} trustee`}
+							/>
 						)}
 						statusText={
 							isComplete(current.context)
