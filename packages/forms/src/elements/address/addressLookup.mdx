@@ -93,7 +93,7 @@ import { AddressLookup } from '@tpr/forms';
 							findAddressCancelledButton="Cancel"
 							onValidatePostcode={(isValid)=>{console.log('isValid postcode: ',isValid)}}
 							onFindAddressCancelled={() => console.log}
-							onAddressChanging={(isAddressChanging)=>{console.log('isAddressChanging: ',isAddressChanging)}}
+							onAddressChanging={()=>{console.log('onAddressChanging fired')}}
 							/>
     					<Button type="submit" cfg={{mt:3}}>Submit form</Button>
     				</form>
@@ -146,7 +146,7 @@ import { AddressLookup } from '@tpr/forms';
 							findAddressCancelledButton="Cancel"
 							onValidatePostcode={(isValid)=>{console.log('isValid postcode: ',isValid)}}
 							onFindAddressCancelled={() => console.log}
-							onAddressChanging={(isAddressChanging)=>{console.log('isAddressChanging: ',isAddressChanging)}}
+							onAddressChanging={()=>{console.log('onAddressChanging fired')}}
 							/>
     					<Button type="submit" cfg={{mt:3}}>Submit form</Button>
     				</form>
