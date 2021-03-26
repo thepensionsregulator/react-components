@@ -25,7 +25,7 @@ const independentTrustee: IndependentTrustee = {
 		postTown: 'Brighton',
 		postcode: 'BN1 4DW',
 		county: 'West Sussex',
-		country: '',
+		country: 'UK',
 		countryId: 2,
 	},
 };
@@ -95,7 +95,7 @@ describe('Professional / Independent Trustee Card', () => {
 
 		test('Address block displays values correctly', () => {
 			const addressPreview = findByTestId('address-preview');
-			const addressExpected = `${independentTrustee.address.addressLine1}<br>${independentTrustee.address.addressLine2}<br>${independentTrustee.address.addressLine3}<br>${independentTrustee.address.postTown}<br>${independentTrustee.address.county}<br>${independentTrustee.address.postcode}<br>`;
+			const addressExpected = `${independentTrustee.address.addressLine1}<br>${independentTrustee.address.addressLine2}<br>${independentTrustee.address.addressLine3}<br>${independentTrustee.address.postTown}<br>${independentTrustee.address.county}<br>${independentTrustee.address.postcode}<br>${independentTrustee.address.country}`;
 			expect(addressPreview).toBeDefined();
 			expect(addressPreview.innerHTML).toEqual(addressExpected);
 		});

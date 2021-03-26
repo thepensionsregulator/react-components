@@ -30,7 +30,7 @@ const corporateGroup: CorporateGroup = {
 		postTown: 'Brighton',
 		postcode: 'BN1 4DW',
 		county: 'West Sussex',
-		country: '',
+		country: 'UK',
 		countryId: 2,
 	},
 };
@@ -104,7 +104,7 @@ describe('Corporate Group Trustee Card', () => {
 
 		test('Address block displays values correctly', () => {
 			const addressPreview = findByTestId('address-preview');
-			const addressExpected = `${corporateGroup.address.addressLine1}<br>${corporateGroup.address.addressLine2}<br>${corporateGroup.address.addressLine3}<br>${corporateGroup.address.postTown}<br>${corporateGroup.address.county}<br>${corporateGroup.address.postcode}<br>`;
+			const addressExpected = `${corporateGroup.address.addressLine1}<br>${corporateGroup.address.addressLine2}<br>${corporateGroup.address.addressLine3}<br>${corporateGroup.address.postTown}<br>${corporateGroup.address.county}<br>${corporateGroup.address.postcode}<br>${corporateGroup.address.country}`;
 			expect(addressPreview).toBeDefined();
 			expect(addressPreview.innerHTML).toEqual(addressExpected);
 		});

@@ -32,7 +32,7 @@ const actuary: Actuary = {
 		postTown: 'Brighton',
 		postcode: 'BN1 4DW',
 		county: 'West Sussex',
-		country: '',
+		country: 'UK',
 		countryId: 2,
 	},
 };
@@ -104,7 +104,7 @@ describe('Actuary Card', () => {
 
 		test('displays Address correctly', () => {
 			const addressPreview = findByTestId('address-preview');
-			const addressExpected = `${actuary.address.addressLine1}<br>${actuary.address.addressLine2}<br>${actuary.address.addressLine3}<br>${actuary.address.postTown}<br>${actuary.address.county}<br>${actuary.address.postcode}<br>`;
+			const addressExpected = `${actuary.address.addressLine1}<br>${actuary.address.addressLine2}<br>${actuary.address.addressLine3}<br>${actuary.address.postTown}<br>${actuary.address.county}<br>${actuary.address.postcode}<br>${actuary.address.country}`;
 			expect(addressPreview).toBeDefined();
 			expect(addressPreview.innerHTML).toEqual(addressExpected);
 		});
