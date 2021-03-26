@@ -54,7 +54,7 @@ export const Toolbar: React.FC<ToolbarProps> = ({
 					icon={complete ? CheckedCircle : ErrorCircle}
 					text={statusText}
 				/>
-				<div className={styles.verticalHr} />
+				<div className={styles.divider} />
 				<Flex cfg={{ alignItems: 'flex-start' }}>{buttonRight()}</Flex>
 			</Flex>
 		</div>
