@@ -30,11 +30,13 @@
 			@include styled-as-h4;
 			@include removeMarginBottom;
 			line-height: $line-height-3;
+			word-break: break-all;
 		}
 
 		.personOrCompanyRole {
 			@include removeMarginBottom;
 			line-height: $line-height-3;
+			word-break: break-all;
 		}
 	}
 
@@ -54,6 +56,7 @@
 		.emailPhonePreviewValue {
 			@include removeMarginBottom;
 			line-height: $line-height-3;
+			word-break: break-all;
 		}
 
 		.identifierItem {
@@ -62,8 +65,8 @@
 
 			.title {
 				@include styled-as-h4;
-				line-height: $line-height-3;
 				@include removeMarginBottom;
+				line-height: $line-height-3;
 			}
 
 			.number {

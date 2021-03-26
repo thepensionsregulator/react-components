@@ -36,12 +36,7 @@ export const ContactDetailsPreview: React.FC<ContactDetailsPreviewProps> = React
 						<P className={styles.emailPhonePreviewLabel}>
 							{props.email.label ? props.email.label : 'Email'}
 						</P>
-						<P
-							className={styles.emailPhonePreviewValue}
-							cfg={{ wordBreak: 'all' }}
-						>
-							{props.email.value}
-						</P>
+						<P className={styles.emailPhonePreviewValue}>{props.email.value}</P>
 					</>
 				)}
 			</Flex>
