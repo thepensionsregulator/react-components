@@ -5,19 +5,19 @@ import styles from '../../../../../cards.module.scss';
 interface SubtitleProps {
 	main?: string;
 	secondary?: string;
-	mainNotBold?: boolean;
+	mainBold?: boolean;
 }
 
 export const Subtitle: React.FC<SubtitleProps> = React.memo(
-	({ main, secondary, mainNotBold = false }) => {
+	({ main, secondary, mainBold = true }) => {
 		return (
 			<>
 				{main && (
 					<P
 						className={
-							mainNotBold
-								? styles.personOrCompanyRole
-								: styles.personOrCompanyName
+							mainBold
+								? styles.personOrCompanyName
+								: styles.personOrCompanyRole
 						}
 					>
 						{main}

@@ -94,7 +94,7 @@ const EmployerSubtitle: React.FC<Partial<Employer>> = ({
 		[statutoryEmployer],
 	);
 
-	return <Subtitle main={title} secondary={subtitle} mainNotBold={true} />;
+	return <Subtitle main={title} secondary={subtitle} mainBold={false} />;
 };
 
 const isComplete = (context: EmployerContext) => {
