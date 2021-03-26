@@ -93,6 +93,7 @@ import { AddressLookup } from '@tpr/forms';
 							findAddressCancelledButton="Cancel"
 							onValidatePostcode={(isValid)=>{console.log('isValid postcode: ',isValid)}}
 							onFindAddressCancelled={() => console.log}
+							onAddressChanging={()=>{console.log('onAddressChanging fired')}}
 							/>
     					<Button type="submit" cfg={{mt:3}}>Submit form</Button>
     				</form>
@@ -145,6 +146,7 @@ import { AddressLookup } from '@tpr/forms';
 							findAddressCancelledButton="Cancel"
 							onValidatePostcode={(isValid)=>{console.log('isValid postcode: ',isValid)}}
 							onFindAddressCancelled={() => console.log}
+							onAddressChanging={()=>{console.log('onAddressChanging fired')}}
 							/>
     					<Button type="submit" cfg={{mt:3}}>Submit form</Button>
     				</form>
@@ -188,3 +190,4 @@ import { AddressLookup } from '@tpr/forms';
 | findAddressCancelledButton	 | false		|	string								|	Text for the cancel button																														 |
 | onFindAddressCancelled			 | false		|	callback							|	Shows a cancel button and binds a callback which is called when the button is clicked	 |
 | onValidatePostcode					 | false		|	callback							|	Binds a callback which is called when the Select Address button is clicked			 			 |
+| onAddressChanging 					 | false		|	callback							|	Binds a callback which is called when the I need to change the address button is clicked	 |

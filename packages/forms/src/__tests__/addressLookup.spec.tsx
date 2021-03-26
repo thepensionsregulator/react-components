@@ -28,6 +28,7 @@ const defaultProps: AddressProps = {
 	countryLabel: 'Country',
 	changeAddressButton: 'I need to change the address',
 	onValidatePostcode: jest.fn(),
+	onAddressChanging: jest.fn(),
 };
 
 async function searchForAPostcode(postcode: string) {
