@@ -32,7 +32,6 @@ export const RemoveDateForm = () => {
 				}
 			},
 			error: i18n.remove.date.fields.date.error,
-			cfg: { mb: 3 },
 		},
 	];
 
