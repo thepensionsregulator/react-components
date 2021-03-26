@@ -1,4 +1,10 @@
-import React, { ChangeEvent, useEffect, memo, useReducer, useState } from 'react';
+import React, {
+	ChangeEvent,
+	useEffect,
+	memo,
+	useReducer,
+	useState,
+} from 'react';
 import { Field, FieldRenderProps } from 'react-final-form';
 import { isValid, toDate, format } from 'date-fns';
 import { P, Flex } from '@tpr/core';
@@ -78,9 +84,8 @@ const DateInputField: React.FC<DateInputFieldProps> = ({
 	hideMonth,
 	maxLength,
 }) => {
-
 	const [hasFocus, setHasFocus] = useState(false);
-	const helper = new AccessibilityHelper(parentId, false, false)
+	const helper = new AccessibilityHelper(parentId, false, false);
 	return (
 		<label className={small ? styles.inputSmall : styles.inputLarge}>
 			<P
@@ -117,7 +122,7 @@ const DateInputField: React.FC<DateInputFieldProps> = ({
 				autoComplete="off"
 				maxLength={maxLength}
 				isError={meta && meta.touched && meta.error}
-				accessibilityHelper={!hasFocus ? helper: null}
+				accessibilityHelper={!hasFocus ? helper : null}
 			/>
 		</label>
 	);
@@ -171,11 +176,11 @@ export const InputDate: React.FC<InputDateComponentProps> = memo(
 		return (
 			<StyledInputLabel
 				isError={meta && meta.touched && meta.error}
-				aria-labelled-by={helper.labelId}
 				element="fieldset"
 				onFocus={input.onFocus}
 				onBlur={input.onBlur}
 				data-testid={`date-input-${testId}`}
+				aria-labelledby={helper.labelId}
 				aria-describedby={helper.formatAriaDescribedBy(isError)}
 				cfg={Object.assign(
 					{ mt: 1, py: 1, alignItems: 'flex-start', flexDirection: 'column' },
@@ -193,6 +198,7 @@ export const InputDate: React.FC<InputDateComponentProps> = memo(
 				<Flex>
 					{!hideDay && (
 						<DateInputField
+							id={`dd-${id}`}
 							parentId={id}
 							label="Day"
 							testId={`dd-${testId}`}
@@ -209,6 +215,7 @@ export const InputDate: React.FC<InputDateComponentProps> = memo(
 					)}
 					{!hideMonth && (
 						<DateInputField
+							id={`mm-${id}`}
 							parentId={id}
 							label="Month"
 							testId={`mm-${testId}`}
@@ -224,6 +231,7 @@ export const InputDate: React.FC<InputDateComponentProps> = memo(
 						/>
 					)}
 					<DateInputField
+						id={`yyyy-${id}`}
 						parentId={id}
 						label="Year"
 						small={false}
