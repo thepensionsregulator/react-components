@@ -44,15 +44,9 @@ describe('Date input', () => {
 			onSubmit: handleSubmit,
 		});
 
-		const dd = container.querySelector(
-			'input[aria-label="passport-expiry: Day"]',
-		);
-		const mm = container.querySelector(
-			'input[aria-label="passport-expiry: Month"]',
-		);
-		const yyyy = container.querySelector(
-			'input[aria-label="passport-expiry: Month"]',
-		);
+		const dd = container.querySelector(`input[data-testid="dd-field"]`);
+		const mm = container.querySelector(`input[data-testid="mm-field"]`);
+		const yyyy = container.querySelector(`input[data-testid="yyyy-field"]`);
 
 		const submit = container.querySelector('button[type="submit"]');
 
@@ -71,7 +65,6 @@ describe('Date input', () => {
 		const fields: FieldProps[] = [
 			{
 				id: id,
-				testId: id,
 				name: 'date-1',
 				label: 'passport-expiry',
 				hint: 'For example, 12 11 2007',
@@ -87,9 +80,9 @@ describe('Date input', () => {
 		});
 
 		const fieldset = container.querySelector('fieldset');
-		const dd = container.querySelector(`input[data-testid="dd-${id}"]`);
-		const mm = container.querySelector(`input[data-testid="mm-${id}"]`);
-		const yyyy = container.querySelector(`input[data-testid="yyyy-${id}"]`);
+		const dd = container.querySelector(`input[data-testid="dd-field"]`);
+		const mm = container.querySelector(`input[data-testid="mm-field"]`);
+		const yyyy = container.querySelector(`input[data-testid="yyyy-field"]`);
 
 		expect(fieldset).not.toBeNull();
 		expect(fieldset).toHaveAttribute('aria-labelledby', `${id}-label`);
@@ -157,7 +150,6 @@ describe('Date input', () => {
 		const fields: FieldProps[] = [
 			{
 				id: id,
-				testId: id,
 				name: 'date-1',
 				label: 'passport-expiry',
 				hint: 'For example, 12 11 2007',
@@ -173,9 +165,9 @@ describe('Date input', () => {
 			onSubmit: handleSubmit,
 		});
 
-		const dd = container.querySelector(`input[data-testid="dd-${id}"]`);
-		const mm = container.querySelector(`input[data-testid="mm-${id}"]`);
-		const yyyy = container.querySelector(`input[data-testid="yyyy-${id}"]`);
+		const dd = container.querySelector(`input[data-testid="dd-field"]`);
+		const mm = container.querySelector(`input[data-testid="mm-field"]`);
+		const yyyy = container.querySelector(`input[data-testid="yyyy-field"]`);
 
 		expect(dd).toHaveAttribute('readonly');
 		expect(mm).toHaveAttribute('readonly');
@@ -187,7 +179,6 @@ describe('Date input', () => {
 		const fields: FieldProps[] = [
 			{
 				id: id,
-				testId: id,
 				name: 'month-year-only',
 				label: 'month-year-only',
 				hint: 'For example, 11 2007',
@@ -203,9 +194,9 @@ describe('Date input', () => {
 			onSubmit: handleSubmit,
 		});
 
-		const dd = container.querySelector(`input[data-testid="dd-${id}"]`);
-		const mm = container.querySelector(`input[data-testid="mm-${id}"]`);
-		const yyyy = container.querySelector(`input[data-testid="yyyy-${id}"]`);
+		const dd = container.querySelector(`input[data-testid="dd-field"]`);
+		const mm = container.querySelector(`input[data-testid="mm-field"]`);
+		const yyyy = container.querySelector(`input[data-testid="yyyy-field"]`);
 
 		expect(dd).toBe(null);
 		expect(mm).toBeDefined();
@@ -229,7 +220,6 @@ describe('Date input', () => {
 		const fields: FieldProps[] = [
 			{
 				id: id,
-				testId: id,
 				name: 'month-year-only',
 				label: 'month-year-only',
 				hint: 'For example, 11 2007',
@@ -246,9 +236,9 @@ describe('Date input', () => {
 			onSubmit: handleSubmit,
 		});
 
-		const dd = container.querySelector(`input[data-testid="dd-${id}"]`);
-		const mm = container.querySelector(`input[data-testid="mm-${id}"]`);
-		const yyyy = container.querySelector(`input[data-testid="yyyy-${id}"]`);
+		const dd = container.querySelector(`input[data-testid="dd-field"]`);
+		const mm = container.querySelector(`input[data-testid="mm-field"]`);
+		const yyyy = container.querySelector(`input[data-testid="yyyy-field"]`);
 
 		expect(dd).toBe(null);
 		expect(mm).toBe(null);
