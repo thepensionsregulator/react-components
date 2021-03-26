@@ -37,14 +37,22 @@ const DateForm: React.FC<DateFormProps> = ({
 			>
 				{({ handleSubmit, submitError }) => (
 					<form onSubmit={handleSubmit} data-testid="remove-actuary-form">
-						<FFCheckbox
-							name="confirm"
-							type="checkbox"
-							label={label}
-							cfg={{ mb: 3 }}
-						/>
-						<div className={styles.dateWrapper}>{renderFields(dateField)}</div>
-						{submitError && <P className={styles.errorMsg}>{submitError}</P>}
+						<fieldset aria-describedby="error-msg">
+							<FFCheckbox
+								name="confirm"
+								type="checkbox"
+								label={label}
+								cfg={{ mb: 3 }}
+							/>
+							<div className={styles.dateWrapper}>
+								{renderFields(dateField)}
+							</div>
+						</fieldset>
+						{submitError && (
+							<P id="error-msg" className={styles.errorMsg}>
+								{submitError}
+							</P>
+						)}
 						<Footer>
 							<ArrowButton
 								appearance="secondary"
