@@ -34,7 +34,7 @@ export type AddressProps = {
 	findAddressCancelledButton?: string;
 	onFindAddressCancelled?: () => void;
 	onValidatePostcode?: (isValid: boolean) => void | null;
-	onAddressChanging?: (isAddressChanging: boolean) => void | null;
+	onAddressChanging?: () => void | null;
 };
 
 export enum AddressView {
@@ -148,9 +148,9 @@ export const AddressLookup: React.FC<AddressProps> = ({
 					onValidatePostcode={(isValid) =>
 					{
 						if(onAddressChanging && isValid){
-							 onAddressChanging(false);
+							 onAddressChanging();
 						}
-						if(onValidatePostcode !== null){
+						if(onValidatePostcode){
 							onValidatePostcode(isValid) ;
 						}
 					}
@@ -165,7 +165,7 @@ export const AddressLookup: React.FC<AddressProps> = ({
 					testId={testId}
 					onChangeAddressClick={() => {
 						if(onAddressChanging){
-							onAddressChanging(true)
+							onAddressChanging()
 						}
 						setAddressView(AddressView.PostcodeLookup);
 					}}
