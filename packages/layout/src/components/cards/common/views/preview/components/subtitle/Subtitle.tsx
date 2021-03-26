@@ -15,9 +15,7 @@ export const Subtitle: React.FC<SubtitleProps> = React.memo(
 				{main && (
 					<P
 						className={
-							mainBold
-								? styles.personOrCompanyName
-								: styles.personOrCompanyRole
+							mainBold ? styles.personOrCompanyName : styles.personOrCompanyRole
 						}
 					>
 						{main}
