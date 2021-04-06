@@ -26,6 +26,9 @@ const DateForm: React.FC<DateFormProps> = ({
 	type,
 	typeName,
 }) => {
+	const errorMsg: string = `${type}-error-msg`;
+	const testId: string = `remove-${type}-form`;
+
 	return (
 		<Content type={type} typeName={typeName} title={title}>
 			<Form
@@ -36,8 +39,8 @@ const DateForm: React.FC<DateFormProps> = ({
 				}}
 			>
 				{({ handleSubmit, submitError }) => (
-					<form onSubmit={handleSubmit} data-testid="remove-actuary-form">
-						<fieldset aria-describedby="error-msg">
+					<form onSubmit={handleSubmit} data-testid={testId}>
+						<div aria-describedby={errorMsg}>
 							<FFCheckbox
 								name="confirm"
 								type="checkbox"
@@ -47,9 +50,9 @@ const DateForm: React.FC<DateFormProps> = ({
 							<div className={styles.dateWrapper}>
 								{renderFields(dateField)}
 							</div>
-						</fieldset>
+						</div>
 						{submitError && (
-							<P id="error-msg" className={styles.errorMsg}>
+							<P id={errorMsg} className={styles.errorMsg}>
 								{submitError}
 							</P>
 						)}
