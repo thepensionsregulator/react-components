@@ -1,5 +1,5 @@
 import React from 'react';
-import { Flex, H3, P, classNames, Hr } from '@tpr/core';
+import { classNames, Flex, H3, Hr, P } from '@tpr/core';
 import styles from './card.module.scss';
 
 type StyledCardProps = { complete: boolean };
@@ -39,22 +39,12 @@ export const Toolbar: React.FC<ToolbarProps> = ({
 				cfg={{ flexDirection: 'column', pb: 2 }}
 				className={styles.toolbarBottomBorder}
 			>
-				{sectionTitle && (
-					<P
-						cfg={{ color: 'neutral.6', fontSize: 3 }}
-						className={styles.noMarginBottom}
-					>
-						{sectionTitle}
-					</P>
-				)}
-
+				{sectionTitle && <P className={styles.sectionTitle}>{sectionTitle}</P>}
 				<H3 cfg={{ fontWeight: 3 }}>{title}</H3>
 			</Flex>
 			{subtitle && (
 				<Flex cfg={{ py: 3 }} className={styles.toolbarBottomBorder}>
-					<P cfg={{ color: 'neutral.6' }} className={styles.noMarginBottom}>
-						{subtitle}
-					</P>
+					<P className={styles.subtitle}>{subtitle}</P>
 				</Flex>
 			)}
 		</Flex>
@@ -81,20 +71,17 @@ export const Footer: React.FC = ({ children }) => {
 
 export const StatusMessage = ({ complete, icon: Icon, text }) => {
 	return (
-		<Flex cfg={{ alignItems: 'center' }} height="22px">
+		<Flex className={styles.statusMsg}>
 			<Icon
 				size={18}
 				fill={complete ? styles.confirmed : styles.unconfirmed}
 				ariaLabel={text}
 			/>
 			<P
+				className={styles.paragraph}
 				cfg={{
-					ml: 1,
-					fontSize: 2,
-					fontWeight: 3,
 					color: complete ? 'confirmed' : 'unconfirmed',
 				}}
-				className={styles.noMarginBottom}
 			>
 				{text}
 			</P>

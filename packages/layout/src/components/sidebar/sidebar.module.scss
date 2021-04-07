@@ -1,6 +1,5 @@
-@import '@tpr/theming/lib/variables.scss';
 @import '@tpr/core/lib/components/typography/typography.module.scss';
-@import '@tpr/theming/lib/resets.module.scss';
+// typography.module.scss includes '@tpr/theming/lib/variables.scss'
 
 .sidebar {
 	display: flex;
@@ -34,18 +33,18 @@
 	div.topLevelWrapper {
 		position: relative;
 
-		&.containsSelectedLink>.topLevelLink {
-				a::before {
-					content: ' ';
-					position: absolute;
-					left: -25px;
-					top: -8px;
-					height: 100%;
-					min-height: 40px;
-					width: 5px;
-					background: $colors-primary-3;
-					// to hide outline from pseudo element
-					box-shadow: 0px 0px 0px 1px white;
+		&.containsSelectedLink > .topLevelLink {
+			a::before {
+				content: ' ';
+				position: absolute;
+				left: -25px;
+				top: -8px;
+				height: 100%;
+				min-height: 40px;
+				width: 5px;
+				background: $colors-primary-3;
+				// to hide outline from pseudo element
+				box-shadow: 0px 0px 0px 1px white;
 			}
 		}
 	}
@@ -65,23 +64,23 @@
 		}
 		&.nested {
 			a {
-				color: $colors-neutral-8!important;
+				color: $colors-neutral-8 !important;
 
 				&:hover {
-					color: $colors-neutral-a1!important;
+					color: $colors-neutral-a1 !important;
 				}
 			}
 		}
 	}
 
 	.nestedWrapper {
-		padding-left: 0!important;
-		
+		padding-left: 0 !important;
+
 		&.collapsed {
 			height: 0;
 			overflow: hidden;
 		}
-	
+
 		.nested {
 			&::before {
 				content: '—';

@@ -4,7 +4,7 @@ import {
 	CorporateGroupProviderProps,
 	useCorporateGroupContext,
 } from './context';
-import { P, Section, Span } from '@tpr/core';
+import { Section } from '@tpr/core';
 import { Toolbar } from '../components/toolbar';
 import { UnderlinedButton } from '../components/button';
 import RemovedBox from '../components/removedBox';
@@ -15,9 +15,10 @@ import { Professional } from './views/professional/professional';
 import { ReasonRemove } from './views/remove/reason/reason';
 import { ConfirmRemove } from './views/remove/confirm/confirm';
 import { cardTypeName } from '../common/interfaces';
-import styles from '../cards.module.scss';
 import { CorporateGroupContext } from './corporateGroupMachine';
+import { Subtitle } from '../common/views/preview/components';
 import { concatenateStrings } from '../../../utils';
+import styles from '../cards.module.scss';
 
 const CardContentSwitch: React.FC = () => {
 	const { current } = useCorporateGroupContext();
@@ -70,6 +71,7 @@ const RemoveButton: React.FC<{ title: string }> = ({ title }) => {
 const isComplete = (context: CorporateGroupContext) => {
 	return context.preValidatedData ? true : context.complete;
 };
+
 export const CorporateGroupCard: React.FC<CorporateGroupProviderProps> = ({
 	testId,
 	cfg,
@@ -91,14 +93,10 @@ export const CorporateGroupCard: React.FC<CorporateGroupProviderProps> = ({
 						<Toolbar
 							complete={isComplete(context)}
 							subtitle={() => (
-								<>
-									<Span cfg={{ lineHeight: 3 }} className={styles.styledAsH4}>
-										{context.corporateGroup.organisationName}
-									</Span>
-									<P className={styles.noMarginBottom}>
-										{i18n.preview.trusteeType}
-									</P>
-								</>
+								<Subtitle
+									main={context.corporateGroup.organisationName}
+									secondary={i18n.preview.trusteeType}
+								/>
 							)}
 							statusText={
 								isComplete(context)
@@ -111,7 +109,6 @@ export const CorporateGroupCard: React.FC<CorporateGroupProviderProps> = ({
 							buttonRight={() => (
 								<RemoveButton title={i18n.preview.buttons.two} />
 							)}
-							extraPB={true}
 						/>
 						<CardContentSwitch />
 					</Section>

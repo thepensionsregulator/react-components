@@ -96,6 +96,10 @@
 	@include styled-as-h5;
 }
 
+@mixin removeMarginBottom {
+	margin-bottom: 0;
+}
+
 .p {
 	color: $colors-neutral-8;
 	font-family: $fonts-sans-serif;

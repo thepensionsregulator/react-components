@@ -1,12 +1,11 @@
 import React from 'react';
-import { Form, FFCheckbox, renderFields, FieldProps } from '@tpr/forms';
 import { P } from '@tpr/core';
+import { Form, FFCheckbox, renderFields, FieldProps } from '@tpr/forms';
 import { Content } from '../../../../components/content';
 import { Footer } from '../../../../components/card';
 import { ArrowButton } from '../../../../../buttons/buttons';
 import { cardType, cardTypeName } from '../../../../common/interfaces';
 import styles from './date.module.scss';
-import CommonStyles from '../../../../cards.module.scss';
 
 interface DateFormProps {
 	title: string;
@@ -27,6 +26,9 @@ const DateForm: React.FC<DateFormProps> = ({
 	type,
 	typeName,
 }) => {
+	const errorMsg: string = `${type}-error-msg`;
+	const testId: string = `remove-${type}-form`;
+
 	return (
 		<Content type={type} typeName={typeName} title={title}>
 			<Form
@@ -37,19 +39,20 @@ const DateForm: React.FC<DateFormProps> = ({
 				}}
 			>
 				{({ handleSubmit, submitError }) => (
-					<form onSubmit={handleSubmit} data-testid="remove-actuary-form">
-						<FFCheckbox
-							name="confirm"
-							type="checkbox"
-							label={label}
-							cfg={{ mb: 3 }}
-						/>
-						<div className={styles.dateWrapper}>{renderFields(dateField)}</div>
+					<form onSubmit={handleSubmit} data-testid={testId}>
+						<div aria-describedby={errorMsg}>
+							<FFCheckbox
+								name="confirm"
+								type="checkbox"
+								label={label}
+								cfg={{ mb: 3 }}
+							/>
+							<div className={styles.dateWrapper}>
+								{renderFields(dateField)}
+							</div>
+						</div>
 						{submitError && (
-							<P
-								cfg={{ color: 'danger.2', mt: 5 }}
-								className={CommonStyles.noMarginBottom}
-							>
+							<P id={errorMsg} className={styles.errorMsg}>
 								{submitError}
 							</P>
 						)}

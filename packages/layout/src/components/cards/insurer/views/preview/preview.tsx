@@ -1,9 +1,10 @@
 import React from 'react';
 import { Checkbox } from '@tpr/forms';
-import { Flex, P, Hr, classNames } from '@tpr/core';
+import { Flex, Hr, P, classNames } from '@tpr/core';
 import { UnderlinedButton } from '../../../components/button';
 import { useInsurerContext } from '../../context';
-import styles from './preview.module.scss';
+import { AddressPreview } from '../../../common/views/preview/components';
+import styles from '../../../cards.module.scss';
 
 export const Preview: React.FC<any> = () => {
 	const { current, send, onCorrect, i18n } = useInsurerContext();
@@ -23,29 +24,17 @@ export const Preview: React.FC<any> = () => {
 					cfg={{ width: 5, flex: '0 0 auto', flexDirection: 'column', pr: 4 }}
 				>
 					<UnderlinedButton>{i18n.preview.buttons.three}</UnderlinedButton>
-					<Flex cfg={{ my: 2, flexDirection: 'column' }}>
-						<P className={styles.noMarginBottom}>
-							{insurer.address.addressLine1}
-						</P>
-						{insurer.address.addressLine2 && (
-							<P className={styles.noMarginBottom}>
-								{insurer.address.addressLine2}
-							</P>
-						)}
-						{insurer.address.addressLine3 && (
-							<P className={styles.noMarginBottom}>
-								{insurer.address.addressLine3}
-							</P>
-						)}
-						<P className={styles.noMarginBottom}>{insurer.address.postTown}</P>
-						{insurer.address.county && (
-							<P className={styles.noMarginBottom}>{insurer.address.county}</P>
-						)}
-						<P className={styles.noMarginBottom}>{insurer.address.postcode}</P>
-						{insurer.address.country && (
-							<P className={styles.noMarginBottom}>{insurer.address.country}</P>
-						)}
-					</Flex>
+					<AddressPreview
+						address={{
+							addressLine1: insurer.address.addressLine1,
+							addressLine2: insurer.address.addressLine2,
+							addressLine3: insurer.address.addressLine3,
+							postTown: insurer.address.postTown,
+							county: insurer.address.county,
+							postcode: insurer.address.postcode,
+							country: insurer.address.country,
+						}}
+					/>
 				</Flex>
 
 				{/* Insurer reference number */}
@@ -58,11 +47,9 @@ export const Preview: React.FC<any> = () => {
 					>
 						{i18n.preview.buttons.four}
 					</UnderlinedButton>
-					<Flex cfg={{ mt: 1, flexDirection: 'column' }}>
-						<P className={styles.noMarginBottom}>
-							{insurer.insurerCompanyReference}
-						</P>
-					</Flex>
+					<P className={styles.insurerCompanyRef}>
+						{insurer.insurerCompanyReference}
+					</P>
 				</Flex>
 			</Flex>
 

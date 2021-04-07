@@ -1,6 +1,6 @@
 import React from 'react';
-import styles from './info.module.scss';
 import { classNames, H2 } from '@tpr/core';
+import styles from './info.module.scss';
 
 type InfoProps = { title?: string; importantMessage?: string };
 export const Info: React.FC<InfoProps> = ({

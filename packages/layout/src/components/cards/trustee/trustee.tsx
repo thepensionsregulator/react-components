@@ -4,7 +4,7 @@ import {
 	useTrusteeContext,
 	TrusteeCardProps,
 } from './context';
-import { Section, Span } from '@tpr/core';
+import { Section } from '@tpr/core';
 import { UnderlinedButton } from '../components/button';
 import { Preview } from './views/preview';
 import { Toolbar } from '../components/toolbar';
@@ -16,10 +16,15 @@ import RemoveReason from './views/remove/reason/reason';
 import { ConfirmRemove } from './views/remove/confirm';
 import RemovedBox from '../components/removedBox';
 import { cardType, cardTypeName } from '../common/interfaces';
-import styles from '../cards.module.scss';
 import { AddressComparer } from '@tpr/forms';
 import { TrusteeContext } from './trusteeMachine';
-import { concatenateStrings, removeFromTabFlowIfMatches } from '../../../utils';
+import { Subtitle } from '../common/views/preview/components';
+import {
+	concatenateStrings,
+	removeFromTabFlowIfMatches,
+	capitalize,
+} from '../../../utils';
+import styles from '../cards.module.scss';
 
 const CardContent: React.FC = () => {
 	const { current, i18n, send, addressAPI } = useTrusteeContext();
@@ -170,13 +175,16 @@ export const TrusteeCard: React.FC<Omit<TrusteeCardProps, 'children'>> = ({
 							/>
 						)}
 						subtitle={() => (
-							<Span cfg={{ lineHeight: 3 }} className={styles.styledAsH4}>
-								{concatenateStrings([
+							<Subtitle
+								main={concatenateStrings([
 									current.context.trustee.title,
 									current.context.trustee.firstName,
 									current.context.trustee.lastName,
 								])}
-							</Span>
+								secondary={`${capitalize(
+									current.context.trustee.trusteeType,
+								)} trustee`}
+							/>
 						)}
 						statusText={
 							isComplete(current.context)

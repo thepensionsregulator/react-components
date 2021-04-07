@@ -4,7 +4,7 @@ import {
 	IndependentTrusteeProviderProps,
 	useIndependentTrusteeContext,
 } from './context';
-import { P, Section, Span } from '@tpr/core';
+import { Section } from '@tpr/core';
 import { Toolbar } from '../components/toolbar';
 import { UnderlinedButton } from '../components/button';
 import RemovedBox from '../components/removedBox';
@@ -13,9 +13,10 @@ import { Regulator } from './views/regulator/regulator';
 import { ReasonRemove } from './views/remove/reason/reason';
 import { ConfirmRemove } from './views/remove/confirm/confirm';
 import { cardTypeName } from '../common/interfaces';
-import styles from '../cards.module.scss';
 import { IndependentTrusteeContext } from './independentTrusteeMachine';
 import { concatenateStrings } from '../../../utils';
+import { Subtitle } from '../common/views/preview/components';
+import styles from '../cards.module.scss';
 
 const CardContentSwitch: React.FC = () => {
 	const { current } = useIndependentTrusteeContext();
@@ -86,14 +87,10 @@ export const IndependentTrusteeCard: React.FC<IndependentTrusteeProviderProps> =
 						<Toolbar
 							complete={isComplete(context)}
 							subtitle={() => (
-								<>
-									<Span cfg={{ lineHeight: 3 }} className={styles.styledAsH4}>
-										{context.independentTrustee.organisationName}
-									</Span>
-									<P className={styles.noMarginBottom}>
-										{i18n.preview.trusteeType}
-									</P>
-								</>
+								<Subtitle
+									main={context.independentTrustee.organisationName}
+									secondary={i18n.preview.trusteeType}
+								/>
 							)}
 							statusText={
 								isComplete(context)
@@ -106,7 +103,6 @@ export const IndependentTrusteeCard: React.FC<IndependentTrusteeProviderProps> =
 							buttonRight={() => (
 								<RemoveButton title={i18n.preview.buttons.two} />
 							)}
-							extraPB={true}
 						/>
 						<CardContentSwitch />
 					</Section>

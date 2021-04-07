@@ -4,7 +4,7 @@ import {
 	ActuaryProviderProps,
 	useActuaryContext,
 } from './context';
-import { Section, Span } from '@tpr/core';
+import { Section } from '@tpr/core';
 import { Toolbar } from '../components/toolbar';
 import { UnderlinedButton } from '../components/button';
 import { Preview } from './views/preview/preview';
@@ -14,9 +14,10 @@ import { ConfirmRemove } from './views/remove/confirm/confirm';
 import { NameScreen } from './views/name';
 import RemovedBox from '../components/removedBox';
 import { cardTypeName } from '../common/interfaces';
-import styles from '../cards.module.scss';
 import { ActuaryContext } from './actuaryMachine';
+import { Subtitle } from '../common/views/preview/components';
 import { removeFromTabFlowIfMatches, concatenateStrings } from '../../../utils';
+import styles from '../cards.module.scss';
 
 const CardContentSwitch: React.FC = () => {
 	const { current } = useActuaryContext();
@@ -121,13 +122,14 @@ export const ActuaryCard: React.FC<ActuaryProviderProps> = ({
 						<Toolbar
 							complete={isComplete(current.context)}
 							subtitle={() => (
-								<Span cfg={{ lineHeight: 3 }} className={styles.styledAsH4}>
-									{concatenateStrings([
+								<Subtitle
+									main={concatenateStrings([
 										current.context.actuary.title,
 										current.context.actuary.firstName,
 										current.context.actuary.lastName,
 									])}
-								</Span>
+									secondary={current.context.actuary.organisationName}
+								/>
 							)}
 							statusText={
 								isComplete(current.context)

@@ -4,7 +4,7 @@ import {
 	ThirdPartyProviderProps,
 	useThirdPartyContext,
 } from './context';
-import { Section, Span } from '@tpr/core';
+import { Section } from '@tpr/core';
 import { Toolbar } from '../components/toolbar';
 import { UnderlinedButton } from '../components/button';
 import { Preview } from './views/preview/preview';
@@ -12,9 +12,10 @@ import { RemoveDateForm } from './views/remove/date/date';
 import { ConfirmRemove } from './views/remove/confirm/confirm';
 import RemovedBox from '../components/removedBox';
 import { cardTypeName } from '../common/interfaces';
-import styles from '../cards.module.scss';
 import { ThirdPartyContext } from './thirdPartyMachine';
+import { Subtitle } from '../common/views/preview/components';
 import { concatenateStrings } from '../../../utils';
+import styles from '../cards.module.scss';
 
 const CardContentSwitch: React.FC = () => {
 	const { current } = useThirdPartyContext();
@@ -82,9 +83,7 @@ export const ThirdPartyCard: React.FC<ThirdPartyProviderProps> = ({
 						<Toolbar
 							complete={isComplete(context)}
 							subtitle={() => (
-								<Span className={styles.styledAsH4}>
-									{context.thirdParty.organisationName}
-								</Span>
+								<Subtitle main={context.thirdParty.organisationName} />
 							)}
 							statusText={
 								isComplete(context)

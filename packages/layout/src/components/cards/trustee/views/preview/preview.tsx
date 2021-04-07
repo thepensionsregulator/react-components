@@ -1,14 +1,13 @@
 import React from 'react';
-import { Flex, P, Hr, classNames, Span } from '@tpr/core';
+import { Flex, Hr, classNames } from '@tpr/core';
 import { useTrusteeContext } from '../../context';
 import { UnderlinedButton } from '../../../components/button';
 import { Checkbox } from '@tpr/forms';
-import { capitalize } from '../../../../../utils';
 import {
-	PhonePreview,
-	EmailPreview,
+	ContactDetailsPreview,
+	AddressPreview,
 } from '../../../common/views/preview/components';
-import styles from './preview.module.scss';
+import styles from '../../../cards.module.scss';
 
 export const Preview: React.FC = () => {
 	const { current, send, onCorrect, i18n } = useTrusteeContext();
@@ -22,9 +21,6 @@ export const Preview: React.FC = () => {
 					: classNames([{ [styles.complete]: complete }, styles.content])
 			}
 		>
-			<P cfg={{ mb: 4 }} className={styles.noMarginBottom}>
-				{capitalize(trustee.trusteeType)} trustee
-			</P>
 			<Flex>
 				{/* Addres section: open for editing	 */}
 				<Flex
@@ -36,26 +32,17 @@ export const Preview: React.FC = () => {
 					>
 						{i18n.preview.buttons.three}
 					</UnderlinedButton>
-					<Flex cfg={{ mt: 1, flexDirection: 'column' }}>
-						<Span cfg={{ lineHeight: 3 }} className={styles.styledAsH4}>
-							{trustee.address.addressLine1}
-						</Span>
-						{trustee.address.addressLine2 && (
-							<P className={styles.noMarginBottom}>
-								{trustee.address.addressLine2}
-							</P>
-						)}
-						{trustee.address.addressLine3 && (
-							<P className={styles.noMarginBottom}>
-								{trustee.address.addressLine3}
-							</P>
-						)}
-						<P className={styles.noMarginBottom}>{trustee.address.postTown}</P>
-						{trustee.address.county && (
-							<P className={styles.noMarginBottom}>{trustee.address.county}</P>
-						)}
-						<P className={styles.noMarginBottom}>{trustee.address.postcode}</P>
-					</Flex>
+					<AddressPreview
+						name={trustee.address.addressLine1}
+						address={{
+							addressLine2: trustee.address.addressLine2,
+							addressLine3: trustee.address.addressLine3,
+							postTown: trustee.address.postTown,
+							county: trustee.address.county,
+							postcode: trustee.address.postcode,
+							country: trustee.address.country,
+						}}
+					/>
 				</Flex>
 
 				{/* Contact details section: open for editing	 */}
@@ -68,14 +55,10 @@ export const Preview: React.FC = () => {
 					>
 						{i18n.preview.buttons.four}
 					</UnderlinedButton>
-					<Flex cfg={{ mt: 1, flexDirection: 'column' }}>
-						{trustee.telephoneNumber && (
-							<PhonePreview value={trustee.telephoneNumber} />
-						)}
-						{trustee.emailAddress && (
-							<EmailPreview value={trustee.emailAddress} />
-						)}
-					</Flex>
+					<ContactDetailsPreview
+						phone={{ value: trustee.telephoneNumber }}
+						email={{ value: trustee.emailAddress }}
+					/>
 				</Flex>
 			</Flex>
 

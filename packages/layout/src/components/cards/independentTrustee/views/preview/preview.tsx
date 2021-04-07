@@ -1,9 +1,10 @@
 import React from 'react';
 import { Checkbox } from '@tpr/forms';
-import { Flex, P, Hr, classNames } from '@tpr/core';
+import { Flex, Hr, classNames, P } from '@tpr/core';
 import { UnderlinedButton } from '../../../components/button';
 import { useIndependentTrusteeContext } from '../../context';
-import styles from './preview.module.scss';
+import { AddressPreview } from '../../../common/views/preview/components';
+import styles from '../../../cards.module.scss';
 
 export const Preview: React.FC<any> = () => {
 	const { current, send, onCorrect, i18n } = useIndependentTrusteeContext();
@@ -23,37 +24,17 @@ export const Preview: React.FC<any> = () => {
 					cfg={{ width: 5, flex: '0 0 auto', flexDirection: 'column', pr: 4 }}
 				>
 					<UnderlinedButton>{i18n.preview.buttons.three}</UnderlinedButton>
-					<Flex cfg={{ my: 2, flexDirection: 'column' }}>
-						<P className={styles.noMarginBottom}>
-							{independentTrustee.address.addressLine1}
-						</P>
-						{independentTrustee.address.addressLine2 && (
-							<P className={styles.noMarginBottom}>
-								{independentTrustee.address.addressLine2}
-							</P>
-						)}
-						{independentTrustee.address.addressLine3 && (
-							<P className={styles.noMarginBottom}>
-								{independentTrustee.address.addressLine3}
-							</P>
-						)}
-						<P className={styles.noMarginBottom}>
-							{independentTrustee.address.postTown}
-						</P>
-						{independentTrustee.address.county && (
-							<P className={styles.noMarginBottom}>
-								{independentTrustee.address.county}
-							</P>
-						)}
-						<P className={styles.noMarginBottom}>
-							{independentTrustee.address.postcode}
-						</P>
-						{independentTrustee.address.country && (
-							<P className={styles.noMarginBottom}>
-								{independentTrustee.address.country}
-							</P>
-						)}
-					</Flex>
+					<AddressPreview
+						address={{
+							addressLine1: independentTrustee.address.addressLine1,
+							addressLine2: independentTrustee.address.addressLine2,
+							addressLine3: independentTrustee.address.addressLine3,
+							postTown: independentTrustee.address.postTown,
+							county: independentTrustee.address.county,
+							postcode: independentTrustee.address.postcode,
+							country: independentTrustee.address.country,
+						}}
+					/>
 				</Flex>
 
 				{/* Appointed By Regulator section: open for editing	 */}
@@ -64,7 +45,7 @@ export const Preview: React.FC<any> = () => {
 					>
 						{i18n.preview.buttons.four}
 					</UnderlinedButton>
-					<P cfg={{ pt: 3 }} className={styles.noMarginBottom}>
+					<P className={styles.appointedByRegulator}>
 						{independentTrustee.appointedByRegulator
 							? i18n.regulator.fields.appointedByRegulator.labels
 									.isAppointedByRegulatorYes

@@ -1,14 +1,14 @@
 import React from 'react';
 import { Checkbox } from '@tpr/forms';
-import { Flex, P, Hr, classNames } from '@tpr/core';
+import { Flex, Hr, classNames } from '@tpr/core';
 import { UnderlinedButton } from '../../../components/button';
 import { useActuaryContext } from '../../context';
 import {
-	PhonePreview,
-	EmailPreview,
+	AddressPreview,
+	ContactDetailsPreview,
 } from '../../../common/views/preview/components';
-import styles from './preview.module.scss';
-import CommonStyles from '../../../cards.module.scss';
+import styles from '../../../cards.module.scss';
+
 export const Preview: React.FC<any> = () => {
 	const { current, send, onCorrect, i18n } = useActuaryContext();
 	const { actuary, complete, preValidatedData } = current.context;
@@ -21,48 +21,23 @@ export const Preview: React.FC<any> = () => {
 					: classNames([{ [styles.complete]: complete }, styles.content])
 			}
 		>
-			{/* Actuary's Organisation name: display only	 */}
-			<P cfg={{ mb: 4 }} className={CommonStyles.noMarginBottom}>
-				{actuary.organisationName}
-			</P>
-
 			<Flex>
 				{/* Address section: display only	 */}
 				<Flex
 					cfg={{ width: 5, flex: '0 0 auto', flexDirection: 'column', pr: 4 }}
 				>
 					<UnderlinedButton>{i18n.preview.buttons.three}</UnderlinedButton>
-					<Flex cfg={{ my: 2, flexDirection: 'column' }}>
-						<P className={CommonStyles.noMarginBottom}>
-							{actuary.address.addressLine1}
-						</P>
-						{actuary.address.addressLine2 && (
-							<P className={CommonStyles.noMarginBottom}>
-								{actuary.address.addressLine2}
-							</P>
-						)}
-						{actuary.address.addressLine3 && (
-							<P className={CommonStyles.noMarginBottom}>
-								{actuary.address.addressLine3}
-							</P>
-						)}
-						<P className={CommonStyles.noMarginBottom}>
-							{actuary.address.postTown}
-						</P>
-						{actuary.address.county && (
-							<P className={CommonStyles.noMarginBottom}>
-								{actuary.address.county}
-							</P>
-						)}
-						<P className={CommonStyles.noMarginBottom}>
-							{actuary.address.postcode}
-						</P>
-						{actuary.address.country && (
-							<P className={CommonStyles.noMarginBottom}>
-								{actuary.address.country}
-							</P>
-						)}
-					</Flex>
+					<AddressPreview
+						address={{
+							addressLine1: actuary.address.addressLine1,
+							addressLine2: actuary.address.addressLine2,
+							addressLine3: actuary.address.addressLine3,
+							postTown: actuary.address.postTown,
+							county: actuary.address.county,
+							postcode: actuary.address.postcode,
+							country: actuary.address.country,
+						}}
+					/>
 				</Flex>
 
 				{/* Contact details section: open for editing	 */}
@@ -75,14 +50,10 @@ export const Preview: React.FC<any> = () => {
 					>
 						{i18n.preview.buttons.four}
 					</UnderlinedButton>
-					<Flex cfg={{ my: 2, flexDirection: 'column' }}>
-						{actuary.telephoneNumber && (
-							<PhonePreview value={actuary.telephoneNumber} />
-						)}
-						{actuary.emailAddress && (
-							<EmailPreview value={actuary.emailAddress} />
-						)}
-					</Flex>
+					<ContactDetailsPreview
+						phone={{ value: actuary.telephoneNumber }}
+						email={{ value: actuary.emailAddress }}
+					/>
 				</Flex>
 			</Flex>
 

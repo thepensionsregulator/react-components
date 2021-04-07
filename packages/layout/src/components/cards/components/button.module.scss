@@ -1,5 +1,5 @@
-@import '@tpr/theming/lib/variables.scss';
-@import '@tpr/theming/lib/resets.module.scss';
+@import '@tpr/core/lib/components/typography/typography.module.scss';
+// typography.module.scss includes '@tpr/theming/lib/variables.scss'
 
 @mixin button-base {
 	text-align: left;

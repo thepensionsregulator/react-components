@@ -1,13 +1,13 @@
 import React from 'react';
 import { Checkbox } from '@tpr/forms';
-import { Flex, P, Hr, classNames } from '@tpr/core';
+import { Flex, Hr, classNames } from '@tpr/core';
 import { UnderlinedButton } from '../../../components/button';
 import { useInHouseAdminContext } from '../../context';
 import {
-	PhonePreview,
-	EmailPreview,
+	ContactDetailsPreview,
+	AddressPreview,
 } from '../../../common/views/preview/components';
-import styles from './preview.module.scss';
+import styles from '../../../cards.module.scss';
 
 export const Preview: React.FC<any> = () => {
 	const { current, send, onCorrect, i18n } = useInHouseAdminContext();
@@ -32,37 +32,17 @@ export const Preview: React.FC<any> = () => {
 					>
 						{i18n.preview.buttons.three}
 					</UnderlinedButton>
-					<Flex cfg={{ my: 2, flexDirection: 'column' }}>
-						<P className={styles.noMarginBottom}>
-							{inHouseAdmin.address.addressLine1}
-						</P>
-						{inHouseAdmin.address.addressLine2 && (
-							<P className={styles.noMarginBottom}>
-								{inHouseAdmin.address.addressLine2}
-							</P>
-						)}
-						{inHouseAdmin.address.addressLine3 && (
-							<P className={styles.noMarginBottom}>
-								{inHouseAdmin.address.addressLine3}
-							</P>
-						)}
-						<P className={styles.noMarginBottom}>
-							{inHouseAdmin.address.postTown}
-						</P>
-						{inHouseAdmin.address.county && (
-							<P className={styles.noMarginBottom}>
-								{inHouseAdmin.address.county}
-							</P>
-						)}
-						<P className={styles.noMarginBottom}>
-							{inHouseAdmin.address.postcode}
-						</P>
-						{inHouseAdmin.address.country && (
-							<P className={styles.noMarginBottom}>
-								{inHouseAdmin.address.country}
-							</P>
-						)}
-					</Flex>
+					<AddressPreview
+						address={{
+							addressLine1: inHouseAdmin.address.addressLine1,
+							addressLine2: inHouseAdmin.address.addressLine2,
+							addressLine3: inHouseAdmin.address.addressLine3,
+							postTown: inHouseAdmin.address.postTown,
+							county: inHouseAdmin.address.county,
+							postcode: inHouseAdmin.address.postcode,
+							country: inHouseAdmin.address.country,
+						}}
+					/>
 				</Flex>
 
 				{/* Contact details section: open for editing	 */}
@@ -75,14 +55,10 @@ export const Preview: React.FC<any> = () => {
 					>
 						{i18n.preview.buttons.four}
 					</UnderlinedButton>
-					<Flex cfg={{ my: 2, flexDirection: 'column' }}>
-						{inHouseAdmin.telephoneNumber && (
-							<PhonePreview value={inHouseAdmin.telephoneNumber} />
-						)}
-						{inHouseAdmin.emailAddress && (
-							<EmailPreview value={inHouseAdmin.emailAddress} />
-						)}
-					</Flex>
+					<ContactDetailsPreview
+						phone={{ value: inHouseAdmin.telephoneNumber }}
+						email={{ value: inHouseAdmin.emailAddress }}
+					/>
 				</Flex>
 			</Flex>
 

@@ -9,7 +9,6 @@ export type ToolbarProps = {
 	subtitle?: Function;
 	buttonLeft: Function;
 	buttonRight: Function;
-	extraPB?: boolean;
 	statusText: string;
 };
 
@@ -18,7 +17,6 @@ export const Toolbar: React.FC<ToolbarProps> = ({
 	subtitle,
 	buttonLeft,
 	buttonRight,
-	extraPB,
 	statusText,
 }) => {
 	return (
@@ -26,7 +24,6 @@ export const Toolbar: React.FC<ToolbarProps> = ({
 			className={classNames([
 				{ [styles.complete]: complete },
 				styles.cardToolbar,
-				extraPB && styles.extraPB,
 			])}
 		>
 			<Flex
@@ -57,7 +54,7 @@ export const Toolbar: React.FC<ToolbarProps> = ({
 					icon={complete ? CheckedCircle : ErrorCircle}
 					text={statusText}
 				/>
-				<div className={styles.verticalHr} />
+				<div className={styles.divider} />
 				<Flex cfg={{ alignItems: 'flex-start' }}>{buttonRight()}</Flex>
 			</Flex>
 		</div>

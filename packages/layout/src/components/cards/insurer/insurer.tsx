@@ -4,7 +4,7 @@ import {
 	InsurerProviderProps,
 	useInsurerContext,
 } from './context';
-import { Section, Span } from '@tpr/core';
+import { Section } from '@tpr/core';
 import { Toolbar } from '../components/toolbar';
 import { UnderlinedButton } from '../components/button';
 import { Preview } from './views/preview/preview';
@@ -13,9 +13,10 @@ import { ConfirmRemove } from './views/remove/confirm/confirm';
 import { Reference } from './views/reference';
 import RemovedBox from '../components/removedBox';
 import { cardTypeName } from '../common/interfaces';
-import styles from '../cards.module.scss';
 import { InsurerContext } from './insurerMachine';
+import { Subtitle } from '../common/views/preview/components';
 import { concatenateStrings } from '../../../utils';
+import styles from '../cards.module.scss';
 
 const CardContentSwitch: React.FC = () => {
 	const { current } = useInsurerContext();
@@ -85,9 +86,7 @@ export const InsurerCard: React.FC<InsurerProviderProps> = ({
 						<Toolbar
 							complete={isComplete(context)}
 							subtitle={() => (
-								<Span className={styles.styledAsH4}>
-									{context.insurer.organisationName}
-								</Span>
+								<Subtitle main={context.insurer.organisationName} />
 							)}
 							statusText={
 								isComplete(context)

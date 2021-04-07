@@ -4,10 +4,10 @@ import { Flex, P, Hr, classNames } from '@tpr/core';
 import { UnderlinedButton } from '../../../components/button';
 import { useCorporateGroupContext } from '../../context';
 import {
-	PhonePreview,
-	EmailPreview,
+	ContactDetailsPreview,
+	AddressPreview,
 } from '../../../common/views/preview/components';
-import styles from './preview.module.scss';
+import styles from '../../../cards.module.scss';
 
 export const Preview: React.FC<any> = () => {
 	const { current, send, onCorrect, i18n } = useCorporateGroupContext();
@@ -27,37 +27,17 @@ export const Preview: React.FC<any> = () => {
 					cfg={{ width: 5, flex: '0 0 auto', flexDirection: 'column', pr: 4 }}
 				>
 					<UnderlinedButton>{i18n.preview.buttons.three}</UnderlinedButton>
-					<Flex cfg={{ my: 2, flexDirection: 'column' }}>
-						<P className={styles.noMarginBottom}>
-							{corporateGroup.address.addressLine1}
-						</P>
-						{corporateGroup.address.addressLine2 && (
-							<P className={styles.noMarginBottom}>
-								{corporateGroup.address.addressLine2}
-							</P>
-						)}
-						{corporateGroup.address.addressLine3 && (
-							<P className={styles.noMarginBottom}>
-								{corporateGroup.address.addressLine3}
-							</P>
-						)}
-						<P className={styles.noMarginBottom}>
-							{corporateGroup.address.postTown}
-						</P>
-						{corporateGroup.address.county && (
-							<P className={styles.noMarginBottom}>
-								{corporateGroup.address.county}
-							</P>
-						)}
-						<P className={styles.noMarginBottom}>
-							{corporateGroup.address.postcode}
-						</P>
-						{corporateGroup.address.country && (
-							<P className={styles.noMarginBottom}>
-								{corporateGroup.address.country}
-							</P>
-						)}
-					</Flex>
+					<AddressPreview
+						address={{
+							addressLine1: corporateGroup.address.addressLine1,
+							addressLine2: corporateGroup.address.addressLine2,
+							addressLine3: corporateGroup.address.addressLine3,
+							postTown: corporateGroup.address.postTown,
+							county: corporateGroup.address.county,
+							postcode: corporateGroup.address.postcode,
+							country: corporateGroup.address.country,
+						}}
+					/>
 
 					{/* Professional Trustee section: open for editing	 */}
 					<Flex cfg={{ flexDirection: 'column', mt: 5 }}>
@@ -67,7 +47,7 @@ export const Preview: React.FC<any> = () => {
 						>
 							{i18n.preview.buttons.five}
 						</UnderlinedButton>
-						<P cfg={{ pt: 3 }} className={styles.noMarginBottom}>
+						<P className={styles.isProfessional}>
 							{corporateGroup.directorIsProfessional
 								? i18n.professional.fields.isProfessional.labels
 										.isProfessionalYes
@@ -87,19 +67,15 @@ export const Preview: React.FC<any> = () => {
 					>
 						{i18n.preview.buttons.four}
 					</UnderlinedButton>
-					<Flex cfg={{ my: 2, flexDirection: 'column' }}>
-						<P cfg={{ mb: 2 }} className={styles.noMarginBottom}>
-							{corporateGroup.title
+					<ContactDetailsPreview
+						name={
+							corporateGroup.title
 								? `${corporateGroup.title} ${corporateGroup.firstName} ${corporateGroup.lastName}`
-								: `${corporateGroup.firstName} ${corporateGroup.lastName}`}
-						</P>
-						{corporateGroup.telephoneNumber && (
-							<PhonePreview value={corporateGroup.telephoneNumber} />
-						)}
-						{corporateGroup.emailAddress && (
-							<EmailPreview value={corporateGroup.emailAddress} />
-						)}
-					</Flex>
+								: `${corporateGroup.firstName} ${corporateGroup.lastName}`
+						}
+						phone={{ value: corporateGroup.telephoneNumber }}
+						email={{ value: corporateGroup.emailAddress }}
+					/>
 				</Flex>
 			</Flex>
 
