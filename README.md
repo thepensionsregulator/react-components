@@ -2,7 +2,7 @@
 
 [license-badge]: https://img.shields.io/npm/l/react-components.svg?style=flat-square
 
-[![Build Status](https://dev.azure.com/thepensionsregulator/TPR/_apis/build/status/thepensionsregulator.react-components?branchName=develop)](https://dev.azure.com/thepensionsregulator/TPR/_build/latest?definitionId=1011&branchName=develop)
+[![Build Status](https://dev.azure.com/thepensionsregulator/TPR/_apis/build/status/Scheme%20Returns/react-components?branchName=develop)](https://dev.azure.com/thepensionsregulator/TPR/_build/latest?definitionId=1011&branchName=develop)
 ![MIT License][license-badge]
 
 > React Components is a design system for TPR
