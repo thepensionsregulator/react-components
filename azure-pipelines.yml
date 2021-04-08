@@ -53,7 +53,10 @@ jobs:
           summaryFileLocation: $(Build.SourcesDirectory)\coverage\cobertura-coverage.xml
           failIfCoverageEmpty: true
 
-      #      - ${{ if eq(variables['Build.SourceBranch'], 'refs/heads/develop') }}:
+          #      - ${{ if eq(variables['Build.SourceBranch'], 'refs/heads/develop') }}:
+      - script: git reset --hard HEAD
+        displayName: Reset file changes made by tests that would prevent deployment
+
       - task: Yarn@3
         inputs:
           projectDirectory: '$(Build.SourcesDirectory)'
