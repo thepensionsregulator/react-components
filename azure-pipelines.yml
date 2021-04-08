@@ -53,21 +53,21 @@ jobs:
           summaryFileLocation: $(Build.SourcesDirectory)\coverage\cobertura-coverage.xml
           failIfCoverageEmpty: true
 
-          #      - ${{ if eq(variables['Build.SourceBranch'], 'refs/heads/develop') }}:
-      - script: git reset --hard HEAD
-        displayName: Reset file changes made by tests that would prevent deployment
+      - ${{ if eq(variables['Build.SourceBranch'], 'refs/heads/develop') }}:
+          - script: git reset --hard HEAD
+            displayName: Reset file changes made by tests that would prevent deployment
 
-      - task: Yarn@3
-        inputs:
-          projectDirectory: '$(Build.SourcesDirectory)'
-          arguments: 'postinstall'
-        displayName: yarn postinstall
+          - task: Yarn@3
+            inputs:
+              projectDirectory: '$(Build.SourcesDirectory)'
+              arguments: 'postinstall'
+            displayName: yarn postinstall
 
-      - script: echo "//registry.npmjs.org/:_authToken=$(NPM-Access-Token)" > $(Build.SourcesDirectory)\.npmrc
-        displayName: Authenticate with NPM registry
+          - script: echo "//registry.npmjs.org/:_authToken=$(NPM-Access-Token)" > $(Build.SourcesDirectory)\.npmrc
+            displayName: Authenticate with NPM registry
 
-      - task: Yarn@3
-        inputs:
-          projectDirectory: '$(Build.SourcesDirectory)'
-          arguments: deploy --canary --yes --preid next --dist-tag next
-        displayName: Publish packages to NPM
+          - task: Yarn@3
+            inputs:
+              projectDirectory: '$(Build.SourcesDirectory)'
+              arguments: deploy --canary --yes --preid next --dist-tag next
+            displayName: Publish packages to NPM
