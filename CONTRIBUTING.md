@@ -41,13 +41,13 @@ Please make sure to run the tests before you commit your changes. You can run
 
 Automatic deployment:
 
-- Branch names that start with `rc`, `feature` or `bug` will be automatically published to NPM with a `next` tag on a `patch` version, only if they pass build and tests on CircleCI. The status of deployment will be visible on a pull request.
+- Branch names will be automatically published to NPM with a `next` tag on a `patch` version, only if they pass build and tests on Azure Pipelines. The status of deployment will be visible on a pull request.
 
 Manual deployment:
 
 - When you're ready to deploy `minor` or `major` versions you can do so from updated `develop` branch in your terminal running command `yarn deploy --message "Release AB#12345"` and follow the instructions in your terminal. Update `AB#12345` to refer to the Azure Boards work item relevant to your work. `Lerna` will bump all versions to chosen ones and will push git refs to Github and new packages to the NPM registry.
 
-- If CircleCI doesn't automatically publish, you can also run `yarn deploy --message "Release AB#12345" --dist-tag next` locally to add the `next` tag.
+- If Azure Pipelines doesn't automatically publish, you can also run `yarn deploy --message "Release AB#12345" --dist-tag next` locally to add the `next` tag.
 
 - Sometimes, you need github to publish to npm on your behalf. To do this, try `npx lerna publish from-git`
 

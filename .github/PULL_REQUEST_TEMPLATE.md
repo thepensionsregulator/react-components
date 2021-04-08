@@ -1,11 +1,11 @@
-#### Fixes #0000
+#### Fixes AB#0000
 
 #### Checklist
 
 - [ ] Includes tests
 - [ ] Update documentation
 
-<!-- DO NOT enable CircleCI for your fork. Our build will run when you open this PR. -->
+<!-- DO NOT enable Azure Pipelines for your fork. Our build will run when you open this PR. -->
 
 #### Changes proposed in this pull request:
 
