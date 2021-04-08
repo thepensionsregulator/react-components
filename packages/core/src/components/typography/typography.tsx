@@ -78,8 +78,8 @@ export const H6: React.FC<TagProps> = ({ ...props }) => {
 	return <Text tag="h6" {...props} />;
 };
 
-export const P: React.FC<TagProps> = ({ testId, ...props }) => {
-	return <Text tag="p" data-testid={testId} {...props} />;
+export const P: React.FC<TagProps> = ({ testid, ...props }) => {
+	return <Text tag="p" data-testid={testid} {...props} />;
 };
 
 export const Span: React.FC<TagProps> = ({ ...props }) => {
