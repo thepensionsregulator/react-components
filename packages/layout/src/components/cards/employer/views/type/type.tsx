@@ -100,8 +100,12 @@ export const EmployerType: React.FC = () => {
 				{({ handleSubmit }) => (
 					<form onSubmit={handleSubmit}>
 						{renderFields(typeFields)}
-						<B>{i18n.statutory.title}</B>
-						{renderFields(statutoryFields)}
+						{current.context.showStatutoryEmployerSection && (
+							<>
+								<B>{i18n.statutory.title}</B>
+								{renderFields(statutoryFields)}
+							</>
+						)}
 						<Footer>
 							<Flex>
 								<ArrowButton

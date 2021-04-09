@@ -27,6 +27,7 @@ type EmployerEvents =
 
 export interface EmployerContext {
 	complete: boolean;
+	showStatutoryEmployerSection: boolean;
 	remove: { confirm: boolean; date: string } | null;
 	employer: Partial<Employer>;
 	preValidatedData?: boolean | null;
@@ -41,6 +42,7 @@ const employerMachine = Machine<
 	initial: 'preview',
 	context: {
 		complete: false,
+		showStatutoryEmployerSection: true,
 		remove: null,
 		employer: {},
 	},
