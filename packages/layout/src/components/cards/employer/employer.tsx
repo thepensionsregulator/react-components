@@ -15,7 +15,6 @@ import {
 	EmployerProvider,
 	useEmployerContext,
 	EmployerProviderProps,
-	Employer,
 } from './context';
 import RemovedBox from '../components/removedBox';
 import { cardTypeName } from '../common/interfaces';
@@ -72,9 +71,11 @@ const ToolbarButton: React.FC<{ title: string; tabIndex?: number }> = ({
 	);
 };
 
-const EmployerSubtitle: React.FC<Partial<Employer>> = ({
-	employerType,
-	statutoryEmployer,
+const EmployerSubtitle: React.FC<Partial<EmployerContext>> = ({
+	employer: {
+		employerType, 
+		statutoryEmployer },
+	showStatutoryEmployerSection
 }) => {
 	if (!employerType || !statutoryEmployer) return null;
 
@@ -90,7 +91,7 @@ const EmployerSubtitle: React.FC<Partial<Employer>> = ({
 	);
 
 	const subtitle = useMemo(
-		() => capitalize(statutoryEmployer).concat(` employer`),
+		() => showStatutoryEmployerSection ? capitalize(statutoryEmployer).concat(` employer`): null,
 		[statutoryEmployer],
 	);
 
@@ -109,7 +110,7 @@ export const EmployerCard: React.FC<EmployerProviderProps> = ({
 	return (
 		<EmployerProvider {...rest}>
 			{({ current, i18n }) => {
-				return (
+			return (
 					<Section
 						cfg={cfg}
 						data-testid={testId}
@@ -121,7 +122,7 @@ export const EmployerCard: React.FC<EmployerProviderProps> = ({
 						<Toolbar
 							complete={isComplete(current.context)}
 							subtitle={() => (
-								<EmployerSubtitle {...current.context.employer} />
+								<EmployerSubtitle {...current.context} />
 							)}
 							statusText={
 								isComplete(current.context)
