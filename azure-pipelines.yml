@@ -27,7 +27,7 @@ jobs:
 
       - task: Cache@2
         inputs:
-          key: 'yarn | "$(Agent.OS)" | $(Build.SourcesDirectory)/**/yarn.lock'
+          key: 'yarn | "$(Agent.OS)" | $(Build.SourcesDirectory)/react-components/**/yarn.lock'
           restoreKeys: |
             yarn | "$(Agent.OS)"
           path: $(YARN_CACHE_FOLDER)
@@ -35,19 +35,19 @@ jobs:
 
       - task: Yarn@3
         inputs:
-          projectDirectory: '$(Build.SourcesDirectory)'
+          projectDirectory: '$(Build.SourcesDirectory)\react-components'
           arguments: '--frozen-lockfile'
         displayName: yarn install
 
       - task: Yarn@3
         inputs:
-          projectDirectory: '$(Build.SourcesDirectory)'
+          projectDirectory: '$(Build.SourcesDirectory)\react-components'
           arguments: 'build'
         displayName: yarn build
 
       - task: Yarn@3
         inputs:
-          projectDirectory: '$(Build.SourcesDirectory)'
+          projectDirectory: '$(Build.SourcesDirectory)\react-components'
           arguments: test --ci --watchAll=false --reporters=jest-junit --reporters=default --coverage --coverageReporters=cobertura --testMatch "**\*.spec.[t]s?(x)"
         displayName: Run tests
         continueOnError: true # Test failures should be published before failing the build
@@ -56,7 +56,7 @@ jobs:
         displayName: 'Publish unit test results'
         inputs:
           testResultsFiles: junit.xml
-          searchFolder: $(Build.SourcesDirectory)
+          searchFolder: $(Build.SourcesDirectory)\react-components
           mergeTestResults: true
           testRunTitle: 'Jest Unit Tests'
           failTaskOnFailedTests: true
@@ -65,7 +65,7 @@ jobs:
         displayName: 'Publish code coverage from Jest tests'
         inputs:
           codeCoverageTool: Cobertura
-          summaryFileLocation: $(Build.SourcesDirectory)\coverage\cobertura-coverage.xml
+          summaryFileLocation: $(Build.SourcesDirectory)\react-components\coverage\cobertura-coverage.xml
           failIfCoverageEmpty: true
 
       - ${{ if eq(variables['Build.SourceBranch'], 'refs/heads/develop') }}:
@@ -74,15 +74,15 @@ jobs:
 
           - task: Yarn@3
             inputs:
-              projectDirectory: '$(Build.SourcesDirectory)'
+              projectDirectory: '$(Build.SourcesDirectory)\react-components'
               arguments: 'postinstall'
             displayName: yarn postinstall
 
-          - script: echo "//registry.npmjs.org/:_authToken=$(NPM-Access-Token)" > $(Build.SourcesDirectory)\.npmrc
+          - script: echo "//registry.npmjs.org/:_authToken=$(NPM-Access-Token)" > $(Build.SourcesDirectory)\react-components\.npmrc
             displayName: Authenticate with NPM registry
 
           - task: Yarn@3
             inputs:
-              projectDirectory: '$(Build.SourcesDirectory)'
+              projectDirectory: '$(Build.SourcesDirectory)\react-components'
               arguments: deploy --canary --yes --preid next --dist-tag next
             displayName: Publish packages to NPM
