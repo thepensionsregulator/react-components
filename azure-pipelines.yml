@@ -1,6 +1,13 @@
 pool:
   vmImage: 'windows-2019'
 
+resources:
+  repositories:
+    - repository: hooks
+      type: git
+      name: TPR/Tools-TPRGitHooks
+      ref: develop
+
 variables:
   - name: YARN_CACHE_FOLDER
     value: $(Pipeline.Workspace)/.yarn
@@ -10,6 +17,10 @@ jobs:
   - job: Build_and_test
     displayName: Build and test
     steps:
+      - checkout: self
+      - checkout: hooks
+      - template: git-secrets.steps.yml@hooks
+
       - task: Cache@2
         inputs:
           key: 'yarn | "$(Agent.OS)" | $(Build.SourcesDirectory)/**/yarn.lock'
