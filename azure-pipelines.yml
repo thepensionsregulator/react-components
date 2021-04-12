@@ -20,6 +20,8 @@ jobs:
       - checkout: self
       - checkout: hooks
       - template: git-secrets.steps.yml@hooks
+        parameters:
+          repoPath: $(Build.SourcesDirectory)\react-components
 
       - task: Cache@2
         inputs:
