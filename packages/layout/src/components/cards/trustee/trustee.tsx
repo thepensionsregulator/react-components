@@ -87,22 +87,12 @@ const TrusteeButton: React.FC = () => {
 			isOpen={
 				current.matches({ edit: { trustee: 'name' } }) ||
 				current.matches({ edit: { trustee: 'kind' } }) ||
-				current.matches({ edit: { trustee: 'save' } }) ||
-				current.matches({ edit: { company: 'address' } }) ||
-				current.matches({ edit: { company: 'save' } }) ||
-				current.matches({ edit: { contact: 'details' } }) ||
-				current.matches({ edit: { contact: 'save' } }) ||
-				current.matches({ remove: 'reason' }) ||
-				current.matches({ remove: 'confirm' })
+				current.matches({ edit: { trustee: 'save' } })
 			}
 			onClick={() => {
 				if (
 					current.matches({ edit: { trustee: 'name' } }) ||
-					current.matches({ edit: { trustee: 'kind' } }) ||
-					current.matches({ edit: { company: 'address' } }) ||
-					current.matches({ edit: { contact: 'details' } }) ||
-					current.matches({ remove: 'reason' }) ||
-					current.matches({ remove: 'confirm' })
+					current.matches({ edit: { trustee: 'kind' } }) 
 				) {
 					send('CANCEL');
 				} else {

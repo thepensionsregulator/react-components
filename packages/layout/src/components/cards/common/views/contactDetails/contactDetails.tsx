@@ -4,6 +4,8 @@ import { Footer } from '../../../components/card';
 import { Content } from '../../../components/content';
 import { ArrowButton } from '../../../../buttons/buttons';
 import { cardType, cardTypeName } from '../../../common/interfaces';
+import { Link } from '@tpr/core';
+import { useTrusteeContext } from '../../../trustee/context';
 
 interface ContactDetailsProps {
 	type: cardType;
@@ -31,6 +33,7 @@ const ContactDetails: React.FC<ContactDetailsProps> = ({
 	initialValues,
 	fields,
 }) => {
+	const {send } = useTrusteeContext();
 	return (
 		<Content
 			type={type}
@@ -60,6 +63,7 @@ const ContactDetails: React.FC<ContactDetailsProps> = ({
 								title="Save and close"
 								disabled={loading}
 							/>
+								<Link cfg={{ m: 3 }} underline onClick={() => send('CANCEL')}>Cancel</Link>
 						</Footer>
 					</form>
 				)}

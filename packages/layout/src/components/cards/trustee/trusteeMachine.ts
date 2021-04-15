@@ -75,6 +75,7 @@ export interface TrusteeContext {
 	loading: boolean;
 	complete: boolean;
 	preValidatedData?: boolean | null;
+	openSection: string;
 	trustee: TrusteeProps;
 	remove?: {
 		reason: null | string;
@@ -88,6 +89,7 @@ const trusteeMachine = Machine<TrusteeContext, TrusteeStates, TrusteeEvents>({
 	context: {
 		loading: false,
 		complete: false,
+		openSection:'',
 		trustee: {
 			schemeRoleId: '',
 			//
@@ -116,8 +118,22 @@ const trusteeMachine = Machine<TrusteeContext, TrusteeStates, TrusteeEvents>({
 			id: 'preview',
 			on: {
 				EDIT_TRUSTEE: 'edit.trustee.name',
-				EDIT_ORG: 'edit.company.address',
-				EDIT_CONTACTS: 'edit.contact.details',
+				EDIT_ORG: {
+					target: 'edit.company.address',
+					actions: assign((context, _event) => {
+						return {
+							openSection: context.openSection = 'edit.address'
+						};
+					})
+					},
+				EDIT_CONTACTS: {
+					target: 'edit.contact.details',
+					actions: assign((context, _event) => {
+						return {
+							openSection: context.openSection = 'edit.contact'
+						};
+					})
+				},
 				REMOVE: 'remove',
 				COMPLETE: {
 					actions: assign((_: any, event: any) => ({
@@ -185,7 +201,14 @@ const trusteeMachine = Machine<TrusteeContext, TrusteeStates, TrusteeEvents>({
 										},
 									})),
 								},
-								CANCEL: '#preview',
+								CANCEL:{
+									target:'#preview',
+									actions: assign((context, _event) => {
+										return {
+											openSection: context.openSection = ''
+										};
+									})
+								},
 								REMOVE: '#remove',
 							},
 						},
@@ -207,7 +230,14 @@ const trusteeMachine = Machine<TrusteeContext, TrusteeStates, TrusteeEvents>({
 										},
 									})),
 								},
-								CANCEL: '#preview',
+								CANCEL:{
+									target:'#preview',
+									actions: assign((context, _event) => {
+										return {
+											openSection: context.openSection = ''
+										};
+									})
+								},
 								REMOVE: '#remove',
 							},
 						},

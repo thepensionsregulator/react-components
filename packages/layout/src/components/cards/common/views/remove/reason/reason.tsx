@@ -1,5 +1,5 @@
 import React from 'react';
-import { P, H4 } from '@tpr/core';
+import { P, H4, Link } from '@tpr/core';
 import { Footer } from '../../../../components/card';
 import { Form, FFRadioButton, FieldProps, renderFields } from '@tpr/forms';
 import { Content } from '../../../../components/content';
@@ -10,6 +10,7 @@ import {
 	RemoveReasonProps,
 } from '../../../../common/interfaces';
 import styles from './reason.module.scss';
+import { useTrusteeContext } from '../../../../trustee/context';
 
 interface ReasonProps {
 	type: cardType;
@@ -26,6 +27,7 @@ export const Reason: React.FC<ReasonProps> = ({
 	remove,
 	dateField,
 }) => {
+	const {send } = useTrusteeContext();
 	return (
 		<Content type={type} title={i18nRemoveReason.title}>
 			<Form
@@ -86,6 +88,7 @@ export const Reason: React.FC<ReasonProps> = ({
 									type="submit"
 									title="Continue"
 								/>
+									<Link cfg={{ m: 3 }} underline onClick={() => send('CANCEL')}>Cancel</Link>
 							</Footer>
 						</form>
 					);

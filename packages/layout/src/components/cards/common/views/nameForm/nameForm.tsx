@@ -4,6 +4,8 @@ import { Footer } from '../../../components/card';
 import { Content } from '../../../components/content';
 import { ArrowButton } from '../../../../buttons/buttons';
 import { cardType, cardTypeName } from '../../interfaces';
+import { Link } from '@tpr/core';
+import { useTrusteeContext } from '../../../trustee/context';
 
 interface NameFormProps {
 	type: cardType;
@@ -32,6 +34,7 @@ const NameForm: React.FC<NameFormProps> = ({
 	loading,
 	nextStep,
 }) => {
+	const {send } = useTrusteeContext();
 	return (
 		<Content
 			type={type}
@@ -61,6 +64,7 @@ const NameForm: React.FC<NameFormProps> = ({
 								type="submit"
 								title={nextStep ? 'Continue' : 'Save and close'}
 							/>
+								<Link cfg={{ m: 3 }} underline onClick={() => send('CANCEL')}>Cancel</Link>
 						</Footer>
 					</form>
 				)}

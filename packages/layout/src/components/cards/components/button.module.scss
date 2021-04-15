@@ -46,6 +46,10 @@
 	}
 }
 
+.arrowSpacing{
+	justify-content: space-between;
+}
+
 :export {
 	arrowColor: $colors-primary-3;
 }

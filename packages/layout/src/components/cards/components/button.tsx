@@ -31,7 +31,7 @@ export const UnderlinedButton: React.FC<UnderlinedButtonProps> = ({
 			aria-expanded={isOpen}
 			tabIndex={tabIndex}
 		>
-			<Flex cfg={{ flex: '0 0 auto', alignItems: 'center' }}>
+			<Flex className={styles.arrowSpacing}  cfg={{ flex: '0 0 auto', alignItems: 'center' }}>
 				<P cfg={{ fontSize: 2, fontWeight: 3 }}>{children}</P>
 				{isOpen ? (
 					<ArrowUp width="24px" fill={styles.arrowColor} />
