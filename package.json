@@ -104,8 +104,8 @@
 	},
 	"husky": {
 		"hooks": {
-			"commit-msg": "pwsh ./Confirm-CommitMessage.ps1",
-			"pre-commit": "yarn format"
+			"commit-msg": "git secrets --commit_msg_hook -- .git/COMMIT_EDITMSG && pwsh -NoProfile ./.githooks/Invoke-CommitMessageHook.ps1 .git/COMMIT_EDITMSG",
+			"pre-commit": "git secrets --pre_commit_hook && yarn format"
 		}
 	}
 }
