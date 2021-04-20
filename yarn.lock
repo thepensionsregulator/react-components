@@ -3674,7 +3674,7 @@
   integrity sha512-RbzJvlNzmRq5c3O09UipeuXno4tA1FE6ikOjxZK0tuxVv3412l64l5t1W5pj4+rJq9vpkm/kwiR07aZXnsKPxw==
 
 "@tpr/core@file:./packages/core":
-  version "2.4.32"
+  version "2.4.33"
   dependencies:
     "@xstate/react" "^1.2.2"
     final-form "^4.20.1"
@@ -3685,7 +3685,7 @@
     xstate "^4.16.2"
 
 "@tpr/forms@file:./packages/forms":
-  version "3.2.13"
+  version "3.2.14"
   dependencies:
     "@types/lodash.isequal" "^4.5.5"
     "@types/lodash.merge" "^4.6.6"
@@ -3704,14 +3704,14 @@
     tslib "^2.1.0"
 
 "@tpr/icons@file:./packages/icons":
-  version "3.0.35"
+  version "3.0.36"
   dependencies:
     node-sass "^5.0.0"
     normalize.css "^8.0.1"
     tslib "^2.1.0"
 
 "@tpr/layout@file:./packages/layout":
-  version "2.4.14"
+  version "2.4.16"
   dependencies:
     "@types/lodash.merge" "^4.6.6"
     "@xstate/react" "^1.2.2"
@@ -16312,7 +16312,7 @@ react-docgen@^4.1.1:
     node-dir "^0.1.10"
     recast "^0.17.3"
 
-react-dom@^16.13.1:
+react-dom@16.14.0, react-dom@^16.14.0:
   version "16.14.0"
   resolved "https://registry.yarnpkg.com/react-dom/-/react-dom-16.14.0.tgz#7ad838ec29a777fb3c75c3a190f661cf92ab8b89"
   integrity sha512-1gCeQXDLoIqMgqD3IO2Ah9bnf0w9kzhwN5q4FGnHZ67hBm9yePzB5JJAIQCc8x3pFnNlwFq4RidZggNAAkzWWw==
@@ -16461,7 +16461,7 @@ react-simple-code-editor@^0.10.0:
   resolved "https://registry.yarnpkg.com/react-simple-code-editor/-/react-simple-code-editor-0.10.0.tgz#73e7ac550a928069715482aeb33ccba36efe2373"
   integrity sha512-bL5W5mAxSW6+cLwqqVWY47Silqgy2DKDTR4hDBrLrUqC5BXc29YVx17l2IZk5v36VcDEq1Bszu2oHm1qBwKqBA==
 
-react-test-renderer@^16.13.1:
+react-test-renderer@^16.14.0:
   version "16.14.0"
   resolved "https://registry.yarnpkg.com/react-test-renderer/-/react-test-renderer-16.14.0.tgz#e98360087348e260c56d4fe2315e970480c228ae"
   integrity sha512-L8yPjqPE5CZO6rKsKXRO/rVPiaCOy0tQQJbC+UjPNlobl5mad59lvPjwFsQHTvL03caVDIVr9x9/OSgDe6I5Eg==
@@ -16471,7 +16471,7 @@ react-test-renderer@^16.13.1:
     react-is "^16.8.6"
     scheduler "^0.19.1"
 
-react@^16.13.1:
+react@16.14.0, react@^16.14.0:
   version "16.14.0"
   resolved "https://registry.yarnpkg.com/react/-/react-16.14.0.tgz#94d776ddd0aaa37da3eda8fc5b6b18a4c9a3114d"
   integrity sha512-0X2CImDkJGApiAlcf0ODKIneSwBPhqJawOa5wCtKbu7ZECrmS26NvtSILynQ66cgkT/RJ4LidJOc3bUESwmU8g==

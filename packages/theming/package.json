@@ -31,8 +31,8 @@
 		"report-coverage": "codecov"
 	},
 	"peerDependencies": {
-		"react": "^16.12.0",
-		"react-dom": "^16.12.0"
+		"react": "^16.14.0",
+		"react-dom": "^16.14.0"
 	},
 	"dependencies": {
 		"node-sass": "^5.0.0",
@@ -43,7 +43,9 @@
 		"access": "public"
 	},
 	"devDependencies": {
-		"cross-env": "^7.0.3"
+		"cross-env": "^7.0.3",
+		"react": "file:../../node_modules/react",
+		"react-dom": "file:../../node_modules/react-dom"
 	},
 	"gitHead": "57aec9c9de22596d6343bae07eb6b198322a0bee"
 }
