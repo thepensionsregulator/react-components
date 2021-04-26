@@ -77,7 +77,7 @@ export const NameScreen: React.FC = () => {
 			fields={fields}
 			initialValues={originalValues}
 			loading={loading}
-			send= {send}
+			send={send}
 		/>
 	);
 };

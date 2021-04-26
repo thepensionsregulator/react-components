@@ -60,6 +60,8 @@ export const Regulator: React.FC = () => {
 			type={cardType.trustee}
 			title={i18n.regulator.title}
 			sectionTitle={i18n.regulator.sectionTitle}
+			subSectionHeaderText={i18n.preview.buttons.four}
+			send={send}
 		>
 			<Form
 				onSubmit={onSubmit}

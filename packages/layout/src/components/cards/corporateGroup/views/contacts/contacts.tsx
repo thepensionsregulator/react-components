@@ -63,7 +63,8 @@ export const Contacts: React.FC = () => {
 				emailAddress: corporateGroup.emailAddress,
 			}}
 			fields={fields}
-			send = {send}
+			send={send}
+			subSectionHeaderText={i18n.preview.buttons.four}
 		/>
 	);
 };

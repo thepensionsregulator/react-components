@@ -21,6 +21,7 @@ interface NameFormProps {
 	loading: boolean;
 	nextStep?: boolean;
 	send?: Function;
+	subSectionHeaderText?: string;
 }
 
 const NameForm: React.FC<NameFormProps> = ({
@@ -34,6 +35,7 @@ const NameForm: React.FC<NameFormProps> = ({
 	loading,
 	nextStep,
 	send,
+	subSectionHeaderText,
 }) => {
 	return (
 		<Content
@@ -42,6 +44,8 @@ const NameForm: React.FC<NameFormProps> = ({
 			title={title}
 			loading={loading}
 			sectionTitle={sectionTitle}
+			subSectionHeaderText={subSectionHeaderText}
+			send={send}
 		>
 			<Form
 				onSubmit={onSubmit}
@@ -64,7 +68,9 @@ const NameForm: React.FC<NameFormProps> = ({
 								type="submit"
 								title={nextStep ? 'Continue' : 'Save and close'}
 							/>
-								<Link cfg={{ m: 3 }} underline onClick={() => send('CANCEL')}>Cancel</Link>
+							<Link cfg={{ m: 3 }} underline onClick={() => send('CANCEL')}>
+								Cancel
+							</Link>
 						</Footer>
 					</form>
 				)}

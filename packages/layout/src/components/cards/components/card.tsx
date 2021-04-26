@@ -1,8 +1,7 @@
 import React from 'react';
 import { classNames, Flex, H3, Hr, P } from '@tpr/core';
 import styles from './card.module.scss';
-import { UnderlinedButton } from './button';
-import { useTrusteeContext } from '../trustee/context';
+import CardContentSectionHeader from './cardContentHeaderSection';
 
 type StyledCardProps = { complete: boolean };
 
@@ -26,48 +25,20 @@ export const StyledCardToolbar: React.FC = ({ children }) => {
 	return <div className={styles.cardToolbar}>{children}</div>;
 };
 
-const CardContentSectionHeader:React.FC =()=>{
-	const { current, i18n, send } = useTrusteeContext();
-	if(current === undefined || current.context===undefined){
-		return(<></>);
-	}
-
-	let sectionHeader = '';
-	let canDisplay = false;
-	if(current.context.openSection==='edit.address'){
-		sectionHeader = i18n.preview.buttons.three;
-		canDisplay = true;
-	}else if(current.context.openSection==='edit.contact'){
-		sectionHeader = i18n.preview.buttons.four;
-		canDisplay = true;
-	}
-
-	if(canDisplay){
-		return (
-			<UnderlinedButton
-				onClick={() => {
-					send("CANCEL");
-					console.log(current.context)
-				}}
-				isOpen={true}
-			>
-				{sectionHeader}
-			</UnderlinedButton>
-		);
-	}else{
-		return (<></>);
-	}
-}
-
 type ToolbarProps = {
 	title: string;
 	subtitle?: string;
 	sectionTitle?: string;
+	subSectionHeaderText?: string;
+	send?: Function;
 };
+
 export const Toolbar: React.FC<ToolbarProps> = ({
 	title,
 	subtitle,
 	sectionTitle,
+	subSectionHeaderText,
+	send,
 }) => {
 	return (
 		<Flex cfg={{ flexDirection: 'column', mt: 4, mb: 3 }}>
@@ -75,7 +46,14 @@ export const Toolbar: React.FC<ToolbarProps> = ({
 				cfg={{ flexDirection: 'column', pb: 2 }}
 				className={styles.toolbarBottomBorder}
 			>
-				<CardContentSectionHeader />
+				{subSectionHeaderText && (
+					<Flex>
+						<CardContentSectionHeader
+							sectionHeaderText={subSectionHeaderText}
+							send={send}
+						/>
+					</Flex>
+				)}
 
 				{sectionTitle && <P className={styles.sectionTitle}>{sectionTitle}</P>}
 				<H3 cfg={{ fontWeight: 3 }}>{title}</H3>

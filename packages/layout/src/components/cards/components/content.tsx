@@ -13,6 +13,8 @@ type ContentProps = {
 	breadcrumbs?: any;
 	subtitle?: string;
 	sectionTitle?: string;
+	subSectionHeaderText?: string;
+	send?: Function;
 };
 export const Content: React.FC<ContentProps> = ({
 	children,
@@ -21,7 +23,10 @@ export const Content: React.FC<ContentProps> = ({
 	breadcrumbs: Breadcrumbs,
 	subtitle,
 	sectionTitle,
+	subSectionHeaderText,
+	send,
 }) => {
+	console.log('section title', sectionTitle);
 	return (
 		<div className={styles.content}>
 			{loading && <Loading />}
@@ -31,6 +36,8 @@ export const Content: React.FC<ContentProps> = ({
 					title={title}
 					subtitle={subtitle}
 					sectionTitle={sectionTitle}
+					subSectionHeaderText={subSectionHeaderText}
+					send={send}
 				/>
 			)}
 			{children}

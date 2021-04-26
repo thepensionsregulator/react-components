@@ -21,13 +21,13 @@ import { concatenateStrings } from '../../../utils';
 import styles from '../cards.module.scss';
 
 const CardContentSwitch: React.FC = () => {
-	const { current } = useCorporateGroupContext();
+	const { i18n, current } = useCorporateGroupContext();
 
 	switch (true) {
 		case current.matches('preview'):
 			return <Preview />;
 		case current.matches({ edit: 'name' }):
-			return <NameScreen />;
+			return <NameScreen subSectionHeaderText={i18n.preview.buttons.four} />;
 		case current.matches({ edit: 'contacts' }):
 			return <Contacts />;
 		case current.matches({ edit: 'professional' }):

@@ -20,6 +20,7 @@ interface ContactDetailsProps {
 	};
 	fields: FieldProps[];
 	send?: Function;
+	subSectionHeaderText?: string;
 }
 
 const ContactDetails: React.FC<ContactDetailsProps> = ({
@@ -33,6 +34,7 @@ const ContactDetails: React.FC<ContactDetailsProps> = ({
 	initialValues,
 	fields,
 	send,
+	subSectionHeaderText,
 }) => {
 	return (
 		<Content
@@ -42,6 +44,8 @@ const ContactDetails: React.FC<ContactDetailsProps> = ({
 			subtitle={subtitle}
 			loading={loading}
 			sectionTitle={sectionTitle}
+			subSectionHeaderText={subSectionHeaderText}
+			send={send}
 		>
 			<Form
 				onSubmit={onSubmit}
