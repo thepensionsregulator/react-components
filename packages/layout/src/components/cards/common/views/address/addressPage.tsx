@@ -12,7 +12,6 @@ import {
 	I18nAddressLookup,
 } from '@tpr/forms';
 import { Link } from '@tpr/core/lib/components/links/links';
-import { useTrusteeContext } from '../../../trustee/context';
 export type AddressPageProps = {
 	onSubmit: (values: Address & { initialValue?: Address }) => void;
 	initialValue?: Address;
@@ -22,6 +21,7 @@ export type AddressPageProps = {
 	sectionTitle?: string;
 	i18n: I18nAddressLookup;
 	onCancelChanges?: () => void;
+	send?:Function;
 };
 
 const AddressPage: React.FC<AddressPageProps> = ({
@@ -35,7 +35,6 @@ const AddressPage: React.FC<AddressPageProps> = ({
 	onCancelChanges,
 }) => {
 	const [loading, setLoading] = useState(false);
-	const {send } = useTrusteeContext();
 	const addressLookupProvider = new ExperianAddressLookupProvider(addressAPI);
 
 	return (
@@ -90,7 +89,7 @@ const AddressPage: React.FC<AddressPageProps> = ({
 										title={i18n.saveAndClose}
 										disabled={loading}
 									/>
-									<Link cfg={{ m: 3 }} underline onClick={() => send('CANCEL')}>Cancel</Link>
+									<Link cfg={{ m: 3 }} underline onClick={() => onCancelChanges()}>Cancel</Link>
 								</Footer>
 							</>
 						}

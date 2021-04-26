@@ -65,6 +65,7 @@ export const Contacts: React.FC = () => {
 				emailAddress: inHouseAdmin.emailAddress,
 			}}
 			fields={fields}
+			send = {send}
 		/>
 	);
 };

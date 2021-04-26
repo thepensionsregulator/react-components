@@ -5,7 +5,6 @@ import { Content } from '../../../components/content';
 import { ArrowButton } from '../../../../buttons/buttons';
 import { cardType, cardTypeName } from '../../interfaces';
 import { Link } from '@tpr/core';
-import { useTrusteeContext } from '../../../trustee/context';
 
 interface NameFormProps {
 	type: cardType;
@@ -21,6 +20,7 @@ interface NameFormProps {
 	};
 	loading: boolean;
 	nextStep?: boolean;
+	send?: Function;
 }
 
 const NameForm: React.FC<NameFormProps> = ({
@@ -33,8 +33,8 @@ const NameForm: React.FC<NameFormProps> = ({
 	initialValues,
 	loading,
 	nextStep,
+	send,
 }) => {
-	const {send } = useTrusteeContext();
 	return (
 		<Content
 			type={type}

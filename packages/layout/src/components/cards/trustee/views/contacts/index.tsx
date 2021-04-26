@@ -56,6 +56,7 @@ export const Contacts: React.FC = () => {
 				emailAddress: trustee.emailAddress,
 			}}
 			fields={fields}
+			send = {send}
 		/>
 	);
 };

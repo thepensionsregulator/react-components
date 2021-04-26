@@ -77,6 +77,7 @@ const Name: React.FC = () => {
 			initialValues={originalValues}
 			loading={loading}
 			nextStep={true}
+			send = {send}
 		/>
 	);
 };

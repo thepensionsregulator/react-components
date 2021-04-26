@@ -10,7 +10,6 @@ import {
 	RemoveReasonProps,
 } from '../../../../common/interfaces';
 import styles from './reason.module.scss';
-import { useTrusteeContext } from '../../../../trustee/context';
 
 interface ReasonProps {
 	type: cardType;
@@ -18,6 +17,7 @@ interface ReasonProps {
 	onSubmit: (any) => void;
 	remove: RemoveReasonProps;
 	dateField: FieldProps[];
+	send?: Function;
 }
 
 export const Reason: React.FC<ReasonProps> = ({
@@ -26,8 +26,8 @@ export const Reason: React.FC<ReasonProps> = ({
 	onSubmit,
 	remove,
 	dateField,
+	send,
 }) => {
-	const {send } = useTrusteeContext();
 	return (
 		<Content type={type} title={i18nRemoveReason.title}>
 			<Form

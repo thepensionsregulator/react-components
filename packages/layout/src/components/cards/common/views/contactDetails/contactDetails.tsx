@@ -5,7 +5,6 @@ import { Content } from '../../../components/content';
 import { ArrowButton } from '../../../../buttons/buttons';
 import { cardType, cardTypeName } from '../../../common/interfaces';
 import { Link } from '@tpr/core';
-import { useTrusteeContext } from '../../../trustee/context';
 
 interface ContactDetailsProps {
 	type: cardType;
@@ -20,6 +19,7 @@ interface ContactDetailsProps {
 		emailAddress: string;
 	};
 	fields: FieldProps[];
+	send?: Function;
 }
 
 const ContactDetails: React.FC<ContactDetailsProps> = ({
@@ -32,8 +32,8 @@ const ContactDetails: React.FC<ContactDetailsProps> = ({
 	onSubmit,
 	initialValues,
 	fields,
+	send,
 }) => {
-	const {send } = useTrusteeContext();
 	return (
 		<Content
 			type={type}

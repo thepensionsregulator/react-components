@@ -76,6 +76,7 @@ export const NameScreen: React.FC = () => {
 			}}
 			loading={loading}
 			nextStep={true}
+			send={send}
 		/>
 	);
 };
