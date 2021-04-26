@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useRef } from 'react';
 import { Flex, P } from '@tpr/core';
 import { ArrowUp, ArrowDown } from '@tpr/icons';
 import styles from './button.module.scss';
@@ -14,6 +14,7 @@ export const UnderlinedButton: React.FC<UnderlinedButtonProps> = ({
 	onClick,
 	tabIndex,
 }) => {
+
 	if (typeof onClick === 'undefined') {
 		return (
 			<div className={styles.buttonPlaceholder}>
@@ -23,13 +24,17 @@ export const UnderlinedButton: React.FC<UnderlinedButtonProps> = ({
 			</div>
 		);
 	}
-
+const buttonRef = useRef(null);
+useEffect(()=>{
+	buttonRef.current.focus();
+})
 	return (
 		<button
 			className={styles.button}
 			onClick={onClick}
 			aria-expanded={isOpen}
 			tabIndex={tabIndex}
+			ref={buttonRef}
 		>
 			<Flex className={styles.arrowSpacing}  cfg={{ flex: '0 0 auto', alignItems: 'center' }}>
 				<P cfg={{ fontSize: 2, fontWeight: 3 }}>{children}</P>
