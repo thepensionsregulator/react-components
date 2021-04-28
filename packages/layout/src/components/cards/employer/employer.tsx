@@ -41,9 +41,10 @@ const CardContentSwitch: React.FC = () => {
 	}
 };
 
-const ToolbarButton: React.FC<{ title: string; tabIndex?: number }> = ({
+const ToolbarButton: React.FC<{ title: string; tabIndex?: number; isEditButton?:boolean }> = ({
 	title,
 	tabIndex,
+	isEditButton,
 }) => {
 	const { current, send } = useEmployerContext();
 	return (
@@ -65,6 +66,7 @@ const ToolbarButton: React.FC<{ title: string; tabIndex?: number }> = ({
 				}
 			}}
 			tabIndex={tabIndex}
+			isEditButton={isEditButton}
 		>
 			{title}
 		</UnderlinedButton>
@@ -130,7 +132,7 @@ export const EmployerCard: React.FC<EmployerProviderProps> = ({
 									: i18n.preview.statusText.unconfirmed
 							}
 							buttonLeft={() => (
-								<ToolbarButton title={i18n.preview.buttons.one} />
+								<ToolbarButton title={i18n.preview.buttons.one} isEditButton={true} />
 							)}
 							buttonRight={() => (
 								<ToolbarButton

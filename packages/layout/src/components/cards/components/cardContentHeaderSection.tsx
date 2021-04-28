@@ -15,6 +15,7 @@ export const CardContentSectionHeader: React.FC<CardContentSectionHeaderProps> =
 				send('CANCEL');
 			}}
 			isOpen={true}
+			isEditButton={true}
 		>
 			{sectionHeaderText}
 		</UnderlinedButton>

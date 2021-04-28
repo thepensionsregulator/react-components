@@ -93,13 +93,14 @@ const TrusteeButton: React.FC = () => {
 			onClick={() => {
 				if (
 					current.matches({ edit: { trustee: 'name' } }) ||
-					current.matches({ edit: { trustee: 'kind' } }) 
+					current.matches({ edit: { trustee: 'kind' } })
 				) {
 					send('CANCEL');
 				} else {
 					send('EDIT_TRUSTEE');
 				}
 			}}
+			isEditButton={true}
 		>
 			{i18n.preview.buttons.one}
 		</UnderlinedButton>

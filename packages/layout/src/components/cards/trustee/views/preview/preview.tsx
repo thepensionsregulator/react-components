@@ -29,6 +29,7 @@ export const Preview: React.FC = () => {
 					<UnderlinedButton
 						onClick={() => send('EDIT_ORG')}
 						isOpen={current.matches({ edit: 'company' })}
+						isEditButton={true}
 					>
 						{i18n.preview.buttons.three}
 					</UnderlinedButton>
@@ -52,6 +53,7 @@ export const Preview: React.FC = () => {
 					<UnderlinedButton
 						onClick={() => send('EDIT_CONTACTS')}
 						isOpen={current.matches({ edit: 'contact' })}
+						isEditButton ={true}
 					>
 						{i18n.preview.buttons.four}
 					</UnderlinedButton>

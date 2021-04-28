@@ -44,6 +44,7 @@ export const Preview: React.FC<any> = () => {
 					<UnderlinedButton
 						isOpen={current.matches({ edit: 'reference' })}
 						onClick={() => send('EDIT_INSURER')}
+						isEditButton={true}
 					>
 						{i18n.preview.buttons.four}
 					</UnderlinedButton>
