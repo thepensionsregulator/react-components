@@ -63,12 +63,6 @@ useEffect(()=>{
 		>
 			<Flex className={styles.arrowSpacing}  cfg={{ flex: '0 0 auto', alignItems: 'center' }}>
 				<P cfg={{ fontSize: 2, fontWeight: 3 }}>{children}</P>
-				{/* {isOpen ? (
-
-					<EditArrowUp width="24px" fill={styles.arrowColor} />
-				) : (
-					<EditArrowDown width="24px" fill={styles.arrowColor} />
-				)} */}
 				{getAppropriateButton()}
 			</Flex>
 		</button>
