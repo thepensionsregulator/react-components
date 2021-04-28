@@ -33,7 +33,7 @@ export interface EmployerProviderProps extends CardProviderProps {
 	onSaveType?: (...args: any[]) => Promise<any>;
 	/** employer props from the API */
 	employer: Partial<Employer>;
-	showStatutoryEmployerSection: boolean;
+	showStatutoryEmployerSection?: boolean;
 	children?: RenderProps | ReactElement;
 	/** overwrite any text that you need */
 	i18n?: RecursivePartial<EmployerI18nProps>;
@@ -72,7 +72,13 @@ export const EmployerProvider = ({
 		},
 	});
 
-	const fwdValues = { current, send, showStatutoryEmployerSection, i18n, ...rest };
+	const fwdValues = {
+		current,
+		send,
+		showStatutoryEmployerSection,
+		i18n,
+		...rest,
+	};
 	const ui = typeof children === 'function' ? children(fwdValues) : children;
 	return (
 		<EmployerContext.Provider value={fwdValues}>{ui}</EmployerContext.Provider>

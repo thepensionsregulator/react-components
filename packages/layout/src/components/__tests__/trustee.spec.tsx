@@ -230,18 +230,23 @@ describe('Trustee correspondence address', () => {
 		findByText(/I need to change the address/).click();
 
 		const results = await axe(component);
-
 		expect(results).toHaveNoViolations();
 		expect(findByText('Find address')).toBeInTheDocument();
-		expect(findByText('Cancel')).toBeInTheDocument();
+		;
+		const cancelButtons = 	findAllByText(/Cancel/);
+
+		expect(cancelButtons[0]).toBeInTheDocument();
+		expect(cancelButtons[1]).toBeInTheDocument();
 	});
 
 	test('Cancel change address returns to preview', async () => {
 		findByText('Correspondence address').click();
 		findByText(/I need to change the address/).click();
-		findByText(/Cancel/).click();
+		const cancelButtons = 	findAllByText(/Cancel/);
+		cancelButtons[0].click();
+		cancelButtons[1].click();
 
-		const results = await axe(component);
+	const results = await axe(component);
 
 		expect(results).toHaveNoViolations();
 		expect(findByText('Correspondence address')).toBeInTheDocument();

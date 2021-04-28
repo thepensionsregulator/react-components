@@ -1,8 +1,10 @@
 import React from 'react';
 import { classNames, Flex, H3, Hr, P } from '@tpr/core';
 import styles from './card.module.scss';
+import CardContentSectionHeader from './cardContentHeaderSection';
 
 type StyledCardProps = { complete: boolean };
+
 export const StyledCard: React.FC<StyledCardProps> = ({
 	complete = false,
 	children,
@@ -27,11 +29,16 @@ type ToolbarProps = {
 	title: string;
 	subtitle?: string;
 	sectionTitle?: string;
+	subSectionHeaderText?: string;
+	send?: Function;
 };
+
 export const Toolbar: React.FC<ToolbarProps> = ({
 	title,
 	subtitle,
 	sectionTitle,
+	subSectionHeaderText,
+	send,
 }) => {
 	return (
 		<Flex cfg={{ flexDirection: 'column', mt: 4, mb: 3 }}>
@@ -39,6 +46,15 @@ export const Toolbar: React.FC<ToolbarProps> = ({
 				cfg={{ flexDirection: 'column', pb: 2 }}
 				className={styles.toolbarBottomBorder}
 			>
+				{subSectionHeaderText && (
+					<Flex>
+						<CardContentSectionHeader
+							sectionHeaderText={subSectionHeaderText}
+							send={send}
+						/>
+					</Flex>
+				)}
+
 				{sectionTitle && <P className={styles.sectionTitle}>{sectionTitle}</P>}
 				<H3 cfg={{ fontWeight: 3 }}>{title}</H3>
 			</Flex>

@@ -82,7 +82,6 @@ describe('InHouse Preview', () => {
 	test('editing in house name', () => {
 		findByText('In House Administrator').click();
 		expect(findByTestId('inHouseAdmin-name-form')).not.toBe(null);
-
 		var titleHtmlElement = findByText('Title (optional)') as HTMLElement;
 		var firstNameHtmlElement = findByText('First name') as HTMLElement;
 		var lastNameHtmlElement = findByText('Last name') as HTMLElement;
@@ -272,7 +271,7 @@ describe('InHouse Remove', () => {
 
 describe('In house admin correspondence address', () => {
 	test('Change address is accessible', async () => {
-		const { container, getByText } = render(
+		const { container, getByText, getAllByText } = render(
 			<InHouseCard
 				onSaveContacts={noop}
 				onSaveAddress={noop}
@@ -295,11 +294,14 @@ describe('In house admin correspondence address', () => {
 
 		expect(results).toHaveNoViolations();
 		expect(getByText('Find address')).toBeInTheDocument();
-		expect(getByText('Cancel')).toBeInTheDocument();
+		const cancelButtons = getAllByText(/Cancel/);
+;
+		expect(cancelButtons[0]).toBeInTheDocument();
+		expect(cancelButtons[1]).toBeInTheDocument();
 	});
 
 	test('Cancel change address returns to preview', async () => {
-		const { container, getByText } = render(
+		const { container, getByText, getAllByText } = render(
 			<InHouseCard
 				onSaveContacts={noop}
 				onSaveAddress={noop}
@@ -317,7 +319,9 @@ describe('In house admin correspondence address', () => {
 
 		getByText('Address').click();
 		getByText(/I need to change the address/).click();
-		getByText(/Cancel/).click();
+		const cancelButtons = 	getAllByText(/Cancel/);
+		cancelButtons[0].click();
+		cancelButtons[1].click();
 
 		const results = await axe(container);
 

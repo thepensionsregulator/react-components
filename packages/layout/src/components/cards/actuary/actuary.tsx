@@ -61,6 +61,7 @@ const ActuaryButton: React.FC = () => {
 					send('EDIT_NAME');
 				}
 			}}
+			isEditButton={true}
 		>
 			{i18n.preview.buttons.one}
 		</UnderlinedButton>

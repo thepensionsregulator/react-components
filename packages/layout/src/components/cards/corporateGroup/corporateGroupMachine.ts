@@ -115,6 +115,7 @@ const corporateGroupMachine = Machine<
 							})),
 						},
 						REMOVE: '#remove',
+						CANCEL: '#preview',
 					},
 				},
 			},

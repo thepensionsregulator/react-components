@@ -1,18 +1,21 @@
-import React from 'react';
+import React, { useEffect, useRef } from 'react';
 import { Flex, P } from '@tpr/core';
-import { ArrowUp, ArrowDown } from '@tpr/icons';
 import styles from './button.module.scss';
+import { EditArrowUp, EditArrowDown } from './arrowButton';
+import { ArrowDown, ArrowUp } from '@tpr/icons';
 
 type UnderlinedButtonProps = {
 	isOpen?: boolean;
 	onClick?: any;
 	tabIndex?: number;
+	isEditButton?: boolean;
 };
 export const UnderlinedButton: React.FC<UnderlinedButtonProps> = ({
 	children,
 	isOpen,
 	onClick,
 	tabIndex,
+	isEditButton,
 }) => {
 	if (typeof onClick === 'undefined') {
 		return (
@@ -23,6 +26,23 @@ export const UnderlinedButton: React.FC<UnderlinedButtonProps> = ({
 			</div>
 		);
 	}
+	const buttonRef = useRef(null);
+	useEffect(() => {
+		buttonRef.current.focus();
+	});
+	const getAppropriateButton = () => {
+		if (isOpen && isEditButton) {
+			return <EditArrowUp width="24px" fill={styles.arrowColor} />;
+		} else if (isOpen && !isEditButton) {
+			return <ArrowUp width="24px" fill={styles.arrowColor} />;
+		}
+
+		if (!isOpen && isEditButton) {
+			return <EditArrowDown width="24px" fill={styles.arrowColor} />;
+		} else if (!isOpen && !isEditButton) {
+			return <ArrowDown width="24px" fill={styles.arrowColor} />;
+		}
+	};
 
 	return (
 		<button
@@ -30,14 +50,14 @@ export const UnderlinedButton: React.FC<UnderlinedButtonProps> = ({
 			onClick={onClick}
 			aria-expanded={isOpen}
 			tabIndex={tabIndex}
+			ref={buttonRef}
 		>
-			<Flex cfg={{ flex: '0 0 auto', alignItems: 'center' }}>
+			<Flex
+				className={styles.arrowSpacing}
+				cfg={{ flex: '0 0 auto', alignItems: 'center' }}
+			>
 				<P cfg={{ fontSize: 2, fontWeight: 3 }}>{children}</P>
-				{isOpen ? (
-					<ArrowUp width="24px" fill={styles.arrowColor} />
-				) : (
-					<ArrowDown width="24px" fill={styles.arrowColor} />
-				)}
+				{getAppropriateButton()}
 			</Flex>
 		</button>
 	);

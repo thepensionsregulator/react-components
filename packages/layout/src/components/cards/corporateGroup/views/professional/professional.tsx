@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Form, renderFields, validate, FieldProps } from '@tpr/forms';
-import { Flex } from '@tpr/core';
+import { Flex, Link } from '@tpr/core';
 import { Content } from '../../../components/content';
 import { Footer } from '../../../components/card';
 import { ArrowButton } from '../../../../buttons/buttons';
@@ -55,6 +55,8 @@ export const Professional: React.FC = () => {
 			type={cardType.trustee}
 			title={i18n.professional.title}
 			sectionTitle={i18n.professional.sectionTitle}
+			subSectionHeaderText={i18n.preview.buttons.five}
+			send={send}
 		>
 			<Form
 				onSubmit={onSubmit}
@@ -80,6 +82,9 @@ export const Professional: React.FC = () => {
 									title="Save and close"
 									type="submit"
 								/>
+								<Link cfg={{ m: 3 }} underline onClick={() => send('CANCEL')}>
+									Cancel
+								</Link>
 							</Flex>
 						</Footer>
 					</form>

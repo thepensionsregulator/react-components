@@ -54,6 +54,7 @@ export const RemoveDateForm = () => {
 			dateField={DateField}
 			type={cardType.actuary}
 			typeName={cardTypeName.actuary}
+			send={send}
 		/>
 	);
 };

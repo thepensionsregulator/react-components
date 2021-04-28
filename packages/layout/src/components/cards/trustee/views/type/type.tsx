@@ -1,5 +1,5 @@
 import React from 'react';
-import { Flex, P } from '@tpr/core';
+import { Flex, Link, P } from '@tpr/core';
 import { Form, FieldProps, renderFields } from '@tpr/forms';
 import { useTrusteeContext } from '../../context';
 import { Footer } from '../../../components/card';
@@ -119,6 +119,9 @@ const Type: React.FC = () => {
 								title="Save and close"
 								disabled={loading}
 							/>
+							<Link cfg={{ m: 3 }} underline onClick={() => send('CANCEL')}>
+								Cancel
+							</Link>
 						</Footer>
 					</form>
 				)}
