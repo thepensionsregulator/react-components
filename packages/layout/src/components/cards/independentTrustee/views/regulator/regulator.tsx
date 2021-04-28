@@ -87,7 +87,9 @@ export const Regulator: React.FC = () => {
 									title="Save and close"
 									type="submit"
 								/>
-								<Link cfg={{ m: 3 }} underline onClick={() => send("CANCEL")}>Cancel</Link>
+								<Link cfg={{ m: 3 }} underline onClick={() => send('CANCEL')}>
+									Cancel
+								</Link>
 							</Flex>
 						</Footer>
 					</form>

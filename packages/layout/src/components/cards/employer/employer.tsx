@@ -41,11 +41,11 @@ const CardContentSwitch: React.FC = () => {
 	}
 };
 
-const ToolbarButton: React.FC<{ title: string; tabIndex?: number; isEditButton?:boolean }> = ({
-	title,
-	tabIndex,
-	isEditButton,
-}) => {
+const ToolbarButton: React.FC<{
+	title: string;
+	tabIndex?: number;
+	isEditButton?: boolean;
+}> = ({ title, tabIndex, isEditButton }) => {
 	const { current, send } = useEmployerContext();
 	return (
 		<UnderlinedButton
@@ -74,10 +74,8 @@ const ToolbarButton: React.FC<{ title: string; tabIndex?: number; isEditButton?:
 };
 
 const EmployerSubtitle: React.FC<Partial<EmployerContext>> = ({
-	employer: {
-		employerType, 
-		statutoryEmployer },
-	showStatutoryEmployerSection
+	employer: { employerType, statutoryEmployer },
+	showStatutoryEmployerSection,
 }) => {
 	if (!employerType || !statutoryEmployer) return null;
 
@@ -93,7 +91,10 @@ const EmployerSubtitle: React.FC<Partial<EmployerContext>> = ({
 	);
 
 	const subtitle = useMemo(
-		() => showStatutoryEmployerSection ? capitalize(statutoryEmployer).concat(` employer`): null,
+		() =>
+			showStatutoryEmployerSection
+				? capitalize(statutoryEmployer).concat(` employer`)
+				: null,
 		[statutoryEmployer],
 	);
 
@@ -112,7 +113,7 @@ export const EmployerCard: React.FC<EmployerProviderProps> = ({
 	return (
 		<EmployerProvider {...rest}>
 			{({ current, i18n }) => {
-			return (
+				return (
 					<Section
 						cfg={cfg}
 						data-testid={testId}
@@ -123,16 +124,17 @@ export const EmployerCard: React.FC<EmployerProviderProps> = ({
 					>
 						<Toolbar
 							complete={isComplete(current.context)}
-							subtitle={() => (
-								<EmployerSubtitle {...current.context} />
-							)}
+							subtitle={() => <EmployerSubtitle {...current.context} />}
 							statusText={
 								isComplete(current.context)
 									? i18n.preview.statusText.confirmed
 									: i18n.preview.statusText.unconfirmed
 							}
 							buttonLeft={() => (
-								<ToolbarButton title={i18n.preview.buttons.one} isEditButton={true} />
+								<ToolbarButton
+									title={i18n.preview.buttons.one}
+									isEditButton={true}
+								/>
 							)}
 							buttonRight={() => (
 								<ToolbarButton

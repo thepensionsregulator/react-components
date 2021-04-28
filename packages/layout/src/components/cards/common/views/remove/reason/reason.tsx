@@ -88,7 +88,9 @@ export const Reason: React.FC<ReasonProps> = ({
 									type="submit"
 									title="Continue"
 								/>
-									<Link cfg={{ m: 3 }} underline onClick={() => send('CANCEL')}>Cancel</Link>
+								<Link cfg={{ m: 3 }} underline onClick={() => send('CANCEL')}>
+									Cancel
+								</Link>
 							</Footer>
 						</form>
 					);

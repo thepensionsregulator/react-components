@@ -67,7 +67,9 @@ const ContactDetails: React.FC<ContactDetailsProps> = ({
 								title="Save and close"
 								disabled={loading}
 							/>
-								<Link cfg={{ m: 3 }} underline onClick={() => send('CANCEL')}>Cancel</Link>
+							<Link cfg={{ m: 3 }} underline onClick={() => send('CANCEL')}>
+								Cancel
+							</Link>
 						</Footer>
 					</form>
 				)}

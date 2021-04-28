@@ -8,7 +8,7 @@ type UnderlinedButtonProps = {
 	isOpen?: boolean;
 	onClick?: any;
 	tabIndex?: number;
-	isEditButton?:boolean;
+	isEditButton?: boolean;
 };
 export const UnderlinedButton: React.FC<UnderlinedButtonProps> = ({
 	children,
@@ -17,7 +17,6 @@ export const UnderlinedButton: React.FC<UnderlinedButtonProps> = ({
 	tabIndex,
 	isEditButton,
 }) => {
-
 	if (typeof onClick === 'undefined') {
 		return (
 			<div className={styles.buttonPlaceholder}>
@@ -27,31 +26,23 @@ export const UnderlinedButton: React.FC<UnderlinedButtonProps> = ({
 			</div>
 		);
 	}
-const buttonRef = useRef(null);
-useEffect(()=>{
-	buttonRef.current.focus();
-})
- const getAppropriateButton= () => {
-		if(isOpen && isEditButton){
-			return (
-				<EditArrowUp width="24px" fill={styles.arrowColor} />
-			);
-		}else if(isOpen && !isEditButton){
-			return (
-				<ArrowUp width="24px" fill={styles.arrowColor} />
-			);
+	const buttonRef = useRef(null);
+	useEffect(() => {
+		buttonRef.current.focus();
+	});
+	const getAppropriateButton = () => {
+		if (isOpen && isEditButton) {
+			return <EditArrowUp width="24px" fill={styles.arrowColor} />;
+		} else if (isOpen && !isEditButton) {
+			return <ArrowUp width="24px" fill={styles.arrowColor} />;
 		}
 
-		if(!isOpen && isEditButton){
-			return (
-				<EditArrowDown width="24px" fill={styles.arrowColor} />
-			);
-		}else if(!isOpen && !isEditButton){
-			return (
-				<ArrowDown width="24px" fill={styles.arrowColor} />
-			);
+		if (!isOpen && isEditButton) {
+			return <EditArrowDown width="24px" fill={styles.arrowColor} />;
+		} else if (!isOpen && !isEditButton) {
+			return <ArrowDown width="24px" fill={styles.arrowColor} />;
 		}
- }
+	};
 
 	return (
 		<button
@@ -61,7 +52,10 @@ useEffect(()=>{
 			tabIndex={tabIndex}
 			ref={buttonRef}
 		>
-			<Flex className={styles.arrowSpacing}  cfg={{ flex: '0 0 auto', alignItems: 'center' }}>
+			<Flex
+				className={styles.arrowSpacing}
+				cfg={{ flex: '0 0 auto', alignItems: 'center' }}
+			>
 				<P cfg={{ fontSize: 2, fontWeight: 3 }}>{children}</P>
 				{getAppropriateButton()}
 			</Flex>

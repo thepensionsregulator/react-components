@@ -66,7 +66,9 @@ const DateForm: React.FC<DateFormProps> = ({
 								title="Continue"
 								type="submit"
 							/>
-							<Link cfg={{ m: 3 }} underline onClick={() =>send('CANCEL')}>Cancel</Link>
+							<Link cfg={{ m: 3 }} underline onClick={() => send('CANCEL')}>
+								Cancel
+							</Link>
 						</Footer>
 					</form>
 				)}
