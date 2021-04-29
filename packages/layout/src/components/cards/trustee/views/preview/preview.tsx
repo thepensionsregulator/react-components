@@ -10,7 +10,7 @@ import {
 import styles from '../../../cards.module.scss';
 import { CardContentProps } from 'components/cards/common/interfaces';
 
-export const Preview: React.FC<CardContentProps> = ({ isRssCard=false }) => {
+export const Preview: React.FC<CardContentProps> = ({ isRssCard = false }) => {
 	const { current, send, onCorrect, i18n } = useTrusteeContext();
 	const { trustee, complete, preValidatedData } = current.context;
 
