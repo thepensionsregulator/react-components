@@ -26,7 +26,7 @@ import {
 } from '../../../utils';
 import styles from '../cards.module.scss';
 
-const CardContent: React.FC<CardContentProps> = ({ isRssCard }) => {
+const CardContent: React.FC<CardContentProps> = ({ isRssCard = false}) => {
 	const { current, i18n, send, addressAPI } = useTrusteeContext();
 	const { trustee } = current.context;
 
@@ -139,6 +139,7 @@ const isComplete = (context: TrusteeContext) => {
 
 export const TrusteeCard: React.FC<Omit<TrusteeCardProps, 'children'>> = ({
 	cfg,
+	isRssCard=false,
 	...props
 }) => {
 	return (
@@ -184,7 +185,7 @@ export const TrusteeCard: React.FC<Omit<TrusteeCardProps, 'children'>> = ({
 								: i18n.preview.statusText.unconfirmed
 						}
 					/>
-					<CardContent isRssCard={props.isRssCard} />
+					<CardContent isRssCard={isRssCard} />
 				</Section>
 			)}
 		</TrusteeProvider>
