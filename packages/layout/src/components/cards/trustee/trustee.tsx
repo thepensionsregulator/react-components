@@ -15,7 +15,7 @@ import { Contacts } from './views/contacts';
 import RemoveReason from './views/remove/reason/reason';
 import { ConfirmRemove } from './views/remove/confirm';
 import RemovedBox from '../components/removedBox';
-import { cardType, cardTypeName } from '../common/interfaces';
+import { CardContentProps, cardType, cardTypeName } from '../common/interfaces';
 import { AddressComparer } from '@tpr/forms';
 import { TrusteeContext } from './trusteeMachine';
 import { Subtitle } from '../common/views/preview/components';
@@ -26,12 +26,12 @@ import {
 } from '../../../utils';
 import styles from '../cards.module.scss';
 
-const CardContent: React.FC = () => {
+const CardContent: React.FC<CardContentProps> = ({ isRssCard = false}) => {
 	const { current, i18n, send, addressAPI } = useTrusteeContext();
 	const { trustee } = current.context;
 
 	if (current.matches('preview')) {
-		return <Preview />;
+		return <Preview isRssCard={isRssCard} />;
 	} else if (current.matches({ edit: { trustee: 'name' } })) {
 		return <Name />;
 	} else if (
@@ -139,6 +139,7 @@ const isComplete = (context: TrusteeContext) => {
 
 export const TrusteeCard: React.FC<Omit<TrusteeCardProps, 'children'>> = ({
 	cfg,
+	isRssCard=false,
 	...props
 }) => {
 	return (
@@ -184,7 +185,7 @@ export const TrusteeCard: React.FC<Omit<TrusteeCardProps, 'children'>> = ({
 								: i18n.preview.statusText.unconfirmed
 						}
 					/>
-					<CardContent />
+					<CardContent isRssCard={isRssCard} />
 				</Section>
 			)}
 		</TrusteeProvider>
