@@ -65,6 +65,7 @@ const CardContentSwitch: React.FC = () => {
 					sectionTitle={i18n.address.sectionTitle}
 					i18n={i18n.address}
 					onCancelChanges={() => send('CANCEL')}
+					subSectionHeaderText={i18n.preview.buttons.three}
 				/>
 			);
 		case current.matches({ edit: 'contacts' }):
@@ -104,6 +105,7 @@ const InHouseAdminButton: React.FC = () => {
 					send('EDIT_NAME');
 				}
 			}}
+			isEditButton={true}
 		>
 			{i18n.preview.buttons.one}
 		</UnderlinedButton>

@@ -75,6 +75,7 @@ export interface TrusteeCardProps {
 	testId?: string | number;
 	children?: RenderProps | ReactElement;
 	cfg?: SpaceProps;
+	isRssCard?: boolean;
 }
 
 export const TrusteeProvider = ({

@@ -79,6 +79,7 @@ const independentTrusteeMachine = Machine<
 							})),
 						},
 						REMOVE: '#remove',
+						CANCEL: '#preview',
 					},
 				},
 			},

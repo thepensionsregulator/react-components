@@ -11,7 +11,7 @@ import {
 	Address,
 	I18nAddressLookup,
 } from '@tpr/forms';
-
+import { Link } from '@tpr/core/lib/components/links/links';
 export type AddressPageProps = {
 	onSubmit: (values: Address & { initialValue?: Address }) => void;
 	initialValue?: Address;
@@ -21,6 +21,8 @@ export type AddressPageProps = {
 	sectionTitle?: string;
 	i18n: I18nAddressLookup;
 	onCancelChanges?: () => void;
+	send?: Function;
+	subSectionHeaderText?: string;
 };
 
 const AddressPage: React.FC<AddressPageProps> = ({
@@ -32,9 +34,9 @@ const AddressPage: React.FC<AddressPageProps> = ({
 	sectionTitle,
 	i18n,
 	onCancelChanges,
+	subSectionHeaderText,
 }) => {
 	const [loading, setLoading] = useState(false);
-
 	const addressLookupProvider = new ExperianAddressLookupProvider(addressAPI);
 
 	return (
@@ -43,6 +45,8 @@ const AddressPage: React.FC<AddressPageProps> = ({
 			typeName={cardTypeName}
 			title={i18n.title}
 			sectionTitle={sectionTitle}
+			subSectionHeaderText={subSectionHeaderText}
+			send={onCancelChanges}
 		>
 			<Form onSubmit={onSubmit}>
 				{({ handleSubmit }) => (
@@ -89,6 +93,13 @@ const AddressPage: React.FC<AddressPageProps> = ({
 										title={i18n.saveAndClose}
 										disabled={loading}
 									/>
+									<Link
+										cfg={{ m: 3 }}
+										underline
+										onClick={() => onCancelChanges()}
+									>
+										Cancel
+									</Link>
 								</Footer>
 							</>
 						}

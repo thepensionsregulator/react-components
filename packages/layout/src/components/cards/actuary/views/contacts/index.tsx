@@ -74,6 +74,8 @@ export const Contacts: React.FC = () => {
 				emailAddress: actuary.emailAddress,
 			}}
 			fields={fields}
+			send={send}
+			subSectionHeaderText={i18n.preview.buttons.four}
 		/>
 	);
 };

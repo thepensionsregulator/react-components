@@ -3,6 +3,7 @@ import { Flex, classNames } from '@tpr/core';
 import { CheckedCircle, ErrorCircle } from '@tpr/icons';
 import { StatusMessage } from './card';
 import styles from '../cards.module.scss';
+import CardContentSectionHeader from './cardContentHeaderSection';
 
 export type ToolbarProps = {
 	complete: boolean;
@@ -10,6 +11,7 @@ export type ToolbarProps = {
 	buttonLeft: Function;
 	buttonRight: Function;
 	statusText: string;
+	subSectionHeaderText?: string;
 };
 
 export const Toolbar: React.FC<ToolbarProps> = ({
@@ -18,6 +20,7 @@ export const Toolbar: React.FC<ToolbarProps> = ({
 	buttonLeft,
 	buttonRight,
 	statusText,
+	subSectionHeaderText,
 }) => {
 	return (
 		<div
@@ -26,6 +29,11 @@ export const Toolbar: React.FC<ToolbarProps> = ({
 				styles.cardToolbar,
 			])}
 		>
+			{subSectionHeaderText && (
+				<Flex>
+					<CardContentSectionHeader sectionHeaderText={subSectionHeaderText} />
+				</Flex>
+			)}
 			<Flex
 				cfg={{
 					width: 5,

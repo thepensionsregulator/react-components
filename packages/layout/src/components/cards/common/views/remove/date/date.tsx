@@ -1,5 +1,5 @@
 import React from 'react';
-import { P } from '@tpr/core';
+import { Link, P } from '@tpr/core';
 import { Form, FFCheckbox, renderFields, FieldProps } from '@tpr/forms';
 import { Content } from '../../../../components/content';
 import { Footer } from '../../../../components/card';
@@ -15,6 +15,7 @@ interface DateFormProps {
 	dateField: FieldProps[];
 	type: cardType;
 	typeName: cardTypeName;
+	send?: Function;
 }
 
 const DateForm: React.FC<DateFormProps> = ({
@@ -25,6 +26,7 @@ const DateForm: React.FC<DateFormProps> = ({
 	dateField,
 	type,
 	typeName,
+	send,
 }) => {
 	const errorMsg: string = `${type}-error-msg`;
 	const testId: string = `remove-${type}-form`;
@@ -64,6 +66,9 @@ const DateForm: React.FC<DateFormProps> = ({
 								title="Continue"
 								type="submit"
 							/>
+							<Link cfg={{ m: 3 }} underline onClick={() => send('CANCEL')}>
+								Cancel
+							</Link>
 						</Footer>
 					</form>
 				)}

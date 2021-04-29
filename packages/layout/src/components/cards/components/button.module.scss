@@ -46,6 +46,14 @@
 	}
 }
 
+.arrowSpacing{
+	justify-content: space-between;
+}
+
+.arrowButtonEdit{
+	font-size: 16px;
+}
+
 :export {
 	arrowColor: $colors-primary-3;
 }

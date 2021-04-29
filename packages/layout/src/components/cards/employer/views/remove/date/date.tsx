@@ -54,6 +54,7 @@ export const RemoveDateForm: React.FC = () => {
 			dateField={DateField}
 			type={cardType.employer}
 			typeName={cardTypeName.employer}
+			send={send}
 		/>
 	);
 };

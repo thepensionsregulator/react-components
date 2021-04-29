@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Form, renderFields, validate, FieldProps } from '@tpr/forms';
-import { Flex } from '@tpr/core';
+import { Flex, Link } from '@tpr/core';
 import { Content } from '../../../components/content';
 import { Footer } from '../../../components/card';
 import { ArrowButton } from '../../../../buttons/buttons';
@@ -60,6 +60,8 @@ export const Regulator: React.FC = () => {
 			type={cardType.trustee}
 			title={i18n.regulator.title}
 			sectionTitle={i18n.regulator.sectionTitle}
+			subSectionHeaderText={i18n.preview.buttons.four}
+			send={send}
 		>
 			<Form
 				onSubmit={onSubmit}
@@ -85,6 +87,9 @@ export const Regulator: React.FC = () => {
 									title="Save and close"
 									type="submit"
 								/>
+								<Link cfg={{ m: 3 }} underline onClick={() => send('CANCEL')}>
+									Cancel
+								</Link>
 							</Flex>
 						</Footer>
 					</form>

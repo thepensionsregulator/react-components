@@ -1,5 +1,5 @@
 import React from 'react';
-import { P, H4 } from '@tpr/core';
+import { P, H4, Link } from '@tpr/core';
 import { Footer } from '../../../../components/card';
 import { Form, FFRadioButton, FieldProps, renderFields } from '@tpr/forms';
 import { Content } from '../../../../components/content';
@@ -17,6 +17,7 @@ interface ReasonProps {
 	onSubmit: (any) => void;
 	remove: RemoveReasonProps;
 	dateField: FieldProps[];
+	send?: Function;
 }
 
 export const Reason: React.FC<ReasonProps> = ({
@@ -25,6 +26,7 @@ export const Reason: React.FC<ReasonProps> = ({
 	onSubmit,
 	remove,
 	dateField,
+	send,
 }) => {
 	return (
 		<Content type={type} title={i18nRemoveReason.title}>
@@ -86,6 +88,9 @@ export const Reason: React.FC<ReasonProps> = ({
 									type="submit"
 									title="Continue"
 								/>
+								<Link cfg={{ m: 3 }} underline onClick={() => send('CANCEL')}>
+									Cancel
+								</Link>
 							</Footer>
 						</form>
 					);
