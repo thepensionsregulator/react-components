@@ -8,8 +8,9 @@ import {
 	AddressPreview,
 } from '../../../common/views/preview/components';
 import styles from '../../../cards.module.scss';
+import { CardContentProps } from 'components/cards/common/interfaces';
 
-export const Preview: React.FC = () => {
+export const Preview: React.FC<CardContentProps> = ({ isRssCard }) => {
 	const { current, send, onCorrect, i18n } = useTrusteeContext();
 	const { trustee, complete, preValidatedData } = current.context;
 
@@ -47,21 +48,23 @@ export const Preview: React.FC = () => {
 				</Flex>
 
 				{/* Contact details section: open for editing	 */}
-				<Flex
-					cfg={{ width: 5, flex: '0 0 auto', flexDirection: 'column', pl: 4 }}
-				>
-					<UnderlinedButton
-						onClick={() => send('EDIT_CONTACTS')}
-						isOpen={current.matches({ edit: 'contact' })}
-						isEditButton={true}
+				{!isRssCard && (
+					<Flex
+						cfg={{ width: 5, flex: '0 0 auto', flexDirection: 'column', pl: 4 }}
 					>
-						{i18n.preview.buttons.four}
-					</UnderlinedButton>
-					<ContactDetailsPreview
-						phone={{ value: trustee.telephoneNumber }}
-						email={{ value: trustee.emailAddress }}
-					/>
-				</Flex>
+						<UnderlinedButton
+							onClick={() => send('EDIT_CONTACTS')}
+							isOpen={current.matches({ edit: 'contact' })}
+							isEditButton={true}
+						>
+							{i18n.preview.buttons.four}
+						</UnderlinedButton>
+						<ContactDetailsPreview
+							phone={{ value: trustee.telephoneNumber }}
+							email={{ value: trustee.emailAddress }}
+						/>
+					</Flex>
+				)}
 			</Flex>
 
 			{/*  All details correct - Checkbox	 */}
