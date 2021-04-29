@@ -61,13 +61,31 @@ import { Tasklist } from '@tpr/layout';
 						name: 'Service provider details',
 						path: '/service-provider-details',
 					},
-					{
-						name: 'Named contact details',
-						completed: true,
-						path: '/name-contact-details',
-					},
 				],
 				order: 2,
+			},
+			{
+				title: 'Financial details',
+				links: [
+					{
+						name: 'S179 valuation',
+						completed: true,
+						active: (_path) => true,
+						path: '/s179-valuation',
+					},
+					{ name: 'Part 3 funding valuation', path: '/part-3-valuation' },
+					{
+						name: 'Buyout valuation',
+						completed: false,
+						path: '/buyout-valuation',
+					},
+					{
+						name: 'Asset breakdown',
+						completed: true,
+						path: '/asset-breakdown',
+					},
+				],
+				order: 3,
 			},
 			{
 				title: 'Review and submit',
@@ -84,19 +102,19 @@ import { Tasklist } from '@tpr/layout';
 						path: '/review-and-submit',
 					}
 				],
-				order: 3,
+				order: 4,
 			},
 		];
 		return (
 			<Tasklist
-				title="Scheme return home"
+				title="Scheme return incomplete"
 				sections={sections}
 				maintenanceMode={false}
 				matchPath={matchPath}
 				location={location}
 				history={{ push: () => {} }}
-				sectionCompleteLabel="Section complete"
-				sectionIncompleteLabel="Section not complete"
+				sectionCompleteLabel="Not started"
+				sectionIncompleteLabel="Completed"
 			/>
 		);
 	}}

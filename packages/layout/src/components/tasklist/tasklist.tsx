@@ -29,16 +29,6 @@ export const useSectionsUpdater = (
 						link.onClick,
 					),
 					active: isActive({ matchPath, location }),
-					links:
-						link.links &&
-						link.links.map((innerLink) => ({
-							...innerLink,
-							onClick: callAllEventHandlers(
-								({ path }) => history.push(path),
-								innerLink.onClick,
-							),
-							active: isActive({ matchPath, location }),
-						})),
 				})),
 			},
 		];
@@ -82,7 +72,6 @@ export const Tasklist: React.FC<TasklistProps> = ({
 	matchPath,
 	location,
 	history,
-	collapseNested = false,
 	sectionCompleteLabel,
 	sectionIncompleteLabel,
 }) => {
@@ -105,43 +94,57 @@ export const Tasklist: React.FC<TasklistProps> = ({
 				cfg={{ flexDirection: 'column', mt: 8 }}
 				className={styles.tasklistMenu}
 			>
-				<Flex className={isHomePageActive ? styles.activeLink : ''}>
+				<P
+					cfg={{
+						color: 'neutral.8',
+						fontSize: 4,
+						fontWeight: 3,
+						lineHeight: 6,
+					}}
+					className={styles.label}
+				>
+					{title}
+				</P>
+				<P
+					cfg={{
+						color: 'neutral.8',
+						fontSize: 3,
+						fontWeight: 3,
+						lineHeight: 6,
+					}}
+					className={styles.label}
+				>
+					You have completed {totalCompleted.length} of {totalSections.length}{' '}
+					sections
+				</P>
+				<Flex
+					cfg={{ flexDirection: 'column', mt: 4, mb: 2 }}
+					className={isHomePageActive ? styles.activeLink : ''}
+				>
 					<Link
 						cfg={{
 							fontWeight: 3,
 							color: 'primary.2',
 							textAlign: 'left',
 							lineHeight: 6,
-							fontSize: 4,
+							fontSize: 2,
 						}}
 						onClick={() => history.push(titlePath)}
 					>
-						{title}
+						Review current and previous scheme returns
 					</Link>
-				</Flex>
-				<Flex cfg={{ justifyContent: 'space-between', mt: 4, mb: 2 }}>
-					<P
+					<Link
 						cfg={{
-							color: 'neutral.8',
-							fontSize: 3,
 							fontWeight: 3,
+							color: 'primary.2',
+							textAlign: 'left',
 							lineHeight: 6,
+							fontSize: 2,
 						}}
-						className={styles.label}
+						onClick={() => history.push(titlePath)}
 					>
-						Section
-					</P>
-					<P
-						cfg={{
-							color: 'neutral.8',
-							fontSize: 3,
-							fontWeight: 3,
-							lineHeight: 6,
-						}}
-						className={styles.label}
-					>
-						Progress {totalCompleted.length} / {totalSections.length}
-					</P>
+						Return to the welcome page
+					</Link>
 				</Flex>
 			</Flex>
 			<ul className={styles.list}>
@@ -153,7 +156,6 @@ export const Tasklist: React.FC<TasklistProps> = ({
 								title={item.title}
 								links={item.links}
 								maintenanceMode={maintenanceMode}
-								collapsed={collapseNested}
 								sectionCompleteLabel={sectionCompleteLabel}
 								sectionIncompleteLabel={sectionIncompleteLabel}
 							/>

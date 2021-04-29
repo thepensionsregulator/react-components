@@ -12,7 +12,6 @@ export type TasklistLinkProps = {
 	onClick?: (link: Omit<TasklistLinkProps, 'onClick'>) => void;
 	disabled?: boolean;
 	active?: (path: string, exact: boolean) => boolean;
-	links?: TasklistLinkProps[];
 	hideIcon?: boolean;
 };
 
@@ -26,7 +25,6 @@ export type TasklistMenuProps = {
 	title: string;
 	links: TasklistLinkProps[];
 	maintenanceMode: boolean;
-	collapsed: boolean;
 	sectionCompleteLabel: string;
 	sectionIncompleteLabel: string;
 };

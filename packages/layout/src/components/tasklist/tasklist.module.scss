@@ -72,23 +72,6 @@
 			}
 		}
 	}
-
-	.nestedWrapper {
-		padding-left: 0 !important;
-
-		&.collapsed {
-			height: 0;
-			overflow: hidden;
-		}
-
-		.nested {
-			&::before {
-				content: '—';
-				color: $colors-neutral-8;
-				padding-right: 2px;
-			}
-		}
-	}
 }
 
 .list {
@@ -100,14 +83,6 @@
 		margin: 0;
 		padding: 0;
 	}
-}
-
-.tasklistMenu {
-	border-bottom: 5px solid $colors-neutral-4;
-}
-
-.tasklistMenu:last-child {
-	border-bottom: none;
 }
 
 .label {
