@@ -8,7 +8,7 @@ const TaskStatus: React.FC<StatusIconProps> = ({
 	sectionIncompleteLabel,
 }) => {
 	return link.completed ? (
-		<div>Completed</div>
+		<div><CheckedCircle ariaLabel={sectionCompleteLabel} /></div>
 	) : (
 		<ErrorCircle
 			cfg={{ fill: link.disabled ? 'danger.1' : 'danger.2' }}
