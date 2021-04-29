@@ -14,6 +14,7 @@ export * from './components/header/header';
 export * from './components/highlight/highlight';
 export * from './components/info/info';
 export * from './components/sidebar';
+export * from './components/tasklist';
 export * from './components/buttons/buttons';
 export * from './components/buttons/links';
 export * from './components/warning/warning';

@@ -1,0 +1,309 @@
+---
+name: Tasklist
+menu: Layout
+route: /layout/tasklist
+---
+
+import { Playground } from '@playground';
+import { Props } from 'docz';
+import { Tasklist } from './tasklist';
+import { matchPath } from 'react-router-dom';
+
+# Tasklist
+
+Tasklist component for tpr apps
+
+## Basic usage
+
+```js
+import { Tasklist } from '@tpr/layout';
+```
+
+<Playground>
+	{() => {
+		const location = {
+			pathname: '/scheme-name-and-address',
+		};
+		const sections = [
+			{
+				title: 'Scheme details',
+				links: [
+					{
+						name: 'Scheme name and address',
+						completed: true,
+						onClick: (link) => alert(`You clicked on ${link.path}`),
+						path: '/scheme-name-and-address',
+					},
+					{
+						name: 'Scheme status and membership',
+						onClick: (link) => alert(`You clicked on ${link.path}`),
+						path: '/scheme-status-and-membership',
+					},
+					{
+						name: 'Consent to electronic communication',
+						onClick: (link) => alert(`You clicked on ${link.path}`),
+						path: '/consent-to-electronic-communication',
+					},
+				],
+				order: 1,
+			},
+			{
+				title: 'Roles',
+				links: [
+					{
+						name: 'Trustee details',
+						completed: true,
+						active: (_path) => true,
+						path: '/trustee-details',
+					},
+					{ name: 'Employer details', path: '/employer-details' },
+					{
+						name: 'Service provider details',
+						path: '/service-provider-details',
+					},
+					{
+						name: 'Named contact details',
+						completed: true,
+						path: '/name-contact-details',
+					},
+				],
+				order: 2,
+			},
+			{
+				title: 'Finish up',
+				links: [
+					{
+						name: 'Review and submit',
+						completed: false,
+						disabled: true,
+						path: '/review-and-submit',
+					},
+				],
+				order: 3,
+			},
+		];
+		return (
+			<Tasklist
+				title="Scheme return home"
+				sections={sections}
+				maintenanceMode={false}
+				matchPath={matchPath}
+				location={location}
+				history={{ push: () => {} }}
+				sectionCompleteLabel="Section complete"
+				sectionIncompleteLabel="Section not complete"
+			/>
+		);
+	}}
+</Playground>
+
+## With submenu (nested elements)
+
+<Playground>
+	{() => {
+		const location = {
+			pathname: '/employer/multiemployer',
+		};
+		const sections = [
+			{
+				title: 'Scheme details (DB)',
+				links: [
+					{
+						name: 'Scheme name, address and contact details',
+						completed: true,
+						path: '/scheme-name-and-address',
+					},
+					{
+						name: 'Scheme status and membership',
+						completed: true,
+						path: '/scheme-status-and-membership',
+					},
+					{
+						name: 'Consent to electronic communication',
+						completed: true,
+						path: '/consent-to-electronic-communication',
+					},
+					{
+						name: 'Record keeping',
+						completed: true,
+						path: '/record-keeping',
+					},
+				],
+				order: 1,
+			},
+			{
+				title: 'Roles',
+				links: [
+					{
+						name: 'Trustee details',
+						completed: true,
+						path: '/cards',
+					},
+					{
+						name: 'Employer details',
+						path: '/employer',
+						completed: false,
+						links: [
+							{
+								name: 'Employer Memberships',
+								path: '/employer/membership',
+								completed: false,
+								hideIcon: true,
+							},
+							{
+								name: 'Multi-employer scheme structure',
+								path: '/employer/multiemployer',
+								completed: false,
+							},
+						],
+					},
+					{
+						name: 'Service provider details',
+						path: '/forms',
+					},
+					{
+						name: 'Named contact details',
+						completed: false,
+						path: '/theming',
+					},
+				],
+				order: 2,
+			},
+			{
+				title: 'Financial details',
+				links: [
+					{
+						name: 'Asset Breakdown',
+						completed: false,
+						path: '/asset-breakdown',
+					},
+					{
+						name: 'Buyout Valuation',
+						completed: false,
+						path: '/buyout-valuation',
+					},
+					{
+						name: 'S179 Valuation',
+						completed: false,
+						path: '/s179-valuation',
+					},
+					{
+						name: 'Part 3 Valuation',
+						completed: false,
+						path: '/part-3-valuation',
+					},
+					{
+						name: 'Liability Hedging',
+						completed: false,
+						path: '/liability-hedging',
+					},
+					{
+						name: 'Employer Covenant',
+						completed: false,
+						path: '/employer-covenant',
+					},
+					{
+						name: 'Statement of Investment Principles',
+						completed: false,
+						path: '/statement-of-investment-principles',
+					},
+				],
+				order: 3,
+			},
+			{
+				title: 'Review and submit',
+				links: [
+					{
+						name: 'Step 1: review and print',
+						completed: false,
+						disabled: true,
+						path: '/review-and-submit',
+					},
+					{
+						name: 'Step 2: submit',
+						completed: false,
+						disabled: true,
+						path: '/review-and-submit',
+					},
+				],
+				order: 4,
+			},
+		];
+		return (
+			<Tasklist
+				title="Scheme return home"
+				sections={sections}
+				maintenanceMode={false}
+				matchPath={matchPath}
+				location={location}
+				history={{ push: () => {} }}
+				sectionCompleteLabel="Section complete"
+				sectionIncompleteLabel="Section not complete"
+			/>
+		);
+	}}
+</Playground>
+
+## With submenus collapsed via collapseNested prop
+
+<Playground>
+	{() => {
+		const location = {
+			pathname: '/review',
+		};
+		const sections = [
+			{
+				title: 'Roles',
+				links: [
+					{
+						name: 'Employer details',
+						path: '/employer',
+						completed: false,
+						links: [
+							{
+								name: 'Employer Memberships',
+								path: '/employer/membership',
+								completed: true,
+								onClick: (link) => console.log(`You clicked on ${link.path}`),
+							},
+							{
+								name: 'Multi-employer scheme structure',
+								path: '/employer/multiemployer',
+								completed: false,
+								onClick: (link) => console.log(`You clicked on ${link.path}`),
+							},
+						],
+					},
+					{
+						name: 'Step 1: review and print',
+						completed: true,
+						path: '/review',
+						hideIcon: true,
+					},
+					{
+						name: 'Step 2: submit',
+						path: '/submit',
+					},
+				],
+				order: 1,
+			},
+		];
+		return (
+			<Tasklist
+				title="Scheme return home"
+				sections={sections}
+				maintenanceMode={false}
+				matchPath={matchPath}
+				location={location}
+				history={{ push: () => {} }}
+				collapseNested={true}
+				sectionCompleteLabel="Section complete"
+				sectionIncompleteLabel="Section not complete"
+			/>
+		);
+	}}
+</Playground>
+
+## API
+
+<Props of={Tasklist} />
