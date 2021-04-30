@@ -69,23 +69,29 @@ const getCard = (isRssCard: boolean) => {
 	);
 };
 
+const setupComponent = (isRssCard: boolean) => {
+	const {
+		container,
+		getByText,
+		getAllByText,
+		queryByTitle,
+		getByTestId,
+		getByRole,
+		queryByText,
+	} = render(getCard(isRssCard));
+
+	component = container;
+	findByText = getByText;
+	findByTestId = getByTestId;
+	findAllByText = getAllByText;
+	findByTitle = queryByTitle;
+	findByRole = getByRole;
+	findByTextQuery = queryByText;
+};
+
 describe('TrusteeCard when isRssCard is false', () => {
 	beforeEach(async () => {
-		const {
-			container,
-			getByText,
-			getAllByText,
-			queryByTitle,
-			getByTestId,
-			getByRole,
-		} = render(getCard(false));
-
-		component = container;
-		findByText = getByText;
-		findByTestId = getByTestId;
-		findAllByText = getAllByText;
-		findByTitle = queryByTitle;
-		findByRole = getByRole;
+		setupComponent(false);
 	});
 
 	afterEach(() => {
@@ -267,23 +273,7 @@ describe('TrusteeCard when isRssCard is false', () => {
 
 describe('TrusteeCard when isRssCard is true', () => {
 	beforeEach(async () => {
-		const {
-			container,
-			getByText,
-			getAllByText,
-			queryByTitle,
-			getByTestId,
-			getByRole,
-			queryByText,
-		} = render(getCard(true));
-
-		component = container;
-		findByText = getByText;
-		findByTestId = getByTestId;
-		findAllByText = getAllByText;
-		findByTitle = queryByTitle;
-		findByRole = getByRole;
-		findByTextQuery = queryByText;
+		setupComponent(true);
 	});
 
 	afterEach(() => {
