@@ -15,7 +15,6 @@
 
 		&:hover {
 			color: $colors-neutral-a1 !important;
-			text-decoration: underline;
 		}
 
 		&:focus {
@@ -29,19 +28,21 @@
 			}
 		}
 
-		.taskStatus {
-			font-size: $font-size-1;
-			text-transform: uppercase;
-			padding: 8px;
+	}
 
-			&.complete {
-				background-color: $colors-primary-3;
-				color:$white;
-			}
-			&.incomplete {
-				background-color: $colors-neutral-3;
-				color: $colors-neutral-8;
-			}
+	.taskStatus {
+		font-size: $font-size-1;
+		font-weight: bold;
+		text-transform: uppercase;
+		padding: 8px;
+
+		&.complete {
+			background-color: $colors-primary-3;
+			color:$white;
+		}
+		&.incomplete {
+			background-color: $colors-neutral-3;
+			color: $colors-neutral-8;
 		}
 	}
 
@@ -51,24 +52,9 @@
 
 	div[aria-current] {
 		a {
-			text-decoration: underline;
-
-			&:hover {
-				text-decoration: underline;
-			}
-
 			&:focus {
 				color: $colors-neutral-8 !important;
 				text-decoration: none;
-			}
-		}
-		&.nested {
-			a {
-				color: $colors-neutral-8 !important;
-
-				&:hover {
-					color: $colors-neutral-a1 !important;
-				}
 			}
 		}
 	}

@@ -51,6 +51,7 @@ export function useCalculateProgress(sections: TasklistSectionProps[]) {
 export type TasklistProps = {
 	title: string;
 	titlePath?: string;
+	welcomePath?: string;
 	maintenanceMode?: boolean;
 	sections: TasklistSectionProps[];
 	/** import from react-router-dom */
@@ -59,7 +60,6 @@ export type TasklistProps = {
 	location: any;
 	/** import from react-router-dom */
 	history: any;
-	collapseNested?: boolean;
 	sectionCompleteLabel: string;
 	sectionIncompleteLabel: string;
 };
@@ -67,6 +67,7 @@ export type TasklistProps = {
 export const Tasklist: React.FC<TasklistProps> = ({
 	title,
 	titlePath,
+	welcomePath,
 	sections: originalSections,
 	maintenanceMode = false,
 	matchPath,
@@ -141,7 +142,7 @@ export const Tasklist: React.FC<TasklistProps> = ({
 							lineHeight: 6,
 							fontSize: 2,
 						}}
-						onClick={() => history.push(titlePath)}
+						onClick={() => history.push(welcomePath)}
 					>
 						Return to the welcome page
 					</Link>
