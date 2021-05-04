@@ -70,6 +70,57 @@ import { TrusteeCard } from '@tpr/layout';
 	}}
 </Playground>
 
+## RSS Trustee Card
+
+<Playground>
+	{() => {
+		const [complete, setComplete] = useState(false);
+		const callbackFn = (values, _fullTrusteeObject) => {
+			console.log(values);
+			console.log(_fullTrusteeObject);
+			return Promise.resolve(values);
+		};
+		const trustee = {
+			id: '12345',
+			schemeRoleId: '12345',
+			//
+			title: 'Mr',
+			firstName: 'John',
+			lastName: 'Smith',
+			trusteeType: 'member-nominated',
+			isProfessionalTrustee: false,
+			//
+			addressLine1: 'The Pensions Regulator',
+			addressLine2: 'Napier House',
+			addressLine3: 'Trafalgar Pl',
+			postTown: 'Brighton',
+			postcode: 'BN1 4DW',
+			county: 'West Sussex',
+			country: '',
+			//
+			telephoneNumber: '01273 000 111',
+			emailAddress: 'fred.sandoors@trp.gov.uk',
+			effectiveDate: '1997-04-01T00:00:00',
+		};
+		return (
+			<TrusteeCard
+				addressAPI={{
+					get: (endpont) => experianApiGet(endpont),
+					limit: 100,
+				}}
+				complete={complete}
+				onAddressSave={callbackFn}
+				onContactSave={callbackFn}
+				onCorrect={(value) => setComplete(value)}
+				onDetailsSave={callbackFn}
+				onRemove={callbackFn}
+				trustee={trustee}
+				isRssCard={true}
+			/>
+		);
+	}}
+</Playground>
+
 ## API
 
 ### Props
@@ -86,3 +137,4 @@ import { TrusteeCard } from '@tpr/layout';
 | onRemove         | true     | function         | actions for when the trustee is removed                                                  |
 | prevalidatedData | false    | boolean          | allows to ignore the state of the "Confirm details are correct" checkbox & shows "No issues" |
 | trustee          | true     | Trustee          | the Trustee object                                                                       |
+| isRssCard        | false    | boolean          | turns off the Contact details section for RSS trustee		                                |

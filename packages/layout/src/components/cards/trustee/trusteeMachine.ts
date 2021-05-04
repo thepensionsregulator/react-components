@@ -89,7 +89,7 @@ const trusteeMachine = Machine<TrusteeContext, TrusteeStates, TrusteeEvents>({
 	context: {
 		loading: false,
 		complete: false,
-		openSection:'',
+		openSection: '',
 		trustee: {
 			schemeRoleId: '',
 			//
@@ -122,17 +122,17 @@ const trusteeMachine = Machine<TrusteeContext, TrusteeStates, TrusteeEvents>({
 					target: 'edit.company.address',
 					actions: assign((context, _event) => {
 						return {
-							openSection: context.openSection = 'edit.address'
+							openSection: (context.openSection = 'edit.address'),
 						};
-					})
-					},
+					}),
+				},
 				EDIT_CONTACTS: {
 					target: 'edit.contact.details',
 					actions: assign((context, _event) => {
 						return {
-							openSection: context.openSection = 'edit.contact'
+							openSection: (context.openSection = 'edit.contact'),
 						};
-					})
+					}),
 				},
 				REMOVE: 'remove',
 				COMPLETE: {
@@ -201,13 +201,13 @@ const trusteeMachine = Machine<TrusteeContext, TrusteeStates, TrusteeEvents>({
 										},
 									})),
 								},
-								CANCEL:{
-									target:'#preview',
+								CANCEL: {
+									target: '#preview',
 									actions: assign((context, _event) => {
 										return {
-											openSection: context.openSection = ''
+											openSection: (context.openSection = ''),
 										};
-									})
+									}),
 								},
 								REMOVE: '#remove',
 							},
@@ -230,13 +230,13 @@ const trusteeMachine = Machine<TrusteeContext, TrusteeStates, TrusteeEvents>({
 										},
 									})),
 								},
-								CANCEL:{
-									target:'#preview',
+								CANCEL: {
+									target: '#preview',
 									actions: assign((context, _event) => {
 										return {
-											openSection: context.openSection = ''
+											openSection: (context.openSection = ''),
 										};
-									})
+									}),
 								},
 								REMOVE: '#remove',
 							},
