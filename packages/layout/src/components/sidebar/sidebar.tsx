@@ -2,8 +2,9 @@ import React, { useEffect, useMemo, useState } from 'react';
 import { Flex, Link, P, flatten } from '@tpr/core';
 import { callAllEventHandlers } from '../../utils';
 import SidebarMenu from './components/SidebarMenu';
-import { ReactRouterDomProps, SidebarSectionProps } from './components/types';
+import { SidebarSectionProps } from './components/types';
 import styles from './sidebar.module.scss';
+import { ReactRouterDomProps } from 'components/types/types';
 
 export const isActive = (settings: { matchPath: any; location: any }) => (
 	path: string,

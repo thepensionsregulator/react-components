@@ -1,9 +1,3 @@
-export type ReactRouterDomProps = {
-	history: any;
-	matchPath: any;
-	location: any;
-};
-
 export type SidebarLinkProps = {
 	name: string;
 	/** route url path for react router, must match with Route path that is already declared */

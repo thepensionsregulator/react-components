@@ -1,9 +1,3 @@
-export type ReactRouterDomProps = {
-	history: any;
-	matchPath: any;
-	location: any;
-};
-
 export type TasklistLinkProps = {
 	name: string;
 	/** route url path for react router, must match with Route path that is already declared */
@@ -29,7 +23,7 @@ export type TasklistMenuProps = {
 	sectionIncompleteLabel: string;
 };
 
-export type StatusIconProps = {
+export type TaskStatusIconProps = {
 	link: TasklistLinkProps;
 	sectionCompleteLabel: string;
 	sectionIncompleteLabel: string;

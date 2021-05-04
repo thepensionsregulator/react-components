@@ -1,8 +1,8 @@
+import { TaskStatusIconProps } from 'components/tasklist';
 import React from 'react';
-import { StatusIconProps } from './types';
 import styles from '../tasklist.module.scss';
 
-const TaskStatus: React.FC<StatusIconProps> = ({
+const TaskStatus: React.FC<TaskStatusIconProps> = ({
 	link,
 	sectionCompleteLabel,
 	sectionIncompleteLabel,
