@@ -14,12 +14,12 @@ const TasklistMenu: React.FC<TasklistMenuProps> = ({
 	return (
 		<Flex cfg={{ flexDirection: 'column' }} className={styles.tasklistMenu}>
 			<H2
-				cfg={{ fontWeight: 3, mt: 4, color: 'neutral.8', lineHeight: 6 }}
+				cfg={{ fontWeight: 3, mt: 5, color: 'neutral.8', lineHeight: 6 }}
 				className={styles.styledAsH3}
 			>
 				{title}
 			</H2>
-			<Hr cfg={{ my: 4 }} />
+			<Hr />
 			<ul className={styles.list}>
 				{links.map(
 					({ onClick = () => {}, active = () => false, ...link }, key) => (
@@ -27,12 +27,12 @@ const TasklistMenu: React.FC<TasklistMenuProps> = ({
 							<Flex
 								cfg={{
 									justifyContent: 'space-between',
-									mb: 5,
+									my: 1,
 									flexDirection: 'row',
 								}}
 								className={
 									active(link.path, false)
-										? `${styles.topLevelWrapper} ${styles.containsSelectedLink}`
+										? `${styles.topLevelWrapper}`
 										: styles.topLevelWrapper
 								}
 							>
@@ -40,7 +40,6 @@ const TasklistMenu: React.FC<TasklistMenuProps> = ({
 									cfg={{
 										justifyContent: 'space-between',
 										width: 10,
-										mb: 1,
 									}}
 									className={styles.topLevelLink}
 									aria-current={active(link.path, true) ? 'page' : null}
@@ -74,6 +73,7 @@ const TasklistMenu: React.FC<TasklistMenuProps> = ({
 									</Link>
 								</Flex>
 							</Flex>
+							<Hr />
 						</li>
 					),
 				)}

@@ -118,7 +118,7 @@ export const Tasklist: React.FC<TasklistProps> = ({
 					sections
 				</P>
 				<Flex
-					cfg={{ flexDirection: 'column', mt: 4, mb: 2 }}
+					cfg={{ flexDirection: 'column', mt: 4 }}
 					className={isHomePageActive ? styles.activeLink : ''}
 				>
 					<Link

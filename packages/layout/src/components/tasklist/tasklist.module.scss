@@ -28,25 +28,25 @@
 				min-width: 22px;
 			}
 		}
+
+		.taskStatus {
+			font-size: $font-size-1;
+			text-transform: uppercase;
+			padding: 8px;
+
+			&.complete {
+				background-color: $colors-primary-3;
+				color:$white;
+			}
+			&.incomplete {
+				background-color: $colors-neutral-3;
+				color: $colors-neutral-8;
+			}
+		}
 	}
 
 	div.topLevelWrapper {
 		position: relative;
-
-		&.containsSelectedLink > .topLevelLink {
-			a::before {
-				content: ' ';
-				position: absolute;
-				left: -25px;
-				top: -8px;
-				height: 100%;
-				min-height: 40px;
-				width: 5px;
-				background: $colors-primary-3;
-				// to hide outline from pseudo element
-				box-shadow: 0px 0px 0px 1px white;
-			}
-		}
 	}
 
 	div[aria-current] {
