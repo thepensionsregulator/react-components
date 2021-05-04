@@ -295,7 +295,6 @@ describe('In house admin correspondence address', () => {
 		expect(results).toHaveNoViolations();
 		expect(getByText('Find address')).toBeInTheDocument();
 		const cancelButtons = getAllByText(/Cancel/);
-;
 		expect(cancelButtons[0]).toBeInTheDocument();
 		expect(cancelButtons[1]).toBeInTheDocument();
 	});
@@ -319,7 +318,7 @@ describe('In house admin correspondence address', () => {
 
 		getByText('Address').click();
 		getByText(/I need to change the address/).click();
-		const cancelButtons = 	getAllByText(/Cancel/);
+		const cancelButtons = getAllByText(/Cancel/);
 		cancelButtons[0].click();
 		cancelButtons[1].click();
 

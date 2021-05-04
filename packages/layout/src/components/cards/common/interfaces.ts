@@ -123,6 +123,6 @@ export const defaultPhoneErrorMessages: InputErrorMessages = {
 	invalid: 'Enter a telephone number, like 0163 960 598 or +44 7700 900 359',
 };
 
-export interface CardContentProps  {
+export interface CardContentProps {
 	isRssCard?: boolean;
 }

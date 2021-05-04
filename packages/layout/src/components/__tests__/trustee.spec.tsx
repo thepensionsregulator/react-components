@@ -37,18 +37,17 @@ const trustee: Trustee = {
 	emailAddress: 'fred.sandoors@trp.gov.uk',
 	effectiveDate: '1997-04-01T00:00:00',
 };
-let component, findByText, findAllByText, findByTitle, findByTestId, findByRole;
+let component,
+	findByText,
+	findAllByText,
+	findByTitle,
+	findByTestId,
+	findByRole,
+	findByTextQuery;
 let updatedTrustee = null;
 
-beforeEach(async () => {
-	const {
-		container,
-		getByText,
-		getAllByText,
-		queryByTitle,
-		getByTestId,
-		getByRole,
-	} = render(
+const getCard = (isRssCard: boolean) => {
+	return (
 		<TrusteeCard
 			onDetailsSave={(values) => {
 				updatedTrustee = values;
@@ -65,8 +64,21 @@ beforeEach(async () => {
 			complete={true}
 			trustee={trustee}
 			testId={trustee.schemeRoleId}
-		/>,
+			isRssCard={isRssCard}
+		/>
 	);
+};
+
+const setupComponent = (isRssCard: boolean) => {
+	const {
+		container,
+		getByText,
+		getAllByText,
+		queryByTitle,
+		getByTestId,
+		getByRole,
+		queryByText,
+	} = render(getCard(isRssCard));
 
 	component = container;
 	findByText = getByText;
@@ -74,181 +86,206 @@ beforeEach(async () => {
 	findAllByText = getAllByText;
 	findByTitle = queryByTitle;
 	findByRole = getByRole;
-});
+	findByTextQuery = queryByText;
+};
 
-afterEach(() => {
-	cleanup();
-});
-
-describe('Trustee Preview', () => {
-	test('is accessible', async () => {
-		const results = await axe(component);
-		expect(results).toHaveNoViolations();
+describe('TrusteeCard when isRssCard is false', () => {
+	beforeEach(async () => {
+		setupComponent(false);
 	});
 
-	test('buttons renders correctly', () => {
-		// Buttons are visible
-		expect(findByText('Trustee')).toBeDefined();
-		expect(findByText('Correspondence address')).toBeDefined();
-		assertThatButtonHasAriaExpanded(
-			findByText,
-			'Correspondence address',
-			false,
-		);
-		expect(findByText('Contact details')).toBeDefined();
-		assertThatButtonHasAriaExpanded(findByText, 'Contact details', false);
-		expect(findByText('Remove')).toBeDefined();
+	afterEach(() => {
+		cleanup();
 	});
 
-	test('initial status is correct', () => {
-		expect(findAllByText('Confirmed').length).toEqual(2);
-		expect(findByTitle('Confirmed')).toBeDefined();
-		expect(findByText('Confirm details are correct.')).toBeDefined();
-	});
-
-	test('address shows up correctly', () => {
-		const organisationName = findByText(trustee.addressLine1);
-		const addressPreview = findByTestId('address-preview');
-		const addressExpected = `${trustee.addressLine2}<br>${trustee.addressLine3}<br>${trustee.postTown}<br>${trustee.county}<br>${trustee.postcode}<br>${trustee.country}`;
-		expect(organisationName).toBeDefined();
-		expect(addressPreview).toBeDefined();
-		expect(addressPreview.innerHTML).toEqual(addressExpected);
-	});
-
-	test('contact details shows up correctly', () => {
-		expect(findByText('Phone')).toBeDefined();
-		expect(findByText(trustee.telephoneNumber)).toBeDefined();
-		expect(findByText('Email')).toBeDefined();
-		expect(findByText(trustee.emailAddress)).toBeDefined();
-	});
-
-	test('renders with a section containing an aria label', () => {
-		assertThatASectionExistsWithAnAriaLabel(
-			findByRole,
-			`${trustee.title} ${trustee.firstName} ${trustee.lastName} ${trustee.trusteeType} Trustee`,
-		);
-	});
-});
-
-describe('Trustee Name', () => {
-	test('is accessible', async () => {
-		findByText('Trustee').click();
-		const results = await axe(component);
-		expect(results).toHaveNoViolations();
-
-		expect(findByTestId('trustee-name-form')).not.toBe(null);
-
-		var titleHtmlElement = findByText('Title (optional)') as HTMLElement;
-		var firstNameHtmlElement = findByText('First name') as HTMLElement;
-		var lastNameHtmlElement = findByText('Last name') as HTMLElement;
-
-		expect(titleHtmlElement).toBeDefined();
-		expect(titleHtmlElement.nextSibling.childNodes[0]).toHaveAttribute(
-			'maxlength',
-			'35',
-		);
-		expect(firstNameHtmlElement).toBeDefined();
-		expect(firstNameHtmlElement.nextSibling.childNodes[0]).toHaveAttribute(
-			'maxlength',
-			'70',
-		);
-		expect(lastNameHtmlElement).toBeDefined();
-		expect(lastNameHtmlElement.nextSibling.childNodes[0]).toHaveAttribute(
-			'maxlength',
-			'70',
-		);
-		expect(findByText('Continue')).toBeDefined();
-
-		assertThatButtonHasBeenRemovedFromTheTabFlow(findByText, 'Remove');
-	});
-
-	test('trustee title can be left empty when name is updated', async () => {
-		await act(async () => {
-			findByText(/Trustee/).click();
-			await axe(component);
-			clearTitleField(findByText);
-			findByText(/Continue/).click();
-			findByText(/Save and close/).click();
+	describe('Trustee Preview', () => {
+		test('is accessible', async () => {
+			const results = await axe(component);
+			expect(results).toHaveNoViolations();
 		});
 
-		await assertThatTitleWasSetToNullWhileFirstAndLastNamesWereLeftUnchanged(
-			component,
-			trustee,
-			updatedTrustee,
-		);
+		test('buttons renders correctly', () => {
+			// Buttons are visible
+			expect(findByText('Trustee')).toBeDefined();
+			expect(findByText('Correspondence address')).toBeDefined();
+			assertThatButtonHasAriaExpanded(
+				findByText,
+				'Correspondence address',
+				false,
+			);
+			expect(findByText('Contact details')).toBeDefined();
+			assertThatButtonHasAriaExpanded(findByText, 'Contact details', false);
+			expect(findByText('Remove')).toBeDefined();
+		});
+
+		test('initial status is correct', () => {
+			expect(findAllByText('Confirmed').length).toEqual(2);
+			expect(findByTitle('Confirmed')).toBeDefined();
+			expect(findByText('Confirm details are correct.')).toBeDefined();
+		});
+
+		test('address shows up correctly', () => {
+			const organisationName = findByText(trustee.addressLine1);
+			const addressPreview = findByTestId('address-preview');
+			const addressExpected = `${trustee.addressLine2}<br>${trustee.addressLine3}<br>${trustee.postTown}<br>${trustee.county}<br>${trustee.postcode}<br>${trustee.country}`;
+			expect(organisationName).toBeDefined();
+			expect(addressPreview).toBeDefined();
+			expect(addressPreview.innerHTML).toEqual(addressExpected);
+		});
+
+		test('contact details shows up correctly, when isRssCard property is false', () => {
+			expect(findByText('Phone')).toBeDefined();
+			expect(findByText(trustee.telephoneNumber)).toBeDefined();
+			expect(findByText('Email')).toBeDefined();
+			expect(findByText(trustee.emailAddress)).toBeDefined();
+		});
+
+		test('renders with a section containing an aria label', () => {
+			assertThatASectionExistsWithAnAriaLabel(
+				findByRole,
+				`${trustee.title} ${trustee.firstName} ${trustee.lastName} ${trustee.trusteeType} Trustee`,
+			);
+		});
+	});
+
+	describe('Trustee Name', () => {
+		test('is accessible', async () => {
+			findByText('Trustee').click();
+			const results = await axe(component);
+			expect(results).toHaveNoViolations();
+
+			expect(findByTestId('trustee-name-form')).not.toBe(null);
+
+			var titleHtmlElement = findByText('Title (optional)') as HTMLElement;
+			var firstNameHtmlElement = findByText('First name') as HTMLElement;
+			var lastNameHtmlElement = findByText('Last name') as HTMLElement;
+
+			expect(titleHtmlElement).toBeDefined();
+			expect(titleHtmlElement.nextSibling.childNodes[0]).toHaveAttribute(
+				'maxlength',
+				'35',
+			);
+			expect(firstNameHtmlElement).toBeDefined();
+			expect(firstNameHtmlElement.nextSibling.childNodes[0]).toHaveAttribute(
+				'maxlength',
+				'70',
+			);
+			expect(lastNameHtmlElement).toBeDefined();
+			expect(lastNameHtmlElement.nextSibling.childNodes[0]).toHaveAttribute(
+				'maxlength',
+				'70',
+			);
+			expect(findByText('Continue')).toBeDefined();
+
+			assertThatButtonHasBeenRemovedFromTheTabFlow(findByText, 'Remove');
+		});
+
+		test('trustee title can be left empty when name is updated', async () => {
+			await act(async () => {
+				findByText(/Trustee/).click();
+				await axe(component);
+				clearTitleField(findByText);
+				findByText(/Continue/).click();
+				findByText(/Save and close/).click();
+			});
+
+			await assertThatTitleWasSetToNullWhileFirstAndLastNamesWereLeftUnchanged(
+				component,
+				trustee,
+				updatedTrustee,
+			);
+		});
+	});
+
+	describe('Trustee Type', () => {
+		test('is accessible', async () => {
+			findByText(/Trustee/).click();
+			findByText(/Continue/).click();
+
+			const results = await axe(component);
+			expect(results).toHaveNoViolations();
+		});
+	});
+
+	describe('Trustee Contact Details', () => {
+		test('is accessible', async () => {
+			findByText('Contact details').click();
+
+			const results = await axe(component);
+			expect(results).toHaveNoViolations();
+		});
+	});
+
+	describe('Trustee Remove', () => {
+		test('is accessible', async () => {
+			findByText('Remove').click();
+
+			const results = await axe(component);
+			expect(results).toHaveNoViolations();
+		});
+
+		test('displays correct validation messages', async () => {
+			findByText('Remove').click();
+			findByText('Continue').click();
+			const msg1 = findByText('Select a reason for removing the trustee.');
+			expect(msg1).toBeDefined();
+			expect(msg1.className.includes('errorMessage')).toBeTruthy();
+
+			findByTestId('leftTheScheme').click();
+			findByText('Continue').click();
+			const msg2 = findByText('Enter the date the trustee left the scheme.');
+			expect(msg2).toBeDefined();
+			expect(msg2.className.includes('errorMessage')).toBeTruthy();
+
+			const results = await axe(component);
+			expect(results).toHaveNoViolations();
+		});
+	});
+
+	describe('Trustee correspondence address', () => {
+		test('Change address is accessible', async () => {
+			findByText('Correspondence address').click();
+			findByText(/I need to change the address/).click();
+
+			const results = await axe(component);
+			expect(results).toHaveNoViolations();
+			expect(findByText('Find address')).toBeInTheDocument();
+			const cancelButtons = findAllByText(/Cancel/);
+
+			expect(cancelButtons[0]).toBeInTheDocument();
+			expect(cancelButtons[1]).toBeInTheDocument();
+		});
+
+		test('Cancel change address returns to preview', async () => {
+			findByText('Correspondence address').click();
+			findByText(/I need to change the address/).click();
+			const cancelButtons = findAllByText(/Cancel/);
+			cancelButtons[0].click();
+			cancelButtons[1].click();
+
+			const results = await axe(component);
+
+			expect(results).toHaveNoViolations();
+			expect(findByText('Correspondence address')).toBeInTheDocument();
+		});
 	});
 });
 
-describe('Trustee Type', () => {
-	test('is accessible', async () => {
-		findByText(/Trustee/).click();
-		findByText(/Continue/).click();
-
-		const results = await axe(component);
-		expect(results).toHaveNoViolations();
-	});
-});
-
-describe('Trustee Contact Details', () => {
-	test('is accessible', async () => {
-		findByText('Contact details').click();
-
-		const results = await axe(component);
-		expect(results).toHaveNoViolations();
-	});
-});
-
-describe('Trustee Remove', () => {
-	test('is accessible', async () => {
-		findByText('Remove').click();
-
-		const results = await axe(component);
-		expect(results).toHaveNoViolations();
+describe('TrusteeCard when isRssCard is true', () => {
+	beforeEach(async () => {
+		setupComponent(true);
 	});
 
-	test('displays correct validation messages', async () => {
-		findByText('Remove').click();
-		findByText('Continue').click();
-		const msg1 = findByText('Select a reason for removing the trustee.');
-		expect(msg1).toBeDefined();
-		expect(msg1.className.includes('errorMessage')).toBeTruthy();
-
-		findByTestId('leftTheScheme').click();
-		findByText('Continue').click();
-		const msg2 = findByText('Enter the date the trustee left the scheme.');
-		expect(msg2).toBeDefined();
-		expect(msg2.className.includes('errorMessage')).toBeTruthy();
-
-		const results = await axe(component);
-		expect(results).toHaveNoViolations();
-	});
-});
-
-describe('Trustee correspondence address', () => {
-	test('Change address is accessible', async () => {
-		findByText('Correspondence address').click();
-		findByText(/I need to change the address/).click();
-
-		const results = await axe(component);
-		expect(results).toHaveNoViolations();
-		expect(findByText('Find address')).toBeInTheDocument();
-		;
-		const cancelButtons = 	findAllByText(/Cancel/);
-
-		expect(cancelButtons[0]).toBeInTheDocument();
-		expect(cancelButtons[1]).toBeInTheDocument();
+	afterEach(() => {
+		cleanup();
 	});
 
-	test('Cancel change address returns to preview', async () => {
-		findByText('Correspondence address').click();
-		findByText(/I need to change the address/).click();
-		const cancelButtons = 	findAllByText(/Cancel/);
-		cancelButtons[0].click();
-		cancelButtons[1].click();
-
-	const results = await axe(component);
-
-		expect(results).toHaveNoViolations();
-		expect(findByText('Correspondence address')).toBeInTheDocument();
+	describe('Trustee Preview', () => {
+		test('contact details does not show when isRssCard property is true', () => {
+			expect(findByTextQuery('Phone')).toBeNull();
+			expect(findByTextQuery(trustee.telephoneNumber)).toBeNull();
+			expect(findByTextQuery('Email')).toBeNull();
+			expect(findByTextQuery(trustee.emailAddress)).toBeNull();
+		});
 	});
 });
