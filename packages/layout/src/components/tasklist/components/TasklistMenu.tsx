@@ -22,7 +22,7 @@ const TasklistMenu: React.FC<TasklistMenuProps> = ({
 			<Hr />
 			<ul className={styles.list}>
 				{links.map(
-					({ onClick = () => {}, active = () => false, ...link }, key) => (
+					({ onClick, active, ...link }, key) => (
 						<li key={key}>
 							<Flex
 								cfg={{
@@ -30,18 +30,13 @@ const TasklistMenu: React.FC<TasklistMenuProps> = ({
 									my: 1,
 									flexDirection: 'row',
 								}}
-								className={
-									active(link.path, false)
-										? `${styles.topLevelWrapper}`
-										: styles.topLevelWrapper
-								}
+								className={styles.taskWrapper}
 							>
 								<Flex
 									cfg={{
 										justifyContent: 'space-between',
 										width: 10,
 									}}
-									className={styles.topLevelLink}
 									aria-current={active(link.path, true) ? 'page' : null}
 								>
 									<Link
