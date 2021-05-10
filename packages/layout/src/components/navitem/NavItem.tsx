@@ -12,6 +12,7 @@ export const NavItem: React.FC<NavItemProps> = ({ link, children }) => {
 				width: link.hideIcon ? 10 : 8,
 			}}
 			disabled={link.disabled}
+			href={link.path}
 			onClick={() => link.onClick(link)}
 		>
 			<Flex

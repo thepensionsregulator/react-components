@@ -105,7 +105,7 @@ export const Tasklist: React.FC<TasklistProps> = ({
 							lineHeight: 6,
 							fontSize: 2,
 						}}
-						onClick={() => history.push(reviewPath)}
+						href={reviewPath}
 					>
 						Review current and previous scheme returns
 					</Link>
@@ -117,7 +117,7 @@ export const Tasklist: React.FC<TasklistProps> = ({
 							lineHeight: 6,
 							fontSize: 2,
 						}}
-						onClick={() => history.push(welcomePath)}
+						href={welcomePath}
 					>
 						Return to the welcome page
 					</Link>
