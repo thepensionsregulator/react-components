@@ -51,7 +51,9 @@ export function useCalculateProgress(sections: TasklistSectionProps[]) {
 
 export const Tasklist: React.FC<TasklistProps> = ({
 	title,
+	reviewTitle,
 	reviewPath,
+	welcomeTitle,
 	welcomePath,
 	sections: originalSections,
 	maintenanceMode = false,
@@ -91,8 +93,7 @@ export const Tasklist: React.FC<TasklistProps> = ({
 					}}
 					className={styles.label}
 				>
-					You have completed {totalCompleted.length} of {totalSections.length}{' '}
-					sections
+					{`You have completed ${totalCompleted.length} of ${totalSections.length} sections`}
 				</P>
 				<Flex
 					cfg={{ flexDirection: 'column', mt: 4 }}
@@ -107,7 +108,7 @@ export const Tasklist: React.FC<TasklistProps> = ({
 						}}
 						href={reviewPath}
 					>
-						Review current and previous scheme returns
+						{reviewTitle}
 					</Link>
 					<Link
 						cfg={{
@@ -119,7 +120,7 @@ export const Tasklist: React.FC<TasklistProps> = ({
 						}}
 						href={welcomePath}
 					>
-						Return to the welcome page
+						{welcomeTitle}
 					</Link>
 				</Flex>
 			</Flex>
