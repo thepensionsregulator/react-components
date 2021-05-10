@@ -15,8 +15,12 @@ export * from './components/highlight/highlight';
 export * from './components/info/info';
 export * from './components/sidebar';
 export * from './components/tasklist';
-export { isActive, useSectionsUpdater, useCalculateProgress} from './components/tasklist/tasklist';
-export * from './components/tasklist/components/types'
+export {
+	isActive,
+	useSectionsUpdater,
+	useCalculateProgress,
+} from './components/tasklist/tasklist';
+export * from './components/tasklist/components/types';
 export * from './components/buttons/buttons';
 export * from './components/buttons/links';
 export * from './components/warning/warning';

@@ -1,4 +1,4 @@
-import { NavItemLinkProps } from "components/navitem/navitem";
+import { NavItemLinkProps } from 'components/navitem/navitem';
 
 export type TasklistSectionProps = {
 	title: string;

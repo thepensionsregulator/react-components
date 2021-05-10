@@ -26,32 +26,27 @@ const SidebarMenu: React.FC<SidebarMenuProps> = ({
 		return (
 			<Flex cfg={{ flexDirection: 'column', pl: 6 }} className={classes}>
 				<ul className={styles.list}>
-					{links.map(
-						(
-							{ active = () => false, ...innerLink },
-							key,
-						) => (
-							<li key={key}>
-								<Flex
-									cfg={{ justifyContent: 'space-between', mb: links ? 5 : 1 }}
-									className={styles.nested}
-									aria-current={active(innerLink.path, true) ? 'page' : null}
-								>
-									<NavItem link={innerLink}>
-										<span>{innerLink.name}</span>
-										{!maintenanceMode && !innerLink.hideIcon && (
-											<StatusIcon
-												link={innerLink}
-												sectionCompleteLabel={sectionCompleteLabel}
-												sectionIncompleteLabel={sectionIncompleteLabel}
-											/>
-										)}
-									</NavItem>
-								</Flex>
-								{innerLink.links && generateSubmenu(innerLink.links)}
-							</li>
-						),
-					)}
+					{links.map(({ active = () => false, ...innerLink }, key) => (
+						<li key={key}>
+							<Flex
+								cfg={{ justifyContent: 'space-between', mb: links ? 5 : 1 }}
+								className={styles.nested}
+								aria-current={active(innerLink.path, true) ? 'page' : null}
+							>
+								<NavItem link={innerLink}>
+									<span>{innerLink.name}</span>
+									{!maintenanceMode && !innerLink.hideIcon && (
+										<StatusIcon
+											link={innerLink}
+											sectionCompleteLabel={sectionCompleteLabel}
+											sectionIncompleteLabel={sectionIncompleteLabel}
+										/>
+									)}
+								</NavItem>
+							</Flex>
+							{innerLink.links && generateSubmenu(innerLink.links)}
+						</li>
+					))}
 				</ul>
 			</Flex>
 		);

@@ -8,10 +8,14 @@ const TaskStatus: React.FC<TaskStatusIconProps> = ({
 	sectionIncompleteLabel,
 }) => {
 	return (
-		<span className={`${styles.taskStatus} ${(link.completed)? styles.complete : styles.incomplete}`}>
-			{link.completed ? sectionCompleteLabel: sectionIncompleteLabel}
+		<span
+			className={`${styles.taskStatus} ${
+				link.completed ? styles.complete : styles.incomplete
+			}`}
+		>
+			{link.completed ? sectionCompleteLabel : sectionIncompleteLabel}
 		</span>
-	)
+	);
 };
 
 export default React.memo(TaskStatus);
