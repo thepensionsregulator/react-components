@@ -22,14 +22,14 @@ const SidebarMenu: React.FC<SidebarMenuProps> = ({
 		!collapsed && setClasses(styles.nestedWrapper);
 	}, [collapsed]);
 
-	const generateSubmenu = (links: NavItemLinkProps[]) => {
+	const generateSubmenu = (ll: NavItemLinkProps[]) => {
 		return (
 			<Flex cfg={{ flexDirection: 'column', pl: 6 }} className={classes}>
 				<ul className={styles.list}>
-					{links.map(({ active = () => false, ...innerLink }, key) => (
+					{ll.map(({ active = () => false, ...innerLink }, key) => (
 						<li key={key}>
 							<Flex
-								cfg={{ justifyContent: 'space-between', mb: links ? 5 : 1 }}
+								cfg={{ justifyContent: 'space-between', mb: ll ? 5 : 1 }}
 								className={styles.nested}
 								aria-current={active(innerLink.path, true) ? 'page' : null}
 							>
