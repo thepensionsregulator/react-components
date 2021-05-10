@@ -13,6 +13,7 @@ export * from './components/footer/footer';
 export * from './components/header/header';
 export * from './components/highlight/highlight';
 export * from './components/info/info';
+export * from './components/navitem';
 export * from './components/sidebar';
 export * from './components/tasklist';
 export {
