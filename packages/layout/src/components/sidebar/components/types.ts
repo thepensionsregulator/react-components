@@ -1,30 +1,14 @@
-export type ReactRouterDomProps = {
-	history: any;
-	matchPath: any;
-	location: any;
-};
-
-export type SidebarLinkProps = {
-	name: string;
-	/** route url path for react router, must match with Route path that is already declared */
-	path: string;
-	completed?: boolean;
-	onClick?: (link: Omit<SidebarLinkProps, 'onClick'>) => void;
-	disabled?: boolean;
-	active?: (path: string, exact: boolean) => boolean;
-	links?: SidebarLinkProps[];
-	hideIcon?: boolean;
-};
+import { NavItemLinkProps } from 'components/navitem/types';
 
 export type SidebarSectionProps = {
 	title: string;
-	links: SidebarLinkProps[];
+	links: NavItemLinkProps[];
 	order: number;
 };
 
 export type SidebarMenuProps = {
 	title: string;
-	links: SidebarLinkProps[];
+	links: NavItemLinkProps[];
 	maintenanceMode: boolean;
 	collapsed: boolean;
 	sectionCompleteLabel: string;
@@ -32,7 +16,7 @@ export type SidebarMenuProps = {
 };
 
 export type StatusIconProps = {
-	link: SidebarLinkProps;
+	link: NavItemLinkProps;
 	sectionCompleteLabel: string;
 	sectionIncompleteLabel: string;
 };

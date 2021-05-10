@@ -1,0 +1,76 @@
+@import '@tpr/core/lib/components/typography/typography.module.scss';
+// typography.module.scss includes '@tpr/theming/lib/variables.scss'
+
+.tasklist {
+	display: flex;
+	flex-direction: column;
+	flex: 0 0 auto;
+	width: 100%;
+	background: $white;
+	padding-left: $space-6;
+
+	a {
+		text-decoration: none;
+		width: 100%;
+
+		&:hover {
+			color: $colors-neutral-a1 !important;
+		}
+
+		&:focus {
+			color: $colors-neutral-8 !important;
+		}
+
+		> div {
+			height: 100%;
+			> svg {
+				min-width: 22px;
+			}
+		}
+
+	}
+
+	.taskStatus {
+		font-size: $font-size-1;
+		font-weight: bold;
+		text-transform: uppercase;
+		padding: 8px;
+
+		&.complete {
+			background-color: $colors-primary-3;
+			color:$white;
+		}
+		&.incomplete {
+			background-color: $colors-neutral-3;
+			color: $colors-neutral-8;
+		}
+	}
+
+	div.taskWrapper {
+		position: relative;
+	}
+
+	div[aria-current] {
+		a {
+			&:focus {
+				color: $colors-neutral-8 !important;
+				text-decoration: none;
+			}
+		}
+	}
+}
+
+.list {
+	list-style-type: none;
+	margin: 0;
+	padding: 0;
+
+	li {
+		margin: 0;
+		padding: 0;
+	}
+}
+
+.label {
+	@include removeMarginBottom;
+}

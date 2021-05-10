@@ -1,9 +1,9 @@
-import React, { useEffect, useMemo, useState } from 'react';
+import React, { useMemo } from 'react';
 import { Flex, Link, P, flatten } from '@tpr/core';
 import { callAllEventHandlers } from '../../utils';
-import SidebarMenu from './components/SidebarMenu';
-import { SidebarSectionProps } from './components/types';
-import styles from './sidebar.module.scss';
+import TasklistMenu from './components/TasklistMenu';
+import { TasklistProps, TasklistSectionProps } from './components/types';
+import styles from './tasklist.module.scss';
 import { ReactRouterDomProps } from 'components/types/types';
 
 export const isActive = (settings: { matchPath: any; location: any }) => (
@@ -15,10 +15,10 @@ export const isActive = (settings: { matchPath: any; location: any }) => (
 };
 
 export const useSectionsUpdater = (
-	sections: SidebarSectionProps[],
+	sections: TasklistSectionProps[],
 	{ history, matchPath, location }: ReactRouterDomProps,
-): SidebarSectionProps[] => {
-	return sections.reduce<SidebarSectionProps[]>((accumulator, section) => {
+): TasklistSectionProps[] => {
+	return sections.reduce<TasklistSectionProps[]>((accumulator, section) => {
 		return [
 			...accumulator,
 			{
@@ -30,23 +30,13 @@ export const useSectionsUpdater = (
 						link.onClick,
 					),
 					active: isActive({ matchPath, location }),
-					links:
-						link.links &&
-						link.links.map((innerLink) => ({
-							...innerLink,
-							onClick: callAllEventHandlers(
-								({ path }) => history.push(path),
-								innerLink.onClick,
-							),
-							active: isActive({ matchPath, location }),
-						})),
 				})),
 			},
 		];
 	}, []);
 };
 
-export function useCalculateProgress(sections: SidebarSectionProps[]) {
+export function useCalculateProgress(sections: TasklistSectionProps[]) {
 	const totalSections = useMemo(
 		() => flatten(sections.map((section) => section.links)),
 		[sections],
@@ -59,90 +49,78 @@ export function useCalculateProgress(sections: SidebarSectionProps[]) {
 	return [totalSections, totalCompleted];
 }
 
-export type SidebarProps = {
-	title: string;
-	titlePath?: string;
-	maintenanceMode?: boolean;
-	sections: SidebarSectionProps[];
-	/** import from react-router-dom */
-	matchPath: any;
-	/** import from react-router-dom */
-	location: any;
-	/** import from react-router-dom */
-	history: any;
-	collapseNested?: boolean;
-	sectionCompleteLabel: string;
-	sectionIncompleteLabel: string;
-};
-
-export const Sidebar: React.FC<SidebarProps> = ({
+export const Tasklist: React.FC<TasklistProps> = ({
 	title,
-	titlePath,
+	reviewPath,
+	welcomePath,
 	sections: originalSections,
 	maintenanceMode = false,
 	matchPath,
 	location,
 	history,
-	collapseNested = false,
 	sectionCompleteLabel,
 	sectionIncompleteLabel,
 }) => {
 	const routerProps = { matchPath, location, history };
 	const sections = useSectionsUpdater(originalSections, routerProps);
 	const [totalSections, totalCompleted] = useCalculateProgress(sections);
-	const [isHomePageActive, setIsHomePageActive] = useState(false);
-
-	useEffect(() => {
-		const match = matchPath(location.pathname, {
-			path: titlePath,
-			exact: true,
-		});
-		setIsHomePageActive(match);
-	}, [location.pathname]);
 
 	return (
-		<nav className={styles.sidebar}>
+		<nav className={styles.tasklist}>
 			<Flex
 				cfg={{ flexDirection: 'column', mt: 8 }}
-				className={styles.sidebarMenu}
+				className={styles.tasklistMenu}
 			>
-				<Flex className={isHomePageActive ? styles.activeLink : ''}>
+				<P
+					cfg={{
+						color: 'neutral.8',
+						fontSize: 4,
+						fontWeight: 3,
+						lineHeight: 6,
+					}}
+					className={styles.label}
+				>
+					{title}
+				</P>
+				<P
+					cfg={{
+						color: 'neutral.8',
+						fontSize: 3,
+						fontWeight: 3,
+						lineHeight: 6,
+					}}
+					className={styles.label}
+				>
+					You have completed {totalCompleted.length} of {totalSections.length}{' '}
+					sections
+				</P>
+				<Flex
+					cfg={{ flexDirection: 'column', mt: 4 }}
+				>
 					<Link
 						cfg={{
 							fontWeight: 3,
 							color: 'primary.2',
 							textAlign: 'left',
 							lineHeight: 6,
-							fontSize: 4,
+							fontSize: 2,
 						}}
-						onClick={() => history.push(titlePath)}
+						href={reviewPath}
 					>
-						{title}
+						Review current and previous scheme returns
 					</Link>
-				</Flex>
-				<Flex cfg={{ justifyContent: 'space-between', mt: 4, mb: 2 }}>
-					<P
+					<Link
 						cfg={{
-							color: 'neutral.8',
-							fontSize: 3,
 							fontWeight: 3,
+							color: 'primary.2',
+							textAlign: 'left',
 							lineHeight: 6,
+							fontSize: 2,
 						}}
-						className={styles.label}
+						href={welcomePath}
 					>
-						Section
-					</P>
-					<P
-						cfg={{
-							color: 'neutral.8',
-							fontSize: 3,
-							fontWeight: 3,
-							lineHeight: 6,
-						}}
-						className={styles.label}
-					>
-						Progress {totalCompleted.length} / {totalSections.length}
-					</P>
+						Return to the welcome page
+					</Link>
 				</Flex>
 			</Flex>
 			<ul className={styles.list}>
@@ -150,11 +128,10 @@ export const Sidebar: React.FC<SidebarProps> = ({
 					.sort((a, b) => a.order - b.order)
 					.map((item, key) => (
 						<li key={key}>
-							<SidebarMenu
+							<TasklistMenu
 								title={item.title}
 								links={item.links}
 								maintenanceMode={maintenanceMode}
-								collapsed={collapseNested}
 								sectionCompleteLabel={sectionCompleteLabel}
 								sectionIncompleteLabel={sectionIncompleteLabel}
 							/>

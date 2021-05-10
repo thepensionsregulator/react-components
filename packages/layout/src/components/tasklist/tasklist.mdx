@@ -1,0 +1,125 @@
+---
+name: Tasklist
+menu: Layout
+route: /layout/tasklist
+---
+
+import { Playground } from '@playground';
+import { Props } from 'docz';
+import { Tasklist } from './tasklist';
+import { matchPath } from 'react-router-dom';
+
+# Tasklist
+
+Tasklist component for tpr apps
+
+## Basic usage
+
+```js
+import { Tasklist } from '@tpr/layout';
+```
+
+<Playground>
+	{() => {
+		const location = {
+			pathname: '/scheme-name-and-address',
+		};
+		const sections = [
+			{
+				title: 'Scheme details',
+				links: [
+					{
+						name: 'Scheme name and address',
+						completed: true,
+						onClick: (link) => alert(`You clicked on ${link.path}`),
+						path: '/scheme-name-and-address',
+					},
+					{
+						name: 'Scheme status and membership',
+						onClick: (link) => alert(`You clicked on ${link.path}`),
+						path: '/scheme-status-and-membership',
+					},
+					{
+						name: 'Consent to electronic communication',
+						onClick: (link) => alert(`You clicked on ${link.path}`),
+						path: '/consent-to-electronic-communication',
+					},
+				],
+				order: 1,
+			},
+			{
+				title: 'Roles',
+				links: [
+					{
+						name: 'Trustee details',
+						completed: true,
+						active: (_path) => true,
+						path: '/trustee-details',
+					},
+					{ name: 'Employer details', path: '/employer-details' },
+					{
+						name: 'Service provider details',
+						path: '/service-provider-details',
+					},
+				],
+				order: 2,
+			},
+			{
+				title: 'Financial details',
+				links: [
+					{
+						name: 'S179 valuation',
+						completed: true,
+						active: (_path) => true,
+						path: '/s179-valuation',
+					},
+					{ name: 'Part 3 funding valuation', path: '/part-3-valuation' },
+					{
+						name: 'Buyout valuation',
+						completed: false,
+						path: '/buyout-valuation',
+					},
+					{
+						name: 'Asset breakdown',
+						completed: true,
+						path: '/asset-breakdown',
+					},
+				],
+				order: 3,
+			},
+			{
+				title: 'Review and submit',
+				links: [
+					{
+						name: 'Review',
+						completed: false,
+						disabled: true,
+						path: '/review-and-submit',
+					},{
+						name: 'Submit',
+						completed: false,
+						disabled: true,
+						path: '/review-and-submit',
+					}
+				],
+				order: 4,
+			},
+		];
+		return (
+			<Tasklist
+				title="Scheme return incomplete"
+				sections={sections}
+				maintenanceMode={false}
+				matchPath={matchPath}
+				location={location}
+				history={{ push: () => {} }}
+				sectionCompleteLabel="Completed"
+				sectionIncompleteLabel="Not started"
+			/>
+		);
+	}}
+</Playground>
+
+## API
+
+<Props of={Tasklist} />
