@@ -70,9 +70,9 @@ describe('Tasklist', () => {
 			<Tasklist
 				title="Scheme return home"
 				sections={sections}
-				matchPath={() => {}}
+				matchPath={() => {/*intentional*/}}
 				location={{}}
-				history={{ push: () => {} }}
+				history={{ push: () => { /*intentional*/ } }}
 				sectionCompleteLabel="Section complete"
 				sectionIncompleteLabel="Section not complete"
 			/>,
@@ -87,9 +87,9 @@ describe('Tasklist', () => {
 			<Tasklist
 				title={title}
 				sections={sections}
-				matchPath={() => {}}
+				matchPath={() => {/*intentional*/}}
 				location={{}}
-				history={{ push: () => {} }}
+				history={{ push: () => {/*intentional*/} }}
 				sectionCompleteLabel="Section complete"
 				sectionIncompleteLabel="Section not complete"
 			/>,
@@ -104,9 +104,9 @@ describe('Tasklist', () => {
 			<Tasklist
 				title={title}
 				sections={sections}
-				matchPath={() => {}}
+				matchPath={() => {/*intentional*/}}
 				location={{}}
-				history={{ push: () => {} }}
+				history={{ push: () => {/*intentional*/} }}
 				sectionCompleteLabel="Section complete"
 				sectionIncompleteLabel="Section not complete"
 			/>,
@@ -133,15 +133,15 @@ describe('Tasklist', () => {
 			<Tasklist
 				title={title}
 				sections={sections}
-				matchPath={() => {}}
+				matchPath={() => {/*intentional*/}}
 				location={{}}
-				history={{ push: () => {} }}
+				history={{ push: () => {/*intentional*/} }}
 				sectionCompleteLabel="Section complete"
 				sectionIncompleteLabel="Section not complete"
 			/>,
 		);
 
-		[s1.title, s2.title, s3.title].map((title) => {
+		[s1.title, s2.title, s3.title].forEach((title) => {
 			expect(getByText(title)).toBeInTheDocument();
 		});
 	});
@@ -152,15 +152,15 @@ describe('Tasklist', () => {
 			<Tasklist
 				title={title}
 				sections={sections}
-				matchPath={() => {}}
+				matchPath={() => {/*intentional*/}}
 				location={{}}
-				history={{ push: () => {} }}
+				history={{ push: () => {/*intentional*/} }}
 				sectionCompleteLabel="Section complete"
 				sectionIncompleteLabel="Section not complete"
 			/>,
 		);
 
-		[...s1.links, ...s2.links, ...s3.links].map((link) => {
+		[...s1.links, ...s2.links, ...s3.links].forEach((link) => {
 			expect(getByText(link.name)).toBeInTheDocument();
 		});
 	});
