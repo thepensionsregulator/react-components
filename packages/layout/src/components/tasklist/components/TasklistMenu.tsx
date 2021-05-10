@@ -37,11 +37,10 @@ const TasklistMenu: React.FC<TasklistMenuProps> = ({
 									justifyContent: 'space-between',
 									width: 10,
 								}}
-								aria-current={active(link.path, true) ? 'page' : null}
 							>
 								<NavItem link={link}>
 									<span>{link.name}</span>
-									{!maintenanceMode && !link.hideIcon && (
+									{!maintenanceMode && (
 										<TaskStatus
 											link={link}
 											sectionCompleteLabel={sectionCompleteLabel}
