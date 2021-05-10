@@ -70,9 +70,15 @@ describe('Tasklist', () => {
 			<Tasklist
 				title="Scheme return home"
 				sections={sections}
-				matchPath={() => {/*intentional*/}}
+				matchPath={() => {
+					/*intentional*/
+				}}
 				location={{}}
-				history={{ push: () => { /*intentional*/ } }}
+				history={{
+					push: () => {
+						/*intentional*/
+					},
+				}}
 				sectionCompleteLabel="Section complete"
 				sectionIncompleteLabel="Section not complete"
 			/>,
@@ -87,9 +93,15 @@ describe('Tasklist', () => {
 			<Tasklist
 				title={title}
 				sections={sections}
-				matchPath={() => {/*intentional*/}}
+				matchPath={() => {
+					/*intentional*/
+				}}
 				location={{}}
-				history={{ push: () => {/*intentional*/} }}
+				history={{
+					push: () => {
+						/*intentional*/
+					},
+				}}
 				sectionCompleteLabel="Section complete"
 				sectionIncompleteLabel="Section not complete"
 			/>,
@@ -104,9 +116,15 @@ describe('Tasklist', () => {
 			<Tasklist
 				title={title}
 				sections={sections}
-				matchPath={() => {/*intentional*/}}
+				matchPath={() => {
+					/*intentional*/
+				}}
 				location={{}}
-				history={{ push: () => {/*intentional*/} }}
+				history={{
+					push: () => {
+						/*intentional*/
+					},
+				}}
 				sectionCompleteLabel="Section complete"
 				sectionIncompleteLabel="Section not complete"
 			/>,
@@ -133,16 +151,22 @@ describe('Tasklist', () => {
 			<Tasklist
 				title={title}
 				sections={sections}
-				matchPath={() => {/*intentional*/}}
+				matchPath={() => {
+					/*intentional*/
+				}}
 				location={{}}
-				history={{ push: () => {/*intentional*/} }}
+				history={{
+					push: () => {
+						/*intentional*/
+					},
+				}}
 				sectionCompleteLabel="Section complete"
 				sectionIncompleteLabel="Section not complete"
 			/>,
 		);
 
-		[s1.title, s2.title, s3.title].forEach((title) => {
-			expect(getByText(title)).toBeInTheDocument();
+		[s1.title, s2.title, s3.title].forEach((t) => {
+			expect(getByText(t)).toBeInTheDocument();
 		});
 	});
 
@@ -152,9 +176,15 @@ describe('Tasklist', () => {
 			<Tasklist
 				title={title}
 				sections={sections}
-				matchPath={() => {/*intentional*/}}
+				matchPath={() => {
+					/*intentional*/
+				}}
 				location={{}}
-				history={{ push: () => {/*intentional*/} }}
+				history={{
+					push: () => {
+						/*intentional*/
+					},
+				}}
 				sectionCompleteLabel="Section complete"
 				sectionIncompleteLabel="Section not complete"
 			/>,
