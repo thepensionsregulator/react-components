@@ -1,8 +1,9 @@
 import React from 'react';
-import { H2, Flex, Hr, Link } from '@tpr/core';
+import { H2, Flex, Hr } from '@tpr/core';
 import { TasklistMenuProps } from './types';
 import TaskStatus from './TaskStatus';
 import styles from '../tasklist.module.scss';
+import { NavItem } from '../../../components/navitem/navitem';
 
 const TasklistMenu: React.FC<TasklistMenuProps> = ({
 	title,
@@ -21,57 +22,38 @@ const TasklistMenu: React.FC<TasklistMenuProps> = ({
 			</H2>
 			<Hr />
 			<ul className={styles.list}>
-				{links.map(
-					({ onClick, active, ...link }, key) => (
-						<li key={key}>
+				{links.map(({ active, ...link }, key) => (
+					<li key={key}>
+						<Flex
+							cfg={{
+								justifyContent: 'space-between',
+								my: 1,
+								flexDirection: 'row',
+							}}
+							className={styles.taskWrapper}
+						>
 							<Flex
 								cfg={{
 									justifyContent: 'space-between',
-									my: 1,
-									flexDirection: 'row',
+									width: 10,
 								}}
-								className={styles.taskWrapper}
+								aria-current={active(link.path, true) ? 'page' : null}
 							>
-								<Flex
-									cfg={{
-										justifyContent: 'space-between',
-										width: 10,
-									}}
-									aria-current={active(link.path, true) ? 'page' : null}
-								>
-									<Link
-										cfg={{
-											color: 'primary.2',
-											textAlign: 'left',
-											fontWeight: 3,
-											width: link.hideIcon ? 10 : 8,
-										}}
-										disabled={link.disabled}
-										onClick={() => onClick(link)}
-									>
-										<Flex
-											cfg={{
-												flexDirection: 'row',
-												justifyContent: 'space-between',
-												alignItems: 'center',
-											}}
-										>
-											<span>{link.name}</span>
-											{!maintenanceMode && !link.hideIcon && (
-												<TaskStatus
-													link={link}
-													sectionCompleteLabel={sectionCompleteLabel}
-													sectionIncompleteLabel={sectionIncompleteLabel}
-												/>
-											)}
-										</Flex>
-									</Link>
-								</Flex>
+								<NavItem link={link}>
+									<span>{link.name}</span>
+									{!maintenanceMode && !link.hideIcon && (
+										<TaskStatus
+											link={link}
+											sectionCompleteLabel={sectionCompleteLabel}
+											sectionIncompleteLabel={sectionIncompleteLabel}
+										/>
+									)}
+								</NavItem>
 							</Flex>
-							<Hr />
-						</li>
-					),
-				)}
+						</Flex>
+						<Hr />
+					</li>
+				))}
 			</ul>
 		</Flex>
 	);

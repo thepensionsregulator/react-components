@@ -1,30 +1,21 @@
-export type TasklistLinkProps = {
-	name: string;
-	/** route url path for react router, must match with Route path that is already declared */
-	path: string;
-	completed?: boolean;
-	onClick?: (link: Omit<TasklistLinkProps, 'onClick'>) => void;
-	disabled?: boolean;
-	active?: (path: string, exact: boolean) => boolean;
-	hideIcon?: boolean;
-};
+import { NavItemLinkProps } from "components/navitem/navitem";
 
 export type TasklistSectionProps = {
 	title: string;
-	links: TasklistLinkProps[];
+	links: NavItemLinkProps[];
 	order: number;
 };
 
 export type TasklistMenuProps = {
 	title: string;
-	links: TasklistLinkProps[];
+	links: NavItemLinkProps[];
 	maintenanceMode: boolean;
 	sectionCompleteLabel: string;
 	sectionIncompleteLabel: string;
 };
 
 export type TaskStatusIconProps = {
-	link: TasklistLinkProps;
+	link: NavItemLinkProps;
 	sectionCompleteLabel: string;
 	sectionIncompleteLabel: string;
 };

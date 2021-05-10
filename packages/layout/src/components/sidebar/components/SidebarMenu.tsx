@@ -1,8 +1,10 @@
 import React, { useState, useEffect } from 'react';
 import { H2, Flex, Hr, Link } from '@tpr/core';
-import { SidebarLinkProps, SidebarMenuProps } from './types';
+import { SidebarMenuProps } from './types';
 import StatusIcon from './StatusIcon';
 import styles from '../sidebar.module.scss';
+import { NavItem } from '../../../components/navitem/navitem';
+import { SidebarLinkProps } from '@tpr/layout';
 
 const SidebarMenu: React.FC<SidebarMenuProps> = ({
 	title,
@@ -26,7 +28,7 @@ const SidebarMenu: React.FC<SidebarMenuProps> = ({
 				<ul className={styles.list}>
 					{links.map(
 						(
-							{ onClick = () => {}, active = () => false, ...innerLink },
+							{ active = () => false, ...innerLink },
 							key,
 						) => (
 							<li key={key}>
@@ -35,33 +37,16 @@ const SidebarMenu: React.FC<SidebarMenuProps> = ({
 									className={styles.nested}
 									aria-current={active(innerLink.path, true) ? 'page' : null}
 								>
-									<Link
-										cfg={{
-											color: 'primary.2',
-											textAlign: 'left',
-											fontWeight: 3,
-											width: innerLink.hideIcon ? 10 : 8,
-										}}
-										disabled={innerLink.disabled}
-										onClick={() => onClick(innerLink)}
-									>
-										<Flex
-											cfg={{
-												flexDirection: 'row',
-												justifyContent: 'space-between',
-												alignItems: 'center',
-											}}
-										>
-											<span>{innerLink.name}</span>
-											{!maintenanceMode && !innerLink.hideIcon && (
-												<StatusIcon
-													link={innerLink}
-													sectionCompleteLabel={sectionCompleteLabel}
-													sectionIncompleteLabel={sectionIncompleteLabel}
-												/>
-											)}
-										</Flex>
-									</Link>
+									<NavItem link={innerLink}>
+										<span>{innerLink.name}</span>
+										{!maintenanceMode && !innerLink.hideIcon && (
+											<StatusIcon
+												link={innerLink}
+												sectionCompleteLabel={sectionCompleteLabel}
+												sectionIncompleteLabel={sectionIncompleteLabel}
+											/>
+										)}
+									</NavItem>
 								</Flex>
 								{innerLink.links && generateSubmenu(innerLink.links)}
 							</li>
