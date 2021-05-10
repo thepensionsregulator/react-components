@@ -4,7 +4,7 @@ import { SidebarMenuProps } from './types';
 import StatusIcon from './StatusIcon';
 import styles from '../sidebar.module.scss';
 import { NavItem } from '../../../components/navitem/navitem';
-import { SidebarLinkProps } from '@tpr/layout';
+import { NavItemLinkProps } from 'components/navitem/types';
 
 const SidebarMenu: React.FC<SidebarMenuProps> = ({
 	title,
@@ -22,7 +22,7 @@ const SidebarMenu: React.FC<SidebarMenuProps> = ({
 		!collapsed && setClasses(styles.nestedWrapper);
 	}, [collapsed]);
 
-	const generateSubmenu = (links: SidebarLinkProps[]) => {
+	const generateSubmenu = (links: NavItemLinkProps[]) => {
 		return (
 			<Flex cfg={{ flexDirection: 'column', pl: 6 }} className={classes}>
 				<ul className={styles.list}>
