@@ -19,3 +19,19 @@ export type TaskStatusIconProps = {
 	sectionCompleteLabel: string;
 	sectionIncompleteLabel: string;
 };
+
+export type TasklistProps = {
+	title: string;
+	reviewPath?: string;
+	welcomePath?: string;
+	maintenanceMode?: boolean;
+	sections: TasklistSectionProps[];
+	/** import from react-router-dom */
+	matchPath: any;
+	/** import from react-router-dom */
+	location: any;
+	/** import from react-router-dom */
+	history: any;
+	sectionCompleteLabel: string;
+	sectionIncompleteLabel: string;
+};

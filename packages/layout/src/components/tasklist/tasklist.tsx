@@ -1,8 +1,8 @@
-import React, { useEffect, useMemo, useState } from 'react';
+import React, { useMemo } from 'react';
 import { Flex, Link, P, flatten } from '@tpr/core';
 import { callAllEventHandlers } from '../../utils';
 import TasklistMenu from './components/TasklistMenu';
-import { TasklistSectionProps } from './components/types';
+import { TasklistProps, TasklistSectionProps } from './components/types';
 import styles from './tasklist.module.scss';
 import { ReactRouterDomProps } from 'components/types/types';
 
@@ -49,25 +49,9 @@ export function useCalculateProgress(sections: TasklistSectionProps[]) {
 	return [totalSections, totalCompleted];
 }
 
-export type TasklistProps = {
-	title: string;
-	titlePath?: string;
-	welcomePath?: string;
-	maintenanceMode?: boolean;
-	sections: TasklistSectionProps[];
-	/** import from react-router-dom */
-	matchPath: any;
-	/** import from react-router-dom */
-	location: any;
-	/** import from react-router-dom */
-	history: any;
-	sectionCompleteLabel: string;
-	sectionIncompleteLabel: string;
-};
-
 export const Tasklist: React.FC<TasklistProps> = ({
 	title,
-	titlePath,
+	reviewPath,
 	welcomePath,
 	sections: originalSections,
 	maintenanceMode = false,
@@ -80,15 +64,6 @@ export const Tasklist: React.FC<TasklistProps> = ({
 	const routerProps = { matchPath, location, history };
 	const sections = useSectionsUpdater(originalSections, routerProps);
 	const [totalSections, totalCompleted] = useCalculateProgress(sections);
-	const [isHomePageActive, setIsHomePageActive] = useState(false);
-
-	useEffect(() => {
-		const match = matchPath(location.pathname, {
-			path: titlePath,
-			exact: true,
-		});
-		setIsHomePageActive(match);
-	}, [location.pathname]);
 
 	return (
 		<nav className={styles.tasklist}>
@@ -121,7 +96,6 @@ export const Tasklist: React.FC<TasklistProps> = ({
 				</P>
 				<Flex
 					cfg={{ flexDirection: 'column', mt: 4 }}
-					className={isHomePageActive ? styles.activeLink : ''}
 				>
 					<Link
 						cfg={{
@@ -131,7 +105,7 @@ export const Tasklist: React.FC<TasklistProps> = ({
 							lineHeight: 6,
 							fontSize: 2,
 						}}
-						onClick={() => history.push(titlePath)}
+						onClick={() => history.push(reviewPath)}
 					>
 						Review current and previous scheme returns
 					</Link>
