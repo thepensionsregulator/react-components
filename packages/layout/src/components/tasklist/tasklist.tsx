@@ -37,21 +37,24 @@ export const useSectionsUpdater = (
 };
 
 export function useCalculateProgress(sections: TasklistSectionProps[]) {
-	const totalSections = useMemo(
+	const allSections = useMemo(
 		() => flatten(sections.map((section) => section.links)),
 		[sections],
 	);
-	const totalCompleted = useMemo(
-		() => totalSections.filter((section) => section.completed),
-		[totalSections],
+	const allCompleted = useMemo(
+		() => allSections.filter((section) => section.completed),
+		[allSections],
 	);
 
-	return [totalSections, totalCompleted];
+	return [allSections, allCompleted];
 }
 
 export const Tasklist: React.FC<TasklistProps> = ({
-	title,
+	titleComplete,
+	titleIncomplete,
+	reviewTitle,
 	reviewPath,
+	welcomeTitle,
 	welcomePath,
 	sections: originalSections,
 	maintenanceMode = false,
@@ -63,7 +66,8 @@ export const Tasklist: React.FC<TasklistProps> = ({
 }) => {
 	const routerProps = { matchPath, location, history };
 	const sections = useSectionsUpdater(originalSections, routerProps);
-	const [totalSections, totalCompleted] = useCalculateProgress(sections);
+	const [allSections, allCompleted] = useCalculateProgress(sections);
+	const completed: boolean = allSections.length == allCompleted.length;
 
 	return (
 		<nav className={styles.tasklist}>
@@ -80,7 +84,7 @@ export const Tasklist: React.FC<TasklistProps> = ({
 					}}
 					className={styles.label}
 				>
-					{title}
+					{completed ? titleComplete : titleIncomplete}
 				</P>
 				<P
 					cfg={{
@@ -91,12 +95,9 @@ export const Tasklist: React.FC<TasklistProps> = ({
 					}}
 					className={styles.label}
 				>
-					You have completed {totalCompleted.length} of {totalSections.length}{' '}
-					sections
+					{`You have completed ${allCompleted.length} of ${allSections.length} sections`}
 				</P>
-				<Flex
-					cfg={{ flexDirection: 'column', mt: 4 }}
-				>
+				<Flex cfg={{ flexDirection: 'column', mt: 4 }}>
 					<Link
 						cfg={{
 							fontWeight: 3,
@@ -107,7 +108,7 @@ export const Tasklist: React.FC<TasklistProps> = ({
 						}}
 						href={reviewPath}
 					>
-						Review current and previous scheme returns
+						{reviewTitle}
 					</Link>
 					<Link
 						cfg={{
@@ -119,7 +120,7 @@ export const Tasklist: React.FC<TasklistProps> = ({
 						}}
 						href={welcomePath}
 					>
-						Return to the welcome page
+						{welcomeTitle}
 					</Link>
 				</Flex>
 			</Flex>

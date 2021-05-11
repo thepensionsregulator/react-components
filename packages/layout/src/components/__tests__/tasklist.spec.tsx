@@ -66,69 +66,22 @@ const sections = [s1, s2, s3];
 
 describe('Tasklist', () => {
 	test('is accessible', async () => {
-		const { container } = render(
-			<Tasklist
-				title="Scheme return home"
-				sections={sections}
-				matchPath={() => {
-					/*intentional*/
-				}}
-				location={{}}
-				history={{
-					push: () => {
-						/*intentional*/
-					},
-				}}
-				sectionCompleteLabel="Section complete"
-				sectionIncompleteLabel="Section not complete"
-			/>,
-		);
+		const title = 'Scheme return home';
+		const { container } = getComponent(title);
 		const results = await axe(container);
 		expect(results).toHaveNoViolations();
 	});
 
 	test('renders main header title', () => {
 		const title = 'Scheme return home';
-		const { getByText } = render(
-			<Tasklist
-				title={title}
-				sections={sections}
-				matchPath={() => {
-					/*intentional*/
-				}}
-				location={{}}
-				history={{
-					push: () => {
-						/*intentional*/
-					},
-				}}
-				sectionCompleteLabel="Section complete"
-				sectionIncompleteLabel="Section not complete"
-			/>,
-		);
+		const { getByText } = getComponent(title);
 		expect(getByText(title)).toBeInTheDocument();
 		expect(true).toBeTruthy();
 	});
 
 	test('calculates and displays progress correctly', () => {
 		const title = 'Scheme return home';
-		const { getByText } = render(
-			<Tasklist
-				title={title}
-				sections={sections}
-				matchPath={() => {
-					/*intentional*/
-				}}
-				location={{}}
-				history={{
-					push: () => {
-						/*intentional*/
-					},
-				}}
-				sectionCompleteLabel="Section complete"
-				sectionIncompleteLabel="Section not complete"
-			/>,
-		);
+		const { getByText } = getComponent(title);
 
 		const progressText = getByText((content) =>
 			content.startsWith('You have completed'),
@@ -147,23 +100,7 @@ describe('Tasklist', () => {
 
 	test('each section title is visible', () => {
 		const title = 'Scheme return home';
-		const { getByText } = render(
-			<Tasklist
-				title={title}
-				sections={sections}
-				matchPath={() => {
-					/*intentional*/
-				}}
-				location={{}}
-				history={{
-					push: () => {
-						/*intentional*/
-					},
-				}}
-				sectionCompleteLabel="Section complete"
-				sectionIncompleteLabel="Section not complete"
-			/>,
-		);
+		const { getByText } = getComponent(title);
 
 		[s1.title, s2.title, s3.title].forEach((t) => {
 			expect(getByText(t)).toBeInTheDocument();
@@ -172,23 +109,7 @@ describe('Tasklist', () => {
 
 	test('each section link name is visible', () => {
 		const title = 'Scheme return home';
-		const { getByText } = render(
-			<Tasklist
-				title={title}
-				sections={sections}
-				matchPath={() => {
-					/*intentional*/
-				}}
-				location={{}}
-				history={{
-					push: () => {
-						/*intentional*/
-					},
-				}}
-				sectionCompleteLabel="Section complete"
-				sectionIncompleteLabel="Section not complete"
-			/>,
-		);
+		const { getByText } = getComponent(title);
 
 		[...s1.links, ...s2.links, ...s3.links].forEach((link) => {
 			expect(getByText(link.name)).toBeInTheDocument();
@@ -202,5 +123,30 @@ describe('Tasklist', () => {
 		expect(totalCompleted.length).toMatchInlineSnapshot(`3`);
 		expect(totalSections.length).toMatchInlineSnapshot(`8`);
 	});
-});
 
+	const getComponent = (title: string) => {
+		const { container, getByText } = render(
+			<Tasklist
+				titleComplete={title}
+				titleIncomplete={title}
+				reviewTitle="Review page"
+				welcomeTitle="Welcome page"
+				reviewPath="/"
+				welcomePath="/"
+				sections={sections}
+				matchPath={() => {
+					/*intentional*/
+				}}
+				location={{}}
+				history={{
+					push: () => {
+						/*intentional*/
+					},
+				}}
+				sectionCompleteLabel="Section complete"
+				sectionIncompleteLabel="Section not complete"
+			/>,
+		);
+		return { container, getByText };
+	};
+});

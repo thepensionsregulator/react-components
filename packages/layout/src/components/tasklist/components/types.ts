@@ -21,9 +21,12 @@ export type TaskStatusIconProps = {
 };
 
 export type TasklistProps = {
-	title: string;
-	reviewPath?: string;
-	welcomePath?: string;
+	titleComplete: string;
+	titleIncomplete: string;
+	reviewTitle: string;
+	reviewPath: string;
+	welcomeTitle: string;
+	welcomePath: string;
 	maintenanceMode?: boolean;
 	sections: TasklistSectionProps[];
 	/** import from react-router-dom */
