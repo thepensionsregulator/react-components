@@ -63,6 +63,7 @@ export const Tasklist: React.FC<TasklistProps> = ({
 	history,
 	sectionCompleteLabel,
 	sectionIncompleteLabel,
+	testId,
 }) => {
 	const routerProps = { matchPath, location, history };
 	const sections = useSectionsUpdater(originalSections, routerProps);
@@ -70,7 +71,7 @@ export const Tasklist: React.FC<TasklistProps> = ({
 	const completed: boolean = allSections.length == allCompleted.length;
 
 	return (
-		<nav className={styles.tasklist}>
+		<nav className={styles.tasklist} data-testid={testId}>
 			<Flex
 				cfg={{ flexDirection: 'column', mt: 8 }}
 				className={styles.tasklistMenu}

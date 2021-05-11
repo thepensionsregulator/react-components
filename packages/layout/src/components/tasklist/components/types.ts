@@ -37,4 +37,5 @@ export type TasklistProps = {
 	history: any;
 	sectionCompleteLabel: string;
 	sectionIncompleteLabel: string;
+	testId?: string;
 };
