@@ -31,18 +31,18 @@ import { Tasklist } from '@tpr/layout';
 					{
 						name: 'Scheme name and address',
 						completed: true,
-						onClick: (link) => alert(`You clicked on ${link.path}`),
-						path: '/scheme-name-and-address',
+						onClick: (link) => alert(`You clicked on /scheme-name-and-address`),
+						path: '',
 					},
 					{
 						name: 'Scheme status and membership',
-						onClick: (link) => alert(`You clicked on ${link.path}`),
-						path: '/scheme-status-and-membership',
+						onClick: (link) => alert(`You clicked on /scheme-status-and-membership`),
+						path: '',
 					},
 					{
 						name: 'Consent to electronic communication',
-						onClick: (link) => alert(`You clicked on ${link.path}`),
-						path: '/consent-to-electronic-communication',
+						onClick: (link) => alert(`You clicked on /consent-to-electronic-communication`),
+						path: '',
 					},
 				],
 				order: 1,
@@ -107,7 +107,8 @@ import { Tasklist } from '@tpr/layout';
 		];
 		return (
 			<Tasklist
-				title="Scheme return incomplete"
+				titleComplete="Scheme return incomplete"
+				titleIncomplete="Scheme return incomplete"
 				reviewTitle="Review current and previous scheme returns"
 				welcomeTitle="Return to the welcome page"
 				sections={sections}

@@ -21,7 +21,8 @@ export type TaskStatusIconProps = {
 };
 
 export type TasklistProps = {
-	title: string;
+	titleComplete: string;
+	titleIncomplete: string;
 	reviewTitle: string;
 	reviewPath: string;
 	welcomeTitle: string;
