@@ -26,12 +26,14 @@ import {
 } from '../../../utils';
 import styles from '../cards.module.scss';
 
-const CardContent: React.FC<CardContentProps> = ({ isRssCard = false }) => {
+const CardContent: React.FC<CardContentProps> = ({
+	enableContactDetails = true,
+}) => {
 	const { current, i18n, send, addressAPI } = useTrusteeContext();
 	const { trustee } = current.context;
 
 	if (current.matches('preview')) {
-		return <Preview isRssCard={isRssCard} />;
+		return <Preview enableContactDetails={enableContactDetails} />;
 	} else if (current.matches({ edit: { trustee: 'name' } })) {
 		return <Name />;
 	} else if (
@@ -139,7 +141,7 @@ const isComplete = (context: TrusteeContext) => {
 
 export const TrusteeCard: React.FC<Omit<TrusteeCardProps, 'children'>> = ({
 	cfg,
-	isRssCard = false,
+	enableContactDetails = true,
 	...props
 }) => {
 	return (
@@ -185,7 +187,7 @@ export const TrusteeCard: React.FC<Omit<TrusteeCardProps, 'children'>> = ({
 								: i18n.preview.statusText.unconfirmed
 						}
 					/>
-					<CardContent isRssCard={isRssCard} />
+					<CardContent enableContactDetails={enableContactDetails} />
 				</Section>
 			)}
 		</TrusteeProvider>

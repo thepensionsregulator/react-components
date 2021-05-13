@@ -124,5 +124,5 @@ export const defaultPhoneErrorMessages: InputErrorMessages = {
 };
 
 export interface CardContentProps {
-	isRssCard?: boolean;
+	enableContactDetails?: boolean;
 }

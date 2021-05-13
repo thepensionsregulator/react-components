@@ -16,6 +16,7 @@ import {
 	CardPersonalDetails,
 	CardContactDetails,
 	CardAddress,
+	CardContentProps,
 } from '../common/interfaces';
 import { AddressAPIType } from '@tpr/forms';
 
@@ -60,7 +61,7 @@ export interface TrusteeContextProps {
 	current: Partial<State<TC, any, any, any>>;
 }
 
-export interface TrusteeCardProps {
+export interface TrusteeCardProps extends CardContentProps {
 	trustee: Trustee;
 	complete?: boolean;
 	preValidatedData?: boolean;
@@ -75,7 +76,6 @@ export interface TrusteeCardProps {
 	testId?: string | number;
 	children?: RenderProps | ReactElement;
 	cfg?: SpaceProps;
-	isRssCard?: boolean;
 }
 
 export const TrusteeProvider = ({

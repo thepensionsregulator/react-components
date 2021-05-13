@@ -10,7 +10,9 @@ import {
 import styles from '../../../cards.module.scss';
 import { CardContentProps } from 'components/cards/common/interfaces';
 
-export const Preview: React.FC<CardContentProps> = ({ isRssCard = false }) => {
+export const Preview: React.FC<CardContentProps> = ({
+	enableContactDetails = true,
+}) => {
 	const { current, send, onCorrect, i18n } = useTrusteeContext();
 	const { trustee, complete, preValidatedData } = current.context;
 
@@ -48,7 +50,7 @@ export const Preview: React.FC<CardContentProps> = ({ isRssCard = false }) => {
 				</Flex>
 
 				{/* Contact details section: open for editing	 */}
-				{!isRssCard && (
+				{enableContactDetails && (
 					<Flex
 						cfg={{ width: 5, flex: '0 0 auto', flexDirection: 'column', pl: 4 }}
 					>

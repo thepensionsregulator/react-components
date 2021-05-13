@@ -46,7 +46,7 @@ let component,
 	findByTextQuery;
 let updatedTrustee = null;
 
-const getCard = (isRssCard: boolean) => {
+const getCard = (enableContactDetails: boolean) => {
 	return (
 		<TrusteeCard
 			onDetailsSave={(values) => {
@@ -64,12 +64,12 @@ const getCard = (isRssCard: boolean) => {
 			complete={true}
 			trustee={trustee}
 			testId={trustee.schemeRoleId}
-			isRssCard={isRssCard}
+			enableContactDetails={enableContactDetails}
 		/>
 	);
 };
 
-const setupComponent = (isRssCard: boolean) => {
+const setupComponent = (enableContactDetails: boolean) => {
 	const {
 		container,
 		getByText,
@@ -78,7 +78,7 @@ const setupComponent = (isRssCard: boolean) => {
 		getByTestId,
 		getByRole,
 		queryByText,
-	} = render(getCard(isRssCard));
+	} = render(getCard(enableContactDetails));
 
 	component = container;
 	findByText = getByText;
@@ -89,9 +89,9 @@ const setupComponent = (isRssCard: boolean) => {
 	findByTextQuery = queryByText;
 };
 
-describe('TrusteeCard when isRssCard is false', () => {
+describe('TrusteeCard enableContactDetails == true', () => {
 	beforeEach(async () => {
-		setupComponent(false);
+		setupComponent(true);
 	});
 
 	afterEach(() => {
@@ -133,7 +133,7 @@ describe('TrusteeCard when isRssCard is false', () => {
 			expect(addressPreview.innerHTML).toEqual(addressExpected);
 		});
 
-		test('contact details shows up correctly, when isRssCard property is false', () => {
+		test('contact details shows up correctly', () => {
 			expect(findByText('Phone')).toBeDefined();
 			expect(findByText(trustee.telephoneNumber)).toBeDefined();
 			expect(findByText('Email')).toBeDefined();
@@ -271,9 +271,9 @@ describe('TrusteeCard when isRssCard is false', () => {
 	});
 });
 
-describe('TrusteeCard when isRssCard is true', () => {
+describe('TrusteeCard when enableContactDetails == false', () => {
 	beforeEach(async () => {
-		setupComponent(true);
+		setupComponent(false);
 	});
 
 	afterEach(() => {
@@ -281,7 +281,7 @@ describe('TrusteeCard when isRssCard is true', () => {
 	});
 
 	describe('Trustee Preview', () => {
-		test('contact details does not show when isRssCard property is true', () => {
+		test('contact details does not show when enableContactDetails property is false', () => {
 			expect(findByTextQuery('Phone')).toBeNull();
 			expect(findByTextQuery(trustee.telephoneNumber)).toBeNull();
 			expect(findByTextQuery('Email')).toBeNull();
