@@ -13,6 +13,7 @@ export type LinkProps = {
 	className?: string;
 	underline?: boolean;
 	testId?: string;
+	taskList?: boolean;
 	[key: string]: any;
 };
 export const Link: React.FC<LinkProps> = ({
@@ -20,6 +21,7 @@ export const Link: React.FC<LinkProps> = ({
 	underline = false,
 	className,
 	testId,
+	taskList = false,
 	children,
 	...props
 }) => {
@@ -37,10 +39,10 @@ export const Link: React.FC<LinkProps> = ({
 		...props,
 	};
 
-	if (props.onClick && !props.href) {
+	if (props.onClick && (!props.href || taskList)) {
 		anchorProps.onClick = function (e) {
-			props.onClick();
 			e.preventDefault();
+			props.onClick();
 		};
 	}
 
