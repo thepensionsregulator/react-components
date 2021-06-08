@@ -44,13 +44,12 @@
 			color: $colors-neutral-8;
 		}
 	}
+	.taskName {
+		padding: 12px 0;
+	}
 
 	div.taskWrapper {
 		position: relative;
-		// border: 2px solid red;
-		span {
-			margin: 8px 0px;
-		}
 	}
 
 	div[aria-current] {
