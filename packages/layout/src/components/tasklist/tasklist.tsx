@@ -108,6 +108,8 @@ export const Tasklist: React.FC<TasklistProps> = ({
 							fontSize: 2,
 						}}
 						href={reviewPath}
+						onClick={() => history.push(reviewPath)}
+						taskList={true}
 					>
 						{reviewTitle}
 					</Link>
@@ -120,6 +122,8 @@ export const Tasklist: React.FC<TasklistProps> = ({
 							fontSize: 2,
 						}}
 						href={welcomePath}
+						onClick={() => history.push(welcomePath)}
+						taskList={true}
 					>
 						{welcomeTitle}
 					</Link>
