@@ -27,7 +27,6 @@
 				min-width: 22px;
 			}
 		}
-
 	}
 
 	.taskStatus {
@@ -38,7 +37,7 @@
 
 		&.complete {
 			background-color: $colors-primary-3;
-			color:$white;
+			color: $white;
 		}
 		&.incomplete {
 			background-color: $colors-neutral-3;
@@ -48,6 +47,10 @@
 
 	div.taskWrapper {
 		position: relative;
+		// border: 2px solid red;
+		span {
+			margin: 8px 0px;
+		}
 	}
 
 	div[aria-current] {

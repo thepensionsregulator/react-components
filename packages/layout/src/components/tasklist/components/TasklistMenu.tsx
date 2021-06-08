@@ -27,7 +27,7 @@ const TasklistMenu: React.FC<TasklistMenuProps> = ({
 						<Flex
 							cfg={{
 								justifyContent: 'space-between',
-								my: 1,
+
 								flexDirection: 'row',
 							}}
 							className={styles.taskWrapper}

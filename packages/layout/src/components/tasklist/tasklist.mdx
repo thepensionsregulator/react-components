@@ -36,12 +36,14 @@ import { Tasklist } from '@tpr/layout';
 					},
 					{
 						name: 'Scheme status and membership',
-						onClick: (link) => alert(`You clicked on /scheme-status-and-membership`),
+						onClick: (link) =>
+							alert(`You clicked on /scheme-status-and-membership`),
 						path: '',
 					},
 					{
 						name: 'Consent to electronic communication',
-						onClick: (link) => alert(`You clicked on /consent-to-electronic-communication`),
+						onClick: (link) =>
+							alert(`You clicked on /consent-to-electronic-communication`),
 						path: '',
 					},
 				],
@@ -96,19 +98,20 @@ import { Tasklist } from '@tpr/layout';
 						disabled: true,
 						path: '/review-and-submit',
 						hideIcon: true,
-					},{
+					},
+					{
 						name: 'Submit',
 						completed: false,
 						disabled: true,
 						path: '/review-and-submit',
-					}
+					},
 				],
 				order: 4,
 			},
 		];
 		return (
 			<Tasklist
-				titleComplete="Scheme return incomplete"
+				titleComplete="Scheme return complete"
 				titleIncomplete="Scheme return incomplete"
 				reviewTitle="Review current and previous scheme returns"
 				welcomeTitle="Return to the welcome page"
