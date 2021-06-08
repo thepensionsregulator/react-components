@@ -14,6 +14,7 @@ export const NavItem: React.FC<NavItemProps> = ({ link, children }) => {
 			disabled={link.disabled}
 			href={link.path}
 			onClick={() => link.onClick(link)}
+			taskList={true}
 		>
 			<Flex
 				cfg={{
