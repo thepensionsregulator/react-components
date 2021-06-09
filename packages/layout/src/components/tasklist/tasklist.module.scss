@@ -27,7 +27,6 @@
 				min-width: 22px;
 			}
 		}
-
 	}
 
 	.taskStatus {
@@ -38,12 +37,15 @@
 
 		&.complete {
 			background-color: $colors-primary-3;
-			color:$white;
+			color: $white;
 		}
 		&.incomplete {
 			background-color: $colors-neutral-3;
 			color: $colors-neutral-8;
 		}
+	}
+	.taskName {
+		padding: 7px 0;
 	}
 
 	div.taskWrapper {

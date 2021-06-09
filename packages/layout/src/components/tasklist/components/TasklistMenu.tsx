@@ -39,7 +39,7 @@ const TasklistMenu: React.FC<TasklistMenuProps> = ({
 								}}
 							>
 								<NavItem link={link}>
-									<span>{link.name}</span>
+									<span className={styles.taskName}>{link.name}</span>
 									{!maintenanceMode && !link.hideIcon && (
 										<TaskStatus
 											link={link}
