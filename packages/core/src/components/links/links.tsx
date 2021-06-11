@@ -6,22 +6,32 @@ import {
 	LayoutProps,
 } from '../globals/globals';
 import { useClassNames } from '../../hooks/use-class-names';
+import { Span } from '../typography/typography';
 import styles from './links.module.scss';
 
-export type LinkProps = {
+export interface LinkProps {
 	cfg?: SpaceProps & ColorProps & TypographyProps & LayoutProps;
 	className?: string;
 	underline?: boolean;
 	testId?: string;
 	taskList?: boolean;
+	hint?: string;
+	hintCfg?: SpaceProps & ColorProps & TypographyProps & LayoutProps;
+	hintId?: string;
 	[key: string]: any;
-};
+}
+
+const defaultHintId = 'cancelHint';
+
 export const Link: React.FC<LinkProps> = ({
 	cfg: globalStyles,
 	underline = false,
 	className,
 	testId,
 	taskList = false,
+	hint,
+	hintCfg,
+	hintId = defaultHintId,
 	children,
 	...props
 }) => {
@@ -36,6 +46,7 @@ export const Link: React.FC<LinkProps> = ({
 		className: classNames,
 		href: props.href ? props.href : '#',
 		onClick: null,
+		'aria-describedby': hint ? hintId : null,
 		...props,
 	};
 
@@ -46,5 +57,17 @@ export const Link: React.FC<LinkProps> = ({
 		};
 	}
 
-	return React.createElement('a', anchorProps, children);
+	const Anchor: React.FC = () =>
+		React.createElement('a', anchorProps, children);
+
+	return (
+		<>
+			<Anchor />
+			{hint && (
+				<Span className={styles.hint} id={hintId} cfg={{ ...hintCfg }}>
+					{hint}
+				</Span>
+			)}
+		</>
+	);
 };
