@@ -6,6 +6,10 @@
 	cursor: pointer;
 }
 
+.button + .button {
+	margin-left: $space-3;
+}
+
 /* 'primary' | 'secondary' | 'link' | 'outlined'; */
 
 .appearance-primary {
@@ -160,7 +164,7 @@
 
 	&:hover {
 		background: $colors-accents-2 !important;
-		border-color: $colors-accents-2!important;
+		border-color: $colors-accents-2 !important;
 		color: $white;
 	}
 }
