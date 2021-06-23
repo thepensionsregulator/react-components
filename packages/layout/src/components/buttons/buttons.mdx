@@ -158,6 +158,14 @@ import { ArrowLink, ArrowButton, CrossButton } from '@tpr/layout';
 		title="Submit"
 		pointsTo="right"
 		onClick={() => console.log('clicked')}
+		cfg={{ mr: 3 }}
+		ariaDisabled={true}
+	/>
+	<ArrowButton
+		iconSide="right"
+		title="Submit"
+		pointsTo="right"
+		onClick={() => console.log('clicked')}
 		disabled
 		disabledText="Loading..."
 	/>
