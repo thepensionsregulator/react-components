@@ -12,10 +12,12 @@ export interface ArrowButtonProps extends ButtonProps {
 	pointsTo?: 'left' | 'up' | 'right' | 'down';
 	iconSide?: 'left' | 'right';
 	iconColor?: ColorProps['fill'];
+	ariaDisabled?: boolean;
 }
 export const ArrowButton: React.FC<ArrowButtonProps> = ({
 	intent,
 	appearance,
+	ariaDisabled = null,
 	type = 'button',
 	onClick = undefined,
 	disabled,
@@ -34,6 +36,7 @@ export const ArrowButton: React.FC<ArrowButtonProps> = ({
 			type={type}
 			onClick={onClick}
 			disabled={disabled}
+			aria-disabled={ariaDisabled}
 			cfg={cfg}
 			testId={testId}
 			className={styles.arrowButton}
