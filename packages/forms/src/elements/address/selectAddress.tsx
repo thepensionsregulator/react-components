@@ -7,24 +7,7 @@ import { ArrowRight } from '@tpr/icons';
 import PostcodeFormatter from './postcodeFormatter';
 import elementStyles from '../elements.module.scss';
 import styles from './addressLookup.module.scss';
-
-type SelectAddressProps = {
-	loading: boolean;
-	testId?: string;
-	postcode?: string;
-	addresses: Address[];
-	onChangePostcodeClick: () => void;
-	onAddressSelected: (address: Address) => void;
-	postcodeLookupLabel: string;
-	changePostcodeButton: string;
-	changePostcodeAriaLabel?: string;
-	selectAddressLabel: string;
-	selectAddressPlaceholder?: string;
-	selectAddressButton: string;
-	selectAddressRequiredMessage: string;
-	noAddressesFoundMessage: string;
-	onValidatePostcode?: (isValid: boolean) => void | null;
-};
+import { SelectAddressProps } from './types';
 
 export const SelectAddress: React.FC<SelectAddressProps> = ({
 	loading,
@@ -42,6 +25,7 @@ export const SelectAddress: React.FC<SelectAddressProps> = ({
 	selectAddressRequiredMessage,
 	noAddressesFoundMessage,
 	onValidatePostcode,
+	setSubmitForm,
 }) => {
 	// if missing fields are undefined rather than empty string they remain at their previous values
 	function ensureNoUndefinedFields(addresses: Address[]) {

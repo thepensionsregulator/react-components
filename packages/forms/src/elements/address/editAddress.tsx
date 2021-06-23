@@ -1,28 +1,11 @@
 import React, { useEffect, useRef } from 'react';
 import { Field, useForm } from 'react-final-form';
-import { Address } from './address';
 import { FFInputText } from '../text/text';
 import { HiddenInput } from '../hidden/hidden';
 import { P, Button } from '@tpr/core';
 import elementStyles from '../elements.module.scss';
 import styles from './addressLookup.module.scss';
-
-type EditAddressProps = {
-	initialValue?: Address;
-	value?: Address;
-	loading: boolean;
-	testId?: string;
-	onChangeAddressClick: () => void;
-	addressLine1Label: string;
-	addressLine1RequiredMessage: string;
-	addressLine2Label: string;
-	addressLine3Label: string;
-	townLabel: string;
-	countyLabel: string;
-	postcodeLabel: string;
-	countryLabel: string;
-	changeAddressButton: string;
-};
+import { EditAddressProps } from './types';
 
 export const EditAddress: React.FC<EditAddressProps> = React.memo(
 	({
@@ -40,6 +23,7 @@ export const EditAddress: React.FC<EditAddressProps> = React.memo(
 		postcodeLabel,
 		countryLabel,
 		changeAddressButton,
+		setSubmitForm,
 	}) => {
 		const form = useForm();
 

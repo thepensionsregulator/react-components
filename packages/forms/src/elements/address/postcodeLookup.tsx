@@ -4,18 +4,7 @@ import PostcodeValidator from './postcodeValidator';
 import { FFInputText } from '../text/text';
 import { Button, Flex } from '@tpr/core';
 import styles from './addressLookup.module.scss';
-
-type PostcodeLookupProps = {
-	loading: boolean;
-	testId?: string;
-	postcode?: string;
-	onPostcodeChanged: (postcode: string) => void;
-	invalidPostcodeMessage: string;
-	postcodeLookupLabel: string;
-	postcodeLookupButton: string;
-	findAddressCancelledButton?: string;
-	onFindAddressCancelled?: () => void;
-};
+import { PostcodeLookupProps } from './types/PostcodeLookupProps';
 
 export const PostcodeLookup: React.FC<PostcodeLookupProps> = ({
 	loading,
