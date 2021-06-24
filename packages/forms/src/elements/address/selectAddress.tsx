@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useForm } from 'react-final-form';
 import { Address } from './address';
 import { FFSelect } from '../select/select';
@@ -7,24 +7,7 @@ import { ArrowRight } from '@tpr/icons';
 import PostcodeFormatter from './postcodeFormatter';
 import elementStyles from '../elements.module.scss';
 import styles from './addressLookup.module.scss';
-
-type SelectAddressProps = {
-	loading: boolean;
-	testId?: string;
-	postcode?: string;
-	addresses: Address[];
-	onChangePostcodeClick: () => void;
-	onAddressSelected: (address: Address) => void;
-	postcodeLookupLabel: string;
-	changePostcodeButton: string;
-	changePostcodeAriaLabel?: string;
-	selectAddressLabel: string;
-	selectAddressPlaceholder?: string;
-	selectAddressButton: string;
-	selectAddressRequiredMessage: string;
-	noAddressesFoundMessage: string;
-	onValidatePostcode?: (isValid: boolean) => void | null;
-};
+import { SelectAddressProps } from './types';
 
 export const SelectAddress: React.FC<SelectAddressProps> = ({
 	loading,
@@ -42,6 +25,7 @@ export const SelectAddress: React.FC<SelectAddressProps> = ({
 	selectAddressRequiredMessage,
 	noAddressesFoundMessage,
 	onValidatePostcode,
+	setSubmitForm,
 }) => {
 	// if missing fields are undefined rather than empty string they remain at their previous values
 	function ensureNoUndefinedFields(addresses: Address[]) {
@@ -123,6 +107,12 @@ export const SelectAddress: React.FC<SelectAddressProps> = ({
 		}
 	};
 
+	const [addressSelected, setAddressSelected] = useState(false);
+
+	useEffect(() => {
+		setAddressSelected(getAddressIfValid() !== undefined);
+	}, [form.getFieldState('selectedAddress')]);
+
 	return (
 		<>
 			<Flex cfg={{ alignItems: 'center' }}>
@@ -155,6 +145,7 @@ export const SelectAddress: React.FC<SelectAddressProps> = ({
 				inputWidth={6}
 				testId={(testId ? testId + '-' : '') + 'select-address-list'}
 				validate={(value) => {
+					console.log('select address is validating');
 					// On initial load, setup the validation object
 					if (!selectAddressValid) {
 						updateAddressValidationIfChanged({ touched: false, error: '' });
@@ -166,6 +157,9 @@ export const SelectAddress: React.FC<SelectAddressProps> = ({
 					if (value && value.value) {
 						updateAddressValidationIfChanged({ touched: true, error: '' });
 					}
+					if (!value) {
+						return 'Enter a value'; // NEEDS TO BE SITECOREABLE
+					}
 				}}
 				meta={selectAddressValid}
 				notFoundMessage={noAddressesFoundMessage}
@@ -175,7 +169,6 @@ export const SelectAddress: React.FC<SelectAddressProps> = ({
 				selectedItem={null} // don't reselect if the same address turns up again
 			/>
 			<Button
-				disabled={loading || !getAddressIfValid()}
 				testId={(testId ? testId + '-' : '') + 'select-address-button'}
 				appearance="secondary"
 				onClick={() => {
@@ -197,6 +190,7 @@ export const SelectAddress: React.FC<SelectAddressProps> = ({
 					}
 				}}
 				className={`${styles.button} ${styles.arrowButton}`}
+				aria-disabled={!addressSelected}
 			>
 				<Flex
 					cfg={{

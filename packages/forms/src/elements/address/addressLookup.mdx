@@ -6,10 +6,11 @@ route: /forms/address
 
 import { Playground } from '@playground';
 import { Form, Field } from 'react-final-form';
-import { Button } from '@tpr/core';
+import { Button, Flex } from '@tpr/core';
 import { AddressLookup, AddressView } from './addressLookup';
 import { FFInputText } from '../text/text';
 import FakeAddressLookupProvider from './fakeAddressLookupProvider';
+import { Hint } from '@tpr/layout';
 
 # Address lookup
 
@@ -50,7 +51,7 @@ import { AddressLookup } from '@tpr/forms';
 		return (
 			<Form
 				onSubmit={(values) => {
-					console.log('submit');
+					console.log('running onSubmit from Form component');
 					console.log(values);
 				}}
 			>
@@ -94,12 +95,16 @@ import { AddressLookup } from '@tpr/forms';
 							onValidatePostcode={(isValid)=>{console.log('isValid postcode: ',isValid)}}
 							onFindAddressCancelled={() => console.log}
 							onAddressChanging={()=>{console.log('onAddressChanging fired')}}
-							/>
-    					<Button type="submit" cfg={{mt:3}}>Submit form</Button>
+							submitButton={{text:"controlled with props"}}
+							>	
+							<Flex cfg={{flexDirection: 'column', mt:1}}>
+								<Hint expanded>My child component</Hint>
+							</Flex>
+							</AddressLookup>
     				</form>
     			)}
     		</Form>
-    	);
+    	)
     }}
 
 </Playground>
@@ -147,47 +152,47 @@ import { AddressLookup } from '@tpr/forms';
 							onValidatePostcode={(isValid)=>{console.log('isValid postcode: ',isValid)}}
 							onFindAddressCancelled={() => console.log}
 							onAddressChanging={()=>{console.log('onAddressChanging fired')}}
+							submitButton={{text: "Submit Form"}}
 							/>
-    					<Button type="submit" cfg={{mt:3}}>Submit form</Button>
     				</form>
     			)}
     		</Form>
-    	);
+    	)
     }}
 
 </Playground>
 
 ### Props
 
-| Property                     | Required | Type                  | Description                                                                            |
-| ---------------------------- | -------- | --------------------- | -------------------------------------------------------------------------------------- |
-| initialValue                 | false    | Address               | Existing value to pre-populate the component. Or one of the following values: 				 |
-|															 |					|												|	{ AddressView.PostcodeLookup, AddressView.SelectAddress, AddressView.EditAddress }		 |
-| testId                       | false    | string                | data attribute for testers                                                             |
-| loading                      | true     | boolean               | Whether the component is currently loading data                                        |
-| setLoading                   | true     | function              | Function the component can use to set the value of `loading`                           |
-| addressLookupProvider        | true     | AddressLookupProvider | A provider to look up addresses by postcode, then transform them to the Address format |
-| invalidPostcodeMessage       | true     | string                | Error message when an invalid or incomplete postcode is looked up                      |
-| postcodeLookupLabel          | true     | string                | Label for the postcode lookup field                                                    |
-| postcodeLookupButton         | true     | string                | Text of the button which triggers a postcode lookup                                    |
-| changePostcodeButton         | true     | string                | Text of the button which allows a different postcode to be looked up                   |
-| changePostcodeAriaLabel?     | true     | string                | Accessible label of the button which allows a different postcode to be looked up       |
-| selectAddressLabel           | true     | string                | Label for the dropdown list of matching addresses                                      |
-| selectAddressPlaceholder?    | true     | string                | Placeholder text within the dropdown list of matching addresses                        |
-| selectAddressButton          | true     | string                | Text of the button which selects a matching address                                    |
-| selectAddressRequiredMessage | true     | string                | Error when a matched address is not selected                                           |
-| noAddressesFoundMessage      | true     | string                | Message indicating no addresses matched the postcode                                   |
-| addressLine1Label            | true     | string                | Label for Address Line 1 field                                                         |
-| addressLine1RequiredMessage  | true     | string                | Error message when Address Line 1 is left blank or < 2 characters                      |
-| addressLine2Label            | true     | string                | Label for Address Line 2 field                                                         |
-| addressLine3Label            | true     | string                | Label for Address Line 3 field                                                         |
-| townLabel                    | true     | string                | Label for the town field                                                               |
-| countyLabel                  | true     | string                | Label for the county field                                                             |
-| postcodeLabel                | true     | string                | Label for the postcode field                                                           |
-| countryLabel                 | true     | string                | Label for the country field                                                            |
-| changeAddressButton          | true     | string                | Text for the button to change the selected address and start a new postcode lookup     |
-| changeAddressButton          | true     | string                | Text for the button to change the selected address and start a new postcode lookup     |
-| findAddressCancelledButton	 | false		|	string								|	Text for the cancel button																														 |
-| onFindAddressCancelled			 | false		|	callback							|	Shows a cancel button and binds a callback which is called when the button is clicked	 |
-| onValidatePostcode					 | false		|	callback							|	Binds a callback which is called when the Select Address button is clicked			 			 |
-| onAddressChanging 					 | false		|	callback							|	Binds a callback which is called when the I need to change the address button is clicked	 |
+| Property                     | Required | Type                  | Description                                                                              |
+| ---------------------------- | -------- | --------------------- | ---------------------------------------------------------------------------------------- |
+| initialValue                 | false    | Address               | Existing value to pre-populate the component. Or one of the following values:            |
+|                              |          |                       | { AddressView.PostcodeLookup, AddressView.SelectAddress, AddressView.EditAddress }       |
+| testId                       | false    | string                | data attribute for testers                                                               |
+| loading                      | true     | boolean               | Whether the component is currently loading data                                          |
+| setLoading                   | true     | function              | Function the component can use to set the value of `loading`                             |
+| addressLookupProvider        | true     | AddressLookupProvider | A provider to look up addresses by postcode, then transform them to the Address format   |
+| invalidPostcodeMessage       | true     | string                | Error message when an invalid or incomplete postcode is looked up                        |
+| postcodeLookupLabel          | true     | string                | Label for the postcode lookup field                                                      |
+| postcodeLookupButton         | true     | string                | Text of the button which triggers a postcode lookup                                      |
+| changePostcodeButton         | true     | string                | Text of the button which allows a different postcode to be looked up                     |
+| changePostcodeAriaLabel?     | true     | string                | Accessible label of the button which allows a different postcode to be looked up         |
+| selectAddressLabel           | true     | string                | Label for the dropdown list of matching addresses                                        |
+| selectAddressPlaceholder?    | true     | string                | Placeholder text within the dropdown list of matching addresses                          |
+| selectAddressButton          | true     | string                | Text of the button which selects a matching address                                      |
+| selectAddressRequiredMessage | true     | string                | Error when a matched address is not selected                                             |
+| noAddressesFoundMessage      | true     | string                | Message indicating no addresses matched the postcode                                     |
+| addressLine1Label            | true     | string                | Label for Address Line 1 field                                                           |
+| addressLine1RequiredMessage  | true     | string                | Error message when Address Line 1 is left blank or < 2 characters                        |
+| addressLine2Label            | true     | string                | Label for Address Line 2 field                                                           |
+| addressLine3Label            | true     | string                | Label for Address Line 3 field                                                           |
+| townLabel                    | true     | string                | Label for the town field                                                                 |
+| countyLabel                  | true     | string                | Label for the county field                                                               |
+| postcodeLabel                | true     | string                | Label for the postcode field                                                             |
+| countryLabel                 | true     | string                | Label for the country field                                                              |
+| changeAddressButton          | true     | string                | Text for the button to change the selected address and start a new postcode lookup       |
+| changeAddressButton          | true     | string                | Text for the button to change the selected address and start a new postcode lookup       |
+| findAddressCancelledButton   | false    | string                | Text for the cancel button                                                               |
+| onFindAddressCancelled       | false    | callback              | Shows a cancel button and binds a callback which is called when the button is clicked    |
+| onValidatePostcode           | false    | callback              | Binds a callback which is called when the Select Address button is clicked               |
+| onAddressChanging            | false    | callback              | Binds a callback which is called when the I need to change the address button is clicked |
