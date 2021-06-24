@@ -16,6 +16,7 @@ export const PostcodeLookup: React.FC<PostcodeLookupProps> = ({
 	postcodeLookupButton,
 	findAddressCancelledButton,
 	onFindAddressCancelled,
+	setSubmitForm,
 }) => {
 	const form = useForm();
 	const validator = new PostcodeValidator(invalidPostcodeMessage);
@@ -34,6 +35,17 @@ export const PostcodeLookup: React.FC<PostcodeLookupProps> = ({
 	useEffect(() => {
 		searchFieldRef.current.value = null;
 	});
+
+	// const [originalFormSubmitFunction] = useState(form.submit);
+
+	useEffect(() => {
+		console.log('this has been called');
+		form.getFieldState('postcodeLookup').change('');
+		form.submit = () =>
+			new Promise(() => {
+				console.log('This submit is in postcode lookup');
+			});
+	}, []);
 
 	const validatePostcode = (value) => {
 		const result = validator.validatePostcode(value);
@@ -54,16 +66,28 @@ export const PostcodeLookup: React.FC<PostcodeLookupProps> = ({
 				testId={(testId ? testId + '-' : '') + 'postcode-lookup-edit'}
 				inputClassName={styles.editPostcode}
 				disabled={loading}
-				defaultValue={''}
 			/>
-			<Flex cfg={{ flexDirection: 'row', mt: 2, alignItems: 'center' }}>
+			<Flex
+				cfg={{
+					flexDirection: 'row',
+					mt: 2,
+					alignItems: 'center',
+				}}
+			>
 				<Button
 					testId={(testId ? testId + '-' : '') + 'postcode-lookup-button'}
 					onClick={clickFindAddress}
 					appearance="secondary"
-					disabled={loading || !postcodeValid}
+					aria-disabled={!postcodeValid}
 				>
 					{postcodeLookupButton}
+				</Button>
+				<Button
+					onClick={() => {
+						setSubmitForm(true);
+					}}
+				>
+					change submit
 				</Button>
 				{onFindAddressCancelled && (
 					<Button

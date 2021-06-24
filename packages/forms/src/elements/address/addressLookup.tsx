@@ -6,6 +6,8 @@ import { EditAddress } from './editAddress';
 import { act } from 'react-dom/test-utils';
 import { Button } from '../../../../core/lib';
 import { AddressProps } from './types';
+import { useForm } from 'react-final-form';
+import { useEffect } from 'react';
 
 export enum AddressView {
 	PostcodeLookup,
@@ -62,6 +64,19 @@ export const AddressLookup: React.FC<AddressProps> = ({
 	const [addresses, setAddresses] = useState<Address[]>([]);
 	const [address, setAddress] = useState<Address | null>(null);
 	const [postcode, setPostcode] = useState<string>(null);
+	const [submitForm, setSubmitForm] = useState(false);
+
+	const formAPI = useForm();
+	const [originalFormSubmit] = useState(formAPI.submit);
+
+	useEffect(() => {
+		if (submitForm) {
+			console.log('Submit form set to true');
+			console.log(originalFormSubmit);
+			formAPI.submit = () => originalFormSubmit;
+		}
+	}, [submitForm]);
+
 	// Render a different child component depending on the state
 	return (
 		<>
@@ -94,6 +109,7 @@ export const AddressLookup: React.FC<AddressProps> = ({
 					postcodeLookupButton={postcodeLookupButton}
 					findAddressCancelledButton={findAddressCancelledButton}
 					onFindAddressCancelled={onFindAddressCancelled}
+					setSubmitForm={setSubmitForm}
 				/>
 			)}
 			{addressView === AddressView.SelectAddress && (
@@ -125,6 +141,7 @@ export const AddressLookup: React.FC<AddressProps> = ({
 							onValidatePostcode(isValid);
 						}
 					}}
+					setSubmitForm={setSubmitForm}
 				/>
 			)}
 			{addressView === AddressView.EditAddress && (
@@ -148,8 +165,13 @@ export const AddressLookup: React.FC<AddressProps> = ({
 					postcodeLabel={postcodeLabel}
 					countryLabel={countryLabel}
 					changeAddressButton={changeAddressButton}
+					setSubmitForm={setSubmitForm}
 				/>
 			)}
+			{children}
+			<Button type="submit" cfg={{ mt: 3 }} aria-disabled={!submitForm}>
+				{submitButton.text}
+			</Button>
 		</>
 	);
 };

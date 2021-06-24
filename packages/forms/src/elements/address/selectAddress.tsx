@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useForm } from 'react-final-form';
 import { Address } from './address';
 import { FFSelect } from '../select/select';
@@ -107,6 +107,12 @@ export const SelectAddress: React.FC<SelectAddressProps> = ({
 		}
 	};
 
+	const [addressSelected, setAddressSelected] = useState(false);
+
+	useEffect(() => {
+		setAddressSelected(getAddressIfValid() !== undefined);
+	}, [form.getFieldState('selectedAddress')]);
+
 	return (
 		<>
 			<Flex cfg={{ alignItems: 'center' }}>
@@ -139,6 +145,7 @@ export const SelectAddress: React.FC<SelectAddressProps> = ({
 				inputWidth={6}
 				testId={(testId ? testId + '-' : '') + 'select-address-list'}
 				validate={(value) => {
+					console.log('select address is validating');
 					// On initial load, setup the validation object
 					if (!selectAddressValid) {
 						updateAddressValidationIfChanged({ touched: false, error: '' });
@@ -150,6 +157,9 @@ export const SelectAddress: React.FC<SelectAddressProps> = ({
 					if (value && value.value) {
 						updateAddressValidationIfChanged({ touched: true, error: '' });
 					}
+					if (!value) {
+						return 'Enter a value'; // NEEDS TO BE SITECOREABLE
+					}
 				}}
 				meta={selectAddressValid}
 				notFoundMessage={noAddressesFoundMessage}
@@ -159,7 +169,6 @@ export const SelectAddress: React.FC<SelectAddressProps> = ({
 				selectedItem={null} // don't reselect if the same address turns up again
 			/>
 			<Button
-				disabled={loading || !getAddressIfValid()}
 				testId={(testId ? testId + '-' : '') + 'select-address-button'}
 				appearance="secondary"
 				onClick={() => {
@@ -181,6 +190,7 @@ export const SelectAddress: React.FC<SelectAddressProps> = ({
 					}
 				}}
 				className={`${styles.button} ${styles.arrowButton}`}
+				aria-disabled={!addressSelected}
 			>
 				<Flex
 					cfg={{
