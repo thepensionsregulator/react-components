@@ -35,17 +35,6 @@ export const PostcodeLookup: React.FC<PostcodeLookupProps> = ({
 		searchFieldRef.current.value = null;
 	});
 
-	// const [originalFormSubmitFunction] = useState(form.submit);
-
-	useEffect(() => {
-		console.log('this has been called');
-		form.getFieldState('postcodeLookup').change('');
-		form.submit = () =>
-			new Promise(() => {
-				console.log('This submit is in postcode lookup');
-			});
-	}, []);
-
 	const validatePostcode = (value) => {
 		const result = validator.validatePostcode(value);
 		typeof result === 'undefined'
@@ -80,13 +69,6 @@ export const PostcodeLookup: React.FC<PostcodeLookupProps> = ({
 					aria-disabled={!postcodeValid}
 				>
 					{postcodeLookupButton}
-				</Button>
-				<Button
-					onClick={() => {
-						setSubmitForm(true);
-					}}
-				>
-					change submit
 				</Button>
 				{onFindAddressCancelled && (
 					<Button
