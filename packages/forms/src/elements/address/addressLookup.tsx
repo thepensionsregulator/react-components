@@ -4,9 +4,7 @@ import { PostcodeLookup } from './postcodeLookup';
 import { SelectAddress } from './selectAddress';
 import { EditAddress } from './editAddress';
 import { act } from 'react-dom/test-utils';
-import { Button } from '../../../../core/lib';
 import { AddressProps } from './types';
-import { useForm } from 'react-final-form';
 import { useEffect } from 'react';
 
 export enum AddressView {
@@ -64,18 +62,12 @@ export const AddressLookup: React.FC<AddressProps> = ({
 	const [addresses, setAddresses] = useState<Address[]>([]);
 	const [address, setAddress] = useState<Address | null>(null);
 	const [postcode, setPostcode] = useState<string>(null);
-	const [submitForm, setSubmitForm] = useState(false);
-
-	const formAPI = useForm();
-	const [originalFormSubmit] = useState(formAPI.submit);
 
 	useEffect(() => {
-		if (submitForm) {
-			console.log('Submit form set to true');
-			console.log(originalFormSubmit);
-			formAPI.submit = () => originalFormSubmit;
+		if (setSubmitButton) {
+			setSubmitButton(addressView === AddressView.EditAddress);
 		}
-	}, [submitForm]);
+	}, [addressView]);
 
 	// Render a different child component depending on the state
 	return (
