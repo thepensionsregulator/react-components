@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Address } from './address';
+import { Address } from './types/address';
 import { PostcodeLookup } from './postcodeLookup';
 import { SelectAddress } from './selectAddress';
 import { EditAddress } from './editAddress';

@@ -1,4 +1,4 @@
-export * from './elements/address/address';
+export * from './elements/address/types';
 export * from './elements/address/addressComparer';
 export * from './elements/address/addressLookup';
 export * from './elements/address/addressLookupProvider';

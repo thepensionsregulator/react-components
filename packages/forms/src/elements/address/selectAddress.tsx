@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useForm } from 'react-final-form';
-import { Address } from './address';
+import { Address } from './types/address';
 import { FFSelect } from '../select/select';
 import { P, Button, Flex } from '@tpr/core';
 import { ArrowRight } from '@tpr/icons';

@@ -1,5 +1,5 @@
-import { Address } from '../address';
 import { SubmitFormProps } from './BaseProps';
+import { Address } from './Address';
 
 export interface SelectAddressProps extends SubmitFormProps {
 	loading: boolean;

@@ -1,5 +1,5 @@
 import { ReactNode } from 'react';
-import { Address } from '../address';
+import { Address } from './Address';
 import { AddressLookupProvider } from '../addressLookupProvider';
 import { SubmitButtonProps } from './BaseProps';
 

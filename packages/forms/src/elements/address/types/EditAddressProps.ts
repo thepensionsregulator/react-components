@@ -1,5 +1,5 @@
-import { Address } from '../address';
 import { SubmitFormProps } from './BaseProps';
+import { Address } from './address';
 
 export interface EditAddressProps extends SubmitFormProps {
 	initialValue?: Address;
