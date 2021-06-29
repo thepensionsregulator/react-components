@@ -1,6 +1,4 @@
-import { SubmitFormProps } from './BaseProps';
-
-export interface PostcodeLookupProps extends SubmitFormProps {
+export interface PostcodeLookupProps {
 	loading: boolean;
 	testId?: string;
 	postcode?: string;

@@ -25,7 +25,6 @@ export const SelectAddress: React.FC<SelectAddressProps> = ({
 	selectAddressRequiredMessage,
 	noAddressesFoundMessage,
 	onValidatePostcode,
-	setSubmitForm,
 }) => {
 	// if missing fields are undefined rather than empty string they remain at their previous values
 	function ensureNoUndefinedFields(addresses: Address[]) {

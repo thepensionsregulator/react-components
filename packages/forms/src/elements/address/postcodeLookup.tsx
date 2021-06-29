@@ -16,7 +16,6 @@ export const PostcodeLookup: React.FC<PostcodeLookupProps> = ({
 	postcodeLookupButton,
 	findAddressCancelledButton,
 	onFindAddressCancelled,
-	setSubmitForm,
 }) => {
 	const form = useForm();
 	const validator = new PostcodeValidator(invalidPostcodeMessage);

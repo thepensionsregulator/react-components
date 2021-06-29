@@ -3,7 +3,7 @@ import { Address } from './Address';
 import { AddressLookupProvider } from '../addressLookupProvider';
 import { SubmitButtonProps } from './BaseProps';
 
-export interface AddressProps {
+export interface AddressProps extends SubmitButtonProps {
 	initialValue?: Address;
 	loading: boolean;
 	setLoading: (loading: boolean) => void;
@@ -32,6 +32,5 @@ export interface AddressProps {
 	onFindAddressCancelled?: () => void;
 	onValidatePostcode?: (isValid: boolean) => void | null;
 	onAddressChanging?: (isValid: boolean) => void | null;
-	submitButton: SubmitButtonProps;
 	children?: ReactNode;
 }

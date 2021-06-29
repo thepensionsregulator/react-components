@@ -23,7 +23,6 @@ export const EditAddress: React.FC<EditAddressProps> = React.memo(
 		postcodeLabel,
 		countryLabel,
 		changeAddressButton,
-		setSubmitForm,
 	}) => {
 		const form = useForm();
 

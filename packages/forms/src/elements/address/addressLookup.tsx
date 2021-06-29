@@ -45,7 +45,7 @@ export const AddressLookup: React.FC<AddressProps> = ({
 	onValidatePostcode,
 	onAddressChanging,
 	children,
-	submitButton,
+	setSubmitButton,
 }) => {
 	// Start in postcode lookup view, unless there's already an address in which case start in edit address view
 	let initialView = AddressView.PostcodeLookup;
@@ -109,7 +109,6 @@ export const AddressLookup: React.FC<AddressProps> = ({
 					postcodeLookupButton={postcodeLookupButton}
 					findAddressCancelledButton={findAddressCancelledButton}
 					onFindAddressCancelled={onFindAddressCancelled}
-					setSubmitForm={setSubmitForm}
 				/>
 			)}
 			{addressView === AddressView.SelectAddress && (
@@ -141,7 +140,6 @@ export const AddressLookup: React.FC<AddressProps> = ({
 							onValidatePostcode(isValid);
 						}
 					}}
-					setSubmitForm={setSubmitForm}
 				/>
 			)}
 			{addressView === AddressView.EditAddress && (
@@ -165,13 +163,9 @@ export const AddressLookup: React.FC<AddressProps> = ({
 					postcodeLabel={postcodeLabel}
 					countryLabel={countryLabel}
 					changeAddressButton={changeAddressButton}
-					setSubmitForm={setSubmitForm}
 				/>
 			)}
 			{children}
-			<Button type="submit" cfg={{ mt: 3 }} aria-disabled={!submitForm}>
-				{submitButton.text}
-			</Button>
 		</>
 	);
 };
