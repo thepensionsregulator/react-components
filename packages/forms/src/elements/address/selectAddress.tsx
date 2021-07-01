@@ -155,9 +155,6 @@ export const SelectAddress: React.FC<SelectAddressProps> = ({
 					if (value && value.value) {
 						updateAddressValidationIfChanged({ touched: true, error: '' });
 					}
-					if (!value) {
-						return 'Enter a value'; // NEEDS TO BE SITECOREABLE
-					}
 				}}
 				meta={selectAddressValid}
 				notFoundMessage={noAddressesFoundMessage}
