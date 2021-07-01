@@ -119,7 +119,7 @@ import { AddressLookup } from '@tpr/forms';
 
 </Playground>
 
-### Postcode selection mode
+### Postcode selection mode without cancel button
 
 [CodeSandbox](https://codesandbox.io)
 
@@ -159,11 +159,9 @@ import { AddressLookup } from '@tpr/forms';
     						postcodeLabel="Postcode"
     						countryLabel="Country"
     						changeAddressButton="I need to change the address"
-    						findAddressCancelledButton="Cancel"
     						onValidatePostcode={(isValid)=>{console.log('isValid postcode: ',isValid)}}
-    						onFindAddressCancelled={() => console.log}
     						onAddressChanging={()=>{console.log('onAddressChanging fired')}}
-    							setSubmitButton={setShowButton}
+								setSubmitButton={setShowButton}
     						/>
     						<Flex cfg={{flexDirection: 'column', mt:1}}>
     							<Hint expanded>Some hint text</Hint>
