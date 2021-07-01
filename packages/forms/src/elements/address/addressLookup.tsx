@@ -42,7 +42,6 @@ export const AddressLookup: React.FC<AddressProps> = ({
 	onFindAddressCancelled,
 	onValidatePostcode,
 	onAddressChanging,
-	children,
 	setSubmitButton,
 }) => {
 	// Start in postcode lookup view, unless there's already an address in which case start in edit address view
@@ -157,7 +156,6 @@ export const AddressLookup: React.FC<AddressProps> = ({
 					changeAddressButton={changeAddressButton}
 				/>
 			)}
-			{children}
 		</>
 	);
 };
