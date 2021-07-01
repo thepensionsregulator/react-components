@@ -4,18 +4,7 @@ import PostcodeValidator from './postcodeValidator';
 import { FFInputText } from '../text/text';
 import { Button, Flex } from '@tpr/core';
 import styles from './addressLookup.module.scss';
-
-type PostcodeLookupProps = {
-	loading: boolean;
-	testId?: string;
-	postcode?: string;
-	onPostcodeChanged: (postcode: string) => void;
-	invalidPostcodeMessage: string;
-	postcodeLookupLabel: string;
-	postcodeLookupButton: string;
-	findAddressCancelledButton?: string;
-	onFindAddressCancelled?: () => void;
-};
+import { PostcodeLookupProps } from './types/PostcodeLookupProps';
 
 export const PostcodeLookup: React.FC<PostcodeLookupProps> = ({
 	loading,
@@ -44,7 +33,7 @@ export const PostcodeLookup: React.FC<PostcodeLookupProps> = ({
 
 	useEffect(() => {
 		searchFieldRef.current.value = null;
-	});
+	}, []);
 
 	const validatePostcode = (value) => {
 		const result = validator.validatePostcode(value);
@@ -65,14 +54,19 @@ export const PostcodeLookup: React.FC<PostcodeLookupProps> = ({
 				testId={(testId ? testId + '-' : '') + 'postcode-lookup-edit'}
 				inputClassName={styles.editPostcode}
 				disabled={loading}
-				defaultValue={''}
 			/>
-			<Flex cfg={{ flexDirection: 'row', mt: 2, alignItems: 'center' }}>
+			<Flex
+				cfg={{
+					flexDirection: 'row',
+					mt: 2,
+					alignItems: 'center',
+				}}
+			>
 				<Button
 					testId={(testId ? testId + '-' : '') + 'postcode-lookup-button'}
 					onClick={clickFindAddress}
 					appearance="secondary"
-					disabled={loading || !postcodeValid}
+					aria-disabled={!postcodeValid}
 				>
 					{postcodeLookupButton}
 				</Button>

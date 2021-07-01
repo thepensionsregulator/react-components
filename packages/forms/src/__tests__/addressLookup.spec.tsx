@@ -3,8 +3,9 @@ import { formSetup } from '../__mocks__/setup';
 import { fireEvent, screen, findByText, cleanup } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { axe } from 'jest-axe';
-import { AddressLookup, AddressProps } from '../elements/address/addressLookup';
+import { AddressLookup } from '../elements/address/addressLookup';
 import FakeAddressLookupProvider from '../elements/address/fakeAddressLookupProvider';
+import { AddressProps } from '../elements/address/types';
 
 const defaultProps: AddressProps = {
 	loading: false,

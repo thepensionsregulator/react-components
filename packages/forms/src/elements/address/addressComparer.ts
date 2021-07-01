@@ -1,4 +1,4 @@
-import { Address } from './address';
+import { Address } from './types';
 
 export class AddressComparer {
 	constructor() {}

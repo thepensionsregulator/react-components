@@ -1,41 +1,11 @@
 import React, { useState } from 'react';
-import { Address } from './address';
+import { Address } from './types/address';
 import { PostcodeLookup } from './postcodeLookup';
 import { SelectAddress } from './selectAddress';
 import { EditAddress } from './editAddress';
-import { AddressLookupProvider } from './addressLookupProvider';
 import { act } from 'react-dom/test-utils';
-
-export type AddressProps = {
-	initialValue?: Address;
-	loading: boolean;
-	setLoading: (loading: boolean) => void;
-	testId?: string;
-	addressLookupProvider: AddressLookupProvider;
-	invalidPostcodeMessage: string;
-	postcodeLookupLabel: string;
-	postcodeLookupButton: string;
-	changePostcodeButton: string;
-	changePostcodeAriaLabel?: string;
-	selectAddressLabel: string;
-	selectAddressPlaceholder?: string;
-	selectAddressButton: string;
-	selectAddressRequiredMessage: string;
-	noAddressesFoundMessage: string;
-	addressLine1Label: string;
-	addressLine1RequiredMessage: string;
-	addressLine2Label: string;
-	addressLine3Label: string;
-	townLabel: string;
-	countyLabel: string;
-	postcodeLabel: string;
-	countryLabel: string;
-	changeAddressButton: string;
-	findAddressCancelledButton?: string;
-	onFindAddressCancelled?: () => void;
-	onValidatePostcode?: (isValid: boolean) => void | null;
-	onAddressChanging?: (isValid: boolean) => void | null;
-};
+import { AddressProps } from './types';
+import { useEffect } from 'react';
 
 export enum AddressView {
 	PostcodeLookup,
@@ -72,6 +42,7 @@ export const AddressLookup: React.FC<AddressProps> = ({
 	onFindAddressCancelled,
 	onValidatePostcode,
 	onAddressChanging,
+	setSubmitButton,
 }) => {
 	// Start in postcode lookup view, unless there's already an address in which case start in edit address view
 	let initialView = AddressView.PostcodeLookup;
@@ -90,6 +61,13 @@ export const AddressLookup: React.FC<AddressProps> = ({
 	const [addresses, setAddresses] = useState<Address[]>([]);
 	const [address, setAddress] = useState<Address | null>(null);
 	const [postcode, setPostcode] = useState<string>(null);
+
+	useEffect(() => {
+		if (setSubmitButton) {
+			setSubmitButton(addressView === AddressView.EditAddress);
+		}
+	}, [addressView]);
+
 	// Render a different child component depending on the state
 	return (
 		<>

@@ -1,4 +1,4 @@
-import { Address } from './address';
+import { Address } from './types';
 import { AddressLookupProvider } from './addressLookupProvider';
 
 export type AddressAPIType = {
