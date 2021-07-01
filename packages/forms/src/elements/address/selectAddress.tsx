@@ -144,7 +144,6 @@ export const SelectAddress: React.FC<SelectAddressProps> = ({
 				inputWidth={6}
 				testId={(testId ? testId + '-' : '') + 'select-address-list'}
 				validate={(value) => {
-					console.log('select address is validating');
 					// On initial load, setup the validation object
 					if (!selectAddressValid) {
 						updateAddressValidationIfChanged({ touched: false, error: '' });
