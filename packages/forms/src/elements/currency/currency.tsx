@@ -225,7 +225,7 @@ const InputCurrency: React.FC<InputCurrencyProps> = React.memo(
 					Delaying minimally the execution of the blur event solves this problem.
 				*/
 				setTimeout(() => {
-					innerInput.current.dispatchEvent(myEvent);
+					innerInput.current && innerInput.current.dispatchEvent(myEvent);
 				}, 100);
 			} else {
 				setFormattedInputValue('');
