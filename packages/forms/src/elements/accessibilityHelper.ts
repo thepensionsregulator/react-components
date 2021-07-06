@@ -10,8 +10,6 @@ export default class AccessibilityHelper {
 		private hiddenLabelId: string | null = null,
 	) {
 		this.rootId = toKebabCase(rootId);
-		//this.innerHiddenLabelId =
-		//	this.hiddenLabelId && this.hiddenLabelId !== '' ? hiddenLabelId : null;
 	}
 
 	get labelId(): string {
