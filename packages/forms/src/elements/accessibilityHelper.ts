@@ -1,8 +1,6 @@
 import { toKebabCase } from '@tpr/core';
 
 export default class AccessibilityHelper {
-	//innerHiddenLabelId: string | null;
-
 	constructor(
 		private rootId: string,
 		private hasLabel: boolean,
