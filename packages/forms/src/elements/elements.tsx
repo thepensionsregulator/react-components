@@ -1,8 +1,7 @@
-import React, { createElement } from 'react';
+import React, { createElement, ReactNode } from 'react';
 import { SpaceProps, FlexProps, useClassNames, Span } from '@tpr/core';
-import styles from './elements.module.scss';
-import { ReactNode } from 'react';
 import AccessibilityHelper from './accessibilityHelper';
+import styles from './elements.module.scss';
 
 interface StyledInputLabelProps {
 	element?: 'label' | 'div' | 'fieldset';
@@ -11,6 +10,8 @@ interface StyledInputLabelProps {
 	cfg?: FlexProps | SpaceProps;
 	[key: string]: any;
 	noLeftBorder?: boolean;
+	hiddenLabel?: string;
+	hiddenLabelId?: string;
 }
 export const StyledInputLabel: React.FC<StyledInputLabelProps> = ({
 	element = 'label',
@@ -19,6 +20,8 @@ export const StyledInputLabel: React.FC<StyledInputLabelProps> = ({
 	className,
 	children,
 	noLeftBorder,
+	hiddenLabel = '',
+	hiddenLabelId,
 	...props
 }) => {
 	const classNames = useClassNames(cfg, [
@@ -32,7 +35,15 @@ export const StyledInputLabel: React.FC<StyledInputLabelProps> = ({
 			className: classNames,
 			...props,
 		},
-		children,
+
+		<>
+			{hiddenLabel && (
+				<div className={styles.hiddenLabel} id={hiddenLabelId}>
+					{hiddenLabel}
+				</div>
+			)}
+			{children}
+		</>,
 	);
 };
 
@@ -64,7 +75,7 @@ export const FormLabelText: React.FC<FormLabelTextProps> = ({
 };
 
 export const ErrorMessage: React.FC<ErrorMessageProps> = ({ id, children }) => (
-	<p id={id} className={styles.errorMessage}>
+	<p id={id} className={styles.errorMessage} role="alert">
 		{children}
 	</p>
 );

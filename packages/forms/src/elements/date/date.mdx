@@ -142,6 +142,41 @@ import { FFInputDate } from '@tpr/forms';
 	}}
 </Playground>
 
+### not label, but including hiddenLabel
+
+<Playground>
+	{() => {
+		const fields = [
+			{
+				id: 'sample-date4',
+				type: 'date',
+				name: 'passport-issued4',
+				hiddenLabel: 'When was your passport issued?',
+				hint: 'For example, 2007',
+				error: 'The year must be in the past',
+				hideDay: true,
+				hideMonth: true,
+			},
+		];
+		return (
+			<Form
+				onSubmit={(val) => console.log(val)}
+				initialValues={{ 'passport-issued4': null }}
+				validate={validate(fields)}
+			>
+				{({ handleSubmit }) => (
+					<form onSubmit={handleSubmit} style={{ padding: 10 }}>
+						{renderFields(fields)}
+						<button type="submit" style={{ display: 'none' }}>
+							Submit
+						</button>
+					</form>
+				)}
+			</Form>
+		);
+	}}
+</Playground>
+
 ## API
 
 ```
