@@ -142,6 +142,41 @@ import { FFInputDate } from '@tpr/forms';
 	}}
 </Playground>
 
+### not label, but including hiddenLabel
+
+<Playground>
+	{() => {
+		const fields = [
+			{
+				id: 'sample-date4',
+				type: 'date',
+				name: 'passport-issued4',
+				hiddenLabel: 'When was your passport issued?',
+				hint: 'For example, 2007',
+				error: 'The year must be in the past',
+				hideDay: true,
+				hideMonth: true,
+			},
+		];
+		return (
+			<Form
+				onSubmit={(val) => console.log(val)}
+				initialValues={{ 'passport-issued4': null }}
+				validate={validate(fields)}
+			>
+				{({ handleSubmit }) => (
+					<form onSubmit={handleSubmit} style={{ padding: 10 }}>
+						{renderFields(fields)}
+						<button type="submit" style={{ display: 'none' }}>
+							Submit
+						</button>
+					</form>
+				)}
+			</Form>
+		);
+	}}
+</Playground>
+
 ## API
 
 ```
@@ -150,13 +185,14 @@ Accepted config props: FlexProps, SpaceProps
 
 ### Props
 
-| Property  | Required | Type    | Description                                                          |
-| --------- | -------- | ------- | -------------------------------------------------------------------- |
-| cfg       | false    | object  | FlexProps & SpaceProps                                               |
-| disabled  | false    | boolean | Disable date field                                                   |
-| testId    | false    | string  | data attribute for testers                                           |
-| label     | true     | string  | Date field description                                               |
-| hint      | false    | string  | More detailed description about the date field                       |
-| hideDay   | false    | boolean | hides the Day input and assigns a default value of 1 for the day     |
-| hideMonth | false    | boolean | hides the Month input and assigns a default value of 1 for the month |
-| readOnly  | false    | boolean | Sets whether the field is read only                                  |
+| Property    | Required | Type    | Description                                                                |
+| ----------- | -------- | ------- | -------------------------------------------------------------------------- |
+| cfg         | false    | object  | FlexProps & SpaceProps                                                     |
+| disabled    | false    | boolean | Disable date field                                                         |
+| testId      | false    | string  | data attribute for testers                                                 |
+| label       | true     | string  | Date field description                                                     |
+| hint        | false    | string  | More detailed description about the date field                             |
+| hideDay     | false    | boolean | hides the Day input and assigns a default value of 1 for the day           |
+| hideMonth   | false    | boolean | hides the Month input and assigns a default value of 1 for the month       |
+| readOnly    | false    | boolean | Sets whether the field is read only                                        |
+| hiddenLabel | false    | string  | allows passing text to be used in aria-describedby when no label specified |

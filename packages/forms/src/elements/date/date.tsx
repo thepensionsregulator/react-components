@@ -8,13 +8,14 @@ import React, {
 import { Field, FieldRenderProps } from 'react-final-form';
 import { isValid, toDate, format } from 'date-fns';
 import { P, Flex } from '@tpr/core';
+import isEqual from 'lodash.isequal';
 import { StyledInputLabel, InputElementHeading } from '../elements';
 import { Input } from '../input/input';
 import { FieldProps, FieldExtraProps } from '../../renderFields';
-import isEqual from 'lodash.isequal';
-import styles from './date.module.scss';
 import { SameMonthDateValidator } from './services/SameMonthDateValidator';
 import AccessibilityHelper from '../accessibilityHelper';
+import { HiddenLabelIdGenerator } from './services/HiddenLabelIdGenerator';
+import styles from './date.module.scss';
 
 const handleChange = (onChange: Function, value: number) => ({
 	target,
@@ -51,38 +52,39 @@ const transformDate = (initialDate: any) => {
 };
 
 type DateInputFieldProps = {
+	disabled?: boolean;
+	hideMonth?: boolean;
 	id?: string;
+	label: string;
+	maxInt: number;
+	maxLength?: number;
+	meta: any;
+	onBlur: Function;
 	parentId?: string;
+	readOnly?: boolean;
+	setMonth: Function;
 	small?: boolean;
 	testId?: string;
-	value: any;
 	updateFn: Function;
-	setMonth: Function;
-	onBlur: Function;
-	maxInt: number;
-	meta: any;
-	label: string;
-	disabled?: boolean;
-	readOnly?: boolean;
-	hideMonth?: boolean;
-	maxLength?: number;
+	value: any;
 };
+
 const DateInputField: React.FC<DateInputFieldProps> = ({
-	id,
-	parentId,
-	small = true,
-	label,
-	testId,
-	value,
-	updateFn,
-	maxInt,
-	setMonth,
-	onBlur,
-	meta,
 	disabled,
-	readOnly,
 	hideMonth,
+	id,
+	label,
+	maxInt,
 	maxLength,
+	meta,
+	onBlur,
+	parentId,
+	readOnly,
+	setMonth,
+	small = true,
+	testId,
+	updateFn,
+	value,
 }) => {
 	const [hasFocus, setHasFocus] = useState(false);
 	const helper = new AccessibilityHelper(parentId, false, false);
@@ -132,6 +134,7 @@ type InputDateProps = FieldRenderProps<string> & FieldExtraProps;
 interface InputDateComponentProps extends InputDateProps {
 	hideDay?: boolean;
 	hideMonth?: boolean;
+	hiddenLabel?: string;
 }
 export const InputDate: React.FC<InputDateComponentProps> = memo(
 	({
@@ -147,6 +150,7 @@ export const InputDate: React.FC<InputDateComponentProps> = memo(
 		readOnly,
 		hideDay,
 		hideMonth,
+		hiddenLabel = '',
 	}) => {
 		// react-final-form types says it's a string, incorrect, it's a date object.
 		const { dd, mm, yyyy } = transformDate(meta.initial);
@@ -171,7 +175,9 @@ export const InputDate: React.FC<InputDateComponentProps> = memo(
 		}, [day, month, year, input]);
 
 		const isError: boolean = meta && meta.touched && meta.error;
-		const helper = new AccessibilityHelper(id, !!label, !!hint);
+		const hiddenLabelId = HiddenLabelIdGenerator(hiddenLabel);
+
+		const helper = new AccessibilityHelper(id, !!label, !!hint, hiddenLabelId);
 
 		return (
 			<StyledInputLabel
@@ -181,11 +187,21 @@ export const InputDate: React.FC<InputDateComponentProps> = memo(
 				onBlur={input.onBlur}
 				data-testid={`date-input-${testId}`}
 				aria-labelledby={helper.labelId}
-				aria-describedby={helper.formatAriaDescribedBy(isError)}
+				aria-describedby={
+					isError
+						? helper.formatAriaDescribedBy(isError)
+						: !label && hiddenLabel !== ''
+						? hiddenLabelId
+						: hint
+						? helper.hintId
+						: helper.labelId
+				}
 				cfg={Object.assign(
 					{ mt: 1, py: 1, alignItems: 'flex-start', flexDirection: 'column' },
 					cfg,
 				)}
+				hiddenLabel={hiddenLabel}
+				hiddenLabelId={hiddenLabelId}
 			>
 				<InputElementHeading
 					element="legend"

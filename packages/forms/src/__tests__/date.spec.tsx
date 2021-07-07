@@ -3,6 +3,7 @@ import { renderFields, validate } from '../index';
 import { FieldProps } from '../renderFields';
 import userEvent from '@testing-library/user-event';
 import { axe } from 'jest-axe';
+import { HiddenLabelIdGenerator } from '../elements/date/services/HiddenLabelIdGenerator';
 
 // TODO: write more test when there are clear specs for date input validation
 
@@ -253,6 +254,48 @@ describe('Date input', () => {
 		expect(handleSubmit).toBeCalledTimes(1);
 		expect(form.getState().values).toEqual({
 			'month-year-only': '2020-01-01',
+		});
+	});
+
+	describe('testing hiddenLabel prop', () => {
+		let dateContainer, findByText, hiddenLabelId;
+		const fields: FieldProps[] = [
+			{
+				name: 'date-1',
+				type: 'date',
+				id: 'date-id',
+				hint: 'For example, 12 11 2007',
+				hiddenLabel: 'When was your passport issued',
+			},
+		];
+
+		beforeEach(() => {
+			const handleSubmit = jest.fn();
+
+			const { container, getByText } = formSetup({
+				render: renderFields(fields),
+				validate: validate(fields),
+				onSubmit: handleSubmit,
+			});
+
+			dateContainer = container;
+			findByText = getByText;
+
+			hiddenLabelId = HiddenLabelIdGenerator(fields[0].hiddenLabel);
+		});
+
+		test('hidden div with correct Id contains hiddenLabel text', () => {
+			const theDiv = findByText(fields[0].hiddenLabel);
+
+			expect(theDiv).toBeDefined();
+
+			expect(theDiv).toHaveAttribute('id', hiddenLabelId);
+		});
+
+		test('aria-describedby has Id of hidden label div', () => {
+			const fieldSet = dateContainer.getElementsByTagName('fieldset')[0];
+
+			expect(fieldSet).toHaveAttribute('aria-describedby', hiddenLabelId);
 		});
 	});
 });
