@@ -14,6 +14,7 @@ import { Input } from '../input/input';
 import { FieldProps, FieldExtraProps } from '../../renderFields';
 import { SameMonthDateValidator } from './services/SameMonthDateValidator';
 import AccessibilityHelper from '../accessibilityHelper';
+import { HiddenLabelIdGenerator } from './services/HiddenLabelIdGenerator';
 import styles from './date.module.scss';
 
 const handleChange = (onChange: Function, value: number) => ({
@@ -174,10 +175,8 @@ export const InputDate: React.FC<InputDateComponentProps> = memo(
 		}, [day, month, year, input]);
 
 		const isError: boolean = meta && meta.touched && meta.error;
-		const hiddenLabelId: string | null =
-			hiddenLabel !== ''
-				? `hiddenLabel-${hiddenLabel.replace(/\s/g, '').slice(-4)}`
-				: null;
+		const hiddenLabelId = HiddenLabelIdGenerator(hiddenLabel);
+
 		const helper = new AccessibilityHelper(id, !!label, !!hint, hiddenLabelId);
 
 		return (
