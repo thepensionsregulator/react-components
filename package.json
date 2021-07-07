@@ -96,7 +96,10 @@
 		"jest-diff": "25.1.0",
 		"pretty-format": "25.1.0",
 		"react": "16.14.0",
-		"react-dom": "16.14.0"
+		"react-dom": "16.14.0",
+		"lodash": "4.17.21",
+		"hosted-git-info": "3.0.8",
+		"trim-newlines": "3.0.1"
 	},
 	"lint-staged": {
 		"*.{ts,tsx}": [
