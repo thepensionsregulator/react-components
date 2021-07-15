@@ -1,6 +1,10 @@
 @import '@tpr/theming/lib/variables.scss';
 @import '@tpr/theming/lib/accessibility.module.scss';
 
+.helpLink {
+	margin-bottom: $space-4;
+}
+
 .helpLink button[aria-expanded] {
 	display: inline-block;
 	border: none;
