@@ -1,7 +1,6 @@
 import React from 'react';
 import { Flex } from '@tpr/core';
 import Styles from './hint.module.scss';
-import { render } from 'react-dom';
 
 type HintProps = {
 	className?: string;
