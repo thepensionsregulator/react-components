@@ -3,8 +3,9 @@
 .root {
 	border-left: 4px solid $colors-neutral-4;
 	color: $colors-neutral-7;
-  line-height: $line-height-3;
+	line-height: $line-height-3;
+	margin-bottom: $space-4;
 }
-.collapsed{
+.collapsed {
 	display: none;
 }
