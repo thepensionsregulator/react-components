@@ -10,7 +10,7 @@ export default rollup({
 		'@types/lodash.isequal',
 		'@types/match-sorter',
 		'@types/qs',
-		'accessible-autocomplete/react',
+		'@financial-times/accessible-autocomplete/react',
 		'date-fns',
 		'downshift',
 		'final-form',

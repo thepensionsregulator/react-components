@@ -4,7 +4,7 @@ import { Flex } from '@tpr/core';
 import { StyledInputLabel, InputElementHeading } from '../elements';
 import { FieldProps, FieldExtraProps } from '../../renderFields';
 import AccessibilityHelper from '../accessibilityHelper';
-import Autocomplete from 'accessible-autocomplete/react';
+import Autocomplete from '@financial-times/accessible-autocomplete/react';
 import { filterResults, formatItemDefault } from './filterResults';
 import { act } from 'react-dom/test-utils';
 import styles from './search.module.scss';
@@ -143,6 +143,7 @@ const Search: React.FC<SearchProps> = React.memo(
 							}}
 							testId={testId}
 							tNoResults={() => notFoundMessage}
+							ariaLabelledBy={helper.labelId}
 						/>
 					</Flex>
 				</StyledInputLabel>
