@@ -143,6 +143,7 @@ const Search: React.FC<SearchProps> = React.memo(
 							}}
 							testId={testId}
 							tNoResults={() => notFoundMessage}
+							ariaLabelledBy={helper.labelId}
 						/>
 					</Flex>
 				</StyledInputLabel>
