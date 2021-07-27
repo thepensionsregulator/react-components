@@ -38,7 +38,7 @@
 		"react-dom": "^16.14.0"
 	},
 	"dependencies": {
-		"@financial-times/accessible-autocomplete": "^2.2.0",
+		"@financial-times/accessible-autocomplete": "^2.2.1",
 		"@types/lodash.isequal": "^4.5.5",
 		"@types/lodash.merge": "^4.6.6",
 		"@types/match-sorter": "^4.0.0",
