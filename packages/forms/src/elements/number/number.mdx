@@ -43,9 +43,9 @@ import { FFInputNumber } from '@tpr/forms';
 [CodeSandbox](https://codesandbox.io)
 
 <Playground>
-	<Form 
+	<Form
 		onSubmit={(values) => console.log(values)}
-		initialValues={{rpiIncrease: 2.5}}
+		initialValues={{ rpiIncrease: 2.5 }}
 	>
 		{({ handleSubmit }) => (
 			<form onSubmit={handleSubmit}>
@@ -58,10 +58,12 @@ import { FFInputNumber } from '@tpr/forms';
 					required={true}
 					maxLength={2}
 					validate={(value) => {
-						if (value < 1 || value > 20 || !value || value === 0) {
+						if (!value) {
+							return 'This field is required ';
+						}
+						if (value < 1 || value > 20) {
 							return 'Must be between 1 and 20';
 						}
-						return undefined;
 					}}
 					callback={(e) => console.log(e.target.value)}
 				/>
@@ -212,6 +214,7 @@ import { Form, validate, renderFields } from '@tpr/forms';
 </Playground>
 
 ### With aria label extension
+
 ```js
 i18n={{ ariaLabelExtension: 'in years' }}
 ```
@@ -249,8 +252,9 @@ i18n={{ ariaLabelExtension: 'in years' }}
 </Playground>
 
 ### With customised aria label
+
 ```js
-aria-label="Age of the applicant in years.  Use whole numbers only."
+aria - label = 'Age of the applicant in years.  Use whole numbers only.';
 ```
 
 <Playground>
@@ -293,8 +297,8 @@ Accepted config props: FlexProps, SpaceProps
 
 ### Props
 
-| Property      | Required | Type     | Description                                                                                                                                                                   |
-| ------------- | -------- | -------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Property      | Required | Type                                  | Description                                                                                                                                      |
+| ------------- | -------- | ------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------ |
 | after         | false    | string                                | emulates text passed to ::after pseudo-selector                                                                                                  |
 | before        | false    | string                                | emulates text passed to ::before pseudo-selector                                                                                                 |
 | callback      | false    | function                              | callback function to be executed after onChange                                                                                                  |
