@@ -42,35 +42,58 @@ import { FFInputDate } from '@tpr/forms';
 
 [CodeSandbox](https://codesandbox.io/s/nice-dream-xs3zp)
 
+The first example shows all fields, and validation for a specific date range. Any date in 2021 is valid.
+
 <Playground>
-	{() => {
-		const fields = [
-			{
-				id: 'sample-date1',
-				type: 'date',
-				name: 'passport-issued1',
-				label: 'When was your passport issued?',
-				hint: 'For example, 12 11 2007',
-				error: 'The date your passport was issued must be in the past',
-			},
-		];
-		return (
-			<Form
-				onSubmit={(val) => console.log(val)}
-				initialValues={{ 'passport-issued1': null }}
-				validate={validate(fields)}
-			>
-				{({ handleSubmit }) => (
-					<form onSubmit={handleSubmit} style={{ padding: 10 }}>
-						{renderFields(fields)}
-						<button type="submit" style={{ display: 'none' }}>
-							Submit
-						</button>
-					</form>
-				)}
-			</Form>
-		);
-	}}
+
+    {() => {
+    	function isValidDate(d) {
+    		return d instanceof Date && !isNaN(d);
+    	}
+    	const fields = [
+    		{
+    			id: 'sample-date1',
+    			type: 'date',
+    			name: 'passport-issued1',
+    			label: 'When was your passport issued?',
+    			hint: 'For example, 12 11 2021',
+    			error: 'The date your passport was issued must be in the past',
+    			validate: (value) => {
+    				const now = new Date();
+    				const d = new Date(value);
+    				if (!isValidDate(d)) {
+    					return "That's an invalid date";
+    				} else {
+    					if (d.getFullYear() == '2021') {
+    						return undefined;
+    					}
+    					if (d < now) {
+    						return 'That date is in the past';
+    					}
+    					if (d > now) {
+    						return 'That date is in the future';
+    					}
+    				}
+    			},
+    		},
+    	];
+    	return (
+    		<Form
+    			onSubmit={(val) => console.log(val)}
+    			initialValues={{ 'passport-issued1': null }}
+    		>
+    			{({ handleSubmit }) => (
+    				<form onSubmit={handleSubmit} style={{ padding: 10 }}>
+    					{renderFields(fields)}
+    					<button type="submit" style={{ display: 'none' }}>
+    						Submit
+    					</button>
+    				</form>
+    			)}
+    		</Form>
+    	);
+    }}
+
 </Playground>
 
 ### hiding Day and only displaying Month & Year

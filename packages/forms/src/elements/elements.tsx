@@ -74,14 +74,21 @@ export const FormLabelText: React.FC<FormLabelTextProps> = ({
 	);
 };
 
-export const ErrorMessage: React.FC<ErrorMessageProps> = ({ id, children }) => (
-	<p id={id} className={styles.errorMessage} role="alert">
+export const ErrorMessage: React.FC<ErrorMessageProps> = ({
+	id,
+	children,
+	role,
+}) => (
+	<p id={id} className={styles.errorMessage} role={role}>
 		{children}
 	</p>
 );
 
+// `role` is optional because, for an error related to a single field, linking it to the error using aria-describedby works best.
+// For a multi-field entry with a combined error (date) it works better to use role="alert".
 type ErrorMessageProps = {
 	id?: string;
+	role?: 'alert' | undefined;
 	children: ReactNode;
 };
 
@@ -93,6 +100,7 @@ type InputElementHeadingProps = {
 	meta?: any;
 	accessibilityHelper: AccessibilityHelper;
 	labelNotBold?: boolean;
+	errorRole?: 'alert' | undefined;
 };
 export const InputElementHeading: React.FC<InputElementHeadingProps> = ({
 	element = 'div',
@@ -102,6 +110,7 @@ export const InputElementHeading: React.FC<InputElementHeadingProps> = ({
 	meta,
 	accessibilityHelper,
 	labelNotBold,
+	errorRole,
 }) => {
 	return (
 		<>
@@ -124,7 +133,7 @@ export const InputElementHeading: React.FC<InputElementHeadingProps> = ({
 				</Span>
 			)}
 			{meta && meta.touched && meta.error && (
-				<ErrorMessage id={accessibilityHelper.errorId}>
+				<ErrorMessage id={accessibilityHelper.errorId} role={errorRole}>
 					{meta.error}
 				</ErrorMessage>
 			)}

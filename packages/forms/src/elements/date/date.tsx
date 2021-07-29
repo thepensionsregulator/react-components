@@ -210,7 +210,9 @@ export const InputDate: React.FC<InputDateComponentProps> = memo(
 					hint={hint}
 					meta={meta}
 					accessibilityHelper={helper}
+					errorRole="alert"
 				/>
+
 				<Flex>
 					{!hideDay && (
 						<DateInputField
