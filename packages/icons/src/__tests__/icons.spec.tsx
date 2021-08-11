@@ -81,7 +81,9 @@ describe('Icons', () => {
 		});
 
 		test('Checked Circle to not be aria-hidden if there is an aria-label', () => {
-			const { getByTestId } = render(<CheckedCircle ariaLabel="Test label" />);
+			const { getByTestId } = render(
+				<CheckedCircle alternativeText="Test label" />,
+			);
 			const icon = getByTestId('checked-circle');
 			expect(icon).toContainHTML('<title>Test label</title>');
 			expect(icon).not.toHaveAttribute('aria-hidden');
@@ -101,7 +103,9 @@ describe('Icons', () => {
 		});
 
 		test('Error Circle to not be aria-hidden if there is an aria-label', () => {
-			const { getByTestId } = render(<ErrorCircle ariaLabel="Test label" />);
+			const { getByTestId } = render(
+				<ErrorCircle alternativeText="Test label" />,
+			);
 			const icon = getByTestId('error-circle');
 			expect(icon).toContainHTML('<title>Test label</title>');
 			expect(icon).not.toHaveAttribute('aria-hidden');
@@ -121,7 +125,9 @@ describe('Icons', () => {
 		});
 
 		test('Warning Circle to not be aria-hidden if there is an aria-label', () => {
-			const { getByTestId } = render(<WarningCircle ariaLabel="Test label" />);
+			const { getByTestId } = render(
+				<WarningCircle alternativeText="Test label" />,
+			);
 			const icon = getByTestId('warning-circle');
 			expect(icon).toContainHTML('<title>Test label</title>');
 			expect(icon).not.toHaveAttribute('aria-hidden');

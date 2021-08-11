@@ -11,7 +11,7 @@ export const SVG: React.FC<SVGProps> = ({
 	viewBox = '0 0 24 24',
 	testId,
 	role,
-	ariaLabel,
+	alternativeText,
 	focusable = false,
 	children,
 }) => {
@@ -29,9 +29,9 @@ export const SVG: React.FC<SVGProps> = ({
 			data-testid={testId}
 			role={role}
 			focusable={focusable}
-			aria-hidden={ariaLabel ? undefined : 'true'}
+			aria-hidden={alternativeText ? undefined : 'true'}
 		>
-			{ariaLabel && <title>{ariaLabel}</title>}
+			{alternativeText && <title>{alternativeText}</title>}
 			{children}
 		</svg>
 	);
