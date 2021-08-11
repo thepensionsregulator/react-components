@@ -88,11 +88,7 @@ export const Footer: React.FC = ({ children }) => {
 export const StatusMessage = ({ complete, icon: Icon, text }) => {
 	return (
 		<Flex className={styles.statusMsg}>
-			<Icon
-				size={18}
-				fill={complete ? styles.confirmed : styles.unconfirmed}
-				ariaLabel={text}
-			/>
+			<Icon size={18} fill={complete ? styles.confirmed : styles.unconfirmed} />
 			<P
 				className={styles.paragraph}
 				cfg={{

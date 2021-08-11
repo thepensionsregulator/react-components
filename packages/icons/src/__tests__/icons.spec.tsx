@@ -6,7 +6,11 @@ import {
 	ArrowRight,
 	UnfoldMore,
 } from '../components/arrows/arrows';
-import { CheckedCircle, ErrorCircle } from '../components/circle/circle';
+import {
+	CheckedCircle,
+	ErrorCircle,
+	WarningCircle,
+} from '../components/circle/circle';
 import { Cross } from '../components/cross/cross';
 import {
 	CheckboxChecked,
@@ -23,7 +27,7 @@ import { render } from '@testing-library/react';
 
 describe('Icons', () => {
 	describe('SVG', () => {
-		test('SVG component renders it`s children', () => {
+		test('SVG component renders its children', () => {
 			const testId = 'svg-icon';
 			const { getByTestId } = render(
 				<SVG cfg={{ fill: 'danger.1' }} testId={testId}>
@@ -63,14 +67,64 @@ describe('Icons', () => {
 	});
 
 	describe('Circle', () => {
-		test('Checked Circle', () => {
+		test('Checked Circle to render without error', () => {
 			const { getByTestId } = render(<CheckedCircle />);
 			expect(getByTestId('checked-circle')).toBeDefined();
 		});
 
-		test('Error Circle', () => {
+		test('Checked Circle to be aria-hidden by default', () => {
+			const { getByTestId } = render(<CheckedCircle />);
+			expect(getByTestId('checked-circle')).toHaveAttribute(
+				'aria-hidden',
+				'true',
+			);
+		});
+
+		test('Checked Circle to not be aria-hidden if there is an aria-label', () => {
+			const { getByTestId } = render(<CheckedCircle ariaLabel="Test label" />);
+			const icon = getByTestId('checked-circle');
+			expect(icon).toContainHTML('<title>Test label</title>');
+			expect(icon).not.toHaveAttribute('aria-hidden');
+		});
+
+		test('Error Circle to render without error', () => {
 			const { getByTestId } = render(<ErrorCircle />);
 			expect(getByTestId('error-circle')).toBeDefined();
+		});
+
+		test('Error Circle to be aria-hidden by default', () => {
+			const { getByTestId } = render(<ErrorCircle />);
+			expect(getByTestId('error-circle')).toHaveAttribute(
+				'aria-hidden',
+				'true',
+			);
+		});
+
+		test('Error Circle to not be aria-hidden if there is an aria-label', () => {
+			const { getByTestId } = render(<ErrorCircle ariaLabel="Test label" />);
+			const icon = getByTestId('error-circle');
+			expect(icon).toContainHTML('<title>Test label</title>');
+			expect(icon).not.toHaveAttribute('aria-hidden');
+		});
+
+		test('Warning Circle to render without error', () => {
+			const { getByTestId } = render(<WarningCircle />);
+			expect(getByTestId('warning-circle')).toBeDefined();
+		});
+
+		test('Warning Circle to be aria-hidden by default', () => {
+			const { getByTestId } = render(<WarningCircle />);
+			expect(getByTestId('warning-circle')).toHaveAttribute(
+				'aria-hidden',
+				'true',
+			);
+		});
+
+		test('Warning Circle to not be aria-hidden if there is an aria-label', () => {
+			const { getByTestId } = render(<WarningCircle ariaLabel="Test label" />);
+			const icon = getByTestId('warning-circle');
+			expect(icon).toContainHTML('<title>Test label</title>');
+			expect(icon).not.toHaveAttribute('aria-hidden');
 		});
 	});
 
