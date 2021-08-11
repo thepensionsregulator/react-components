@@ -1,7 +1,7 @@
 import { FieldProps } from '../renderFields';
-import { FieldWithAriaLabelExtenstionI18nProps } from './FieldWithAriaLabelExtensionI18nProps';
+import { FieldWithAriaLabelExtensionI18nProps as FieldWithAriaLabelExtensionI18nProps } from './FieldWithAriaLabelExtensionI18nProps';
 import { RecursivePartial } from './RecursivePartial';
 
 export interface FieldWithAriaLabelExtensionProps extends FieldProps {
-	i18n?: RecursivePartial<FieldWithAriaLabelExtenstionI18nProps>;
+	i18n?: RecursivePartial<FieldWithAriaLabelExtensionI18nProps>;
 }

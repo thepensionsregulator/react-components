@@ -4,12 +4,12 @@ import { StyledInputLabel, InputElementHeading } from '../elements';
 import { FieldExtraProps } from '../../renderFields';
 import { Input } from '../input/input';
 import { adaptValueToFormat, fixToDecimals, validKeys as vk } from '../helpers';
-import { FieldWithAriaLabelExtenstionI18nProps } from 'types/FieldWithAriaLabelExtensionI18nProps';
+import { FieldWithAriaLabelExtensionI18nProps } from 'types/FieldWithAriaLabelExtensionI18nProps';
 import { FieldWithAriaLabelExtensionProps } from '../../types/FieldWithAriaLabelExtensionProps';
 import { RecursivePartial } from 'types/RecursivePartial';
 import AccessibilityHelper from '../accessibilityHelper';
 
-let numberFieldI18nDefaults: FieldWithAriaLabelExtenstionI18nProps = {
+let numberFieldI18nDefaults: FieldWithAriaLabelExtensionI18nProps = {
 	ariaLabelExtension: null,
 };
 
@@ -22,7 +22,7 @@ interface InputNumberProps extends FieldRenderProps<number>, FieldExtraProps {
 	optionalText?: boolean;
 	maxLength?: number;
 	maxIntDigits?: number;
-	i18n?: RecursivePartial<FieldWithAriaLabelExtenstionI18nProps>;
+	i18n?: RecursivePartial<FieldWithAriaLabelExtensionI18nProps>;
 }
 
 const InputNumber: React.FC<InputNumberProps> = ({

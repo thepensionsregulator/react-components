@@ -1,3 +1,3 @@
-export type FieldWithAriaLabelExtenstionI18nProps = {
+export type FieldWithAriaLabelExtensionI18nProps = {
 	ariaLabelExtension: string;
 };
