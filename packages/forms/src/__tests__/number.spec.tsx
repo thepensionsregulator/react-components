@@ -59,6 +59,33 @@ describe('Number', () => {
 			expect(getByTestId(testId)).toHaveValue(123);
 		});
 
+		test('default wrapper element is label', () => {
+			const { getByText } = formSetup({
+				render: numberComponent,
+			});
+
+			const label = getByText(/Number/);
+
+			expect(label.parentElement.tagName).toBe('LABEL');
+		});
+
+		test('wrapper element can be changed', () => {
+			const { getByText } = formSetup({
+				render: (
+					<FFInputNumber
+						label="Number"
+						testId={testId}
+						name="number"
+						wrapperElement="div"
+					/>
+				),
+			});
+
+			const label = getByText(/Number/);
+
+			expect(label.parentElement.tagName).toBe('DIV');
+		});
+
 		test('label renders with an id attribute', () => {
 			const { getByText } = formSetup({
 				render: numberComponent,

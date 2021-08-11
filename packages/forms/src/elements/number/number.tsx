@@ -23,6 +23,7 @@ interface InputNumberProps extends FieldRenderProps<number>, FieldExtraProps {
 	maxLength?: number;
 	maxIntDigits?: number;
 	i18n?: RecursivePartial<FieldWithAriaLabelExtensionI18nProps>;
+	wrapperElement?: 'label' | 'div' | 'fieldset';
 }
 
 const InputNumber: React.FC<InputNumberProps> = ({
@@ -48,6 +49,7 @@ const InputNumber: React.FC<InputNumberProps> = ({
 	maxIntDigits,
 	i18n = numberFieldI18nDefaults,
 	initialValue,
+	wrapperElement = 'label',
 	...props
 }) => {
 	const digits = [
@@ -168,6 +170,7 @@ const InputNumber: React.FC<InputNumberProps> = ({
 			isError={meta && meta.touched && meta.error}
 			cfg={Object.assign({ flexDirection: 'column', mt: 1 }, cfg)}
 			noLeftBorder={noLeftBorder}
+			element={wrapperElement}
 		>
 			<InputElementHeading
 				label={label}
@@ -202,9 +205,11 @@ const InputNumber: React.FC<InputNumberProps> = ({
 	);
 };
 
-export const FFInputNumber: React.FC<FieldWithAriaLabelExtensionProps> = (
-	fieldProps,
-) => {
+export interface FFInputNumberProps extends FieldWithAriaLabelExtensionProps {
+	wrapperElement?: 'label' | 'div' | 'fieldset';
+}
+
+export const FFInputNumber: React.FC<FFInputNumberProps> = (fieldProps) => {
 	return (
 		<Field
 			{...fieldProps}
