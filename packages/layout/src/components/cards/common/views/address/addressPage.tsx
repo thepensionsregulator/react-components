@@ -21,6 +21,7 @@ export type AddressPageProps = {
 	sectionTitle?: string;
 	i18n: I18nAddressLookup;
 	onCancelChanges?: () => void;
+	onChangeAddress?: () => void;
 	send?: Function;
 	subSectionHeaderText?: string;
 };
@@ -35,6 +36,7 @@ const AddressPage: React.FC<AddressPageProps> = ({
 	i18n,
 	onCancelChanges,
 	subSectionHeaderText,
+	onChangeAddress
 }) => {
 	const [loading, setLoading] = useState(false);
 	const addressLookupProvider = new ExperianAddressLookupProvider(addressAPI);
@@ -83,6 +85,7 @@ const AddressPage: React.FC<AddressPageProps> = ({
 									changeAddressButton={i18n.changeAddressButton}
 									findAddressCancelledButton={i18n.findAddressCancelledButton}
 									onFindAddressCancelled={onCancelChanges}
+									onAddressChanging={onChangeAddress}
 								/>
 								<Footer>
 									<ArrowButton

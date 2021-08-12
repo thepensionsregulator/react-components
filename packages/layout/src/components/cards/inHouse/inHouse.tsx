@@ -21,7 +21,11 @@ import { Subtitle } from '../common/views/preview/components';
 import { removeFromTabFlowIfMatches, concatenateStrings } from '../../../utils';
 import styles from '../cards.module.scss';
 
-const CardContentSwitch: React.FC = () => {
+export interface ICardContentSwitchProps {
+	onChangeAddress?: (...args: any[]) => Promise<any>;
+}
+
+const CardContentSwitch: React.FC<ICardContentSwitchProps> = (props: ICardContentSwitchProps) => {
 	const {
 		current,
 		i18n,
@@ -66,6 +70,7 @@ const CardContentSwitch: React.FC = () => {
 					i18n={i18n.address}
 					onCancelChanges={() => send('CANCEL')}
 					subSectionHeaderText={i18n.preview.buttons.three}
+					onChangeAddress={props.onChangeAddress}
 				/>
 			);
 		case current.matches({ edit: 'contacts' }):
@@ -190,7 +195,7 @@ export const InHouseCard: React.FC<InHouseAdminProviderProps> = ({
 								/>
 							)}
 						/>
-						<CardContentSwitch />
+						<CardContentSwitch onChangeAddress={rest.onChangeAddress} />
 					</Section>
 				);
 			}}
