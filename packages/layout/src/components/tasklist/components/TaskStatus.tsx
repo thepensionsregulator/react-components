@@ -8,13 +8,13 @@ const TaskStatus: React.FC<TaskStatusIconProps> = ({
 	sectionIncompleteLabel,
 }) => {
 	return (
-		<span
+		<strong
 			className={`${styles.taskStatus} ${
 				link.completed ? styles.complete : styles.incomplete
 			}`}
 		>
 			{link.completed ? sectionCompleteLabel : sectionIncompleteLabel}
-		</span>
+		</strong>
 	);
 };
 
