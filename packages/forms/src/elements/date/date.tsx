@@ -102,7 +102,7 @@ const DateInputField: React.FC<DateInputFieldProps> = ({
 				{label}
 			</P>
 			<Input
-				type="string"
+				type="number"
 				id={id}
 				disabled={disabled}
 				data-testid={testId}
