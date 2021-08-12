@@ -88,9 +88,9 @@ describe('Date input', () => {
 		expect(fieldset).not.toBeNull();
 		expect(fieldset).toHaveAttribute('aria-labelledby', `${id}-label`);
 		expect(fieldset).toHaveAttribute('aria-describedby', `${id}-hint`);
-		expect(dd).toHaveAttribute('type', 'string');
-		expect(mm).toHaveAttribute('type', 'string');
-		expect(yyyy).toHaveAttribute('type', 'string');
+		expect(dd).toHaveAttribute('type', 'number');
+		expect(mm).toHaveAttribute('type', 'number');
+		expect(yyyy).toHaveAttribute('type', 'number');
 
 		const submit = container.querySelector('button[type="submit"]');
 
