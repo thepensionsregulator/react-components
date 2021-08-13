@@ -16,12 +16,12 @@ import {
 	getNumberOfCommas,
 	calculateCursorPosition,
 } from '../helpers';
-import { FieldWithAriaLabelExtenstionI18nProps } from 'types/FieldWithAriaLabelExtensionI18nProps';
+import { FieldWithAriaLabelExtensionI18nProps } from 'types/FieldWithAriaLabelExtensionI18nProps';
 import { FieldWithAriaLabelExtensionProps } from '../../types/FieldWithAriaLabelExtensionProps';
 import { RecursivePartial } from 'types/RecursivePartial';
 import AccessibilityHelper from '../accessibilityHelper';
 
-let currencyFieldI18nDefaults: FieldWithAriaLabelExtenstionI18nProps = {
+let currencyFieldI18nDefaults: FieldWithAriaLabelExtensionI18nProps = {
 	ariaLabelExtension: ', in pounds',
 };
 
@@ -33,7 +33,7 @@ interface InputCurrencyProps extends FieldRenderProps<number>, FieldExtraProps {
 	noLeftBorder?: boolean;
 	optionalText?: boolean;
 	maxInputLength?: number;
-	i18n?: RecursivePartial<FieldWithAriaLabelExtenstionI18nProps>;
+	i18n?: RecursivePartial<FieldWithAriaLabelExtensionI18nProps>;
 }
 
 const InputCurrency: React.FC<InputCurrencyProps> = React.memo(
