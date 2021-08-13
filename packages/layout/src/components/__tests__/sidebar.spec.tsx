@@ -206,7 +206,6 @@ const assertStatusIconHasAccessibilityAttributes = (
 	expectedLabel: string,
 ) => {
 	expect(statusIcon).toHaveAttribute('data-testid', expectedTestId);
-	expect(statusIcon).toHaveAttribute('aria-label', expectedLabel);
 	expect(statusIcon.getElementsByTagName('title')[0].innerHTML).toEqual(
 		expectedLabel,
 	);
