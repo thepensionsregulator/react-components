@@ -19,7 +19,7 @@ export const WarningBox: React.FC<WarningBoxProps> = ({
 			role="alert"
 		>
 			<Flex cfg={{ flexDirection: 'row' }}>
-				<WarningCircle cfg={{ mr: 4 }} ariaLabel={warningLabel} />
+				<WarningCircle cfg={{ mr: 4 }} alternativeText={warningLabel} />
 				{children}
 			</Flex>
 		</Flex>

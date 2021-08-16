@@ -10,12 +10,15 @@ export const SVG: React.FC<SVGProps> = ({
 	className,
 	viewBox = '0 0 24 24',
 	testId,
-	role,
-	ariaLabel,
+	role = 'img',
+	alternativeText,
 	focusable = false,
 	children,
 }) => {
 	const classNames = useClassNames(cfg, [className]);
+	const uniqueId = [...Array(10)]
+		.map(() => (~~(Math.random() * 36)).toString(36))
+		.join('');
 	return (
 		<svg
 			width={width}
@@ -29,8 +32,10 @@ export const SVG: React.FC<SVGProps> = ({
 			data-testid={testId}
 			role={role}
 			focusable={focusable}
-			aria-label={ariaLabel}
+			aria-hidden={alternativeText ? undefined : 'true'}
+			aria-labelledby={alternativeText ? uniqueId : undefined}
 		>
+			{alternativeText && <title id={uniqueId}>{alternativeText}</title>}
 			{children}
 		</svg>
 	);

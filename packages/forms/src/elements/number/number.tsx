@@ -4,12 +4,12 @@ import { StyledInputLabel, InputElementHeading } from '../elements';
 import { FieldExtraProps } from '../../renderFields';
 import { Input } from '../input/input';
 import { adaptValueToFormat, fixToDecimals, validKeys as vk } from '../helpers';
-import { FieldWithAriaLabelExtenstionI18nProps } from 'types/FieldWithAriaLabelExtensionI18nProps';
+import { FieldWithAriaLabelExtensionI18nProps } from 'types/FieldWithAriaLabelExtensionI18nProps';
 import { FieldWithAriaLabelExtensionProps } from '../../types/FieldWithAriaLabelExtensionProps';
 import { RecursivePartial } from 'types/RecursivePartial';
 import AccessibilityHelper from '../accessibilityHelper';
 
-let numberFieldI18nDefaults: FieldWithAriaLabelExtenstionI18nProps = {
+let numberFieldI18nDefaults: FieldWithAriaLabelExtensionI18nProps = {
 	ariaLabelExtension: null,
 };
 
@@ -22,7 +22,8 @@ interface InputNumberProps extends FieldRenderProps<number>, FieldExtraProps {
 	optionalText?: boolean;
 	maxLength?: number;
 	maxIntDigits?: number;
-	i18n?: RecursivePartial<FieldWithAriaLabelExtenstionI18nProps>;
+	i18n?: RecursivePartial<FieldWithAriaLabelExtensionI18nProps>;
+	wrapperElement?: 'label' | 'div' | 'fieldset';
 }
 
 const InputNumber: React.FC<InputNumberProps> = ({
@@ -48,6 +49,7 @@ const InputNumber: React.FC<InputNumberProps> = ({
 	maxIntDigits,
 	i18n = numberFieldI18nDefaults,
 	initialValue,
+	wrapperElement = 'label',
 	...props
 }) => {
 	const digits = [
@@ -168,6 +170,7 @@ const InputNumber: React.FC<InputNumberProps> = ({
 			isError={meta && meta.touched && meta.error}
 			cfg={Object.assign({ flexDirection: 'column', mt: 1 }, cfg)}
 			noLeftBorder={noLeftBorder}
+			element={wrapperElement}
 		>
 			<InputElementHeading
 				label={label}
@@ -202,9 +205,11 @@ const InputNumber: React.FC<InputNumberProps> = ({
 	);
 };
 
-export const FFInputNumber: React.FC<FieldWithAriaLabelExtensionProps> = (
-	fieldProps,
-) => {
+export interface FFInputNumberProps extends FieldWithAriaLabelExtensionProps {
+	wrapperElement?: 'label' | 'div' | 'fieldset';
+}
+
+export const FFInputNumber: React.FC<FFInputNumberProps> = (fieldProps) => {
 	return (
 		<Field
 			{...fieldProps}

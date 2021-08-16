@@ -10,12 +10,12 @@ const StatusIcon: React.FC<StatusIconProps> = ({
 	return link.completed ? (
 		<CheckedCircle
 			cfg={{ fill: 'success.1' }}
-			ariaLabel={sectionCompleteLabel}
+			alternativeText={sectionCompleteLabel}
 		/>
 	) : (
 		<ErrorCircle
 			cfg={{ fill: link.disabled ? 'danger.1' : 'danger.2' }}
-			ariaLabel={sectionIncompleteLabel}
+			alternativeText={sectionIncompleteLabel}
 		/>
 	);
 };

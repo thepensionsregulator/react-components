@@ -92,7 +92,7 @@ describe('Corporate Group Trustee Card', () => {
 		});
 
 		test('initial status is correct', () => {
-			expect(findAllByText('Confirmed').length).toEqual(2);
+			expect(findAllByText('Confirmed').length).toEqual(1);
 			expect(findByTitle('Confirmed')).toBeDefined();
 			expect(findByText('Confirm details are correct.')).toBeDefined();
 		});

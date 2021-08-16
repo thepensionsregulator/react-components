@@ -17,7 +17,7 @@ export type SVGProps = Partial<{
 	testId: string;
 	/** for accessibility */
 	role: string;
-	ariaLabel: string;
+	alternativeText?: string;
 	focusable?: boolean;
 }>;
 
