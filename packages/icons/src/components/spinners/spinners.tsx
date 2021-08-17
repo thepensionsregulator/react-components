@@ -10,6 +10,7 @@ export const LoadingSpinnerCircle: React.FC<SpinnerProps> = ({
 			className={styles.spinnerCircle}
 			data-testid="spinner-circle"
 			role="status"
+			aria-live="polite" 
 		>
 			<div className={styles.spinner}>
 				<div></div>
@@ -28,6 +29,7 @@ export const LoadingSpinnerProgress: React.FC<SpinnerProps> = ({
 			className={styles.spinnerProgress}
 			data-testid="spinner-progress"
 			role="status"
+			aria-live="polite"
 		>
 			<div className={styles.spinner}>
 				<div></div>
