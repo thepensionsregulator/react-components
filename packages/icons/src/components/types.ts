@@ -28,5 +28,4 @@ export type CrossProps = {
 
 export type SpinnerProps = {
 	text?: string;
-	iconOnly?: boolean;
 };
