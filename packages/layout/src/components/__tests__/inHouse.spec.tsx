@@ -79,6 +79,10 @@ describe('InHouse Preview', () => {
 		assertThatButtonHasAriaExpanded(findByText, 'Contact details', false);
 	});
 
+	test('replaces __NAME__ in the checkbox label', () => {
+		expect(findByText(`Confirm 'Mr John Smoth' is correct.`)).toBeDefined();
+	});
+
 	test('editing in house name', () => {
 		findByText('In House Administrator').click();
 		expect(findByTestId('inHouseAdmin-name-form')).not.toBe(null);

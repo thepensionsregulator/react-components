@@ -91,7 +91,6 @@ describe('Actuary Card', () => {
 		test('initial status is correct', () => {
 			expect(findAllByText('Confirmed').length).toEqual(1);
 			expect(findByTitle('Confirmed')).toBeDefined();
-			expect(findByText('Confirm details are correct.')).toBeDefined();
 		});
 
 		test('displays Name Correctly', () => {
@@ -122,6 +121,10 @@ describe('Actuary Card', () => {
 				findByRole,
 				`${actuary.title} ${actuary.firstName} ${actuary.lastName} Actuary`,
 			);
+		});
+
+		test('replaces __NAME__ in the checkbox label', () => {
+			expect(findByText("Confirm 'Mr John Johnson' is correct.")).toBeDefined();
 		});
 	});
 

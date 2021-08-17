@@ -154,7 +154,7 @@ export const i18n: TrusteeI18nProps = {
 			confirmed: 'Confirmed',
 			unconfirmed: 'Unconfirmed',
 		},
-		checkboxLabel: 'Confirm details are correct.',
+		checkboxLabel: "Confirm '__NAME__' is correct.",
 	},
 	remove: {
 		confirm: {

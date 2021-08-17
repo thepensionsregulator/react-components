@@ -9,6 +9,7 @@ import {
 } from '../../../common/views/preview/components';
 import styles from '../../../cards.module.scss';
 import { CardContentProps } from 'components/cards/common/interfaces';
+import { concatenateStrings } from '../../../../../utils';
 
 export const Preview: React.FC<CardContentProps> = ({
 	enableContactDetails = true,
@@ -79,7 +80,14 @@ export const Preview: React.FC<CardContentProps> = ({
 						send('COMPLETE', { value: !complete });
 						onCorrect(!complete);
 					}}
-					label={i18n.preview.checkboxLabel}
+					label={i18n.preview.checkboxLabel.replace(
+						'__NAME__',
+						concatenateStrings([
+							trustee.title,
+							trustee.firstName,
+							trustee.lastName,
+						]),
+					)}
 				/>
 			</Flex>
 		</div>

@@ -8,6 +8,7 @@ import {
 	AddressPreview,
 } from '../../../common/views/preview/components';
 import styles from '../../../cards.module.scss';
+import { concatenateStrings } from '../../../../../utils';
 
 export const Preview: React.FC<any> = () => {
 	const { current, send, onCorrect, i18n } = useInHouseAdminContext();
@@ -74,7 +75,14 @@ export const Preview: React.FC<any> = () => {
 						send('COMPLETE', { value: !complete });
 						onCorrect(!complete);
 					}}
-					label={i18n.preview.checkboxLabel}
+					label={i18n.preview.checkboxLabel.replace(
+						'__NAME__',
+						concatenateStrings([
+							inHouseAdmin.title,
+							inHouseAdmin.firstName,
+							inHouseAdmin.lastName,
+						]),
+					)}
 				/>
 			</Flex>
 		</div>
