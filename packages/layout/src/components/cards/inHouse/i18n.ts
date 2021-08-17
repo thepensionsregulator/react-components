@@ -111,7 +111,7 @@ export const i18n: InHouseAdminI18nProps = {
 			confirmed: 'Confirmed',
 			unconfirmed: 'Unconfirmed',
 		},
-		checkboxLabel: 'Confirm details are correct.',
+		checkboxLabel: "Confirm '__NAME__' is correct.",
 	},
 	name: {
 		title: 'Name of in house administrator',

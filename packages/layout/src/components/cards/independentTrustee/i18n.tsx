@@ -60,7 +60,7 @@ export const i18n: IndependentTrusteeI18nProps = {
 			confirmed: 'Confirmed',
 			unconfirmed: 'Unconfirmed',
 		},
-		checkboxLabel: 'Confirm details are correct.',
+		checkboxLabel: "Confirm '__NAME__' is correct.",
 		trusteeType: 'Professional / Independent Trustee',
 	},
 	regulator: {

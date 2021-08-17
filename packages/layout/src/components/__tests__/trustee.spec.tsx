@@ -121,7 +121,6 @@ describe('TrusteeCard enableContactDetails == true', () => {
 		test('initial status is correct', () => {
 			expect(findAllByText('Confirmed').length).toEqual(1);
 			expect(findByTitle('Confirmed')).toBeDefined();
-			expect(findByText('Confirm details are correct.')).toBeDefined();
 		});
 
 		test('address shows up correctly', () => {
@@ -145,6 +144,10 @@ describe('TrusteeCard enableContactDetails == true', () => {
 				findByRole,
 				`${trustee.title} ${trustee.firstName} ${trustee.lastName} ${trustee.trusteeType} Trustee`,
 			);
+		});
+
+		test('replaces __NAME__ in the checkbox label', () => {
+			expect(findByText(`Confirm 'Mr John Smith' is correct.`)).toBeDefined();
 		});
 	});
 

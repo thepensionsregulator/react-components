@@ -71,6 +71,22 @@ describe('Insurer Preview', () => {
 			`${insurer.organisationName} Insurer administrator`,
 		);
 	});
+
+	test('replaces __NAME__ in the checkbox label', () => {
+		const { findByText } = render(
+			<InsurerCard
+				onSaveRef={noop}
+				onRemove={noop}
+				onCorrect={noop}
+				complete={true}
+				insurer={insurer}
+			/>,
+		);
+
+		expect(
+			findByText(`Confirm '${insurer.organisationName}' is correct.`),
+		).toBeDefined();
+	});
 });
 
 describe('Insurer Remove', () => {

@@ -94,7 +94,6 @@ describe('Corporate Group Trustee Card', () => {
 		test('initial status is correct', () => {
 			expect(findAllByText('Confirmed').length).toEqual(1);
 			expect(findByTitle('Confirmed')).toBeDefined();
-			expect(findByText('Confirm details are correct.')).toBeDefined();
 		});
 
 		test('Organisation block displays values correctly', () => {
@@ -124,6 +123,12 @@ describe('Corporate Group Trustee Card', () => {
 				findByRole,
 				`${corporateGroup.organisationName} Corporate Group trustee`,
 			);
+		});
+
+		test('replaces __NAME__ in the checkbox label', () => {
+			expect(
+				findByText(`Confirm '${corporateGroup.organisationName}' is correct.`),
+			).toBeDefined();
 		});
 	});
 

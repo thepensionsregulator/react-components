@@ -54,6 +54,21 @@ describe('ThirdParty Preview', () => {
 			`${thirdPartyAdmin.organisationName} Third Party Administrator`,
 		);
 	});
+
+	test('replaces __NAME__ in the checkbox label', () => {
+		const { findByText } = render(
+			<ThirdPartyCard
+				onRemove={noop}
+				onCorrect={noop}
+				complete={true}
+				thirdParty={thirdPartyAdmin}
+			/>,
+		);
+
+		expect(
+			findByText(`Confirm '${thirdPartyAdmin.organisationName}' is correct.`),
+		).toBeDefined();
+	});
 });
 
 describe('ThirdParty Remove', () => {
