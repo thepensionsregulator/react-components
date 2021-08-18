@@ -6,6 +6,7 @@ import { EditAddress } from './editAddress';
 import { act } from 'react-dom/test-utils';
 import { AddressProps } from './types';
 import { useEffect } from 'react';
+import accessibilityStyles from '@tpr/theming/lib/accessibility.module.scss';
 
 export enum AddressView {
 	PostcodeLookup,
@@ -70,7 +71,7 @@ export const AddressLookup: React.FC<AddressProps> = ({
 
 	// Render a different child component depending on the state
 	return (
-		<>
+		<div aria-live="polite" className={accessibilityStyles.visuallyHidden}>
 			{addressView === AddressView.PostcodeLookup && (
 				<PostcodeLookup
 					postcode={postcode}
@@ -156,6 +157,6 @@ export const AddressLookup: React.FC<AddressProps> = ({
 					changeAddressButton={changeAddressButton}
 				/>
 			)}
-		</>
+		</div>
 	);
 };
