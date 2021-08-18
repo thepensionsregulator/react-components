@@ -91,4 +91,26 @@
 	blockquote {
 		background: $colors-neutral-2;
 	}
+	table {
+		border-collapse: collapse;
+		margin-bottom: 1rem;
+	}
+	caption,
+	td,
+	th {
+		padding: $space-2;
+		text-align: left;
+		border: 1px solid $colors-neutral-6;
+	}
+	caption {
+		border-bottom: none;
+		background: $colors-neutral-3;
+	}
+	caption,
+	th {
+		font-weight: $font-weight-4;
+	}
+	& > :last-child {
+		margin-bottom: 0;
+	}
 }
