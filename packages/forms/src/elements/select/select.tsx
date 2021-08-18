@@ -83,6 +83,7 @@ export const Select: React.FC<SelectProps & FieldRenderProps<string>> = ({
 								disabled={disabled}
 								placeholder={placeholder}
 								readOnly={readOnly}
+								required={required}
 								onClick={() => toggleMenu()}
 								className={styles.input}
 								accessibilityHelper={helper}
@@ -139,7 +140,7 @@ export const FFSelect: React.FC<FieldProps & Omit<SelectProps, 'children'>> = (
 	return (
 		<Field
 			{...fieldProps}
-			required={typeof fieldProps.validate === 'function' || fieldProps.error}
+			required={fieldProps.required || typeof fieldProps.validate === 'function' || fieldProps.error}
 			render={({
 				input,
 				initialSelectedItem,

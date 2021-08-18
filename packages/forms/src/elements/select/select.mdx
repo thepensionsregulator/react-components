@@ -91,7 +91,7 @@ import { FFSelect } from '@tpr/forms';
 		return (
 			<Form onSubmit={console.log}>
 				{({ handleSubmit }) => (
-					<form onSubmit={handleSubmit}>
+					<form onSubmit={handleSubmit} noValidate>
 						<div style={{ padding: 10 }}>
 							<FFSelect
 								id="sample-select-2"
@@ -100,6 +100,52 @@ import { FFSelect } from '@tpr/forms';
 								hint="Please select one of the fruit from the dropdown menu"
 								inputWidth={5}
 								onChange={({ value }, send) => send(value)}
+								validate={(value) =>
+									value
+										? undefined
+										: 'Cannot be left empty, please select a value!'
+								}
+								options={[
+									{ label: 'Apple', value: 1 },
+									{ label: 'Pear', value: 2 },
+									{ label: 'Orange', value: 3 },
+									{ label: 'Grape', value: 4 },
+									{ label: 'Banana', value: 5 },
+								]}
+							/>
+						</div>
+					</form>
+				)}
+			</Form>
+		);
+	}}
+</Playground>
+
+
+## Required
+
+```js
+<form noValidate>
+...
+required=true;
+```
+
+<Playground>
+	{() => {
+		const FIELD_NAME = 'fruit';
+		return (
+			<Form onSubmit={console.log}>
+				{({ handleSubmit }) => (
+					<form onSubmit={handleSubmit} noValidate>
+						<div style={{ padding: 10 }}>
+							<FFSelect
+								id="sample-select-2"
+								name={FIELD_NAME}
+								label="Select Fruit"
+								hint="Please select one of the fruit from the dropdown menu"
+								inputWidth={5}
+								onChange={({ value }, send) => send(value)}
+								required={true}
 								validate={(value) =>
 									value
 										? undefined
@@ -135,5 +181,6 @@ Accepted config props: FlexProps, SpaceProps
 | disabled        | false    | boolean  | Disable the select                                                                     |
 | testId          | false    | string   | data attribute for testers                                                             |
 | readOnly        | false    | boolean  | Specifies whether the control is read only like a select, or editable like a combobox. |
+| required        | false    | boolean 	| Sets whether the field is required (default value: false) 														 |
 | validate        | false    | function | Validates the selected value. If not specified an 'optional' label is displayed.       |
 | notFoundMessage | false    | string   | Displayed when there are no options to select                                          |

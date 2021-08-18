@@ -11,6 +11,7 @@ export type HiddenInputProps = {
 export const HiddenInput: React.FC<HiddenInputProps> = ({
 	type,
 	disabled = false,
+	required = false,
 	input,
 	meta,
 	updatedValue,
@@ -26,6 +27,7 @@ export const HiddenInput: React.FC<HiddenInputProps> = ({
 		<input
 			type={type}
 			disabled={disabled}
+			required={required}
 			className={styles.hiddenInput}
 			{...rest}
 		/>

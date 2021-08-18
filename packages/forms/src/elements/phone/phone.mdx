@@ -48,7 +48,7 @@ import { Form, FFInputPhone } from '@tpr/forms';
 <Playground>
 	<Form onSubmit={console.log}>
 		{({ handleSubmit }) => (
-			<form onSubmit={handleSubmit}>
+			<form onSubmit={handleSubmit} noValidate>
 				<FFInputPhone
 					name="phone_number"
 					label="Phone Number"

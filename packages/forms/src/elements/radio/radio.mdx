@@ -267,6 +267,75 @@ import { FFRadioButton } from '@tpr/forms';
 	}}
 </Playground>
 
+
+### Required
+
+```js
+required=true;
+```
+
+<Playground>
+	{() => {
+		const FIELD_NAME = 'required_rb';
+		const fields = [
+			{
+				type: 'radio',
+				id: 'required_radio-a',
+				name: FIELD_NAME,
+				label: 'Value A',
+				value: 'required_value_a',
+				required: true,
+				hint: 'Either option A',
+				cfg: { mb: 4 }
+			},
+			{
+				type: 'radio',
+				id: 'required_radio-b',
+				name: FIELD_NAME,
+				label: 'Value B',
+				value: 'required_value_b',
+				required: true,
+				hint: 'Or option B',
+			}
+		];
+		const validateForm = (values) => {
+			console.log('validateForm');
+			console.log(values);
+			if (!values[FIELD_NAME]) {
+				return {
+					message: 'You must choose an option'
+				};
+			}
+		};
+		return (
+			<Form 
+				onSubmit={(value, form) => {
+					setTimeout(() => {
+						form.reset();
+					}, 500)
+				}} 
+				initialValues={{ [FIELD_NAME]: null }}
+				validate={validateForm}
+			>
+				{({ handleSubmit, errors }) => (
+					<form onSubmit={handleSubmit}>
+						<fieldset className={errors.message && styles.labelError} aria-describedby="error-message">
+							<legend>Choose an option</legend>
+		          {errors.message && <p id="error-message" className={styles.errorMessage}>{errors.message}</p>}
+							{renderFields(fields)}
+						</fieldset>
+						<button type="submit" style={{ display: 'none' }}>
+							Submit
+						</button>
+						<br />
+						<p>(Press ENTER to reset)</p>
+					</form>
+				)}
+			</Form>
+		);
+	}}
+</Playground>
+
 ## API
 
 ```

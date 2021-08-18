@@ -48,7 +48,7 @@ import { FFInputNumber } from '@tpr/forms';
 		initialValues={{ rpiIncrease: 2.5 }}
 	>
 		{({ handleSubmit }) => (
-			<form onSubmit={handleSubmit}>
+			<form onSubmit={handleSubmit} noValidate>
 				<FFInputNumber
 					name="number_of_participants"
 					label="Number of participants"
@@ -289,6 +289,47 @@ aria - label = 'Age of the applicant in years.  Use whole numbers only.';
 	}}
 </Playground>
 
+
+### Required field
+
+```js
+<form noValidate>
+...
+required=true;
+```
+
+<Playground>
+	{() => {
+		const handleChange = (value) => {
+			console.log(value);
+		};
+		return (
+			<Form onSubmit={(values) => console.log(values)}>
+				{({ handleSubmit }) => (
+					<form onSubmit={handleSubmit} noValidate>
+						<FFInputNumber
+							name="ageOfApplicant"
+							label="Age of the applicant"
+							aria-label="Age of the applicant in years.  Use whole numbers only."
+							after="years"
+							inputWidth={1}
+							required={true}
+							noLeftBorder={true}
+							optionalText={false}
+							callback={handleChange}
+						/>
+						<button
+							type="submit"
+							style={{ display: 'none' }}
+							children="Submit"
+						/>
+					</form>
+				)}
+			</Form>
+		);
+	}}
+</Playground>
+
 ## API
 
 ```
@@ -314,5 +355,6 @@ Accepted config props: FlexProps, SpaceProps
 | optionalText   | false    | boolean                               | allows hiding "optional" text when field is not required                                                                                         |
 | testId         | false    | string                                | data attribute for testers                                                                                                                       |
 | readOnly       | false    | boolean                               | Sets whether the field is read only                                                                                                              |
+| required       | false    | boolean 															| Mark text field as required                    																																																	 |
 | i18n           | false    | FieldWithAriaLabelExtenstionI18nProps | allows the overridding of default text in the number input                                                                                       |
 | wrapperElement | false    | string                                | replaces the `<label>` with a different element, for use in combination with an alternative labelling technique such as aria-labelledby          |
