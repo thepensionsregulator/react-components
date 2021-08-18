@@ -36,7 +36,7 @@ export const EditAddress: React.FC<EditAddressProps> = React.memo(
 			label?: string,
 		) {
 			return (
-				<div aria-live="polite">
+				<>
 					{label && (
 						<P className={styles.nonEditable}>
 							<strong
@@ -60,7 +60,7 @@ export const EditAddress: React.FC<EditAddressProps> = React.memo(
 						updatedValue={value ? value[fieldName] : ''}
 						render={(props) => <HiddenInput type="hidden" {...props} />}
 					/>
-				</div>
+				</>
 			);
 		}
 

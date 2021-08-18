@@ -44,7 +44,7 @@ export const PostcodeLookup: React.FC<PostcodeLookupProps> = ({
 	};
 
 	return (
-		<div aria-live="polite">
+		<>
 			<FFInputText
 				ref={searchFieldRef}
 				name="postcodeLookup"
@@ -81,6 +81,6 @@ export const PostcodeLookup: React.FC<PostcodeLookupProps> = ({
 					</Button>
 				)}
 			</Flex>
-		</div>
+		</>
 	);
 };

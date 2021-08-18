@@ -114,7 +114,7 @@ export const SelectAddress: React.FC<SelectAddressProps> = ({
 
 	return (
 		<>
-			<Flex cfg={{ alignItems: 'center' }} aria-live="polite">
+			<Flex cfg={{ alignItems: 'center' }}>
 				<P className={`${styles.nonEditable} ${styles.selectedPostcode}`}>
 					<strong
 						id={(testId ? testId + '-' : '') + 'postcode'}
