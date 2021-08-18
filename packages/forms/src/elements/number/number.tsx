@@ -89,7 +89,8 @@ const InputNumber: React.FC<InputNumberProps> = ({
 		// 		Delaying minimally the execution of the blur event solves this problem.
 		// 	*/
 		setTimeout(() => {
-			innerInput.current && innerInput.current.dispatchEvent(new Event('blur', { bubbles: true }));
+			innerInput.current &&
+				innerInput.current.dispatchEvent(new Event('blur', { bubbles: true }));
 		}, 100);
 	};
 
