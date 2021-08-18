@@ -26,6 +26,7 @@ const InputText: React.FC<InputTextProps> = React.forwardRef(
 			placeholder,
 			disabled,
 			readOnly,
+			autoComplete,
 			inputWidth: width,
 			cfg,
 			updatedValue,
@@ -63,6 +64,7 @@ const InputText: React.FC<InputTextProps> = React.forwardRef(
 					placeholder={placeholder}
 					disabled={disabled}
 					readOnly={readOnly}
+					autoComplete={autoComplete}
 					isError={meta && meta.touched && meta.error}
 					className={inputClassName}
 					maxLength={maxLength}

@@ -121,7 +121,6 @@ const DateInputField: React.FC<DateInputFieldProps> = ({
 					}
 				}}
 				meta={meta}
-				autoComplete="off"
 				maxLength={maxLength}
 				isError={meta && meta.touched && meta.error}
 				accessibilityHelper={!hasFocus ? helper : null}

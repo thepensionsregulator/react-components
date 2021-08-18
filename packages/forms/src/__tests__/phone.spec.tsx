@@ -81,6 +81,24 @@ describe('Phone input', () => {
 		expect(label).toHaveAttribute('readonly');
 	});
 
+	test('renders autocomplete', () => {
+		const { queryByTestId } = formSetup({
+			render: <FFInputPhone {...basicProps} />,
+		});
+
+		const label = queryByTestId(phoneTestId);
+		expect(label).toHaveAttribute('autocomplete', 'tel');
+	});
+
+	test('renders type="tel"', () => {
+		const { queryByTestId } = formSetup({
+			render: <FFInputPhone {...basicProps} />,
+		});
+
+		const label = queryByTestId(phoneTestId);
+		expect(label).toHaveAttribute('type', 'tel');
+	});
+
 	test('has correct describedby tag when an error is shown', () => {
 		const { getByTestId, getByText } = formSetup({
 			render: <FFInputPhone {...basicProps} required={true} />,

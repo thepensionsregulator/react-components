@@ -78,6 +78,24 @@ describe('Email input', () => {
 		expect(label).toHaveAttribute('readonly');
 	});
 
+	test('renders autocomplete', () => {
+		const { queryByTestId } = formSetup({
+			render: <FFInputEmail {...basicProps} />,
+		});
+
+		const label = queryByTestId(emailTestId);
+		expect(label).toHaveAttribute('autocomplete', 'email');
+	});
+
+	test('renders type="email"', () => {
+		const { queryByTestId } = formSetup({
+			render: <FFInputEmail {...basicProps} />,
+		});
+
+		const label = queryByTestId(emailTestId);
+		expect(label).toHaveAttribute('type', 'email');
+	});
+
 	test('has correct describedby tag when an error is shown', () => {
 		const { getByText, getByTestId } = formSetup({
 			render: <FFInputEmail {...basicProps} required={true} />,

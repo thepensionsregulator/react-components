@@ -175,6 +175,32 @@ describe('Date input', () => {
 		expect(yyyy).toHaveAttribute('readonly');
 	});
 
+	test('date fields do not set autocomplete', () => {
+		const fields: FieldProps[] = [
+			{
+				id: 'test-date',
+				name: 'date-1',
+				label: 'passport-expiry',
+				hint: 'For example, 12 11 2007',
+				type: 'date',
+				required: true,
+			},
+		];
+		const { container } = formSetup({
+			render: renderFields(fields),
+			validate: validate(fields),
+			onSubmit: jest.fn(),
+		});
+
+		const dd = container.querySelector(`input[data-testid="dd-field"]`);
+		const mm = container.querySelector(`input[data-testid="mm-field"]`);
+		const yyyy = container.querySelector(`input[data-testid="yyyy-field"]`);
+
+		expect(dd).not.toHaveAttribute('autocomplete');
+		expect(mm).not.toHaveAttribute('autocomplete');
+		expect(yyyy).not.toHaveAttribute('autocomplete');
+	});
+
 	test('using the hideDay prop', () => {
 		const id = 'test-date';
 		const fields: FieldProps[] = [
