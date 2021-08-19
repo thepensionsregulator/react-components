@@ -96,6 +96,7 @@ export const EditAddress: React.FC<EditAddressProps> = React.memo(
 					name="addressLine1"
 					label={addressLine1Label}
 					disabled={loading}
+					required
 					testId={(testId ? testId + '-' : '') + 'addressLine1'}
 					initialValue={
 						isDirty() ? value.addressLine1 : initialValue.addressLine1

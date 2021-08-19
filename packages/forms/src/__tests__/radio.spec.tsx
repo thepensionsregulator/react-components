@@ -4,8 +4,41 @@ import { FFRadioButton } from '../elements/radio/radio';
 import { renderFields } from '../index';
 import { fireEvent, getByTestId } from '@testing-library/react';
 import { axe } from 'jest-axe';
+import { FieldProps } from '../../lib/renderFields';
+
+const testId = 'radio-button';
+
+const basicProps: FieldProps = {
+	hint: 'This explains how to complete the currency field',
+	label: 'Click Me',
+	name: 'radio_button',
+	value: 'radio_1',
+	testId: testId,
+};
 
 describe('Radio input', () => {
+	describe('rendering', () => {
+		test('renders correctly', () => {
+			const { queryByTestId } = formSetup({
+				render: <FFRadioButton {...basicProps} />,
+			});
+
+			const button = queryByTestId(testId);
+			expect(button).toBeDefined();
+			expect(button).toHaveAttribute('value', basicProps.value);
+			expect(button).not.toHaveAttribute('required');
+		});
+
+		test('can render with required attribute', () => {
+			const { queryByTestId } = formSetup({
+				render: <FFRadioButton {...basicProps} required={true} />,
+			});
+
+			const button = queryByTestId(testId);
+			expect(button).toHaveAttribute('required');
+		});
+	});
+
 	test('is accessible', async () => {
 		const handleSubmit = jest.fn();
 		const { container } = formSetup({

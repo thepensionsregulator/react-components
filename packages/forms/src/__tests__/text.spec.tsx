@@ -9,7 +9,75 @@ import { axe } from 'jest-axe';
 import { CheckDescribedByTag } from '../utils/aria-describedByTest';
 import AccessibilityHelper from '../elements/accessibilityHelper';
 
+const testId = 'text-input';
+
+const basicProps: FieldProps = {
+	hint: 'enter your name here',
+	label: 'Name',
+	name: 'name',
+	testId: testId,
+	type: 'text',
+};
+
 describe('Text input', () => {
+	describe('rendering', () => {
+		test('renders correctly', () => {
+			const { queryByTestId } = formSetup({
+				render: <FFInputText {...basicProps} />,
+			});
+
+			const label = queryByTestId(testId);
+			expect(label).toBeDefined();
+			expect(label).not.toHaveAttribute('required');
+		});
+
+		test('renders required', () => {
+			const { queryByTestId } = formSetup({
+				render: <FFInputText {...basicProps} required={true} />,
+			});
+
+			const label = queryByTestId(testId);
+			expect(label).toHaveAttribute('required');
+		});
+
+		test('renders label', () => {
+			const { getByText } = formSetup({
+				render: <FFInputText {...basicProps} />,
+			});
+
+			const label = getByText(/Name/);
+			expect(label).toBeInTheDocument();
+			expect(label).toHaveAttribute('id', 'name-label');
+		});
+
+		test('renders label with title optional', () => {
+			const { queryByText } = formSetup({
+				render: (
+					<FFInputText label="Name" required={false} name="name" type="text" />
+				),
+			});
+			const label = queryByText(/optional/g);
+			expect(label).toBeInTheDocument();
+		});
+
+		test('renders aria-label', () => {
+			const { queryByTestId } = formSetup({
+				render: <FFInputText {...basicProps} />,
+			});
+
+			const label = queryByTestId(testId);
+			expect(label).toHaveAttribute('aria-label', 'Name');
+		});
+
+		test('renders hint correctly', () => {
+			const { queryByText } = formSetup({
+				render: <FFInputText {...basicProps} />,
+			});
+			const hint = queryByText(/enter your name here/);
+			expect(hint).toBeInTheDocument();
+		});
+	});
+
 	test('is accessible', async () => {
 		const { container } = formSetup({
 			render: (
@@ -18,59 +86,6 @@ describe('Text input', () => {
 		});
 		const results = await axe(container);
 		expect(results).toHaveNoViolations();
-	});
-
-	test('renders label', () => {
-		const { getByText } = formSetup({
-			render: (
-				<FFInputText label="Name" testId="text-input" name="name" type="text" />
-			),
-		});
-
-		const label = getByText(/Name/);
-		expect(label).toBeInTheDocument();
-		expect(label).toHaveAttribute('id', 'name-label');
-	});
-
-	test('renders label with title optional', () => {
-		const { queryByText } = formSetup({
-			render: (
-				<FFInputText label="Name" required={false} name="name" type="text" />
-			),
-		});
-		const label = queryByText(/optional/g);
-		expect(label).toBeInTheDocument();
-	});
-
-	test('renders aria-label', () => {
-		const { queryByTestId } = formSetup({
-			render: (
-				<FFInputText
-					ariaLabel="Name"
-					testId="text-input"
-					name="name"
-					type="text"
-				/>
-			),
-		});
-
-		const label = queryByTestId('text-input');
-		expect(label).toHaveAttribute('aria-label', 'Name');
-	});
-
-	test('renders hint correctly', () => {
-		const { queryByText } = formSetup({
-			render: (
-				<FFInputText
-					label="Name"
-					hint="enter your name here"
-					name="name"
-					type="text"
-				/>
-			),
-		});
-		const hint = queryByText(/enter your name here/);
-		expect(hint).toBeInTheDocument();
 	});
 
 	test('shows error message on required field when left empty', () => {

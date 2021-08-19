@@ -24,6 +24,36 @@ const basicProps = {
 const handleSubmit = jest.fn();
 
 describe('Phone input', () => {
+	describe('rendering', () => {
+		test('renders correctly', () => {
+			const { queryByTestId } = formSetup({
+				render: <FFInputPhone {...basicProps} />,
+			});
+
+			const input = queryByTestId(phoneTestId);
+			expect(input).toBeDefined();
+			expect(input).not.toHaveAttribute('readonly');
+			expect(input).not.toHaveAttribute('required');
+		});
+		test('renders readonly', () => {
+			const { queryByTestId } = formSetup({
+				render: <FFInputPhone {...basicProps} readOnly={true} />,
+			});
+
+			const input = queryByTestId(phoneTestId);
+			expect(input).toHaveAttribute('readonly');
+		});
+
+		test('renders required attribute', () => {
+			const { queryByTestId } = formSetup({
+				render: <FFInputPhone {...basicProps} required={true} />,
+			});
+
+			const input = queryByTestId(phoneTestId);
+			expect(input).toHaveAttribute('required');
+		});
+	});
+
 	test('is accessible', async () => {
 		const { container } = formSetup({
 			render: <FFInputPhone {...basicProps} />,
@@ -70,15 +100,6 @@ describe('Phone input', () => {
 		getByText('Submit').click();
 
 		expect(form.getState().valid).toBeTruthy();
-	});
-
-	test('renders readonly', () => {
-		const { queryByTestId } = formSetup({
-			render: <FFInputPhone {...basicProps} readOnly={true} />,
-		});
-
-		const label = queryByTestId(phoneTestId);
-		expect(label).toHaveAttribute('readonly');
 	});
 
 	test('has correct describedby tag when an error is shown', () => {

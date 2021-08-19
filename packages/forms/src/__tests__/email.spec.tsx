@@ -24,6 +24,26 @@ const basicProps = {
 const handleSubmit = jest.fn();
 
 describe('Email input', () => {
+	describe('rendering', () => {
+		test('renders readonly attribute', () => {
+			const { queryByTestId } = formSetup({
+				render: <FFInputEmail {...basicProps} readOnly={true} />,
+			});
+
+			const label = queryByTestId(emailTestId);
+			expect(label).toHaveAttribute('readonly');
+		});
+
+		test('renders required attribute', () => {
+			const { queryByTestId } = formSetup({
+				render: <FFInputEmail {...basicProps} required={true} />,
+			});
+
+			const label = queryByTestId(emailTestId);
+			expect(label).toHaveAttribute('required');
+		});
+	});
+
 	test('is accessible', async () => {
 		const { container } = formSetup({
 			render: <FFInputEmail {...basicProps} />,
@@ -67,15 +87,6 @@ describe('Email input', () => {
 		getByText('Submit').click();
 
 		expect(form.getState().valid).toBeTruthy();
-	});
-
-	test('renders readonly', () => {
-		const { queryByTestId } = formSetup({
-			render: <FFInputEmail {...basicProps} readOnly={true} />,
-		});
-
-		const label = queryByTestId(emailTestId);
-		expect(label).toHaveAttribute('readonly');
 	});
 
 	test('has correct describedby tag when an error is shown', () => {

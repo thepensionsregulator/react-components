@@ -10,8 +10,16 @@ import {
 	validateCurrency,
 } from '../elements/helpers';
 import { CheckDescribedByTag } from '../utils/aria-describedByTest';
+import { FieldWithAriaLabelExtensionProps } from '../types/FieldWithAriaLabelExtensionProps';
 
 const testId = 'currency-input';
+
+const basicProps: FieldWithAriaLabelExtensionProps = {
+	hint: 'This explains how to complete the currency field',
+	label: 'Currency',
+	name: 'currency',
+	testId: testId,
+};
 
 const currencyComponent = (
 	<FFInputCurrency label="Currency" testId={testId} name="currency" />
@@ -36,31 +44,16 @@ const currencyComponentWithArialLabelAndi18n = (
 );
 
 describe('Currency', () => {
-	describe('normal behaviour', () => {
-		test('is accessible', async () => {
-			const { container } = formSetup({
-				render: currencyComponent,
-			});
-			const results = await axe(container);
-			expect(results).toHaveNoViolations();
-		});
-
-		test('values get captured correctly', async () => {
+	describe('rendering', () => {
+		test('renders correctly', () => {
 			const { getByTestId } = formSetup({
 				render: currencyComponent,
 			});
 
-			userEvent.type(getByTestId(testId), '123');
-			expect(getByTestId(testId)).toHaveValue('123');
-		});
+			const input = getByTestId(testId);
 
-		test('Currency symbol can be typed as the first character only', async () => {
-			const { getByTestId } = formSetup({
-				render: currencyComponent,
-			});
-
-			userEvent.type(getByTestId(testId), '£10£0');
-			expect(getByTestId(testId)).toHaveValue('£100');
+			expect(input).toBeDefined();
+			expect(input).not.toHaveAttribute('required');
 		});
 
 		test('label renders with an id attribute', () => {
@@ -83,6 +76,28 @@ describe('Currency', () => {
 
 			expect(input).toBeDefined();
 			expect(input).toHaveAttribute('aria-label', 'Currency, in pounds');
+		});
+
+		test('renders readonly', () => {
+			const { queryByTestId } = formSetup({
+				render: (
+					<FFInputCurrency testId="text-input" name="name" readOnly={true} />
+				),
+			});
+
+			const label = queryByTestId('text-input');
+			expect(label).toHaveAttribute('readonly');
+		});
+
+		test('renders a required attribute', () => {
+			const { getByTestId } = formSetup({
+				render: <FFInputCurrency {...basicProps} required={true} />,
+			});
+
+			const input = getByTestId(testId);
+
+			expect(input).toBeDefined();
+			expect(input).toHaveAttribute('required');
 		});
 
 		test('renders an aria-label when given a label and an aria label extension', () => {
@@ -111,6 +126,34 @@ describe('Currency', () => {
 				'aria-label',
 				'Currency extended aria label',
 			);
+		});
+	});
+
+	describe('normal behaviour', () => {
+		test('is accessible', async () => {
+			const { container } = formSetup({
+				render: currencyComponent,
+			});
+			const results = await axe(container);
+			expect(results).toHaveNoViolations();
+		});
+
+		test('values get captured correctly', async () => {
+			const { getByTestId } = formSetup({
+				render: currencyComponent,
+			});
+
+			userEvent.type(getByTestId(testId), '123');
+			expect(getByTestId(testId)).toHaveValue('123');
+		});
+
+		test('Currency symbol can be typed as the first character only', async () => {
+			const { getByTestId } = formSetup({
+				render: currencyComponent,
+			});
+
+			userEvent.type(getByTestId(testId), '£10£0');
+			expect(getByTestId(testId)).toHaveValue('£100');
 		});
 	});
 
@@ -201,17 +244,6 @@ describe('Currency', () => {
 			userEvent.type(getByTestId(testId), '12345.5');
 			fireEvent.blur(getByTestId(testId));
 			expect(getByTestId(testId)).toHaveValue('12,345.500');
-		});
-
-		test('renders readonly', () => {
-			const { queryByTestId } = formSetup({
-				render: (
-					<FFInputCurrency testId="text-input" name="name" readOnly={true} />
-				),
-			});
-
-			const label = queryByTestId('text-input');
-			expect(label).toHaveAttribute('readonly');
 		});
 	});
 
@@ -328,7 +360,7 @@ describe('Currency', () => {
 	});
 
 	describe('testing helper function: calculateCursorPosition', () => {
-		describe('cursor at the beggining', () => {
+		describe('cursor at the beginning', () => {
 			const prevValue = '1,223.55';
 
 			test('new value is greater', () => {
