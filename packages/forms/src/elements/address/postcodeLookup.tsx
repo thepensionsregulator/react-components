@@ -48,6 +48,7 @@ export const PostcodeLookup: React.FC<PostcodeLookupProps> = ({
 			<FFInputText
 				ref={searchFieldRef}
 				name="postcodeLookup"
+				autoComplete="postal-code"
 				value={postcode}
 				label={postcodeLookupLabel}
 				validate={(value) => validatePostcode(value)}

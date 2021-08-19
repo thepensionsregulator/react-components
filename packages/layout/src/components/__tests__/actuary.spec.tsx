@@ -128,7 +128,7 @@ describe('Actuary Card', () => {
 		});
 	});
 
-	describe('updating Actuary Name', () => {
+	describe('update Actuary Name', () => {
 		let component, findByText, findByTestId;
 		let updatedActuary = null;
 
@@ -153,15 +153,18 @@ describe('Actuary Card', () => {
 			findByTestId = getByTestId;
 
 			findByText('Actuary').click();
-			const results = await axe(component);
-			expect(results).toHaveNoViolations();
 		});
 
 		afterEach(() => {
 			cleanup();
 		});
 
-		test('editing actuary Name', () => {
+		test('passes AXE accessibility testing', async () => {
+			const results = await axe(component);
+			expect(results).toHaveNoViolations();
+		});
+
+		test('renders name fields', () => {
 			expect(findByTestId('actuary-name-form')).not.toBe(null);
 
 			var titleHtmlElement = findByText('Title (optional)') as HTMLElement;
@@ -173,15 +176,39 @@ describe('Actuary Card', () => {
 				'maxlength',
 				'35',
 			);
+			expect(titleHtmlElement.nextSibling.childNodes[0]).toHaveAttribute(
+				'autocomplete',
+				'honorific-prefix',
+			);
+			expect(titleHtmlElement.nextSibling.childNodes[0]).toHaveAttribute(
+				'value',
+				actuary.title,
+			);
 			expect(firstNameHtmlElement).toBeDefined();
 			expect(firstNameHtmlElement.nextSibling.childNodes[0]).toHaveAttribute(
 				'maxlength',
 				'70',
 			);
+			expect(firstNameHtmlElement.nextSibling.childNodes[0]).toHaveAttribute(
+				'autocomplete',
+				'given-name',
+			);
+			expect(firstNameHtmlElement.nextSibling.childNodes[0]).toHaveAttribute(
+				'value',
+				actuary.firstName,
+			);
 			expect(lastNameHtmlElement).toBeDefined();
 			expect(lastNameHtmlElement.nextSibling.childNodes[0]).toHaveAttribute(
 				'maxlength',
 				'70',
+			);
+			expect(lastNameHtmlElement.nextSibling.childNodes[0]).toHaveAttribute(
+				'autocomplete',
+				'family-name',
+			);
+			expect(lastNameHtmlElement.nextSibling.childNodes[0]).toHaveAttribute(
+				'value',
+				actuary.lastName,
 			);
 			expect(findByText('Save and close')).toBeDefined();
 			assertThatButtonHasBeenRemovedFromTheTabFlow(findByText, 'Remove');
@@ -231,18 +258,47 @@ describe('Actuary Card', () => {
 			findByTestId = getByTestId;
 
 			findByText('Contact details').click();
-			const results = await axe(component);
-			expect(results).toHaveNoViolations();
 		});
 
 		afterEach(() => {
 			cleanup();
 		});
 
-		test('editing contact details', () => {
+		test('passes AXE accessibility testing', async () => {
+			const results = await axe(component);
+			expect(results).toHaveNoViolations();
+		});
+
+		test('renders phone and email fields', () => {
 			expect(findByTestId('actuary-contact-form')).not.toBe(null);
-			expect(findByText('Telephone number')).toBeDefined();
-			expect(findByText('Email address')).toBeDefined();
+			const telHtmlElement = findByText('Telephone number');
+			const emailHtmlElement = findByText('Email address');
+			expect(telHtmlElement).toBeDefined();
+			expect(telHtmlElement.nextSibling.childNodes[0]).toHaveAttribute(
+				'type',
+				'tel',
+			);
+			expect(telHtmlElement.nextSibling.childNodes[0]).toHaveAttribute(
+				'autocomplete',
+				'tel',
+			);
+			expect(telHtmlElement.nextSibling.childNodes[0]).toHaveAttribute(
+				'value',
+				actuary.telephoneNumber,
+			);
+			expect(emailHtmlElement).toBeDefined();
+			expect(emailHtmlElement.nextSibling.childNodes[0]).toHaveAttribute(
+				'type',
+				'email',
+			);
+			expect(emailHtmlElement.nextSibling.childNodes[0]).toHaveAttribute(
+				'autocomplete',
+				'email',
+			);
+			expect(emailHtmlElement.nextSibling.childNodes[0]).toHaveAttribute(
+				'value',
+				actuary.emailAddress,
+			);
 			expect(findByText('Save and close')).toBeDefined();
 		});
 

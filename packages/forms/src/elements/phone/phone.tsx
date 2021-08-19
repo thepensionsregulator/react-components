@@ -39,7 +39,7 @@ const InputPhone: React.FC<InputPhoneProps> = ({
 			/>
 			<Input
 				id={id}
-				type="tel"
+				autoComplete="tel"
 				width={width}
 				testId={testId}
 				label={label}
@@ -49,6 +49,7 @@ const InputPhone: React.FC<InputPhoneProps> = ({
 				required={required}
 				accessibilityHelper={helper}
 				{...input}
+				type="tel"
 			/>
 		</StyledInputLabel>
 	);
