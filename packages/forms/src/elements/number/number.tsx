@@ -190,6 +190,7 @@ const InputNumber: React.FC<InputNumberProps> = ({
 				isError={meta && meta.touched && meta.error}
 				placeholder={placeholder}
 				readOnly={readOnly}
+				required={required}
 				decimalPlaces={decimalPlaces}
 				{...input}
 				onKeyDown={handleKeyDown}

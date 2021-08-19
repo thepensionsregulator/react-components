@@ -53,6 +53,7 @@ const transformDate = (initialDate: any) => {
 
 type DateInputFieldProps = {
 	disabled?: boolean;
+	required?: boolean;
 	hideMonth?: boolean;
 	id?: string;
 	label: string;
@@ -71,6 +72,7 @@ type DateInputFieldProps = {
 
 const DateInputField: React.FC<DateInputFieldProps> = ({
 	disabled,
+	required = false,
 	hideMonth,
 	id,
 	label,
@@ -105,6 +107,7 @@ const DateInputField: React.FC<DateInputFieldProps> = ({
 				type="number"
 				id={id}
 				disabled={disabled}
+				required={required}
 				data-testid={testId}
 				value={value}
 				readOnly={readOnly}
@@ -227,6 +230,7 @@ export const InputDate: React.FC<InputDateComponentProps> = memo(
 							meta={meta}
 							disabled={disabled}
 							readOnly={readOnly}
+							required={required}
 							maxLength={2}
 						/>
 					)}
@@ -244,6 +248,7 @@ export const InputDate: React.FC<InputDateComponentProps> = memo(
 							meta={meta}
 							disabled={disabled}
 							readOnly={readOnly}
+							required={required}
 							maxLength={2}
 						/>
 					)}
@@ -261,6 +266,7 @@ export const InputDate: React.FC<InputDateComponentProps> = memo(
 						meta={meta}
 						disabled={disabled}
 						readOnly={readOnly}
+						required={required}
 						hideMonth={hideMonth}
 						maxLength={4}
 					/>

@@ -98,6 +98,12 @@ describe('Address lookup', () => {
 			);
 			expect(errorMessage).not.toBeNull();
 		});
+		test('to have a required attribute', async () => {
+			const { getByTestId } = formSetup({
+				render: <AddressLookup {...defaultProps} initialValue={{}} />,
+			});
+			expect(getByTestId('postcode-lookup-edit')).toHaveAttribute('required');
+		});
 	});
 
 	describe('select address view', () => {
@@ -235,6 +241,17 @@ describe('Address lookup', () => {
 			fireEvent.click(button);
 			const input = container.querySelector('input[name="postcodeLookup"]');
 			expect(input).not.toBeNull();
+		});
+		test('address line 1 to have a required attribute', async () => {
+			const { getByTestId } = formSetup({
+				render: (
+					<AddressLookup
+						{...defaultProps}
+						initialValue={FakeAddressLookupProvider.tprAddress}
+					/>
+				),
+			});
+			expect(getByTestId('addressLine1')).toHaveAttribute('required');
 		});
 	});
 });

@@ -45,10 +45,16 @@ import { Form, FFInputEmail } from '@tpr/forms';
 
 ### Field required & custom error messages
 
+```js
+<form noValidate>
+...
+required=true;
+```
+
 <Playground>
 	<Form onSubmit={console.log}>
 		{({ handleSubmit }) => (
-			<form onSubmit={handleSubmit}>
+			<form onSubmit={handleSubmit} noValidate>
 				<FFInputEmail
 					name="email"
 					label="Email address"

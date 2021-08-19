@@ -18,6 +18,7 @@ export type InputProps = {
 	ariaLabelExtension?: string;
 	[key: string]: any;
 	accessibilityHelper?: AccessibilityHelper;
+	required?: boolean;
 	autoComplete?: string;
 };
 
@@ -38,6 +39,7 @@ export const Input: React.FC<InputProps> = ({
 	parentRef,
 	ariaLabelExtension,
 	accessibilityHelper,
+	required = false,
 	...rest
 }) => {
 	const getAriaLabel = (): string => {
@@ -89,6 +91,7 @@ export const Input: React.FC<InputProps> = ({
 						[styles['inputText-error']]: isError,
 					},
 				])}
+				required={required}
 				aria-invalid={!!isError}
 				aria-describedby={
 					accessibilityHelper &&

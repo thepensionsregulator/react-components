@@ -89,6 +89,7 @@ import { Form, validate, renderFields } from '@tpr/forms';
 			{
 				type: 'text',
 				name: 'event_name',
+				required: true,
 				label: 'Event name',
 				hint: 'Cannot be empty',
 				error: 'Enter an event name',
@@ -129,6 +130,7 @@ Although neither `label` or `ariaLabel` are required props, you should always us
 | cfg            | false    | object  | FlexProps & SpaceProps                         |
 | disabled       | false    | boolean | Disable text field                             |
 | testId         | false    | string  | data attribute for testers                     |
+| required       | false    | boolean | Mark text field as required                    |
 | label          | false    | string  | Visible field label                            |
 | ariaLabel      | false    | string  | Invisible field label for assistive technology |
 | hint           | false    | string  | More detailed description about the text field |

@@ -69,6 +69,7 @@ const InputText: React.FC<InputTextProps> = React.forwardRef(
 					className={inputClassName}
 					maxLength={maxLength}
 					accessibilityHelper={helper}
+					required={required}
 					{...input}
 				/>
 			</StyledInputLabel>

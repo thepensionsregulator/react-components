@@ -21,6 +21,7 @@ export const RadioButton: React.FC<RadioButtonProps> = ({
 	value,
 	hint,
 	className,
+	required = false,
 }) => {
 	const msg = testId ? `${testId}-${checked ? 'checked' : 'unchecked'}` : null;
 	const helper = new AccessibilityHelper(
@@ -57,6 +58,7 @@ export const RadioButton: React.FC<RadioButtonProps> = ({
 					checked={checked}
 					value={value}
 					disabled={disabled}
+					required={required}
 					onChange={onChange}
 					data-testid={testId}
 				/>

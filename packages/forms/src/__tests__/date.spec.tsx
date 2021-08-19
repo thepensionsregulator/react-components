@@ -1,13 +1,68 @@
+import React from 'react';
 import { formSetup } from '../__mocks__/setup';
 import { renderFields, validate } from '../index';
 import { FieldProps } from '../renderFields';
 import userEvent from '@testing-library/user-event';
 import { axe } from 'jest-axe';
 import { HiddenLabelIdGenerator } from '../elements/date/services/HiddenLabelIdGenerator';
+import { FFInputDate } from '../elements/date/date';
+
+const testId = 'date-input';
+
+const basicProps: FieldProps = {
+	hint: 'This explains how to complete the currency field',
+	label: 'Currency',
+	name: 'currency',
+	testId: testId,
+};
 
 // TODO: write more test when there are clear specs for date input validation
 
 describe('Date input', () => {
+	describe('Rendering', () => {
+		test('renders three text fields', () => {
+			const { getByTestId } = formSetup({
+				render: <FFInputDate {...basicProps} />,
+			});
+
+			const dd = getByTestId(`dd-${testId}`);
+			const mm = getByTestId(`mm-${testId}`);
+			const yyyy = getByTestId(`yyyy-${testId}`);
+
+			expect(dd).toBeDefined();
+			expect(mm).toBeDefined();
+			expect(yyyy).toBeDefined();
+		});
+
+		test('renders without a required attribute', () => {
+			const { getByTestId } = formSetup({
+				render: <FFInputDate {...basicProps} />,
+			});
+
+			const dd = getByTestId(`dd-${testId}`);
+			const mm = getByTestId(`mm-${testId}`);
+			const yyyy = getByTestId(`yyyy-${testId}`);
+
+			expect(dd).not.toHaveAttribute('required');
+			expect(mm).not.toHaveAttribute('required');
+			expect(yyyy).not.toHaveAttribute('required');
+		});
+
+		test('can render with a required attribute', () => {
+			const { getByTestId } = formSetup({
+				render: <FFInputDate {...basicProps} required={true} />,
+			});
+
+			const dd = getByTestId(`dd-${testId}`);
+			const mm = getByTestId(`mm-${testId}`);
+			const yyyy = getByTestId(`yyyy-${testId}`);
+
+			expect(dd).toHaveAttribute('required');
+			expect(mm).toHaveAttribute('required');
+			expect(yyyy).toHaveAttribute('required');
+		});
+	});
+
 	test('is accessible', async () => {
 		const fields: FieldProps[] = [
 			{

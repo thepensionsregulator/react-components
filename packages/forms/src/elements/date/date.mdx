@@ -40,9 +40,9 @@ import { FFInputDate } from '@tpr/forms';
 
 ## Examples
 
-[CodeSandbox](https://codesandbox.io/s/nice-dream-xs3zp)
+### The first example shows all fields, and validation for a specific date range. Any date in 2021 is valid.
 
-The first example shows all fields, and validation for a specific date range. Any date in 2021 is valid.
+[CodeSandbox](https://codesandbox.io/s/nice-dream-xs3zp)
 
 <Playground>
 
@@ -165,7 +165,7 @@ The first example shows all fields, and validation for a specific date range. An
 	}}
 </Playground>
 
-### not label, but including hiddenLabel
+### Without label, but including hiddenLabel
 
 <Playground>
 	{() => {
@@ -200,6 +200,46 @@ The first example shows all fields, and validation for a specific date range. An
 	}}
 </Playground>
 
+### Required field
+
+```js
+<form noValidate>
+...
+required=true;
+```
+
+<Playground>
+	{() => {
+		const fields = [
+			{
+				id: 'sample-date5',
+				type: 'date',
+				name: 'passport-issued5',
+				required: true,
+				label: 'When was your passport issued?',
+   			hint: 'For example, 12 11 2021',
+				error: 'The date is required',
+ 			},
+		];
+		return (
+			<Form
+				onSubmit={(val) => console.log(val)}
+				initialValues={{ 'passport-issued5': null }}
+				validate={validate(fields)}
+			>
+				{({ handleSubmit }) => (
+					<form onSubmit={handleSubmit} style={{ padding: 10 }} noValidate>
+						{renderFields(fields)}
+						<button type="submit" style={{ display: 'none' }}>
+							Submit
+						</button>
+					</form>
+				)}
+			</Form>
+		);
+	}}
+</Playground>
+
 ## API
 
 ```
@@ -213,6 +253,7 @@ Accepted config props: FlexProps, SpaceProps
 | cfg         | false    | object  | FlexProps & SpaceProps                                                     |
 | disabled    | false    | boolean | Disable date field                                                         |
 | testId      | false    | string  | data attribute for testers                                                 |
+| required    | false    | boolean | Mark text field as required                    														|
 | label       | true     | string  | Date field description                                                     |
 | hint        | false    | string  | More detailed description about the date field                             |
 | hideDay     | false    | boolean | hides the Day input and assigns a default value of 1 for the day           |
