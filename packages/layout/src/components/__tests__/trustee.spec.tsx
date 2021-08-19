@@ -156,6 +156,10 @@ describe('TrusteeCard enableContactDetails == true', () => {
 			findByText('Trustee').click();
 			const results = await axe(component);
 			expect(results).toHaveNoViolations();
+		});
+
+		test('renders name fields', () => {
+			findByText('Trustee').click();
 
 			expect(findByTestId('trustee-name-form')).not.toBe(null);
 
@@ -168,15 +172,39 @@ describe('TrusteeCard enableContactDetails == true', () => {
 				'maxlength',
 				'35',
 			);
+			expect(titleHtmlElement.nextSibling.childNodes[0]).toHaveAttribute(
+				'autocomplete',
+				'honorific-prefix',
+			);
+			expect(titleHtmlElement.nextSibling.childNodes[0]).toHaveAttribute(
+				'value',
+				trustee.title,
+			);
 			expect(firstNameHtmlElement).toBeDefined();
 			expect(firstNameHtmlElement.nextSibling.childNodes[0]).toHaveAttribute(
 				'maxlength',
 				'70',
 			);
+			expect(firstNameHtmlElement.nextSibling.childNodes[0]).toHaveAttribute(
+				'autocomplete',
+				'given-name',
+			);
+			expect(firstNameHtmlElement.nextSibling.childNodes[0]).toHaveAttribute(
+				'value',
+				trustee.firstName,
+			);
 			expect(lastNameHtmlElement).toBeDefined();
 			expect(lastNameHtmlElement.nextSibling.childNodes[0]).toHaveAttribute(
 				'maxlength',
 				'70',
+			);
+			expect(lastNameHtmlElement.nextSibling.childNodes[0]).toHaveAttribute(
+				'autocomplete',
+				'family-name',
+			);
+			expect(lastNameHtmlElement.nextSibling.childNodes[0]).toHaveAttribute(
+				'value',
+				trustee.lastName,
 			);
 			expect(findByText('Continue')).toBeDefined();
 
@@ -216,6 +244,40 @@ describe('TrusteeCard enableContactDetails == true', () => {
 
 			const results = await axe(component);
 			expect(results).toHaveNoViolations();
+		});
+
+		test('renders contact fields', () => {
+			findByText('Contact details').click();
+
+			const telHtmlElement = findByText('Telephone number');
+			expect(telHtmlElement).toBeDefined();
+			expect(telHtmlElement.nextSibling.firstChild).toHaveAttribute(
+				'type',
+				'tel',
+			);
+			expect(telHtmlElement.nextSibling.firstChild).toHaveAttribute(
+				'autocomplete',
+				'tel',
+			);
+			expect(telHtmlElement.nextSibling.firstChild).toHaveAttribute(
+				'value',
+				trustee.telephoneNumber,
+			);
+			const emailHtmlElement = findByText('Email address');
+			expect(emailHtmlElement).toBeDefined();
+			expect(emailHtmlElement.nextSibling.firstChild).toHaveAttribute(
+				'type',
+				'email',
+			);
+			expect(emailHtmlElement.nextSibling.firstChild).toHaveAttribute(
+				'autocomplete',
+				'email',
+			);
+			expect(emailHtmlElement.nextSibling.firstChild).toHaveAttribute(
+				'value',
+				trustee.emailAddress,
+			);
+			expect(findByText('Save and close')).toBeDefined();
 		});
 	});
 

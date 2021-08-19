@@ -94,6 +94,7 @@ export const EditAddress: React.FC<EditAddressProps> = React.memo(
 				<FFInputText
 					ref={address1ref}
 					name="addressLine1"
+					autoComplete="address-line1"
 					label={addressLine1Label}
 					disabled={loading}
 					required
@@ -113,6 +114,7 @@ export const EditAddress: React.FC<EditAddressProps> = React.memo(
 				<FFInputText
 					ref={address2ref}
 					name="addressLine2"
+					autoComplete="address-line2"
 					label={addressLine2Label}
 					disabled={loading}
 					testId={(testId ? testId + '-' : '') + 'addressLine2'}

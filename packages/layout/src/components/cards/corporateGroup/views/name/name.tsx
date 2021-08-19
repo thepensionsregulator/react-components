@@ -15,6 +15,7 @@ const getFields = (
 	{
 		name: 'title',
 		type: 'text',
+		autoComplete: 'honorific-prefix',
 		label: fields.title.label,
 		error: fields.title.error,
 		maxLength: fields.title.maxlength,
@@ -24,6 +25,7 @@ const getFields = (
 	{
 		name: 'firstName',
 		type: 'text',
+		autoComplete: 'given-name',
 		label: fields.firstName.label,
 		error: fields.firstName.error,
 		maxLength: fields.firstName.maxlength,
@@ -33,6 +35,7 @@ const getFields = (
 	{
 		name: 'lastName',
 		type: 'text',
+		autoComplete: 'family-name',
 		label: fields.lastName.label,
 		error: fields.lastName.error,
 		maxLength: fields.lastName.maxlength,
@@ -60,7 +63,7 @@ export const NameScreen: React.FC<NameScreenProps> = ({
 			setLoading(false);
 			send('SAVE', { values });
 		} catch (error) {
-			console.log(error);
+			console.error(error);
 			setLoading(false);
 		}
 	};

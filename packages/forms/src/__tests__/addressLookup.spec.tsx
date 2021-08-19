@@ -70,6 +70,13 @@ describe('Address lookup', () => {
 			const results = await axe(container);
 			expect(results).toHaveNoViolations();
 		});
+		test('should use autocomplete="postal-code"', () => {
+			const { getByTestId } = formSetup({
+				render: <AddressLookup {...defaultProps} />,
+			});
+			const input = getByTestId('postcode-lookup-edit');
+			expect(input).toHaveAttribute('autocomplete', 'postal-code');
+		});
 		test('should go to select address view when button is clicked', async () => {
 			const { container } = formSetup({
 				render: <AddressLookup {...defaultProps} />,
@@ -203,6 +210,21 @@ describe('Address lookup', () => {
 			});
 			const results = await axe(container);
 			expect(results).toHaveNoViolations();
+		});
+		test('should use autocomplete attribute for address lines 1 & 2', () => {
+			const { getByTestId } = formSetup({
+				render: (
+					<AddressLookup
+						{...defaultProps}
+						initialValue={FakeAddressLookupProvider.tprAddress}
+					/>
+				),
+			});
+
+			const addressLine1 = getByTestId('addressLine1');
+			const addressLine2 = getByTestId('addressLine2');
+			expect(addressLine1).toHaveAttribute('autocomplete', 'address-line1');
+			expect(addressLine2).toHaveAttribute('autocomplete', 'address-line2');
 		});
 		test('to go to postcode lookup view when button clicked', async () => {
 			const { container } = formSetup({

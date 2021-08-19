@@ -38,7 +38,6 @@ export const Contacts: React.FC = () => {
 	const { current, send, i18n, onSaveContacts } = useActuaryContext();
 	const { actuary } = current.context;
 	const fields = getFields(i18n?.contacts?.fields);
-
 	const onSubmit = async (values) => {
 		setLoading(true);
 		try {

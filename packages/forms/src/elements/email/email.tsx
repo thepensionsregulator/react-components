@@ -40,6 +40,7 @@ const InputEmail: React.FC<InputEmailProps> = ({
 			<Input
 				id={id}
 				type="email"
+				autoComplete="email"
 				width={width}
 				testId={testId}
 				label={label}

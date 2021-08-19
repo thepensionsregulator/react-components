@@ -44,6 +44,24 @@ describe('Phone input', () => {
 			expect(input).toHaveAttribute('readonly');
 		});
 
+		test('renders autocomplete', () => {
+			const { queryByTestId } = formSetup({
+				render: <FFInputPhone {...basicProps} />,
+			});
+
+			const label = queryByTestId(phoneTestId);
+			expect(label).toHaveAttribute('autocomplete', 'tel');
+		});
+
+		test('renders type="tel"', () => {
+			const { queryByTestId } = formSetup({
+				render: <FFInputPhone {...basicProps} />,
+			});
+
+			const label = queryByTestId(phoneTestId);
+			expect(label).toHaveAttribute('type', 'tel');
+		});
+
 		test('renders required attribute', () => {
 			const { queryByTestId } = formSetup({
 				render: <FFInputPhone {...basicProps} required={true} />,

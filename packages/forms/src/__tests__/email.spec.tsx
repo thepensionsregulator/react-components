@@ -25,13 +25,14 @@ const handleSubmit = jest.fn();
 
 describe('Email input', () => {
 	describe('rendering', () => {
-		test('renders readonly attribute', () => {
+		test('renders correctly', () => {
 			const { queryByTestId } = formSetup({
-				render: <FFInputEmail {...basicProps} readOnly={true} />,
+				render: <FFInputEmail {...basicProps} />,
 			});
 
 			const label = queryByTestId(emailTestId);
-			expect(label).toHaveAttribute('readonly');
+			expect(label).toBeDefined();
+			expect(label).not.toHaveAttribute('required');
 		});
 
 		test('renders required attribute', () => {
@@ -41,6 +42,33 @@ describe('Email input', () => {
 
 			const label = queryByTestId(emailTestId);
 			expect(label).toHaveAttribute('required');
+		});
+
+		test('renders readonly', () => {
+			const { queryByTestId } = formSetup({
+				render: <FFInputEmail {...basicProps} readOnly={true} />,
+			});
+
+			const label = queryByTestId(emailTestId);
+			expect(label).toHaveAttribute('readonly');
+		});
+
+		test('renders autocomplete', () => {
+			const { queryByTestId } = formSetup({
+				render: <FFInputEmail {...basicProps} />,
+			});
+
+			const label = queryByTestId(emailTestId);
+			expect(label).toHaveAttribute('autocomplete', 'email');
+		});
+
+		test('renders type="email"', () => {
+			const { queryByTestId } = formSetup({
+				render: <FFInputEmail {...basicProps} />,
+			});
+
+			const label = queryByTestId(emailTestId);
+			expect(label).toHaveAttribute('type', 'email');
 		});
 	});
 

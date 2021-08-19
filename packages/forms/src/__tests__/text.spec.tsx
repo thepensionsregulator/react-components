@@ -50,6 +50,27 @@ describe('Text input', () => {
 			expect(label).toHaveAttribute('id', 'name-label');
 		});
 
+		test('renders readonly', () => {
+			const { queryByTestId } = formSetup({
+				render: <FFInputText {...basicProps} readOnly={true} />,
+			});
+
+			const label = queryByTestId(testId);
+			expect(label).toHaveAttribute('readonly');
+		});
+
+		test('renders maxLength', () => {
+			const { queryByTestId } = formSetup({
+				render: <FFInputText testId="text-input" name="name" maxLength={3} />,
+			});
+
+			var textInput = queryByTestId(testId);
+			userEvent.type(textInput, 'ABCDEF');
+			fireEvent.blur(textInput);
+
+			expect(textInput).toHaveAttribute('maxlength');
+			expect(textInput).toHaveValue('ABC');
+		});
 		test('renders label with title optional', () => {
 			const { queryByText } = formSetup({
 				render: (
@@ -81,7 +102,7 @@ describe('Text input', () => {
 	test('is accessible', async () => {
 		const { container } = formSetup({
 			render: (
-				<FFInputText label="Name" testId="text-input" name="name" type="text" />
+				<FFInputText label="Name" testId={testId} name="name" type="text" />
 			),
 		});
 		const results = await axe(container);
@@ -138,37 +159,7 @@ describe('Text input', () => {
 	`);
 	});
 
-	test('renders readonly', () => {
-		const { queryByTestId } = formSetup({
-			render: (
-				<FFInputText
-					testId="text-input"
-					name="name"
-					type="text"
-					readOnly={true}
-				/>
-			),
-		});
-
-		const label = queryByTestId('text-input');
-		expect(label).toHaveAttribute('readonly');
-	});
-
-	test('renders maxLength', () => {
-		const { queryByTestId } = formSetup({
-			render: <FFInputText testId="text-input" name="name" maxLength={3} />,
-		});
-
-		var textInput = queryByTestId('text-input');
-		userEvent.type(textInput, 'ABCDEF');
-		fireEvent.blur(textInput);
-
-		expect(textInput).toHaveAttribute('maxlength');
-		expect(textInput).toHaveValue('ABC');
-	});
-
 	test('has correct describedby tag when an error is shown', () => {
-		const testId = 'texTest';
 		const name = 'textInput';
 		const label = 'Text Line 1';
 		const error = 'This is a required field';
