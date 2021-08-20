@@ -28,8 +28,8 @@ export const UnderlinedButton: React.FC<UnderlinedButtonProps> = ({
 	}
 	const buttonRef = useRef(null);
 	useEffect(() => {
-		buttonRef.current.focus();
-	});
+		isOpen && buttonRef.current.focus();
+	}, [isOpen]);
 	const getAppropriateButton = () => {
 		if (isOpen && isEditButton) {
 			return <EditArrowUp width="24px" fill={styles.arrowColor} />;
