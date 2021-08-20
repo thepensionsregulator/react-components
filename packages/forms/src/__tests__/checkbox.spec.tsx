@@ -79,6 +79,25 @@ describe('Checkbox input', () => {
 		expect(optional).not.toHaveAttribute('required');
 	});
 
+	test('renders children within the label', () => {
+		const { getByText } = formSetup({
+			render: (
+				<FFCheckbox
+					label="Click me"
+					name="important-checkbox"
+					testId="checkbox"
+				>
+					<p>Child component</p>
+				</FFCheckbox>
+			),
+		});
+		const child = getByText(/Child component/);
+		expect(child).toBeDefined();
+
+		const label = child.closest('label');
+		expect(label).toBeDefined();
+	});
+
 	test('checking and unchecking the checkbox', () => {
 		const { getByLabelText, getByTestId } = formSetup({
 			render: (

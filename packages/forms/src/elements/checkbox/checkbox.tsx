@@ -20,6 +20,7 @@ export const Checkbox: React.FC<Partial<CheckboxIconProps>> = ({
 	label,
 	hint,
 	className,
+	children,
 }) => {
 	const msg = testId ? `${testId}-${checked ? 'checked' : 'unchecked'}` : null;
 	const helper = new AccessibilityHelper(id, !!label, !!hint);
@@ -66,6 +67,11 @@ export const Checkbox: React.FC<Partial<CheckboxIconProps>> = ({
 					<P id={helper.hintId} className={styles.hint}>
 						{hint}
 					</P>
+				)}
+				{children && (
+					<div id={helper.hintId} className={styles.hint}>
+						{children}
+					</div>
 				)}
 			</label>
 		</StyledInputLabel>
