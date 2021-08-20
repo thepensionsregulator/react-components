@@ -15,6 +15,7 @@ export const Checkbox: React.FC<Partial<CheckboxIconProps>> = ({
 	disabled = false,
 	testId,
 	checked,
+	required,
 	onChange,
 	label,
 	hint,
@@ -49,6 +50,7 @@ export const Checkbox: React.FC<Partial<CheckboxIconProps>> = ({
 					aria-describedby={helper && helper.hintId}
 					checked={checked}
 					disabled={disabled}
+					required={required}
 					onChange={onChange}
 				/>
 				{checked ? (

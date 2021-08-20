@@ -50,6 +50,35 @@ describe('Checkbox input', () => {
 	`);
 	});
 
+	test('renders required attribute', () => {
+		const { getByLabelText } = formSetup({
+			render: (
+				<FFCheckbox
+					required
+					label="Click me"
+					name="important-checkbox"
+					testId="checkbox"
+				/>
+			),
+		});
+		const required = getByLabelText(/Click me/);
+		expect(required).toHaveAttribute('required');
+	});
+
+	test('does not render required attribute when optional', () => {
+		const { getByLabelText } = formSetup({
+			render: (
+				<FFCheckbox
+					label="Click me"
+					name="important-checkbox"
+					testId="checkbox"
+				/>
+			),
+		});
+		const optional = getByLabelText(/Click me/);
+		expect(optional).not.toHaveAttribute('required');
+	});
+
 	test('checking and unchecking the checkbox', () => {
 		const { getByLabelText, getByTestId } = formSetup({
 			render: (
