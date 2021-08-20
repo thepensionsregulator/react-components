@@ -44,29 +44,30 @@ export const Checkbox: React.FC<Partial<CheckboxIconProps>> = ({
 				className={styles.wrapper}
 				htmlFor={id}
 			>
-				<HiddenInput
-					id={id}
-					type="checkbox"
-					aria-describedby={helper && helper.hintId}
-					checked={checked}
-					disabled={disabled}
-					required={required}
-					onChange={onChange}
-				/>
-				{checked ? (
-					<CheckboxChecked className={styles.checkbox} />
-				) : (
-					<CheckboxBlank className={styles.checkbox} />
+				<div className={styles.innerWrapper}>
+					<HiddenInput
+						id={id}
+						type="checkbox"
+						checked={checked}
+						disabled={disabled}
+						required={required}
+						onChange={onChange}
+					/>
+					{checked ? (
+						<CheckboxChecked className={styles.checkbox} />
+					) : (
+						<CheckboxBlank className={styles.checkbox} />
+					)}
+					<P cfg={{ fontWeight: 3 }} className={styles.label}>
+						{label}
+					</P>
+				</div>
+				{hint && (
+					<P id={helper.hintId} className={styles.hint}>
+						{hint}
+					</P>
 				)}
-				<P cfg={{ ml: 3, fontWeight: 3 }} className={styles.label}>
-					{label}
-				</P>
 			</label>
-			{hint && (
-				<P id={helper.hintId} className={styles.hint}>
-					{hint}
-				</P>
-			)}
 		</StyledInputLabel>
 	);
 };

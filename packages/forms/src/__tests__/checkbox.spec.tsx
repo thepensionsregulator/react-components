@@ -135,11 +135,11 @@ describe('Checkbox input', () => {
 		expect(getByTestId(container, 'my-span').innerText).toBe('true');
 	});
 
-	test('has correct describedby tag', () => {
+	test('renders hint within the label', () => {
 		const hint = 'This explains how to complete the field';
 		const labelText = 'My checkbox';
 		const id = 'test-checkbox';
-		const { getByLabelText } = formSetup({
+		const { getByText } = formSetup({
 			render: (
 				<FFCheckbox
 					id={id}
@@ -150,9 +150,11 @@ describe('Checkbox input', () => {
 				/>
 			),
 		});
-		const checkbox = getByLabelText(labelText);
-		expect(checkbox).not.toBeNull();
-		expect(checkbox).toHaveAttribute('aria-describedby', `${id}-hint`);
+		const hintElement = getByText(hint);
+		expect(hintElement).not.toBeNull();
+
+		const label = hintElement.closest('label');
+		expect(label).toBeDefined();
 	});
 
 	test('has correct label reference', () => {
