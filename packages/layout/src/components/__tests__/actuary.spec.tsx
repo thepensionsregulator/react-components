@@ -224,9 +224,7 @@ describe('Actuary Card', () => {
 
 	describe('updating Actuary Contact Details', () => {
 		beforeEach(async () => {
-			act(() => {
-				findByText('Contact details').click();
-			});
+			findByText('Contact details').click();
 		});
 
 		afterEach(() => {
@@ -284,9 +282,7 @@ describe('Actuary Card', () => {
 
 	describe('Remove Actuary', () => {
 		beforeEach(async () => {
-			act(() => {
-				findByText('Remove').click();
-			});
+			findByText('Remove').click();
 
 			const results = await axe(component);
 			expect(results).toHaveNoViolations();
