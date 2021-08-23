@@ -44,6 +44,11 @@ const InputText: React.FC<InputTextProps> = React.forwardRef(
 		}, [updatedValue]);
 
 		const helper = new AccessibilityHelper(name, !!label, !!hint);
+		const labelRequiresForAttribute =
+			labelElement && labelElement.toUpperCase() === 'LABEL';
+		if (labelRequiresForAttribute && !id) {
+			throw 'id is required when setting labelElement="label"';
+		}
 		const InputElementHeadingWrapper = headingElement
 			? headingElement
 			: React.Fragment;
@@ -62,6 +67,7 @@ const InputText: React.FC<InputTextProps> = React.forwardRef(
 						hint={hint}
 						meta={meta}
 						accessibilityHelper={helper}
+						forId={labelRequiresForAttribute ? id : undefined}
 					/>
 				</InputElementHeadingWrapper>
 				<Input

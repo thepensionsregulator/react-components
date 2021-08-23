@@ -101,6 +101,7 @@ export const EditAddress: React.FC<EditAddressProps> = React.memo(
 					label={addressLine1Label}
 					disabled={loading}
 					required
+					id={(testId ? testId + '-' : '') + 'addressLine1'}
 					testId={(testId ? testId + '-' : '') + 'addressLine1'}
 					initialValue={
 						isDirty() ? value.addressLine1 : initialValue.addressLine1
@@ -123,6 +124,7 @@ export const EditAddress: React.FC<EditAddressProps> = React.memo(
 					autoComplete="address-line2"
 					label={addressLine2Label}
 					disabled={loading}
+					id={(testId ? testId + '-' : '') + 'addressLine2'}
 					testId={(testId ? testId + '-' : '') + 'addressLine2'}
 					initialValue={
 						isDirty() ? value.addressLine2 : initialValue.addressLine2
