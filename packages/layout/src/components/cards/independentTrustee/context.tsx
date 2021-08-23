@@ -51,6 +51,7 @@ export const IndependentTrusteeProvider = ({
 	complete,
 	preValidatedData,
 	independentTrustee,
+	lastBtnClicked = null,
 	children,
 	i18n: i18nOverrides = {},
 	...rest
@@ -61,6 +62,7 @@ export const IndependentTrusteeProvider = ({
 			complete,
 			preValidatedData,
 			independentTrustee,
+			lastBtnClicked,
 		},
 	});
 
