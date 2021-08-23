@@ -142,10 +142,12 @@ describe('Update in-house trustee name', () => {
 			'value',
 			inHouseAdmin.firstName,
 		);
+		expect(firstNameHtmlElement).toHaveAttribute('required');
 		expect(lastNameHtmlElement).toBeDefined();
 		expect(lastNameHtmlElement).toHaveAttribute('maxlength', '70');
 		expect(lastNameHtmlElement).toHaveAttribute('autocomplete', 'family-name');
 		expect(lastNameHtmlElement).toHaveAttribute('value', inHouseAdmin.lastName);
+		expect(lastNameHtmlElement).toHaveAttribute('required');
 		expect(findByText('Save and close')).toBeDefined();
 
 		assertThatButtonHasBeenRemovedFromTheTabFlow(findByText, 'Remove');

@@ -186,6 +186,7 @@ describe('Corporate Group Trustee Card', () => {
 				'value',
 				corporateGroup.firstName,
 			);
+			expect(firstNameHtmlElement).toHaveAttribute('required');
 			expect(lastNameHtmlElement).toBeDefined();
 			expect(lastNameHtmlElement).toHaveAttribute('maxlength', '70');
 			expect(lastNameHtmlElement).toHaveAttribute(
@@ -196,6 +197,7 @@ describe('Corporate Group Trustee Card', () => {
 				'value',
 				corporateGroup.lastName,
 			);
+			expect(lastNameHtmlElement).toHaveAttribute('required');
 			expect(findByText('Continue')).toBeDefined();
 		});
 

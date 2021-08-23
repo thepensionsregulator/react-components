@@ -182,6 +182,7 @@ describe('TrusteeCard enableContactDetails == true', () => {
 				'given-name',
 			);
 			expect(firstNameHtmlElement).toHaveAttribute('value', trustee.firstName);
+			expect(firstNameHtmlElement).toHaveAttribute('required');
 			expect(lastNameHtmlElement).toBeDefined();
 			expect(lastNameHtmlElement).toHaveAttribute('maxlength', '70');
 			expect(lastNameHtmlElement).toHaveAttribute(
@@ -189,6 +190,7 @@ describe('TrusteeCard enableContactDetails == true', () => {
 				'family-name',
 			);
 			expect(lastNameHtmlElement).toHaveAttribute('value', trustee.lastName);
+			expect(lastNameHtmlElement).toHaveAttribute('required');
 			expect(findByText('Continue')).toBeDefined();
 
 			assertThatButtonHasBeenRemovedFromTheTabFlow(findByText, 'Remove');

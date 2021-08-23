@@ -185,6 +185,7 @@ describe('Actuary Card', () => {
 				'given-name',
 			);
 			expect(firstNameHtmlElement).toHaveAttribute('value', actuary.firstName);
+			expect(firstNameHtmlElement).toHaveAttribute('required');
 			expect(lastNameHtmlElement).toBeDefined();
 			expect(lastNameHtmlElement).toHaveAttribute('maxlength', '70');
 			expect(lastNameHtmlElement).toHaveAttribute(
@@ -192,6 +193,7 @@ describe('Actuary Card', () => {
 				'family-name',
 			);
 			expect(lastNameHtmlElement).toHaveAttribute('value', actuary.lastName);
+			expect(lastNameHtmlElement).toHaveAttribute('required');
 			expect(findByText('Save and close')).toBeDefined();
 			assertThatButtonHasBeenRemovedFromTheTabFlow(findByText, 'Remove');
 		});

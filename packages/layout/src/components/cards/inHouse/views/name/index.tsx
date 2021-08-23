@@ -33,6 +33,7 @@ const getFields = (
 		maxLength: fields.firstName.maxlength,
 		inputWidth: 6,
 		testId: 'first-name',
+		required: true,
 		cfg: { mb: 4 },
 	},
 	{
@@ -43,6 +44,7 @@ const getFields = (
 		error: fields.lastName.error,
 		maxLength: fields.lastName.maxlength,
 		inputWidth: 6,
+		required: true,
 		testId: 'last-name',
 	},
 ];
