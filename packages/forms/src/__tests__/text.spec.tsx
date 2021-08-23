@@ -47,7 +47,36 @@ describe('Text input', () => {
 
 			const label = getByText(/Name/);
 			expect(label).toBeInTheDocument();
+			expect(label.tagName).toBe('DIV');
 			expect(label).toHaveAttribute('id', 'name-label');
+		});
+
+		test('renders wrapper with custom tagName', () => {
+			const { container } = formSetup({
+				render: <FFInputText {...basicProps} wrapperElement="div" />,
+			});
+
+			expect(container.tagName).toBe('DIV');
+		});
+
+		test('renders label with custom tagName', () => {
+			const { getByText } = formSetup({
+				render: <FFInputText {...basicProps} labelElement="label" />,
+			});
+
+			const label = getByText(/Name/);
+			expect(label).toBeInTheDocument();
+			expect(label.tagName).toBe('LABEL');
+		});
+
+		test('renders heading around label', () => {
+			const { getByText } = formSetup({
+				render: <FFInputText {...basicProps} headingElement="h3" />,
+			});
+
+			const label = getByText(/Name/);
+			expect(label).toBeInTheDocument();
+			expect(label.parentElement.tagName).toBe('H3');
 		});
 
 		test('renders readonly', () => {

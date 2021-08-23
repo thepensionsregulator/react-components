@@ -2,7 +2,7 @@ import React, { useEffect, useRef } from 'react';
 import { Field, useForm } from 'react-final-form';
 import { FFInputText } from '../text/text';
 import { HiddenInput } from '../hidden/hidden';
-import { P, Button } from '@tpr/core';
+import { Button } from '@tpr/core';
 import elementStyles from '../elements.module.scss';
 import styles from './addressLookup.module.scss';
 import { EditAddressProps } from './types';
@@ -23,6 +23,7 @@ export const EditAddress: React.FC<EditAddressProps> = React.memo(
 		postcodeLabel,
 		countryLabel,
 		changeAddressButton,
+		headingLevel = 2,
 	}) => {
 		const form = useForm();
 
@@ -34,21 +35,23 @@ export const EditAddress: React.FC<EditAddressProps> = React.memo(
 		function renderNonEditableFieldWithUpdates(
 			fieldName: string,
 			label?: string,
+			headingLevel?: number,
 		) {
+			const ElementName = `h${headingLevel}` as keyof JSX.IntrinsicElements;
 			return (
 				<>
 					{label && (
-						<P className={styles.nonEditable}>
-							<strong
+						<>
+							<ElementName
 								id={(testId ? testId + '-' : '') + fieldName}
 								className={`${elementStyles.labelText} ${styles.nonEditableLabel}`}
 							>
 								{label}
-							</strong>{' '}
-							<span aria-labelledby={(testId ? testId + '-' : '') + fieldName}>
+							</ElementName>
+							<p className={styles.nonEditableText}>
 								{value ? value[fieldName] : initialValue[fieldName]}
-							</span>
-						</P>
+							</p>
+						</>
 					)}
 					<Field
 						name={fieldName}
@@ -110,6 +113,9 @@ export const EditAddress: React.FC<EditAddressProps> = React.memo(
 					}
 					inputWidth={6}
 					maxLength={100}
+					wrapperElement="div"
+					labelElement="label"
+					headingElement={`h${headingLevel}`}
 				/>
 				<FFInputText
 					ref={address2ref}
@@ -124,13 +130,28 @@ export const EditAddress: React.FC<EditAddressProps> = React.memo(
 					updatedValue={value ? value.addressLine2 : ''}
 					inputWidth={6}
 					maxLength={100}
+					wrapperElement="div"
+					labelElement="label"
+					headingElement={`h${headingLevel}`}
 				/>
-				{renderNonEditableFieldWithUpdates('addressLine3', addressLine3Label)}
-				{renderNonEditableFieldWithUpdates('postTown', townLabel)}
-				{renderNonEditableFieldWithUpdates('county', countyLabel)}
-				{renderNonEditableFieldWithUpdates('postcode', postcodeLabel)}
+				{renderNonEditableFieldWithUpdates(
+					'addressLine3',
+					addressLine3Label,
+					headingLevel,
+				)}
+				{renderNonEditableFieldWithUpdates('postTown', townLabel, headingLevel)}
+				{renderNonEditableFieldWithUpdates('county', countyLabel, headingLevel)}
+				{renderNonEditableFieldWithUpdates(
+					'postcode',
+					postcodeLabel,
+					headingLevel,
+				)}
 				{renderNonEditableFieldWithUpdates('nationId')}
-				{renderNonEditableFieldWithUpdates('country', countryLabel)}
+				{renderNonEditableFieldWithUpdates(
+					'country',
+					countryLabel,
+					headingLevel,
+				)}
 				{renderNonEditableFieldWithUpdates('countryId')}
 				{renderNonEditableFieldWithUpdates('uprn')}
 
@@ -168,7 +189,7 @@ export const EditAddress: React.FC<EditAddressProps> = React.memo(
 					testId={(testId ? testId + '-' : '') + 'change-address'}
 					appearance="secondary"
 					size="small"
-					className={styles.button}
+					className={styles.button + ' ' + styles.changeAddress}
 				>
 					{changeAddressButton}
 				</Button>

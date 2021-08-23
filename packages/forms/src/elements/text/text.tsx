@@ -31,6 +31,9 @@ const InputText: React.FC<InputTextProps> = React.forwardRef(
 			cfg,
 			updatedValue,
 			maxLength,
+			wrapperElement,
+			labelElement,
+			headingElement,
 		},
 		ref,
 	) => {
@@ -41,19 +44,26 @@ const InputText: React.FC<InputTextProps> = React.forwardRef(
 		}, [updatedValue]);
 
 		const helper = new AccessibilityHelper(name, !!label, !!hint);
+		const InputElementHeadingWrapper = headingElement
+			? headingElement
+			: React.Fragment;
 
 		return (
 			<StyledInputLabel
 				isError={meta && meta.touched && meta.error}
+				element={wrapperElement}
 				cfg={Object.assign({ flexDirection: 'column', mt: 1 }, cfg)}
 			>
-				<InputElementHeading
-					label={label}
-					required={required}
-					hint={hint}
-					meta={meta}
-					accessibilityHelper={helper}
-				/>
+				<InputElementHeadingWrapper>
+					<InputElementHeading
+						element={labelElement}
+						label={label}
+						required={required}
+						hint={hint}
+						meta={meta}
+						accessibilityHelper={helper}
+					/>
+				</InputElementHeadingWrapper>
 				<Input
 					id={id}
 					parentRef={ref}
