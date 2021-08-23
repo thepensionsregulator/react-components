@@ -1,4 +1,4 @@
-import React, { useEffect, useRef } from 'react';
+import React, { useEffect, useRef, MutableRefObject } from 'react';
 import { Flex, P } from '@tpr/core';
 import styles from './button.module.scss';
 import { EditArrowUp, EditArrowDown } from './arrowButton';
@@ -9,13 +9,18 @@ type UnderlinedButtonProps = {
 	onClick?: any;
 	tabIndex?: number;
 	isEditButton?: boolean;
+	onCollapseCallback?: () => void;
+	btnRef?: MutableRefObject<any>;
 };
+
 export const UnderlinedButton: React.FC<UnderlinedButtonProps> = ({
 	children,
 	isOpen,
 	onClick,
 	tabIndex,
 	isEditButton,
+	onCollapseCallback,
+	btnRef,
 }) => {
 	if (typeof onClick === 'undefined') {
 		return (
@@ -26,9 +31,11 @@ export const UnderlinedButton: React.FC<UnderlinedButtonProps> = ({
 			</div>
 		);
 	}
-	const buttonRef = useRef(null);
+
+	const noToolbarBtnRef = useRef(null);
 	useEffect(() => {
-		isOpen && buttonRef.current.focus();
+		isOpen && noToolbarBtnRef && noToolbarBtnRef.current.focus();
+		!isOpen && onCollapseCallback && onCollapseCallback();
 	}, [isOpen]);
 	const getAppropriateButton = () => {
 		if (isOpen && isEditButton) {
@@ -50,7 +57,7 @@ export const UnderlinedButton: React.FC<UnderlinedButtonProps> = ({
 			onClick={onClick}
 			aria-expanded={isOpen}
 			tabIndex={tabIndex}
-			ref={buttonRef}
+			ref={btnRef ? btnRef : noToolbarBtnRef}
 		>
 			<Flex
 				className={styles.arrowSpacing}
