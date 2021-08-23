@@ -124,49 +124,30 @@ describe('Update in-house trustee name', () => {
 
 	test('renders name fields', () => {
 		expect(findByTestId('inHouseAdmin-name-form')).not.toBe(null);
-		const titleHtmlElement = findByText('Title (optional)') as HTMLElement;
-		const firstNameHtmlElement = findByText('First name') as HTMLElement;
-		const lastNameHtmlElement = findByText('Last name') as HTMLElement;
+		const titleHtmlElement = findByTestId('title') as HTMLElement;
+		const firstNameHtmlElement = findByTestId('first-name') as HTMLElement;
+		const lastNameHtmlElement = findByTestId('last-name') as HTMLElement;
 
 		expect(titleHtmlElement).toBeDefined();
-		expect(titleHtmlElement.nextSibling.childNodes[0]).toHaveAttribute(
-			'maxlength',
-			'35',
-		);
-		expect(titleHtmlElement.nextSibling.childNodes[0]).toHaveAttribute(
+		expect(titleHtmlElement).toHaveAttribute('maxlength', '35');
+		expect(titleHtmlElement).toHaveAttribute(
 			'autocomplete',
 			'honorific-prefix',
 		);
-		expect(titleHtmlElement.nextSibling.childNodes[0]).toHaveAttribute(
-			'value',
-			inHouseAdmin.title,
-		);
+		expect(titleHtmlElement).toHaveAttribute('value', inHouseAdmin.title);
 		expect(firstNameHtmlElement).toBeDefined();
-		expect(firstNameHtmlElement.nextSibling.childNodes[0]).toHaveAttribute(
-			'maxlength',
-			'70',
-		);
-		expect(firstNameHtmlElement.nextSibling.childNodes[0]).toHaveAttribute(
-			'autocomplete',
-			'given-name',
-		);
-		expect(firstNameHtmlElement.nextSibling.childNodes[0]).toHaveAttribute(
+		expect(firstNameHtmlElement).toHaveAttribute('maxlength', '70');
+		expect(firstNameHtmlElement).toHaveAttribute('autocomplete', 'given-name');
+		expect(firstNameHtmlElement).toHaveAttribute(
 			'value',
 			inHouseAdmin.firstName,
 		);
+		expect(firstNameHtmlElement).toHaveAttribute('required');
 		expect(lastNameHtmlElement).toBeDefined();
-		expect(lastNameHtmlElement.nextSibling.childNodes[0]).toHaveAttribute(
-			'maxlength',
-			'70',
-		);
-		expect(lastNameHtmlElement.nextSibling.childNodes[0]).toHaveAttribute(
-			'autocomplete',
-			'family-name',
-		);
-		expect(lastNameHtmlElement.nextSibling.childNodes[0]).toHaveAttribute(
-			'value',
-			inHouseAdmin.lastName,
-		);
+		expect(lastNameHtmlElement).toHaveAttribute('maxlength', '70');
+		expect(lastNameHtmlElement).toHaveAttribute('autocomplete', 'family-name');
+		expect(lastNameHtmlElement).toHaveAttribute('value', inHouseAdmin.lastName);
+		expect(lastNameHtmlElement).toHaveAttribute('required');
 		expect(findByText('Save and close')).toBeDefined();
 
 		assertThatButtonHasBeenRemovedFromTheTabFlow(findByText, 'Remove');

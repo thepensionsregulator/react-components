@@ -82,7 +82,7 @@ export const FFInputText: React.FC<FieldProps> = React.forwardRef(
 		return (
 			<Field
 				{...fieldProps}
-				required={typeof fieldProps.validate === 'function' || fieldProps.error}
+				required={fieldProps.required}
 				render={(props) => <InputText {...props} {...fieldProps} ref={ref} />}
 			/>
 		);
