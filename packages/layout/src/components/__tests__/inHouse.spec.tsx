@@ -114,9 +114,7 @@ describe('Update in-house trustee name', () => {
 		findByText = getByText;
 		findByTestId = getByTestId;
 
-		act(() => {
-			findByText('In House Administrator').click();
-		});
+		findByText('In House Administrator').click();
 	});
 
 	test('is accessible', async () => {
