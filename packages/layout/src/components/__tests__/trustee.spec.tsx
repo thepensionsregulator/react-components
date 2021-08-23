@@ -168,7 +168,6 @@ describe('TrusteeCard enableContactDetails == true', () => {
 			var lastNameHtmlElement = findByTestId('last-name') as HTMLElement;
 
 			expect(titleHtmlElement).toBeDefined();
-			console.log(titleHtmlElement);
 			expect(titleHtmlElement).toHaveAttribute('maxlength', '35');
 			expect(titleHtmlElement).toHaveAttribute(
 				'autocomplete',
