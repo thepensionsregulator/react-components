@@ -55,6 +55,7 @@ const ActuaryButton: React.FC = () => {
 		<UnderlinedButton
 			isOpen={onOfStatesIsActive}
 			onClick={() => {
+				current.context.lastBtnClicked = 1;
 				if (onOfStatesIsActive) {
 					send('CANCEL');
 				} else {
@@ -80,6 +81,7 @@ const RemoveButton: React.FC<{ title: string; tabIndex?: number }> = ({
 				current.matches({ remove: 'confirm' })
 			}
 			onClick={() => {
+				current.context.lastBtnClicked = 2;
 				if (
 					current.matches({ remove: 'date' }) ||
 					current.matches({ remove: 'confirm' })
@@ -100,57 +102,55 @@ const isComplete = (context: ActuaryContext) => {
 	return context.preValidatedData ? true : context.complete;
 };
 
-export const ActuaryCard: React.FC<ActuaryProviderProps> = ({
-	testId,
-	cfg,
-	...rest
-}) => {
-	return (
-		<ActuaryProvider {...rest}>
-			{({ current, i18n }) => {
-				return (
-					<Section
-						cfg={cfg}
-						data-testid={testId}
-						className={styles.card}
-						ariaLabel={concatenateStrings([
-							current.context.actuary.title,
-							current.context.actuary.firstName,
-							current.context.actuary.lastName,
-							i18n.preview.buttons.one,
-						])}
-					>
-						<Toolbar
-							complete={isComplete(current.context)}
-							subtitle={() => (
-								<Subtitle
-									main={concatenateStrings([
-										current.context.actuary.title,
-										current.context.actuary.firstName,
-										current.context.actuary.lastName,
-									])}
-									secondary={current.context.actuary.organisationName}
-								/>
-							)}
-							statusText={
-								isComplete(current.context)
-									? i18n.preview.statusText.confirmed
-									: i18n.preview.statusText.unconfirmed
-							}
-							buttonLeft={() => <ActuaryButton />}
-							buttonRight={() => (
-								<RemoveButton
-									title={i18n.preview.buttons.two}
-									tabIndex={removeFromTabFlowIfMatches(current, {
-										edit: 'name',
-									})}
-								/>
-							)}
-						/>
-						<CardContentSwitch />
-					</Section>
-				);
-			}}
-		</ActuaryProvider>
-	);
-};
+export const ActuaryCard: React.FC<ActuaryProviderProps> = React.memo(
+	({ testId, cfg, ...rest }) => {
+		return (
+			<ActuaryProvider {...rest}>
+				{({ current, i18n }) => {
+					return (
+						<Section
+							cfg={cfg}
+							data-testid={testId}
+							className={styles.card}
+							ariaLabel={concatenateStrings([
+								current.context.actuary.title,
+								current.context.actuary.firstName,
+								current.context.actuary.lastName,
+								i18n.preview.buttons.one,
+							])}
+						>
+							<Toolbar
+								complete={isComplete(current.context)}
+								subtitle={() => (
+									<Subtitle
+										main={concatenateStrings([
+											current.context.actuary.title,
+											current.context.actuary.firstName,
+											current.context.actuary.lastName,
+										])}
+										secondary={current.context.actuary.organisationName}
+									/>
+								)}
+								statusText={
+									isComplete(current.context)
+										? i18n.preview.statusText.confirmed
+										: i18n.preview.statusText.unconfirmed
+								}
+								buttonLeft={() => <ActuaryButton />}
+								buttonRight={() => (
+									<RemoveButton
+										title={i18n.preview.buttons.two}
+										tabIndex={removeFromTabFlowIfMatches(current, {
+											edit: 'name',
+										})}
+									/>
+								)}
+							/>
+							<CardContentSwitch />
+						</Section>
+					);
+				}}
+			</ActuaryProvider>
+		);
+	},
+);
