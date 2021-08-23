@@ -9,6 +9,7 @@ import { Form } from 'react-final-form';
 import { FFCheckbox } from './checkbox';
 import { SeparatorY, SeparatorX } from '../separator';
 import styles from '../elements.module.scss';
+import { EditorFonts } from '@tpr/theming';
 
 # Checkbox
 
@@ -61,6 +62,21 @@ import { FFCheckbox } from '@tpr/forms';
 					label="Select option 2"
 					callback={(value) => console.log('callback:', value)}
 				/>
+				<FFCheckbox
+					name="checkbox-c"
+					label="Select option 3"
+					cfg={{ mb: 4 }}
+					callback={(value) => console.log('callback:', value)}
+				>
+					<EditorFonts>
+						<p>
+							This is a rich text child component
+							<a href="https://example.org">supporting links</a> and <strong>
+								important text
+							</strong> as part of the label.
+						</p>
+					</EditorFonts>
+				</FFCheckbox>
 				<button type="submit" style={{ display: 'none' }}>
 					Submit
 				</button>
@@ -131,17 +147,21 @@ import { FFCheckbox } from '@tpr/forms';
 	</Form>
 </Playground>
 
-### Disabled
+### Disabled and required
 
 <Playground>
 	<Form onSubmit={console.log} initialValues={{ 'checkbox-c': true }}>
 		{({ handleSubmit }) => (
 			<form onSubmit={handleSubmit}>
-				<FFCheckbox name="checkbox-a" label="Select option 1" disabled={true} />
+				<FFCheckbox
+					name="checkbox-a"
+					label="Select disabled option 1"
+					disabled={true}
+				/>
 				<FFCheckbox
 					name="checkbox-b"
-					disabled={true}
-					label="Select option 2"
+					required={true}
+					label="Select required option 2"
 					hint="Lorem, ipsum dolor sit amet consectetur adipisicing elit. Ea obcaecati repellat molestias nemo deleniti eveniet vel similique nesciunt fugiat nisi?"
 				/>
 				<button type="submit" style={{ display: 'none' }}>
@@ -216,6 +236,7 @@ Accepted config props: FlexProps, SpaceProps
 | callback | false    | function             | callback function that runs after every onChange event, receives a boolean indicating if checked |
 | cfg      | false    | object               | FlexProps & SpaceProps                                                                           |
 | disabled | false    | boolean              | Disable checkbox                                                                                 |
+| required | false    | boolean              | Mark checkbox as required                                                                        |
 | testId   | false    | string               | data attribute for testers                                                                       |
 | checked  | true     | boolean              | Specifies whether the checkbox is selected.                                                      |
 | onChange | true     | function(evt: Event) | The callback function that is triggered when the state changes.                                  |
