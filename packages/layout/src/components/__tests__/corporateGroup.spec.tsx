@@ -165,46 +165,34 @@ describe('Corporate Group Trustee Card', () => {
 
 		test('editing Name of the chair of the board', () => {
 			expect(findByTestId('corporateGroup-name-form')).not.toBe(null);
-			const titleHtmlElement = findByText('Title (optional)') as HTMLElement;
-			const firstNameHtmlElement = findByText('First name') as HTMLElement;
-			const lastNameHtmlElement = findByText('Last name') as HTMLElement;
+			var titleHtmlElement = findByTestId('title') as HTMLElement;
+			var firstNameHtmlElement = findByTestId('first-name') as HTMLElement;
+			var lastNameHtmlElement = findByTestId('last-name') as HTMLElement;
 
 			expect(titleHtmlElement).toBeDefined();
-			expect(titleHtmlElement.nextSibling.childNodes[0]).toHaveAttribute(
-				'maxlength',
-				'35',
-			);
-			expect(titleHtmlElement.nextSibling.childNodes[0]).toHaveAttribute(
+			expect(titleHtmlElement).toHaveAttribute('maxlength', '35');
+			expect(titleHtmlElement).toHaveAttribute(
 				'autocomplete',
 				'honorific-prefix',
 			);
-			expect(titleHtmlElement.nextSibling.childNodes[0]).toHaveAttribute(
-				'value',
-				corporateGroup.title,
-			);
+			expect(titleHtmlElement).toHaveAttribute('value', corporateGroup.title);
 			expect(firstNameHtmlElement).toBeDefined();
-			expect(firstNameHtmlElement.nextSibling.childNodes[0]).toHaveAttribute(
-				'maxlength',
-				'70',
-			);
-			expect(firstNameHtmlElement.nextSibling.childNodes[0]).toHaveAttribute(
+			expect(firstNameHtmlElement).toHaveAttribute('maxlength', '70');
+			expect(firstNameHtmlElement).toHaveAttribute(
 				'autocomplete',
 				'given-name',
 			);
-			expect(firstNameHtmlElement.nextSibling.childNodes[0]).toHaveAttribute(
+			expect(firstNameHtmlElement).toHaveAttribute(
 				'value',
 				corporateGroup.firstName,
 			);
 			expect(lastNameHtmlElement).toBeDefined();
-			expect(lastNameHtmlElement.nextSibling.childNodes[0]).toHaveAttribute(
-				'maxlength',
-				'70',
-			);
-			expect(lastNameHtmlElement.nextSibling.childNodes[0]).toHaveAttribute(
+			expect(lastNameHtmlElement).toHaveAttribute('maxlength', '70');
+			expect(lastNameHtmlElement).toHaveAttribute(
 				'autocomplete',
 				'family-name',
 			);
-			expect(lastNameHtmlElement.nextSibling.childNodes[0]).toHaveAttribute(
+			expect(lastNameHtmlElement).toHaveAttribute(
 				'value',
 				corporateGroup.lastName,
 			);
