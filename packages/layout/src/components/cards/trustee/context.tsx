@@ -76,12 +76,14 @@ export interface TrusteeCardProps extends CardContentProps {
 	testId?: string | number;
 	children?: RenderProps | ReactElement;
 	cfg?: SpaceProps;
+	lastBtnClicked?: number | null;
 }
 
 export const TrusteeProvider = ({
 	trustee,
 	preValidatedData,
 	complete,
+	lastBtnClicked = null,
 	children,
 	onDetailsSave,
 	onContactSave,
@@ -103,6 +105,7 @@ export const TrusteeProvider = ({
 				...modifiedTrustee,
 				address: trusteeAddress,
 			},
+			lastBtnClicked,
 		},
 		services: {
 			onDetailsSave: ({ trustee }) => {
