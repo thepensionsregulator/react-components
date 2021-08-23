@@ -38,45 +38,41 @@ const actuary: Actuary = {
 };
 
 describe('Actuary Card', () => {
-	let component,
-		findByText,
-		findAllByText,
-		findByTitle,
-		findByRole,
-		findByTestId;
-	let updatedActuary = null;
-	beforeEach(async () => {
-		const {
-			container,
-			getByText,
-			getAllByText,
-			queryByTitle,
-			getByRole,
-			getByTestId,
-		} = render(
-			<ActuaryCard
-				actuary={actuary}
-				complete={true}
-				onCorrect={() => {}}
-				onRemove={noop}
-				onSaveContacts={noop}
-				onSaveName={(values) => {
-					updatedActuary = values;
-					return noop();
-				}}
-				testId={actuary.schemeRoleId.toString()}
-			/>,
-		);
-
-		component = container;
-		findByText = getByText;
-		findAllByText = getAllByText;
-		findByTitle = queryByTitle;
-		findByRole = getByRole;
-		findByTestId = getByTestId;
-	});
-
 	describe('Preview', () => {
+		let component,
+			findByText,
+			findAllByText,
+			findByTitle,
+			findByRole,
+			findByTestId;
+		beforeEach(() => {
+			const {
+				container,
+				getByText,
+				getAllByText,
+				queryByTitle,
+				getByRole,
+				getByTestId,
+			} = render(
+				<ActuaryCard
+					actuary={actuary}
+					complete={true}
+					onCorrect={() => {}}
+					onRemove={noop}
+					onSaveContacts={noop}
+					onSaveName={noop}
+					testId={actuary.schemeRoleId.toString()}
+				/>,
+			);
+
+			component = container;
+			findByText = getByText;
+			findAllByText = getAllByText;
+			findByTitle = queryByTitle;
+			findByRole = getByRole;
+			findByTestId = getByTestId;
+		});
+
 		test('no Violations', async () => {
 			const results = await axe(component);
 			expect(results).toHaveNoViolations();
@@ -133,10 +129,30 @@ describe('Actuary Card', () => {
 	});
 
 	describe('update Actuary Name', () => {
+		let component, findByText, findByTestId;
+		let updatedActuary = null;
+
 		beforeEach(async () => {
-			act(() => {
-				findByText('Actuary').click();
-			});
+			const { container, getByText, getByTestId } = render(
+				<ActuaryCard
+					actuary={actuary}
+					complete={true}
+					onCorrect={() => {}}
+					onRemove={noop}
+					onSaveContacts={noop}
+					onSaveName={(values) => {
+						updatedActuary = values;
+						return noop();
+					}}
+					testId={actuary.schemeRoleId.toString()}
+				/>,
+			);
+
+			component = container;
+			findByText = getByText;
+			findByTestId = getByTestId;
+
+			findByText('Actuary').click();
 		});
 
 		afterEach(() => {
@@ -223,7 +239,24 @@ describe('Actuary Card', () => {
 	});
 
 	describe('updating Actuary Contact Details', () => {
+		let component, findByText, findByTestId;
 		beforeEach(async () => {
+			const { container, getByText, getByTestId } = render(
+				<ActuaryCard
+					actuary={actuary}
+					complete={true}
+					onCorrect={() => {}}
+					onRemove={noop}
+					onSaveContacts={noop}
+					onSaveName={noop}
+					testId={actuary.schemeRoleId.toString()}
+				/>,
+			);
+
+			component = container;
+			findByText = getByText;
+			findByTestId = getByTestId;
+
 			findByText('Contact details').click();
 		});
 
@@ -281,9 +314,25 @@ describe('Actuary Card', () => {
 	});
 
 	describe('Remove Actuary', () => {
+		let component, findByText, findByTestId;
 		beforeEach(async () => {
-			findByText('Remove').click();
+			const { container, getByText, getByTestId } = render(
+				<ActuaryCard
+					actuary={actuary}
+					complete={true}
+					onCorrect={() => {}}
+					onRemove={noop}
+					onSaveContacts={noop}
+					onSaveName={noop}
+					testId={actuary.schemeRoleId.toString()}
+				/>,
+			);
 
+			component = container;
+			findByText = getByText;
+			findByTestId = getByTestId;
+
+			findByText('Remove').click();
 			const results = await axe(component);
 			expect(results).toHaveNoViolations();
 		});
