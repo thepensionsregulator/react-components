@@ -124,9 +124,9 @@ describe('Update in-house trustee name', () => {
 
 	test('renders name fields', () => {
 		expect(findByTestId('inHouseAdmin-name-form')).not.toBe(null);
-		var titleHtmlElement = findByTestId('title') as HTMLElement;
-		var firstNameHtmlElement = findByTestId('first-name') as HTMLElement;
-		var lastNameHtmlElement = findByTestId('last-name') as HTMLElement;
+		const titleHtmlElement = findByTestId('title') as HTMLElement;
+		const firstNameHtmlElement = findByTestId('first-name') as HTMLElement;
+		const lastNameHtmlElement = findByTestId('last-name') as HTMLElement;
 
 		expect(titleHtmlElement).toBeDefined();
 		expect(titleHtmlElement).toHaveAttribute('maxlength', '35');
