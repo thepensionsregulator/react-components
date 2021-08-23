@@ -42,7 +42,11 @@ export const Reason: React.FC<ReasonProps> = ({
 					const showError: boolean = !!submitError && !reason;
 					const leftScheme: boolean = reason === 'left_the_scheme';
 					return (
-						<form onSubmit={handleSubmit} data-testid={`remove-${type}-form`} noValidate>
+						<form
+							onSubmit={handleSubmit}
+							data-testid={`remove-${type}-form`}
+							noValidate
+						>
 							<div className={showError ? styles.labelError : null}>
 								<fieldset>
 									<legend>
