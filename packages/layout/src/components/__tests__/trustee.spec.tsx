@@ -159,7 +159,9 @@ describe('TrusteeCard enableContactDetails == true', () => {
 		});
 
 		test('renders name fields', () => {
-			findByText('Trustee').click();
+			act(() => {
+				findByText('Trustee').click();
+			});
 
 			expect(findByTestId('trustee-name-form')).not.toBe(null);
 

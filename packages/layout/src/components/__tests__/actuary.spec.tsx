@@ -152,7 +152,9 @@ describe('Actuary Card', () => {
 			findByText = getByText;
 			findByTestId = getByTestId;
 
-			findByText('Actuary').click();
+			act(() => {
+				findByText('Actuary').click();
+			});
 		});
 
 		afterEach(() => {

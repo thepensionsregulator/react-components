@@ -1,6 +1,6 @@
 import React from 'react';
 import { formSetup } from '../__mocks__/setup';
-import { fireEvent, screen, findByText, cleanup } from '@testing-library/react';
+import { fireEvent, screen, cleanup } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { axe } from 'jest-axe';
 import { AddressLookup } from '../elements/address/addressLookup';
@@ -88,14 +88,11 @@ describe('Address lookup', () => {
 			expect(changePostcode).not.toBeNull();
 		});
 		test('should validate the postcode when button is clicked', async () => {
-			const { container } = formSetup({
+			const { findByText } = formSetup({
 				render: <AddressLookup {...defaultProps} />,
 			});
 			await searchForAPostcode('AB12 3MV'); // invalid postcode due to MV in the incode
-			const errorMessage = findByText(
-				container,
-				defaultProps.invalidPostcodeMessage,
-			);
+			const errorMessage = findByText(defaultProps.invalidPostcodeMessage);
 			expect(errorMessage).not.toBeNull();
 		});
 		test('to have a required attribute', async () => {

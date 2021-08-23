@@ -151,7 +151,9 @@ describe('Corporate Group Trustee Card', () => {
 			findByText = getByText;
 			findByTestId = getByTestId;
 
-			findByText('Chair of board').click();
+			act(() => {
+				findByText('Chair of board').click();
+			});
 		});
 
 		afterEach(() => {
