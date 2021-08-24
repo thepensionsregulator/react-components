@@ -125,8 +125,12 @@ describe('Update in-house trustee name', () => {
 	test('renders name fields', () => {
 		expect(findByTestId('inHouseAdmin-name-form')).not.toBe(null);
 		const titleHtmlElement = findByText('Title (optional)') as HTMLElement;
-		const firstNameHtmlElement = findByText('First name') as HTMLElement;
-		const lastNameHtmlElement = findByText('Last name') as HTMLElement;
+		const firstNameHtmlElement = findByText(
+			'First name (optional)',
+		) as HTMLElement;
+		const lastNameHtmlElement = findByText(
+			'Last name (optional)',
+		) as HTMLElement;
 
 		expect(titleHtmlElement).toBeDefined();
 		expect(titleHtmlElement.nextSibling.childNodes[0]).toHaveAttribute(

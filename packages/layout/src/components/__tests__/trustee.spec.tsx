@@ -164,8 +164,12 @@ describe('TrusteeCard enableContactDetails == true', () => {
 			expect(findByTestId('trustee-name-form')).not.toBe(null);
 
 			var titleHtmlElement = findByText('Title (optional)') as HTMLElement;
-			var firstNameHtmlElement = findByText('First name') as HTMLElement;
-			var lastNameHtmlElement = findByText('Last name') as HTMLElement;
+			var firstNameHtmlElement = findByText(
+				'First name (optional)',
+			) as HTMLElement;
+			var lastNameHtmlElement = findByText(
+				'Last name (optional)',
+			) as HTMLElement;
 
 			expect(titleHtmlElement).toBeDefined();
 			expect(titleHtmlElement.nextSibling.childNodes[0]).toHaveAttribute(

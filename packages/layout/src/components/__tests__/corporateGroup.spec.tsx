@@ -166,8 +166,12 @@ describe('Corporate Group Trustee Card', () => {
 		test('editing Name of the chair of the board', () => {
 			expect(findByTestId('corporateGroup-name-form')).not.toBe(null);
 			const titleHtmlElement = findByText('Title (optional)') as HTMLElement;
-			const firstNameHtmlElement = findByText('First name') as HTMLElement;
-			const lastNameHtmlElement = findByText('Last name') as HTMLElement;
+			const firstNameHtmlElement = findByText(
+				'First name (optional)',
+			) as HTMLElement;
+			const lastNameHtmlElement = findByText(
+				'Last name (optional)',
+			) as HTMLElement;
 
 			expect(titleHtmlElement).toBeDefined();
 			expect(titleHtmlElement.nextSibling.childNodes[0]).toHaveAttribute(
