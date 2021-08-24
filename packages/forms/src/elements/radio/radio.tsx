@@ -21,6 +21,7 @@ export const RadioButton: React.FC<RadioButtonProps> = ({
 	value,
 	hint,
 	className,
+	required = false,
 }) => {
 	const msg = testId ? `${testId}-${checked ? 'checked' : 'unchecked'}` : null;
 	const helper = new AccessibilityHelper(
@@ -49,31 +50,33 @@ export const RadioButton: React.FC<RadioButtonProps> = ({
 				data-testid={msg}
 				htmlFor={id}
 			>
-				<HiddenInput
-					type="radio"
-					id={id}
-					aria-describedby={helper && helper.hintId}
-					name={name}
-					checked={checked}
-					value={value}
-					disabled={disabled}
-					onChange={onChange}
-					data-testid={testId}
-				/>
-				{checked ? (
-					<RadioButtonChecked className={styles.radio} />
-				) : (
-					<RadioButtonUnchecked className={styles.radio} />
+				<div className={styles.innerWrapper}>
+					<HiddenInput
+						type="radio"
+						id={id}
+						name={name}
+						checked={checked}
+						value={value}
+						disabled={disabled}
+						required={required}
+						onChange={onChange}
+						data-testid={testId}
+					/>
+					{checked ? (
+						<RadioButtonChecked className={styles.radio} />
+					) : (
+						<RadioButtonUnchecked className={styles.radio} />
+					)}
+					<P cfg={{ fontWeight: 3 }} className={styles.label}>
+						{label}
+					</P>
+				</div>
+				{hint && (
+					<P id={helper && helper.hintId} className={styles.hint}>
+						{hint}
+					</P>
 				)}
-				<P cfg={{ ml: 2, fontWeight: 3 }} className={styles.label}>
-					{label}
-				</P>
 			</label>
-			{hint && (
-				<P id={helper && helper.hintId} className={styles.hint}>
-					{hint}
-				</P>
-			)}
 		</StyledInputLabel>
 	);
 };

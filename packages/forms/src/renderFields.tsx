@@ -39,6 +39,8 @@ export type FieldExtraProps = {
 	/** for radio buttons */
 	checked?: boolean;
 	readOnly?: boolean;
+	required?: boolean;
+	autoComplete?: string;
 	/** argument for tests */
 	testId?: string;
 	/** options for Select input field */

@@ -36,23 +36,19 @@ const inHouseAdmin: InHouseAdminNoApi = {
 };
 
 describe('InHouse Preview', () => {
-	let component, findByText, findByTestId, findByRole;
-	let updatedInHouseAdmin = null;
+	let component, findByText, findByRole;
 
 	beforeEach(async () => {
-		const { container, getByText, getByTestId, getByRole } = render(
+		const { container, getByText, getByRole } = render(
 			<InHouseCard
 				onSaveContacts={noop}
 				onSaveAddress={noop}
-				onSaveName={(values) => {
-					updatedInHouseAdmin = values;
-					return noop();
-				}}
+				onSaveName={noop}
 				onRemove={noop}
 				onCorrect={(_value) => {}}
 				complete={true}
 				addressAPI={{
-					get: (_endpont) => Promise.resolve(),
+					get: (_endpoint) => Promise.resolve(),
 					limit: 100,
 				}}
 				inHouseAdmin={inHouseAdmin}
@@ -61,7 +57,6 @@ describe('InHouse Preview', () => {
 
 		component = container;
 		findByText = getByText;
-		findByTestId = getByTestId;
 		findByRole = getByRole;
 	});
 
@@ -83,28 +78,76 @@ describe('InHouse Preview', () => {
 		expect(findByText(`Confirm 'Mr John Smoth' is correct.`)).toBeDefined();
 	});
 
-	test('editing in house name', () => {
+	test('renders with a section containing an aria label', () => {
+		assertThatASectionExistsWithAnAriaLabel(
+			findByRole,
+			`${inHouseAdmin.title} ${inHouseAdmin.firstName} ${inHouseAdmin.lastName} In House Administrator`,
+		);
+	});
+});
+
+describe('Update in-house trustee name', () => {
+	let component, findByText, findByTestId;
+	let updatedInHouseAdmin = null;
+
+	beforeEach(async () => {
+		const { container, getByText, getByTestId } = render(
+			<InHouseCard
+				onSaveContacts={noop}
+				onSaveAddress={noop}
+				onSaveName={(values) => {
+					updatedInHouseAdmin = values;
+					return noop();
+				}}
+				onRemove={noop}
+				onCorrect={(_value) => {}}
+				complete={true}
+				addressAPI={{
+					get: (_endpont) => Promise.resolve(),
+					limit: 100,
+				}}
+				inHouseAdmin={inHouseAdmin}
+			/>,
+		);
+
+		component = container;
+		findByText = getByText;
+		findByTestId = getByTestId;
+
 		findByText('In House Administrator').click();
+	});
+
+	test('is accessible', async () => {
+		const results = await axe(component);
+		expect(results).toHaveNoViolations();
+	});
+
+	test('renders name fields', () => {
 		expect(findByTestId('inHouseAdmin-name-form')).not.toBe(null);
-		var titleHtmlElement = findByText('Title (optional)') as HTMLElement;
-		var firstNameHtmlElement = findByText('First name') as HTMLElement;
-		var lastNameHtmlElement = findByText('Last name') as HTMLElement;
+		const titleHtmlElement = findByTestId('title') as HTMLElement;
+		const firstNameHtmlElement = findByTestId('first-name') as HTMLElement;
+		const lastNameHtmlElement = findByTestId('last-name') as HTMLElement;
 
 		expect(titleHtmlElement).toBeDefined();
-		expect(titleHtmlElement.nextSibling.childNodes[0]).toHaveAttribute(
-			'maxlength',
-			'35',
+		expect(titleHtmlElement).toHaveAttribute('maxlength', '35');
+		expect(titleHtmlElement).toHaveAttribute(
+			'autocomplete',
+			'honorific-prefix',
 		);
+		expect(titleHtmlElement).toHaveAttribute('value', inHouseAdmin.title);
 		expect(firstNameHtmlElement).toBeDefined();
-		expect(firstNameHtmlElement.nextSibling.childNodes[0]).toHaveAttribute(
-			'maxlength',
-			'70',
+		expect(firstNameHtmlElement).toHaveAttribute('maxlength', '70');
+		expect(firstNameHtmlElement).toHaveAttribute('autocomplete', 'given-name');
+		expect(firstNameHtmlElement).toHaveAttribute(
+			'value',
+			inHouseAdmin.firstName,
 		);
+		expect(firstNameHtmlElement).toHaveAttribute('required');
 		expect(lastNameHtmlElement).toBeDefined();
-		expect(lastNameHtmlElement.nextSibling.childNodes[0]).toHaveAttribute(
-			'maxlength',
-			'70',
-		);
+		expect(lastNameHtmlElement).toHaveAttribute('maxlength', '70');
+		expect(lastNameHtmlElement).toHaveAttribute('autocomplete', 'family-name');
+		expect(lastNameHtmlElement).toHaveAttribute('value', inHouseAdmin.lastName);
+		expect(lastNameHtmlElement).toHaveAttribute('required');
 		expect(findByText('Save and close')).toBeDefined();
 
 		assertThatButtonHasBeenRemovedFromTheTabFlow(findByText, 'Remove');
@@ -112,8 +155,6 @@ describe('InHouse Preview', () => {
 
 	test('in house title can be left empty when name is updated', async () => {
 		await act(async () => {
-			findByText(/In House Administrator/).click();
-			await axe(component);
 			clearTitleField(findByText);
 			findByText(/Save and close/).click();
 		});
@@ -124,12 +165,70 @@ describe('InHouse Preview', () => {
 			updatedInHouseAdmin,
 		);
 	});
+});
 
-	test('renders with a section containing an aria label', () => {
-		assertThatASectionExistsWithAnAriaLabel(
-			findByRole,
-			`${inHouseAdmin.title} ${inHouseAdmin.firstName} ${inHouseAdmin.lastName} In House Administrator`,
+describe('Update in-house trustee contact details', () => {
+	let component, findByText;
+
+	beforeEach(async () => {
+		const { container, getByText } = render(
+			<InHouseCard
+				onSaveContacts={noop}
+				onSaveAddress={noop}
+				onSaveName={noop}
+				onRemove={noop}
+				onCorrect={(_value) => {}}
+				complete={true}
+				addressAPI={{
+					get: (_endpoint) => Promise.resolve(),
+					limit: 100,
+				}}
+				inHouseAdmin={inHouseAdmin}
+			/>,
 		);
+
+		component = container;
+		findByText = getByText;
+
+		findByText('Contact details').click();
+	});
+
+	test('is accessible', async () => {
+		const results = await axe(component);
+		expect(results).toHaveNoViolations();
+	});
+
+	test('renders contact fields', () => {
+		const telHtmlElement = findByText('Telephone number');
+		expect(telHtmlElement).toBeDefined();
+		expect(telHtmlElement.nextSibling.firstChild).toHaveAttribute(
+			'type',
+			'tel',
+		);
+		expect(telHtmlElement.nextSibling.firstChild).toHaveAttribute(
+			'autocomplete',
+			'tel',
+		);
+		expect(telHtmlElement.nextSibling.firstChild).toHaveAttribute(
+			'value',
+			inHouseAdmin.telephoneNumber,
+		);
+
+		const emailHtmlElement = findByText('Email address');
+		expect(emailHtmlElement).toBeDefined();
+		expect(emailHtmlElement.nextSibling.firstChild).toHaveAttribute(
+			'type',
+			'email',
+		);
+		expect(emailHtmlElement.nextSibling.firstChild).toHaveAttribute(
+			'autocomplete',
+			'email',
+		);
+		expect(emailHtmlElement.nextSibling.firstChild).toHaveAttribute(
+			'value',
+			inHouseAdmin.emailAddress,
+		);
+		expect(findByText('Save and close')).toBeDefined();
 	});
 });
 

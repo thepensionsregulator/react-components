@@ -4,8 +4,39 @@ import { FFRadioButton } from '../elements/radio/radio';
 import { renderFields } from '../index';
 import { fireEvent, getByTestId } from '@testing-library/react';
 import { axe } from 'jest-axe';
+import { FieldProps } from '../../lib/renderFields';
+
+const testId = 'radio-button';
+
+const basicProps: FieldProps = {
+	hint: 'This explains how to complete the currency field',
+	label: 'Click Me',
+	name: 'radio_button',
+	value: 'radio_1',
+	testId: testId,
+};
 
 describe('Radio input', () => {
+	test('renders correctly', () => {
+		const { queryByTestId } = formSetup({
+			render: <FFRadioButton {...basicProps} />,
+		});
+
+		const button = queryByTestId(testId);
+		expect(button).toBeDefined();
+		expect(button).toHaveAttribute('value', basicProps.value);
+		expect(button).not.toHaveAttribute('required');
+	});
+
+	test('can render with required attribute', () => {
+		const { queryByTestId } = formSetup({
+			render: <FFRadioButton {...basicProps} required={true} />,
+		});
+
+		const button = queryByTestId(testId);
+		expect(button).toHaveAttribute('required');
+	});
+
 	test('is accessible', async () => {
 		const handleSubmit = jest.fn();
 		const { container } = formSetup({
@@ -143,11 +174,11 @@ describe('Radio input', () => {
 		);
 	});
 
-	test('has correct describedby tag', () => {
+	test('renders hint within the label', () => {
 		const hint = 'This explains how to complete the field';
 		const labelText = 'My radiobutton';
 		const id = 'test-radiobutton';
-		const { getByLabelText } = formSetup({
+		const { getByText } = formSetup({
 			render: (
 				<FFRadioButton
 					id={id}
@@ -158,9 +189,11 @@ describe('Radio input', () => {
 				/>
 			),
 		});
-		const radio = getByLabelText(labelText);
-		expect(radio).not.toBeNull();
-		expect(radio).toHaveAttribute('aria-describedby', `${id}-hint`);
+		const hintElement = getByText(hint);
+		expect(hintElement).not.toBeNull();
+
+		const label = hintElement.closest('label');
+		expect(label).toBeDefined();
 	});
 
 	test('has correct label reference', () => {

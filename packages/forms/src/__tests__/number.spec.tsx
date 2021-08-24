@@ -1,6 +1,6 @@
 import React from 'react';
 import { formSetup } from '../__mocks__/setup';
-import { FFInputNumber } from '../elements/number/number';
+import { FFInputNumber, FFInputNumberProps } from '../elements/number/number';
 import { axe } from 'jest-axe';
 import userEvent from '@testing-library/user-event';
 import { fireEvent } from '@testing-library/react';
@@ -9,33 +9,29 @@ import { sleep } from '@tpr/core/src/testHelpers';
 
 const testId = 'number-input';
 
-const numberComponent = (
-	<FFInputNumber label="Number" testId={testId} name="number" />
-);
+const basicProps: FFInputNumberProps = {
+	hint: 'This explains how to complete the number field',
+	label: 'Number',
+	name: 'number',
+	testId: testId,
+};
+const numberComponent = <FFInputNumber {...basicProps} />;
 
 const numberComponentWithDecimals = (
-	<FFInputNumber
-		label="Number"
-		testId={testId}
-		name="number"
-		decimalPlaces={2}
-	/>
+	<FFInputNumber {...basicProps} decimalPlaces={2} />
 );
 
 const numberComponentWithi18n = (
 	<FFInputNumber
-		label="Number"
-		testId={testId}
-		name="number"
+		{...basicProps}
 		i18n={{ ariaLabelExtension: 'extended aria label' }}
 	/>
 );
 
 const numberComponentWithArialLabelAndi18n = (
 	<FFInputNumber
+		{...basicProps}
 		aria-label="Number"
-		testId={testId}
-		name="number"
 		i18n={{ ariaLabelExtension: 'extended aria label' }}
 	/>
 );
@@ -128,6 +124,28 @@ describe('Number', () => {
 
 			expect(input).toBeDefined();
 			expect(input).toHaveAttribute('aria-label', 'Number extended aria label');
+		});
+
+		test('renders without a required attribute', () => {
+			const { getByTestId } = formSetup({
+				render: numberComponent,
+			});
+
+			const input = getByTestId(testId);
+
+			expect(input).toBeDefined();
+			expect(input).not.toHaveAttribute('required');
+		});
+
+		test('can render with a required attribute', () => {
+			const { getByTestId } = formSetup({
+				render: <FFInputNumber {...basicProps} required={true} />,
+			});
+
+			const input = getByTestId(testId);
+
+			expect(input).toBeDefined();
+			expect(input).toHaveAttribute('required');
 		});
 	});
 

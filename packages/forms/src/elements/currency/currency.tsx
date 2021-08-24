@@ -270,6 +270,7 @@ const InputCurrency: React.FC<InputCurrencyProps> = React.memo(
 					after={after}
 					before={before}
 					accessibilityHelper={helper}
+					required={required}
 					{...props}
 				/>
 			</StyledInputLabel>

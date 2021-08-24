@@ -26,6 +26,7 @@ const InputText: React.FC<InputTextProps> = React.forwardRef(
 			placeholder,
 			disabled,
 			readOnly,
+			autoComplete,
 			inputWidth: width,
 			cfg,
 			updatedValue,
@@ -63,10 +64,12 @@ const InputText: React.FC<InputTextProps> = React.forwardRef(
 					placeholder={placeholder}
 					disabled={disabled}
 					readOnly={readOnly}
+					autoComplete={autoComplete}
 					isError={meta && meta.touched && meta.error}
 					className={inputClassName}
 					maxLength={maxLength}
 					accessibilityHelper={helper}
+					required={required}
 					{...input}
 				/>
 			</StyledInputLabel>
@@ -79,7 +82,7 @@ export const FFInputText: React.FC<FieldProps> = React.forwardRef(
 		return (
 			<Field
 				{...fieldProps}
-				required={typeof fieldProps.validate === 'function' || fieldProps.error}
+				required={fieldProps.required}
 				render={(props) => <InputText {...props} {...fieldProps} ref={ref} />}
 			/>
 		);

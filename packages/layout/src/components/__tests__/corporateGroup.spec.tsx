@@ -134,7 +134,7 @@ describe('Corporate Group Trustee Card', () => {
 
 	describe('editing Chair-of-board', () => {
 		let component, findByText, findByTestId;
-		beforeEach(async () => {
+		beforeEach(() => {
 			const { container, getByText, getByTestId } = render(
 				<CorporateGroupCard
 					corporateGroup={corporateGroup}
@@ -152,42 +152,52 @@ describe('Corporate Group Trustee Card', () => {
 			findByTestId = getByTestId;
 
 			findByText('Chair of board').click();
-			const results = await axe(component);
-			expect(results).toHaveNoViolations();
-
-			expect(getByTestId('corporateGroup-name-form')).not.toBe(null);
-
-			var titleHtmlElement = getByText('Title (optional)') as HTMLElement;
-			var firstNameHtmlElement = getByText('First name') as HTMLElement;
-			var lastNameHtmlElement = getByText('Last name') as HTMLElement;
-
-			expect(titleHtmlElement).toBeDefined();
-			expect(titleHtmlElement.nextSibling.childNodes[0]).toHaveAttribute(
-				'maxlength',
-				'35',
-			);
-			expect(firstNameHtmlElement).toBeDefined();
-			expect(firstNameHtmlElement.nextSibling.childNodes[0]).toHaveAttribute(
-				'maxlength',
-				'70',
-			);
-			expect(lastNameHtmlElement).toBeDefined();
-			expect(lastNameHtmlElement.nextSibling.childNodes[0]).toHaveAttribute(
-				'maxlength',
-				'70',
-			);
-			expect(getByText('Continue')).toBeDefined();
 		});
 
 		afterEach(() => {
 			cleanup();
 		});
 
+		test('editing Name of the chair of the board passes AXE accessibility testing', async () => {
+			const results = await axe(component);
+			expect(results).toHaveNoViolations();
+		});
+
 		test('editing Name of the chair of the board', () => {
 			expect(findByTestId('corporateGroup-name-form')).not.toBe(null);
-			expect(findByText('Title (optional)')).toBeDefined();
-			expect(findByText('First name')).toBeDefined();
-			expect(findByText('Last name')).toBeDefined();
+			const titleHtmlElement = findByTestId('title') as HTMLElement;
+			const firstNameHtmlElement = findByTestId('first-name') as HTMLElement;
+			const lastNameHtmlElement = findByTestId('last-name') as HTMLElement;
+
+			expect(titleHtmlElement).toBeDefined();
+			expect(titleHtmlElement).toHaveAttribute('maxlength', '35');
+			expect(titleHtmlElement).toHaveAttribute(
+				'autocomplete',
+				'honorific-prefix',
+			);
+			expect(titleHtmlElement).toHaveAttribute('value', corporateGroup.title);
+			expect(firstNameHtmlElement).toBeDefined();
+			expect(firstNameHtmlElement).toHaveAttribute('maxlength', '70');
+			expect(firstNameHtmlElement).toHaveAttribute(
+				'autocomplete',
+				'given-name',
+			);
+			expect(firstNameHtmlElement).toHaveAttribute(
+				'value',
+				corporateGroup.firstName,
+			);
+			expect(firstNameHtmlElement).toHaveAttribute('required');
+			expect(lastNameHtmlElement).toBeDefined();
+			expect(lastNameHtmlElement).toHaveAttribute('maxlength', '70');
+			expect(lastNameHtmlElement).toHaveAttribute(
+				'autocomplete',
+				'family-name',
+			);
+			expect(lastNameHtmlElement).toHaveAttribute(
+				'value',
+				corporateGroup.lastName,
+			);
+			expect(lastNameHtmlElement).toHaveAttribute('required');
 			expect(findByText('Continue')).toBeDefined();
 		});
 
@@ -196,8 +206,34 @@ describe('Corporate Group Trustee Card', () => {
 				findByText('Continue').click();
 				const results = await axe(component);
 				expect(results).toHaveNoViolations();
-				expect(findByText('Telephone number')).toBeDefined();
-				expect(findByText('Email address')).toBeDefined();
+				const telHtmlElement = findByText('Telephone number');
+				expect(telHtmlElement).toBeDefined();
+				expect(telHtmlElement.nextSibling.childNodes[0]).toHaveAttribute(
+					'type',
+					'tel',
+				);
+				expect(telHtmlElement.nextSibling.childNodes[0]).toHaveAttribute(
+					'autocomplete',
+					'tel',
+				);
+				expect(telHtmlElement.nextSibling.childNodes[0]).toHaveAttribute(
+					'value',
+					corporateGroup.telephoneNumber,
+				);
+				const emailHtmlElement = findByText('Email address');
+				expect(emailHtmlElement).toBeDefined();
+				expect(emailHtmlElement.nextSibling.childNodes[0]).toHaveAttribute(
+					'type',
+					'email',
+				);
+				expect(emailHtmlElement.nextSibling.childNodes[0]).toHaveAttribute(
+					'autocomplete',
+					'email',
+				);
+				expect(emailHtmlElement.nextSibling.childNodes[0]).toHaveAttribute(
+					'value',
+					corporateGroup.emailAddress,
+				);
 				expect(findByText('Save and close')).toBeDefined();
 			});
 

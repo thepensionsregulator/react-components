@@ -18,6 +18,8 @@ export type InputProps = {
 	ariaLabelExtension?: string;
 	[key: string]: any;
 	accessibilityHelper?: AccessibilityHelper;
+	required?: boolean;
+	autoComplete?: string;
 };
 
 export const Input: React.FC<InputProps> = ({
@@ -30,12 +32,14 @@ export const Input: React.FC<InputProps> = ({
 	isError = false,
 	className,
 	readOnly,
+	autoComplete,
 	after: After,
 	before: Before,
 	decimalPlaces,
 	parentRef,
 	ariaLabelExtension,
 	accessibilityHelper,
+	required = false,
 	...rest
 }) => {
 	const getAriaLabel = (): string => {
@@ -72,6 +76,7 @@ export const Input: React.FC<InputProps> = ({
 				type={type}
 				data-testid={testId}
 				readOnly={readOnly}
+				autoComplete={autoComplete}
 				step={
 					type !== 'number'
 						? null
@@ -86,6 +91,7 @@ export const Input: React.FC<InputProps> = ({
 						[styles['inputText-error']]: isError,
 					},
 				])}
+				required={required}
 				aria-invalid={!!isError}
 				aria-describedby={
 					accessibilityHelper &&

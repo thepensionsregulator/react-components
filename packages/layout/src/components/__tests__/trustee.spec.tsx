@@ -156,28 +156,40 @@ describe('TrusteeCard enableContactDetails == true', () => {
 			findByText('Trustee').click();
 			const results = await axe(component);
 			expect(results).toHaveNoViolations();
+		});
+
+		test('renders name fields', () => {
+			findByText('Trustee').click();
 
 			expect(findByTestId('trustee-name-form')).not.toBe(null);
 
-			var titleHtmlElement = findByText('Title (optional)') as HTMLElement;
-			var firstNameHtmlElement = findByText('First name') as HTMLElement;
-			var lastNameHtmlElement = findByText('Last name') as HTMLElement;
+			const titleHtmlElement = findByTestId('title') as HTMLElement;
+			const firstNameHtmlElement = findByTestId('first-name') as HTMLElement;
+			const lastNameHtmlElement = findByTestId('last-name') as HTMLElement;
 
 			expect(titleHtmlElement).toBeDefined();
-			expect(titleHtmlElement.nextSibling.childNodes[0]).toHaveAttribute(
-				'maxlength',
-				'35',
+			expect(titleHtmlElement).toHaveAttribute('maxlength', '35');
+			expect(titleHtmlElement).toHaveAttribute(
+				'autocomplete',
+				'honorific-prefix',
 			);
+			expect(titleHtmlElement).toHaveAttribute('value', trustee.title);
 			expect(firstNameHtmlElement).toBeDefined();
-			expect(firstNameHtmlElement.nextSibling.childNodes[0]).toHaveAttribute(
-				'maxlength',
-				'70',
+			expect(firstNameHtmlElement).toHaveAttribute('maxlength', '70');
+			expect(firstNameHtmlElement).toHaveAttribute(
+				'autocomplete',
+				'given-name',
 			);
+			expect(firstNameHtmlElement).toHaveAttribute('value', trustee.firstName);
+			expect(firstNameHtmlElement).toHaveAttribute('required');
 			expect(lastNameHtmlElement).toBeDefined();
-			expect(lastNameHtmlElement.nextSibling.childNodes[0]).toHaveAttribute(
-				'maxlength',
-				'70',
+			expect(lastNameHtmlElement).toHaveAttribute('maxlength', '70');
+			expect(lastNameHtmlElement).toHaveAttribute(
+				'autocomplete',
+				'family-name',
 			);
+			expect(lastNameHtmlElement).toHaveAttribute('value', trustee.lastName);
+			expect(lastNameHtmlElement).toHaveAttribute('required');
 			expect(findByText('Continue')).toBeDefined();
 
 			assertThatButtonHasBeenRemovedFromTheTabFlow(findByText, 'Remove');
@@ -216,6 +228,40 @@ describe('TrusteeCard enableContactDetails == true', () => {
 
 			const results = await axe(component);
 			expect(results).toHaveNoViolations();
+		});
+
+		test('renders contact fields', () => {
+			findByText('Contact details').click();
+
+			const telHtmlElement = findByText('Telephone number');
+			expect(telHtmlElement).toBeDefined();
+			expect(telHtmlElement.nextSibling.firstChild).toHaveAttribute(
+				'type',
+				'tel',
+			);
+			expect(telHtmlElement.nextSibling.firstChild).toHaveAttribute(
+				'autocomplete',
+				'tel',
+			);
+			expect(telHtmlElement.nextSibling.firstChild).toHaveAttribute(
+				'value',
+				trustee.telephoneNumber,
+			);
+			const emailHtmlElement = findByText('Email address');
+			expect(emailHtmlElement).toBeDefined();
+			expect(emailHtmlElement.nextSibling.firstChild).toHaveAttribute(
+				'type',
+				'email',
+			);
+			expect(emailHtmlElement.nextSibling.firstChild).toHaveAttribute(
+				'autocomplete',
+				'email',
+			);
+			expect(emailHtmlElement.nextSibling.firstChild).toHaveAttribute(
+				'value',
+				trustee.emailAddress,
+			);
+			expect(findByText('Save and close')).toBeDefined();
 		});
 	});
 
