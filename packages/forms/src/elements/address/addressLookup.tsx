@@ -29,6 +29,7 @@ export const AddressLookup: React.FC<AddressProps> = ({
 	selectAddressButton,
 	selectAddressRequiredMessage,
 	noAddressesFoundMessage,
+	headingLevel = 2,
 	addressLine1Label,
 	addressLine1RequiredMessage,
 	addressLine2Label,
@@ -154,6 +155,7 @@ export const AddressLookup: React.FC<AddressProps> = ({
 					postcodeLabel={postcodeLabel}
 					countryLabel={countryLabel}
 					changeAddressButton={changeAddressButton}
+					headingLevel={headingLevel}
 				/>
 			)}
 		</>
