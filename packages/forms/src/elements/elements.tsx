@@ -71,7 +71,7 @@ export const FormLabelText: React.FC<FormLabelTextProps> = ({
 		{
 			id: id,
 			className: classNames,
-			for: forId,
+			htmlFor: forId,
 		},
 		children,
 	);
