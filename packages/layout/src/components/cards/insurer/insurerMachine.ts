@@ -34,6 +34,7 @@ export interface InsurerContext {
 	remove: { confirm: boolean; date: string } | null;
 	insurer: Partial<Insurer>;
 	preValidatedData?: boolean | null;
+	lastBtnClicked?: number | null;
 }
 
 const insurerMachine = Machine<InsurerContext, InsurerStates, InsurerEvents>({
@@ -43,6 +44,7 @@ const insurerMachine = Machine<InsurerContext, InsurerStates, InsurerEvents>({
 		complete: false,
 		remove: null,
 		insurer: {},
+		lastBtnClicked: null,
 	},
 	states: {
 		preview: {

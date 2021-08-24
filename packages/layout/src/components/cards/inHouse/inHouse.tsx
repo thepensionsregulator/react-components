@@ -99,6 +99,7 @@ const InHouseAdminButton: React.FC = () => {
 		<UnderlinedButton
 			isOpen={onOfStatesIsActive}
 			onClick={() => {
+				current.context.lastBtnClicked = 1;
 				if (onOfStatesIsActive) {
 					send('CANCEL');
 				} else {
@@ -124,6 +125,7 @@ const RemoveButton: React.FC<{ title: string; tabIndex?: number }> = ({
 				current.matches({ remove: 'confirm' })
 			}
 			onClick={() => {
+				current.context.lastBtnClicked = 2;
 				if (
 					current.matches({ remove: 'date' }) ||
 					current.matches({ remove: 'confirm' })
@@ -144,56 +146,54 @@ const isComplete = (context: InHouseAdminContext) => {
 	return context.preValidatedData ? true : context.complete;
 };
 
-export const InHouseCard: React.FC<InHouseAdminProviderProps> = ({
-	testId,
-	cfg,
-	...rest
-}) => {
-	return (
-		<InHouseAdminProvider {...rest}>
-			{({ current, i18n }) => {
-				return (
-					<Section
-						cfg={cfg}
-						data-testid={testId}
-						className={styles.card}
-						ariaLabel={concatenateStrings([
-							current.context.inHouseAdmin.title,
-							current.context.inHouseAdmin.firstName,
-							current.context.inHouseAdmin.lastName,
-							i18n.preview.buttons.one,
-						])}
-					>
-						<Toolbar
-							complete={isComplete(current.context)}
-							subtitle={() => (
-								<Subtitle
-									main={concatenateStrings([
-										current.context.inHouseAdmin.title,
-										current.context.inHouseAdmin.firstName,
-										current.context.inHouseAdmin.lastName,
-									])}
-								/>
-							)}
-							statusText={
-								isComplete(current.context)
-									? i18n.preview.statusText.confirmed
-									: i18n.preview.statusText.unconfirmed
-							}
-							buttonLeft={() => <InHouseAdminButton />}
-							buttonRight={() => (
-								<RemoveButton
-									title={i18n.preview.buttons.two}
-									tabIndex={removeFromTabFlowIfMatches(current, {
-										edit: 'name',
-									})}
-								/>
-							)}
-						/>
-						<CardContentSwitch />
-					</Section>
-				);
-			}}
-		</InHouseAdminProvider>
-	);
-};
+export const InHouseCard: React.FC<InHouseAdminProviderProps> = React.memo(
+	({ testId, cfg, ...rest }) => {
+		return (
+			<InHouseAdminProvider {...rest}>
+				{({ current, i18n }) => {
+					return (
+						<Section
+							cfg={cfg}
+							data-testid={testId}
+							className={styles.card}
+							ariaLabel={concatenateStrings([
+								current.context.inHouseAdmin.title,
+								current.context.inHouseAdmin.firstName,
+								current.context.inHouseAdmin.lastName,
+								i18n.preview.buttons.one,
+							])}
+						>
+							<Toolbar
+								complete={isComplete(current.context)}
+								subtitle={() => (
+									<Subtitle
+										main={concatenateStrings([
+											current.context.inHouseAdmin.title,
+											current.context.inHouseAdmin.firstName,
+											current.context.inHouseAdmin.lastName,
+										])}
+									/>
+								)}
+								statusText={
+									isComplete(current.context)
+										? i18n.preview.statusText.confirmed
+										: i18n.preview.statusText.unconfirmed
+								}
+								buttonLeft={() => <InHouseAdminButton />}
+								buttonRight={() => (
+									<RemoveButton
+										title={i18n.preview.buttons.two}
+										tabIndex={removeFromTabFlowIfMatches(current, {
+											edit: 'name',
+										})}
+									/>
+								)}
+							/>
+							<CardContentSwitch />
+						</Section>
+					);
+				}}
+			</InHouseAdminProvider>
+		);
+	},
+);

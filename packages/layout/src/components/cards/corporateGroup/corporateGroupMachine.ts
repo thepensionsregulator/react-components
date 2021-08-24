@@ -39,6 +39,7 @@ export interface CorporateGroupContext {
 	remove?: RemoveReasonProps;
 	corporateGroup: Partial<CorporateGroup>;
 	preValidatedData?: boolean | null;
+	lastBtnClicked?: number | null;
 }
 
 const corporateGroupMachine = Machine<
@@ -52,6 +53,7 @@ const corporateGroupMachine = Machine<
 		complete: false,
 		remove: null,
 		corporateGroup: {},
+		lastBtnClicked: null,
 	},
 	states: {
 		preview: {

@@ -20,6 +20,7 @@ const getFields = (
 		label: fields.title.label,
 		error: fields.title.error,
 		maxLength: fields.title.maxlength,
+		testId: 'title',
 		inputWidth: 1,
 		cfg: { mb: 4 },
 	},
@@ -30,7 +31,9 @@ const getFields = (
 		label: fields.firstName.label,
 		error: fields.firstName.error,
 		maxLength: fields.firstName.maxlength,
+		testId: 'first-name',
 		inputWidth: 6,
+		required: true,
 		cfg: { mb: 4 },
 	},
 	{
@@ -40,6 +43,8 @@ const getFields = (
 		label: fields.lastName.label,
 		error: fields.lastName.error,
 		maxLength: fields.lastName.maxlength,
+		testId: 'last-name',
+		required: true,
 		inputWidth: 6,
 	},
 ];

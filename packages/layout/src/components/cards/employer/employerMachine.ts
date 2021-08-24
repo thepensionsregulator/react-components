@@ -31,6 +31,7 @@ export interface EmployerContext {
 	remove: { confirm: boolean; date: string } | null;
 	employer: Partial<Employer>;
 	preValidatedData?: boolean | null;
+	lastBtnClicked?: number | null;
 }
 
 const employerMachine = Machine<
@@ -45,6 +46,7 @@ const employerMachine = Machine<
 		showStatutoryEmployerSection: true,
 		remove: null,
 		employer: {},
+		lastBtnClicked: null,
 	},
 	states: {
 		preview: {

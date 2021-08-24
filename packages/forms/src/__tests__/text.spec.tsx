@@ -17,6 +17,7 @@ const basicProps: FieldProps = {
 	name: 'name',
 	testId: testId,
 	type: 'text',
+	id: 'id1',
 };
 
 describe('Text input', () => {

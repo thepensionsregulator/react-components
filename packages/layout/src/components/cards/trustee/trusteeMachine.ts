@@ -81,6 +81,7 @@ export interface TrusteeContext {
 		reason: null | string;
 		date: null | string;
 	};
+	lastBtnClicked?: number | null;
 }
 
 const trusteeMachine = Machine<TrusteeContext, TrusteeStates, TrusteeEvents>({
@@ -112,6 +113,7 @@ const trusteeMachine = Machine<TrusteeContext, TrusteeStates, TrusteeEvents>({
 			emailAddress: '',
 		},
 		remove: null,
+		lastBtnClicked: null,
 	},
 	states: {
 		preview: {
