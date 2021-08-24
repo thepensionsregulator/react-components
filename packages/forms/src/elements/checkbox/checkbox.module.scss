@@ -2,12 +2,17 @@
 // typography.module.scss includes '@tpr/theming/lib/variables.scss'
 
 .wrapper {
-	display: flex;
-	flex: 0 0 auto;
-	align-items: center;
-	line-height: 1.4;
 	cursor: pointer;
 	user-select: none;
+
+	.innerWrapper {
+		display: flex;
+		flex: 0 0 auto;
+		align-items: center;
+		line-height: 1.4;
+		max-height: 2em;
+		overflow: visible;
+	}
 
 	input[type='checkbox']:focus + .checkbox {
 		box-shadow: 0 0 0 4px #ffd300;
@@ -18,7 +23,8 @@
 	}
 
 	.checkbox {
-		// outline: 1px dashed red;
+		min-width: 40px;
+		min-height: 40px;
 	}
 }
 
@@ -37,5 +43,6 @@
 }
 
 .label {
+	margin-left: $space-3;
 	@include removeMarginBottom;
 }
