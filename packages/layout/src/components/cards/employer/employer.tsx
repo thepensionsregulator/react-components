@@ -41,20 +41,16 @@ const CardContentSwitch: React.FC = () => {
 	}
 };
 
-const ToolbarButton: React.FC<{
+const EmployerButton: React.FC<{
 	title: string;
-	tabIndex?: number;
 	isEditButton?: boolean;
-}> = ({ title, tabIndex, isEditButton }) => {
+}> = ({ title, isEditButton }) => {
 	const { current, send } = useEmployerContext();
 	return (
 		<UnderlinedButton
-			isOpen={
-				current.matches('employerType') ||
-				current.matches({ remove: 'date' }) ||
-				current.matches({ remove: 'confirm' })
-			}
+			isOpen={current.matches('employerType')}
 			onClick={() => {
+				current.context.lastBtnClicked = 1;
 				if (
 					current.matches('employerType') ||
 					current.matches({ remove: 'date' }) ||
@@ -62,10 +58,9 @@ const ToolbarButton: React.FC<{
 				) {
 					send('CANCEL');
 				} else {
-					send(title === 'Remove' ? 'REMOVE' : 'CHANGE_TYPE');
+					send('CHANGE_TYPE');
 				}
 			}}
-			tabIndex={tabIndex}
 			isEditButton={isEditButton}
 		>
 			{title}
@@ -73,80 +68,113 @@ const ToolbarButton: React.FC<{
 	);
 };
 
-const EmployerSubtitle: React.FC<Partial<EmployerContext>> = ({
-	employer: { employerType, statutoryEmployer },
-	showStatutoryEmployerSection,
-}) => {
-	if (!employerType || !statutoryEmployer) return null;
-
-	const title = useMemo(
-		() =>
-			employerType
-				.split('-')
-				.map((word, index) => (index === 0 ? capitalize(word) : word))
-				.join(' ')
-				.replace('employer', '')
-				.concat(` employer`),
-		[employerType],
+const RemoveButton: React.FC<{
+	title: string;
+	tabIndex?: number;
+}> = ({ title, tabIndex }) => {
+	const { current, send } = useEmployerContext();
+	return (
+		<UnderlinedButton
+			isOpen={
+				current.matches({ remove: 'date' }) ||
+				current.matches({ remove: 'confirm' })
+			}
+			onClick={() => {
+				current.context.lastBtnClicked = 2;
+				if (
+					current.matches('employerType') ||
+					current.matches({ remove: 'date' }) ||
+					current.matches({ remove: 'confirm' })
+				) {
+					send('CANCEL');
+				} else {
+					send('REMOVE');
+				}
+			}}
+			tabIndex={tabIndex}
+		>
+			{title}
+		</UnderlinedButton>
 	);
-
-	const subtitle = useMemo(
-		() =>
-			showStatutoryEmployerSection
-				? capitalize(statutoryEmployer).concat(` employer`)
-				: null,
-		[statutoryEmployer],
-	);
-
-	return <Subtitle main={title} secondary={subtitle} mainBold={false} />;
 };
+
+const EmployerSubtitle: React.FC<Partial<EmployerContext>> = React.memo(
+	({
+		employer: { employerType, statutoryEmployer },
+		showStatutoryEmployerSection,
+	}) => {
+		if (!employerType || !statutoryEmployer) return null;
+
+		const title = useMemo(
+			() =>
+				employerType
+					.split('-')
+					.map((word, index) => (index === 0 ? capitalize(word) : word))
+					.join(' ')
+					.replace('employer', '')
+					.concat(` employer`),
+			[employerType],
+		);
+
+		const subtitle = useMemo(
+			() =>
+				showStatutoryEmployerSection
+					? capitalize(statutoryEmployer).concat(` employer`)
+					: null,
+			[statutoryEmployer],
+		);
+
+		return <Subtitle main={title} secondary={subtitle} mainBold={false} />;
+	},
+);
 
 const isComplete = (context: EmployerContext) => {
 	return context.preValidatedData ? true : context.complete;
 };
 
-export const EmployerCard: React.FC<EmployerProviderProps> = ({
-	testId,
-	cfg,
-	...rest
-}) => {
-	return (
-		<EmployerProvider {...rest}>
-			{({ current, i18n }) => {
-				return (
-					<Section
-						cfg={cfg}
-						data-testid={testId}
-						className={styles.card}
-						ariaLabel={concatenateStrings([
-							current.context.employer.organisationName,
-						])}
-					>
-						<Toolbar
-							complete={isComplete(current.context)}
-							subtitle={() => <EmployerSubtitle {...current.context} />}
-							statusText={
-								isComplete(current.context)
-									? i18n.preview.statusText.confirmed
-									: i18n.preview.statusText.unconfirmed
-							}
-							buttonLeft={() => (
-								<ToolbarButton
-									title={i18n.preview.buttons.one}
-									isEditButton={true}
-								/>
-							)}
-							buttonRight={() => (
-								<ToolbarButton
-									title={i18n.preview.buttons.two}
-									tabIndex={removeFromTabFlowIfMatches(current, 'employerType')}
-								/>
-							)}
-						/>
-						<CardContentSwitch />
-					</Section>
-				);
-			}}
-		</EmployerProvider>
-	);
-};
+export const EmployerCard: React.FC<EmployerProviderProps> = React.memo(
+	({ testId, cfg, ...rest }) => {
+		return (
+			<EmployerProvider {...rest}>
+				{({ current, i18n }) => {
+					return (
+						<Section
+							cfg={cfg}
+							data-testid={testId}
+							className={styles.card}
+							ariaLabel={concatenateStrings([
+								current.context.employer.organisationName,
+							])}
+						>
+							<Toolbar
+								complete={isComplete(current.context)}
+								subtitle={() => <EmployerSubtitle {...current.context} />}
+								statusText={
+									isComplete(current.context)
+										? i18n.preview.statusText.confirmed
+										: i18n.preview.statusText.unconfirmed
+								}
+								buttonLeft={() => (
+									<EmployerButton
+										title={i18n.preview.buttons.one}
+										isEditButton={true}
+									/>
+								)}
+								buttonRight={() => (
+									<RemoveButton
+										title={i18n.preview.buttons.two}
+										tabIndex={removeFromTabFlowIfMatches(
+											current,
+											'employerType',
+										)}
+									/>
+								)}
+							/>
+							<CardContentSwitch />
+						</Section>
+					);
+				}}
+			</EmployerProvider>
+		);
+	},
+);

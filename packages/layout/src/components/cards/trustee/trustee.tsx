@@ -93,6 +93,7 @@ const TrusteeButton: React.FC = () => {
 				current.matches({ edit: { trustee: 'save' } })
 			}
 			onClick={() => {
+				current.context.lastBtnClicked = 1;
 				if (
 					current.matches({ edit: { trustee: 'name' } }) ||
 					current.matches({ edit: { trustee: 'kind' } })
@@ -119,6 +120,7 @@ const RemoveButton: React.FC<{ tabIndex?: number }> = ({ tabIndex }) => {
 				current.matches({ remove: 'confirm' })
 			}
 			onClick={() => {
+				current.context.lastBtnClicked = 2;
 				if (
 					current.matches({ remove: 'reason' }) ||
 					current.matches({ remove: 'confirm' })
@@ -139,11 +141,9 @@ const isComplete = (context: TrusteeContext) => {
 	return context.preValidatedData ? true : context.complete;
 };
 
-export const TrusteeCard: React.FC<Omit<TrusteeCardProps, 'children'>> = ({
-	cfg,
-	enableContactDetails = true,
-	...props
-}) => {
+export const TrusteeCard: React.FC<
+	Omit<TrusteeCardProps, 'children'>
+> = React.memo(({ cfg, enableContactDetails = true, ...props }) => {
 	return (
 		<TrusteeProvider {...props}>
 			{({ current, i18n }) => (
@@ -192,4 +192,4 @@ export const TrusteeCard: React.FC<Omit<TrusteeCardProps, 'children'>> = ({
 			)}
 		</TrusteeProvider>
 	);
-};
+});

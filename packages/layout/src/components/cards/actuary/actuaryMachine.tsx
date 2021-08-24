@@ -38,6 +38,7 @@ export interface ActuaryContext {
 	remove: { confirm: boolean; date: string } | null;
 	actuary: Partial<Actuary>;
 	preValidatedData?: boolean | null;
+	lastBtnClicked?: number | null;
 }
 
 const actuaryMachine = Machine<ActuaryContext, ActuaryStates, ActuaryEvents>({
@@ -47,6 +48,7 @@ const actuaryMachine = Machine<ActuaryContext, ActuaryStates, ActuaryEvents>({
 		complete: false,
 		remove: null,
 		actuary: {},
+		lastBtnClicked: null,
 	},
 	states: {
 		preview: {

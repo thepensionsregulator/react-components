@@ -1,4 +1,4 @@
-import React, { useEffect, useRef } from 'react';
+import React, { useEffect, useRef, MutableRefObject } from 'react';
 import { Flex, P } from '@tpr/core';
 import styles from './button.module.scss';
 import { EditArrowUp, EditArrowDown } from './arrowButton';
@@ -9,13 +9,30 @@ type UnderlinedButtonProps = {
 	onClick?: any;
 	tabIndex?: number;
 	isEditButton?: boolean;
+	onCollapseCallback?: () => void;
+	btnRef?: MutableRefObject<any>;
 };
+
+/*
+	In all cards, we have 2 sections: Toolbar (containing at least the 'Remove' button) & Content (changes depending on the data being edited).
+	Because the 'content' section changes, when clicking one of its buttons (on the Preview 'view') the focus needs to be added to the button rendered in the new view in the editing section.
+	And when collapsing the editing section, the focus needs to return to the button that was clicked in the 'Preview' view.
+
+	To solve this, 2 new properties need to be passed to the Underlinedbutton component.
+
+	btnRef: reference received for buttons from the 'Preview' view, but only for those which are part of the 'content' section (not the Toolbar buttons).
+
+	onCollapseCallback: callback function to be called when collapsing an editing section. This function is used to return the focus to the button from 'Preview'.
+	*/
+
 export const UnderlinedButton: React.FC<UnderlinedButtonProps> = ({
 	children,
 	isOpen,
 	onClick,
 	tabIndex,
 	isEditButton,
+	onCollapseCallback,
+	btnRef,
 }) => {
 	if (typeof onClick === 'undefined') {
 		return (
@@ -26,10 +43,12 @@ export const UnderlinedButton: React.FC<UnderlinedButtonProps> = ({
 			</div>
 		);
 	}
-	const buttonRef = useRef(null);
+
+	const noToolbarBtnRef = useRef(null);
 	useEffect(() => {
-		buttonRef.current.focus();
-	});
+		isOpen && noToolbarBtnRef && noToolbarBtnRef.current.focus();
+		!isOpen && onCollapseCallback && onCollapseCallback();
+	}, [isOpen]);
 	const getAppropriateButton = () => {
 		if (isOpen && isEditButton) {
 			return <EditArrowUp width="24px" fill={styles.arrowColor} />;
@@ -50,7 +69,7 @@ export const UnderlinedButton: React.FC<UnderlinedButtonProps> = ({
 			onClick={onClick}
 			aria-expanded={isOpen}
 			tabIndex={tabIndex}
-			ref={buttonRef}
+			ref={btnRef ? btnRef : noToolbarBtnRef}
 		>
 			<Flex
 				className={styles.arrowSpacing}

@@ -37,7 +37,7 @@ const CardContentSwitch: React.FC = () => {
 	}
 };
 
-const ToolbarButton: React.FC<{ title: string }> = ({ title }) => {
+const RemoveButton: React.FC<{ title: string }> = ({ title }) => {
 	const { current, send } = useInsurerContext();
 	return (
 		<UnderlinedButton
@@ -46,6 +46,7 @@ const ToolbarButton: React.FC<{ title: string }> = ({ title }) => {
 				current.matches({ remove: 'confirm' })
 			}
 			onClick={() => {
+				current.context.lastBtnClicked = 2;
 				if (
 					current.matches({ remove: 'date' }) ||
 					current.matches({ remove: 'confirm' })
@@ -65,45 +66,45 @@ const isComplete = (context: InsurerContext) => {
 	return context.preValidatedData ? true : context.complete;
 };
 
-export const InsurerCard: React.FC<InsurerProviderProps> = ({
-	testId,
-	cfg,
-	...rest
-}) => {
-	return (
-		<InsurerProvider {...rest}>
-			{({ current: { context }, i18n }) => {
-				return (
-					<Section
-						cfg={cfg}
-						data-testid={testId}
-						className={styles.card}
-						ariaLabel={concatenateStrings([
-							context.insurer.organisationName,
-							i18n.preview.buttons.one,
-						])}
-					>
-						<Toolbar
-							complete={isComplete(context)}
-							subtitle={() => (
-								<Subtitle main={context.insurer.organisationName} />
-							)}
-							statusText={
-								isComplete(context)
-									? i18n.preview.statusText.confirmed
-									: i18n.preview.statusText.unconfirmed
-							}
-							buttonLeft={() => (
-								<UnderlinedButton>{i18n.preview.buttons.one}</UnderlinedButton>
-							)}
-							buttonRight={() => (
-								<ToolbarButton title={i18n.preview.buttons.two} />
-							)}
-						/>
-						<CardContentSwitch />
-					</Section>
-				);
-			}}
-		</InsurerProvider>
-	);
-};
+export const InsurerCard: React.FC<InsurerProviderProps> = React.memo(
+	({ testId, cfg, ...rest }) => {
+		return (
+			<InsurerProvider {...rest}>
+				{({ current: { context }, i18n }) => {
+					return (
+						<Section
+							cfg={cfg}
+							data-testid={testId}
+							className={styles.card}
+							ariaLabel={concatenateStrings([
+								context.insurer.organisationName,
+								i18n.preview.buttons.one,
+							])}
+						>
+							<Toolbar
+								complete={isComplete(context)}
+								subtitle={() => (
+									<Subtitle main={context.insurer.organisationName} />
+								)}
+								statusText={
+									isComplete(context)
+										? i18n.preview.statusText.confirmed
+										: i18n.preview.statusText.unconfirmed
+								}
+								buttonLeft={() => (
+									<UnderlinedButton>
+										{i18n.preview.buttons.one}
+									</UnderlinedButton>
+								)}
+								buttonRight={() => (
+									<RemoveButton title={i18n.preview.buttons.two} />
+								)}
+							/>
+							<CardContentSwitch />
+						</Section>
+					);
+				}}
+			</InsurerProvider>
+		);
+	},
+);

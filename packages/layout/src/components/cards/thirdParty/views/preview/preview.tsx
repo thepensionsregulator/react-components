@@ -6,7 +6,7 @@ import { useThirdPartyContext } from '../../context';
 import { AddressPreview } from '../../../common/views/preview/components';
 import styles from '../../../cards.module.scss';
 
-export const Preview: React.FC<any> = () => {
+export const Preview: React.FC<any> = React.memo(() => {
 	const { current, send, onCorrect, i18n } = useThirdPartyContext();
 	const { thirdParty, complete, preValidatedData } = current.context;
 
@@ -56,4 +56,4 @@ export const Preview: React.FC<any> = () => {
 			</Flex>
 		</div>
 	);
-};
+});

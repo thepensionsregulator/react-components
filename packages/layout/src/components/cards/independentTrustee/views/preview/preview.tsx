@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useRef } from 'react';
 import { Checkbox } from '@tpr/forms';
 import { Flex, Hr, classNames, P } from '@tpr/core';
 import { UnderlinedButton } from '../../../components/button';
@@ -6,9 +6,20 @@ import { useIndependentTrusteeContext } from '../../context';
 import { AddressPreview } from '../../../common/views/preview/components';
 import styles from '../../../cards.module.scss';
 
-export const Preview: React.FC<any> = () => {
+export const Preview: React.FC<any> = React.memo(() => {
 	const { current, send, onCorrect, i18n } = useIndependentTrusteeContext();
 	const { independentTrustee, complete, preValidatedData } = current.context;
+
+	const regulatorBtn = useRef(null);
+
+	const onClickRegulatorBtn = () => {
+		current.context.lastBtnClicked = 4;
+		send('EDIT_REGULATOR');
+	};
+
+	const onCollapseRegulator = () => {
+		current.context.lastBtnClicked === 4 && regulatorBtn.current.focus();
+	};
 
 	return (
 		<div
@@ -42,9 +53,11 @@ export const Preview: React.FC<any> = () => {
 					cfg={{ width: 5, flex: '0 0 auto', flexDirection: 'column', pr: 4 }}
 				>
 					<UnderlinedButton
-						onClick={() => send('EDIT_REGULATOR')}
+						onClick={onClickRegulatorBtn}
 						isOpen={current.matches({ edit: 'regulator' })}
 						isEditButton={true}
+						btnRef={regulatorBtn}
+						onCollapseCallback={onCollapseRegulator}
 					>
 						{i18n.preview.buttons.four}
 					</UnderlinedButton>
@@ -76,4 +89,4 @@ export const Preview: React.FC<any> = () => {
 			</Flex>
 		</div>
 	);
-};
+});
