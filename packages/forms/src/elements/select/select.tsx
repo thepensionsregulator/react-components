@@ -21,7 +21,7 @@ export const selectStateChangeTypes = Downshift.stateChangeTypes;
 
 export const Select: React.FC<
 	SelectProps & FieldRenderProps<string>
-> = React.forwardRef(
+> = React.forwardRef<HTMLInputElement, SelectProps & FieldRenderProps<string>>(
 	(
 		{
 			id,
@@ -44,7 +44,7 @@ export const Select: React.FC<
 			cfg,
 			...rest
 		},
-		ref: React.LegacyRef<HTMLInputElement>,
+		ref,
 	) => {
 		const helper = new AccessibilityHelper(id, !!label, !!hint);
 		return (
@@ -143,7 +143,10 @@ export const Select: React.FC<
 
 export const FFSelect: React.FC<
 	FieldProps & Omit<SelectProps, 'children'>
-> = React.forwardRef((fieldProps, ref: React.LegacyRef<HTMLInputElement>) => {
+> = React.forwardRef<
+	HTMLInputElement,
+	FieldProps & Omit<SelectProps, 'children'>
+>((fieldProps, ref) => {
 	return (
 		<Field
 			{...fieldProps}

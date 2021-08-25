@@ -111,9 +111,8 @@ export const SelectAddress: React.FC<SelectAddressProps> = ({
 	const dropdownRef = useRef<HTMLInputElement>(null);
 
 	useEffect(() => {
-		console.log('dropdownref', dropdownRef.current);
 		dropdownRef.current && dropdownRef.current.focus();
-	}, []);
+	}, [loading]);
 
 	useEffect(() => {
 		setAddressSelected(getAddressIfValid() !== undefined);

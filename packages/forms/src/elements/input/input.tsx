@@ -21,7 +21,7 @@ export type InputProps = {
 	autoComplete?: string;
 };
 
-export const Input: React.FC<InputProps> = React.forwardRef(({
+export const Input: React.FC<InputProps> = React.forwardRef<HTMLInputElement, InputProps>(({
 	id,
 	type = 'text',
 	width,
@@ -39,7 +39,7 @@ export const Input: React.FC<InputProps> = React.forwardRef(({
 	accessibilityHelper,
 	required = false,
 	...rest
-}, ref: React.LegacyRef<HTMLInputElement>) => {
+}, ref) => {
 	const getAriaLabel = (): string => {
 		var ariaLabel = rest['aria-label'] ?? label;
 
