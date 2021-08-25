@@ -16,7 +16,7 @@ const IdentifiersItem: React.FC<IdentifiersItemProps> = ({ title, number }) => {
 	);
 };
 
-export const Preview: React.FC<any> = () => {
+export const Preview: React.FC<any> = React.memo(() => {
 	const { current, send, onCorrect, i18n } = useEmployerContext();
 	const { employer, complete, preValidatedData } = current.context;
 	const [items] = useState(
@@ -89,4 +89,4 @@ export const Preview: React.FC<any> = () => {
 			</Flex>
 		</div>
 	);
-};
+});

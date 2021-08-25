@@ -1,25 +1,7 @@
 import React from 'react';
-import { classNames, Flex, H3, Hr, P } from '@tpr/core';
+import { Flex, H3, Hr, P } from '@tpr/core';
 import styles from './card.module.scss';
 import CardContentSectionHeader from './cardContentHeaderSection';
-
-type StyledCardProps = { complete: boolean };
-
-export const StyledCard: React.FC<StyledCardProps> = ({
-	complete = false,
-	children,
-}) => {
-	return (
-		<div
-			className={classNames([
-				styles.card,
-				{ [styles['card-completed']]: complete },
-			])}
-		>
-			{children}
-		</div>
-	);
-};
 
 export const StyledCardToolbar: React.FC = ({ children }) => {
 	return <div className={styles.cardToolbar}>{children}</div>;

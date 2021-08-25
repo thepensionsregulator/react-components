@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useRef } from 'react';
 import { Checkbox } from '@tpr/forms';
 import { Flex, Hr, classNames } from '@tpr/core';
 import { UnderlinedButton } from '../../../components/button';
@@ -10,9 +10,30 @@ import {
 import styles from '../../../cards.module.scss';
 import { concatenateStrings } from '../../../../../utils';
 
-export const Preview: React.FC<any> = () => {
+export const Preview: React.FC<any> = React.memo(() => {
 	const { current, send, onCorrect, i18n } = useInHouseAdminContext();
 	const { inHouseAdmin, complete, preValidatedData } = current.context;
+
+	const addressBtn = useRef(null);
+	const contactsBtn = useRef(null);
+
+	const onClickAddressBtn = () => {
+		current.context.lastBtnClicked = 3;
+		send('EDIT_ADDRESS');
+	};
+
+	const onClickContactsBtn = () => {
+		current.context.lastBtnClicked = 4;
+		send('EDIT_CONTACTS');
+	};
+
+	const onCollapseAddress = () => {
+		current.context.lastBtnClicked === 3 && addressBtn.current.focus();
+	};
+
+	const onCollapseContacts = () => {
+		current.context.lastBtnClicked === 4 && contactsBtn.current.focus();
+	};
 
 	return (
 		<div
@@ -28,9 +49,11 @@ export const Preview: React.FC<any> = () => {
 					cfg={{ width: 5, flex: '0 0 auto', flexDirection: 'column', pr: 4 }}
 				>
 					<UnderlinedButton
-						onClick={() => send('EDIT_ADDRESS')}
+						onClick={onClickAddressBtn}
 						isOpen={current.matches({ edit: 'address' })}
 						isEditButton={true}
+						btnRef={addressBtn}
+						onCollapseCallback={onCollapseAddress}
 					>
 						{i18n.preview.buttons.three}
 					</UnderlinedButton>
@@ -52,9 +75,11 @@ export const Preview: React.FC<any> = () => {
 					cfg={{ width: 5, flex: '0 0 auto', flexDirection: 'column', pl: 4 }}
 				>
 					<UnderlinedButton
-						onClick={() => send('EDIT_CONTACTS')}
+						onClick={onClickContactsBtn}
 						isOpen={current.matches({ edit: 'contacts' })}
 						isEditButton={true}
+						btnRef={contactsBtn}
+						onCollapseCallback={onCollapseContacts}
 					>
 						{i18n.preview.buttons.four}
 					</UnderlinedButton>
@@ -87,4 +112,4 @@ export const Preview: React.FC<any> = () => {
 			</Flex>
 		</div>
 	);
-};
+});

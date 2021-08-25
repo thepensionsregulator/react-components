@@ -76,6 +76,7 @@ export interface CardProviderProps {
 	testId?: string | number;
 	/** cfg space props */
 	cfg?: SpaceProps;
+	lastBtnClicked?: number | null;
 }
 
 export interface RemoveReasonProps {

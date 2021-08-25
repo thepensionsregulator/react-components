@@ -27,6 +27,7 @@ export interface ThirdPartyContext {
 	remove: { confirm: boolean; date: string } | null;
 	thirdParty: Partial<ThirdPartyProps>;
 	preValidatedData?: boolean | null;
+	lastBtnClicked?: number | null;
 }
 
 const thirdPartyMachine = Machine<
@@ -40,6 +41,7 @@ const thirdPartyMachine = Machine<
 		complete: false,
 		remove: null,
 		thirdParty: {},
+		lastBtnClicked: null,
 	},
 	states: {
 		preview: {
