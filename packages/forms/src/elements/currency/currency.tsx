@@ -253,7 +253,7 @@ const InputCurrency: React.FC<InputCurrencyProps> = React.memo(
 				<Input
 					id={id}
 					name={name}
-					parentRef={innerInput}
+					ref={innerInput}
 					type="text"
 					width={width}
 					testId={testId}

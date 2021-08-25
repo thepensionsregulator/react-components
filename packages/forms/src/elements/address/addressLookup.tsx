@@ -71,7 +71,7 @@ export const AddressLookup: React.FC<AddressProps> = ({
 
 	// Render a different child component depending on the state
 	return (
-		<>
+		<div aria-live="polite">
 			{addressView === AddressView.PostcodeLookup && (
 				<PostcodeLookup
 					postcode={postcode}
@@ -158,6 +158,6 @@ export const AddressLookup: React.FC<AddressProps> = ({
 					headingLevel={headingLevel}
 				/>
 			)}
-		</>
+		</div>
 	);
 };

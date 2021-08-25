@@ -200,7 +200,7 @@ const InputNumber: React.FC<InputNumberProps> = ({
 				before={before}
 				ariaLabelExtension={i18n.ariaLabelExtension}
 				accessibilityHelper={helper}
-				parentRef={innerInput}
+				ref={innerInput}
 				{...props}
 			/>
 		</StyledInputLabel>

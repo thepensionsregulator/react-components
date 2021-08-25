@@ -84,6 +84,10 @@ export const EditAddress: React.FC<EditAddressProps> = React.memo(
 		const address2ref = useRef(null);
 
 		useEffect(() => {
+			address1ref.current && address1ref.current.focus();
+		}, [address1ref]);
+
+		useEffect(() => {
 			const blurEvent = new Event('blur', { bubbles: true });
 			// in some cases when 'value'=='initialValue',
 			// the input fields do not refresh the view and keep the previous values,

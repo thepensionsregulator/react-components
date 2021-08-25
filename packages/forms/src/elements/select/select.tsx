@@ -19,128 +19,139 @@ interface SelectProps extends DownshiftProps<any>, FieldExtraProps {
 
 export const selectStateChangeTypes = Downshift.stateChangeTypes;
 
-export const Select: React.FC<SelectProps & FieldRenderProps<string>> = ({
-	id,
-	options,
-	label,
-	required,
-	hint,
-	meta,
-	handleNotFoundButtonClick,
-	notFoundMessage = 'Your search criteria has no match',
-	itemToString,
-	initialSelectedItem,
-	onChange,
-	disabled,
-	testId = 'select',
-	showToggleButton = true,
-	placeholder,
-	readOnly = false,
-	inputWidth: width,
-	cfg,
-	...rest
-}) => {
-	const helper = new AccessibilityHelper(id, !!label, !!hint);
-
-	return (
-		<Downshift
-			onChange={onChange}
-			itemToString={itemToString}
-			initialSelectedItem={initialSelectedItem}
-			{...rest}
-		>
-			{({
-				getInputProps,
-				getItemProps,
-				getLabelProps,
-				getMenuProps,
-				isOpen,
-				highlightedIndex,
-				selectedItem,
-				toggleMenu,
-				inputValue,
-			}) => (
-				<div>
-					<StyledInputLabel
-						element="label"
-						isError={meta && meta.touched && meta.error}
-						cfg={Object.assign({ flexDirection: 'column' }, cfg)}
-						{...getLabelProps()}
-					>
-						<InputElementHeading
-							label={label}
-							required={required}
-							hint={hint}
-							meta={meta}
-							accessibilityHelper={helper}
-						/>
-						<Flex cfg={{ width }} className={styles.relative}>
-							<Input
-								autoComplete="off"
-								type="text"
-								testId={testId}
-								label={label}
-								disabled={disabled}
-								placeholder={placeholder}
-								readOnly={readOnly}
-								required={required}
-								onClick={() => toggleMenu()}
-								className={styles.input}
-								accessibilityHelper={helper}
-								{...getInputProps()}
-							/>
-							{showToggleButton && (
-								<button
-									type="button"
-									disabled={disabled}
-									aria-label="open-dropdown"
-									data-testid={`${testId}-button`}
-									className={styles.iconButton}
-									onClick={() => toggleMenu()}
-								>
-									<UnfoldMore />
-								</button>
-							)}
-						</Flex>
-					</StyledInputLabel>
-					<Flex cfg={{ width }} className={styles.relative}>
-						<div
-							{...getMenuProps({
-								className: classNames([
-									{ [styles['popup-isopen']]: isOpen },
-									styles.popup,
-								]),
-							})}
+export const Select: React.FC<
+	SelectProps & FieldRenderProps<string>
+> = React.forwardRef<HTMLInputElement, SelectProps & FieldRenderProps<string>>(
+	(
+		{
+			id,
+			options,
+			label,
+			required,
+			hint,
+			meta,
+			handleNotFoundButtonClick,
+			notFoundMessage = 'Your search criteria has no match',
+			itemToString,
+			initialSelectedItem,
+			onChange,
+			disabled,
+			testId = 'select',
+			showToggleButton = true,
+			placeholder,
+			readOnly = false,
+			inputWidth: width,
+			cfg,
+			...rest
+		},
+		ref,
+	) => {
+		const helper = new AccessibilityHelper(id, !!label, !!hint);
+		return (
+			<Downshift
+				onChange={onChange}
+				itemToString={itemToString}
+				initialSelectedItem={initialSelectedItem}
+				{...rest}
+			>
+				{({
+					getInputProps,
+					getItemProps,
+					getLabelProps,
+					getMenuProps,
+					isOpen,
+					highlightedIndex,
+					selectedItem,
+					toggleMenu,
+					inputValue,
+				}) => (
+					<div>
+						<StyledInputLabel
+							element="label"
+							isError={meta && meta.touched && meta.error}
+							cfg={Object.assign({ flexDirection: 'column' }, cfg)}
+							{...getLabelProps()}
 						>
-							{isOpen && (
-								<PopupBox
-									searchable={!readOnly}
-									{...{
-										getItemProps,
-										inputValue,
-										options,
-										highlightedIndex,
-										selectedItem,
-										handleNotFoundButtonClick,
-										notFoundMessage,
-									}}
+							<InputElementHeading
+								label={label}
+								required={required}
+								hint={hint}
+								meta={meta}
+								accessibilityHelper={helper}
+							/>
+							<Flex cfg={{ width }} className={styles.relative}>
+								<Input
+									ref={ref}
+									autoComplete="off"
+									type="text"
+									testId={testId}
+									label={label}
+									disabled={disabled}
+									placeholder={placeholder}
+									readOnly={readOnly}
+									required={required}
+									onClick={() => toggleMenu()}
+									className={styles.input}
+									accessibilityHelper={helper}
+									{...getInputProps()}
 								/>
-							)}
-						</div>
-					</Flex>
-				</div>
-			)}
-		</Downshift>
-	);
-};
+								{showToggleButton && (
+									<button
+										type="button"
+										disabled={disabled}
+										aria-label="open-dropdown"
+										data-testid={`${testId}-button`}
+										className={styles.iconButton}
+										onClick={() => toggleMenu()}
+									>
+										<UnfoldMore />
+									</button>
+								)}
+							</Flex>
+						</StyledInputLabel>
+						<Flex cfg={{ width }} className={styles.relative}>
+							<div
+								{...getMenuProps({
+									className: classNames([
+										{ [styles['popup-isopen']]: isOpen },
+										styles.popup,
+									]),
+								})}
+							>
+								{isOpen && (
+									<PopupBox
+										searchable={!readOnly}
+										{...{
+											getItemProps,
+											inputValue,
+											options,
+											highlightedIndex,
+											selectedItem,
+											handleNotFoundButtonClick,
+											notFoundMessage,
+										}}
+									/>
+								)}
+							</div>
+						</Flex>
+					</div>
+				)}
+			</Downshift>
+		);
+	},
+);
 
-export const FFSelect: React.FC<FieldProps & Omit<SelectProps, 'children'>> = (
-	fieldProps,
-) => {
+export const FFSelect: React.FC<
+	FieldProps & Omit<SelectProps, 'children'>
+> = React.forwardRef<
+	HTMLInputElement,
+	FieldProps & Omit<SelectProps, 'children'>
+>((fieldProps, ref) => {
 	return (
 		<Field
 			{...fieldProps}
 			required={fieldProps.required}
+			ref={ref}
 			render={({
 				input,
 				initialSelectedItem,
@@ -150,6 +161,7 @@ export const FFSelect: React.FC<FieldProps & Omit<SelectProps, 'children'>> = (
 			}: any) => {
 				return (
 					<Select
+						ref={ref}
 						initialSelectedItem={
 							initialSelectedItem ? initialSelectedItem : input.value
 						}
@@ -168,4 +180,4 @@ export const FFSelect: React.FC<FieldProps & Omit<SelectProps, 'children'>> = (
 			}}
 		/>
 	);
-};
+});
