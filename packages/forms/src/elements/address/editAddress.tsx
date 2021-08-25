@@ -86,7 +86,7 @@ export const EditAddress: React.FC<EditAddressProps> = React.memo(
 		useEffect(() => {
 			address1ref.current && address1ref.current.focus();
 		}, [address1ref]);
-	
+
 		useEffect(() => {
 			const blurEvent = new Event('blur', { bubbles: true });
 			// in some cases when 'value'=='initialValue',

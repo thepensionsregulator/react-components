@@ -10,7 +10,10 @@ type InputTextProps = FieldRenderProps<string> &
 	FieldExtraProps & {
 		updatedValue: string;
 	};
-const InputText: React.FC<InputTextProps> = React.forwardRef(
+const InputText: React.FC<InputTextProps> = React.forwardRef<
+	HTMLInputElement,
+	InputTextProps
+>(
 	(
 		{
 			id,
@@ -93,14 +96,16 @@ const InputText: React.FC<InputTextProps> = React.forwardRef(
 	},
 );
 
-export const FFInputText: React.FC<FieldProps> = React.forwardRef(
-	(fieldProps, ref) => {
-		return (
-			<Field
-				{...fieldProps}
-				required={fieldProps.required}
-				render={(props) => <InputText {...props} {...fieldProps} ref={ref} />}
-			/>
-		);
-	},
-);
+export const FFInputText: React.FC<FieldProps> = React.forwardRef<
+	HTMLInputElement,
+	FieldProps
+>((fieldProps, ref) => {
+	return (
+		<Field
+			{...fieldProps}
+			required={fieldProps.required}
+			ref={ref}
+			render={(props) => <InputText {...props} {...fieldProps} ref={ref} />}
+		/>
+	);
+});

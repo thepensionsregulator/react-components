@@ -106,14 +106,12 @@ export const SelectAddress: React.FC<SelectAddressProps> = ({
 		}
 	};
 
-	const [addressSelected, setAddressSelected] = useState(false);
-
 	const dropdownRef = useRef<HTMLInputElement>(null);
-
 	useEffect(() => {
 		dropdownRef.current && dropdownRef.current.focus();
 	}, [loading]);
 
+	const [addressSelected, setAddressSelected] = useState(false);
 	useEffect(() => {
 		setAddressSelected(getAddressIfValid() !== undefined);
 	}, [form.getFieldState('selectedAddress')]);
@@ -151,15 +149,10 @@ export const SelectAddress: React.FC<SelectAddressProps> = ({
 				inputWidth={6}
 				testId={(testId ? testId + '-' : '') + 'select-address-list'}
 				validate={(value) => {
-					// On initial load, setup the validation object
-					if (!selectAddressValid) {
-						updateAddressValidationIfChanged({ touched: false, error: '' });
-						return;
-					}
-					// On subsequent runs, update the validation object.
+					// When the FFSelect has been fully rendered and has a value, update the validation object.
 					// In this case it can only go from invalid (initial load) to valid (address selected).
 					// You can't select an invalid option from the list because there aren't any, and if you don't select one this never runs.
-					if (value && value.value) {
+					if (dropdownRef.current && value && value.value) {
 						updateAddressValidationIfChanged({ touched: true, error: '' });
 					}
 				}}
