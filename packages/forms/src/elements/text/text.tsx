@@ -56,7 +56,7 @@ const InputText: React.FC<InputTextProps> = React.forwardRef(
 				/>
 				<Input
 					id={id}
-					parentRef={ref}
+					ref={ref}
 					type="text"
 					width={width}
 					testId={testId}

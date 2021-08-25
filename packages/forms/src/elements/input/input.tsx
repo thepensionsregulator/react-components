@@ -13,7 +13,6 @@ export type InputProps = {
 	after?: string;
 	before?: string;
 	decimalPlaces?: number;
-	parentRef?: any;
 	readOnly?: boolean;
 	ariaLabelExtension?: string;
 	[key: string]: any;
@@ -22,7 +21,7 @@ export type InputProps = {
 	autoComplete?: string;
 };
 
-export const Input: React.FC<InputProps> = ({
+export const Input: React.FC<InputProps> = React.forwardRef(({
 	id,
 	type = 'text',
 	width,
@@ -36,12 +35,11 @@ export const Input: React.FC<InputProps> = ({
 	after: After,
 	before: Before,
 	decimalPlaces,
-	parentRef,
 	ariaLabelExtension,
 	accessibilityHelper,
 	required = false,
 	...rest
-}) => {
+}, ref: React.LegacyRef<HTMLInputElement>) => {
 	const getAriaLabel = (): string => {
 		var ariaLabel = rest['aria-label'] ?? label;
 
@@ -72,7 +70,7 @@ export const Input: React.FC<InputProps> = ({
 			)}
 			<input
 				id={id}
-				ref={parentRef}
+				ref={ref}
 				type={type}
 				data-testid={testId}
 				readOnly={readOnly}
@@ -111,4 +109,4 @@ export const Input: React.FC<InputProps> = ({
 			)}
 		</Flex>
 	);
-};
+});

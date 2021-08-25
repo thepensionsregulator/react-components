@@ -33,6 +33,7 @@ export const PostcodeLookup: React.FC<PostcodeLookupProps> = ({
 
 	useEffect(() => {
 		searchFieldRef.current.value = null;
+		searchFieldRef.current.focus();
 	}, []);
 
 	const validatePostcode = (value) => {

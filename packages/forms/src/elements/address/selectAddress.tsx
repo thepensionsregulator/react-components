@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useRef } from 'react';
 import { useForm } from 'react-final-form';
 import { Address } from './types/address';
 import { FFSelect } from '../select/select';
@@ -108,6 +108,13 @@ export const SelectAddress: React.FC<SelectAddressProps> = ({
 
 	const [addressSelected, setAddressSelected] = useState(false);
 
+	const dropdownRef = useRef<HTMLInputElement>(null);
+
+	useEffect(() => {
+		console.log('dropdownref', dropdownRef.current);
+		dropdownRef.current && dropdownRef.current.focus();
+	}, []);
+
 	useEffect(() => {
 		setAddressSelected(getAddressIfValid() !== undefined);
 	}, [form.getFieldState('selectedAddress')]);
@@ -138,6 +145,7 @@ export const SelectAddress: React.FC<SelectAddressProps> = ({
 				</Button>
 			</Flex>
 			<FFSelect
+				ref={dropdownRef}
 				label={selectAddressLabel}
 				name="selectedAddress"
 				options={options}
