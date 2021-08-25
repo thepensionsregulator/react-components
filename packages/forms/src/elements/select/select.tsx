@@ -46,9 +46,9 @@ export const Select: React.FC<
 		},
 		ref: React.LegacyRef<HTMLInputElement>,
 	) => {
-		const helper = new AccessibilityHelper(id, !!label, !!hint);		
+		const helper = new AccessibilityHelper(id, !!label, !!hint);
 		return (
-			<Downshift				
+			<Downshift
 				onChange={onChange}
 				itemToString={itemToString}
 				initialSelectedItem={initialSelectedItem}
@@ -64,9 +64,8 @@ export const Select: React.FC<
 					selectedItem,
 					toggleMenu,
 					inputValue,
-				}) => (					
+				}) => (
 					<div>
-						{/* <input type="text" ref={getInputProps().ref} /> */}
 						<StyledInputLabel
 							element="label"
 							isError={meta && meta.touched && meta.error}
@@ -149,6 +148,7 @@ export const FFSelect: React.FC<
 		<Field
 			{...fieldProps}
 			required={fieldProps.required}
+			ref={ref}
 			render={({
 				input,
 				initialSelectedItem,
