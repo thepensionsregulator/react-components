@@ -10,12 +10,14 @@ export type TasklistMenuProps = {
 	title: string;
 	links: NavItemLinkProps[];
 	maintenanceMode: boolean;
+	sectionDisabledLabel: string;
 	sectionCompleteLabel: string;
 	sectionIncompleteLabel: string;
 };
 
 export type TaskStatusIconProps = {
 	link: NavItemLinkProps;
+	sectionDisabledLabel: string;
 	sectionCompleteLabel: string;
 	sectionIncompleteLabel: string;
 };
@@ -35,6 +37,7 @@ export type TasklistProps = {
 	location: any;
 	/** import from react-router-dom */
 	history: any;
+	sectionDisabledLabel: string;
 	sectionCompleteLabel: string;
 	sectionIncompleteLabel: string;
 	testId?: string;

@@ -95,15 +95,14 @@ import { Tasklist } from '@tpr/layout';
 					{
 						name: 'Review',
 						completed: false,
-						disabled: true,
-						path: '/review-and-submit',
+						path: '/review',
 						hideIcon: true,
 					},
 					{
 						name: 'Submit',
 						completed: false,
 						disabled: true,
-						path: '/review-and-submit',
+						path: '/declare-and-submit',
 					},
 				],
 				order: 4,
@@ -120,6 +119,7 @@ import { Tasklist } from '@tpr/layout';
 				matchPath={matchPath}
 				location={location}
 				history={{ push: () => {} }}
+				sectionDisabledLabel="Cannot start yet"
 				sectionCompleteLabel="Completed"
 				sectionIncompleteLabel="Not started"
 			/>
