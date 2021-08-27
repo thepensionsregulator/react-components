@@ -124,6 +124,61 @@ describe('Tasklist', () => {
 		expect(totalSections.length).toMatchInlineSnapshot(`8`);
 	});
 
+	test('incomplete link is linked', () => {
+		const title = 'Scheme return home';
+		const { getByText } = getComponent(title);
+
+		[...s1.links, ...s2.links, ...s3.links]
+			.filter((link) => !link.completed && !link.disabled)
+			.forEach((link) => {
+				expect(getByText(link.name).closest('a')).not.toBeNull();
+			});
+	});
+
+	test('completed link is linked', () => {
+		const title = 'Scheme return home';
+		const { getByText } = getComponent(title);
+
+		[...s1.links, ...s2.links, ...s3.links]
+			.filter((link) => link.completed && !link.disabled)
+			.forEach((link) => {
+				expect(getByText(link.name).closest('a')).not.toBeNull();
+			});
+	});
+
+	test('disabled link is not linked', () => {
+		const title = 'Scheme return home';
+		const { getByText } = getComponent(title);
+
+		[...s1.links, ...s2.links, ...s3.links]
+			.filter((link) => link.disabled)
+			.forEach((link) => {
+				expect(getByText(link.name).closest('a')).toBeNull();
+			});
+	});
+
+	test('status is labelled correctly', () => {
+		const title = 'Scheme return home';
+		const { getByText } = getComponent(title);
+
+		[...s1.links, ...s2.links, ...s3.links].forEach((link) => {
+			let expectedStatus = 'Section not complete';
+			let expectedClass = 'incomplete';
+			if (link.completed) {
+				expectedStatus = 'Section complete';
+				expectedClass = 'complete';
+			}
+			if (link.disabled) {
+				expectedStatus = 'Section unavailable';
+				expectedClass = 'disabled';
+			}
+
+			const status = getByText(link.name).nextElementSibling;
+			expect(status.textContent).toBe(expectedStatus);
+			expect(status).toHaveAttribute('class', `taskStatus ${expectedClass}`);
+		});
+	});
+
 	const getComponent = (title: string) => {
 		const { container, getByText } = render(
 			<Tasklist
@@ -143,6 +198,7 @@ describe('Tasklist', () => {
 						/*intentional*/
 					},
 				}}
+				sectionDisabledLabel="Section unavailable"
 				sectionCompleteLabel="Section complete"
 				sectionIncompleteLabel="Section not complete"
 			/>,
