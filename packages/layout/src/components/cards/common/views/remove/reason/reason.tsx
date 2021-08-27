@@ -70,6 +70,7 @@ export const Reason: React.FC<ReasonProps> = ({
 										label={i18nRemoveReason.fields.leftTheScheme.label}
 										value="left_the_scheme"
 										cfg={{ my: 4 }}
+										required={true}
 									/>
 									{leftScheme && (
 										<div className={styles.dateWrapper}>
@@ -81,6 +82,7 @@ export const Reason: React.FC<ReasonProps> = ({
 										type="radio"
 										label={i18nRemoveReason.fields.neverPartOfTheScheme.label}
 										value="not_part_of_scheme"
+										required={true}
 									/>
 								</fieldset>
 							</div>
