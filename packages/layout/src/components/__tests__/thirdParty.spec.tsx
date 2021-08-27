@@ -39,6 +39,27 @@ describe('ThirdParty Preview', () => {
 		expect(results).toHaveNoViolations();
 	});
 
+	test('renders buttons correctly', () => {
+		const { getByText, container } = render(
+			<ThirdPartyCard
+				onRemove={noop}
+				onCorrect={(_value) => {}}
+				complete={true}
+				thirdParty={thirdPartyAdmin}
+			/>,
+		);
+
+		expect(container.querySelector('button')).not.toBe(null);
+		expect(getByText('Third Party Administrator')).toBeDefined();
+		expect(getByText('Third Party Administrator').outerHTML.slice(0, 3)).toBe(
+			'<h3',
+		);
+		expect(getByText('Remove')).toBeDefined();
+		expect(getByText('Remove').outerHTML.slice(0, 3)).toBe('<h4');
+		expect(getByText('Address')).toBeDefined();
+		expect(getByText('Address').outerHTML.slice(0, 3)).toBe('<h4');
+	});
+
 	test('renders with a section containing an aria label', () => {
 		const { getByRole } = render(
 			<ThirdPartyCard

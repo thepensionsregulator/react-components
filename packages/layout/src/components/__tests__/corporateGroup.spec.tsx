@@ -79,16 +79,26 @@ describe('Corporate Group Trustee Card', () => {
 		test('it renders sections correctly', () => {
 			expect(component.querySelector('button')).not.toBe(null);
 			expect(findByText('Corporate Trustee')).toBeDefined();
+			expect(findByText('Corporate Trustee').outerHTML.slice(0, 3)).toBe('<h3');
 			expect(findByText('Remove')).toBeDefined();
+			expect(findByText('Remove').outerHTML.slice(0, 3)).toBe('<h4');
 			expect(findByText('Address')).toBeDefined();
+			expect(findByText('Address').outerHTML.slice(0, 3)).toBe('<h4');
 			expect(findByText('Chair of board')).toBeDefined();
 			assertThatButtonHasAriaExpanded(findByText, 'Chair of board', false);
+			expect(findByText('Chair of board').outerHTML.slice(0, 3)).toBe('<h4');
 			expect(findByText('Director(s) are Professional Trustees')).toBeDefined();
 			assertThatButtonHasAriaExpanded(
 				findByText,
 				'Director(s) are Professional Trustees',
 				false,
 			);
+			expect(
+				findByText('Director(s) are Professional Trustees').outerHTML.slice(
+					0,
+					3,
+				),
+			).toBe('<h4');
 		});
 
 		test('initial status is correct', () => {

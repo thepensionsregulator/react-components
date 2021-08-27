@@ -49,6 +49,27 @@ describe('Employer Preview', () => {
 		expect(results).toHaveNoViolations();
 	});
 
+	test('renders buttons correctly', () => {
+		const { getByText, container } = render(
+			<EmployerCard
+				onSaveType={noop}
+				onRemove={noop}
+				complete={true}
+				employer={employer}
+			/>,
+		);
+
+		expect(container.querySelector('button')).not.toBe(null);
+		expect(getByText('Employer type')).toBeDefined();
+		expect(getByText('Employer type').outerHTML.slice(0, 3)).toBe('<h3');
+		expect(getByText('Remove')).toBeDefined();
+		expect(getByText('Remove').outerHTML.slice(0, 3)).toBe('<h4');
+		expect(getByText('Employer')).toBeDefined();
+		expect(getByText('Employer').outerHTML.slice(0, 3)).toBe('<h4');
+		expect(getByText('Employer Identifiers')).toBeDefined();
+		expect(getByText('Employer Identifiers').outerHTML.slice(0, 3)).toBe('<h4');
+	});
+
 	test('renders with a section containing an aria label', () => {
 		const { getByRole } = render(
 			<EmployerCard

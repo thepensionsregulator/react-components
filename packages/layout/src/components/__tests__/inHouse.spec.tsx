@@ -67,11 +67,17 @@ describe('InHouse Preview', () => {
 
 	test('it renders preview correctly', () => {
 		expect(findByText('In House Administrator')).toBeDefined();
+		expect(findByText('In House Administrator').outerHTML.slice(0, 3)).toBe(
+			'<h3',
+		);
 		expect(findByText('Remove')).toBeDefined();
+		expect(findByText('Remove').outerHTML.slice(0, 3)).toBe('<h4');
 		expect(findByText('Address')).toBeDefined();
 		assertThatButtonHasAriaExpanded(findByText, 'Address', false);
+		expect(findByText('Address').outerHTML.slice(0, 3)).toBe('<h4');
 		expect(findByText('Contact details')).toBeDefined();
 		assertThatButtonHasAriaExpanded(findByText, 'Contact details', false);
+		expect(findByText('Contact details').outerHTML.slice(0, 3)).toBe('<h4');
 	});
 
 	test('replaces __NAME__ in the checkbox label', () => {

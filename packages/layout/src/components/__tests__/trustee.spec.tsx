@@ -107,15 +107,21 @@ describe('TrusteeCard enableContactDetails == true', () => {
 		test('buttons renders correctly', () => {
 			// Buttons are visible
 			expect(findByText('Trustee')).toBeDefined();
+			expect(findByText('Trustee').outerHTML.slice(0, 3)).toBe('<h3');
+			expect(findByText('Remove')).toBeDefined();
+			expect(findByText('Remove').outerHTML.slice(0, 3)).toBe('<h4');
 			expect(findByText('Correspondence address')).toBeDefined();
+			expect(findByText('Correspondence address').outerHTML.slice(0, 3)).toBe(
+				'<h4',
+			);
 			assertThatButtonHasAriaExpanded(
 				findByText,
 				'Correspondence address',
 				false,
 			);
 			expect(findByText('Contact details')).toBeDefined();
+			expect(findByText('Contact details').outerHTML.slice(0, 3)).toBe('<h4');
 			assertThatButtonHasAriaExpanded(findByText, 'Contact details', false);
-			expect(findByText('Remove')).toBeDefined();
 		});
 
 		test('initial status is correct', () => {

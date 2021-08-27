@@ -72,9 +72,15 @@ describe('Professional / Independent Trustee Card', () => {
 		test('it renders sections correctly', () => {
 			expect(component.querySelector('button')).not.toBe(null);
 			expect(findByText('Corporate Trustee')).toBeDefined();
+			expect(findByText('Corporate Trustee').outerHTML.slice(0, 3)).toBe('<h3');
 			expect(findByText('Remove')).toBeDefined();
+			expect(findByText('Remove').outerHTML.slice(0, 3)).toBe('<h4');
 			expect(findByText('Address')).toBeDefined();
+			expect(findByText('Address').outerHTML.slice(0, 3)).toBe('<h4');
 			expect(findByText('Appointed by the regulator')).toBeDefined();
+			expect(
+				findByText('Appointed by the regulator').outerHTML.slice(0, 3),
+			).toBe('<h4');
 			assertThatButtonHasAriaExpanded(
 				findByText,
 				'Appointed by the regulator',

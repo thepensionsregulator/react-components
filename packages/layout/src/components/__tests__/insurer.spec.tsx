@@ -46,8 +46,15 @@ describe('Insurer Preview', () => {
 		const results = await axe(container);
 		expect(results).toHaveNoViolations();
 		expect(getByText('Insurer administrator')).toBeDefined();
+		expect(getByText('Insurer administrator').outerHTML.slice(0, 3)).toBe(
+			'<h3',
+		);
 		expect(getByText('Remove')).toBeDefined();
+		expect(getByText('Remove').outerHTML.slice(0, 3)).toBe('<h4');
 		expect(getByText('Insurer reference number')).toBeDefined();
+		expect(getByText('Insurer reference number').outerHTML.slice(0, 3)).toBe(
+			'<h4',
+		);
 		assertThatButtonHasAriaExpanded(
 			getByText,
 			'Insurer reference number',

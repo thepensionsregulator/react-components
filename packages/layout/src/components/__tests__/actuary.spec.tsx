@@ -94,11 +94,14 @@ describe('Actuary Card', () => {
 		test('it renders buttons correctly', () => {
 			expect(component.querySelector('button')).not.toBe(null);
 			expect(findByText('Actuary')).toBeDefined();
+			expect(findByText('Actuary').outerHTML.slice(0, 3)).toBe('<h3');
 			assertThatButtonHasAriaExpanded(findByText, 'Actuary', false);
 			expect(findByText('Remove')).toBeDefined();
 			assertThatButtonHasAriaExpanded(findByText, 'Remove', false);
+			expect(findByText('Remove').outerHTML.slice(0, 3)).toBe('<h4');
 			expect(findByText('Contact details')).toBeDefined();
 			assertThatButtonHasAriaExpanded(findByText, 'Contact details', false);
+			expect(findByText('Contact details').outerHTML.slice(0, 3)).toBe('<h4');
 		});
 
 		test('initial status is correct', () => {
