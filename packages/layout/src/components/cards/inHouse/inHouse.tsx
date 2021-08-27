@@ -107,17 +107,15 @@ const InHouseAdminButton: React.FC = () => {
 				}
 			}}
 			isEditButton={true}
+			isMainHeading={true}
 		>
 			{i18n.preview.buttons.one}
 		</UnderlinedButton>
 	);
 };
 
-const RemoveButton: React.FC<{ title: string; tabIndex?: number }> = ({
-	title,
-	tabIndex,
-}) => {
-	const { current, send } = useInHouseAdminContext();
+const RemoveButton: React.FC = () => {
+	const { current, send, i18n } = useInHouseAdminContext();
 	return (
 		<UnderlinedButton
 			isOpen={
@@ -135,9 +133,11 @@ const RemoveButton: React.FC<{ title: string; tabIndex?: number }> = ({
 					send('REMOVE');
 				}
 			}}
-			tabIndex={tabIndex}
+			tabIndex={removeFromTabFlowIfMatches(current, {
+				edit: 'name',
+			})}
 		>
-			{title}
+			{i18n.preview.buttons.two}
 		</UnderlinedButton>
 	);
 };
@@ -164,6 +164,8 @@ export const InHouseCard: React.FC<InHouseAdminProviderProps> = React.memo(
 							])}
 						>
 							<Toolbar
+								buttonLeft={InHouseAdminButton}
+								buttonRight={RemoveButton}
 								complete={isComplete(current.context)}
 								subtitle={() => (
 									<Subtitle
@@ -179,15 +181,6 @@ export const InHouseCard: React.FC<InHouseAdminProviderProps> = React.memo(
 										? i18n.preview.statusText.confirmed
 										: i18n.preview.statusText.unconfirmed
 								}
-								buttonLeft={() => <InHouseAdminButton />}
-								buttonRight={() => (
-									<RemoveButton
-										title={i18n.preview.buttons.two}
-										tabIndex={removeFromTabFlowIfMatches(current, {
-											edit: 'name',
-										})}
-									/>
-								)}
 							/>
 							<CardContentSwitch />
 						</Section>

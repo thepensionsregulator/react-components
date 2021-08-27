@@ -104,13 +104,14 @@ const TrusteeButton: React.FC = () => {
 				}
 			}}
 			isEditButton={true}
+			isMainHeading={true}
 		>
 			{i18n.preview.buttons.one}
 		</UnderlinedButton>
 	);
 };
 
-const RemoveButton: React.FC<{ tabIndex?: number }> = ({ tabIndex }) => {
+const RemoveButton: React.FC = () => {
 	const { current, send, i18n } = useTrusteeContext();
 
 	return (
@@ -130,7 +131,9 @@ const RemoveButton: React.FC<{ tabIndex?: number }> = ({ tabIndex }) => {
 					send('REMOVE');
 				}
 			}}
-			tabIndex={tabIndex}
+			tabIndex={removeFromTabFlowIfMatches(current, {
+				edit: { trustee: 'name' },
+			})}
 		>
 			{i18n.preview.buttons.two}
 		</UnderlinedButton>
@@ -160,15 +163,9 @@ export const TrusteeCard: React.FC<
 					])}
 				>
 					<Toolbar
+						buttonLeft={TrusteeButton}
+						buttonRight={RemoveButton}
 						complete={isComplete(current.context)}
-						buttonLeft={() => <TrusteeButton />}
-						buttonRight={() => (
-							<RemoveButton
-								tabIndex={removeFromTabFlowIfMatches(current, {
-									edit: { trustee: 'name' },
-								})}
-							/>
-						)}
 						subtitle={() => (
 							<Subtitle
 								main={concatenateStrings([

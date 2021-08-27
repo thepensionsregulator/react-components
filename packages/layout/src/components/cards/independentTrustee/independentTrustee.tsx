@@ -37,14 +37,17 @@ const CardContentSwitch: React.FC = () => {
 	}
 };
 
-const RemoveButton: React.FC<{ title: string }> = ({ title }) => {
-	const { current, send } = useIndependentTrusteeContext();
+const IndependentTrusteeBtn: React.FC<{ title: string }> = ({ title }) => (
+	<UnderlinedButton isMainHeading={true}>{title}</UnderlinedButton>
+);
 
+const RemoveButton: React.FC = () => {
+	const { current, send, i18n } = useIndependentTrusteeContext();
 	return (
 		<UnderlinedButton
 			isOpen={
 				current.matches({ remove: 'reason' }) ||
-				current.matches({ remvve: 'confirm' })
+				current.matches({ remove: 'confirm' })
 			}
 			onClick={() => {
 				current.context.lastBtnClicked = 2;
@@ -58,7 +61,7 @@ const RemoveButton: React.FC<{ title: string }> = ({ title }) => {
 				}
 			}}
 		>
-			{title}
+			{i18n.preview.buttons.two}
 		</UnderlinedButton>
 	);
 };
@@ -83,6 +86,10 @@ export const IndependentTrusteeCard: React.FC<IndependentTrusteeProviderProps> =
 							])}
 						>
 							<Toolbar
+								buttonLeft={() => (
+									<IndependentTrusteeBtn title={i18n.preview.buttons.one} />
+								)}
+								buttonRight={RemoveButton}
 								complete={isComplete(context)}
 								subtitle={() => (
 									<Subtitle
@@ -95,14 +102,6 @@ export const IndependentTrusteeCard: React.FC<IndependentTrusteeProviderProps> =
 										? i18n.preview.statusText.confirmed
 										: i18n.preview.statusText.unconfirmed
 								}
-								buttonLeft={() => (
-									<UnderlinedButton>
-										{i18n.preview.buttons.one}
-									</UnderlinedButton>
-								)}
-								buttonRight={() => (
-									<RemoveButton title={i18n.preview.buttons.two} />
-								)}
 							/>
 							<CardContentSwitch />
 						</Section>

@@ -47,13 +47,13 @@ const CorporateGroupBtn: React.FC<{ title: string }> = ({ title }) => (
 	<UnderlinedButton isMainHeading={true}>{title}</UnderlinedButton>
 );
 
-const RemoveButton: React.FC<{ title: string }> = ({ title }) => {
-	const { current, send } = useCorporateGroupContext();
+const RemoveButton: React.FC = () => {
+	const { current, send, i18n } = useCorporateGroupContext();
 	return (
 		<UnderlinedButton
 			isOpen={
 				current.matches({ remove: 'reason' }) ||
-				current.matches({ remvve: 'confirm' })
+				current.matches({ remove: 'confirm' })
 			}
 			onClick={() => {
 				current.context.lastBtnClicked = 2;
@@ -67,7 +67,7 @@ const RemoveButton: React.FC<{ title: string }> = ({ title }) => {
 				}
 			}}
 		>
-			{title}
+			{i18n.preview.buttons.two}
 		</UnderlinedButton>
 	);
 };
@@ -95,9 +95,7 @@ export const CorporateGroupCard: React.FC<CorporateGroupProviderProps> = React.m
 								buttonLeft={() => (
 									<CorporateGroupBtn title={i18n.preview.buttons.one} />
 								)}
-								buttonRight={() => (
-									<RemoveButton title={i18n.preview.buttons.two} />
-								)}
+								buttonRight={RemoveButton}
 								complete={isComplete(context)}
 								subtitle={() => (
 									<Subtitle

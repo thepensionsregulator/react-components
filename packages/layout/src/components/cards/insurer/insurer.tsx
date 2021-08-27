@@ -37,8 +37,12 @@ const CardContentSwitch: React.FC = () => {
 	}
 };
 
-const RemoveButton: React.FC<{ title: string }> = ({ title }) => {
-	const { current, send } = useInsurerContext();
+const InsurerBtn: React.FC<{ title: string }> = ({ title }) => (
+	<UnderlinedButton isMainHeading={true}>{title}</UnderlinedButton>
+);
+
+const RemoveButton: React.FC = () => {
+	const { current, send, i18n } = useInsurerContext();
 	return (
 		<UnderlinedButton
 			isOpen={
@@ -57,7 +61,7 @@ const RemoveButton: React.FC<{ title: string }> = ({ title }) => {
 				}
 			}}
 		>
-			{title}
+			{i18n.preview.buttons.two}
 		</UnderlinedButton>
 	);
 };
@@ -82,6 +86,10 @@ export const InsurerCard: React.FC<InsurerProviderProps> = React.memo(
 							])}
 						>
 							<Toolbar
+								buttonLeft={() => (
+									<InsurerBtn title={i18n.preview.buttons.one} />
+								)}
+								buttonRight={RemoveButton}
 								complete={isComplete(context)}
 								subtitle={() => (
 									<Subtitle main={context.insurer.organisationName} />
@@ -91,14 +99,6 @@ export const InsurerCard: React.FC<InsurerProviderProps> = React.memo(
 										? i18n.preview.statusText.confirmed
 										: i18n.preview.statusText.unconfirmed
 								}
-								buttonLeft={() => (
-									<UnderlinedButton>
-										{i18n.preview.buttons.one}
-									</UnderlinedButton>
-								)}
-								buttonRight={() => (
-									<RemoveButton title={i18n.preview.buttons.two} />
-								)}
 							/>
 							<CardContentSwitch />
 						</Section>
