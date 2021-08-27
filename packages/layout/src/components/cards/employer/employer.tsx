@@ -41,11 +41,8 @@ const CardContentSwitch: React.FC = () => {
 	}
 };
 
-const EmployerButton: React.FC<{
-	title: string;
-	isEditButton?: boolean;
-}> = ({ title, isEditButton }) => {
-	const { current, send } = useEmployerContext();
+const EmployerButton: React.FC = () => {
+	const { current, send, i18n } = useEmployerContext();
 	return (
 		<UnderlinedButton
 			isOpen={current.matches('employerType')}
@@ -61,18 +58,16 @@ const EmployerButton: React.FC<{
 					send('CHANGE_TYPE');
 				}
 			}}
-			isEditButton={isEditButton}
+			isEditButton={true}
+			isMainHeading={true}
 		>
-			{title}
+			{i18n.preview.buttons.one}
 		</UnderlinedButton>
 	);
 };
 
-const RemoveButton: React.FC<{
-	title: string;
-	tabIndex?: number;
-}> = ({ title, tabIndex }) => {
-	const { current, send } = useEmployerContext();
+const RemoveButton: React.FC = () => {
+	const { current, send, i18n } = useEmployerContext();
 	return (
 		<UnderlinedButton
 			isOpen={
@@ -91,9 +86,9 @@ const RemoveButton: React.FC<{
 					send('REMOVE');
 				}
 			}}
-			tabIndex={tabIndex}
+			tabIndex={removeFromTabFlowIfMatches(current, 'employerType')}
 		>
-			{title}
+			{i18n.preview.buttons.two}
 		</UnderlinedButton>
 	);
 };
@@ -147,6 +142,8 @@ export const EmployerCard: React.FC<EmployerProviderProps> = React.memo(
 							])}
 						>
 							<Toolbar
+								buttonLeft={EmployerButton}
+								buttonRight={RemoveButton}
 								complete={isComplete(current.context)}
 								subtitle={() => <EmployerSubtitle {...current.context} />}
 								statusText={
@@ -154,21 +151,6 @@ export const EmployerCard: React.FC<EmployerProviderProps> = React.memo(
 										? i18n.preview.statusText.confirmed
 										: i18n.preview.statusText.unconfirmed
 								}
-								buttonLeft={() => (
-									<EmployerButton
-										title={i18n.preview.buttons.one}
-										isEditButton={true}
-									/>
-								)}
-								buttonRight={() => (
-									<RemoveButton
-										title={i18n.preview.buttons.two}
-										tabIndex={removeFromTabFlowIfMatches(
-											current,
-											'employerType',
-										)}
-									/>
-								)}
 							/>
 							<CardContentSwitch />
 						</Section>

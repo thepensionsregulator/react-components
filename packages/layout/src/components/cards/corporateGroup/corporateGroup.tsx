@@ -5,18 +5,18 @@ import {
 	useCorporateGroupContext,
 } from './context';
 import { Section } from '@tpr/core';
+import RemovedBox from '../components/removedBox';
 import { Toolbar } from '../components/toolbar';
 import { UnderlinedButton } from '../components/button';
-import RemovedBox from '../components/removedBox';
 import { Preview } from './views/preview/preview';
-import { NameScreen } from './views/name/name';
 import { Contacts } from './views/contacts/contacts';
+import { NameScreen } from './views/name/name';
 import { Professional } from './views/professional/professional';
 import { ReasonRemove } from './views/remove/reason/reason';
 import { ConfirmRemove } from './views/remove/confirm/confirm';
+import { Subtitle } from '../common/views/preview/components';
 import { cardTypeName } from '../common/interfaces';
 import { CorporateGroupContext } from './corporateGroupMachine';
-import { Subtitle } from '../common/views/preview/components';
 import { concatenateStrings } from '../../../utils';
 import styles from '../cards.module.scss';
 
@@ -43,9 +43,12 @@ const CardContentSwitch: React.FC = () => {
 	}
 };
 
+const CorporateGroupBtn: React.FC<{ title: string }> = ({ title }) => (
+	<UnderlinedButton isMainHeading={true}>{title}</UnderlinedButton>
+);
+
 const RemoveButton: React.FC<{ title: string }> = ({ title }) => {
 	const { current, send } = useCorporateGroupContext();
-
 	return (
 		<UnderlinedButton
 			isOpen={
@@ -89,6 +92,12 @@ export const CorporateGroupCard: React.FC<CorporateGroupProviderProps> = React.m
 							])}
 						>
 							<Toolbar
+								buttonLeft={() => (
+									<CorporateGroupBtn title={i18n.preview.buttons.one} />
+								)}
+								buttonRight={() => (
+									<RemoveButton title={i18n.preview.buttons.two} />
+								)}
 								complete={isComplete(context)}
 								subtitle={() => (
 									<Subtitle
@@ -101,14 +110,6 @@ export const CorporateGroupCard: React.FC<CorporateGroupProviderProps> = React.m
 										? i18n.preview.statusText.confirmed
 										: i18n.preview.statusText.unconfirmed
 								}
-								buttonLeft={() => (
-									<UnderlinedButton>
-										{i18n.preview.buttons.one}
-									</UnderlinedButton>
-								)}
-								buttonRight={() => (
-									<RemoveButton title={i18n.preview.buttons.two} />
-								)}
 							/>
 							<CardContentSwitch />
 						</Section>

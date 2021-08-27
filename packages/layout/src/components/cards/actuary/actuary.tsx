@@ -63,6 +63,7 @@ const ActuaryButton: React.FC = () => {
 				}
 			}}
 			isEditButton={true}
+			isMainHeading={true}
 		>
 			{i18n.preview.buttons.one}
 		</UnderlinedButton>
@@ -120,6 +121,15 @@ export const ActuaryCard: React.FC<ActuaryProviderProps> = React.memo(
 							])}
 						>
 							<Toolbar
+								buttonLeft={ActuaryButton}
+								buttonRight={() => (
+									<RemoveButton
+										title={i18n.preview.buttons.two}
+										tabIndex={removeFromTabFlowIfMatches(current, {
+											edit: 'name',
+										})}
+									/>
+								)}
 								complete={isComplete(current.context)}
 								subtitle={() => (
 									<Subtitle
@@ -136,15 +146,6 @@ export const ActuaryCard: React.FC<ActuaryProviderProps> = React.memo(
 										? i18n.preview.statusText.confirmed
 										: i18n.preview.statusText.unconfirmed
 								}
-								buttonLeft={() => <ActuaryButton />}
-								buttonRight={() => (
-									<RemoveButton
-										title={i18n.preview.buttons.two}
-										tabIndex={removeFromTabFlowIfMatches(current, {
-											edit: 'name',
-										})}
-									/>
-								)}
 							/>
 							<CardContentSwitch />
 						</Section>
