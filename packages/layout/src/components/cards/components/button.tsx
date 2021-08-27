@@ -1,17 +1,18 @@
 import React, { useEffect, useRef, MutableRefObject } from 'react';
-import { Flex, P } from '@tpr/core';
+import { Flex, H3, H4 } from '@tpr/core';
 import styles from './button.module.scss';
 import { EditArrowUp, EditArrowDown } from './arrowButton';
 import { ArrowDown, ArrowUp } from '@tpr/icons';
 
-type UnderlinedButtonProps = {
+interface UnderlinedButtonProps {
 	isOpen?: boolean;
 	onClick?: any;
 	tabIndex?: number;
 	isEditButton?: boolean;
 	onCollapseCallback?: () => void;
 	btnRef?: MutableRefObject<any>;
-};
+	isMainHeading?: boolean;
+}
 
 /*
 	In all cards, we have 2 sections: Toolbar (containing at least the 'Remove' button) & Content (changes depending on the data being edited).
@@ -33,12 +34,17 @@ export const UnderlinedButton: React.FC<UnderlinedButtonProps> = ({
 	isEditButton,
 	onCollapseCallback,
 	btnRef,
+	isMainHeading = false,
 }) => {
 	if (typeof onClick === 'undefined') {
 		return (
 			<div className={styles.buttonPlaceholder}>
 				<Flex cfg={{ flex: '0 0 auto', alignItems: 'center' }}>
-					<P cfg={{ fontSize: 2, fontWeight: 3 }}>{children}</P>
+					{isMainHeading ? (
+						<H3 cfg={{ fontWeight: 3 }}>{children}</H3>
+					) : (
+						<H4>{children}</H4>
+					)}
 				</Flex>
 			</div>
 		);
@@ -75,7 +81,11 @@ export const UnderlinedButton: React.FC<UnderlinedButtonProps> = ({
 				className={styles.arrowSpacing}
 				cfg={{ flex: '0 0 auto', alignItems: 'center' }}
 			>
-				<P cfg={{ fontSize: 2, fontWeight: 3 }}>{children}</P>
+				{isMainHeading ? (
+					<H3 cfg={{ fontWeight: 3 }}>{children}</H3>
+				) : (
+					<H4>{children}</H4>
+				)}
 				{getAppropriateButton()}
 			</Flex>
 		</button>

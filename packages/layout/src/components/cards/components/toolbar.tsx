@@ -5,14 +5,14 @@ import { StatusMessage } from './card';
 import styles from '../cards.module.scss';
 import CardContentSectionHeader from './cardContentHeaderSection';
 
-export type ToolbarProps = {
+export interface ToolbarProps {
 	complete: boolean;
 	subtitle?: Function;
 	buttonLeft: Function;
 	buttonRight: Function;
 	statusText: string;
 	subSectionHeaderText?: string;
-};
+}
 
 export const Toolbar: React.FC<ToolbarProps> = React.memo(
 	({
