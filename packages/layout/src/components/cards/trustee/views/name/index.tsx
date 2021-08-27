@@ -8,7 +8,7 @@ import {
 	cardTypeName,
 } from '../../../common/interfaces';
 import NameForm from '../../../common/views/nameForm/nameForm';
-import { RestoreMissingNullValues } from '../../../common/services/NullValueFieldRestorer';
+import { RestoreMissingNullValues } from '../../../../../services/NullValueFieldRestorer';
 
 const getFields = (
 	fields: RecursivePartial<TrusteeI18nProps['name']['fields']>,

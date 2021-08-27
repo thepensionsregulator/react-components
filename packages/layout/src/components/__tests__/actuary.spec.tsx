@@ -12,6 +12,7 @@ import {
 	assertThatTitleWasSetToNullWhileFirstAndLastNamesWereLeftUnchanged,
 	clearTitleField,
 } from '../testHelpers/testHelpers';
+import { capitalizeEachWord } from '../../services';
 
 const noop = () => Promise.resolve();
 
@@ -26,16 +27,28 @@ const actuary: Actuary = {
 	emailAddress: 'john@actuary.com',
 	organisationName: 'Actuaries Group Ltd',
 	address: {
-		addressLine1: 'The Pensions Regulator',
-		addressLine2: 'Napier House',
-		addressLine3: 'Trafalgar Pl',
-		postTown: 'Brighton',
+		addressLine1: 'THE PENSIONS REGULATOR',
+		addressLine2: 'NAPIER HOUSE',
+		addressLine3: 'TRAFALGAR PL',
+		postTown: 'BRIGHTON',
 		postcode: 'BN1 4DW',
-		county: 'West Sussex',
+		county: 'WEST SUSSEX',
 		country: 'UK',
 		countryId: 2,
 	},
 };
+
+const formattedAddress = {
+	addressLine1: capitalizeEachWord(actuary.address.addressLine1),
+	addressLine2: capitalizeEachWord(actuary.address.addressLine2),
+	addressLine3: capitalizeEachWord(actuary.address.addressLine3),
+	postTown: capitalizeEachWord(actuary.address.postTown),
+	postcode: actuary.address.postcode.toUpperCase(),
+	county: capitalizeEachWord(actuary.address.county),
+	country: actuary.address.country,
+};
+
+const addressExpectedHTML = `${formattedAddress.addressLine1}<br>${formattedAddress.addressLine2}<br>${formattedAddress.addressLine3}<br>${formattedAddress.postTown}<br>${formattedAddress.county}<br>${formattedAddress.postcode}<br>${formattedAddress.country}`;
 
 describe('Actuary Card', () => {
 	describe('Preview', () => {
@@ -103,9 +116,8 @@ describe('Actuary Card', () => {
 
 		test('displays Address correctly', () => {
 			const addressPreview = findByTestId('address-preview');
-			const addressExpected = `${actuary.address.addressLine1}<br>${actuary.address.addressLine2}<br>${actuary.address.addressLine3}<br>${actuary.address.postTown}<br>${actuary.address.county}<br>${actuary.address.postcode}<br>${actuary.address.country}`;
 			expect(addressPreview).toBeDefined();
-			expect(addressPreview.innerHTML).toEqual(addressExpected);
+			expect(addressPreview.innerHTML).toEqual(addressExpectedHTML);
 		});
 
 		test('displays telephone number correctly', () => {
