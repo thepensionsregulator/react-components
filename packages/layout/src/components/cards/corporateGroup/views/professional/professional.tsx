@@ -17,6 +17,7 @@ const getProfessionalFields = (
 		value: 'yes',
 		label: labels.isProfessional.labels.isProfessionalYes,
 		cfg: { mb: 2 },
+		required: true,
 	},
 	{
 		type: 'radio',
@@ -24,6 +25,7 @@ const getProfessionalFields = (
 		value: 'no',
 		label: labels.isProfessional.labels.isProfessionalNo,
 		cfg: { mb: 2 },
+		required: true,
 	},
 ];
 
