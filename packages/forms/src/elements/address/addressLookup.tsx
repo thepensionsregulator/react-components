@@ -3,7 +3,6 @@ import { Address } from './types/address';
 import { PostcodeLookup } from './postcodeLookup';
 import { SelectAddress } from './selectAddress';
 import { EditAddress } from './editAddress';
-import { act } from 'react-dom/test-utils';
 import { AddressProps } from './types';
 import { useEffect } from 'react';
 
@@ -86,7 +85,7 @@ export const AddressLookup: React.FC<AddressProps> = ({
 								addressLookupProvider
 									.transformResults(rawAddresses)
 									.then((processedResults) => {
-										act(() => setAddresses(processedResults));
+										setAddresses(processedResults);
 										setLoading(false);
 									});
 							})

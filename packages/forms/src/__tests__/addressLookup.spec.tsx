@@ -1,7 +1,6 @@
 import React from 'react';
 import { formSetup } from '../__mocks__/setup';
 import { fireEvent, screen, cleanup } from '@testing-library/react';
-import userEvent from '@testing-library/user-event';
 import { axe } from 'jest-axe';
 import { AddressLookup } from '../elements/address/addressLookup';
 import FakeAddressLookupProvider from '../elements/address/fakeAddressLookupProvider';
@@ -34,9 +33,9 @@ const defaultProps: AddressProps = {
 
 async function searchForAPostcode(postcode: string) {
 	const input = await screen.findByTestId('postcode-lookup-edit');
-	userEvent.type(input, postcode);
+	fireEvent.change(input, { target: { value: postcode } });
 	fireEvent.blur(input);
-
+	
 	const submit = await screen.findByTestId('postcode-lookup-button');
 	fireEvent.click(submit);
 }
@@ -143,7 +142,7 @@ describe('Address lookup', () => {
 			});
 
 			await searchForAPostcode(FakeAddressLookupProvider.tprAddress.postcode);
-
+			
 			const selectAddressInput = await findByTestId('select-address-list');
 			selectAddressInput.click();
 
@@ -157,6 +156,7 @@ describe('Address lookup', () => {
 			);
 			expect(addressLine1Input).toBeDefined();
 		});
+		
 		test('should call onValidatePostcode when select address button is clicked', async () => {
 			const { findByTestId } = formSetup({
 				render: <AddressLookup {...defaultProps} />,
