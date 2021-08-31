@@ -15,28 +15,36 @@ const getFields = (
 	{
 		name: 'title',
 		type: 'text',
+		autoComplete: 'honorific-prefix',
 		label: fields.title.label,
 		error: fields.title.error,
 		maxLength: fields.title.maxlength,
 		inputWidth: 1,
+		testId: 'title',
 		cfg: { mb: 4 },
 	},
 	{
 		name: 'firstName',
 		type: 'text',
+		autoComplete: 'given-name',
 		label: fields.firstName.label,
 		error: fields.firstName.error,
 		maxLength: fields.firstName.maxlength,
 		inputWidth: 6,
+		required: true,
+		testId: 'first-name',
 		cfg: { mb: 4 },
 	},
 	{
 		name: 'lastName',
 		type: 'text',
+		autoComplete: 'family-name',
 		label: fields.lastName.label,
 		error: fields.lastName.error,
 		maxLength: fields.lastName.maxlength,
 		inputWidth: 6,
+		required: true,
+		testId: 'last-name',
 	},
 ];
 interface NameScreenProps {
@@ -60,7 +68,7 @@ export const NameScreen: React.FC<NameScreenProps> = ({
 			setLoading(false);
 			send('SAVE', { values });
 		} catch (error) {
-			console.log(error);
+			console.error(error);
 			setLoading(false);
 		}
 	};

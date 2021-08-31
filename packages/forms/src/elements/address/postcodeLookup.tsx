@@ -20,19 +20,17 @@ export const PostcodeLookup: React.FC<PostcodeLookupProps> = ({
 	const form = useForm();
 	const validator = new PostcodeValidator(invalidPostcodeMessage);
 
-	const searchFieldRef = useRef(null);
+	const searchFieldRef = useRef<HTMLInputElement>(null);
 	const [postcodeValid, setPostcodeValid] = useState(false);
 
 	const clickFindAddress = () => {
-		// the blur event will trigger 'validate' in FFInputText when clicking 'Find address' without having visited the input field.
-		const myEvent = new Event('blur', { bubbles: true });
-		searchFieldRef.current.dispatchEvent(myEvent);
 		postcodeValid &&
 			onPostcodeChanged(form.getFieldState('postcodeLookup').value);
 	};
 
 	useEffect(() => {
 		searchFieldRef.current.value = null;
+		searchFieldRef.current.focus();
 	}, []);
 
 	const validatePostcode = (value) => {
@@ -48,9 +46,11 @@ export const PostcodeLookup: React.FC<PostcodeLookupProps> = ({
 			<FFInputText
 				ref={searchFieldRef}
 				name="postcodeLookup"
+				autoComplete="postal-code"
 				value={postcode}
 				label={postcodeLookupLabel}
-				validate={(value) => validatePostcode(value)}
+				required
+				validate={(value) => searchFieldRef.current && validatePostcode(value)}
 				testId={(testId ? testId + '-' : '') + 'postcode-lookup-edit'}
 				inputClassName={styles.editPostcode}
 				disabled={loading}

@@ -15,4 +15,5 @@ export interface EditAddressProps {
 	postcodeLabel: string;
 	countryLabel: string;
 	changeAddressButton: string;
+	headingLevel?: number;
 }

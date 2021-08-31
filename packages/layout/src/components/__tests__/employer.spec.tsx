@@ -64,6 +64,21 @@ describe('Employer Preview', () => {
 			employer.organisationName,
 		);
 	});
+
+	test('replaces __NAME__ in the checkbox label', () => {
+		const { findByText } = render(
+			<EmployerCard
+				onSaveType={noop}
+				onRemove={noop}
+				complete={true}
+				employer={employer}
+			/>,
+		);
+
+		expect(
+			findByText(`Confirm '${employer.organisationName}' is correct.`),
+		).toBeDefined();
+	});
 });
 
 describe('Employer type', () => {

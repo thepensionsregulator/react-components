@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useRef } from 'react';
 import { Checkbox } from '@tpr/forms';
 import { Flex, Hr, classNames } from '@tpr/core';
 import { UnderlinedButton } from '../../../components/button';
@@ -7,11 +7,23 @@ import {
 	AddressPreview,
 	ContactDetailsPreview,
 } from '../../../common/views/preview/components';
+import { concatenateStrings } from '../../../../../utils';
 import styles from '../../../cards.module.scss';
 
-export const Preview: React.FC<any> = () => {
+export const Preview: React.FC<any> = React.memo(() => {
 	const { current, send, onCorrect, i18n } = useActuaryContext();
 	const { actuary, complete, preValidatedData } = current.context;
+
+	const contactsBtn = useRef(null);
+
+	const onClickContactsBtn = () => {
+		current.context.lastBtnClicked = 3;
+		send('EDIT_CONTACTS');
+	};
+
+	const onCollapseContacts = () => {
+		current.context.lastBtnClicked === 3 && contactsBtn.current.focus();
+	};
 
 	return (
 		<div
@@ -45,9 +57,11 @@ export const Preview: React.FC<any> = () => {
 					cfg={{ width: 5, flex: '0 0 auto', flexDirection: 'column', pl: 4 }}
 				>
 					<UnderlinedButton
-						onClick={() => send('EDIT_CONTACTS')}
+						onClick={onClickContactsBtn}
 						isOpen={current.matches({ edit: 'contacts' })}
 						isEditButton={true}
+						onCollapseCallback={onCollapseContacts}
+						btnRef={contactsBtn}
 					>
 						{i18n.preview.buttons.four}
 					</UnderlinedButton>
@@ -68,9 +82,16 @@ export const Preview: React.FC<any> = () => {
 						send('COMPLETE', { value: !complete });
 						onCorrect(!complete);
 					}}
-					label={i18n.preview.checkboxLabel}
+					label={i18n.preview.checkboxLabel.replace(
+						'__NAME__',
+						concatenateStrings([
+							actuary.title,
+							actuary.firstName,
+							actuary.lastName,
+						]),
+					)}
 				/>
 			</Flex>
 		</div>
 	);
-};
+});

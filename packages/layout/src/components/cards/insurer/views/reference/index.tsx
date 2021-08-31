@@ -27,6 +27,7 @@ const getFields = (
 			return undefined;
 		},
 		cfg: { mb: 3 },
+		required: true,
 	},
 ];
 

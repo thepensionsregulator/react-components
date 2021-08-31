@@ -26,7 +26,6 @@ export const Content: React.FC<ContentProps> = ({
 	subSectionHeaderText,
 	send,
 }) => {
-	console.log('section title', sectionTitle);
 	return (
 		<div className={styles.content}>
 			{loading && <Loading />}

@@ -61,6 +61,7 @@ export const Tasklist: React.FC<TasklistProps> = ({
 	matchPath,
 	location,
 	history,
+	sectionDisabledLabel,
 	sectionCompleteLabel,
 	sectionIncompleteLabel,
 	testId,
@@ -138,6 +139,7 @@ export const Tasklist: React.FC<TasklistProps> = ({
 								title={item.title}
 								links={item.links}
 								maintenanceMode={maintenanceMode}
+								sectionDisabledLabel={sectionDisabledLabel}
 								sectionCompleteLabel={sectionCompleteLabel}
 								sectionIncompleteLabel={sectionIncompleteLabel}
 							/>

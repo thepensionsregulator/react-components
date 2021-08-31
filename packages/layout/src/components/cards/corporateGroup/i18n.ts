@@ -102,7 +102,7 @@ export const i18n: CorporateGroupI18nProps = {
 			confirmed: 'Confirmed',
 			unconfirmed: 'Unconfirmed',
 		},
-		checkboxLabel: 'Confirm details are correct.',
+		checkboxLabel: "Confirm '__NAME__' is correct.",
 		trusteeType: 'Corporate Group trustee',
 	},
 	name: {

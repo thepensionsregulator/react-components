@@ -41,7 +41,7 @@ const DateForm: React.FC<DateFormProps> = ({
 				}}
 			>
 				{({ handleSubmit, submitError }) => (
-					<form onSubmit={handleSubmit} data-testid={testId}>
+					<form onSubmit={handleSubmit} data-testid={testId} noValidate>
 						<div aria-describedby={errorMsg}>
 							<FFCheckbox
 								name="confirm"

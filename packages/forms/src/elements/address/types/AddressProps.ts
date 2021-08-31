@@ -18,6 +18,7 @@ export interface AddressProps extends SubmitButtonProps {
 	selectAddressButton: string;
 	selectAddressRequiredMessage: string;
 	noAddressesFoundMessage: string;
+	headingLevel?: number;
 	addressLine1Label: string;
 	addressLine1RequiredMessage: string;
 	addressLine2Label: string;

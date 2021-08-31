@@ -16,7 +16,7 @@ const IdentifiersItem: React.FC<IdentifiersItemProps> = ({ title, number }) => {
 	);
 };
 
-export const Preview: React.FC<any> = () => {
+export const Preview: React.FC<any> = React.memo(() => {
 	const { current, send, onCorrect, i18n } = useEmployerContext();
 	const { employer, complete, preValidatedData } = current.context;
 	const [items] = useState(
@@ -81,9 +81,12 @@ export const Preview: React.FC<any> = () => {
 						send('COMPLETE', { value: !complete });
 						onCorrect(!complete);
 					}}
-					label={i18n.preview.checkboxLabel}
+					label={i18n.preview.checkboxLabel.replace(
+						'__NAME__',
+						employer.organisationName,
+					)}
 				/>
 			</Flex>
 		</div>
 	);
-};
+});

@@ -85,7 +85,6 @@ describe('Professional / Independent Trustee Card', () => {
 		test('initial status is correct', () => {
 			expect(findAllByText('Confirmed').length).toEqual(1);
 			expect(findByTitle('Confirmed')).toBeDefined();
-			expect(findByText('Confirm details are correct.')).toBeDefined();
 		});
 
 		test('Organisation block displays values correctly', () => {
@@ -109,6 +108,14 @@ describe('Professional / Independent Trustee Card', () => {
 				findByRole,
 				`${independentTrustee.organisationName} Professional / Independent Trustee`,
 			);
+		});
+
+		test('replaces __NAME__ in the checkbox label', () => {
+			expect(
+				findByText(
+					`Confirm '${independentTrustee.organisationName}' is correct.`,
+				),
+			).toBeDefined();
 		});
 	});
 

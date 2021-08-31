@@ -29,6 +29,7 @@ export const AddressLookup: React.FC<AddressProps> = ({
 	selectAddressButton,
 	selectAddressRequiredMessage,
 	noAddressesFoundMessage,
+	headingLevel = 2,
 	addressLine1Label,
 	addressLine1RequiredMessage,
 	addressLine2Label,
@@ -70,7 +71,7 @@ export const AddressLookup: React.FC<AddressProps> = ({
 
 	// Render a different child component depending on the state
 	return (
-		<>
+		<div aria-live="polite">
 			{addressView === AddressView.PostcodeLookup && (
 				<PostcodeLookup
 					postcode={postcode}
@@ -154,8 +155,9 @@ export const AddressLookup: React.FC<AddressProps> = ({
 					postcodeLabel={postcodeLabel}
 					countryLabel={countryLabel}
 					changeAddressButton={changeAddressButton}
+					headingLevel={headingLevel}
 				/>
 			)}
-		</>
+		</div>
 	);
 };

@@ -35,6 +35,7 @@ export interface IndependentTrusteeContext {
 	remove?: RemoveReasonProps;
 	independentTrustee: Partial<IndependentTrustee>;
 	preValidatedData?: boolean | null;
+	lastBtnClicked?: number | null;
 }
 
 const independentTrusteeMachine = Machine<
@@ -48,6 +49,7 @@ const independentTrusteeMachine = Machine<
 		complete: false,
 		remove: null,
 		independentTrustee: {},
+		lastBtnClicked: null,
 	},
 	states: {
 		preview: {

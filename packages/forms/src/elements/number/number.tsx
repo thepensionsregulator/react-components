@@ -89,7 +89,8 @@ const InputNumber: React.FC<InputNumberProps> = ({
 		// 		Delaying minimally the execution of the blur event solves this problem.
 		// 	*/
 		setTimeout(() => {
-			innerInput.current.dispatchEvent(new Event('blur', { bubbles: true }));
+			innerInput.current &&
+				innerInput.current.dispatchEvent(new Event('blur', { bubbles: true }));
 		}, 100);
 	};
 
@@ -189,6 +190,7 @@ const InputNumber: React.FC<InputNumberProps> = ({
 				isError={meta && meta.touched && meta.error}
 				placeholder={placeholder}
 				readOnly={readOnly}
+				required={required}
 				decimalPlaces={decimalPlaces}
 				{...input}
 				onKeyDown={handleKeyDown}
@@ -198,7 +200,7 @@ const InputNumber: React.FC<InputNumberProps> = ({
 				before={before}
 				ariaLabelExtension={i18n.ariaLabelExtension}
 				accessibilityHelper={helper}
-				parentRef={innerInput}
+				ref={innerInput}
 				{...props}
 			/>
 		</StyledInputLabel>

@@ -39,6 +39,7 @@ export interface InHouseAdminContext {
 	remove: { confirm: boolean; date: string } | null;
 	inHouseAdmin: Partial<InHouseAdmin>;
 	preValidatedData?: boolean | null;
+	lastBtnClicked?: number | null;
 }
 
 const inHouseAdminMachine = Machine<
@@ -52,6 +53,7 @@ const inHouseAdminMachine = Machine<
 		complete: false,
 		remove: null,
 		inHouseAdmin: {},
+		lastBtnClicked: null,
 	},
 	states: {
 		preview: {

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useRef } from 'react';
 import { Checkbox } from '@tpr/forms';
 import { Flex, Hr, P, classNames } from '@tpr/core';
 import { UnderlinedButton } from '../../../components/button';
@@ -6,9 +6,20 @@ import { useInsurerContext } from '../../context';
 import { AddressPreview } from '../../../common/views/preview/components';
 import styles from '../../../cards.module.scss';
 
-export const Preview: React.FC<any> = () => {
+export const Preview: React.FC<any> = React.memo(() => {
 	const { current, send, onCorrect, i18n } = useInsurerContext();
 	const { insurer, complete, preValidatedData } = current.context;
+
+	const insurerBtn = useRef(null);
+
+	const onClickInsurerBtn = () => {
+		current.context.lastBtnClicked = 4;
+		send('EDIT_INSURER');
+	};
+
+	const onCollapseInsurer = () => {
+		current.context.lastBtnClicked === 4 && insurerBtn.current.focus();
+	};
 
 	return (
 		<div
@@ -43,8 +54,10 @@ export const Preview: React.FC<any> = () => {
 				>
 					<UnderlinedButton
 						isOpen={current.matches({ edit: 'reference' })}
-						onClick={() => send('EDIT_INSURER')}
+						onClick={onClickInsurerBtn}
 						isEditButton={true}
+						btnRef={insurerBtn}
+						onCollapseCallback={onCollapseInsurer}
 					>
 						{i18n.preview.buttons.four}
 					</UnderlinedButton>
@@ -64,9 +77,12 @@ export const Preview: React.FC<any> = () => {
 						send('COMPLETE', { value: !complete });
 						onCorrect(!complete);
 					}}
-					label={i18n.preview.checkboxLabel}
+					label={i18n.preview.checkboxLabel.replace(
+						'__NAME__',
+						insurer.organisationName,
+					)}
 				/>
 			</Flex>
 		</div>
 	);
-};
+});

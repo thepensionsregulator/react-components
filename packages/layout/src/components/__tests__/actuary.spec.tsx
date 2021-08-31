@@ -91,7 +91,6 @@ describe('Actuary Card', () => {
 		test('initial status is correct', () => {
 			expect(findAllByText('Confirmed').length).toEqual(1);
 			expect(findByTitle('Confirmed')).toBeDefined();
-			expect(findByText('Confirm details are correct.')).toBeDefined();
 		});
 
 		test('displays Name Correctly', () => {
@@ -123,9 +122,13 @@ describe('Actuary Card', () => {
 				`${actuary.title} ${actuary.firstName} ${actuary.lastName} Actuary`,
 			);
 		});
+
+		test('replaces __NAME__ in the checkbox label', () => {
+			expect(findByText("Confirm 'Mr John Johnson' is correct.")).toBeDefined();
+		});
 	});
 
-	describe('updating Actuary Name', () => {
+	describe('update Actuary Name', () => {
 		let component, findByText, findByTestId;
 		let updatedActuary = null;
 
@@ -150,36 +153,47 @@ describe('Actuary Card', () => {
 			findByTestId = getByTestId;
 
 			findByText('Actuary').click();
-			const results = await axe(component);
-			expect(results).toHaveNoViolations();
 		});
 
 		afterEach(() => {
 			cleanup();
 		});
 
-		test('editing actuary Name', () => {
+		test('passes AXE accessibility testing', async () => {
+			const results = await axe(component);
+			expect(results).toHaveNoViolations();
+		});
+
+		test('renders name fields', () => {
 			expect(findByTestId('actuary-name-form')).not.toBe(null);
 
-			var titleHtmlElement = findByText('Title (optional)') as HTMLElement;
-			var firstNameHtmlElement = findByText('First name') as HTMLElement;
-			var lastNameHtmlElement = findByText('Last name') as HTMLElement;
+			const titleHtmlElement = findByTestId('title') as HTMLElement;
+			const firstNameHtmlElement = findByTestId('first-name') as HTMLElement;
+			const lastNameHtmlElement = findByTestId('last-name') as HTMLElement;
 
 			expect(titleHtmlElement).toBeDefined();
-			expect(titleHtmlElement.nextSibling.childNodes[0]).toHaveAttribute(
-				'maxlength',
-				'35',
+			expect(titleHtmlElement).toHaveAttribute('maxlength', '35');
+			expect(titleHtmlElement).toHaveAttribute(
+				'autocomplete',
+				'honorific-prefix',
 			);
+			expect(titleHtmlElement).toHaveAttribute('value', actuary.title);
 			expect(firstNameHtmlElement).toBeDefined();
-			expect(firstNameHtmlElement.nextSibling.childNodes[0]).toHaveAttribute(
-				'maxlength',
-				'70',
+			expect(firstNameHtmlElement).toHaveAttribute('maxlength', '70');
+			expect(firstNameHtmlElement).toHaveAttribute(
+				'autocomplete',
+				'given-name',
 			);
+			expect(firstNameHtmlElement).toHaveAttribute('value', actuary.firstName);
+			expect(firstNameHtmlElement).toHaveAttribute('required');
 			expect(lastNameHtmlElement).toBeDefined();
-			expect(lastNameHtmlElement.nextSibling.childNodes[0]).toHaveAttribute(
-				'maxlength',
-				'70',
+			expect(lastNameHtmlElement).toHaveAttribute('maxlength', '70');
+			expect(lastNameHtmlElement).toHaveAttribute(
+				'autocomplete',
+				'family-name',
 			);
+			expect(lastNameHtmlElement).toHaveAttribute('value', actuary.lastName);
+			expect(lastNameHtmlElement).toHaveAttribute('required');
 			expect(findByText('Save and close')).toBeDefined();
 			assertThatButtonHasBeenRemovedFromTheTabFlow(findByText, 'Remove');
 		});
@@ -228,18 +242,47 @@ describe('Actuary Card', () => {
 			findByTestId = getByTestId;
 
 			findByText('Contact details').click();
-			const results = await axe(component);
-			expect(results).toHaveNoViolations();
 		});
 
 		afterEach(() => {
 			cleanup();
 		});
 
-		test('editing contact details', () => {
+		test('passes AXE accessibility testing', async () => {
+			const results = await axe(component);
+			expect(results).toHaveNoViolations();
+		});
+
+		test('renders phone and email fields', () => {
 			expect(findByTestId('actuary-contact-form')).not.toBe(null);
-			expect(findByText('Telephone number')).toBeDefined();
-			expect(findByText('Email address')).toBeDefined();
+			const telHtmlElement = findByText('Telephone number');
+			const emailHtmlElement = findByText('Email address');
+			expect(telHtmlElement).toBeDefined();
+			expect(telHtmlElement.nextSibling.childNodes[0]).toHaveAttribute(
+				'type',
+				'tel',
+			);
+			expect(telHtmlElement.nextSibling.childNodes[0]).toHaveAttribute(
+				'autocomplete',
+				'tel',
+			);
+			expect(telHtmlElement.nextSibling.childNodes[0]).toHaveAttribute(
+				'value',
+				actuary.telephoneNumber,
+			);
+			expect(emailHtmlElement).toBeDefined();
+			expect(emailHtmlElement.nextSibling.childNodes[0]).toHaveAttribute(
+				'type',
+				'email',
+			);
+			expect(emailHtmlElement.nextSibling.childNodes[0]).toHaveAttribute(
+				'autocomplete',
+				'email',
+			);
+			expect(emailHtmlElement.nextSibling.childNodes[0]).toHaveAttribute(
+				'value',
+				actuary.emailAddress,
+			);
 			expect(findByText('Save and close')).toBeDefined();
 		});
 

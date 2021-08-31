@@ -7,15 +7,10 @@
 .nonEditable.selectedPostcode {
 	margin-top: 9px; /* Aligns with the field label on the postcode lookup view */
 }
-
 /* Ensure there is a space for the data even if the field is empty */
-.nonEditable [aria-labelledby]::after {
+.nonEditableText::after {
 	content: ' ';
 	display: inline-block;
-}
-
-label + .nonEditable {
-	margin-top: $space-3;
 }
 
 .editPostcode {
@@ -27,7 +22,7 @@ label + .nonEditable {
 }
 
 .nonEditableLabel {
-	margin: 0 0 $space-1;
+	margin: $space-3 0 $space-1;
 }
 
 .button {
@@ -37,4 +32,8 @@ label + .nonEditable {
 
 .arrowButton {
 	padding: 0;
+}
+
+.changeAddress {
+	margin-top: $space-5;
 }

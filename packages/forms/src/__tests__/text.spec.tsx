@@ -9,68 +9,134 @@ import { axe } from 'jest-axe';
 import { CheckDescribedByTag } from '../utils/aria-describedByTest';
 import AccessibilityHelper from '../elements/accessibilityHelper';
 
+const testId = 'text-input';
+
+const basicProps: FieldProps = {
+	hint: 'enter your name here',
+	label: 'Name',
+	name: 'name',
+	testId: testId,
+	type: 'text',
+	id: 'id1',
+};
+
 describe('Text input', () => {
+	describe('rendering', () => {
+		test('renders correctly', () => {
+			const { queryByTestId } = formSetup({
+				render: <FFInputText {...basicProps} />,
+			});
+
+			const label = queryByTestId(testId);
+			expect(label).toBeDefined();
+			expect(label).not.toHaveAttribute('required');
+		});
+
+		test('renders required', () => {
+			const { queryByTestId } = formSetup({
+				render: <FFInputText {...basicProps} required={true} />,
+			});
+
+			const label = queryByTestId(testId);
+			expect(label).toHaveAttribute('required');
+		});
+
+		test('renders label', () => {
+			const { getByText } = formSetup({
+				render: <FFInputText {...basicProps} />,
+			});
+
+			const label = getByText(/Name/);
+			expect(label).toBeInTheDocument();
+			expect(label.tagName).toBe('DIV');
+			expect(label).toHaveAttribute('id', 'name-label');
+		});
+
+		test('renders wrapper with custom tagName', () => {
+			const { container } = formSetup({
+				render: <FFInputText {...basicProps} wrapperElement="div" />,
+			});
+
+			expect(container.tagName).toBe('DIV');
+		});
+
+		test('renders label with custom tagName', () => {
+			const { getByText } = formSetup({
+				render: <FFInputText {...basicProps} labelElement="label" />,
+			});
+
+			const label = getByText(/Name/);
+			expect(label).toBeInTheDocument();
+			expect(label.tagName).toBe('LABEL');
+		});
+
+		test('renders heading around label', () => {
+			const { getByText } = formSetup({
+				render: <FFInputText {...basicProps} headingElement="h3" />,
+			});
+
+			const label = getByText(/Name/);
+			expect(label).toBeInTheDocument();
+			expect(label.parentElement.tagName).toBe('H3');
+		});
+
+		test('renders readonly', () => {
+			const { queryByTestId } = formSetup({
+				render: <FFInputText {...basicProps} readOnly={true} />,
+			});
+
+			const label = queryByTestId(testId);
+			expect(label).toHaveAttribute('readonly');
+		});
+
+		test('renders maxLength', () => {
+			const { queryByTestId } = formSetup({
+				render: <FFInputText testId="text-input" name="name" maxLength={3} />,
+			});
+
+			var textInput = queryByTestId(testId);
+			userEvent.type(textInput, 'ABCDEF');
+			fireEvent.blur(textInput);
+
+			expect(textInput).toHaveAttribute('maxlength');
+			expect(textInput).toHaveValue('ABC');
+		});
+		test('renders label with title optional', () => {
+			const { queryByText } = formSetup({
+				render: (
+					<FFInputText label="Name" required={false} name="name" type="text" />
+				),
+			});
+			const label = queryByText(/optional/g);
+			expect(label).toBeInTheDocument();
+		});
+
+		test('renders aria-label', () => {
+			const { queryByTestId } = formSetup({
+				render: <FFInputText {...basicProps} />,
+			});
+
+			const label = queryByTestId(testId);
+			expect(label).toHaveAttribute('aria-label', 'Name');
+		});
+
+		test('renders hint correctly', () => {
+			const { queryByText } = formSetup({
+				render: <FFInputText {...basicProps} />,
+			});
+			const hint = queryByText(/enter your name here/);
+			expect(hint).toBeInTheDocument();
+		});
+	});
+
 	test('is accessible', async () => {
 		const { container } = formSetup({
 			render: (
-				<FFInputText label="Name" testId="text-input" name="name" type="text" />
+				<FFInputText label="Name" testId={testId} name="name" type="text" />
 			),
 		});
 		const results = await axe(container);
 		expect(results).toHaveNoViolations();
-	});
-
-	test('renders label', () => {
-		const { getByText } = formSetup({
-			render: (
-				<FFInputText label="Name" testId="text-input" name="name" type="text" />
-			),
-		});
-
-		const label = getByText(/Name/);
-		expect(label).toBeInTheDocument();
-		expect(label).toHaveAttribute('id', 'name-label');
-	});
-
-	test('renders label with title optional', () => {
-		const { queryByText } = formSetup({
-			render: (
-				<FFInputText label="Name" required={false} name="name" type="text" />
-			),
-		});
-		const label = queryByText(/optional/g);
-		expect(label).toBeInTheDocument();
-	});
-
-	test('renders aria-label', () => {
-		const { queryByTestId } = formSetup({
-			render: (
-				<FFInputText
-					ariaLabel="Name"
-					testId="text-input"
-					name="name"
-					type="text"
-				/>
-			),
-		});
-
-		const label = queryByTestId('text-input');
-		expect(label).toHaveAttribute('aria-label', 'Name');
-	});
-
-	test('renders hint correctly', () => {
-		const { queryByText } = formSetup({
-			render: (
-				<FFInputText
-					label="Name"
-					hint="enter your name here"
-					name="name"
-					type="text"
-				/>
-			),
-		});
-		const hint = queryByText(/enter your name here/);
-		expect(hint).toBeInTheDocument();
 	});
 
 	test('shows error message on required field when left empty', () => {
@@ -123,37 +189,7 @@ describe('Text input', () => {
 	`);
 	});
 
-	test('renders readonly', () => {
-		const { queryByTestId } = formSetup({
-			render: (
-				<FFInputText
-					testId="text-input"
-					name="name"
-					type="text"
-					readOnly={true}
-				/>
-			),
-		});
-
-		const label = queryByTestId('text-input');
-		expect(label).toHaveAttribute('readonly');
-	});
-
-	test('renders maxLength', () => {
-		const { queryByTestId } = formSetup({
-			render: <FFInputText testId="text-input" name="name" maxLength={3} />,
-		});
-
-		var textInput = queryByTestId('text-input');
-		userEvent.type(textInput, 'ABCDEF');
-		fireEvent.blur(textInput);
-
-		expect(textInput).toHaveAttribute('maxlength');
-		expect(textInput).toHaveValue('ABC');
-	});
-
 	test('has correct describedby tag when an error is shown', () => {
-		const testId = 'texTest';
 		const name = 'textInput';
 		const label = 'Text Line 1';
 		const error = 'This is a required field';
