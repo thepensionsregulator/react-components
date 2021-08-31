@@ -13,6 +13,7 @@ export interface AddressProps extends SubmitButtonProps {
 	postcodeLookupButton: string;
 	changePostcodeButton: string;
 	changePostcodeAriaLabel?: string;
+	addressSelectedStatus: string;
 	selectAddressLabel: string;
 	selectAddressPlaceholder?: string;
 	selectAddressButton: string;

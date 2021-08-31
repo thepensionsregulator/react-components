@@ -12,6 +12,7 @@ export interface I18nAddressLookup {
 	selectAddressButton?: string;
 	selectAddressRequiredMessage?: string;
 	noAddressesFoundMessage?: string;
+	addressSelectedStatus?: string;
 	addressLine1Label?: string;
 	addressLine1RequiredMessage?: string;
 	addressLine2Label?: string;
@@ -37,6 +38,7 @@ export const i18n: I18nAddressLookup = {
 	selectAddressButton: 'Select address',
 	selectAddressRequiredMessage: 'Select an address to continue',
 	noAddressesFoundMessage: 'No matching addresses were found',
+	addressSelectedStatus: 'Address selected',
 	addressLine1Label: 'Address line 1',
 	addressLine1RequiredMessage: 'You must complete this field',
 	addressLine2Label: 'Address line 2',

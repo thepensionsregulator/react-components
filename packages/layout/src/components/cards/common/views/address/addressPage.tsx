@@ -72,6 +72,7 @@ const AddressPage: React.FC<AddressPageProps> = ({
 										i18n.selectAddressRequiredMessage
 									}
 									noAddressesFoundMessage={i18n.noAddressesFoundMessage}
+									addressSelectedStatus={i18n.addressSelectedStatus}
 									addressLine1Label={i18n.addressLine1Label}
 									addressLine1RequiredMessage={i18n.addressLine1RequiredMessage}
 									addressLine2Label={i18n.addressLine2Label}

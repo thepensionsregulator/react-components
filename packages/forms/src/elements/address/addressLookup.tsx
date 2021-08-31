@@ -6,6 +6,7 @@ import { EditAddress } from './editAddress';
 import { act } from 'react-dom/test-utils';
 import { AddressProps } from './types';
 import { useEffect } from 'react';
+import accessibilityStyles from '@tpr/theming/lib/accessibility.module.scss';
 
 export enum AddressView {
 	PostcodeLookup,
@@ -30,6 +31,7 @@ export const AddressLookup: React.FC<AddressProps> = ({
 	selectAddressRequiredMessage,
 	noAddressesFoundMessage,
 	headingLevel = 2,
+	addressSelectedStatus,
 	addressLine1Label,
 	addressLine1RequiredMessage,
 	addressLine2Label,
@@ -62,6 +64,11 @@ export const AddressLookup: React.FC<AddressProps> = ({
 	const [addresses, setAddresses] = useState<Address[]>([]);
 	const [address, setAddress] = useState<Address | null>(null);
 	const [postcode, setPostcode] = useState<string>(null);
+	const [accessibleStatus, setAccessibleStatus] = React.useState<string>();
+	function updateStatus(status) {
+		setAccessibleStatus(status);
+		setTimeout(() => setAccessibleStatus(''), 4000);
+	}
 
 	useEffect(() => {
 		if (setSubmitButton) {
@@ -71,7 +78,10 @@ export const AddressLookup: React.FC<AddressProps> = ({
 
 	// Render a different child component depending on the state
 	return (
-		<div aria-live="polite">
+		<>
+			<p role="status" className={accessibilityStyles.visuallyHidden}>
+				{accessibleStatus}
+			</p>
 			{addressView === AddressView.PostcodeLookup && (
 				<PostcodeLookup
 					postcode={postcode}
@@ -115,6 +125,7 @@ export const AddressLookup: React.FC<AddressProps> = ({
 					onAddressSelected={(selectedAddress) => {
 						setAddress(selectedAddress);
 						setAddressView(AddressView.EditAddress);
+						updateStatus(addressSelectedStatus);
 					}}
 					postcodeLookupLabel={postcodeLookupLabel}
 					changePostcodeButton={changePostcodeButton}
@@ -158,6 +169,6 @@ export const AddressLookup: React.FC<AddressProps> = ({
 					headingLevel={headingLevel}
 				/>
 			)}
-		</div>
+		</>
 	);
 };

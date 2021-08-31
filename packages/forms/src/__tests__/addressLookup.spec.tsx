@@ -19,6 +19,7 @@ const defaultProps: AddressProps = {
 	selectAddressButton: 'Select address',
 	selectAddressRequiredMessage: 'Select an address to continue',
 	noAddressesFoundMessage: 'No matching addresses were found',
+	addressSelectedStatus: 'Address selected',
 	addressLine1Label: 'Address line 1',
 	addressLine1RequiredMessage: 'You must complete this field',
 	addressLine2Label: 'Address line 2',
