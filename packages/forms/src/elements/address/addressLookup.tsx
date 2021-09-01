@@ -1,10 +1,9 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Address } from './types/address';
 import { PostcodeLookup } from './postcodeLookup';
 import { SelectAddress } from './selectAddress';
 import { EditAddress } from './editAddress';
 import { AddressProps } from './types';
-import { useEffect } from 'react';
 
 export enum AddressView {
 	PostcodeLookup,
