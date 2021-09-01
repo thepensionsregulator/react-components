@@ -61,7 +61,7 @@ export const Preview: React.FC<any> = React.memo(() => {
 						isOpen={current.matches({ edit: 'contacts' })}
 						isEditButton={true}
 						onCollapseCallback={onCollapseContacts}
-						btnRef={contactsBtn}
+						buttonRef={contactsBtn}
 					>
 						{i18n.preview.buttons.four}
 					</UnderlinedButton>

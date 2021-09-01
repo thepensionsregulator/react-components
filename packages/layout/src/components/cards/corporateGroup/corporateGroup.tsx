@@ -43,7 +43,7 @@ const CardContentSwitch: React.FC = () => {
 	}
 };
 
-const CorporateGroupBtn: React.FC<{ title: string }> = ({ title }) => (
+const CorporateGroupButton: React.FC<{ title: string }> = ({ title }) => (
 	<UnderlinedButton isMainHeading={true}>{title}</UnderlinedButton>
 );
 
@@ -66,6 +66,7 @@ const RemoveButton: React.FC = () => {
 					send('REMOVE');
 				}
 			}}
+			notHeading={true}
 		>
 			{i18n.preview.buttons.two}
 		</UnderlinedButton>
@@ -93,7 +94,7 @@ export const CorporateGroupCard: React.FC<CorporateGroupProviderProps> = React.m
 						>
 							<Toolbar
 								buttonLeft={() => (
-									<CorporateGroupBtn title={i18n.preview.buttons.one} />
+									<CorporateGroupButton title={i18n.preview.buttons.one} />
 								)}
 								buttonRight={RemoveButton}
 								complete={isComplete(context)}

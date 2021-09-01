@@ -66,7 +66,7 @@ export const Preview: React.FC<any> = React.memo(() => {
 							onClick={onClickDirectorBtn}
 							isOpen={current.matches({ edit: 'professional' })}
 							isEditButton={true}
-							btnRef={directorBtn}
+							buttonRef={directorBtn}
 							onCollapseCallback={onCollapseDirector}
 						>
 							{i18n.preview.buttons.five}
@@ -89,7 +89,7 @@ export const Preview: React.FC<any> = React.memo(() => {
 						onClick={onClickChairOfBoardBtn}
 						isOpen={current.matches({ edit: 'contacts' })}
 						isEditButton={true}
-						btnRef={chairBtn}
+						buttonRef={chairBtn}
 						onCollapseCallback={onCollapseChairOfBoard}
 					>
 						{i18n.preview.buttons.four}

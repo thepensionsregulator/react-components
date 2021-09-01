@@ -54,7 +54,7 @@ export const Preview: React.FC<CardContentProps> = React.memo(
 							onClick={onClickCorrespondenceBtn}
 							isOpen={current.matches({ edit: 'company' })}
 							isEditButton={true}
-							btnRef={correspondenceBtn}
+							buttonRef={correspondenceBtn}
 							onCollapseCallback={onCollapseCorrespondence}
 						>
 							{i18n.preview.buttons.three}
@@ -86,7 +86,7 @@ export const Preview: React.FC<CardContentProps> = React.memo(
 								onClick={onClickContactsBtn}
 								isOpen={current.matches({ edit: 'contact' })}
 								isEditButton={true}
-								btnRef={contactsBtn}
+								buttonRef={contactsBtn}
 								onCollapseCallback={onCollapseContacts}
 							>
 								{i18n.preview.buttons.four}

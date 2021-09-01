@@ -37,7 +37,7 @@ const CardContentSwitch: React.FC = () => {
 	}
 };
 
-const IndependentTrusteeBtn: React.FC<{ title: string }> = ({ title }) => (
+const IndependentTrusteeButton: React.FC<{ title: string }> = ({ title }) => (
 	<UnderlinedButton isMainHeading={true}>{title}</UnderlinedButton>
 );
 
@@ -60,6 +60,7 @@ const RemoveButton: React.FC = () => {
 					send('REMOVE');
 				}
 			}}
+			notHeading={true}
 		>
 			{i18n.preview.buttons.two}
 		</UnderlinedButton>
@@ -87,7 +88,7 @@ export const IndependentTrusteeCard: React.FC<IndependentTrusteeProviderProps> =
 						>
 							<Toolbar
 								buttonLeft={() => (
-									<IndependentTrusteeBtn title={i18n.preview.buttons.one} />
+									<IndependentTrusteeButton title={i18n.preview.buttons.one} />
 								)}
 								buttonRight={RemoveButton}
 								complete={isComplete(context)}

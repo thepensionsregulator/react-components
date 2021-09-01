@@ -56,7 +56,7 @@ export const Preview: React.FC<any> = React.memo(() => {
 						isOpen={current.matches({ edit: 'reference' })}
 						onClick={onClickInsurerBtn}
 						isEditButton={true}
-						btnRef={insurerBtn}
+						buttonRef={insurerBtn}
 						onCollapseCallback={onCollapseInsurer}
 					>
 						{i18n.preview.buttons.four}

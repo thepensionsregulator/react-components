@@ -92,6 +92,7 @@ const RemoveButton: React.FC = () => {
 			tabIndex={removeFromTabFlowIfMatches(current, {
 				edit: 'name',
 			})}
+			notHeading={true}
 		>
 			{i18n.preview.buttons.two}
 		</UnderlinedButton>

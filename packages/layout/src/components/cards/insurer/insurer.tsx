@@ -37,7 +37,7 @@ const CardContentSwitch: React.FC = () => {
 	}
 };
 
-const InsurerBtn: React.FC<{ title: string }> = ({ title }) => (
+const InsurerButton: React.FC<{ title: string }> = ({ title }) => (
 	<UnderlinedButton isMainHeading={true}>{title}</UnderlinedButton>
 );
 
@@ -60,6 +60,7 @@ const RemoveButton: React.FC = () => {
 					send('REMOVE');
 				}
 			}}
+			notHeading={true}
 		>
 			{i18n.preview.buttons.two}
 		</UnderlinedButton>
@@ -87,7 +88,7 @@ export const InsurerCard: React.FC<InsurerProviderProps> = React.memo(
 						>
 							<Toolbar
 								buttonLeft={() => (
-									<InsurerBtn title={i18n.preview.buttons.one} />
+									<InsurerButton title={i18n.preview.buttons.one} />
 								)}
 								buttonRight={RemoveButton}
 								complete={isComplete(context)}
