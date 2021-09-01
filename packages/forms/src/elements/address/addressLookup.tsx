@@ -3,7 +3,6 @@ import { Address } from './types/address';
 import { PostcodeLookup } from './postcodeLookup';
 import { SelectAddress } from './selectAddress';
 import { EditAddress } from './editAddress';
-import { act } from 'react-dom/test-utils';
 import { AddressProps } from './types';
 import { useEffect } from 'react';
 
@@ -71,7 +70,7 @@ export const AddressLookup: React.FC<AddressProps> = ({
 
 	// Render a different child component depending on the state
 	return (
-		<div aria-live="polite">
+		<>
 			{addressView === AddressView.PostcodeLookup && (
 				<PostcodeLookup
 					postcode={postcode}
@@ -86,7 +85,7 @@ export const AddressLookup: React.FC<AddressProps> = ({
 								addressLookupProvider
 									.transformResults(rawAddresses)
 									.then((processedResults) => {
-										act(() => setAddresses(processedResults));
+										setAddresses(processedResults);
 										setLoading(false);
 									});
 							})
@@ -134,30 +133,32 @@ export const AddressLookup: React.FC<AddressProps> = ({
 					}}
 				/>
 			)}
-			{addressView === AddressView.EditAddress && (
-				<EditAddress
-					initialValue={initialValue}
-					loading={loading}
-					value={address}
-					testId={testId}
-					onChangeAddressClick={() => {
-						if (onAddressChanging) {
-							onAddressChanging(false);
-						}
-						setAddressView(AddressView.PostcodeLookup);
-					}}
-					addressLine1Label={addressLine1Label}
-					addressLine1RequiredMessage={addressLine1RequiredMessage}
-					addressLine2Label={addressLine2Label}
-					addressLine3Label={addressLine3Label}
-					townLabel={townLabel}
-					countyLabel={countyLabel}
-					postcodeLabel={postcodeLabel}
-					countryLabel={countryLabel}
-					changeAddressButton={changeAddressButton}
-					headingLevel={headingLevel}
-				/>
-			)}
-		</div>
+			<div aria-live="polite">
+				{addressView === AddressView.EditAddress && (
+					<EditAddress
+						initialValue={initialValue}
+						loading={loading}
+						value={address}
+						testId={testId}
+						onChangeAddressClick={() => {
+							if (onAddressChanging) {
+								onAddressChanging(false);
+							}
+							setAddressView(AddressView.PostcodeLookup);
+						}}
+						addressLine1Label={addressLine1Label}
+						addressLine1RequiredMessage={addressLine1RequiredMessage}
+						addressLine2Label={addressLine2Label}
+						addressLine3Label={addressLine3Label}
+						townLabel={townLabel}
+						countyLabel={countyLabel}
+						postcodeLabel={postcodeLabel}
+						countryLabel={countryLabel}
+						changeAddressButton={changeAddressButton}
+						headingLevel={headingLevel}
+					/>
+				)}
+			</div>
+		</>
 	);
 };
