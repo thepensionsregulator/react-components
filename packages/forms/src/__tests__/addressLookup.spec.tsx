@@ -5,6 +5,7 @@ import { axe } from 'jest-axe';
 import { AddressLookup } from '../elements/address/addressLookup';
 import FakeAddressLookupProvider from '../elements/address/fakeAddressLookupProvider';
 import { AddressProps } from '../elements/address/types';
+import { act } from 'react-dom/test-utils';
 
 const defaultProps: AddressProps = {
 	loading: false,
@@ -31,14 +32,14 @@ const defaultProps: AddressProps = {
 	onAddressChanging: jest.fn(),
 };
 
-async function searchForAPostcode(postcode: string) {
+const searchForAPostcode = async (postcode: string) => {
 	const input = await screen.findByTestId('postcode-lookup-edit');
 	fireEvent.change(input, { target: { value: postcode } });
 	fireEvent.blur(input);
-	
+
 	const submit = await screen.findByTestId('postcode-lookup-button');
 	fireEvent.click(submit);
-}
+};
 
 beforeEach(() => {
 	defaultProps.addressLookupProvider = new FakeAddressLookupProvider();
@@ -50,13 +51,13 @@ afterEach(() => {
 
 describe('Address lookup', () => {
 	describe('postcode lookup view', () => {
-		test('to be the default when initialValue is null', async () => {
+		test('to be the default when initialValue is null', () => {
 			const { getByTestId } = formSetup({
 				render: <AddressLookup {...defaultProps} />,
 			});
 			expect(getByTestId('postcode-lookup-edit')).toBeDefined();
 		});
-		test('to be the default when all properties of initialValue are falsy', async () => {
+		test('to be the default when all properties of initialValue are falsy', () => {
 			const { getByTestId } = formSetup({
 				render: <AddressLookup {...defaultProps} initialValue={{}} />,
 			});
@@ -80,11 +81,13 @@ describe('Address lookup', () => {
 			const { container } = formSetup({
 				render: <AddressLookup {...defaultProps} />,
 			});
-			await searchForAPostcode(FakeAddressLookupProvider.tprAddress.postcode);
-			const changePostcode = container.querySelector(
-				'button[data-testid$="change-postcode"]',
-			);
-			expect(changePostcode).not.toBeNull();
+			await act(async () => {
+				await searchForAPostcode(FakeAddressLookupProvider.tprAddress.postcode);
+				const changePostcode = container.querySelector(
+					'button[data-testid$="change-postcode"]',
+				);
+				expect(changePostcode).not.toBeNull();
+			});
 		});
 		test('should validate the postcode when button is clicked', async () => {
 			const { findByText } = formSetup({
@@ -142,7 +145,7 @@ describe('Address lookup', () => {
 			});
 
 			await searchForAPostcode(FakeAddressLookupProvider.tprAddress.postcode);
-			
+
 			const selectAddressInput = await findByTestId('select-address-list');
 			selectAddressInput.click();
 
@@ -156,11 +159,12 @@ describe('Address lookup', () => {
 			);
 			expect(addressLine1Input).toBeDefined();
 		});
-		
+
 		test('should call onValidatePostcode when select address button is clicked', async () => {
 			const { findByTestId } = formSetup({
 				render: <AddressLookup {...defaultProps} />,
 			});
+
 			await searchForAPostcode(FakeAddressLookupProvider.tprAddress.postcode);
 
 			const selectAddressInput = await findByTestId('select-address-list');
@@ -174,7 +178,7 @@ describe('Address lookup', () => {
 	});
 
 	describe('edit address view', () => {
-		test('to be the default when initialValue is not null', async () => {
+		test('to be the default when initialValue is not null', () => {
 			const { container } = formSetup({
 				render: (
 					<AddressLookup
@@ -213,7 +217,7 @@ describe('Address lookup', () => {
 			expect(addressLine1).toHaveAttribute('autocomplete', 'address-line1');
 			expect(addressLine2).toHaveAttribute('autocomplete', 'address-line2');
 		});
-		test('to go to postcode lookup view when button clicked', async () => {
+		test('to go to postcode lookup view when button clicked', () => {
 			const { container } = formSetup({
 				render: (
 					<AddressLookup
@@ -229,7 +233,7 @@ describe('Address lookup', () => {
 			const input = container.querySelector('input[name="postcodeLookup"]');
 			expect(input).not.toBeNull();
 		});
-		test('address line 1 to have a required attribute', async () => {
+		test('address line 1 to have a required attribute', () => {
 			const { getByTestId } = formSetup({
 				render: (
 					<AddressLookup
