@@ -28,6 +28,7 @@ import styles from '../cards.module.scss';
 
 const CardContent: React.FC<CardContentProps> = ({
 	enableContactDetails = true,
+	onChangeAddress,
 }) => {
 	const { current, i18n, send, addressAPI } = useTrusteeContext();
 	const { trustee } = current.context;
@@ -63,6 +64,7 @@ const CardContent: React.FC<CardContentProps> = ({
 				i18n={i18n.address}
 				onCancelChanges={() => send('CANCEL')}
 				subSectionHeaderText={i18n.preview.buttons.three}
+				onChangeAddress={onChangeAddress}
 			/>
 		);
 	} else if (
@@ -187,7 +189,10 @@ export const TrusteeCard: React.FC<
 								: i18n.preview.statusText.unconfirmed
 						}
 					/>
-					<CardContent enableContactDetails={enableContactDetails} />
+					<CardContent
+						onChangeAddress={props.onChangeAddress}
+						enableContactDetails={enableContactDetails}
+					/>
 				</Section>
 			)}
 		</TrusteeProvider>
