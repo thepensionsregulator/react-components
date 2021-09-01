@@ -46,12 +46,13 @@
 	}
 }
 
-.arrowSpacing{
+.arrowSpacing {
 	justify-content: space-between;
 }
 
-.arrowButtonEdit{
-	font-size: 16px;
+.arrowButtonEdit {
+	font-size: $font-size-2;
+	font-weight: $font-weight-3;
 }
 
 :export {
