@@ -29,7 +29,7 @@ const trustee: Trustee = {
 	addressLine3: 'Trafalgar Pl',
 	postTown: 'Brighton',
 	postcode: 'BN1 4DW',
-	county: 'West Sussex',
+	county: 'East Sussex',
 	country: 'UK',
 	countryId: 2,
 	//

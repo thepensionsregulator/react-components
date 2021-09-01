@@ -19,7 +19,7 @@ const thirdPartyAdmin: ThirdPartyProps = {
 		addressLine3: '',
 		postTown: 'Brighton',
 		postcode: 'BN1 4DW',
-		county: 'West Sussex',
+		county: 'East Sussex',
 		countryId: 2,
 	},
 };

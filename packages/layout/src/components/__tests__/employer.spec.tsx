@@ -28,7 +28,7 @@ const employer: Employer = {
 		addressLine3: '',
 		postTown: 'Brighton',
 		postcode: 'BN1 4DW',
-		county: 'West Sussex',
+		county: 'East Sussex',
 		country: '',
 		countryId: 2,
 	},

@@ -36,13 +36,13 @@ describe('capitalizeEachWord', () => {
 	const firstString: string = 'the  pensions regulator';
 	const secondString: string = ' THE PENSIONS REGULATOR';
 	const thirdString: string = '45/50 MAIN ROAD  ';
-	const forthString: string = '45 FIRST FLOOR, MAIN ROAD';
+	const fourthString: string = '45 FIRST FLOOR, MAIN ROAD';
 
 	test('capitalizeEachWord works as expected', () => {
 		expect(capitalizeEachWord(firstString)).toEqual('The Pensions Regulator');
 		expect(capitalizeEachWord(secondString)).toEqual('The Pensions Regulator');
 		expect(capitalizeEachWord(thirdString)).toEqual('45/50 Main Road');
-		expect(capitalizeEachWord(forthString)).toEqual(
+		expect(capitalizeEachWord(fourthString)).toEqual(
 			'45 First Floor, Main Road',
 		);
 	});

@@ -32,7 +32,7 @@ const actuary: Actuary = {
 		addressLine3: 'TRAFALGAR PL',
 		postTown: 'BRIGHTON',
 		postcode: 'BN1 4DW',
-		county: 'WEST SUSSEX',
+		county: 'EAST SUSSEX',
 		country: 'UK',
 		countryId: 2,
 	},

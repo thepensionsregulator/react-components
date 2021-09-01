@@ -40,7 +40,7 @@ import { ThirdPartyCard } from '@tpr/layout';
 				addressLine2: 'Trafalgar Pl',
 				addressLine3: '',
 				postTown: 'Brighton',
-				county: 'West Sussex',
+				county: 'East Sussex',
 				postcode: 'BN1 4DW',
 				country: '',
 			},
@@ -60,11 +60,11 @@ import { ThirdPartyCard } from '@tpr/layout';
 
 ### Props
 
-| Property         | Required | Type                | Description                                                                              |
-| ---------------- | -------- | ------------------- | ---------------------------------------------------------------------------------------- |
-| complete         | true     | boolean             | changes the state of the card when All details are correct                               |
-| i18n             | false    | ThirdPartyI18nProps | allows to override specific text in the card                                             |
+| Property         | Required | Type                | Description                                                                                  |
+| ---------------- | -------- | ------------------- | -------------------------------------------------------------------------------------------- |
+| complete         | true     | boolean             | changes the state of the card when All details are correct                                   |
+| i18n             | false    | ThirdPartyI18nProps | allows to override specific text in the card                                                 |
 | onCorrect        | true     | function            | actions for when the user clicks the "Confirm details are correct" checkbox                  |
-| onRemove         | true     | function            | actions for when the thirdParty is removed                                               |
+| onRemove         | true     | function            | actions for when the thirdParty is removed                                                   |
 | prevalidatedData | false    | boolean             | allows to ignore the state of the "Confirm details are correct" checkbox & shows "No issues" |
-| thirdParty       | true     | ThirdPartyProps     | the Third Party object                                                                   |
+| thirdParty       | true     | ThirdPartyProps     | the Third Party object                                                                       |

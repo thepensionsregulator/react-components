@@ -28,7 +28,7 @@ const inHouseAdmin: InHouseAdminNoApi = {
 		addressLine3: '',
 		postTown: 'Brighton',
 		postcode: 'BN1 4DW',
-		county: 'West Sussex',
+		county: 'East Sussex',
 		countryId: 2,
 	},
 	telephoneNumber: '01273 222 111',
