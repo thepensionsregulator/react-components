@@ -42,7 +42,9 @@ describe('Corporate Group Trustee Card', () => {
 			findAllByText,
 			findByTitle,
 			findByRole,
-			findByTestId;
+			findByTestId,
+			findAllByTestId;
+
 		beforeEach(() => {
 			const {
 				container,
@@ -51,6 +53,7 @@ describe('Corporate Group Trustee Card', () => {
 				queryByTitle,
 				getByRole,
 				getByTestId,
+				getAllByTestId,
 			} = render(
 				<CorporateGroupCard
 					corporateGroup={corporateGroup}
@@ -69,6 +72,7 @@ describe('Corporate Group Trustee Card', () => {
 			findByTitle = queryByTitle;
 			findByRole = getByRole;
 			findByTestId = getByTestId;
+			findAllByTestId = getAllByTestId;
 		});
 
 		test('no Violations', async () => {
@@ -78,27 +82,31 @@ describe('Corporate Group Trustee Card', () => {
 
 		test('it renders sections correctly', () => {
 			expect(component.querySelector('button')).not.toBe(null);
+
 			expect(findByText('Corporate Trustee')).toBeDefined();
-			expect(findByText('Corporate Trustee').outerHTML.slice(0, 3)).toBe('<h3');
+			expect(findByTestId('card-main-heading')).toBeDefined();
+
 			expect(findByText('Remove')).toBeDefined();
-			expect(findByText('Remove').outerHTML.slice(0, 3)).toBe('<h4');
-			expect(findByText('Address')).toBeDefined();
-			expect(findByText('Address').outerHTML.slice(0, 3)).toBe('<h4');
-			expect(findByText('Chair of board')).toBeDefined();
-			assertThatButtonHasAriaExpanded(findByText, 'Chair of board', false);
-			expect(findByText('Chair of board').outerHTML.slice(0, 3)).toBe('<h4');
-			expect(findByText('Director(s) are Professional Trustees')).toBeDefined();
+			expect(findByTestId('card-not-heading')).toBeDefined();
+
+			const h4Headings = findAllByTestId('card-heading');
+			expect(h4Headings).toBeDefined();
+			expect(h4Headings.length).toBe(1);
+			expect(h4Headings[0]).toHaveTextContent('Address');
+
+			const h4Buttons = findAllByTestId('card-heading-button');
+			expect(h4Buttons).toBeDefined();
+			expect(h4Buttons.length).toBe(2);
+			expect(h4Buttons[0]).toHaveTextContent(
+				'Director(s) are Professional Trustees',
+			);
+			expect(h4Buttons[1]).toHaveTextContent('Chair of board');
 			assertThatButtonHasAriaExpanded(
 				findByText,
 				'Director(s) are Professional Trustees',
 				false,
 			);
-			expect(
-				findByText('Director(s) are Professional Trustees').outerHTML.slice(
-					0,
-					3,
-				),
-			).toBe('<h4');
+			assertThatButtonHasAriaExpanded(findByText, 'Chair of board', false);
 		});
 
 		test('initial status is correct', () => {

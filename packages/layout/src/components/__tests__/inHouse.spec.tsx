@@ -36,10 +36,16 @@ const inHouseAdmin: InHouseAdminNoApi = {
 };
 
 describe('InHouse Preview', () => {
-	let component, findByText, findByRole;
+	let component, findByText, findByRole, findByTestId, findAllByTestId;
 
 	beforeEach(async () => {
-		const { container, getByText, getByRole } = render(
+		const {
+			container,
+			getByText,
+			getByRole,
+			getByTestId,
+			getAllByTestId,
+		} = render(
 			<InHouseCard
 				onSaveContacts={noop}
 				onSaveAddress={noop}
@@ -58,6 +64,8 @@ describe('InHouse Preview', () => {
 		component = container;
 		findByText = getByText;
 		findByRole = getByRole;
+		findByTestId = getByTestId;
+		findAllByTestId = getAllByTestId;
 	});
 
 	test('is accessible', async () => {
@@ -67,17 +75,18 @@ describe('InHouse Preview', () => {
 
 	test('it renders preview correctly', () => {
 		expect(findByText('In House Administrator')).toBeDefined();
-		expect(findByText('In House Administrator').outerHTML.slice(0, 3)).toBe(
-			'<h3',
-		);
+		expect(findByTestId('card-main-heading-button')).toBeDefined();
+
 		expect(findByText('Remove')).toBeDefined();
-		expect(findByText('Remove').outerHTML.slice(0, 3)).toBe('<h4');
-		expect(findByText('Address')).toBeDefined();
+		expect(findByTestId('card-not-heading')).toBeDefined();
+
+		const h4Buttons = findAllByTestId('card-heading-button');
+		expect(h4Buttons).toBeDefined();
+		expect(h4Buttons.length).toBe(2);
+		expect(h4Buttons[0]).toHaveTextContent('Address');
+		expect(h4Buttons[1]).toHaveTextContent('Contact details');
 		assertThatButtonHasAriaExpanded(findByText, 'Address', false);
-		expect(findByText('Address').outerHTML.slice(0, 3)).toBe('<h4');
-		expect(findByText('Contact details')).toBeDefined();
 		assertThatButtonHasAriaExpanded(findByText, 'Contact details', false);
-		expect(findByText('Contact details').outerHTML.slice(0, 3)).toBe('<h4');
 	});
 
 	test('replaces __NAME__ in the checkbox label', () => {

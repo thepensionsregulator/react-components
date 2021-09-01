@@ -50,7 +50,7 @@ describe('Employer Preview', () => {
 	});
 
 	test('renders buttons correctly', () => {
-		const { getByText, container } = render(
+		const { getByText, getByTestId, getAllByTestId, container } = render(
 			<EmployerCard
 				onSaveType={noop}
 				onRemove={noop}
@@ -60,14 +60,18 @@ describe('Employer Preview', () => {
 		);
 
 		expect(container.querySelector('button')).not.toBe(null);
+
 		expect(getByText('Employer type')).toBeDefined();
-		expect(getByText('Employer type').outerHTML.slice(0, 3)).toBe('<h3');
+		expect(getByTestId('card-main-heading-button')).toBeDefined();
+
 		expect(getByText('Remove')).toBeDefined();
-		expect(getByText('Remove').outerHTML.slice(0, 3)).toBe('<h4');
-		expect(getByText('Employer')).toBeDefined();
-		expect(getByText('Employer').outerHTML.slice(0, 3)).toBe('<h4');
-		expect(getByText('Employer Identifiers')).toBeDefined();
-		expect(getByText('Employer Identifiers').outerHTML.slice(0, 3)).toBe('<h4');
+		expect(getByTestId('card-not-heading')).toBeDefined();
+
+		const h4Headings = getAllByTestId('card-heading');
+		expect(h4Headings).toBeDefined();
+		expect(h4Headings.length).toBe(2);
+		expect(h4Headings[0]).toHaveTextContent('Employer');
+		expect(h4Headings[1]).toHaveTextContent('Employer Identifiers');
 	});
 
 	test('renders with a section containing an aria label', () => {

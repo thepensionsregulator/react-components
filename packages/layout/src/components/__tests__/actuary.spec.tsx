@@ -48,7 +48,9 @@ describe('Actuary Card', () => {
 			findAllByText,
 			findByTitle,
 			findByRole,
-			findByTestId;
+			findByTestId,
+			findAllByTestId;
+
 		beforeEach(() => {
 			const {
 				container,
@@ -57,6 +59,7 @@ describe('Actuary Card', () => {
 				queryByTitle,
 				getByRole,
 				getByTestId,
+				getAllByTestId,
 			} = render(
 				<ActuaryCard
 					actuary={actuary}
@@ -75,6 +78,7 @@ describe('Actuary Card', () => {
 			findByTitle = queryByTitle;
 			findByRole = getByRole;
 			findByTestId = getByTestId;
+			findAllByTestId = getAllByTestId;
 		});
 
 		test('no Violations', async () => {
@@ -84,15 +88,20 @@ describe('Actuary Card', () => {
 
 		test('it renders buttons correctly', () => {
 			expect(component.querySelector('button')).not.toBe(null);
+
 			expect(findByText('Actuary')).toBeDefined();
-			expect(findByText('Actuary').outerHTML.slice(0, 3)).toBe('<h3');
+			expect(findByTestId('card-main-heading-button')).toBeDefined();
 			assertThatButtonHasAriaExpanded(findByText, 'Actuary', false);
+
 			expect(findByText('Remove')).toBeDefined();
+			expect(findByTestId('card-not-heading')).toBeDefined();
 			assertThatButtonHasAriaExpanded(findByText, 'Remove', false);
-			expect(findByText('Remove').outerHTML.slice(0, 3)).toBe('<h4');
-			expect(findByText('Contact details')).toBeDefined();
+
+			const h4Buttons = findAllByTestId('card-heading-button');
+			expect(h4Buttons).toBeDefined();
+			expect(h4Buttons.length).toBe(1);
+			expect(h4Buttons[0]).toHaveTextContent('Contact details');
 			assertThatButtonHasAriaExpanded(findByText, 'Contact details', false);
-			expect(findByText('Contact details').outerHTML.slice(0, 3)).toBe('<h4');
 		});
 
 		test('initial status is correct', () => {

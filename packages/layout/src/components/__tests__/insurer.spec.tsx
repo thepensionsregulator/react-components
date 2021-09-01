@@ -33,7 +33,7 @@ const insurer: Insurer = {
 
 describe('Insurer Preview', () => {
 	test('is accessible', async () => {
-		const { container, getByText } = render(
+		const { container, getByText, getByTestId, getAllByTestId } = render(
 			<InsurerCard
 				onSaveRef={noop}
 				onRemove={noop}
@@ -46,15 +46,20 @@ describe('Insurer Preview', () => {
 		const results = await axe(container);
 		expect(results).toHaveNoViolations();
 		expect(getByText('Insurer administrator')).toBeDefined();
-		expect(getByText('Insurer administrator').outerHTML.slice(0, 3)).toBe(
-			'<h3',
-		);
+		expect(getByTestId('card-main-heading')).toBeDefined();
+
 		expect(getByText('Remove')).toBeDefined();
-		expect(getByText('Remove').outerHTML.slice(0, 3)).toBe('<h4');
-		expect(getByText('Insurer reference number')).toBeDefined();
-		expect(getByText('Insurer reference number').outerHTML.slice(0, 3)).toBe(
-			'<h4',
-		);
+		expect(getByTestId('card-not-heading')).toBeDefined();
+
+		const h4Headings = getAllByTestId('card-heading');
+		expect(h4Headings).toBeDefined();
+		expect(h4Headings.length).toBe(1);
+		expect(h4Headings[0]).toHaveTextContent('Address');
+
+		const h4Buttons = getAllByTestId('card-heading-button');
+		expect(h4Buttons).toBeDefined();
+		expect(h4Buttons.length).toBe(1);
+		expect(h4Buttons[0]).toHaveTextContent('Insurer reference number');
 		assertThatButtonHasAriaExpanded(
 			getByText,
 			'Insurer reference number',

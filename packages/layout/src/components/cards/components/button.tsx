@@ -44,9 +44,16 @@ export const UnderlinedButton: React.FC<UnderlinedButtonProps> = ({
 		<div className={styles.buttonPlaceholder}>
 			<Flex cfg={{ flex: '0 0 auto', alignItems: 'center' }}>
 				{isMainHeading ? (
-					<H3 cfg={{ fontWeight: 3, fontSize: 3 }}>{children}</H3>
+					<H3
+						cfg={{ fontWeight: 3, fontSize: 3 }}
+						data-testid="card-main-heading"
+					>
+						{children}
+					</H3>
 				) : (
-					<H4 cfg={{ fontSize: 2 }}>{children}</H4>
+					<H4 cfg={{ fontSize: 2 }} data-testid="card-heading">
+						{children}
+					</H4>
 				)}
 			</Flex>
 		</div>
@@ -71,19 +78,22 @@ export const UnderlinedButton: React.FC<UnderlinedButtonProps> = ({
 	);
 
 	const MainHeadingButton: React.FC = () => (
-		<H3 cfg={{ fontWeight: 3, fontSize: 3 }}>
+		<H3
+			cfg={{ fontWeight: 3, fontSize: 3 }}
+			data-testid="card-main-heading-button"
+		>
 			<ClickableButton />
 		</H3>
 	);
 
 	const HeadingButton: React.FC = () => (
-		<H4 cfg={{ fontSize: 2 }}>
+		<H4 cfg={{ fontSize: 2 }} data-testid="card-heading-button">
 			<ClickableButton />
 		</H4>
 	);
 
 	const NotHeadingButton: React.FC = () => (
-		<P cfg={{ fontWeight: 3 }}>
+		<P cfg={{ fontWeight: 3 }} data-testid="card-not-heading">
 			<ClickableButton />
 		</P>
 	);

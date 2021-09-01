@@ -43,7 +43,8 @@ let component,
 	findByTitle,
 	findByTestId,
 	findByRole,
-	findByTextQuery;
+	findByTextQuery,
+	findAllByTestId;
 let updatedTrustee = null;
 
 const getCard = (enableContactDetails: boolean) => {
@@ -78,6 +79,7 @@ const setupComponent = (enableContactDetails: boolean) => {
 		getByTestId,
 		getByRole,
 		queryByText,
+		getAllByTestId,
 	} = render(getCard(enableContactDetails));
 
 	component = container;
@@ -87,6 +89,7 @@ const setupComponent = (enableContactDetails: boolean) => {
 	findByTitle = queryByTitle;
 	findByRole = getByRole;
 	findByTextQuery = queryByText;
+	findAllByTestId = getAllByTestId;
 };
 
 describe('TrusteeCard enableContactDetails == true', () => {
@@ -104,23 +107,23 @@ describe('TrusteeCard enableContactDetails == true', () => {
 			expect(results).toHaveNoViolations();
 		});
 
-		test('buttons renders correctly', () => {
-			// Buttons are visible
+		test('buttons render correctly', () => {
 			expect(findByText('Trustee')).toBeDefined();
-			expect(findByText('Trustee').outerHTML.slice(0, 3)).toBe('<h3');
+			expect(findByTestId('card-main-heading-button')).toBeDefined();
+
 			expect(findByText('Remove')).toBeDefined();
-			expect(findByText('Remove').outerHTML.slice(0, 3)).toBe('<h4');
-			expect(findByText('Correspondence address')).toBeDefined();
-			expect(findByText('Correspondence address').outerHTML.slice(0, 3)).toBe(
-				'<h4',
-			);
+			expect(findByTestId('card-not-heading')).toBeDefined();
+
+			const h4Buttons = findAllByTestId('card-heading-button');
+			expect(h4Buttons).toBeDefined();
+			expect(h4Buttons.length).toBe(2);
+			expect(h4Buttons[0]).toHaveTextContent('Correspondence address');
+			expect(h4Buttons[1]).toHaveTextContent('Contact details');
 			assertThatButtonHasAriaExpanded(
 				findByText,
 				'Correspondence address',
 				false,
 			);
-			expect(findByText('Contact details')).toBeDefined();
-			expect(findByText('Contact details').outerHTML.slice(0, 3)).toBe('<h4');
 			assertThatButtonHasAriaExpanded(findByText, 'Contact details', false);
 		});
 

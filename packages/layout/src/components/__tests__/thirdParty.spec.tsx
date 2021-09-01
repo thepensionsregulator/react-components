@@ -40,7 +40,7 @@ describe('ThirdParty Preview', () => {
 	});
 
 	test('renders buttons correctly', () => {
-		const { getByText, container } = render(
+		const { getByText, container, getByTestId, getAllByTestId } = render(
 			<ThirdPartyCard
 				onRemove={noop}
 				onCorrect={(_value) => {}}
@@ -50,14 +50,17 @@ describe('ThirdParty Preview', () => {
 		);
 
 		expect(container.querySelector('button')).not.toBe(null);
+
 		expect(getByText('Third Party Administrator')).toBeDefined();
-		expect(getByText('Third Party Administrator').outerHTML.slice(0, 3)).toBe(
-			'<h3',
-		);
+		expect(getByTestId('card-main-heading')).toBeDefined();
+
 		expect(getByText('Remove')).toBeDefined();
-		expect(getByText('Remove').outerHTML.slice(0, 3)).toBe('<h4');
-		expect(getByText('Address')).toBeDefined();
-		expect(getByText('Address').outerHTML.slice(0, 3)).toBe('<h4');
+		expect(getByTestId('card-not-heading')).toBeDefined();
+
+		const h4Headings = getAllByTestId('card-heading');
+		expect(h4Headings).toBeDefined();
+		expect(h4Headings.length).toBe(1);
+		expect(h4Headings[0]).toHaveTextContent('Address');
 	});
 
 	test('renders with a section containing an aria label', () => {

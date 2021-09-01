@@ -37,7 +37,8 @@ describe('Professional / Independent Trustee Card', () => {
 			findAllByText,
 			findByTitle,
 			findByRole,
-			findByTestId;
+			findByTestId,
+			findAllByTestId;
 		beforeEach(() => {
 			const {
 				container,
@@ -46,6 +47,7 @@ describe('Professional / Independent Trustee Card', () => {
 				queryByTitle,
 				getByRole,
 				getByTestId,
+				getAllByTestId,
 			} = render(
 				<IndependentTrusteeCard
 					independentTrustee={independentTrustee}
@@ -62,6 +64,7 @@ describe('Professional / Independent Trustee Card', () => {
 			findByTitle = queryByTitle;
 			findByRole = getByRole;
 			findByTestId = getByTestId;
+			findAllByTestId = getAllByTestId;
 		});
 
 		test('no Violations', async () => {
@@ -71,16 +74,22 @@ describe('Professional / Independent Trustee Card', () => {
 
 		test('it renders sections correctly', () => {
 			expect(component.querySelector('button')).not.toBe(null);
+
 			expect(findByText('Corporate Trustee')).toBeDefined();
-			expect(findByText('Corporate Trustee').outerHTML.slice(0, 3)).toBe('<h3');
+			expect(findByTestId('card-main-heading')).toBeDefined();
+
 			expect(findByText('Remove')).toBeDefined();
-			expect(findByText('Remove').outerHTML.slice(0, 3)).toBe('<h4');
-			expect(findByText('Address')).toBeDefined();
-			expect(findByText('Address').outerHTML.slice(0, 3)).toBe('<h4');
-			expect(findByText('Appointed by the regulator')).toBeDefined();
-			expect(
-				findByText('Appointed by the regulator').outerHTML.slice(0, 3),
-			).toBe('<h4');
+			expect(findByTestId('card-not-heading')).toBeDefined();
+
+			const h4Headings = findAllByTestId('card-heading');
+			expect(h4Headings).toBeDefined();
+			expect(h4Headings.length).toBe(1);
+			expect(h4Headings[0]).toHaveTextContent('Address');
+
+			const h4Buttons = findAllByTestId('card-heading-button');
+			expect(h4Buttons).toBeDefined();
+			expect(h4Buttons.length).toBe(1);
+			expect(h4Buttons[0]).toHaveTextContent('Appointed by the regulator');
 			assertThatButtonHasAriaExpanded(
 				findByText,
 				'Appointed by the regulator',
