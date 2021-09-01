@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useRef, MutableRefObject } from 'react';
 import {
 	CorporateGroupProvider,
 	CorporateGroupProviderProps,
@@ -47,8 +47,15 @@ const CorporateGroupButton: React.FC<{ title: string }> = ({ title }) => (
 	<UnderlinedButton isMainHeading={true}>{title}</UnderlinedButton>
 );
 
-const RemoveButton: React.FC = () => {
+const RemoveButton: React.FC<{ button: MutableRefObject<any> }> = ({
+	button,
+}) => {
 	const { current, send, i18n } = useCorporateGroupContext();
+
+	const onCollapseRemove = () => {
+		current.context.lastBtnClicked === 2 && button.current.focus();
+	};
+
 	return (
 		<UnderlinedButton
 			isOpen={
@@ -67,6 +74,8 @@ const RemoveButton: React.FC = () => {
 				}
 			}}
 			notHeading={true}
+			buttonRef={button}
+			onCollapseCallback={onCollapseRemove}
 		>
 			{i18n.preview.buttons.two}
 		</UnderlinedButton>
@@ -79,6 +88,8 @@ const isComplete = (context: CorporateGroupContext) => {
 
 export const CorporateGroupCard: React.FC<CorporateGroupProviderProps> = React.memo(
 	({ testId, cfg, ...rest }) => {
+		const removeButtonRef = useRef(null);
+
 		return (
 			<CorporateGroupProvider {...rest}>
 				{({ current: { context }, i18n }) => {
@@ -96,7 +107,7 @@ export const CorporateGroupCard: React.FC<CorporateGroupProviderProps> = React.m
 								buttonLeft={() => (
 									<CorporateGroupButton title={i18n.preview.buttons.one} />
 								)}
-								buttonRight={RemoveButton}
+								buttonRight={() => <RemoveButton button={removeButtonRef} />}
 								complete={isComplete(context)}
 								subtitle={() => (
 									<Subtitle

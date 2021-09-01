@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useRef, MutableRefObject } from 'react';
 import {
 	IndependentTrusteeProvider,
 	IndependentTrusteeProviderProps,
@@ -41,8 +41,15 @@ const IndependentTrusteeButton: React.FC<{ title: string }> = ({ title }) => (
 	<UnderlinedButton isMainHeading={true}>{title}</UnderlinedButton>
 );
 
-const RemoveButton: React.FC = () => {
+const RemoveButton: React.FC<{ button: MutableRefObject<any> }> = ({
+	button,
+}) => {
 	const { current, send, i18n } = useIndependentTrusteeContext();
+
+	const onCollapseRemove = () => {
+		current.context.lastBtnClicked === 2 && button.current.focus();
+	};
+
 	return (
 		<UnderlinedButton
 			isOpen={
@@ -61,6 +68,8 @@ const RemoveButton: React.FC = () => {
 				}
 			}}
 			notHeading={true}
+			buttonRef={button}
+			onCollapseCallback={onCollapseRemove}
 		>
 			{i18n.preview.buttons.two}
 		</UnderlinedButton>
@@ -73,6 +82,8 @@ const isComplete = (context: IndependentTrusteeContext) => {
 
 export const IndependentTrusteeCard: React.FC<IndependentTrusteeProviderProps> = React.memo(
 	({ testId, cfg, ...rest }) => {
+		const removeButtonRef = useRef(null);
+
 		return (
 			<IndependentTrusteeProvider {...rest}>
 				{({ current: { context }, i18n }) => {
@@ -90,7 +101,7 @@ export const IndependentTrusteeCard: React.FC<IndependentTrusteeProviderProps> =
 								buttonLeft={() => (
 									<IndependentTrusteeButton title={i18n.preview.buttons.one} />
 								)}
-								buttonRight={RemoveButton}
+								buttonRight={() => <RemoveButton button={removeButtonRef} />}
 								complete={isComplete(context)}
 								subtitle={() => (
 									<Subtitle

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useRef, MutableRefObject } from 'react';
 import {
 	TrusteeProvider,
 	useTrusteeContext,
@@ -82,8 +82,14 @@ const CardContent: React.FC<CardContentProps> = ({
 	}
 };
 
-const TrusteeButton: React.FC = () => {
+const TrusteeButton: React.FC<{ button: MutableRefObject<any> }> = ({
+	button,
+}) => {
 	const { current, send, i18n } = useTrusteeContext();
+
+	const onCollapseTrustee = () => {
+		current.context.lastBtnClicked === 1 && button.current.focus();
+	};
 
 	return (
 		<UnderlinedButton
@@ -105,14 +111,22 @@ const TrusteeButton: React.FC = () => {
 			}}
 			isEditButton={true}
 			isMainHeading={true}
+			buttonRef={button}
+			onCollapseCallback={onCollapseTrustee}
 		>
 			{i18n.preview.buttons.one}
 		</UnderlinedButton>
 	);
 };
 
-const RemoveButton: React.FC = () => {
+const RemoveButton: React.FC<{ button: MutableRefObject<any> }> = ({
+	button,
+}) => {
 	const { current, send, i18n } = useTrusteeContext();
+
+	const onCollapseRemove = () => {
+		current.context.lastBtnClicked === 2 && button.current.focus();
+	};
 
 	return (
 		<UnderlinedButton
@@ -135,6 +149,8 @@ const RemoveButton: React.FC = () => {
 				edit: { trustee: 'name' },
 			})}
 			notHeading={true}
+			buttonRef={button}
+			onCollapseCallback={onCollapseRemove}
 		>
 			{i18n.preview.buttons.two}
 		</UnderlinedButton>
@@ -148,6 +164,9 @@ const isComplete = (context: TrusteeContext) => {
 export const TrusteeCard: React.FC<
 	Omit<TrusteeCardProps, 'children'>
 > = React.memo(({ cfg, enableContactDetails = true, ...props }) => {
+	const trusteeButtonRef = useRef(null);
+	const removeButtonRef = useRef(null);
+
 	return (
 		<TrusteeProvider {...props}>
 			{({ current, i18n }) => (
@@ -164,8 +183,8 @@ export const TrusteeCard: React.FC<
 					])}
 				>
 					<Toolbar
-						buttonLeft={TrusteeButton}
-						buttonRight={RemoveButton}
+						buttonLeft={() => <TrusteeButton button={trusteeButtonRef} />}
+						buttonRight={() => <RemoveButton button={removeButtonRef} />}
 						complete={isComplete(current.context)}
 						subtitle={() => (
 							<Subtitle

@@ -1,4 +1,4 @@
-import React, { useMemo } from 'react';
+import React, { useMemo, useRef, MutableRefObject } from 'react';
 import { UnderlinedButton } from '../components/button';
 import { Toolbar } from '../components/toolbar';
 import { Section } from '@tpr/core';
@@ -41,8 +41,15 @@ const CardContentSwitch: React.FC = () => {
 	}
 };
 
-const EmployerButton: React.FC = () => {
+const EmployerButton: React.FC<{ button: MutableRefObject<any> }> = ({
+	button,
+}) => {
 	const { current, send, i18n } = useEmployerContext();
+
+	const onCollapseEmployer = () => {
+		current.context.lastBtnClicked === 1 && button.current.focus();
+	};
+
 	return (
 		<UnderlinedButton
 			isOpen={current.matches('employerType')}
@@ -60,14 +67,23 @@ const EmployerButton: React.FC = () => {
 			}}
 			isEditButton={true}
 			isMainHeading={true}
+			buttonRef={button}
+			onCollapseCallback={onCollapseEmployer}
 		>
 			{i18n.preview.buttons.one}
 		</UnderlinedButton>
 	);
 };
 
-const RemoveButton: React.FC = () => {
+const RemoveButton: React.FC<{ button: MutableRefObject<any> }> = ({
+	button,
+}) => {
 	const { current, send, i18n } = useEmployerContext();
+
+	const onCollapseRemove = () => {
+		current.context.lastBtnClicked === 2 && button.current.focus();
+	};
+
 	return (
 		<UnderlinedButton
 			isOpen={
@@ -88,6 +104,8 @@ const RemoveButton: React.FC = () => {
 			}}
 			tabIndex={removeFromTabFlowIfMatches(current, 'employerType')}
 			notHeading={true}
+			buttonRef={button}
+			onCollapseCallback={onCollapseRemove}
 		>
 			{i18n.preview.buttons.two}
 		</UnderlinedButton>
@@ -130,6 +148,9 @@ const isComplete = (context: EmployerContext) => {
 
 export const EmployerCard: React.FC<EmployerProviderProps> = React.memo(
 	({ testId, cfg, ...rest }) => {
+		const employerButtonRef = useRef(null);
+		const removeButtonRef = useRef(null);
+
 		return (
 			<EmployerProvider {...rest}>
 				{({ current, i18n }) => {
@@ -143,8 +164,8 @@ export const EmployerCard: React.FC<EmployerProviderProps> = React.memo(
 							])}
 						>
 							<Toolbar
-								buttonLeft={EmployerButton}
-								buttonRight={RemoveButton}
+								buttonLeft={() => <EmployerButton button={employerButtonRef} />}
+								buttonRight={() => <RemoveButton button={removeButtonRef} />}
 								complete={isComplete(current.context)}
 								subtitle={() => <EmployerSubtitle {...current.context} />}
 								statusText={

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useRef, MutableRefObject } from 'react';
 import {
 	ThirdPartyProvider,
 	ThirdPartyProviderProps,
@@ -38,8 +38,15 @@ const ThirdPartyButton: React.FC<{ title: string }> = ({ title }) => (
 	<UnderlinedButton isMainHeading={true}>{title}</UnderlinedButton>
 );
 
-const RemoveButton: React.FC = () => {
+const RemoveButton: React.FC<{ button: MutableRefObject<any> }> = ({
+	button,
+}) => {
 	const { current, send, i18n } = useThirdPartyContext();
+
+	const onCollapseRemove = () => {
+		current.context.lastBtnClicked === 2 && button.current.focus();
+	};
+
 	return (
 		<UnderlinedButton
 			isOpen={
@@ -58,6 +65,8 @@ const RemoveButton: React.FC = () => {
 				}
 			}}
 			notHeading={true}
+			buttonRef={button}
+			onCollapseCallback={onCollapseRemove}
 		>
 			{i18n.preview.buttons.two}
 		</UnderlinedButton>
@@ -70,6 +79,8 @@ const isComplete = (context: ThirdPartyContext) => {
 
 export const ThirdPartyCard: React.FC<ThirdPartyProviderProps> = React.memo(
 	({ testId, cfg, ...rest }) => {
+		const removeButtonRef = useRef(null);
+
 		return (
 			<ThirdPartyProvider {...rest}>
 				{({ current: { context }, i18n }) => {
@@ -87,7 +98,7 @@ export const ThirdPartyCard: React.FC<ThirdPartyProviderProps> = React.memo(
 								buttonLeft={() => (
 									<ThirdPartyButton title={i18n.preview.buttons.one} />
 								)}
-								buttonRight={RemoveButton}
+								buttonRight={() => <RemoveButton button={removeButtonRef} />}
 								complete={isComplete(context)}
 								subtitle={() => (
 									<Subtitle main={context.thirdParty.organisationName} />

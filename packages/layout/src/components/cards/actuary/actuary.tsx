@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useRef, MutableRefObject } from 'react';
 import {
 	ActuaryProvider,
 	ActuaryProviderProps,
@@ -41,8 +41,14 @@ const CardContentSwitch: React.FC = () => {
 	}
 };
 
-const ActuaryButton: React.FC = () => {
+const ActuaryButton: React.FC<{ button: MutableRefObject<any> }> = ({
+	button,
+}) => {
 	const { current, send, i18n } = useActuaryContext();
+
+	const onCollapseActuary = () => {
+		current.context.lastBtnClicked === 1 && button.current.focus();
+	};
 
 	const onOfStatesIsActive =
 		current.matches({ edit: 'contacts' }) ||
@@ -64,14 +70,23 @@ const ActuaryButton: React.FC = () => {
 			}}
 			isEditButton={true}
 			isMainHeading={true}
+			buttonRef={button}
+			onCollapseCallback={onCollapseActuary}
 		>
 			{i18n.preview.buttons.one}
 		</UnderlinedButton>
 	);
 };
 
-const RemoveButton: React.FC = () => {
+const RemoveButton: React.FC<{ button: MutableRefObject<any> }> = ({
+	button,
+}) => {
 	const { current, send, i18n } = useActuaryContext();
+
+	const onCollapseRemove = () => {
+		current.context.lastBtnClicked === 2 && button.current.focus();
+	};
+
 	return (
 		<UnderlinedButton
 			isOpen={
@@ -93,6 +108,8 @@ const RemoveButton: React.FC = () => {
 				edit: 'name',
 			})}
 			notHeading={true}
+			buttonRef={button}
+			onCollapseCallback={onCollapseRemove}
 		>
 			{i18n.preview.buttons.two}
 		</UnderlinedButton>
@@ -105,6 +122,9 @@ const isComplete = (context: ActuaryContext) => {
 
 export const ActuaryCard: React.FC<ActuaryProviderProps> = React.memo(
 	({ testId, cfg, ...rest }) => {
+		const actuaryButtonRef = useRef(null);
+		const removeButtonRef = useRef(null);
+
 		return (
 			<ActuaryProvider {...rest}>
 				{({ current, i18n }) => {
@@ -121,8 +141,8 @@ export const ActuaryCard: React.FC<ActuaryProviderProps> = React.memo(
 							])}
 						>
 							<Toolbar
-								buttonLeft={ActuaryButton}
-								buttonRight={RemoveButton}
+								buttonLeft={() => <ActuaryButton button={actuaryButtonRef} />}
+								buttonRight={() => <RemoveButton button={removeButtonRef} />}
 								complete={isComplete(current.context)}
 								subtitle={() => (
 									<Subtitle

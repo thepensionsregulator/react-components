@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useRef, MutableRefObject } from 'react';
 import {
 	InHouseAdminProvider,
 	InHouseAdminProviderProps,
@@ -84,8 +84,14 @@ const CardContentSwitch: React.FC = () => {
 	}
 };
 
-const InHouseAdminButton: React.FC = () => {
+const InHouseAdminButton: React.FC<{ button: MutableRefObject<any> }> = ({
+	button,
+}) => {
 	const { current, send, i18n } = useInHouseAdminContext();
+
+	const onCollapseInHouse = () => {
+		current.context.lastBtnClicked === 1 && button.current.focus();
+	};
 
 	const onOfStatesIsActive =
 		current.matches({ edit: 'address' }) ||
@@ -108,14 +114,22 @@ const InHouseAdminButton: React.FC = () => {
 			}}
 			isEditButton={true}
 			isMainHeading={true}
+			buttonRef={button}
+			onCollapseCallback={onCollapseInHouse}
 		>
 			{i18n.preview.buttons.one}
 		</UnderlinedButton>
 	);
 };
 
-const RemoveButton: React.FC = () => {
+const RemoveButton: React.FC<{ button: MutableRefObject<any> }> = ({
+	button,
+}) => {
 	const { current, send, i18n } = useInHouseAdminContext();
+
+	const onCollapseRemove = () => {
+		current.context.lastBtnClicked === 2 && button.current.focus();
+	};
 	return (
 		<UnderlinedButton
 			isOpen={
@@ -137,6 +151,8 @@ const RemoveButton: React.FC = () => {
 				edit: 'name',
 			})}
 			notHeading={true}
+			buttonRef={button}
+			onCollapseCallback={onCollapseRemove}
 		>
 			{i18n.preview.buttons.two}
 		</UnderlinedButton>
@@ -149,6 +165,9 @@ const isComplete = (context: InHouseAdminContext) => {
 
 export const InHouseCard: React.FC<InHouseAdminProviderProps> = React.memo(
 	({ testId, cfg, ...rest }) => {
+		const inHouseButtonRef = useRef(null);
+		const removeButtonRef = useRef(null);
+
 		return (
 			<InHouseAdminProvider {...rest}>
 				{({ current, i18n }) => {
@@ -165,8 +184,10 @@ export const InHouseCard: React.FC<InHouseAdminProviderProps> = React.memo(
 							])}
 						>
 							<Toolbar
-								buttonLeft={InHouseAdminButton}
-								buttonRight={RemoveButton}
+								buttonLeft={() => (
+									<InHouseAdminButton button={inHouseButtonRef} />
+								)}
+								buttonRight={() => <RemoveButton button={removeButtonRef} />}
 								complete={isComplete(current.context)}
 								subtitle={() => (
 									<Subtitle
