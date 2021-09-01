@@ -12,9 +12,19 @@ import {
 	assertThatTitleWasSetToNullWhileFirstAndLastNamesWereLeftUnchanged,
 	clearTitleField,
 } from '../testHelpers/testHelpers';
-import { capitalizeEachWord } from '../../services';
 
 const noop = () => Promise.resolve();
+
+const actuaryAddress = {
+	addressLine1: 'THE PENSIONS REGULATOR',
+	addressLine2: 'NAPIER HOUSE',
+	addressLine3: 'TRAFALGAR PL',
+	postTown: 'BRIGHTON',
+	postcode: 'BN1 4DW',
+	county: 'EAST SUSSEX',
+	country: 'UK',
+	countryId: 2,
+};
 
 const actuary: Actuary = {
 	id: '',
@@ -26,29 +36,10 @@ const actuary: Actuary = {
 	telephoneNumber: '01273 000 111',
 	emailAddress: 'john@actuary.com',
 	organisationName: 'Actuaries Group Ltd',
-	address: {
-		addressLine1: 'THE PENSIONS REGULATOR',
-		addressLine2: 'NAPIER HOUSE',
-		addressLine3: 'TRAFALGAR PL',
-		postTown: 'BRIGHTON',
-		postcode: 'BN1 4DW',
-		county: 'EAST SUSSEX',
-		country: 'UK',
-		countryId: 2,
-	},
+	address: actuaryAddress,
 };
 
-const formattedAddress = {
-	addressLine1: capitalizeEachWord(actuary.address.addressLine1),
-	addressLine2: capitalizeEachWord(actuary.address.addressLine2),
-	addressLine3: capitalizeEachWord(actuary.address.addressLine3),
-	postTown: capitalizeEachWord(actuary.address.postTown),
-	postcode: actuary.address.postcode.toUpperCase(),
-	county: capitalizeEachWord(actuary.address.county),
-	country: actuary.address.country,
-};
-
-const addressExpectedHTML = `${formattedAddress.addressLine1}<br>${formattedAddress.addressLine2}<br>${formattedAddress.addressLine3}<br>${formattedAddress.postTown}<br>${formattedAddress.county}<br>${formattedAddress.postcode}<br>${formattedAddress.country}`;
+const addressExpectedHTML = `${actuaryAddress.addressLine1}<br>${actuaryAddress.addressLine2}<br>${actuaryAddress.addressLine3}<br>${actuaryAddress.postTown}<br>${actuaryAddress.county}<br>${actuaryAddress.postcode}<br>${actuaryAddress.country}`;
 
 describe('Actuary Card', () => {
 	describe('Preview', () => {
