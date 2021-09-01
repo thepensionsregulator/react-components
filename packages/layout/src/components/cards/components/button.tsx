@@ -22,7 +22,7 @@ interface UnderlinedButtonProps {
 
 	To solve this, 2 new properties need to be passed to the Underlinedbutton component.
 
-	buttonRef: reference received for buttons from the 'Preview' view, but only for those which are part of the 'content' section (not the Toolbar buttons).
+	buttonRef: reference received for buttons from the 'Preview' view.
 
 	onCollapseCallback: callback function to be called when collapsing an editing section. This function is used to return the focus to the button from 'Preview'.
 	*/
@@ -38,6 +38,8 @@ export const UnderlinedButton: React.FC<UnderlinedButtonProps> = ({
 	isMainHeading = false,
 	notHeading = false,
 }) => {
+	const editViewButtonRef = useRef(null);
+
 	const NotClickableButton: React.FC = () => (
 		<div className={styles.buttonPlaceholder}>
 			<Flex cfg={{ flex: '0 0 auto', alignItems: 'center' }}>
@@ -56,7 +58,7 @@ export const UnderlinedButton: React.FC<UnderlinedButtonProps> = ({
 			onClick={onClick}
 			aria-expanded={isOpen}
 			tabIndex={tabIndex}
-			ref={buttonRef ? buttonRef : noToolbarButtonRef}
+			ref={isOpen ? editViewButtonRef : buttonRef}
 		>
 			<Flex
 				className={styles.arrowSpacing}
@@ -86,8 +88,6 @@ export const UnderlinedButton: React.FC<UnderlinedButtonProps> = ({
 		</P>
 	);
 
-	const noToolbarButtonRef = useRef(null);
-
 	const getAppropriateButton = () => {
 		if (isOpen && isEditButton) {
 			return <EditArrowUp width="24px" fill={styles.arrowColor} />;
@@ -103,7 +103,7 @@ export const UnderlinedButton: React.FC<UnderlinedButtonProps> = ({
 	};
 
 	useEffect(() => {
-		isOpen && noToolbarButtonRef && noToolbarButtonRef.current.focus();
+		isOpen && editViewButtonRef && editViewButtonRef.current.focus();
 		!isOpen && onCollapseCallback && onCollapseCallback();
 	}, [isOpen]);
 
