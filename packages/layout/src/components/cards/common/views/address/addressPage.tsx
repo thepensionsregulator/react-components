@@ -36,7 +36,7 @@ const AddressPage: React.FC<AddressPageProps> = ({
 	i18n,
 	onCancelChanges,
 	subSectionHeaderText,
-	onChangeAddress
+	onChangeAddress,
 }) => {
 	const [loading, setLoading] = useState(false);
 	const addressLookupProvider = new ExperianAddressLookupProvider(addressAPI);

@@ -25,7 +25,9 @@ export interface ICardContentSwitchProps {
 	onChangeAddress?: (...args: any[]) => Promise<any>;
 }
 
-const CardContentSwitch: React.FC<ICardContentSwitchProps> = (props: ICardContentSwitchProps) => {
+const CardContentSwitch: React.FC<ICardContentSwitchProps> = (
+	props: ICardContentSwitchProps,
+) => {
 	const {
 		current,
 		i18n,

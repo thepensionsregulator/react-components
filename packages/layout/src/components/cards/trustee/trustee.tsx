@@ -28,7 +28,7 @@ import styles from '../cards.module.scss';
 
 const CardContent: React.FC<CardContentProps> = ({
 	enableContactDetails = true,
-	onChangeAddress
+	onChangeAddress,
 }) => {
 	const { current, i18n, send, addressAPI } = useTrusteeContext();
 	const { trustee } = current.context;
@@ -189,7 +189,10 @@ export const TrusteeCard: React.FC<
 								: i18n.preview.statusText.unconfirmed
 						}
 					/>
-					<CardContent onChangeAddress={props.onChangeAddress} enableContactDetails={enableContactDetails} />
+					<CardContent
+						onChangeAddress={props.onChangeAddress}
+						enableContactDetails={enableContactDetails}
+					/>
 				</Section>
 			)}
 		</TrusteeProvider>

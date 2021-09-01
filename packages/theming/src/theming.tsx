@@ -23,7 +23,7 @@ export const getBreakpoint = () => {
 		break4em = 114,
 		breakpoint = '';
 
-	if ((!fontSizeMatch) || fontSizeMatch.length < 1) {
+	if (!fontSizeMatch || fontSizeMatch.length < 1) {
 		return '';
 	}
 
