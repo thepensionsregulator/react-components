@@ -1,5 +1,5 @@
 import React from 'react';
-import { render } from '@testing-library/react';
+import { cleanup, render } from '@testing-library/react';
 import { ThirdPartyCard } from '../cards/thirdParty/thirdParty';
 import { axe } from 'jest-axe';
 import userEvent from '@testing-library/user-event';
@@ -23,6 +23,10 @@ const thirdPartyAdmin: ThirdPartyProps = {
 		countryId: 2,
 	},
 };
+
+afterEach(() => {
+	cleanup();
+});
 
 describe('ThirdParty Preview', () => {
 	test('is accessible', async () => {
