@@ -3,7 +3,7 @@ import { Flex, classNames } from '@tpr/core';
 import { CheckedCircle, ErrorCircle } from '@tpr/icons';
 import { StatusMessage } from './card';
 import styles from '../cards.module.scss';
-import CardContentSectionHeader from './cardContentHeaderSection';
+import CardContentSectionHeader from './cardContentSectionHeader';
 
 export interface ToolbarProps {
 	complete: boolean;
@@ -31,11 +31,7 @@ export const Toolbar: React.FC<ToolbarProps> = React.memo(
 				])}
 			>
 				{subSectionHeaderText && (
-					<Flex>
-						<CardContentSectionHeader
-							sectionHeaderText={subSectionHeaderText}
-						/>
-					</Flex>
+					<CardContentSectionHeader sectionHeaderText={subSectionHeaderText} />
 				)}
 				<Flex
 					cfg={{

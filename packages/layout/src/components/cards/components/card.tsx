@@ -1,7 +1,7 @@
 import React from 'react';
-import { Flex, H3, Hr, P } from '@tpr/core';
+import { Flex, H5, Hr, P } from '@tpr/core';
+import CardContentSectionHeader from './cardContentSectionHeader';
 import styles from './card.module.scss';
-import CardContentSectionHeader from './cardContentHeaderSection';
 
 export const StyledCardToolbar: React.FC = ({ children }) => {
 	return <div className={styles.cardToolbar}>{children}</div>;
@@ -29,16 +29,14 @@ export const Toolbar: React.FC<ToolbarProps> = ({
 				className={styles.toolbarBottomBorder}
 			>
 				{subSectionHeaderText && (
-					<Flex>
-						<CardContentSectionHeader
-							sectionHeaderText={subSectionHeaderText}
-							send={send}
-						/>
-					</Flex>
+					<CardContentSectionHeader
+						sectionHeaderText={subSectionHeaderText}
+						send={send}
+					/>
 				)}
 
 				{sectionTitle && <P className={styles.sectionTitle}>{sectionTitle}</P>}
-				<H3 cfg={{ fontWeight: 3 }}>{title}</H3>
+				<H5 className={styles.heading}>{title}</H5>
 			</Flex>
 			{subtitle && (
 				<Flex cfg={{ py: 3 }} className={styles.toolbarBottomBorder}>
