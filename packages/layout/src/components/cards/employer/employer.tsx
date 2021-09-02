@@ -103,7 +103,7 @@ const RemoveButton: React.FC<{ button: MutableRefObject<any> }> = ({
 				}
 			}}
 			tabIndex={removeFromTabFlowIfMatches(current, 'employerType')}
-			notHeading={true}
+			heading={false}
 			buttonRef={button}
 			onCollapseCallback={onCollapseRemove}
 		>

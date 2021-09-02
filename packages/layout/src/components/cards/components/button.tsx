@@ -12,7 +12,7 @@ interface UnderlinedButtonProps {
 	onCollapseCallback?: () => void;
 	buttonRef?: MutableRefObject<any>;
 	isMainHeading?: boolean;
-	notHeading?: boolean;
+	heading?: boolean;
 }
 
 /*
@@ -36,22 +36,19 @@ export const UnderlinedButton: React.FC<UnderlinedButtonProps> = ({
 	onCollapseCallback,
 	buttonRef,
 	isMainHeading = false,
-	notHeading = false,
+	heading = true,
 }) => {
 	const editViewButtonRef = useRef(null);
 
-	const NotClickableButton: React.FC = () => (
+	const Heading: React.FC = () => (
 		<div className={styles.buttonPlaceholder}>
 			<Flex cfg={{ flex: '0 0 auto', alignItems: 'center' }}>
 				{isMainHeading ? (
-					<H3
-						cfg={{ fontWeight: 3, fontSize: 3 }}
-						data-testid="card-main-heading"
-					>
+					<H3 className={styles.heading3} data-testid="card-main-heading">
 						{children}
 					</H3>
 				) : (
-					<H4 cfg={{ fontSize: 2 }} data-testid="card-heading">
+					<H4 className={styles.heading4} data-testid="card-heading">
 						{children}
 					</H4>
 				)}
@@ -78,22 +75,19 @@ export const UnderlinedButton: React.FC<UnderlinedButtonProps> = ({
 	);
 
 	const MainHeadingButton: React.FC = () => (
-		<H3
-			cfg={{ fontWeight: 3, fontSize: 3 }}
-			data-testid="card-main-heading-button"
-		>
+		<H3 className={styles.heading3} data-testid="card-main-heading-button">
 			<ClickableButton />
 		</H3>
 	);
 
 	const HeadingButton: React.FC = () => (
-		<H4 cfg={{ fontSize: 2 }} data-testid="card-heading-button">
+		<H4 className={styles.heading4} data-testid="card-heading-button">
 			<ClickableButton />
 		</H4>
 	);
 
-	const NotHeadingButton: React.FC = () => (
-		<P cfg={{ fontWeight: 3 }} data-testid="card-not-heading">
+	const ParagraphButton: React.FC = () => (
+		<P className={styles.heading4} data-testid="card-not-heading">
 			<ClickableButton />
 		</P>
 	);
@@ -120,13 +114,13 @@ export const UnderlinedButton: React.FC<UnderlinedButtonProps> = ({
 	return (
 		<>
 			{typeof onClick === 'undefined' ? (
-				<NotClickableButton />
+				<Heading />
 			) : isMainHeading ? (
 				<MainHeadingButton />
-			) : notHeading ? (
-				<NotHeadingButton />
-			) : (
+			) : heading ? (
 				<HeadingButton />
+			) : (
+				<ParagraphButton />
 			)}
 		</>
 	);

@@ -148,7 +148,7 @@ const RemoveButton: React.FC<{ button: MutableRefObject<any> }> = ({
 			tabIndex={removeFromTabFlowIfMatches(current, {
 				edit: { trustee: 'name' },
 			})}
-			notHeading={true}
+			heading={false}
 			buttonRef={button}
 			onCollapseCallback={onCollapseRemove}
 		>

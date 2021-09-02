@@ -1,5 +1,4 @@
 @import '@tpr/core/lib/components/typography/typography.module.scss';
-// typography.module.scss includes '@tpr/theming/lib/variables.scss'
 
 @mixin button-base {
 	text-align: left;
@@ -51,6 +50,16 @@
 }
 
 .arrowButtonEdit {
+	font-size: $font-size-2;
+	font-weight: $font-weight-3;
+}
+
+.heading3 {
+	font-size: $font-size-3;
+	font-weight: $font-weight-3;
+}
+
+.heading4 {
 	font-size: $font-size-2;
 	font-weight: $font-weight-3;
 }

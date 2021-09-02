@@ -73,7 +73,7 @@ const RemoveButton: React.FC<{ button: MutableRefObject<any> }> = ({
 					send('REMOVE');
 				}
 			}}
-			notHeading={true}
+			heading={false}
 			buttonRef={button}
 			onCollapseCallback={onCollapseRemove}
 		>
