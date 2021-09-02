@@ -20,7 +20,6 @@ export const sampleAddress: CardAddress = {
 	countryId: 2,
 };
 
-
 // jest-axe RULES
 export const disableHeadingOrder = {
 	['heading-order']: { enabled: false },
