@@ -10,7 +10,10 @@ import {
 	assertRemoveButtonExists,
 	assertHeadingsExist,
 } from '../testHelpers/testHelpers';
-import { sampleAddress } from '../testHelpers/commonData/cards';
+import {
+	sampleAddress,
+	disableHeadingOrder,
+} from '../testHelpers/commonData/cards';
 
 const noop = () => Promise.resolve();
 
@@ -111,7 +114,7 @@ describe('ThirdParty Remove', () => {
 
 		getByText('Remove').click();
 
-		const results = await axe(container);
+		const results = await axe(container, { rules: disableHeadingOrder });
 		expect(results).toHaveNoViolations();
 	});
 

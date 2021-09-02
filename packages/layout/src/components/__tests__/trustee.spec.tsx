@@ -13,7 +13,10 @@ import {
 	assertRemoveButtonExists,
 	assertHeadingButtonsExist,
 } from '../testHelpers/testHelpers';
-import { sampleAddress } from '../testHelpers/commonData/cards';
+import {
+	sampleAddress,
+	disableHeadingOrder,
+} from '../testHelpers/commonData/cards';
 
 const noop = () => Promise.resolve();
 
@@ -148,7 +151,7 @@ describe('TrusteeCard enableContactDetails == true', () => {
 	describe('Trustee Name', () => {
 		test('is accessible', async () => {
 			findByText('Trustee').click();
-			const results = await axe(component);
+			const results = await axe(component, { rules: disableHeadingOrder });
 			expect(results).toHaveNoViolations();
 		});
 
@@ -211,7 +214,7 @@ describe('TrusteeCard enableContactDetails == true', () => {
 			findByText(/Trustee/).click();
 			findByText(/Continue/).click();
 
-			const results = await axe(component);
+			const results = await axe(component, { rules: disableHeadingOrder });
 			expect(results).toHaveNoViolations();
 		});
 	});
@@ -263,7 +266,7 @@ describe('TrusteeCard enableContactDetails == true', () => {
 		test('is accessible', async () => {
 			findByText('Remove').click();
 
-			const results = await axe(component);
+			const results = await axe(component, { rules: disableHeadingOrder });
 			expect(results).toHaveNoViolations();
 		});
 
@@ -280,7 +283,7 @@ describe('TrusteeCard enableContactDetails == true', () => {
 			expect(msg2).toBeDefined();
 			expect(msg2.className.includes('errorMessage')).toBeTruthy();
 
-			const results = await axe(component);
+			const results = await axe(component, { rules: disableHeadingOrder });
 			expect(results).toHaveNoViolations();
 		});
 	});

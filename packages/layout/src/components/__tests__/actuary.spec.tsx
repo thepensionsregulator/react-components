@@ -14,7 +14,10 @@ import {
 	assertRemoveButtonExists,
 	assertHeadingButtonsExist,
 } from '../testHelpers/testHelpers';
-import { sampleAddress } from '../testHelpers/commonData/cards';
+import {
+	sampleAddress,
+	disableHeadingOrder,
+} from '../testHelpers/commonData/cards';
 
 const noop = () => Promise.resolve();
 
@@ -160,7 +163,9 @@ describe('Actuary Card', () => {
 		});
 
 		test('passes AXE accessibility testing', async () => {
-			const results = await axe(component);
+			const results = await axe(component, {
+				rules: disableHeadingOrder,
+			});
 			expect(results).toHaveNoViolations();
 		});
 
@@ -201,7 +206,9 @@ describe('Actuary Card', () => {
 		test('save and close', async () => {
 			await act(async () => {
 				findByText('Save and close').click();
-				const results = await axe(component);
+				const results = await axe(component, {
+					rules: disableHeadingOrder,
+				});
 				expect(results).toHaveNoViolations();
 				// After clicking the "Save and close" button, it goes back to the Preview
 				expect(findByText('Address')).toBeDefined();
@@ -317,7 +324,9 @@ describe('Actuary Card', () => {
 			findByTestId = getByTestId;
 
 			findByText('Remove').click();
-			const results = await axe(component);
+			const results = await axe(component, {
+				rules: disableHeadingOrder,
+			});
 			expect(results).toHaveNoViolations();
 		});
 

@@ -14,7 +14,10 @@ import {
 	assertRemoveButtonExists,
 	assertHeadingButtonsExist,
 } from '../testHelpers/testHelpers';
-import { sampleAddress } from '../testHelpers/commonData/cards';
+import {
+	sampleAddress,
+	disableHeadingOrder,
+} from '../testHelpers/commonData/cards';
 
 const noop = () => Promise.resolve();
 
@@ -126,7 +129,7 @@ describe('Update in-house trustee name', () => {
 	});
 
 	test('is accessible', async () => {
-		const results = await axe(component);
+		const results = await axe(component, { rules: disableHeadingOrder });
 		expect(results).toHaveNoViolations();
 	});
 
@@ -260,7 +263,7 @@ describe('InHouse Remove', () => {
 
 		getByText('Remove').click();
 
-		const results = await axe(container);
+		const results = await axe(container, { rules: disableHeadingOrder });
 		expect(results).toHaveNoViolations();
 	});
 

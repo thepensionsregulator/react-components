@@ -12,7 +12,10 @@ import {
 	assertHeadingButtonsExist,
 	assertHeadingsExist,
 } from '../testHelpers/testHelpers';
-import { sampleAddress } from '../testHelpers/commonData/cards';
+import {
+	sampleAddress,
+	disableHeadingOrder,
+} from '../testHelpers/commonData/cards';
 
 const noop = () => Promise.resolve();
 
@@ -310,7 +313,7 @@ describe('Corporate Group Trustee Card', () => {
 			findByTestId = getByTestId;
 
 			findByText('Remove').click();
-			const results = await axe(component);
+			const results = await axe(component, { rules: disableHeadingOrder });
 			expect(results).toHaveNoViolations();
 		});
 
@@ -330,13 +333,13 @@ describe('Corporate Group Trustee Card', () => {
 		test('remove Corporate Group - confirm', async () => {
 			await act(async () => {
 				findByText('They were never part of the scheme.').click();
-				const results = await axe(component);
+				const results = await axe(component, { rules: disableHeadingOrder });
 				expect(results).toHaveNoViolations();
 			});
 
 			await act(async () => {
 				findByText('Continue').click();
-				const results = await axe(component);
+				const results = await axe(component, { rules: disableHeadingOrder });
 				expect(results).toHaveNoViolations();
 				expect(
 					findByText('Are you sure you want to remove this corporate trustee?'),
