@@ -6,8 +6,12 @@ import userEvent from '@testing-library/user-event';
 import { Insurer } from '../cards/insurer/context';
 import {
 	assertThatASectionExistsWithAnAriaLabel,
-	assertThatButtonHasAriaExpanded,
+	assertMainHeadingExists,
+	assertRemoveButtonExists,
+	assertHeadingButtonsExist,
+	assertHeadingsExist,
 } from '../testHelpers/testHelpers';
+import { sampleAddress } from '../testHelpers/commonData/cards';
 
 const noop = () => Promise.resolve();
 
@@ -18,15 +22,7 @@ const insurer: Insurer = {
 	organisationReference: 456,
 	organisationName: 'Some Organisation Name',
 	insurerCompanyReference: '12345678',
-	address: {
-		addressLine1: 'Napier House',
-		addressLine2: 'Trafalgar Pl',
-		addressLine3: '',
-		postTown: 'Brighton',
-		postcode: 'BN1 4DW',
-		county: 'East Sussex',
-		countryId: 2,
-	},
+	address: sampleAddress,
 	telephoneNumber: '',
 	emailAddress: '',
 };
@@ -45,26 +41,21 @@ describe('Insurer Preview', () => {
 
 		const results = await axe(container);
 		expect(results).toHaveNoViolations();
-		expect(getByText('Insurer administrator')).toBeDefined();
-		expect(getByTestId('card-main-heading')).toBeDefined();
 
-		expect(getByText('Remove')).toBeDefined();
-		expect(getByTestId('card-not-heading')).toBeDefined();
-
-		const h4Headings = getAllByTestId('card-heading');
-		expect(h4Headings).toBeDefined();
-		expect(h4Headings.length).toBe(1);
-		expect(h4Headings[0]).toHaveTextContent('Address');
-
-		const h4Buttons = getAllByTestId('card-heading-button');
-		expect(h4Buttons).toBeDefined();
-		expect(h4Buttons.length).toBe(1);
-		expect(h4Buttons[0]).toHaveTextContent('Insurer reference number');
-		assertThatButtonHasAriaExpanded(
+		assertMainHeadingExists(
 			getByText,
-			'Insurer reference number',
+			getByTestId,
+			'Insurer administrator',
 			false,
 		);
+
+		assertRemoveButtonExists(getByText, getByTestId);
+
+		const h4Headings = ['Address'];
+		assertHeadingsExist(getAllByTestId, h4Headings);
+
+		const h4Buttons = ['Insurer reference number'];
+		assertHeadingButtonsExist(getAllByTestId, getByText, h4Buttons);
 	});
 
 	test('renders with a section containing an aria label', () => {

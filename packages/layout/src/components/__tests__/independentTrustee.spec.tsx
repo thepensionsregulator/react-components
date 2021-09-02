@@ -7,8 +7,12 @@ import { cleanup } from '@testing-library/react-hooks';
 import { act } from 'react-dom/test-utils';
 import {
 	assertThatASectionExistsWithAnAriaLabel,
-	assertThatButtonHasAriaExpanded,
+	assertMainHeadingExists,
+	assertRemoveButtonExists,
+	assertHeadingButtonsExist,
+	assertHeadingsExist,
 } from '../testHelpers/testHelpers';
+import { sampleAddress } from '../testHelpers/commonData/cards';
 
 const noop = () => Promise.resolve();
 
@@ -18,16 +22,7 @@ const independentTrustee: IndependentTrustee = {
 	effectiveDate: '',
 	organisationName: 'Pensions Are Us Limited',
 	appointedByRegulator: true,
-	address: {
-		addressLine1: 'The Pensions Regulator',
-		addressLine2: 'Napier House',
-		addressLine3: 'Trafalgar Pl',
-		postTown: 'Brighton',
-		postcode: 'BN1 4DW',
-		county: 'East Sussex',
-		country: 'UK',
-		countryId: 2,
-	},
+	address: sampleAddress,
 };
 
 describe('Professional / Independent Trustee Card', () => {
@@ -75,26 +70,20 @@ describe('Professional / Independent Trustee Card', () => {
 		test('it renders sections correctly', () => {
 			expect(component.querySelector('button')).not.toBe(null);
 
-			expect(findByText('Corporate Trustee')).toBeDefined();
-			expect(findByTestId('card-main-heading')).toBeDefined();
-
-			expect(findByText('Remove')).toBeDefined();
-			expect(findByTestId('card-not-heading')).toBeDefined();
-
-			const h4Headings = findAllByTestId('card-heading');
-			expect(h4Headings).toBeDefined();
-			expect(h4Headings.length).toBe(1);
-			expect(h4Headings[0]).toHaveTextContent('Address');
-
-			const h4Buttons = findAllByTestId('card-heading-button');
-			expect(h4Buttons).toBeDefined();
-			expect(h4Buttons.length).toBe(1);
-			expect(h4Buttons[0]).toHaveTextContent('Appointed by the regulator');
-			assertThatButtonHasAriaExpanded(
+			assertMainHeadingExists(
 				findByText,
-				'Appointed by the regulator',
+				findByTestId,
+				'Corporate Trustee',
 				false,
 			);
+
+			assertRemoveButtonExists(findByText, findByTestId);
+
+			const h4Headings = ['Address'];
+			assertHeadingsExist(findAllByTestId, h4Headings);
+
+			const h4Buttons: string[] = ['Appointed by the regulator'];
+			assertHeadingButtonsExist(findAllByTestId, findByText, h4Buttons);
 		});
 
 		test('initial status is correct', () => {

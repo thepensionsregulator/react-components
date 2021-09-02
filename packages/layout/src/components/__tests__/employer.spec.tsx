@@ -7,7 +7,11 @@ import { Employer } from '../cards/employer/context';
 import {
 	assertThatASectionExistsWithAnAriaLabel,
 	assertThatButtonHasBeenRemovedFromTheTabFlow,
+	assertMainHeadingExists,
+	assertRemoveButtonExists,
+	assertHeadingsExist,
 } from '../testHelpers/testHelpers';
+import { sampleAddress } from '../testHelpers/commonData/cards';
 
 const noop = () => Promise.resolve();
 
@@ -22,16 +26,7 @@ const employer: Employer = {
 	epsrNumber: '11223344',
 	organisationName: 'The Pensions Regulator',
 	statutoryEmployer: 'statutory',
-	address: {
-		addressLine1: 'Napier House',
-		addressLine2: 'Trafalgar Pl',
-		addressLine3: '',
-		postTown: 'Brighton',
-		postcode: 'BN1 4DW',
-		county: 'East Sussex',
-		country: '',
-		countryId: 2,
-	},
+	address: sampleAddress,
 };
 
 describe('Employer Preview', () => {
@@ -61,17 +56,12 @@ describe('Employer Preview', () => {
 
 		expect(container.querySelector('button')).not.toBe(null);
 
-		expect(getByText('Employer type')).toBeDefined();
-		expect(getByTestId('card-main-heading-button')).toBeDefined();
+		assertMainHeadingExists(getByText, getByTestId, 'Employer type', true);
 
-		expect(getByText('Remove')).toBeDefined();
-		expect(getByTestId('card-not-heading')).toBeDefined();
+		assertRemoveButtonExists(getByText, getByTestId);
 
-		const h4Headings = getAllByTestId('card-heading');
-		expect(h4Headings).toBeDefined();
-		expect(h4Headings.length).toBe(2);
-		expect(h4Headings[0]).toHaveTextContent('Employer');
-		expect(h4Headings[1]).toHaveTextContent('Employer Identifiers');
+		const h4Headings = ['Employer', 'Employer Identifiers'];
+		assertHeadingsExist(getAllByTestId, h4Headings);
 	});
 
 	test('renders with a section containing an aria label', () => {

@@ -4,7 +4,13 @@ import { ThirdPartyCard } from '../cards/thirdParty/thirdParty';
 import { axe } from 'jest-axe';
 import userEvent from '@testing-library/user-event';
 import { ThirdPartyProps } from '../cards/thirdParty/context';
-import { assertThatASectionExistsWithAnAriaLabel } from '../testHelpers/testHelpers';
+import {
+	assertThatASectionExistsWithAnAriaLabel,
+	assertMainHeadingExists,
+	assertRemoveButtonExists,
+	assertHeadingsExist,
+} from '../testHelpers/testHelpers';
+import { sampleAddress } from '../testHelpers/commonData/cards';
 
 const noop = () => Promise.resolve();
 
@@ -13,15 +19,7 @@ const thirdPartyAdmin: ThirdPartyProps = {
 	schemeRoleId: 123,
 	effectiveDate: '1997-04-01T00:00:00',
 	organisationName: `McDonald's`,
-	address: {
-		addressLine1: 'Napier House',
-		addressLine2: 'Trafalgar Pl',
-		addressLine3: '',
-		postTown: 'Brighton',
-		postcode: 'BN1 4DW',
-		county: 'East Sussex',
-		countryId: 2,
-	},
+	address: sampleAddress,
 };
 
 afterEach(() => {
@@ -55,16 +53,17 @@ describe('ThirdParty Preview', () => {
 
 		expect(container.querySelector('button')).not.toBe(null);
 
-		expect(getByText('Third Party Administrator')).toBeDefined();
-		expect(getByTestId('card-main-heading')).toBeDefined();
+		assertMainHeadingExists(
+			getByText,
+			getByTestId,
+			'Third Party Administrator',
+			false,
+		);
 
-		expect(getByText('Remove')).toBeDefined();
-		expect(getByTestId('card-not-heading')).toBeDefined();
+		assertRemoveButtonExists(getByText, getByTestId);
 
-		const h4Headings = getAllByTestId('card-heading');
-		expect(h4Headings).toBeDefined();
-		expect(h4Headings.length).toBe(1);
-		expect(h4Headings[0]).toHaveTextContent('Address');
+		const h4Headings = ['Address'];
+		assertHeadingsExist(getAllByTestId, h4Headings);
 	});
 
 	test('renders with a section containing an aria label', () => {

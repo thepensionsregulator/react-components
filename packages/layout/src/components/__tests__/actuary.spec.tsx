@@ -7,24 +7,16 @@ import { act } from 'react-dom/test-utils';
 import { cleanup } from '@testing-library/react-hooks';
 import {
 	assertThatASectionExistsWithAnAriaLabel,
-	assertThatButtonHasAriaExpanded,
 	assertThatButtonHasBeenRemovedFromTheTabFlow,
 	assertThatTitleWasSetToNullWhileFirstAndLastNamesWereLeftUnchanged,
 	clearTitleField,
+	assertMainHeadingExists,
+	assertRemoveButtonExists,
+	assertHeadingButtonsExist,
 } from '../testHelpers/testHelpers';
+import { sampleAddress } from '../testHelpers/commonData/cards';
 
 const noop = () => Promise.resolve();
-
-const actuaryAddress = {
-	addressLine1: 'THE PENSIONS REGULATOR',
-	addressLine2: 'NAPIER HOUSE',
-	addressLine3: 'TRAFALGAR PL',
-	postTown: 'BRIGHTON',
-	postcode: 'BN1 4DW',
-	county: 'EAST SUSSEX',
-	country: 'UK',
-	countryId: 2,
-};
 
 const actuary: Actuary = {
 	id: '',
@@ -36,10 +28,10 @@ const actuary: Actuary = {
 	telephoneNumber: '01273 000 111',
 	emailAddress: 'john@actuary.com',
 	organisationName: 'Actuaries Group Ltd',
-	address: actuaryAddress,
+	address: sampleAddress,
 };
 
-const addressExpectedHTML = `${actuaryAddress.addressLine1}<br>${actuaryAddress.addressLine2}<br>${actuaryAddress.addressLine3}<br>${actuaryAddress.postTown}<br>${actuaryAddress.county}<br>${actuaryAddress.postcode}<br>${actuaryAddress.country}`;
+const addressExpectedHTML = `${sampleAddress.addressLine1}<br>${sampleAddress.addressLine2}<br>${sampleAddress.addressLine3}<br>${sampleAddress.postTown}<br>${sampleAddress.county}<br>${sampleAddress.postcode}<br>${sampleAddress.country}`;
 
 describe('Actuary Card', () => {
 	describe('Preview', () => {
@@ -89,19 +81,12 @@ describe('Actuary Card', () => {
 		test('it renders buttons correctly', () => {
 			expect(component.querySelector('button')).not.toBe(null);
 
-			expect(findByText('Actuary')).toBeDefined();
-			expect(findByTestId('card-main-heading-button')).toBeDefined();
-			assertThatButtonHasAriaExpanded(findByText, 'Actuary', false);
+			assertMainHeadingExists(findByText, findByTestId, 'Actuary', true);
 
-			expect(findByText('Remove')).toBeDefined();
-			expect(findByTestId('card-not-heading')).toBeDefined();
-			assertThatButtonHasAriaExpanded(findByText, 'Remove', false);
+			assertRemoveButtonExists(findByText, findByTestId);
 
-			const h4Buttons = findAllByTestId('card-heading-button');
-			expect(h4Buttons).toBeDefined();
-			expect(h4Buttons.length).toBe(1);
-			expect(h4Buttons[0]).toHaveTextContent('Contact details');
-			assertThatButtonHasAriaExpanded(findByText, 'Contact details', false);
+			const h4Buttons = ['Contact details'];
+			assertHeadingButtonsExist(findAllByTestId, findByText, h4Buttons);
 		});
 
 		test('initial status is correct', () => {

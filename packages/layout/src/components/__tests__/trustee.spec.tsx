@@ -6,15 +6,20 @@ import { act } from 'react-dom/test-utils';
 import { Trustee } from '../cards/trustee/context';
 import {
 	assertThatASectionExistsWithAnAriaLabel,
-	assertThatButtonHasAriaExpanded,
 	assertThatButtonHasBeenRemovedFromTheTabFlow,
 	assertThatTitleWasSetToNullWhileFirstAndLastNamesWereLeftUnchanged,
 	clearTitleField,
+	assertMainHeadingExists,
+	assertRemoveButtonExists,
+	assertHeadingButtonsExist,
 } from '../testHelpers/testHelpers';
+import { sampleAddress } from '../testHelpers/commonData/cards';
 
 const noop = () => Promise.resolve();
 
 const trustee: Trustee = {
+	...sampleAddress,
+	//
 	id: '',
 	schemeRoleId: 12345,
 	//
@@ -23,15 +28,6 @@ const trustee: Trustee = {
 	lastName: 'Smith',
 	trusteeType: 'member-nominated',
 	isProfessionalTrustee: false,
-	//
-	addressLine1: 'The Pensions Regulator',
-	addressLine2: 'Napier House',
-	addressLine3: 'Trafalgar Pl',
-	postTown: 'Brighton',
-	postcode: 'BN1 4DW',
-	county: 'East Sussex',
-	country: 'UK',
-	countryId: 2,
 	//
 	telephoneNumber: '01273 000 111',
 	emailAddress: 'fred.sandoors@trp.gov.uk',
@@ -108,23 +104,12 @@ describe('TrusteeCard enableContactDetails == true', () => {
 		});
 
 		test('buttons render correctly', () => {
-			expect(findByText('Trustee')).toBeDefined();
-			expect(findByTestId('card-main-heading-button')).toBeDefined();
+			assertMainHeadingExists(findByText, findByTestId, 'Trustee', true);
 
-			expect(findByText('Remove')).toBeDefined();
-			expect(findByTestId('card-not-heading')).toBeDefined();
+			assertRemoveButtonExists(findByText, findByTestId);
 
-			const h4Buttons = findAllByTestId('card-heading-button');
-			expect(h4Buttons).toBeDefined();
-			expect(h4Buttons.length).toBe(2);
-			expect(h4Buttons[0]).toHaveTextContent('Correspondence address');
-			expect(h4Buttons[1]).toHaveTextContent('Contact details');
-			assertThatButtonHasAriaExpanded(
-				findByText,
-				'Correspondence address',
-				false,
-			);
-			assertThatButtonHasAriaExpanded(findByText, 'Contact details', false);
+			const h4Buttons = ['Correspondence address', 'Contact details'];
+			assertHeadingButtonsExist(findAllByTestId, findByText, h4Buttons);
 		});
 
 		test('initial status is correct', () => {

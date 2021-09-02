@@ -7,11 +7,14 @@ import userEvent from '@testing-library/user-event';
 import { InHouseAdminNoApi } from '../cards/inHouse/context';
 import {
 	assertThatASectionExistsWithAnAriaLabel,
-	assertThatButtonHasAriaExpanded,
 	assertThatButtonHasBeenRemovedFromTheTabFlow,
 	assertThatTitleWasSetToNullWhileFirstAndLastNamesWereLeftUnchanged,
 	clearTitleField,
+	assertMainHeadingExists,
+	assertRemoveButtonExists,
+	assertHeadingButtonsExist,
 } from '../testHelpers/testHelpers';
+import { sampleAddress } from '../testHelpers/commonData/cards';
 
 const noop = () => Promise.resolve();
 
@@ -22,15 +25,7 @@ const inHouseAdmin: InHouseAdminNoApi = {
 	firstName: 'John',
 	lastName: 'Smoth',
 	effectiveDate: '1997-04-01T00:00:00',
-	address: {
-		addressLine1: 'Napier House',
-		addressLine2: 'Trafalgar Pl',
-		addressLine3: '',
-		postTown: 'Brighton',
-		postcode: 'BN1 4DW',
-		county: 'East Sussex',
-		countryId: 2,
-	},
+	address: sampleAddress,
 	telephoneNumber: '01273 222 111',
 	emailAddress: 'john.wick@warnerbros.com',
 };
@@ -74,19 +69,17 @@ describe('InHouse Preview', () => {
 	});
 
 	test('it renders preview correctly', () => {
-		expect(findByText('In House Administrator')).toBeDefined();
-		expect(findByTestId('card-main-heading-button')).toBeDefined();
+		assertMainHeadingExists(
+			findByText,
+			findByTestId,
+			'In House Administrator',
+			true,
+		);
 
-		expect(findByText('Remove')).toBeDefined();
-		expect(findByTestId('card-not-heading')).toBeDefined();
+		assertRemoveButtonExists(findByText, findByTestId);
 
-		const h4Buttons = findAllByTestId('card-heading-button');
-		expect(h4Buttons).toBeDefined();
-		expect(h4Buttons.length).toBe(2);
-		expect(h4Buttons[0]).toHaveTextContent('Address');
-		expect(h4Buttons[1]).toHaveTextContent('Contact details');
-		assertThatButtonHasAriaExpanded(findByText, 'Address', false);
-		assertThatButtonHasAriaExpanded(findByText, 'Contact details', false);
+		const h4Buttons = ['Address', 'Contact details'];
+		assertHeadingButtonsExist(findAllByTestId, findByText, h4Buttons);
 	});
 
 	test('replaces __NAME__ in the checkbox label', () => {

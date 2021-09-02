@@ -7,8 +7,12 @@ import { cleanup } from '@testing-library/react-hooks';
 import { act } from 'react-dom/test-utils';
 import {
 	assertThatASectionExistsWithAnAriaLabel,
-	assertThatButtonHasAriaExpanded,
+	assertMainHeadingExists,
+	assertRemoveButtonExists,
+	assertHeadingButtonsExist,
+	assertHeadingsExist,
 } from '../testHelpers/testHelpers';
+import { sampleAddress } from '../testHelpers/commonData/cards';
 
 const noop = () => Promise.resolve();
 
@@ -23,16 +27,7 @@ const corporateGroup: CorporateGroup = {
 	directorIsProfessional: true,
 	telephoneNumber: '01273 000 111',
 	emailAddress: 'susan@corporate-group.com',
-	address: {
-		addressLine1: 'The Pensions Regulator',
-		addressLine2: 'Napier House',
-		addressLine3: 'Trafalgar Pl',
-		postTown: 'Brighton',
-		postcode: 'BN1 4DW',
-		county: 'East Sussex',
-		country: 'UK',
-		countryId: 2,
-	},
+	address: sampleAddress,
 };
 
 describe('Corporate Group Trustee Card', () => {
@@ -83,30 +78,23 @@ describe('Corporate Group Trustee Card', () => {
 		test('it renders sections correctly', () => {
 			expect(component.querySelector('button')).not.toBe(null);
 
-			expect(findByText('Corporate Trustee')).toBeDefined();
-			expect(findByTestId('card-main-heading')).toBeDefined();
-
-			expect(findByText('Remove')).toBeDefined();
-			expect(findByTestId('card-not-heading')).toBeDefined();
-
-			const h4Headings = findAllByTestId('card-heading');
-			expect(h4Headings).toBeDefined();
-			expect(h4Headings.length).toBe(1);
-			expect(h4Headings[0]).toHaveTextContent('Address');
-
-			const h4Buttons = findAllByTestId('card-heading-button');
-			expect(h4Buttons).toBeDefined();
-			expect(h4Buttons.length).toBe(2);
-			expect(h4Buttons[0]).toHaveTextContent(
-				'Director(s) are Professional Trustees',
-			);
-			expect(h4Buttons[1]).toHaveTextContent('Chair of board');
-			assertThatButtonHasAriaExpanded(
+			assertMainHeadingExists(
 				findByText,
-				'Director(s) are Professional Trustees',
+				findByTestId,
+				'Corporate Trustee',
 				false,
 			);
-			assertThatButtonHasAriaExpanded(findByText, 'Chair of board', false);
+
+			assertRemoveButtonExists(findByText, findByTestId);
+
+			const h4Buttons: string[] = [
+				'Director(s) are Professional Trustees',
+				'Chair of board',
+			];
+			assertHeadingButtonsExist(findAllByTestId, findByText, h4Buttons);
+
+			const h4Headings: string[] = ['Address'];
+			assertHeadingsExist(findAllByTestId, h4Headings);
 		});
 
 		test('initial status is correct', () => {
