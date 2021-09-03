@@ -38,7 +38,10 @@ export const useSectionsUpdater = (
 
 export function useCalculateProgress(sections: TasklistSectionProps[]) {
 	const allSections = useMemo(
-		() => flatten(sections.map((section) => section.links)),
+		() =>
+			flatten(sections.map((section) => section.links)).filter(
+				(section) => !section.hideIcon,
+			),
 		[sections],
 	);
 	const allCompleted = useMemo(
