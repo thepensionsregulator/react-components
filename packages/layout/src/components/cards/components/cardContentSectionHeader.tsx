@@ -14,11 +14,10 @@ const CardContentSectionHeader: React.FC<CardContentSectionHeaderProps> = ({
 	return (
 		<Flex className={styles.contentHeader}>
 			<UnderlinedButton
-				onClick={() => {
-					send('CANCEL');
-				}}
+				onClick={() => send('CANCEL')}
 				isOpen={true}
 				isEditButton={true}
+				giveFocus={true}
 			>
 				{sectionHeaderText}
 			</UnderlinedButton>
@@ -26,4 +25,4 @@ const CardContentSectionHeader: React.FC<CardContentSectionHeaderProps> = ({
 	);
 };
 
-export default CardContentSectionHeader;
+export default React.memo(CardContentSectionHeader);

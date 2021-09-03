@@ -1,4 +1,3 @@
-//import { Actuary } from '@tpr/core';
 import { Machine, assign } from 'xstate';
 import { Actuary } from './context';
 
@@ -23,7 +22,6 @@ interface ActuaryStates {
 
 type ActuaryEvents =
 	| { type: 'COMPLETE'; value: boolean }
-	| { type: 'EDIT_INSURER' }
 	| { type: 'EDIT_CONTACTS' }
 	| { type: 'EDIT_NAME' }
 	| { type: 'REMOVE' }
@@ -41,6 +39,19 @@ export interface ActuaryContext {
 	lastBtnClicked?: number | null;
 }
 
+const updateClickedButton = (btn: number) => {
+	return assign((__, _) => ({
+		lastBtnClicked: btn,
+	}));
+};
+
+const returnToPreview = (btnClicked: number) => {
+	return {
+		target: '#preview',
+		actions: updateClickedButton(btnClicked),
+	};
+};
+
 const actuaryMachine = Machine<ActuaryContext, ActuaryStates, ActuaryEvents>({
 	id: 'actuary',
 	initial: 'preview',
@@ -54,10 +65,18 @@ const actuaryMachine = Machine<ActuaryContext, ActuaryStates, ActuaryEvents>({
 		preview: {
 			id: 'preview',
 			on: {
-				REMOVE: '#remove',
-				EDIT_INSURER: 'edit',
-				EDIT_CONTACTS: 'edit.contacts',
-				EDIT_NAME: 'edit.name',
+				EDIT_NAME: {
+					target: 'edit.name',
+					actions: updateClickedButton(1),
+				},
+				REMOVE: {
+					target: '#remove',
+					actions: updateClickedButton(2),
+				},
+				EDIT_CONTACTS: {
+					target: 'edit.contacts',
+					actions: updateClickedButton(4),
+				},
 				COMPLETE: {
 					actions: assign((_, event) => ({
 						complete: event.value,
@@ -80,7 +99,8 @@ const actuaryMachine = Machine<ActuaryContext, ActuaryStates, ActuaryEvents>({
 							})),
 						},
 						CANCEL: '#preview',
-						REMOVE: '#remove',
+						EDIT_NAME: returnToPreview(1),
+						REMOVE: returnToPreview(2),
 					},
 				},
 				contacts: {
@@ -95,7 +115,8 @@ const actuaryMachine = Machine<ActuaryContext, ActuaryStates, ActuaryEvents>({
 							})),
 						},
 						CANCEL: '#preview',
-						REMOVE: '#remove',
+						EDIT_NAME: returnToPreview(1),
+						REMOVE: returnToPreview(2),
 					},
 				},
 			},
@@ -115,6 +136,8 @@ const actuaryMachine = Machine<ActuaryContext, ActuaryStates, ActuaryEvents>({
 								};
 							}),
 						},
+						EDIT_NAME: returnToPreview(1),
+						REMOVE: returnToPreview(2),
 					},
 				},
 				confirm: {
@@ -122,6 +145,8 @@ const actuaryMachine = Machine<ActuaryContext, ActuaryStates, ActuaryEvents>({
 						CANCEL: '#preview',
 						BACK: '#remove',
 						DELETE: 'deleted',
+						EDIT_NAME: returnToPreview(1),
+						REMOVE: returnToPreview(2),
 					},
 				},
 				deleted: {

@@ -5,6 +5,7 @@ import {
 	useActuaryContext,
 } from './context';
 import { Section } from '@tpr/core';
+import { EventData, State } from 'xstate';
 import { Toolbar } from '../components/toolbar';
 import { UnderlinedButton } from '../components/button';
 import { Preview } from './views/preview/preview';
@@ -41,80 +42,90 @@ const CardContentSwitch: React.FC = () => {
 	}
 };
 
-const ActuaryButton: React.FC<{ button: MutableRefObject<any> }> = ({
-	button,
-}) => {
-	const { current, send, i18n } = useActuaryContext();
+interface IToolbarButtonProps {
+	remove?: boolean;
+	button: MutableRefObject<any>;
+}
 
-	const onCollapseActuary = () => {
-		current.context.lastBtnClicked === 1 && button.current.focus();
-	};
+interface IButtonProps {
+	button: MutableRefObject<any>;
+	send: (
+		event: any,
+		payload?: EventData,
+	) => Partial<State<ActuaryContext, any, any, any>>;
+	isOpen: boolean;
+	returnFocus: boolean;
+	current?: Partial<State<ActuaryContext, any, any, any>>;
+}
 
-	const onOfStatesIsActive =
-		current.matches({ edit: 'contacts' }) ||
-		current.matches({ edit: 'name' }) ||
-		current.matches({ remove: 'date' }) ||
-		current.matches({ remove: 'confirm' }) ||
-		current.matches({ remove: 'deleted' });
+const ToolbarButton: React.FC<IToolbarButtonProps> = React.memo(
+	({ remove = false, button }) => {
+		const { current, send, i18n } = useActuaryContext();
 
-	return (
-		<UnderlinedButton
-			isOpen={onOfStatesIsActive}
-			onClick={() => {
-				current.context.lastBtnClicked = 1;
-				if (onOfStatesIsActive) {
-					send('CANCEL');
-				} else {
-					send('EDIT_NAME');
-				}
-			}}
-			isEditButton={true}
-			isMainHeading={true}
-			buttonRef={button}
-			onCollapseCallback={onCollapseActuary}
-		>
-			{i18n.preview.buttons.one}
-		</UnderlinedButton>
-	);
-};
+		const isEditing = !current.matches('preview');
 
-const RemoveButton: React.FC<{ button: MutableRefObject<any> }> = ({
-	button,
-}) => {
-	const { current, send, i18n } = useActuaryContext();
+		return (
+			<>
+				{remove ? (
+					<RemoveButton
+						button={button}
+						isOpen={isEditing}
+						send={send}
+						returnFocus={current.context.lastBtnClicked === 2}
+						current={current}
+					>
+						{i18n.preview.buttons.two}
+					</RemoveButton>
+				) : (
+					<ActuaryButton
+						button={button}
+						isOpen={isEditing}
+						send={send}
+						returnFocus={current.context.lastBtnClicked === 1}
+					>
+						{i18n.preview.buttons.one}
+					</ActuaryButton>
+				)}
+			</>
+		);
+	},
+);
 
-	const onCollapseRemove = () => {
-		current.context.lastBtnClicked === 2 && button.current.focus();
-	};
+const ActuaryButton: React.FC<IButtonProps> = React.memo(
+	({ children, button, send, isOpen, returnFocus = false }) => {
+		return (
+			<UnderlinedButton
+				isOpen={isOpen}
+				onClick={() => send('EDIT_NAME')}
+				isEditButton={true}
+				isMainHeading={true}
+				buttonRef={button}
+				giveFocus={returnFocus}
+			>
+				{children}
+			</UnderlinedButton>
+		);
+	},
+);
 
-	return (
-		<UnderlinedButton
-			isOpen={
-				current.matches({ remove: 'date' }) ||
-				current.matches({ remove: 'confirm' })
-			}
-			onClick={() => {
-				current.context.lastBtnClicked = 2;
-				if (
-					current.matches({ remove: 'date' }) ||
-					current.matches({ remove: 'confirm' })
-				) {
-					send('CANCEL');
-				} else {
-					send('REMOVE');
-				}
-			}}
-			tabIndex={removeFromTabFlowIfMatches(current, {
-				edit: 'name',
-			})}
-			heading={false}
-			buttonRef={button}
-			onCollapseCallback={onCollapseRemove}
-		>
-			{i18n.preview.buttons.two}
-		</UnderlinedButton>
-	);
-};
+const RemoveButton: React.FC<IButtonProps> = React.memo(
+	({ children, button, send, isOpen, returnFocus = false, current }) => {
+		return (
+			<UnderlinedButton
+				isOpen={isOpen}
+				onClick={() => send('REMOVE')}
+				tabIndex={removeFromTabFlowIfMatches(current, {
+					edit: 'name',
+				})}
+				heading={false}
+				buttonRef={button}
+				giveFocus={returnFocus}
+			>
+				{children}
+			</UnderlinedButton>
+		);
+	},
+);
 
 const isComplete = (context: ActuaryContext) => {
 	return context.preValidatedData ? true : context.complete;
@@ -141,8 +152,10 @@ export const ActuaryCard: React.FC<ActuaryProviderProps> = React.memo(
 							])}
 						>
 							<Toolbar
-								buttonLeft={() => <ActuaryButton button={actuaryButtonRef} />}
-								buttonRight={() => <RemoveButton button={removeButtonRef} />}
+								buttonLeft={() => <ToolbarButton button={actuaryButtonRef} />}
+								buttonRight={() => (
+									<ToolbarButton button={removeButtonRef} remove={true} />
+								)}
 								complete={isComplete(current.context)}
 								subtitle={() => (
 									<Subtitle

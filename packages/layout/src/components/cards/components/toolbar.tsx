@@ -2,8 +2,8 @@ import React from 'react';
 import { Flex, classNames } from '@tpr/core';
 import { CheckedCircle, ErrorCircle } from '@tpr/icons';
 import { StatusMessage } from './card';
-import styles from '../cards.module.scss';
 import CardContentSectionHeader from './cardContentSectionHeader';
+import styles from '../cards.module.scss';
 
 export interface ToolbarProps {
 	complete: boolean;
