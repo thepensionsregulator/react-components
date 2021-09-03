@@ -23,51 +23,58 @@ export interface LinkProps {
 
 const defaultHintId = 'cancelHint';
 
-export const Link: React.FC<LinkProps> = ({
-	cfg: globalStyles,
-	underline = false,
-	className,
-	testId,
-	taskList = false,
-	hint,
-	hintCfg,
-	hintId = defaultHintId,
-	children,
-	...props
-}) => {
-	const classNames = useClassNames(globalStyles, [
-		styles.link,
-		{ [styles['link-underline']]: underline },
-		className,
-	]);
+export const Link: React.FC<LinkProps> = React.forwardRef<
+	HTMLAnchorElement,
+	LinkProps
+>(
+	(
+		{
+			cfg: globalStyles,
+			underline = false,
+			className,
+			testId,
+			taskList = false,
+			hint,
+			hintCfg,
+			hintId = defaultHintId,
+			children,
+			...props
+		},
+		ref,
+	) => {
+		const classNames = useClassNames(globalStyles, [
+			styles.link,
+			{ [styles['link-underline']]: underline },
+			className,
+		]);
 
-	let anchorProps = {
-		'data-testid': testId,
-		className: classNames,
-		href: props.href ? props.href : '#',
-		onClick: null,
-		'aria-describedby': hint ? hintId : null,
-		...props,
-	};
-
-	if (props.onClick && (!props.href || taskList)) {
-		anchorProps.onClick = function (e) {
-			e.preventDefault();
-			props.onClick();
+		let anchorProps = {
+			'data-testid': testId,
+			className: classNames,
+			href: props.href ? props.href : '#',
+			onClick: null,
+			'aria-describedby': hint ? hintId : null,
+			...props,
 		};
-	}
 
-	const Anchor: React.FC = () =>
-		React.createElement('a', anchorProps, children);
+		if (props.onClick && (!props.href || taskList)) {
+			anchorProps.onClick = function (e) {
+				e.preventDefault();
+				props.onClick();
+			};
+		}
 
-	return (
-		<>
-			<Anchor />
-			{hint && (
-				<Span className={styles.hint} id={hintId} cfg={{ ...hintCfg }}>
-					{hint}
-				</Span>
-			)}
-		</>
-	);
-};
+		return (
+			<>
+				<a ref={ref} {...anchorProps}>
+					{children}
+				</a>
+				{hint && (
+					<Span className={styles.hint} id={hintId} cfg={{ ...hintCfg }}>
+						{hint}
+					</Span>
+				)}
+			</>
+		);
+	},
+);
