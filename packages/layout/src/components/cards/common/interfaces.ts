@@ -1,4 +1,6 @@
 import { SpaceProps } from '@tpr/core';
+import { MutableRefObject } from 'react';
+import { EventData, State } from 'xstate';
 
 export const addressFields = [
 	'addressLine1',
@@ -126,4 +128,25 @@ export const defaultPhoneErrorMessages: InputErrorMessages = {
 
 export interface CardContentProps {
 	enableContactDetails?: boolean;
+}
+
+/*	--------------------------------
+						Card Buttons
+		--------------------------------	*/
+export interface IToolbarButtonProps {
+	remove?: boolean;
+	button: MutableRefObject<any>;
+}
+
+export interface ICardMainHeadingButtonProps {
+	button: MutableRefObject<any>;
+	current?: Partial<State<any, any, any, any>>;
+	onClick: any;
+}
+
+export interface ICardRemoveButtonProps {
+	button: MutableRefObject<any>;
+	send: (event: any, payload?: EventData) => Partial<State<any, any, any, any>>;
+	current?: Partial<State<any, any, any, any>>;
+	tabIndex?: number;
 }

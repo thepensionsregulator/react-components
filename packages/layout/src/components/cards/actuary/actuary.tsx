@@ -1,22 +1,24 @@
-import React, { useRef, MutableRefObject } from 'react';
+import React, { useRef } from 'react';
 import {
 	ActuaryProvider,
 	ActuaryProviderProps,
 	useActuaryContext,
 } from './context';
 import { Section } from '@tpr/core';
-import { EventData, State } from 'xstate';
 import { Toolbar } from '../components/toolbar';
-import { UnderlinedButton } from '../components/button';
 import { Preview } from './views/preview/preview';
 import { Contacts } from './views/contacts';
 import { RemoveDateForm } from './views/remove/date/date';
 import { ConfirmRemove } from './views/remove/confirm/confirm';
 import { NameScreen } from './views/name';
 import RemovedBox from '../components/removedBox';
-import { cardTypeName } from '../common/interfaces';
+import { cardTypeName, IToolbarButtonProps } from '../common/interfaces';
 import { ActuaryContext } from './actuaryMachine';
-import { Subtitle } from '../common/views/preview/components';
+import {
+	Subtitle,
+	CardRemoveButton,
+	CardMainHeadingButton,
+} from '../common/views/preview/components';
 import { removeFromTabFlowIfMatches, concatenateStrings } from '../../../utils';
 import styles from '../cards.module.scss';
 
@@ -42,87 +44,33 @@ const CardContentSwitch: React.FC = () => {
 	}
 };
 
-interface IToolbarButtonProps {
-	remove?: boolean;
-	button: MutableRefObject<any>;
-}
-
-interface IButtonProps {
-	button: MutableRefObject<any>;
-	send: (
-		event: any,
-		payload?: EventData,
-	) => Partial<State<ActuaryContext, any, any, any>>;
-	isOpen: boolean;
-	returnFocus: boolean;
-	current?: Partial<State<ActuaryContext, any, any, any>>;
-}
-
 const ToolbarButton: React.FC<IToolbarButtonProps> = React.memo(
 	({ remove = false, button }) => {
 		const { current, send, i18n } = useActuaryContext();
 
-		const isEditing = !current.matches('preview');
-
 		return (
 			<>
 				{remove ? (
-					<RemoveButton
+					<CardRemoveButton
 						button={button}
-						isOpen={isEditing}
 						send={send}
-						returnFocus={current.context.lastBtnClicked === 2}
 						current={current}
+						tabIndex={removeFromTabFlowIfMatches(current, {
+							edit: 'name',
+						})}
 					>
 						{i18n.preview.buttons.two}
-					</RemoveButton>
+					</CardRemoveButton>
 				) : (
-					<ActuaryButton
+					<CardMainHeadingButton
 						button={button}
-						isOpen={isEditing}
-						send={send}
-						returnFocus={current.context.lastBtnClicked === 1}
+						current={current}
+						onClick={() => send('EDIT_NAME')}
 					>
 						{i18n.preview.buttons.one}
-					</ActuaryButton>
+					</CardMainHeadingButton>
 				)}
 			</>
-		);
-	},
-);
-
-const ActuaryButton: React.FC<IButtonProps> = React.memo(
-	({ children, button, send, isOpen, returnFocus = false }) => {
-		return (
-			<UnderlinedButton
-				isOpen={isOpen}
-				onClick={() => send('EDIT_NAME')}
-				isEditButton={true}
-				isMainHeading={true}
-				buttonRef={button}
-				giveFocus={returnFocus}
-			>
-				{children}
-			</UnderlinedButton>
-		);
-	},
-);
-
-const RemoveButton: React.FC<IButtonProps> = React.memo(
-	({ children, button, send, isOpen, returnFocus = false, current }) => {
-		return (
-			<UnderlinedButton
-				isOpen={isOpen}
-				onClick={() => send('REMOVE')}
-				tabIndex={removeFromTabFlowIfMatches(current, {
-					edit: 'name',
-				})}
-				heading={false}
-				buttonRef={button}
-				giveFocus={returnFocus}
-			>
-				{children}
-			</UnderlinedButton>
 		);
 	},
 );
