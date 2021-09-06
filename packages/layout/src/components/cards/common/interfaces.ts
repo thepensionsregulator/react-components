@@ -75,6 +75,7 @@ export interface CardProviderProps {
 	onSaveAddress?: (...args: any[]) => Promise<any>;
 	onSaveContacts?: (...args: any[]) => Promise<any>;
 	onSaveName?: (...args: any[]) => Promise<any>;
+	onChangeAddress?: (...args: any[]) => Promise<any>;
 	testId?: string | number;
 	/** cfg space props */
 	cfg?: SpaceProps;
@@ -143,6 +144,7 @@ export const defaultPhoneErrorMessages: InputErrorMessages = {
 
 export interface CardContentProps {
 	enableContactDetails?: boolean;
+	onChangeAddress?: (...args: any[]) => Promise<any>;
 }
 
 /*	--------------------------------
