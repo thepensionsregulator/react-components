@@ -39,6 +39,7 @@ type IndependentTrusteeEvents =
 
 export interface IndependentTrusteeContext extends CommonCardMachineContext {
 	independentTrustee: Partial<IndependentTrustee>;
+	remove: RemoveReasonProps;
 }
 
 const independentTrusteeMachine = Machine<

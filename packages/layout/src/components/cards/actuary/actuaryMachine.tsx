@@ -4,7 +4,10 @@ import {
 	updateClickedButton,
 	returnToPreview,
 } from '../common/machine/actions';
-import { CommonCardMachineContext } from '../common/interfaces';
+import {
+	CommonCardMachineContext,
+	RemoveConfirmProps,
+} from '../common/interfaces';
 
 interface ActuaryStates {
 	states: {
@@ -38,6 +41,7 @@ type ActuaryEvents =
 
 export interface ActuaryContext extends CommonCardMachineContext {
 	actuary: Partial<Actuary>;
+	remove: RemoveConfirmProps;
 }
 
 const actuaryMachine = Machine<ActuaryContext, ActuaryStates, ActuaryEvents>({

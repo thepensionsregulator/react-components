@@ -1,6 +1,9 @@
 import { Machine, assign } from 'xstate';
 import { Insurer } from './context';
-import { CommonCardMachineContext } from '../common/interfaces';
+import {
+	CommonCardMachineContext,
+	RemoveConfirmProps,
+} from '../common/interfaces';
 import {
 	updateClickedButton,
 	returnToPreview,
@@ -36,6 +39,7 @@ type InsurerEvents =
 
 export interface InsurerContext extends CommonCardMachineContext {
 	insurer: Partial<Insurer>;
+	remove: RemoveConfirmProps;
 }
 
 const insurerMachine = Machine<InsurerContext, InsurerStates, InsurerEvents>({

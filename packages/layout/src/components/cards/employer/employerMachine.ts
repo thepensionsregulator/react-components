@@ -1,6 +1,9 @@
 import { Machine, assign } from 'xstate';
 import { Employer } from './context';
-import { CommonCardMachineContext } from '../common/interfaces';
+import {
+	CommonCardMachineContext,
+	RemoveConfirmProps,
+} from '../common/interfaces';
 import {
 	updateClickedButton,
 	returnToPreview,
@@ -33,6 +36,7 @@ type EmployerEvents =
 export interface EmployerContext extends CommonCardMachineContext {
 	employer: Partial<Employer>;
 	showStatutoryEmployerSection: boolean;
+	remove: RemoveConfirmProps;
 }
 
 const employerMachine = Machine<

@@ -43,6 +43,7 @@ type CorporateGroupEvents =
 
 export interface CorporateGroupContext extends CommonCardMachineContext {
 	corporateGroup: Partial<CorporateGroup>;
+	remove: RemoveReasonProps;
 }
 
 const corporateGroupMachine = Machine<

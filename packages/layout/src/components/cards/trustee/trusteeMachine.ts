@@ -4,6 +4,7 @@ import {
 	CardPersonalDetails,
 	CardContactDetails,
 	CommonCardMachineContext,
+	RemoveReasonProps,
 } from '../common/interfaces';
 import {
 	updateClickedButton,
@@ -80,6 +81,7 @@ export interface TrusteeContext extends CommonCardMachineContext {
 	loading: boolean;
 	trustee: TrusteeProps;
 	openSection: string;
+	remove: RemoveReasonProps;
 }
 
 const trusteeMachine = Machine<TrusteeContext, TrusteeStates, TrusteeEvents>({

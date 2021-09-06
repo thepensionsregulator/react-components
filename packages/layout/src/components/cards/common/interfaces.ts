@@ -92,11 +92,7 @@ export interface RemoveConfirmProps {
 	date: string;
 }
 
-export interface RemoveContextProp {
-	remove: RemoveReasonProps | RemoveReasonProps | null;
-}
-
-export interface CommonCardMachineContext extends RemoveContextProp {
+export interface CommonCardMachineContext {
 	complete: boolean;
 	preValidatedData?: boolean | null;
 	lastBtnClicked?: number | null;

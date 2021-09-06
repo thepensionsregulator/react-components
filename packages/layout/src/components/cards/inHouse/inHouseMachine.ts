@@ -1,5 +1,8 @@
 import { Machine, assign } from 'xstate';
-import { CommonCardMachineContext } from '../common/interfaces';
+import {
+	CommonCardMachineContext,
+	RemoveConfirmProps,
+} from '../common/interfaces';
 import {
 	updateClickedButton,
 	returnToPreview,
@@ -40,6 +43,7 @@ type InHouseAdminEvents =
 
 export interface InHouseAdminContext extends CommonCardMachineContext {
 	inHouseAdmin: Partial<InHouseAdmin>;
+	remove: RemoveConfirmProps;
 }
 
 const inHouseAdminMachine = Machine<

@@ -1,6 +1,9 @@
 import { Machine, assign } from 'xstate';
 import { ThirdPartyProps } from './context';
-import { CommonCardMachineContext } from '../common/interfaces';
+import {
+	CommonCardMachineContext,
+	RemoveConfirmProps,
+} from '../common/interfaces';
 import { updateClickedButton } from '../common/machine/actions';
 
 interface ThirdPartyStates {
@@ -26,6 +29,7 @@ type ThirdPartyEvents =
 
 export interface ThirdPartyContext extends CommonCardMachineContext {
 	thirdParty: Partial<ThirdPartyProps>;
+	remove: RemoveConfirmProps;
 }
 
 const thirdPartyMachine = Machine<
