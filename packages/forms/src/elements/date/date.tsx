@@ -183,20 +183,14 @@ export const InputDate: React.FC<InputDateComponentProps> = memo(
 
 		return (
 			<StyledInputLabel
+				id={id}
 				isError={meta && meta.touched && meta.error}
 				element="fieldset"
 				onBlur={(e: React.FocusEvent<HTMLFieldSetElement>) => {
 					if (e.relatedTarget && !e.currentTarget.outerHTML.includes((e.relatedTarget as HTMLElement).outerHTML)) {
-						console.log("leaving date component");
 						if (hasValue()) {
-							console.log(`validating ...`);
 							input.onBlur();
 						}		
-					}
-				}}
-				onFocus={(e: React.FocusEvent<HTMLFieldSetElement>) => {
-					if (!e.relatedTarget || !e.currentTarget.outerHTML.includes((e.relatedTarget as HTMLElement).outerHTML)) {
-						console.log("entering date component");						
 					}
 				}}
 				data-testid={`date-input-${testId}`}
