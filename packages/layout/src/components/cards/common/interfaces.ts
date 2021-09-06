@@ -69,7 +69,7 @@ export type RecursivePartial<T> = {
 
 export interface CardProviderProps {
 	complete?: boolean;
-	preValidatedData?: boolean;
+	preValidatedData?: boolean | null;
 	onCorrect?: (...args: any[]) => void;
 	onRemove?: (...args: any[]) => Promise<any>;
 	onSaveAddress?: (...args: any[]) => Promise<any>;
@@ -84,6 +84,21 @@ export interface CardProviderProps {
 export interface RemoveReasonProps {
 	reason: null | string;
 	date: null | string;
+}
+
+export interface RemoveConfirmProps {
+	confirm: boolean; 
+	date: string
+}
+
+export interface RemoveContextProp {
+	remove: RemoveReasonProps | RemoveReasonProps | null;
+}
+
+export interface CommonCardMachineContext extends RemoveContextProp {
+	complete: boolean;
+	preValidatedData?: boolean | null;
+	lastBtnClicked?: number | null;
 }
 
 /*	--------------------------------

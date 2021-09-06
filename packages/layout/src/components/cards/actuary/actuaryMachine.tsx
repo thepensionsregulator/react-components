@@ -1,5 +1,10 @@
 import { Machine, assign } from 'xstate';
 import { Actuary } from './context';
+import {
+	updateClickedButton,
+	returnToPreview,
+} from '../common/machine/actions';
+import { CommonCardMachineContext } from '../common/interfaces';
 
 interface ActuaryStates {
 	states: {
@@ -31,26 +36,9 @@ type ActuaryEvents =
 	| { type: 'BACK' }
 	| { type: 'DELETE' };
 
-export interface ActuaryContext {
-	complete: boolean;
-	remove: { confirm: boolean; date: string } | null;
+export interface ActuaryContext extends CommonCardMachineContext {
 	actuary: Partial<Actuary>;
-	preValidatedData?: boolean | null;
-	lastBtnClicked?: number | null;
 }
-
-const updateClickedButton = (btn: number) => {
-	return assign((__, _) => ({
-		lastBtnClicked: btn,
-	}));
-};
-
-const returnToPreview = (btnClicked: number) => {
-	return {
-		target: '#preview',
-		actions: updateClickedButton(btnClicked),
-	};
-};
 
 const actuaryMachine = Machine<ActuaryContext, ActuaryStates, ActuaryEvents>({
 	id: 'actuary',
