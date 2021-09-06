@@ -1,6 +1,13 @@
 import { Machine, assign } from 'xstate';
 import { IndependentTrustee } from './context';
-import { RemoveReasonProps } from '../common/interfaces';
+import {
+	CommonCardMachineContext,
+	RemoveReasonProps,
+} from '../common/interfaces';
+import {
+	returnToPreview,
+	updateClickedButton,
+} from '../common/machine/actions';
 
 interface IndependentTrusteeStates {
 	states: {
@@ -30,12 +37,8 @@ type IndependentTrusteeEvents =
 	| { type: 'DELETE' }
 	| { type: 'SELECT'; values?: RemoveReasonProps };
 
-export interface IndependentTrusteeContext {
-	complete: boolean;
-	remove?: RemoveReasonProps;
+export interface IndependentTrusteeContext extends CommonCardMachineContext {
 	independentTrustee: Partial<IndependentTrustee>;
-	preValidatedData?: boolean | null;
-	lastBtnClicked?: number | null;
 }
 
 const independentTrusteeMachine = Machine<
@@ -55,8 +58,14 @@ const independentTrusteeMachine = Machine<
 		preview: {
 			id: 'preview',
 			on: {
-				REMOVE: '#remove',
-				EDIT_REGULATOR: 'edit.regulator',
+				REMOVE: {
+					target: '#remove',
+					actions: updateClickedButton(2),
+				},
+				EDIT_REGULATOR: {
+					target: 'edit.regulator',
+					actions: updateClickedButton(4),
+				},
 				COMPLETE: {
 					actions: assign((_, event) => ({
 						complete: event.value,
@@ -80,8 +89,8 @@ const independentTrusteeMachine = Machine<
 								},
 							})),
 						},
-						REMOVE: '#remove',
 						CANCEL: '#preview',
+						REMOVE: returnToPreview(2),
 					},
 				},
 			},
@@ -101,6 +110,7 @@ const independentTrusteeMachine = Machine<
 								};
 							}),
 						},
+						REMOVE: '#preview',
 					},
 				},
 				confirm: {
@@ -108,6 +118,7 @@ const independentTrusteeMachine = Machine<
 						CANCEL: '#preview',
 						BACK: '#remove',
 						DELETE: 'deleted',
+						REMOVE: '#preview',
 					},
 				},
 				deleted: {
