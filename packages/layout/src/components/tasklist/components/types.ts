@@ -27,8 +27,6 @@ export type TasklistProps = {
 	titleIncomplete: string;
 	reviewTitle: string;
 	reviewPath: string;
-	welcomeTitle: string;
-	welcomePath: string;
 	maintenanceMode?: boolean;
 	sections: TasklistSectionProps[];
 	/** import from react-router-dom */

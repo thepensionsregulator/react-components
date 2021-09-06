@@ -57,8 +57,6 @@ export const Tasklist: React.FC<TasklistProps> = ({
 	titleIncomplete,
 	reviewTitle,
 	reviewPath,
-	welcomeTitle,
-	welcomePath,
 	sections: originalSections,
 	maintenanceMode = false,
 	matchPath,
@@ -116,20 +114,6 @@ export const Tasklist: React.FC<TasklistProps> = ({
 						taskList={true}
 					>
 						{reviewTitle}
-					</Link>
-					<Link
-						cfg={{
-							fontWeight: 3,
-							color: 'primary.2',
-							textAlign: 'left',
-							lineHeight: 6,
-							fontSize: 2,
-						}}
-						href={welcomePath}
-						onClick={() => history.push(welcomePath)}
-						taskList={true}
-					>
-						{welcomeTitle}
 					</Link>
 				</Flex>
 			</Flex>
