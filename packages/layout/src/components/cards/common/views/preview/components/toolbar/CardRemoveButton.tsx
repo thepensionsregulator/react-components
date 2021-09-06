@@ -1,6 +1,6 @@
 import React from 'react';
-import { ICardRemoveButtonProps } from '../../../../../interfaces';
-import { UnderlinedButton } from '../../../../../../components/button';
+import { ICardRemoveButtonProps } from '../../../../interfaces';
+import { UnderlinedButton } from '../../../../../components/button';
 
 export const CardRemoveButton: React.FC<ICardRemoveButtonProps> = React.memo(
 	({ children, button, current, send, tabIndex = null }) => {

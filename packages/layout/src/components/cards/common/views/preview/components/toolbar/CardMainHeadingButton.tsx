@@ -1,6 +1,6 @@
 import React from 'react';
-import { ICardMainHeadingButtonProps } from '../../../../../interfaces';
-import { UnderlinedButton } from '../../../../../../components/button';
+import { ICardMainHeadingButtonProps } from '../../../../interfaces';
+import { UnderlinedButton } from '../../../../../components/button';
 
 export const CardMainHeadingButton: React.FC<ICardMainHeadingButtonProps> = React.memo(
 	({ children, button, current, onClick }) => {

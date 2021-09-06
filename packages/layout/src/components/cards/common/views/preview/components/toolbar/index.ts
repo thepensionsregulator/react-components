@@ -1,2 +1,3 @@
-export * from './cardRemoveButton/CardRemoveButton';
-export * from './cardMainHeadingButton/CardMainHeadingButton';
+export * from './CardRemoveButton';
+export * from './CardMainHeadingButton';
+export * from './CardMainHeadingTitle';
