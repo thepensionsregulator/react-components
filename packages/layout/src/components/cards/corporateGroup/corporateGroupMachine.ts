@@ -1,7 +1,13 @@
 import { Machine, assign } from 'xstate';
 import { CorporateGroup } from './context';
-import { CommonCardMachineContext, RemoveReasonProps } from '../common/interfaces';
-import { updateClickedButton, returnToPreview } from '../common/machine/actions';
+import {
+	CommonCardMachineContext,
+	RemoveReasonProps,
+} from '../common/interfaces';
+import {
+	updateClickedButton,
+	returnToPreview,
+} from '../common/machine/actions';
 
 interface CorporateGroupStates {
 	states: {

@@ -1,7 +1,10 @@
 import { Machine, assign } from 'xstate';
 import { Insurer } from './context';
 import { CommonCardMachineContext } from '../common/interfaces';
-import { updateClickedButton, returnToPreview } from '../common/machine/actions';
+import {
+	updateClickedButton,
+	returnToPreview,
+} from '../common/machine/actions';
 
 interface InsurerStates {
 	states: {

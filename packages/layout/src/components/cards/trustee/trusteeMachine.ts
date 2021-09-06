@@ -5,7 +5,10 @@ import {
 	CardContactDetails,
 	CommonCardMachineContext,
 } from '../common/interfaces';
-import { updateClickedButton, returnToPreview } from '../common/machine/actions';
+import {
+	updateClickedButton,
+	returnToPreview,
+} from '../common/machine/actions';
 
 interface TrusteeStates {
 	states: {

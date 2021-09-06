@@ -1,6 +1,9 @@
 import { Machine, assign } from 'xstate';
 import { CommonCardMachineContext } from '../common/interfaces';
-import { updateClickedButton, returnToPreview } from '../common/machine/actions';
+import {
+	updateClickedButton,
+	returnToPreview,
+} from '../common/machine/actions';
 import { InHouseAdmin } from './context';
 
 interface InHouseAdminStates {

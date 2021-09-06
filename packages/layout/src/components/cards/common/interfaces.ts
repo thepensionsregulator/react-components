@@ -87,8 +87,8 @@ export interface RemoveReasonProps {
 }
 
 export interface RemoveConfirmProps {
-	confirm: boolean; 
-	date: string
+	confirm: boolean;
+	date: string;
 }
 
 export interface RemoveContextProp {
