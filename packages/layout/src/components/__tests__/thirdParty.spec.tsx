@@ -14,6 +14,7 @@ import {
 	sampleAddress,
 	disableHeadingOrder,
 } from '../testHelpers/commonData/cards';
+import { act } from '@testing-library/react-hooks';
 
 const noop = () => Promise.resolve();
 
@@ -128,12 +129,14 @@ describe('ThirdParty Remove', () => {
 			/>,
 		);
 
-		userEvent.click(getByText('Remove'));
-		userEvent.click(getByText('Continue'));
+		await act(async () => {
+			userEvent.click(getByText('Remove'));
+			userEvent.click(getByText('Continue'));
 
-		expect(
-			getByText('Please confirm and fill in the date fields.'),
-		).toBeInTheDocument();
+			expect(
+				getByText('Please confirm and fill in the date fields.'),
+			).toBeInTheDocument();
+		});
 	});
 
 	test('Date screen date is required', async () => {
@@ -146,13 +149,15 @@ describe('ThirdParty Remove', () => {
 			/>,
 		);
 
-		userEvent.click(getByText('Remove'));
-		userEvent.click(getByText(/I confirm/i));
-		userEvent.click(getByText('Continue'));
+		await act(async () => {
+			userEvent.click(getByText('Remove'));
+			userEvent.click(getByText(/I confirm/i));
+			userEvent.click(getByText('Continue'));
 
-		expect(
-			getByText('Please confirm and fill in the date fields.'),
-		).toBeInTheDocument();
+			expect(
+				getByText('Please confirm and fill in the date fields.'),
+			).toBeInTheDocument();
+		});
 	});
 
 	test('Date screen checkbox is required', async () => {
@@ -165,18 +170,20 @@ describe('ThirdParty Remove', () => {
 			/>,
 		);
 
-		// go to remove screen
-		userEvent.click(getByText('Remove'));
-		// enter date
-		userEvent.type(getByTestId('dd-field'), '10');
-		userEvent.type(getByTestId('mm-field'), '10');
-		userEvent.type(getByTestId('yyyy-field'), '2010');
-		// click Continue and check validation
-		userEvent.click(getByText('Continue'));
+		await act(async () => {
+			// go to remove screen
+			userEvent.click(getByText('Remove'));
+			// enter date
+			userEvent.type(getByTestId('dd-field'), '10');
+			userEvent.type(getByTestId('mm-field'), '10');
+			userEvent.type(getByTestId('yyyy-field'), '2010');
+			// click Continue and check validation
+			userEvent.click(getByText('Continue'));
 
-		expect(
-			getByText('Please confirm and fill in the date fields.'),
-		).toBeInTheDocument();
+			expect(
+				getByText('Please confirm and fill in the date fields.'),
+			).toBeInTheDocument();
+		});
 	});
 
 	test('Date screen validation passes when required fields complete', async () => {
@@ -189,19 +196,21 @@ describe('ThirdParty Remove', () => {
 			/>,
 		);
 
-		// go to remove screen
-		userEvent.click(getByText('Remove'));
-		// confirm checkbox
-		userEvent.click(getByText(/I confirm/i));
-		// enter date
-		userEvent.type(getByTestId('dd-field'), '10');
-		userEvent.type(getByTestId('mm-field'), '10');
-		userEvent.type(getByTestId('yyyy-field'), '2010');
-		// click Continue and check validation
-		userEvent.click(getByText('Continue'));
+		await act(async () => {
+			// go to remove screen
+			userEvent.click(getByText('Remove'));
+			// confirm checkbox
+			userEvent.click(getByText(/I confirm/i));
+			// enter date
+			userEvent.type(getByTestId('dd-field'), '10');
+			userEvent.type(getByTestId('mm-field'), '10');
+			userEvent.type(getByTestId('yyyy-field'), '2010');
+			// click Continue and check validation
+			userEvent.click(getByText('Continue'));
 
-		expect(
-			getByText('Are you sure you want to remove this third party admin?'),
-		).toBeInTheDocument();
+			expect(
+				getByText('Are you sure you want to remove this third party admin?'),
+			).toBeInTheDocument();
+		});
 	});
 });
