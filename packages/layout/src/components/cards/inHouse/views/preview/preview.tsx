@@ -7,8 +7,8 @@ import {
 	ContactDetailsPreview,
 	AddressPreview,
 } from '../../../common/views/preview/components';
-import styles from '../../../cards.module.scss';
 import { concatenateStrings } from '../../../../../utils';
+import styles from '../../../cards.module.scss';
 
 export const Preview: React.FC<any> = React.memo(() => {
 	const { current, send, onCorrect, i18n } = useInHouseAdminContext();
@@ -16,24 +16,6 @@ export const Preview: React.FC<any> = React.memo(() => {
 
 	const addressBtn = useRef(null);
 	const contactsBtn = useRef(null);
-
-	const onClickAddressBtn = () => {
-		current.context.lastBtnClicked = 3;
-		send('EDIT_ADDRESS');
-	};
-
-	const onClickContactsBtn = () => {
-		current.context.lastBtnClicked = 4;
-		send('EDIT_CONTACTS');
-	};
-
-	const onCollapseAddress = () => {
-		current.context.lastBtnClicked === 3 && addressBtn.current.focus();
-	};
-
-	const onCollapseContacts = () => {
-		current.context.lastBtnClicked === 4 && contactsBtn.current.focus();
-	};
 
 	return (
 		<div
@@ -49,11 +31,10 @@ export const Preview: React.FC<any> = React.memo(() => {
 					cfg={{ width: 5, flex: '0 0 auto', flexDirection: 'column', pr: 4 }}
 				>
 					<UnderlinedButton
-						onClick={onClickAddressBtn}
-						isOpen={current.matches({ edit: 'address' })}
+						onClick={() => send('EDIT_ADDRESS')}
 						isEditButton={true}
 						buttonRef={addressBtn}
-						onCollapseCallback={onCollapseAddress}
+						giveFocus={current.context.lastBtnClicked === 3}
 					>
 						{i18n.preview.buttons.three}
 					</UnderlinedButton>
@@ -75,11 +56,10 @@ export const Preview: React.FC<any> = React.memo(() => {
 					cfg={{ width: 5, flex: '0 0 auto', flexDirection: 'column', pl: 4 }}
 				>
 					<UnderlinedButton
-						onClick={onClickContactsBtn}
-						isOpen={current.matches({ edit: 'contacts' })}
+						onClick={() => send('EDIT_CONTACTS')}
 						isEditButton={true}
 						buttonRef={contactsBtn}
-						onCollapseCallback={onCollapseContacts}
+						giveFocus={current.context.lastBtnClicked === 4}
 					>
 						{i18n.preview.buttons.four}
 					</UnderlinedButton>
