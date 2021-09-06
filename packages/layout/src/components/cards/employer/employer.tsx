@@ -1,5 +1,4 @@
-import React, { useMemo, useRef, MutableRefObject } from 'react';
-import { UnderlinedButton } from '../components/button';
+import React, { useMemo, useRef } from 'react';
 import { Toolbar } from '../components/toolbar';
 import { Section } from '@tpr/core';
 import { Preview } from './views/preview/preview';
@@ -17,9 +16,13 @@ import {
 	EmployerProviderProps,
 } from './context';
 import RemovedBox from '../components/removedBox';
-import { cardTypeName } from '../common/interfaces';
+import { cardTypeName, IToolbarButtonProps } from '../common/interfaces';
 import { EmployerContext } from './employerMachine';
-import { Subtitle } from '../common/views/preview/components';
+import {
+	CardMainHeadingButton,
+	CardRemoveButton,
+	Subtitle,
+} from '../common/views/preview/components';
 import styles from '../cards.module.scss';
 
 const CardContentSwitch: React.FC = () => {
@@ -41,76 +44,34 @@ const CardContentSwitch: React.FC = () => {
 	}
 };
 
-const EmployerButton: React.FC<{ button: MutableRefObject<any> }> = ({
-	button,
-}) => {
-	const { current, send, i18n } = useEmployerContext();
+const ToolbarButton: React.FC<IToolbarButtonProps> = React.memo(
+	({ remove = false, button }) => {
+		const { current, send, i18n } = useEmployerContext();
 
-	const onCollapseEmployer = () => {
-		current.context.lastBtnClicked === 1 && button.current.focus();
-	};
-
-	return (
-		<UnderlinedButton
-			isOpen={current.matches('employerType')}
-			onClick={() => {
-				current.context.lastBtnClicked = 1;
-				if (
-					current.matches('employerType') ||
-					current.matches({ remove: 'date' }) ||
-					current.matches({ remove: 'confirm' })
-				) {
-					send('CANCEL');
-				} else {
-					send('CHANGE_TYPE');
-				}
-			}}
-			isEditButton={true}
-			isMainHeading={true}
-			buttonRef={button}
-			onCollapseCallback={onCollapseEmployer}
-		>
-			{i18n.preview.buttons.one}
-		</UnderlinedButton>
-	);
-};
-
-const RemoveButton: React.FC<{ button: MutableRefObject<any> }> = ({
-	button,
-}) => {
-	const { current, send, i18n } = useEmployerContext();
-
-	const onCollapseRemove = () => {
-		current.context.lastBtnClicked === 2 && button.current.focus();
-	};
-
-	return (
-		<UnderlinedButton
-			isOpen={
-				current.matches({ remove: 'date' }) ||
-				current.matches({ remove: 'confirm' })
-			}
-			onClick={() => {
-				current.context.lastBtnClicked = 2;
-				if (
-					current.matches('employerType') ||
-					current.matches({ remove: 'date' }) ||
-					current.matches({ remove: 'confirm' })
-				) {
-					send('CANCEL');
-				} else {
-					send('REMOVE');
-				}
-			}}
-			tabIndex={removeFromTabFlowIfMatches(current, 'employerType')}
-			heading={false}
-			buttonRef={button}
-			onCollapseCallback={onCollapseRemove}
-		>
-			{i18n.preview.buttons.two}
-		</UnderlinedButton>
-	);
-};
+		return (
+			<>
+				{remove ? (
+					<CardRemoveButton
+						button={button}
+						send={send}
+						current={current}
+						tabIndex={removeFromTabFlowIfMatches(current, 'employerType')}
+					>
+						{i18n.preview.buttons.two}
+					</CardRemoveButton>
+				) : (
+					<CardMainHeadingButton
+						button={button}
+						current={current}
+						onClick={() => send('CHANGE_TYPE')}
+					>
+						{i18n.preview.buttons.one}
+					</CardMainHeadingButton>
+				)}
+			</>
+		);
+	},
+);
 
 const EmployerSubtitle: React.FC<Partial<EmployerContext>> = React.memo(
 	({
@@ -164,8 +125,10 @@ export const EmployerCard: React.FC<EmployerProviderProps> = React.memo(
 							])}
 						>
 							<Toolbar
-								buttonLeft={() => <EmployerButton button={employerButtonRef} />}
-								buttonRight={() => <RemoveButton button={removeButtonRef} />}
+								buttonLeft={() => <ToolbarButton button={employerButtonRef} />}
+								buttonRight={() => (
+									<ToolbarButton button={removeButtonRef} remove={true} />
+								)}
 								complete={isComplete(current.context)}
 								subtitle={() => <EmployerSubtitle {...current.context} />}
 								statusText={

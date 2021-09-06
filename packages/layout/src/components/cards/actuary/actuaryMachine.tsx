@@ -87,7 +87,7 @@ const actuaryMachine = Machine<ActuaryContext, ActuaryStates, ActuaryEvents>({
 							})),
 						},
 						CANCEL: '#preview',
-						EDIT_NAME: returnToPreview(1),
+						EDIT_NAME: '#preview',
 						REMOVE: returnToPreview(2),
 					},
 				},
@@ -125,7 +125,7 @@ const actuaryMachine = Machine<ActuaryContext, ActuaryStates, ActuaryEvents>({
 							}),
 						},
 						EDIT_NAME: returnToPreview(1),
-						REMOVE: returnToPreview(2),
+						REMOVE: '#preview',
 					},
 				},
 				confirm: {
@@ -134,7 +134,7 @@ const actuaryMachine = Machine<ActuaryContext, ActuaryStates, ActuaryEvents>({
 						BACK: '#remove',
 						DELETE: 'deleted',
 						EDIT_NAME: returnToPreview(1),
-						REMOVE: returnToPreview(2),
+						REMOVE: '#preview',
 					},
 				},
 				deleted: {

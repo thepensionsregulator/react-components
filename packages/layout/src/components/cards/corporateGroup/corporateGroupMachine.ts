@@ -142,7 +142,7 @@ const corporateGroupMachine = Machine<
 								};
 							}),
 						},
-						REMOVE: returnToPreview(2),
+						REMOVE: '#preview',
 					},
 				},
 				confirm: {
@@ -150,7 +150,7 @@ const corporateGroupMachine = Machine<
 						CANCEL: '#preview',
 						BACK: '#remove',
 						DELETE: 'deleted',
-						REMOVE: returnToPreview(2),
+						REMOVE: '#preview',
 					},
 				},
 				deleted: {

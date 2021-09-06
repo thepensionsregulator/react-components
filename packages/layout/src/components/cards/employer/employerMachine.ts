@@ -1,5 +1,10 @@
 import { Machine, assign } from 'xstate';
 import { Employer } from './context';
+import { CommonCardMachineContext } from '../common/interfaces';
+import {
+	updateClickedButton,
+	returnToPreview,
+} from '../common/machine/actions';
 
 interface EmployerStates {
 	states: {
@@ -25,13 +30,9 @@ type EmployerEvents =
 	| { type: 'DELETE' }
 	| { type: 'COMPLETE'; value: boolean };
 
-export interface EmployerContext {
-	complete: boolean;
-	showStatutoryEmployerSection: boolean;
-	remove: { confirm: boolean; date: string } | null;
+export interface EmployerContext extends CommonCardMachineContext {
 	employer: Partial<Employer>;
-	preValidatedData?: boolean | null;
-	lastBtnClicked?: number | null;
+	showStatutoryEmployerSection: boolean;
 }
 
 const employerMachine = Machine<
@@ -52,8 +53,14 @@ const employerMachine = Machine<
 		preview: {
 			id: 'preview',
 			on: {
-				CHANGE_TYPE: '#employerType',
-				REMOVE: '#remove',
+				CHANGE_TYPE: {
+					target: '#employerType',
+					actions: updateClickedButton(1),
+				},
+				REMOVE: {
+					target: '#remove',
+					actions: updateClickedButton(2),
+				},
 				COMPLETE: {
 					actions: assign((_, event) => ({
 						complete: event.value,
@@ -75,6 +82,8 @@ const employerMachine = Machine<
 					})),
 				},
 				CANCEL: '#preview',
+				CHANGE_TYPE: '#preview',
+				REMOVE: returnToPreview(2),
 			},
 		},
 		remove: {
@@ -92,6 +101,8 @@ const employerMachine = Machine<
 								};
 							}),
 						},
+						CHANGE_TYPE: returnToPreview(1),
+						REMOVE: '#preview',
 					},
 				},
 				confirm: {
@@ -99,6 +110,8 @@ const employerMachine = Machine<
 						CANCEL: '#preview',
 						BACK: '#remove',
 						DELETE: 'deleted',
+						CHANGE_TYPE: returnToPreview(1),
+						REMOVE: '#preview',
 					},
 				},
 				deleted: {
