@@ -1,11 +1,10 @@
-import React, { useRef, MutableRefObject } from 'react';
+import React, { useRef } from 'react';
 import {
 	TrusteeProvider,
 	useTrusteeContext,
 	TrusteeCardProps,
 } from './context';
 import { Section } from '@tpr/core';
-import { UnderlinedButton } from '../components/button';
 import { Preview } from './views/preview';
 import { Toolbar } from '../components/toolbar';
 import Name from './views/name';
@@ -15,10 +14,19 @@ import { Contacts } from './views/contacts';
 import RemoveReason from './views/remove/reason/reason';
 import { ConfirmRemove } from './views/remove/confirm';
 import RemovedBox from '../components/removedBox';
-import { CardContentProps, cardType, cardTypeName } from '../common/interfaces';
+import {
+	CardContentProps,
+	cardType,
+	cardTypeName,
+	IToolbarButtonProps,
+} from '../common/interfaces';
 import { AddressComparer } from '@tpr/forms';
 import { TrusteeContext } from './trusteeMachine';
-import { Subtitle } from '../common/views/preview/components';
+import {
+	CardMainHeadingButton,
+	CardRemoveButton,
+	Subtitle,
+} from '../common/views/preview/components';
 import {
 	concatenateStrings,
 	removeFromTabFlowIfMatches,
@@ -82,80 +90,36 @@ const CardContent: React.FC<CardContentProps> = ({
 	}
 };
 
-const TrusteeButton: React.FC<{ button: MutableRefObject<any> }> = ({
-	button,
-}) => {
-	const { current, send, i18n } = useTrusteeContext();
+const ToolbarButton: React.FC<IToolbarButtonProps> = React.memo(
+	({ remove = false, button }) => {
+		const { current, send, i18n } = useTrusteeContext();
 
-	const onCollapseTrustee = () => {
-		current.context.lastBtnClicked === 1 && button.current.focus();
-	};
-
-	return (
-		<UnderlinedButton
-			isOpen={
-				current.matches({ edit: { trustee: 'name' } }) ||
-				current.matches({ edit: { trustee: 'kind' } }) ||
-				current.matches({ edit: { trustee: 'save' } })
-			}
-			onClick={() => {
-				current.context.lastBtnClicked = 1;
-				if (
-					current.matches({ edit: { trustee: 'name' } }) ||
-					current.matches({ edit: { trustee: 'kind' } })
-				) {
-					send('CANCEL');
-				} else {
-					send('EDIT_TRUSTEE');
-				}
-			}}
-			isEditButton={true}
-			isMainHeading={true}
-			buttonRef={button}
-			onCollapseCallback={onCollapseTrustee}
-		>
-			{i18n.preview.buttons.one}
-		</UnderlinedButton>
-	);
-};
-
-const RemoveButton: React.FC<{ button: MutableRefObject<any> }> = ({
-	button,
-}) => {
-	const { current, send, i18n } = useTrusteeContext();
-
-	const onCollapseRemove = () => {
-		current.context.lastBtnClicked === 2 && button.current.focus();
-	};
-
-	return (
-		<UnderlinedButton
-			isOpen={
-				current.matches({ remove: 'reason' }) ||
-				current.matches({ remove: 'confirm' })
-			}
-			onClick={() => {
-				current.context.lastBtnClicked = 2;
-				if (
-					current.matches({ remove: 'reason' }) ||
-					current.matches({ remove: 'confirm' })
-				) {
-					send('CANCEL');
-				} else {
-					send('REMOVE');
-				}
-			}}
-			tabIndex={removeFromTabFlowIfMatches(current, {
-				edit: { trustee: 'name' },
-			})}
-			heading={false}
-			buttonRef={button}
-			onCollapseCallback={onCollapseRemove}
-		>
-			{i18n.preview.buttons.two}
-		</UnderlinedButton>
-	);
-};
+		return (
+			<>
+				{remove ? (
+					<CardRemoveButton
+						button={button}
+						send={send}
+						current={current}
+						tabIndex={removeFromTabFlowIfMatches(current, {
+							edit: { trustee: 'name' },
+						})}
+					>
+						{i18n.preview.buttons.two}
+					</CardRemoveButton>
+				) : (
+					<CardMainHeadingButton
+						button={button}
+						current={current}
+						onClick={() => send('EDIT_TRUSTEE')}
+					>
+						{i18n.preview.buttons.one}
+					</CardMainHeadingButton>
+				)}
+			</>
+		);
+	},
+);
 
 const isComplete = (context: TrusteeContext) => {
 	return context.preValidatedData ? true : context.complete;
@@ -183,8 +147,10 @@ export const TrusteeCard: React.FC<
 					])}
 				>
 					<Toolbar
-						buttonLeft={() => <TrusteeButton button={trusteeButtonRef} />}
-						buttonRight={() => <RemoveButton button={removeButtonRef} />}
+						buttonLeft={() => <ToolbarButton button={trusteeButtonRef} />}
+						buttonRight={() => (
+							<ToolbarButton button={removeButtonRef} remove={true} />
+						)}
 						complete={isComplete(current.context)}
 						subtitle={() => (
 							<Subtitle
