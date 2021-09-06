@@ -34,6 +34,7 @@ export const Preview: React.FC<CardContentProps> = React.memo(
 					>
 						<UnderlinedButton
 							onClick={() => send('EDIT_ORG')}
+							isOpen={current.matches({ edit: 'company.address' })}
 							isEditButton={true}
 							buttonRef={correspondenceBtn}
 							giveFocus={current.context.lastBtnClicked === 3}
@@ -65,6 +66,7 @@ export const Preview: React.FC<CardContentProps> = React.memo(
 						>
 							<UnderlinedButton
 								onClick={() => send('EDIT_CONTACTS')}
+								isOpen={current.matches({ edit: 'contact.details' })}
 								isEditButton={true}
 								buttonRef={contactsBtn}
 								giveFocus={current.context.lastBtnClicked === 4}

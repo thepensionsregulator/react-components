@@ -45,6 +45,7 @@ export const Preview: React.FC<any> = React.memo(() => {
 				>
 					<UnderlinedButton
 						onClick={() => send('EDIT_INSURER')}
+						isOpen={current.matches('edit')}
 						isEditButton={true}
 						buttonRef={insurerBtn}
 						giveFocus={current.context.lastBtnClicked === 4}

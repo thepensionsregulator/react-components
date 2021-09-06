@@ -32,6 +32,7 @@ export const Preview: React.FC<any> = React.memo(() => {
 				>
 					<UnderlinedButton
 						onClick={() => send('EDIT_ADDRESS')}
+						isOpen={current.matches({ edit: 'address' })}
 						isEditButton={true}
 						buttonRef={addressBtn}
 						giveFocus={current.context.lastBtnClicked === 3}
@@ -57,6 +58,7 @@ export const Preview: React.FC<any> = React.memo(() => {
 				>
 					<UnderlinedButton
 						onClick={() => send('EDIT_CONTACTS')}
+						isOpen={current.matches({ edit: 'contacts' })}
 						isEditButton={true}
 						buttonRef={contactsBtn}
 						giveFocus={current.context.lastBtnClicked === 4}
