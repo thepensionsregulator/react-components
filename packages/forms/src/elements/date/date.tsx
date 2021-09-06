@@ -187,10 +187,8 @@ export const InputDate: React.FC<InputDateComponentProps> = memo(
 				isError={meta && meta.touched && meta.error}
 				element="fieldset"
 				onBlur={(e: React.FocusEvent<HTMLFieldSetElement>) => {
-					if (e.relatedTarget && !e.currentTarget.outerHTML.includes((e.relatedTarget as HTMLElement).outerHTML)) {
-						if (hasValue()) {
-							input.onBlur();
-						}		
+					if (hasValue() && e.relatedTarget && !e.currentTarget.outerHTML.includes((e.relatedTarget as HTMLElement).outerHTML)) {
+						input.onBlur();
 					}
 				}}
 				data-testid={`date-input-${testId}`}
