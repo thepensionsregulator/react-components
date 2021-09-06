@@ -54,16 +54,14 @@ const transformDate = (initialDate: any) => {
 type DateInputFieldProps = {
 	disabled?: boolean;
 	required?: boolean;
-	hideMonth?: boolean;
 	id?: string;
 	label: string;
 	maxInt: number;
 	maxLength?: number;
 	meta: any;
-	onBlur: Function;
+	onBlur?: Function;
 	parentId?: string;
 	readOnly?: boolean;
-	setMonth: Function;
 	small?: boolean;
 	testId?: string;
 	updateFn: Function;
@@ -73,7 +71,6 @@ type DateInputFieldProps = {
 const DateInputField: React.FC<DateInputFieldProps> = ({
 	disabled,
 	required = false,
-	hideMonth,
 	id,
 	label,
 	maxInt,
@@ -82,7 +79,6 @@ const DateInputField: React.FC<DateInputFieldProps> = ({
 	onBlur,
 	parentId,
 	readOnly,
-	setMonth,
 	small = true,
 	testId,
 	updateFn,
@@ -111,16 +107,15 @@ const DateInputField: React.FC<DateInputFieldProps> = ({
 				data-testid={testId}
 				value={value}
 				readOnly={readOnly}
-				onFocus={({ target }: ChangeEvent<HTMLInputElement>) => {
+				onFocus={({ target }: React.FocusEvent<HTMLInputElement>) => {
 					target.select();
 					setHasFocus(true);
 				}}
 				onChange={handleChange(updateFn, maxInt)}
-				onBlur={(evt: ChangeEvent<HTMLInputElement>) => {
-					if (!evt.target.value || evt.target.value === '0') {
-						!hideMonth && setMonth('');
+				onBlur={({ target }: React.FocusEvent<HTMLInputElement>) => {
+					if (!target.value || target.value === '0') {
 						setHasFocus(false);
-						onBlur();
+						onBlur && onBlur();
 					}
 				}}
 				meta={meta}
@@ -186,7 +181,6 @@ export const InputDate: React.FC<InputDateComponentProps> = memo(
 				isError={meta && meta.touched && meta.error}
 				element="fieldset"
 				onFocus={input.onFocus}
-				onBlur={input.onBlur}
 				data-testid={`date-input-${testId}`}
 				aria-labelledby={helper.labelId}
 				aria-describedby={
@@ -226,7 +220,6 @@ export const InputDate: React.FC<InputDateComponentProps> = memo(
 							updateFn={(dd: number) => setState({ dd })}
 							maxInt={32}
 							setMonth={(mm: number) => setState({ mm })}
-							onBlur={input.onBlur}
 							meta={meta}
 							disabled={disabled}
 							readOnly={readOnly}
@@ -244,7 +237,6 @@ export const InputDate: React.FC<InputDateComponentProps> = memo(
 							updateFn={(mm: number) => setState({ mm })}
 							maxInt={13}
 							setMonth={(mm: number) => setState({ mm })}
-							onBlur={input.onBlur}
 							meta={meta}
 							disabled={disabled}
 							readOnly={readOnly}
