@@ -81,7 +81,7 @@ export interface TrusteeCardProps extends CardContentProps {
 
 export const TrusteeProvider = ({
 	trustee,
-	preValidatedData,
+	preValidatedData = null,
 	complete,
 	lastBtnClicked = null,
 	children,

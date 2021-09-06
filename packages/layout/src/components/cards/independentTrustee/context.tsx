@@ -49,7 +49,7 @@ export const IndependentTrusteeContext = createContext<IndependentTrusteeContext
 
 export const IndependentTrusteeProvider = ({
 	complete,
-	preValidatedData,
+	preValidatedData = null,
 	independentTrustee,
 	lastBtnClicked = null,
 	children,
