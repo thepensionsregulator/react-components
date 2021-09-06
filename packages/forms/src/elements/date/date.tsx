@@ -59,6 +59,7 @@ type DateInputFieldProps = {
 	maxInt: number;
 	maxLength?: number;
 	meta: any;
+	onFocus?: Function;
 	onBlur?: Function;
 	parentId?: string;
 	readOnly?: boolean;
@@ -76,6 +77,7 @@ const DateInputField: React.FC<DateInputFieldProps> = ({
 	maxInt,
 	maxLength,
 	meta,
+	onFocus,
 	onBlur,
 	parentId,
 	readOnly,
@@ -110,13 +112,12 @@ const DateInputField: React.FC<DateInputFieldProps> = ({
 				onFocus={({ target }: React.FocusEvent<HTMLInputElement>) => {
 					target.select();
 					setHasFocus(true);
+					onFocus && onFocus();
 				}}
 				onChange={handleChange(updateFn, maxInt)}
-				onBlur={({ target }: React.FocusEvent<HTMLInputElement>) => {
-					if (!target.value || target.value === '0') {
-						setHasFocus(false);
-						onBlur && onBlur();
-					}
+				onBlur={() => {
+					setHasFocus(false);
+					onBlur && onBlur();
 				}}
 				meta={meta}
 				maxLength={maxLength}
@@ -171,6 +172,10 @@ export const InputDate: React.FC<InputDateComponentProps> = memo(
 			}
 		}, [day, month, year, input]);
 
+		const hasValue = (): boolean => {
+			return day !== "" || month !== "" || year !== "";
+		};
+
 		const isError: boolean = meta && meta.touched && meta.error;
 		const hiddenLabelId = HiddenLabelIdGenerator(hiddenLabel);
 
@@ -180,7 +185,20 @@ export const InputDate: React.FC<InputDateComponentProps> = memo(
 			<StyledInputLabel
 				isError={meta && meta.touched && meta.error}
 				element="fieldset"
-				onFocus={input.onFocus}
+				onBlur={(e: React.FocusEvent<HTMLFieldSetElement>) => {
+					if (e.relatedTarget && !e.currentTarget.outerHTML.includes((e.relatedTarget as HTMLElement).outerHTML)) {
+						console.log("leaving date component");
+						if (hasValue()) {
+							console.log(`validating ...`);
+							input.onBlur();
+						}		
+					}
+				}}
+				onFocus={(e: React.FocusEvent<HTMLFieldSetElement>) => {
+					if (!e.relatedTarget || !e.currentTarget.outerHTML.includes((e.relatedTarget as HTMLElement).outerHTML)) {
+						console.log("entering date component");						
+					}
+				}}
 				data-testid={`date-input-${testId}`}
 				aria-labelledby={helper.labelId}
 				aria-describedby={
@@ -219,7 +237,6 @@ export const InputDate: React.FC<InputDateComponentProps> = memo(
 							value={day}
 							updateFn={(dd: number) => setState({ dd })}
 							maxInt={32}
-							setMonth={(mm: number) => setState({ mm })}
 							meta={meta}
 							disabled={disabled}
 							readOnly={readOnly}
@@ -236,7 +253,6 @@ export const InputDate: React.FC<InputDateComponentProps> = memo(
 							value={month}
 							updateFn={(mm: number) => setState({ mm })}
 							maxInt={13}
-							setMonth={(mm: number) => setState({ mm })}
 							meta={meta}
 							disabled={disabled}
 							readOnly={readOnly}
@@ -253,13 +269,10 @@ export const InputDate: React.FC<InputDateComponentProps> = memo(
 						value={year}
 						updateFn={(yyyy: number) => setState({ yyyy })}
 						maxInt={10000}
-						setMonth={(mm: number) => setState({ mm })}
-						onBlur={input.onBlur}
 						meta={meta}
 						disabled={disabled}
 						readOnly={readOnly}
 						required={required}
-						hideMonth={hideMonth}
 						maxLength={4}
 					/>
 				</Flex>
