@@ -83,11 +83,11 @@ describe('Address lookup', () => {
 			});
 			await act(async () => {
 				await searchForAPostcode(FakeAddressLookupProvider.tprAddress.postcode);
-				const changePostcode = container.querySelector(
-					'button[data-testid$="change-postcode"]',
-				);
-				expect(changePostcode).not.toBeNull();
 			});
+			const changePostcode = container.querySelector(
+				'button[data-testid$="change-postcode"]',
+			);
+			expect(changePostcode).not.toBeNull();
 		});
 		test('should validate the postcode when button is clicked', async () => {
 			const { findByText } = formSetup({
@@ -122,23 +122,21 @@ describe('Address lookup', () => {
 				render: <AddressLookup {...defaultProps} />,
 			});
 
+			await searchForAPostcode(FakeAddressLookupProvider.tprAddress.postcode);
+			const displayedPostcode = await findByText(
+				FakeAddressLookupProvider.tprAddress.postcode,
+			);
+			expect(displayedPostcode).toBeDefined();
+
+			const selectAddressInput = await findByTestId('select-address-list');
 			await act(async () => {
-				await searchForAPostcode(FakeAddressLookupProvider.tprAddress.postcode);
-
-				const displayedPostcode = await findByText(
-					FakeAddressLookupProvider.tprAddress.postcode,
-				);
-				expect(displayedPostcode).toBeDefined();
-
-				const selectAddressInput = await findByTestId('select-address-list');
 				selectAddressInput.click();
-
-				const addressOptions = await findAllByRole('option');
-
-				expect(addressOptions[0].textContent).toMatch(
-					FakeAddressLookupProvider.tprAddress.addressLine1,
-				);
 			});
+			const addressOptions = await findAllByRole('option');
+
+			expect(addressOptions[0].textContent).toMatch(
+				FakeAddressLookupProvider.tprAddress.addressLine1,
+			);
 		});
 
 		test('should pass selected address to edit address view', async () => {
@@ -148,20 +146,26 @@ describe('Address lookup', () => {
 
 			await act(async () => {
 				await searchForAPostcode(FakeAddressLookupProvider.tprAddress.postcode);
-
-				const selectAddressInput = await findByTestId('select-address-list');
-				selectAddressInput.click();
-
-				const addressOptions = await findAllByRole('option');
-				addressOptions[0].click();
-				const selectAddressButton = await findByTestId('select-address-button');
-				selectAddressButton.click();
-
-				const addressLine1Input = await findByDisplayValue(
-					FakeAddressLookupProvider.tprAddress.addressLine1,
-				);
-				expect(addressLine1Input).toBeDefined();
 			});
+
+			const selectAddressInput = await findByTestId('select-address-list');
+			await act(async () => {
+				selectAddressInput.click();
+			});
+
+			const addressOptions = await findAllByRole('option');
+			await act(async () => {
+				addressOptions[0].click();
+			});
+			const selectAddressButton = await findByTestId('select-address-button');
+			await act(async () => {
+				selectAddressButton.click();
+			});
+
+			const addressLine1Input = await findByDisplayValue(
+				FakeAddressLookupProvider.tprAddress.addressLine1,
+			);
+			expect(addressLine1Input).toBeDefined();
 		});
 
 		test('should call onValidatePostcode when select address button is clicked', async () => {
@@ -171,15 +175,21 @@ describe('Address lookup', () => {
 
 			await act(async () => {
 				await searchForAPostcode(FakeAddressLookupProvider.tprAddress.postcode);
-
-				const selectAddressInput = await findByTestId('select-address-list');
-				selectAddressInput.click();
-				const addressOptions = await screen.findAllByRole('option');
-				addressOptions[0].click();
-				const selectAddressButton = await findByTestId('select-address-button');
-				selectAddressButton.click();
-				expect(defaultProps.onValidatePostcode).toHaveBeenCalled();
 			});
+
+			const selectAddressInput = await findByTestId('select-address-list');
+			await act(async () => {
+				selectAddressInput.click();
+			});
+			const addressOptions = await screen.findAllByRole('option');
+			await act(async () => {
+				addressOptions[0].click();
+			});
+			const selectAddressButton = await findByTestId('select-address-button');
+			await act(async () => {
+				selectAddressButton.click();
+			});
+			expect(defaultProps.onValidatePostcode).toHaveBeenCalled();
 		});
 	});
 
