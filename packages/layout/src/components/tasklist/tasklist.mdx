@@ -19,6 +19,8 @@ Tasklist component for tpr apps
 import { Tasklist } from '@tpr/layout';
 ```
 
+## With progress bar
+
 <Playground>
 	{() => {
 		const location = {
@@ -113,9 +115,117 @@ import { Tasklist } from '@tpr/layout';
 				titleComplete="Scheme return complete"
 				titleIncomplete="Scheme return incomplete"
 				reviewTitle="Review current and previous scheme returns"
-				welcomeTitle="Return to the welcome page"
 				sections={sections}
-				maintenanceMode={false}
+				showStatus={true}
+				matchPath={matchPath}
+				location={location}
+				history={{ push: () => {} }}
+				sectionDisabledLabel="Cannot start yet"
+				sectionCompleteLabel="Completed"
+				sectionIncompleteLabel="Not started"
+			/>
+		);
+	}}
+</Playground>
+
+## Without progress bar
+
+If `showStatus` is false the progress bar and status indicators are hidden. If `titleComplete` and/or `titleIncomplete` are falsy, the progress bar is also hidden.
+
+<Playground>
+	{() => {
+		const location = {
+			pathname: '/scheme-name-and-address',
+		};
+		const sections = [
+			{
+				title: 'Scheme details',
+				links: [
+					{
+						name: 'Scheme name and address',
+						completed: true,
+						onClick: (link) => alert(`You clicked on /scheme-name-and-address`),
+						path: '',
+					},
+					{
+						name: 'Scheme status and membership',
+						onClick: (link) =>
+							alert(`You clicked on /scheme-status-and-membership`),
+						path: '',
+					},
+					{
+						name: 'Consent to electronic communication',
+						onClick: (link) =>
+							alert(`You clicked on /consent-to-electronic-communication`),
+						path: '',
+					},
+				],
+				order: 1,
+			},
+			{
+				title: 'Roles',
+				links: [
+					{
+						name: 'Trustee details',
+						completed: true,
+						active: (_path) => true,
+						path: '/trustee-details',
+					},
+					{ name: 'Employer details', path: '/employer-details' },
+					{
+						name: 'Service provider details',
+						path: '/service-provider-details',
+					},
+				],
+				order: 2,
+			},
+			{
+				title: 'Financial details',
+				links: [
+					{
+						name: 'S179 valuation',
+						completed: true,
+						active: (_path) => true,
+						path: '/s179-valuation',
+					},
+					{ name: 'Part 3 funding valuation', path: '/part-3-valuation' },
+					{
+						name: 'Buyout valuation',
+						completed: false,
+						path: '/buyout-valuation',
+					},
+					{
+						name: 'Asset breakdown',
+						completed: true,
+						path: '/asset-breakdown',
+					},
+				],
+				order: 3,
+			},
+			{
+				title: 'Review and submit',
+				links: [
+					{
+						name: 'Review',
+						completed: false,
+						path: '/review',
+						hideIcon: true,
+					},
+					{
+						name: 'Submit',
+						completed: false,
+						disabled: true,
+						path: '/declare-and-submit',
+					},
+				],
+				order: 4,
+			},
+		];
+		return (
+			<Tasklist
+				reviewTitle="Review current and previous scheme returns"
+				sections={sections}
+				showStatus={false}
 				matchPath={matchPath}
 				location={location}
 				history={{ push: () => {} }}
