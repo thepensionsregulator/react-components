@@ -12,10 +12,7 @@ import {
 	assertHeadingButtonsExist,
 	assertHeadingsExist,
 } from '../testHelpers/testHelpers';
-import {
-	sampleAddress,
-	disableHeadingOrder,
-} from '../testHelpers/commonData/cards';
+import { sampleAddress } from '../testHelpers/commonData/cards';
 
 const noop = () => Promise.resolve();
 
@@ -148,6 +145,10 @@ describe('Professional / Independent Trustee Card', () => {
 			expect(results).toHaveNoViolations();
 		});
 
+		afterEach(() => {
+			cleanup();
+		});
+
 		test('indicating if trustee was appointed by the regulator', () => {
 			expect(findByTestId('independent-regulator-form')).not.toBe(null);
 			expect(
@@ -179,7 +180,7 @@ describe('Professional / Independent Trustee Card', () => {
 			findByTestId = getByTestId;
 
 			findByText('Remove').click();
-			const results = await axe(component, { rules: disableHeadingOrder });
+			const results = await axe(component);
 			expect(results).toHaveNoViolations();
 		});
 
@@ -199,31 +200,31 @@ describe('Professional / Independent Trustee Card', () => {
 		test('remove Independent Trustee - confirm', async () => {
 			await act(async () => {
 				findByText('They were never part of the scheme.').click();
-				const results = await axe(component, { rules: disableHeadingOrder });
-				expect(results).toHaveNoViolations();
 			});
+			const results = await axe(component);
+			expect(results).toHaveNoViolations();
 
 			await act(async () => {
 				findByText('Continue').click();
-				const results = await axe(component, { rules: disableHeadingOrder });
-				expect(results).toHaveNoViolations();
-				expect(
-					findByText('Are you sure you want to remove this trustee?'),
-				).toBeDefined();
-				expect(findByText("This can't be undone.")).toBeDefined();
-				expect(findByText('Remove Trustee')).toBeDefined();
-				expect(findByText('Cancel')).toBeDefined();
 			});
+			const results2 = await axe(component);
+			expect(results2).toHaveNoViolations();
+			expect(
+				findByText('Are you sure you want to remove this trustee?'),
+			).toBeDefined();
+			expect(findByText("This can't be undone.")).toBeDefined();
+			expect(findByText('Remove Trustee')).toBeDefined();
+			expect(findByText('Cancel')).toBeDefined();
 
 			// Removed => confirmation banner
 			await act(async () => {
 				findByText('Remove Trustee').click();
-				const results = await axe(component);
-				expect(results).toHaveNoViolations();
-				expect(
-					findByText('Professional / Independent Trustee removed successfully'),
-				).toBeDefined();
 			});
+			const results3 = await axe(component);
+			expect(results3).toHaveNoViolations();
+			expect(
+				findByText('Professional / Independent Trustee removed successfully'),
+			).toBeDefined();
 		});
 	});
 });

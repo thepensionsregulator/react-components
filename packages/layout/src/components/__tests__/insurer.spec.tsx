@@ -1,5 +1,5 @@
 import React from 'react';
-import { render } from '@testing-library/react';
+import { cleanup, render } from '@testing-library/react';
 import { InsurerCard } from '../cards/insurer/insurer';
 import { axe } from 'jest-axe';
 import userEvent from '@testing-library/user-event';
@@ -11,10 +11,8 @@ import {
 	assertHeadingButtonsExist,
 	assertHeadingsExist,
 } from '../testHelpers/testHelpers';
-import {
-	sampleAddress,
-	disableHeadingOrder,
-} from '../testHelpers/commonData/cards';
+import { sampleAddress } from '../testHelpers/commonData/cards';
+import { act } from '@testing-library/react-hooks';
 
 const noop = () => Promise.resolve();
 
@@ -96,6 +94,10 @@ describe('Insurer Preview', () => {
 });
 
 describe('Insurer Remove', () => {
+	afterEach(() => {
+		cleanup();
+	});
+
 	test('Date screen is accessible', async () => {
 		const { container, getByText } = render(
 			<InsurerCard
@@ -107,9 +109,11 @@ describe('Insurer Remove', () => {
 			/>,
 		);
 
-		getByText('Remove').click();
+		await act(async () => {
+			getByText('Remove').click();
+		});
 
-		const results = await axe(container, { rules: disableHeadingOrder });
+		const results = await axe(container);
 		expect(results).toHaveNoViolations();
 	});
 
@@ -124,9 +128,10 @@ describe('Insurer Remove', () => {
 			/>,
 		);
 
-		userEvent.click(getByText('Remove'));
-		userEvent.click(getByText('Continue'));
-
+		await act(async () => {
+			userEvent.click(getByText('Remove'));
+			userEvent.click(getByText('Continue'));
+		});
 		expect(
 			getByText('Please confirm and fill in the date fields.'),
 		).toBeInTheDocument();
@@ -143,9 +148,11 @@ describe('Insurer Remove', () => {
 			/>,
 		);
 
-		userEvent.click(getByText('Remove'));
-		userEvent.click(getByText(/I confirm/i));
-		userEvent.click(getByText('Continue'));
+		await act(async () => {
+			userEvent.click(getByText('Remove'));
+			userEvent.click(getByText(/I confirm/i));
+			userEvent.click(getByText('Continue'));
+		});
 
 		expect(
 			getByText('Please confirm and fill in the date fields.'),
@@ -163,14 +170,16 @@ describe('Insurer Remove', () => {
 			/>,
 		);
 
-		// go to remove screen
-		userEvent.click(getByText('Remove'));
-		// enter date
-		userEvent.type(getByTestId('dd-field'), '10');
-		userEvent.type(getByTestId('mm-field'), '10');
-		userEvent.type(getByTestId('yyyy-field'), '2010');
-		// click Continue and check validation
-		userEvent.click(getByText('Continue'));
+		await act(async () => {
+			// go to remove screen
+			userEvent.click(getByText('Remove'));
+			// enter date
+			userEvent.type(getByTestId('dd-field'), '10');
+			userEvent.type(getByTestId('mm-field'), '10');
+			userEvent.type(getByTestId('yyyy-field'), '2010');
+			// click Continue and check validation
+			userEvent.click(getByText('Continue'));
+		});
 
 		expect(
 			getByText('Please confirm and fill in the date fields.'),
@@ -188,16 +197,18 @@ describe('Insurer Remove', () => {
 			/>,
 		);
 
-		// go to remove screen
-		userEvent.click(getByText('Remove'));
-		// confirm checkbox
-		userEvent.click(getByText(/I confirm/i));
-		// enter date
-		userEvent.type(getByTestId('dd-field'), '10');
-		userEvent.type(getByTestId('mm-field'), '10');
-		userEvent.type(getByTestId('yyyy-field'), '2010');
-		// click Continue and check validation
-		userEvent.click(getByText('Continue'));
+		await act(async () => {
+			// go to remove screen
+			userEvent.click(getByText('Remove'));
+			// confirm checkbox
+			userEvent.click(getByText(/I confirm/i));
+			// enter date
+			userEvent.type(getByTestId('dd-field'), '10');
+			userEvent.type(getByTestId('mm-field'), '10');
+			userEvent.type(getByTestId('yyyy-field'), '2010');
+			// click Continue and check validation
+			userEvent.click(getByText('Continue'));
+		});
 
 		expect(
 			getByText('Are you sure you want to remove this insurer?'),

@@ -1,5 +1,5 @@
 import React from 'react';
-import { render } from '@testing-library/react';
+import { cleanup, render } from '@testing-library/react';
 import { InHouseCard } from '../cards/inHouse/inHouse';
 import { axe } from 'jest-axe';
 import { act } from 'react-dom/test-utils';
@@ -14,10 +14,7 @@ import {
 	assertRemoveButtonExists,
 	assertHeadingButtonsExist,
 } from '../testHelpers/testHelpers';
-import {
-	sampleAddress,
-	disableHeadingOrder,
-} from '../testHelpers/commonData/cards';
+import { sampleAddress } from '../testHelpers/commonData/cards';
 
 const noop = () => Promise.resolve();
 
@@ -128,8 +125,12 @@ describe('Update in-house trustee name', () => {
 		findByText('In House Administrator').click();
 	});
 
+	afterEach(() => {
+		cleanup();
+	});
+
 	test('is accessible', async () => {
-		const results = await axe(component, { rules: disableHeadingOrder });
+		const results = await axe(component);
 		expect(results).toHaveNoViolations();
 	});
 
@@ -204,6 +205,10 @@ describe('Update in-house trustee contact details', () => {
 		findByText('Contact details').click();
 	});
 
+	afterEach(() => {
+		cleanup();
+	});
+
 	test('is accessible', async () => {
 		const results = await axe(component);
 		expect(results).toHaveNoViolations();
@@ -244,6 +249,10 @@ describe('Update in-house trustee contact details', () => {
 });
 
 describe('InHouse Remove', () => {
+	afterEach(() => {
+		cleanup();
+	});
+
 	test('Date screen is accessible', async () => {
 		const { container, getByText } = render(
 			<InHouseCard
@@ -263,7 +272,7 @@ describe('InHouse Remove', () => {
 
 		getByText('Remove').click();
 
-		const results = await axe(container, { rules: disableHeadingOrder });
+		const results = await axe(container);
 		expect(results).toHaveNoViolations();
 	});
 
@@ -384,6 +393,10 @@ describe('InHouse Remove', () => {
 });
 
 describe('In house admin correspondence address', () => {
+	afterEach(() => {
+		cleanup();
+	});
+
 	test('Change address is accessible', async () => {
 		const { container, getByText, getAllByText } = render(
 			<InHouseCard

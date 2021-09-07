@@ -13,10 +13,7 @@ import {
 	assertRemoveButtonExists,
 	assertHeadingButtonsExist,
 } from '../testHelpers/testHelpers';
-import {
-	sampleAddress,
-	disableHeadingOrder,
-} from '../testHelpers/commonData/cards';
+import { sampleAddress } from '../testHelpers/commonData/cards';
 
 const noop = () => Promise.resolve();
 
@@ -96,10 +93,6 @@ describe('TrusteeCard enableContactDetails == true', () => {
 		setupComponent(true);
 	});
 
-	afterEach(() => {
-		cleanup();
-	});
-
 	describe('Trustee Preview', () => {
 		test('is accessible', async () => {
 			const results = await axe(component);
@@ -149,9 +142,13 @@ describe('TrusteeCard enableContactDetails == true', () => {
 	});
 
 	describe('Trustee Name', () => {
+		afterEach(() => {
+			cleanup();
+		});
+
 		test('is accessible', async () => {
 			findByText('Trustee').click();
-			const results = await axe(component, { rules: disableHeadingOrder });
+			const results = await axe(component);
 			expect(results).toHaveNoViolations();
 		});
 
@@ -195,9 +192,13 @@ describe('TrusteeCard enableContactDetails == true', () => {
 		test('trustee title can be left empty when name is updated', async () => {
 			await act(async () => {
 				findByText(/Trustee/).click();
-				await axe(component);
-				clearTitleField(findByText);
+			});
+			await axe(component);
+			clearTitleField(findByText);
+			await act(async () => {
 				findByText(/Continue/).click();
+			});
+			await act(async () => {
 				findByText(/Save and close/).click();
 			});
 
@@ -210,16 +211,24 @@ describe('TrusteeCard enableContactDetails == true', () => {
 	});
 
 	describe('Trustee Type', () => {
+		afterEach(() => {
+			cleanup();
+		});
+
 		test('is accessible', async () => {
 			findByText(/Trustee/).click();
 			findByText(/Continue/).click();
 
-			const results = await axe(component, { rules: disableHeadingOrder });
+			const results = await axe(component);
 			expect(results).toHaveNoViolations();
 		});
 	});
 
 	describe('Trustee Contact Details', () => {
+		afterEach(() => {
+			cleanup();
+		});
+
 		test('is accessible', async () => {
 			findByText('Contact details').click();
 
@@ -263,10 +272,14 @@ describe('TrusteeCard enableContactDetails == true', () => {
 	});
 
 	describe('Trustee Remove', () => {
+		afterEach(() => {
+			cleanup();
+		});
+
 		test('is accessible', async () => {
 			findByText('Remove').click();
 
-			const results = await axe(component, { rules: disableHeadingOrder });
+			const results = await axe(component);
 			expect(results).toHaveNoViolations();
 		});
 
@@ -283,12 +296,16 @@ describe('TrusteeCard enableContactDetails == true', () => {
 			expect(msg2).toBeDefined();
 			expect(msg2.className.includes('errorMessage')).toBeTruthy();
 
-			const results = await axe(component, { rules: disableHeadingOrder });
+			const results = await axe(component);
 			expect(results).toHaveNoViolations();
 		});
 	});
 
 	describe('Trustee correspondence address', () => {
+		afterEach(() => {
+			cleanup();
+		});
+
 		test('Change address is accessible', async () => {
 			findByText('Correspondence address').click();
 			findByText(/I need to change the address/).click();

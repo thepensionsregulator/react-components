@@ -1,5 +1,5 @@
 import React from 'react';
-import { render } from '@testing-library/react';
+import { cleanup, render } from '@testing-library/react';
 import { EmployerCard } from '../cards/employer/employer';
 import { axe } from 'jest-axe';
 import userEvent from '@testing-library/user-event';
@@ -11,10 +11,7 @@ import {
 	assertRemoveButtonExists,
 	assertHeadingsExist,
 } from '../testHelpers/testHelpers';
-import {
-	sampleAddress,
-	disableHeadingOrder,
-} from '../testHelpers/commonData/cards';
+import { sampleAddress } from '../testHelpers/commonData/cards';
 
 const noop = () => Promise.resolve();
 
@@ -100,6 +97,10 @@ describe('Employer Preview', () => {
 });
 
 describe('Employer type', () => {
+	afterEach(() => {
+		cleanup();
+	});
+
 	test('Remove button is taken out of the tab flow', async () => {
 		const { container, getByText } = render(
 			<EmployerCard
@@ -112,7 +113,7 @@ describe('Employer type', () => {
 
 		getByText('Employer type').click();
 
-		const results = await axe(container, { rules: disableHeadingOrder });
+		const results = await axe(container);
 		expect(results).toHaveNoViolations();
 
 		assertThatButtonHasBeenRemovedFromTheTabFlow(getByText, 'Remove');
@@ -120,6 +121,10 @@ describe('Employer type', () => {
 });
 
 describe('Employer Remove', () => {
+	afterEach(() => {
+		cleanup();
+	});
+
 	test('Date screen is accessible', async () => {
 		const { container, getByText } = render(
 			<EmployerCard
@@ -132,7 +137,7 @@ describe('Employer Remove', () => {
 
 		getByText('Remove').click();
 
-		const results = await axe(container, { rules: disableHeadingOrder });
+		const results = await axe(container);
 		expect(results).toHaveNoViolations();
 	});
 
