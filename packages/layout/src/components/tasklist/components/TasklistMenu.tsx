@@ -8,7 +8,7 @@ import { NavItem } from '../../../components/navitem/navitem';
 const TasklistMenu: React.FC<TasklistMenuProps> = ({
 	title,
 	links,
-	maintenanceMode,
+	showStatus,
 	sectionDisabledLabel,
 	sectionCompleteLabel,
 	sectionIncompleteLabel,
@@ -42,7 +42,7 @@ const TasklistMenu: React.FC<TasklistMenuProps> = ({
 								{link.disabled ? (
 									<div className={styles.taskDisabled}>
 										<span className={styles.taskName}>{link.name}</span>
-										{!maintenanceMode && !link.hideIcon && (
+										{showStatus && !link.hideIcon && (
 											<TaskStatus
 												link={link}
 												sectionDisabledLabel={sectionDisabledLabel}
@@ -54,7 +54,7 @@ const TasklistMenu: React.FC<TasklistMenuProps> = ({
 								) : (
 									<NavItem link={link}>
 										<span className={styles.taskName}>{link.name}</span>
-										{!maintenanceMode && !link.hideIcon && (
+										{showStatus && !link.hideIcon && (
 											<TaskStatus
 												link={link}
 												sectionDisabledLabel={sectionDisabledLabel}
