@@ -86,7 +86,7 @@ const AddressPage: React.FC<AddressPageProps> = ({
 									findAddressCancelledButton={i18n.findAddressCancelledButton}
 									onFindAddressCancelled={onCancelChanges}
 									onAddressChanging={onChangeAddress}
-									headingLevel={4}
+									headingLevel={6}
 								/>
 								<Footer>
 									<ArrowButton
