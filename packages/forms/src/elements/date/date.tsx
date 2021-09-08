@@ -54,16 +54,15 @@ const transformDate = (initialDate: any) => {
 type DateInputFieldProps = {
 	disabled?: boolean;
 	required?: boolean;
-	hideMonth?: boolean;
 	id?: string;
 	label: string;
 	maxInt: number;
 	maxLength?: number;
 	meta: any;
-	onBlur: Function;
+	onFocus?: Function;
+	onBlur?: Function;
 	parentId?: string;
 	readOnly?: boolean;
-	setMonth: Function;
 	small?: boolean;
 	testId?: string;
 	updateFn: Function;
@@ -73,16 +72,15 @@ type DateInputFieldProps = {
 const DateInputField: React.FC<DateInputFieldProps> = ({
 	disabled,
 	required = false,
-	hideMonth,
 	id,
 	label,
 	maxInt,
 	maxLength,
 	meta,
+	onFocus,
 	onBlur,
 	parentId,
 	readOnly,
-	setMonth,
 	small = true,
 	testId,
 	updateFn,
@@ -111,17 +109,15 @@ const DateInputField: React.FC<DateInputFieldProps> = ({
 				data-testid={testId}
 				value={value}
 				readOnly={readOnly}
-				onFocus={({ target }: ChangeEvent<HTMLInputElement>) => {
+				onFocus={({ target }: React.FocusEvent<HTMLInputElement>) => {
 					target.select();
 					setHasFocus(true);
+					onFocus && onFocus();
 				}}
 				onChange={handleChange(updateFn, maxInt)}
-				onBlur={(evt: ChangeEvent<HTMLInputElement>) => {
-					if (!evt.target.value || evt.target.value === '0') {
-						!hideMonth && setMonth('');
-						setHasFocus(false);
-						onBlur();
-					}
+				onBlur={() => {
+					setHasFocus(false);
+					onBlur && onBlur();
 				}}
 				meta={meta}
 				maxLength={maxLength}
@@ -176,6 +172,12 @@ export const InputDate: React.FC<InputDateComponentProps> = memo(
 			}
 		}, [day, month, year, input]);
 
+		const hasValue = (): boolean => {
+			return (
+				(!hideDay && day !== '') || (!hideMonth && month !== '') || year !== ''
+			);
+		};
+
 		const isError: boolean = meta && meta.touched && meta.error;
 		const hiddenLabelId = HiddenLabelIdGenerator(hiddenLabel);
 
@@ -183,10 +185,21 @@ export const InputDate: React.FC<InputDateComponentProps> = memo(
 
 		return (
 			<StyledInputLabel
+				id={id}
 				isError={meta && meta.touched && meta.error}
 				element="fieldset"
-				onFocus={input.onFocus}
-				onBlur={input.onBlur}
+				onBlur={(e: React.FocusEvent<HTMLFieldSetElement>) => {
+					if (
+						(required || hasValue()) &&
+						e.relatedTarget &&
+						!e.currentTarget.outerHTML.includes(
+							(e.relatedTarget as HTMLElement).outerHTML,
+						)
+					) {
+						//date component losing focus
+						input.onBlur();
+					}
+				}}
 				data-testid={`date-input-${testId}`}
 				aria-labelledby={helper.labelId}
 				aria-describedby={
@@ -225,8 +238,6 @@ export const InputDate: React.FC<InputDateComponentProps> = memo(
 							value={day}
 							updateFn={(dd: number) => setState({ dd })}
 							maxInt={32}
-							setMonth={(mm: number) => setState({ mm })}
-							onBlur={input.onBlur}
 							meta={meta}
 							disabled={disabled}
 							readOnly={readOnly}
@@ -243,8 +254,6 @@ export const InputDate: React.FC<InputDateComponentProps> = memo(
 							value={month}
 							updateFn={(mm: number) => setState({ mm })}
 							maxInt={13}
-							setMonth={(mm: number) => setState({ mm })}
-							onBlur={input.onBlur}
 							meta={meta}
 							disabled={disabled}
 							readOnly={readOnly}
@@ -261,13 +270,10 @@ export const InputDate: React.FC<InputDateComponentProps> = memo(
 						value={year}
 						updateFn={(yyyy: number) => setState({ yyyy })}
 						maxInt={10000}
-						setMonth={(mm: number) => setState({ mm })}
-						onBlur={input.onBlur}
 						meta={meta}
 						disabled={disabled}
 						readOnly={readOnly}
 						required={required}
-						hideMonth={hideMonth}
 						maxLength={4}
 					/>
 				</Flex>
