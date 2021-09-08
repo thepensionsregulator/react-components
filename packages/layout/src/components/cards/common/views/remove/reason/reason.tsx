@@ -1,5 +1,5 @@
 import React from 'react';
-import { P, H4, Link } from '@tpr/core';
+import { P, H5, Link } from '@tpr/core';
 import { Footer } from '../../../../components/card';
 import { Form, FFRadioButton, FieldProps, renderFields } from '@tpr/forms';
 import { Content } from '../../../../components/content';
@@ -50,9 +50,9 @@ export const Reason: React.FC<ReasonProps> = ({
 							<div className={showError ? styles.labelError : null}>
 								<fieldset>
 									<legend>
-										<H4 fontWeight="bold" mb={0}>
+										<H5 className={styles.h5Legend}>
 											{i18nRemoveReason.subtitle}
-										</H4>
+										</H5>
 									</legend>
 									{showError && (
 										<P
