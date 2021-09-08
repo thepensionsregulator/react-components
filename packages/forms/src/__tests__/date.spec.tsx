@@ -461,6 +461,7 @@ describe('Date input', () => {
 			//Assert
 			const errorMessage = queryByText(/Invalid value/);
 			expect(errorMessage).toBeInTheDocument();
+			expect(handleSubmit).toBeCalledTimes(0);
 		});
 
 		test('When a required component loses focus with no value, it fires validation', () => {
@@ -483,6 +484,7 @@ describe('Date input', () => {
 			//Assert
 			const errorMessage = queryByText(/Invalid value/);
 			expect(errorMessage).toBeInTheDocument();
+			expect(handleSubmit).toBeCalledTimes(0);
 		});
 
 		test('When the form is posted with no value, it fires validation', () => {
@@ -507,6 +509,7 @@ describe('Date input', () => {
 			//Assert
 			const errorMessage = queryByText(/Invalid value/);
 			expect(errorMessage).toBeInTheDocument();
+			expect(handleSubmit).toBeCalledTimes(0);
 		});
 	});
 });
