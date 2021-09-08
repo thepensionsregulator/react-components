@@ -2,17 +2,17 @@ import React from 'react';
 import { Flex, classNames } from '@tpr/core';
 import { CheckedCircle, ErrorCircle } from '@tpr/icons';
 import { StatusMessage } from './card';
+import CardContentSectionHeader from './cardContentSectionHeader';
 import styles from '../cards.module.scss';
-import CardContentSectionHeader from './cardContentHeaderSection';
 
-export type ToolbarProps = {
+export interface ToolbarProps {
 	complete: boolean;
 	subtitle?: Function;
 	buttonLeft: Function;
 	buttonRight: Function;
 	statusText: string;
 	subSectionHeaderText?: string;
-};
+}
 
 export const Toolbar: React.FC<ToolbarProps> = React.memo(
 	({
@@ -31,11 +31,7 @@ export const Toolbar: React.FC<ToolbarProps> = React.memo(
 				])}
 			>
 				{subSectionHeaderText && (
-					<Flex>
-						<CardContentSectionHeader
-							sectionHeaderText={subSectionHeaderText}
-						/>
-					</Flex>
+					<CardContentSectionHeader sectionHeaderText={subSectionHeaderText} />
 				)}
 				<Flex
 					cfg={{

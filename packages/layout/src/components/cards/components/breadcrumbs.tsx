@@ -19,7 +19,7 @@ export const Breadcrumbs: React.FC<BreadcrumbsProps> = ({ links, send }) => {
 				return (
 					<Fragment key={index}>
 						<Link
-							onClick={() => send(link.to)}
+							onClick={() => link.to && send(link.to)}
 							underline={link.underline}
 							disabled={link.disabled}
 						>

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useRef } from 'react';
 import {
 	ActuaryProvider,
 	ActuaryProviderProps,
@@ -6,16 +6,19 @@ import {
 } from './context';
 import { Section } from '@tpr/core';
 import { Toolbar } from '../components/toolbar';
-import { UnderlinedButton } from '../components/button';
 import { Preview } from './views/preview/preview';
 import { Contacts } from './views/contacts';
 import { RemoveDateForm } from './views/remove/date/date';
 import { ConfirmRemove } from './views/remove/confirm/confirm';
 import { NameScreen } from './views/name';
 import RemovedBox from '../components/removedBox';
-import { cardTypeName } from '../common/interfaces';
+import { cardTypeName, IToolbarButtonProps } from '../common/interfaces';
 import { ActuaryContext } from './actuaryMachine';
-import { Subtitle } from '../common/views/preview/components';
+import {
+	Subtitle,
+	CardRemoveButton,
+	CardMainHeadingButton,
+} from '../common/views/preview/components';
 import { removeFromTabFlowIfMatches, concatenateStrings } from '../../../utils';
 import styles from '../cards.module.scss';
 
@@ -41,62 +44,36 @@ const CardContentSwitch: React.FC = () => {
 	}
 };
 
-const ActuaryButton: React.FC = () => {
-	const { current, send, i18n } = useActuaryContext();
+const ToolbarButton: React.FC<IToolbarButtonProps> = React.memo(
+	({ remove = false, button }) => {
+		const { current, send, i18n } = useActuaryContext();
 
-	const onOfStatesIsActive =
-		current.matches({ edit: 'contacts' }) ||
-		current.matches({ edit: 'name' }) ||
-		current.matches({ remove: 'date' }) ||
-		current.matches({ remove: 'confirm' }) ||
-		current.matches({ remove: 'deleted' });
-
-	return (
-		<UnderlinedButton
-			isOpen={onOfStatesIsActive}
-			onClick={() => {
-				current.context.lastBtnClicked = 1;
-				if (onOfStatesIsActive) {
-					send('CANCEL');
-				} else {
-					send('EDIT_NAME');
-				}
-			}}
-			isEditButton={true}
-		>
-			{i18n.preview.buttons.one}
-		</UnderlinedButton>
-	);
-};
-
-const RemoveButton: React.FC<{ title: string; tabIndex?: number }> = ({
-	title,
-	tabIndex,
-}) => {
-	const { current, send } = useActuaryContext();
-	return (
-		<UnderlinedButton
-			isOpen={
-				current.matches({ remove: 'date' }) ||
-				current.matches({ remove: 'confirm' })
-			}
-			onClick={() => {
-				current.context.lastBtnClicked = 2;
-				if (
-					current.matches({ remove: 'date' }) ||
-					current.matches({ remove: 'confirm' })
-				) {
-					send('CANCEL');
-				} else {
-					send('REMOVE');
-				}
-			}}
-			tabIndex={tabIndex}
-		>
-			{title}
-		</UnderlinedButton>
-	);
-};
+		return (
+			<>
+				{remove ? (
+					<CardRemoveButton
+						button={button}
+						send={send}
+						current={current}
+						tabIndex={removeFromTabFlowIfMatches(current, {
+							edit: 'name',
+						})}
+					>
+						{i18n.preview.buttons.two}
+					</CardRemoveButton>
+				) : (
+					<CardMainHeadingButton
+						button={button}
+						current={current}
+						onClick={() => send('EDIT_NAME')}
+					>
+						{i18n.preview.buttons.one}
+					</CardMainHeadingButton>
+				)}
+			</>
+		);
+	},
+);
 
 const isComplete = (context: ActuaryContext) => {
 	return context.preValidatedData ? true : context.complete;
@@ -104,6 +81,9 @@ const isComplete = (context: ActuaryContext) => {
 
 export const ActuaryCard: React.FC<ActuaryProviderProps> = React.memo(
 	({ testId, cfg, ...rest }) => {
+		const actuaryButtonRef = useRef(null);
+		const removeButtonRef = useRef(null);
+
 		return (
 			<ActuaryProvider {...rest}>
 				{({ current, i18n }) => {
@@ -120,6 +100,10 @@ export const ActuaryCard: React.FC<ActuaryProviderProps> = React.memo(
 							])}
 						>
 							<Toolbar
+								buttonLeft={() => <ToolbarButton button={actuaryButtonRef} />}
+								buttonRight={() => (
+									<ToolbarButton button={removeButtonRef} remove={true} />
+								)}
 								complete={isComplete(current.context)}
 								subtitle={() => (
 									<Subtitle
@@ -136,15 +120,6 @@ export const ActuaryCard: React.FC<ActuaryProviderProps> = React.memo(
 										? i18n.preview.statusText.confirmed
 										: i18n.preview.statusText.unconfirmed
 								}
-								buttonLeft={() => <ActuaryButton />}
-								buttonRight={() => (
-									<RemoveButton
-										title={i18n.preview.buttons.two}
-										tabIndex={removeFromTabFlowIfMatches(current, {
-											edit: 'name',
-										})}
-									/>
-								)}
 							/>
 							<CardContentSwitch />
 						</Section>

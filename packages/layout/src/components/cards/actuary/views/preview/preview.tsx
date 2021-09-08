@@ -16,15 +16,6 @@ export const Preview: React.FC<any> = React.memo(() => {
 
 	const contactsBtn = useRef(null);
 
-	const onClickContactsBtn = () => {
-		current.context.lastBtnClicked = 3;
-		send('EDIT_CONTACTS');
-	};
-
-	const onCollapseContacts = () => {
-		current.context.lastBtnClicked === 3 && contactsBtn.current.focus();
-	};
-
 	return (
 		<div
 			className={
@@ -57,11 +48,11 @@ export const Preview: React.FC<any> = React.memo(() => {
 					cfg={{ width: 5, flex: '0 0 auto', flexDirection: 'column', pl: 4 }}
 				>
 					<UnderlinedButton
-						onClick={onClickContactsBtn}
+						onClick={() => send('EDIT_CONTACTS')}
 						isOpen={current.matches({ edit: 'contacts' })}
 						isEditButton={true}
-						onCollapseCallback={onCollapseContacts}
-						btnRef={contactsBtn}
+						buttonRef={contactsBtn}
+						giveFocus={current.context.lastBtnClicked === 4}
 					>
 						{i18n.preview.buttons.four}
 					</UnderlinedButton>

@@ -1,22 +1,25 @@
-import React from 'react';
+import React, { useRef } from 'react';
 import {
 	CorporateGroupProvider,
 	CorporateGroupProviderProps,
 	useCorporateGroupContext,
 } from './context';
 import { Section } from '@tpr/core';
-import { Toolbar } from '../components/toolbar';
-import { UnderlinedButton } from '../components/button';
 import RemovedBox from '../components/removedBox';
+import { Toolbar } from '../components/toolbar';
 import { Preview } from './views/preview/preview';
-import { NameScreen } from './views/name/name';
 import { Contacts } from './views/contacts/contacts';
+import { NameScreen } from './views/name/name';
 import { Professional } from './views/professional/professional';
 import { ReasonRemove } from './views/remove/reason/reason';
 import { ConfirmRemove } from './views/remove/confirm/confirm';
+import {
+	CardRemoveButton,
+	Subtitle,
+	CardMainHeadingTitle,
+} from '../common/views/preview/components';
 import { cardTypeName } from '../common/interfaces';
 import { CorporateGroupContext } from './corporateGroupMachine';
-import { Subtitle } from '../common/views/preview/components';
 import { concatenateStrings } from '../../../utils';
 import styles from '../cards.module.scss';
 
@@ -43,72 +46,54 @@ const CardContentSwitch: React.FC = () => {
 	}
 };
 
-const RemoveButton: React.FC<{ title: string }> = ({ title }) => {
-	const { current, send } = useCorporateGroupContext();
-
-	return (
-		<UnderlinedButton
-			isOpen={
-				current.matches({ remove: 'reason' }) ||
-				current.matches({ remvve: 'confirm' })
-			}
-			onClick={() => {
-				current.context.lastBtnClicked = 2;
-				if (
-					current.matches({ remove: 'reason' }) ||
-					current.matches({ remove: 'confirm' })
-				) {
-					send('CANCEL');
-				} else {
-					send('REMOVE');
-				}
-			}}
-		>
-			{title}
-		</UnderlinedButton>
-	);
-};
-
 const isComplete = (context: CorporateGroupContext) => {
 	return context.preValidatedData ? true : context.complete;
 };
 
 export const CorporateGroupCard: React.FC<CorporateGroupProviderProps> = React.memo(
 	({ testId, cfg, ...rest }) => {
+		const removeButtonRef = useRef(null);
+
 		return (
 			<CorporateGroupProvider {...rest}>
-				{({ current: { context }, i18n }) => {
+				{({ current, send, i18n }) => {
+					const RemoveButton = () => (
+						<CardRemoveButton
+							button={removeButtonRef}
+							send={send}
+							current={current}
+						>
+							{i18n.preview.buttons.two}
+						</CardRemoveButton>
+					);
+
 					return (
 						<Section
 							cfg={cfg}
 							data-testid={testId}
 							className={styles.card}
 							ariaLabel={concatenateStrings([
-								context.corporateGroup.organisationName,
+								current.context.corporateGroup.organisationName,
 								i18n.preview.trusteeType,
 							])}
 						>
 							<Toolbar
-								complete={isComplete(context)}
+								buttonLeft={() => (
+									<CardMainHeadingTitle title={i18n.preview.buttons.one} />
+								)}
+								buttonRight={RemoveButton}
+								complete={isComplete(current.context)}
 								subtitle={() => (
 									<Subtitle
-										main={context.corporateGroup.organisationName}
+										main={current.context.corporateGroup.organisationName}
 										secondary={i18n.preview.trusteeType}
 									/>
 								)}
 								statusText={
-									isComplete(context)
+									isComplete(current.context)
 										? i18n.preview.statusText.confirmed
 										: i18n.preview.statusText.unconfirmed
 								}
-								buttonLeft={() => (
-									<UnderlinedButton>
-										{i18n.preview.buttons.one}
-									</UnderlinedButton>
-								)}
-								buttonRight={() => (
-									<RemoveButton title={i18n.preview.buttons.two} />
-								)}
 							/>
 							<CardContentSwitch />
 						</Section>

@@ -19,24 +19,6 @@ export const Preview: React.FC<CardContentProps> = React.memo(
 		const correspondenceBtn = useRef(null);
 		const contactsBtn = useRef(null);
 
-		const onClickCorrespondenceBtn = () => {
-			current.context.lastBtnClicked = 3;
-			send('EDIT_ORG');
-		};
-
-		const onClickContactsBtn = () => {
-			current.context.lastBtnClicked = 4;
-			send('EDIT_CONTACTS');
-		};
-
-		const onCollapseCorrespondence = () => {
-			current.context.lastBtnClicked === 3 && correspondenceBtn.current.focus();
-		};
-
-		const onCollapseContacts = () => {
-			current.context.lastBtnClicked === 4 && contactsBtn.current.focus();
-		};
-
 		return (
 			<div
 				className={
@@ -51,11 +33,11 @@ export const Preview: React.FC<CardContentProps> = React.memo(
 						cfg={{ width: 5, flex: '0 0 auto', flexDirection: 'column', pr: 4 }}
 					>
 						<UnderlinedButton
-							onClick={onClickCorrespondenceBtn}
-							isOpen={current.matches({ edit: 'company' })}
+							onClick={() => send('EDIT_ORG')}
+							isOpen={current.matches({ edit: 'company.address' })}
 							isEditButton={true}
-							btnRef={correspondenceBtn}
-							onCollapseCallback={onCollapseCorrespondence}
+							buttonRef={correspondenceBtn}
+							giveFocus={current.context.lastBtnClicked === 3}
 						>
 							{i18n.preview.buttons.three}
 						</UnderlinedButton>
@@ -83,11 +65,11 @@ export const Preview: React.FC<CardContentProps> = React.memo(
 							}}
 						>
 							<UnderlinedButton
-								onClick={onClickContactsBtn}
-								isOpen={current.matches({ edit: 'contact' })}
+								onClick={() => send('EDIT_CONTACTS')}
+								isOpen={current.matches({ edit: 'contact.details' })}
 								isEditButton={true}
-								btnRef={contactsBtn}
-								onCollapseCallback={onCollapseContacts}
+								buttonRef={contactsBtn}
+								giveFocus={current.context.lastBtnClicked === 4}
 							>
 								{i18n.preview.buttons.four}
 							</UnderlinedButton>

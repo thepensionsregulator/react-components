@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useRef } from 'react';
 import {
 	ThirdPartyProvider,
 	ThirdPartyProviderProps,
@@ -6,14 +6,17 @@ import {
 } from './context';
 import { Section } from '@tpr/core';
 import { Toolbar } from '../components/toolbar';
-import { UnderlinedButton } from '../components/button';
 import { Preview } from './views/preview/preview';
 import { RemoveDateForm } from './views/remove/date/date';
 import { ConfirmRemove } from './views/remove/confirm/confirm';
 import RemovedBox from '../components/removedBox';
 import { cardTypeName } from '../common/interfaces';
 import { ThirdPartyContext } from './thirdPartyMachine';
-import { Subtitle } from '../common/views/preview/components';
+import {
+	CardMainHeadingTitle,
+	CardRemoveButton,
+	Subtitle,
+} from '../common/views/preview/components';
 import { concatenateStrings } from '../../../utils';
 import styles from '../cards.module.scss';
 
@@ -34,68 +37,53 @@ const CardContentSwitch: React.FC = () => {
 	}
 };
 
-const RemoveButton: React.FC<{ title: string }> = ({ title }) => {
-	const { current, send } = useThirdPartyContext();
-	return (
-		<UnderlinedButton
-			isOpen={
-				current.matches({ remove: 'date' }) ||
-				current.matches({ remove: 'confirm' })
-			}
-			onClick={() => {
-				current.context.lastBtnClicked = 2;
-				if (
-					current.matches({ remove: 'date' }) ||
-					current.matches({ remove: 'confirm' })
-				) {
-					send('CANCEL');
-				} else {
-					send('REMOVE');
-				}
-			}}
-		>
-			{title}
-		</UnderlinedButton>
-	);
-};
-
 const isComplete = (context: ThirdPartyContext) => {
 	return context.preValidatedData ? true : context.complete;
 };
 
 export const ThirdPartyCard: React.FC<ThirdPartyProviderProps> = React.memo(
 	({ testId, cfg, ...rest }) => {
+		const removeButtonRef = useRef(null);
+
 		return (
 			<ThirdPartyProvider {...rest}>
-				{({ current: { context }, i18n }) => {
+				{({ current, send, i18n }) => {
+					const RemoveButton = () => (
+						<CardRemoveButton
+							button={removeButtonRef}
+							send={send}
+							current={current}
+						>
+							{i18n.preview.buttons.two}
+						</CardRemoveButton>
+					);
+
 					return (
 						<Section
 							cfg={cfg}
 							data-testid={testId}
 							className={styles.card}
 							ariaLabel={concatenateStrings([
-								context.thirdParty.organisationName,
+								current.context.thirdParty.organisationName,
 								i18n.preview.buttons.one,
 							])}
 						>
 							<Toolbar
-								complete={isComplete(context)}
+								buttonLeft={() => (
+									<CardMainHeadingTitle title={i18n.preview.buttons.one} />
+								)}
+								buttonRight={RemoveButton}
+								complete={isComplete(current.context)}
 								subtitle={() => (
-									<Subtitle main={context.thirdParty.organisationName} />
+									<Subtitle
+										main={current.context.thirdParty.organisationName}
+									/>
 								)}
 								statusText={
-									isComplete(context)
+									isComplete(current.context)
 										? i18n.preview.statusText.confirmed
 										: i18n.preview.statusText.unconfirmed
 								}
-								buttonLeft={() => (
-									<UnderlinedButton>
-										{i18n.preview.buttons.one}
-									</UnderlinedButton>
-								)}
-								buttonRight={() => (
-									<RemoveButton title={i18n.preview.buttons.two} />
-								)}
 							/>
 							<CardContentSwitch />
 						</Section>

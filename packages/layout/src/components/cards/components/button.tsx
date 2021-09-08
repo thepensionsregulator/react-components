@@ -1,17 +1,20 @@
 import React, { useEffect, useRef, MutableRefObject } from 'react';
-import { Flex, P } from '@tpr/core';
-import styles from './button.module.scss';
-import { EditArrowUp, EditArrowDown } from './arrowButton';
+import { Flex, H3, H4, P } from '@tpr/core';
 import { ArrowDown, ArrowUp } from '@tpr/icons';
+import { EditArrowUp, EditArrowDown } from './arrowButton';
+import styles from './button.module.scss';
 
-type UnderlinedButtonProps = {
+interface UnderlinedButtonProps {
+	buttonRef?: MutableRefObject<any>;
+	giveFocus?: boolean;
+	heading?: boolean;
+	isEditButton?: boolean;
+	isMainHeading?: boolean;
 	isOpen?: boolean;
 	onClick?: any;
-	tabIndex?: number;
-	isEditButton?: boolean;
 	onCollapseCallback?: () => void;
-	btnRef?: MutableRefObject<any>;
-};
+	tabIndex?: number;
+}
 
 /*
 	In all cards, we have 2 sections: Toolbar (containing at least the 'Remove' button) & Content (changes depending on the data being edited).
@@ -20,64 +23,112 @@ type UnderlinedButtonProps = {
 
 	To solve this, 2 new properties need to be passed to the Underlinedbutton component.
 
-	btnRef: reference received for buttons from the 'Preview' view, but only for those which are part of the 'content' section (not the Toolbar buttons).
+	- buttonRef: reference received for buttons from the 'Preview' view.
+	- giveFocus: indicates if need to assign focus to the button.
 
-	onCollapseCallback: callback function to be called when collapsing an editing section. This function is used to return the focus to the button from 'Preview'.
-	*/
+	- onCollapseCallback: callback function that allows to execute additional actions when collapsing an editing section.
+*/
 
-export const UnderlinedButton: React.FC<UnderlinedButtonProps> = ({
-	children,
-	isOpen,
-	onClick,
-	tabIndex,
-	isEditButton,
-	onCollapseCallback,
-	btnRef,
-}) => {
-	if (typeof onClick === 'undefined') {
-		return (
+export const UnderlinedButton: React.FC<UnderlinedButtonProps> = React.memo(
+	({
+		children,
+		buttonRef,
+		giveFocus = false,
+		heading = true,
+		isEditButton,
+		isMainHeading = false,
+		isOpen,
+		onClick,
+		onCollapseCallback,
+		tabIndex,
+	}) => {
+		const editViewButtonRef = useRef(null);
+
+		const Heading: React.FC = () => (
 			<div className={styles.buttonPlaceholder}>
 				<Flex cfg={{ flex: '0 0 auto', alignItems: 'center' }}>
-					<P cfg={{ fontSize: 2, fontWeight: 3 }}>{children}</P>
+					{isMainHeading ? (
+						<H3 className={styles.heading3} data-testid="card-main-heading">
+							{children}
+						</H3>
+					) : (
+						<H4 className={styles.heading4} data-testid="card-heading">
+							{children}
+						</H4>
+					)}
 				</Flex>
 			</div>
 		);
-	}
 
-	const noToolbarBtnRef = useRef(null);
-	useEffect(() => {
-		isOpen && noToolbarBtnRef && noToolbarBtnRef.current.focus();
-		!isOpen && onCollapseCallback && onCollapseCallback();
-	}, [isOpen]);
-	const getAppropriateButton = () => {
-		if (isOpen && isEditButton) {
-			return <EditArrowUp width="24px" fill={styles.arrowColor} />;
-		} else if (isOpen && !isEditButton) {
-			return <ArrowUp width="24px" fill={styles.arrowColor} />;
-		}
+		const getAppropriateIcon = () => {
+			if (isOpen && isEditButton) {
+				return <EditArrowUp width="24px" fill={styles.arrowColor} />;
+			} else if (isOpen && !isEditButton) {
+				return <ArrowUp width="24px" fill={styles.arrowColor} />;
+			}
 
-		if (!isOpen && isEditButton) {
-			return <EditArrowDown width="24px" fill={styles.arrowColor} />;
-		} else if (!isOpen && !isEditButton) {
-			return <ArrowDown width="24px" fill={styles.arrowColor} />;
-		}
-	};
+			if (!isOpen && isEditButton) {
+				return <EditArrowDown width="24px" fill={styles.arrowColor} />;
+			} else if (!isOpen && !isEditButton) {
+				return <ArrowDown width="24px" fill={styles.arrowColor} />;
+			}
+		};
 
-	return (
-		<button
-			className={styles.button}
-			onClick={onClick}
-			aria-expanded={isOpen}
-			tabIndex={tabIndex}
-			ref={btnRef ? btnRef : noToolbarBtnRef}
-		>
-			<Flex
-				className={styles.arrowSpacing}
-				cfg={{ flex: '0 0 auto', alignItems: 'center' }}
+		const ClickableButton: React.FC = () => (
+			<button
+				className={styles.button}
+				onClick={onClick}
+				aria-expanded={isOpen}
+				tabIndex={tabIndex}
+				ref={isOpen ? editViewButtonRef : buttonRef}
 			>
-				<P cfg={{ fontSize: 2, fontWeight: 3 }}>{children}</P>
-				{getAppropriateButton()}
-			</Flex>
-		</button>
-	);
-};
+				<Flex
+					className={styles.arrowSpacing}
+					cfg={{ flex: '0 0 auto', alignItems: 'center' }}
+				>
+					{children}
+					{getAppropriateIcon()}
+				</Flex>
+			</button>
+		);
+
+		const getButton = () => {
+			return isMainHeading ? (
+				<MainHeadingButton />
+			) : heading ? (
+				<HeadingButton />
+			) : (
+				<ParagraphButton />
+			);
+		};
+
+		const MainHeadingButton: React.FC = () => (
+			<H3 className={styles.heading3} data-testid="card-main-heading-button">
+				<ClickableButton />
+			</H3>
+		);
+
+		const HeadingButton: React.FC = () => (
+			<H4 className={styles.heading4} data-testid="card-heading-button">
+				<ClickableButton />
+			</H4>
+		);
+
+		const ParagraphButton: React.FC = () => (
+			<P className={styles.heading4} data-testid="card-not-heading">
+				<ClickableButton />
+			</P>
+		);
+
+		useEffect(() => {
+			isOpen &&
+				giveFocus &&
+				editViewButtonRef.current &&
+				editViewButtonRef.current.focus();
+			!isOpen && giveFocus && buttonRef.current && buttonRef.current.focus();
+			!isOpen && onCollapseCallback && onCollapseCallback();
+		}, [isOpen]);
+
+		return <>{typeof onClick === 'undefined' ? <Heading /> : getButton()}</>;
+	},
+);

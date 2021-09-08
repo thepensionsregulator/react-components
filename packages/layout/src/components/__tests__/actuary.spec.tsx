@@ -7,11 +7,14 @@ import { act } from 'react-dom/test-utils';
 import { cleanup } from '@testing-library/react-hooks';
 import {
 	assertThatASectionExistsWithAnAriaLabel,
-	assertThatButtonHasAriaExpanded,
 	assertThatButtonHasBeenRemovedFromTheTabFlow,
 	assertThatTitleWasSetToNullWhileFirstAndLastNamesWereLeftUnchanged,
 	clearTitleField,
+	assertMainHeadingExists,
+	assertRemoveButtonExists,
+	assertHeadingButtonsExist,
 } from '../testHelpers/testHelpers';
+import { sampleAddress } from '../testHelpers/commonData/cards';
 
 const noop = () => Promise.resolve();
 
@@ -25,17 +28,10 @@ const actuary: Actuary = {
 	telephoneNumber: '01273 000 111',
 	emailAddress: 'john@actuary.com',
 	organisationName: 'Actuaries Group Ltd',
-	address: {
-		addressLine1: 'The Pensions Regulator',
-		addressLine2: 'Napier House',
-		addressLine3: 'Trafalgar Pl',
-		postTown: 'Brighton',
-		postcode: 'BN1 4DW',
-		county: 'West Sussex',
-		country: 'UK',
-		countryId: 2,
-	},
+	address: sampleAddress,
 };
+
+const addressExpectedHTML = `${sampleAddress.addressLine1}<br>${sampleAddress.addressLine2}<br>${sampleAddress.addressLine3}<br>${sampleAddress.postTown}<br>${sampleAddress.county}<br>${sampleAddress.postcode}<br>${sampleAddress.country}`;
 
 describe('Actuary Card', () => {
 	describe('Preview', () => {
@@ -44,7 +40,9 @@ describe('Actuary Card', () => {
 			findAllByText,
 			findByTitle,
 			findByRole,
-			findByTestId;
+			findByTestId,
+			findAllByTestId;
+
 		beforeEach(() => {
 			const {
 				container,
@@ -53,6 +51,7 @@ describe('Actuary Card', () => {
 				queryByTitle,
 				getByRole,
 				getByTestId,
+				getAllByTestId,
 			} = render(
 				<ActuaryCard
 					actuary={actuary}
@@ -71,6 +70,7 @@ describe('Actuary Card', () => {
 			findByTitle = queryByTitle;
 			findByRole = getByRole;
 			findByTestId = getByTestId;
+			findAllByTestId = getAllByTestId;
 		});
 
 		test('no Violations', async () => {
@@ -80,12 +80,13 @@ describe('Actuary Card', () => {
 
 		test('it renders buttons correctly', () => {
 			expect(component.querySelector('button')).not.toBe(null);
-			expect(findByText('Actuary')).toBeDefined();
-			assertThatButtonHasAriaExpanded(findByText, 'Actuary', false);
-			expect(findByText('Remove')).toBeDefined();
-			assertThatButtonHasAriaExpanded(findByText, 'Remove', false);
-			expect(findByText('Contact details')).toBeDefined();
-			assertThatButtonHasAriaExpanded(findByText, 'Contact details', false);
+
+			assertMainHeadingExists(findByText, findByTestId, 'Actuary', true);
+
+			assertRemoveButtonExists(findByText, findByTestId);
+
+			const h4Buttons = ['Contact details'];
+			assertHeadingButtonsExist(findAllByTestId, findByText, h4Buttons);
 		});
 
 		test('initial status is correct', () => {
@@ -103,9 +104,8 @@ describe('Actuary Card', () => {
 
 		test('displays Address correctly', () => {
 			const addressPreview = findByTestId('address-preview');
-			const addressExpected = `${actuary.address.addressLine1}<br>${actuary.address.addressLine2}<br>${actuary.address.addressLine3}<br>${actuary.address.postTown}<br>${actuary.address.county}<br>${actuary.address.postcode}<br>${actuary.address.country}`;
 			expect(addressPreview).toBeDefined();
-			expect(addressPreview.innerHTML).toEqual(addressExpected);
+			expect(addressPreview.innerHTML).toEqual(addressExpectedHTML);
 		});
 
 		test('displays telephone number correctly', () => {
@@ -201,11 +201,11 @@ describe('Actuary Card', () => {
 		test('save and close', async () => {
 			await act(async () => {
 				findByText('Save and close').click();
-				const results = await axe(component);
-				expect(results).toHaveNoViolations();
-				// After clicking the "Save and close" button, it goes back to the Preview
-				expect(findByText('Address')).toBeDefined();
 			});
+			const results = await axe(component);
+			expect(results).toHaveNoViolations();
+			// After clicking the "Save and close" button, it goes back to the Preview
+			expect(findByText('Address')).toBeDefined();
 		});
 
 		test('actuary title can be left empty when name is updated', async () => {

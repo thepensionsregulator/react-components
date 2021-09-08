@@ -7,8 +7,12 @@ import { cleanup } from '@testing-library/react-hooks';
 import { act } from 'react-dom/test-utils';
 import {
 	assertThatASectionExistsWithAnAriaLabel,
-	assertThatButtonHasAriaExpanded,
+	assertMainHeadingExists,
+	assertRemoveButtonExists,
+	assertHeadingButtonsExist,
+	assertHeadingsExist,
 } from '../testHelpers/testHelpers';
+import { sampleAddress } from '../testHelpers/commonData/cards';
 
 const noop = () => Promise.resolve();
 
@@ -23,16 +27,7 @@ const corporateGroup: CorporateGroup = {
 	directorIsProfessional: true,
 	telephoneNumber: '01273 000 111',
 	emailAddress: 'susan@corporate-group.com',
-	address: {
-		addressLine1: 'The Pensions Regulator',
-		addressLine2: 'Napier House',
-		addressLine3: 'Trafalgar Pl',
-		postTown: 'Brighton',
-		postcode: 'BN1 4DW',
-		county: 'West Sussex',
-		country: 'UK',
-		countryId: 2,
-	},
+	address: sampleAddress,
 };
 
 describe('Corporate Group Trustee Card', () => {
@@ -42,7 +37,9 @@ describe('Corporate Group Trustee Card', () => {
 			findAllByText,
 			findByTitle,
 			findByRole,
-			findByTestId;
+			findByTestId,
+			findAllByTestId;
+
 		beforeEach(() => {
 			const {
 				container,
@@ -51,6 +48,7 @@ describe('Corporate Group Trustee Card', () => {
 				queryByTitle,
 				getByRole,
 				getByTestId,
+				getAllByTestId,
 			} = render(
 				<CorporateGroupCard
 					corporateGroup={corporateGroup}
@@ -69,6 +67,7 @@ describe('Corporate Group Trustee Card', () => {
 			findByTitle = queryByTitle;
 			findByRole = getByRole;
 			findByTestId = getByTestId;
+			findAllByTestId = getAllByTestId;
 		});
 
 		test('no Violations', async () => {
@@ -78,17 +77,24 @@ describe('Corporate Group Trustee Card', () => {
 
 		test('it renders sections correctly', () => {
 			expect(component.querySelector('button')).not.toBe(null);
-			expect(findByText('Corporate Trustee')).toBeDefined();
-			expect(findByText('Remove')).toBeDefined();
-			expect(findByText('Address')).toBeDefined();
-			expect(findByText('Chair of board')).toBeDefined();
-			assertThatButtonHasAriaExpanded(findByText, 'Chair of board', false);
-			expect(findByText('Director(s) are Professional Trustees')).toBeDefined();
-			assertThatButtonHasAriaExpanded(
+
+			assertMainHeadingExists(
 				findByText,
-				'Director(s) are Professional Trustees',
+				findByTestId,
+				'Corporate Trustee',
 				false,
 			);
+
+			assertRemoveButtonExists(findByText, findByTestId);
+
+			const h4Buttons: string[] = [
+				'Director(s) are Professional Trustees',
+				'Chair of board',
+			];
+			assertHeadingButtonsExist(findAllByTestId, findByText, h4Buttons);
+
+			const h4Headings: string[] = ['Address'];
+			assertHeadingsExist(findAllByTestId, h4Headings);
 		});
 
 		test('initial status is correct', () => {
@@ -271,6 +277,10 @@ describe('Corporate Group Trustee Card', () => {
 			expect(results).toHaveNoViolations();
 		});
 
+		afterEach(() => {
+			cleanup();
+		});
+
 		test('editing Director(s) type', () => {
 			expect(findByTestId('corporateGroup-directors-form')).not.toBe(null);
 			expect(
@@ -324,31 +334,31 @@ describe('Corporate Group Trustee Card', () => {
 		test('remove Corporate Group - confirm', async () => {
 			await act(async () => {
 				findByText('They were never part of the scheme.').click();
-				const results = await axe(component);
-				expect(results).toHaveNoViolations();
 			});
+			const results = await axe(component);
+			expect(results).toHaveNoViolations();
 
 			await act(async () => {
 				findByText('Continue').click();
-				const results = await axe(component);
-				expect(results).toHaveNoViolations();
-				expect(
-					findByText('Are you sure you want to remove this corporate trustee?'),
-				).toBeDefined();
-				expect(findByText("This can't be undone.")).toBeDefined();
-				expect(findByText('Remove Trustee')).toBeDefined();
-				expect(findByText('Cancel')).toBeDefined();
 			});
+			const results2 = await axe(component);
+			expect(results2).toHaveNoViolations();
+			expect(
+				findByText('Are you sure you want to remove this corporate trustee?'),
+			).toBeDefined();
+			expect(findByText("This can't be undone.")).toBeDefined();
+			expect(findByText('Remove Trustee')).toBeDefined();
+			expect(findByText('Cancel')).toBeDefined();
 
 			// Removed => confirmation banner
 			await act(async () => {
 				findByText('Remove Trustee').click();
-				const results = await axe(component);
-				expect(results).toHaveNoViolations();
-				expect(
-					findByText('Corporate Group Trustee removed successfully'),
-				).toBeDefined();
 			});
+			const results3 = await axe(component);
+			expect(results3).toHaveNoViolations();
+			expect(
+				findByText('Corporate Group Trustee removed successfully'),
+			).toBeDefined();
 		});
 	});
 });
