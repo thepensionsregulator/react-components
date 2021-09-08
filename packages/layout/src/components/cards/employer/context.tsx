@@ -55,7 +55,7 @@ export interface Employer extends CardDefaultProps {
 
 export const EmployerProvider = ({
 	complete,
-	preValidatedData,
+	preValidatedData = null,
 	employer,
 	showStatutoryEmployerSection,
 	lastBtnClicked = null,

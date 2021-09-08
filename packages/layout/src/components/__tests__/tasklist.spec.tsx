@@ -99,6 +99,30 @@ describe('Tasklist', () => {
 		expect(totalProgress).toEqual(totalSections.length);
 	});
 
+	test('progress bar is not shown when titleComplete and titleIncomplete are falsy', () => {
+		const { queryByText } = getComponent('');
+
+		const progressText = queryByText((content) =>
+			content.startsWith('You have completed'),
+		);
+		expect(progressText).toBeNull();
+	});
+
+	test('progress is not shown when showStatus = false', () => {
+		const title = 'Scheme return home';
+		const { queryByText } = getComponent(title, false);
+
+		const progressText = queryByText((content) =>
+			content.startsWith('You have completed'),
+		);
+		expect(progressText).toBeNull();
+
+		[...s1.links, ...s2.links, ...s3.links].forEach((link) => {
+			const status = queryByText(link.name).nextElementSibling;
+			expect(status).toBeNull();
+		});
+	});
+
 	test('each section title is visible', () => {
 		const title = 'Scheme return home';
 		const { getByText } = getComponent(title);
@@ -185,15 +209,14 @@ describe('Tasklist', () => {
 		});
 	});
 
-	const getComponent = (title: string) => {
-		const { container, getByText } = render(
+	const getComponent = (title: string, showStatus: boolean = true) => {
+		const { container, getByText, queryByText } = render(
 			<Tasklist
 				titleComplete={title}
 				titleIncomplete={title}
+				showStatus={showStatus}
 				reviewTitle="Review page"
-				welcomeTitle="Welcome page"
 				reviewPath="/"
-				welcomePath="/"
 				sections={sections}
 				matchPath={() => {
 					/*intentional*/
@@ -209,6 +232,6 @@ describe('Tasklist', () => {
 				sectionIncompleteLabel="Section not complete"
 			/>,
 		);
-		return { container, getByText };
+		return { container, getByText, queryByText };
 	};
 });

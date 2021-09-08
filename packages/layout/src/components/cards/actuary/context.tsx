@@ -58,7 +58,7 @@ export type UpdateActuaryModel = {
 
 export const ActuaryProvider = ({
 	complete,
-	preValidatedData,
+	preValidatedData = null,
 	actuary,
 	lastBtnClicked = null,
 	children,

@@ -16,24 +16,6 @@ export const Preview: React.FC<any> = React.memo(() => {
 	const directorBtn = useRef(null);
 	const chairBtn = useRef(null);
 
-	const onClickDirectorBtn = () => {
-		current.context.lastBtnClicked = 5;
-		send('EDIT_PROFESSIONAL');
-	};
-
-	const onClickChairOfBoardBtn = () => {
-		current.context.lastBtnClicked = 4;
-		send('EDIT_NAME');
-	};
-
-	const onCollapseDirector = () => {
-		current.context.lastBtnClicked === 5 && directorBtn.current.focus();
-	};
-
-	const onCollapseChairOfBoard = () => {
-		current.context.lastBtnClicked === 4 && chairBtn.current.focus();
-	};
-
 	return (
 		<div
 			className={
@@ -63,11 +45,11 @@ export const Preview: React.FC<any> = React.memo(() => {
 					{/* Professional Trustee section: open for editing	 */}
 					<Flex cfg={{ flexDirection: 'column', mt: 5 }}>
 						<UnderlinedButton
-							onClick={onClickDirectorBtn}
+							onClick={() => send('EDIT_PROFESSIONAL')}
 							isOpen={current.matches({ edit: 'professional' })}
 							isEditButton={true}
-							btnRef={directorBtn}
-							onCollapseCallback={onCollapseDirector}
+							buttonRef={directorBtn}
+							giveFocus={current.context.lastBtnClicked === 5}
 						>
 							{i18n.preview.buttons.five}
 						</UnderlinedButton>
@@ -86,11 +68,11 @@ export const Preview: React.FC<any> = React.memo(() => {
 					cfg={{ width: 5, flex: '0 0 auto', flexDirection: 'column', pr: 4 }}
 				>
 					<UnderlinedButton
-						onClick={onClickChairOfBoardBtn}
+						onClick={() => send('EDIT_NAME')}
 						isOpen={current.matches({ edit: 'contacts' })}
 						isEditButton={true}
-						btnRef={chairBtn}
-						onCollapseCallback={onCollapseChairOfBoard}
+						buttonRef={chairBtn}
+						giveFocus={current.context.lastBtnClicked === 4}
 					>
 						{i18n.preview.buttons.four}
 					</UnderlinedButton>

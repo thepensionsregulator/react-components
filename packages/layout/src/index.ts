@@ -29,3 +29,5 @@ export * from './components/helplink/helplink';
 export * from './components/hint/hint';
 export * from './components/poscon/poscon';
 export * from './components/types/types';
+
+export * from './services';

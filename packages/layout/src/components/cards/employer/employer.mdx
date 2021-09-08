@@ -46,10 +46,10 @@ import { EmployerCard } from '@tpr/layout';
 				addressLine2: 'Trafalgar Pl',
 				postTown: 'Brighton',
 				postcode: 'BN1 4DW',
-				county: 'West Sussex',
+				county: 'East Sussex',
 				country: '',
 			},
-		};		
+		};
 		return (
 			<EmployerCard
 				complete={complete}
@@ -89,10 +89,10 @@ import { EmployerCard } from '@tpr/layout';
 				addressLine2: 'Trafalgar Pl',
 				postTown: 'Brighton',
 				postcode: 'BN1 4DW',
-				county: 'West Sussex',
+				county: 'East Sussex',
 				country: '',
 			},
-		};		
+		};
 		return (
 			<EmployerCard
 				complete={complete}
@@ -110,13 +110,13 @@ import { EmployerCard } from '@tpr/layout';
 
 ### Props
 
-| Property         | Required | Type              | Description                                                                              |
-| ---------------- | -------- | ----------------- | ---------------------------------------------------------------------------------------- |
-| complete         | true     | boolean           | changes the state of the card when All details are correct                               |
-| employer         | true     | Employer          | the Employer object                                                                      |
-| i18n             | false    | EmployerI18nProps | allows to override specific text in the card                                             |
-| onCorrect        | true     | function          | actions for when the user clicks the "Confirm details are correct" checkbox                  |
-| onRemove         | true     | function          | actions for when the employer is removed                                                 |
-| onSaveType       | true     | function          | actions for when the user updates the type of employer                                   |
-| prevalidatedData | false    | boolean           | allows to ignore the state of the "Confirm details are correct" checkbox & shows "No issues" |
-| showStatutoryEmployerSection | true			| boolean						| allows to suppress display of statutory employer description														 |
+| Property                     | Required | Type              | Description                                                                                  |
+| ---------------------------- | -------- | ----------------- | -------------------------------------------------------------------------------------------- |
+| complete                     | true     | boolean           | changes the state of the card when All details are correct                                   |
+| employer                     | true     | Employer          | the Employer object                                                                          |
+| i18n                         | false    | EmployerI18nProps | allows to override specific text in the card                                                 |
+| onCorrect                    | true     | function          | actions for when the user clicks the "Confirm details are correct" checkbox                  |
+| onRemove                     | true     | function          | actions for when the employer is removed                                                     |
+| onSaveType                   | true     | function          | actions for when the user updates the type of employer                                       |
+| preValidatedData             | false    | boolean           | allows to ignore the state of the "Confirm details are correct" checkbox & shows "No issues" |
+| showStatutoryEmployerSection | true     | boolean           | allows to suppress display of statutory employer description                                 |

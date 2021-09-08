@@ -12,15 +12,6 @@ export const Preview: React.FC<any> = React.memo(() => {
 
 	const insurerBtn = useRef(null);
 
-	const onClickInsurerBtn = () => {
-		current.context.lastBtnClicked = 4;
-		send('EDIT_INSURER');
-	};
-
-	const onCollapseInsurer = () => {
-		current.context.lastBtnClicked === 4 && insurerBtn.current.focus();
-	};
-
 	return (
 		<div
 			className={
@@ -53,11 +44,11 @@ export const Preview: React.FC<any> = React.memo(() => {
 					cfg={{ width: 5, flex: '0 0 auto', flexDirection: 'column', pl: 4 }}
 				>
 					<UnderlinedButton
-						isOpen={current.matches({ edit: 'reference' })}
-						onClick={onClickInsurerBtn}
+						onClick={() => send('EDIT_INSURER')}
+						isOpen={current.matches('edit')}
 						isEditButton={true}
-						btnRef={insurerBtn}
-						onCollapseCallback={onCollapseInsurer}
+						buttonRef={insurerBtn}
+						giveFocus={current.context.lastBtnClicked === 4}
 					>
 						{i18n.preview.buttons.four}
 					</UnderlinedButton>

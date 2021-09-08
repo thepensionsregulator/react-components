@@ -1,5 +1,5 @@
 import React from 'react';
-import { render } from '@testing-library/react';
+import { cleanup, render } from '@testing-library/react';
 import { InHouseCard } from '../cards/inHouse/inHouse';
 import { axe } from 'jest-axe';
 import { act } from 'react-dom/test-utils';
@@ -7,11 +7,14 @@ import userEvent from '@testing-library/user-event';
 import { InHouseAdminNoApi } from '../cards/inHouse/context';
 import {
 	assertThatASectionExistsWithAnAriaLabel,
-	assertThatButtonHasAriaExpanded,
 	assertThatButtonHasBeenRemovedFromTheTabFlow,
 	assertThatTitleWasSetToNullWhileFirstAndLastNamesWereLeftUnchanged,
 	clearTitleField,
+	assertMainHeadingExists,
+	assertRemoveButtonExists,
+	assertHeadingButtonsExist,
 } from '../testHelpers/testHelpers';
+import { sampleAddress } from '../testHelpers/commonData/cards';
 
 const noop = () => Promise.resolve();
 
@@ -22,24 +25,22 @@ const inHouseAdmin: InHouseAdminNoApi = {
 	firstName: 'John',
 	lastName: 'Smoth',
 	effectiveDate: '1997-04-01T00:00:00',
-	address: {
-		addressLine1: 'Napier House',
-		addressLine2: 'Trafalgar Pl',
-		addressLine3: '',
-		postTown: 'Brighton',
-		postcode: 'BN1 4DW',
-		county: 'West Sussex',
-		countryId: 2,
-	},
+	address: sampleAddress,
 	telephoneNumber: '01273 222 111',
 	emailAddress: 'john.wick@warnerbros.com',
 };
 
 describe('InHouse Preview', () => {
-	let component, findByText, findByRole;
+	let component, findByText, findByRole, findByTestId, findAllByTestId;
 
 	beforeEach(async () => {
-		const { container, getByText, getByRole } = render(
+		const {
+			container,
+			getByText,
+			getByRole,
+			getByTestId,
+			getAllByTestId,
+		} = render(
 			<InHouseCard
 				onSaveContacts={noop}
 				onSaveAddress={noop}
@@ -58,6 +59,8 @@ describe('InHouse Preview', () => {
 		component = container;
 		findByText = getByText;
 		findByRole = getByRole;
+		findByTestId = getByTestId;
+		findAllByTestId = getAllByTestId;
 	});
 
 	test('is accessible', async () => {
@@ -66,12 +69,17 @@ describe('InHouse Preview', () => {
 	});
 
 	test('it renders preview correctly', () => {
-		expect(findByText('In House Administrator')).toBeDefined();
-		expect(findByText('Remove')).toBeDefined();
-		expect(findByText('Address')).toBeDefined();
-		assertThatButtonHasAriaExpanded(findByText, 'Address', false);
-		expect(findByText('Contact details')).toBeDefined();
-		assertThatButtonHasAriaExpanded(findByText, 'Contact details', false);
+		assertMainHeadingExists(
+			findByText,
+			findByTestId,
+			'In House Administrator',
+			true,
+		);
+
+		assertRemoveButtonExists(findByText, findByTestId);
+
+		const h4Buttons = ['Address', 'Contact details'];
+		assertHeadingButtonsExist(findAllByTestId, findByText, h4Buttons);
 	});
 
 	test('replaces __NAME__ in the checkbox label', () => {
@@ -115,6 +123,10 @@ describe('Update in-house trustee name', () => {
 		findByTestId = getByTestId;
 
 		findByText('In House Administrator').click();
+	});
+
+	afterEach(() => {
+		cleanup();
 	});
 
 	test('is accessible', async () => {
@@ -193,6 +205,10 @@ describe('Update in-house trustee contact details', () => {
 		findByText('Contact details').click();
 	});
 
+	afterEach(() => {
+		cleanup();
+	});
+
 	test('is accessible', async () => {
 		const results = await axe(component);
 		expect(results).toHaveNoViolations();
@@ -233,6 +249,10 @@ describe('Update in-house trustee contact details', () => {
 });
 
 describe('InHouse Remove', () => {
+	afterEach(() => {
+		cleanup();
+	});
+
 	test('Date screen is accessible', async () => {
 		const { container, getByText } = render(
 			<InHouseCard
@@ -373,6 +393,10 @@ describe('InHouse Remove', () => {
 });
 
 describe('In house admin correspondence address', () => {
+	afterEach(() => {
+		cleanup();
+	});
+
 	test('Change address is accessible', async () => {
 		const { container, getByText, getAllByText } = render(
 			<InHouseCard
