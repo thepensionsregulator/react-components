@@ -173,7 +173,9 @@ export const InputDate: React.FC<InputDateComponentProps> = memo(
 		}, [day, month, year, input]);
 
 		const hasValue = (): boolean => {
-			return day !== "" || month !== "" || year !== "";
+			return (
+				(!hideDay && day !== '') || (!hideMonth && month !== '') || year !== ''
+			);
 		};
 
 		const isError: boolean = meta && meta.touched && meta.error;
@@ -187,7 +189,14 @@ export const InputDate: React.FC<InputDateComponentProps> = memo(
 				isError={meta && meta.touched && meta.error}
 				element="fieldset"
 				onBlur={(e: React.FocusEvent<HTMLFieldSetElement>) => {
-					if (hasValue() && e.relatedTarget && !e.currentTarget.outerHTML.includes((e.relatedTarget as HTMLElement).outerHTML)) {
+					if (
+						(required || hasValue()) &&
+						e.relatedTarget &&
+						!e.currentTarget.outerHTML.includes(
+							(e.relatedTarget as HTMLElement).outerHTML,
+						)
+					) {
+						//date component losing focus
 						input.onBlur();
 					}
 				}}
