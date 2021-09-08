@@ -1,4 +1,5 @@
 import React from 'react';
+import { cleanup } from '@testing-library/react';
 import { formSetup } from '../__mocks__/setup';
 import { renderFields, validate } from '../index';
 import { FieldProps } from '../renderFields';
@@ -377,6 +378,138 @@ describe('Date input', () => {
 			const fieldSet = dateContainer.getElementsByTagName('fieldset')[0];
 
 			expect(fieldSet).toHaveAttribute('aria-describedby', hiddenLabelId);
+		});
+	});
+
+	describe('Validation behaviour', () => {
+		const getFields = (required: boolean = false) => {
+			const fields: FieldProps[] = [
+				{
+					id: testId,
+					testId: testId,
+					label: 'optional date',
+					hint: 'For example, 12 11 2007',
+					name: 'optional-date',
+					type: 'date',
+					required: required,
+					error: 'Invalid value',
+				},
+			];
+			return fields;
+		};
+
+		afterEach(() => {
+			cleanup();
+		});
+
+		test('When the component is rendered, it does not fire validation', () => {
+			//Arrange
+			const fields = getFields();
+			const handleSubmit = jest.fn();
+
+			//Act
+			const { queryByText } = formSetup({
+				render: renderFields(fields),
+				validate: validate(fields),
+				onSubmit: handleSubmit,
+			});
+
+			//Assert
+			const errorMessage = queryByText(/Invalid value/);
+			expect(errorMessage).not.toBeInTheDocument();
+			expect(handleSubmit).toBeCalledTimes(0);
+		});
+
+		test('When the component receives focus, it does not fire validation', () => {
+			//Arrange
+			const fields = getFields();
+			const handleSubmit = jest.fn();
+			const { getByTestId, queryByText } = formSetup({
+				render: renderFields(fields),
+				validate: validate(fields),
+				onSubmit: handleSubmit,
+			});
+
+			//Act
+			const dd = getByTestId(`dd-${testId}`);
+			dd.focus();
+
+			//Assert
+			const errorMessage = queryByText(/Invalid value/);
+			expect(errorMessage).not.toBeInTheDocument();
+			expect(handleSubmit).toBeCalledTimes(0);
+		});
+
+		test('When the component loses focus with any value, it fires validation', () => {
+			//Arrange
+			const fields = getFields();
+			const handleSubmit = jest.fn();
+			const { getByTestId, queryByText } = formSetup({
+				render: renderFields(fields),
+				validate: validate(fields),
+				onSubmit: handleSubmit,
+			});
+
+			//Act
+			const dd = getByTestId(`dd-${testId}`);
+			dd.focus();
+			userEvent.type(dd, '20');
+			userEvent.tab();
+			userEvent.tab();
+			userEvent.tab();
+
+			//Assert
+			const errorMessage = queryByText(/Invalid value/);
+			expect(errorMessage).toBeInTheDocument();
+			expect(handleSubmit).toBeCalledTimes(0);
+		});
+
+		test('When a required component loses focus with no value, it fires validation', () => {
+			//Arrange
+			const fields = getFields(true);
+			const handleSubmit = jest.fn();
+			const { getByTestId, queryByText } = formSetup({
+				render: renderFields(fields),
+				validate: validate(fields),
+				onSubmit: handleSubmit,
+			});
+
+			//Act
+			const dd = getByTestId(`dd-${testId}`);
+			dd.focus();
+			userEvent.tab();
+			userEvent.tab();
+			userEvent.tab();
+
+			//Assert
+			const errorMessage = queryByText(/Invalid value/);
+			expect(errorMessage).toBeInTheDocument();
+			expect(handleSubmit).toBeCalledTimes(0);
+		});
+
+		test('When the form is posted with no value, it fires validation', () => {
+			//Arrange
+			const fields = getFields();
+			const handleSubmit = jest.fn();
+			const { getByTestId, getByRole, queryByText } = formSetup({
+				render: renderFields(fields),
+				validate: validate(fields),
+				onSubmit: handleSubmit,
+			});
+
+			//Act
+			const dd = getByTestId(`dd-${testId}`);
+			dd.focus();
+			userEvent.tab();
+			userEvent.tab();
+			userEvent.tab();
+			const button = getByRole('button');
+			userEvent.click(button);
+
+			//Assert
+			const errorMessage = queryByText(/Invalid value/);
+			expect(errorMessage).toBeInTheDocument();
+			expect(handleSubmit).toBeCalledTimes(0);
 		});
 	});
 });
