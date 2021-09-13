@@ -1,4 +1,4 @@
-import { validate } from '../validation';
+import { validate } from '../../validation';
 
 export function finalFormValidationMock(fields) {
 	const validation = validate(fields);

@@ -1,4 +1,4 @@
-import { finalFormValidationMock } from '../__mocks__/validation';
+import { finalFormValidationMock } from '../__mocks__/local/validation';
 
 describe('form validation', () => {
 	test('should accept `error` key with value `string` and return it if there was no value', () => {
