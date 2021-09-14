@@ -30,7 +30,6 @@ export const LoadingSpinnerProgress: React.FC<SpinnerProps> = ({
 			className={styles.spinnerProgress}
 			data-testid="spinner-progress"
 			role="alert"
-			aria-label={text}
 			aria-busy="true"
 		>
 			<div className={styles.spinner}>
