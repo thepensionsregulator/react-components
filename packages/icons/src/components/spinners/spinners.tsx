@@ -10,7 +10,6 @@ export const LoadingSpinnerCircle: React.FC<SpinnerProps> = ({
 			className={styles.spinnerCircle}
 			data-testid="spinner-circle"
 			role="alert"
-			aria-label={text}
 			aria-busy="true"
 		>
 			<div className={styles.spinner}>
