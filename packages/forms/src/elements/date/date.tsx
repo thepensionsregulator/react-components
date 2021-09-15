@@ -68,6 +68,7 @@ type DateInputFieldProps = {
 	testId?: string;
 	updateFn: Function;
 	value: any;
+	name: string;
 };
 
 const DateInputField: React.FC<DateInputFieldProps> = ({
@@ -87,6 +88,7 @@ const DateInputField: React.FC<DateInputFieldProps> = ({
 	testId,
 	updateFn,
 	value,
+	name,
 }) => {
 	const [hasFocus, setHasFocus] = useState(false);
 	const helper = new AccessibilityHelper(parentId, false, false);
@@ -127,6 +129,7 @@ const DateInputField: React.FC<DateInputFieldProps> = ({
 				maxLength={maxLength}
 				isError={meta && meta.touched && meta.error}
 				accessibilityHelper={!hasFocus ? helper : null}
+				name={name}
 			/>
 		</label>
 	);
@@ -137,6 +140,7 @@ interface InputDateComponentProps extends InputDateProps {
 	hideDay?: boolean;
 	hideMonth?: boolean;
 	hiddenLabel?: string;
+	name: string;
 }
 export const InputDate: React.FC<InputDateComponentProps> = memo(
 	({
@@ -153,6 +157,7 @@ export const InputDate: React.FC<InputDateComponentProps> = memo(
 		hideDay,
 		hideMonth,
 		hiddenLabel = '',
+		name,
 	}) => {
 		// react-final-form types says it's a string, incorrect, it's a date object.
 		const { dd, mm, yyyy } = transformDate(meta.initial);
@@ -232,6 +237,7 @@ export const InputDate: React.FC<InputDateComponentProps> = memo(
 							readOnly={readOnly}
 							required={required}
 							maxLength={2}
+							name={`dd-${name}`}
 						/>
 					)}
 					{!hideMonth && (
@@ -250,6 +256,7 @@ export const InputDate: React.FC<InputDateComponentProps> = memo(
 							readOnly={readOnly}
 							required={required}
 							maxLength={2}
+							name={`mm-${name}`}
 						/>
 					)}
 					<DateInputField
@@ -269,6 +276,7 @@ export const InputDate: React.FC<InputDateComponentProps> = memo(
 						required={required}
 						hideMonth={hideMonth}
 						maxLength={4}
+						name={`yy=${name}`}
 					/>
 				</Flex>
 			</StyledInputLabel>
