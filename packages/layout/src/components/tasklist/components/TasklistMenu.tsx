@@ -8,7 +8,8 @@ import { NavItem } from '../../../components/navitem/navitem';
 const TasklistMenu: React.FC<TasklistMenuProps> = ({
 	title,
 	links,
-	maintenanceMode,
+	showStatus,
+	sectionDisabledLabel,
 	sectionCompleteLabel,
 	sectionIncompleteLabel,
 }) => {
@@ -38,16 +39,31 @@ const TasklistMenu: React.FC<TasklistMenuProps> = ({
 									width: 10,
 								}}
 							>
-								<NavItem link={link}>
-									<span className={styles.taskName}>{link.name}</span>
-									{!maintenanceMode && !link.hideIcon && (
-										<TaskStatus
-											link={link}
-											sectionCompleteLabel={sectionCompleteLabel}
-											sectionIncompleteLabel={sectionIncompleteLabel}
-										/>
-									)}
-								</NavItem>
+								{link.disabled ? (
+									<div className={styles.taskDisabled}>
+										<span className={styles.taskName}>{link.name}</span>
+										{showStatus && !link.hideIcon && (
+											<TaskStatus
+												link={link}
+												sectionDisabledLabel={sectionDisabledLabel}
+												sectionCompleteLabel={sectionCompleteLabel}
+												sectionIncompleteLabel={sectionIncompleteLabel}
+											/>
+										)}
+									</div>
+								) : (
+									<NavItem link={link}>
+										<span className={styles.taskName}>{link.name}</span>
+										{showStatus && !link.hideIcon && (
+											<TaskStatus
+												link={link}
+												sectionDisabledLabel={sectionDisabledLabel}
+												sectionCompleteLabel={sectionCompleteLabel}
+												sectionIncompleteLabel={sectionIncompleteLabel}
+											/>
+										)}
+									</NavItem>
+								)}
 							</Flex>
 						</Flex>
 						<Hr />

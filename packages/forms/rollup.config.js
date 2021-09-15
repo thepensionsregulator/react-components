@@ -11,6 +11,7 @@ export default rollup({
 		'@types/match-sorter',
 		'@types/qs',
 		'@financial-times/accessible-autocomplete/react',
+		'@testing-library/react',
 		'date-fns',
 		'downshift',
 		'final-form',

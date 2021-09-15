@@ -24,3 +24,5 @@ export * from './finalFormExports';
 export * from './validators';
 export * from './elements/helpers';
 export * from './elements/elements';
+
+export * from './__mocks__/setup';

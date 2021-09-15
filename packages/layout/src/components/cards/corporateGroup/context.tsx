@@ -54,7 +54,7 @@ export const CorporateGroupContext = createContext<CorporateGroupContextProps>({
 
 export const CorporateGroupProvider = ({
 	complete,
-	preValidatedData,
+	preValidatedData = null,
 	corporateGroup,
 	lastBtnClicked = null,
 	children,

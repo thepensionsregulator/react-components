@@ -63,7 +63,7 @@ export interface InHouseAdminProviderProps extends CardProviderProps {
 
 export const InHouseAdminProvider = ({
 	complete,
-	preValidatedData,
+	preValidatedData = null,
 	inHouseAdmin,
 	lastBtnClicked = null,
 	children,

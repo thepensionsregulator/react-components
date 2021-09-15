@@ -1,4 +1,6 @@
 import { SpaceProps } from '@tpr/core';
+import { MutableRefObject } from 'react';
+import { EventData, State } from 'xstate';
 
 export const addressFields = [
 	'addressLine1',
@@ -67,12 +69,13 @@ export type RecursivePartial<T> = {
 
 export interface CardProviderProps {
 	complete?: boolean;
-	preValidatedData?: boolean;
+	preValidatedData?: boolean | null;
 	onCorrect?: (...args: any[]) => void;
 	onRemove?: (...args: any[]) => Promise<any>;
 	onSaveAddress?: (...args: any[]) => Promise<any>;
 	onSaveContacts?: (...args: any[]) => Promise<any>;
 	onSaveName?: (...args: any[]) => Promise<any>;
+	onChangeAddress?: (...args: any[]) => Promise<any>;
 	testId?: string | number;
 	/** cfg space props */
 	cfg?: SpaceProps;
@@ -82,6 +85,17 @@ export interface CardProviderProps {
 export interface RemoveReasonProps {
 	reason: null | string;
 	date: null | string;
+}
+
+export interface RemoveConfirmProps {
+	confirm: boolean;
+	date: string;
+}
+
+export interface CommonCardMachineContext {
+	complete: boolean;
+	preValidatedData?: boolean | null;
+	lastBtnClicked?: number | null;
 }
 
 /*	--------------------------------
@@ -126,4 +140,26 @@ export const defaultPhoneErrorMessages: InputErrorMessages = {
 
 export interface CardContentProps {
 	enableContactDetails?: boolean;
+	onChangeAddress?: (...args: any[]) => Promise<any>;
+}
+
+/*	--------------------------------
+						Card Buttons
+		--------------------------------	*/
+export interface IToolbarButtonProps {
+	remove?: boolean;
+	button: MutableRefObject<any>;
+}
+
+export interface ICardMainHeadingButtonProps {
+	button: MutableRefObject<any>;
+	current?: Partial<State<any, any, any, any>>;
+	onClick: any;
+}
+
+export interface ICardRemoveButtonProps {
+	button: MutableRefObject<any>;
+	send: (event: any, payload?: EventData) => Partial<State<any, any, any, any>>;
+	current?: Partial<State<any, any, any, any>>;
+	tabIndex?: number;
 }

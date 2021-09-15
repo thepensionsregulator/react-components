@@ -47,7 +47,7 @@ export interface InsurerProviderProps extends CardProviderProps {
 
 export const InsurerProvider = ({
 	complete,
-	preValidatedData,
+	preValidatedData = null,
 	insurer,
 	lastBtnClicked = null,
 	children,

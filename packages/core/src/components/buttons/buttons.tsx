@@ -17,45 +17,54 @@ export type ButtonProps = {
 	testId?: string;
 	[key: string]: any;
 };
-export const Button: React.FC<ButtonProps> = ({
-	children,
-	cfg: globalStyles = {},
-	className,
-	appearance = 'primary',
-	intent = 'none',
-	size = 'medium',
-	before: Before,
-	after: After,
-	disabled,
-	loading,
-	testId,
-	type = 'button',
-	...props
-}) => {
-	const classNames = useClassNames(globalStyles, [
-		styles.button,
-		styles[`appearance-${appearance}`],
-		styles[`intent-${intent}`],
-		styles[`size-${size}`],
-		className,
-	]);
-	return (
-		<button
-			type={type}
-			disabled={disabled || loading}
-			className={classNames}
-			data-testid={testId}
-			{...props}
-		>
-			{loading ? (
-				'Loading...'
-			) : (
-				<>
-					{Before && <Before />}
-					{children}
-					{After && <After />}
-				</>
-			)}
-		</button>
-	);
-};
+export const Button: React.FC<ButtonProps> = React.forwardRef<
+	HTMLInputElement,
+	ButtonProps
+>(
+	(
+		{
+			children,
+			cfg: globalStyles = {},
+			className,
+			appearance = 'primary',
+			intent = 'none',
+			size = 'medium',
+			before: Before,
+			after: After,
+			disabled,
+			loading,
+			testId,
+			type = 'button',
+			...props
+		},
+		ref,
+	) => {
+		const classNames = useClassNames(globalStyles, [
+			styles.button,
+			styles[`appearance-${appearance}`],
+			styles[`intent-${intent}`],
+			styles[`size-${size}`],
+			className,
+		]);
+		return (
+			<button
+				type={type}
+				disabled={disabled || loading}
+				className={classNames}
+				data-testid={testId}
+				ref={ref}
+				{...props}
+			>
+				{loading ? (
+					'Loading...'
+				) : (
+					<>
+						{Before && <Before />}
+						{children}
+						{After && <After />}
+					</>
+				)}
+			</button>
+		);
+	},
+);

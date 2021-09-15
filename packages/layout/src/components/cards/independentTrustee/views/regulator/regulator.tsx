@@ -17,6 +17,7 @@ const getIndependentTrusteeFields = (
 		value: 'yes',
 		label: labels.appointedByRegulator.labels.isAppointedByRegulatorYes,
 		cfg: { mb: 2 },
+		required: true,
 	},
 	{
 		type: 'radio',
@@ -24,6 +25,7 @@ const getIndependentTrusteeFields = (
 		value: 'no',
 		label: labels.appointedByRegulator.labels.isAppointedByRegulatorNo,
 		cfg: { mb: 2 },
+		required: true,
 	},
 ];
 

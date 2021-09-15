@@ -57,6 +57,7 @@ const s3: TasklistSectionProps = {
 			completed: false,
 			disabled: true,
 			path: '/review-and-submit',
+			hideIcon: true,
 		},
 	],
 	order: 3,
@@ -98,6 +99,30 @@ describe('Tasklist', () => {
 		expect(totalProgress).toEqual(totalSections.length);
 	});
 
+	test('progress bar is not shown when titleComplete and titleIncomplete are falsy', () => {
+		const { queryByText } = getComponent('');
+
+		const progressText = queryByText((content) =>
+			content.startsWith('You have completed'),
+		);
+		expect(progressText).toBeNull();
+	});
+
+	test('progress is not shown when showStatus = false', () => {
+		const title = 'Scheme return home';
+		const { queryByText } = getComponent(title, false);
+
+		const progressText = queryByText((content) =>
+			content.startsWith('You have completed'),
+		);
+		expect(progressText).toBeNull();
+
+		[...s1.links, ...s2.links, ...s3.links].forEach((link) => {
+			const status = queryByText(link.name).nextElementSibling;
+			expect(status).toBeNull();
+		});
+	});
+
 	test('each section title is visible', () => {
 		const title = 'Scheme return home';
 		const { getByText } = getComponent(title);
@@ -120,19 +145,78 @@ describe('Tasklist', () => {
 		const { result } = renderHook(() => useCalculateProgress(sections));
 		const [totalSections, totalCompleted] = result.current;
 
-		expect(totalCompleted.length).toMatchInlineSnapshot(`3`);
-		expect(totalSections.length).toMatchInlineSnapshot(`8`);
+		expect(totalCompleted.length).toBe(3);
+		expect(totalSections.length).toBe(7);
 	});
 
-	const getComponent = (title: string) => {
-		const { container, getByText } = render(
+	test('incomplete link is linked', () => {
+		const title = 'Scheme return home';
+		const { getByText } = getComponent(title);
+
+		[...s1.links, ...s2.links, ...s3.links]
+			.filter((link) => !link.completed && !link.disabled)
+			.forEach((link) => {
+				expect(getByText(link.name).closest('a')).not.toBeNull();
+			});
+	});
+
+	test('completed link is linked', () => {
+		const title = 'Scheme return home';
+		const { getByText } = getComponent(title);
+
+		[...s1.links, ...s2.links, ...s3.links]
+			.filter((link) => link.completed && !link.disabled)
+			.forEach((link) => {
+				expect(getByText(link.name).closest('a')).not.toBeNull();
+			});
+	});
+
+	test('disabled link is not linked', () => {
+		const title = 'Scheme return home';
+		const { getByText } = getComponent(title);
+
+		[...s1.links, ...s2.links, ...s3.links]
+			.filter((link) => link.disabled)
+			.forEach((link) => {
+				expect(getByText(link.name).closest('a')).toBeNull();
+			});
+	});
+
+	test('status is labelled correctly', () => {
+		const title = 'Scheme return home';
+		const { getByText } = getComponent(title);
+
+		[...s1.links, ...s2.links, ...s3.links].forEach((link) => {
+			if (link.hideIcon) {
+				const status = getByText(link.name).nextElementSibling;
+				expect(status).toBeNull();
+			} else {
+				let expectedStatus = 'Section not complete';
+				let expectedClass = 'incomplete';
+				if (link.completed) {
+					expectedStatus = 'Section complete';
+					expectedClass = 'complete';
+				}
+				if (link.disabled) {
+					expectedStatus = 'Section unavailable';
+					expectedClass = 'disabled';
+				}
+
+				const status = getByText(link.name).nextElementSibling;
+				expect(status.textContent).toBe(expectedStatus);
+				expect(status).toHaveAttribute('class', `taskStatus ${expectedClass}`);
+			}
+		});
+	});
+
+	const getComponent = (title: string, showStatus: boolean = true) => {
+		const { container, getByText, queryByText } = render(
 			<Tasklist
 				titleComplete={title}
 				titleIncomplete={title}
+				showStatus={showStatus}
 				reviewTitle="Review page"
-				welcomeTitle="Welcome page"
 				reviewPath="/"
-				welcomePath="/"
 				sections={sections}
 				matchPath={() => {
 					/*intentional*/
@@ -143,10 +227,11 @@ describe('Tasklist', () => {
 						/*intentional*/
 					},
 				}}
+				sectionDisabledLabel="Section unavailable"
 				sectionCompleteLabel="Section complete"
 				sectionIncompleteLabel="Section not complete"
 			/>,
 		);
-		return { container, getByText };
+		return { container, getByText, queryByText };
 	};
 });

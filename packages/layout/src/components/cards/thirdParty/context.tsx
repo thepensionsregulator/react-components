@@ -44,7 +44,7 @@ export interface ThirdPartyProviderProps extends CardProviderProps {
 
 export const ThirdPartyProvider = ({
 	complete,
-	preValidatedData,
+	preValidatedData = null,
 	thirdParty,
 	lastBtnClicked = null,
 	children,

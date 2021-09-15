@@ -38,7 +38,10 @@ export const useSectionsUpdater = (
 
 export function useCalculateProgress(sections: TasklistSectionProps[]) {
 	const allSections = useMemo(
-		() => flatten(sections.map((section) => section.links)),
+		() =>
+			flatten(sections.map((section) => section.links)).filter(
+				(section) => !section.hideIcon,
+			),
 		[sections],
 	);
 	const allCompleted = useMemo(
@@ -54,13 +57,12 @@ export const Tasklist: React.FC<TasklistProps> = ({
 	titleIncomplete,
 	reviewTitle,
 	reviewPath,
-	welcomeTitle,
-	welcomePath,
 	sections: originalSections,
-	maintenanceMode = false,
+	showStatus = true,
 	matchPath,
 	location,
 	history,
+	sectionDisabledLabel,
 	sectionCompleteLabel,
 	sectionIncompleteLabel,
 	testId,
@@ -76,28 +78,32 @@ export const Tasklist: React.FC<TasklistProps> = ({
 				cfg={{ flexDirection: 'column', mt: 8 }}
 				className={styles.tasklistMenu}
 			>
-				<P
-					cfg={{
-						color: 'neutral.8',
-						fontSize: 4,
-						fontWeight: 3,
-						lineHeight: 6,
-					}}
-					className={styles.label}
-				>
-					{completed ? titleComplete : titleIncomplete}
-				</P>
-				<P
-					cfg={{
-						color: 'neutral.8',
-						fontSize: 3,
-						fontWeight: 3,
-						lineHeight: 6,
-					}}
-					className={styles.label}
-				>
-					{`You have completed ${allCompleted.length} of ${allSections.length} sections`}
-				</P>
+				{showStatus && titleComplete && titleIncomplete && (
+					<>
+						<P
+							cfg={{
+								color: 'neutral.8',
+								fontSize: 4,
+								fontWeight: 3,
+								lineHeight: 6,
+							}}
+							className={styles.label}
+						>
+							{completed ? titleComplete : titleIncomplete}
+						</P>
+						<P
+							cfg={{
+								color: 'neutral.8',
+								fontSize: 3,
+								fontWeight: 3,
+								lineHeight: 6,
+							}}
+							className={styles.label}
+						>
+							{`You have completed ${allCompleted.length} of ${allSections.length} sections`}
+						</P>
+					</>
+				)}
 				<Flex cfg={{ flexDirection: 'column', mt: 4 }}>
 					<Link
 						cfg={{
@@ -113,20 +119,6 @@ export const Tasklist: React.FC<TasklistProps> = ({
 					>
 						{reviewTitle}
 					</Link>
-					<Link
-						cfg={{
-							fontWeight: 3,
-							color: 'primary.2',
-							textAlign: 'left',
-							lineHeight: 6,
-							fontSize: 2,
-						}}
-						href={welcomePath}
-						onClick={() => history.push(welcomePath)}
-						taskList={true}
-					>
-						{welcomeTitle}
-					</Link>
 				</Flex>
 			</Flex>
 			<ul className={styles.list}>
@@ -137,7 +129,8 @@ export const Tasklist: React.FC<TasklistProps> = ({
 							<TasklistMenu
 								title={item.title}
 								links={item.links}
-								maintenanceMode={maintenanceMode}
+								showStatus={showStatus}
+								sectionDisabledLabel={sectionDisabledLabel}
 								sectionCompleteLabel={sectionCompleteLabel}
 								sectionIncompleteLabel={sectionIncompleteLabel}
 							/>

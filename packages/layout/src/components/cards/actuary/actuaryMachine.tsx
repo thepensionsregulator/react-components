@@ -1,6 +1,13 @@
-//import { Actuary } from '@tpr/core';
 import { Machine, assign } from 'xstate';
 import { Actuary } from './context';
+import {
+	updateClickedButton,
+	returnToPreview,
+} from '../common/machine/actions';
+import {
+	CommonCardMachineContext,
+	RemoveConfirmProps,
+} from '../common/interfaces';
 
 interface ActuaryStates {
 	states: {
@@ -23,7 +30,6 @@ interface ActuaryStates {
 
 type ActuaryEvents =
 	| { type: 'COMPLETE'; value: boolean }
-	| { type: 'EDIT_INSURER' }
 	| { type: 'EDIT_CONTACTS' }
 	| { type: 'EDIT_NAME' }
 	| { type: 'REMOVE' }
@@ -33,12 +39,9 @@ type ActuaryEvents =
 	| { type: 'BACK' }
 	| { type: 'DELETE' };
 
-export interface ActuaryContext {
-	complete: boolean;
-	remove: { confirm: boolean; date: string } | null;
+export interface ActuaryContext extends CommonCardMachineContext {
 	actuary: Partial<Actuary>;
-	preValidatedData?: boolean | null;
-	lastBtnClicked?: number | null;
+	remove: RemoveConfirmProps;
 }
 
 const actuaryMachine = Machine<ActuaryContext, ActuaryStates, ActuaryEvents>({
@@ -54,10 +57,18 @@ const actuaryMachine = Machine<ActuaryContext, ActuaryStates, ActuaryEvents>({
 		preview: {
 			id: 'preview',
 			on: {
-				REMOVE: '#remove',
-				EDIT_INSURER: 'edit',
-				EDIT_CONTACTS: 'edit.contacts',
-				EDIT_NAME: 'edit.name',
+				EDIT_NAME: {
+					target: 'edit.name',
+					actions: updateClickedButton(1),
+				},
+				REMOVE: {
+					target: '#remove',
+					actions: updateClickedButton(2),
+				},
+				EDIT_CONTACTS: {
+					target: 'edit.contacts',
+					actions: updateClickedButton(4),
+				},
 				COMPLETE: {
 					actions: assign((_, event) => ({
 						complete: event.value,
@@ -80,7 +91,8 @@ const actuaryMachine = Machine<ActuaryContext, ActuaryStates, ActuaryEvents>({
 							})),
 						},
 						CANCEL: '#preview',
-						REMOVE: '#remove',
+						EDIT_NAME: '#preview',
+						REMOVE: returnToPreview(2),
 					},
 				},
 				contacts: {
@@ -95,7 +107,8 @@ const actuaryMachine = Machine<ActuaryContext, ActuaryStates, ActuaryEvents>({
 							})),
 						},
 						CANCEL: '#preview',
-						REMOVE: '#remove',
+						EDIT_NAME: returnToPreview(1),
+						REMOVE: returnToPreview(2),
 					},
 				},
 			},
@@ -115,6 +128,8 @@ const actuaryMachine = Machine<ActuaryContext, ActuaryStates, ActuaryEvents>({
 								};
 							}),
 						},
+						EDIT_NAME: returnToPreview(1),
+						REMOVE: '#preview',
 					},
 				},
 				confirm: {
@@ -122,6 +137,8 @@ const actuaryMachine = Machine<ActuaryContext, ActuaryStates, ActuaryEvents>({
 						CANCEL: '#preview',
 						BACK: '#remove',
 						DELETE: 'deleted',
+						EDIT_NAME: returnToPreview(1),
+						REMOVE: '#preview',
 					},
 				},
 				deleted: {

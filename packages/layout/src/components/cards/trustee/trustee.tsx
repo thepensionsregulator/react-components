@@ -1,11 +1,10 @@
-import React from 'react';
+import React, { useRef } from 'react';
 import {
 	TrusteeProvider,
 	useTrusteeContext,
 	TrusteeCardProps,
 } from './context';
 import { Section } from '@tpr/core';
-import { UnderlinedButton } from '../components/button';
 import { Preview } from './views/preview';
 import { Toolbar } from '../components/toolbar';
 import Name from './views/name';
@@ -15,10 +14,19 @@ import { Contacts } from './views/contacts';
 import RemoveReason from './views/remove/reason/reason';
 import { ConfirmRemove } from './views/remove/confirm';
 import RemovedBox from '../components/removedBox';
-import { CardContentProps, cardType, cardTypeName } from '../common/interfaces';
+import {
+	CardContentProps,
+	cardType,
+	cardTypeName,
+	IToolbarButtonProps,
+} from '../common/interfaces';
 import { AddressComparer } from '@tpr/forms';
 import { TrusteeContext } from './trusteeMachine';
-import { Subtitle } from '../common/views/preview/components';
+import {
+	CardMainHeadingButton,
+	CardRemoveButton,
+	Subtitle,
+} from '../common/views/preview/components';
 import {
 	concatenateStrings,
 	removeFromTabFlowIfMatches,
@@ -28,6 +36,7 @@ import styles from '../cards.module.scss';
 
 const CardContent: React.FC<CardContentProps> = ({
 	enableContactDetails = true,
+	onChangeAddress,
 }) => {
 	const { current, i18n, send, addressAPI } = useTrusteeContext();
 	const { trustee } = current.context;
@@ -63,6 +72,7 @@ const CardContent: React.FC<CardContentProps> = ({
 				i18n={i18n.address}
 				onCancelChanges={() => send('CANCEL')}
 				subSectionHeaderText={i18n.preview.buttons.three}
+				onChangeAddress={onChangeAddress}
 			/>
 		);
 	} else if (
@@ -82,60 +92,36 @@ const CardContent: React.FC<CardContentProps> = ({
 	}
 };
 
-const TrusteeButton: React.FC = () => {
-	const { current, send, i18n } = useTrusteeContext();
+const ToolbarButton: React.FC<IToolbarButtonProps> = React.memo(
+	({ remove = false, button }) => {
+		const { current, send, i18n } = useTrusteeContext();
 
-	return (
-		<UnderlinedButton
-			isOpen={
-				current.matches({ edit: { trustee: 'name' } }) ||
-				current.matches({ edit: { trustee: 'kind' } }) ||
-				current.matches({ edit: { trustee: 'save' } })
-			}
-			onClick={() => {
-				current.context.lastBtnClicked = 1;
-				if (
-					current.matches({ edit: { trustee: 'name' } }) ||
-					current.matches({ edit: { trustee: 'kind' } })
-				) {
-					send('CANCEL');
-				} else {
-					send('EDIT_TRUSTEE');
-				}
-			}}
-			isEditButton={true}
-		>
-			{i18n.preview.buttons.one}
-		</UnderlinedButton>
-	);
-};
-
-const RemoveButton: React.FC<{ tabIndex?: number }> = ({ tabIndex }) => {
-	const { current, send, i18n } = useTrusteeContext();
-
-	return (
-		<UnderlinedButton
-			isOpen={
-				current.matches({ remove: 'reason' }) ||
-				current.matches({ remove: 'confirm' })
-			}
-			onClick={() => {
-				current.context.lastBtnClicked = 2;
-				if (
-					current.matches({ remove: 'reason' }) ||
-					current.matches({ remove: 'confirm' })
-				) {
-					send('CANCEL');
-				} else {
-					send('REMOVE');
-				}
-			}}
-			tabIndex={tabIndex}
-		>
-			{i18n.preview.buttons.two}
-		</UnderlinedButton>
-	);
-};
+		return (
+			<>
+				{remove ? (
+					<CardRemoveButton
+						button={button}
+						send={send}
+						current={current}
+						tabIndex={removeFromTabFlowIfMatches(current, {
+							edit: { trustee: 'name' },
+						})}
+					>
+						{i18n.preview.buttons.two}
+					</CardRemoveButton>
+				) : (
+					<CardMainHeadingButton
+						button={button}
+						current={current}
+						onClick={() => send('EDIT_TRUSTEE')}
+					>
+						{i18n.preview.buttons.one}
+					</CardMainHeadingButton>
+				)}
+			</>
+		);
+	},
+);
 
 const isComplete = (context: TrusteeContext) => {
 	return context.preValidatedData ? true : context.complete;
@@ -144,6 +130,9 @@ const isComplete = (context: TrusteeContext) => {
 export const TrusteeCard: React.FC<
 	Omit<TrusteeCardProps, 'children'>
 > = React.memo(({ cfg, enableContactDetails = true, ...props }) => {
+	const trusteeButtonRef = useRef(null);
+	const removeButtonRef = useRef(null);
+
 	return (
 		<TrusteeProvider {...props}>
 			{({ current, i18n }) => (
@@ -160,15 +149,11 @@ export const TrusteeCard: React.FC<
 					])}
 				>
 					<Toolbar
-						complete={isComplete(current.context)}
-						buttonLeft={() => <TrusteeButton />}
+						buttonLeft={() => <ToolbarButton button={trusteeButtonRef} />}
 						buttonRight={() => (
-							<RemoveButton
-								tabIndex={removeFromTabFlowIfMatches(current, {
-									edit: { trustee: 'name' },
-								})}
-							/>
+							<ToolbarButton button={removeButtonRef} remove={true} />
 						)}
+						complete={isComplete(current.context)}
 						subtitle={() => (
 							<Subtitle
 								main={concatenateStrings([
@@ -187,7 +172,10 @@ export const TrusteeCard: React.FC<
 								: i18n.preview.statusText.unconfirmed
 						}
 					/>
-					<CardContent enableContactDetails={enableContactDetails} />
+					<CardContent
+						onChangeAddress={props.onChangeAddress}
+						enableContactDetails={enableContactDetails}
+					/>
 				</Section>
 			)}
 		</TrusteeProvider>

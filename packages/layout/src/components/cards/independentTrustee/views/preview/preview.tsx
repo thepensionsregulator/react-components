@@ -12,15 +12,6 @@ export const Preview: React.FC<any> = React.memo(() => {
 
 	const regulatorBtn = useRef(null);
 
-	const onClickRegulatorBtn = () => {
-		current.context.lastBtnClicked = 4;
-		send('EDIT_REGULATOR');
-	};
-
-	const onCollapseRegulator = () => {
-		current.context.lastBtnClicked === 4 && regulatorBtn.current.focus();
-	};
-
 	return (
 		<div
 			className={
@@ -53,11 +44,11 @@ export const Preview: React.FC<any> = React.memo(() => {
 					cfg={{ width: 5, flex: '0 0 auto', flexDirection: 'column', pr: 4 }}
 				>
 					<UnderlinedButton
-						onClick={onClickRegulatorBtn}
+						onClick={() => send('EDIT_REGULATOR')}
 						isOpen={current.matches({ edit: 'regulator' })}
 						isEditButton={true}
-						btnRef={regulatorBtn}
-						onCollapseCallback={onCollapseRegulator}
+						buttonRef={regulatorBtn}
+						giveFocus={current.context.lastBtnClicked === 4}
 					>
 						{i18n.preview.buttons.four}
 					</UnderlinedButton>

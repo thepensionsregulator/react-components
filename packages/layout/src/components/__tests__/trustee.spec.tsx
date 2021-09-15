@@ -6,15 +6,20 @@ import { act } from 'react-dom/test-utils';
 import { Trustee } from '../cards/trustee/context';
 import {
 	assertThatASectionExistsWithAnAriaLabel,
-	assertThatButtonHasAriaExpanded,
 	assertThatButtonHasBeenRemovedFromTheTabFlow,
 	assertThatTitleWasSetToNullWhileFirstAndLastNamesWereLeftUnchanged,
 	clearTitleField,
+	assertMainHeadingExists,
+	assertRemoveButtonExists,
+	assertHeadingButtonsExist,
 } from '../testHelpers/testHelpers';
+import { sampleAddress } from '../testHelpers/commonData/cards';
 
 const noop = () => Promise.resolve();
 
 const trustee: Trustee = {
+	...sampleAddress,
+	//
 	id: '',
 	schemeRoleId: 12345,
 	//
@@ -23,15 +28,6 @@ const trustee: Trustee = {
 	lastName: 'Smith',
 	trusteeType: 'member-nominated',
 	isProfessionalTrustee: false,
-	//
-	addressLine1: 'The Pensions Regulator',
-	addressLine2: 'Napier House',
-	addressLine3: 'Trafalgar Pl',
-	postTown: 'Brighton',
-	postcode: 'BN1 4DW',
-	county: 'West Sussex',
-	country: 'UK',
-	countryId: 2,
 	//
 	telephoneNumber: '01273 000 111',
 	emailAddress: 'fred.sandoors@trp.gov.uk',
@@ -43,7 +39,8 @@ let component,
 	findByTitle,
 	findByTestId,
 	findByRole,
-	findByTextQuery;
+	findByTextQuery,
+	findAllByTestId;
 let updatedTrustee = null;
 
 const getCard = (enableContactDetails: boolean) => {
@@ -78,6 +75,7 @@ const setupComponent = (enableContactDetails: boolean) => {
 		getByTestId,
 		getByRole,
 		queryByText,
+		getAllByTestId,
 	} = render(getCard(enableContactDetails));
 
 	component = container;
@@ -87,15 +85,12 @@ const setupComponent = (enableContactDetails: boolean) => {
 	findByTitle = queryByTitle;
 	findByRole = getByRole;
 	findByTextQuery = queryByText;
+	findAllByTestId = getAllByTestId;
 };
 
 describe('TrusteeCard enableContactDetails == true', () => {
 	beforeEach(async () => {
 		setupComponent(true);
-	});
-
-	afterEach(() => {
-		cleanup();
 	});
 
 	describe('Trustee Preview', () => {
@@ -104,18 +99,13 @@ describe('TrusteeCard enableContactDetails == true', () => {
 			expect(results).toHaveNoViolations();
 		});
 
-		test('buttons renders correctly', () => {
-			// Buttons are visible
-			expect(findByText('Trustee')).toBeDefined();
-			expect(findByText('Correspondence address')).toBeDefined();
-			assertThatButtonHasAriaExpanded(
-				findByText,
-				'Correspondence address',
-				false,
-			);
-			expect(findByText('Contact details')).toBeDefined();
-			assertThatButtonHasAriaExpanded(findByText, 'Contact details', false);
-			expect(findByText('Remove')).toBeDefined();
+		test('buttons render correctly', () => {
+			assertMainHeadingExists(findByText, findByTestId, 'Trustee', true);
+
+			assertRemoveButtonExists(findByText, findByTestId);
+
+			const h4Buttons = ['Correspondence address', 'Contact details'];
+			assertHeadingButtonsExist(findAllByTestId, findByText, h4Buttons);
 		});
 
 		test('initial status is correct', () => {
@@ -152,6 +142,10 @@ describe('TrusteeCard enableContactDetails == true', () => {
 	});
 
 	describe('Trustee Name', () => {
+		afterEach(() => {
+			cleanup();
+		});
+
 		test('is accessible', async () => {
 			findByText('Trustee').click();
 			const results = await axe(component);
@@ -198,9 +192,13 @@ describe('TrusteeCard enableContactDetails == true', () => {
 		test('trustee title can be left empty when name is updated', async () => {
 			await act(async () => {
 				findByText(/Trustee/).click();
-				await axe(component);
-				clearTitleField(findByText);
+			});
+			await axe(component);
+			clearTitleField(findByText);
+			await act(async () => {
 				findByText(/Continue/).click();
+			});
+			await act(async () => {
 				findByText(/Save and close/).click();
 			});
 
@@ -213,6 +211,10 @@ describe('TrusteeCard enableContactDetails == true', () => {
 	});
 
 	describe('Trustee Type', () => {
+		afterEach(() => {
+			cleanup();
+		});
+
 		test('is accessible', async () => {
 			findByText(/Trustee/).click();
 			findByText(/Continue/).click();
@@ -223,6 +225,10 @@ describe('TrusteeCard enableContactDetails == true', () => {
 	});
 
 	describe('Trustee Contact Details', () => {
+		afterEach(() => {
+			cleanup();
+		});
+
 		test('is accessible', async () => {
 			findByText('Contact details').click();
 
@@ -266,6 +272,10 @@ describe('TrusteeCard enableContactDetails == true', () => {
 	});
 
 	describe('Trustee Remove', () => {
+		afterEach(() => {
+			cleanup();
+		});
+
 		test('is accessible', async () => {
 			findByText('Remove').click();
 
@@ -292,6 +302,10 @@ describe('TrusteeCard enableContactDetails == true', () => {
 	});
 
 	describe('Trustee correspondence address', () => {
+		afterEach(() => {
+			cleanup();
+		});
+
 		test('Change address is accessible', async () => {
 			findByText('Correspondence address').click();
 			findByText(/I need to change the address/).click();
