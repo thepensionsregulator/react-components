@@ -136,8 +136,8 @@ interface InputDateComponentProps extends InputDateProps {
 	hideDay?: boolean;
 	hideMonth?: boolean;
 	hiddenLabel?: string;
-	name: string;
 }
+
 export const InputDate: React.FC<InputDateComponentProps> = memo(
 	({
 		id,
@@ -153,7 +153,6 @@ export const InputDate: React.FC<InputDateComponentProps> = memo(
 		hideDay,
 		hideMonth,
 		hiddenLabel = '',
-		name,
 	}) => {
 		// react-final-form types says it's a string, incorrect, it's a date object.
 		const { dd, mm, yyyy } = transformDate(meta.initial);
@@ -161,6 +160,9 @@ export const InputDate: React.FC<InputDateComponentProps> = memo(
 			(p: any, n: any) => ({ ...p, ...n }),
 			{ dd, mm, yyyy },
 		);
+		useEffect(() => {
+			console.log({ name, id, label, hint, meta, input });
+		});
 
 		useEffect(() => {
 			setState({ dd: hideDay ? 1 : dd, mm: hideMonth ? 1 : mm, yyyy: yyyy });
@@ -248,7 +250,7 @@ export const InputDate: React.FC<InputDateComponentProps> = memo(
 							readOnly={readOnly}
 							required={required}
 							maxLength={2}
-							name={`dd-${name}`}
+							name={input.name}
 						/>
 					)}
 					{!hideMonth && (
@@ -265,7 +267,7 @@ export const InputDate: React.FC<InputDateComponentProps> = memo(
 							readOnly={readOnly}
 							required={required}
 							maxLength={2}
-							name={`mm-${name}`}
+							name={input.name}
 						/>
 					)}
 					<DateInputField
@@ -282,7 +284,7 @@ export const InputDate: React.FC<InputDateComponentProps> = memo(
 						readOnly={readOnly}
 						required={required}
 						maxLength={4}
-						name={`yy=${name}`}
+						name={input.name}
 					/>
 				</Flex>
 			</StyledInputLabel>
@@ -292,5 +294,8 @@ export const InputDate: React.FC<InputDateComponentProps> = memo(
 );
 
 export const FFInputDate: React.FC<FieldProps> = ({ type, ...fieldProps }) => {
+	useEffect(() => {
+		console.log({ fieldProps });
+	});
 	return <Field {...fieldProps} type="text" component={InputDate} />;
 };
