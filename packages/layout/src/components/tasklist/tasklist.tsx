@@ -106,13 +106,7 @@ export const Tasklist: React.FC<TasklistProps> = ({
 				)}
 				<Flex cfg={{ flexDirection: 'column', mt: 4 }}>
 					<Link
-						cfg={{
-							fontWeight: 3,
-							color: 'primary.2',
-							textAlign: 'left',
-							lineHeight: 6,
-							fontSize: 2,
-						}}
+						className={styles.reviewLink}
 						href={reviewPath}
 						onClick={() => history.push(reviewPath)}
 						taskList={true}
