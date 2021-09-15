@@ -160,9 +160,6 @@ export const InputDate: React.FC<InputDateComponentProps> = memo(
 			(p: any, n: any) => ({ ...p, ...n }),
 			{ dd, mm, yyyy },
 		);
-		useEffect(() => {
-			console.log({ name, id, label, hint, meta, input });
-		});
 
 		useEffect(() => {
 			setState({ dd: hideDay ? 1 : dd, mm: hideMonth ? 1 : mm, yyyy: yyyy });
@@ -294,8 +291,5 @@ export const InputDate: React.FC<InputDateComponentProps> = memo(
 );
 
 export const FFInputDate: React.FC<FieldProps> = ({ type, ...fieldProps }) => {
-	useEffect(() => {
-		console.log({ fieldProps });
-	});
 	return <Field {...fieldProps} type="text" component={InputDate} />;
 };
