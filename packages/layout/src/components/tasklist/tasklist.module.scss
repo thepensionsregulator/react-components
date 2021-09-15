@@ -15,6 +15,7 @@
 
 		&:hover {
 			color: $colors-neutral-a1 !important;
+			text-decoration: underline;
 		}
 
 		&:focus {
@@ -26,6 +27,15 @@
 			> svg {
 				min-width: 22px;
 			}
+		}
+
+		&.reviewLink {
+			text-decoration: underline;
+			font-size: 16px;
+			line-height: 1.565em;
+			text-align: left;
+			color: $colors-primary-3;
+			font-weight: 600
 		}
 	}
 
