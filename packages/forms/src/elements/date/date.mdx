@@ -59,7 +59,7 @@ import { FFInputDate } from '@tpr/forms';
     			hint: 'For example, 12 11 2021',
     			error: 'The date your passport was issued must be in the past',
     			validate: (value) => {
-    				const now = new Date();
+    				const rightNow = new Date();
     				const d = new Date(value);
     				if (!isValidDate(d)) {
     					return "That's an invalid date";
@@ -67,10 +67,10 @@ import { FFInputDate } from '@tpr/forms';
     					if (d.getFullYear() == '2021') {
     						return undefined;
     					}
-    					if (d < now) {
+    					if (d < rightNow) {
     						return 'That date is in the past';
     					}
-    					if (d > now) {
+    					if (d > rightNow) {
     						return 'That date is in the future';
     					}
     				}
@@ -217,9 +217,9 @@ required=true;
 				name: 'passport-issued5',
 				required: true,
 				label: 'When was your passport issued?',
-   			hint: 'For example, 12 11 2021',
+				hint: 'For example, 12 11 2021',
 				error: 'The date is required',
- 			},
+			},
 		];
 		return (
 			<Form
@@ -253,7 +253,7 @@ Accepted config props: FlexProps, SpaceProps
 | cfg         | false    | object  | FlexProps & SpaceProps                                                     |
 | disabled    | false    | boolean | Disable date field                                                         |
 | testId      | false    | string  | data attribute for testers                                                 |
-| required    | false    | boolean | Mark text field as required                    														|
+| required    | false    | boolean | Mark text field as required                                                |
 | label       | true     | string  | Date field description                                                     |
 | hint        | false    | string  | More detailed description about the date field                             |
 | hideDay     | false    | boolean | hides the Day input and assigns a default value of 1 for the day           |
