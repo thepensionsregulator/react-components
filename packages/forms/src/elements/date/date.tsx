@@ -67,6 +67,7 @@ type DateInputFieldProps = {
 	testId?: string;
 	updateFn: Function;
 	value: any;
+	name: string;
 };
 
 const DateInputField: React.FC<DateInputFieldProps> = ({
@@ -85,6 +86,7 @@ const DateInputField: React.FC<DateInputFieldProps> = ({
 	testId,
 	updateFn,
 	value,
+	name,
 }) => {
 	const [hasFocus, setHasFocus] = useState(false);
 	const helper = new AccessibilityHelper(parentId, false, false);
@@ -123,6 +125,7 @@ const DateInputField: React.FC<DateInputFieldProps> = ({
 				maxLength={maxLength}
 				isError={meta && meta.touched && meta.error}
 				accessibilityHelper={!hasFocus ? helper : null}
+				name={name}
 			/>
 		</label>
 	);
@@ -134,6 +137,7 @@ interface InputDateComponentProps extends InputDateProps {
 	hideMonth?: boolean;
 	hiddenLabel?: string;
 }
+
 export const InputDate: React.FC<InputDateComponentProps> = memo(
 	({
 		id,
@@ -243,6 +247,7 @@ export const InputDate: React.FC<InputDateComponentProps> = memo(
 							readOnly={readOnly}
 							required={required}
 							maxLength={2}
+							name={input.name}
 						/>
 					)}
 					{!hideMonth && (
@@ -259,6 +264,7 @@ export const InputDate: React.FC<InputDateComponentProps> = memo(
 							readOnly={readOnly}
 							required={required}
 							maxLength={2}
+							name={input.name}
 						/>
 					)}
 					<DateInputField
@@ -275,6 +281,7 @@ export const InputDate: React.FC<InputDateComponentProps> = memo(
 						readOnly={readOnly}
 						required={required}
 						maxLength={4}
+						name={input.name}
 					/>
 				</Flex>
 			</StyledInputLabel>
