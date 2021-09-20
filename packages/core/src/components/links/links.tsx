@@ -1,22 +1,17 @@
 import React from 'react';
-import {
-	SpaceProps,
-	ColorProps,
-	TypographyProps,
-	LayoutProps,
-} from '../globals/globals';
+import { SpaceProps, ColorProps, TypographyProps } from '../globals/globals';
 import { useClassNames } from '../../hooks/use-class-names';
 import { Span } from '../typography/typography';
 import styles from './links.module.scss';
 
 export interface LinkProps {
-	cfg?: SpaceProps & ColorProps & TypographyProps & LayoutProps;
+	cfg?: SpaceProps & ColorProps & TypographyProps;
 	className?: string;
 	underline?: boolean;
 	testId?: string;
 	taskList?: boolean;
 	hint?: string;
-	hintCfg?: SpaceProps & ColorProps & TypographyProps & LayoutProps;
+	hintCfg?: SpaceProps & ColorProps & TypographyProps;
 	hintId?: string;
 	[key: string]: any;
 }

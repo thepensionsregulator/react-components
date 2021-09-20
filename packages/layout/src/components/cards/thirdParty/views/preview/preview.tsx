@@ -19,9 +19,7 @@ export const Preview: React.FC<any> = React.memo(() => {
 			}
 		>
 			<Flex>
-				<Flex
-					cfg={{ width: 5, flex: '0 0 auto', flexDirection: 'column', pr: 4 }}
-				>
+				<Flex cfg={{ pr: 4 }} className={styles.section}>
 					<UnderlinedButton>{i18n.preview.buttons.three}</UnderlinedButton>
 					<AddressPreview
 						address={{
@@ -35,9 +33,6 @@ export const Preview: React.FC<any> = React.memo(() => {
 						}}
 					/>
 				</Flex>
-				<Flex
-					cfg={{ width: 5, flex: '0 0 auto', flexDirection: 'column', pl: 4 }}
-				></Flex>
 			</Flex>
 			<Flex cfg={{ flexDirection: 'column' }}>
 				<Hr cfg={{ my: 4 }} />

@@ -33,12 +33,7 @@ const TasklistMenu: React.FC<TasklistMenuProps> = ({
 							}}
 							className={styles.taskWrapper}
 						>
-							<Flex
-								cfg={{
-									justifyContent: 'space-between',
-									width: 10,
-								}}
-							>
+							<Flex className={styles.taskWrapperInner}>
 								{link.disabled ? (
 									<div className={styles.taskDisabled}>
 										<span className={styles.taskName}>{link.name}</span>

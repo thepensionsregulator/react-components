@@ -1,6 +1,7 @@
 import { Flex, Link } from '@tpr/core';
 import React from 'react';
 import { NavItemProps } from './types';
+import navItemStyles from './navitem.module.scss';
 
 export const NavItem: React.FC<NavItemProps> = ({ link, children }) => {
 	return (
@@ -9,11 +10,13 @@ export const NavItem: React.FC<NavItemProps> = ({ link, children }) => {
 				color: 'primary.2',
 				textAlign: 'left',
 				fontWeight: 3,
-				width: link.hideIcon ? 10 : 8,
 			}}
 			href={link.path}
 			onClick={() => link.onClick(link)}
 			taskList={true}
+			className={
+				link.hideIcon ? navItemStyles.link : navItemStyles.linkWithIcon
+			}
 		>
 			<Flex
 				cfg={{

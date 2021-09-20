@@ -3,8 +3,9 @@ import { Field, useForm } from 'react-final-form';
 import { FFInputText } from '../text/text';
 import { HiddenInput } from '../hidden/hidden';
 import { Button } from '@tpr/core';
-import elementStyles from '../elements.module.scss';
 import styles from './addressLookup.module.scss';
+import elementStyles from '../elements.module.scss';
+import textStyles from '../text/text.module.scss';
 import { EditAddressProps } from './types';
 
 export const EditAddress: React.FC<EditAddressProps> = React.memo(
@@ -116,7 +117,7 @@ export const EditAddress: React.FC<EditAddressProps> = React.memo(
 							? undefined
 							: addressLine1RequiredMessage
 					}
-					inputWidth={6}
+					inputClassName={textStyles.textInput}
 					maxLength={100}
 					wrapperElement="div"
 					labelElement="label"
@@ -134,7 +135,7 @@ export const EditAddress: React.FC<EditAddressProps> = React.memo(
 						isDirty() ? value.addressLine2 : initialValue.addressLine2
 					}
 					updatedValue={value ? value.addressLine2 : ''}
-					inputWidth={6}
+					inputClassName={textStyles.textInput}
 					maxLength={100}
 					wrapperElement="div"
 					labelElement="label"

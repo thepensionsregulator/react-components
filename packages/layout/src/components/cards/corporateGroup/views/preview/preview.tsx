@@ -26,9 +26,7 @@ export const Preview: React.FC<any> = React.memo(() => {
 		>
 			<Flex>
 				{/* Address section: display only	 */}
-				<Flex
-					cfg={{ width: 5, flex: '0 0 auto', flexDirection: 'column', pr: 4 }}
-				>
+				<Flex cfg={{ pr: 4 }} className={styles.section}>
 					<UnderlinedButton>{i18n.preview.buttons.three}</UnderlinedButton>
 					<AddressPreview
 						address={{
@@ -64,9 +62,7 @@ export const Preview: React.FC<any> = React.memo(() => {
 				</Flex>
 
 				{/* Name & Contact details section: open for editing	 */}
-				<Flex
-					cfg={{ width: 5, flex: '0 0 auto', flexDirection: 'column', pr: 4 }}
-				>
+				<Flex cfg={{ pr: 4 }} className={styles.section}>
 					<UnderlinedButton
 						onClick={() => send('EDIT_NAME')}
 						isOpen={current.matches({ edit: 'contacts' })}

@@ -9,6 +9,7 @@ import {
 } from '../../../common/interfaces';
 import NameForm from '../../../common/views/nameForm/nameForm';
 import { RestoreMissingNullValues } from '../../../../../services/NullValueFieldRestorer';
+import textStyles from '@tpr/forms/lib/elements/text/text.module.scss';
 
 const getFields = (
 	fields: RecursivePartial<InHouseAdminI18nProps['name']['fields']>,
@@ -20,7 +21,7 @@ const getFields = (
 		label: fields.title.label,
 		error: fields.title.error,
 		maxLength: fields.title.maxlength,
-		inputWidth: 1,
+		inputClassName: textStyles.namePrefixInput,
 		testId: 'title',
 		cfg: { mb: 4 },
 	},
@@ -31,7 +32,7 @@ const getFields = (
 		label: fields.firstName.label,
 		error: fields.firstName.error,
 		maxLength: fields.firstName.maxlength,
-		inputWidth: 6,
+		inputClassName: textStyles.nameInput,
 		testId: 'first-name',
 		required: true,
 		cfg: { mb: 4 },
@@ -43,7 +44,7 @@ const getFields = (
 		label: fields.lastName.label,
 		error: fields.lastName.error,
 		maxLength: fields.lastName.maxlength,
-		inputWidth: 6,
+		inputClassName: textStyles.nameInput,
 		required: true,
 		testId: 'last-name',
 	},

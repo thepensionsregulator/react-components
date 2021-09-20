@@ -3,6 +3,7 @@ import { Field, FieldRenderProps } from 'react-final-form';
 import { FieldExtraProps } from '../../renderFields';
 import { StyledInputLabel, InputElementHeading } from '../elements';
 import { Input } from '../input/input';
+import { classNames } from '@tpr/core';
 import {
 	validKeys,
 	format,
@@ -20,6 +21,7 @@ import { FieldWithAriaLabelExtensionI18nProps } from 'types/FieldWithAriaLabelEx
 import { FieldWithAriaLabelExtensionProps } from '../../types/FieldWithAriaLabelExtensionProps';
 import { RecursivePartial } from 'types/RecursivePartial';
 import AccessibilityHelper from '../accessibilityHelper';
+import elementStyles from '../elements.module.scss';
 
 let currencyFieldI18nDefaults: FieldWithAriaLabelExtensionI18nProps = {
 	ariaLabelExtension: ', in pounds',
@@ -34,6 +36,7 @@ interface InputCurrencyProps extends FieldRenderProps<number>, FieldExtraProps {
 	optionalText?: boolean;
 	maxInputLength?: number;
 	i18n?: RecursivePartial<FieldWithAriaLabelExtensionI18nProps>;
+	inputClassName?: string;
 }
 
 const InputCurrency: React.FC<InputCurrencyProps> = React.memo(
@@ -42,13 +45,13 @@ const InputCurrency: React.FC<InputCurrencyProps> = React.memo(
 		label,
 		hint,
 		input,
+		inputClassName,
 		testId,
 		name,
 		meta,
 		required,
 		placeholder,
 		readOnly,
-		inputWidth: width,
 		cfg,
 		after,
 		before,
@@ -255,7 +258,6 @@ const InputCurrency: React.FC<InputCurrencyProps> = React.memo(
 					name={name}
 					ref={innerInput}
 					type="text"
-					width={width}
 					testId={testId}
 					label={label}
 					ariaLabelExtension={i18n.ariaLabelExtension}
@@ -263,6 +265,7 @@ const InputCurrency: React.FC<InputCurrencyProps> = React.memo(
 					placeholder={placeholder}
 					readOnly={readOnly}
 					decimalPlaces={decimalPlaces}
+					className={classNames([elementStyles.currencyInput, inputClassName])}
 					{...input}
 					onKeyDown={handleKeyDown}
 					onChange={handleOnChange}

@@ -24,6 +24,7 @@ interface InputNumberProps extends FieldRenderProps<number>, FieldExtraProps {
 	maxIntDigits?: number;
 	i18n?: RecursivePartial<FieldWithAriaLabelExtensionI18nProps>;
 	wrapperElement?: 'label' | 'div' | 'fieldset';
+	inputClassName?: string;
 }
 
 const InputNumber: React.FC<InputNumberProps> = ({
@@ -37,7 +38,6 @@ const InputNumber: React.FC<InputNumberProps> = ({
 	required,
 	placeholder,
 	readOnly,
-	inputWidth: width,
 	cfg,
 	after,
 	before,
@@ -50,6 +50,7 @@ const InputNumber: React.FC<InputNumberProps> = ({
 	i18n = numberFieldI18nDefaults,
 	initialValue,
 	wrapperElement = 'label',
+	inputClassName,
 	...props
 }) => {
 	const digits = [
@@ -184,7 +185,6 @@ const InputNumber: React.FC<InputNumberProps> = ({
 				id={id}
 				name={name}
 				type="number"
-				width={width}
 				testId={testId}
 				label={label}
 				isError={meta && meta.touched && meta.error}
@@ -192,6 +192,7 @@ const InputNumber: React.FC<InputNumberProps> = ({
 				readOnly={readOnly}
 				required={required}
 				decimalPlaces={decimalPlaces}
+				className={inputClassName}
 				{...input}
 				onKeyDown={handleKeyDown}
 				onChange={handleOnChange}

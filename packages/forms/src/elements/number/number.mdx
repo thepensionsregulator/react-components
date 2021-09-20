@@ -9,6 +9,7 @@ import { Form } from 'react-final-form';
 import { FFInputNumber } from './number';
 import { validate } from '../../validation';
 import { renderFields } from '../../renderFields';
+import styles from './input.module.scss';
 
 # Number Input
 
@@ -53,7 +54,7 @@ import { FFInputNumber } from '@tpr/forms';
 					name="number_of_participants"
 					label="Number of participants"
 					hint="people attending this event, maximum of 20"
-					inputWidth={5}
+					inputClassName={styles.integerTwoDigits}
 					cfg={{ my: 5 }}
 					required={true}
 					maxLength={2}
@@ -72,7 +73,7 @@ import { FFInputNumber } from '@tpr/forms';
 					label="Total expenses"
 					hint="amount in GBP"
 					validate={(value) => {}}
-					inputWidth={5}
+					inputClassName={styles.decimalFiveDigits}
 					cfg={{ my: 5 }}
 					required={false}
 					noLeftBorder={true}
@@ -87,7 +88,7 @@ import { FFInputNumber } from '@tpr/forms';
 					name="percentage"
 					label="Amount deducted from expenses"
 					hint="amount in %"
-					inputWidth={1}
+					inputClassName={styles.percentageInput}
 					cfg={{ my: 5 }}
 					required={false}
 					noLeftBorder={true}
@@ -107,7 +108,7 @@ import { FFInputNumber } from '@tpr/forms';
 				<FFInputNumber
 					name="rpiIncrease"
 					label="Increase in RPI"
-					inputWidth={1}
+					inputClassName={styles.decimalFiveDigits}
 					cfg={{ my: 5 }}
 					required={false}
 					noLeftBorder={true}
@@ -145,7 +146,7 @@ import { Form, validate, renderFields } from '@tpr/forms';
 				label: 'Distance between the 2 cities',
 				hint: 'must be expressed in miles',
 				error: 'Cannot be empty',
-				inputWidth: 5,
+				inputClassName: styles.decimalFiveDigits,
 				placeholder: 'e.g. 456.77',
 				cfg: { my: 5 },
 				after: 'mi',
@@ -195,7 +196,7 @@ import { Form, validate, renderFields } from '@tpr/forms';
 							name="ageOfApplicant"
 							label="Age of the applicant"
 							after="years"
-							inputWidth={1}
+							inputClassName={styles.integerTwoDigits}
 							required={false}
 							noLeftBorder={true}
 							optionalText={false}
@@ -232,7 +233,7 @@ i18n={{ ariaLabelExtension: 'in years' }}
 							name="ageOfApplicant"
 							label="Age of the applicant"
 							after="years"
-							inputWidth={1}
+							inputClassName={styles.integerTwoDigits}
 							required={false}
 							noLeftBorder={true}
 							optionalText={false}
@@ -271,7 +272,7 @@ aria - label = 'Age of the applicant in years.  Use whole numbers only.';
 							label="Age of the applicant"
 							aria-label="Age of the applicant in years.  Use whole numbers only."
 							after="years"
-							inputWidth={1}
+							inputClassName={styles.integerTwoDigits}
 							required={false}
 							noLeftBorder={true}
 							optionalText={false}
@@ -288,7 +289,6 @@ aria - label = 'Age of the applicant in years.  Use whole numbers only.';
 		);
 	}}
 </Playground>
-
 
 ### Required field
 
@@ -312,7 +312,7 @@ required=true;
 							label="Age of the applicant"
 							aria-label="Age of the applicant in years.  Use whole numbers only."
 							after="years"
-							inputWidth={1}
+							inputClassName={styles.integerTwoDigits}
 							required={true}
 							noLeftBorder={true}
 							optionalText={false}
@@ -347,6 +347,7 @@ Accepted config props: FlexProps, SpaceProps
 | decimalPlaces  | false    | number                                | the number of decimal places used for formatting the value                                                                                       |
 | disabled       | false    | boolean                               | Disable input field                                                                                                                              |
 | hint           | false    | string                                | More detailed description about the field                                                                                                        |
+| inputClassName | false    | string                                | CSS class applied to the input element                                                                                                           |
 | label          | true     | string                                | The visible label displayed above the input field                                                                                                |
 | aria-label     | true     | string                                | Use to provide descriptive labelling to assistive technology in situations where the visible label does not convey the full context of the input |
 | maxIntDigits   | false    | number                                | sets a maximum length for the integer part of the value                                                                                          |
@@ -355,6 +356,6 @@ Accepted config props: FlexProps, SpaceProps
 | optionalText   | false    | boolean                               | allows hiding "optional" text when field is not required                                                                                         |
 | testId         | false    | string                                | data attribute for testers                                                                                                                       |
 | readOnly       | false    | boolean                               | Sets whether the field is read only                                                                                                              |
-| required       | false    | boolean 															| Mark text field as required                    																																																	 |
+| required       | false    | boolean                               | Mark text field as required                                                                                                                      |
 | i18n           | false    | FieldWithAriaLabelExtenstionI18nProps | allows the overridding of default text in the number input                                                                                       |
 | wrapperElement | false    | string                                | replaces the `<label>` with a different element, for use in combination with an alternative labelling technique such as aria-labelledby          |

@@ -35,12 +35,10 @@ export const Toolbar: React.FC<ToolbarProps> = React.memo(
 				)}
 				<Flex
 					cfg={{
-						width: 5,
-						flex: '0 0 auto',
-						flexDirection: 'column',
 						justifyContent: 'flex-start',
 						pr: 4,
 					}}
+					className={styles.section}
 				>
 					{buttonLeft()}
 					{subtitle && (
@@ -49,12 +47,9 @@ export const Toolbar: React.FC<ToolbarProps> = React.memo(
 				</Flex>
 				<Flex
 					cfg={{
-						width: 5,
-						flex: '0 0 auto',
-						justifyContent: 'flex-end',
-						alignItems: 'flex-start',
 						pl: 4,
 					}}
+					className={styles.section + ' ' + styles.removeSection}
 				>
 					<StatusMessage
 						complete={complete}

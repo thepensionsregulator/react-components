@@ -22,10 +22,6 @@ export type CursorProps = Partial<{
 	cursor: 'pointer' | 'default' | 'not-allowed';
 }>;
 
-export type LayoutProps = Partial<{
-	width: ValuesFullRange;
-}>;
-
 export type ColorsPrimary =
 	| 'primary.1'
 	| 'primary.2'
@@ -130,7 +126,6 @@ export type FlexBoxProps = {
 		SpaceProps &
 		BackgroundProps &
 		ColorProps &
-		LayoutProps &
 		CursorProps &
 		TypographyProps;
 	[key: string]: any;

@@ -6,6 +6,7 @@ import { FFInputCommonProps } from 'types/fieldProps';
 import { Input } from '../input/input';
 import { isEmailValid } from '../../validators';
 import AccessibilityHelper from '../accessibilityHelper';
+import elementStyles from '../elements.module.scss';
 
 interface InputEmailProps extends FieldRenderProps<string>, FieldExtraProps {}
 
@@ -13,7 +14,6 @@ const InputEmail: React.FC<InputEmailProps> = ({
 	hint,
 	id,
 	input,
-	inputWidth: width,
 	label,
 	meta,
 	name,
@@ -41,7 +41,7 @@ const InputEmail: React.FC<InputEmailProps> = ({
 				id={id}
 				type="email"
 				autoComplete="email"
-				width={width}
+				className={elementStyles.emailInput}
 				testId={testId}
 				label={label}
 				required={required}

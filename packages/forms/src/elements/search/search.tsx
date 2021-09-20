@@ -8,6 +8,7 @@ import Autocomplete from '@financial-times/accessible-autocomplete/react';
 import { filterResults, formatItemDefault } from './filterResults';
 import { act } from 'react-dom/test-utils';
 import styles from './search.module.scss';
+import elementStyles from '../elements.module.scss';
 
 interface SearchProps extends FieldRenderProps<string>, FieldExtraProps {
 	assistiveHint?: string;
@@ -33,7 +34,6 @@ const Search: React.FC<SearchProps> = React.memo(
 		getSelectedItem,
 		hint,
 		id,
-		inputWidth = 10,
 		keyValue,
 		label,
 		labelNotBold = false,
@@ -125,8 +125,8 @@ const Search: React.FC<SearchProps> = React.memo(
 						required={required}
 					/>
 					<Flex
-						cfg={{ width: inputWidth, flexDirection: 'column' }}
-						className={styles.relative}
+						cfg={{ flexDirection: 'column' }}
+						className={styles.relative + ' ' + elementStyles.select}
 					>
 						<Autocomplete
 							id={id}

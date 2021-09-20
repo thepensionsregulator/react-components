@@ -30,7 +30,6 @@ const InputText: React.FC<InputTextProps> = React.forwardRef<
 			disabled,
 			readOnly,
 			autoComplete,
-			inputWidth: width,
 			cfg,
 			updatedValue,
 			maxLength,
@@ -77,7 +76,6 @@ const InputText: React.FC<InputTextProps> = React.forwardRef<
 					id={id}
 					ref={ref}
 					type="text"
-					width={width}
 					testId={testId}
 					label={ariaLabel ? ariaLabel : label}
 					placeholder={placeholder}

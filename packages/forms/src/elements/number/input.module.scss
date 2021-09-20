@@ -1,6 +1,18 @@
 .percentageInput {
-  width: 75px;
-  + span {
-    position: initial;
-  }
+	min-width: 5em;
+	max-width: 5em;
+	+ span {
+		position: initial;
+	}
+}
+.numberOfPeople {
+	max-width: 14em;
+}
+.integerTwoDigits {
+	min-width: 4em;
+	max-width: 4em;
+}
+.decimalFiveDigits {
+	min-width: 6em;
+	max-width: 6em;
 }
