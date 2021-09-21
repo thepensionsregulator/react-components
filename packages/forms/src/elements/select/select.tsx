@@ -59,6 +59,7 @@ export const Select: React.FC<
 					getItemProps,
 					getLabelProps,
 					getMenuProps,
+					getToggleButtonProps,
 					isOpen,
 					highlightedIndex,
 					selectedItem,
@@ -103,6 +104,7 @@ export const Select: React.FC<
 										data-testid={`${testId}-button`}
 										className={styles.iconButton}
 										onClick={() => toggleMenu()}
+										{...getToggleButtonProps()}
 									>
 										<UnfoldMore />
 									</button>
