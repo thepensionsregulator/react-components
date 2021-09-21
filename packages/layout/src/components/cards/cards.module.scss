@@ -40,6 +40,18 @@
 		}
 	}
 
+	.section {
+		width: 50%;
+		flex: 0 0 auto;
+		flex-direction: column;
+	}
+
+	.removeSection {
+		flex-direction: row;
+		justify-content: flex-end;
+		align-items: flex-start;
+	}
+
 	.content {
 		display: flex;
 		flex-direction: column;

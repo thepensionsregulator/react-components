@@ -92,13 +92,6 @@ describe('Flex', () => {
 		expect(Component).toBeDefined();
 	});
 
-	test('Flex accepts cfg with width props', () => {
-		const { getByTestId } = render(<Flex cfg={{ width: 5 }} testId="flex" />);
-		const Component = getByTestId(/flex/i);
-		expect(Component.className.includes('width-5')).toBeTruthy();
-		expect(Component).toBeDefined();
-	});
-
 	test('Flex accepts cfg with color props', () => {
 		const { getByTestId } = render(
 			<Flex cfg={{ color: 'warning.1' }} testId="flex" />,

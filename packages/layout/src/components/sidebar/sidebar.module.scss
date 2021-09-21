@@ -33,6 +33,10 @@
 	div.topLevelWrapper {
 		position: relative;
 
+		&.topLevelLink {
+			width: 100%;
+		}
+
 		&.containsSelectedLink > .topLevelLink {
 			a::before {
 				content: ' ';

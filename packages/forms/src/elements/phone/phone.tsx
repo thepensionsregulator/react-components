@@ -6,6 +6,7 @@ import { FFInputCommonProps } from 'types/fieldProps';
 import { Input } from '../input/input';
 import { isPhoneValid } from '../../validators';
 import AccessibilityHelper from '../accessibilityHelper';
+import elementStyles from '../elements.module.scss';
 
 interface InputPhoneProps extends FieldRenderProps<string>, FieldExtraProps {}
 
@@ -20,7 +21,6 @@ const InputPhone: React.FC<InputPhoneProps> = ({
 	required,
 	placeholder,
 	readOnly,
-	inputWidth: width,
 	cfg,
 }) => {
 	const helper = new AccessibilityHelper(name, !!label, !!hint);
@@ -40,7 +40,7 @@ const InputPhone: React.FC<InputPhoneProps> = ({
 			<Input
 				id={id}
 				autoComplete="tel"
-				width={width}
+				className={elementStyles.phoneInput}
 				testId={testId}
 				label={label}
 				placeholder={placeholder}

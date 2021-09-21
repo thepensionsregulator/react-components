@@ -58,3 +58,15 @@ fieldset {
 	display: none;
 	visibility: hidden;
 }
+
+.phoneInput {
+	max-width: 12em;
+}
+.emailInput,
+.select {
+	max-width: 42em;
+}
+
+.currencyInput {
+	max-width: 14em;
+}

@@ -35,7 +35,7 @@
 			line-height: 1.565em;
 			text-align: left;
 			color: $colors-primary-3;
-			font-weight: 600
+			font-weight: 600;
 		}
 	}
 
@@ -74,6 +74,11 @@
 
 	div.taskWrapper {
 		position: relative;
+	}
+
+	.taskWrapperInner {
+		justify-content: space-between;
+		width: 100%;
 	}
 
 	div[aria-current] {

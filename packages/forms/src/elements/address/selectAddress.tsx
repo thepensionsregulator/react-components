@@ -146,7 +146,6 @@ export const SelectAddress: React.FC<SelectAddressProps> = ({
 				label={selectAddressLabel}
 				name="selectedAddress"
 				options={options}
-				inputWidth={6}
 				testId={(testId ? testId + '-' : '') + 'select-address-list'}
 				validate={(value) => {
 					// When the FFSelect has been fully rendered and has a value, update the validation object.

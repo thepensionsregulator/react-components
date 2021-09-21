@@ -9,6 +9,7 @@ import { Input } from '../input/input';
 import PopupBox from './popup';
 import styles from './select.module.scss';
 import AccessibilityHelper from '../accessibilityHelper';
+import elementStyles from '../elements.module.scss';
 
 interface SelectProps extends DownshiftProps<any>, FieldExtraProps {
 	handleNotFoundButtonClick?: Function;
@@ -40,7 +41,6 @@ export const Select: React.FC<
 			showToggleButton = true,
 			placeholder,
 			readOnly = false,
-			inputWidth: width,
 			cfg,
 			...rest
 		},
@@ -79,7 +79,7 @@ export const Select: React.FC<
 								meta={meta}
 								accessibilityHelper={helper}
 							/>
-							<Flex cfg={{ width }} className={styles.relative}>
+							<Flex className={styles.relative + ' ' + elementStyles.select}>
 								<Input
 									ref={ref}
 									autoComplete="off"
@@ -109,7 +109,7 @@ export const Select: React.FC<
 								)}
 							</Flex>
 						</StyledInputLabel>
-						<Flex cfg={{ width }} className={styles.relative}>
+						<Flex className={styles.relative + ' ' + elementStyles.select}>
 							<div
 								{...getMenuProps({
 									className: classNames([

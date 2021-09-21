@@ -1,0 +1,14 @@
+/* Form styles exported for use across multiple libraries */
+.textInput,
+.nameInput,
+.urlInput {
+	max-width: 42em;
+}
+
+.namePrefixInput {
+	max-width: 6.5em;
+}
+
+.insurerReferenceInput {
+	max-width: 34em;
+}

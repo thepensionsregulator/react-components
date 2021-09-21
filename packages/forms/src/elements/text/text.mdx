@@ -9,6 +9,7 @@ import { Form } from 'react-final-form';
 import { FFInputText } from './text';
 import { validate } from '../../validation';
 import { renderFields } from '../../renderFields';
+import textStyles from './text.module.scss';
 
 # Input
 
@@ -55,8 +56,8 @@ Example using field level validation
 					placeholder="add some text here..."
 					hint="Must be between 6 and 8 digits long"
 					validate={(value) => (value ? undefined : 'Enter an event name')}
-					inputWidth={5}
 					cfg={{ my: 5 }}
+					inputClassName={textStyles.textInput}
 				/>
 				<button type="submit" style={{ display: 'none' }} children="Submit" />
 			</form>
@@ -83,8 +84,8 @@ import { Form, validate, renderFields } from '@tpr/forms';
 					return value === 'London' ? undefined : 'Must be in London';
 				},
 				placeholder: 'add some text here...',
-				inputWidth: 5,
 				cfg: { my: 5 },
+				inputClassName: textStyles.textInput,
 			},
 			{
 				type: 'text',
@@ -94,8 +95,8 @@ import { Form, validate, renderFields } from '@tpr/forms';
 				hint: 'Cannot be empty',
 				error: 'Enter an event name',
 				placeholder: 'add some text here...',
-				inputWidth: 5,
 				cfg: { my: 5 },
+				inputClassName: textStyles.textInput,
 			},
 		];
 		return (

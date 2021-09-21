@@ -3,6 +3,7 @@ import { H2, Flex, Hr, Link } from '@tpr/core';
 import { SidebarMenuProps } from './types';
 import StatusIcon from './StatusIcon';
 import styles from '../sidebar.module.scss';
+import navItemStyles from '../../../components/navitem/navitem.module.scss';
 import { NavItem } from '../../../components/navitem/navitem';
 import { NavItemLinkProps } from 'components/navitem/types';
 
@@ -80,7 +81,6 @@ const SidebarMenu: React.FC<SidebarMenuProps> = ({
 								<Flex
 									cfg={{
 										justifyContent: 'space-between',
-										width: 10,
 										mb: link.links ? 5 : 1,
 									}}
 									className={styles.topLevelLink}
@@ -91,10 +91,14 @@ const SidebarMenu: React.FC<SidebarMenuProps> = ({
 											color: 'primary.2',
 											textAlign: 'left',
 											fontWeight: 3,
-											width: link.hideIcon ? 10 : 8,
 										}}
 										disabled={link.disabled}
 										onClick={() => onClick(link)}
+										className={
+											link.hideIcon
+												? navItemStyles.link
+												: navItemStyles.linkWithIcon
+										}
 									>
 										<Flex
 											cfg={{

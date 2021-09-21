@@ -9,6 +9,7 @@ import {
 } from '../../../common/interfaces';
 import NameForm from '../../../common/views/nameForm/nameForm';
 import { RestoreMissingNullValues } from '../../../../../services/NullValueFieldRestorer';
+import textStyles from '@tpr/forms/lib/elements/text/text.module.scss';
 
 const getFields = (
 	fields: RecursivePartial<TrusteeI18nProps['name']['fields']>,
@@ -21,7 +22,7 @@ const getFields = (
 		error: fields.title.error,
 		maxLength: fields.title.maxlength,
 		testId: 'title',
-		inputWidth: 1,
+		inputClassName: textStyles.namePrefixInput,
 		cfg: { mb: 4 },
 	},
 	{
@@ -32,7 +33,7 @@ const getFields = (
 		error: fields.firstName.error,
 		maxLength: fields.firstName.maxlength,
 		testId: 'first-name',
-		inputWidth: 6,
+		inputClassName: textStyles.nameInput,
 		required: true,
 		cfg: { mb: 4 },
 	},
@@ -45,7 +46,7 @@ const getFields = (
 		maxLength: fields.lastName.maxlength,
 		testId: 'last-name',
 		required: true,
-		inputWidth: 6,
+		inputClassName: textStyles.nameInput,
 	},
 ];
 

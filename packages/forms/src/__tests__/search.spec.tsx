@@ -64,7 +64,6 @@ describe('Search input', () => {
 						hint="Search by organisation name."
 						optionsArray={values}
 						keyValue="organisationName"
-						inputWidth={5}
 						callback={cb}
 					/>
 				),

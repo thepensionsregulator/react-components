@@ -51,13 +51,9 @@ export const Footer: React.FC = ({ children }) => {
 	return (
 		<Flex
 			cfg={{
-				flex: '0 0 auto',
-				flexDirection: 'column',
-				alignItems: 'flex-start',
-				justifyContent: 'flex-start',
-				width: 10,
 				mt: 5,
 			}}
+			className={styles.footer}
 		>
 			<Hr cfg={{ mb: 6 }} />
 			<Flex>{children}</Flex>

@@ -1,12 +1,11 @@
 import React from 'react';
-import { classNames, Flex, LayoutProps, toKebabCase } from '@tpr/core';
+import { classNames, Flex, toKebabCase } from '@tpr/core';
 import styles from './input.module.scss';
 import AccessibilityHelper from '../accessibilityHelper';
 
 export type InputProps = {
 	id?: string;
 	type: string;
-	width?: LayoutProps['width'];
 	testId?: string;
 	label?: string;
 	isError?: boolean;
@@ -29,7 +28,6 @@ export const Input: React.FC<InputProps> = React.forwardRef<
 		{
 			id,
 			type = 'text',
-			width,
 			testId,
 			name,
 			label,
@@ -63,7 +61,7 @@ export const Input: React.FC<InputProps> = React.forwardRef<
 
 		return (
 			<Flex
-				cfg={{ flex: width ? '0 0 auto' : '1 1 auto', width }}
+				cfg={{ flex: '1 1 auto' }}
 				className={After ? styles['input-wrapper_relative'] : ''}
 			>
 				{Before && (
