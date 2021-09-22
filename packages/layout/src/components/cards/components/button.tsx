@@ -115,7 +115,10 @@ export const UnderlinedButton: React.FC<UnderlinedButtonProps> = React.memo(
 		);
 
 		const ParagraphButton: React.FC = () => (
-			<P className={styles.heading4} data-testid="card-not-heading">
+			<P
+				className={`${styles.heading4} ${styles.removeButton}`}
+				data-testid="card-not-heading"
+			>
 				<ClickableButton />
 			</P>
 		);
