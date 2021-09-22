@@ -164,9 +164,7 @@ export const FFSelect: React.FC<
 				return (
 					<Select
 						ref={ref}
-						initialSelectedItem={
-							initialSelectedItem ? initialSelectedItem : input.value
-						}
+						initialSelectedItem={initialSelectedItem}
 						itemToString={itemToString}
 						onChange={(value, _ctx) => {
 							// override onChange from outside if needed

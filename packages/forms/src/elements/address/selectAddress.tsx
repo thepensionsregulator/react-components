@@ -160,7 +160,7 @@ export const SelectAddress: React.FC<SelectAddressProps> = ({
 				placeholder={selectAddressPlaceholder}
 				readOnly={true}
 				disabled={loading}
-				selectedItem={ addressSelected ? form.getFieldState('selectedAddress') :  null}
+				initialSelectedItem={ addressSelected ? form.getFieldState('selectedAddress') :  null}
 			/>
 			<Button
 				testId={(testId ? testId + '-' : '') + 'select-address-button'}
