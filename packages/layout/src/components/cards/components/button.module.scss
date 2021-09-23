@@ -11,6 +11,14 @@
 	min-height: $space-5;
 }
 
+@mixin button-focus {
+	background-color: $colors-warning-1;
+	box-shadow: 0px -2px $colors-warning-1, 0px 4px $colors-neutral-8;
+	border: none;
+	outline: none;
+	color: $colors-neutral-8;
+}
+
 .button {
 	@include button-base;
 	cursor: pointer;
@@ -21,11 +29,19 @@
 		color: $colors-primary-3;
 		@include removeMarginBottom;
 	}
-}
 
-.button:hover {
-	color: $colors-primary-3;
-	border-bottom-color: $colors-primary-3;
+	&:focus {
+		@include button-focus;
+
+		.editButton {
+			.text {
+				color: $colors-neutral-8;
+			}
+		}
+		svg {
+			fill: $colors-neutral-8;
+		}
+	}
 }
 
 .button:disabled {
@@ -49,9 +65,11 @@
 	justify-content: space-between;
 }
 
-.arrowButtonEdit {
-	font-size: $font-size-2;
-	font-weight: $font-weight-3;
+.editButton {
+	.text {
+		font-size: $font-size-2;
+		font-weight: $font-weight-3;
+	}
 }
 
 .heading3 {
