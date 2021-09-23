@@ -6,6 +6,7 @@ import { AddressLookup } from '../elements/address/addressLookup';
 import FakeAddressLookupProvider from '../elements/address/fakeAddressLookupProvider';
 import { AddressProps } from '../elements/address/types';
 import { act } from 'react-dom/test-utils';
+import userEvent from '@testing-library/user-event';
 
 const defaultProps: AddressProps = {
 	loading: false,
@@ -17,6 +18,7 @@ const defaultProps: AddressProps = {
 	changePostcodeButton: 'Change postcode',
 	selectAddressLabel: 'Select an address',
 	selectAddressButton: 'Select address',
+	selectAddressPlaceholder: 'Select address placeholder',
 	selectAddressRequiredMessage: 'Select an address to continue',
 	noAddressesFoundMessage: 'No matching addresses were found',
 	addressLine1Label: 'Address line 1',
@@ -117,6 +119,26 @@ describe('Address lookup', () => {
 			expect(results).toHaveNoViolations();
 		});
 
+		test('should have placeholder text', async () => {
+			const { findByTestId, findByText } = formSetup({
+				render: <AddressLookup {...defaultProps} />,
+			});
+
+			await searchForAPostcode(FakeAddressLookupProvider.tprAddress.postcode);
+			const displayedPostcode = await findByText(
+				FakeAddressLookupProvider.tprAddress.postcode,
+			);
+			expect(displayedPostcode).toBeDefined();
+
+			const selectAddressInput = (await findByTestId(
+				'select-address-list',
+			)) as HTMLInputElement;
+
+			expect(selectAddressInput.placeholder).toMatch(
+				defaultProps.selectAddressPlaceholder,
+			);
+		});
+
 		test('should list matching addresses', async () => {
 			const { findByTestId, findByText, findAllByRole } = formSetup({
 				render: <AddressLookup {...defaultProps} />,
@@ -137,6 +159,31 @@ describe('Address lookup', () => {
 			expect(addressOptions[0].textContent).toMatch(
 				FakeAddressLookupProvider.tprAddress.addressLine1,
 			);
+		});
+
+		test('should retain address in text input after tabbing', async () => {
+			const { findByTestId, findAllByRole } = formSetup({
+				render: <AddressLookup {...defaultProps} />,
+			});
+
+			await searchForAPostcode(FakeAddressLookupProvider.tprAddress.postcode);
+
+			const selectAddressInput = await findByTestId('select-address-list');
+			await act(async () => {
+				selectAddressInput.click();
+			});
+
+			const addressOptions = await findAllByRole('option');
+
+			await act(async () => {
+				addressOptions[0].click();
+			});
+
+			expect(selectAddressInput.getAttribute('value')).not.toBe('');
+
+			userEvent.type(selectAddressInput, '\t');
+
+			expect(selectAddressInput.getAttribute('value')).not.toBe('');
 		});
 
 		test('should pass selected address to edit address view', async () => {
