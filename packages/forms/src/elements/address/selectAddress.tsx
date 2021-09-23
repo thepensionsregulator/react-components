@@ -160,7 +160,7 @@ export const SelectAddress: React.FC<SelectAddressProps> = ({
 				placeholder={selectAddressPlaceholder}
 				readOnly={true}
 				disabled={loading}
-				selectedItem={null} // don't reselect if the same address turns up again
+				initialSelectedItem={ addressSelected ? form.getFieldState('selectedAddress') :  null}
 			/>
 			<Button
 				testId={(testId ? testId + '-' : '') + 'select-address-button'}

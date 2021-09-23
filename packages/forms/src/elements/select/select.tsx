@@ -59,6 +59,7 @@ export const Select: React.FC<
 					getItemProps,
 					getLabelProps,
 					getMenuProps,
+					getToggleButtonProps,
 					isOpen,
 					highlightedIndex,
 					selectedItem,
@@ -103,6 +104,7 @@ export const Select: React.FC<
 										data-testid={`${testId}-button`}
 										className={styles.iconButton}
 										onClick={() => toggleMenu()}
+										{...getToggleButtonProps()}
 									>
 										<UnfoldMore />
 									</button>
@@ -162,9 +164,7 @@ export const FFSelect: React.FC<
 				return (
 					<Select
 						ref={ref}
-						initialSelectedItem={
-							initialSelectedItem ? initialSelectedItem : input.value
-						}
+						initialSelectedItem={initialSelectedItem}
 						itemToString={itemToString}
 						onChange={(value, _ctx) => {
 							// override onChange from outside if needed
