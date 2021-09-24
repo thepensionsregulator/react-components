@@ -1,9 +1,9 @@
 import React, { useState, useRef, useEffect } from 'react';
 import { useForm } from 'react-final-form';
-import { postcodeValidator } from './services/postcodeValidator';
-import { FFInputText } from '../text/text';
 import { Button, Flex } from '@tpr/core';
-import { PostcodeLookupProps } from './types/PostcodeLookupProps';
+import { FFInputText } from '../text/text';
+import { postcodeValidator } from './services';
+import { PostcodeLookupProps } from './types';
 import styles from './addressLookup.module.scss';
 
 export const PostcodeLookup: React.FC<PostcodeLookupProps> = ({

@@ -1,4 +1,4 @@
-import { AddressLookupProvider } from '../types/AddressLookupProvider';
+import { AddressLookupProvider } from '../types';
 
 class FakeAddressLookupProvider implements AddressLookupProvider {
 	public static tprAddress = {

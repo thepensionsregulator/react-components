@@ -1,5 +1,4 @@
-import { Address } from '../types';
-import { AddressLookupProvider } from '../types/AddressLookupProvider';
+import { Address, AddressLookupProvider } from '../types';
 
 export type AddressAPIType = {
 	/** API instance with auth to get a list of addresses */

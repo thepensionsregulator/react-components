@@ -1,12 +1,12 @@
 import React, { useEffect, useRef } from 'react';
 import { Field, useForm } from 'react-final-form';
+import { Button } from '@tpr/core';
 import { FFInputText } from '../text/text';
 import { HiddenInput } from '../hidden/hidden';
-import { Button } from '@tpr/core';
-import styles from './addressLookup.module.scss';
+import { EditAddressProps } from './types';
 import elementStyles from '../elements.module.scss';
 import textStyles from '../text/text.module.scss';
-import { EditAddressProps } from './types';
+import styles from './addressLookup.module.scss';
 
 export const EditAddress: React.FC<EditAddressProps> = React.memo(
 	({

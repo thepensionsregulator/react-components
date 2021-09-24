@@ -4,7 +4,7 @@ import { ArrowRight } from '@tpr/icons';
 import { P, Button, Flex } from '@tpr/core';
 import { FFSelect } from '../select/select';
 import { Address, SelectAddressProps } from './types';
-import { formatPostcode } from './services/postcodeFormatter';
+import { formatPostcode } from './services';
 import styles from './addressLookup.module.scss';
 import elementStyles from '../elements.module.scss';
 
