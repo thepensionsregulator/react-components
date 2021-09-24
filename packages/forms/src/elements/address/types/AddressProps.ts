@@ -1,5 +1,5 @@
 import { Address } from './Address';
-import { AddressLookupProvider } from '../addressLookupProvider';
+import { AddressLookupProvider } from './AddressLookupProvider';
 import { SubmitButtonProps } from './BaseProps';
 
 export interface AddressProps extends SubmitButtonProps {

@@ -57,8 +57,7 @@ const CardContentSwitch: React.FC<ICardContentSwitchProps> = (
 								...inHouseAdminValues
 							} = current.context.inHouseAdmin;
 
-							const comparer = new AddressComparer();
-							if (comparer.areEqual(values.initialValue, values)) {
+							if (AddressComparer.areEqual(values.initialValue, values)) {
 								send('CANCEL');
 							} else {
 								await onSaveAddress(

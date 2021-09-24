@@ -36,6 +36,7 @@ const InputText: React.FC<InputTextProps> = React.forwardRef<
 			wrapperElement,
 			labelElement,
 			headingElement,
+			onKeyPress,
 		},
 		ref,
 	) => {
@@ -87,6 +88,7 @@ const InputText: React.FC<InputTextProps> = React.forwardRef<
 					maxLength={maxLength}
 					accessibilityHelper={helper}
 					required={required}
+					onKeyPress={onKeyPress}
 					{...input}
 				/>
 			</StyledInputLabel>

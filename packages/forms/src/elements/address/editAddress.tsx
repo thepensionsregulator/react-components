@@ -1,12 +1,12 @@
 import React, { useEffect, useRef } from 'react';
 import { Field, useForm } from 'react-final-form';
+import { Button } from '@tpr/core';
 import { FFInputText } from '../text/text';
 import { HiddenInput } from '../hidden/hidden';
-import { Button } from '@tpr/core';
-import styles from './addressLookup.module.scss';
+import { EditAddressProps } from './types';
 import elementStyles from '../elements.module.scss';
 import textStyles from '../text/text.module.scss';
-import { EditAddressProps } from './types';
+import styles from './addressLookup.module.scss';
 
 export const EditAddress: React.FC<EditAddressProps> = React.memo(
 	({
@@ -28,16 +28,16 @@ export const EditAddress: React.FC<EditAddressProps> = React.memo(
 	}) => {
 		const form = useForm();
 
-		function isDirty() {
+		const isDirty = () => {
 			const selectedAddress = form.getFieldState('selectedAddress');
 			return selectedAddress && selectedAddress.dirty;
-		}
+		};
 
-		function renderNonEditableFieldWithUpdates(
+		const renderNonEditableFieldWithUpdates = (
 			fieldName: string,
 			label?: string,
 			headingLevel?: number,
-		) {
+		) => {
 			const ElementName = `h${headingLevel}` as keyof JSX.IntrinsicElements;
 			return (
 				<>
@@ -66,9 +66,9 @@ export const EditAddress: React.FC<EditAddressProps> = React.memo(
 					/>
 				</>
 			);
-		}
+		};
 
-		function renderInitialValueField(fieldName: string, value: string) {
+		const renderInitialValueField = (fieldName: string, value: string) => {
 			return (
 				<Field
 					name={'initialValue.' + fieldName}
@@ -79,7 +79,7 @@ export const EditAddress: React.FC<EditAddressProps> = React.memo(
 					render={(props) => <HiddenInput type="hidden" {...props} />}
 				/>
 			);
-		}
+		};
 
 		const address1ref = useRef(null);
 		const address2ref = useRef(null);

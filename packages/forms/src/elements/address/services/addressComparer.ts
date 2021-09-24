@@ -1,8 +1,7 @@
-import { Address } from './types';
+import { Address } from '../types';
 
-export class AddressComparer {
-	constructor() {}
-	public areEqual(address1: Address, address2: Address): boolean {
+export const AddressComparer = {
+	areEqual: (address1: Address, address2: Address): boolean => {
 		// Use == because an address is the same address if it's undefined on one side and null or empty string on the other
 		return (
 			address1 &&
@@ -18,6 +17,5 @@ export class AddressComparer {
 			address1.countryId == address2.countryId &&
 			address1.uprn == address2.uprn
 		);
-	}
-}
-export default AddressComparer;
+	},
+};

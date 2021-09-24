@@ -3,7 +3,7 @@ import { formSetup } from '../__mocks__/setup';
 import { fireEvent, screen, cleanup } from '@testing-library/react';
 import { axe } from 'jest-axe';
 import { AddressLookup } from '../elements/address/addressLookup';
-import FakeAddressLookupProvider from '../elements/address/fakeAddressLookupProvider';
+import FakeAddressLookupProvider from '../elements/address/services/fakeAddressLookupProvider';
 import { AddressProps } from '../elements/address/types';
 import { act } from 'react-dom/test-utils';
 import userEvent from '@testing-library/user-event';
