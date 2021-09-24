@@ -6,6 +6,7 @@ route: /layout/header
 
 import { Playground } from '@playground';
 import { Header } from './header';
+import { Highlight } from '../highlight/highlight';
 
 # Header
 
@@ -17,10 +18,25 @@ import { Header } from '@tpr/layout';
 
 <Playground>
 	<Header
-		title="Test Scheme Return"
 		logoSrc="https://www.thepensionsregulator.gov.uk/-/media/thepensionsregulator/images/logo/tpr-logo-header.ashx"
-		logoUrl="https://www.thepensionsregulator.gov.uk"
+		logoHref="https://www.thepensionsregulator.gov.uk"
 		onClickLogout={() => alert('logged out')}
 		schemeOptionsHref="https://www.thepensionsregulator.gov.uk"
+	/>
+</Playground>
+
+## Combined with highlight
+
+<Playground>
+	<Header
+		logoSrc="https://www.thepensionsregulator.gov.uk/-/media/thepensionsregulator/images/logo/tpr-logo-header.ashx"
+		logoHref="https://www.thepensionsregulator.gov.uk"
+		onClickLogout={() => alert('logged out')}
+		schemeOptionsHref="https://www.thepensionsregulator.gov.uk"
+	/>
+	<Highlight
+		context="Scheme maintenance"
+		name="Test Scheme: Pension scheme with an long name that will not fit on one line even at full width"
+		reference="PSR: 12014314"
 	/>
 </Playground>
