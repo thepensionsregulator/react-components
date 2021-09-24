@@ -7,9 +7,9 @@ import { StyledInputLabel, InputElementHeading } from '../elements';
 import { FieldProps, FieldOptions, FieldExtraProps } from '../../renderFields';
 import { Input } from '../input/input';
 import PopupBox from './popup';
-import styles from './select.module.scss';
 import AccessibilityHelper from '../accessibilityHelper';
 import elementStyles from '../elements.module.scss';
+import styles from './select.module.scss';
 
 interface SelectProps extends DownshiftProps<any>, FieldExtraProps {
 	handleNotFoundButtonClick?: Function;
@@ -94,6 +94,7 @@ export const Select: React.FC<
 									onClick={() => toggleMenu()}
 									className={styles.input}
 									accessibilityHelper={helper}
+									onKeyPress={rest.onKeyPress}
 									{...getInputProps()}
 								/>
 								{showToggleButton && (

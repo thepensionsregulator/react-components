@@ -1,11 +1,8 @@
-import PostcodeValidator from '../elements/address/postcodeValidator';
+import { postcodeValidator } from '../elements/address/services';
 
 const invalidPostcodeMessage = 'Enter a valid postcode';
 
 describe('The PostcodeValidator', () => {
-	let validator: PostcodeValidator;
-	beforeAll(() => (validator = new PostcodeValidator(invalidPostcodeMessage)));
-
 	const validPostcodes = [
 		'M2 5AA',
 		'M25AA',
@@ -35,12 +32,12 @@ describe('The PostcodeValidator', () => {
 	];
 
 	test.each(validPostcodes)('should allow %p', (postcode) => {
-		const result = validator.validatePostcode(postcode);
+		const result = postcodeValidator(postcode, invalidPostcodeMessage);
 		expect(result).toBeUndefined();
 	});
 
 	test.each(invalidPostcodes)('should not allow %p', (postcode) => {
-		const result = validator.validatePostcode(postcode);
+		const result = postcodeValidator(postcode, invalidPostcodeMessage);
 		expect(result).toEqual(invalidPostcodeMessage);
 	});
 });
