@@ -17,12 +17,12 @@ export const Highlight: React.FC<HighlightProps> = ({
 		<DocWidth className={styles.highlight}>
 			<AppWidth className={styles.highlightContent}>
 				<Flex className={styles.context}>{context}</Flex>
-				<Flex className={styles.container}>
-					<Flex className={styles.name}>{name}</Flex>
-					<Flex className={styles.reference}>
+				<div className={styles.container}>
+					<div className={styles.name}>{name}</div>
+					<div className={styles.reference}>
 						<Flex>{reference}</Flex>
-					</Flex>
-				</Flex>
+					</div>
+				</div>
 			</AppWidth>
 		</DocWidth>
 	);

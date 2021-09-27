@@ -11,17 +11,14 @@ $horizontal-space-outer: $space-6;
 // Stack everything by default.
 .highlightContent {
 	min-height: 50px;
-	display: flex;
 	color: $white;
-	flex-direction: column;
 	font-weight: $font-weight-4;
 	font-size: $font-size-3;
 	line-height: $line-height-5;
 }
 
 .container {
-	flex-grow: 1; // Required when the text inside .name is short.
-	flex-direction: column;
+	width: 100%; // Required when the text inside .name is short.
 }
 
 .context {
@@ -43,7 +40,6 @@ $horizontal-space-outer: $space-6;
 // to the top and bottom of the outer element.
 .reference {
 	white-space: nowrap;
-	height: 100%;
 	background-color: $colors-primary-4;
 }
 
@@ -80,8 +76,11 @@ $horizontal-space-outer: $space-6;
 
 	// Remove the border on .context, and use z-index to raise the content above the pseudo-element creating
 	// the background and longer border.
+
+	// Start using flexbox at this level, not earlier, otherwise IE11 does not expand the height of .name when
+	// text wraps onto multiple lines
 	.highlightContent {
-		flex-direction: row;
+		display: flex;
 		z-index: 1;
 	}
 	.context {
@@ -101,8 +100,10 @@ $horizontal-space-outer: $space-6;
 	.context {
 		width: $sidebar-width;
 	}
-	.container {
-		flex-direction: row;
+	.container,
+	.name,
+	.reference {
+		display: flex;
 	}
 	.reference > div {
 		border-top: none;
