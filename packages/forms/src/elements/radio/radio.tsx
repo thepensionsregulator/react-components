@@ -38,8 +38,6 @@ export const RadioButton: React.FC<RadioButtonProps> = ({
 					mt: 1,
 					mb: 1,
 					py: 1,
-					alignItems: 'flex-start',
-					flexDirection: 'column',
 				},
 				cfg,
 			)}

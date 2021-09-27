@@ -170,7 +170,7 @@ const InputNumber: React.FC<InputNumberProps> = ({
 	return (
 		<StyledInputLabel
 			isError={meta && meta.touched && meta.error}
-			cfg={Object.assign({ flexDirection: 'column', mt: 1 }, cfg)}
+			cfg={Object.assign({ mt: 1 }, cfg)}
 			noLeftBorder={noLeftBorder}
 			element={wrapperElement}
 		>

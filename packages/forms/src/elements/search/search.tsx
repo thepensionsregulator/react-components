@@ -112,7 +112,7 @@ const Search: React.FC<SearchProps> = React.memo(
 		return (
 			<div className={classes}>
 				<StyledInputLabel
-					cfg={Object.assign({ flexDirection: 'column' }, cfg)}
+					cfg={cfg}
 					element="label"
 					isError={meta && meta.touched && meta.error}
 				>

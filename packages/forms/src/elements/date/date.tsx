@@ -215,10 +215,7 @@ export const InputDate: React.FC<InputDateComponentProps> = memo(
 						? helper.hintId
 						: helper.labelId
 				}
-				cfg={Object.assign(
-					{ mt: 1, py: 1, alignItems: 'flex-start', flexDirection: 'column' },
-					cfg,
-				)}
+				cfg={Object.assign({ mt: 1, py: 1 }, cfg)}
 				hiddenLabel={hiddenLabel}
 				hiddenLabelId={hiddenLabelId}
 			>
