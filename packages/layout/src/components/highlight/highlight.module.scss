@@ -20,6 +20,7 @@ $horizontal-space-outer: $space-6;
 }
 
 .container {
+	flex-grow: 1; // Required when the text inside .name is short.
 	flex-direction: column;
 }
 
