@@ -33,8 +33,6 @@ export const Checkbox: React.FC<Partial<CheckboxIconProps>> = ({
 				{
 					mt: 1,
 					mb: 1,
-					alignItems: 'flex-start',
-					flexDirection: 'column',
 				},
 				cfg,
 			)}

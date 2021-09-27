@@ -70,7 +70,7 @@ export const Select: React.FC<
 						<StyledInputLabel
 							element="label"
 							isError={meta && meta.touched && meta.error}
-							cfg={Object.assign({ flexDirection: 'column' }, cfg)}
+							cfg={cfg}
 							{...getLabelProps()}
 						>
 							<InputElementHeading
