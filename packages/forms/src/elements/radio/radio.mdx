@@ -8,6 +8,7 @@ import { Playground } from '@playground';
 import { Form } from 'react-final-form';
 import { FFRadioButton } from './radio';
 import { renderFields } from '../../renderFields';
+import radioStyles from './radio.module.scss';
 import styles from '../elements.module.scss';
 
 # Radio
@@ -106,8 +107,10 @@ Horizontal layout will only be used where there are two radio buttons with short
 					<form onSubmit={handleSubmit}>
 						<fieldset>
 							<legend>Select a value</legend>
-							<FFRadioButton name={FIELD_NAME} value={true} label="Yes" />
-							<FFRadioButton name={FIELD_NAME} value={false} label="No" />
+							<div className={radioStyles.inline}>
+								<FFRadioButton name={FIELD_NAME} value={true} label="Yes" />
+								<FFRadioButton name={FIELD_NAME} value={false} label="No" />
+							</div>
 						</fieldset>
 						<button type="submit" style={{ display: 'none' }}>
 							Submit
