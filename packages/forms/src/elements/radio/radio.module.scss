@@ -57,3 +57,12 @@
 	max-width: 100%;
 	@include removeMarginBottom;
 }
+
+.inline {
+	display: flex;
+	flex-direction: row;
+
+	& > div {
+		margin-right: $space-8;
+	}
+}

@@ -10,16 +10,11 @@
 		flex: 0 0 auto;
 		align-items: center;
 		line-height: 1.4;
-		max-height: 2em;
 		overflow: visible;
 	}
 
 	input[type='checkbox']:focus + .checkbox {
 		box-shadow: 0 0 0 4px #ffd300;
-	}
-
-	input[type='checkbox']:checked + .checkbox {
-		// outline: 2px dashed orange;
 	}
 
 	.checkbox {
@@ -45,4 +40,13 @@
 .label {
 	margin-left: $space-3;
 	@include removeMarginBottom;
+}
+
+.inline {
+	display: flex;
+	flex-direction: row;
+
+	& > div {
+		margin-right: $space-8;
+	}
 }
