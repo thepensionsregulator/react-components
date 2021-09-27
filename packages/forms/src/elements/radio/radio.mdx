@@ -7,7 +7,6 @@ route: /forms/radio
 import { Playground } from '@playground';
 import { Form } from 'react-final-form';
 import { FFRadioButton } from './radio';
-import { SeparatorY, SeparatorX } from '../separator';
 import { renderFields } from '../../renderFields';
 import styles from '../elements.module.scss';
 
@@ -44,7 +43,7 @@ import { FFRadioButton } from '@tpr/forms';
 
 [CodeSandbox](https://codesandbox.io/s/lively-wood-rxcpu)
 
-### No separator
+### Default layout
 
 <Playground>
 	{() => {
@@ -59,12 +58,29 @@ import { FFRadioButton } from '@tpr/forms';
 								name={FIELD_NAME}
 								value="value_a"
 								label="Select Value A"
+								hint="Lorem, ipsum dolor sit amet consectetur adipisicing elit. Ea obcaecati repellat molestias nemo deleniti eveniet vel similique nesciunt fugiat nisi?"
 							/>
 							<FFRadioButton
 								name={FIELD_NAME}
 								value="value_b"
-								label="Select Value B"
+								label="Select Value B with a long label that always wraps: Lorem, ipsum dolor sit amet consectetur adipisicing elit. Ea obcaecati repellat molestias nemo deleniti eveniet vel similique nesciunt fugiat nisi"
 								hint="Lorem, ipsum dolor sit amet consectetur adipisicing elit. Ea obcaecati repellat molestias nemo deleniti eveniet vel similique nesciunt fugiat nisi?"
+							/>
+							<FFRadioButton
+								name={FIELD_NAME}
+								value="value_c"
+								label="Select Value C with a long label that always wraps: Lorem, ipsum dolor sit amet consectetur adipisicing elit. Ea obcaecati repellat molestias nemo deleniti eveniet vel similique nesciunt fugiat nisi"
+							/>
+							<FFRadioButton
+								name={FIELD_NAME}
+								value="value_d"
+								label="Select Value D"
+								hint="Lorem, ipsum dolor sit amet consectetur adipisicing elit."
+							/>
+							<FFRadioButton
+								name={FIELD_NAME}
+								value="value_e"
+								label="Select Value E"
 							/>
 						</fieldset>
 						<button type="submit" style={{ display: 'none' }}>
@@ -77,59 +93,7 @@ import { FFRadioButton } from '@tpr/forms';
 	}}
 </Playground>
 
-### SeparatorY
-
-<Playground>
-	{() => {
-		const FIELD_NAME = 'radio_button';
-		return (
-			<Form onSubmit={console.log} initialValues={{ [FIELD_NAME]: 'value_b' }}>
-				{({ handleSubmit }) => (
-					<form onSubmit={handleSubmit}>
-						<fieldset>
-							<legend>Select a value</legend>
-							<SeparatorY>
-								<FFRadioButton
-									name={FIELD_NAME}
-									value="value_a"
-									label="Select Value A"
-									hint="Lorem, ipsum dolor sit amet consectetur adipisicing elit. Ea obcaecati repellat molestias nemo deleniti eveniet vel similique nesciunt fugiat nisi?"
-								/>
-								<FFRadioButton
-									name={FIELD_NAME}
-									value="value_b"
-									label="Select Value B with a long label that always wraps: Lorem, ipsum dolor sit amet consectetur adipisicing elit. Ea obcaecati repellat molestias nemo deleniti eveniet vel similique nesciunt fugiat nisi"
-									hint="Lorem, ipsum dolor sit amet consectetur adipisicing elit. Ea obcaecati repellat molestias nemo deleniti eveniet vel similique nesciunt fugiat nisi?"
-								/>
-								<FFRadioButton
-									name={FIELD_NAME}
-									value="value_c"
-									label="Select Value C"
-								/>
-								<FFRadioButton
-									name={FIELD_NAME}
-									value="value_d"
-									label="Select Value D"
-									hint="Lorem, ipsum dolor sit amet consectetur adipisicing elit."
-								/>
-								<FFRadioButton
-									name={FIELD_NAME}
-									value="value_e"
-									label="Select Value E"
-								/>
-							</SeparatorY>
-						</fieldset>
-						<button type="submit" style={{ display: 'none' }}>
-							Submit
-						</button>
-					</form>
-				)}
-			</Form>
-		);
-	}}
-</Playground>
-
-### SeparatorX
+### Horizontal layout
 
 Horizontal layout will only be used where there are two radio buttons with short labels, eg Yes/No questions
 
@@ -142,10 +106,8 @@ Horizontal layout will only be used where there are two radio buttons with short
 					<form onSubmit={handleSubmit}>
 						<fieldset>
 							<legend>Select a value</legend>
-							<SeparatorX>
-								<FFRadioButton name={FIELD_NAME} value={true} label="Yes" />
-								<FFRadioButton name={FIELD_NAME} value={false} label="No" />
-							</SeparatorX>
+							<FFRadioButton name={FIELD_NAME} value={true} label="Yes" />
+							<FFRadioButton name={FIELD_NAME} value={false} label="No" />
 						</fieldset>
 						<button type="submit" style={{ display: 'none' }}>
 							Submit
