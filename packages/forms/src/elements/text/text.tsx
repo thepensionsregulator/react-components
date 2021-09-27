@@ -60,7 +60,7 @@ const InputText: React.FC<InputTextProps> = React.forwardRef<
 			<StyledInputLabel
 				isError={meta && meta.touched && meta.error}
 				element={wrapperElement}
-				cfg={Object.assign({ flexDirection: 'column', mt: 1 }, cfg)}
+				cfg={Object.assign({ mt: 1 }, cfg)}
 			>
 				<InputElementHeadingWrapper>
 					<InputElementHeading

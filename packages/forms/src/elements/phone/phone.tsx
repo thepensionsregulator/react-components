@@ -28,7 +28,7 @@ const InputPhone: React.FC<InputPhoneProps> = ({
 	return (
 		<StyledInputLabel
 			isError={meta && meta.touched && meta.error}
-			cfg={Object.assign({ flexDirection: 'column', mt: 1 }, cfg)}
+			cfg={Object.assign({ mt: 1 }, cfg)}
 		>
 			<InputElementHeading
 				label={label}

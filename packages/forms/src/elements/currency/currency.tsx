@@ -243,7 +243,7 @@ const InputCurrency: React.FC<InputCurrencyProps> = React.memo(
 		return (
 			<StyledInputLabel
 				isError={meta && meta.touched && meta.error}
-				cfg={Object.assign({ flexDirection: 'column', mt: 1 }, cfg)}
+				cfg={Object.assign({ mt: 1 }, cfg)}
 				noLeftBorder={noLeftBorder}
 			>
 				<InputElementHeading
