@@ -1,5 +1,5 @@
-import { TaskStatusIconProps } from 'components/tasklist';
 import React from 'react';
+import { TaskStatusIconProps } from './types';
 import styles from '../tasklist.module.scss';
 
 const TaskStatus: React.FC<TaskStatusIconProps> = ({

@@ -2,8 +2,8 @@ import React from 'react';
 import { H2, Flex, Hr } from '@tpr/core';
 import { TasklistMenuProps } from './types';
 import TaskStatus from './TaskStatus';
+import { NavItem } from '../../navitem';
 import styles from '../tasklist.module.scss';
-import { NavItem } from '../../../components/navitem/navitem';
 
 const TasklistMenu: React.FC<TasklistMenuProps> = ({
 	title,

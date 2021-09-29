@@ -2,10 +2,9 @@ import React, { useState, useEffect } from 'react';
 import { H2, Flex, Hr, Link } from '@tpr/core';
 import { SidebarMenuProps } from './types';
 import StatusIcon from './StatusIcon';
+import { NavItem, NavItemLinkProps } from '../../navitem';
+import navItemStyles from '../../navitem/navitem.module.scss';
 import styles from '../sidebar.module.scss';
-import navItemStyles from '../../../components/navitem/navitem.module.scss';
-import { NavItem } from '../../../components/navitem/navitem';
-import { NavItemLinkProps } from 'components/navitem/types';
 
 const SidebarMenu: React.FC<SidebarMenuProps> = ({
 	title,

@@ -3,8 +3,8 @@ import { Flex, Link, P, flatten } from '@tpr/core';
 import { callAllEventHandlers } from '../../utils';
 import TasklistMenu from './components/TasklistMenu';
 import { TasklistProps, TasklistSectionProps } from './components/types';
+import { ReactRouterDomProps } from '../types/types';
 import styles from './tasklist.module.scss';
-import { ReactRouterDomProps } from 'components/types/types';
 
 export const isActive = (settings: { matchPath: any; location: any }) => (
 	path: string,
