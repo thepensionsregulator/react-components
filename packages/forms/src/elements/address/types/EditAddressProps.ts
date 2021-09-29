@@ -1,4 +1,4 @@
-import { Address } from './address';
+import { Address } from './Address';
 
 export interface EditAddressProps {
 	initialValue?: Address;
