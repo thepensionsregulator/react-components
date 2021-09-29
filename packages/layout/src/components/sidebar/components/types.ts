@@ -1,4 +1,4 @@
-import { NavItemLinkProps } from 'components/navitem/types';
+import { NavItemLinkProps } from '../../navitem';
 
 export type SidebarSectionProps = {
 	title: string;
