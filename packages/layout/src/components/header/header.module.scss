@@ -1,29 +1,86 @@
 @import '@tpr/theming/lib/variables.scss';
 
-.headerBackground {
+$vertical-space: $space-2;
+$horizontal-space-inner: $space-4;
+$horizontal-space-outer: $space-6;
+
+// This background extends across the whole viewport.
+.header {
 	background: $colors-accents-2;
+}
+
+// Stack everything by default, and hide .title which is usually a disposable strapline.
+.headerContent {
+	display: flex;
+	flex-direction: column;
+	padding: $vertical-space $horizontal-space-inner;
 }
 
 .logo {
 	display: flex;
 	flex: 0 0 auto;
-	align-items: flex-start;
-	justify-content: flex-start;
-	width: $sidebar-width;
-	border-right: 1px solid;
-	border-color: $colors-accents-1;
-	margin-right: $space-4;
-	padding-left: $space-6;
 }
 
-.img {
-	max-width: 180px;
+.title {
+	display: none;
 }
 
-a.headerlink {
+.headerlink {
 	font-weight: $font-weight-3;
 	line-height: $line-height-3;
+	white-space: nowrap;
 	&:not(:focus) {
 		color: $white;
+	}
+	&:first-child {
+		margin-right: $space-4;
+	}
+}
+
+@media (min-width: 42em) {
+	// At this size align the sections horizontally rather than stacked.
+	.headerContent {
+		flex-direction: row;
+		align-items: center;
+		padding: $vertical-space $horizontal-space-outer $vertical-space 0;
+	}
+	.logo {
+		padding: 0 $horizontal-space-outer;
+		border-right: 1px solid $colors-accents-1;
+	}
+	.title {
+		display: flex;
+		flex-grow: 1;
+		margin: $vertical-space 0;
+		color: $white;
+		font-size: $font-size-3;
+		font-weight: $font-weight-3;
+		line-height: $line-height-5;
+		padding: 0 $horizontal-space-inner;
+	}
+
+	// The links in .links are stacked to save space, so remove the margin that would knock them off-centre.
+	.links {
+		flex-direction: column;
+		text-align: center;
+	}
+	.headerlink:first-child {
+		margin-right: 0;
+	}
+}
+
+@media (min-width: 54em) {
+	// Now the links in .links have room to spread out.
+	.links {
+		flex-direction: row;
+	}
+	.headerlink:first-child {
+		margin-right: $space-4;
+	}
+}
+
+@media (min-width: 60em) {
+	.logo {
+		width: $sidebar-width;
 	}
 }

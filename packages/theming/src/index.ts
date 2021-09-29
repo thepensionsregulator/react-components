@@ -1,4 +1,4 @@
-import { CssResets, EditorFonts } from './theming';
+import { CssResets, EditorFonts, getBreakpoint } from './theming';
 import { ThemeProvider } from './resets';
 
-export { ThemeProvider as default, CssResets, EditorFonts };
+export { ThemeProvider as default, CssResets, EditorFonts, getBreakpoint };

@@ -1,5 +1,13 @@
 import { Machine, assign } from 'xstate';
 import { Insurer } from './context';
+import {
+	CommonCardMachineContext,
+	RemoveConfirmProps,
+} from '../common/interfaces';
+import {
+	updateClickedButton,
+	returnToPreview,
+} from '../common/machine/actions';
 
 interface InsurerStates {
 	states: {
@@ -29,11 +37,9 @@ type InsurerEvents =
 	| { type: 'BACK' }
 	| { type: 'DELETE' };
 
-export interface InsurerContext {
-	complete: boolean;
-	remove: { confirm: boolean; date: string } | null;
+export interface InsurerContext extends CommonCardMachineContext {
 	insurer: Partial<Insurer>;
-	preValidatedData?: boolean | null;
+	remove: RemoveConfirmProps;
 }
 
 const insurerMachine = Machine<InsurerContext, InsurerStates, InsurerEvents>({
@@ -43,13 +49,20 @@ const insurerMachine = Machine<InsurerContext, InsurerStates, InsurerEvents>({
 		complete: false,
 		remove: null,
 		insurer: {},
+		lastBtnClicked: null,
 	},
 	states: {
 		preview: {
 			id: 'preview',
 			on: {
-				REMOVE: '#remove',
-				EDIT_INSURER: 'edit',
+				REMOVE: {
+					target: '#remove',
+					actions: updateClickedButton(2),
+				},
+				EDIT_INSURER: {
+					target: 'edit',
+					actions: updateClickedButton(4),
+				},
 				COMPLETE: {
 					actions: assign((_, event) => ({
 						complete: event.value,
@@ -73,7 +86,8 @@ const insurerMachine = Machine<InsurerContext, InsurerStates, InsurerEvents>({
 							})),
 						},
 						CANCEL: '#preview',
-						REMOVE: '#remove',
+						REMOVE: returnToPreview(2),
+						EDIT_INSURER: '#preview',
 					},
 				},
 			},
@@ -93,6 +107,7 @@ const insurerMachine = Machine<InsurerContext, InsurerStates, InsurerEvents>({
 								};
 							}),
 						},
+						REMOVE: '#preview',
 					},
 				},
 				confirm: {
@@ -100,6 +115,7 @@ const insurerMachine = Machine<InsurerContext, InsurerStates, InsurerEvents>({
 						CANCEL: '#preview',
 						BACK: '#remove',
 						DELETE: 'deleted',
+						REMOVE: '#preview',
 					},
 				},
 				deleted: {

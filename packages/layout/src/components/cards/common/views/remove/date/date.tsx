@@ -1,6 +1,6 @@
 import React from 'react';
+import { Link, P } from '@tpr/core';
 import { Form, FFCheckbox, renderFields, FieldProps } from '@tpr/forms';
-import { P } from '@tpr/core';
 import { Content } from '../../../../components/content';
 import { Footer } from '../../../../components/card';
 import { ArrowButton } from '../../../../../buttons/buttons';
@@ -15,6 +15,7 @@ interface DateFormProps {
 	dateField: FieldProps[];
 	type: cardType;
 	typeName: cardTypeName;
+	send?: Function;
 }
 
 const DateForm: React.FC<DateFormProps> = ({
@@ -25,7 +26,11 @@ const DateForm: React.FC<DateFormProps> = ({
 	dateField,
 	type,
 	typeName,
+	send,
 }) => {
+	const errorMsg: string = `${type}-error-msg`;
+	const testId: string = `remove-${type}-form`;
+
 	return (
 		<Content type={type} typeName={typeName} title={title}>
 			<Form
@@ -36,16 +41,22 @@ const DateForm: React.FC<DateFormProps> = ({
 				}}
 			>
 				{({ handleSubmit, submitError }) => (
-					<form onSubmit={handleSubmit} data-testid="remove-actuary-form">
-						<FFCheckbox
-							name="confirm"
-							type="checkbox"
-							label={label}
-							cfg={{ mb: 3 }}
-						/>
-						<div className={styles.dateWrapper}>{renderFields(dateField)}</div>
+					<form onSubmit={handleSubmit} data-testid={testId} noValidate>
+						<div aria-describedby={errorMsg}>
+							<FFCheckbox
+								name="confirm"
+								type="checkbox"
+								label={label}
+								cfg={{ mb: 3 }}
+							/>
+							<div className={styles.dateWrapper}>
+								{renderFields(dateField)}
+							</div>
+						</div>
 						{submitError && (
-							<P cfg={{ color: 'danger.2', mt: 5 }}>{submitError}</P>
+							<P id={errorMsg} className={styles.errorMsg}>
+								{submitError}
+							</P>
 						)}
 						<Footer>
 							<ArrowButton
@@ -55,6 +66,9 @@ const DateForm: React.FC<DateFormProps> = ({
 								title="Continue"
 								type="submit"
 							/>
+							<Link cfg={{ m: 3 }} underline onClick={() => send('CANCEL')}>
+								Cancel
+							</Link>
 						</Footer>
 					</form>
 				)}

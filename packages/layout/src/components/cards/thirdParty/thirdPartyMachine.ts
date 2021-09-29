@@ -1,5 +1,10 @@
 import { Machine, assign } from 'xstate';
 import { ThirdPartyProps } from './context';
+import {
+	CommonCardMachineContext,
+	RemoveConfirmProps,
+} from '../common/interfaces';
+import { updateClickedButton } from '../common/machine/actions';
 
 interface ThirdPartyStates {
 	states: {
@@ -22,11 +27,9 @@ type ThirdPartyEvents =
 	| { type: 'BACK' }
 	| { type: 'DELETE' };
 
-export interface ThirdPartyContext {
-	complete: boolean;
-	remove: { confirm: boolean; date: string } | null;
+export interface ThirdPartyContext extends CommonCardMachineContext {
 	thirdParty: Partial<ThirdPartyProps>;
-	preValidatedData?: boolean | null;
+	remove: RemoveConfirmProps;
 }
 
 const thirdPartyMachine = Machine<
@@ -40,12 +43,16 @@ const thirdPartyMachine = Machine<
 		complete: false,
 		remove: null,
 		thirdParty: {},
+		lastBtnClicked: null,
 	},
 	states: {
 		preview: {
 			id: 'preview',
 			on: {
-				REMOVE: '#remove',
+				REMOVE: {
+					target: '#remove',
+					actions: updateClickedButton(2),
+				},
 				COMPLETE: {
 					actions: assign((_, event) => ({
 						complete: event.value,
@@ -68,6 +75,7 @@ const thirdPartyMachine = Machine<
 								};
 							}),
 						},
+						REMOVE: '#preview',
 					},
 				},
 				confirm: {
@@ -75,6 +83,7 @@ const thirdPartyMachine = Machine<
 						CANCEL: '#preview',
 						BACK: '#remove',
 						DELETE: 'deleted',
+						REMOVE: '#preview',
 					},
 				},
 				deleted: {

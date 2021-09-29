@@ -32,7 +32,6 @@ export const RemoveDateForm = () => {
 				}
 			},
 			error: i18n.remove.date.fields.date.error,
-			cfg: { mb: 3 },
 		},
 	];
 
@@ -55,6 +54,7 @@ export const RemoveDateForm = () => {
 			dateField={DateField}
 			type={cardType.actuary}
 			typeName={cardTypeName.actuary}
+			send={send}
 		/>
 	);
 };

@@ -22,10 +22,6 @@ export type CursorProps = Partial<{
 	cursor: 'pointer' | 'default' | 'not-allowed';
 }>;
 
-export type LayoutProps = Partial<{
-	width: ValuesFullRange;
-}>;
-
 export type ColorsPrimary =
 	| 'primary.1'
 	| 'primary.2'
@@ -54,6 +50,8 @@ export type ColorsWarning = 'warning.1' | 'warning.a1';
 
 export type ColorsDanger = 'danger.1' | 'danger.2';
 
+export type ColorsConfirmation = 'confirmed' | 'unconfirmed';
+
 export type ColorsFullRange =
 	| 'white'
 	| 'black'
@@ -62,7 +60,8 @@ export type ColorsFullRange =
 	| ColorsAccents
 	| ColorsSuccess
 	| ColorsWarning
-	| ColorsDanger;
+	| ColorsDanger
+	| ColorsConfirmation;
 
 export type BackgroundProps = Partial<{
 	bg: ColorsFullRange;
@@ -127,7 +126,6 @@ export type FlexBoxProps = {
 		SpaceProps &
 		BackgroundProps &
 		ColorProps &
-		LayoutProps &
 		CursorProps &
 		TypographyProps;
 	[key: string]: any;

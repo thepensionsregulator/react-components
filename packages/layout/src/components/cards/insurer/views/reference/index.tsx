@@ -7,6 +7,7 @@ import { Content } from '../../../components/content';
 import { ArrowButton } from '../../../../buttons/buttons';
 import { InsurerI18nProps } from '../../i18n';
 import { cardType, RecursivePartial } from '../../../common/interfaces';
+import textStyles from '@tpr/forms/lib/elements/text/text.module.scss';
 
 const getFields = (
 	fields: RecursivePartial<InsurerI18nProps['reference']['fields']>,
@@ -15,7 +16,7 @@ const getFields = (
 		type: 'text',
 		name: 'insurerCompanyReference',
 		label: fields.insurerCompanyReference.label,
-		inputWidth: 5,
+		inputClassName: textStyles.insurerReferenceInput,
 		error: (value: string) => {
 			if (!value) {
 				return fields.insurerCompanyReference.errorIfEmpty;
@@ -27,6 +28,7 @@ const getFields = (
 			return undefined;
 		},
 		cfg: { mb: 3 },
+		required: true,
 	},
 ];
 
@@ -56,6 +58,8 @@ export const Reference: React.FC = () => {
 			subtitle={i18n.reference.subtitle}
 			loading={false}
 			sectionTitle={i18n.reference.sectionTitle}
+			subSectionHeaderText={i18n.preview.buttons.four}
+			send={send}
 		>
 			<Form
 				onSubmit={onSubmit}
@@ -70,7 +74,7 @@ export const Reference: React.FC = () => {
 						<Footer>
 							<Flex>
 								<ArrowButton
-									intent="special"
+									appearance="secondary"
 									pointsTo="up"
 									iconSide="right"
 									type="submit"

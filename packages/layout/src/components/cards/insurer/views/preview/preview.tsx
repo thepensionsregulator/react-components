@@ -1,13 +1,16 @@
-import React from 'react';
+import React, { useRef } from 'react';
 import { Checkbox } from '@tpr/forms';
-import { Flex, P, Hr, classNames } from '@tpr/core';
+import { Flex, Hr, P, classNames } from '@tpr/core';
 import { UnderlinedButton } from '../../../components/button';
 import { useInsurerContext } from '../../context';
-import styles from './preview.module.scss';
+import { AddressPreview } from '../../../common/views/preview/components';
+import styles from '../../../cards.module.scss';
 
-export const Preview: React.FC<any> = () => {
+export const Preview: React.FC<any> = React.memo(() => {
 	const { current, send, onCorrect, i18n } = useInsurerContext();
 	const { insurer, complete, preValidatedData } = current.context;
+
+	const insurerBtn = useRef(null);
 
 	return (
 		<div
@@ -19,38 +22,35 @@ export const Preview: React.FC<any> = () => {
 		>
 			<Flex>
 				{/* Address block: display only	 */}
-				<Flex
-					cfg={{ width: 5, flex: '0 0 auto', flexDirection: 'column', pr: 4 }}
-				>
+				<Flex cfg={{ pr: 4 }} className={styles.section}>
 					<UnderlinedButton>{i18n.preview.buttons.three}</UnderlinedButton>
-					<Flex cfg={{ my: 2, flexDirection: 'column' }}>
-						<P>{insurer.address.addressLine1}</P>
-						{insurer.address.addressLine2 && (
-							<P>{insurer.address.addressLine2}</P>
-						)}
-						{insurer.address.addressLine3 && (
-							<P>{insurer.address.addressLine3}</P>
-						)}
-						<P>{insurer.address.postTown}</P>
-						{insurer.address.county && <P>{insurer.address.county}</P>}
-						<P>{insurer.address.postcode}</P>
-						{insurer.address.country && <P>{insurer.address.country}</P>}
-					</Flex>
+					<AddressPreview
+						address={{
+							addressLine1: insurer.address.addressLine1,
+							addressLine2: insurer.address.addressLine2,
+							addressLine3: insurer.address.addressLine3,
+							postTown: insurer.address.postTown,
+							county: insurer.address.county,
+							postcode: insurer.address.postcode,
+							country: insurer.address.country,
+						}}
+					/>
 				</Flex>
 
 				{/* Insurer reference number */}
-				<Flex
-					cfg={{ width: 5, flex: '0 0 auto', flexDirection: 'column', pl: 4 }}
-				>
+				<Flex cfg={{ pl: 4 }} className={styles.section}>
 					<UnderlinedButton
-						isOpen={current.matches({ edit: 'reference' })}
 						onClick={() => send('EDIT_INSURER')}
+						isOpen={current.matches('edit')}
+						isEditButton={true}
+						buttonRef={insurerBtn}
+						giveFocus={current.context.lastBtnClicked === 4}
 					>
 						{i18n.preview.buttons.four}
 					</UnderlinedButton>
-					<Flex cfg={{ mt: 1, flexDirection: 'column' }}>
-						<P>{insurer.insurerCompanyReference}</P>
-					</Flex>
+					<P className={styles.insurerCompanyRef}>
+						{insurer.insurerCompanyReference}
+					</P>
 				</Flex>
 			</Flex>
 
@@ -64,9 +64,12 @@ export const Preview: React.FC<any> = () => {
 						send('COMPLETE', { value: !complete });
 						onCorrect(!complete);
 					}}
-					label={i18n.preview.checkboxLabel}
+					label={i18n.preview.checkboxLabel.replace(
+						'__NAME__',
+						insurer.organisationName,
+					)}
 				/>
 			</Flex>
 		</div>
 	);
-};
+});

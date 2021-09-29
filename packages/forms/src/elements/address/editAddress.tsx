@@ -1,28 +1,12 @@
 import React, { useEffect, useRef } from 'react';
 import { Field, useForm } from 'react-final-form';
-import { Address } from './address';
+import { Button } from '@tpr/core';
 import { FFInputText } from '../text/text';
 import { HiddenInput } from '../hidden/hidden';
-import { P, Button } from '@tpr/core';
+import { EditAddressProps } from './types';
 import elementStyles from '../elements.module.scss';
+import textStyles from '../text/text.module.scss';
 import styles from './addressLookup.module.scss';
-
-type EditAddressProps = {
-	initialValue?: Address;
-	value?: Address;
-	loading: boolean;
-	testId?: string;
-	onChangeAddressClick: () => void;
-	addressLine1Label: string;
-	addressLine1RequiredMessage: string;
-	addressLine2Label: string;
-	addressLine3Label: string;
-	townLabel: string;
-	countyLabel: string;
-	postcodeLabel: string;
-	countryLabel: string;
-	changeAddressButton: string;
-};
 
 export const EditAddress: React.FC<EditAddressProps> = React.memo(
 	({
@@ -40,32 +24,35 @@ export const EditAddress: React.FC<EditAddressProps> = React.memo(
 		postcodeLabel,
 		countryLabel,
 		changeAddressButton,
+		headingLevel = 2,
 	}) => {
 		const form = useForm();
 
-		function isDirty() {
+		const isDirty = () => {
 			const selectedAddress = form.getFieldState('selectedAddress');
 			return selectedAddress && selectedAddress.dirty;
-		}
+		};
 
-		function renderNonEditableFieldWithUpdates(
+		const renderNonEditableFieldWithUpdates = (
 			fieldName: string,
 			label?: string,
-		) {
+			headingLevel?: number,
+		) => {
+			const ElementName = `h${headingLevel}` as keyof JSX.IntrinsicElements;
 			return (
 				<>
 					{label && (
-						<P className={styles.nonEditable}>
-							<strong
+						<>
+							<ElementName
 								id={(testId ? testId + '-' : '') + fieldName}
 								className={`${elementStyles.labelText} ${styles.nonEditableLabel}`}
 							>
 								{label}
-							</strong>{' '}
-							<span aria-labelledby={(testId ? testId + '-' : '') + fieldName}>
+							</ElementName>
+							<p className={styles.nonEditableText}>
 								{value ? value[fieldName] : initialValue[fieldName]}
-							</span>
-						</P>
+							</p>
+						</>
 					)}
 					<Field
 						name={fieldName}
@@ -79,9 +66,9 @@ export const EditAddress: React.FC<EditAddressProps> = React.memo(
 					/>
 				</>
 			);
-		}
+		};
 
-		function renderInitialValueField(fieldName: string, value: string) {
+		const renderInitialValueField = (fieldName: string, value: string) => {
 			return (
 				<Field
 					name={'initialValue.' + fieldName}
@@ -92,10 +79,14 @@ export const EditAddress: React.FC<EditAddressProps> = React.memo(
 					render={(props) => <HiddenInput type="hidden" {...props} />}
 				/>
 			);
-		}
+		};
 
 		const address1ref = useRef(null);
 		const address2ref = useRef(null);
+
+		useEffect(() => {
+			address1ref.current && address1ref.current.focus();
+		}, [address1ref]);
 
 		useEffect(() => {
 			const blurEvent = new Event('blur', { bubbles: true });
@@ -111,8 +102,11 @@ export const EditAddress: React.FC<EditAddressProps> = React.memo(
 				<FFInputText
 					ref={address1ref}
 					name="addressLine1"
+					autoComplete="address-line1"
 					label={addressLine1Label}
 					disabled={loading}
+					required
+					id={(testId ? testId + '-' : '') + 'addressLine1'}
 					testId={(testId ? testId + '-' : '') + 'addressLine1'}
 					initialValue={
 						isDirty() ? value.addressLine1 : initialValue.addressLine1
@@ -123,28 +117,48 @@ export const EditAddress: React.FC<EditAddressProps> = React.memo(
 							? undefined
 							: addressLine1RequiredMessage
 					}
-					inputWidth={6}
+					inputClassName={textStyles.textInput}
 					maxLength={100}
+					wrapperElement="div"
+					labelElement="label"
+					headingElement={`h${headingLevel}`}
 				/>
 				<FFInputText
 					ref={address2ref}
 					name="addressLine2"
+					autoComplete="address-line2"
 					label={addressLine2Label}
 					disabled={loading}
+					id={(testId ? testId + '-' : '') + 'addressLine2'}
 					testId={(testId ? testId + '-' : '') + 'addressLine2'}
 					initialValue={
 						isDirty() ? value.addressLine2 : initialValue.addressLine2
 					}
 					updatedValue={value ? value.addressLine2 : ''}
-					inputWidth={6}
+					inputClassName={textStyles.textInput}
 					maxLength={100}
+					wrapperElement="div"
+					labelElement="label"
+					headingElement={`h${headingLevel}`}
 				/>
-				{renderNonEditableFieldWithUpdates('addressLine3', addressLine3Label)}
-				{renderNonEditableFieldWithUpdates('postTown', townLabel)}
-				{renderNonEditableFieldWithUpdates('county', countyLabel)}
-				{renderNonEditableFieldWithUpdates('postcode', postcodeLabel)}
+				{renderNonEditableFieldWithUpdates(
+					'addressLine3',
+					addressLine3Label,
+					headingLevel,
+				)}
+				{renderNonEditableFieldWithUpdates('postTown', townLabel, headingLevel)}
+				{renderNonEditableFieldWithUpdates('county', countyLabel, headingLevel)}
+				{renderNonEditableFieldWithUpdates(
+					'postcode',
+					postcodeLabel,
+					headingLevel,
+				)}
 				{renderNonEditableFieldWithUpdates('nationId')}
-				{renderNonEditableFieldWithUpdates('country', countryLabel)}
+				{renderNonEditableFieldWithUpdates(
+					'country',
+					countryLabel,
+					headingLevel,
+				)}
 				{renderNonEditableFieldWithUpdates('countryId')}
 				{renderNonEditableFieldWithUpdates('uprn')}
 
@@ -182,7 +196,7 @@ export const EditAddress: React.FC<EditAddressProps> = React.memo(
 					testId={(testId ? testId + '-' : '') + 'change-address'}
 					appearance="secondary"
 					size="small"
-					className={styles.button}
+					className={styles.button + ' ' + styles.changeAddress}
 				>
 					{changeAddressButton}
 				</Button>

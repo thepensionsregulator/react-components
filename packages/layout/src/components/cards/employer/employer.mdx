@@ -12,7 +12,7 @@ import { EmployerCard } from './employer';
 
 # Employer Card
 
-Employer Card Card for tpr apps
+Employer Card for tpr apps
 
 ## Usage
 
@@ -46,7 +46,7 @@ import { EmployerCard } from '@tpr/layout';
 				addressLine2: 'Trafalgar Pl',
 				postTown: 'Brighton',
 				postcode: 'BN1 4DW',
-				county: 'West Sussex',
+				county: 'East Sussex',
 				country: '',
 			},
 		};
@@ -57,6 +57,50 @@ import { EmployerCard } from '@tpr/layout';
 				onCorrect={(value) => setComplete(value)}
 				onRemove={callbackFn}
 				onSaveType={callbackFn}
+				showStatutoryEmployerSection={true}
+			/>
+		);
+	}}
+</Playground>
+
+## Without Statutory Employer details
+
+<Playground>
+	{() => {
+		const [complete, setComplete] = useState(false);
+		const callbackFn = (values, _fullEmployerObject) => {
+			console.log(values);
+			console.log(_fullEmployerObject);
+			return Promise.resolve(values);
+		};
+		const employer = {
+			id: '',
+			schemeRoleId: 123,
+			effectiveDate: '1997-04-01T00:00:00',
+			employerType: 'principal-and-participating',
+			organisationReference: 0,
+			companiesHouseNumber: 'AB123456',
+			registeredCharityNumber: '123',
+			epsrNumber: 'ABCD1234',
+			organisationName: 'The Pensions Regulator',
+			statutoryEmployer: 'statutory',
+			address: {
+				addressLine1: 'Napier House',
+				addressLine2: 'Trafalgar Pl',
+				postTown: 'Brighton',
+				postcode: 'BN1 4DW',
+				county: 'East Sussex',
+				country: '',
+			},
+		};
+		return (
+			<EmployerCard
+				complete={complete}
+				employer={employer}
+				onCorrect={(value) => setComplete(value)}
+				onRemove={callbackFn}
+				onSaveType={callbackFn}
+				showStatutoryEmployerSection={false}
 			/>
 		);
 	}}
@@ -66,12 +110,13 @@ import { EmployerCard } from '@tpr/layout';
 
 ### Props
 
-| Property         | Required | Type              | Description                                                                              |
-| ---------------- | -------- | ----------------- | ---------------------------------------------------------------------------------------- |
-| complete         | true     | boolean           | changes the state of the card when All details are correct                               |
-| employer         | true     | Employer          | the Employer object                                                                      |
-| i18n             | false    | EmployerI18nProps | allows to override specific text in the card                                             |
-| onCorrect        | true     | function          | actions for when the user clicks the "Confirm details are correct" checkbox                  |
-| onRemove         | true     | function          | actions for when the employer is removed                                                 |
-| onSaveType       | true     | function          | actions for when the user updates the type of employer                                   |
-| prevalidatedData | false    | boolean           | allows to ignore the state of the "Confirm details are correct" checkbox & shows "No issues" |
+| Property                     | Required | Type              | Description                                                                                  |
+| ---------------------------- | -------- | ----------------- | -------------------------------------------------------------------------------------------- |
+| complete                     | true     | boolean           | changes the state of the card when All details are correct                                   |
+| employer                     | true     | Employer          | the Employer object                                                                          |
+| i18n                         | false    | EmployerI18nProps | allows to override specific text in the card                                                 |
+| onCorrect                    | true     | function          | actions for when the user clicks the "Confirm details are correct" checkbox                  |
+| onRemove                     | true     | function          | actions for when the employer is removed                                                     |
+| onSaveType                   | true     | function          | actions for when the user updates the type of employer                                       |
+| preValidatedData             | false    | boolean           | allows to ignore the state of the "Confirm details are correct" checkbox & shows "No issues" |
+| showStatutoryEmployerSection | true     | boolean           | allows to suppress display of statutory employer description                                 |

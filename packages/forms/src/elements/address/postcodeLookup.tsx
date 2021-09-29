@@ -1,22 +1,10 @@
-import React, { useState, useRef } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import { useForm } from 'react-final-form';
-import PostcodeValidator from './postcodeValidator';
-import { FFInputText } from '../text/text';
 import { Button, Flex } from '@tpr/core';
+import { FFInputText } from '../text/text';
+import { postcodeValidator } from './services';
+import { PostcodeLookupProps } from './types';
 import styles from './addressLookup.module.scss';
-
-type PostcodeLookupProps = {
-	loading: boolean;
-	testId?: string;
-	postcode?: string;
-	onPostcodeChanged: (postcode: string) => void;
-	invalidPostcodeMessage: string;
-	postcodeLookupLabel: string;
-	postcodeLookupButton: string;
-	findAddressCancelledButton?: string;
-	onFindAddressCancelled?: () => void;
-	onValidatePostcode?: (isValid: boolean) => void | null;
-};
 
 export const PostcodeLookup: React.FC<PostcodeLookupProps> = ({
 	loading,
@@ -28,39 +16,35 @@ export const PostcodeLookup: React.FC<PostcodeLookupProps> = ({
 	postcodeLookupButton,
 	findAddressCancelledButton,
 	onFindAddressCancelled,
-	onValidatePostcode,
 }) => {
 	const form = useForm();
-	const validator = new PostcodeValidator(invalidPostcodeMessage);
 
-	const searchFieldRef = useRef(null);
+	const searchFieldRef = useRef<HTMLInputElement>(null);
 	const [postcodeValid, setPostcodeValid] = useState(false);
 
 	const clickFindAddress = () => {
-		// the blur event will trigger 'validate' in FFInputText when clicking 'Find address' without having visited the input field.
-		const myEvent = new Event('blur', { bubbles: true });
-		searchFieldRef.current.dispatchEvent(myEvent);
 		postcodeValid &&
 			onPostcodeChanged(form.getFieldState('postcodeLookup').value);
 	};
 
+	useEffect(() => {
+		searchFieldRef.current.value = null;
+		searchFieldRef.current.focus();
+	}, []);
+
 	const validatePostcode = (value) => {
-		const result = validator.validatePostcode(value);
-		let isValid: boolean;
-
-		if (typeof result === 'undefined') {
-			setPostcodeValid(true);
-			isValid = true;
-		} else {
-			setPostcodeValid(false);
-			isValid = false;
-		}
-
-		if (onValidatePostcode !== null) {
-			onValidatePostcode(isValid);
-		}
-
+		const result = postcodeValidator(value, invalidPostcodeMessage);
+		typeof result === 'undefined'
+			? setPostcodeValid(true)
+			: setPostcodeValid(false);
 		return result;
+	};
+
+	const handleKeyPress = (e: KeyboardEvent) => {
+		if (e.key === 'Enter') {
+			e.preventDefault();
+			clickFindAddress();
+		}
 	};
 
 	return (
@@ -68,19 +52,28 @@ export const PostcodeLookup: React.FC<PostcodeLookupProps> = ({
 			<FFInputText
 				ref={searchFieldRef}
 				name="postcodeLookup"
+				autoComplete="postal-code"
 				value={postcode}
 				label={postcodeLookupLabel}
-				validate={(value) => validatePostcode(value)}
+				required
+				validate={(value) => searchFieldRef.current && validatePostcode(value)}
 				testId={(testId ? testId + '-' : '') + 'postcode-lookup-edit'}
 				inputClassName={styles.editPostcode}
 				disabled={loading}
-				defaultValue={''}
+				onKeyPress={handleKeyPress}
 			/>
-			<Flex cfg={{ flexDirection: 'row', mt: 2, alignItems: 'center' }}>
+			<Flex
+				cfg={{
+					flexDirection: 'row',
+					mt: 2,
+					alignItems: 'center',
+				}}
+			>
 				<Button
 					testId={(testId ? testId + '-' : '') + 'postcode-lookup-button'}
 					onClick={clickFindAddress}
-					disabled={loading || !postcodeValid}
+					appearance="secondary"
+					aria-disabled={!postcodeValid}
 				>
 					{postcodeLookupButton}
 				</Button>
@@ -90,7 +83,6 @@ export const PostcodeLookup: React.FC<PostcodeLookupProps> = ({
 						onClick={onFindAddressCancelled}
 						testId={(testId ? testId + '-' : '') + 'find-address-cancel-button'}
 						appearance="secondary"
-						size="small"
 					>
 						{findAddressCancelledButton}
 					</Button>

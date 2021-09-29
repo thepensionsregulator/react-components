@@ -1,25 +1,31 @@
 import React from 'react';
-import styles from './info.module.scss';
 import { classNames, H2 } from '@tpr/core';
+import styles from './info.module.scss';
 
-type InfoProps = { title?: string; importantMessage?: string };
+type InfoProps = { id: string; title?: string; importantMessage?: string };
 export const Info: React.FC<InfoProps> = ({
 	children,
+	id = 'info',
 	title,
 	importantMessage,
 }) => {
 	return (
-		<div
+		<section
+			id={id}
+			data-testid={id}
 			className={classNames([
 				styles.info,
 				{ [styles['important']]: importantMessage ? true : false },
 			])}
+			aria-labelledby={importantMessage ? `${id}-important` : undefined}
 		>
 			{importantMessage && (
-				<div className={styles.importantMessage}>{importantMessage}</div>
+				<strong className={styles.importantMessage} id={`${id}-important`}>
+					{importantMessage}
+				</strong>
 			)}
 			{title && <H2 cfg={{ mb: 2 }}>{title}</H2>}
 			{children}
-		</div>
+		</section>
 	);
 };

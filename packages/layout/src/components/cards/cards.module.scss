@@ -1,5 +1,5 @@
-@import '@tpr/theming/lib/variables.scss';
 @import '@tpr/core/lib/components/typography/typography.module.scss';
+// typography.module.scss includes '@tpr/theming/lib/variables.scss'
 
 .card {
 	position: relative;
@@ -8,29 +8,93 @@
 	border: 1px solid $colors-neutral-4;
 	box-shadow: 0 2px 3px rgba(0, 0, 0, 0.2);
 	margin-bottom: $space-6;
-}
 
-.cardToolbar {
-	display: flex;
-	flex-direction: row;
-	flex: 0 0 auto;
-	min-height: 100px;
-	padding: 40px 40px 0 40px;
-	border-left: 5px solid;
-	border-color: $colors-danger-2;
-}
+	.cardToolbar {
+		display: flex;
+		flex-direction: row;
+		flex: 0 0 auto;
+		min-height: 100px;
+		padding: 40px 40px 20px 40px;
+		border-left: 5px solid;
+		border-color: $colors-danger-2;
 
-.complete {
-	border-color: $colors-success-1;
-}
+		.divider {
+			width: 1px;
+			background-color: $colors-neutral-6;
+			height: 50%;
+			margin: 0 $space-4;
+			max-height: $space-6;
+		}
 
-.verticalHr {
-	width: 1px;
-	background-color: $colors-neutral-6;
-	height: 50%;
-	margin: 0 $space-4;
-}
+		.personOrCompanyName {
+			@include styled-as-h4;
+			@include removeMarginBottom;
+			line-height: $line-height-3;
+			word-break: break-all;
+		}
 
-.extraPB {
-	padding-bottom: 16px;
+		.personOrCompanyRole {
+			@include removeMarginBottom;
+			line-height: $line-height-3;
+			word-break: break-all;
+		}
+	}
+
+	.section {
+		width: 50%;
+		flex: 0 0 auto;
+		flex-direction: column;
+	}
+
+	.removeSection {
+		flex-direction: row;
+		justify-content: flex-end;
+		align-items: flex-start;
+	}
+
+	.content {
+		display: flex;
+		flex-direction: column;
+		border-left: 5px solid;
+		border-color: $colors-danger-2;
+		padding: 0 40px 20px 40px;
+
+		.emailPhonePreviewLabel {
+			@include styled-as-h4;
+			@include removeMarginBottom;
+			line-height: $line-height-3;
+		}
+
+		.emailPhonePreviewValue {
+			@include removeMarginBottom;
+			line-height: $line-height-3;
+			word-break: break-all;
+		}
+
+		.identifierItem {
+			margin-top: $space-2;
+			flex-direction: column;
+
+			.title {
+				@include styled-as-h4;
+				@include removeMarginBottom;
+				line-height: $line-height-3;
+			}
+
+			.number {
+				@include removeMarginBottom;
+			}
+		}
+
+		.isProfessional,
+		.appointedByRegulator,
+		.insurerCompanyRef {
+			margin-top: $space-2;
+			@include removeMarginBottom;
+		}
+	}
+
+	.complete {
+		border-left-color: $colors-success-1;
+	}
 }

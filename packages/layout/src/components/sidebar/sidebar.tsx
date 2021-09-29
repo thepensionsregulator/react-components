@@ -2,15 +2,16 @@ import React, { useEffect, useMemo, useState } from 'react';
 import { Flex, Link, P, flatten } from '@tpr/core';
 import { callAllEventHandlers } from '../../utils';
 import SidebarMenu from './components/SidebarMenu';
-import { ReactRouterDomProps, SidebarSectionProps } from './components/types';
+import { SidebarSectionProps } from './components/types';
+import { ReactRouterDomProps } from '../types/types';
 import styles from './sidebar.module.scss';
 
 export const isActive = (settings: { matchPath: any; location: any }) => (
 	path: string,
+	exact: boolean,
 ): boolean => {
 	const { matchPath = () => {}, location } = settings;
-	const matched = matchPath(location.pathname, { path });
-	return matched ? true : false;
+	return matchPath(location.pathname, { path, exact });
 };
 
 export const useSectionsUpdater = (
@@ -111,6 +112,7 @@ export const Sidebar: React.FC<SidebarProps> = ({
 							fontWeight: 3,
 							color: 'primary.2',
 							textAlign: 'left',
+							lineHeight: 6,
 							fontSize: 4,
 						}}
 						onClick={() => history.push(titlePath)}
@@ -126,6 +128,7 @@ export const Sidebar: React.FC<SidebarProps> = ({
 							fontWeight: 3,
 							lineHeight: 6,
 						}}
+						className={styles.label}
 					>
 						Section
 					</P>
@@ -136,6 +139,7 @@ export const Sidebar: React.FC<SidebarProps> = ({
 							fontWeight: 3,
 							lineHeight: 6,
 						}}
+						className={styles.label}
 					>
 						Progress {totalCompleted.length} / {totalSections.length}
 					</P>

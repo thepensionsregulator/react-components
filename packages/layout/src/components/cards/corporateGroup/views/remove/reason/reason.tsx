@@ -63,6 +63,7 @@ export const ReasonRemove: React.FC = () => {
 			onSubmit={onSubmit}
 			remove={remove}
 			dateField={DateField}
+			send={send}
 		/>
 	);
 };

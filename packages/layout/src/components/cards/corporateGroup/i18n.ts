@@ -1,4 +1,9 @@
-import { I18nRemoveReason } from '../common/interfaces';
+import {
+	I18nRemoveReason,
+	InputErrorMessages,
+	defaultEmailErrorMessages,
+	defaultPhoneErrorMessages,
+} from '../common/interfaces';
 type PropertyFunction<T> = () => T;
 
 export type CorporateGroupI18nProps = {
@@ -43,11 +48,11 @@ export type CorporateGroupI18nProps = {
 		fields: {
 			telephone: {
 				label: string;
-				error: string;
+				error: InputErrorMessages;
 			};
 			email: {
 				label: string;
-				error: string;
+				error: InputErrorMessages;
 			};
 		};
 	};
@@ -97,7 +102,7 @@ export const i18n: CorporateGroupI18nProps = {
 			confirmed: 'Confirmed',
 			unconfirmed: 'Unconfirmed',
 		},
-		checkboxLabel: 'Confirm details are correct.',
+		checkboxLabel: "Confirm '__NAME__' is correct.",
 		trusteeType: 'Corporate Group trustee',
 	},
 	name: {
@@ -126,12 +131,11 @@ export const i18n: CorporateGroupI18nProps = {
 		fields: {
 			telephone: {
 				label: 'Telephone number',
-				error:
-					'Enter a telephone number, like 0163 960 598 or +44 7700 900 359',
+				error: defaultPhoneErrorMessages,
 			},
 			email: {
 				label: 'Email address',
-				error: 'Cannot be empty',
+				error: defaultEmailErrorMessages,
 			},
 		},
 	},

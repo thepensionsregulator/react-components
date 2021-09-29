@@ -32,7 +32,6 @@ export const RemoveDateForm: React.FC = () => {
 				}
 			},
 			error: i18n.remove.date.fields.date.error,
-			cfg: { mb: 3 },
 		},
 	];
 
@@ -55,6 +54,7 @@ export const RemoveDateForm: React.FC = () => {
 			dateField={DateField}
 			type={cardType.inHouseAdmin}
 			typeName={cardTypeName.inHouseAdmin}
+			send={send}
 		/>
 	);
 };

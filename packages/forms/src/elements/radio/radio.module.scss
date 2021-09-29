@@ -1,12 +1,15 @@
-@import '@tpr/theming/lib/variables.scss';
+@import '@tpr/core/lib/components/typography/typography.module.scss';
+// typography.module.scss includes '@tpr/theming/lib/variables.scss'
 
 .wrapper {
-	display: flex;
-	flex: 0 0 auto;
-	align-items: center;
 	cursor: pointer;
-	height: 25px;
 	user-select: none;
+
+	.innerWrapper {
+		display: flex;
+		flex: 0 0 auto;
+		align-items: center;
+	}
 
 	input[type='radio']:focus + .radio {
 		box-shadow: 0 0 0 4px #ffd300;
@@ -14,6 +17,8 @@
 
 	.radio {
 		border-radius: 50%;
+		min-width: 40px;
+		min-height: 40px;
 	}
 }
 
@@ -23,6 +28,8 @@
 	line-height: $line-height-3;
 	padding-left: $space-1;
 	cursor: pointer;
+	margin-left: $space-2;
+	@include removeMarginBottom;
 }
 
 .disabled {
@@ -48,4 +55,14 @@
 	margin-top: $space-2;
 	padding-left: 55px;
 	max-width: 100%;
+	@include removeMarginBottom;
+}
+
+.inline {
+	display: flex;
+	flex-direction: row;
+
+	& > div {
+		margin-right: $space-8;
+	}
 }

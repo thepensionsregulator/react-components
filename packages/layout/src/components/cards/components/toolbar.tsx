@@ -2,71 +2,64 @@ import React from 'react';
 import { Flex, classNames } from '@tpr/core';
 import { CheckedCircle, ErrorCircle } from '@tpr/icons';
 import { StatusMessage } from './card';
+import CardContentSectionHeader from './cardContentSectionHeader';
 import styles from '../cards.module.scss';
 
-export type ToolbarProps = {
+export interface ToolbarProps {
 	complete: boolean;
 	subtitle?: Function;
 	buttonLeft: Function;
 	buttonRight: Function;
-	extraPB?: boolean;
 	statusText: string;
-};
-export const Toolbar: React.FC<ToolbarProps> = ({
-	complete,
-	subtitle,
-	buttonLeft,
-	buttonRight,
-	extraPB,
-	statusText,
-}) => {
-	return (
-		<div
-			className={classNames([
-				{ [styles.complete]: complete },
-				styles.cardToolbar,
-				extraPB && styles.extraPB,
-			])}
-		>
-			<Flex
-				cfg={{
-					width: 5,
-					flex: '0 0 auto',
-					flexDirection: 'column',
-					justifyContent: 'flex-start',
-					pr: 4,
-				}}
+	subSectionHeaderText?: string;
+}
+
+export const Toolbar: React.FC<ToolbarProps> = React.memo(
+	({
+		complete,
+		subtitle,
+		buttonLeft,
+		buttonRight,
+		statusText,
+		subSectionHeaderText,
+	}) => {
+		return (
+			<div
+				className={classNames([
+					{ [styles.complete]: complete },
+					styles.cardToolbar,
+				])}
 			>
-				{buttonLeft()}
-				{subtitle && (
-					<Flex cfg={{ mt: 1, flexDirection: 'column' }}>{subtitle()}</Flex>
+				{subSectionHeaderText && (
+					<CardContentSectionHeader sectionHeaderText={subSectionHeaderText} />
 				)}
-			</Flex>
-			<Flex
-				cfg={{
-					width: 5,
-					flex: '0 0 auto',
-					justifyContent: 'flex-end',
-					alignItems: 'flex-start',
-					pl: 4,
-				}}
-			>
-				{complete ? (
+				<Flex
+					cfg={{
+						justifyContent: 'flex-start',
+						pr: 4,
+					}}
+					className={styles.section}
+				>
+					{buttonLeft()}
+					{subtitle && (
+						<Flex cfg={{ mt: 1, flexDirection: 'column' }}>{subtitle()}</Flex>
+					)}
+				</Flex>
+				<Flex
+					cfg={{
+						pl: 4,
+					}}
+					className={styles.section + ' ' + styles.removeSection}
+				>
 					<StatusMessage
 						complete={complete}
-						icon={CheckedCircle}
+						icon={complete ? CheckedCircle : ErrorCircle}
 						text={statusText}
 					/>
-				) : (
-					<StatusMessage
-						complete={complete}
-						icon={ErrorCircle}
-						text={statusText}
-					/>
-				)}
-				<div className={styles.verticalHr} />
-				<Flex cfg={{ alignItems: 'flex-start' }}>{buttonRight()}</Flex>
-			</Flex>
-		</div>
-	);
-};
+					<div className={styles.divider} />
+					<Flex cfg={{ alignItems: 'flex-start' }}>{buttonRight()}</Flex>
+				</Flex>
+			</div>
+		);
+	},
+);

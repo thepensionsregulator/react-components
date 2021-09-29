@@ -1,0 +1,94 @@
+trigger: none
+
+pool:
+  vmImage: 'windows-2019'
+
+resources:
+  repositories:
+    - repository: hooks
+      type: git
+      name: TPR/Tools-TPRGitHooks
+      ref: develop
+
+variables:
+  - name: YARN_CACHE_FOLDER
+    value: $(Pipeline.Workspace)/.yarn
+  - group: DEV-COMMON-SECRETS
+
+jobs:
+  - job: Build_and_test
+    displayName: Build and test
+    steps:
+      - checkout: self
+      - checkout: hooks
+      - template: git-secrets.steps.yml@hooks
+        parameters:
+          repoPath: $(Build.SourcesDirectory)\react-components
+
+      - task: Cache@2
+        inputs:
+          key: 'yarn | "$(Agent.OS)" | $(Build.SourcesDirectory)/react-components/**/yarn.lock'
+          restoreKeys: |
+            yarn | "$(Agent.OS)"
+          path: $(YARN_CACHE_FOLDER)
+        displayName: Cache Yarn packages
+
+      - task: Yarn@3
+        inputs:
+          projectDirectory: '$(Build.SourcesDirectory)\react-components'
+          arguments: 'audit --level moderate --groups dependencies'
+        displayName: yarn audit
+
+      - task: Yarn@3
+        inputs:
+          projectDirectory: '$(Build.SourcesDirectory)\react-components'
+          arguments: '--frozen-lockfile'
+        displayName: yarn install
+
+      - task: Yarn@3
+        inputs:
+          projectDirectory: '$(Build.SourcesDirectory)\react-components'
+          arguments: 'build'
+        displayName: yarn build
+
+      - task: Yarn@3
+        inputs:
+          projectDirectory: '$(Build.SourcesDirectory)\react-components'
+          arguments: test --ci --watchAll=false --reporters=jest-junit --reporters=default --coverage --coverageReporters=cobertura --testMatch "**\*.spec.[t]s?(x)"
+        displayName: Run tests
+        continueOnError: true # Test failures should be published before failing the build
+
+      - task: PublishTestResults@2
+        displayName: 'Publish unit test results'
+        inputs:
+          testResultsFiles: junit.xml
+          searchFolder: $(Build.SourcesDirectory)\react-components
+          mergeTestResults: true
+          testRunTitle: 'Jest Unit Tests'
+          failTaskOnFailedTests: true
+
+      - task: PublishCodeCoverageResults@1
+        displayName: 'Publish code coverage from Jest tests'
+        inputs:
+          codeCoverageTool: Cobertura
+          summaryFileLocation: $(Build.SourcesDirectory)\react-components\coverage\cobertura-coverage.xml
+          failIfCoverageEmpty: true
+
+      - ${{ if eq(variables['Build.SourceBranch'], 'refs/heads/develop') }}:
+          - script: git reset --hard HEAD
+            displayName: Reset file changes made by tests that would prevent deployment
+
+          - task: Yarn@3
+            inputs:
+              projectDirectory: '$(Build.SourcesDirectory)\react-components'
+              arguments: 'postinstall'
+            displayName: yarn postinstall
+
+          - script: echo "//registry.npmjs.org/:_authToken=$(NPM-Access-Token)" > $(Build.SourcesDirectory)\react-components\.npmrc
+            displayName: Authenticate with NPM registry
+
+          - task: Yarn@3
+            inputs:
+              projectDirectory: '$(Build.SourcesDirectory)\react-components'
+              arguments: deploy --canary --yes --preid next --dist-tag next
+            displayName: Publish packages to NPM

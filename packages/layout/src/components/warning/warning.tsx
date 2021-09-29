@@ -1,7 +1,7 @@
 import React from 'react';
 import { Flex, SpaceProps, FlexProps } from '@tpr/core';
-import styles from './warning.module.scss';
 import { WarningCircle } from '@tpr/icons';
+import styles from './warning.module.scss';
 
 export type WarningBoxProps = {
 	cfg?: SpaceProps & FlexProps;
@@ -19,7 +19,7 @@ export const WarningBox: React.FC<WarningBoxProps> = ({
 			role="alert"
 		>
 			<Flex cfg={{ flexDirection: 'row' }}>
-				<WarningCircle cfg={{ mr: 4 }} ariaLabel={warningLabel} />
+				<WarningCircle cfg={{ mr: 4 }} alternativeText={warningLabel} />
 				{children}
 			</Flex>
 		</Flex>

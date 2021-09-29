@@ -1,5 +1,5 @@
 import React from 'react';
-import { P, H4 } from '@tpr/core';
+import { P, H5, Link } from '@tpr/core';
 import { Footer } from '../../../../components/card';
 import { Form, FFRadioButton, FieldProps, renderFields } from '@tpr/forms';
 import { Content } from '../../../../components/content';
@@ -10,7 +10,6 @@ import {
 	RemoveReasonProps,
 } from '../../../../common/interfaces';
 import styles from './reason.module.scss';
-import elementStyles from '@tpr/forms/lib/elements/elements.module.scss';
 
 interface ReasonProps {
 	type: cardType;
@@ -18,6 +17,7 @@ interface ReasonProps {
 	onSubmit: (any) => void;
 	remove: RemoveReasonProps;
 	dateField: FieldProps[];
+	send?: Function;
 }
 
 export const Reason: React.FC<ReasonProps> = ({
@@ -26,6 +26,7 @@ export const Reason: React.FC<ReasonProps> = ({
 	onSubmit,
 	remove,
 	dateField,
+	send,
 }) => {
 	return (
 		<Content type={type} title={i18nRemoveReason.title}>
@@ -41,14 +42,27 @@ export const Reason: React.FC<ReasonProps> = ({
 					const showError: boolean = !!submitError && !reason;
 					const leftScheme: boolean = reason === 'left_the_scheme';
 					return (
-						<form onSubmit={handleSubmit} data-testid={`remove-${type}-form`}>
-							<div className={showError ? elementStyles.labelError : null}>
+						<form
+							onSubmit={handleSubmit}
+							data-testid={`remove-${type}-form`}
+							noValidate
+						>
+							<div className={showError ? styles.labelError : null}>
 								<fieldset>
 									<legend>
-										<H4 fontWeight="bold" mb={0}>
+										<H5 className={styles.h5Legend}>
 											{i18nRemoveReason.subtitle}
-										</H4>
+										</H5>
 									</legend>
+									{showError && (
+										<P
+											role="alert"
+											cfg={{ color: 'danger.2', mt: 5 }}
+											className={styles.errorMessage}
+										>
+											{submitError}
+										</P>
+									)}
 									<FFRadioButton
 										name="reason"
 										type="radio"
@@ -56,6 +70,7 @@ export const Reason: React.FC<ReasonProps> = ({
 										label={i18nRemoveReason.fields.leftTheScheme.label}
 										value="left_the_scheme"
 										cfg={{ my: 4 }}
+										required={true}
 									/>
 									{leftScheme && (
 										<div className={styles.dateWrapper}>
@@ -67,17 +82,9 @@ export const Reason: React.FC<ReasonProps> = ({
 										type="radio"
 										label={i18nRemoveReason.fields.neverPartOfTheScheme.label}
 										value="not_part_of_scheme"
+										required={true}
 									/>
 								</fieldset>
-								{showError && (
-									<P
-										role="alert"
-										cfg={{ color: 'danger.2', mt: 5 }}
-										className={elementStyles.errorMessage}
-									>
-										{submitError}
-									</P>
-								)}
 							</div>
 							<Footer>
 								<ArrowButton
@@ -87,6 +94,9 @@ export const Reason: React.FC<ReasonProps> = ({
 									type="submit"
 									title="Continue"
 								/>
+								<Link cfg={{ m: 3 }} underline onClick={() => send('CANCEL')}>
+									Cancel
+								</Link>
 							</Footer>
 						</form>
 					);

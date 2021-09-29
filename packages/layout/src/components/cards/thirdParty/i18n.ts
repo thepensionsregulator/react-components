@@ -71,7 +71,7 @@ export const i18n: ThirdPartyI18nProps = {
 			confirmed: 'Confirmed',
 			unconfirmed: 'Unconfirmed',
 		},
-		checkboxLabel: 'Confirm details are correct.',
+		checkboxLabel: "Confirm '__NAME__' is correct.",
 	},
 	reference: {
 		title: 'Reference details for this third party admin',

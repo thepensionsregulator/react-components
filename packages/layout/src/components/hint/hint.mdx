@@ -5,6 +5,10 @@ route: /layout/hint
 ---
 
 import { Playground } from '@playground';
+import { Props } from 'docz';
+import { useState } from 'react';
+import { Flex, Button } from '@tpr/core';
+import { EditorFonts } from '@tpr/theming';
 import { Hint } from './hint';
 
 # Hint
@@ -16,16 +20,64 @@ import { Hint } from '@tpr/layout';
 ```
 
 <Playground>
-	<Hint>
-		<p>
-			Lucas ipsum dolor sit amet wookiee skywalker antilles yoda antilles hutt
-			luke grievous darth darth. Hutt obi-wan maul vader. Owen han skywalker
-			moff obi-wan kashyyyk bespin moff darth. Palpatine organa qui-gon lars
-			darth. Gamorrean jango fett amidala luuke jawa. Hutt moff darth grievous
-			coruscant jar ben skywalker. Jabba organa cade windu lars mon. Darth fisto
-			dantooine qui-gon jabba qui-gon sidious palpatine dooku. Darth darth hutt
-			k-3po tatooine. Padmé mandalore wampa darth moff. Wampa hutt jabba binks
-			luke
-		</p>
-	</Hint>
+	{() => {
+		const [expanded, setExpanded] = useState(false);
+		return (
+			<>
+				<Button onClick={() => setExpanded(!expanded)} cfg={{ mb: 4 }}>
+					Toggle visibility
+				</Button>
+				<Hint expanded={expanded}>
+					<EditorFonts>
+					<p>
+						Lucas ipsum dolor sit amet wookiee skywalker antilles yoda antilles
+						hutt luke grievous darth darth. Hutt obi-wan maul vader. Owen han
+						skywalker moff obi-wan kashyyyk bespin moff darth. Palpatine organa
+						qui-gon lars darth. Gamorrean jango fett amidala luuke jawa. Hutt
+						moff darth grievous coruscant jar ben skywalker. Jabba organa cade
+						windu lars mon. Darth fisto dantooine qui-gon jabba qui-gon sidious
+						palpatine dooku. Darth darth hutt k-3po tatooine. Padmé mandalore
+						wampa darth moff. Wampa hutt jabba binks luke
+					</p>
+					<table>
+						<caption>Assumed values for active and deferred members</caption>
+						<thead>
+								<tr>
+										<th scope="col">Service period</th>
+										<th scope="col">Active members</th>
+										<th scope="col">Deferred members</th>
+								</tr>
+						</thead>
+						<tbody>
+							<tr>
+									<th scope="row">Pre-6 April 1997</th>
+									<td>60%</td>
+									<td>80%</td>
+							</tr>
+							<tr>
+									<th scope="row">6 April 1997 to 5 April 2009</th>
+									<td>40%</td>
+									<td>20%</td>
+							</tr>
+							<tr>
+									<th scope="row">Post-5 April 2009</th>
+									<td>0%</td>
+									<td>0%</td>
+							</tr>
+						</tbody>
+    			</table>
+    			</EditorFonts>
+    			</Hint>
+    			<p>
+    				There should be default spacing between the Hint component and this
+    				paragraph.
+    			</p>
+    		</>
+    	);
+    }}
+
 </Playground>
+
+## API
+
+<Props of={Hint} />

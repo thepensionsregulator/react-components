@@ -1,16 +1,15 @@
 import React from 'react';
 import { Field, FieldRenderProps } from 'react-final-form';
 import { StyledInputLabel, InputElementHeading } from '../elements';
-import { FieldProps, FieldExtraProps } from '../../renderFields';
+import { FieldExtraProps } from '../../renderFields';
+import { FFInputCommonProps } from 'types/fieldProps';
 import { Input } from '../input/input';
-import {
-	composeValidators,
-	isPhoneValid,
-	executeClientValidation,
-} from '../../validators';
+import { isPhoneValid } from '../../validators';
 import AccessibilityHelper from '../accessibilityHelper';
+import elementStyles from '../elements.module.scss';
 
-type InputPhoneProps = FieldRenderProps<string> & FieldExtraProps;
+interface InputPhoneProps extends FieldRenderProps<string>, FieldExtraProps {}
+
 const InputPhone: React.FC<InputPhoneProps> = ({
 	id,
 	label,
@@ -22,7 +21,6 @@ const InputPhone: React.FC<InputPhoneProps> = ({
 	required,
 	placeholder,
 	readOnly,
-	inputWidth: width,
 	cfg,
 }) => {
 	const helper = new AccessibilityHelper(name, !!label, !!hint);
@@ -30,7 +28,7 @@ const InputPhone: React.FC<InputPhoneProps> = ({
 	return (
 		<StyledInputLabel
 			isError={meta && meta.touched && meta.error}
-			cfg={Object.assign({ flexDirection: 'column', mt: 1 }, cfg)}
+			cfg={Object.assign({ mt: 1 }, cfg)}
 		>
 			<InputElementHeading
 				label={label}
@@ -41,8 +39,8 @@ const InputPhone: React.FC<InputPhoneProps> = ({
 			/>
 			<Input
 				id={id}
-				type="tel"
-				width={width}
+				autoComplete="tel"
+				className={elementStyles.phoneInput}
 				testId={testId}
 				label={label}
 				placeholder={placeholder}
@@ -51,22 +49,20 @@ const InputPhone: React.FC<InputPhoneProps> = ({
 				required={required}
 				accessibilityHelper={helper}
 				{...input}
+				type="tel"
 			/>
 		</StyledInputLabel>
 	);
 };
 
-export const FFInputPhone: React.FC<FieldProps & FieldExtraProps> = (
-	fieldProps,
-) => {
+export const FFInputPhone: React.FC<FFInputCommonProps> = (fieldProps) => {
 	return (
 		<Field
 			{...fieldProps}
-			validate={composeValidators(
-				executeClientValidation(fieldProps.validate),
-				isPhoneValid(
-					fieldProps.error ? fieldProps.error : 'Invalid phone number',
-				),
+			validate={isPhoneValid(
+				fieldProps.errorEmptyValue,
+				fieldProps.errorInvalidValue,
+				fieldProps.required,
 			)}
 			render={(props) => <InputPhone {...props} {...fieldProps} />}
 		/>

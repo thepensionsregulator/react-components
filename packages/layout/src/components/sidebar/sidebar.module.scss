@@ -1,5 +1,5 @@
-@import '@tpr/theming/lib/variables.scss';
 @import '@tpr/core/lib/components/typography/typography.module.scss';
+// typography.module.scss includes '@tpr/theming/lib/variables.scss'
 
 .sidebar {
 	display: flex;
@@ -30,25 +30,18 @@
 		}
 	}
 
-	div.activeLink {
+	div.topLevelWrapper {
 		position: relative;
 
-		a {
-			text-decoration: underline;
+		&.topLevelLink {
+			width: 100%;
+		}
 
-			&:hover {
-				text-decoration: underline !important;
-			}
-
-			&:focus {
-				color: $colors-neutral-8 !important;
-				text-decoration: none;
-			}
-
-			&::before {
+		&.containsSelectedLink > .topLevelLink {
+			a::before {
 				content: ' ';
 				position: absolute;
-				left: -20px;
+				left: -25px;
 				top: -8px;
 				height: 100%;
 				min-height: 40px;
@@ -56,6 +49,47 @@
 				background: $colors-primary-3;
 				// to hide outline from pseudo element
 				box-shadow: 0px 0px 0px 1px white;
+			}
+		}
+	}
+
+	div[aria-current] {
+		a {
+			text-decoration: underline;
+
+			&:hover {
+				text-decoration: underline;
+			}
+
+			&:focus {
+				color: $colors-neutral-8 !important;
+				text-decoration: none;
+			}
+		}
+		&.nested {
+			a {
+				color: $colors-neutral-8 !important;
+
+				&:hover {
+					color: $colors-neutral-a1 !important;
+				}
+			}
+		}
+	}
+
+	.nestedWrapper {
+		padding-left: 0 !important;
+
+		&.collapsed {
+			height: 0;
+			overflow: hidden;
+		}
+
+		.nested {
+			&::before {
+				content: '—';
+				color: $colors-neutral-8;
+				padding-right: 2px;
 			}
 		}
 	}
@@ -80,17 +114,6 @@
 	border-bottom: none;
 }
 
-.nestedWrapper {
-	&.collapsed {
-		height: 0;
-		overflow: hidden;
-	}
-
-	.nested {
-		&::before {
-			content: '—';
-			color: $colors-neutral-8;
-			padding-right: 2px;
-		}
-	}
+.label {
+	@include removeMarginBottom;
 }

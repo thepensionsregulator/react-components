@@ -1,8 +1,7 @@
-import React, { createElement } from 'react';
+import React, { createElement, ReactNode } from 'react';
 import { SpaceProps, FlexProps, useClassNames, Span } from '@tpr/core';
-import styles from './elements.module.scss';
-import { ReactNode } from 'react';
 import AccessibilityHelper from './accessibilityHelper';
+import styles from './elements.module.scss';
 
 interface StyledInputLabelProps {
 	element?: 'label' | 'div' | 'fieldset';
@@ -11,6 +10,8 @@ interface StyledInputLabelProps {
 	cfg?: FlexProps | SpaceProps;
 	[key: string]: any;
 	noLeftBorder?: boolean;
+	hiddenLabel?: string;
+	hiddenLabelId?: string;
 }
 export const StyledInputLabel: React.FC<StyledInputLabelProps> = ({
 	element = 'label',
@@ -19,6 +20,8 @@ export const StyledInputLabel: React.FC<StyledInputLabelProps> = ({
 	className,
 	children,
 	noLeftBorder,
+	hiddenLabel = '',
+	hiddenLabelId,
 	...props
 }) => {
 	const classNames = useClassNames(cfg, [
@@ -32,7 +35,15 @@ export const StyledInputLabel: React.FC<StyledInputLabelProps> = ({
 			className: classNames,
 			...props,
 		},
-		children,
+
+		<>
+			{hiddenLabel && (
+				<div className={styles.hiddenLabel} id={hiddenLabelId}>
+					{hiddenLabel}
+				</div>
+			)}
+			{children}
+		</>,
 	);
 };
 
@@ -41,6 +52,7 @@ interface FormLabelTextProps {
 	id?: string;
 	className?: string;
 	labelNotBold?: boolean;
+	forId?: string;
 }
 
 export const FormLabelText: React.FC<FormLabelTextProps> = ({
@@ -48,6 +60,7 @@ export const FormLabelText: React.FC<FormLabelTextProps> = ({
 	id = null,
 	children,
 	labelNotBold,
+	forId,
 }) => {
 	const classNames = useClassNames({}, [
 		styles.labelText,
@@ -58,19 +71,27 @@ export const FormLabelText: React.FC<FormLabelTextProps> = ({
 		{
 			id: id,
 			className: classNames,
+			htmlFor: forId,
 		},
 		children,
 	);
 };
 
-export const ErrorMessage: React.FC<ErrorMessageProps> = ({ id, children }) => (
-	<p id={id} className={styles.errorMessage}>
+export const ErrorMessage: React.FC<ErrorMessageProps> = ({
+	id,
+	children,
+	role,
+}) => (
+	<p id={id} className={styles.errorMessage} role={role}>
 		{children}
 	</p>
 );
 
+// `role` is optional because, for an error related to a single field, linking it to the error using aria-describedby works best.
+// For a multi-field entry with a combined error (date) it works better to use role="alert".
 type ErrorMessageProps = {
 	id?: string;
+	role?: 'alert' | undefined;
 	children: ReactNode;
 };
 
@@ -82,6 +103,8 @@ type InputElementHeadingProps = {
 	meta?: any;
 	accessibilityHelper: AccessibilityHelper;
 	labelNotBold?: boolean;
+	errorRole?: 'alert' | undefined;
+	forId?: string;
 };
 export const InputElementHeading: React.FC<InputElementHeadingProps> = ({
 	element = 'div',
@@ -91,6 +114,8 @@ export const InputElementHeading: React.FC<InputElementHeadingProps> = ({
 	meta,
 	accessibilityHelper,
 	labelNotBold,
+	errorRole,
+	forId,
 }) => {
 	return (
 		<>
@@ -99,6 +124,7 @@ export const InputElementHeading: React.FC<InputElementHeadingProps> = ({
 					element={element}
 					id={accessibilityHelper.labelId}
 					labelNotBold={labelNotBold}
+					forId={forId}
 				>
 					{label} {!required && '(optional)'}
 				</FormLabelText>
@@ -113,7 +139,7 @@ export const InputElementHeading: React.FC<InputElementHeadingProps> = ({
 				</Span>
 			)}
 			{meta && meta.touched && meta.error && (
-				<ErrorMessage id={accessibilityHelper.errorId}>
+				<ErrorMessage id={accessibilityHelper.errorId} role={errorRole}>
 					{meta.error}
 				</ErrorMessage>
 			)}

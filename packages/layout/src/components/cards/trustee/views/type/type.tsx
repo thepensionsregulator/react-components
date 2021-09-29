@@ -1,5 +1,5 @@
 import React from 'react';
-import { Flex, P } from '@tpr/core';
+import { Flex, Link, P } from '@tpr/core';
 import { Form, FieldProps, renderFields } from '@tpr/forms';
 import { useTrusteeContext } from '../../context';
 import { Footer } from '../../../components/card';
@@ -15,6 +15,7 @@ const getDescriptionFields = ({ fields }: any): FieldProps[] => [
 		value: 'member-nominated',
 		label: fields.trusteeType.labels.memberNominated,
 		cfg: { mb: 2 },
+		required: true,
 	},
 	{
 		type: 'radio',
@@ -22,6 +23,7 @@ const getDescriptionFields = ({ fields }: any): FieldProps[] => [
 		value: 'employer-appointed',
 		label: fields.trusteeType.labels.employerAppointed,
 		cfg: { mb: 2 },
+		required: true,
 	},
 	{
 		type: 'radio',
@@ -29,6 +31,7 @@ const getDescriptionFields = ({ fields }: any): FieldProps[] => [
 		value: 'regulator-appointed',
 		label: fields.trusteeType.labels.regulatorAppointed,
 		cfg: { mb: 2 },
+		required: true,
 	},
 	{
 		type: 'radio',
@@ -36,6 +39,7 @@ const getDescriptionFields = ({ fields }: any): FieldProps[] => [
 		value: 'other',
 		label: fields.trusteeType.labels.other,
 		cfg: { mb: 4 },
+		required: true,
 	},
 ];
 
@@ -45,6 +49,7 @@ const getIndividualFields = ({ fields }: any): FieldProps[] => [
 		name: 'isProfessionalTrustee',
 		value: 'yes',
 		label: fields.isProfessionalTrustee.labels.isProfessionalTrusteeYes,
+		required: true,
 	},
 	{
 		type: 'radio',
@@ -52,6 +57,7 @@ const getIndividualFields = ({ fields }: any): FieldProps[] => [
 		value: 'no',
 		label: fields.isProfessionalTrustee.labels.isProfessionalTrusteeNo,
 		cfg: { ml: 3 },
+		required: true,
 	},
 ];
 
@@ -119,6 +125,9 @@ const Type: React.FC = () => {
 								title="Save and close"
 								disabled={loading}
 							/>
+							<Link cfg={{ m: 3 }} underline onClick={() => send('CANCEL')}>
+								Cancel
+							</Link>
 						</Footer>
 					</form>
 				)}

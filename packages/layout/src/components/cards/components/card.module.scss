@@ -1,28 +1,46 @@
-@import '@tpr/theming/lib/variables.scss';
-
-.card {
-	position: relative;
-	display: flex;
-	flex-direction: column;
-	box-shadow: 0 2px 2px rgba(0, 0, 0, 0.2);
-	border: 1px solid #ddd;
-	margin-bottom: 20px;
-	border-left: 6px solid;
-	border-left-color: $colors-danger-2;
-}
-
-.card-complete {
-	border-left-color: $colors-success-1;
-}
-
-.cardToolbar {
-	display: flex;
-	flex-direction: column;
-	flex: 0 0 auto;
-	justify-content: space-evenly;
-	align-items: flex-start;
-}
+@import '../cards.module.scss';
 
 .toolbarBottomBorder {
 	border-bottom: 1px solid $colors-neutral-6;
+
+	.sectionTitle {
+		color: $colors-neutral-6;
+		font-size: $font-size-3;
+		@include removeMarginBottom;
+	}
+
+	.subtitle {
+		color: $colors-neutral-7;
+		@include removeMarginBottom;
+	}
+
+	.heading {
+		@include styled-as-h3;
+		font-weight: $font-weight-3;
+	}
+}
+
+.statusMsg {
+	align-items: center;
+	height: 1.5em;
+
+	.paragraph {
+		margin-left: $space-1;
+		font-size: $font-size-2;
+		font-weight: $font-weight-3;
+		@include removeMarginBottom;
+	}
+}
+
+.footer {
+	flex: 0 0 auto;
+	flex-direction: column;
+	align-items: flex-start;
+	justify-content: flex-start;
+	width: 100%;
+}
+
+:export {
+	confirmed: $colors-confirmed;
+	unconfirmed: $colors-unconfirmed;
 }

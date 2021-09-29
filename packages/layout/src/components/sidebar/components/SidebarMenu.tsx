@@ -1,7 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import { H2, Flex, Hr, Link } from '@tpr/core';
-import { SidebarLinkProps, SidebarMenuProps } from './types';
+import { SidebarMenuProps } from './types';
 import StatusIcon from './StatusIcon';
+import { NavItem, NavItemLinkProps } from '../../navitem';
+import navItemStyles from '../../navitem/navitem.module.scss';
 import styles from '../sidebar.module.scss';
 
 const SidebarMenu: React.FC<SidebarMenuProps> = ({
@@ -20,52 +22,31 @@ const SidebarMenu: React.FC<SidebarMenuProps> = ({
 		!collapsed && setClasses(styles.nestedWrapper);
 	}, [collapsed]);
 
-	const generateSubmenu = (links: SidebarLinkProps[]) => {
+	const generateSubmenu = (ll: NavItemLinkProps[]) => {
 		return (
 			<Flex cfg={{ flexDirection: 'column', pl: 6 }} className={classes}>
 				<ul className={styles.list}>
-					{links.map(
-						(
-							{ onClick = () => {}, active = () => false, ...innerLink },
-							key,
-						) => (
-							<li key={key}>
-								<Flex
-									cfg={{ justifyContent: 'space-between', mb: links ? 5 : 1 }}
-									className={styles.nested}
-								>
-									<Link
-										cfg={{
-											color: 'primary.2',
-											textAlign: 'left',
-											fontWeight: 3,
-											width: innerLink.hideIcon ? 10 : 8,
-										}}
-										disabled={innerLink.disabled}
-										onClick={() => onClick(innerLink)}
-									>
-										<Flex
-											cfg={{
-												flexDirection: 'row',
-												justifyContent: 'space-between',
-												alignItems: 'center',
-											}}
-										>
-											<span>{innerLink.name}</span>
-											{!maintenanceMode && !innerLink.hideIcon && (
-												<StatusIcon
-													link={innerLink}
-													sectionCompleteLabel={sectionCompleteLabel}
-													sectionIncompleteLabel={sectionIncompleteLabel}
-												/>
-											)}
-										</Flex>
-									</Link>
-								</Flex>
-								{innerLink.links && generateSubmenu(innerLink.links)}
-							</li>
-						),
-					)}
+					{ll.map(({ active = () => false, ...innerLink }, key) => (
+						<li key={key}>
+							<Flex
+								cfg={{ justifyContent: 'space-between', mb: ll ? 5 : 1 }}
+								className={styles.nested}
+								aria-current={active(innerLink.path, true) ? 'page' : null}
+							>
+								<NavItem link={innerLink}>
+									<span>{innerLink.name}</span>
+									{!maintenanceMode && !innerLink.hideIcon && (
+										<StatusIcon
+											link={innerLink}
+											sectionCompleteLabel={sectionCompleteLabel}
+											sectionIncompleteLabel={sectionIncompleteLabel}
+										/>
+									)}
+								</NavItem>
+							</Flex>
+							{innerLink.links && generateSubmenu(innerLink.links)}
+						</li>
+					))}
 				</ul>
 			</Flex>
 		);
@@ -90,24 +71,33 @@ const SidebarMenu: React.FC<SidebarMenuProps> = ({
 									mb: link.links ? 1 : 5,
 									flexDirection: link.links ? 'column' : 'row',
 								}}
-								className={active(link.path) ? styles.activeLink : undefined}
+								className={
+									active(link.path, false)
+										? `${styles.topLevelWrapper} ${styles.containsSelectedLink}`
+										: styles.topLevelWrapper
+								}
 							>
 								<Flex
 									cfg={{
 										justifyContent: 'space-between',
-										width: 10,
 										mb: link.links ? 5 : 1,
 									}}
+									className={styles.topLevelLink}
+									aria-current={active(link.path, true) ? 'page' : null}
 								>
 									<Link
 										cfg={{
 											color: 'primary.2',
 											textAlign: 'left',
 											fontWeight: 3,
-											width: link.hideIcon ? 10 : 8,
 										}}
 										disabled={link.disabled}
 										onClick={() => onClick(link)}
+										className={
+											link.hideIcon
+												? navItemStyles.link
+												: navItemStyles.linkWithIcon
+										}
 									>
 										<Flex
 											cfg={{

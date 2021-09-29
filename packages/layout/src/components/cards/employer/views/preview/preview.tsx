@@ -1,23 +1,22 @@
 import React, { useState } from 'react';
-import { Flex, P, Hr, classNames, Span } from '@tpr/core';
+import { Flex, P, Hr, classNames } from '@tpr/core';
 import { UnderlinedButton } from '../../../components/button';
 import { Checkbox } from '@tpr/forms';
-import styles from './preview.module.scss';
 import { useEmployerContext } from '../../context';
+import { AddressPreview } from '../../../common/views/preview/components';
+import styles from '../../../cards.module.scss';
 
 type IdentifiersItemProps = { title: string; number: string | number };
 const IdentifiersItem: React.FC<IdentifiersItemProps> = ({ title, number }) => {
 	return (
 		<>
-			<Span cfg={{ lineHeight: 3 }} className={styles.styledAsH4}>
-				{title}
-			</Span>
-			<P>{number}</P>
+			<P className={styles.title}>{title}</P>
+			<P className={styles.number}>{number}</P>
 		</>
 	);
 };
 
-export const Preview: React.FC<any> = () => {
+export const Preview: React.FC<any> = React.memo(() => {
 	const { current, send, onCorrect, i18n } = useEmployerContext();
 	const { employer, complete, preValidatedData } = current.context;
 	const [items] = useState(
@@ -46,31 +45,23 @@ export const Preview: React.FC<any> = () => {
 			}
 		>
 			<Flex>
-				<Flex
-					cfg={{ width: 5, flex: '0 0 auto', flexDirection: 'column', pr: 4 }}
-				>
+				<Flex cfg={{ pr: 4 }} className={styles.section}>
 					<UnderlinedButton>{i18n.preview.buttons.three}</UnderlinedButton>
-					<Flex cfg={{ my: 2, flexDirection: 'column' }}>
-						<Span cfg={{ lineHeight: 3 }} className={styles.styledAsH4}>
-							{employer.organisationName}
-						</Span>
-						<P>{employer.address.addressLine1}</P>
-						{employer.address.addressLine2 && (
-							<P>{employer.address.addressLine2}</P>
-						)}
-						{employer.address.addressLine3 && (
-							<P>{employer.address.addressLine3}</P>
-						)}
-						<P>{employer.address.postTown}</P>
-						{employer.address.county && <P>{employer.address.county}</P>}
-						<P>{employer.address.postcode}</P>
-					</Flex>
+					<AddressPreview
+						name={employer.organisationName}
+						address={{
+							addressLine1: employer.address.addressLine1,
+							addressLine2: employer.address.addressLine2,
+							addressLine3: employer.address.addressLine3,
+							postTown: employer.address.postTown,
+							county: employer.address.county,
+							postcode: employer.address.postcode,
+						}}
+					/>
 				</Flex>
-				<Flex
-					cfg={{ width: 5, flex: '0 0 auto', flexDirection: 'column', pl: 4 }}
-				>
+				<Flex cfg={{ pl: 4 }} className={styles.section}>
 					<UnderlinedButton>{i18n.preview.buttons.four}</UnderlinedButton>
-					<Flex cfg={{ mt: 1, flexDirection: 'column' }}>
+					<Flex className={styles.identifierItem}>
 						{items.map((item, key) => (
 							<IdentifiersItem key={key} {...item} />
 						))}
@@ -86,9 +77,12 @@ export const Preview: React.FC<any> = () => {
 						send('COMPLETE', { value: !complete });
 						onCorrect(!complete);
 					}}
-					label={i18n.preview.checkboxLabel}
+					label={i18n.preview.checkboxLabel.replace(
+						'__NAME__',
+						employer.organisationName,
+					)}
 				/>
 			</Flex>
 		</div>
 	);
-};
+});

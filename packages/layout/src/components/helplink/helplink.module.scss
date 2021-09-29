@@ -1,6 +1,10 @@
 @import '@tpr/theming/lib/variables.scss';
 @import '@tpr/theming/lib/accessibility.module.scss';
 
+.helpLink {
+	margin-bottom: $space-4;
+}
+
 .helpLink button[aria-expanded] {
 	display: inline-block;
 	border: none;
@@ -13,6 +17,18 @@
 	cursor: pointer;
 	padding-top: $space-1;
 	padding-bottom: $space-1;
+}
+
+.helpLink button[aria-expanded]:hover {
+	color: $colors-neutral-a1;
+}
+
+.helpLink button[aria-expanded]:focus {
+	color: $colors-neutral-8;
+	background: $colors-warning-1;
+	outline: none;
+	text-decoration: none;
+	box-shadow: 0px -2px $colors-warning-1, 0px 4px $colors-neutral-8;
 }
 
 .helpLink [aria-expanded] svg {

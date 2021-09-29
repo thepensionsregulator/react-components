@@ -21,15 +21,12 @@ export const HelpLink: React.FC<HelpLinkProps> = (props) => {
 		</button>
 	);
 
-	// Create an alert when the component is expanded/collapsed, because the trigger button loses focus which prevents the change to aria-expanded being announced.
+	// Update a status to announce when the component is expanded/collapsed, because the trigger button loses focus which prevents the change to aria-expanded being announced.
 	// Using a ref to get the button element and call its focus() method doesn't work.
-	const [accessibleAlert, setAccessibleAlert] = React.useState<JSX.Element>();
-	function createAccessibleAlert() {
-		return (
-			<p role="alert" className={Styles.visuallyHidden}>
-				{expanded ? 'collapsed' : 'expanded'}
-			</p>
-		);
+	const [accessibleStatus, setAccessibleStatus] = React.useState<string>();
+	function updateStatus() {
+		setAccessibleStatus(expanded ? 'collapsed' : 'expanded');
+		setTimeout(() => setAccessibleStatus(''), 4000);
 	}
 
 	return (
@@ -41,16 +38,18 @@ export const HelpLink: React.FC<HelpLinkProps> = (props) => {
 				overflowWhenOpen="visible"
 				onOpening={() => {
 					setExpanded(true);
-					setAccessibleAlert(createAccessibleAlert());
+					updateStatus();
 				}}
 				onClosing={() => {
 					setExpanded(false);
-					setAccessibleAlert(createAccessibleAlert());
+					updateStatus();
 				}}
 			>
-				<Hint>{props.children}</Hint>
+				<Hint expanded={expanded}>{props.children}</Hint>
+				<p role="status" className={Styles.visuallyHidden}>
+					{accessibleStatus}
+				</p>
 			</Collapsible>
-			{accessibleAlert}
 		</>
 	);
 };

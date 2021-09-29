@@ -25,6 +25,7 @@ const RemovedBox: React.FC<RemovedBoxProps> = ({ type }) => {
 						lineHeight: 3,
 						p: 10,
 					}}
+					className={styles.noMarginBottom}
 				>
 					{type} removed successfully
 				</P>

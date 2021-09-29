@@ -16,18 +16,18 @@ const getFields = (
 		type: 'phone',
 		name: 'telephoneNumber',
 		label: fields.telephone.label,
-		inputWidth: 2,
-		error: fields.telephone.error,
 		cfg: { mb: 3 },
 		required: true,
+		errorEmptyValue: fields.telephone.error.empty,
+		errorInvalidValue: fields.telephone.error.invalid,
 	},
 	{
 		type: 'email',
 		name: 'emailAddress',
 		label: fields.email.label,
-		inputWidth: 6,
-		error: fields.email.error,
 		required: true,
+		errorEmptyValue: fields.email.error.empty,
+		errorInvalidValue: fields.email.error.invalid,
 	},
 ];
 
@@ -63,6 +63,8 @@ export const Contacts: React.FC = () => {
 				emailAddress: inHouseAdmin.emailAddress,
 			}}
 			fields={fields}
+			send={send}
+			subSectionHeaderText={i18n.preview.buttons.four}
 		/>
 	);
 };

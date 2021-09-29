@@ -1,6 +1,13 @@
 import { Machine, assign } from 'xstate';
 import { CorporateGroup } from './context';
-import { RemoveReasonProps } from '../common/interfaces';
+import {
+	CommonCardMachineContext,
+	RemoveReasonProps,
+} from '../common/interfaces';
+import {
+	updateClickedButton,
+	returnToPreview,
+} from '../common/machine/actions';
 
 interface CorporateGroupStates {
 	states: {
@@ -34,11 +41,9 @@ type CorporateGroupEvents =
 	| { type: 'DELETE' }
 	| { type: 'SELECT'; values?: RemoveReasonProps };
 
-export interface CorporateGroupContext {
-	complete: boolean;
-	remove?: RemoveReasonProps;
+export interface CorporateGroupContext extends CommonCardMachineContext {
 	corporateGroup: Partial<CorporateGroup>;
-	preValidatedData?: boolean | null;
+	remove: RemoveReasonProps;
 }
 
 const corporateGroupMachine = Machine<
@@ -52,15 +57,24 @@ const corporateGroupMachine = Machine<
 		complete: false,
 		remove: null,
 		corporateGroup: {},
+		lastBtnClicked: null,
 	},
 	states: {
 		preview: {
 			id: 'preview',
 			on: {
-				REMOVE: '#remove',
-				EDIT_NAME: 'edit.name',
-				EDIT_CONTACTS: 'edit.contacts',
-				EDIT_PROFESSIONAL: 'edit.professional',
+				REMOVE: {
+					target: '#remove',
+					actions: updateClickedButton(2),
+				},
+				EDIT_NAME: {
+					target: 'edit.name',
+					actions: updateClickedButton(4),
+				},
+				EDIT_PROFESSIONAL: {
+					target: 'edit.professional',
+					actions: updateClickedButton(5),
+				},
 				COMPLETE: {
 					actions: assign((_, event) => ({
 						complete: event.value,
@@ -84,7 +98,7 @@ const corporateGroupMachine = Machine<
 							})),
 						},
 						CANCEL: '#preview',
-						REMOVE: '#remove',
+						REMOVE: returnToPreview(2),
 					},
 				},
 				contacts: {
@@ -99,7 +113,7 @@ const corporateGroupMachine = Machine<
 							})),
 						},
 						CANCEL: '#preview',
-						REMOVE: '#remove',
+						REMOVE: returnToPreview(2),
 					},
 				},
 				professional: {
@@ -114,7 +128,8 @@ const corporateGroupMachine = Machine<
 								},
 							})),
 						},
-						REMOVE: '#remove',
+						CANCEL: '#preview',
+						REMOVE: returnToPreview(2),
 					},
 				},
 			},
@@ -134,6 +149,7 @@ const corporateGroupMachine = Machine<
 								};
 							}),
 						},
+						REMOVE: '#preview',
 					},
 				},
 				confirm: {
@@ -141,6 +157,7 @@ const corporateGroupMachine = Machine<
 						CANCEL: '#preview',
 						BACK: '#remove',
 						DELETE: 'deleted',
+						REMOVE: '#preview',
 					},
 				},
 				deleted: {

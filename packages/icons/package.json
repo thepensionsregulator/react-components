@@ -1,6 +1,6 @@
 {
 	"name": "@tpr/icons",
-	"version": "3.0.27",
+	"version": "3.1.11",
 	"description": "TPR Icons",
 	"author": "David Alekna <david.alekna@tpr.gov.uk>",
 	"license": "MIT",
@@ -33,13 +33,12 @@
 		"report-coverage": "codecov"
 	},
 	"peerDependencies": {
-		"@tpr/core": "^2.4.17",
-		"@tpr/theming": "^2.2.16",
-		"react": "^16.12.0",
-		"react-dom": "^16.12.0"
+		"@tpr/core": "^3.0.0",
+		"@tpr/theming": "^2.4.0",
+		"react": "^16.14.0",
+		"react-dom": "^16.14.0"
 	},
 	"dependencies": {
-		"node-sass": "^5.0.0",
 		"normalize.css": "^8.0.1",
 		"tslib": "^2.1.0"
 	},
@@ -49,7 +48,10 @@
 	"devDependencies": {
 		"@tpr/core": "file:../core",
 		"@tpr/theming": "file:../theming",
-		"cross-env": "^7.0.3"
+		"cross-env": "^7.0.3",
+		"node-sass": "^5.0.0",
+		"react": "file:../../node_modules/react",
+		"react-dom": "file:../../node_modules/react-dom"
 	},
 	"gitHead": "57aec9c9de22596d6343bae07eb6b198322a0bee"
 }

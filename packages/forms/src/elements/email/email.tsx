@@ -1,28 +1,26 @@
 import React from 'react';
 import { Field, FieldRenderProps } from 'react-final-form';
 import { StyledInputLabel, InputElementHeading } from '../elements';
-import { FieldProps, FieldExtraProps } from '../../renderFields';
+import { FieldExtraProps } from '../../renderFields';
+import { FFInputCommonProps } from 'types/fieldProps';
 import { Input } from '../input/input';
-import {
-	composeValidators,
-	isEmailValid,
-	executeClientValidation,
-} from '../../validators';
+import { isEmailValid } from '../../validators';
 import AccessibilityHelper from '../accessibilityHelper';
+import elementStyles from '../elements.module.scss';
 
-type InputEmailProps = FieldRenderProps<string> & FieldExtraProps;
+interface InputEmailProps extends FieldRenderProps<string>, FieldExtraProps {}
+
 const InputEmail: React.FC<InputEmailProps> = ({
-	id,
-	label,
-	name,
 	hint,
+	id,
 	input,
-	testId,
+	label,
 	meta,
-	required,
+	name,
 	placeholder,
 	readOnly,
-	inputWidth: width,
+	required,
+	testId,
 	cfg,
 }) => {
 	const helper = new AccessibilityHelper(name, !!label, !!hint);
@@ -30,7 +28,7 @@ const InputEmail: React.FC<InputEmailProps> = ({
 	return (
 		<StyledInputLabel
 			isError={meta && meta.touched && meta.error}
-			cfg={Object.assign({ flexDirection: 'column', mt: 1 }, cfg)}
+			cfg={Object.assign({ mt: 1 }, cfg)}
 		>
 			<InputElementHeading
 				label={label}
@@ -42,7 +40,8 @@ const InputEmail: React.FC<InputEmailProps> = ({
 			<Input
 				id={id}
 				type="email"
-				width={width}
+				autoComplete="email"
+				className={elementStyles.emailInput}
 				testId={testId}
 				label={label}
 				required={required}
@@ -56,19 +55,18 @@ const InputEmail: React.FC<InputEmailProps> = ({
 	);
 };
 
-export const FFInputEmail: React.FC<
-	FieldProps & FieldExtraProps
-> = React.forwardRef((fieldProps, ref) => {
-	return (
-		<Field
-			{...fieldProps}
-			validate={composeValidators(
-				executeClientValidation(fieldProps.validate),
-				isEmailValid(
-					fieldProps.error ? fieldProps.error : 'Invalid email address',
-				),
-			)}
-			render={(props) => <InputEmail {...props} {...fieldProps} ref={ref} />}
-		/>
-	);
-});
+export const FFInputEmail: React.FC<FFInputCommonProps> = React.forwardRef(
+	(fieldProps, ref) => {
+		return (
+			<Field
+				{...fieldProps}
+				validate={isEmailValid(
+					fieldProps.errorEmptyValue,
+					fieldProps.errorInvalidValue,
+					fieldProps.required,
+				)}
+				render={(props) => <InputEmail {...props} {...fieldProps} ref={ref} />}
+			/>
+		);
+	},
+);

@@ -10,7 +10,10 @@ type InputTextProps = FieldRenderProps<string> &
 	FieldExtraProps & {
 		updatedValue: string;
 	};
-const InputText: React.FC<InputTextProps> = React.forwardRef(
+const InputText: React.FC<InputTextProps> = React.forwardRef<
+	HTMLInputElement,
+	InputTextProps
+>(
 	(
 		{
 			id,
@@ -26,10 +29,14 @@ const InputText: React.FC<InputTextProps> = React.forwardRef(
 			placeholder,
 			disabled,
 			readOnly,
-			inputWidth: width,
+			autoComplete,
 			cfg,
 			updatedValue,
 			maxLength,
+			wrapperElement,
+			labelElement,
+			headingElement,
+			onKeyPress,
 		},
 		ref,
 	) => {
@@ -40,33 +47,48 @@ const InputText: React.FC<InputTextProps> = React.forwardRef(
 		}, [updatedValue]);
 
 		const helper = new AccessibilityHelper(name, !!label, !!hint);
+		const labelRequiresForAttribute =
+			labelElement && labelElement.toUpperCase() === 'LABEL';
+		if (labelRequiresForAttribute && !id) {
+			throw 'id is required when setting labelElement="label"';
+		}
+		const InputElementHeadingWrapper = headingElement
+			? headingElement
+			: React.Fragment;
 
 		return (
 			<StyledInputLabel
 				isError={meta && meta.touched && meta.error}
-				cfg={Object.assign({ flexDirection: 'column', mt: 1 }, cfg)}
+				element={wrapperElement}
+				cfg={Object.assign({ mt: 1 }, cfg)}
 			>
-				<InputElementHeading
-					label={label}
-					required={required}
-					hint={hint}
-					meta={meta}
-					accessibilityHelper={helper}
-				/>
+				<InputElementHeadingWrapper>
+					<InputElementHeading
+						element={labelElement}
+						label={label}
+						required={required}
+						hint={hint}
+						meta={meta}
+						accessibilityHelper={helper}
+						forId={labelRequiresForAttribute ? id : undefined}
+					/>
+				</InputElementHeadingWrapper>
 				<Input
 					id={id}
-					parentRef={ref}
+					ref={ref}
 					type="text"
-					width={width}
 					testId={testId}
 					label={ariaLabel ? ariaLabel : label}
 					placeholder={placeholder}
 					disabled={disabled}
 					readOnly={readOnly}
+					autoComplete={autoComplete}
 					isError={meta && meta.touched && meta.error}
 					className={inputClassName}
 					maxLength={maxLength}
 					accessibilityHelper={helper}
+					required={required}
+					onKeyPress={onKeyPress}
 					{...input}
 				/>
 			</StyledInputLabel>
@@ -74,14 +96,16 @@ const InputText: React.FC<InputTextProps> = React.forwardRef(
 	},
 );
 
-export const FFInputText: React.FC<FieldProps> = React.forwardRef(
-	(fieldProps, ref) => {
-		return (
-			<Field
-				{...fieldProps}
-				required={typeof fieldProps.validate === 'function' || fieldProps.error}
-				render={(props) => <InputText {...props} {...fieldProps} ref={ref} />}
-			/>
-		);
-	},
-);
+export const FFInputText: React.FC<FieldProps> = React.forwardRef<
+	HTMLInputElement,
+	FieldProps
+>((fieldProps, ref) => {
+	return (
+		<Field
+			{...fieldProps}
+			required={fieldProps.required}
+			ref={ref}
+			render={(props) => <InputText {...props} {...fieldProps} ref={ref} />}
+		/>
+	);
+});

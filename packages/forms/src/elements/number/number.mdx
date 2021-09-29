@@ -9,6 +9,7 @@ import { Form } from 'react-final-form';
 import { FFInputNumber } from './number';
 import { validate } from '../../validation';
 import { renderFields } from '../../renderFields';
+import styles from './input.module.scss';
 
 # Number Input
 
@@ -43,22 +44,27 @@ import { FFInputNumber } from '@tpr/forms';
 [CodeSandbox](https://codesandbox.io)
 
 <Playground>
-	<Form onSubmit={(values) => console.log(values)}>
+	<Form
+		onSubmit={(values) => console.log(values)}
+		initialValues={{ rpiIncrease: 2.5 }}
+	>
 		{({ handleSubmit }) => (
-			<form onSubmit={handleSubmit}>
+			<form onSubmit={handleSubmit} noValidate>
 				<FFInputNumber
 					name="number_of_participants"
 					label="Number of participants"
 					hint="people attending this event, maximum of 20"
-					inputWidth={5}
+					inputClassName={styles.integerTwoDigits}
 					cfg={{ my: 5 }}
 					required={true}
 					maxLength={2}
 					validate={(value) => {
-						if (value < 1 || value > 20 || !value || value === 0) {
+						if (!value) {
+							return 'This field is required ';
+						}
+						if (value < 1 || value > 20) {
 							return 'Must be between 1 and 20';
 						}
-						return undefined;
 					}}
 					callback={(e) => console.log(e.target.value)}
 				/>
@@ -67,7 +73,7 @@ import { FFInputNumber } from '@tpr/forms';
 					label="Total expenses"
 					hint="amount in GBP"
 					validate={(value) => {}}
-					inputWidth={5}
+					inputClassName={styles.decimalFiveDigits}
 					cfg={{ my: 5 }}
 					required={false}
 					noLeftBorder={true}
@@ -82,7 +88,27 @@ import { FFInputNumber } from '@tpr/forms';
 					name="percentage"
 					label="Amount deducted from expenses"
 					hint="amount in %"
-					inputWidth={5}
+					inputClassName={styles.percentageInput}
+					cfg={{ my: 5 }}
+					required={false}
+					noLeftBorder={true}
+					optionalText={false}
+					decimalPlaces={2}
+					min={0}
+					max={100}
+					after="%"
+					validate={(value) => {
+						if (value < 0 || value > 100)
+							return 'must be value between 0 and 100%';
+					}}
+					callback={(e) => console.log(e.target.value)}
+					i18n={{ ariaLabelExtension: ' as a percentage' }}
+					initialValue={10}
+				/>
+				<FFInputNumber
+					name="rpiIncrease"
+					label="Increase in RPI"
+					inputClassName={styles.decimalFiveDigits}
 					cfg={{ my: 5 }}
 					required={false}
 					noLeftBorder={true}
@@ -120,7 +146,7 @@ import { Form, validate, renderFields } from '@tpr/forms';
 				label: 'Distance between the 2 cities',
 				hint: 'must be expressed in miles',
 				error: 'Cannot be empty',
-				inputWidth: 5,
+				inputClassName: styles.decimalFiveDigits,
 				placeholder: 'e.g. 456.77',
 				cfg: { my: 5 },
 				after: 'mi',
@@ -170,7 +196,7 @@ import { Form, validate, renderFields } from '@tpr/forms';
 							name="ageOfApplicant"
 							label="Age of the applicant"
 							after="years"
-							inputWidth={1}
+							inputClassName={styles.integerTwoDigits}
 							required={false}
 							noLeftBorder={true}
 							optionalText={false}
@@ -189,6 +215,7 @@ import { Form, validate, renderFields } from '@tpr/forms';
 </Playground>
 
 ### With aria label extension
+
 ```js
 i18n={{ ariaLabelExtension: 'in years' }}
 ```
@@ -206,7 +233,7 @@ i18n={{ ariaLabelExtension: 'in years' }}
 							name="ageOfApplicant"
 							label="Age of the applicant"
 							after="years"
-							inputWidth={1}
+							inputClassName={styles.integerTwoDigits}
 							required={false}
 							noLeftBorder={true}
 							optionalText={false}
@@ -226,8 +253,9 @@ i18n={{ ariaLabelExtension: 'in years' }}
 </Playground>
 
 ### With customised aria label
+
 ```js
-aria-label="Age of the applicant in years.  Use whole numbers only."
+aria - label = 'Age of the applicant in years.  Use whole numbers only.';
 ```
 
 <Playground>
@@ -244,8 +272,48 @@ aria-label="Age of the applicant in years.  Use whole numbers only."
 							label="Age of the applicant"
 							aria-label="Age of the applicant in years.  Use whole numbers only."
 							after="years"
-							inputWidth={1}
+							inputClassName={styles.integerTwoDigits}
 							required={false}
+							noLeftBorder={true}
+							optionalText={false}
+							callback={handleChange}
+						/>
+						<button
+							type="submit"
+							style={{ display: 'none' }}
+							children="Submit"
+						/>
+					</form>
+				)}
+			</Form>
+		);
+	}}
+</Playground>
+
+### Required field
+
+```js
+<form noValidate>
+...
+required=true;
+```
+
+<Playground>
+	{() => {
+		const handleChange = (value) => {
+			console.log(value);
+		};
+		return (
+			<Form onSubmit={(values) => console.log(values)}>
+				{({ handleSubmit }) => (
+					<form onSubmit={handleSubmit} noValidate>
+						<FFInputNumber
+							name="ageOfApplicant"
+							label="Age of the applicant"
+							aria-label="Age of the applicant in years.  Use whole numbers only."
+							after="years"
+							inputClassName={styles.integerTwoDigits}
+							required={true}
 							noLeftBorder={true}
 							optionalText={false}
 							callback={handleChange}
@@ -270,21 +338,24 @@ Accepted config props: FlexProps, SpaceProps
 
 ### Props
 
-| Property      | Required | Type     | Description                                                                                                                                                                   |
-| ------------- | -------- | -------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| after         | false    | string                                | emulates text passed to ::after pseudo-selector                                                                                                  |
-| before        | false    | string                                | emulates text passed to ::before pseudo-selector                                                                                                 |
-| callback      | false    | function                              | callback function to be executed after onChange                                                                                                  |
-| cfg           | false    | object                                | FlexProps & SpaceProps                                                                                                                           |
-| decimalPlaces | false    | number                                | the number of decimal places used for formatting the value                                                                                       |
-| disabled      | false    | boolean                               | Disable input field                                                                                                                              |
-| hint          | false    | string                                | More detailed description about the field                                                                                                        |
-| label         | true     | string                                | The visible label displayed above the input field                                                                                                |
-| aria-label    | true     | string                                | Use to provide descriptive labelling to assistive technology in situations where the visible label does not convey the full context of the input |
-| maxIntDigits  | false    | number                                | sets a maximum length for the integer part of the value                                                                                          |
-| maxLength     | false    | number                                | sets a maximum length for the input value (e.g. 123.00 &#x27A1; maxLength={6})                                                                   |
-| noLeftBorder  | false    | boolean                               | disables the left border when detecting error                                                                                                    |
-| optionalText  | false    | boolean                               | allows hiding "optional" text when field is not required                                                                                         |
-| testId        | false    | string                                | data attribute for testers                                                                                                                       |
-| readOnly      | false    | boolean                               | Sets whether the field is read only                                                                                                              |
-| i18n          | false    | FieldWithAriaLabelExtenstionI18nProps | allows the overridding of default text in the number input                                                                                       |
+| Property       | Required | Type                                  | Description                                                                                                                                      |
+| -------------- | -------- | ------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------ |
+| after          | false    | string                                | emulates text passed to ::after pseudo-selector                                                                                                  |
+| before         | false    | string                                | emulates text passed to ::before pseudo-selector                                                                                                 |
+| callback       | false    | function                              | callback function to be executed after onChange                                                                                                  |
+| cfg            | false    | object                                | FlexProps & SpaceProps                                                                                                                           |
+| decimalPlaces  | false    | number                                | the number of decimal places used for formatting the value                                                                                       |
+| disabled       | false    | boolean                               | Disable input field                                                                                                                              |
+| hint           | false    | string                                | More detailed description about the field                                                                                                        |
+| inputClassName | false    | string                                | CSS class applied to the input element                                                                                                           |
+| label          | true     | string                                | The visible label displayed above the input field                                                                                                |
+| aria-label     | true     | string                                | Use to provide descriptive labelling to assistive technology in situations where the visible label does not convey the full context of the input |
+| maxIntDigits   | false    | number                                | sets a maximum length for the integer part of the value                                                                                          |
+| maxLength      | false    | number                                | sets a maximum length for the input value (e.g. 123.00 &#x27A1; maxLength={6})                                                                   |
+| noLeftBorder   | false    | boolean                               | disables the left border when detecting error                                                                                                    |
+| optionalText   | false    | boolean                               | allows hiding "optional" text when field is not required                                                                                         |
+| testId         | false    | string                                | data attribute for testers                                                                                                                       |
+| readOnly       | false    | boolean                               | Sets whether the field is read only                                                                                                              |
+| required       | false    | boolean                               | Mark text field as required                                                                                                                      |
+| i18n           | false    | FieldWithAriaLabelExtenstionI18nProps | allows the overridding of default text in the number input                                                                                       |
+| wrapperElement | false    | string                                | replaces the `<label>` with a different element, for use in combination with an alternative labelling technique such as aria-labelledby          |

@@ -1,5 +1,4 @@
 import React from 'react';
-import { classNames } from '@tpr/core';
 import { Toolbar } from './card';
 import { cardType, cardTypeName } from '../common/interfaces';
 import styles from './content.module.scss';
@@ -14,6 +13,8 @@ type ContentProps = {
 	breadcrumbs?: any;
 	subtitle?: string;
 	sectionTitle?: string;
+	subSectionHeaderText?: string;
+	send?: Function;
 };
 export const Content: React.FC<ContentProps> = ({
 	children,
@@ -22,14 +23,11 @@ export const Content: React.FC<ContentProps> = ({
 	breadcrumbs: Breadcrumbs,
 	subtitle,
 	sectionTitle,
+	subSectionHeaderText,
+	send,
 }) => {
 	return (
-		<div
-			className={classNames([
-				{ [styles.noTopPadding]: typeof Breadcrumbs === 'function' },
-				styles.content,
-			])}
-		>
+		<div className={styles.content}>
 			{loading && <Loading />}
 			{Breadcrumbs && <Breadcrumbs />}
 			{title && (
@@ -37,6 +35,8 @@ export const Content: React.FC<ContentProps> = ({
 					title={title}
 					subtitle={subtitle}
 					sectionTitle={sectionTitle}
+					subSectionHeaderText={subSectionHeaderText}
+					send={send}
 				/>
 			)}
 			{children}

@@ -63,6 +63,7 @@ const RemoveReason: React.FC = () => {
 			onSubmit={onSubmit}
 			remove={remove}
 			dateField={DateField}
+			send={send}
 		/>
 	);
 };

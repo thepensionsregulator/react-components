@@ -15,10 +15,12 @@ export const Checkbox: React.FC<Partial<CheckboxIconProps>> = ({
 	disabled = false,
 	testId,
 	checked,
+	required,
 	onChange,
 	label,
 	hint,
 	className,
+	children,
 }) => {
 	const msg = testId ? `${testId}-${checked ? 'checked' : 'unchecked'}` : null;
 	const helper = new AccessibilityHelper(id, !!label, !!hint);
@@ -30,9 +32,7 @@ export const Checkbox: React.FC<Partial<CheckboxIconProps>> = ({
 			cfg={Object.assign(
 				{
 					mt: 1,
-					mb: 1,
-					alignItems: 'flex-start',
-					flexDirection: 'column',
+					mb: 4,
 				},
 				cfg,
 			)}
@@ -43,26 +43,35 @@ export const Checkbox: React.FC<Partial<CheckboxIconProps>> = ({
 				className={styles.wrapper}
 				htmlFor={id}
 			>
-				<HiddenInput
-					id={id}
-					type="checkbox"
-					aria-describedby={helper && helper.hintId}
-					checked={checked}
-					disabled={disabled}
-					onChange={onChange}
-				/>
-				{checked ? (
-					<CheckboxChecked className={styles.checkbox} />
-				) : (
-					<CheckboxBlank className={styles.checkbox} />
+				<div className={styles.innerWrapper}>
+					<HiddenInput
+						id={id}
+						type="checkbox"
+						checked={checked}
+						disabled={disabled}
+						required={required}
+						onChange={onChange}
+					/>
+					{checked ? (
+						<CheckboxChecked className={styles.checkbox} />
+					) : (
+						<CheckboxBlank className={styles.checkbox} />
+					)}
+					<P cfg={{ fontWeight: 3 }} className={styles.label}>
+						{label}
+					</P>
+				</div>
+				{hint && (
+					<P id={helper.hintId} className={styles.hint}>
+						{hint}
+					</P>
 				)}
-				<P cfg={{ ml: 3, fontWeight: 3 }}>{label}</P>
+				{children && (
+					<div id={helper.hintId} className={styles.hint}>
+						{children}
+					</div>
+				)}
 			</label>
-			{hint && (
-				<P id={helper.hintId} className={styles.hint}>
-					{hint}
-				</P>
-			)}
 		</StyledInputLabel>
 	);
 };

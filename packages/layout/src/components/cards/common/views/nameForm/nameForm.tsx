@@ -4,6 +4,7 @@ import { Footer } from '../../../components/card';
 import { Content } from '../../../components/content';
 import { ArrowButton } from '../../../../buttons/buttons';
 import { cardType, cardTypeName } from '../../interfaces';
+import { Link } from '@tpr/core';
 
 interface NameFormProps {
 	type: cardType;
@@ -19,6 +20,8 @@ interface NameFormProps {
 	};
 	loading: boolean;
 	nextStep?: boolean;
+	send?: Function;
+	subSectionHeaderText?: string;
 }
 
 const NameForm: React.FC<NameFormProps> = ({
@@ -31,6 +34,8 @@ const NameForm: React.FC<NameFormProps> = ({
 	initialValues,
 	loading,
 	nextStep,
+	send,
+	subSectionHeaderText,
 }) => {
 	return (
 		<Content
@@ -39,6 +44,8 @@ const NameForm: React.FC<NameFormProps> = ({
 			title={title}
 			loading={loading}
 			sectionTitle={sectionTitle}
+			subSectionHeaderText={subSectionHeaderText}
+			send={send}
 		>
 			<Form
 				onSubmit={onSubmit}
@@ -54,13 +61,16 @@ const NameForm: React.FC<NameFormProps> = ({
 						{renderFields(fields)}
 						<Footer>
 							<ArrowButton
-								intent="special"
+								appearance="secondary"
 								pointsTo={nextStep ? 'right' : 'up'}
 								iconSide="right"
 								disabled={loading}
 								type="submit"
 								title={nextStep ? 'Continue' : 'Save and close'}
 							/>
+							<Link cfg={{ m: 3 }} underline onClick={() => send('CANCEL')}>
+								Cancel
+							</Link>
 						</Footer>
 					</form>
 				)}

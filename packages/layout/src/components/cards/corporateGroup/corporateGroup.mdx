@@ -45,7 +45,7 @@ import { CorporateGroupCard } from '@tpr/layout';
 				addressLine2: 'Trafalgar Pl',
 				addressLine3: '',
 				postTown: 'Brighton',
-				county: 'West Sussex',
+				county: 'East Sussex',
 				postcode: 'BN1 4DW',
 				country: '',
 			},
@@ -69,14 +69,14 @@ import { CorporateGroupCard } from '@tpr/layout';
 
 ### Props
 
-| Property         | Required | Type                    | Description                                                                              |
-| ---------------- | -------- | ----------------------- | ---------------------------------------------------------------------------------------- |
-| complete         | true     | boolean                 | changes the state of the card when All details are correct                               |
-| corporateGroup   | true     | CorporateGroup          | the corporateGroup object                                                                |
-| i18n             | false    | CorporateGroupI18nProps | allows to override specific text in the card                                             |
+| Property         | Required | Type                    | Description                                                                                  |
+| ---------------- | -------- | ----------------------- | -------------------------------------------------------------------------------------------- |
+| complete         | true     | boolean                 | changes the state of the card when All details are correct                                   |
+| corporateGroup   | true     | CorporateGroup          | the corporateGroup object                                                                    |
+| i18n             | false    | CorporateGroupI18nProps | allows to override specific text in the card                                                 |
 | onCorrect        | true     | function                | actions for when the user clicks the "Confirm details are correct" checkbox                  |
-| onRemove         | true     | function                | actions for when the Corporate Group trustee is removed                                  |
-| onSaveContacts   | true     | function                | actions for when the user updates the Contact Details for the Chair of board             |
-| onSaveDirector   | true     | function                | actions for when the user updates if any of the directors a professional trustee         |
-| onSaveName       | true     | function                | actions for when the user updates the Name of the Chair of board                         |
-| prevalidatedData | false    | boolean                 | allows to ignore the state of the "Confirm details are correct" checkbox & shows "No issues" |
+| onRemove         | true     | function                | actions for when the Corporate Group trustee is removed                                      |
+| onSaveContacts   | true     | function                | actions for when the user updates the Contact Details for the Chair of board                 |
+| onSaveDirector   | true     | function                | actions for when the user updates if any of the directors a professional trustee             |
+| onSaveName       | true     | function                | actions for when the user updates the Name of the Chair of board                             |
+| preValidatedData | false    | boolean                 | allows to ignore the state of the "Confirm details are correct" checkbox & shows "No issues" |

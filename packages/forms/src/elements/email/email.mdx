@@ -43,25 +43,46 @@ import { Form, FFInputEmail } from '@tpr/forms';
 
 [CodeSandbox](https://codesandbox.io)
 
-Example using field level validation
+### Field required & custom error messages
+
+```js
+<form noValidate>
+...
+required=true;
+```
+
+<Playground>
+	<Form onSubmit={console.log}>
+		{({ handleSubmit }) => (
+			<form onSubmit={handleSubmit} noValidate>
+				<FFInputEmail
+					name="email"
+					label="Email address"
+					placeholder="john.smith@tpr.gov.uk"
+					hint="Must be between 6 and 8 digits long"
+					cfg={{ my: 5 }}
+					required={true}
+					errorEmptyValue="Enter an email address"
+					errorInvalidValue="Enter an email address in the correct format, like name@example.com"
+				/>
+				<button type="submit" style={{ display: 'none' }} children="Submit" />
+			</form>
+		)}
+	</Form>
+</Playground>
+
+### Field not required
 
 <Playground>
 	<Form onSubmit={console.log}>
 		{({ handleSubmit }) => (
 			<form onSubmit={handleSubmit}>
 				<FFInputEmail
-					name="event_name"
-					label="Event name"
-					placeholder="john.smith@tpr.gov.uk"
+					name="email2"
+					label="Email address"
+					placeholder="sam.smith@tpr.gov.uk"
 					hint="Must be between 6 and 8 digits long"
-					validate={(email) =>
-						email && email.includes('tpr.gov.uk')
-							? undefined
-							: 'Must be a TPR email'
-					}
-					inputWidth={5}
 					cfg={{ my: 5 }}
-					required={true}
 				/>
 				<button type="submit" style={{ display: 'none' }} children="Submit" />
 			</form>
@@ -77,11 +98,14 @@ Accepted config props: FlexProps, SpaceProps
 
 ### Props
 
-| Property | Required | Type    | Description                                     |
-| -------- | -------- | ------- | --------------------------------------------    |
-| cfg      | false    | object  | FlexProps & SpaceProps                          |
-| disabled | false    | boolean | Disable email field                             |
-| testId   | false    | string  | data attribute for testers                      |
-| label    | true     | string  | Email field description                         |
-| hint     | false    | string  | More detailed description about the email field |
-| readOnly | false    | boolean | Sets whether the field is read only             |
+| Property          | Required | Type    | Description                                               |
+| ----------------- | -------- | ------- | --------------------------------------------------------- |
+| cfg               | false    | object  | FlexProps & SpaceProps                                    |
+| disabled          | false    | boolean | Disable email field                                       |
+| errorEmptyValue   | false    | string  | The error message to display when the field is empty      |
+| errorInvalidValue | false    | string  | The error message to display when the format is not valid |
+| hint              | false    | string  | More detailed description about the email field           |
+| label             | true     | string  | Email field description                                   |
+| readOnly          | false    | boolean | Sets whether the field is read only                       |
+| required          | false    | boolean | Sets whether the field is required (default value: false) |
+| testId            | false    | string  | data attribute for testers                                |

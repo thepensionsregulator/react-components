@@ -4,10 +4,11 @@ import { Flex } from '@tpr/core';
 import { StyledInputLabel, InputElementHeading } from '../elements';
 import { FieldProps, FieldExtraProps } from '../../renderFields';
 import AccessibilityHelper from '../accessibilityHelper';
-import Autocomplete from 'accessible-autocomplete/react';
+import Autocomplete from '@financial-times/accessible-autocomplete/react';
 import { filterResults, formatItemDefault } from './filterResults';
 import { act } from 'react-dom/test-utils';
 import styles from './search.module.scss';
+import elementStyles from '../elements.module.scss';
 
 interface SearchProps extends FieldRenderProps<string>, FieldExtraProps {
 	assistiveHint?: string;
@@ -33,7 +34,6 @@ const Search: React.FC<SearchProps> = React.memo(
 		getSelectedItem,
 		hint,
 		id,
-		inputWidth = 10,
 		keyValue,
 		label,
 		labelNotBold = false,
@@ -112,7 +112,7 @@ const Search: React.FC<SearchProps> = React.memo(
 		return (
 			<div className={classes}>
 				<StyledInputLabel
-					cfg={Object.assign({ flexDirection: 'column' }, cfg)}
+					cfg={cfg}
 					element="label"
 					isError={meta && meta.touched && meta.error}
 				>
@@ -125,8 +125,8 @@ const Search: React.FC<SearchProps> = React.memo(
 						required={required}
 					/>
 					<Flex
-						cfg={{ width: inputWidth, flexDirection: 'column' }}
-						className={styles.relative}
+						cfg={{ flexDirection: 'column' }}
+						className={styles.relative + ' ' + elementStyles.select}
 					>
 						<Autocomplete
 							id={id}
@@ -143,6 +143,7 @@ const Search: React.FC<SearchProps> = React.memo(
 							}}
 							testId={testId}
 							tNoResults={() => notFoundMessage}
+							ariaLabelledBy={helper.labelId}
 						/>
 					</Flex>
 				</StyledInputLabel>

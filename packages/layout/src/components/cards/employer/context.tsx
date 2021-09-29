@@ -17,6 +17,7 @@ export const EmployerContext = createContext<EmployerContextProps>({
 	onCorrect: () => {},
 	onRemove: Promise.resolve,
 	onSaveType: Promise.resolve,
+	showStatutoryEmployerSection: true,
 	i18n: i18nDefaults,
 });
 
@@ -32,6 +33,7 @@ export interface EmployerProviderProps extends CardProviderProps {
 	onSaveType?: (...args: any[]) => Promise<any>;
 	/** employer props from the API */
 	employer: Partial<Employer>;
+	showStatutoryEmployerSection?: boolean;
 	children?: RenderProps | ReactElement;
 	/** overwrite any text that you need */
 	i18n?: RecursivePartial<EmployerI18nProps>;
@@ -53,8 +55,10 @@ export interface Employer extends CardDefaultProps {
 
 export const EmployerProvider = ({
 	complete,
-	preValidatedData,
+	preValidatedData = null,
 	employer,
+	showStatutoryEmployerSection,
+	lastBtnClicked = null,
 	children,
 	i18n: i18nOverrides = {},
 	...rest
@@ -63,12 +67,20 @@ export const EmployerProvider = ({
 	const [current, send] = useMachine(employerMachine, {
 		context: {
 			complete,
+			showStatutoryEmployerSection,
 			preValidatedData,
 			employer,
+			lastBtnClicked,
 		},
 	});
 
-	const fwdValues = { current, send, i18n, ...rest };
+	const fwdValues = {
+		current,
+		send,
+		showStatutoryEmployerSection,
+		i18n,
+		...rest,
+	};
 	const ui = typeof children === 'function' ? children(fwdValues) : children;
 	return (
 		<EmployerContext.Provider value={fwdValues}>{ui}</EmployerContext.Provider>

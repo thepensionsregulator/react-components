@@ -1,4 +1,12 @@
 import { Machine, assign } from 'xstate';
+import {
+	CommonCardMachineContext,
+	RemoveConfirmProps,
+} from '../common/interfaces';
+import {
+	updateClickedButton,
+	returnToPreview,
+} from '../common/machine/actions';
 import { InHouseAdmin } from './context';
 
 interface InHouseAdminStates {
@@ -23,7 +31,6 @@ interface InHouseAdminStates {
 
 type InHouseAdminEvents =
 	| { type: 'COMPLETE'; value: boolean }
-	| { type: 'EDIT_INSURER' }
 	| { type: 'EDIT_CONTACTS' }
 	| { type: 'EDIT_NAME' }
 	| { type: 'EDIT_ADDRESS' }
@@ -34,11 +41,9 @@ type InHouseAdminEvents =
 	| { type: 'BACK' }
 	| { type: 'DELETE' };
 
-export interface InHouseAdminContext {
-	complete: boolean;
-	remove: { confirm: boolean; date: string } | null;
+export interface InHouseAdminContext extends CommonCardMachineContext {
 	inHouseAdmin: Partial<InHouseAdmin>;
-	preValidatedData?: boolean | null;
+	remove: RemoveConfirmProps;
 }
 
 const inHouseAdminMachine = Machine<
@@ -52,16 +57,28 @@ const inHouseAdminMachine = Machine<
 		complete: false,
 		remove: null,
 		inHouseAdmin: {},
+		lastBtnClicked: null,
 	},
 	states: {
 		preview: {
 			id: 'preview',
 			on: {
-				REMOVE: '#remove',
-				EDIT_INSURER: 'edit',
-				EDIT_CONTACTS: 'edit.contacts',
-				EDIT_NAME: 'edit.name',
-				EDIT_ADDRESS: 'edit.address',
+				EDIT_NAME: {
+					target: 'edit.name',
+					actions: updateClickedButton(1),
+				},
+				REMOVE: {
+					target: '#remove',
+					actions: updateClickedButton(2),
+				},
+				EDIT_ADDRESS: {
+					target: 'edit.address',
+					actions: updateClickedButton(3),
+				},
+				EDIT_CONTACTS: {
+					target: 'edit.contacts',
+					actions: updateClickedButton(4),
+				},
 				COMPLETE: {
 					actions: assign((_, event) => ({
 						complete: event.value,
@@ -84,7 +101,8 @@ const inHouseAdminMachine = Machine<
 							})),
 						},
 						CANCEL: '#preview',
-						REMOVE: '#remove',
+						EDIT_NAME: '#preview',
+						REMOVE: returnToPreview(2),
 					},
 				},
 				contacts: {
@@ -99,7 +117,8 @@ const inHouseAdminMachine = Machine<
 							})),
 						},
 						CANCEL: '#preview',
-						REMOVE: '#remove',
+						EDIT_NAME: returnToPreview(1),
+						REMOVE: returnToPreview(2),
 					},
 				},
 				address: {
@@ -114,7 +133,8 @@ const inHouseAdminMachine = Machine<
 							})),
 						},
 						CANCEL: '#preview',
-						REMOVE: '#remove',
+						EDIT_NAME: returnToPreview(1),
+						REMOVE: returnToPreview(2),
 					},
 				},
 			},
@@ -134,6 +154,8 @@ const inHouseAdminMachine = Machine<
 								};
 							}),
 						},
+						EDIT_NAME: returnToPreview(1),
+						REMOVE: '#preview',
 					},
 				},
 				confirm: {
@@ -141,6 +163,8 @@ const inHouseAdminMachine = Machine<
 						CANCEL: '#preview',
 						BACK: '#remove',
 						DELETE: 'deleted',
+						EDIT_NAME: returnToPreview(1),
+						REMOVE: '#preview',
 					},
 				},
 				deleted: {

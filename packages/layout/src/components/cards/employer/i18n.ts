@@ -107,7 +107,7 @@ export const i18n: EmployerI18nProps = {
 			confirmed: 'Confirmed',
 			unconfirmed: 'Unconfirmed',
 		},
-		checkboxLabel: 'Confirm details are correct.',
+		checkboxLabel: "Confirm '__NAME__' is correct.",
 	},
 	type: {
 		title: 'Type of employer',

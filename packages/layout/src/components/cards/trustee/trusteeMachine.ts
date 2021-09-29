@@ -3,7 +3,13 @@ import {
 	CardAddress,
 	CardPersonalDetails,
 	CardContactDetails,
+	CommonCardMachineContext,
+	RemoveReasonProps,
 } from '../common/interfaces';
+import {
+	updateClickedButton,
+	returnToPreview,
+} from '../common/machine/actions';
 
 interface TrusteeStates {
 	states: {
@@ -71,15 +77,11 @@ export interface TrusteeProps extends CardPersonalDetails, CardContactDetails {
 	[key: string]: any;
 }
 
-export interface TrusteeContext {
+export interface TrusteeContext extends CommonCardMachineContext {
 	loading: boolean;
-	complete: boolean;
-	preValidatedData?: boolean | null;
 	trustee: TrusteeProps;
-	remove?: {
-		reason: null | string;
-		date: null | string;
-	};
+	openSection: string;
+	remove: RemoveReasonProps;
 }
 
 const trusteeMachine = Machine<TrusteeContext, TrusteeStates, TrusteeEvents>({
@@ -88,6 +90,7 @@ const trusteeMachine = Machine<TrusteeContext, TrusteeStates, TrusteeEvents>({
 	context: {
 		loading: false,
 		complete: false,
+		openSection: '',
 		trustee: {
 			schemeRoleId: '',
 			//
@@ -110,15 +113,38 @@ const trusteeMachine = Machine<TrusteeContext, TrusteeStates, TrusteeEvents>({
 			emailAddress: '',
 		},
 		remove: null,
+		lastBtnClicked: null,
 	},
 	states: {
 		preview: {
 			id: 'preview',
 			on: {
-				EDIT_TRUSTEE: 'edit.trustee.name',
-				EDIT_ORG: 'edit.company.address',
-				EDIT_CONTACTS: 'edit.contact.details',
-				REMOVE: 'remove',
+				EDIT_TRUSTEE: {
+					target: 'edit.trustee.name',
+					actions: updateClickedButton(1),
+				},
+				REMOVE: {
+					target: '#remove',
+					actions: updateClickedButton(2),
+				},
+				EDIT_ORG: {
+					target: 'edit.company.address',
+					actions: assign((context, _event) => {
+						return {
+							openSection: (context.openSection = 'edit.address'),
+							lastBtnClicked: 3,
+						};
+					}),
+				},
+				EDIT_CONTACTS: {
+					target: 'edit.contact.details',
+					actions: assign((context, _event) => {
+						return {
+							openSection: (context.openSection = 'edit.contact'),
+							lastBtnClicked: 4,
+						};
+					}),
+				},
 				COMPLETE: {
 					actions: assign((_: any, event: any) => ({
 						complete: event.value,
@@ -146,7 +172,8 @@ const trusteeMachine = Machine<TrusteeContext, TrusteeStates, TrusteeEvents>({
 									})),
 								},
 								CANCEL: '#preview',
-								REMOVE: '#remove',
+								EDIT_TRUSTEE: '#preview',
+								REMOVE: returnToPreview(2),
 							},
 						},
 						kind: {
@@ -163,7 +190,8 @@ const trusteeMachine = Machine<TrusteeContext, TrusteeStates, TrusteeEvents>({
 								},
 								BACK: 'name',
 								CANCEL: '#preview',
-								REMOVE: '#remove',
+								EDIT_TRUSTEE: '#preview',
+								REMOVE: returnToPreview(2),
 							},
 						},
 						save: saveTrustee('onDetailsSave', 'kind'),
@@ -185,8 +213,16 @@ const trusteeMachine = Machine<TrusteeContext, TrusteeStates, TrusteeEvents>({
 										},
 									})),
 								},
-								CANCEL: '#preview',
-								REMOVE: '#remove',
+								CANCEL: {
+									target: '#preview',
+									actions: assign((context, _event) => {
+										return {
+											openSection: (context.openSection = ''),
+										};
+									}),
+								},
+								EDIT_TRUSTEE: returnToPreview(1),
+								REMOVE: returnToPreview(2),
 							},
 						},
 						save: saveTrustee('onAddressSave', 'address'),
@@ -207,8 +243,16 @@ const trusteeMachine = Machine<TrusteeContext, TrusteeStates, TrusteeEvents>({
 										},
 									})),
 								},
-								CANCEL: '#preview',
-								REMOVE: '#remove',
+								CANCEL: {
+									target: '#preview',
+									actions: assign((context, _event) => {
+										return {
+											openSection: (context.openSection = ''),
+										};
+									}),
+								},
+								EDIT_TRUSTEE: returnToPreview(1),
+								REMOVE: returnToPreview(2),
 							},
 						},
 						save: saveTrustee('onContactSave', 'details'),
@@ -230,16 +274,18 @@ const trusteeMachine = Machine<TrusteeContext, TrusteeStates, TrusteeEvents>({
 								};
 							}),
 						},
-						EDIT_TRUSTEE: '#edit.trustee.name',
 						CANCEL: '#preview',
+						EDIT_TRUSTEE: returnToPreview(1),
+						REMOVE: '#preview',
 					},
 				},
 				confirm: {
 					on: {
-						EDIT_TRUSTEE: '#edit.trustee.name',
 						BACK: 'reason',
 						CANCEL: '#preview',
 						DELETE: 'deleted',
+						EDIT_TRUSTEE: returnToPreview(1),
+						REMOVE: '#preview',
 					},
 				},
 				deleted: {

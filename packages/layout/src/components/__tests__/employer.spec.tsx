@@ -1,5 +1,5 @@
 import React from 'react';
-import { render } from '@testing-library/react';
+import { cleanup, render } from '@testing-library/react';
 import { EmployerCard } from '../cards/employer/employer';
 import { axe } from 'jest-axe';
 import userEvent from '@testing-library/user-event';
@@ -7,7 +7,11 @@ import { Employer } from '../cards/employer/context';
 import {
 	assertThatASectionExistsWithAnAriaLabel,
 	assertThatButtonHasBeenRemovedFromTheTabFlow,
+	assertMainHeadingExists,
+	assertRemoveButtonExists,
+	assertHeadingsExist,
 } from '../testHelpers/testHelpers';
+import { sampleAddress } from '../testHelpers/commonData/cards';
 
 const noop = () => Promise.resolve();
 
@@ -22,16 +26,7 @@ const employer: Employer = {
 	epsrNumber: '11223344',
 	organisationName: 'The Pensions Regulator',
 	statutoryEmployer: 'statutory',
-	address: {
-		addressLine1: 'Napier House',
-		addressLine2: 'Trafalgar Pl',
-		addressLine3: '',
-		postTown: 'Brighton',
-		postcode: 'BN1 4DW',
-		county: 'West Sussex',
-		country: '',
-		countryId: 2,
-	},
+	address: sampleAddress,
 };
 
 describe('Employer Preview', () => {
@@ -49,6 +44,26 @@ describe('Employer Preview', () => {
 		expect(results).toHaveNoViolations();
 	});
 
+	test('renders buttons correctly', () => {
+		const { getByText, getByTestId, getAllByTestId, container } = render(
+			<EmployerCard
+				onSaveType={noop}
+				onRemove={noop}
+				complete={true}
+				employer={employer}
+			/>,
+		);
+
+		expect(container.querySelector('button')).not.toBe(null);
+
+		assertMainHeadingExists(getByText, getByTestId, 'Employer type', true);
+
+		assertRemoveButtonExists(getByText, getByTestId);
+
+		const h4Headings = ['Employer', 'Employer Identifiers'];
+		assertHeadingsExist(getAllByTestId, h4Headings);
+	});
+
 	test('renders with a section containing an aria label', () => {
 		const { getByRole } = render(
 			<EmployerCard
@@ -64,9 +79,28 @@ describe('Employer Preview', () => {
 			employer.organisationName,
 		);
 	});
+
+	test('replaces __NAME__ in the checkbox label', () => {
+		const { findByText } = render(
+			<EmployerCard
+				onSaveType={noop}
+				onRemove={noop}
+				complete={true}
+				employer={employer}
+			/>,
+		);
+
+		expect(
+			findByText(`Confirm '${employer.organisationName}' is correct.`),
+		).toBeDefined();
+	});
 });
 
 describe('Employer type', () => {
+	afterEach(() => {
+		cleanup();
+	});
+
 	test('Remove button is taken out of the tab flow', async () => {
 		const { container, getByText } = render(
 			<EmployerCard
@@ -87,6 +121,10 @@ describe('Employer type', () => {
 });
 
 describe('Employer Remove', () => {
+	afterEach(() => {
+		cleanup();
+	});
+
 	test('Date screen is accessible', async () => {
 		const { container, getByText } = render(
 			<EmployerCard

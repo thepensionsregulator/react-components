@@ -1,3 +1,10 @@
+@import '@tpr/forms/lib/elements/elements.module.scss';
+@import '@tpr/core/lib/components/typography/typography.module.scss';
+
+.h5Legend {
+	@include styled-as-h4;
+}
+
 .dateWrapper {
 	margin-left: 50px;
 	margin-bottom: 20px;

@@ -11,7 +11,7 @@ import {
 	Address,
 	I18nAddressLookup,
 } from '@tpr/forms';
-
+import { Link } from '@tpr/core/lib/components/links/links';
 export type AddressPageProps = {
 	onSubmit: (values: Address & { initialValue?: Address }) => void;
 	initialValue?: Address;
@@ -21,6 +21,9 @@ export type AddressPageProps = {
 	sectionTitle?: string;
 	i18n: I18nAddressLookup;
 	onCancelChanges?: () => void;
+	onChangeAddress?: () => void;
+	send?: Function;
+	subSectionHeaderText?: string;
 };
 
 const AddressPage: React.FC<AddressPageProps> = ({
@@ -32,9 +35,10 @@ const AddressPage: React.FC<AddressPageProps> = ({
 	sectionTitle,
 	i18n,
 	onCancelChanges,
+	subSectionHeaderText,
+	onChangeAddress,
 }) => {
 	const [loading, setLoading] = useState(false);
-
 	const addressLookupProvider = new ExperianAddressLookupProvider(addressAPI);
 
 	return (
@@ -43,6 +47,8 @@ const AddressPage: React.FC<AddressPageProps> = ({
 			typeName={cardTypeName}
 			title={i18n.title}
 			sectionTitle={sectionTitle}
+			subSectionHeaderText={subSectionHeaderText}
+			send={onCancelChanges}
 		>
 			<Form onSubmit={onSubmit}>
 				{({ handleSubmit }) => (
@@ -79,16 +85,25 @@ const AddressPage: React.FC<AddressPageProps> = ({
 									changeAddressButton={i18n.changeAddressButton}
 									findAddressCancelledButton={i18n.findAddressCancelledButton}
 									onFindAddressCancelled={onCancelChanges}
+									onAddressChanging={onChangeAddress}
+									headingLevel={6}
 								/>
 								<Footer>
 									<ArrowButton
-										intent="special"
+										appearance="secondary"
 										pointsTo="up"
 										iconSide="right"
 										type="submit"
 										title={i18n.saveAndClose}
 										disabled={loading}
 									/>
+									<Link
+										cfg={{ m: 3 }}
+										underline
+										onClick={() => onCancelChanges()}
+									>
+										Cancel
+									</Link>
 								</Footer>
 							</>
 						}

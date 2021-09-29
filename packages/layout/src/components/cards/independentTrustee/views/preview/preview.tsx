@@ -1,13 +1,16 @@
-import React from 'react';
+import React, { useRef } from 'react';
 import { Checkbox } from '@tpr/forms';
-import { Flex, P, Hr, classNames } from '@tpr/core';
+import { Flex, Hr, classNames, P } from '@tpr/core';
 import { UnderlinedButton } from '../../../components/button';
 import { useIndependentTrusteeContext } from '../../context';
-import styles from './preview.module.scss';
+import { AddressPreview } from '../../../common/views/preview/components';
+import styles from '../../../cards.module.scss';
 
-export const Preview: React.FC<any> = () => {
+export const Preview: React.FC<any> = React.memo(() => {
 	const { current, send, onCorrect, i18n } = useIndependentTrusteeContext();
 	const { independentTrustee, complete, preValidatedData } = current.context;
+
+	const regulatorBtn = useRef(null);
 
 	return (
 		<div
@@ -19,38 +22,33 @@ export const Preview: React.FC<any> = () => {
 		>
 			<Flex>
 				{/* Address section: display only	 */}
-				<Flex
-					cfg={{ width: 5, flex: '0 0 auto', flexDirection: 'column', pr: 4 }}
-				>
+				<Flex cfg={{ pr: 4 }} className={styles.section}>
 					<UnderlinedButton>{i18n.preview.buttons.three}</UnderlinedButton>
-					<Flex cfg={{ my: 2, flexDirection: 'column' }}>
-						<P>{independentTrustee.address.addressLine1}</P>
-						{independentTrustee.address.addressLine2 && (
-							<P>{independentTrustee.address.addressLine2}</P>
-						)}
-						{independentTrustee.address.addressLine3 && (
-							<P>{independentTrustee.address.addressLine3}</P>
-						)}
-						<P>{independentTrustee.address.postTown}</P>
-						{independentTrustee.address.county && (
-							<P>{independentTrustee.address.county}</P>
-						)}
-						<P>{independentTrustee.address.postcode}</P>
-						{independentTrustee.address.country && (
-							<P>{independentTrustee.address.country}</P>
-						)}
-					</Flex>
+					<AddressPreview
+						address={{
+							addressLine1: independentTrustee.address.addressLine1,
+							addressLine2: independentTrustee.address.addressLine2,
+							addressLine3: independentTrustee.address.addressLine3,
+							postTown: independentTrustee.address.postTown,
+							county: independentTrustee.address.county,
+							postcode: independentTrustee.address.postcode,
+							country: independentTrustee.address.country,
+						}}
+					/>
 				</Flex>
 
 				{/* Appointed By Regulator section: open for editing	 */}
-				<Flex cfg={{ flexDirection: 'column' }}>
+				<Flex cfg={{ pr: 4 }} className={styles.section}>
 					<UnderlinedButton
 						onClick={() => send('EDIT_REGULATOR')}
 						isOpen={current.matches({ edit: 'regulator' })}
+						isEditButton={true}
+						buttonRef={regulatorBtn}
+						giveFocus={current.context.lastBtnClicked === 4}
 					>
 						{i18n.preview.buttons.four}
 					</UnderlinedButton>
-					<P cfg={{ pt: 3 }}>
+					<P className={styles.appointedByRegulator}>
 						{independentTrustee.appointedByRegulator
 							? i18n.regulator.fields.appointedByRegulator.labels
 									.isAppointedByRegulatorYes
@@ -70,9 +68,12 @@ export const Preview: React.FC<any> = () => {
 						send('COMPLETE', { value: !complete });
 						onCorrect(!complete);
 					}}
-					label={i18n.preview.checkboxLabel}
+					label={i18n.preview.checkboxLabel.replace(
+						'__NAME__',
+						independentTrustee.organisationName,
+					)}
 				/>
 			</Flex>
 		</div>
 	);
-};
+});

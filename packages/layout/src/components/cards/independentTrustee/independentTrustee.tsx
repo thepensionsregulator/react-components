@@ -1,21 +1,25 @@
-import React from 'react';
+import React, { useRef } from 'react';
 import {
 	IndependentTrusteeProvider,
 	IndependentTrusteeProviderProps,
 	useIndependentTrusteeContext,
 } from './context';
-import { P, Section, Span } from '@tpr/core';
+import { Section } from '@tpr/core';
 import { Toolbar } from '../components/toolbar';
-import { UnderlinedButton } from '../components/button';
 import RemovedBox from '../components/removedBox';
 import { Preview } from './views/preview/preview';
 import { Regulator } from './views/regulator/regulator';
 import { ReasonRemove } from './views/remove/reason/reason';
 import { ConfirmRemove } from './views/remove/confirm/confirm';
 import { cardTypeName } from '../common/interfaces';
-import styles from '../cards.module.scss';
 import { IndependentTrusteeContext } from './independentTrusteeMachine';
 import { concatenateStrings } from '../../../utils';
+import {
+	CardMainHeadingTitle,
+	CardRemoveButton,
+	Subtitle,
+} from '../common/views/preview/components';
+import styles from '../cards.module.scss';
 
 const CardContentSwitch: React.FC = () => {
 	const { current } = useIndependentTrusteeContext();
@@ -36,80 +40,60 @@ const CardContentSwitch: React.FC = () => {
 	}
 };
 
-const RemoveButton: React.FC<{ title: string }> = ({ title }) => {
-	const { current, send } = useIndependentTrusteeContext();
-
-	return (
-		<UnderlinedButton
-			isOpen={
-				current.matches({ remove: 'reason' }) ||
-				current.matches({ remvve: 'confirm' })
-			}
-			onClick={() => {
-				if (
-					current.matches({ remove: 'reason' }) ||
-					current.matches({ remove: 'confirm' })
-				) {
-					send('CANCEL');
-				} else {
-					send('REMOVE');
-				}
-			}}
-		>
-			{title}
-		</UnderlinedButton>
-	);
-};
-
 const isComplete = (context: IndependentTrusteeContext) => {
 	return context.preValidatedData ? true : context.complete;
 };
 
-export const IndependentTrusteeCard: React.FC<IndependentTrusteeProviderProps> = ({
-	testId,
-	cfg,
-	...rest
-}) => {
-	return (
-		<IndependentTrusteeProvider {...rest}>
-			{({ current: { context }, i18n }) => {
-				return (
-					<Section
-						cfg={cfg}
-						data-testid={testId}
-						className={styles.card}
-						ariaLabel={concatenateStrings([
-							context.independentTrustee.organisationName,
-							i18n.preview.trusteeType,
-						])}
-					>
-						<Toolbar
-							complete={isComplete(context)}
-							subtitle={() => (
-								<>
-									<Span cfg={{ lineHeight: 3 }} className={styles.styledAsH4}>
-										{context.independentTrustee.organisationName}
-									</Span>
-									<P>{i18n.preview.trusteeType}</P>
-								</>
-							)}
-							statusText={
-								isComplete(context)
-									? i18n.preview.statusText.confirmed
-									: i18n.preview.statusText.unconfirmed
-							}
-							buttonLeft={() => (
-								<UnderlinedButton>{i18n.preview.buttons.one}</UnderlinedButton>
-							)}
-							buttonRight={() => (
-								<RemoveButton title={i18n.preview.buttons.two} />
-							)}
-							extraPB={true}
-						/>
-						<CardContentSwitch />
-					</Section>
-				);
-			}}
-		</IndependentTrusteeProvider>
-	);
-};
+export const IndependentTrusteeCard: React.FC<IndependentTrusteeProviderProps> = React.memo(
+	({ testId, cfg, ...rest }) => {
+		const removeButtonRef = useRef(null);
+
+		return (
+			<IndependentTrusteeProvider {...rest}>
+				{({ current, send, i18n }) => {
+					const RemoveButton = () => (
+						<CardRemoveButton
+							button={removeButtonRef}
+							send={send}
+							current={current}
+						>
+							{i18n.preview.buttons.two}
+						</CardRemoveButton>
+					);
+
+					return (
+						<Section
+							cfg={cfg}
+							data-testid={testId}
+							className={styles.card}
+							ariaLabel={concatenateStrings([
+								current.context.independentTrustee.organisationName,
+								i18n.preview.trusteeType,
+							])}
+						>
+							<Toolbar
+								buttonLeft={() => (
+									<CardMainHeadingTitle title={i18n.preview.buttons.one} />
+								)}
+								buttonRight={RemoveButton}
+								complete={isComplete(current.context)}
+								subtitle={() => (
+									<Subtitle
+										main={current.context.independentTrustee.organisationName}
+										secondary={i18n.preview.trusteeType}
+									/>
+								)}
+								statusText={
+									isComplete(current.context)
+										? i18n.preview.statusText.confirmed
+										: i18n.preview.statusText.unconfirmed
+								}
+							/>
+							<CardContentSwitch />
+						</Section>
+					);
+				}}
+			</IndependentTrusteeProvider>
+		);
+	},
+);

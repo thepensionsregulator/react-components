@@ -18,6 +18,7 @@ const getTypeFields = (
 		value: 'principal-employer',
 		label: labels.employerType.principal.label,
 		cfg: { mb: 2 },
+		required: true,
 	},
 	{
 		type: 'radio',
@@ -26,6 +27,7 @@ const getTypeFields = (
 		value: 'principal-and-participating',
 		label: labels.employerType.principalAndParticipating.label,
 		cfg: { mb: 2 },
+		required: true,
 	},
 	{
 		type: 'radio',
@@ -34,6 +36,7 @@ const getTypeFields = (
 		value: 'participating-employer',
 		label: labels.employerType.participating.label,
 		cfg: { mb: 4 },
+		required: true,
 	},
 ];
 
@@ -47,6 +50,7 @@ const getStatutoryFields = (
 		value: 'statutory',
 		label: labels.statutoryEmployer.statutory.label,
 		cfg: { mb: 2 },
+		required: true,
 	},
 	{
 		type: 'radio',
@@ -55,6 +59,7 @@ const getStatutoryFields = (
 		value: 'non-statutory',
 		label: labels.statutoryEmployer.nonStatutory.label,
 		cfg: { mb: 2 },
+		required: true,
 	},
 ];
 
@@ -100,12 +105,16 @@ export const EmployerType: React.FC = () => {
 				{({ handleSubmit }) => (
 					<form onSubmit={handleSubmit}>
 						{renderFields(typeFields)}
-						<B>{i18n.statutory.title}</B>
-						{renderFields(statutoryFields)}
+						{current.context.showStatutoryEmployerSection && (
+							<>
+								<B>{i18n.statutory.title}</B>
+								{renderFields(statutoryFields)}
+							</>
+						)}
 						<Footer>
 							<Flex>
 								<ArrowButton
-									intent="special"
+									appearance="secondary"
 									pointsTo="up"
 									iconSide="right"
 									disabled={loading}

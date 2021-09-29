@@ -1,11 +1,10 @@
-import React from 'react';
+import React, { useRef } from 'react';
 import {
 	TrusteeProvider,
 	useTrusteeContext,
 	TrusteeCardProps,
 } from './context';
-import { Section, Span } from '@tpr/core';
-import { UnderlinedButton } from '../components/button';
+import { Section } from '@tpr/core';
 import { Preview } from './views/preview';
 import { Toolbar } from '../components/toolbar';
 import Name from './views/name';
@@ -15,18 +14,35 @@ import { Contacts } from './views/contacts';
 import RemoveReason from './views/remove/reason/reason';
 import { ConfirmRemove } from './views/remove/confirm';
 import RemovedBox from '../components/removedBox';
-import { cardType, cardTypeName } from '../common/interfaces';
-import styles from '../cards.module.scss';
+import {
+	CardContentProps,
+	cardType,
+	cardTypeName,
+	IToolbarButtonProps,
+} from '../common/interfaces';
 import { AddressComparer } from '@tpr/forms';
 import { TrusteeContext } from './trusteeMachine';
-import { concatenateStrings, removeFromTabFlowIfMatches } from '../../../utils';
+import {
+	CardMainHeadingButton,
+	CardRemoveButton,
+	Subtitle,
+} from '../common/views/preview/components';
+import {
+	concatenateStrings,
+	removeFromTabFlowIfMatches,
+	capitalize,
+} from '../../../utils';
+import styles from '../cards.module.scss';
 
-const CardContent: React.FC = () => {
+const CardContent: React.FC<CardContentProps> = ({
+	enableContactDetails = true,
+	onChangeAddress,
+}) => {
 	const { current, i18n, send, addressAPI } = useTrusteeContext();
 	const { trustee } = current.context;
 
 	if (current.matches('preview')) {
-		return <Preview />;
+		return <Preview enableContactDetails={enableContactDetails} />;
 	} else if (current.matches({ edit: { trustee: 'name' } })) {
 		return <Name />;
 	} else if (
@@ -41,8 +57,7 @@ const CardContent: React.FC = () => {
 		return (
 			<Address
 				onSubmit={(values) => {
-					const comparer = new AddressComparer();
-					if (comparer.areEqual(values.initialValue, values)) {
+					if (AddressComparer.areEqual(values.initialValue, values)) {
 						send('CANCEL');
 					} else {
 						send('SAVE', { address: values || {} });
@@ -55,6 +70,8 @@ const CardContent: React.FC = () => {
 				sectionTitle={i18n.address.sectionTitle}
 				i18n={i18n.address}
 				onCancelChanges={() => send('CANCEL')}
+				subSectionHeaderText={i18n.preview.buttons.three}
+				onChangeAddress={onChangeAddress}
 			/>
 		);
 	} else if (
@@ -74,76 +91,47 @@ const CardContent: React.FC = () => {
 	}
 };
 
-const TrusteeButton: React.FC = () => {
-	const { current, send, i18n } = useTrusteeContext();
+const ToolbarButton: React.FC<IToolbarButtonProps> = React.memo(
+	({ remove = false, button }) => {
+		const { current, send, i18n } = useTrusteeContext();
 
-	return (
-		<UnderlinedButton
-			isOpen={
-				current.matches({ edit: { trustee: 'name' } }) ||
-				current.matches({ edit: { trustee: 'kind' } }) ||
-				current.matches({ edit: { trustee: 'save' } }) ||
-				current.matches({ edit: { company: 'address' } }) ||
-				current.matches({ edit: { company: 'save' } }) ||
-				current.matches({ edit: { contact: 'details' } }) ||
-				current.matches({ edit: { contact: 'save' } }) ||
-				current.matches({ remove: 'reason' }) ||
-				current.matches({ remove: 'confirm' })
-			}
-			onClick={() => {
-				if (
-					current.matches({ edit: { trustee: 'name' } }) ||
-					current.matches({ edit: { trustee: 'kind' } }) ||
-					current.matches({ edit: { company: 'address' } }) ||
-					current.matches({ edit: { contact: 'details' } }) ||
-					current.matches({ remove: 'reason' }) ||
-					current.matches({ remove: 'confirm' })
-				) {
-					send('CANCEL');
-				} else {
-					send('EDIT_TRUSTEE');
-				}
-			}}
-		>
-			{i18n.preview.buttons.one}
-		</UnderlinedButton>
-	);
-};
-
-const RemoveButton: React.FC<{ tabIndex?: number }> = ({ tabIndex }) => {
-	const { current, send, i18n } = useTrusteeContext();
-
-	return (
-		<UnderlinedButton
-			isOpen={
-				current.matches({ remove: 'reason' }) ||
-				current.matches({ remove: 'confirm' })
-			}
-			onClick={() => {
-				if (
-					current.matches({ remove: 'reason' }) ||
-					current.matches({ remove: 'confirm' })
-				) {
-					send('CANCEL');
-				} else {
-					send('REMOVE');
-				}
-			}}
-			tabIndex={tabIndex}
-		>
-			{i18n.preview.buttons.two}
-		</UnderlinedButton>
-	);
-};
+		return (
+			<>
+				{remove ? (
+					<CardRemoveButton
+						button={button}
+						send={send}
+						current={current}
+						tabIndex={removeFromTabFlowIfMatches(current, {
+							edit: { trustee: 'name' },
+						})}
+					>
+						{i18n.preview.buttons.two}
+					</CardRemoveButton>
+				) : (
+					<CardMainHeadingButton
+						button={button}
+						current={current}
+						onClick={() => send('EDIT_TRUSTEE')}
+					>
+						{i18n.preview.buttons.one}
+					</CardMainHeadingButton>
+				)}
+			</>
+		);
+	},
+);
 
 const isComplete = (context: TrusteeContext) => {
 	return context.preValidatedData ? true : context.complete;
 };
 
-export const TrusteeCard: React.FC<Omit<TrusteeCardProps, 'children'>> = ({
-	cfg,
-	...props
-}) => {
+export const TrusteeCard: React.FC<
+	Omit<TrusteeCardProps, 'children'>
+> = React.memo(({ cfg, enableContactDetails = true, ...props }) => {
+	const trusteeButtonRef = useRef(null);
+	const removeButtonRef = useRef(null);
+
 	return (
 		<TrusteeProvider {...props}>
 			{({ current, i18n }) => (
@@ -160,23 +148,22 @@ export const TrusteeCard: React.FC<Omit<TrusteeCardProps, 'children'>> = ({
 					])}
 				>
 					<Toolbar
-						complete={isComplete(current.context)}
-						buttonLeft={() => <TrusteeButton />}
+						buttonLeft={() => <ToolbarButton button={trusteeButtonRef} />}
 						buttonRight={() => (
-							<RemoveButton
-								tabIndex={removeFromTabFlowIfMatches(current, {
-									edit: { trustee: 'name' },
-								})}
-							/>
+							<ToolbarButton button={removeButtonRef} remove={true} />
 						)}
+						complete={isComplete(current.context)}
 						subtitle={() => (
-							<Span cfg={{ lineHeight: 3 }} className={styles.styledAsH4}>
-								{concatenateStrings([
+							<Subtitle
+								main={concatenateStrings([
 									current.context.trustee.title,
 									current.context.trustee.firstName,
 									current.context.trustee.lastName,
 								])}
-							</Span>
+								secondary={`${capitalize(
+									current.context.trustee.trusteeType,
+								)} trustee`}
+							/>
 						)}
 						statusText={
 							isComplete(current.context)
@@ -184,9 +171,12 @@ export const TrusteeCard: React.FC<Omit<TrusteeCardProps, 'children'>> = ({
 								: i18n.preview.statusText.unconfirmed
 						}
 					/>
-					<CardContent />
+					<CardContent
+						onChangeAddress={props.onChangeAddress}
+						enableContactDetails={enableContactDetails}
+					/>
 				</Section>
 			)}
 		</TrusteeProvider>
 	);
-};
+});

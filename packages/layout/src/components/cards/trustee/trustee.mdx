@@ -45,7 +45,7 @@ import { TrusteeCard } from '@tpr/layout';
 			addressLine3: 'Trafalgar Pl',
 			postTown: 'Brighton',
 			postcode: 'BN1 4DW',
-			county: 'West Sussex',
+			county: 'East Sussex',
 			country: '',
 			//
 			telephoneNumber: '01273 000 111',
@@ -70,19 +70,71 @@ import { TrusteeCard } from '@tpr/layout';
 	}}
 </Playground>
 
+## RSS Trustee Card
+
+<Playground>
+	{() => {
+		const [complete, setComplete] = useState(false);
+		const callbackFn = (values, _fullTrusteeObject) => {
+			console.log(values);
+			console.log(_fullTrusteeObject);
+			return Promise.resolve(values);
+		};
+		const trustee = {
+			id: '12345',
+			schemeRoleId: '12345',
+			//
+			title: 'Mr',
+			firstName: 'John',
+			lastName: 'Smith',
+			trusteeType: 'member-nominated',
+			isProfessionalTrustee: false,
+			//
+			addressLine1: 'The Pensions Regulator',
+			addressLine2: 'Napier House',
+			addressLine3: 'Trafalgar Pl',
+			postTown: 'Brighton',
+			postcode: 'BN1 4DW',
+			county: 'East Sussex',
+			country: '',
+			//
+			telephoneNumber: '01273 000 111',
+			emailAddress: 'fred.sandoors@trp.gov.uk',
+			effectiveDate: '1997-04-01T00:00:00',
+		};
+		return (
+			<TrusteeCard
+				addressAPI={{
+					get: (endpont) => experianApiGet(endpont),
+					limit: 100,
+				}}
+				complete={complete}
+				onAddressSave={callbackFn}
+				onContactSave={callbackFn}
+				onCorrect={(value) => setComplete(value)}
+				onDetailsSave={callbackFn}
+				onRemove={callbackFn}
+				trustee={trustee}
+				enableContactDetails={false}
+			/>
+		);
+	}}
+</Playground>
+
 ## API
 
 ### Props
 
-| Property         | Required | Type             | Description                                                                              |
-| ---------------- | -------- | ---------------- | ---------------------------------------------------------------------------------------- |
-| addressAPI       | true     | addressAPIType   | the required API params for the address search                                           |
-| complete         | true     | boolean          | changes the state of the card when All details are correct                               |
-| i18n             | false    | TrusteeI18nProps | allows to override specific text in the card                                             |
-| onAddressSave    | true     | function         | actions for when the user updates the Trustee's Address                                  |
-| onContactSave    | true     | function         | actions for when the user updates the Contact Details                                    |
-| onCorrect        | true     | function         | actions for when the user clicks the "Confirm details are correct" checkbox                  |
-| onDetailsSave    | true     | function         | actions for when the user updates the Name of the Trustee                                |
-| onRemove         | true     | function         | actions for when the trustee is removed                                                  |
-| prevalidatedData | false    | boolean          | allows to ignore the state of the "Confirm details are correct" checkbox & shows "No issues" |
-| trustee          | true     | Trustee          | the Trustee object                                                                       |
+| Property             | Required | Type             | Description                                                                                  |
+| -------------------- | -------- | ---------------- | -------------------------------------------------------------------------------------------- |
+| addressAPI           | true     | addressAPIType   | the required API params for the address search                                               |
+| complete             | true     | boolean          | changes the state of the card when All details are correct                                   |
+| i18n                 | false    | TrusteeI18nProps | allows to override specific text in the card                                                 |
+| onAddressSave        | true     | function         | actions for when the user updates the Trustee's Address                                      |
+| onContactSave        | true     | function         | actions for when the user updates the Contact Details                                        |
+| onCorrect            | true     | function         | actions for when the user clicks the "Confirm details are correct" checkbox                  |
+| onDetailsSave        | true     | function         | actions for when the user updates the Name of the Trustee                                    |
+| onRemove             | true     | function         | actions for when the trustee is removed                                                      |
+| preValidatedData     | false    | boolean          | allows to ignore the state of the "Confirm details are correct" checkbox & shows "No issues" |
+| trustee              | true     | Trustee          | the Trustee object                                                                           |
+| enableContactDetails | false    | boolean          | turns off the Contact details section for RSS trustee                                        |

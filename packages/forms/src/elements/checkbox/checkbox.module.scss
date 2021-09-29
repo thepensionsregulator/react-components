@@ -1,23 +1,25 @@
-@import '@tpr/theming/lib/variables.scss';
+@import '@tpr/core/lib/components/typography/typography.module.scss';
+// typography.module.scss includes '@tpr/theming/lib/variables.scss'
 
 .wrapper {
-	display: flex;
-	flex: 0 0 auto;
-	align-items: center;
-	line-height: 1.4;
 	cursor: pointer;
 	user-select: none;
+
+	.innerWrapper {
+		display: flex;
+		flex: 0 0 auto;
+		align-items: center;
+		line-height: 1.4;
+		overflow: visible;
+	}
 
 	input[type='checkbox']:focus + .checkbox {
 		box-shadow: 0 0 0 4px #ffd300;
 	}
 
-	input[type='checkbox']:checked + .checkbox {
-		// outline: 2px dashed orange;
-	}
-
 	.checkbox {
-		// outline: 1px dashed red;
+		min-width: 40px;
+		min-height: 40px;
 	}
 }
 
@@ -32,4 +34,19 @@
 	font-weight: $font-weight-2;
 	margin-top: $space-2;
 	margin-left: 55px;
+	margin-bottom: 0;
+}
+
+.label {
+	margin-left: $space-3;
+	@include removeMarginBottom;
+}
+
+.inline {
+	display: flex;
+	flex-direction: row;
+
+	& > div {
+		margin-right: $space-8;
+	}
 }

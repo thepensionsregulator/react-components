@@ -8,7 +8,8 @@ import {
 	cardTypeName,
 } from '../../../common/interfaces';
 import NameForm from '../../../common/views/nameForm/nameForm';
-import { RestoreMissingNullValues } from '../../../common/services/NullValueFieldRestorer';
+import { RestoreMissingNullValues } from '../../../../../services/NullValueFieldRestorer';
+import textStyles from '@tpr/forms/lib/elements/text/text.module.scss';
 
 const getFields = (
 	fields: RecursivePartial<TrusteeI18nProps['name']['fields']>,
@@ -16,28 +17,36 @@ const getFields = (
 	{
 		name: 'title',
 		type: 'text',
+		autoComplete: 'honorific-prefix',
 		label: fields.title.label,
 		error: fields.title.error,
 		maxLength: fields.title.maxlength,
-		inputWidth: 1,
+		testId: 'title',
+		inputClassName: textStyles.namePrefixInput,
 		cfg: { mb: 4 },
 	},
 	{
 		name: 'firstName',
 		type: 'text',
+		autoComplete: 'given-name',
 		label: fields.firstName.label,
 		error: fields.firstName.error,
 		maxLength: fields.firstName.maxlength,
-		inputWidth: 6,
+		testId: 'first-name',
+		inputClassName: textStyles.nameInput,
+		required: true,
 		cfg: { mb: 4 },
 	},
 	{
 		name: 'lastName',
 		type: 'text',
+		autoComplete: 'family-name',
 		label: fields.lastName.label,
 		error: fields.lastName.error,
 		maxLength: fields.lastName.maxlength,
-		inputWidth: 6,
+		testId: 'last-name',
+		required: true,
+		inputClassName: textStyles.nameInput,
 	},
 ];
 
@@ -77,6 +86,7 @@ const Name: React.FC = () => {
 			initialValues={originalValues}
 			loading={loading}
 			nextStep={true}
+			send={send}
 		/>
 	);
 };

@@ -1,11 +1,12 @@
 import React from 'react';
 import { Checkbox } from '@tpr/forms';
-import { Flex, P, Hr, classNames } from '@tpr/core';
+import { Flex, Hr, classNames } from '@tpr/core';
 import { UnderlinedButton } from '../../../components/button';
 import { useThirdPartyContext } from '../../context';
-import styles from './preview.module.scss';
+import { AddressPreview } from '../../../common/views/preview/components';
+import styles from '../../../cards.module.scss';
 
-export const Preview: React.FC<any> = () => {
+export const Preview: React.FC<any> = React.memo(() => {
 	const { current, send, onCorrect, i18n } = useThirdPartyContext();
 	const { thirdParty, complete, preValidatedData } = current.context;
 
@@ -18,27 +19,20 @@ export const Preview: React.FC<any> = () => {
 			}
 		>
 			<Flex>
-				<Flex
-					cfg={{ width: 5, flex: '0 0 auto', flexDirection: 'column', pr: 4 }}
-				>
+				<Flex cfg={{ pr: 4 }} className={styles.section}>
 					<UnderlinedButton>{i18n.preview.buttons.three}</UnderlinedButton>
-					<Flex cfg={{ my: 2, flexDirection: 'column' }}>
-						<P>{thirdParty.address.addressLine1}</P>
-						{thirdParty.address.addressLine2 && (
-							<P>{thirdParty.address.addressLine2}</P>
-						)}
-						{thirdParty.address.addressLine3 && (
-							<P>{thirdParty.address.addressLine3}</P>
-						)}
-						<P>{thirdParty.address.postTown}</P>
-						{thirdParty.address.county && <P>{thirdParty.address.county}</P>}
-						<P>{thirdParty.address.postcode}</P>
-						{thirdParty.address.country && <P>{thirdParty.address.country}</P>}
-					</Flex>
+					<AddressPreview
+						address={{
+							addressLine1: thirdParty.address.addressLine1,
+							addressLine2: thirdParty.address.addressLine2,
+							addressLine3: thirdParty.address.addressLine3,
+							postTown: thirdParty.address.postTown,
+							county: thirdParty.address.county,
+							postcode: thirdParty.address.postcode,
+							country: thirdParty.address.country,
+						}}
+					/>
 				</Flex>
-				<Flex
-					cfg={{ width: 5, flex: '0 0 auto', flexDirection: 'column', pl: 4 }}
-				></Flex>
 			</Flex>
 			<Flex cfg={{ flexDirection: 'column' }}>
 				<Hr cfg={{ my: 4 }} />
@@ -49,9 +43,12 @@ export const Preview: React.FC<any> = () => {
 						send('COMPLETE', { value: !complete });
 						onCorrect(!complete);
 					}}
-					label={i18n.preview.checkboxLabel}
+					label={i18n.preview.checkboxLabel.replace(
+						'__NAME__',
+						thirdParty.organisationName,
+					)}
 				/>
 			</Flex>
 		</div>
 	);
-};
+});

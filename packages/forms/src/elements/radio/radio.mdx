@@ -7,8 +7,8 @@ route: /forms/radio
 import { Playground } from '@playground';
 import { Form } from 'react-final-form';
 import { FFRadioButton } from './radio';
-import { SeparatorY, SeparatorX } from '../separator';
 import { renderFields } from '../../renderFields';
+import radioStyles from './radio.module.scss';
 import styles from '../elements.module.scss';
 
 # Radio
@@ -44,7 +44,7 @@ import { FFRadioButton } from '@tpr/forms';
 
 [CodeSandbox](https://codesandbox.io/s/lively-wood-rxcpu)
 
-### No separator
+### Default layout
 
 <Playground>
 	{() => {
@@ -59,13 +59,29 @@ import { FFRadioButton } from '@tpr/forms';
 								name={FIELD_NAME}
 								value="value_a"
 								label="Select Value A"
-								cfg={{ mb: 4 }}
+								hint="Lorem, ipsum dolor sit amet consectetur adipisicing elit. Ea obcaecati repellat molestias nemo deleniti eveniet vel similique nesciunt fugiat nisi?"
 							/>
 							<FFRadioButton
 								name={FIELD_NAME}
 								value="value_b"
-								label="Select Value B"
+								label="Select Value B with a long label that always wraps: Lorem, ipsum dolor sit amet consectetur adipisicing elit. Ea obcaecati repellat molestias nemo deleniti eveniet vel similique nesciunt fugiat nisi"
 								hint="Lorem, ipsum dolor sit amet consectetur adipisicing elit. Ea obcaecati repellat molestias nemo deleniti eveniet vel similique nesciunt fugiat nisi?"
+							/>
+							<FFRadioButton
+								name={FIELD_NAME}
+								value="value_c"
+								label="Select Value C with a long label that always wraps: Lorem, ipsum dolor sit amet consectetur adipisicing elit. Ea obcaecati repellat molestias nemo deleniti eveniet vel similique nesciunt fugiat nisi"
+							/>
+							<FFRadioButton
+								name={FIELD_NAME}
+								value="value_d"
+								label="Select Value D"
+								hint="Lorem, ipsum dolor sit amet consectetur adipisicing elit."
+							/>
+							<FFRadioButton
+								name={FIELD_NAME}
+								value="value_e"
+								label="Select Value E"
 							/>
 						</fieldset>
 						<button type="submit" style={{ display: 'none' }}>
@@ -78,7 +94,9 @@ import { FFRadioButton } from '@tpr/forms';
 	}}
 </Playground>
 
-### SeparatorY
+### Horizontal layout
+
+Horizontal layout will only be used where there are two radio buttons with short labels, eg Yes/No questions
 
 <Playground>
 	{() => {
@@ -89,75 +107,10 @@ import { FFRadioButton } from '@tpr/forms';
 					<form onSubmit={handleSubmit}>
 						<fieldset>
 							<legend>Select a value</legend>
-							<SeparatorY>
-								<FFRadioButton
-									name={FIELD_NAME}
-									value="value_a"
-									label="Select Value A"
-								/>
-								<FFRadioButton
-									name={FIELD_NAME}
-									value="value_b"
-									label="Select Value B"
-									hint="Lorem, ipsum dolor sit amet consectetur adipisicing elit. Ea obcaecati repellat molestias nemo deleniti eveniet vel similique nesciunt fugiat nisi?"
-								/>
-								<FFRadioButton
-									name={FIELD_NAME}
-									value="value_c"
-									label="Select Value C"
-								/>
-								<FFRadioButton
-									name={FIELD_NAME}
-									value="value_d"
-									label="Select Value D"
-									hint="Lorem, ipsum dolor sit amet consectetur adipisicing elit."
-								/>
-								<FFRadioButton
-									name={FIELD_NAME}
-									value="value_e"
-									label="Select Value E"
-								/>
-							</SeparatorY>
-						</fieldset>
-						<button type="submit" style={{ display: 'none' }}>
-							Submit
-						</button>
-					</form>
-				)}
-			</Form>
-		);
-	}}
-</Playground>
-
-### SeparatorX
-
-<Playground>
-	{() => {
-		const FIELD_NAME = 'radio_button';
-		return (
-			<Form onSubmit={console.log} initialValues={{ [FIELD_NAME]: 'value_b' }}>
-				{({ handleSubmit }) => (
-					<form onSubmit={handleSubmit}>
-						<fieldset>
-							<legend>Select a value</legend>
-							<SeparatorX>
-								<FFRadioButton
-									name={FIELD_NAME}
-									value="value_a"
-									label="Select Value A"
-									hint="Lorem, ipsum dolor sit amet consectetur adipisicing elit."
-								/>
-								<FFRadioButton
-									name={FIELD_NAME}
-									value="value_b"
-									label="Select Value B"
-								/>
-								<FFRadioButton
-									name={FIELD_NAME}
-									value="value_c"
-									label="Select Value C"
-								/>
-							</SeparatorX>
+							<div className={radioStyles.inline}>
+								<FFRadioButton name={FIELD_NAME} value={true} label="Yes" />
+								<FFRadioButton name={FIELD_NAME} value={false} label="No" />
+							</div>
 						</fieldset>
 						<button type="submit" style={{ display: 'none' }}>
 							Submit
@@ -184,7 +137,6 @@ import { FFRadioButton } from '@tpr/forms';
 								name={FIELD_NAME}
 								value="value_a"
 								label="Select Value A"
-								cfg={{ mb: 4 }}
 								disabled
 							/>
 							<FFRadioButton
@@ -218,7 +170,6 @@ import { FFRadioButton } from '@tpr/forms';
 				label: 'Value A',
 				value: 'value_a',
 				hint: 'Either option A',
-				cfg: { mb: 4 }
 			},
 			{
 				type: 'radio',
@@ -227,32 +178,113 @@ import { FFRadioButton } from '@tpr/forms';
 				label: 'Value B',
 				value: 'value_b',
 				hint: 'Or option B',
-			}
+			},
 		];
 		const validateForm = (values) => {
 			console.log('validateForm');
 			console.log(values);
 			if (!values[FIELD_NAME]) {
 				return {
-					message: 'You must choose an option'
+					message: 'You must choose an option',
 				};
 			}
 		};
 		return (
-			<Form 
+			<Form
 				onSubmit={(value, form) => {
 					setTimeout(() => {
 						form.reset();
-					}, 500)
-				}} 
+					}, 500);
+				}}
 				initialValues={{ [FIELD_NAME]: null }}
 				validate={validateForm}
 			>
 				{({ handleSubmit, errors }) => (
 					<form onSubmit={handleSubmit}>
-						<fieldset className={errors.message && styles.labelError} aria-describedby="error-message">
+						<fieldset
+							className={errors.message && styles.labelError}
+							aria-describedby="error-message"
+						>
 							<legend>Choose an option</legend>
-		          {errors.message && <p id="error-message" className={styles.errorMessage}>{errors.message}</p>}
+							{errors.message && (
+								<p id="error-message" className={styles.errorMessage}>
+									{errors.message}
+								</p>
+							)}
+							{renderFields(fields)}
+						</fieldset>
+						<button type="submit" style={{ display: 'none' }}>
+							Submit
+						</button>
+						<br />
+						<p>(Press ENTER to reset)</p>
+					</form>
+				)}
+			</Form>
+		);
+	}}
+</Playground>
+
+### Required
+
+```js
+required = true;
+```
+
+<Playground>
+	{() => {
+		const FIELD_NAME = 'required_rb';
+		const fields = [
+			{
+				type: 'radio',
+				id: 'required_radio-a',
+				name: FIELD_NAME,
+				label: 'Value A',
+				value: 'required_value_a',
+				required: true,
+				hint: 'Either option A',
+			},
+			{
+				type: 'radio',
+				id: 'required_radio-b',
+				name: FIELD_NAME,
+				label: 'Value B',
+				value: 'required_value_b',
+				required: true,
+				hint: 'Or option B',
+			},
+		];
+		const validateForm = (values) => {
+			console.log('validateForm');
+			console.log(values);
+			if (!values[FIELD_NAME]) {
+				return {
+					message: 'You must choose an option',
+				};
+			}
+		};
+		return (
+			<Form
+				onSubmit={(value, form) => {
+					setTimeout(() => {
+						form.reset();
+					}, 500);
+				}}
+				initialValues={{ [FIELD_NAME]: null }}
+				validate={validateForm}
+			>
+				{({ handleSubmit, errors }) => (
+					<form onSubmit={handleSubmit}>
+						<fieldset
+							className={errors.message && styles.labelError}
+							aria-describedby="error-message"
+						>
+							<legend>Choose an option</legend>
+							{errors.message && (
+								<p id="error-message" className={styles.errorMessage}>
+									{errors.message}
+								</p>
+							)}
 							{renderFields(fields)}
 						</fieldset>
 						<button type="submit" style={{ display: 'none' }}>

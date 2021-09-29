@@ -8,6 +8,7 @@ import {
 	cardTypeName,
 } from '../../../common/interfaces';
 import NameForm from '../../../common/views/nameForm/nameForm';
+import textStyles from '@tpr/forms/lib/elements/text/text.module.scss';
 
 const getFields = (
 	fields: RecursivePartial<CorporateGroupI18nProps['name']['fields']>,
@@ -15,32 +16,44 @@ const getFields = (
 	{
 		name: 'title',
 		type: 'text',
+		autoComplete: 'honorific-prefix',
 		label: fields.title.label,
 		error: fields.title.error,
 		maxLength: fields.title.maxlength,
-		inputWidth: 1,
+		inputClassName: textStyles.namePrefixInput,
+		testId: 'title',
 		cfg: { mb: 4 },
 	},
 	{
 		name: 'firstName',
 		type: 'text',
+		autoComplete: 'given-name',
 		label: fields.firstName.label,
 		error: fields.firstName.error,
 		maxLength: fields.firstName.maxlength,
-		inputWidth: 6,
+		inputClassName: textStyles.nameInput,
+		required: true,
+		testId: 'first-name',
 		cfg: { mb: 4 },
 	},
 	{
 		name: 'lastName',
 		type: 'text',
+		autoComplete: 'family-name',
 		label: fields.lastName.label,
 		error: fields.lastName.error,
 		maxLength: fields.lastName.maxlength,
-		inputWidth: 6,
+		inputClassName: textStyles.nameInput,
+		required: true,
+		testId: 'last-name',
 	},
 ];
-
-export const NameScreen: React.FC = () => {
+interface NameScreenProps {
+	subSectionHeaderText?: string;
+}
+export const NameScreen: React.FC<NameScreenProps> = ({
+	subSectionHeaderText,
+}) => {
 	const [loading, setLoading] = useState(false);
 	const { current, send, i18n, onSaveName } = useCorporateGroupContext();
 	const fields = getFields(i18n.name.fields);
@@ -56,7 +69,7 @@ export const NameScreen: React.FC = () => {
 			setLoading(false);
 			send('SAVE', { values });
 		} catch (error) {
-			console.log(error);
+			console.error(error);
 			setLoading(false);
 		}
 	};
@@ -76,6 +89,8 @@ export const NameScreen: React.FC = () => {
 			}}
 			loading={loading}
 			nextStep={true}
+			send={send}
+			subSectionHeaderText={subSectionHeaderText}
 		/>
 	);
 };

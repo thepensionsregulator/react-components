@@ -1,42 +1,10 @@
-import React, { useState } from 'react';
-import { Address } from './address';
+import React, { useState, useEffect } from 'react';
 import { PostcodeLookup } from './postcodeLookup';
 import { SelectAddress } from './selectAddress';
 import { EditAddress } from './editAddress';
-import { AddressLookupProvider } from './addressLookupProvider';
-import { act } from 'react-dom/test-utils';
+import { AddressProps, Address } from './types';
 
-export type AddressProps = {
-	initialValue?: Address;
-	loading: boolean;
-	setLoading: (loading: boolean) => void;
-	testId?: string;
-	addressLookupProvider: AddressLookupProvider;
-	invalidPostcodeMessage: string;
-	postcodeLookupLabel: string;
-	postcodeLookupButton: string;
-	changePostcodeButton: string;
-	changePostcodeAriaLabel?: string;
-	selectAddressLabel: string;
-	selectAddressPlaceholder?: string;
-	selectAddressButton: string;
-	selectAddressRequiredMessage: string;
-	noAddressesFoundMessage: string;
-	addressLine1Label: string;
-	addressLine1RequiredMessage: string;
-	addressLine2Label: string;
-	addressLine3Label: string;
-	townLabel: string;
-	countyLabel: string;
-	postcodeLabel: string;
-	countryLabel: string;
-	changeAddressButton: string;
-	findAddressCancelledButton?: string;
-	onFindAddressCancelled?: () => void;
-	onValidatePostcode?: (isValid: boolean) => void | null;
-};
-
-enum AddressView {
+export enum AddressView {
 	PostcodeLookup,
 	SelectAddress,
 	EditAddress,
@@ -58,6 +26,7 @@ export const AddressLookup: React.FC<AddressProps> = ({
 	selectAddressButton,
 	selectAddressRequiredMessage,
 	noAddressesFoundMessage,
+	headingLevel = 2,
 	addressLine1Label,
 	addressLine1RequiredMessage,
 	addressLine2Label,
@@ -70,6 +39,8 @@ export const AddressLookup: React.FC<AddressProps> = ({
 	findAddressCancelledButton,
 	onFindAddressCancelled,
 	onValidatePostcode,
+	onAddressChanging,
+	setSubmitButton,
 }) => {
 	// Start in postcode lookup view, unless there's already an address in which case start in edit address view
 	let initialView = AddressView.PostcodeLookup;
@@ -89,6 +60,12 @@ export const AddressLookup: React.FC<AddressProps> = ({
 	const [address, setAddress] = useState<Address | null>(null);
 	const [postcode, setPostcode] = useState<string>(null);
 
+	useEffect(() => {
+		if (setSubmitButton) {
+			setSubmitButton(addressView === AddressView.EditAddress);
+		}
+	}, [addressView]);
+
 	// Render a different child component depending on the state
 	return (
 		<>
@@ -106,7 +83,7 @@ export const AddressLookup: React.FC<AddressProps> = ({
 								addressLookupProvider
 									.transformResults(rawAddresses)
 									.then((processedResults) => {
-										act(() => setAddresses(processedResults));
+										setAddresses(processedResults);
 										setLoading(false);
 									});
 							})
@@ -121,9 +98,6 @@ export const AddressLookup: React.FC<AddressProps> = ({
 					postcodeLookupButton={postcodeLookupButton}
 					findAddressCancelledButton={findAddressCancelledButton}
 					onFindAddressCancelled={onFindAddressCancelled}
-					onValidatePostcode={(isValid) =>
-						onValidatePostcode ? onValidatePostcode(isValid) : null
-					}
 				/>
 			)}
 			{addressView === AddressView.SelectAddress && (
@@ -147,28 +121,42 @@ export const AddressLookup: React.FC<AddressProps> = ({
 					selectAddressButton={selectAddressButton}
 					selectAddressRequiredMessage={selectAddressRequiredMessage}
 					noAddressesFoundMessage={noAddressesFoundMessage}
+					onValidatePostcode={(isValid) => {
+						if (onAddressChanging && isValid) {
+							onAddressChanging(isValid);
+						}
+						if (onValidatePostcode) {
+							onValidatePostcode(isValid);
+						}
+					}}
 				/>
 			)}
-			{addressView === AddressView.EditAddress && (
-				<EditAddress
-					initialValue={initialValue}
-					loading={loading}
-					value={address}
-					testId={testId}
-					onChangeAddressClick={() =>
-						setAddressView(AddressView.PostcodeLookup)
-					}
-					addressLine1Label={addressLine1Label}
-					addressLine1RequiredMessage={addressLine1RequiredMessage}
-					addressLine2Label={addressLine2Label}
-					addressLine3Label={addressLine3Label}
-					townLabel={townLabel}
-					countyLabel={countyLabel}
-					postcodeLabel={postcodeLabel}
-					countryLabel={countryLabel}
-					changeAddressButton={changeAddressButton}
-				/>
-			)}
+			<div aria-live="polite">
+				{addressView === AddressView.EditAddress && (
+					<EditAddress
+						initialValue={initialValue}
+						loading={loading}
+						value={address}
+						testId={testId}
+						onChangeAddressClick={() => {
+							if (onAddressChanging) {
+								onAddressChanging(false);
+							}
+							setAddressView(AddressView.PostcodeLookup);
+						}}
+						addressLine1Label={addressLine1Label}
+						addressLine1RequiredMessage={addressLine1RequiredMessage}
+						addressLine2Label={addressLine2Label}
+						addressLine3Label={addressLine3Label}
+						townLabel={townLabel}
+						countyLabel={countyLabel}
+						postcodeLabel={postcodeLabel}
+						countryLabel={countryLabel}
+						changeAddressButton={changeAddressButton}
+						headingLevel={headingLevel}
+					/>
+				)}
+			</div>
 		</>
 	);
 };

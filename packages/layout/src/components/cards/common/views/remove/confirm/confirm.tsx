@@ -4,6 +4,7 @@ import { Content } from '../../../../components/content';
 import { ArrowButton } from '../../../../../buttons/buttons';
 import { WarningBox } from '../../../../../warning/warning';
 import { cardType, cardTypeName } from '../../../interfaces';
+import styles from './confirm.module.scss';
 
 interface ConfirmProps {
 	cardType: cardType;
@@ -39,9 +40,11 @@ const Confirm: React.FC<ConfirmProps> = ({
 			<H3 cfg={{ mt: 3, fontWeight: 2 }}>{removeTitle}</H3>
 			<Hr cfg={{ my: 4 }} />
 			<WarningBox warningLabel={warningLabel}>
-				<Flex cfg={{ flexDirection: 'column' }}>
-					<P>{removeMessage1}</P>
-					{removeMessage2 && <P cfg={{ mt: 3 }}>{removeMessage2}</P>}
+				<Flex className={styles.confirm}>
+					<P className={styles.paragraph1}>{removeMessage1}</P>
+					{removeMessage2 && (
+						<P className={styles.paragraph2}>{removeMessage2}</P>
+					)}
 					<Flex cfg={{ mt: 3 }}>
 						<ArrowButton
 							intent="warning"

@@ -1,20 +1,24 @@
-import React from 'react';
+import React, { useRef } from 'react';
 import {
 	ThirdPartyProvider,
 	ThirdPartyProviderProps,
 	useThirdPartyContext,
 } from './context';
-import { Section, Span } from '@tpr/core';
+import { Section } from '@tpr/core';
 import { Toolbar } from '../components/toolbar';
-import { UnderlinedButton } from '../components/button';
 import { Preview } from './views/preview/preview';
 import { RemoveDateForm } from './views/remove/date/date';
 import { ConfirmRemove } from './views/remove/confirm/confirm';
 import RemovedBox from '../components/removedBox';
 import { cardTypeName } from '../common/interfaces';
-import styles from '../cards.module.scss';
 import { ThirdPartyContext } from './thirdPartyMachine';
+import {
+	CardMainHeadingTitle,
+	CardRemoveButton,
+	Subtitle,
+} from '../common/views/preview/components';
 import { concatenateStrings } from '../../../utils';
+import styles from '../cards.module.scss';
 
 const CardContentSwitch: React.FC = () => {
 	const { current } = useThirdPartyContext();
@@ -33,75 +37,59 @@ const CardContentSwitch: React.FC = () => {
 	}
 };
 
-const ToolbarButton: React.FC<{ title: string }> = ({ title }) => {
-	const { current, send } = useThirdPartyContext();
-	return (
-		<UnderlinedButton
-			isOpen={
-				current.matches({ remove: 'date' }) ||
-				current.matches({ remove: 'confirm' })
-			}
-			onClick={() => {
-				if (
-					current.matches({ remove: 'date' }) ||
-					current.matches({ remove: 'confirm' })
-				) {
-					send('CANCEL');
-				} else {
-					send('REMOVE');
-				}
-			}}
-		>
-			{title}
-		</UnderlinedButton>
-	);
-};
-
 const isComplete = (context: ThirdPartyContext) => {
 	return context.preValidatedData ? true : context.complete;
 };
 
-export const ThirdPartyCard: React.FC<ThirdPartyProviderProps> = ({
-	testId,
-	cfg,
-	...rest
-}) => {
-	return (
-		<ThirdPartyProvider {...rest}>
-			{({ current: { context }, i18n }) => {
-				return (
-					<Section
-						cfg={cfg}
-						data-testid={testId}
-						className={styles.card}
-						ariaLabel={concatenateStrings([
-							context.thirdParty.organisationName,
-							i18n.preview.buttons.one,
-						])}
-					>
-						<Toolbar
-							complete={isComplete(context)}
-							subtitle={() => (
-								<Span className={styles.styledAsH4}>
-									{context.thirdParty.organisationName}
-								</Span>
-							)}
-							statusText={
-								isComplete(context)
-									? i18n.preview.statusText.confirmed
-									: i18n.preview.statusText.unconfirmed
-							}
-							buttonLeft={() => (
-								<UnderlinedButton>{i18n.preview.buttons.one}</UnderlinedButton>
-							)}
-							buttonRight={() => (
-								<ToolbarButton title={i18n.preview.buttons.two} />
-							)}
-						/>
-						<CardContentSwitch />
-					</Section>
-				);
-			}}
-		</ThirdPartyProvider>
-	);
-};
+export const ThirdPartyCard: React.FC<ThirdPartyProviderProps> = React.memo(
+	({ testId, cfg, ...rest }) => {
+		const removeButtonRef = useRef(null);
+
+		return (
+			<ThirdPartyProvider {...rest}>
+				{({ current, send, i18n }) => {
+					const RemoveButton = () => (
+						<CardRemoveButton
+							button={removeButtonRef}
+							send={send}
+							current={current}
+						>
+							{i18n.preview.buttons.two}
+						</CardRemoveButton>
+					);
+
+					return (
+						<Section
+							cfg={cfg}
+							data-testid={testId}
+							className={styles.card}
+							ariaLabel={concatenateStrings([
+								current.context.thirdParty.organisationName,
+								i18n.preview.buttons.one,
+							])}
+						>
+							<Toolbar
+								buttonLeft={() => (
+									<CardMainHeadingTitle title={i18n.preview.buttons.one} />
+								)}
+								buttonRight={RemoveButton}
+								complete={isComplete(current.context)}
+								subtitle={() => (
+									<Subtitle
+										main={current.context.thirdParty.organisationName}
+									/>
+								)}
+								statusText={
+									isComplete(current.context)
+										? i18n.preview.statusText.confirmed
+										: i18n.preview.statusText.unconfirmed
+								}
+							/>
+							<CardContentSwitch />
+						</Section>
+					);
+				}}
+			</ThirdPartyProvider>
+		);
+	},
+);

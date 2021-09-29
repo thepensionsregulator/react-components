@@ -1,22 +1,26 @@
-import React from 'react';
+import React, { useRef } from 'react';
 import {
 	ActuaryProvider,
 	ActuaryProviderProps,
 	useActuaryContext,
 } from './context';
-import { Section, Span } from '@tpr/core';
+import { Section } from '@tpr/core';
 import { Toolbar } from '../components/toolbar';
-import { UnderlinedButton } from '../components/button';
 import { Preview } from './views/preview/preview';
 import { Contacts } from './views/contacts';
 import { RemoveDateForm } from './views/remove/date/date';
 import { ConfirmRemove } from './views/remove/confirm/confirm';
 import { NameScreen } from './views/name';
 import RemovedBox from '../components/removedBox';
-import { cardTypeName } from '../common/interfaces';
-import styles from '../cards.module.scss';
+import { cardTypeName, IToolbarButtonProps } from '../common/interfaces';
 import { ActuaryContext } from './actuaryMachine';
+import {
+	Subtitle,
+	CardRemoveButton,
+	CardMainHeadingButton,
+} from '../common/views/preview/components';
 import { removeFromTabFlowIfMatches, concatenateStrings } from '../../../utils';
+import styles from '../cards.module.scss';
 
 const CardContentSwitch: React.FC = () => {
 	const { current } = useActuaryContext();
@@ -40,114 +44,88 @@ const CardContentSwitch: React.FC = () => {
 	}
 };
 
-const ActuaryButton: React.FC = () => {
-	const { current, send, i18n } = useActuaryContext();
+const ToolbarButton: React.FC<IToolbarButtonProps> = React.memo(
+	({ remove = false, button }) => {
+		const { current, send, i18n } = useActuaryContext();
 
-	const onOfStatesIsActive =
-		current.matches({ edit: 'contacts' }) ||
-		current.matches({ edit: 'name' }) ||
-		current.matches({ remove: 'date' }) ||
-		current.matches({ remove: 'confirm' }) ||
-		current.matches({ remove: 'deleted' });
-
-	return (
-		<UnderlinedButton
-			isOpen={onOfStatesIsActive}
-			onClick={() => {
-				if (onOfStatesIsActive) {
-					send('CANCEL');
-				} else {
-					send('EDIT_NAME');
-				}
-			}}
-		>
-			{i18n.preview.buttons.one}
-		</UnderlinedButton>
-	);
-};
-
-const RemoveButton: React.FC<{ title: string; tabIndex?: number }> = ({
-	title,
-	tabIndex,
-}) => {
-	const { current, send } = useActuaryContext();
-	return (
-		<UnderlinedButton
-			isOpen={
-				current.matches({ remove: 'date' }) ||
-				current.matches({ remove: 'confirm' })
-			}
-			onClick={() => {
-				if (
-					current.matches({ remove: 'date' }) ||
-					current.matches({ remove: 'confirm' })
-				) {
-					send('CANCEL');
-				} else {
-					send('REMOVE');
-				}
-			}}
-			tabIndex={tabIndex}
-		>
-			{title}
-		</UnderlinedButton>
-	);
-};
+		return (
+			<>
+				{remove ? (
+					<CardRemoveButton
+						button={button}
+						send={send}
+						current={current}
+						tabIndex={removeFromTabFlowIfMatches(current, {
+							edit: 'name',
+						})}
+					>
+						{i18n.preview.buttons.two}
+					</CardRemoveButton>
+				) : (
+					<CardMainHeadingButton
+						button={button}
+						current={current}
+						onClick={() => send('EDIT_NAME')}
+					>
+						{i18n.preview.buttons.one}
+					</CardMainHeadingButton>
+				)}
+			</>
+		);
+	},
+);
 
 const isComplete = (context: ActuaryContext) => {
 	return context.preValidatedData ? true : context.complete;
 };
 
-export const ActuaryCard: React.FC<ActuaryProviderProps> = ({
-	testId,
-	cfg,
-	...rest
-}) => {
-	return (
-		<ActuaryProvider {...rest}>
-			{({ current, i18n }) => {
-				return (
-					<Section
-						cfg={cfg}
-						data-testid={testId}
-						className={styles.card}
-						ariaLabel={concatenateStrings([
-							current.context.actuary.title,
-							current.context.actuary.firstName,
-							current.context.actuary.lastName,
-							i18n.preview.buttons.one,
-						])}
-					>
-						<Toolbar
-							complete={isComplete(current.context)}
-							subtitle={() => (
-								<Span cfg={{ lineHeight: 3 }} className={styles.styledAsH4}>
-									{concatenateStrings([
-										current.context.actuary.title,
-										current.context.actuary.firstName,
-										current.context.actuary.lastName,
-									])}
-								</Span>
-							)}
-							statusText={
-								isComplete(current.context)
-									? i18n.preview.statusText.confirmed
-									: i18n.preview.statusText.unconfirmed
-							}
-							buttonLeft={() => <ActuaryButton />}
-							buttonRight={() => (
-								<RemoveButton
-									title={i18n.preview.buttons.two}
-									tabIndex={removeFromTabFlowIfMatches(current, {
-										edit: 'name',
-									})}
-								/>
-							)}
-						/>
-						<CardContentSwitch />
-					</Section>
-				);
-			}}
-		</ActuaryProvider>
-	);
-};
+export const ActuaryCard: React.FC<ActuaryProviderProps> = React.memo(
+	({ testId, cfg, ...rest }) => {
+		const actuaryButtonRef = useRef(null);
+		const removeButtonRef = useRef(null);
+
+		return (
+			<ActuaryProvider {...rest}>
+				{({ current, i18n }) => {
+					return (
+						<Section
+							cfg={cfg}
+							data-testid={testId}
+							className={styles.card}
+							ariaLabel={concatenateStrings([
+								current.context.actuary.title,
+								current.context.actuary.firstName,
+								current.context.actuary.lastName,
+								i18n.preview.buttons.one,
+							])}
+						>
+							<Toolbar
+								buttonLeft={() => <ToolbarButton button={actuaryButtonRef} />}
+								buttonRight={() => (
+									<ToolbarButton button={removeButtonRef} remove={true} />
+								)}
+								complete={isComplete(current.context)}
+								subtitle={() => (
+									<Subtitle
+										main={concatenateStrings([
+											current.context.actuary.title,
+											current.context.actuary.firstName,
+											current.context.actuary.lastName,
+										])}
+										secondary={current.context.actuary.organisationName}
+									/>
+								)}
+								statusText={
+									isComplete(current.context)
+										? i18n.preview.statusText.confirmed
+										: i18n.preview.statusText.unconfirmed
+								}
+							/>
+							<CardContentSwitch />
+						</Section>
+					);
+				}}
+			</ActuaryProvider>
+		);
+	},
+);

@@ -9,6 +9,7 @@ import { Form } from 'react-final-form';
 import { FFInputText } from './text';
 import { validate } from '../../validation';
 import { renderFields } from '../../renderFields';
+import textStyles from './text.module.scss';
 
 # Input
 
@@ -55,8 +56,8 @@ Example using field level validation
 					placeholder="add some text here..."
 					hint="Must be between 6 and 8 digits long"
 					validate={(value) => (value ? undefined : 'Enter an event name')}
-					inputWidth={5}
 					cfg={{ my: 5 }}
+					inputClassName={textStyles.textInput}
 				/>
 				<button type="submit" style={{ display: 'none' }} children="Submit" />
 			</form>
@@ -83,18 +84,19 @@ import { Form, validate, renderFields } from '@tpr/forms';
 					return value === 'London' ? undefined : 'Must be in London';
 				},
 				placeholder: 'add some text here...',
-				inputWidth: 5,
 				cfg: { my: 5 },
+				inputClassName: textStyles.textInput,
 			},
 			{
 				type: 'text',
 				name: 'event_name',
+				required: true,
 				label: 'Event name',
 				hint: 'Cannot be empty',
 				error: 'Enter an event name',
 				placeholder: 'add some text here...',
-				inputWidth: 5,
 				cfg: { my: 5 },
+				inputClassName: textStyles.textInput,
 			},
 		];
 		return (
@@ -124,13 +126,18 @@ Accepted config props: FlexProps, SpaceProps
 
 Although neither `label` or `ariaLabel` are required props, you should always use one or the other.
 
-| Property       | Required | Type    | Description                                    |
-| -------------- | -------- | ------- | ---------------------------------------------- |
-| cfg            | false    | object  | FlexProps & SpaceProps                         |
-| disabled       | false    | boolean | Disable text field                             |
-| testId         | false    | string  | data attribute for testers                     |
-| label          | false    | string  | Visible field label                            |
-| ariaLabel      | false    | string  | Invisible field label for assistive technology |
-| hint           | false    | string  | More detailed description about the text field |
-| readOnly       | false    | boolean | Sets whether the field is read only            |
-| inputClassName | false    | string  | Sets a class to apply to the input element     |
+| Property       | Required | Type    | Description                                                               |
+| -------------- | -------- | ------- | ------------------------------------------------------------------------- |
+| cfg            | false    | object  | FlexProps & SpaceProps                                                    |
+| disabled       | false    | boolean | Disable text field                                                        |
+| testId         | false    | string  | data attribute for testers                                                |
+| required       | false    | boolean | Mark text field as required                                               |
+| label          | false    | string  | Visible field label                                                       |
+| ariaLabel      | false    | string  | Invisible field label for assistive technology                            |
+| hint           | false    | string  | More detailed description about the text field                            |
+| readOnly       | false    | boolean | Sets whether the field is read only                                       |
+| inputClassName | false    | string  | Sets a class to apply to the input element                                |
+| autoComplete   | false    | string  | Sets the HTML autocomplete attribute                                      |
+| wrapperElement | false    | string  | The HTML element wrapping the field and its label. Defaults to 'label'.   |
+| labelElement   | false    | string  | The HTML element wrapping the text of the field label. Defaults to 'div'. |
+| headingElement | false    | string  | The HTML element wrapping labelElement. Defaults to none.                 |

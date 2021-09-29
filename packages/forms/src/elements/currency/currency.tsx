@@ -3,6 +3,7 @@ import { Field, FieldRenderProps } from 'react-final-form';
 import { FieldExtraProps } from '../../renderFields';
 import { StyledInputLabel, InputElementHeading } from '../elements';
 import { Input } from '../input/input';
+import { classNames } from '@tpr/core';
 import {
 	validKeys,
 	format,
@@ -16,12 +17,13 @@ import {
 	getNumberOfCommas,
 	calculateCursorPosition,
 } from '../helpers';
-import { FieldWithAriaLabelExtenstionI18nProps } from 'types/FieldWithAriaLabelExtensionI18nProps';
+import { FieldWithAriaLabelExtensionI18nProps } from 'types/FieldWithAriaLabelExtensionI18nProps';
 import { FieldWithAriaLabelExtensionProps } from '../../types/FieldWithAriaLabelExtensionProps';
 import { RecursivePartial } from 'types/RecursivePartial';
 import AccessibilityHelper from '../accessibilityHelper';
+import elementStyles from '../elements.module.scss';
 
-let currencyFieldI18nDefaults: FieldWithAriaLabelExtenstionI18nProps = {
+let currencyFieldI18nDefaults: FieldWithAriaLabelExtensionI18nProps = {
 	ariaLabelExtension: ', in pounds',
 };
 
@@ -33,7 +35,8 @@ interface InputCurrencyProps extends FieldRenderProps<number>, FieldExtraProps {
 	noLeftBorder?: boolean;
 	optionalText?: boolean;
 	maxInputLength?: number;
-	i18n?: RecursivePartial<FieldWithAriaLabelExtenstionI18nProps>;
+	i18n?: RecursivePartial<FieldWithAriaLabelExtensionI18nProps>;
+	inputClassName?: string;
 }
 
 const InputCurrency: React.FC<InputCurrencyProps> = React.memo(
@@ -42,13 +45,13 @@ const InputCurrency: React.FC<InputCurrencyProps> = React.memo(
 		label,
 		hint,
 		input,
+		inputClassName,
 		testId,
 		name,
 		meta,
 		required,
 		placeholder,
 		readOnly,
-		inputWidth: width,
 		cfg,
 		after,
 		before,
@@ -225,7 +228,7 @@ const InputCurrency: React.FC<InputCurrencyProps> = React.memo(
 					Delaying minimally the execution of the blur event solves this problem.
 				*/
 				setTimeout(() => {
-					innerInput.current.dispatchEvent(myEvent);
+					innerInput.current && innerInput.current.dispatchEvent(myEvent);
 				}, 100);
 			} else {
 				setFormattedInputValue('');
@@ -240,7 +243,7 @@ const InputCurrency: React.FC<InputCurrencyProps> = React.memo(
 		return (
 			<StyledInputLabel
 				isError={meta && meta.touched && meta.error}
-				cfg={Object.assign({ flexDirection: 'column', mt: 1 }, cfg)}
+				cfg={Object.assign({ mt: 1 }, cfg)}
 				noLeftBorder={noLeftBorder}
 			>
 				<InputElementHeading
@@ -252,9 +255,9 @@ const InputCurrency: React.FC<InputCurrencyProps> = React.memo(
 				/>
 				<Input
 					id={id}
-					parentRef={innerInput}
+					name={name}
+					ref={innerInput}
 					type="text"
-					width={width}
 					testId={testId}
 					label={label}
 					ariaLabelExtension={i18n.ariaLabelExtension}
@@ -262,6 +265,7 @@ const InputCurrency: React.FC<InputCurrencyProps> = React.memo(
 					placeholder={placeholder}
 					readOnly={readOnly}
 					decimalPlaces={decimalPlaces}
+					className={classNames([elementStyles.currencyInput, inputClassName])}
 					{...input}
 					onKeyDown={handleKeyDown}
 					onChange={handleOnChange}
@@ -269,6 +273,7 @@ const InputCurrency: React.FC<InputCurrencyProps> = React.memo(
 					after={after}
 					before={before}
 					accessibilityHelper={helper}
+					required={required}
 					{...props}
 				/>
 			</StyledInputLabel>

@@ -1,40 +1,37 @@
 import React from 'react';
 import { formSetup } from '../__mocks__/setup';
-import { FFInputNumber } from '../elements/number/number';
+import { FFInputNumber, FFInputNumberProps } from '../elements/number/number';
 import { axe } from 'jest-axe';
 import userEvent from '@testing-library/user-event';
 import { fireEvent } from '@testing-library/react';
 import { CheckDescribedByTag } from '../utils/aria-describedByTest';
+import { sleep } from '@tpr/core/src/testHelpers';
 
 const testId = 'number-input';
 
-const numberComponent = (
-	<FFInputNumber label="Number" testId={testId} name="number" />
-);
+const basicProps: FFInputNumberProps = {
+	hint: 'This explains how to complete the number field',
+	label: 'Number',
+	name: 'number',
+	testId: testId,
+};
+const numberComponent = <FFInputNumber {...basicProps} />;
 
 const numberComponentWithDecimals = (
-	<FFInputNumber
-		label="Number"
-		testId={testId}
-		name="number"
-		decimalPlaces={2}
-	/>
+	<FFInputNumber {...basicProps} decimalPlaces={2} />
 );
 
 const numberComponentWithi18n = (
 	<FFInputNumber
-		label="Number"
-		testId={testId}
-		name="number"
+		{...basicProps}
 		i18n={{ ariaLabelExtension: 'extended aria label' }}
 	/>
 );
 
 const numberComponentWithArialLabelAndi18n = (
 	<FFInputNumber
+		{...basicProps}
 		aria-label="Number"
-		testId={testId}
-		name="number"
 		i18n={{ ariaLabelExtension: 'extended aria label' }}
 	/>
 );
@@ -56,6 +53,33 @@ describe('Number', () => {
 
 			userEvent.type(getByTestId(testId), '123');
 			expect(getByTestId(testId)).toHaveValue(123);
+		});
+
+		test('default wrapper element is label', () => {
+			const { getByText } = formSetup({
+				render: numberComponent,
+			});
+
+			const label = getByText(/Number/);
+
+			expect(label.parentElement.tagName).toBe('LABEL');
+		});
+
+		test('wrapper element can be changed', () => {
+			const { getByText } = formSetup({
+				render: (
+					<FFInputNumber
+						label="Number"
+						testId={testId}
+						name="number"
+						wrapperElement="div"
+					/>
+				),
+			});
+
+			const label = getByText(/Number/);
+
+			expect(label.parentElement.tagName).toBe('DIV');
 		});
 
 		test('label renders with an id attribute', () => {
@@ -100,6 +124,28 @@ describe('Number', () => {
 
 			expect(input).toBeDefined();
 			expect(input).toHaveAttribute('aria-label', 'Number extended aria label');
+		});
+
+		test('renders without a required attribute', () => {
+			const { getByTestId } = formSetup({
+				render: numberComponent,
+			});
+
+			const input = getByTestId(testId);
+
+			expect(input).toBeDefined();
+			expect(input).not.toHaveAttribute('required');
+		});
+
+		test('can render with a required attribute', () => {
+			const { getByTestId } = formSetup({
+				render: <FFInputNumber {...basicProps} required={true} />,
+			});
+
+			const input = getByTestId(testId);
+
+			expect(input).toBeDefined();
+			expect(input).toHaveAttribute('required');
 		});
 	});
 
@@ -262,6 +308,48 @@ describe('Number', () => {
 			userEvent.type(getByTestId(testId), '1.2');
 			fireEvent.blur(getByTestId(testId));
 			expect(getByTestId(testId)).toHaveValue(1.2);
+		});
+		test('field with initial value renders with decimal places set', async () => {
+			const { getByTestId } = formSetup({
+				render: (
+					<FFInputNumber
+						label="Number"
+						testId={testId}
+						name="number"
+						decimalPlaces={2}
+						initialValue={15}
+					/>
+				),
+			});
+
+			// There is a setTimeout function in the number.tsx so we
+			// need to wait for that to complete before running the
+			// test assertions
+			await sleep(1000);
+
+			var inputNumberField = await getByTestId(testId);
+			expect(inputNumberField).toHaveAttribute('value', '15.00');
+		});
+		test('form with initial values renders with decimal places set', async () => {
+			const { getByTestId } = formSetup({
+				render: (
+					<FFInputNumber
+						label="Number"
+						testId={testId}
+						name="rpiIncrease"
+						decimalPlaces={2}
+					/>
+				),
+				initialValues: { rpiIncrease: 2.5 },
+			});
+
+			// There is a setTimeout function in the number.tsx so we
+			// need to wait for that to complete before running the
+			// test assertions
+			await sleep(1000);
+
+			var inputNumberField = await getByTestId(testId);
+			expect(inputNumberField).toHaveAttribute('value', '2.50');
 		});
 	});
 

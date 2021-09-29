@@ -31,6 +31,7 @@ export type TextProps = {
 		ColorProps &
 		CursorProps;
 	[key: string]: any;
+	testid?: string;
 };
 export const Text: React.FC<TextProps> = ({
 	tag = '',
@@ -77,8 +78,8 @@ export const H6: React.FC<TagProps> = ({ ...props }) => {
 	return <Text tag="h6" {...props} />;
 };
 
-export const P: React.FC<TagProps> = ({ ...props }) => {
-	return <Text tag="p" {...props} />;
+export const P: React.FC<TagProps> = ({ testid, ...props }) => {
+	return <Text tag="p" data-testid={testid} {...props} />;
 };
 
 export const Span: React.FC<TagProps> = ({ ...props }) => {

@@ -1,4 +1,6 @@
 import { SpaceProps } from '@tpr/core';
+import { MutableRefObject } from 'react';
+import { EventData, State } from 'xstate';
 
 export const addressFields = [
 	'addressLine1',
@@ -67,20 +69,33 @@ export type RecursivePartial<T> = {
 
 export interface CardProviderProps {
 	complete?: boolean;
-	preValidatedData?: boolean;
+	preValidatedData?: boolean | null;
 	onCorrect?: (...args: any[]) => void;
 	onRemove?: (...args: any[]) => Promise<any>;
 	onSaveAddress?: (...args: any[]) => Promise<any>;
 	onSaveContacts?: (...args: any[]) => Promise<any>;
 	onSaveName?: (...args: any[]) => Promise<any>;
+	onChangeAddress?: (...args: any[]) => Promise<any>;
 	testId?: string | number;
 	/** cfg space props */
 	cfg?: SpaceProps;
+	lastBtnClicked?: number | null;
 }
 
 export interface RemoveReasonProps {
 	reason: null | string;
 	date: null | string;
+}
+
+export interface RemoveConfirmProps {
+	confirm: boolean;
+	date: string;
+}
+
+export interface CommonCardMachineContext {
+	complete: boolean;
+	preValidatedData?: boolean | null;
+	lastBtnClicked?: number | null;
 }
 
 /*	--------------------------------
@@ -106,4 +121,45 @@ export interface I18nRemoveReason {
 		dateAddedBeforeEffectiveDate?: string;
 		dateAddedInTheFuture?: string;
 	};
+}
+
+export interface InputErrorMessages {
+	empty: string;
+	invalid: string;
+}
+
+export const defaultEmailErrorMessages: InputErrorMessages = {
+	empty: 'Email cannot be empty',
+	invalid: 'Invalid email format',
+};
+
+export const defaultPhoneErrorMessages: InputErrorMessages = {
+	empty: 'Phone number cannot be empty',
+	invalid: 'Enter a telephone number, like 0163 960 598 or +44 7700 900 359',
+};
+
+export interface CardContentProps {
+	enableContactDetails?: boolean;
+	onChangeAddress?: (...args: any[]) => Promise<any>;
+}
+
+/*	--------------------------------
+						Card Buttons
+		--------------------------------	*/
+export interface IToolbarButtonProps {
+	remove?: boolean;
+	button: MutableRefObject<any>;
+}
+
+export interface ICardMainHeadingButtonProps {
+	button: MutableRefObject<any>;
+	current?: Partial<State<any, any, any, any>>;
+	onClick: any;
+}
+
+export interface ICardRemoveButtonProps {
+	button: MutableRefObject<any>;
+	send: (event: any, payload?: EventData) => Partial<State<any, any, any, any>>;
+	current?: Partial<State<any, any, any, any>>;
+	tabIndex?: number;
 }

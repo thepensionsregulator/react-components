@@ -14,18 +14,18 @@
 	&:hover {
 		color: $colors-neutral-a1;
 	}
-	
+
 	&:disabled {
 		color: $colors-neutral-6;
 		text-decoration: none;
 		cursor: not-allowed;
 	}
-	
+
 	&:visited {
 		color: $colors-accents-2;
 		background-color: $colors-warning-1;
 	}
-	
+
 	&:focus {
 		color: $colors-neutral-8;
 		background: $colors-warning-1;
@@ -56,4 +56,8 @@
 	flex-direction: row-reverse;
 	justify-content: center;
 	align-items: center;
+}
+
+.hint {
+	margin-left: $space-1;
 }

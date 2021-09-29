@@ -16,6 +16,7 @@ import {
 	CardPersonalDetails,
 	CardContactDetails,
 	CardAddress,
+	CardContentProps,
 } from '../common/interfaces';
 import { AddressAPIType } from '@tpr/forms';
 
@@ -60,7 +61,7 @@ export interface TrusteeContextProps {
 	current: Partial<State<TC, any, any, any>>;
 }
 
-export interface TrusteeCardProps {
+export interface TrusteeCardProps extends CardContentProps {
 	trustee: Trustee;
 	complete?: boolean;
 	preValidatedData?: boolean;
@@ -75,12 +76,14 @@ export interface TrusteeCardProps {
 	testId?: string | number;
 	children?: RenderProps | ReactElement;
 	cfg?: SpaceProps;
+	lastBtnClicked?: number | null;
 }
 
 export const TrusteeProvider = ({
 	trustee,
-	preValidatedData,
+	preValidatedData = null,
 	complete,
+	lastBtnClicked = null,
 	children,
 	onDetailsSave,
 	onContactSave,
@@ -102,6 +105,7 @@ export const TrusteeProvider = ({
 				...modifiedTrustee,
 				address: trusteeAddress,
 			},
+			lastBtnClicked,
 		},
 		services: {
 			onDetailsSave: ({ trustee }) => {

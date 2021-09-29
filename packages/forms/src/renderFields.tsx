@@ -7,7 +7,7 @@ import { FFInputDate } from './elements/date/date';
 import { FFSelect } from './elements/select/select';
 import { FFInputEmail } from './elements/email/email';
 import { FFInputPhone } from './elements/phone/phone';
-import { FlexProps, SpaceProps, LayoutProps } from '@tpr/core';
+import { FlexProps, SpaceProps } from '@tpr/core';
 import { FieldProps as FinalFormFieldProps } from 'react-final-form';
 
 export type FieldInputTypes =
@@ -39,12 +39,12 @@ export type FieldExtraProps = {
 	/** for radio buttons */
 	checked?: boolean;
 	readOnly?: boolean;
+	required?: boolean;
+	autoComplete?: string;
 	/** argument for tests */
 	testId?: string;
 	/** options for Select input field */
 	options?: FieldOptions[];
-	/** sets max input width without affecting labels */
-	inputWidth?: LayoutProps['width'];
 	/** flex and space props */
 	cfg?: FlexProps & SpaceProps;
 };

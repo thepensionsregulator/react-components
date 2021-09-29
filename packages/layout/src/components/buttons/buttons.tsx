@@ -1,5 +1,5 @@
 import React, { ChangeEvent } from 'react';
-import { Flex, Button, ButtonProps, ColorProps, P } from '@tpr/core';
+import { Flex, Button, ButtonProps, ColorProps, Span } from '@tpr/core';
 import { ArrowIcon } from './icons';
 import styles from './buttons.module.scss';
 import { Cross } from '@tpr/icons';
@@ -12,10 +12,12 @@ export interface ArrowButtonProps extends ButtonProps {
 	pointsTo?: 'left' | 'up' | 'right' | 'down';
 	iconSide?: 'left' | 'right';
 	iconColor?: ColorProps['fill'];
+	ariaDisabled?: boolean;
 }
 export const ArrowButton: React.FC<ArrowButtonProps> = ({
 	intent,
 	appearance,
+	ariaDisabled = null,
 	type = 'button',
 	onClick = undefined,
 	disabled,
@@ -34,12 +36,13 @@ export const ArrowButton: React.FC<ArrowButtonProps> = ({
 			type={type}
 			onClick={onClick}
 			disabled={disabled}
+			aria-disabled={ariaDisabled}
 			cfg={cfg}
 			testId={testId}
-			className={styles.removepadding}
+			className={styles.arrowButton}
 		>
 			{disabled && disabledText ? (
-				<P cfg={{ px: 4 }}>{disabledText}</P>
+				<Span cfg={{ px: 4 }}>{disabledText}</Span>
 			) : (
 				<Flex
 					cfg={{
@@ -73,7 +76,10 @@ export const CrossButton: React.FC<CrossButtonProps> = ({
 }) => {
 	return (
 		<button type={'button'} onClick={onClick} className={styles.crossButton}>
-			<Cross colour={colour} svgProps={{ role: 'img', ariaLabel: 'Close' }} />
+			<Cross
+				colour={colour}
+				svgProps={{ role: 'img', alternativeText: 'Close' }}
+			/>
 		</button>
 	);
 };

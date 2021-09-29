@@ -50,6 +50,54 @@ describe('Checkbox input', () => {
 	`);
 	});
 
+	test('renders required attribute', () => {
+		const { getByLabelText } = formSetup({
+			render: (
+				<FFCheckbox
+					required
+					label="Click me"
+					name="important-checkbox"
+					testId="checkbox"
+				/>
+			),
+		});
+		const required = getByLabelText(/Click me/);
+		expect(required).toHaveAttribute('required');
+	});
+
+	test('does not render required attribute when optional', () => {
+		const { getByLabelText } = formSetup({
+			render: (
+				<FFCheckbox
+					label="Click me"
+					name="important-checkbox"
+					testId="checkbox"
+				/>
+			),
+		});
+		const optional = getByLabelText(/Click me/);
+		expect(optional).not.toHaveAttribute('required');
+	});
+
+	test('renders children within the label', () => {
+		const { getByText } = formSetup({
+			render: (
+				<FFCheckbox
+					label="Click me"
+					name="important-checkbox"
+					testId="checkbox"
+				>
+					<p>Child component</p>
+				</FFCheckbox>
+			),
+		});
+		const child = getByText(/Child component/);
+		expect(child).toBeDefined();
+
+		const label = child.closest('label');
+		expect(label).toBeDefined();
+	});
+
 	test('checking and unchecking the checkbox', () => {
 		const { getByLabelText, getByTestId } = formSetup({
 			render: (
@@ -106,11 +154,11 @@ describe('Checkbox input', () => {
 		expect(getByTestId(container, 'my-span').innerText).toBe('true');
 	});
 
-	test('has correct describedby tag', () => {
+	test('renders hint within the label', () => {
 		const hint = 'This explains how to complete the field';
 		const labelText = 'My checkbox';
 		const id = 'test-checkbox';
-		const { getByLabelText } = formSetup({
+		const { getByText } = formSetup({
 			render: (
 				<FFCheckbox
 					id={id}
@@ -121,9 +169,11 @@ describe('Checkbox input', () => {
 				/>
 			),
 		});
-		const checkbox = getByLabelText(labelText);
-		expect(checkbox).not.toBeNull();
-		expect(checkbox).toHaveAttribute('aria-describedby', `${id}-hint`);
+		const hintElement = getByText(hint);
+		expect(hintElement).not.toBeNull();
+
+		const label = hintElement.closest('label');
+		expect(label).toBeDefined();
 	});
 
 	test('has correct label reference', () => {

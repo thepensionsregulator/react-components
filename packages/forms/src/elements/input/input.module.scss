@@ -1,21 +1,11 @@
-@import '@tpr/theming/lib/variables.scss';
+@import './common.module.scss';
 
 .inputText {
-	font-family: $fonts-sans-serif;
-	font-size: $font-size-2;
-	display: flex;
-	width: 100%;
-	background: $white;
-	height: 50px;
-	outline: none;
-	padding: 0 8px;
-	border: 2px solid $colors-neutral-7;
+	@include inputDefault;
 }
 
 .inputText:focus {
-	border: 4px solid $colors-neutral-7;
-	box-shadow: 0 0 0 3px $colors-warning-1;
-	padding: 0 6px;
+	@include inputFocus;
 }
 
 .inputText:disabled {

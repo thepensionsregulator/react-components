@@ -1,0 +1,11 @@
+@import '../../../../../cards.module.scss';
+
+.name {
+	@include styled-as-h4;
+	line-height: $line-height-3;
+	@include removeMarginBottom;
+}
+
+.address {
+	@include removeMarginBottom;
+}

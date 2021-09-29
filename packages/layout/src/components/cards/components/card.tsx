@@ -1,37 +1,22 @@
 import React from 'react';
-import { Flex, H3, P, classNames, Hr } from '@tpr/core';
+import { Flex, H4, H5, Hr, P } from '@tpr/core';
+import CardContentSectionHeader from './cardContentSectionHeader';
 import styles from './card.module.scss';
-
-type StyledCardProps = { complete: boolean };
-export const StyledCard: React.FC<StyledCardProps> = ({
-	complete = false,
-	children,
-}) => {
-	return (
-		<div
-			className={classNames([
-				styles.card,
-				{ [styles['card-completed']]: complete },
-			])}
-		>
-			{children}
-		</div>
-	);
-};
-
-export const StyledCardToolbar: React.FC = ({ children }) => {
-	return <div className={styles.cardToolbar}>{children}</div>;
-};
 
 type ToolbarProps = {
 	title: string;
 	subtitle?: string;
 	sectionTitle?: string;
+	subSectionHeaderText?: string;
+	send?: Function;
 };
+
 export const Toolbar: React.FC<ToolbarProps> = ({
 	title,
 	subtitle,
 	sectionTitle,
+	subSectionHeaderText,
+	send,
 }) => {
 	return (
 		<Flex cfg={{ flexDirection: 'column', mt: 4, mb: 3 }}>
@@ -39,15 +24,23 @@ export const Toolbar: React.FC<ToolbarProps> = ({
 				cfg={{ flexDirection: 'column', pb: 2 }}
 				className={styles.toolbarBottomBorder}
 			>
-				{sectionTitle && (
-					<P cfg={{ color: 'neutral.6', fontSize: 3 }}>{sectionTitle}</P>
+				{subSectionHeaderText && (
+					<CardContentSectionHeader
+						sectionHeaderText={subSectionHeaderText}
+						send={send}
+					/>
 				)}
 
-				<H3 cfg={{ fontWeight: 3 }}>{title}</H3>
+				{sectionTitle && <P className={styles.sectionTitle}>{sectionTitle}</P>}
+				{subSectionHeaderText ? (
+					<H5 className={styles.heading}>{title}</H5>
+				) : (
+					<H4 className={styles.heading}>{title}</H4>
+				)}
 			</Flex>
 			{subtitle && (
 				<Flex cfg={{ py: 3 }} className={styles.toolbarBottomBorder}>
-					<P cfg={{ color: 'neutral.6' }}>{subtitle}</P>
+					<P className={styles.subtitle}>{subtitle}</P>
 				</Flex>
 			)}
 		</Flex>
@@ -58,13 +51,9 @@ export const Footer: React.FC = ({ children }) => {
 	return (
 		<Flex
 			cfg={{
-				flex: '0 0 auto',
-				flexDirection: 'column',
-				alignItems: 'flex-start',
-				justifyContent: 'flex-start',
-				width: 10,
 				mt: 5,
 			}}
+			className={styles.footer}
 		>
 			<Hr cfg={{ mb: 6 }} />
 			<Flex>{children}</Flex>
@@ -74,18 +63,12 @@ export const Footer: React.FC = ({ children }) => {
 
 export const StatusMessage = ({ complete, icon: Icon, text }) => {
 	return (
-		<Flex cfg={{ alignItems: 'center' }} height="22px">
-			<Icon
-				size={18}
-				fill={complete ? '#207e3b' : '#d4351c'}
-				ariaLabel={text}
-			/>
+		<Flex className={styles.statusMsg}>
+			<Icon size={18} fill={complete ? styles.confirmed : styles.unconfirmed} />
 			<P
+				className={styles.paragraph}
 				cfg={{
-					ml: 1,
-					fontSize: 2,
-					fontWeight: 3,
-					color: complete ? 'success.1' : 'danger.2',
+					color: complete ? 'confirmed' : 'unconfirmed',
 				}}
 			>
 				{text}

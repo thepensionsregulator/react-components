@@ -1,7 +1,6 @@
-import React, { useMemo } from 'react';
-import { UnderlinedButton } from '../components/button';
+import React, { useMemo, useRef } from 'react';
 import { Toolbar } from '../components/toolbar';
-import { Section, P } from '@tpr/core';
+import { Section } from '@tpr/core';
 import { Preview } from './views/preview/preview';
 import { RemoveDateForm } from './views/remove/date/date';
 import { EmployerType } from './views/type/type';
@@ -15,12 +14,16 @@ import {
 	EmployerProvider,
 	useEmployerContext,
 	EmployerProviderProps,
-	Employer,
 } from './context';
 import RemovedBox from '../components/removedBox';
-import { cardTypeName } from '../common/interfaces';
-import styles from '../cards.module.scss';
+import { cardTypeName, IToolbarButtonProps } from '../common/interfaces';
 import { EmployerContext } from './employerMachine';
+import {
+	CardMainHeadingButton,
+	CardRemoveButton,
+	Subtitle,
+} from '../common/views/preview/components';
+import styles from '../cards.module.scss';
 
 const CardContentSwitch: React.FC = () => {
 	const { current } = useEmployerContext();
@@ -41,111 +44,104 @@ const CardContentSwitch: React.FC = () => {
 	}
 };
 
-const ToolbarButton: React.FC<{ title: string; tabIndex?: number }> = ({
-	title,
-	tabIndex,
-}) => {
-	const { current, send } = useEmployerContext();
-	return (
-		<UnderlinedButton
-			isOpen={
-				current.matches('employerType') ||
-				current.matches({ remove: 'date' }) ||
-				current.matches({ remove: 'confirm' })
-			}
-			onClick={() => {
-				if (
-					current.matches('employerType') ||
-					current.matches({ remove: 'date' }) ||
-					current.matches({ remove: 'confirm' })
-				) {
-					send('CANCEL');
-				} else {
-					send(title === 'Remove' ? 'REMOVE' : 'CHANGE_TYPE');
-				}
-			}}
-			tabIndex={tabIndex}
-		>
-			{title}
-		</UnderlinedButton>
-	);
-};
+const ToolbarButton: React.FC<IToolbarButtonProps> = React.memo(
+	({ remove = false, button }) => {
+		const { current, send, i18n } = useEmployerContext();
 
-const EmployerSubtitle: React.FC<Partial<Employer>> = ({
-	employerType,
-	statutoryEmployer,
-}) => {
-	if (!employerType || !statutoryEmployer) return null;
+		return (
+			<>
+				{remove ? (
+					<CardRemoveButton
+						button={button}
+						send={send}
+						current={current}
+						tabIndex={removeFromTabFlowIfMatches(current, 'employerType')}
+					>
+						{i18n.preview.buttons.two}
+					</CardRemoveButton>
+				) : (
+					<CardMainHeadingButton
+						button={button}
+						current={current}
+						onClick={() => send('CHANGE_TYPE')}
+					>
+						{i18n.preview.buttons.one}
+					</CardMainHeadingButton>
+				)}
+			</>
+		);
+	},
+);
 
-	const title = useMemo(
-		() =>
-			employerType
-				.split('-')
-				.map((word, index) => (index === 0 ? capitalize(word) : word))
-				.join(' ')
-				.replace('employer', '')
-				.concat(` employer`),
-		[employerType],
-	);
+const EmployerSubtitle: React.FC<Partial<EmployerContext>> = React.memo(
+	({
+		employer: { employerType, statutoryEmployer },
+		showStatutoryEmployerSection,
+	}) => {
+		if (!employerType || !statutoryEmployer) return null;
 
-	const subtitle = useMemo(
-		() => capitalize(statutoryEmployer).concat(` employer`),
-		[statutoryEmployer],
-	);
+		const title = useMemo(
+			() =>
+				employerType
+					.split('-')
+					.map((word, index) => (index === 0 ? capitalize(word) : word))
+					.join(' ')
+					.replace('employer', '')
+					.concat(` employer`),
+			[employerType],
+		);
 
-	return (
-		<>
-			<P>{title}</P>
-			<P>{subtitle}</P>
-		</>
-	);
-};
+		const subtitle = useMemo(
+			() =>
+				showStatutoryEmployerSection
+					? capitalize(statutoryEmployer).concat(` employer`)
+					: null,
+			[statutoryEmployer],
+		);
+
+		return <Subtitle main={title} secondary={subtitle} mainBold={false} />;
+	},
+);
 
 const isComplete = (context: EmployerContext) => {
 	return context.preValidatedData ? true : context.complete;
 };
 
-export const EmployerCard: React.FC<EmployerProviderProps> = ({
-	testId,
-	cfg,
-	...rest
-}) => {
-	return (
-		<EmployerProvider {...rest}>
-			{({ current, i18n }) => {
-				return (
-					<Section
-						cfg={cfg}
-						data-testid={testId}
-						className={styles.card}
-						ariaLabel={concatenateStrings([
-							current.context.employer.organisationName,
-						])}
-					>
-						<Toolbar
-							complete={isComplete(current.context)}
-							subtitle={() => (
-								<EmployerSubtitle {...current.context.employer} />
-							)}
-							statusText={
-								isComplete(current.context)
-									? i18n.preview.statusText.confirmed
-									: i18n.preview.statusText.unconfirmed
-							}
-							buttonLeft={() => (
-								<ToolbarButton title={i18n.preview.buttons.one} />
-							)}
-							buttonRight={() => (
-								<ToolbarButton
-									title={i18n.preview.buttons.two}
-									tabIndex={removeFromTabFlowIfMatches(current, 'employerType')}
-								/>
-							)}
-						/>
-						<CardContentSwitch />
-					</Section>
-				);
-			}}
-		</EmployerProvider>
-	);
-};
+export const EmployerCard: React.FC<EmployerProviderProps> = React.memo(
+	({ testId, cfg, ...rest }) => {
+		const employerButtonRef = useRef(null);
+		const removeButtonRef = useRef(null);
+
+		return (
+			<EmployerProvider {...rest}>
+				{({ current, i18n }) => {
+					return (
+						<Section
+							cfg={cfg}
+							data-testid={testId}
+							className={styles.card}
+							ariaLabel={concatenateStrings([
+								current.context.employer.organisationName,
+							])}
+						>
+							<Toolbar
+								buttonLeft={() => <ToolbarButton button={employerButtonRef} />}
+								buttonRight={() => (
+									<ToolbarButton button={removeButtonRef} remove={true} />
+								)}
+								complete={isComplete(current.context)}
+								subtitle={() => <EmployerSubtitle {...current.context} />}
+								statusText={
+									isComplete(current.context)
+										? i18n.preview.statusText.confirmed
+										: i18n.preview.statusText.unconfirmed
+								}
+							/>
+							<CardContentSwitch />
+						</Section>
+					);
+				}}
+			</EmployerProvider>
+		);
+	},
+);

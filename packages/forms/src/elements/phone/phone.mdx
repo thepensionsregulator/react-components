@@ -43,25 +43,40 @@ import { Form, FFInputPhone } from '@tpr/forms';
 
 [CodeSandbox](https://codesandbox.io)
 
-Example using field level validation
+### Field required & custom error messages
+
+<Playground>
+	<Form onSubmit={console.log}>
+		{({ handleSubmit }) => (
+			<form onSubmit={handleSubmit} noValidate>
+				<FFInputPhone
+					name="phone_number"
+					label="Phone Number"
+					placeholder="07543 221 321"
+					hint="Must be a UK number and 11 digits long"
+					cfg={{ my: 5 }}
+					required={true}
+					errorEmptyValue="Enter a telephone number"
+					errorInvalidValue="Enter a telephone number in the correct format, like 01632 960 001, 07700 900 982 or +44 808 157 019"
+				/>
+				<button type="submit" style={{ display: 'none' }} children="Submit" />
+			</form>
+		)}
+	</Form>
+</Playground>
+
+### Field not required
 
 <Playground>
 	<Form onSubmit={console.log}>
 		{({ handleSubmit }) => (
 			<form onSubmit={handleSubmit}>
 				<FFInputPhone
-					name="phone_number"
+					name="phone_number2"
 					label="Phone Number"
 					placeholder="07543 221 321"
 					hint="Must be a UK number and 11 digits long"
-					validate={(number) =>
-						number && number.includes('777')
-							? undefined
-							: 'It must include 3 sevens.'
-					}
-					inputWidth={5}
 					cfg={{ my: 5 }}
-					required={false}
 				/>
 				<button type="submit" style={{ display: 'none' }} children="Submit" />
 			</form>
@@ -77,11 +92,14 @@ Accepted config props: FlexProps, SpaceProps
 
 ### Props
 
-| Property | Required | Type    | Description                                     |
-| -------- | -------- | ------- | --------------------------------------------    |
-| cfg      | false    | object  | FlexProps & SpaceProps                          |
-| disabled | false    | boolean | Disable phone field                             |
-| testId   | false    | string  | data attribute for testers                      |
-| label    | true     | string  | Phone field description                         |
-| hint     | false    | string  | More detailed description about the phone field |
-| readOnly | false    | boolean | Sets whether the field is read only             |
+| Property          | Required | Type    | Description                                               |
+| ----------------- | -------- | ------- | --------------------------------------------------------- |
+| cfg               | false    | object  | FlexProps & SpaceProps                                    |
+| disabled          | false    | boolean | Disable phone field                                       |
+| errorEmptyValue   | false    | string  | The error message to display when the field is empty      |
+| errorInvalidValue | false    | string  | The error message to display when the format is not valid |
+| hint              | false    | string  | More detailed description about the phone field           |
+| label             | true     | string  | Phone field description                                   |
+| readOnly          | false    | boolean | Sets whether the field is read only                       |
+| required          | false    | boolean | Sets whether the field is required (default value: false) |
+| testId            | false    | string  | data attribute for testers                                |

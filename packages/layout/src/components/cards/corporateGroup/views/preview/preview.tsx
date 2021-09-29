@@ -1,17 +1,20 @@
-import React from 'react';
+import React, { useRef } from 'react';
 import { Checkbox } from '@tpr/forms';
 import { Flex, P, Hr, classNames } from '@tpr/core';
 import { UnderlinedButton } from '../../../components/button';
 import { useCorporateGroupContext } from '../../context';
 import {
-	PhonePreview,
-	EmailPreview,
+	ContactDetailsPreview,
+	AddressPreview,
 } from '../../../common/views/preview/components';
-import styles from './preview.module.scss';
+import styles from '../../../cards.module.scss';
 
-export const Preview: React.FC<any> = () => {
+export const Preview: React.FC<any> = React.memo(() => {
 	const { current, send, onCorrect, i18n } = useCorporateGroupContext();
 	const { corporateGroup, complete, preValidatedData } = current.context;
+
+	const directorBtn = useRef(null);
+	const chairBtn = useRef(null);
 
 	return (
 		<div
@@ -23,37 +26,32 @@ export const Preview: React.FC<any> = () => {
 		>
 			<Flex>
 				{/* Address section: display only	 */}
-				<Flex
-					cfg={{ width: 5, flex: '0 0 auto', flexDirection: 'column', pr: 4 }}
-				>
+				<Flex cfg={{ pr: 4 }} className={styles.section}>
 					<UnderlinedButton>{i18n.preview.buttons.three}</UnderlinedButton>
-					<Flex cfg={{ my: 2, flexDirection: 'column' }}>
-						<P>{corporateGroup.address.addressLine1}</P>
-						{corporateGroup.address.addressLine2 && (
-							<P>{corporateGroup.address.addressLine2}</P>
-						)}
-						{corporateGroup.address.addressLine3 && (
-							<P>{corporateGroup.address.addressLine3}</P>
-						)}
-						<P>{corporateGroup.address.postTown}</P>
-						{corporateGroup.address.county && (
-							<P>{corporateGroup.address.county}</P>
-						)}
-						<P>{corporateGroup.address.postcode}</P>
-						{corporateGroup.address.country && (
-							<P>{corporateGroup.address.country}</P>
-						)}
-					</Flex>
+					<AddressPreview
+						address={{
+							addressLine1: corporateGroup.address.addressLine1,
+							addressLine2: corporateGroup.address.addressLine2,
+							addressLine3: corporateGroup.address.addressLine3,
+							postTown: corporateGroup.address.postTown,
+							county: corporateGroup.address.county,
+							postcode: corporateGroup.address.postcode,
+							country: corporateGroup.address.country,
+						}}
+					/>
 
 					{/* Professional Trustee section: open for editing	 */}
 					<Flex cfg={{ flexDirection: 'column', mt: 5 }}>
 						<UnderlinedButton
 							onClick={() => send('EDIT_PROFESSIONAL')}
 							isOpen={current.matches({ edit: 'professional' })}
+							isEditButton={true}
+							buttonRef={directorBtn}
+							giveFocus={current.context.lastBtnClicked === 5}
 						>
 							{i18n.preview.buttons.five}
 						</UnderlinedButton>
-						<P cfg={{ pt: 3 }}>
+						<P className={styles.isProfessional}>
 							{corporateGroup.directorIsProfessional
 								? i18n.professional.fields.isProfessional.labels
 										.isProfessionalYes
@@ -64,28 +62,25 @@ export const Preview: React.FC<any> = () => {
 				</Flex>
 
 				{/* Name & Contact details section: open for editing	 */}
-				<Flex
-					cfg={{ width: 5, flex: '0 0 auto', flexDirection: 'column', pr: 4 }}
-				>
+				<Flex cfg={{ pr: 4 }} className={styles.section}>
 					<UnderlinedButton
 						onClick={() => send('EDIT_NAME')}
 						isOpen={current.matches({ edit: 'contacts' })}
+						isEditButton={true}
+						buttonRef={chairBtn}
+						giveFocus={current.context.lastBtnClicked === 4}
 					>
 						{i18n.preview.buttons.four}
 					</UnderlinedButton>
-					<Flex cfg={{ my: 2, flexDirection: 'column' }}>
-						<P cfg={{ mb: 2 }}>
-							{corporateGroup.title
+					<ContactDetailsPreview
+						name={
+							corporateGroup.title
 								? `${corporateGroup.title} ${corporateGroup.firstName} ${corporateGroup.lastName}`
-								: `${corporateGroup.firstName} ${corporateGroup.lastName}`}
-						</P>
-						{corporateGroup.telephoneNumber && (
-							<PhonePreview value={corporateGroup.telephoneNumber} />
-						)}
-						{corporateGroup.emailAddress && (
-							<EmailPreview value={corporateGroup.emailAddress} />
-						)}
-					</Flex>
+								: `${corporateGroup.firstName} ${corporateGroup.lastName}`
+						}
+						phone={{ value: corporateGroup.telephoneNumber }}
+						email={{ value: corporateGroup.emailAddress }}
+					/>
 				</Flex>
 			</Flex>
 
@@ -99,9 +94,12 @@ export const Preview: React.FC<any> = () => {
 						send('COMPLETE', { value: !complete });
 						onCorrect(!complete);
 					}}
-					label={i18n.preview.checkboxLabel}
+					label={i18n.preview.checkboxLabel.replace(
+						'__NAME__',
+						corporateGroup.organisationName,
+					)}
 				/>
 			</Flex>
 		</div>
 	);
-};
+});

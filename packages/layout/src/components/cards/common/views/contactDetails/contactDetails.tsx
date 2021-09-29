@@ -4,6 +4,7 @@ import { Footer } from '../../../components/card';
 import { Content } from '../../../components/content';
 import { ArrowButton } from '../../../../buttons/buttons';
 import { cardType, cardTypeName } from '../../../common/interfaces';
+import { Link } from '@tpr/core';
 
 interface ContactDetailsProps {
 	type: cardType;
@@ -18,6 +19,8 @@ interface ContactDetailsProps {
 		emailAddress: string;
 	};
 	fields: FieldProps[];
+	send?: Function;
+	subSectionHeaderText?: string;
 }
 
 const ContactDetails: React.FC<ContactDetailsProps> = ({
@@ -30,6 +33,8 @@ const ContactDetails: React.FC<ContactDetailsProps> = ({
 	onSubmit,
 	initialValues,
 	fields,
+	send,
+	subSectionHeaderText,
 }) => {
 	return (
 		<Content
@@ -39,6 +44,8 @@ const ContactDetails: React.FC<ContactDetailsProps> = ({
 			subtitle={subtitle}
 			loading={loading}
 			sectionTitle={sectionTitle}
+			subSectionHeaderText={subSectionHeaderText}
+			send={send}
 		>
 			<Form
 				onSubmit={onSubmit}
@@ -53,13 +60,16 @@ const ContactDetails: React.FC<ContactDetailsProps> = ({
 						{renderFields(fields)}
 						<Footer>
 							<ArrowButton
-								intent="special"
+								appearance="secondary"
 								pointsTo="up"
 								iconSide="right"
 								type="submit"
 								title="Save and close"
 								disabled={loading}
 							/>
+							<Link cfg={{ m: 3 }} underline onClick={() => send('CANCEL')}>
+								Cancel
+							</Link>
 						</Footer>
 					</form>
 				)}

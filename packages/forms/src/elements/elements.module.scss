@@ -16,7 +16,7 @@ fieldset {
 }
 
 .label {
-	display: flex;
+	display: block;
 	cursor: default;
 }
 
@@ -48,8 +48,25 @@ fieldset {
 .errorMessage {
 	color: $colors-danger-2;
 	font-size: $font-size-2;
-	font-weight: $font-weight-3;
+	font-weight: $font-weight-3 !important;
 	margin-bottom: $space-2;
 	max-width: 100%;
 	white-space: pre-line;
+}
+
+.hiddenLabel {
+	display: none;
+	visibility: hidden;
+}
+
+.phoneInput {
+	max-width: 12em;
+}
+.emailInput,
+.select {
+	max-width: 42em;
+}
+
+.currencyInput {
+	max-width: 14em;
 }

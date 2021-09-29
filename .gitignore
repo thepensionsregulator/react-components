@@ -67,7 +67,7 @@ docs.json
 
 # Env variables
 .env
-
+.npmrc
 junit.xml
 
 .rpt2_cache

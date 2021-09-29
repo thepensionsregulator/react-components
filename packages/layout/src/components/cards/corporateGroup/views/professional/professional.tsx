@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Form, renderFields, validate, FieldProps } from '@tpr/forms';
-import { Flex } from '@tpr/core';
+import { Flex, Link } from '@tpr/core';
 import { Content } from '../../../components/content';
 import { Footer } from '../../../components/card';
 import { ArrowButton } from '../../../../buttons/buttons';
@@ -17,6 +17,7 @@ const getProfessionalFields = (
 		value: 'yes',
 		label: labels.isProfessional.labels.isProfessionalYes,
 		cfg: { mb: 2 },
+		required: true,
 	},
 	{
 		type: 'radio',
@@ -24,6 +25,7 @@ const getProfessionalFields = (
 		value: 'no',
 		label: labels.isProfessional.labels.isProfessionalNo,
 		cfg: { mb: 2 },
+		required: true,
 	},
 ];
 
@@ -55,6 +57,8 @@ export const Professional: React.FC = () => {
 			type={cardType.trustee}
 			title={i18n.professional.title}
 			sectionTitle={i18n.professional.sectionTitle}
+			subSectionHeaderText={i18n.preview.buttons.five}
+			send={send}
 		>
 			<Form
 				onSubmit={onSubmit}
@@ -72,7 +76,7 @@ export const Professional: React.FC = () => {
 						<Footer>
 							<Flex>
 								<ArrowButton
-									intent="special"
+									appearance="secondary"
 									pointsTo="up"
 									iconSide="right"
 									disabled={loading}
@@ -80,6 +84,9 @@ export const Professional: React.FC = () => {
 									title="Save and close"
 									type="submit"
 								/>
+								<Link cfg={{ m: 3 }} underline onClick={() => send('CANCEL')}>
+									Cancel
+								</Link>
 							</Flex>
 						</Footer>
 					</form>

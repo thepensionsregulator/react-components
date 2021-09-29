@@ -1,6 +1,6 @@
 {
 	"name": "@tpr/forms",
-	"version": "3.1.4",
+	"version": "4.0.11",
 	"description": "TPR Forms components",
 	"author": "David Alekna <david.alekna@tpr.gov.uk>",
 	"license": "MIT",
@@ -31,25 +31,24 @@
 		"report-coverage": "codecov"
 	},
 	"peerDependencies": {
-		"@tpr/core": "^2.4.17",
-		"@tpr/icons": "^3.0.19",
-		"@tpr/theming": "^2.2.16",
-		"react": "^16.12.0",
-		"react-dom": "^16.12.0"
+		"@tpr/core": "^3.0.0",
+		"@tpr/icons": "^3.1.10",
+		"@tpr/theming": "^2.4.0",
+		"react": "^16.14.0",
+		"react-dom": "^16.14.0"
 	},
 	"dependencies": {
+		"@financial-times/accessible-autocomplete": "^2.2.1",
 		"@types/lodash.isequal": "^4.5.5",
 		"@types/lodash.merge": "^4.6.6",
 		"@types/match-sorter": "^4.0.0",
 		"@types/qs": "^6.9.5",
-		"accessible-autocomplete": "^2.0.3",
 		"date-fns": "^2.17.0",
 		"downshift": "^6.1.0",
 		"final-form": "^4.20.1",
 		"lodash.isequal": "^4.5.0",
 		"lodash.merge": "^4.6.2",
 		"match-sorter": "^4.1.0",
-		"node-sass": "^5.0.0",
 		"qs": "^6.9.6",
 		"react-final-form": "^6.5.2",
 		"tslib": "^2.1.0"
@@ -61,7 +60,10 @@
 		"@tpr/core": "file:../core",
 		"@tpr/icons": "file:../icons",
 		"@tpr/theming": "file:../theming",
-		"cross-env": "^7.0.3"
+		"cross-env": "^7.0.3",
+		"node-sass": "^5.0.0",
+		"react": "file:../../node_modules/react",
+		"react-dom": "file:../../node_modules/react-dom"
 	},
 	"gitHead": "57aec9c9de22596d6343bae07eb6b198322a0bee"
 }

@@ -4,6 +4,11 @@
 	display: inline-block;
 	position: relative;
 	cursor: pointer;
+	margin-bottom: $space-3;
+}
+
+.button + .button {
+	margin-left: $space-3;
 }
 
 /* 'primary' | 'secondary' | 'link' | 'outlined'; */
@@ -24,7 +29,8 @@
 		outline: none;
 	}
 
-	&:disabled {
+	&:disabled,
+	&[aria-disabled='true'] {
 		cursor: not-allowed !important;
 		background: $colors-primary-a1;
 
@@ -47,7 +53,8 @@
 		outline: none;
 	}
 
-	&:disabled {
+	&:disabled,
+	&[aria-disabled='true'] {
 		cursor: not-allowed !important;
 		background: $colors-primary-1 !important;
 	}
@@ -66,7 +73,8 @@
 		}
 	}
 
-	&:disabled {
+	&:disabled,
+	&[aria-disabled='true'] {
 		color: $colors-neutral-6;
 		cursor: not-allowed !important;
 		border: 2px solid $colors-neutral-6;
@@ -93,7 +101,8 @@
 	&.appearance-secondary:hover {
 		background: $colors-neutral-a1 !important;
 
-		&:disabled {
+		&:disabled,
+		&[aria-disabled='true'] {
 			background: $colors-primary-1 !important;
 		}
 	}
@@ -102,7 +111,8 @@
 		background: $colors-primary-a2 !important;
 		border-color: $colors-primary-a2 !important;
 
-		&:disabled {
+		&:disabled,
+		&[aria-disabled='true'] {
 			background: none !important;
 			border-color: $colors-neutral-6 !important;
 		}
@@ -134,7 +144,8 @@
 		color: $colors-neutral-8;
 	}
 
-	&:disabled {
+	&:disabled,
+	&[aria-disabled='true'] {
 		cursor: not-allowed !important;
 		background: $colors-danger-1;
 
@@ -159,7 +170,8 @@
 	border-color: $colors-primary-a2;
 
 	&:hover {
-		background: $colors-primary-a2 !important;
+		background: $colors-accents-2 !important;
+		border-color: $colors-accents-2 !important;
 		color: $white;
 	}
 }
