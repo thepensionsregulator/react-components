@@ -30,7 +30,7 @@ const CardContentSwitch: React.FC = () => {
 		case current.matches('preview'):
 			return <Preview />;
 		case current.matches({ edit: 'name' }):
-			return <NameScreen subSectionHeaderText={i18n.preview.buttons.four} />;
+			return <NameScreen />;
 		case current.matches({ edit: 'contacts' }):
 			return <Contacts />;
 		case current.matches({ edit: 'professional' }):
@@ -79,15 +79,14 @@ export const CorporateGroupCard: React.FC<CorporateGroupProviderProps> = React.m
 						>
 							<Toolbar
 								buttonLeft={() => (
-									<CardMainHeadingTitle title={i18n.preview.buttons.one} />
+									<CardMainHeadingTitle
+										title={current.context.corporateGroup.organisationName}
+									/>
 								)}
 								buttonRight={RemoveButton}
 								complete={isComplete(current.context)}
 								subtitle={() => (
-									<Subtitle
-										main={current.context.corporateGroup.organisationName}
-										secondary={i18n.preview.trusteeType}
-									/>
+									<Subtitle secondary={i18n.preview.trusteeType} />
 								)}
 								statusText={
 									isComplete(current.context)

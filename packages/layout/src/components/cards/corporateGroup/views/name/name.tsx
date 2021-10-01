@@ -48,12 +48,8 @@ const getFields = (
 		testId: 'last-name',
 	},
 ];
-interface NameScreenProps {
-	subSectionHeaderText?: string;
-}
-export const NameScreen: React.FC<NameScreenProps> = ({
-	subSectionHeaderText,
-}) => {
+
+export const NameScreen: React.FC = () => {
 	const [loading, setLoading] = useState(false);
 	const { current, send, i18n, onSaveName } = useCorporateGroupContext();
 	const fields = getFields(i18n.name.fields);
@@ -90,7 +86,7 @@ export const NameScreen: React.FC<NameScreenProps> = ({
 			loading={loading}
 			nextStep={true}
 			send={send}
-			subSectionHeaderText={subSectionHeaderText}
+			subSectionHeaderText={i18n.preview.buttons.five}
 		/>
 	);
 };
