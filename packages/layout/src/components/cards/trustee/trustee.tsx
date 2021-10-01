@@ -92,7 +92,7 @@ const CardContent: React.FC<CardContentProps> = ({
 };
 
 const ToolbarButton: React.FC<IToolbarButtonProps> = React.memo(
-	({ remove = false, button }) => {
+	({ remove = false, button, text }) => {
 		const { current, send, i18n } = useTrusteeContext();
 
 		return (
@@ -114,7 +114,7 @@ const ToolbarButton: React.FC<IToolbarButtonProps> = React.memo(
 						current={current}
 						onClick={() => send('EDIT_TRUSTEE')}
 					>
-						{i18n.preview.buttons.one}
+						{text ? text : i18n.preview.buttons.one}
 					</CardMainHeadingButton>
 				)}
 			</>
@@ -134,49 +134,52 @@ export const TrusteeCard: React.FC<
 
 	return (
 		<TrusteeProvider {...props}>
-			{({ current, i18n }) => (
-				<Section
-					cfg={cfg}
-					data-testid={props.testId}
-					className={styles.card}
-					ariaLabel={concatenateStrings([
-						current.context.trustee.title,
-						current.context.trustee.firstName,
-						current.context.trustee.lastName,
-						current.context.trustee.trusteeType,
-						i18n.preview.buttons.one,
-					])}
-				>
-					<Toolbar
-						buttonLeft={() => <ToolbarButton button={trusteeButtonRef} />}
-						buttonRight={() => (
-							<ToolbarButton button={removeButtonRef} remove={true} />
-						)}
-						complete={isComplete(current.context)}
-						subtitle={() => (
-							<Subtitle
-								main={concatenateStrings([
-									current.context.trustee.title,
-									current.context.trustee.firstName,
-									current.context.trustee.lastName,
-								])}
-								secondary={`${capitalize(
-									current.context.trustee.trusteeType,
-								)} trustee`}
-							/>
-						)}
-						statusText={
-							isComplete(current.context)
-								? i18n.preview.statusText.confirmed
-								: i18n.preview.statusText.unconfirmed
-						}
-					/>
-					<CardContent
-						onChangeAddress={props.onChangeAddress}
-						enableContactDetails={enableContactDetails}
-					/>
-				</Section>
-			)}
+			{({ current, i18n }) => {
+				const trusteeName: string = concatenateStrings([
+					current.context.trustee.title,
+					current.context.trustee.firstName,
+					current.context.trustee.lastName,
+				]);
+
+				return (
+					<Section
+						cfg={cfg}
+						data-testid={props.testId}
+						className={styles.card}
+						ariaLabel={concatenateStrings([
+							trusteeName,
+							current.context.trustee.trusteeType,
+							i18n.preview.buttons.one,
+						])}
+					>
+						<Toolbar
+							buttonLeft={() => (
+								<ToolbarButton button={trusteeButtonRef} text={trusteeName} />
+							)}
+							buttonRight={() => (
+								<ToolbarButton button={removeButtonRef} remove={true} />
+							)}
+							complete={isComplete(current.context)}
+							subtitle={() => (
+								<Subtitle
+									secondary={`${capitalize(
+										current.context.trustee.trusteeType,
+									)} trustee`}
+								/>
+							)}
+							statusText={
+								isComplete(current.context)
+									? i18n.preview.statusText.confirmed
+									: i18n.preview.statusText.unconfirmed
+							}
+						/>
+						<CardContent
+							onChangeAddress={props.onChangeAddress}
+							enableContactDetails={enableContactDetails}
+						/>
+					</Section>
+				);
+			}}
 		</TrusteeProvider>
 	);
 });
