@@ -6,6 +6,7 @@ import { useCorporateGroupContext } from '../../context';
 import {
 	ContactDetailsPreview,
 	AddressPreview,
+	CompaniesHouseNumber,
 } from '../../../common/views/preview/components';
 import styles from '../../../cards.module.scss';
 
@@ -40,25 +41,11 @@ export const Preview: React.FC<any> = React.memo(() => {
 						}}
 					/>
 
-					{/* Professional Trustee section: open for editing	 */}
-					<Flex cfg={{ flexDirection: 'column', mt: 5 }}>
-						<UnderlinedButton
-							onClick={() => send('EDIT_PROFESSIONAL')}
-							isOpen={current.matches({ edit: 'professional' })}
-							isEditButton={true}
-							buttonRef={directorBtn}
-							giveFocus={current.context.lastBtnClicked === 5}
-						>
-							{i18n.preview.buttons.five}
-						</UnderlinedButton>
-						<P className={styles.isProfessional}>
-							{corporateGroup.directorIsProfessional
-								? i18n.professional.fields.isProfessional.labels
-										.isProfessionalYes
-								: i18n.professional.fields.isProfessional.labels
-										.isProfessionalNo}
-						</P>
-					</Flex>
+					{/* Companies House Number: display only	 */}
+					<CompaniesHouseNumber
+						heading={i18n.preview.buttons.four}
+						houseNumber={corporateGroup.companiesHouseNumber}
+					/>
 				</Flex>
 
 				{/* Name & Contact details section: open for editing	 */}
@@ -70,7 +57,7 @@ export const Preview: React.FC<any> = React.memo(() => {
 						buttonRef={chairBtn}
 						giveFocus={current.context.lastBtnClicked === 4}
 					>
-						{i18n.preview.buttons.four}
+						{i18n.preview.buttons.five}
 					</UnderlinedButton>
 					<ContactDetailsPreview
 						name={
@@ -81,6 +68,26 @@ export const Preview: React.FC<any> = React.memo(() => {
 						phone={{ value: corporateGroup.telephoneNumber }}
 						email={{ value: corporateGroup.emailAddress }}
 					/>
+
+					{/* Professional Trustee section: open for editing	 */}
+					<Flex cfg={{ flexDirection: 'column', mt: 5 }}>
+						<UnderlinedButton
+							onClick={() => send('EDIT_PROFESSIONAL')}
+							isOpen={current.matches({ edit: 'professional' })}
+							isEditButton={true}
+							buttonRef={directorBtn}
+							giveFocus={current.context.lastBtnClicked === 5}
+						>
+							{i18n.preview.buttons.six}
+						</UnderlinedButton>
+						<P className={styles.isProfessional}>
+							{corporateGroup.directorIsProfessional
+								? i18n.professional.fields.isProfessional.labels
+										.isProfessionalYes
+								: i18n.professional.fields.isProfessional.labels
+										.isProfessionalNo}
+						</P>
+					</Flex>
 				</Flex>
 			</Flex>
 

@@ -14,6 +14,7 @@ export type CorporateGroupI18nProps = {
 			three: string;
 			four: string;
 			five: string;
+			six: string;
 		};
 		statusText: {
 			confirmed: string;
@@ -95,8 +96,9 @@ export const i18n: CorporateGroupI18nProps = {
 			one: 'Corporate Trustee',
 			two: 'Remove',
 			three: 'Address',
-			four: 'Chair of board',
-			five: 'Director(s) are Professional Trustees',
+			four: 'Companies House Number',
+			five: 'Chair of board',
+			six: 'Director(s) are Professional Trustees',
 		},
 		statusText: {
 			confirmed: 'Confirmed',
