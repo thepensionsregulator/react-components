@@ -65,7 +65,7 @@ const independentTrusteeMachine = Machine<
 				},
 				EDIT_REGULATOR: {
 					target: 'edit.regulator',
-					actions: updateClickedButton(4),
+					actions: updateClickedButton(5),
 				},
 				COMPLETE: {
 					actions: assign((_, event) => ({

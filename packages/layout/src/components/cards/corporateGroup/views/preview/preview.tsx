@@ -55,7 +55,7 @@ export const Preview: React.FC<any> = React.memo(() => {
 						isOpen={current.matches({ edit: 'contacts' })}
 						isEditButton={true}
 						buttonRef={chairBtn}
-						giveFocus={current.context.lastBtnClicked === 4}
+						giveFocus={current.context.lastBtnClicked === 5}
 					>
 						{i18n.preview.buttons.five}
 					</UnderlinedButton>
@@ -76,7 +76,7 @@ export const Preview: React.FC<any> = React.memo(() => {
 							isOpen={current.matches({ edit: 'professional' })}
 							isEditButton={true}
 							buttonRef={directorBtn}
-							giveFocus={current.context.lastBtnClicked === 5}
+							giveFocus={current.context.lastBtnClicked === 6}
 						>
 							{i18n.preview.buttons.six}
 						</UnderlinedButton>
