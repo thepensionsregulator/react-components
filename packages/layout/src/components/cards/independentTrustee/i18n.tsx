@@ -7,6 +7,7 @@ export type IndependentTrusteeI18nProps = {
 			two: string;
 			three: string;
 			four: string;
+			five: string;
 		};
 		statusText: {
 			confirmed: string;
@@ -54,7 +55,8 @@ export const i18n: IndependentTrusteeI18nProps = {
 			one: 'Corporate Trustee',
 			two: 'Remove',
 			three: 'Address',
-			four: 'Appointed by the regulator',
+			four: 'Companies House Number',
+			five: 'Appointed by the regulator',
 		},
 		statusText: {
 			confirmed: 'Confirmed',

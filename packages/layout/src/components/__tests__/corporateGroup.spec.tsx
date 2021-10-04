@@ -28,7 +28,7 @@ const corporateGroup: CorporateGroup = {
 	telephoneNumber: '01273 000 111',
 	emailAddress: 'susan@corporate-group.com',
 	address: sampleAddress,
-	companiesHouseNumber: '123456789',
+	companiesHouseNumber: '0987654321',
 };
 
 describe('Corporate Group Trustee Card', () => {

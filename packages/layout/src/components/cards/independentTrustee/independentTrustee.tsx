@@ -73,15 +73,14 @@ export const IndependentTrusteeCard: React.FC<IndependentTrusteeProviderProps> =
 						>
 							<Toolbar
 								buttonLeft={() => (
-									<CardMainHeadingTitle title={i18n.preview.buttons.one} />
+									<CardMainHeadingTitle
+										title={current.context.independentTrustee.organisationName}
+									/>
 								)}
 								buttonRight={RemoveButton}
 								complete={isComplete(current.context)}
 								subtitle={() => (
-									<Subtitle
-										main={current.context.independentTrustee.organisationName}
-										secondary={i18n.preview.trusteeType}
-									/>
+									<Subtitle secondary={i18n.preview.trusteeType} />
 								)}
 								statusText={
 									isComplete(current.context)

@@ -13,7 +13,7 @@ export const AddressPreview: React.FC<AddressPreviewProps> = ({
 	address,
 }) => {
 	return (
-		<Flex cfg={{ my: 2, flexDirection: 'column' }}>
+		<Flex cfg={{ flexDirection: 'column' }}>
 			{name && <P className={styles.name}>{name}</P>}
 
 			<P className={styles.address} data-testid="address-preview">

@@ -69,11 +69,11 @@ const corporateGroupMachine = Machine<
 				},
 				EDIT_NAME: {
 					target: 'edit.name',
-					actions: updateClickedButton(4),
+					actions: updateClickedButton(5),
 				},
 				EDIT_PROFESSIONAL: {
 					target: 'edit.professional',
-					actions: updateClickedButton(5),
+					actions: updateClickedButton(6),
 				},
 				COMPLETE: {
 					actions: assign((_, event) => ({

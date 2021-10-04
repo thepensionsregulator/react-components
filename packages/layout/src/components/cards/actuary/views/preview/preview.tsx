@@ -42,12 +42,10 @@ export const Preview: React.FC<any> = React.memo(() => {
 					/>
 
 					{/* Companies House Number: display only	 */}
-					{actuary.companiesHouseNumber && (
-						<CompaniesHouseNumber
-							heading={i18n.preview.buttons.four}
-							houseNumber={actuary.companiesHouseNumber}
-						/>
-					)}
+					<CompaniesHouseNumber
+						heading={i18n.preview.buttons.four}
+						companiesHouseNumber={actuary.companiesHouseNumber}
+					/>
 				</Flex>
 
 				{/* Contact details section: open for editing	 */}

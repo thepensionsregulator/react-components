@@ -72,7 +72,6 @@
 		}
 
 		.identifierItem {
-			margin-top: $space-2;
 			flex-direction: column;
 
 			.title {
@@ -89,7 +88,6 @@
 		.isProfessional,
 		.appointedByRegulator,
 		.insurerCompanyRef {
-			margin-top: $space-2;
 			@include removeMarginBottom;
 		}
 	}

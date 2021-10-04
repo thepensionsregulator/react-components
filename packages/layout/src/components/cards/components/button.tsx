@@ -109,7 +109,10 @@ export const UnderlinedButton: React.FC<UnderlinedButtonProps> = React.memo(
 		);
 
 		const HeadingButton: React.FC = () => (
-			<H4 className={styles.heading4} data-testid="card-heading-button">
+			<H4
+				className={`${styles.heading4} ${isOpen ? '' : styles.headingButton}`}
+				data-testid="card-heading-button"
+			>
 				<ClickableButton />
 			</H4>
 		);
