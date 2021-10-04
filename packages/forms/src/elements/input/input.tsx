@@ -61,8 +61,10 @@ export const Input: React.FC<InputProps> = React.forwardRef<
 
 		return (
 			<Flex
-				cfg={{ flex: '1 1 auto' }}
-				className={After ? styles['input-wrapper_relative'] : ''}
+				className={classNames([
+					styles.inputWrapper,
+					After ? styles['input-wrapper_relative'] : '',
+				])}
 			>
 				{Before && (
 					<span

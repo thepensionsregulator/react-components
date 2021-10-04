@@ -5,21 +5,21 @@
 	position: relative;
 	display: flex;
 	flex-direction: column;
-	border: 1px solid $colors-neutral-4;
-	box-shadow: 0 2px 3px rgba(0, 0, 0, 0.2);
+	border: 0.0625rem solid $colors-neutral-4;
+	box-shadow: 0 0.125rem 0.1875rem rgba(0, 0, 0, 0.2);
 	margin-bottom: $space-6;
 
 	.cardToolbar {
 		display: flex;
 		flex-direction: row;
 		flex: 0 0 auto;
-		min-height: 100px;
-		padding: 40px 40px 20px 40px;
-		border-left: 5px solid;
+		min-height: 6.25rem;
+		padding: $space-4;
+		border-left: 0.3125rem solid;
 		border-color: $colors-danger-2;
 
 		.divider {
-			width: 1px;
+			width: 0.0625rem;
 			background-color: $colors-neutral-6;
 			height: 50%;
 			margin: 0 $space-4;
@@ -55,9 +55,9 @@
 	.content {
 		display: flex;
 		flex-direction: column;
-		border-left: 5px solid;
+		border-left: 0.3125rem solid;
 		border-color: $colors-danger-2;
-		padding: 0 40px 20px 40px;
+		padding: 0 $space-4 $space-4 $space-4;
 
 		.emailPhonePreviewLabel {
 			@include styled-as-h4;
@@ -96,5 +96,17 @@
 
 	.complete {
 		border-left-color: $colors-success-1;
+	}
+}
+
+@media (min-width: 40em) {
+	.card {
+		.cardToolbar {
+			padding: $space-8 $space-8 $space-4 $space-8;
+		}
+
+		.content {
+			padding: 0 $space-8 $space-4 $space-8;
+		}
 	}
 }

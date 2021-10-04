@@ -24,14 +24,10 @@
 
 		> div {
 			height: 100%;
-			> svg {
-				min-width: 22px;
-			}
 		}
 
 		&.reviewLink {
 			text-decoration: underline;
-			font-size: 16px;
 			line-height: 1.565em;
 			text-align: left;
 			color: $colors-primary-3;
@@ -43,7 +39,7 @@
 		font-size: $font-size-2;
 		font-weight: bold;
 		text-transform: uppercase;
-		padding: 8px;
+		padding: 0.5rem;
 
 		&.complete {
 			background-color: $colors-primary-3;
@@ -69,7 +65,7 @@
 	}
 
 	.taskName {
-		padding: 7px 0;
+		padding: 0.4375rem 0;
 	}
 
 	div.taskWrapper {

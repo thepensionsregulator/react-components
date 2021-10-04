@@ -4,9 +4,6 @@
 	margin: 0 0 $space-3;
 }
 
-.nonEditable.selectedPostcode {
-	margin-top: 9px; /* Aligns with the field label on the postcode lookup view */
-}
 /* Ensure there is a space for the data even if the field is empty */
 .nonEditableText::after {
 	content: ' ';
@@ -22,7 +19,7 @@
 }
 
 .nonEditableLabel {
-	margin: $space-3 0 $space-1;
+	margin: 0 0 $space-1;
 }
 
 .button {
