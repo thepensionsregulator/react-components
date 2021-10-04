@@ -33,7 +33,13 @@ export const Toolbar: React.FC<ToolbarProps> = ({
 
 				{sectionTitle && <P className={styles.sectionTitle}>{sectionTitle}</P>}
 				{subSectionHeaderText ? (
-					<H5 className={styles.heading}>{title}</H5>
+					<H5
+						className={`${styles.heading} ${
+							!sectionTitle ? styles.noSubSection : ''
+						}`}
+					>
+						{title}
+					</H5>
 				) : (
 					<H4 className={styles.heading}>{title}</H4>
 				)}
