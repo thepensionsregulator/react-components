@@ -61,7 +61,7 @@ export interface CardDefaultProps {
 	id: string;
 	schemeRoleId: number;
 	effectiveDate: string;
-	companiesHouseNumber?: string;
+	companiesHouseNumber?: number | string;
 }
 
 export type RecursivePartial<T> = {

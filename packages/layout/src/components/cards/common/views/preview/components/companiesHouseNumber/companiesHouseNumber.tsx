@@ -4,7 +4,7 @@ import { UnderlinedButton } from '../../../../../components/button';
 
 interface ICompaniesHouseNumberProps {
 	heading: string;
-	houseNumber: string;
+	houseNumber: number | string;
 }
 
 export const CompaniesHouseNumber: React.FC<ICompaniesHouseNumberProps> = React.memo(
