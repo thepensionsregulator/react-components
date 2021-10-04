@@ -5,16 +5,16 @@
 	background: transparent;
 	box-shadow: none;
 	border: none;
-	border-bottom: 1px solid;
-	padding: 0 0 4px 0;
+	border-bottom: 0.0625rem solid;
+	padding: 0 0 0.25rem 0;
 	width: 100%;
 	min-height: $space-5;
 }
 
 @mixin button-focus {
 	background-color: $colors-warning-1;
-	box-shadow: 0px -2px $colors-warning-1, 0px 4px $colors-neutral-8;
-	border: none;
+	box-shadow: 0 -0.125rem $colors-warning-1, 0 0.25rem $colors-neutral-8;
+	border-color: transparent;
 	outline: none;
 	color: $colors-neutral-8;
 }
@@ -28,6 +28,11 @@
 	p {
 		color: $colors-primary-3;
 		@include removeMarginBottom;
+	}
+
+	svg {
+		min-width: 1.5rem;
+		min-height: 1.5rem;
 	}
 
 	&:focus {
@@ -46,7 +51,7 @@
 
 .button:disabled {
 	color: $colors-neutral-6;
-	border-bottom: 2px solid $colors-neutral-6;
+	border-bottom: 0.125rem solid $colors-neutral-6;
 	cursor: not-allowed;
 }
 

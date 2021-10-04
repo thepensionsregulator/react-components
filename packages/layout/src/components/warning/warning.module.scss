@@ -1,12 +1,12 @@
 @import '@tpr/theming/lib/variables.scss';
 
 .warning {
-	border: 4px solid $colors-danger-2;
+	border: 0.25rem solid $colors-danger-2;
 	font-weight: $font-weight-3;
 
 	svg {
-		min-width: 35px;
-		min-height: 35px;
-   	margin-top: 2px;
+		min-width: 1.5625rem;
+		min-height: 1.5625rem;
+		margin-top: 0.125rem;
 	}
 }
