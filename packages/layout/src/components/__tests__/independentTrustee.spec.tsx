@@ -73,13 +73,13 @@ describe('Professional / Independent Trustee Card', () => {
 			assertMainHeadingExists(
 				findByText,
 				findByTestId,
-				'Corporate Trustee',
+				independentTrustee.organisationName,
 				false,
 			);
 
 			assertRemoveButtonExists(findByText, findByTestId);
 
-			const h4Headings = ['Address'];
+			const h4Headings = ['Address', 'Companies House Number'];
 			assertHeadingsExist(findAllByTestId, h4Headings);
 
 			const h4Buttons: string[] = ['Appointed by the regulator'];
