@@ -81,19 +81,19 @@ describe('Corporate Group Trustee Card', () => {
 			assertMainHeadingExists(
 				findByText,
 				findByTestId,
-				'Corporate Trustee',
+				corporateGroup.organisationName,
 				false,
 			);
 
 			assertRemoveButtonExists(findByText, findByTestId);
 
 			const h4Buttons: string[] = [
-				'Director(s) are Professional Trustees',
 				'Chair of board',
+				'Director(s) are Professional Trustees',
 			];
 			assertHeadingButtonsExist(findAllByTestId, findByText, h4Buttons);
 
-			const h4Headings: string[] = ['Address'];
+			const h4Headings: string[] = ['Address', 'Companies House Number'];
 			assertHeadingsExist(findAllByTestId, h4Headings);
 		});
 

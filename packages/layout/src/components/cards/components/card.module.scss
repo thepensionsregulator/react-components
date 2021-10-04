@@ -17,6 +17,10 @@
 	.heading {
 		@include styled-as-h3;
 		font-weight: $font-weight-3;
+
+		&.noSubSection {
+			line-height: $line-height-3;
+		}
 	}
 }
 
