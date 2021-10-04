@@ -67,7 +67,11 @@ const ToolbarButton: React.FC<IToolbarButtonProps> = React.memo(
 						current={current}
 						onClick={() => send('EDIT_NAME')}
 					>
-						{i18n.preview.buttons.one}
+						{concatenateStrings([
+							current.context.actuary.title,
+							current.context.actuary.firstName,
+							current.context.actuary.lastName,
+						])}
 					</CardMainHeadingButton>
 				)}
 			</>
@@ -107,11 +111,7 @@ export const ActuaryCard: React.FC<ActuaryProviderProps> = React.memo(
 								complete={isComplete(current.context)}
 								subtitle={() => (
 									<Subtitle
-										main={concatenateStrings([
-											current.context.actuary.title,
-											current.context.actuary.firstName,
-											current.context.actuary.lastName,
-										])}
+										main={i18n.preview.buttons.one}
 										secondary={current.context.actuary.organisationName}
 									/>
 								)}

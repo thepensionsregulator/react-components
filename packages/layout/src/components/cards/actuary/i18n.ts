@@ -12,6 +12,7 @@ export type ActuaryI18nProps = {
 			two: string;
 			three: string;
 			four: string;
+			five: string;
 		};
 		statusText: {
 			confirmed: string;
@@ -97,7 +98,8 @@ export const i18n: ActuaryI18nProps = {
 			one: 'Actuary',
 			two: 'Remove',
 			three: 'Address',
-			four: 'Contact details',
+			four: 'Companies House Number',
+			five: 'Contact details',
 		},
 		statusText: {
 			confirmed: 'Confirmed',
