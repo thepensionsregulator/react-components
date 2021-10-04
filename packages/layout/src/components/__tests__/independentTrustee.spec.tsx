@@ -23,6 +23,7 @@ const independentTrustee: IndependentTrustee = {
 	organisationName: 'Pensions Are Us Limited',
 	appointedByRegulator: true,
 	address: sampleAddress,
+	companiesHouseNumber: '0987654321',
 };
 
 describe('Professional / Independent Trustee Card', () => {
