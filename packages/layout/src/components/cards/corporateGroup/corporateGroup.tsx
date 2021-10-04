@@ -24,7 +24,7 @@ import { concatenateStrings } from '../../../utils';
 import styles from '../cards.module.scss';
 
 const CardContentSwitch: React.FC = () => {
-	const { i18n, current } = useCorporateGroupContext();
+	const { current } = useCorporateGroupContext();
 
 	switch (true) {
 		case current.matches('preview'):
