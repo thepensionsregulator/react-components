@@ -6,6 +6,7 @@ import { useActuaryContext } from '../../context';
 import {
 	AddressPreview,
 	ContactDetailsPreview,
+	CompaniesHouseNumber,
 } from '../../../common/views/preview/components';
 import { concatenateStrings } from '../../../../../utils';
 import styles from '../../../cards.module.scss';
@@ -39,6 +40,12 @@ export const Preview: React.FC<any> = React.memo(() => {
 							country: actuary.address.country,
 						}}
 					/>
+
+					{/* Companies House Number: display only	 */}
+					<CompaniesHouseNumber
+						heading={i18n.preview.buttons.four}
+						companiesHouseNumber={actuary.companiesHouseNumber}
+					/>
 				</Flex>
 
 				{/* Contact details section: open for editing	 */}
@@ -50,7 +57,7 @@ export const Preview: React.FC<any> = React.memo(() => {
 						buttonRef={contactsBtn}
 						giveFocus={current.context.lastBtnClicked === 4}
 					>
-						{i18n.preview.buttons.four}
+						{i18n.preview.buttons.five}
 					</UnderlinedButton>
 					<ContactDetailsPreview
 						phone={{ value: actuary.telephoneNumber }}

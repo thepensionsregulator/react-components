@@ -4,16 +4,20 @@ import { UnderlinedButton } from '../../../../../components/button';
 
 interface ICompaniesHouseNumberProps {
 	heading: string;
-	houseNumber: number | string;
+	companiesHouseNumber: number | string;
 }
 
 export const CompaniesHouseNumber: React.FC<ICompaniesHouseNumberProps> = React.memo(
-	({ heading, houseNumber }) => {
+	({ heading, companiesHouseNumber }) => {
 		return (
-			<Flex cfg={{ flexDirection: 'column', mt: 5 }}>
-				<UnderlinedButton>{heading}</UnderlinedButton>
-				<P cfg={{ mt: 2 }}>{houseNumber}</P>
-			</Flex>
+			<>
+				{companiesHouseNumber && (
+					<Flex cfg={{ flexDirection: 'column', mt: 6 }}>
+						<UnderlinedButton>{heading}</UnderlinedButton>
+						<P>{companiesHouseNumber}</P>
+					</Flex>
+				)}
+			</>
 		);
 	},
 );

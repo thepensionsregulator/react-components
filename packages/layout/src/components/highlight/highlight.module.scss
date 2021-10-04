@@ -10,7 +10,7 @@ $horizontal-space-outer: $space-6;
 
 // Stack everything by default.
 .highlightContent {
-	min-height: 50px;
+	min-height: 3.125rem;
 	color: $white;
 	font-weight: $font-weight-4;
 	font-size: $font-size-3;
@@ -25,7 +25,7 @@ $horizontal-space-outer: $space-6;
 	align-items: center;
 	flex: 0 0 auto;
 	padding: $vertical-space $horizontal-space-inner;
-	border-top: 1px solid $colors-accents-1;
+	border-top: 0.0625rem solid $colors-accents-1;
 }
 
 // Allow more space for .name as the viewport width grows.
@@ -44,7 +44,7 @@ $horizontal-space-outer: $space-6;
 }
 
 .reference > div {
-	border-top: 1px solid rgba(202, 202, 202, 0.5);
+	border-top: 0.0625rem solid rgba(202, 202, 202, 0.5);
 	padding: $vertical-space $horizontal-space-inner;
 	align-items: center;
 	width: 100%;
@@ -65,7 +65,7 @@ $horizontal-space-outer: $space-6;
 		top: 0;
 		width: 50%;
 		height: 100%;
-		border-top: 1px solid $colors-accents-1;
+		border-top: 0.0625rem solid $colors-accents-1;
 		box-sizing: border-box;
 		background-color: $colors-accents-2;
 		z-index: 0;
@@ -86,7 +86,7 @@ $horizontal-space-outer: $space-6;
 	.context {
 		padding: $vertical-space $horizontal-space-inner $vertical-space
 			$horizontal-space-outer;
-		width: 180px + ($horizontal-space-outer * 2); // 180px is image width in Header
+		width: 11.25rem + ($horizontal-space-outer * 2); // 11.25rem is image width in Header
 		border: none;
 	}
 	.name {
@@ -98,7 +98,7 @@ $horizontal-space-outer: $space-6;
 	// At this width make .context bigger to match the width to the logo in the Header component,
 	// and unstack .name and .reference to be side-by-side.
 	.context {
-		width: $sidebar-width;
+		width: 17.8rem;
 	}
 	.container,
 	.name,
@@ -107,7 +107,7 @@ $horizontal-space-outer: $space-6;
 	}
 	.reference > div {
 		border-top: none;
-		border-left: 1px solid rgba(202, 202, 202, 0.5);
+		border-left: 0.0625rem solid rgba(202, 202, 202, 0.5);
 		margin: $vertical-space 0;
 		padding: $vertical-space $horizontal-space-outer $vertical-space
 			$horizontal-space-inner;

@@ -42,7 +42,7 @@ export const Toolbar: React.FC<ToolbarProps> = React.memo(
 				>
 					{buttonLeft()}
 					{subtitle && (
-						<Flex cfg={{ mt: 1, flexDirection: 'column' }}>{subtitle()}</Flex>
+						<Flex cfg={{ flexDirection: 'column' }}>{subtitle()}</Flex>
 					)}
 				</Flex>
 				<Flex
