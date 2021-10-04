@@ -73,12 +73,14 @@ export const InsurerCard: React.FC<InsurerProviderProps> = React.memo(
 						>
 							<Toolbar
 								buttonLeft={() => (
-									<CardMainHeadingTitle title={i18n.preview.buttons.one} />
+									<CardMainHeadingTitle
+										title={current.context.insurer.organisationName}
+									/>
 								)}
 								buttonRight={RemoveButton}
 								complete={isComplete(current.context)}
 								subtitle={() => (
-									<Subtitle main={current.context.insurer.organisationName} />
+									<Subtitle secondary={i18n.preview.buttons.one} />
 								)}
 								statusText={
 									isComplete(current.context)

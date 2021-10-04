@@ -61,7 +61,7 @@ const insurerMachine = Machine<InsurerContext, InsurerStates, InsurerEvents>({
 				},
 				EDIT_INSURER: {
 					target: 'edit',
-					actions: updateClickedButton(4),
+					actions: updateClickedButton(5),
 				},
 				COMPLETE: {
 					actions: assign((_, event) => ({
