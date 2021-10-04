@@ -12,7 +12,7 @@ export const CompaniesHouseNumber: React.FC<ICompaniesHouseNumberProps> = React.
 		return (
 			<Flex cfg={{ flexDirection: 'column', mt: 5 }}>
 				<UnderlinedButton>{heading}</UnderlinedButton>
-				<P>{houseNumber}</P>
+				<P cfg={{ mt: 2 }}>{houseNumber}</P>
 			</Flex>
 		);
 	},
