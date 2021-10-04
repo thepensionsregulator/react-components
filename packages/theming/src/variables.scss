@@ -1,6 +1,6 @@
 /**** SCREEN SETTINGS ****/
-$app-width: 1170px;
-$sidebar-width: 285px;
+$app-width: 73rem;
+$sidebar-width: 18rem;
 /**** COLORS ****/
 $white: #ffffff;
 $black: #000000;
@@ -36,7 +36,7 @@ $colors-danger-2: #a91717;
 $colors-danger-3: #cd2e25;
 /* colors confirmation */
 $colors-confirmed: #1e7e34;
-$colors-unconfirmed: #a91717 ;
+$colors-unconfirmed: #a91717;
 
 /**** FONTS ****/
 $fonts-sans-serif: 'Open Sans', sans-serif;
@@ -48,29 +48,24 @@ $line-height-4: 1.511em;
 $line-height-5: 1.555em;
 $line-height-6: 1.565em;
 /**** SPACE ****/
-$space-1: 5px;
-$space-2: 10px;
-$space-3: 15px;
-$space-4: 20px;
-$space-5: 25px;
-$space-6: 30px;
-$space-7: 35px;
-$space-8: 40px;
-$space-9: 45px;
-$space-10: 50px;
+$space-1: 0.3125rem;
+$space-2: 0.625rem;
+$space-3: 0.9375rem;
+$space-4: 1.25rem;
+$space-5: 1.5625rem;
+$space-6: 1.875rem;
+$space-7: 2.1875rem;
+$space-8: 2.5rem;
+$space-9: 2.8125rem;
+$space-10: 3.125rem;
 /**** FONT SIZES ****/
-$font-size-1: 14px;
-$font-size-2: 16px;
-$font-size-3: 18px;
-$font-size-4: 23px;
-$font-size-5: 36px;
-$font-size-6: 45px;
+$font-size-1: 0.875rem;
+$font-size-2: 1rem;
+$font-size-3: 1.125rem;
+$font-size-4: 1.4375rem;
+$font-size-5: 2.25rem;
+$font-size-6: 2.8125rem;
 /**** FONT WEIGHTS ****/
 $font-weight-2: 400;
 $font-weight-3: 600;
 $font-weight-4: 700;
-/**** BREAKPOINTS ****/
-$breakpoint-1: 48em;
-$breakpoint-2: 64em;
-$breakpoint-3: 90em;
-$breakpoint-4: 114em;

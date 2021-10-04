@@ -4,13 +4,19 @@
 	display: flex;
 	flex: 0 0 auto;
 	flex-direction: column;
-	width: 3.5em;
 	margin-right: $space-4;
+}
+
+.inputSmall input {
+	width: 3.5em;
 }
 
 .inputLarge {
 	display: flex;
 	flex: 0 0 auto;
 	flex-direction: column;
+}
+
+.inputLarge input {
 	width: 4.5em;
 }

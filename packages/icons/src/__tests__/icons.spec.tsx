@@ -18,10 +18,7 @@ import {
 	RadioButtonChecked,
 	RadioButtonUnchecked,
 } from '../components/form/form';
-import {
-	LoadingSpinnerCircle,
-	LoadingSpinnerProgress,
-} from '../components/spinners/spinners';
+import { LoadingSpinnerProgress } from '../components/spinners/spinners';
 import { SVG } from '../components/global';
 import { render } from '@testing-library/react';
 
@@ -167,11 +164,6 @@ describe('Icons', () => {
 	});
 
 	describe('Spinners', () => {
-		test('Loading Spinner Circle', () => {
-			const { getByTestId } = render(<LoadingSpinnerCircle />);
-			expect(getByTestId('spinner-circle')).toBeDefined();
-		});
-
 		test('Loading Spinner Progress', () => {
 			const { getByTestId } = render(<LoadingSpinnerProgress />);
 			expect(getByTestId('spinner-progress')).toBeDefined();
