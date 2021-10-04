@@ -3,7 +3,10 @@ import { Checkbox } from '@tpr/forms';
 import { Flex, Hr, classNames, P } from '@tpr/core';
 import { UnderlinedButton } from '../../../components/button';
 import { useIndependentTrusteeContext } from '../../context';
-import { AddressPreview } from '../../../common/views/preview/components';
+import {
+	AddressPreview,
+	CompaniesHouseNumber,
+} from '../../../common/views/preview/components';
 import styles from '../../../cards.module.scss';
 
 export const Preview: React.FC<any> = React.memo(() => {
@@ -35,6 +38,12 @@ export const Preview: React.FC<any> = React.memo(() => {
 							country: independentTrustee.address.country,
 						}}
 					/>
+
+					{/* Companies House Number: display only	 */}
+					<CompaniesHouseNumber
+						heading={i18n.preview.buttons.four}
+						houseNumber={independentTrustee.companiesHouseNumber}
+					/>
 				</Flex>
 
 				{/* Appointed By Regulator section: open for editing	 */}
@@ -44,9 +53,9 @@ export const Preview: React.FC<any> = React.memo(() => {
 						isOpen={current.matches({ edit: 'regulator' })}
 						isEditButton={true}
 						buttonRef={regulatorBtn}
-						giveFocus={current.context.lastBtnClicked === 4}
+						giveFocus={current.context.lastBtnClicked === 5}
 					>
-						{i18n.preview.buttons.four}
+						{i18n.preview.buttons.five}
 					</UnderlinedButton>
 					<P className={styles.appointedByRegulator}>
 						{independentTrustee.appointedByRegulator
