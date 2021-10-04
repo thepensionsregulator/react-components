@@ -2,11 +2,41 @@
 
 .wrapper {
 	background-color: $colors-neutral-3;
-	border-top: 5px solid $colors-neutral-a2;
+	border-top: 0.3125rem solid $colors-neutral-a2;
+}
+
+.logo {
+	width: 11.25rem;
+	height: 4.6875rem;
+	box-sizing: content-box;
+	padding: $space-6;
 }
 
 .footerText {
-	align-items: center;
-	height: 50px;
-	border-top: 2px solid $colors-neutral-4;
+	flex-direction: column;
+	justify-content: space-between;
+	margin-top: $space-3;
+	padding: $space-2 $space-6;
+	border-top: 0.125rem solid $colors-neutral-4;
+}
+
+.footerLinks {
+	flex-direction: column;
+}
+
+.footerLinks > a {
+	margin: 0 0.25rem;
+}
+
+@media (min-width: 40em) {
+	.footerText {
+		flex-direction: row;
+		align-items: center;
+	}
+}
+
+@media (min-width: 27em) {
+	.footerLinks {
+		flex-direction: row;
+	}
 }

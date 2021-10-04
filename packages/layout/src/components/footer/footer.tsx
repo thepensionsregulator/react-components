@@ -26,30 +26,27 @@ export const Footer: React.FC<FooterProps> = ({
 	return (
 		<DocWidth className={styles.wrapper}>
 			<AppWidth>
-				<Flex cfg={{ flexDirection: 'column' }}>
-					<Flex
-						cfg={{ justifyContent: 'flex-start', p: 6, alignItems: 'center' }}
-					>
-						<img src={logoUrl} alt={logoAlt} width="180" height="75" />
+				<img
+					src={logoUrl}
+					alt={logoAlt}
+					width="180"
+					height="75"
+					className={styles.logo}
+				/>
+				<Flex className={styles.footerText}>
+					<Flex className={styles.footerLinks}>
+						{links.map(({ url, title, ...linkProps }, key: number) => (
+							<Link
+								key={key}
+								href={url}
+								cfg={{ mr: 3, color: 'neutral.a2' }}
+								{...linkProps}
+							>
+								{title}
+							</Link>
+						))}
 					</Flex>
-					<Flex
-						cfg={{ justifyContent: 'space-between', mt: 3, px: 6 }}
-						className={styles.footerText}
-					>
-						<Flex>
-							{links.map(({ url, title, ...linkProps }, key: number) => (
-								<Link
-									key={key}
-									href={url}
-									cfg={{ mr: 3, color: 'neutral.a2' }}
-									{...linkProps}
-								>
-									{title}
-								</Link>
-							))}
-						</Flex>
-						<P cfg={{ fontSize: 1, color: 'neutral.a2', my: 1 }}>{copyright}</P>
-					</Flex>
+					<P cfg={{ fontSize: 1, color: 'neutral.a2', my: 1 }}>{copyright}</P>
 				</Flex>
 			</AppWidth>
 		</DocWidth>
