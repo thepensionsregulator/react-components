@@ -150,6 +150,7 @@ export interface CardContentProps {
 export interface IToolbarButtonProps {
 	remove?: boolean;
 	button: MutableRefObject<any>;
+	text?: string;
 }
 
 export interface ICardMainHeadingButtonProps {

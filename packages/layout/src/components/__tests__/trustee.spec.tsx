@@ -88,6 +88,8 @@ const setupComponent = (enableContactDetails: boolean) => {
 	findAllByTestId = getAllByTestId;
 };
 
+const trusteeName: string = `${trustee.title} ${trustee.firstName} ${trustee.lastName}`;
+
 describe('TrusteeCard enableContactDetails == true', () => {
 	beforeEach(async () => {
 		setupComponent(true);
@@ -100,7 +102,7 @@ describe('TrusteeCard enableContactDetails == true', () => {
 		});
 
 		test('buttons render correctly', () => {
-			assertMainHeadingExists(findByText, findByTestId, 'Trustee', true);
+			assertMainHeadingExists(findByText, findByTestId, trusteeName, true);
 
 			assertRemoveButtonExists(findByText, findByTestId);
 
@@ -132,7 +134,7 @@ describe('TrusteeCard enableContactDetails == true', () => {
 		test('renders with a section containing an aria label', () => {
 			assertThatASectionExistsWithAnAriaLabel(
 				findByRole,
-				`${trustee.title} ${trustee.firstName} ${trustee.lastName} ${trustee.trusteeType} Trustee`,
+				`${trusteeName} ${trustee.trusteeType} Trustee`,
 			);
 		});
 
@@ -147,13 +149,13 @@ describe('TrusteeCard enableContactDetails == true', () => {
 		});
 
 		test('is accessible', async () => {
-			findByText('Trustee').click();
+			findByText(trusteeName).click();
 			const results = await axe(component);
 			expect(results).toHaveNoViolations();
 		});
 
 		test('renders name fields', () => {
-			findByText('Trustee').click();
+			findByText(trusteeName).click();
 
 			expect(findByTestId('trustee-name-form')).not.toBe(null);
 
@@ -191,7 +193,7 @@ describe('TrusteeCard enableContactDetails == true', () => {
 
 		test('trustee title can be left empty when name is updated', async () => {
 			await act(async () => {
-				findByText(/Trustee/).click();
+				findByText(trusteeName).click();
 			});
 			await axe(component);
 			clearTitleField(findByText);
@@ -216,7 +218,7 @@ describe('TrusteeCard enableContactDetails == true', () => {
 		});
 
 		test('is accessible', async () => {
-			findByText(/Trustee/).click();
+			findByText(trusteeName).click();
 			findByText(/Continue/).click();
 
 			const results = await axe(component);
