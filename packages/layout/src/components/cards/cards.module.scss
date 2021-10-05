@@ -38,6 +38,9 @@
 			line-height: $line-height-3;
 			word-break: break-all;
 		}
+		p {
+			@include removeMarginBottom;
+		}
 	}
 
 	.section {
