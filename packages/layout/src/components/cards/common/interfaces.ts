@@ -99,9 +99,97 @@ export interface CommonCardMachineContext {
 	lastBtnClicked?: number | null;
 }
 
+type PropertyFunction<T> = () => T;
+
 /*	--------------------------------
 					i18n common props
 		--------------------------------	*/
+export interface I18nPreviewViewCommonProps {
+	mainHeadingSubtitle: {
+		main: string;
+		secondary?: string;
+	};
+	statusText: {
+		confirmed: string;
+		unconfirmed: string;
+	};
+	checkboxLabel: string;
+}
+
+export interface I18nNameView {
+	title: string;
+	sectionTitle?: string;
+	fields: {
+		title: {
+			label: string;
+			error: string | PropertyFunction<string | undefined>;
+			maxlength: number;
+		};
+		firstName: {
+			label: string;
+			error: string | PropertyFunction<string | undefined>;
+			maxlength: number;
+		};
+		lastName: {
+			label: string;
+			error: string | PropertyFunction<string | undefined>;
+			maxlength: number;
+		};
+	};
+}
+
+export interface I18nContactsView {
+	title: string;
+	subtitle?: string;
+	sectionTitle?: string;
+	fields: {
+		telephone: {
+			label: string;
+			error: InputErrorMessages;
+		};
+		email: {
+			label: string;
+			error: InputErrorMessages;
+		};
+	};
+}
+
+export interface I18nRemoveViewDateAndConfirm {
+	date: {
+		title: string;
+		fields: {
+			confirm: {
+				label: string;
+			};
+			date: {
+				label: string;
+				hint: string;
+				error: string;
+			};
+		};
+		errors: {
+			formIncomplete: string;
+			dateAddedBeforeEffectiveDate: string;
+			dateAddedInTheFuture: string;
+		};
+	};
+	confirm: {
+		breadcrumbs: {
+			link1: string;
+			link2: string;
+		};
+		title: string;
+		dialog: {
+			message1: string;
+			message2?: string;
+		};
+		buttons: {
+			remove: string;
+			cancel: string;
+		};
+	};
+}
+
 export interface I18nRemoveReason {
 	title?: string;
 	subtitle?: string;
@@ -123,6 +211,27 @@ export interface I18nRemoveReason {
 		dateAddedInTheFuture?: string;
 	};
 }
+
+export interface I18nRemoveViewReasonAndConfirm {
+	reason: I18nRemoveReason;
+	confirm: {
+		title: string;
+		subtitle: string;
+		breadcrumbs: {
+			link1: string;
+			link2: string;
+		};
+		dialog?: {
+			message1: string;
+		};
+		buttons: {
+			remove: string;
+			cancel: string;
+		};
+	};
+}
+
+// -----------------------------------------
 
 export interface InputErrorMessages {
 	empty: string;
