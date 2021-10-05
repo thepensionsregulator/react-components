@@ -35,7 +35,7 @@ export const Preview: React.FC<any> = React.memo(() => {
 						buttonRef={addressBtn}
 						giveFocus={current.context.lastBtnClicked === 3}
 					>
-						{i18n.preview.buttons.three}
+						{i18n.preview.buttonsAndHeadings.address}
 					</UnderlinedButton>
 					<AddressPreview
 						address={{
@@ -59,7 +59,7 @@ export const Preview: React.FC<any> = React.memo(() => {
 						buttonRef={contactsBtn}
 						giveFocus={current.context.lastBtnClicked === 4}
 					>
-						{i18n.preview.buttons.four}
+						{i18n.preview.buttonsAndHeadings.contacts}
 					</UnderlinedButton>
 					<ContactDetailsPreview
 						phone={{ value: inHouseAdmin.telephoneNumber }}

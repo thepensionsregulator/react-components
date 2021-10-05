@@ -64,7 +64,7 @@ export const Contacts: React.FC = () => {
 			}}
 			fields={fields}
 			send={send}
-			subSectionHeaderText={i18n.preview.buttons.four}
+			subSectionHeaderText={i18n.preview.buttonsAndHeadings.contacts}
 		/>
 	);
 };
