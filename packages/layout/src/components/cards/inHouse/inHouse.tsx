@@ -120,7 +120,11 @@ const ToolbarButton: React.FC<IToolbarButtonProps> = React.memo(
 						current={current}
 						onClick={() => send('EDIT_NAME')}
 					>
-						{i18n.preview.buttons.one}
+						{concatenateStrings([
+							current.context.inHouseAdmin.title,
+							current.context.inHouseAdmin.firstName,
+							current.context.inHouseAdmin.lastName,
+						])}
 					</CardMainHeadingButton>
 				)}
 			</>
@@ -158,15 +162,7 @@ export const InHouseCard: React.FC<InHouseAdminProviderProps> = React.memo(
 									<ToolbarButton button={removeButtonRef} remove={true} />
 								)}
 								complete={isComplete(current.context)}
-								subtitle={() => (
-									<Subtitle
-										main={concatenateStrings([
-											current.context.inHouseAdmin.title,
-											current.context.inHouseAdmin.firstName,
-											current.context.inHouseAdmin.lastName,
-										])}
-									/>
-								)}
+								subtitle={() => <Subtitle main={i18n.preview.buttons.one} />}
 								statusText={
 									isComplete(current.context)
 										? i18n.preview.statusText.confirmed
