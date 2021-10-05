@@ -53,7 +53,7 @@ describe('ThirdParty Preview', () => {
 		assertMainHeadingExists(
 			getByText,
 			getByTestId,
-			'Third Party Administrator',
+			thirdPartyAdmin.organisationName,
 			false,
 		);
 

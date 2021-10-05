@@ -3,7 +3,10 @@ import { Checkbox } from '@tpr/forms';
 import { Flex, Hr, classNames } from '@tpr/core';
 import { UnderlinedButton } from '../../../components/button';
 import { useThirdPartyContext } from '../../context';
-import { AddressPreview } from '../../../common/views/preview/components';
+import {
+	AddressPreview,
+	CompaniesHouseNumber,
+} from '../../../common/views/preview/components';
 import styles from '../../../cards.module.scss';
 
 export const Preview: React.FC<any> = React.memo(() => {
@@ -31,6 +34,10 @@ export const Preview: React.FC<any> = React.memo(() => {
 							postcode: thirdParty.address.postcode,
 							country: thirdParty.address.country,
 						}}
+					/>
+					<CompaniesHouseNumber
+						heading={i18n.preview.buttons.four}
+						companiesHouseNumber={thirdParty.companiesHouseNumber}
 					/>
 				</Flex>
 			</Flex>

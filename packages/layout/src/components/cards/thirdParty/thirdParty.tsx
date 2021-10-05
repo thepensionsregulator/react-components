@@ -70,15 +70,13 @@ export const ThirdPartyCard: React.FC<ThirdPartyProviderProps> = React.memo(
 						>
 							<Toolbar
 								buttonLeft={() => (
-									<CardMainHeadingTitle title={i18n.preview.buttons.one} />
+									<CardMainHeadingTitle
+										title={current.context.thirdParty.organisationName}
+									/>
 								)}
 								buttonRight={RemoveButton}
 								complete={isComplete(current.context)}
-								subtitle={() => (
-									<Subtitle
-										main={current.context.thirdParty.organisationName}
-									/>
-								)}
+								subtitle={() => <Subtitle main={i18n.preview.buttons.one} />}
 								statusText={
 									isComplete(current.context)
 										? i18n.preview.statusText.confirmed
