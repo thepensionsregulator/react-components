@@ -95,7 +95,7 @@ export const i18n: EmployerI18nProps = {
 		buttons: {
 			one: 'Employer type',
 			two: 'Remove',
-			three: 'Employer',
+			three: 'Registered office address',
 			four: 'Employer Identifiers',
 		},
 		identifiers: {

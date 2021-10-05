@@ -48,7 +48,6 @@ export const Preview: React.FC<any> = React.memo(() => {
 				<Flex cfg={{ pr: 4 }} className={styles.section}>
 					<UnderlinedButton>{i18n.preview.buttons.three}</UnderlinedButton>
 					<AddressPreview
-						name={employer.organisationName}
 						address={{
 							addressLine1: employer.address.addressLine1,
 							addressLine2: employer.address.addressLine2,
