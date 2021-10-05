@@ -59,7 +59,7 @@ const ToolbarButton: React.FC<IToolbarButtonProps> = React.memo(
 							edit: 'name',
 						})}
 					>
-						{i18n.preview.buttons.two}
+						{i18n.preview.buttonsAndHeadings.remove}
 					</CardRemoveButton>
 				) : (
 					<CardMainHeadingButton
@@ -100,7 +100,7 @@ export const ActuaryCard: React.FC<ActuaryProviderProps> = React.memo(
 								current.context.actuary.title,
 								current.context.actuary.firstName,
 								current.context.actuary.lastName,
-								i18n.preview.buttons.one,
+								i18n.preview.mainHeadingSubtitle.main,
 							])}
 						>
 							<Toolbar
@@ -111,7 +111,7 @@ export const ActuaryCard: React.FC<ActuaryProviderProps> = React.memo(
 								complete={isComplete(current.context)}
 								subtitle={() => (
 									<Subtitle
-										main={i18n.preview.buttons.one}
+										main={i18n.preview.mainHeadingSubtitle.main}
 										secondary={current.context.actuary.organisationName}
 									/>
 								)}
