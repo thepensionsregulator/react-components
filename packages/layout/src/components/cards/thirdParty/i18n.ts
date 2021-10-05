@@ -4,6 +4,7 @@ export type ThirdPartyI18nProps = {
 			one: string;
 			two: string;
 			three: string;
+			four: string;
 		};
 		statusText: {
 			confirmed: string;
@@ -66,6 +67,7 @@ export const i18n: ThirdPartyI18nProps = {
 			one: 'Third Party Administrator',
 			two: 'Remove',
 			three: 'Address',
+			four: 'Companies House Number',
 		},
 		statusText: {
 			confirmed: 'Confirmed',
