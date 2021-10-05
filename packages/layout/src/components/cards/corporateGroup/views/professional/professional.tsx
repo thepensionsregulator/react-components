@@ -57,7 +57,9 @@ export const Professional: React.FC = () => {
 			type={cardType.trustee}
 			title={i18n.professional.title}
 			sectionTitle={i18n.professional.sectionTitle}
-			subSectionHeaderText={i18n.preview.buttons.six}
+			subSectionHeaderText={
+				i18n.preview.buttonsAndHeadings.directorProfessional
+			}
 			send={send}
 		>
 			<Form

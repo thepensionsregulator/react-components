@@ -86,7 +86,7 @@ export const NameScreen: React.FC = () => {
 			loading={loading}
 			nextStep={true}
 			send={send}
-			subSectionHeaderText={i18n.preview.buttons.five}
+			subSectionHeaderText={i18n.preview.buttonsAndHeadings.chairOfBoard}
 		/>
 	);
 };
