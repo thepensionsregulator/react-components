@@ -1,0 +1,8 @@
+@import '@tpr/core/lib/components/typography/typography.module.scss';
+// typography.module.scss includes '@tpr/theming/lib/variables.scss'
+
+.personOrCompanyRole {
+	@include removeMarginBottom;
+	line-height: $line-height-3;
+	word-break: break-all;
+}

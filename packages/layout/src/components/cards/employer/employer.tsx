@@ -1,6 +1,6 @@
 import React, { useMemo, useRef } from 'react';
 import { Toolbar } from '../components/toolbar';
-import { Section } from '@tpr/core';
+import { P, Section } from '@tpr/core';
 import { Preview } from './views/preview/preview';
 import { RemoveDateForm } from './views/remove/date/date';
 import { EmployerType } from './views/type/type';
@@ -24,6 +24,7 @@ import {
 	Subtitle,
 } from '../common/views/preview/components';
 import styles from '../cards.module.scss';
+import { Heading } from '../components/heading';
 
 const CardContentSwitch: React.FC = () => {
 	const { current } = useEmployerContext();
@@ -44,7 +45,7 @@ const CardContentSwitch: React.FC = () => {
 	}
 };
 
-const ToolbarButton: React.FC<IToolbarButtonProps> = React.memo(
+export const ToolbarButton: React.FC<IToolbarButtonProps> = React.memo(
 	({ remove = false, button }) => {
 		const { current, send, i18n } = useEmployerContext();
 
@@ -73,7 +74,7 @@ const ToolbarButton: React.FC<IToolbarButtonProps> = React.memo(
 	},
 );
 
-const EmployerSubtitle: React.FC<Partial<EmployerContext>> = React.memo(
+export const EmployerSubtitle: React.FC<Partial<EmployerContext>> = React.memo(
 	({
 		employer: { employerType, statutoryEmployer },
 		showStatutoryEmployerSection,
@@ -109,7 +110,6 @@ const isComplete = (context: EmployerContext) => {
 
 export const EmployerCard: React.FC<EmployerProviderProps> = React.memo(
 	({ testId, cfg, ...rest }) => {
-		const employerButtonRef = useRef(null);
 		const removeButtonRef = useRef(null);
 
 		return (
@@ -125,12 +125,16 @@ export const EmployerCard: React.FC<EmployerProviderProps> = React.memo(
 							])}
 						>
 							<Toolbar
-								buttonLeft={() => <ToolbarButton button={employerButtonRef} />}
+								buttonLeft={() => (
+									<Heading isMainHeading>
+										{current.context.employer.organisationName}
+									</Heading>
+								)}
 								buttonRight={() => (
 									<ToolbarButton button={removeButtonRef} remove={true} />
 								)}
 								complete={isComplete(current.context)}
-								subtitle={() => <EmployerSubtitle {...current.context} />}
+								subtitle={() => <P>Employer</P>}
 								statusText={
 									isComplete(current.context)
 										? i18n.preview.statusText.confirmed

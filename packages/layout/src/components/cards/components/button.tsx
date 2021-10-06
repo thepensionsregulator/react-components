@@ -3,13 +3,13 @@ import { Flex, H3, H4, P } from '@tpr/core';
 import { ArrowDown, ArrowUp } from '@tpr/icons';
 import { EditArrowUp, EditArrowDown } from './arrowButton';
 import styles from './button.module.scss';
+import { Heading, HeadingProps } from './heading';
 
-interface UnderlinedButtonProps {
+interface UnderlinedButtonProps extends HeadingProps {
 	buttonRef?: MutableRefObject<any>;
 	giveFocus?: boolean;
 	heading?: boolean;
 	isEditButton?: boolean;
-	isMainHeading?: boolean;
 	isOpen?: boolean;
 	onClick?: any;
 	onCollapseCallback?: () => void;
@@ -43,22 +43,6 @@ export const UnderlinedButton: React.FC<UnderlinedButtonProps> = React.memo(
 		tabIndex,
 	}) => {
 		const editViewButtonRef = useRef(null);
-
-		const Heading: React.FC = () => (
-			<div className={styles.buttonPlaceholder}>
-				<Flex cfg={{ flex: '0 0 auto', alignItems: 'center' }}>
-					{isMainHeading ? (
-						<H3 className={styles.heading3} data-testid="card-main-heading">
-							{children}
-						</H3>
-					) : (
-						<H4 className={styles.heading4} data-testid="card-heading">
-							{children}
-						</H4>
-					)}
-				</Flex>
-			</div>
-		);
 
 		const getAppropriateIcon = () => {
 			if (isOpen && isEditButton) {
@@ -135,6 +119,14 @@ export const UnderlinedButton: React.FC<UnderlinedButtonProps> = React.memo(
 			!isOpen && onCollapseCallback && onCollapseCallback();
 		}, [isOpen]);
 
-		return <>{typeof onClick === 'undefined' ? <Heading /> : getButton()}</>;
+		return (
+			<>
+				{typeof onClick === 'undefined' ? (
+					<Heading isMainHeading={isMainHeading}>{children}</Heading>
+				) : (
+					getButton()
+				)}
+			</>
+		);
 	},
 );

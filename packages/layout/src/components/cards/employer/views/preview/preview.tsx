@@ -1,10 +1,12 @@
-import React, { useState } from 'react';
+import React, { useRef, useState } from 'react';
 import { Flex, P, Hr, classNames } from '@tpr/core';
 import { UnderlinedButton } from '../../../components/button';
 import { Checkbox } from '@tpr/forms';
 import { useEmployerContext } from '../../context';
 import { AddressPreview } from '../../../common/views/preview/components';
 import styles from '../../../cards.module.scss';
+import { PreviewButton } from './previewButton';
+import { EmployerTypePreview } from './employerTypePreview';
 
 type IdentifiersItemProps = { title: string; number: string | number };
 const IdentifiersItem: React.FC<IdentifiersItemProps> = ({ title, number }) => {
@@ -17,6 +19,7 @@ const IdentifiersItem: React.FC<IdentifiersItemProps> = ({ title, number }) => {
 };
 
 export const Preview: React.FC<any> = React.memo(() => {
+	const employerButtonRef = useRef(null);
 	const { current, send, onCorrect, i18n } = useEmployerContext();
 	const { employer, complete, preValidatedData } = current.context;
 	const [items] = useState(
@@ -48,7 +51,6 @@ export const Preview: React.FC<any> = React.memo(() => {
 				<Flex cfg={{ pr: 4 }} className={styles.section}>
 					<UnderlinedButton>{i18n.preview.buttons.three}</UnderlinedButton>
 					<AddressPreview
-						name={employer.organisationName}
 						address={{
 							addressLine1: employer.address.addressLine1,
 							addressLine2: employer.address.addressLine2,
@@ -58,14 +60,18 @@ export const Preview: React.FC<any> = React.memo(() => {
 							postcode: employer.address.postcode,
 						}}
 					/>
-				</Flex>
-				<Flex cfg={{ pl: 4 }} className={styles.section}>
-					<UnderlinedButton>{i18n.preview.buttons.four}</UnderlinedButton>
-					<Flex className={styles.identifierItem}>
+					<Flex cfg={{ mt: 3 }} className={styles.identifierItem}>
+						<UnderlinedButton>{i18n.preview.buttons.four}</UnderlinedButton>
 						{items.map((item, key) => (
 							<IdentifiersItem key={key} {...item} />
 						))}
 					</Flex>
+				</Flex>
+				<Flex cfg={{ pl: 4 }} className={styles.section}>
+					<PreviewButton button={employerButtonRef}>
+						{i18n.preview.buttons.one}
+					</PreviewButton>
+					<EmployerTypePreview {...current.context} />
 				</Flex>
 			</Flex>
 			<Flex cfg={{ flexDirection: 'column' }}>
