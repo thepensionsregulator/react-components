@@ -5,7 +5,7 @@ import {
 	I18nNameView,
 	I18nContactsView,
 	I18nRemoveViewDateAndConfirm,
-	I18nPreviewViewCommonProps
+	I18nPreviewViewCommonProps,
 } from '../common/interfaces';
 
 interface I18nInHouseAdminPreviewView extends I18nPreviewViewCommonProps {
@@ -13,7 +13,7 @@ interface I18nInHouseAdminPreviewView extends I18nPreviewViewCommonProps {
 		remove: string;
 		address: string;
 		contacts: string;
-	}
+	};
 }
 
 export type InHouseAdminI18nProps = {
@@ -113,7 +113,8 @@ export const i18n: InHouseAdminI18nProps = {
 			},
 			errors: {
 				formIncomplete: 'Please confirm and fill in the date fields.',
-				dateAddedBeforeEffectiveDate: 'Date must be after the Employer was added.',
+				dateAddedBeforeEffectiveDate:
+					'Date must be after the Employer was added.',
 				dateAddedInTheFuture: 'Date cannot be in the future.',
 			},
 		},

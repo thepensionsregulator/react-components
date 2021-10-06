@@ -13,7 +13,7 @@ interface I18nActuaryPreviewView extends I18nPreviewViewCommonProps {
 		address: string;
 		companiesHouseNumber: string;
 		contacts: string;
-	}
+	};
 }
 
 export type ActuaryI18nProps = {
