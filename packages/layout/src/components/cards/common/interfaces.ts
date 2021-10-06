@@ -159,6 +159,10 @@ export interface ICardMainHeadingButtonProps {
 	onClick: any;
 }
 
+export interface IPreviewButtonProps {
+	button: MutableRefObject<any>;
+}
+
 export interface ICardRemoveButtonProps {
 	button: MutableRefObject<any>;
 	send: (event: any, payload?: EventData) => Partial<State<any, any, any, any>>;
