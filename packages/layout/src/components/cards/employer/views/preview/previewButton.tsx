@@ -13,7 +13,7 @@ export const PreviewButton: React.FC<IPreviewButtonProps> = ({
 	return (
 		<UnderlinedButton
 			buttonRef={button}
-			giveFocus={current.context.lastBtnClicked === 1}
+			giveFocus={current.context.lastBtnClicked === 5}
 			isEditButton={true}
 			isMainHeading={false}
 			isOpen={isEditing}

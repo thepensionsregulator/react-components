@@ -58,7 +58,7 @@ export const ToolbarButton: React.FC<IToolbarButtonProps> = React.memo(
 						current={current}
 						tabIndex={removeFromTabFlowIfMatches(current, 'employerType')}
 					>
-						{i18n.preview.buttons.two}
+						{i18n.preview.buttonsAndHeadings.remove}
 					</CardRemoveButton>
 				) : (
 					<CardMainHeadingButton
@@ -66,7 +66,7 @@ export const ToolbarButton: React.FC<IToolbarButtonProps> = React.memo(
 						current={current}
 						onClick={() => send('CHANGE_TYPE')}
 					>
-						{i18n.preview.buttons.one}
+						{current.context.employer.organisationName}
 					</CardMainHeadingButton>
 				)}
 			</>

@@ -1,12 +1,12 @@
 import React, { useRef, useState } from 'react';
 import { Flex, P, Hr, classNames } from '@tpr/core';
-import { UnderlinedButton } from '../../../components/button';
 import { Checkbox } from '@tpr/forms';
+import { UnderlinedButton } from '../../../components/button';
 import { useEmployerContext } from '../../context';
 import { AddressPreview } from '../../../common/views/preview/components';
-import styles from '../../../cards.module.scss';
 import { PreviewButton } from './previewButton';
 import { EmployerTypePreview } from './employerTypePreview';
+import styles from '../../../cards.module.scss';
 
 type IdentifiersItemProps = { title: string; number: string | number };
 const IdentifiersItem: React.FC<IdentifiersItemProps> = ({ title, number }) => {
@@ -49,7 +49,9 @@ export const Preview: React.FC<any> = React.memo(() => {
 		>
 			<Flex>
 				<Flex cfg={{ pr: 4 }} className={styles.section}>
-					<UnderlinedButton>{i18n.preview.buttons.three}</UnderlinedButton>
+					<UnderlinedButton>
+						{i18n.preview.buttonsAndHeadings.address}
+					</UnderlinedButton>
 					<AddressPreview
 						address={{
 							addressLine1: employer.address.addressLine1,
@@ -61,7 +63,9 @@ export const Preview: React.FC<any> = React.memo(() => {
 						}}
 					/>
 					<Flex cfg={{ mt: 3 }} className={styles.identifierItem}>
-						<UnderlinedButton>{i18n.preview.buttons.four}</UnderlinedButton>
+						<UnderlinedButton>
+							{i18n.preview.buttonsAndHeadings.employerIdentifiers}
+						</UnderlinedButton>
 						{items.map((item, key) => (
 							<IdentifiersItem key={key} {...item} />
 						))}
@@ -69,7 +73,7 @@ export const Preview: React.FC<any> = React.memo(() => {
 				</Flex>
 				<Flex cfg={{ pl: 4 }} className={styles.section}>
 					<PreviewButton button={employerButtonRef}>
-						{i18n.preview.buttons.one}
+						{i18n.preview.buttonsAndHeadings.employerType}
 					</PreviewButton>
 					<EmployerTypePreview {...current.context} />
 				</Flex>

@@ -59,7 +59,7 @@ const employerMachine = Machine<
 			on: {
 				CHANGE_TYPE: {
 					target: '#employerType',
-					actions: updateClickedButton(1),
+					actions: updateClickedButton(5),
 				},
 				REMOVE: {
 					target: '#remove',
@@ -105,7 +105,6 @@ const employerMachine = Machine<
 								};
 							}),
 						},
-						CHANGE_TYPE: returnToPreview(1),
 						REMOVE: '#preview',
 					},
 				},
@@ -114,7 +113,6 @@ const employerMachine = Machine<
 						CANCEL: '#preview',
 						BACK: '#remove',
 						DELETE: 'deleted',
-						CHANGE_TYPE: returnToPreview(1),
 						REMOVE: '#preview',
 					},
 				},
