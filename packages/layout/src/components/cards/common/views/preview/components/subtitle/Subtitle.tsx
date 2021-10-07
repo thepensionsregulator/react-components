@@ -9,7 +9,7 @@ interface SubtitleProps {
 }
 
 export const Subtitle: React.FC<SubtitleProps> = React.memo(
-	({ main, secondary, mainBold = true }) => {
+	({ main, secondary, mainBold = false }) => {
 		return (
 			<>
 				{main && (

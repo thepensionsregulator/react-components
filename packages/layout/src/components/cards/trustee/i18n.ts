@@ -1,78 +1,27 @@
 import { I18nAddressLookup, i18n as AddressI18n } from '@tpr/forms';
 import {
-	I18nRemoveReason,
-	InputErrorMessages,
+	I18nContactsView,
+	I18nNameView,
+	I18nRemoveViewReasonAndConfirm,
 	defaultEmailErrorMessages,
 	defaultPhoneErrorMessages,
+	I18nPreviewViewCommonProps,
 } from '../common/interfaces';
-type PropertyFunction<T> = () => T;
+
+interface I18nTrusteePreviewView extends I18nPreviewViewCommonProps {
+	buttonsAndHeadings: {
+		remove: string;
+		correspondenceAddress: string;
+		contacts: string;
+	};
+}
 
 export type TrusteeI18nProps = {
 	address: I18nAddressLookup;
-	contacts: {
-		title: string;
-		subtitle: string;
-		sectionTitle?: string;
-		fields: {
-			telephone: {
-				label: string;
-				error: InputErrorMessages;
-			};
-			email: {
-				label: string;
-				error: InputErrorMessages;
-			};
-		};
-	};
-	name: {
-		title: string;
-		sectionTitle?: string;
-		fields: {
-			title: {
-				label: string;
-				error: string | PropertyFunction<string | undefined>;
-				maxlength: number;
-			};
-			firstName: {
-				label: string;
-				error: string | PropertyFunction<string | undefined>;
-				maxlength: number;
-			};
-			lastName: {
-				label: string;
-				error: string | PropertyFunction<string | undefined>;
-				maxlength: number;
-			};
-		};
-	};
-	preview: {
-		buttons: {
-			one: string;
-			two: string;
-			three: string;
-			four: string;
-		};
-		statusText: {
-			confirmed: string;
-			unconfirmed: string;
-		};
-		checkboxLabel: string;
-	};
-	remove: {
-		confirm: {
-			title: string;
-			subtitle: string;
-			breadcrumbs: {
-				link1: string;
-				link2: string;
-			};
-			buttons: {
-				remove: string;
-				cancel: string;
-			};
-		};
-		reason: I18nRemoveReason;
-	};
+	contacts: I18nContactsView;
+	name: I18nNameView;
+	preview: I18nTrusteePreviewView;
+	remove: I18nRemoveViewReasonAndConfirm;
 	type: {
 		title: string;
 		subtitle: string;
@@ -144,11 +93,13 @@ export const i18n: TrusteeI18nProps = {
 		},
 	},
 	preview: {
-		buttons: {
-			one: 'Trustee',
-			two: 'Remove',
-			three: 'Correspondence address',
-			four: 'Contact details',
+		buttonsAndHeadings: {
+			remove: 'Remove',
+			correspondenceAddress: 'Correspondence address',
+			contacts: 'Contact details',
+		},
+		mainHeadingSubtitle: {
+			main: 'Trustee',
 		},
 		statusText: {
 			confirmed: 'Confirmed',

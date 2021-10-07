@@ -1,22 +1,24 @@
-export type EmployerI18nProps = {
-	preview: {
-		buttons: {
-			one: string;
-			two: string;
-			three: string;
-			four: string;
-		};
-		identifiers: {
-			companiesHouseNo: string;
-			registeredCharityNo: string;
-			epsrNumber: string;
-		};
-		statusText: {
-			confirmed: string;
-			unconfirmed: string;
-		};
-		checkboxLabel: string;
+import {
+	I18nPreviewViewCommonProps,
+	I18nRemoveViewDateAndConfirm,
+} from '../common/interfaces';
+
+interface I18nEmployerPreviewView extends I18nPreviewViewCommonProps {
+	buttonsAndHeadings: {
+		remove: string;
+		address: string;
+		employerType: string;
+		employerIdentifiers: string;
 	};
+	identifiers: {
+		companiesHouseNo: string;
+		registeredCharityNo: string;
+		epsrNumber: string;
+	};
+}
+
+export type EmployerI18nProps = {
+	preview: I18nEmployerPreviewView;
 	type: {
 		title: string;
 		subtitle: string;
@@ -53,50 +55,19 @@ export type EmployerI18nProps = {
 			};
 		};
 	};
-	remove: {
-		confirm: {
-			breadcrumbs: {
-				link1: string;
-				link2: string;
-			};
-			title: string;
-			dialog: {
-				message1: string;
-				message2: string;
-			};
-			buttons: {
-				remove: string;
-				cancel: string;
-			};
-		};
-		date: {
-			title: string;
-			fields: {
-				confirm: {
-					label: string;
-				};
-				date: {
-					label: string;
-					hint: string;
-					error: string;
-				};
-			};
-			errors: {
-				formIncomplete: string;
-				dateAddedBeforeEffectiveDate: string;
-				dateAddedInTheFuture: string;
-			};
-		};
-	};
+	remove: I18nRemoveViewDateAndConfirm;
 };
 
 export const i18n: EmployerI18nProps = {
 	preview: {
-		buttons: {
-			one: 'Employer type',
-			two: 'Remove',
-			three: 'Registered office address',
-			four: 'Employer Identifiers',
+		buttonsAndHeadings: {
+			employerType: 'Employer type',
+			remove: 'Remove',
+			address: 'Registered office address',
+			employerIdentifiers: 'Employer Identifiers',
+		},
+		mainHeadingSubtitle: {
+			main: 'Employer',
 		},
 		identifiers: {
 			companiesHouseNo: 'Companies House number',

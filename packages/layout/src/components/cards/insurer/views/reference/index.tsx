@@ -58,7 +58,9 @@ export const Reference: React.FC = () => {
 			subtitle={i18n.reference.subtitle}
 			loading={false}
 			sectionTitle={i18n.reference.sectionTitle}
-			subSectionHeaderText={i18n.preview.buttons.four}
+			subSectionHeaderText={
+				i18n.preview.buttonsAndHeadings.insurerReferenceNumber
+			}
 			send={send}
 		>
 			<Form

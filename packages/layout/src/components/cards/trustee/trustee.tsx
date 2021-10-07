@@ -9,18 +9,16 @@ import { Preview } from './views/preview';
 import { Toolbar } from '../components/toolbar';
 import Name from './views/name';
 import Type from './views/type/type';
-import Address from '../common/views/address/addressPage';
 import { Contacts } from './views/contacts';
 import RemoveReason from './views/remove/reason/reason';
 import { ConfirmRemove } from './views/remove/confirm';
+import AddressView from './views/address/address';
 import RemovedBox from '../components/removedBox';
 import {
 	CardContentProps,
-	cardType,
 	cardTypeName,
 	IToolbarButtonProps,
 } from '../common/interfaces';
-import { AddressComparer } from '@tpr/forms';
 import { TrusteeContext } from './trusteeMachine';
 import {
 	CardMainHeadingButton,
@@ -38,8 +36,7 @@ const CardContent: React.FC<CardContentProps> = ({
 	enableContactDetails = true,
 	onChangeAddress,
 }) => {
-	const { current, i18n, send, addressAPI } = useTrusteeContext();
-	const { trustee } = current.context;
+	const { current } = useTrusteeContext();
 
 	if (current.matches('preview')) {
 		return <Preview enableContactDetails={enableContactDetails} />;
@@ -54,26 +51,7 @@ const CardContent: React.FC<CardContentProps> = ({
 		current.matches({ edit: { company: 'address' } }) ||
 		current.matches({ edit: { company: 'save' } })
 	) {
-		return (
-			<Address
-				onSubmit={(values) => {
-					if (AddressComparer.areEqual(values.initialValue, values)) {
-						send('CANCEL');
-					} else {
-						send('SAVE', { address: values || {} });
-					}
-				}}
-				initialValue={trustee.address}
-				addressAPI={addressAPI}
-				cardType={cardType.trustee}
-				cardTypeName={cardTypeName.trustee}
-				sectionTitle={i18n.address.sectionTitle}
-				i18n={i18n.address}
-				onCancelChanges={() => send('CANCEL')}
-				subSectionHeaderText={i18n.preview.buttons.three}
-				onChangeAddress={onChangeAddress}
-			/>
-		);
+		return <AddressView onChangeAddress={onChangeAddress} />;
 	} else if (
 		current.matches({ edit: { contact: 'details' } }) ||
 		current.matches({ edit: { contact: 'save' } })
@@ -106,7 +84,7 @@ const ToolbarButton: React.FC<IToolbarButtonProps> = React.memo(
 							edit: { trustee: 'name' },
 						})}
 					>
-						{i18n.preview.buttons.two}
+						{i18n.preview.buttonsAndHeadings.remove}
 					</CardRemoveButton>
 				) : (
 					<CardMainHeadingButton
@@ -114,7 +92,7 @@ const ToolbarButton: React.FC<IToolbarButtonProps> = React.memo(
 						current={current}
 						onClick={() => send('EDIT_TRUSTEE')}
 					>
-						{text ? text : i18n.preview.buttons.one}
+						{text}
 					</CardMainHeadingButton>
 				)}
 			</>
@@ -149,7 +127,7 @@ export const TrusteeCard: React.FC<
 						ariaLabel={concatenateStrings([
 							trusteeName,
 							current.context.trustee.trusteeType,
-							i18n.preview.buttons.one,
+							i18n.preview.mainHeadingSubtitle.main,
 						])}
 					>
 						<Toolbar

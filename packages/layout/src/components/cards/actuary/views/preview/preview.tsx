@@ -1,7 +1,7 @@
 import React, { useRef } from 'react';
-import { Checkbox } from '@tpr/forms';
-import { Flex, Hr, classNames } from '@tpr/core';
+import { Flex, classNames } from '@tpr/core';
 import { UnderlinedButton } from '../../../components/button';
+import { CardFooter } from '../../../components/footer';
 import { useActuaryContext } from '../../context';
 import {
 	AddressPreview,
@@ -28,7 +28,9 @@ export const Preview: React.FC<any> = React.memo(() => {
 			<Flex>
 				{/* Address section: display only	 */}
 				<Flex cfg={{ pr: 4 }} className={styles.section}>
-					<UnderlinedButton>{i18n.preview.buttons.three}</UnderlinedButton>
+					<UnderlinedButton>
+						{i18n.preview.buttonsAndHeadings.address}
+					</UnderlinedButton>
 					<AddressPreview
 						address={{
 							addressLine1: actuary.address.addressLine1,
@@ -43,7 +45,7 @@ export const Preview: React.FC<any> = React.memo(() => {
 
 					{/* Companies House Number: display only	 */}
 					<CompaniesHouseNumber
-						heading={i18n.preview.buttons.four}
+						heading={i18n.preview.buttonsAndHeadings.companiesHouseNumber}
 						companiesHouseNumber={actuary.companiesHouseNumber}
 					/>
 				</Flex>
@@ -57,7 +59,7 @@ export const Preview: React.FC<any> = React.memo(() => {
 						buttonRef={contactsBtn}
 						giveFocus={current.context.lastBtnClicked === 4}
 					>
-						{i18n.preview.buttons.five}
+						{i18n.preview.buttonsAndHeadings.contacts}
 					</UnderlinedButton>
 					<ContactDetailsPreview
 						phone={{ value: actuary.telephoneNumber }}
@@ -67,25 +69,21 @@ export const Preview: React.FC<any> = React.memo(() => {
 			</Flex>
 
 			{/*  All details correct - Checkbox	 */}
-			<Flex cfg={{ flexDirection: 'column' }}>
-				<Hr cfg={{ my: 4 }} />
-				<Checkbox
-					value={complete}
-					checked={complete}
-					onChange={() => {
-						send('COMPLETE', { value: !complete });
-						onCorrect(!complete);
-					}}
-					label={i18n.preview.checkboxLabel.replace(
-						'__NAME__',
-						concatenateStrings([
-							actuary.title,
-							actuary.firstName,
-							actuary.lastName,
-						]),
-					)}
-				/>
-			</Flex>
+			<CardFooter
+				complete={complete}
+				onChange={() => {
+					send('COMPLETE', { value: !complete });
+					onCorrect(!complete);
+				}}
+				label={i18n.preview.checkboxLabel.replace(
+					'__NAME__',
+					concatenateStrings([
+						actuary.title,
+						actuary.firstName,
+						actuary.lastName,
+					]),
+				)}
+			/>
 		</div>
 	);
 });

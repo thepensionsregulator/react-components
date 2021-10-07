@@ -1,17 +1,18 @@
-export type ThirdPartyI18nProps = {
-	preview: {
-		buttons: {
-			one: string;
-			two: string;
-			three: string;
-			four: string;
-		};
-		statusText: {
-			confirmed: string;
-			unconfirmed: string;
-		};
-		checkboxLabel: string;
+import {
+	I18nPreviewViewCommonProps,
+	I18nRemoveViewDateAndConfirm,
+} from '../common/interfaces';
+
+interface I18nThirdPartyPreviewView extends I18nPreviewViewCommonProps {
+	buttonsAndHeadings: {
+		remove: string;
+		address: string;
+		companiesHouseNumber: string;
 	};
+}
+
+export type ThirdPartyI18nProps = {
+	preview: I18nThirdPartyPreviewView;
 	reference: {
 		title: string;
 		subtitle: string;
@@ -24,50 +25,18 @@ export type ThirdPartyI18nProps = {
 			};
 		};
 	};
-	remove: {
-		confirm: {
-			breadcrumbs: {
-				link1: string;
-				link2: string;
-			};
-			title: string;
-			dialog: {
-				message1: string;
-				message2: string;
-			};
-			buttons: {
-				remove: string;
-				cancel: string;
-			};
-		};
-		date: {
-			title: string;
-			fields: {
-				confirm: {
-					label: string;
-				};
-				date: {
-					label: string;
-					hint: string;
-					error: string;
-				};
-			};
-			errors: {
-				formIncomplete: string;
-				dateAddedBeforeEffectiveDate: string;
-				dateAddedInTheFuture: string;
-			};
-		};
-	};
+	remove: I18nRemoveViewDateAndConfirm;
 };
 
 export const i18n: ThirdPartyI18nProps = {
 	preview: {
-		buttons: {
-			one: 'Third Party Administrator',
-			two: 'Remove',
-			three: 'Address',
-			four: 'Companies House Number',
+		buttonsAndHeadings: {
+			remove: 'Remove',
+			address: 'Address',
+			companiesHouseNumber: 'Companies House Number',
+		},
+		mainHeadingSubtitle: {
+			main: 'Third Party Administrator',
 		},
 		statusText: {
 			confirmed: 'Confirmed',

@@ -1,18 +1,19 @@
-export type InsurerI18nProps = {
-	preview: {
-		buttons: {
-			one: string;
-			two: string;
-			three: string;
-			four: string;
-			five: string;
-		};
-		statusText: {
-			confirmed: string;
-			unconfirmed: string;
-		};
-		checkboxLabel: string;
+import {
+	I18nPreviewViewCommonProps,
+	I18nRemoveViewDateAndConfirm,
+} from '../common/interfaces';
+
+interface I18nInsurerPreviewView extends I18nPreviewViewCommonProps {
+	buttonsAndHeadings: {
+		remove: string;
+		address: string;
+		companiesHouseNumber: string;
+		insurerReferenceNumber: string;
 	};
+}
+
+export type InsurerI18nProps = {
+	preview: I18nInsurerPreviewView;
 	reference: {
 		title: string;
 		subtitle: string;
@@ -26,51 +27,19 @@ export type InsurerI18nProps = {
 			};
 		};
 	};
-	remove: {
-		confirm: {
-			breadcrumbs: {
-				link1: string;
-				link2: string;
-			};
-			title: string;
-			dialog: {
-				message1: string;
-				message2: string;
-			};
-			buttons: {
-				remove: string;
-				cancel: string;
-			};
-		};
-		date: {
-			title: string;
-			fields: {
-				confirm: {
-					label: string;
-				};
-				date: {
-					label: string;
-					hint: string;
-					error: string;
-				};
-			};
-			errors: {
-				formIncomplete: string;
-				dateAddedBeforeEffectiveDate: string;
-				dateAddedInTheFuture: string;
-			};
-		};
-	};
+	remove: I18nRemoveViewDateAndConfirm;
 };
 
 export const i18n: InsurerI18nProps = {
 	preview: {
-		buttons: {
-			one: 'Insurer administrator',
-			two: 'Remove',
-			three: 'Address',
-			four: 'Companies House Number',
-			five: 'Insurer reference number',
+		buttonsAndHeadings: {
+			remove: 'Remove',
+			address: 'Address',
+			companiesHouseNumber: 'Companies House Number',
+			insurerReferenceNumber: 'Insurer reference number',
+		},
+		mainHeadingSubtitle: {
+			main: 'Insurer administrator',
 		},
 		statusText: {
 			confirmed: 'Confirmed',

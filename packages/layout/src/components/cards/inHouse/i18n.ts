@@ -1,97 +1,27 @@
 import { I18nAddressLookup, i18n as AddressI18n } from '@tpr/forms';
 import {
-	InputErrorMessages,
 	defaultEmailErrorMessages,
 	defaultPhoneErrorMessages,
+	I18nNameView,
+	I18nContactsView,
+	I18nRemoveViewDateAndConfirm,
+	I18nPreviewViewCommonProps,
 } from '../common/interfaces';
-type PropertyFunction<T> = () => T;
+
+interface I18nInHouseAdminPreviewView extends I18nPreviewViewCommonProps {
+	buttonsAndHeadings: {
+		remove: string;
+		address: string;
+		contacts: string;
+	};
+}
 
 export type InHouseAdminI18nProps = {
 	address: I18nAddressLookup;
-	preview: {
-		buttons: {
-			one: string;
-			two: string;
-			three: string;
-			four: string;
-		};
-		statusText: {
-			confirmed: string;
-			unconfirmed: string;
-		};
-		checkboxLabel: string;
-	};
-	name: {
-		title: string;
-		sectionTitle?: string;
-		fields: {
-			title: {
-				label: string;
-				error: string | PropertyFunction<string | undefined>;
-				maxlength: number;
-			};
-			firstName: {
-				label: string;
-				error: string | PropertyFunction<string | undefined>;
-				maxlength: number;
-			};
-			lastName: {
-				label: string;
-				error: string | PropertyFunction<string | undefined>;
-				maxlength: number;
-			};
-		};
-	};
-	contacts: {
-		title: string;
-		subtitle: string;
-		sectionTitle?: string;
-		fields: {
-			telephone: {
-				label: string;
-				error: InputErrorMessages;
-			};
-			email: {
-				label: string;
-				error: InputErrorMessages;
-			};
-		};
-	};
-	remove: {
-		confirm: {
-			breadcrumbs: {
-				link1: string;
-				link2: string;
-			};
-			title: string;
-			dialog: {
-				message1: string;
-				message2: string;
-			};
-			buttons: {
-				remove: string;
-				cancel: string;
-			};
-		};
-		date: {
-			title: string;
-			fields: {
-				confirm: {
-					label: string;
-				};
-				date: {
-					label: string;
-					hint: string;
-					error: string;
-				};
-			};
-			errors: {
-				formIncomplete: string;
-				dateAddedBeforeEffectiveDate: string;
-				dateAddedInTheFuture: string;
-			};
-		};
-	};
+	preview: I18nInHouseAdminPreviewView;
+	name: I18nNameView;
+	contacts: I18nContactsView;
+	remove: I18nRemoveViewDateAndConfirm;
 };
 
 export const i18n: InHouseAdminI18nProps = {
@@ -101,11 +31,13 @@ export const i18n: InHouseAdminI18nProps = {
 		...AddressI18n,
 	},
 	preview: {
-		buttons: {
-			one: 'In House Administrator',
-			two: 'Remove',
-			three: 'Address',
-			four: 'Contact details',
+		buttonsAndHeadings: {
+			remove: 'Remove',
+			address: 'Address',
+			contacts: 'Contact details',
+		},
+		mainHeadingSubtitle: {
+			main: 'In House Administrator',
 		},
 		statusText: {
 			confirmed: 'Confirmed',

@@ -130,7 +130,7 @@ describe('Actuary Card', () => {
 		test('renders with a section containing an aria label', () => {
 			assertThatASectionExistsWithAnAriaLabel(
 				findByRole,
-				`${actuary.title} ${actuary.firstName} ${actuary.lastName} Actuary`,
+				`${actuary.title} ${actuary.firstName} ${actuary.lastName} Scheme Actuary`,
 			);
 		});
 

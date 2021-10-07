@@ -63,7 +63,7 @@ export const CorporateGroupCard: React.FC<CorporateGroupProviderProps> = React.m
 							send={send}
 							current={current}
 						>
-							{i18n.preview.buttons.two}
+							{i18n.preview.buttonsAndHeadings.remove}
 						</CardRemoveButton>
 					);
 
@@ -74,7 +74,7 @@ export const CorporateGroupCard: React.FC<CorporateGroupProviderProps> = React.m
 							className={styles.card}
 							ariaLabel={concatenateStrings([
 								current.context.corporateGroup.organisationName,
-								i18n.preview.trusteeType,
+								i18n.preview.mainHeadingSubtitle.main,
 							])}
 						>
 							<Toolbar
@@ -86,7 +86,7 @@ export const CorporateGroupCard: React.FC<CorporateGroupProviderProps> = React.m
 								buttonRight={RemoveButton}
 								complete={isComplete(current.context)}
 								subtitle={() => (
-									<Subtitle secondary={i18n.preview.trusteeType} />
+									<Subtitle secondary={i18n.preview.mainHeadingSubtitle.main} />
 								)}
 								statusText={
 									isComplete(current.context)
