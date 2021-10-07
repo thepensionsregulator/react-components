@@ -1,12 +1,12 @@
 import React from 'react';
 import { AddressComparer } from '@tpr/forms';
 import { useInHouseAdminContext } from '../../context';
-import { cardType, cardTypeName } from '../../../common/interfaces';
+import {
+	cardType,
+	cardTypeName,
+	IAddressViewProps,
+} from '../../../common/interfaces';
 import Address from '../../../common/views/address/addressPage';
-
-interface IAddressViewProps {
-	onChangeAddress?: (...args: any[]) => Promise<any>;
-}
 
 const AddressView: React.FC<IAddressViewProps> = ({ onChangeAddress }) => {
 	const {

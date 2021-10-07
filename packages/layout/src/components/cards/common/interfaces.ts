@@ -248,9 +248,14 @@ export const defaultPhoneErrorMessages: InputErrorMessages = {
 	invalid: 'Enter a telephone number, like 0163 960 598 or +44 7700 900 359',
 };
 
-export interface CardContentProps {
-	enableContactDetails?: boolean;
+// -----------------------------------------
+
+export interface IAddressViewProps {
 	onChangeAddress?: (...args: any[]) => Promise<any>;
+}
+
+export interface CardContentProps extends IAddressViewProps {
+	enableContactDetails?: boolean;
 }
 
 /*	--------------------------------
