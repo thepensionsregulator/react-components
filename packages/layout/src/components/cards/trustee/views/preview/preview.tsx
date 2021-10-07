@@ -37,7 +37,7 @@ export const Preview: React.FC<CardContentProps> = React.memo(
 							buttonRef={correspondenceBtn}
 							giveFocus={current.context.lastBtnClicked === 3}
 						>
-							{i18n.preview.buttons.three}
+							{i18n.preview.buttonsAndHeadings.correspondenceAddress}
 						</UnderlinedButton>
 						<AddressPreview
 							name={trustee.address.addressLine1}
@@ -62,7 +62,7 @@ export const Preview: React.FC<CardContentProps> = React.memo(
 								buttonRef={contactsBtn}
 								giveFocus={current.context.lastBtnClicked === 4}
 							>
-								{i18n.preview.buttons.four}
+								{i18n.preview.buttonsAndHeadings.contacts}
 							</UnderlinedButton>
 							<ContactDetailsPreview
 								phone={{ value: trustee.telephoneNumber }}

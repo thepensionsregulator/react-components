@@ -1,11 +1,14 @@
-import { I18nPreviewViewCommonProps, I18nRemoveViewDateAndConfirm } from '../common/interfaces';
+import {
+	I18nPreviewViewCommonProps,
+	I18nRemoveViewDateAndConfirm,
+} from '../common/interfaces';
 
 interface I18nThirdPartyPreviewView extends I18nPreviewViewCommonProps {
 	buttonsAndHeadings: {
 		remove: string;
 		address: string;
-		companiesHouseNumber: string;		
-	}
+		companiesHouseNumber: string;
+	};
 }
 
 export type ThirdPartyI18nProps = {

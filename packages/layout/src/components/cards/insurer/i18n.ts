@@ -1,4 +1,7 @@
-import { I18nPreviewViewCommonProps, I18nRemoveViewDateAndConfirm } from '../common/interfaces';
+import {
+	I18nPreviewViewCommonProps,
+	I18nRemoveViewDateAndConfirm,
+} from '../common/interfaces';
 
 interface I18nInsurerPreviewView extends I18nPreviewViewCommonProps {
 	buttonsAndHeadings: {
@@ -6,7 +9,7 @@ interface I18nInsurerPreviewView extends I18nPreviewViewCommonProps {
 		address: string;
 		companiesHouseNumber: string;
 		insurerReferenceNumber: string;
-	}
+	};
 }
 
 export type InsurerI18nProps = {
