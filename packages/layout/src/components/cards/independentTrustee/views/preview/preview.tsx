@@ -26,7 +26,9 @@ export const Preview: React.FC<any> = React.memo(() => {
 			<Flex>
 				{/* Address section: display only	 */}
 				<Flex cfg={{ pr: 4 }} className={styles.section}>
-					<UnderlinedButton>{i18n.preview.buttons.three}</UnderlinedButton>
+					<UnderlinedButton>
+						{i18n.preview.buttonsAndHeadings.address}
+					</UnderlinedButton>
 					<AddressPreview
 						address={{
 							addressLine1: independentTrustee.address.addressLine1,
@@ -41,7 +43,7 @@ export const Preview: React.FC<any> = React.memo(() => {
 
 					{/* Companies House Number: display only	 */}
 					<CompaniesHouseNumber
-						heading={i18n.preview.buttons.four}
+						heading={i18n.preview.buttonsAndHeadings.companiesHouseNumber}
 						companiesHouseNumber={independentTrustee.companiesHouseNumber}
 					/>
 				</Flex>
@@ -55,7 +57,7 @@ export const Preview: React.FC<any> = React.memo(() => {
 						buttonRef={regulatorBtn}
 						giveFocus={current.context.lastBtnClicked === 5}
 					>
-						{i18n.preview.buttons.five}
+						{i18n.preview.buttonsAndHeadings.appointedByRegulator}
 					</UnderlinedButton>
 					<P className={styles.appointedByRegulator}>
 						{independentTrustee.appointedByRegulator

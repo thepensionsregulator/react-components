@@ -1,21 +1,19 @@
-import { I18nRemoveReason } from '../common/interfaces';
+import {
+	I18nPreviewViewCommonProps,
+	I18nRemoveViewReasonAndConfirm,
+} from '../common/interfaces';
+
+interface I18nIndependentTrusteePreviewView extends I18nPreviewViewCommonProps {
+	buttonsAndHeadings: {
+		remove: string;
+		address: string;
+		companiesHouseNumber: string;
+		appointedByRegulator: string;
+	};
+}
 
 export type IndependentTrusteeI18nProps = {
-	preview: {
-		buttons: {
-			one: string;
-			two: string;
-			three: string;
-			four: string;
-			five: string;
-		};
-		statusText: {
-			confirmed: string;
-			unconfirmed: string;
-		};
-		checkboxLabel: string;
-		trusteeType: string;
-	};
+	preview: I18nIndependentTrusteePreviewView;
 	regulator: {
 		title: string;
 		subtitle: string;
@@ -29,41 +27,25 @@ export type IndependentTrusteeI18nProps = {
 			};
 		};
 	};
-	remove: {
-		confirm: {
-			title: string;
-			subtitle: string;
-			breadcrumbs: {
-				link1: string;
-				link2: string;
-			};
-			dialog: {
-				message1: string;
-			};
-			buttons: {
-				remove: string;
-				cancel: string;
-			};
-		};
-		reason: I18nRemoveReason;
-	};
+	remove: I18nRemoveViewReasonAndConfirm;
 };
 
 export const i18n: IndependentTrusteeI18nProps = {
 	preview: {
-		buttons: {
-			one: 'Corporate Trustee',
-			two: 'Remove',
-			three: 'Address',
-			four: 'Companies House Number',
-			five: 'Appointed by the regulator',
+		buttonsAndHeadings: {
+			remove: 'Remove',
+			address: 'Address',
+			companiesHouseNumber: 'Companies House Number',
+			appointedByRegulator: 'Appointed by the regulator',
+		},
+		mainHeadingSubtitle: {
+			main: 'Professional / Independent Trustee',
 		},
 		statusText: {
 			confirmed: 'Confirmed',
 			unconfirmed: 'Unconfirmed',
 		},
 		checkboxLabel: "Confirm '__NAME__' is correct.",
-		trusteeType: 'Professional / Independent Trustee',
 	},
 	regulator: {
 		title: 'Was this trustee appointed to this scheme by the regulator?',
