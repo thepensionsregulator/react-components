@@ -54,7 +54,7 @@ export const ThirdPartyCard: React.FC<ThirdPartyProviderProps> = React.memo(
 							send={send}
 							current={current}
 						>
-							{i18n.preview.buttons.two}
+							{i18n.preview.buttonsAndHeadings.remove}
 						</CardRemoveButton>
 					);
 
@@ -65,7 +65,7 @@ export const ThirdPartyCard: React.FC<ThirdPartyProviderProps> = React.memo(
 							className={styles.card}
 							ariaLabel={concatenateStrings([
 								current.context.thirdParty.organisationName,
-								i18n.preview.buttons.one,
+								i18n.preview.mainHeadingSubtitle.main,
 							])}
 						>
 							<Toolbar
@@ -76,7 +76,9 @@ export const ThirdPartyCard: React.FC<ThirdPartyProviderProps> = React.memo(
 								)}
 								buttonRight={RemoveButton}
 								complete={isComplete(current.context)}
-								subtitle={() => <Subtitle main={i18n.preview.buttons.one} />}
+								subtitle={() => (
+									<Subtitle main={i18n.preview.mainHeadingSubtitle.main} />
+								)}
 								statusText={
 									isComplete(current.context)
 										? i18n.preview.statusText.confirmed

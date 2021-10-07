@@ -23,7 +23,9 @@ export const Preview: React.FC<any> = React.memo(() => {
 		>
 			<Flex>
 				<Flex cfg={{ pr: 4 }} className={styles.section}>
-					<UnderlinedButton>{i18n.preview.buttons.three}</UnderlinedButton>
+					<UnderlinedButton>
+						{i18n.preview.buttonsAndHeadings.address}
+					</UnderlinedButton>
 					<AddressPreview
 						address={{
 							addressLine1: thirdParty.address.addressLine1,
@@ -36,7 +38,7 @@ export const Preview: React.FC<any> = React.memo(() => {
 						}}
 					/>
 					<CompaniesHouseNumber
-						heading={i18n.preview.buttons.four}
+						heading={i18n.preview.buttonsAndHeadings.companiesHouseNumber}
 						companiesHouseNumber={thirdParty.companiesHouseNumber}
 					/>
 				</Flex>
