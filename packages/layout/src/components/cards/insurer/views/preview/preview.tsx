@@ -26,7 +26,9 @@ export const Preview: React.FC<any> = React.memo(() => {
 			<Flex>
 				{/* Address block: display only	 */}
 				<Flex cfg={{ pr: 4 }} className={styles.section}>
-					<UnderlinedButton>{i18n.preview.buttons.three}</UnderlinedButton>
+					<UnderlinedButton>
+						{i18n.preview.buttonsAndHeadings.address}
+					</UnderlinedButton>
 					<AddressPreview
 						address={{
 							addressLine1: insurer.address.addressLine1,
@@ -41,7 +43,7 @@ export const Preview: React.FC<any> = React.memo(() => {
 
 					{/* Companies House Number: display only	 */}
 					<CompaniesHouseNumber
-						heading={i18n.preview.buttons.four}
+						heading={i18n.preview.buttonsAndHeadings.companiesHouseNumber}
 						companiesHouseNumber={insurer.companiesHouseNumber}
 					/>
 				</Flex>
@@ -55,7 +57,7 @@ export const Preview: React.FC<any> = React.memo(() => {
 						buttonRef={insurerBtn}
 						giveFocus={current.context.lastBtnClicked === 5}
 					>
-						{i18n.preview.buttons.five}
+						{i18n.preview.buttonsAndHeadings.insurerReferenceNumber}
 					</UnderlinedButton>
 					<P className={styles.insurerCompanyRef}>
 						{insurer.insurerCompanyReference}
