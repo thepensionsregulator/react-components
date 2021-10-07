@@ -1,7 +1,7 @@
 import React from 'react';
-import { Checkbox } from '@tpr/forms';
-import { Flex, Hr, classNames } from '@tpr/core';
+import { Flex, classNames } from '@tpr/core';
 import { UnderlinedButton } from '../../../components/button';
+import { CardFooter } from '../../../components/footer';
 import { useThirdPartyContext } from '../../context';
 import {
 	AddressPreview,
@@ -43,21 +43,17 @@ export const Preview: React.FC<any> = React.memo(() => {
 					/>
 				</Flex>
 			</Flex>
-			<Flex cfg={{ flexDirection: 'column' }}>
-				<Hr cfg={{ my: 4 }} />
-				<Checkbox
-					value={complete}
-					checked={complete}
-					onChange={() => {
-						send('COMPLETE', { value: !complete });
-						onCorrect(!complete);
-					}}
-					label={i18n.preview.checkboxLabel.replace(
-						'__NAME__',
-						thirdParty.organisationName,
-					)}
-				/>
-			</Flex>
+			<CardFooter
+				complete={complete}
+				onChange={() => {
+					send('COMPLETE', { value: !complete });
+					onCorrect(!complete);
+				}}
+				label={i18n.preview.checkboxLabel.replace(
+					'__NAME__',
+					thirdParty.organisationName,
+				)}
+			/>
 		</div>
 	);
 });

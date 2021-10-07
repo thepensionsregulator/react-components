@@ -1,7 +1,7 @@
 import React, { useRef } from 'react';
-import { Checkbox } from '@tpr/forms';
-import { Flex, P, Hr, classNames } from '@tpr/core';
+import { Flex, P, classNames } from '@tpr/core';
 import { UnderlinedButton } from '../../../components/button';
+import { CardFooter } from '../../../components/footer';
 import { useCorporateGroupContext } from '../../context';
 import {
 	ContactDetailsPreview,
@@ -94,21 +94,17 @@ export const Preview: React.FC<any> = React.memo(() => {
 			</Flex>
 
 			{/*  All details correct - Checkbox	 */}
-			<Flex cfg={{ flexDirection: 'column' }}>
-				<Hr cfg={{ my: 4 }} />
-				<Checkbox
-					value={complete}
-					checked={complete}
-					onChange={() => {
-						send('COMPLETE', { value: !complete });
-						onCorrect(!complete);
-					}}
-					label={i18n.preview.checkboxLabel.replace(
-						'__NAME__',
-						corporateGroup.organisationName,
-					)}
-				/>
-			</Flex>
+			<CardFooter
+				complete={complete}
+				onChange={() => {
+					send('COMPLETE', { value: !complete });
+					onCorrect(!complete);
+				}}
+				label={i18n.preview.checkboxLabel.replace(
+					'__NAME__',
+					corporateGroup.organisationName,
+				)}
+			/>
 		</div>
 	);
 });

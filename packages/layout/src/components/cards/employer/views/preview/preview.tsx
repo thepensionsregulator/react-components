@@ -1,7 +1,7 @@
 import React, { useRef, useState } from 'react';
-import { Flex, P, Hr, classNames } from '@tpr/core';
-import { Checkbox } from '@tpr/forms';
+import { Flex, P, classNames } from '@tpr/core';
 import { UnderlinedButton } from '../../../components/button';
+import { CardFooter } from '../../../components/footer';
 import { useEmployerContext } from '../../context';
 import { AddressPreview } from '../../../common/views/preview/components';
 import { PreviewButton } from './previewButton';
@@ -49,6 +49,7 @@ export const Preview: React.FC<any> = React.memo(() => {
 		>
 			<Flex>
 				<Flex cfg={{ pr: 4 }} className={styles.section}>
+					{/* Office Address: display only	 */}
 					<UnderlinedButton>
 						{i18n.preview.buttonsAndHeadings.address}
 					</UnderlinedButton>
@@ -62,6 +63,8 @@ export const Preview: React.FC<any> = React.memo(() => {
 							postcode: employer.address.postcode,
 						}}
 					/>
+
+					{/* Employer Identifiers: display only	 */}
 					<Flex cfg={{ mt: 3 }} className={styles.identifierItem}>
 						<UnderlinedButton>
 							{i18n.preview.buttonsAndHeadings.employerIdentifiers}
@@ -71,6 +74,8 @@ export const Preview: React.FC<any> = React.memo(() => {
 						))}
 					</Flex>
 				</Flex>
+
+				{/* Employer type: open for editing	 */}
 				<Flex cfg={{ pl: 4 }} className={styles.section}>
 					<PreviewButton button={employerButtonRef}>
 						{i18n.preview.buttonsAndHeadings.employerType}
@@ -78,21 +83,19 @@ export const Preview: React.FC<any> = React.memo(() => {
 					<EmployerTypePreview {...current.context} />
 				</Flex>
 			</Flex>
-			<Flex cfg={{ flexDirection: 'column' }}>
-				<Hr cfg={{ my: 4 }} />
-				<Checkbox
-					value={complete}
-					checked={complete}
-					onChange={() => {
-						send('COMPLETE', { value: !complete });
-						onCorrect(!complete);
-					}}
-					label={i18n.preview.checkboxLabel.replace(
-						'__NAME__',
-						employer.organisationName,
-					)}
-				/>
-			</Flex>
+
+			{/*  All details correct - Checkbox	 */}
+			<CardFooter
+				complete={complete}
+				onChange={() => {
+					send('COMPLETE', { value: !complete });
+					onCorrect(!complete);
+				}}
+				label={i18n.preview.checkboxLabel.replace(
+					'__NAME__',
+					employer.organisationName,
+				)}
+			/>
 		</div>
 	);
 });

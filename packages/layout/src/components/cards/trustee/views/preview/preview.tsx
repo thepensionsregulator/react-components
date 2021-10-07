@@ -1,8 +1,8 @@
 import React, { useRef } from 'react';
-import { Flex, Hr, classNames } from '@tpr/core';
+import { Flex, classNames } from '@tpr/core';
 import { useTrusteeContext } from '../../context';
 import { UnderlinedButton } from '../../../components/button';
-import { Checkbox } from '@tpr/forms';
+import { CardFooter } from '../../../components/footer';
 import {
 	ContactDetailsPreview,
 	AddressPreview,
@@ -73,25 +73,21 @@ export const Preview: React.FC<CardContentProps> = React.memo(
 				</Flex>
 
 				{/*  All details correct - Checkbox	 */}
-				<Flex cfg={{ flexDirection: 'column' }}>
-					<Hr cfg={{ my: 4 }} />
-					<Checkbox
-						value={complete}
-						checked={complete}
-						onChange={() => {
-							send('COMPLETE', { value: !complete });
-							onCorrect(!complete);
-						}}
-						label={i18n.preview.checkboxLabel.replace(
-							'__NAME__',
-							concatenateStrings([
-								trustee.title,
-								trustee.firstName,
-								trustee.lastName,
-							]),
-						)}
-					/>
-				</Flex>
+				<CardFooter
+					complete={complete}
+					onChange={() => {
+						send('COMPLETE', { value: !complete });
+						onCorrect(!complete);
+					}}
+					label={i18n.preview.checkboxLabel.replace(
+						'__NAME__',
+						concatenateStrings([
+							trustee.title,
+							trustee.firstName,
+							trustee.lastName,
+						]),
+					)}
+				/>
 			</div>
 		);
 	},
