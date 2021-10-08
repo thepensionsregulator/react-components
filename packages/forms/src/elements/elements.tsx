@@ -2,16 +2,24 @@ import React, { createElement, ReactNode } from 'react';
 import { SpaceProps, FlexProps, useClassNames, Span } from '@tpr/core';
 import AccessibilityHelper from './accessibilityHelper';
 import styles from './elements.module.scss';
+import { useField } from '../../lib';
 
-interface StyledInputLabelProps {
+interface BaseStyledInputLabelProps {
 	element?: 'label' | 'div' | 'fieldset';
-	isError?: boolean;
 	className?: string;
 	cfg?: FlexProps | SpaceProps;
-	[key: string]: any;
 	noLeftBorder?: boolean;
-	hiddenLabel?: string;
 	hiddenLabelId?: string;
+	hiddenLabel?: string;
+	[key: string]: any;
+}
+
+interface StyledInputLabelSubscriptionProps extends BaseStyledInputLabelProps {
+	fieldNames: string[];
+}
+
+interface StyledInputLabelProps extends BaseStyledInputLabelProps {
+	isError?: boolean;
 }
 export const StyledInputLabel: React.FC<StyledInputLabelProps> = ({
 	element = 'label',
@@ -36,6 +44,42 @@ export const StyledInputLabel: React.FC<StyledInputLabelProps> = ({
 			...props,
 		},
 
+		<>
+			{hiddenLabel && (
+				<div className={styles.hiddenLabel} id={hiddenLabelId}>
+					{hiddenLabel}
+				</div>
+			)}
+			{children}
+		</>,
+	);
+};
+
+export const StyledInputLabelWithSubscription: React.FC<StyledInputLabelSubscriptionProps> = ({
+	fieldNames,
+	cfg,
+	noLeftBorder,
+	className,
+	element = 'label',
+	hiddenLabel = '',
+	hiddenLabelId,
+	children,
+	...props
+}) => {
+	const {
+		meta: { touched, error },
+	} = useField(fieldNames[0]);
+	const classNames = useClassNames(cfg, [
+		styles.label,
+		{ [styles['labelError']]: touched && error && !noLeftBorder },
+		className,
+	]);
+	return createElement(
+		element,
+		{
+			className: classNames,
+			...props,
+		},
 		<>
 			{hiddenLabel && (
 				<div className={styles.hiddenLabel} id={hiddenLabelId}>
