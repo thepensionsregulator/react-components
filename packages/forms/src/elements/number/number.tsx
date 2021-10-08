@@ -253,9 +253,9 @@ const StyledLabelInputNumber: React.FC<InputNumberProps> = ({
 				optionalText={optionalText}
 				maxLength={maxLength}
 				maxIntDigits={maxIntDigits}
-				ariaLabel={i18n.ariaLabelExtension}
 				initialValue={initialValue}
 				inputClassName={inputClassName}
+				i18n={i18n}
 				{...props}
 			/>
 		</StyledInputLabel>
