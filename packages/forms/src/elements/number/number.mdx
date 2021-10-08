@@ -6,7 +6,7 @@ route: /forms/number
 
 import { Playground } from '@playground';
 import { Form } from 'react-final-form';
-import { FFInputNumber } from './number';
+import { FFInputNumber, FFInputNumberWithCheckbox } from './number';
 import { validate } from '../../validation';
 import { renderFields } from '../../renderFields';
 import styles from './input.module.scss';
@@ -322,6 +322,45 @@ required=true;
 							type="submit"
 							style={{ display: 'none' }}
 							children="Submit"
+						/>
+					</form>
+				)}
+			</Form>
+		);
+	}}
+</Playground>
+
+### Number field with checkbox
+
+```js
+import { FFInputNumberWithCheckbox } from '@tpr/forms';
+<form noValidate>
+...
+required=true;
+```
+
+<Playground>
+	{() => {
+		const handleChange = (value) => {
+			console.log(value);
+		};
+		return (
+			<Form onSubmit={(values) => console.log(values)}>
+				{({ handleSubmit }) => (
+					<form onSubmit={handleSubmit} noValidate>
+						<FFInputNumberWithCheckbox
+							numberProps={{
+								name: 'number field',
+								label: 'some number field',
+								required: true,
+								validate: (value) => {
+									if (value <= 0 || value > 100000) {
+										return 'value must be between 0 and 100000 and accepts 2 decimal places';
+									}
+									noLeftBorder: true;
+								},
+							}}
+							checkboxProps={{ name: 'checkbox', label: 'Not available' }}
 						/>
 					</form>
 				)}
