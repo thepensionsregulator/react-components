@@ -8,6 +8,7 @@ import { FieldWithAriaLabelExtensionI18nProps } from 'types/FieldWithAriaLabelEx
 import { FieldWithAriaLabelExtensionProps } from '../../types/FieldWithAriaLabelExtensionProps';
 import { RecursivePartial } from 'types/RecursivePartial';
 import AccessibilityHelper from '../accessibilityHelper';
+// import { CheckboxIconProps } from 'elements/checkbox/checkbox';
 
 let numberFieldI18nDefaults: FieldWithAriaLabelExtensionI18nProps = {
 	ariaLabelExtension: null,
@@ -43,13 +44,11 @@ const InputNumber: React.FC<InputNumberProps> = ({
 	before,
 	callback,
 	decimalPlaces,
-	noLeftBorder,
 	optionalText,
 	maxLength,
 	maxIntDigits,
 	i18n = numberFieldI18nDefaults,
 	initialValue,
-	wrapperElement = 'label',
 	inputClassName,
 	...props
 }) => {
@@ -168,12 +167,7 @@ const InputNumber: React.FC<InputNumberProps> = ({
 	const helper = new AccessibilityHelper(name, !!label, !!hint);
 
 	return (
-		<StyledInputLabel
-			isError={meta && meta.touched && meta.error}
-			cfg={Object.assign({ mt: 1 }, cfg)}
-			noLeftBorder={noLeftBorder}
-			element={wrapperElement}
-		>
+		<>
 			<InputElementHeading
 				label={label}
 				required={optionalText !== undefined ? !optionalText : required}
@@ -204,6 +198,66 @@ const InputNumber: React.FC<InputNumberProps> = ({
 				ref={innerInput}
 				{...props}
 			/>
+		</>
+	);
+};
+
+const StyledLabelInputNumber: React.FC<InputNumberProps> = ({
+	id,
+	label,
+	name,
+	hint,
+	input,
+	testId,
+	meta,
+	required,
+	placeholder,
+	readOnly,
+	cfg,
+	after,
+	before,
+	callback,
+	decimalPlaces,
+	optionalText,
+	maxLength,
+	maxIntDigits,
+	i18n = numberFieldI18nDefaults,
+	initialValue,
+	inputClassName,
+	wrapperElement = 'label',
+	noLeftBorder,
+	...props
+}) => {
+	return (
+		<StyledInputLabel
+			isError={meta && meta.touched && meta.error}
+			cfg={Object.assign({ mt: 1 }, cfg)}
+			noLeftBorder={noLeftBorder}
+			element={wrapperElement}
+		>
+			<InputNumber
+				id={id}
+				label={label}
+				name={name}
+				hint={hint}
+				input={input}
+				testId={testId}
+				meta={meta}
+				required={required}
+				placeholder={placeholder}
+				readOnly={readOnly}
+				after={after}
+				before={before}
+				callback={callback}
+				decimalPlaces={decimalPlaces}
+				optionalText={optionalText}
+				maxLength={maxLength}
+				maxIntDigits={maxIntDigits}
+				ariaLabel={i18n.ariaLabelExtension}
+				initialValue={initialValue}
+				inputClassName={inputClassName}
+				{...props}
+			/>
 		</StyledInputLabel>
 	);
 };
@@ -217,7 +271,7 @@ export const FFInputNumber: React.FC<FFInputNumberProps> = (fieldProps) => {
 		<Field
 			{...fieldProps}
 			render={(props) => (
-				<InputNumber
+				<StyledLabelInputNumber
 					{...props}
 					name={fieldProps.name}
 					initialValue={fieldProps.initialValue}
@@ -226,3 +280,23 @@ export const FFInputNumber: React.FC<FFInputNumberProps> = (fieldProps) => {
 		/>
 	);
 };
+
+// export type FFInputNumberWithCheckboxProps = FFInputNumberProps &
+// 	CheckboxIconProps &
+// 	InputNumberProps;
+
+// export const FFInputNumberWithCheckbox: React.FC<FFInputNumberWithCheckboxProps> = ({
+// 	meta,
+// 	cfg,
+// 	wrapperElement,
+// 	noLeftBorder,
+// }) => {
+// 	return (
+// 		<StyledInputLabel
+// 			isError={meta && meta.touched && meta.error}
+// 			cfg={Object.assign({ mt: 1 }, cfg)}
+// 			noLeftBorder={noLeftBorder}
+// 			element={wrapperElement}
+// 		></StyledInputLabel>
+// 	);
+// };
