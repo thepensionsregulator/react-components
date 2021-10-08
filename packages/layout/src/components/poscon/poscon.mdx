@@ -7,7 +7,7 @@ route: /layout/poscon
 import { Playground } from '@playground';
 import { Props } from 'docz';
 import { Poscon } from './poscon';
-import { H3, P } from '@tpr/core';
+import { H1, H3, P } from '@tpr/core';
 
 # Poscon Banner
 
@@ -23,8 +23,8 @@ import { Poscon } from '@tpr/layout';
 
 <Playground>
 	<Poscon>
-		<p>Section Complete</p>
-		<p>Information about section</p>
+		<p style={{ color: 'white' }}>Section Complete</p>
+		<p style={{ color: 'white' }}>Information about section</p>
 	</Poscon>
 </Playground>
 
@@ -48,9 +48,38 @@ import { Poscon } from '@tpr/layout';
 
 <Playground>
 	<Poscon enableClose={true}>
-		<H3>Poscon section</H3>
-		<P>Section complete</P>
+		<H3 cfg={{ color: 'white', my: 4 }}>Poscon section</H3>
+		<P cfg={{ color: 'white' }}>
+			You successfully submitted your scheme return for 10000168, The Pilot's
+			National Pension Fund on 2/9/2021 at 09:42 to The Pensions Regulator. You
+			can go home and relax now.
+		</P>
 	</Poscon>
+</Playground>
+
+### the "cfg" prop allows to override the default props for the Flex container.
+
+<Playground>
+	{() => {
+		const posconStyles = {
+			flexDirection: 'row',
+			bg: 'neutral.3',
+			px: 4,
+			pb: 2,
+		};
+		return (
+			<Poscon cfg={posconStyles} enableClose={true} closeButtonColor="black">
+				<H1 cfg={{ pr: 4 }}>Section Complete</H1>
+				<P cfg={{ textAlign: 'right' }}>
+					You successfully submitted your scheme return for 10000168, The
+					Pilot's National Pension Fund on 2/9/2021 at 09:42 to The Pensions
+					Regulator.
+					<br />
+					You can go home and relax now.
+				</P>
+			</Poscon>
+		);
+	}}
 </Playground>
 
 ## API
