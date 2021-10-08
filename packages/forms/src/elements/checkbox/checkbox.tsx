@@ -101,12 +101,16 @@ export interface CheckboxProps extends FieldProps {
 	callback?: Function;
 }
 
-export const FFCheckbox: React.FC<CheckboxProps> = (fieldProps) => {
-	const handleChange = (input: any, value: boolean) => {
-		input.onChange(!input.checked);
-		fieldProps.callback && fieldProps.callback(value);
-	};
+export const handleChangeCheckbox = (
+	fieldProps: CheckboxProps,
+	input: any,
+	value: boolean,
+) => {
+	input.onChange(!input.checked);
+	fieldProps.callback && fieldProps.callback(value);
+};
 
+export const FFCheckbox: React.FC<CheckboxProps> = (fieldProps) => {
 	return (
 		<Field
 			{...fieldProps}
@@ -116,7 +120,9 @@ export const FFCheckbox: React.FC<CheckboxProps> = (fieldProps) => {
 					<StyledLabelCheckbox
 						label={label}
 						checked={input.checked}
-						onChange={(e: any) => handleChange(input, e.target.checked)}
+						onChange={(e: any) =>
+							handleChangeCheckbox(fieldProps, input, e.target.checked)
+						}
 						{...rest}
 					/>
 				);
