@@ -1,6 +1,10 @@
 import React, { ChangeEvent, useEffect, useRef, useState } from 'react';
 import { Field, FieldRenderProps } from 'react-final-form';
-import { StyledInputLabel, InputElementHeading } from '../elements';
+import {
+	StyledInputLabel,
+	InputElementHeading,
+	StyledInputLabelWithSubscription,
+} from '../elements';
 import { FieldExtraProps } from '../../renderFields';
 import { Input } from '../input/input';
 import { adaptValueToFormat, fixToDecimals, validKeys as vk } from '../helpers';
@@ -8,7 +12,11 @@ import { FieldWithAriaLabelExtensionI18nProps } from 'types/FieldWithAriaLabelEx
 import { FieldWithAriaLabelExtensionProps } from '../../types/FieldWithAriaLabelExtensionProps';
 import { RecursivePartial } from 'types/RecursivePartial';
 import AccessibilityHelper from '../accessibilityHelper';
-// import { CheckboxIconProps } from 'elements/checkbox/checkbox';
+import {
+	Checkbox,
+	CheckboxProps,
+	handleChangeCheckbox,
+} from '../../elements/checkbox/checkbox';
 
 let numberFieldI18nDefaults: FieldWithAriaLabelExtensionI18nProps = {
 	ariaLabelExtension: null,
@@ -281,22 +289,41 @@ export const FFInputNumber: React.FC<FFInputNumberProps> = (fieldProps) => {
 	);
 };
 
-// export type FFInputNumberWithCheckboxProps = FFInputNumberProps &
-// 	CheckboxIconProps &
-// 	InputNumberProps;
+export type FFInputNumberWithCheckboxProps = {
+	numberProps: FFInputNumberProps;
+	checkboxProps: CheckboxProps;
+};
 
-// export const FFInputNumberWithCheckbox: React.FC<FFInputNumberWithCheckboxProps> = ({
-// 	meta,
-// 	cfg,
-// 	wrapperElement,
-// 	noLeftBorder,
-// }) => {
-// 	return (
-// 		<StyledInputLabel
-// 			isError={meta && meta.touched && meta.error}
-// 			cfg={Object.assign({ mt: 1 }, cfg)}
-// 			noLeftBorder={noLeftBorder}
-// 			element={wrapperElement}
-// 		></StyledInputLabel>
-// 	);
-// };
+export const FFInputNumberWithCheckbox: React.FC<FFInputNumberWithCheckboxProps> = ({
+	numberProps,
+	checkboxProps,
+}) => {
+	return (
+		<StyledInputLabelWithSubscription fieldNames={[numberProps.name]}>
+			<Field
+				{...numberProps}
+				render={(props) => (
+					<InputNumber
+						{...props}
+						name={numberProps.name}
+						initialValue={numberProps.initialValue}
+					/>
+				)}
+			/>
+			<Field
+				{...checkboxProps}
+				type="checkbox"
+				render={({ label, input, ...rest }: any) => (
+					<Checkbox
+						onChange={(e: any) =>
+							handleChangeCheckbox(checkboxProps, input, e.target.checked)
+						}
+						label={checkboxProps.label}
+						checked={input.checked}
+						{...rest}
+					/>
+				)}
+			/>
+		</StyledInputLabelWithSubscription>
+	);
+};
