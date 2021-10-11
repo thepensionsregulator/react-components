@@ -9,6 +9,8 @@ import { Form } from 'react-final-form';
 import { FFInputNumber } from './number';
 import { validate } from '../../validation';
 import { renderFields } from '../../renderFields';
+import { StyledInputLabelWithSubscription } from '../elements';
+import { FFCheckbox } from '@tpr/forms';
 import styles from './input.module.scss';
 
 # Number Input
@@ -323,6 +325,49 @@ required=true;
 							style={{ display: 'none' }}
 							children="Submit"
 						/>
+					</form>
+				)}
+			</Form>
+		);
+	}}
+</Playground>
+
+### Using StyledInputLabelWithSubscription with a number and checkbox input
+
+```js
+<form noValidate>
+...
+required=true
+```
+
+<Playground>
+	{() => {
+		const handleChange = (value) => {
+			console.log(value);
+		};
+		return (
+			<Form onSubmit={(values) => console.log(values)}>
+				{({ handleSubmit }) => (
+					<form onSubmit={handleSubmit} noValidate>
+						<StyledInputLabelWithSubscription elementName="age">
+							<FFInputNumber
+								name="age"
+								label="Age of applicant"
+								hint="You must be over 18"
+								validate={(value) => {
+									if (value < 18) {
+										return 'You must be over 18';
+									}
+								}}
+								callback={handleChange}
+								noLeftBorder={true}
+							/>
+							<FFCheckbox
+								name="checkbox"
+								label="Not available"
+								cfg={{ mb: 0 }}
+							/>
+						</StyledInputLabelWithSubscription>
 					</form>
 				)}
 			</Form>

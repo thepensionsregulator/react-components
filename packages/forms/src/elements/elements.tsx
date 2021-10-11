@@ -2,6 +2,7 @@ import React, { createElement, ReactNode } from 'react';
 import { SpaceProps, FlexProps, useClassNames, Span } from '@tpr/core';
 import AccessibilityHelper from './accessibilityHelper';
 import styles from './elements.module.scss';
+import { useField } from '../finalFormExports';
 
 interface StyledInputLabelProps {
 	element?: 'label' | 'div' | 'fieldset';
@@ -13,6 +14,7 @@ interface StyledInputLabelProps {
 	hiddenLabel?: string;
 	hiddenLabelId?: string;
 }
+
 export const StyledInputLabel: React.FC<StyledInputLabelProps> = ({
 	element = 'label',
 	cfg,
@@ -44,6 +46,33 @@ export const StyledInputLabel: React.FC<StyledInputLabelProps> = ({
 			)}
 			{children}
 		</>,
+	);
+};
+
+interface StyledInputLabelWithSubscriptionsProps extends StyledInputLabelProps {
+	elementName: string;
+}
+
+export const StyledInputLabelWithSubscription: React.FC<StyledInputLabelWithSubscriptionsProps> = ({
+	elementName,
+	cfg,
+	noLeftBorder,
+	element = 'fieldset',
+	children,
+}) => {
+	const {
+		meta: { touched, error },
+	} = useField(elementName, { subscription: { touched: true, error: true } });
+
+	return (
+		<StyledInputLabel
+			isError={touched && error}
+			cfg={Object.assign({ mt: 1 }, cfg)}
+			element={element}
+			noLeftBorder={noLeftBorder}
+		>
+			{children}
+		</StyledInputLabel>
 	);
 };
 
