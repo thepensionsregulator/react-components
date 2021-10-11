@@ -2,7 +2,7 @@ import React, { createElement, ReactNode } from 'react';
 import { SpaceProps, FlexProps, useClassNames, Span } from '@tpr/core';
 import AccessibilityHelper from './accessibilityHelper';
 import styles from './elements.module.scss';
-import { useField } from '../../lib';
+import { useField } from '../finalFormExports';
 
 interface BaseStyledInputLabelProps {
 	element?: 'label' | 'div' | 'fieldset';
