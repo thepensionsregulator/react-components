@@ -17,6 +17,7 @@ import {
 	CheckboxProps,
 	handleChangeCheckbox,
 } from '../../elements/checkbox/checkbox';
+import { Flex } from '@tpr/core/lib/components/globals/globals';
 
 let numberFieldI18nDefaults: FieldWithAriaLabelExtensionI18nProps = {
 	ariaLabelExtension: null,
@@ -32,7 +33,7 @@ interface InputNumberProps extends FieldRenderProps<number>, FieldExtraProps {
 	maxLength?: number;
 	maxIntDigits?: number;
 	i18n?: RecursivePartial<FieldWithAriaLabelExtensionI18nProps>;
-	wrapperElement?: 'label' | 'div' | 'fieldset';
+	// wrapperElement?: 'label' | 'div' | 'fieldset';
 	inputClassName?: string;
 }
 
@@ -292,14 +293,19 @@ export const FFInputNumber: React.FC<FFInputNumberProps> = (fieldProps) => {
 export type FFInputNumberWithCheckboxProps = {
 	numberProps: FFInputNumberProps;
 	checkboxProps: CheckboxProps;
+	wrapperElement?: 'label' | 'div' | 'fieldset';
 };
 
 export const FFInputNumberWithCheckbox: React.FC<FFInputNumberWithCheckboxProps> = ({
 	numberProps,
 	checkboxProps,
+	wrapperElement = 'fieldset',
 }) => {
 	return (
-		<StyledInputLabelWithSubscription fieldNames={[numberProps.name]}>
+		<StyledInputLabelWithSubscription
+			fieldNames={[numberProps.name]}
+			element={wrapperElement}
+		>
 			<Field
 				{...numberProps}
 				render={(props) => (
@@ -310,20 +316,22 @@ export const FFInputNumberWithCheckbox: React.FC<FFInputNumberWithCheckboxProps>
 					/>
 				)}
 			/>
-			<Field
-				{...checkboxProps}
-				type="checkbox"
-				render={({ label, input, ...rest }: any) => (
-					<Checkbox
-						onChange={(e: any) =>
-							handleChangeCheckbox(checkboxProps, input, e.target.checked)
-						}
-						label={checkboxProps.label}
-						checked={input.checked}
-						{...rest}
-					/>
-				)}
-			/>
+			<Flex cfg={{ mt: 2, mb: 4 }}>
+				<Field
+					{...checkboxProps}
+					type="checkbox"
+					render={({ label, input, ...rest }: any) => (
+						<Checkbox
+							onChange={(e: any) =>
+								handleChangeCheckbox(checkboxProps, input, e.target.checked)
+							}
+							label={checkboxProps.label}
+							checked={input.checked}
+							{...rest}
+						/>
+					)}
+				/>
+			</Flex>
 		</StyledInputLabelWithSubscription>
 	);
 };
