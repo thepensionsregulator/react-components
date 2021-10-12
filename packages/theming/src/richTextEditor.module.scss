@@ -79,6 +79,10 @@
 			background-color: $colors-warning-1;
 		}
 	}
+	ul,
+	ol {
+		list-style-position: inside;
+	}
 	ul > li,
 	ol > li {
 		color: $colors-neutral-8;
