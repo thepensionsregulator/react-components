@@ -1,5 +1,5 @@
 import React, { createElement, ReactNode } from 'react';
-import { SpaceProps, FlexProps, useClassNames, Span } from '@tpr/core';
+import { SpaceProps, FlexProps, useClassNames } from '@tpr/core';
 import AccessibilityHelper from './accessibilityHelper';
 import styles from './elements.module.scss';
 import { useField } from '../finalFormExports';
@@ -159,13 +159,9 @@ export const InputElementHeading: React.FC<InputElementHeadingProps> = ({
 				</FormLabelText>
 			)}
 			{hint && (
-				<Span
-					id={accessibilityHelper.hintId}
-					cfg={{ mb: 2 }}
-					className={styles.hint}
-				>
+				<p id={accessibilityHelper.hintId} className={styles.hint}>
 					{hint}
-				</Span>
+				</p>
 			)}
 			{meta && meta.touched && meta.error && (
 				<ErrorMessage id={accessibilityHelper.errorId} role={errorRole}>
