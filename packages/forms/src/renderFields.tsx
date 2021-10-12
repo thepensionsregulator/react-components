@@ -20,7 +20,8 @@ export type FieldInputTypes =
 	| 'select'
 	| 'phone'
 	| 'email'
-	| 'hidden';
+	| 'hidden'
+	| 'ur;';
 
 export type FieldOptions = {
 	label: string;
