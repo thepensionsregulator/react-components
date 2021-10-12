@@ -332,49 +332,6 @@ required=true;
 	}}
 </Playground>
 
-### Using StyledInputLabelWithSubscription with a number and checkbox input
-
-```js
-<form noValidate>
-...
-required=true
-```
-
-<Playground>
-	{() => {
-		const handleChange = (value) => {
-			console.log(value);
-		};
-		return (
-			<Form onSubmit={(values) => console.log(values)}>
-				{({ handleSubmit }) => (
-					<form onSubmit={handleSubmit} noValidate>
-						<StyledInputLabelWithSubscription elementName="age">
-							<FFInputNumber
-								name="age"
-								label="Age of applicant"
-								hint="You must be over 18"
-								validate={(value) => {
-									if (value < 18) {
-										return 'You must be over 18';
-									}
-								}}
-								callback={handleChange}
-								noLeftBorder={true}
-							/>
-							<FFCheckbox
-								name="checkbox"
-								label="Not available"
-								cfg={{ mb: 0 }}
-							/>
-						</StyledInputLabelWithSubscription>
-					</form>
-				)}
-			</Form>
-		);
-	}}
-</Playground>
-
 ## API
 
 ```
