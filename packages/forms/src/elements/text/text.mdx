@@ -116,6 +116,26 @@ import { Form, validate, renderFields } from '@tpr/forms';
 	}}
 </Playground>
 
+### Example with URL as type
+
+<Playground>
+	<Form onSubmit={console.log}>
+		{({ handleSubmit }) => (
+			<form onSubmit={handleSubmit} noValidate>
+				<FFInputText
+					type="url"
+					name="event_url"
+					label="Event URl"
+					cfg={{ my: 5 }}
+					inputClassName={textStyles.textInput}
+					required
+				/>
+				<button type="submit" style={{ display: 'none' }} children="Submit" />
+			</form>
+		)}
+	</Form>
+</Playground>
+
 ## API
 
 ```
