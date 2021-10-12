@@ -1,5 +1,4 @@
 import React from 'react';
-import { FORM_ERROR } from 'final-form';
 import { FieldProps } from '@tpr/forms';
 import { useActuaryContext } from '../../../context';
 import { isAfter, toDate, isBefore } from 'date-fns';

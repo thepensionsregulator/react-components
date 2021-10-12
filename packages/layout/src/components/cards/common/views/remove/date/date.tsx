@@ -1,5 +1,5 @@
 import React from 'react';
-import { Link, P } from '@tpr/core';
+import { Link } from '@tpr/core';
 import { Form, FFCheckbox, renderFields, FieldProps } from '@tpr/forms';
 import { Content } from '../../../../components/content';
 import { Footer } from '../../../../components/card';
