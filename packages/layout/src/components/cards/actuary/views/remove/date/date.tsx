@@ -36,13 +36,7 @@ export const RemoveDateForm = () => {
 	];
 
 	const onSubmit = (values) => {
-		if (!values.confirm) {
-			return {
-				[FORM_ERROR]: i18n.remove.date.errors.formIncomplete,
-			};
-		} else {
-			send('NEXT', { values });
-		}
+		send('NEXT', { values });
 	};
 
 	return (
@@ -51,6 +45,7 @@ export const RemoveDateForm = () => {
 			onSubmit={onSubmit}
 			remove={remove}
 			label={i18n.remove.date.fields.confirm.label}
+			checkboxErrorMessage={i18n.remove.date.errors.confirmMissing}
 			dateField={DateField}
 			type={cardType.actuary}
 			typeName={cardTypeName.actuary}
