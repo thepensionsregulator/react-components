@@ -21,7 +21,7 @@ export type FieldInputTypes =
 	| 'phone'
 	| 'email'
 	| 'hidden'
-	| 'ur;';
+	| 'url';
 
 export type FieldOptions = {
 	label: string;
