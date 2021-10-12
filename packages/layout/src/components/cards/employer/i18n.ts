@@ -150,6 +150,7 @@ export const i18n: EmployerI18nProps = {
 				},
 			},
 			errors: {
+				confirmMissing: 'Confirm this employer is no longer associated',
 				formIncomplete: 'Please confirm and fill in the date fields.',
 				dateAddedBeforeEffectiveDate:
 					'Date must be after the Employer was added.',

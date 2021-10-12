@@ -88,6 +88,7 @@ export const i18n: ThirdPartyI18nProps = {
 				},
 			},
 			errors: {
+				confirmMissing: 'Confirm this employer is no longer associated',
 				formIncomplete: 'Please confirm and fill in the date fields.',
 				dateAddedBeforeEffectiveDate:
 					'Date must be after the third party admin was added.',
