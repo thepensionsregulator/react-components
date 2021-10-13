@@ -183,7 +183,7 @@ describe('Insurer Remove', () => {
 		});
 
 		expect(
-			getByText('Please confirm and fill in the date fields.'),
+			getByText('Confirm this employer is no longer associated'),
 		).toBeInTheDocument();
 	});
 

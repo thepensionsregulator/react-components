@@ -168,6 +168,7 @@ export interface I18nRemoveViewDateAndConfirm {
 			};
 		};
 		errors: {
+			confirmMissing: string;
 			formIncomplete: string;
 			dateAddedBeforeEffectiveDate: string;
 			dateAddedInTheFuture: string;
