@@ -100,7 +100,7 @@
 	}
 }
 
-@media (min-width: 40em) {
+@media (min-width: 40rem) {
 	.card {
 		.cardToolbar {
 			padding: $space-8 $space-8 $space-4 $space-8;
@@ -110,4 +110,47 @@
 			padding: 0 $space-8 $space-4 $space-8;
 		}
 	}
+}
+
+@media (max-width: 48rem) {
+	//mobile
+	.card {
+		.cardToolbar {			
+			flex-direction: column;
+			flex-wrap: wrap;
+			.section {
+				order: 1;
+				width: 100%;
+				padding-right: 0!important;
+
+				&.removeSection {
+					order: 0;
+					justify-content: flex-start;
+					padding-left: 0!important;
+					padding-bottom: 2rem;
+				
+					> div {
+						width: 50%;
+						&.divider {
+							width: .06rem;
+							height: 2rem;
+							margin: 0 0.75rem;
+						}
+					}
+				}
+			}
+		}
+		.content {
+			> div {
+				flex-direction: column;
+			}
+			.section {
+				width: 100%;
+				padding: 2rem 0 0 0!important;
+			}
+		}
+	}
+}
+@media (max-width: 75rem) {
+	//tablet
 }

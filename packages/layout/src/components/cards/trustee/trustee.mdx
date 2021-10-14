@@ -70,6 +70,56 @@ import { TrusteeCard } from '@tpr/layout';
 	}}
 </Playground>
 
+## Long name
+
+<Playground>
+	{() => {
+		const [complete, setComplete] = useState(false);
+		const callbackFn = (values, _fullTrusteeObject) => {
+			console.log(values);
+			console.log(_fullTrusteeObject);
+			return Promise.resolve(values);
+		};
+		const trustee = {
+			id: '12345',
+			schemeRoleId: '12345',
+			//
+			title: 'Mr',
+			firstName: 'John',
+			lastName: 'Smith',
+			trusteeType: 'member-nominated',
+			isProfessionalTrustee: false,
+			//
+			addressLine1: 'THE REDEEMED CHRISTIAN CHURCH OF GOD, OASIS CHAPEL GREAT YARMOUTH',
+			addressLine2: 'Oasis Chapel',
+			addressLine3: 'The Loan',
+			postTown: 'Great Yarmouth',
+			postcode: 'GY1 3AB',
+			county: 'Norfolk',
+			country: '',
+			//
+			telephoneNumber: '01273 000 111',
+			emailAddress: 'fred.sandoors@trp.gov.uk',
+			effectiveDate: '1997-04-01T00:00:00',
+		};
+		return (
+			<TrusteeCard
+				addressAPI={{
+					get: (endpont) => experianApiGet(endpont),
+					limit: 100,
+				}}
+				complete={complete}
+				onAddressSave={callbackFn}
+				onContactSave={callbackFn}
+				onCorrect={(value) => setComplete(value)}
+				onDetailsSave={callbackFn}
+				onRemove={callbackFn}
+				trustee={trustee}
+			/>
+		);
+	}}
+</Playground>
+
 ## RSS Trustee Card
 
 <Playground>
