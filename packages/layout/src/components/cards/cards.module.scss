@@ -115,6 +115,7 @@
 }
 
 @media (max-width: 48rem) {
+	//mobile
 	.card {
 		.cardToolbar {			
 			flex-direction: column;
@@ -135,6 +136,7 @@
 						&.divider {
 							width: .06rem;
 							height: 2rem;
+							margin: 0 0.75rem;
 						}
 					}
 				}
@@ -150,4 +152,7 @@
 			}
 		}
 	}
+}
+@media (max-width: 75rem) {
+	//tablet
 }
