@@ -47,14 +47,12 @@
 		width: 50%;
 		flex: 0 0 auto;
 		flex-direction: column;
-		//order: 1;
 	}
 
 	.removeSection {
 		flex-direction: row;
 		justify-content: flex-end;
 		align-items: flex-start;
-		//order: 0;
 	}
 
 	.content {
