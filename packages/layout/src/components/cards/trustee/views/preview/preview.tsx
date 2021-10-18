@@ -6,6 +6,7 @@ import { CardFooter } from '../../../components/footer';
 import {
 	ContactDetailsPreview,
 	AddressPreview,
+	CompaniesHouseNumber,
 } from '../../../common/views/preview/components';
 import { CardContentProps } from 'components/cards/common/interfaces';
 import { concatenateStrings } from '../../../../../utils';
@@ -49,6 +50,12 @@ export const Preview: React.FC<CardContentProps> = React.memo(
 								postcode: trustee.address.postcode,
 								country: trustee.address.country,
 							}}
+						/>
+
+						{/* Companies House Number: display only	 */}
+						<CompaniesHouseNumber
+							heading={i18n.preview.buttonsAndHeadings.companiesHouseNumber}
+							companiesHouseNumber={trustee.companiesHouseNumber}
 						/>
 					</Flex>
 
