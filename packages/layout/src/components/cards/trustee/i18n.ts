@@ -12,6 +12,7 @@ interface I18nTrusteePreviewView extends I18nPreviewViewCommonProps {
 	buttonsAndHeadings: {
 		remove: string;
 		correspondenceAddress: string;
+		companiesHouseNumber: string;
 		contacts: string;
 	};
 }
@@ -96,6 +97,7 @@ export const i18n: TrusteeI18nProps = {
 		buttonsAndHeadings: {
 			remove: 'Remove',
 			correspondenceAddress: 'Correspondence address',
+			companiesHouseNumber: 'Companies House Number',
 			contacts: 'Contact details',
 		},
 		mainHeadingSubtitle: {
