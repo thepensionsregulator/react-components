@@ -7,36 +7,40 @@ export type PosconProps = {
 	color?: ColorsFullRange;
 	enableClose?: boolean;
 	callback?: Function;
+	ariaLabelledBy?: string;
 };
 
 export const Poscon: React.FC<PosconProps> = ({
 	color = 'success.1',
 	enableClose = false,
+	ariaLabelledBy,
 	callback,
 	children,
 }) => {
 	return enableClose ? (
-		<ClosablePoscon color={color} callback={callback}>
+		<ClosablePoscon color={color} callback={callback} ariaLabelledBy={ariaLabelledBy}>
 			{children}
 		</ClosablePoscon>
 	) : (
-		<PersistentPoscon color={color}>{children}</PersistentPoscon>
+		<PersistentPoscon ariaLabelledBy={ariaLabelledBy} color={color}>{children}</PersistentPoscon>
 	);
 };
 
 export type ClosablePosconProps = {
 	color?: ColorsFullRange;
 	callback?: Function;
+	ariaLabelledBy?: string;
 };
 
 const ClosablePoscon: React.FC<ClosablePosconProps> = ({
 	color,
+	ariaLabelledBy,
 	callback,
 	children,
 }) => {
 	const [closed, setClosed] = useState<boolean>(false);
 	return !closed ? (
-		<PersistentPoscon color={color} pt={4}>
+		<PersistentPoscon color={color} pt={4} ariaLabelledBy={ariaLabelledBy}>
 			<div className={Styles.enableClose}>
 				<CrossButton
 					colour={'white'}
@@ -56,11 +60,13 @@ const ClosablePoscon: React.FC<ClosablePosconProps> = ({
 export type PersistentPosconProps = {
 	color?: ColorsFullRange;
 	pt?: ValuesFullRange;
+	ariaLabelledBy?: string;
 };
 
 const PersistentPoscon: React.FC<PersistentPosconProps> = ({
 	color,
 	pt = 8,
+	ariaLabelledBy = '',
 	children,
 }) => {
 	return (
@@ -75,6 +81,7 @@ const PersistentPoscon: React.FC<PersistentPosconProps> = ({
 				textAlign: 'center',
 			}}
 			role="alert"
+			aria-labelledby={ariaLabelledBy}
 		>
 			{children}
 		</Flex>
