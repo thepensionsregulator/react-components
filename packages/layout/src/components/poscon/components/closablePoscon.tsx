@@ -25,7 +25,9 @@ export const ClosablePoscon: React.FC<ClosablePosconProps> = React.memo(
 				{!closed && (
 					<div className={Styles.wrapper}>
 						<CloseButton />
-						<PersistentPoscon cfg={cfg} ariaLabelledBy={ariaLabelledBy}>{children}</PersistentPoscon>
+						<PersistentPoscon cfg={cfg} ariaLabelledBy={ariaLabelledBy}>
+							{children}
+						</PersistentPoscon>
 					</div>
 				)}
 			</>

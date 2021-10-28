@@ -39,6 +39,8 @@ export const Poscon: React.FC<PosconProps> = ({
 			{children}
 		</ClosablePoscon>
 	) : (
-		<PersistentPoscon cfg={posconCfg} ariaLabelledBy={ariaLabelledBy}>{children}</PersistentPoscon>
+		<PersistentPoscon cfg={posconCfg} ariaLabelledBy={ariaLabelledBy}>
+			{children}
+		</PersistentPoscon>
 	);
 };

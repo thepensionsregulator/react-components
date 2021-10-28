@@ -5,7 +5,7 @@ import { PersistentPosconProps } from './/types';
 export const PersistentPoscon: React.FC<PersistentPosconProps> = React.memo(
 	({ cfg, children, ariaLabelledBy }) => {
 		return (
-			<Flex cfg={cfg} role="alert" aria-labelledBy={ariaLabelledBy}>
+			<Flex cfg={cfg} role="alert" aria-labelledby={ariaLabelledBy}>
 				{children}
 			</Flex>
 		);
