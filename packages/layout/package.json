@@ -1,6 +1,6 @@
 {
 	"name": "@tpr/layout",
-	"version": "3.0.9",
+	"version": "3.0.10",
 	"description": "TPR Layout components",
 	"author": "David Alekna <david.alekna@tpr.gov.uk>",
 	"license": "MIT",
@@ -65,5 +65,5 @@
 		"react": "file:../../node_modules/react",
 		"react-dom": "file:../../node_modules/react-dom"
 	},
-	"gitHead": "419f86e23453ad956b7a21e19235283048c0ec4e"
+	"gitHead": "c057c397636b175d20527f1151673defcc4de365"
 }
