@@ -5,7 +5,7 @@ import { PersistentPoscon } from './persistentPoscon';
 import Styles from '../poscon.module.scss';
 
 export const ClosablePoscon: React.FC<ClosablePosconProps> = React.memo(
-	({ cfg, callback, closeButtonColor, children }) => {
+	({ cfg, callback, closeButtonColor, ariaLabelledBy, children }) => {
 		const [closed, setClosed] = useState<boolean>(false);
 
 		const CloseButton: React.FC = () => (
@@ -25,7 +25,9 @@ export const ClosablePoscon: React.FC<ClosablePosconProps> = React.memo(
 				{!closed && (
 					<div className={Styles.wrapper}>
 						<CloseButton />
-						<PersistentPoscon cfg={cfg}>{children}</PersistentPoscon>
+						<PersistentPoscon cfg={cfg} ariaLabelledBy={ariaLabelledBy}>
+							{children}
+						</PersistentPoscon>
 					</div>
 				)}
 			</>

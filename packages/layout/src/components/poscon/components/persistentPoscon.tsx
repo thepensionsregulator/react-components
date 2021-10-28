@@ -3,9 +3,9 @@ import { Flex } from '@tpr/core';
 import { PersistentPosconProps } from './/types';
 
 export const PersistentPoscon: React.FC<PersistentPosconProps> = React.memo(
-	({ cfg, children }) => {
+	({ cfg, children, ariaLabelledBy }) => {
 		return (
-			<Flex cfg={cfg} role="alert">
+			<Flex cfg={cfg} role="alert" aria-labelledby={ariaLabelledBy}>
 				{children}
 			</Flex>
 		);

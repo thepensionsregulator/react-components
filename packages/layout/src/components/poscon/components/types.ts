@@ -17,6 +17,7 @@ export type PosconCfgType = FlexProps &
 
 export interface PersistentPosconProps {
 	cfg?: PosconCfgType;
+	ariaLabelledBy?: string;
 }
 
 export type CloseButtonColor = 'white' | 'black';
@@ -32,4 +33,5 @@ export interface PosconProps {
 	closeButtonColor?: CloseButtonColor;
 	color?: ColorsFullRange;
 	enableClose?: boolean;
+	ariaLabelledBy?: string;
 }

@@ -9,6 +9,7 @@ export const Poscon: React.FC<PosconProps> = ({
 	closeButtonColor = 'white',
 	color = 'success.1',
 	enableClose = false,
+	ariaLabelledBy,
 	children,
 }) => {
 	const defaultstyles: PosconCfgType = {
@@ -33,10 +34,13 @@ export const Poscon: React.FC<PosconProps> = ({
 			cfg={posconCfg}
 			callback={callback}
 			closeButtonColor={closeButtonColor}
+			ariaLabelledBy={ariaLabelledBy}
 		>
 			{children}
 		</ClosablePoscon>
 	) : (
-		<PersistentPoscon cfg={posconCfg}>{children}</PersistentPoscon>
+		<PersistentPoscon cfg={posconCfg} ariaLabelledBy={ariaLabelledBy}>
+			{children}
+		</PersistentPoscon>
 	);
 };
