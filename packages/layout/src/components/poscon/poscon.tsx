@@ -66,7 +66,7 @@ export type PersistentPosconProps = {
 const PersistentPoscon: React.FC<PersistentPosconProps> = ({
 	color,
 	pt = 8,
-	ariaLabelledBy = '',
+	ariaLabelledBy,
 	children,
 }) => {
 	return (
