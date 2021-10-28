@@ -1,7 +1,7 @@
 import React, { useRef } from 'react';
-import { Checkbox } from '@tpr/forms';
-import { Flex, Hr, classNames } from '@tpr/core';
+import { Flex, classNames } from '@tpr/core';
 import { UnderlinedButton } from '../../../components/button';
+import { CardFooter } from '../../../components/footer';
 import { useInHouseAdminContext } from '../../context';
 import {
 	ContactDetailsPreview,
@@ -35,7 +35,7 @@ export const Preview: React.FC<any> = React.memo(() => {
 						buttonRef={addressBtn}
 						giveFocus={current.context.lastBtnClicked === 3}
 					>
-						{i18n.preview.buttons.three}
+						{i18n.preview.buttonsAndHeadings.address}
 					</UnderlinedButton>
 					<AddressPreview
 						address={{
@@ -59,7 +59,7 @@ export const Preview: React.FC<any> = React.memo(() => {
 						buttonRef={contactsBtn}
 						giveFocus={current.context.lastBtnClicked === 4}
 					>
-						{i18n.preview.buttons.four}
+						{i18n.preview.buttonsAndHeadings.contacts}
 					</UnderlinedButton>
 					<ContactDetailsPreview
 						phone={{ value: inHouseAdmin.telephoneNumber }}
@@ -69,25 +69,21 @@ export const Preview: React.FC<any> = React.memo(() => {
 			</Flex>
 
 			{/*  All details correct - Checkbox	 */}
-			<Flex cfg={{ flexDirection: 'column' }}>
-				<Hr cfg={{ my: 4 }} />
-				<Checkbox
-					value={complete}
-					checked={complete}
-					onChange={() => {
-						send('COMPLETE', { value: !complete });
-						onCorrect(!complete);
-					}}
-					label={i18n.preview.checkboxLabel.replace(
-						'__NAME__',
-						concatenateStrings([
-							inHouseAdmin.title,
-							inHouseAdmin.firstName,
-							inHouseAdmin.lastName,
-						]),
-					)}
-				/>
-			</Flex>
+			<CardFooter
+				complete={complete}
+				onChange={() => {
+					send('COMPLETE', { value: !complete });
+					onCorrect(!complete);
+				}}
+				label={i18n.preview.checkboxLabel.replace(
+					'__NAME__',
+					concatenateStrings([
+						inHouseAdmin.title,
+						inHouseAdmin.firstName,
+						inHouseAdmin.lastName,
+					]),
+				)}
+			/>
 		</div>
 	);
 });

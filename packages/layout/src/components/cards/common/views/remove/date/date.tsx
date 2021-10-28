@@ -1,5 +1,5 @@
 import React from 'react';
-import { Link, P } from '@tpr/core';
+import { Link } from '@tpr/core';
 import { Form, FFCheckbox, renderFields, FieldProps } from '@tpr/forms';
 import { Content } from '../../../../components/content';
 import { Footer } from '../../../../components/card';
@@ -12,6 +12,7 @@ interface DateFormProps {
 	onSubmit: (any) => void;
 	remove: any;
 	label: string;
+	checkboxErrorMessage: string;
 	dateField: FieldProps[];
 	type: cardType;
 	typeName: cardTypeName;
@@ -23,6 +24,7 @@ const DateForm: React.FC<DateFormProps> = ({
 	onSubmit,
 	remove,
 	label,
+	checkboxErrorMessage,
 	dateField,
 	type,
 	typeName,
@@ -40,24 +42,25 @@ const DateForm: React.FC<DateFormProps> = ({
 					date: remove && remove.date && new Date(remove.date),
 				}}
 			>
-				{({ handleSubmit, submitError }) => (
+				{({ handleSubmit }) => (
 					<form onSubmit={handleSubmit} data-testid={testId} noValidate>
 						<div aria-describedby={errorMsg}>
 							<FFCheckbox
+								id="confirm"
 								name="confirm"
 								type="checkbox"
 								label={label}
+								validate={(value) => {
+									if (!value) {
+										return checkboxErrorMessage;
+									}
+								}}
 								cfg={{ mb: 3 }}
 							/>
 							<div className={styles.dateWrapper}>
 								{renderFields(dateField)}
 							</div>
 						</div>
-						{submitError && (
-							<P id={errorMsg} className={styles.errorMsg}>
-								{submitError}
-							</P>
-						)}
 						<Footer>
 							<ArrowButton
 								appearance="secondary"

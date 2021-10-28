@@ -1,9 +1,11 @@
-import React, { useState } from 'react';
-import { Flex, P, Hr, classNames } from '@tpr/core';
+import React, { useRef, useState } from 'react';
+import { Flex, P, classNames } from '@tpr/core';
 import { UnderlinedButton } from '../../../components/button';
-import { Checkbox } from '@tpr/forms';
+import { CardFooter } from '../../../components/footer';
 import { useEmployerContext } from '../../context';
 import { AddressPreview } from '../../../common/views/preview/components';
+import { PreviewButton } from './previewButton';
+import { EmployerTypePreview } from './employerTypePreview';
 import styles from '../../../cards.module.scss';
 
 type IdentifiersItemProps = { title: string; number: string | number };
@@ -17,6 +19,7 @@ const IdentifiersItem: React.FC<IdentifiersItemProps> = ({ title, number }) => {
 };
 
 export const Preview: React.FC<any> = React.memo(() => {
+	const employerButtonRef = useRef(null);
 	const { current, send, onCorrect, i18n } = useEmployerContext();
 	const { employer, complete, preValidatedData } = current.context;
 	const [items] = useState(
@@ -46,9 +49,11 @@ export const Preview: React.FC<any> = React.memo(() => {
 		>
 			<Flex>
 				<Flex cfg={{ pr: 4 }} className={styles.section}>
-					<UnderlinedButton>{i18n.preview.buttons.three}</UnderlinedButton>
+					{/* Office Address: display only	 */}
+					<UnderlinedButton>
+						{i18n.preview.buttonsAndHeadings.address}
+					</UnderlinedButton>
 					<AddressPreview
-						name={employer.organisationName}
 						address={{
 							addressLine1: employer.address.addressLine1,
 							addressLine2: employer.address.addressLine2,
@@ -58,31 +63,39 @@ export const Preview: React.FC<any> = React.memo(() => {
 							postcode: employer.address.postcode,
 						}}
 					/>
-				</Flex>
-				<Flex cfg={{ pl: 4 }} className={styles.section}>
-					<UnderlinedButton>{i18n.preview.buttons.four}</UnderlinedButton>
-					<Flex className={styles.identifierItem}>
+
+					{/* Employer Identifiers: display only	 */}
+					<Flex cfg={{ mt: 3 }} className={styles.identifierItem}>
+						<UnderlinedButton>
+							{i18n.preview.buttonsAndHeadings.employerIdentifiers}
+						</UnderlinedButton>
 						{items.map((item, key) => (
 							<IdentifiersItem key={key} {...item} />
 						))}
 					</Flex>
 				</Flex>
+
+				{/* Employer type: open for editing	 */}
+				<Flex cfg={{ pl: 4 }} className={styles.section}>
+					<PreviewButton button={employerButtonRef}>
+						{i18n.preview.buttonsAndHeadings.employerType}
+					</PreviewButton>
+					<EmployerTypePreview {...current.context} />
+				</Flex>
 			</Flex>
-			<Flex cfg={{ flexDirection: 'column' }}>
-				<Hr cfg={{ my: 4 }} />
-				<Checkbox
-					value={complete}
-					checked={complete}
-					onChange={() => {
-						send('COMPLETE', { value: !complete });
-						onCorrect(!complete);
-					}}
-					label={i18n.preview.checkboxLabel.replace(
-						'__NAME__',
-						employer.organisationName,
-					)}
-				/>
-			</Flex>
+
+			{/*  All details correct - Checkbox	 */}
+			<CardFooter
+				complete={complete}
+				onChange={() => {
+					send('COMPLETE', { value: !complete });
+					onCorrect(!complete);
+				}}
+				label={i18n.preview.checkboxLabel.replace(
+					'__NAME__',
+					employer.organisationName,
+				)}
+			/>
 		</div>
 	);
 });

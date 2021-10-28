@@ -37,31 +37,30 @@
 /**** SPACE ****/
 /**** FONT SIZES ****/
 /**** FONT WEIGHTS ****/
-/**** BREAKPOINTS ****/
 .richTextEditor_editorFontStack__3RH-q {
 	font-family: 'Open Sans', sans-serif;
-	font-size: 16px;
+	font-size: 1rem;
 }
 .richTextEditor_editorFontStack__3RH-q h1 {
-	font-size: 45px;
+	font-size: 2.8125rem;
 }
 .richTextEditor_editorFontStack__3RH-q h2 {
-	font-size: 36px;
+	font-size: 2.25rem;
 }
 .richTextEditor_editorFontStack__3RH-q h3 {
-	font-size: 23px;
+	font-size: 1.4375rem;
 }
 .richTextEditor_editorFontStack__3RH-q h4 {
-	font-size: 18px;
+	font-size: 1.125rem;
 }
 .richTextEditor_editorFontStack__3RH-q h5 {
-	font-size: 16px;
+	font-size: 1rem;
 }
 .richTextEditor_editorFontStack__3RH-q h6 {
-	font-size: 14px;
+	font-size: 0.875rem;
 }
 .richTextEditor_editorFontStack__3RH-q p {
-	font-size: 16px;
+	font-size: 1rem;
 }
 .richTextEditor_editorFontStack__3RH-q b {
 	font-weight: 600;
@@ -70,7 +69,7 @@
 	font-weight: 600;
 }
 .richTextEditor_editorFontStack__3RH-q span {
-	font-size: 16px;
+	font-size: 1rem;
 }
 .richTextEditor_editorFontStack__3RH-q i {
 	font-style: italic;

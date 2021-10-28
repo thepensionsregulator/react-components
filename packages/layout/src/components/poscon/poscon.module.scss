@@ -1,5 +1,11 @@
-.enableClose {
-	margin-right: 15px;
-	margin-left: auto;
-	align-self: flex-start;
+@import '@tpr/theming/lib/variables.scss';
+
+.wrapper {
+	position: relative;
+
+	.closeButton {
+		position: absolute;
+		top: $space-4;
+		right: $space-3;
+	}
 }

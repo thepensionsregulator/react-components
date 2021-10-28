@@ -1,9 +1,12 @@
 import React from 'react';
-import { Checkbox } from '@tpr/forms';
-import { Flex, Hr, classNames } from '@tpr/core';
+import { Flex, classNames } from '@tpr/core';
 import { UnderlinedButton } from '../../../components/button';
+import { CardFooter } from '../../../components/footer';
 import { useThirdPartyContext } from '../../context';
-import { AddressPreview } from '../../../common/views/preview/components';
+import {
+	AddressPreview,
+	CompaniesHouseNumber,
+} from '../../../common/views/preview/components';
 import styles from '../../../cards.module.scss';
 
 export const Preview: React.FC<any> = React.memo(() => {
@@ -20,7 +23,9 @@ export const Preview: React.FC<any> = React.memo(() => {
 		>
 			<Flex>
 				<Flex cfg={{ pr: 4 }} className={styles.section}>
-					<UnderlinedButton>{i18n.preview.buttons.three}</UnderlinedButton>
+					<UnderlinedButton>
+						{i18n.preview.buttonsAndHeadings.address}
+					</UnderlinedButton>
 					<AddressPreview
 						address={{
 							addressLine1: thirdParty.address.addressLine1,
@@ -32,23 +37,23 @@ export const Preview: React.FC<any> = React.memo(() => {
 							country: thirdParty.address.country,
 						}}
 					/>
+					<CompaniesHouseNumber
+						heading={i18n.preview.buttonsAndHeadings.companiesHouseNumber}
+						companiesHouseNumber={thirdParty.companiesHouseNumber}
+					/>
 				</Flex>
 			</Flex>
-			<Flex cfg={{ flexDirection: 'column' }}>
-				<Hr cfg={{ my: 4 }} />
-				<Checkbox
-					value={complete}
-					checked={complete}
-					onChange={() => {
-						send('COMPLETE', { value: !complete });
-						onCorrect(!complete);
-					}}
-					label={i18n.preview.checkboxLabel.replace(
-						'__NAME__',
-						thirdParty.organisationName,
-					)}
-				/>
-			</Flex>
+			<CardFooter
+				complete={complete}
+				onChange={() => {
+					send('COMPLETE', { value: !complete });
+					onCorrect(!complete);
+				}}
+				label={i18n.preview.checkboxLabel.replace(
+					'__NAME__',
+					thirdParty.organisationName,
+				)}
+			/>
 		</div>
 	);
 });

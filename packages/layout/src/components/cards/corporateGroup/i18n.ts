@@ -1,61 +1,26 @@
 import {
-	I18nRemoveReason,
-	InputErrorMessages,
+	I18nNameView,
+	I18nContactsView,
+	I18nRemoveViewReasonAndConfirm,
 	defaultEmailErrorMessages,
 	defaultPhoneErrorMessages,
+	I18nPreviewViewCommonProps,
 } from '../common/interfaces';
-type PropertyFunction<T> = () => T;
+
+interface I18nCorporateGroupPreviewView extends I18nPreviewViewCommonProps {
+	buttonsAndHeadings: {
+		remove: string;
+		address: string;
+		companiesHouseNumber: string;
+		chairOfBoard: string;
+		directorProfessional: string;
+	};
+}
 
 export type CorporateGroupI18nProps = {
-	preview: {
-		buttons: {
-			one: string;
-			two: string;
-			three: string;
-			four: string;
-			five: string;
-		};
-		statusText: {
-			confirmed: string;
-			unconfirmed: string;
-		};
-		checkboxLabel: string;
-		trusteeType: string;
-	};
-	name: {
-		title: string;
-		sectionTitle?: string;
-		fields: {
-			title: {
-				label: string;
-				error: string | PropertyFunction<string | undefined>;
-				maxlength: number;
-			};
-			firstName: {
-				label: string;
-				error: string | PropertyFunction<string | undefined>;
-				maxlength: number;
-			};
-			lastName: {
-				label: string;
-				error: string | PropertyFunction<string | undefined>;
-				maxlength: number;
-			};
-		};
-	};
-	contacts: {
-		title: string;
-		fields: {
-			telephone: {
-				label: string;
-				error: InputErrorMessages;
-			};
-			email: {
-				label: string;
-				error: InputErrorMessages;
-			};
-		};
-	};
+	preview: I18nCorporateGroupPreviewView;
+	name: I18nNameView;
+	contacts: I18nContactsView;
 	professional: {
 		title: string;
 		subtitle: string;
@@ -69,41 +34,26 @@ export type CorporateGroupI18nProps = {
 			};
 		};
 	};
-	remove: {
-		confirm: {
-			title: string;
-			subtitle: string;
-			breadcrumbs: {
-				link1: string;
-				link2: string;
-			};
-			dialog: {
-				message1: string;
-			};
-			buttons: {
-				remove: string;
-				cancel: string;
-			};
-		};
-		reason: I18nRemoveReason;
-	};
+	remove: I18nRemoveViewReasonAndConfirm;
 };
 
 export const i18n: CorporateGroupI18nProps = {
 	preview: {
-		buttons: {
-			one: 'Corporate Trustee',
-			two: 'Remove',
-			three: 'Address',
-			four: 'Chair of board',
-			five: 'Director(s) are Professional Trustees',
+		buttonsAndHeadings: {
+			remove: 'Remove',
+			address: 'Address',
+			companiesHouseNumber: 'Companies House Number',
+			chairOfBoard: 'Chair of board',
+			directorProfessional: 'Director(s) are Professional Trustees',
+		},
+		mainHeadingSubtitle: {
+			main: 'Corporate Group trustee',
 		},
 		statusText: {
 			confirmed: 'Confirmed',
 			unconfirmed: 'Unconfirmed',
 		},
 		checkboxLabel: "Confirm '__NAME__' is correct.",
-		trusteeType: 'Corporate Group trustee',
 	},
 	name: {
 		title: 'Name of the chair of the board',

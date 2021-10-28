@@ -24,13 +24,13 @@ import { concatenateStrings } from '../../../utils';
 import styles from '../cards.module.scss';
 
 const CardContentSwitch: React.FC = () => {
-	const { i18n, current } = useCorporateGroupContext();
+	const { current } = useCorporateGroupContext();
 
 	switch (true) {
 		case current.matches('preview'):
 			return <Preview />;
 		case current.matches({ edit: 'name' }):
-			return <NameScreen subSectionHeaderText={i18n.preview.buttons.four} />;
+			return <NameScreen />;
 		case current.matches({ edit: 'contacts' }):
 			return <Contacts />;
 		case current.matches({ edit: 'professional' }):
@@ -63,7 +63,7 @@ export const CorporateGroupCard: React.FC<CorporateGroupProviderProps> = React.m
 							send={send}
 							current={current}
 						>
-							{i18n.preview.buttons.two}
+							{i18n.preview.buttonsAndHeadings.remove}
 						</CardRemoveButton>
 					);
 
@@ -74,20 +74,19 @@ export const CorporateGroupCard: React.FC<CorporateGroupProviderProps> = React.m
 							className={styles.card}
 							ariaLabel={concatenateStrings([
 								current.context.corporateGroup.organisationName,
-								i18n.preview.trusteeType,
+								i18n.preview.mainHeadingSubtitle.main,
 							])}
 						>
 							<Toolbar
 								buttonLeft={() => (
-									<CardMainHeadingTitle title={i18n.preview.buttons.one} />
+									<CardMainHeadingTitle
+										title={current.context.corporateGroup.organisationName}
+									/>
 								)}
 								buttonRight={RemoveButton}
 								complete={isComplete(current.context)}
 								subtitle={() => (
-									<Subtitle
-										main={current.context.corporateGroup.organisationName}
-										secondary={i18n.preview.trusteeType}
-									/>
+									<Subtitle secondary={i18n.preview.mainHeadingSubtitle.main} />
 								)}
 								statusText={
 									isComplete(current.context)

@@ -56,11 +56,11 @@ describe('Employer Preview', () => {
 
 		expect(container.querySelector('button')).not.toBe(null);
 
-		assertMainHeadingExists(getByText, getByTestId, 'Employer type', true);
+		assertMainHeadingExists(getByText, getByTestId, 'Employer type', false);
 
 		assertRemoveButtonExists(getByText, getByTestId);
 
-		const h4Headings = ['Employer', 'Employer Identifiers'];
+		const h4Headings = ['Registered office address', 'Employer Identifiers'];
 		assertHeadingsExist(getAllByTestId, h4Headings);
 	});
 
@@ -198,7 +198,7 @@ describe('Employer Remove', () => {
 		userEvent.click(getByText('Continue'));
 
 		expect(
-			getByText('Please confirm and fill in the date fields.'),
+			getByText('Confirm this employer is no longer associated'),
 		).toBeInTheDocument();
 	});
 

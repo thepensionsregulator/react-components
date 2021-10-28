@@ -53,7 +53,7 @@ describe('ThirdParty Preview', () => {
 		assertMainHeadingExists(
 			getByText,
 			getByTestId,
-			'Third Party Administrator',
+			thirdPartyAdmin.organisationName,
 			false,
 		);
 
@@ -177,7 +177,7 @@ describe('ThirdParty Remove', () => {
 		});
 
 		expect(
-			getByText('Please confirm and fill in the date fields.'),
+			getByText('Confirm this employer is no longer associated'),
 		).toBeInTheDocument();
 	});
 

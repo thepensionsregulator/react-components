@@ -185,6 +185,32 @@ Horizontal layout will only be used where there are two checkboxes buttons with 
 
 </Playground>
 
+### Field level validation
+
+<Playground>
+	{() => {
+		return (
+			<Form onSubmit={(values) => console.log(values)}>
+				{({ handleSubmit }) => (
+					<form noValidate onSubmit={handleSubmit}>
+						<FFCheckbox
+							id="checkbox-z"
+							name="checkbox-z"
+							label="Confirm these details are correct"
+							validate={(value) => {
+								if (!value) {
+									return 'Confirm details are correct to continue';
+								}
+							}}
+						></FFCheckbox>
+						<button type="submit">Submit</button>
+					</form>
+				)}
+			</Form>
+		);
+	}}
+</Playground>
+
 ## API
 
 ```

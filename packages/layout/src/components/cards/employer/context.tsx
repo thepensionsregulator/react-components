@@ -46,7 +46,6 @@ export interface Employer extends CardDefaultProps {
 		| 'principal-and-participating';
 	organisationReference: number;
 	organisationName: string;
-	companiesHouseNumber: number | string;
 	registeredCharityNumber: number | string;
 	epsrNumber: number | string;
 	statutoryEmployer: 'statutory' | 'non-statutory';

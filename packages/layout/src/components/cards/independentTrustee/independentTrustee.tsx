@@ -57,7 +57,7 @@ export const IndependentTrusteeCard: React.FC<IndependentTrusteeProviderProps> =
 							send={send}
 							current={current}
 						>
-							{i18n.preview.buttons.two}
+							{i18n.preview.buttonsAndHeadings.remove}
 						</CardRemoveButton>
 					);
 
@@ -68,20 +68,19 @@ export const IndependentTrusteeCard: React.FC<IndependentTrusteeProviderProps> =
 							className={styles.card}
 							ariaLabel={concatenateStrings([
 								current.context.independentTrustee.organisationName,
-								i18n.preview.trusteeType,
+								i18n.preview.mainHeadingSubtitle.main,
 							])}
 						>
 							<Toolbar
 								buttonLeft={() => (
-									<CardMainHeadingTitle title={i18n.preview.buttons.one} />
+									<CardMainHeadingTitle
+										title={current.context.independentTrustee.organisationName}
+									/>
 								)}
 								buttonRight={RemoveButton}
 								complete={isComplete(current.context)}
 								subtitle={() => (
-									<Subtitle
-										main={current.context.independentTrustee.organisationName}
-										secondary={i18n.preview.trusteeType}
-									/>
+									<Subtitle secondary={i18n.preview.mainHeadingSubtitle.main} />
 								)}
 								statusText={
 									isComplete(current.context)

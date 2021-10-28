@@ -1,11 +1,12 @@
 import React, { useRef } from 'react';
-import { Flex, Hr, classNames } from '@tpr/core';
+import { Flex, classNames } from '@tpr/core';
 import { useTrusteeContext } from '../../context';
 import { UnderlinedButton } from '../../../components/button';
-import { Checkbox } from '@tpr/forms';
+import { CardFooter } from '../../../components/footer';
 import {
 	ContactDetailsPreview,
 	AddressPreview,
+	CompaniesHouseNumber,
 } from '../../../common/views/preview/components';
 import { CardContentProps } from 'components/cards/common/interfaces';
 import { concatenateStrings } from '../../../../../utils';
@@ -37,7 +38,7 @@ export const Preview: React.FC<CardContentProps> = React.memo(
 							buttonRef={correspondenceBtn}
 							giveFocus={current.context.lastBtnClicked === 3}
 						>
-							{i18n.preview.buttons.three}
+							{i18n.preview.buttonsAndHeadings.correspondenceAddress}
 						</UnderlinedButton>
 						<AddressPreview
 							name={trustee.address.addressLine1}
@@ -49,6 +50,12 @@ export const Preview: React.FC<CardContentProps> = React.memo(
 								postcode: trustee.address.postcode,
 								country: trustee.address.country,
 							}}
+						/>
+
+						{/* Companies House Number: display only	 */}
+						<CompaniesHouseNumber
+							heading={i18n.preview.buttonsAndHeadings.companiesHouseNumber}
+							companiesHouseNumber={trustee.companiesHouseNumber}
 						/>
 					</Flex>
 
@@ -62,7 +69,7 @@ export const Preview: React.FC<CardContentProps> = React.memo(
 								buttonRef={contactsBtn}
 								giveFocus={current.context.lastBtnClicked === 4}
 							>
-								{i18n.preview.buttons.four}
+								{i18n.preview.buttonsAndHeadings.contacts}
 							</UnderlinedButton>
 							<ContactDetailsPreview
 								phone={{ value: trustee.telephoneNumber }}
@@ -73,25 +80,21 @@ export const Preview: React.FC<CardContentProps> = React.memo(
 				</Flex>
 
 				{/*  All details correct - Checkbox	 */}
-				<Flex cfg={{ flexDirection: 'column' }}>
-					<Hr cfg={{ my: 4 }} />
-					<Checkbox
-						value={complete}
-						checked={complete}
-						onChange={() => {
-							send('COMPLETE', { value: !complete });
-							onCorrect(!complete);
-						}}
-						label={i18n.preview.checkboxLabel.replace(
-							'__NAME__',
-							concatenateStrings([
-								trustee.title,
-								trustee.firstName,
-								trustee.lastName,
-							]),
-						)}
-					/>
-				</Flex>
+				<CardFooter
+					complete={complete}
+					onChange={() => {
+						send('COMPLETE', { value: !complete });
+						onCorrect(!complete);
+					}}
+					label={i18n.preview.checkboxLabel.replace(
+						'__NAME__',
+						concatenateStrings([
+							trustee.title,
+							trustee.firstName,
+							trustee.lastName,
+						]),
+					)}
+				/>
 			</div>
 		);
 	},

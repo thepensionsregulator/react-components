@@ -138,7 +138,15 @@ describe('Text input', () => {
 		const results = await axe(container);
 		expect(results).toHaveNoViolations();
 	});
+	test('has type URL', async () => {
+		const { getByTestId } = formSetup({
+			render: (
+				<FFInputText label="URL" testId="url-field" name="URL" type="url" />
+			),
+		});
 
+		expect(getByTestId('url-field')).toHaveAttribute('type', 'url');
+	});
 	test('shows error message on required field when left empty', () => {
 		const fields: FieldProps[] = [
 			{

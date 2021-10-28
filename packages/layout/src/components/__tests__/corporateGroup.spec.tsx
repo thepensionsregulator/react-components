@@ -28,6 +28,7 @@ const corporateGroup: CorporateGroup = {
 	telephoneNumber: '01273 000 111',
 	emailAddress: 'susan@corporate-group.com',
 	address: sampleAddress,
+	companiesHouseNumber: '0987654321',
 };
 
 describe('Corporate Group Trustee Card', () => {
@@ -81,19 +82,19 @@ describe('Corporate Group Trustee Card', () => {
 			assertMainHeadingExists(
 				findByText,
 				findByTestId,
-				'Corporate Trustee',
+				corporateGroup.organisationName,
 				false,
 			);
 
 			assertRemoveButtonExists(findByText, findByTestId);
 
 			const h4Buttons: string[] = [
-				'Director(s) are Professional Trustees',
 				'Chair of board',
+				'Director(s) are Professional Trustees',
 			];
 			assertHeadingButtonsExist(findAllByTestId, findByText, h4Buttons);
 
-			const h4Headings: string[] = ['Address'];
+			const h4Headings: string[] = ['Address', 'Companies House Number'];
 			assertHeadingsExist(findAllByTestId, h4Headings);
 		});
 

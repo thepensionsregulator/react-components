@@ -1,5 +1,4 @@
 import React from 'react';
-import { FORM_ERROR } from 'final-form';
 import { FieldProps } from '@tpr/forms';
 import { useEmployerContext } from '../../../context';
 import { isAfter, toDate, isBefore } from 'date-fns';
@@ -36,13 +35,7 @@ export const RemoveDateForm: React.FC = () => {
 	];
 
 	const onSubmit = (values) => {
-		if (!values.confirm) {
-			return {
-				[FORM_ERROR]: i18n.remove.date.errors.formIncomplete,
-			};
-		} else {
-			send('NEXT', { values });
-		}
+		send('NEXT', { values });
 	};
 
 	return (
@@ -51,6 +44,7 @@ export const RemoveDateForm: React.FC = () => {
 			onSubmit={onSubmit}
 			remove={remove}
 			label={i18n.remove.date.fields.confirm.label}
+			checkboxErrorMessage={i18n.remove.date.errors.confirmMissing}
 			dateField={DateField}
 			type={cardType.employer}
 			typeName={cardTypeName.employer}

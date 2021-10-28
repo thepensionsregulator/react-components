@@ -3,7 +3,7 @@ import { Field, FieldRenderProps } from 'react-final-form';
 import { P } from '@tpr/core';
 import { FieldProps, FieldExtraProps } from '../../renderFields';
 import { CheckboxChecked, CheckboxBlank } from './icons';
-import { StyledInputLabel } from '../elements';
+import { ErrorMessage, StyledInputLabel } from '../elements';
 import { HiddenInput } from '../hidden/hidden';
 import styles from './checkbox.module.scss';
 import AccessibilityHelper from '../accessibilityHelper';
@@ -19,6 +19,7 @@ export const Checkbox: React.FC<Partial<CheckboxIconProps>> = ({
 	onChange,
 	label,
 	hint,
+	meta,
 	className,
 	children,
 }) => {
@@ -36,6 +37,7 @@ export const Checkbox: React.FC<Partial<CheckboxIconProps>> = ({
 				},
 				cfg,
 			)}
+			isError={meta && meta.error && meta.touched}
 		>
 			<label
 				id={helper && helper.labelId}
@@ -43,6 +45,11 @@ export const Checkbox: React.FC<Partial<CheckboxIconProps>> = ({
 				className={styles.wrapper}
 				htmlFor={id}
 			>
+				{meta && meta.touched && meta.touched && (
+					<ErrorMessage id={helper.errorId} role="alert">
+						{meta.error}
+					</ErrorMessage>
+				)}
 				<div className={styles.innerWrapper}>
 					<HiddenInput
 						id={id}

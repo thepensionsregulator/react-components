@@ -1,89 +1,44 @@
-import React, { useState } from 'react';
-import { ColorsFullRange, Flex, ValuesFullRange } from '@tpr/core';
-import { CrossButton } from '../buttons/buttons';
-import Styles from './poscon.module.scss';
-
-export type PosconProps = {
-	color?: ColorsFullRange;
-	enableClose?: boolean;
-	callback?: Function;
-	ariaLabelledBy?: string;
-};
+import React from 'react';
+import { ClosablePoscon } from './components/closablePoscon';
+import { PersistentPoscon } from './components/persistentPoscon';
+import { PosconCfgType, PosconProps } from './components/types';
 
 export const Poscon: React.FC<PosconProps> = ({
+	callback,
+	cfg,
+	closeButtonColor = 'white',
 	color = 'success.1',
 	enableClose = false,
 	ariaLabelledBy,
-	callback,
 	children,
 }) => {
+	const defaultstyles: PosconCfgType = {
+		flexDirection: 'column',
+		alignItems: 'center',
+		justifyContent: 'center',
+		bg: color,
+		pl: 10,
+		pr: 10,
+		pt: enableClose ? 10 : 6,
+		pb: enableClose ? 10 : 6,
+		textAlign: 'center',
+	};
+
+	const posconCfg: PosconCfgType = {
+		...defaultstyles,
+		...cfg,
+	};
+
 	return enableClose ? (
-		<ClosablePoscon color={color} callback={callback} ariaLabelledBy={ariaLabelledBy}>
+		<ClosablePoscon
+			cfg={posconCfg}
+			callback={callback}
+			closeButtonColor={closeButtonColor}
+			ariaLabelledBy={ariaLabelledBy}
+		>
 			{children}
 		</ClosablePoscon>
 	) : (
-		<PersistentPoscon ariaLabelledBy={ariaLabelledBy} color={color}>{children}</PersistentPoscon>
-	);
-};
-
-export type ClosablePosconProps = {
-	color?: ColorsFullRange;
-	callback?: Function;
-	ariaLabelledBy?: string;
-};
-
-const ClosablePoscon: React.FC<ClosablePosconProps> = ({
-	color,
-	ariaLabelledBy,
-	callback,
-	children,
-}) => {
-	const [closed, setClosed] = useState<boolean>(false);
-	return !closed ? (
-		<PersistentPoscon color={color} pt={4} ariaLabelledBy={ariaLabelledBy}>
-			<div className={Styles.enableClose}>
-				<CrossButton
-					colour={'white'}
-					onClick={() => {
-						setClosed(!closed);
-						callback && callback();
-					}}
-				/>
-			</div>
-			{children}
-		</PersistentPoscon>
-	) : (
-		<></>
-	);
-};
-
-export type PersistentPosconProps = {
-	color?: ColorsFullRange;
-	pt?: ValuesFullRange;
-	ariaLabelledBy?: string;
-};
-
-const PersistentPoscon: React.FC<PersistentPosconProps> = ({
-	color,
-	pt = 8,
-	ariaLabelledBy,
-	children,
-}) => {
-	return (
-		<Flex
-			cfg={{
-				alignItems: 'center',
-				justifyContent: 'center',
-				bg: color,
-				pb: 6,
-				pt: pt,
-				flexDirection: 'column',
-				textAlign: 'center',
-			}}
-			role="alert"
-			aria-labelledby={ariaLabelledBy}
-		>
-			{children}
-		</Flex>
+		<PersistentPoscon cfg={posconCfg} ariaLabelledBy={ariaLabelledBy}>{children}</PersistentPoscon>
 	);
 };

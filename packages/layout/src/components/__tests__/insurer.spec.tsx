@@ -26,6 +26,7 @@ const insurer: Insurer = {
 	address: sampleAddress,
 	telephoneNumber: '',
 	emailAddress: '',
+	companiesHouseNumber: '0012345',
 };
 
 describe('Insurer Preview', () => {
@@ -46,13 +47,13 @@ describe('Insurer Preview', () => {
 		assertMainHeadingExists(
 			getByText,
 			getByTestId,
-			'Insurer administrator',
+			insurer.organisationName,
 			false,
 		);
 
 		assertRemoveButtonExists(getByText, getByTestId);
 
-		const h4Headings = ['Address'];
+		const h4Headings = ['Address', 'Companies House Number'];
 		assertHeadingsExist(getAllByTestId, h4Headings);
 
 		const h4Buttons = ['Insurer reference number'];
@@ -182,7 +183,7 @@ describe('Insurer Remove', () => {
 		});
 
 		expect(
-			getByText('Please confirm and fill in the date fields.'),
+			getByText('Confirm this employer is no longer associated'),
 		).toBeInTheDocument();
 	});
 

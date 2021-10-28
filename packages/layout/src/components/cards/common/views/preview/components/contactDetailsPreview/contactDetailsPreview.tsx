@@ -16,7 +16,7 @@ interface ContactDetailsPreviewProps {
 export const ContactDetailsPreview: React.FC<ContactDetailsPreviewProps> = React.memo(
 	(props: ContactDetailsPreviewProps) => {
 		return (
-			<Flex cfg={{ my: 2, flexDirection: 'column' }}>
+			<Flex cfg={{ flexDirection: 'column' }}>
 				{props.name && <P cfg={{ mb: 2 }}>{props.name}</P>}
 				{props.phone && (
 					<>

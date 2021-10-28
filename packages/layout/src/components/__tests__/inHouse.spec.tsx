@@ -15,6 +15,7 @@ import {
 	assertHeadingButtonsExist,
 } from '../testHelpers/testHelpers';
 import { sampleAddress } from '../testHelpers/commonData/cards';
+import { concatenateStrings } from '../../utils';
 
 const noop = () => Promise.resolve();
 
@@ -72,7 +73,11 @@ describe('InHouse Preview', () => {
 		assertMainHeadingExists(
 			findByText,
 			findByTestId,
-			'In House Administrator',
+			concatenateStrings([
+				inHouseAdmin.title,
+				inHouseAdmin.firstName,
+				inHouseAdmin.lastName,
+			]),
 			true,
 		);
 
@@ -121,8 +126,13 @@ describe('Update in-house trustee name', () => {
 		component = container;
 		findByText = getByText;
 		findByTestId = getByTestId;
+		const buttonText = concatenateStrings([
+			inHouseAdmin.title,
+			inHouseAdmin.firstName,
+			inHouseAdmin.lastName,
+		]);
 
-		findByText('In House Administrator').click();
+		findByText(buttonText).click();
 	});
 
 	afterEach(() => {
@@ -354,7 +364,7 @@ describe('InHouse Remove', () => {
 		userEvent.click(getByText('Continue'));
 
 		expect(
-			getByText('Please confirm and fill in the date fields.'),
+			getByText('Confirm this employer is no longer associated'),
 		).toBeInTheDocument();
 	});
 

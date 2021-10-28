@@ -9,18 +9,16 @@ import { Preview } from './views/preview';
 import { Toolbar } from '../components/toolbar';
 import Name from './views/name';
 import Type from './views/type/type';
-import Address from '../common/views/address/addressPage';
 import { Contacts } from './views/contacts';
 import RemoveReason from './views/remove/reason/reason';
 import { ConfirmRemove } from './views/remove/confirm';
+import AddressView from './views/address/address';
 import RemovedBox from '../components/removedBox';
 import {
 	CardContentProps,
-	cardType,
 	cardTypeName,
 	IToolbarButtonProps,
 } from '../common/interfaces';
-import { AddressComparer } from '@tpr/forms';
 import { TrusteeContext } from './trusteeMachine';
 import {
 	CardMainHeadingButton,
@@ -38,8 +36,7 @@ const CardContent: React.FC<CardContentProps> = ({
 	enableContactDetails = true,
 	onChangeAddress,
 }) => {
-	const { current, i18n, send, addressAPI } = useTrusteeContext();
-	const { trustee } = current.context;
+	const { current } = useTrusteeContext();
 
 	if (current.matches('preview')) {
 		return <Preview enableContactDetails={enableContactDetails} />;
@@ -54,26 +51,7 @@ const CardContent: React.FC<CardContentProps> = ({
 		current.matches({ edit: { company: 'address' } }) ||
 		current.matches({ edit: { company: 'save' } })
 	) {
-		return (
-			<Address
-				onSubmit={(values) => {
-					if (AddressComparer.areEqual(values.initialValue, values)) {
-						send('CANCEL');
-					} else {
-						send('SAVE', { address: values || {} });
-					}
-				}}
-				initialValue={trustee.address}
-				addressAPI={addressAPI}
-				cardType={cardType.trustee}
-				cardTypeName={cardTypeName.trustee}
-				sectionTitle={i18n.address.sectionTitle}
-				i18n={i18n.address}
-				onCancelChanges={() => send('CANCEL')}
-				subSectionHeaderText={i18n.preview.buttons.three}
-				onChangeAddress={onChangeAddress}
-			/>
-		);
+		return <AddressView onChangeAddress={onChangeAddress} />;
 	} else if (
 		current.matches({ edit: { contact: 'details' } }) ||
 		current.matches({ edit: { contact: 'save' } })
@@ -92,7 +70,7 @@ const CardContent: React.FC<CardContentProps> = ({
 };
 
 const ToolbarButton: React.FC<IToolbarButtonProps> = React.memo(
-	({ remove = false, button }) => {
+	({ remove = false, button, text }) => {
 		const { current, send, i18n } = useTrusteeContext();
 
 		return (
@@ -106,7 +84,7 @@ const ToolbarButton: React.FC<IToolbarButtonProps> = React.memo(
 							edit: { trustee: 'name' },
 						})}
 					>
-						{i18n.preview.buttons.two}
+						{i18n.preview.buttonsAndHeadings.remove}
 					</CardRemoveButton>
 				) : (
 					<CardMainHeadingButton
@@ -114,7 +92,7 @@ const ToolbarButton: React.FC<IToolbarButtonProps> = React.memo(
 						current={current}
 						onClick={() => send('EDIT_TRUSTEE')}
 					>
-						{i18n.preview.buttons.one}
+						{text}
 					</CardMainHeadingButton>
 				)}
 			</>
@@ -134,49 +112,52 @@ export const TrusteeCard: React.FC<
 
 	return (
 		<TrusteeProvider {...props}>
-			{({ current, i18n }) => (
-				<Section
-					cfg={cfg}
-					data-testid={props.testId}
-					className={styles.card}
-					ariaLabel={concatenateStrings([
-						current.context.trustee.title,
-						current.context.trustee.firstName,
-						current.context.trustee.lastName,
-						current.context.trustee.trusteeType,
-						i18n.preview.buttons.one,
-					])}
-				>
-					<Toolbar
-						buttonLeft={() => <ToolbarButton button={trusteeButtonRef} />}
-						buttonRight={() => (
-							<ToolbarButton button={removeButtonRef} remove={true} />
-						)}
-						complete={isComplete(current.context)}
-						subtitle={() => (
-							<Subtitle
-								main={concatenateStrings([
-									current.context.trustee.title,
-									current.context.trustee.firstName,
-									current.context.trustee.lastName,
-								])}
-								secondary={`${capitalize(
-									current.context.trustee.trusteeType,
-								)} trustee`}
-							/>
-						)}
-						statusText={
-							isComplete(current.context)
-								? i18n.preview.statusText.confirmed
-								: i18n.preview.statusText.unconfirmed
-						}
-					/>
-					<CardContent
-						onChangeAddress={props.onChangeAddress}
-						enableContactDetails={enableContactDetails}
-					/>
-				</Section>
-			)}
+			{({ current, i18n }) => {
+				const trusteeName: string = concatenateStrings([
+					current.context.trustee.title,
+					current.context.trustee.firstName,
+					current.context.trustee.lastName,
+				]);
+
+				return (
+					<Section
+						cfg={cfg}
+						data-testid={props.testId}
+						className={styles.card}
+						ariaLabel={concatenateStrings([
+							trusteeName,
+							current.context.trustee.trusteeType,
+							i18n.preview.mainHeadingSubtitle.main,
+						])}
+					>
+						<Toolbar
+							buttonLeft={() => (
+								<ToolbarButton button={trusteeButtonRef} text={trusteeName} />
+							)}
+							buttonRight={() => (
+								<ToolbarButton button={removeButtonRef} remove={true} />
+							)}
+							complete={isComplete(current.context)}
+							subtitle={() => (
+								<Subtitle
+									secondary={`${capitalize(
+										current.context.trustee.trusteeType,
+									)} trustee`}
+								/>
+							)}
+							statusText={
+								isComplete(current.context)
+									? i18n.preview.statusText.confirmed
+									: i18n.preview.statusText.unconfirmed
+							}
+						/>
+						<CardContent
+							onChangeAddress={props.onChangeAddress}
+							enableContactDetails={enableContactDetails}
+						/>
+					</Section>
+				);
+			}}
 		</TrusteeProvider>
 	);
 });

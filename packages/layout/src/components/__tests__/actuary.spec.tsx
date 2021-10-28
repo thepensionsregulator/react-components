@@ -15,6 +15,7 @@ import {
 	assertHeadingButtonsExist,
 } from '../testHelpers/testHelpers';
 import { sampleAddress } from '../testHelpers/commonData/cards';
+import { concatenateStrings } from '../../utils';
 
 const noop = () => Promise.resolve();
 
@@ -29,6 +30,7 @@ const actuary: Actuary = {
 	emailAddress: 'john@actuary.com',
 	organisationName: 'Actuaries Group Ltd',
 	address: sampleAddress,
+	companiesHouseNumber: '123123',
 };
 
 const addressExpectedHTML = `${sampleAddress.addressLine1}<br>${sampleAddress.addressLine2}<br>${sampleAddress.addressLine3}<br>${sampleAddress.postTown}<br>${sampleAddress.county}<br>${sampleAddress.postcode}<br>${sampleAddress.country}`;
@@ -81,7 +83,16 @@ describe('Actuary Card', () => {
 		test('it renders buttons correctly', () => {
 			expect(component.querySelector('button')).not.toBe(null);
 
-			assertMainHeadingExists(findByText, findByTestId, 'Actuary', true);
+			assertMainHeadingExists(
+				findByText,
+				findByTestId,
+				concatenateStrings([
+					actuary.title,
+					actuary.firstName,
+					actuary.lastName,
+				]),
+				true,
+			);
 
 			assertRemoveButtonExists(findByText, findByTestId);
 
@@ -119,7 +130,7 @@ describe('Actuary Card', () => {
 		test('renders with a section containing an aria label', () => {
 			assertThatASectionExistsWithAnAriaLabel(
 				findByRole,
-				`${actuary.title} ${actuary.firstName} ${actuary.lastName} Actuary`,
+				`${actuary.title} ${actuary.firstName} ${actuary.lastName} Scheme Actuary`,
 			);
 		});
 
@@ -152,7 +163,13 @@ describe('Actuary Card', () => {
 			findByText = getByText;
 			findByTestId = getByTestId;
 
-			findByText('Actuary').click();
+			const buttonLabel = concatenateStrings([
+				actuary.title,
+				actuary.firstName,
+				actuary.lastName,
+			]);
+
+			findByText(buttonLabel).click();
 		});
 
 		afterEach(() => {

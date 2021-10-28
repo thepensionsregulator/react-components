@@ -1,58 +1,5 @@
 @import '@tpr/theming/lib/variables.scss';
 
-.spinnerCircle {
-	display: inline-block;
-	text-align: center;
-
-	.spinner {
-		position: relative;
-		width: 80px;
-		height: 80px;
-		overflow: visible;
-		margin: 0 auto;
-
-		div {
-			position: absolute;
-			border: 10px solid #cdd500;
-			opacity: 1;
-			border-radius: 50%;
-			//animation: lds-ripple 1s cubic-bezier(0, 0.2, 0.8, 1) infinite;
-			animation: circle-animation 1s cubic-bezier(0, 0.9, 0.9, 1) infinite;
-
-			&:nth-child(2) {
-				animation-delay: -0.5s;
-				border: 10px solid #cdd500;
-			}
-		}
-	}
-
-	.text {
-		font-family: $fonts-sans-serif;
-		font-size: 16px;
-		color: $black;
-		text-align: center;
-	}
-}
-
-@keyframes circle-animation {
-	0% {
-		top: 36px;
-		left: 36px;
-		width: 0px;
-		height: 0;
-		opacity: 1;
-	}
-	100% {
-		top: 0px;
-		left: 0px;
-		width: 72px;
-		height: 72px;
-		opacity: 0;
-	}
-}
-
-/* ----------------------------------- */
-
 .spinnerProgress {
 	display: inline-block;
 	text-align: center;
@@ -60,21 +7,21 @@
 	.spinner {
 		display: inline-block;
 		position: relative;
-		width: 80px;
-		height: 80px;
+		width: 5rem;
+		height: 5rem;
 
 		div {
-			transform-origin: 40px 40px;
+			transform-origin: 2.5rem 2.5rem;
 			animation: progress-animation 1.2s linear infinite;
 
 			&:after {
 				content: ' ';
 				display: block;
 				position: absolute;
-				top: 3px;
-				left: 37px;
-				width: 6px;
-				height: 18px;
+				top: 0.1875rem;
+				left: 2.3125rem;
+				width: 0.375rem;
+				height: 1.125rem;
 				border-radius: 20%;
 				background: #483b8b;
 			}
@@ -132,7 +79,6 @@
 
 	.text {
 		font-family: $fonts-sans-serif;
-		font-size: 16px;
 		color: $black;
 		text-align: center;
 	}

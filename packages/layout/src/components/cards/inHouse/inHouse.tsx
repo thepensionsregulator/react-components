@@ -10,15 +10,10 @@ import { Preview } from './views/preview/preview';
 import { Contacts } from './views/contacts';
 import { RemoveDateForm } from './views/remove/date/date';
 import { ConfirmRemove } from './views/remove/confirm/confirm';
-import Address from '../common/views/address/addressPage';
 import { NameScreen } from './views/name';
+import AddressView from './views/address';
 import RemovedBox from '../components/removedBox';
-import {
-	cardType,
-	cardTypeName,
-	IToolbarButtonProps,
-} from '../common/interfaces';
-import { AddressComparer } from '@tpr/forms';
+import { cardTypeName, IToolbarButtonProps } from '../common/interfaces';
 import { InHouseAdminContext } from './inHouseMachine';
 import {
 	CardMainHeadingButton,
@@ -32,55 +27,16 @@ export interface ICardContentSwitchProps {
 	onChangeAddress?: (...args: any[]) => Promise<any>;
 }
 
-const CardContentSwitch: React.FC<ICardContentSwitchProps> = (
-	props: ICardContentSwitchProps,
-) => {
-	const {
-		current,
-		i18n,
-		send,
-		addressAPI,
-		onSaveAddress,
-	} = useInHouseAdminContext();
-	const { inHouseAdmin } = current.context;
+const CardContentSwitch: React.FC<ICardContentSwitchProps> = ({
+	onChangeAddress,
+}) => {
+	const { current } = useInHouseAdminContext();
 
 	switch (true) {
 		case current.matches('preview'):
 			return <Preview />;
 		case current.matches({ edit: 'address' }):
-			return (
-				<Address
-					onSubmit={async (values) => {
-						try {
-							const {
-								address,
-								...inHouseAdminValues
-							} = current.context.inHouseAdmin;
-
-							if (AddressComparer.areEqual(values.initialValue, values)) {
-								send('CANCEL');
-							} else {
-								await onSaveAddress(
-									values,
-									Object.assign(inHouseAdminValues, address),
-								);
-								send('SAVE', { values });
-							}
-						} catch (error) {
-							console.log(error);
-						}
-					}}
-					initialValue={inHouseAdmin.address}
-					addressAPI={addressAPI}
-					cardType={cardType.inHouseAdmin}
-					cardTypeName={cardTypeName.inHouseAdmin}
-					sectionTitle={i18n.address.sectionTitle}
-					i18n={i18n.address}
-					onCancelChanges={() => send('CANCEL')}
-					subSectionHeaderText={i18n.preview.buttons.three}
-					onChangeAddress={props.onChangeAddress}
-				/>
-			);
+			return <AddressView onChangeAddress={onChangeAddress} />;
 		case current.matches({ edit: 'contacts' }):
 			return <Contacts />;
 		case current.matches({ edit: 'name' }):
@@ -112,7 +68,7 @@ const ToolbarButton: React.FC<IToolbarButtonProps> = React.memo(
 							edit: 'name',
 						})}
 					>
-						{i18n.preview.buttons.two}
+						{i18n.preview.buttonsAndHeadings.remove}
 					</CardRemoveButton>
 				) : (
 					<CardMainHeadingButton
@@ -120,7 +76,11 @@ const ToolbarButton: React.FC<IToolbarButtonProps> = React.memo(
 						current={current}
 						onClick={() => send('EDIT_NAME')}
 					>
-						{i18n.preview.buttons.one}
+						{concatenateStrings([
+							current.context.inHouseAdmin.title,
+							current.context.inHouseAdmin.firstName,
+							current.context.inHouseAdmin.lastName,
+						])}
 					</CardMainHeadingButton>
 				)}
 			</>
@@ -149,7 +109,7 @@ export const InHouseCard: React.FC<InHouseAdminProviderProps> = React.memo(
 								current.context.inHouseAdmin.title,
 								current.context.inHouseAdmin.firstName,
 								current.context.inHouseAdmin.lastName,
-								i18n.preview.buttons.one,
+								i18n.preview.mainHeadingSubtitle.main,
 							])}
 						>
 							<Toolbar
@@ -159,13 +119,7 @@ export const InHouseCard: React.FC<InHouseAdminProviderProps> = React.memo(
 								)}
 								complete={isComplete(current.context)}
 								subtitle={() => (
-									<Subtitle
-										main={concatenateStrings([
-											current.context.inHouseAdmin.title,
-											current.context.inHouseAdmin.firstName,
-											current.context.inHouseAdmin.lastName,
-										])}
-									/>
+									<Subtitle main={i18n.preview.mainHeadingSubtitle.main} />
 								)}
 								statusText={
 									isComplete(current.context)

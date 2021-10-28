@@ -14,12 +14,12 @@
 	}
 
 	input[type='checkbox']:focus + .checkbox {
-		box-shadow: 0 0 0 4px #ffd300;
+		box-shadow: 0 0 0 0.25rem #ffd300;
 	}
 
 	.checkbox {
-		min-width: 40px;
-		min-height: 40px;
+		min-width: 2.5rem;
+		min-height: 2.5rem;
 	}
 }
 
@@ -33,7 +33,7 @@
 	font-size: $font-size-2;
 	font-weight: $font-weight-2;
 	margin-top: $space-2;
-	margin-left: 55px;
+	margin-left: 3.4375rem;
 	margin-bottom: 0;
 }
 

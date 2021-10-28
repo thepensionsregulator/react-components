@@ -1,103 +1,38 @@
 import {
-	InputErrorMessages,
 	defaultEmailErrorMessages,
 	defaultPhoneErrorMessages,
+	I18nNameView,
+	I18nRemoveViewDateAndConfirm,
+	I18nPreviewViewCommonProps,
+	I18nContactsView,
 } from '../common/interfaces';
-type PropertyFunction<T> = () => T;
+
+interface I18nActuaryPreviewView extends I18nPreviewViewCommonProps {
+	buttonsAndHeadings: {
+		remove: string;
+		address: string;
+		companiesHouseNumber: string;
+		contacts: string;
+	};
+}
 
 export type ActuaryI18nProps = {
-	preview: {
-		buttons: {
-			one: string;
-			two: string;
-			three: string;
-			four: string;
-		};
-		statusText: {
-			confirmed: string;
-			unconfirmed: string;
-		};
-		checkboxLabel: string;
-	};
-	name: {
-		title: string;
-		sectionTitle?: string;
-		fields: {
-			title: {
-				label: string;
-				error: string | PropertyFunction<string | undefined>;
-				maxlength: number;
-			};
-			firstName: {
-				label: string;
-				error: string | PropertyFunction<string | undefined>;
-				maxlength: number;
-			};
-			lastName: {
-				label: string;
-				error: string | PropertyFunction<string | undefined>;
-				maxlength: number;
-			};
-		};
-	};
-	contacts: {
-		title: string;
-		subtitle: string;
-		sectionTitle?: string;
-		fields: {
-			telephone: {
-				label: string;
-				error: InputErrorMessages;
-			};
-			email: {
-				label: string;
-				error: InputErrorMessages;
-			};
-		};
-	};
-	remove: {
-		confirm: {
-			breadcrumbs: {
-				link1: string;
-				link2: string;
-			};
-			title: string;
-			dialog: {
-				message1: string;
-			};
-			buttons: {
-				remove: string;
-				cancel: string;
-			};
-		};
-		date: {
-			title: string;
-			fields: {
-				confirm: {
-					label: string;
-				};
-				date: {
-					label: string;
-					hint: string;
-					error: string;
-				};
-			};
-			errors: {
-				formIncomplete: string;
-				dateAddedBeforeEffectiveDate: string;
-				dateAddedInTheFuture: string;
-			};
-		};
-	};
+	preview: I18nActuaryPreviewView;
+	name: I18nNameView;
+	contacts: I18nContactsView;
+	remove: I18nRemoveViewDateAndConfirm;
 };
 
 export const i18n: ActuaryI18nProps = {
 	preview: {
-		buttons: {
-			one: 'Actuary',
-			two: 'Remove',
-			three: 'Address',
-			four: 'Contact details',
+		buttonsAndHeadings: {
+			remove: 'Remove',
+			address: 'Address',
+			companiesHouseNumber: 'Companies House Number',
+			contacts: 'Contact details',
+		},
+		mainHeadingSubtitle: {
+			main: 'Scheme Actuary',
 		},
 		statusText: {
 			confirmed: 'Confirmed',
@@ -170,6 +105,7 @@ export const i18n: ActuaryI18nProps = {
 				},
 			},
 			errors: {
+				confirmMissing: 'Confirm this employer is no longer associated',
 				formIncomplete: 'Please confirm and fill in the date fields.',
 				dateAddedBeforeEffectiveDate:
 					'Date must be after the Employer was added.',

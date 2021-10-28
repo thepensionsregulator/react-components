@@ -93,6 +93,8 @@ export const EmployerType: React.FC = () => {
 			title={i18n.type.title}
 			subtitle={i18n.type.subtitle}
 			sectionTitle={i18n.type.sectionTitle}
+			subSectionHeaderText={i18n.preview.buttonsAndHeadings.employerType}
+			send={send}
 		>
 			<Form
 				onSubmit={onSubmit}
