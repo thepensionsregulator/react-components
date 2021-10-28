@@ -56,14 +56,14 @@
 		"access": "public"
 	},
 	"devDependencies": {
-		"@tpr/core": "file:../core",
-		"@tpr/forms": "file:../forms",
-		"@tpr/icons": "file:../icons",
-		"@tpr/theming": "file:../theming",
+		"@tpr/core": "^3.0.3",
+		"@tpr/forms": "^4.1.6",
+		"@tpr/icons": "^3.1.13",
+		"@tpr/theming": "^2.4.2",
 		"cross-env": "^7.0.3",
 		"node-sass": "^5.0.0",
 		"react": "file:../../node_modules/react",
 		"react-dom": "file:../../node_modules/react-dom"
 	},
-	"gitHead": "57aec9c9de22596d6343bae07eb6b198322a0bee"
+	"gitHead": "419f86e23453ad956b7a21e19235283048c0ec4e"
 }
