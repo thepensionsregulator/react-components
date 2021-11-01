@@ -59,6 +59,7 @@ export const AddressLookup: React.FC<AddressProps> = ({
 	const [addresses, setAddresses] = useState<Address[]>([]);
 	const [address, setAddress] = useState<Address | null>(null);
 	const [postcode, setPostcode] = useState<string>(null);
+  const [focusOnAddressLine1,setFocusOnAddressLine1] = useState(false)
 
 	useEffect(() => {
 		if (setSubmitButton) {
@@ -112,6 +113,7 @@ export const AddressLookup: React.FC<AddressProps> = ({
 					onAddressSelected={(selectedAddress) => {
 						setAddress(selectedAddress);
 						setAddressView(AddressView.EditAddress);
+						setFocusOnAddressLine1(true)
 					}}
 					postcodeLookupLabel={postcodeLookupLabel}
 					changePostcodeButton={changePostcodeButton}
@@ -154,6 +156,7 @@ export const AddressLookup: React.FC<AddressProps> = ({
 						countryLabel={countryLabel}
 						changeAddressButton={changeAddressButton}
 						headingLevel={headingLevel}
+						focusOnAdressLine1={focusOnAddressLine1}
 					/>
 				)}
 			</div>
