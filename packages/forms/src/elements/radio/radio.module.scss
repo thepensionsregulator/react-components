@@ -1,6 +1,5 @@
 @import '@tpr/core/lib/components/typography/typography.module.scss';
 // typography.module.scss includes '@tpr/theming/lib/variables.scss'
-
 .wrapper {
 	cursor: pointer;
 	user-select: none;
@@ -65,4 +64,9 @@
 	& > div {
 		margin-right: $space-8;
 	}
+}
+
+.children {
+	border-left: 4px solid $colors-neutral-9;
+	padding-left: 20px;
 }
