@@ -1,5 +1,6 @@
 trigger: none
 
+# For code on Github this must always be a Microsoft-hosted agent running outside our network
 pool:
   vmImage: 'windows-2019'
 
