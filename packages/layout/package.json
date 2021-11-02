@@ -1,6 +1,6 @@
 {
 	"name": "@tpr/layout",
-	"version": "3.0.17",
+	"version": "3.0.18",
 	"description": "TPR Layout components",
 	"author": "David Alekna <david.alekna@tpr.gov.uk>",
 	"license": "MIT",
@@ -57,7 +57,7 @@
 	},
 	"devDependencies": {
 		"@tpr/core": "^3.0.3",
-		"@tpr/forms": "^4.1.6",
+		"@tpr/forms": "^4.1.7",
 		"@tpr/icons": "^3.1.13",
 		"@tpr/theming": "^2.4.2",
 		"cross-env": "^7.0.3",
