@@ -1,7 +1,7 @@
 import React from 'react';
 import { formSetup } from '../__mocks__/setup';
 import { FFRadioButton } from '../elements/radio/radio';
-import { renderFields } from '../index';
+import { FFInputText, renderFields } from '../index';
 import { fireEvent, getByTestId } from '@testing-library/react';
 import { axe } from 'jest-axe';
 import { FieldProps } from '../../lib/renderFields';
@@ -214,5 +214,19 @@ describe('Radio input', () => {
 		const label = container.querySelector(`[id=${id}-label]`);
 		expect(label).not.toBeNull();
 		expect(label).toHaveAttribute('for', id);
+	});
+	test('renders child components', () => {
+		// Arrange
+		const childId = 'childId';
+		// Act
+		const { getByTestId } = formSetup({
+			render: (
+				<FFRadioButton value="a" label="a" name="a" id="radio_a">
+					<FFInputText id={childId} name="phoneNumber" testId={childId} />
+				</FFRadioButton>
+			),
+		});
+		// Assert
+		expect(getByTestId(childId)).toBeInTheDocument();
 	});
 });
