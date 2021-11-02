@@ -16,5 +16,5 @@ export interface EditAddressProps {
 	countryLabel: string;
 	changeAddressButton: string;
 	headingLevel?: number;
-	focusOnAdressLine1?:boolean;
+	focusOnAdressLine1?: boolean;
 }

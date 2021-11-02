@@ -7,6 +7,7 @@ route: /forms/radio
 import { Playground } from '@playground';
 import { Form } from 'react-final-form';
 import { FFRadioButton } from './radio';
+import { FFInputText } from '@tpr/forms';
 import { renderFields } from '../../renderFields';
 import radioStyles from './radio.module.scss';
 import styles from '../elements.module.scss';
@@ -297,6 +298,44 @@ required = true;
 			</Form>
 		);
 	}}
+</Playground>
+
+### With Children
+
+```js
+required = true;
+```
+
+<Playground>
+	{() => {
+		const FIELD_NAME = 'required_rb';
+		return (
+			<Form
+				onSubmit={(value, form) => {
+					console.log(value);
+					setTimeout(() => {
+						form.reset();
+					}, 500);
+				}}
+			>
+				{({ handleSubmit, errors }) => (
+					<form onSubmit={handleSubmit}>
+						<FFRadioButton name={FIELD_NAME} label="Email" id="email" value="email"/>
+						<FFRadioButton name={FIELD_NAME} label="Phone" id="phone" value="phone">
+							<FFInputText name="phoneNumber" id="phoneNumber" label="Phone number"/>
+						</FFRadioButton>
+						<FFRadioButton name={FIELD_NAME} label="Text message" id="textMessage" value="textMessage"/>
+    					<button type="submit" style={{ display: 'none' }}>
+    						Submit
+    					</button>
+    					<br />
+    					<p>(Press ENTER to reset)</p>
+    				</form>
+    			)}
+    		</Form>
+    	);
+    }}
+
 </Playground>
 
 ## API

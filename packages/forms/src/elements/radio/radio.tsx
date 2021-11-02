@@ -21,6 +21,7 @@ export const RadioButton: React.FC<RadioButtonProps> = ({
 	value,
 	hint,
 	className,
+	children,
 	required = false,
 }) => {
 	const msg = testId ? `${testId}-${checked ? 'checked' : 'unchecked'}` : null;
@@ -74,6 +75,7 @@ export const RadioButton: React.FC<RadioButtonProps> = ({
 						{hint}
 					</P>
 				)}
+				{children && <div className={styles.children}>{children}</div>}
 			</label>
 		</StyledInputLabel>
 	);
