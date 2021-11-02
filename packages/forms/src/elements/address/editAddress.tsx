@@ -85,8 +85,8 @@ export const EditAddress: React.FC<EditAddressProps> = React.memo(
 		const address2ref = useRef(null);
 
 		useEffect(() => {
-	  if(focusOnAdressLine1){
-			address1ref.current && address1ref.current.focus();
+			if (focusOnAdressLine1) {
+				address1ref.current && address1ref.current.focus();
 			}
 		}, [address1ref]);
 
