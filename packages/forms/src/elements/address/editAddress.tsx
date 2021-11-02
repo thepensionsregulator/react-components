@@ -25,6 +25,7 @@ export const EditAddress: React.FC<EditAddressProps> = React.memo(
 		countryLabel,
 		changeAddressButton,
 		headingLevel = 2,
+		focusOnAdressLine1,
 	}) => {
 		const form = useForm();
 
@@ -32,7 +33,6 @@ export const EditAddress: React.FC<EditAddressProps> = React.memo(
 			const selectedAddress = form.getFieldState('selectedAddress');
 			return selectedAddress && selectedAddress.dirty;
 		};
-
 		const renderNonEditableFieldWithUpdates = (
 			fieldName: string,
 			label?: string,
@@ -85,7 +85,9 @@ export const EditAddress: React.FC<EditAddressProps> = React.memo(
 		const address2ref = useRef(null);
 
 		useEffect(() => {
+	  if(focusOnAdressLine1){
 			address1ref.current && address1ref.current.focus();
+			}
 		}, [address1ref]);
 
 		useEffect(() => {
