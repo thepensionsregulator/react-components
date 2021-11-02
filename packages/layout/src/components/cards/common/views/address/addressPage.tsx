@@ -11,7 +11,7 @@ import {
 	Address,
 	I18nAddressLookup,
 } from '@tpr/forms';
-import { Link } from '@tpr/core/lib/components/links/links';
+import { Link } from '@tpr/core';
 export type AddressPageProps = {
 	onSubmit: (values: Address & { initialValue?: Address }) => void;
 	initialValue?: Address;
