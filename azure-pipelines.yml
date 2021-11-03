@@ -57,7 +57,7 @@ jobs:
           projectDirectory: '$(Build.SourcesDirectory)\react-components'
           arguments: test --ci --watchAll=false --reporters=jest-junit --reporters=default --coverage --coverageReporters=cobertura --testMatch "**\*.spec.[t]s?(x)"
         displayName: Run tests
-        continueOnError: true # Test failures should be published before failing the build
+        continueOnError: false # Test failures should fail the build
 
       - task: PublishTestResults@2
         displayName: 'Publish unit test results'
