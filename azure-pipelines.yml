@@ -67,6 +67,7 @@ jobs:
           mergeTestResults: true
           testRunTitle: 'Jest Unit Tests'
           failTaskOnFailedTests: true
+        condition: always()
 
       - task: PublishCodeCoverageResults@1
         displayName: 'Publish code coverage from Jest tests'
