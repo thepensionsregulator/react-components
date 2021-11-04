@@ -1,5 +1,8 @@
 @import '@tpr/core/lib/components/typography/typography.module.scss';
 // typography.module.scss includes '@tpr/theming/lib/variables.scss'
+
+$wcag-minimum-clickable-size: 2.75rem;
+
 .wrapper {
 	cursor: pointer;
 	user-select: none;
@@ -10,14 +13,24 @@
 		align-items: center;
 	}
 
+	input[type='radio'] {
+		width: $wcag-minimum-clickable-size;
+		height: $wcag-minimum-clickable-size;
+		margin-left: -$wcag-minimum-clickable-size;
+	}
+
+	input[type='radio']:focus {
+		outline: none;
+	}
+
 	input[type='radio']:focus + .radio {
 		box-shadow: 0 0 0 0.25rem #ffd300;
 	}
 
 	.radio {
 		border-radius: 50%;
-		min-width: 2.5rem;
-		min-height: 2.5rem;
+		min-width: $wcag-minimum-clickable-size;
+		min-height: $wcag-minimum-clickable-size;
 	}
 }
 

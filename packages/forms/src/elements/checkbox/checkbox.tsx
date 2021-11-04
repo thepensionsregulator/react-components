@@ -51,19 +51,21 @@ export const Checkbox: React.FC<Partial<CheckboxIconProps>> = ({
 					</ErrorMessage>
 				)}
 				<div className={styles.innerWrapper}>
-					<HiddenInput
-						id={id}
-						type="checkbox"
-						checked={checked}
-						disabled={disabled}
-						required={required}
-						onChange={onChange}
-					/>
-					{checked ? (
-						<CheckboxChecked className={styles.checkbox} />
-					) : (
-						<CheckboxBlank className={styles.checkbox} />
-					)}
+					<div>
+						<HiddenInput
+							id={id}
+							type="checkbox"
+							checked={checked}
+							disabled={disabled}
+							required={required}
+							onChange={onChange}
+						/>
+						{checked ? (
+							<CheckboxChecked className={styles.checkbox} />
+						) : (
+							<CheckboxBlank className={styles.checkbox} />
+						)}
+					</div>
 					<P cfg={{ fontWeight: 3 }} className={styles.label}>
 						{label}
 					</P>

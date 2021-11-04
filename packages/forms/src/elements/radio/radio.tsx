@@ -50,22 +50,24 @@ export const RadioButton: React.FC<RadioButtonProps> = ({
 				htmlFor={id}
 			>
 				<div className={styles.innerWrapper}>
-					<HiddenInput
-						type="radio"
-						id={id}
-						name={name}
-						checked={checked}
-						value={value}
-						disabled={disabled}
-						required={required}
-						onChange={onChange}
-						data-testid={testId}
-					/>
-					{checked ? (
-						<RadioButtonChecked className={styles.radio} />
-					) : (
-						<RadioButtonUnchecked className={styles.radio} />
-					)}
+					<div>
+						<HiddenInput
+							type="radio"
+							id={id}
+							name={name}
+							checked={checked}
+							value={value}
+							disabled={disabled}
+							required={required}
+							onChange={onChange}
+							data-testid={testId}
+						/>
+						{checked ? (
+							<RadioButtonChecked className={styles.radio} />
+						) : (
+							<RadioButtonUnchecked className={styles.radio} />
+						)}
+					</div>
 					<P cfg={{ fontWeight: 3 }} className={styles.label}>
 						{label}
 					</P>
