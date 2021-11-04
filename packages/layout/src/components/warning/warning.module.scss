@@ -10,3 +10,11 @@
 		margin-top: 0.125rem;
 	}
 }
+
+@media (max-width: 25rem) {
+	.warning {
+		.innerWrapper {
+			flex-wrap: wrap;
+		}
+	}
+}

@@ -9,3 +9,13 @@
 	margin-left: 3.4375rem;
 	margin-bottom: 1.25rem;
 }
+
+.actionButtons {
+	display: flex;
+	flex-wrap: wrap;
+	align-items: center;
+
+	.cancelButton {
+		margin-bottom: $space-3;
+	}
+}

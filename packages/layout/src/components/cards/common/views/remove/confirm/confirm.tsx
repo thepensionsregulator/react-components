@@ -39,13 +39,13 @@ const Confirm: React.FC<ConfirmProps> = ({
 		<Content type={cardType} typeName={cardTypeName} breadcrumbs={breadcrumbs}>
 			<H3 cfg={{ mt: 3, fontWeight: 2 }}>{removeTitle}</H3>
 			<Hr cfg={{ my: 4 }} />
-			<WarningBox warningLabel={warningLabel}>
+			<WarningBox warningLabel={warningLabel} wrapInMobile={true}>
 				<Flex className={styles.confirm}>
 					<P className={styles.paragraph1}>{removeMessage1}</P>
 					{removeMessage2 && (
 						<P className={styles.paragraph2}>{removeMessage2}</P>
 					)}
-					<Flex cfg={{ mt: 3 }}>
+					<Flex cfg={{ mt: 3 }} className={styles.actionButtons}>
 						<ArrowButton
 							intent="warning"
 							pointsTo="right"
@@ -54,7 +54,11 @@ const Confirm: React.FC<ConfirmProps> = ({
 							onClick={handleRemove}
 							disabled={loading}
 						/>
-						<Link cfg={{ m: 3 }} underline onClick={handleCancel}>
+						<Link
+							underline
+							onClick={handleCancel}
+							className={styles.cancelButton}
+						>
 							{cancelBtnTitle}
 						</Link>
 					</Flex>

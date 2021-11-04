@@ -62,16 +62,23 @@ const DateForm: React.FC<DateFormProps> = ({
 							</div>
 						</div>
 						<Footer>
-							<ArrowButton
-								appearance="secondary"
-								pointsTo="right"
-								iconSide="right"
-								title="Continue"
-								type="submit"
-							/>
-							<Link cfg={{ m: 3 }} underline onClick={() => send('CANCEL')}>
-								Cancel
-							</Link>
+							<div className={styles.actionButtons}>
+								<ArrowButton
+									appearance="secondary"
+									pointsTo="right"
+									iconSide="right"
+									title="Continue"
+									type="submit"
+									cfg={{ mr: 3 }}
+								/>
+								<Link
+									underline
+									onClick={() => send('CANCEL')}
+									className={styles.cancelButton}
+								>
+									Cancel
+								</Link>
+							</div>
 						</Footer>
 					</form>
 				)}

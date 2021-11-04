@@ -4,3 +4,9 @@
 	width: 50%;
 	padding-right: $space-4;
 }
+
+@media (max-width: 48rem) {
+	.contentHeader {
+		width: 100%;
+	}
+}

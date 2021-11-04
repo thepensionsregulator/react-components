@@ -11,4 +11,23 @@
 	.paragraph2 {
 		margin-top: $space-3;
 	}
+
+	.actionButtons {
+		.cancelButton {
+			margin: $space-3;
+		}
+	}
+}
+
+@media (max-width: 30rem) {
+	.confirm {
+		.actionButtons {
+			flex-wrap: wrap;
+
+			.cancelButton {
+				margin-top: 0 !important;
+				margin-left: 0 !important;
+			}
+		}
+	}
 }

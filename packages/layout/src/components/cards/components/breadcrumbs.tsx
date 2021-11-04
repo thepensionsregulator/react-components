@@ -1,6 +1,7 @@
 import React, { Fragment } from 'react';
 import { Flex, Link } from '@tpr/core';
 import { ArrowRight } from '@tpr/icons';
+import styles from './breadcrumbs.module.scss';
 
 export type BreadcrumbLink = {
 	to?: 'BACK';
@@ -14,7 +15,7 @@ export const Breadcrumbs: React.FC<BreadcrumbsProps> = ({ links, send }) => {
 	const totalLinks = links.length - 1;
 	if (links.length < 1) return null;
 	return (
-		<Flex cfg={{ alignItems: 'center' }}>
+		<Flex className={styles.breadcrumbsWrapper}>
 			{links.map((link, index) => {
 				return (
 					<Fragment key={index}>
