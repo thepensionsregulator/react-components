@@ -6,11 +6,13 @@ import styles from './warning.module.scss';
 export type WarningBoxProps = {
 	cfg?: SpaceProps & FlexProps;
 	warningLabel?: string;
+	wrapInMobile?: boolean;
 };
 export const WarningBox: React.FC<WarningBoxProps> = ({
 	children,
 	cfg,
 	warningLabel = 'Warning',
+	wrapInMobile = false,
 }) => {
 	return (
 		<Flex
@@ -18,7 +20,10 @@ export const WarningBox: React.FC<WarningBoxProps> = ({
 			className={styles.warning}
 			role="alert"
 		>
-			<Flex cfg={{ flexDirection: 'row' }}>
+			<Flex
+				cfg={{ flexDirection: 'row' }}
+				className={wrapInMobile ? styles.innerWrapper : ''}
+			>
 				<WarningCircle cfg={{ mr: 4 }} alternativeText={warningLabel} />
 				{children}
 			</Flex>

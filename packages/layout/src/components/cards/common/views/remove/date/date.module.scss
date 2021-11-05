@@ -10,3 +10,13 @@
 	margin-top: $space-5;
 	@include removeMarginBottom;
 }
+
+.actionButtons {
+	display: flex;
+	flex-wrap: wrap;
+	align-items: center;
+
+	.cancelButton {
+		margin-bottom: $space-3;
+	}
+}

@@ -87,16 +87,23 @@ export const Reason: React.FC<ReasonProps> = ({
 								</fieldset>
 							</div>
 							<Footer>
-								<ArrowButton
-									appearance="secondary"
-									pointsTo="right"
-									iconSide="right"
-									type="submit"
-									title="Continue"
-								/>
-								<Link cfg={{ m: 3 }} underline onClick={() => send('CANCEL')}>
-									Cancel
-								</Link>
+								<div className={styles.actionButtons}>
+									<ArrowButton
+										appearance="secondary"
+										pointsTo="right"
+										iconSide="right"
+										type="submit"
+										title="Continue"
+										cfg={{ mr: 3 }}
+									/>
+									<Link
+										underline
+										onClick={() => send('CANCEL')}
+										className={styles.cancelButton}
+									>
+										Cancel
+									</Link>
+								</div>
 							</Footer>
 						</form>
 					);

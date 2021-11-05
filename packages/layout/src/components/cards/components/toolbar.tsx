@@ -57,7 +57,7 @@ export const Toolbar: React.FC<ToolbarProps> = React.memo(
 						text={statusText}
 					/>
 					<div className={styles.divider} />
-					<Flex cfg={{ alignItems: 'flex-start' }}>{buttonRight()}</Flex>
+					<Flex className={styles.removeBtnWrapper}>{buttonRight()}</Flex>
 				</Flex>
 			</div>
 		);
