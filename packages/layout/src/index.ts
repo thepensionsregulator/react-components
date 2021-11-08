@@ -8,7 +8,7 @@ export * from './components/cards/actuary/actuary';
 export * from './components/cards/corporateGroup/corporateGroup';
 export * from './components/cards/independentTrustee/independentTrustee';
 // all other exports
-export * from './components/beta/beta';
+export * from './components/phaseBanner/phaseBanner';
 export * from './components/footer/footer';
 export * from './components/header/header';
 export * from './components/highlight/highlight';
