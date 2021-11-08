@@ -1,0 +1,37 @@
+---
+name: PhaseBanner
+menu: Layout
+route: /layout/phaseBanner
+---
+
+import { Playground } from '@playground';
+import { PhaseBanner } from './phaseBanner';
+import { Link } from '@tpr/core';
+
+# PhaseBanner
+
+Beta toolbar
+
+## Basic usage
+
+```js
+import { PhaseBanner } from '@tpr/layout';
+```
+
+### Default component
+
+<Playground>
+	<PhaseBanner />
+</Playground>
+
+## With children component
+
+<Playground>
+	<PhaseBanner>
+		<p data-testid="children">
+			{`This is a new service — your `}
+			<Link href="mailto:user@domain.com">feedback</Link>
+			{` will help us improve it.`}
+		</p>
+	</PhaseBanner>
+</Playground>

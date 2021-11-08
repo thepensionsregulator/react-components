@@ -1,0 +1,22 @@
+@import '@tpr/theming/lib/variables.scss';
+
+.phaseBanner {
+	background-color: $white;
+
+	.innerWrapper {
+		align-items: center;
+		padding: $space-2 $space-6;
+		font-size: $font-size-2;
+		color: $colors-neutral-8;
+
+		.beta {
+			background: $colors-primary-3;
+			color: white;
+			font-size: $font-size-2;
+			font-weight: $font-weight-4;
+			padding: $space-2;
+			margin-right: $space-3;
+			margin-bottom: 0;
+		}
+	}
+}
