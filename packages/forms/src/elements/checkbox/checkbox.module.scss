@@ -2,6 +2,8 @@
 // typography.module.scss includes '@tpr/theming/lib/variables.scss'
 
 $wcag-minimum-clickable-size: 2.75rem;
+$focus-ring-width: 0.25rem;
+$offset-text-to-vertical-centre: 0.6rem;
 
 .outerWrapper {
 	min-height: $wcag-minimum-clickable-size + $space-2;
@@ -13,11 +15,18 @@ $wcag-minimum-clickable-size: 2.75rem;
 
 	.innerWrapper {
 		position: relative;
-		padding-top: 0.6rem;
+		padding-top: $offset-text-to-vertical-centre;
+	}
+
+	// hidden input needs to be styled this way to correctly display the focus ring in Safari
+	input[type='checkbox'] {
+		width: $wcag-minimum-clickable-size + $focus-ring-width;
+		height: $wcag-minimum-clickable-size + $focus-ring-width;
+		transform: translateY(-$offset-text-to-vertical-centre);
 	}
 
 	input[type='checkbox']:focus + .checkbox {
-		box-shadow: 0 0 0 0.25rem #ffd300;
+		box-shadow: 0 0 0 $focus-ring-width #ffd300;
 	}
 
 	.checkbox {
