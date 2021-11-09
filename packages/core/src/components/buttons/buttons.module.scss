@@ -201,7 +201,7 @@
 .size-small {
 	font-size: $font-size-1;
 	text-align: center;
-	height: 2.5rem;
+	min-height: 2.5rem;
 	padding: 0 0.9375rem;
 }
 
@@ -209,7 +209,7 @@
 	font-weight: $font-weight-2;
 	font-size: $font-size-2;
 	text-align: center;
-	height: 3.125rem;
+	min-height: 3.125rem;
 	padding: 0 1.75rem;
 }
 
@@ -217,6 +217,6 @@
 	font-weight: $font-weight-3;
 	font-size: $font-size-3;
 	text-align: center;
-	height: 3.75rem;
+	min-height: 3.75rem;
 	padding: 0 2.375rem;
 }

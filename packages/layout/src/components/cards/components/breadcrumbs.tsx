@@ -1,4 +1,4 @@
-import React, { Fragment } from 'react';
+import React from 'react';
 import { Flex, Link } from '@tpr/core';
 import { ArrowRight } from '@tpr/icons';
 import styles from './breadcrumbs.module.scss';
@@ -18,7 +18,8 @@ export const Breadcrumbs: React.FC<BreadcrumbsProps> = ({ links, send }) => {
 		<Flex className={styles.breadcrumbsWrapper}>
 			{links.map((link, index) => {
 				return (
-					<Fragment key={index}>
+					<Flex key={index}>
+						{index > 0 && index <= totalLinks && <ArrowRight fill="#036db8" />}
 						<Link
 							onClick={() => link.to && send(link.to)}
 							underline={link.underline}
@@ -26,8 +27,7 @@ export const Breadcrumbs: React.FC<BreadcrumbsProps> = ({ links, send }) => {
 						>
 							{link.name}
 						</Link>
-						{index !== totalLinks && <ArrowRight fill="#036db8" />}
-					</Fragment>
+					</Flex>
 				);
 			})}
 		</Flex>
