@@ -18,7 +18,7 @@ export const Breadcrumbs: React.FC<BreadcrumbsProps> = ({ links, send }) => {
 		<Flex className={styles.breadcrumbsWrapper}>
 			{links.map((link, index) => {
 				return (
-					<Flex key={index}>
+					<Flex key={index} className={styles.innerWrapper}>
 						{index > 0 && index <= totalLinks && <ArrowRight fill="#036db8" />}
 						<Link
 							onClick={() => link.to && send(link.to)}

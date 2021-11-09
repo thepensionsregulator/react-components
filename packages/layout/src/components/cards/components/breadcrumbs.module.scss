@@ -2,6 +2,10 @@
 	align-items: center;
 	flex-wrap: wrap;
 
+	.innerWrapper {
+		min-height: 1.5rem;
+	}
+
 	svg {
 		min-width: 1.5rem;
 		min-height: 1.5rem;
