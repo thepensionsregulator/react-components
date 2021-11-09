@@ -1,6 +1,6 @@
 import React from 'react';
 import { Field, FieldRenderProps } from 'react-final-form';
-import { P } from '@tpr/core';
+import { classNames, P } from '@tpr/core';
 import { FieldProps, FieldExtraProps } from '../../renderFields';
 import { RadioButtonChecked, RadioButtonUnchecked } from './icons';
 import { StyledInputLabel } from '../elements';
@@ -33,7 +33,7 @@ export const RadioButton: React.FC<RadioButtonProps> = ({
 	return (
 		<StyledInputLabel
 			element="div"
-			className={className}
+			className={classNames([className, styles.outerWrapper])}
 			cfg={Object.assign(
 				{
 					mt: 1,
@@ -50,28 +50,26 @@ export const RadioButton: React.FC<RadioButtonProps> = ({
 				htmlFor={id}
 			>
 				<div className={styles.innerWrapper}>
-					<div>
-						<HiddenInput
-							type="radio"
-							id={id}
-							name={name}
-							checked={checked}
-							value={value}
-							disabled={disabled}
-							required={required}
-							onChange={onChange}
-							data-testid={testId}
-						/>
-						{checked ? (
-							<RadioButtonChecked className={styles.radio} />
-						) : (
-							<RadioButtonUnchecked className={styles.radio} />
-						)}
-					</div>
-					<P cfg={{ fontWeight: 3 }} className={styles.label}>
-						{label}
-					</P>
+					<HiddenInput
+						type="radio"
+						id={id}
+						name={name}
+						checked={checked}
+						value={value}
+						disabled={disabled}
+						required={required}
+						onChange={onChange}
+						data-testid={testId}
+					/>
+					{checked ? (
+						<RadioButtonChecked className={styles.radio} />
+					) : (
+						<RadioButtonUnchecked className={styles.radio} />
+					)}
 				</div>
+				<P cfg={{ fontWeight: 3 }} className={styles.label}>
+					{label}
+				</P>
 				{hint && (
 					<P id={helper && helper.hintId} className={styles.hint}>
 						{hint}

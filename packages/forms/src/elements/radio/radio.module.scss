@@ -3,24 +3,17 @@
 
 $wcag-minimum-clickable-size: 2.75rem;
 
+.outerWrapper {
+	min-height: $wcag-minimum-clickable-size + $space-2;
+}
+
 .wrapper {
 	cursor: pointer;
 	user-select: none;
 
 	.innerWrapper {
-		display: flex;
-		flex: 0 0 auto;
-		align-items: center;
-	}
-
-	input[type='radio'] {
-		width: $wcag-minimum-clickable-size;
-		height: $wcag-minimum-clickable-size;
-		margin-left: -$wcag-minimum-clickable-size;
-	}
-
-	input[type='radio']:focus {
-		outline: none;
+		position: relative;
+		padding-top: 0.6rem;
 	}
 
 	input[type='radio']:focus + .radio {
@@ -28,20 +21,22 @@ $wcag-minimum-clickable-size: 2.75rem;
 	}
 
 	.radio {
+		position: absolute;
+		top: 0;
+		left: 0;
 		border-radius: 50%;
 		min-width: $wcag-minimum-clickable-size;
 		min-height: $wcag-minimum-clickable-size;
 	}
-}
 
-.label {
-	color: $colors-neutral-8;
-	font-weight: $font-weight-3;
-	line-height: $line-height-3;
-	padding-left: $space-1;
-	cursor: pointer;
-	margin-left: $space-2;
-	@include removeMarginBottom;
+	.label {
+		color: $colors-neutral-8;
+		font-weight: $font-weight-3;
+		line-height: $line-height-3;
+		padding-left: $wcag-minimum-clickable-size + $space-3;
+		cursor: pointer;
+		@include removeMarginBottom;
+	}
 }
 
 .disabled {
@@ -65,7 +60,7 @@ $wcag-minimum-clickable-size: 2.75rem;
 	font-size: $font-size-2;
 	font-weight: $font-weight-2;
 	margin-top: $space-2;
-	padding-left: 3.4375rem;
+	padding-left: $wcag-minimum-clickable-size + $space-3;
 	max-width: 100%;
 	@include removeMarginBottom;
 }

@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
 import { FieldInputTypes } from '../../renderFields';
-import styles from './hidden.module.scss';
+import accessibilityStyles from '@tpr/theming/lib/accessibility.module.scss';
 
 export type HiddenInputProps = {
 	type: FieldInputTypes;
@@ -28,7 +28,7 @@ export const HiddenInput: React.FC<HiddenInputProps> = ({
 			type={type}
 			disabled={disabled}
 			required={required}
-			className={styles.hiddenInput}
+			className={accessibilityStyles.visuallyHidden}
 			{...rest}
 		/>
 	);

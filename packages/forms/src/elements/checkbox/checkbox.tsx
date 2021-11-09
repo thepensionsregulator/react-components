@@ -1,6 +1,6 @@
 import React from 'react';
 import { Field, FieldRenderProps } from 'react-final-form';
-import { P } from '@tpr/core';
+import { classNames, P } from '@tpr/core';
 import { FieldProps, FieldExtraProps } from '../../renderFields';
 import { CheckboxChecked, CheckboxBlank } from './icons';
 import { ErrorMessage, StyledInputLabel } from '../elements';
@@ -29,7 +29,7 @@ export const Checkbox: React.FC<Partial<CheckboxIconProps>> = ({
 	return (
 		<StyledInputLabel
 			element="div"
-			className={className}
+			className={classNames([className, styles.outerWrapper])}
 			cfg={Object.assign(
 				{
 					mt: 1,
@@ -51,21 +51,19 @@ export const Checkbox: React.FC<Partial<CheckboxIconProps>> = ({
 					</ErrorMessage>
 				)}
 				<div className={styles.innerWrapper}>
-					<div>
-						<HiddenInput
-							id={id}
-							type="checkbox"
-							checked={checked}
-							disabled={disabled}
-							required={required}
-							onChange={onChange}
-						/>
-						{checked ? (
-							<CheckboxChecked className={styles.checkbox} />
-						) : (
-							<CheckboxBlank className={styles.checkbox} />
-						)}
-					</div>
+					<HiddenInput
+						id={id}
+						type="checkbox"
+						checked={checked}
+						disabled={disabled}
+						required={required}
+						onChange={onChange}
+					/>
+					{checked ? (
+						<CheckboxChecked className={styles.checkbox} />
+					) : (
+						<CheckboxBlank className={styles.checkbox} />
+					)}
 					<P cfg={{ fontWeight: 3 }} className={styles.label}>
 						{label}
 					</P>
