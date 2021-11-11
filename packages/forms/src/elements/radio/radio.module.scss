@@ -20,8 +20,8 @@ $offset-text-to-vertical-centre: 0.6rem;
 
 	// hidden input needs to be styled this way to correctly display the focus ring in Safari
 	input[type='radio'] {
-		width: $wcag-minimum-clickable-size + $focus-ring-width;
-		height: $wcag-minimum-clickable-size + $focus-ring-width;
+		width: $wcag-minimum-clickable-size + $focus-ring-width !important;
+		height: $wcag-minimum-clickable-size + $focus-ring-width !important;
 		transform: translateY(-$offset-text-to-vertical-centre);
 	}
 
