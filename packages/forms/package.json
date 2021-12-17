@@ -27,8 +27,7 @@
 		"copycss": "copyfiles -u 1 \"./src/**/*.{css,scss}\" \"./lib/\" && echo @tpr/forms css files copied.",
 		"bundle": "cross-env-shell \"../../node_modules/.bin/rollup\" -c rollup.config.js",
 		"build": "tsc -b && yarn copycss",
-		"clean": "rimraf lib",
-		"report-coverage": "codecov"
+		"clean": "rimraf lib"
 	},
 	"peerDependencies": {
 		"@tpr/core": "^3.0.0",
