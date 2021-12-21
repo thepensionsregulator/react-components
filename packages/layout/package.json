@@ -56,10 +56,10 @@
 		"access": "public"
 	},
 	"devDependencies": {
-		"@tpr/core": "^3.0.5",
-		"@tpr/forms": "^4.1.13",
-		"@tpr/icons": "^3.1.15",
-		"@tpr/theming": "^2.4.3",
+		"@tpr/core": "file:../core",
+		"@tpr/forms": "file:../forms",
+		"@tpr/icons": "file:../icons",
+		"@tpr/theming": "file:../theming",
 		"cross-env": "^7.0.3",
 		"node-sass": "^5.0.0",
 		"react": "file:../../node_modules/react",

@@ -1,6 +1,6 @@
 import React from 'react';
 import { useClassNames } from '@tpr/core';
-import { SVGProps } from 'components/types';
+import { SVGProps } from './types';
 
 export const SVG: React.FC<SVGProps> = ({
 	cfg,

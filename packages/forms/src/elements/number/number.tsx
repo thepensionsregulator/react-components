@@ -4,9 +4,9 @@ import { StyledInputLabel, InputElementHeading } from '../elements';
 import { FieldExtraProps } from '../../renderFields';
 import { Input } from '../input/input';
 import { adaptValueToFormat, fixToDecimals, validKeys as vk } from '../helpers';
-import { FieldWithAriaLabelExtensionI18nProps } from 'types/FieldWithAriaLabelExtensionI18nProps';
+import { FieldWithAriaLabelExtensionI18nProps } from '../../types/FieldWithAriaLabelExtensionI18nProps';
 import { FieldWithAriaLabelExtensionProps } from '../../types/FieldWithAriaLabelExtensionProps';
-import { RecursivePartial } from 'types/RecursivePartial';
+import { RecursivePartial } from '../../types/RecursivePartial';
 import AccessibilityHelper from '../accessibilityHelper';
 
 let numberFieldI18nDefaults: FieldWithAriaLabelExtensionI18nProps = {

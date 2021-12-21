@@ -6,6 +6,7 @@ module.exports = {
 	},
 	moduleNameMapper: {
 		'\\.module\\.(css|scss)$': 'identity-obj-proxy',
+		"@tpr/(core|icons|forms|theming)$": "<rootDir>/node_modules/@tpr/$1/src"
 	},
 	moduleFileExtensions: ['ts', 'tsx', 'js', 'json'],
 	testURL: 'http://localhost',
