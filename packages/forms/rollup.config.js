@@ -15,6 +15,7 @@ export default rollup({
 		'date-fns',
 		'downshift',
 		'final-form',
+		'govuk-frontend',
 		'lodash.merge',
 		'lodash.isequal',
 		'match-sorter',

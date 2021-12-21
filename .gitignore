@@ -54,6 +54,7 @@ test/**/public
 .gatsby-context.js
 .docz/gatsby-config.js 
 .docz/gatsby-node.js 
+.docz/gatsby-node.custom.js 
 .docz/src/pages/404.js
 .cache/
 .netlify
@@ -73,3 +74,9 @@ junit.xml
 .rpt2_cache
 
 tsconfig.tsbuildinfo
+
+# Temp publishes of packages
+.yalc
+
+# Snyk
+.dccache

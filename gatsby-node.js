@@ -10,6 +10,7 @@ exports.onCreateWebpackConfig = ({ actions }) => {
 				'@tpr/icons': path.resolve(__dirname, '../packages/icons'),
 				'@tpr/forms': path.resolve(__dirname, '../packages/forms'),
 				'@tpr/layout': path.resolve(__dirname, '../packages/layout'),
+				'~govuk-frontend': path.resolve(__dirname, '../node_modules/govuk-frontend'),
 			},
 		},
 	};

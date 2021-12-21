@@ -55,6 +55,7 @@
 		"docz": "^2.3.1",
 		"gatsby-plugin-sass": "^3.2.0",
 		"gatsby-theme-docz": "^2.3.1",
+    "govuk-frontend": "^3.14.0",
 		"husky": "^4.3.8",
 		"identity-obj-proxy": "^3.0.0",
 		"immutability-helper": "^3.1.1",
