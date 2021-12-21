@@ -35,7 +35,8 @@
 		"@tpr/icons": "^3.1.10",
 		"@tpr/theming": "^2.4.0",
 		"react": "^16.14.0",
-		"react-dom": "^16.14.0"
+		"react-dom": "^16.14.0",
+		"react-helmet": "^6.1.0"
 	},
 	"dependencies": {
 		"@financial-times/accessible-autocomplete": "^2.2.1",
@@ -47,6 +48,7 @@
 		"downshift": "^6.1.0",
 		"final-form": "^4.20.1",
     "govuk-frontend": "^3.14.0",
+		"govuk-react-jsx": "^6.2.1",
 		"lodash.isequal": "^4.5.0",
 		"lodash.merge": "^4.6.2",
 		"match-sorter": "^4.1.0",

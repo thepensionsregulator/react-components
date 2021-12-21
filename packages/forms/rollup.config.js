@@ -16,6 +16,7 @@ export default rollup({
 		'downshift',
 		'final-form',
 		'govuk-frontend',
+		'govuk-react-jsx',
 		'lodash.merge',
 		'lodash.isequal',
 		'match-sorter',

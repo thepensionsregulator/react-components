@@ -74,6 +74,7 @@
 		"react": "^16.14.0",
 		"react-docgen-typescript-loader": "^3.7.2",
 		"react-dom": "^16.14.0",
+		"react-helmet": "^6.1.0",
 		"react-router-dom": "^5.2.0",
 		"react-test-renderer": "^16.14.0",
 		"rimraf": "^3.0.2",
