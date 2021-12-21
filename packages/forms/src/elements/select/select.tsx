@@ -1,6 +1,5 @@
 import React from 'react';
 import Downshift, { DownshiftProps } from 'downshift';
-import { UnfoldMore } from '@tpr/icons';
 import { Field, FieldRenderProps } from 'react-final-form';
 import { Flex, classNames } from '@tpr/core';
 import { StyledInputLabel, InputElementHeading } from '../elements';
@@ -106,9 +105,7 @@ export const Select: React.FC<
 										className={styles.iconButton}
 										onClick={() => toggleMenu()}
 										{...getToggleButtonProps()}
-									>
-										<UnfoldMore />
-									</button>
+									></button>
 								)}
 							</Flex>
 						</StyledInputLabel>
