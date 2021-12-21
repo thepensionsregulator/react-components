@@ -1,0 +1,11 @@
+@import '@tpr/theming/lib/govuk-frontend.module.scss';
+@import '~govuk-frontend/govuk/objects/_all';
+@import '~govuk-frontend/govuk/components/error-message/_index';
+@import '~govuk-frontend/govuk/components/select/_index';
+@import '~govuk-frontend/govuk/components/hint/_index';
+@import '~govuk-frontend/govuk/components/label/_index';
+
+/* Labels on GOV.UK are not bold by default */
+.govuk-label {
+	font-weight: $font-weight-4;
+}
