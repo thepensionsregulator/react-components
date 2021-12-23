@@ -12,7 +12,6 @@ export default rollup({
 		'@financial-times/accessible-autocomplete/react',
 		'@testing-library/react',
 		'date-fns',
-		'downshift',
 		'final-form',
 		'govuk-frontend',
 		'govuk-react-jsx',
