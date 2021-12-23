@@ -13,6 +13,7 @@ interface SelectProps extends DownshiftProps<any>, FieldExtraProps {
 	handleNotFoundButtonClick?: Function;
 	options?: FieldOptions[];
 	notFoundMessage?: string;
+	addPlaceholderOption?: boolean;
 	showToggleButton?: boolean;
 }
 
