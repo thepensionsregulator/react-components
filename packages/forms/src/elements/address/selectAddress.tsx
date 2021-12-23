@@ -73,15 +73,14 @@ export const SelectAddress: React.FC<SelectAddressProps> = ({
 	});
 
 	const getAddressIfValid = (): Address | undefined => {
-		const selectedAddressField = form.getFieldState('selectedAddress');
 		if (
 			selectAddressValid &&
 			selectAddressValid.touched &&
 			!selectAddressValid.error &&
-			selectedAddressField &&
-			selectedAddressField.value.value
+			dropdownRef.current &&
+			dropdownRef.current.value
 		) {
-			return selectedAddressField.value.value;
+			return JSON.parse(dropdownRef.current.value);
 		}
 	};
 
@@ -124,22 +123,10 @@ export const SelectAddress: React.FC<SelectAddressProps> = ({
 		}
 	};
 
-	const handleKeyPress = (e: KeyboardEvent) => {
-		if (e.key === 'Enter') {
-			e.preventDefault();
-			handleOnClick();
-		}
-	};
-
-	const dropdownRef = useRef<HTMLInputElement>(null);
+	const dropdownRef = useRef<HTMLSelectElement>(null);
 	useEffect(() => {
 		dropdownRef.current && dropdownRef.current.focus();
 	}, [loading]);
-
-	const [addressSelected, setAddressSelected] = useState(false);
-	useEffect(() => {
-		setAddressSelected(getAddressIfValid() !== undefined);
-	}, [form.getFieldState('selectedAddress')]);
 
 	return (
 		<>
@@ -160,7 +147,6 @@ export const SelectAddress: React.FC<SelectAddressProps> = ({
 					testId={(testId ? testId + '-' : '') + 'change-postcode'}
 					className={styles.changePostcode}
 					aria-label={changePostcodeAriaLabel}
-					disabled={loading}
 					appearance="secondary"
 				>
 					{changePostcodeButton}
@@ -171,31 +157,33 @@ export const SelectAddress: React.FC<SelectAddressProps> = ({
 				label={selectAddressLabel}
 				name="selectedAddress"
 				options={options}
+				id={(testId ? testId + '-' : '') + 'select-address-list'}
 				testId={(testId ? testId + '-' : '') + 'select-address-list'}
-				validate={(value) => {
+				onChange={() => {
 					// When the FFSelect has been fully rendered and has a value, update the validation object.
 					// In this case it can only go from invalid (initial load) to valid (address selected).
 					// You can't select an invalid option from the list because there aren't any, and if you don't select one this never runs.
-					if (dropdownRef.current && value && value.value) {
+					if (dropdownRef.current && dropdownRef.current.value) {
 						updateAddressValidationIfChanged({ touched: true, error: '' });
+					} else if (selectAddressValid.touched) {
+						updateAddressValidationIfChanged({
+							touched: true,
+							error: selectAddressRequiredMessage,
+						});
 					}
 				}}
+				required={true}
 				meta={selectAddressValid}
 				notFoundMessage={noAddressesFoundMessage}
 				placeholder={selectAddressPlaceholder}
-				readOnly={true}
+				addPlaceholderOption={true}
 				disabled={loading}
-				initialSelectedItem={
-					addressSelected ? form.getFieldState('selectedAddress') : null
-				}
-				onKeyPress={handleKeyPress}
 			/>
 			<Button
 				testId={(testId ? testId + '-' : '') + 'select-address-button'}
 				appearance="secondary"
 				onClick={handleOnClick}
 				className={`${styles.button} ${styles.arrowButton}`}
-				aria-disabled={!addressSelected}
 			>
 				<Flex
 					cfg={{

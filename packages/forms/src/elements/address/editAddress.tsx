@@ -1,5 +1,5 @@
 import React, { useEffect, useRef } from 'react';
-import { Field, useForm } from 'react-final-form';
+import { Field } from 'react-final-form';
 import { Button } from '@tpr/core';
 import { FFInputText } from '../text/text';
 import { HiddenInput } from '../hidden/hidden';
@@ -7,6 +7,7 @@ import { EditAddressProps } from './types';
 import elementStyles from '../elements.module.scss';
 import textStyles from '../text/text.module.scss';
 import styles from './addressLookup.module.scss';
+import { AddressComparer } from './services';
 
 export const EditAddress: React.FC<EditAddressProps> = React.memo(
 	({
@@ -27,11 +28,11 @@ export const EditAddress: React.FC<EditAddressProps> = React.memo(
 		headingLevel = 2,
 		focusOnAdressLine1,
 	}) => {
-		const form = useForm();
-
 		const isDirty = () => {
-			const selectedAddress = form.getFieldState('selectedAddress');
-			return selectedAddress && selectedAddress.dirty;
+			if (!value) {
+				return false;
+			}
+			return !AddressComparer.areEqual(initialValue, value);
 		};
 		const renderNonEditableFieldWithUpdates = (
 			fieldName: string,
