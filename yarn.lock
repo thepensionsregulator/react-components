@@ -1659,13 +1659,6 @@
   dependencies:
     regenerator-runtime "^0.13.4"
 
-"@babel/runtime@^7.10.5":
-  version "7.12.13"
-  resolved "https://registry.yarnpkg.com/@babel/runtime/-/runtime-7.12.13.tgz#0a21452352b02542db0ffb928ac2d3ca7cb6d66d"
-  integrity sha512-8+3UMPBrjFa/6TtKi/7sehPKqfAm4g6K+YQjyyFOLUTxzOngcRZTlAVY8sc2CORJYqdHQY8gRPHmn+qo15rCBw==
-  dependencies:
-    regenerator-runtime "^0.13.4"
-
 "@babel/standalone@^7.12.6", "@babel/standalone@^7.4.5":
   version "7.12.12"
   resolved "https://registry.yarnpkg.com/@babel/standalone/-/standalone-7.12.12.tgz#f858ab1c76d9c4c23fe0783a0330ad37755f0176"
@@ -3696,7 +3689,6 @@
     "@financial-times/accessible-autocomplete" "^2.2.1"
     "@types/lodash.isequal" "^4.5.5"
     "@types/lodash.merge" "^4.6.6"
-    "@types/match-sorter" "^4.0.0"
     "@types/qs" "^6.9.5"
     date-fns "^2.17.0"
     downshift "^6.1.0"
@@ -3705,7 +3697,6 @@
     govuk-react-jsx "^6.2.1"
     lodash.isequal "^4.5.0"
     lodash.merge "^4.6.2"
-    match-sorter "^4.1.0"
     qs "^6.9.6"
     react-final-form "^6.5.2"
     tslib "^2.1.0"
@@ -3951,11 +3942,6 @@
   version "4.14.167"
   resolved "https://registry.yarnpkg.com/@types/lodash/-/lodash-4.14.167.tgz#ce7d78553e3c886d4ea643c37ec7edc20f16765e"
   integrity sha512-w7tQPjARrvdeBkX/Rwg95S592JwxqOjmms3zWQ0XZgSyxSLdzWaYH3vErBhdVS/lRBX7F8aBYcYJYTr5TMGOzw==
-
-"@types/match-sorter@^4.0.0":
-  version "4.0.0"
-  resolved "https://registry.yarnpkg.com/@types/match-sorter/-/match-sorter-4.0.0.tgz#8a7286019d4e328c09422bb2af2403a94b7038fd"
-  integrity sha512-JK7HNHXZA7i/nEp6fbNAxoX/1j1ysZXmv2/nlkt2UpX1LiUWKLtyt/dMmDTlMPR6t6PkwMmIr2W2AAyu6oELNw==
 
 "@types/mdast@^3.0.0":
   version "3.0.3"
@@ -13181,14 +13167,6 @@ match-sorter@^3.1.1:
   resolved "https://registry.yarnpkg.com/match-sorter/-/match-sorter-3.1.1.tgz#a49889245da80a3d6a032eca0c18e21f265bb42a"
   integrity sha512-Qlox3wRM/Q4Ww9rv1cBmYKNJwWVX/WC+eA3+1S3Fv4EOhrqyp812ZEfVFKQk0AP6RfzmPUUOwEZBbJ8IRt8SOw==
   dependencies:
-    remove-accents "0.4.2"
-
-match-sorter@^4.1.0:
-  version "4.2.1"
-  resolved "https://registry.yarnpkg.com/match-sorter/-/match-sorter-4.2.1.tgz#575b4b3737185ba9518b67612b66877ea0b37358"
-  integrity sha512-s+3h9TiZU9U1pWhIERHf8/f4LmBN6IXaRgo2CI17+XGByGS1GvG5VvXK9pcGyCjGe3WM3mSYRC3ipGrd5UEVgw==
-  dependencies:
-    "@babel/runtime" "^7.10.5"
     remove-accents "0.4.2"
 
 md5-file@^5.0.0:
