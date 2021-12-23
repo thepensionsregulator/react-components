@@ -5,7 +5,6 @@ import { Flex, classNames } from '@tpr/core';
 import { StyledInputLabel, InputElementHeading } from '../elements';
 import { FieldProps, FieldOptions, FieldExtraProps } from '../../renderFields';
 import { Input } from '../input/input';
-import PopupBox from './popup';
 import AccessibilityHelper from '../accessibilityHelper';
 import elementStyles from '../elements.module.scss';
 import styles from './select.module.scss';
@@ -55,15 +54,11 @@ export const Select: React.FC<
 			>
 				{({
 					getInputProps,
-					getItemProps,
 					getLabelProps,
 					getMenuProps,
 					getToggleButtonProps,
 					isOpen,
-					highlightedIndex,
-					selectedItem,
 					toggleMenu,
-					inputValue,
 				}) => (
 					<div>
 						<StyledInputLabel
@@ -117,22 +112,7 @@ export const Select: React.FC<
 										styles.popup,
 									]),
 								})}
-							>
-								{isOpen && (
-									<PopupBox
-										searchable={!readOnly}
-										{...{
-											getItemProps,
-											inputValue,
-											options,
-											highlightedIndex,
-											selectedItem,
-											handleNotFoundButtonClick,
-											notFoundMessage,
-										}}
-									/>
-								)}
-							</div>
+							></div>
 						</Flex>
 					</div>
 				)}
