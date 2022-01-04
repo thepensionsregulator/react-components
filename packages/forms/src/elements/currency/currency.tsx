@@ -189,7 +189,7 @@ const InputCurrency: React.FC<InputCurrencyProps> = React.memo(
 								);
 							}
 							setInputValue(e.target.value);
-							input.onChange(e.target.value && e.target.value);
+							input.onChange(e.target.value);
 						} else input.onChange(null);
 					}
 					if (!containsDecimals(e.target.value)) setDot(false);
