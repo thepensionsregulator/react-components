@@ -129,7 +129,7 @@ const InputCurrency: React.FC<InputCurrencyProps> = React.memo(
 
 		const handleKeyDown = (e: any) => {
 			// managing e.ctrlKey we allow to use the key combinations Ctrl+C, Ctrl+V, Ctrl+X
-			if (!(e.ctrlKey === true)) {
+			if ((!e.ctrlKey)) {
 				// typing '.' when already exists one in the value
 				if (e.key === '.') {
 					dot ? e.preventDefault() : setDot(true);
@@ -161,7 +161,6 @@ const InputCurrency: React.FC<InputCurrencyProps> = React.memo(
 				if (isNumeric(e.target.value)){
 					setFormattedInputValue(e.target.value);
 				}
-				return;
 			} else {
 				const commasBefore: number = getNumberOfCommas(inputValue, cursorPos);
 				// if the new value.length is greater than the maxLength, keeps the previous value
