@@ -16,6 +16,7 @@ import {
 	getFinalValueWithFormat,
 	getNumberOfCommas,
 	calculateCursorPosition,
+	isNumeric,
 } from '../helpers';
 import { FieldWithAriaLabelExtensionI18nProps } from 'types/FieldWithAriaLabelExtensionI18nProps';
 import { FieldWithAriaLabelExtensionProps } from '../../types/FieldWithAriaLabelExtensionProps';
@@ -155,44 +156,53 @@ const InputCurrency: React.FC<InputCurrencyProps> = React.memo(
 		};
 
 		const handleOnChange = (e: ChangeEvent<HTMLInputElement>): void => {
-			const commasBefore: number = getNumberOfCommas(inputValue, cursorPos);
-			// if the new value.length is greater than the maxLength, keeps the previous value
-			if (!valueLengthValid(e.target.value)) {
-				e.target.value = formattedInputValue;
+			const inputEvent = e.nativeEvent as InputEvent;
+			if (inputEvent.isComposing) {
+				if (isNumeric(e.target.value)){
+					setFormattedInputValue(e.target.value);
+				}
+				return;
 			} else {
-				setInputValue(e.target.value);
-				if (String(e.target.value)[e.target.value.length - 1] == '.') {
+				const commasBefore: number = getNumberOfCommas(inputValue, cursorPos);
+				// if the new value.length is greater than the maxLength, keeps the previous value
+				if (!valueLengthValid(e.target.value) || !isNumeric(e.target.value)) {
+					e.target.value = formattedInputValue;
 					input.onChange(e.target.value);
 				} else {
-					if (e.target.value) {
-						e.target.value = formatWithCommas(e.target.value);
-						// we only adjust the cursor position when the cursor is not at the end of the input.value
-						if (cursorPos !== e.target.value.length) {
-							[
-								e.target.selectionStart,
-								e.target.selectionEnd,
-							] = calculateCursorPosition(
-								cursorPos,
-								e,
-								inputValue,
-								commasBefore,
-								delKey,
-							);
-						}
-						setInputValue(e.target.value);
-						input.onChange(e.target.value && e.target.value);
-					} else input.onChange(null);
+					setInputValue(e.target.value);
+					if (String(e.target.value)[e.target.value.length - 1] == '.') {
+						input.onChange(e.target.value);
+					} else {
+						if (e.target.value) {
+							e.target.value = formatWithCommas(e.target.value);
+							// we only adjust the cursor position when the cursor is not at the end of the input.value
+							if (cursorPos !== e.target.value.length) {
+								[
+									e.target.selectionStart,
+									e.target.selectionEnd,
+								] = calculateCursorPosition(
+									cursorPos,
+									e,
+									inputValue,
+									commasBefore,
+									delKey,
+								);
+							}
+							setInputValue(e.target.value);
+							input.onChange(e.target.value && e.target.value);
+						} else input.onChange(null);
+					}
+					if (!containsDecimals(e.target.value)) setDot(false);
+					e.target.value === '' && setFormattedInputValue('');
 				}
-				if (!containsDecimals(e.target.value)) setDot(false);
-				e.target.value === '' && setFormattedInputValue('');
-			}
-			if (callback) {
-				const numericValue = Number(
-					adaptValueToFormat(e.target.value.replace(/,/g, ''), decimalPlaces),
-				);
-				e.target.value === ''
-					? callback(null)
-					: callback(Number(numericValue.toFixed(decimalPlaces)));
+				if (callback) {
+					const numericValue = Number(
+						adaptValueToFormat(e.target.value.replace(/,/g, ''), decimalPlaces),
+					);
+					e.target.value === ''
+						? callback(null)
+						: callback(Number(numericValue.toFixed(decimalPlaces)));
+				}			
 			}
 		};
 

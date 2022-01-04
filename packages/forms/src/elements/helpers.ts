@@ -15,6 +15,11 @@ export const validKeys = [
 	'Tab',
 ];
 
+export const isNumeric = (value: string): boolean => {
+	const pattern = /[a-zA-z]/g
+	return !pattern.test(value);
+}
+
 export const firstDotPosition = (num: string): number => {
 	// detects if the number contains '.' and returns its index
 	return num.indexOf('.');
