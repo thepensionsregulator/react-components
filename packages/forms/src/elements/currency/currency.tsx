@@ -123,7 +123,7 @@ const InputCurrency: React.FC<InputCurrencyProps> = React.memo(
 		};
 
 		const keyPressedIsAllowed = (e: any): boolean => {
-			return (digits.includes(e.key) || validKeys.includes(e.key));
+			return digits.includes(e.key) || validKeys.includes(e.key);
 		};
 
 		const handleKeyDown = (e: any) => {
@@ -149,7 +149,7 @@ const InputCurrency: React.FC<InputCurrencyProps> = React.memo(
 			// if the length of the new value (after formatting) is greater than maxInputLength => returns false
 			if (value) {
 				const newValue = getFinalValueWithFormat(value, decimalPlaces);
-				return (newValue.length <= maxInputLength);
+				return newValue.length <= maxInputLength;
 			}
 			return true;
 		};
@@ -158,15 +158,15 @@ const InputCurrency: React.FC<InputCurrencyProps> = React.memo(
 			const inputEvent = e.nativeEvent as InputEvent;
 			if (inputEvent.isComposing) {
 				//this happens repeatedly when a dictation tool is composing the value
-				if (isNumeric(e.target.value)){
+				if (isNumeric(e.target.value)) {
 					setFormattedInputValue(e.target.value);
 				}
 			} else {
 				const commasBefore: number = getNumberOfCommas(inputValue, cursorPos);
 				// if the new value.length is greater than the maxLength, keeps the previous value
 				if (!valueLengthValid(e.target.value) || !isNumeric(e.target.value)) {
-					//this happens: 
-					//	* when the user keys in a value that is too long or 
+					//this happens:
+					//	* when the user keys in a value that is too long or
 					//	* when a dictation tool supplies a value that includes text (e.g. "5 million")
 					e.target.value = formattedInputValue;
 					input.onChange(e.target.value);
@@ -207,7 +207,7 @@ const InputCurrency: React.FC<InputCurrencyProps> = React.memo(
 					e.target.value === ''
 						? callback(null)
 						: callback(Number(numericValue.toFixed(decimalPlaces)));
-				}			
+				}
 			}
 		};
 

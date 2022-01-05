@@ -16,9 +16,9 @@ export const validKeys = [
 ];
 
 export const isNumeric = (value: string): boolean => {
-	const pattern = /[a-zA-Z]/g
+	const pattern = /[a-zA-Z]/g;
 	return !pattern.test(value);
-}
+};
 
 export const firstDotPosition = (num: string): number => {
 	// detects if the number contains '.' and returns its index
