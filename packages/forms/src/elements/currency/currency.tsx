@@ -122,15 +122,14 @@ const InputCurrency: React.FC<InputCurrencyProps> = React.memo(
 			return numFormatted;
 		};
 
-		const keyPressedIsNotAllowed = (e: any): boolean => {
-			if (!digits.includes(e.key) && !validKeys.includes(e.key)) return true;
-			return false;
+		const keyPressedIsAllowed = (e: any): boolean => {
+			return (digits.includes(e.key) || validKeys.includes(e.key));
 		};
 
 		const handleKeyDown = (e: any) => {
 			// managing e.ctrlKey we allow to use the key combinations Ctrl+C, Ctrl+V, Ctrl+X
-			if ((!e.ctrlKey)) {
-				// typing '.' when already exists one in the value
+			if (!e.ctrlKey) {
+				// typing '.' when it already exists in the value
 				if (e.key === '.') {
 					dot ? e.preventDefault() : setDot(true);
 					return true;
@@ -139,10 +138,10 @@ const InputCurrency: React.FC<InputCurrencyProps> = React.memo(
 					if (e.target.value.length !== 0) e.preventDefault();
 					return true;
 				}
-				keyPressedIsNotAllowed(e) && e.preventDefault();
+				!keyPressedIsAllowed(e) && e.preventDefault();
 				// we save the position of the cursorwhen the key is pressed
 				setCursorPos(e.target.selectionStart);
-				e.key === 'Delete' ? setDelKey(true) : setDelKey(false);
+				setDelKey(e.key === 'Delete');
 			}
 		};
 
@@ -150,7 +149,7 @@ const InputCurrency: React.FC<InputCurrencyProps> = React.memo(
 			// if the length of the new value (after formatting) is greater than maxInputLength => returns false
 			if (value) {
 				const newValue = getFinalValueWithFormat(value, decimalPlaces);
-				if (newValue.length > maxInputLength) return false;
+				return (newValue.length <= maxInputLength);
 			}
 			return true;
 		};
@@ -158,6 +157,7 @@ const InputCurrency: React.FC<InputCurrencyProps> = React.memo(
 		const handleOnChange = (e: ChangeEvent<HTMLInputElement>): void => {
 			const inputEvent = e.nativeEvent as InputEvent;
 			if (inputEvent.isComposing) {
+				//this happens repeatedly when a dictation tool is composing the value
 				if (isNumeric(e.target.value)){
 					setFormattedInputValue(e.target.value);
 				}
@@ -165,13 +165,18 @@ const InputCurrency: React.FC<InputCurrencyProps> = React.memo(
 				const commasBefore: number = getNumberOfCommas(inputValue, cursorPos);
 				// if the new value.length is greater than the maxLength, keeps the previous value
 				if (!valueLengthValid(e.target.value) || !isNumeric(e.target.value)) {
+					//this happens: 
+					//	* when the user keys in a value that is too long or 
+					//	* when a dictation tool supplies a value that includes text (e.g. "5 million")
 					e.target.value = formattedInputValue;
 					input.onChange(e.target.value);
 				} else {
 					setInputValue(e.target.value);
 					if (String(e.target.value)[e.target.value.length - 1] == '.') {
+						//the last character is a decimal point
 						input.onChange(e.target.value);
 					} else {
+						//Normal processing
 						if (e.target.value) {
 							e.target.value = formatWithCommas(e.target.value);
 							// we only adjust the cursor position when the cursor is not at the end of the input.value
@@ -195,6 +200,7 @@ const InputCurrency: React.FC<InputCurrencyProps> = React.memo(
 					e.target.value === '' && setFormattedInputValue('');
 				}
 				if (callback) {
+					//if a callback has been supplied
 					const numericValue = Number(
 						adaptValueToFormat(e.target.value.replace(/,/g, ''), decimalPlaces),
 					);
