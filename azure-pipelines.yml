@@ -26,6 +26,20 @@ jobs:
         parameters:
           repoPath: $(Build.SourcesDirectory)\react-components
 
+      # Node.js tool installer
+      # Finds or downloads and caches the specified version spec of Node.js and adds it to the PATH
+      - task: NodeTool@0
+        inputs:
+          versionSpec: '14.18.1'
+        displayName: Set Node version
+
+      # Be specific about which version of npm we build with
+      # npm 7 or above fails with "Cannot read properties of null (reading 'matches')". Two changes separately triggered this error:
+      # - removal of the "downshift" package,
+      # - adding the "@tpr/govuk-react-jsx" package
+      - script: npm install -g npm@6.14.15
+        displayName: Set npm version
+
       - task: Cache@2
         inputs:
           key: 'yarn | "$(Agent.OS)" | $(Build.SourcesDirectory)/react-components/**/yarn.lock'
