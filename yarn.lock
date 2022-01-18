@@ -3687,11 +3687,11 @@
   version "4.1.13"
   dependencies:
     "@financial-times/accessible-autocomplete" "^2.2.1"
+    "@tpr/govuk-react-jsx" "^6.2.1"
     "@types/lodash.isequal" "^4.5.5"
     "@types/lodash.merge" "^4.6.6"
     "@types/qs" "^6.9.5"
     date-fns "^2.17.0"
-    downshift "^6.1.0"
     final-form "^4.20.1"
     govuk-frontend "^3.14.0"
     govuk-react-jsx "^6.2.1"
@@ -3700,6 +3700,11 @@
     qs "^6.9.6"
     react-final-form "^6.5.2"
     tslib "^2.1.0"
+
+"@tpr/govuk-react-jsx@^6.2.1":
+  version "6.2.1"
+  resolved "https://registry.yarnpkg.com/@tpr/govuk-react-jsx/-/govuk-react-jsx-6.2.1.tgz#dedd8addf1e9124cf14ec2203ee1dd0bd67a92ab"
+  integrity sha512-98NpAQtjvu48xUeOEZHWBvogmj0c7f0k0hNHENKLgnC5kNlFguOrbMyfqi+bt/UNTyRw+fB/wpporQqWPVhP5g==
 
 "@tpr/icons@file:./packages/icons":
   version "3.1.15"
@@ -6521,11 +6526,6 @@ compression@^1.7.4:
     safe-buffer "5.1.2"
     vary "~1.1.2"
 
-compute-scroll-into-view@^1.0.16:
-  version "1.0.16"
-  resolved "https://registry.yarnpkg.com/compute-scroll-into-view/-/compute-scroll-into-view-1.0.16.tgz#5b7bf4f7127ea2c19b750353d7ce6776a90ee088"
-  integrity sha512-a85LHKY81oQnikatZYA90pufpZ6sQx++BoCxOEMsjpZx+ZnaKGQnCyCehTRr/1p9GBIAHTjcU9k71kSYWloLiQ==
-
 concat-map@0.0.1:
   version "0.0.1"
   resolved "https://registry.yarnpkg.com/concat-map/-/concat-map-0.0.1.tgz#d8a96bd77fd68df7793a73036a3ba0d5405d477b"
@@ -7891,16 +7891,6 @@ dotenv@^8.2.0:
   version "8.2.0"
   resolved "https://registry.yarnpkg.com/dotenv/-/dotenv-8.2.0.tgz#97e619259ada750eea3e4ea3e26bceea5424b16a"
   integrity sha512-8sJ78ElpbDJBHNeBzUbUVLsqKdccaa/BXF1uPTw3GrvQTBgrQrtObr2mUrE38vzYd8cEv+m/JBfDLioYcfXoaw==
-
-downshift@^6.1.0:
-  version "6.1.0"
-  resolved "https://registry.yarnpkg.com/downshift/-/downshift-6.1.0.tgz#f008063d9b63935910d9db12ead07979ab51ce66"
-  integrity sha512-MnEJERij+1pTVAsOPsH3q9MJGNIZuu2sT90uxOCEOZYH6sEzkVGtUcTBVDRQkE8y96zpB7uEbRn24aE9VpHnZg==
-  dependencies:
-    "@babel/runtime" "^7.12.5"
-    compute-scroll-into-view "^1.0.16"
-    prop-types "^15.7.2"
-    react-is "^17.0.1"
 
 duplexer3@^0.1.4:
   version "0.1.4"
@@ -16349,11 +16339,6 @@ react-is@^16.12.0, react-is@^16.6.0, react-is@^16.7.0, react-is@^16.8.1, react-i
   version "16.13.1"
   resolved "https://registry.yarnpkg.com/react-is/-/react-is-16.13.1.tgz#789729a4dc36de2999dc156dd6c1d9c18cea56a4"
   integrity sha512-24e6ynE2H+OKt4kqsOvNd8kBpV65zoxbA4BVsEOB3ARVWQki/DHzaUoC5KuON/BiccDaCCTZBuOcfZs70kR8bQ==
-
-react-is@^17.0.1:
-  version "17.0.1"
-  resolved "https://registry.yarnpkg.com/react-is/-/react-is-17.0.1.tgz#5b3531bd76a645a4c9fb6e693ed36419e3301339"
-  integrity sha512-NAnt2iGDXohE5LI7uBnLnqvLQMtzhkiAOLXTmv+qnF9Ky7xAPcX8Up/xWIhxvLVGJvuLiNc4xQLtuqDRzb4fSA==
 
 react-lifecycles-compat@^3.0.4:
   version "3.0.4"
