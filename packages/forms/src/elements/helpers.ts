@@ -15,6 +15,11 @@ export const validKeys = [
 	'Tab',
 ];
 
+export const isNumeric = (value: string): boolean => {
+	const pattern = /[a-zA-Z]/g;
+	return !pattern.test(value);
+};
+
 export const firstDotPosition = (num: string): number => {
 	// detects if the number contains '.' and returns its index
 	return num.indexOf('.');
@@ -25,8 +30,7 @@ export const adaptValueToFormat = (num: string, decimals: number): string => {
 	// if contains decimals, only allow n number of decimals
 	// to avoid unnexpected rounds when using toFixed() in handleBlur
 	if (firstDot > -1) {
-		let newNum = num.slice(0, firstDot + decimals + 1);
-		return newNum;
+		return num.slice(0, firstDot + decimals + 1);
 	} else return num;
 };
 
@@ -106,8 +110,7 @@ export const getFinalValueWithFormat = (
 			'.',
 			new Array(decimals).fill('0').join(''),
 		);
-		const val = formatWithDecimals(newValueWithDecimals, decimals);
-		return val;
+		return formatWithDecimals(newValueWithDecimals, decimals);
 	}
 	return value;
 };
