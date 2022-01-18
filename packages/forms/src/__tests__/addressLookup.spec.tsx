@@ -119,26 +119,6 @@ describe('Address lookup', () => {
 			expect(results).toHaveNoViolations();
 		});
 
-		test('should have placeholder text', async () => {
-			const { findByTestId, findByText } = formSetup({
-				render: <AddressLookup {...defaultProps} />,
-			});
-
-			await searchForAPostcode(FakeAddressLookupProvider.tprAddress.postcode);
-			const displayedPostcode = await findByText(
-				FakeAddressLookupProvider.tprAddress.postcode,
-			);
-			expect(displayedPostcode).toBeDefined();
-
-			const selectAddressInput = (await findByTestId(
-				'select-address-list',
-			)) as HTMLInputElement;
-
-			expect(selectAddressInput.placeholder).toMatch(
-				defaultProps.selectAddressPlaceholder,
-			);
-		});
-
 		test('should list matching addresses', async () => {
 			const { findByTestId, findByText, findAllByRole } = formSetup({
 				render: <AddressLookup {...defaultProps} />,
