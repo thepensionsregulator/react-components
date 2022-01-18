@@ -1,8 +1,8 @@
 import React from 'react';
 import { Field, FieldRenderProps } from 'react-final-form';
 import { FieldProps, FieldOptions, FieldExtraProps } from '../../renderFields';
-//import govuk from './govuk-frontend.module.scss';
-import { Select as GovUkSelect } from 'govuk-react-jsx';
+import govuk from './govuk-frontend.module.scss';
+import { Select as GovUkSelect } from '@tpr/govuk-react-jsx';
 import elementStyles from '../elements.module.scss';
 import { classNames } from '@tpr/core';
 
@@ -61,7 +61,7 @@ export const Select: React.FC<
 					elementStyles.select,
 					addPlaceholderOption ? elementStyles.selectWithPlaceholder : '',
 				])}
-				//	govukClassNames={govuk}
+				govukClassNames={govuk}
 				errorMessage={
 					meta && meta.touched && meta.error
 						? {
