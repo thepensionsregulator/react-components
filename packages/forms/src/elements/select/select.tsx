@@ -21,6 +21,7 @@ export const Select: React.FC<
 			id,
 			options,
 			label,
+			ariaLabel,
 			required,
 			hint,
 			meta,
@@ -34,6 +35,10 @@ export const Select: React.FC<
 		},
 		ref,
 	) => {
+		if (label && !id) {
+			throw 'When specifying a visible label you must specify an id';
+		}
+
 		const buildItemsArray = () => {
 			const initialOption = addPlaceholderOption
 				? [{ children: placeholder || '', value: '' }]
@@ -74,6 +79,7 @@ export const Select: React.FC<
 				}}
 				id={id}
 				items={buildItemsArray()}
+				aria-label={ariaLabel}
 				label={{
 					children: label + (required ? '' : ' ' + optionalFieldLabel),
 				}}

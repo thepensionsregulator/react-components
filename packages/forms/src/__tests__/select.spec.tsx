@@ -3,6 +3,7 @@ import { formSetup } from '../__mocks__/setup';
 import { FFSelect } from '../elements/select/select';
 import { axe } from 'jest-axe';
 import { FieldProps } from '../renderFields';
+import { act } from 'react-test-renderer';
 
 const testId = 'select-input';
 
@@ -17,6 +18,7 @@ const items = [
 const basicProps: FieldProps = {
 	hint: 'This explains how to complete the select field',
 	label: 'Select your favourite fruit',
+	id: 'select-fruit',
 	name: 'fruits',
 	testId: testId,
 	options: items,
@@ -57,6 +59,7 @@ describe('Select input', () => {
 			render: (
 				<FFSelect
 					label="Select your favourite fruit"
+					id="select-fruit"
 					testId={testId}
 					name="fruits"
 					error="required"
@@ -69,11 +72,12 @@ describe('Select input', () => {
 		expect(results).toHaveNoViolations();
 	});
 
-	test('on button click opens the dropdown', () => {
+	test('on click opens the dropdown', async () => {
 		const { queryByTestId, getByText } = formSetup({
 			render: (
 				<FFSelect
 					label="Select your favourite fruit"
+					id="select-fruit"
 					testId={testId}
 					name="fruits"
 					error="required"
@@ -85,7 +89,9 @@ describe('Select input', () => {
 
 		// todo: check that it's not open before the click
 
-		queryByTestId('select-input-button').click();
+		await act(async () => {
+			queryByTestId(testId).click();
+		});
 		items.map((item) => {
 			expect(getByText(item.label)).toBeDefined();
 		});
