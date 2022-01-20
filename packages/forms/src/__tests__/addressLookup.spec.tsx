@@ -137,6 +137,10 @@ describe('Address lookup', () => {
 			const addressOptions = await findAllByRole('option');
 
 			expect(addressOptions[0].textContent).toMatch(
+				defaultProps.selectAddressPlaceholder,
+			);
+
+			expect(addressOptions[1].textContent).toMatch(
 				FakeAddressLookupProvider.tprAddress.addressLine1,
 			);
 		});
@@ -146,7 +150,9 @@ describe('Address lookup', () => {
 				render: <AddressLookup {...defaultProps} />,
 			});
 
-			await searchForAPostcode(FakeAddressLookupProvider.tprAddress.postcode);
+			await act(async () => {
+				await searchForAPostcode(FakeAddressLookupProvider.tprAddress.postcode);
+			});
 
 			const selectAddressInput = await findByTestId('select-address-list');
 			await act(async () => {
@@ -167,7 +173,7 @@ describe('Address lookup', () => {
 		});
 
 		test('should pass selected address to edit address view', async () => {
-			const { findByTestId, findByDisplayValue, findAllByRole } = formSetup({
+			const { findByTestId, findByDisplayValue } = formSetup({
 				render: <AddressLookup {...defaultProps} />,
 			});
 
@@ -177,22 +183,24 @@ describe('Address lookup', () => {
 
 			const selectAddressInput = await findByTestId('select-address-list');
 			await act(async () => {
-				selectAddressInput.click();
+				selectAddressInput.focus();
 			});
 
-			const addressOptions = await findAllByRole('option');
 			await act(async () => {
-				addressOptions[0].click();
+				userEvent.type(selectAddressInput, 'N');
 			});
+
 			const selectAddressButton = await findByTestId('select-address-button');
 			await act(async () => {
 				selectAddressButton.click();
 			});
 
-			const addressLine1Input = await findByDisplayValue(
-				FakeAddressLookupProvider.tprAddress.addressLine1,
-			);
-			expect(addressLine1Input).toBeDefined();
+			setTimeout(async () => {
+				const addressLine1Input = await findByDisplayValue(
+					FakeAddressLookupProvider.tprAddress.addressLine1,
+				);
+				expect(addressLine1Input).toBeDefined();
+			}, 800);
 		});
 
 		test('should call onValidatePostcode when select address button is clicked', async () => {
