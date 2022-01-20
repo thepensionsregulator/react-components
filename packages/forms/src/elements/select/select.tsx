@@ -36,7 +36,7 @@ export const Select: React.FC<
 		ref,
 	) => {
 		if (label && !id) {
-			throw 'When specifying a visible label you must specify an id';
+			throw new Error('When specifying a visible label you must specify an id');
 		}
 
 		const buildItemsArray = () => {
