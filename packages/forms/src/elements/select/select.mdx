@@ -14,8 +14,9 @@ Select component to select value from options.
 
 ## When To Use
 
-- A dropdown menu for displaying choices - an elegant alternative to the native `<select>` element.
-- Utilizing Radio is recommended when there are fewer total options (less than 5).
+The select component should only be used as a last resort in public-facing services
+because research shows that some users find selects very difficult to use.
+See [Select - GOV.UK Design System](https://design-system.service.gov.uk/components/select/).
 
 ## Usage
 
@@ -41,7 +42,7 @@ import { FFSelect } from '@tpr/forms';
 
 [CodeSandbox](https://codesandbox.io)
 
-## Read-Only & receiving initialValue
+## No results showing notFoundMessage
 
 <Playground>
 	{() => {
@@ -59,20 +60,8 @@ import { FFSelect } from '@tpr/forms';
 								name={FIELD_NAME}
 								label="Select Fruit"
 								hint="Please select one of the fruit from the dropdown menu"
-								onChange={({ value }, send) => send(value)}
-								validate={(value) =>
-									value
-										? undefined
-										: 'Cannot be left empty, please select a value!'
-								}
-								options={[
-									{ label: 'Apple', value: 1 },
-									{ label: 'Pear', value: 2 },
-									{ label: 'Orange', value: 3 },
-									{ label: 'Grape', value: 4 },
-									{ label: 'Banana', value: 5 },
-								]}
-								readOnly={true}
+								options={[]}
+								notFoundMessage="No fruits are available"
 							/>
 						</div>
 					</form>
@@ -82,7 +71,7 @@ import { FFSelect } from '@tpr/forms';
 	}}
 </Playground>
 
-## Searchable without initialValue
+## Required with addPlaceholderOption and placeholder text
 
 <Playground>
 	{() => {
@@ -96,13 +85,10 @@ import { FFSelect } from '@tpr/forms';
 								id="sample-select-2"
 								name={FIELD_NAME}
 								label="Select Fruit"
-								hint="Please select one of the fruit from the dropdown menu"
-								onChange={({ value }, send) => send(value)}
-								validate={(value) =>
-									value
-										? undefined
-										: 'Cannot be left empty, please select a value!'
-								}
+								hint="Please select one of the fruits from the dropdown menu"
+								required={true}
+								addPlaceholderOption={true}
+								placeholder="Select a fruit"
 								options={[
 									{ label: 'Apple', value: 1 },
 									{ label: 'Pear', value: 2 },
@@ -119,7 +105,7 @@ import { FFSelect } from '@tpr/forms';
 	}}
 </Playground>
 
-## Required
+## Required with addPlaceholderOption (but no placeholder) and an error
 
 ```js
 <form noValidate>
@@ -138,15 +124,11 @@ required=true;
 							<FFSelect
 								id="sample-select-2"
 								name={FIELD_NAME}
+								meta={{ touched: true, error: 'Not fruity enough' }}
 								label="Select Fruit"
 								hint="Please select one of the fruit from the dropdown menu"
-								onChange={({ value }, send) => send(value)}
 								required={true}
-								validate={(value) =>
-									value
-										? undefined
-										: 'Cannot be left empty, please select a value!'
-								}
+								addPlaceholderOption={true}
 								options={[
 									{ label: 'Apple', value: 1 },
 									{ label: 'Pear', value: 2 },
@@ -165,18 +147,21 @@ required=true;
 
 ## API
 
-```
-Accepted config props: FlexProps, SpaceProps
-```
-
 ### Props
 
-| Property        | Required | Type     | Description                                                                            |
-| --------------- | -------- | -------- | -------------------------------------------------------------------------------------- |
-| cfg             | false    | object   | FlexProps & SpaceProps                                                                 |
-| disabled        | false    | boolean  | Disable the select                                                                     |
-| testId          | false    | string   | data attribute for testers                                                             |
-| readOnly        | false    | boolean  | Specifies whether the control is read only like a select, or editable like a combobox. |
-| required        | false    | boolean  | Sets whether the field is required (default value: false)                              |
-| validate        | false    | function | Validates the selected value. If not specified an 'optional' label is displayed.       |
-| notFoundMessage | false    | string   | Displayed when there are no options to select                                          |
+| Property             | Required | Type     | Description                                                                            |
+| -------------------- | -------- | -------- | -------------------------------------------------------------------------------------- |
+| id                   | true     | boolean  | id assigned to the select element                                                      |
+| testId               | false    | string   | data attribute for testers                                                             |
+| ref                  | false    | ref      | A reference to the select element created using the useRef hook                        |
+| label                | true     | string   | Label identifying the purpose of the field                                             |
+| hint                 | false    | string   | Hint text to display after the label                                                   |
+| options              | true     | array    | Options to select from                                                                 |
+| required             | false    | boolean  | Sets whether the field is required. If not required an 'optional' label is displayed.  |
+| optionalFieldLabel   | false    | string   | The label used to show the field is optional. Defaults to '(optional)'.                |
+| onChange             | false    | function | Called when the selected value changes. Use ref.current.value to get the value.        |
+| addPlaceholderOption | false    | boolean  | Adds an extra option with an empty value, above those provided by the options property |
+| placeholder          | false    | string   | If addPlaceholderOption is true, the display text of the extra option                  |
+| notFoundMessage      | false    | string   | Displayed as an option element when there are no valid options to select               |
+| disabled             | false    | boolean  | Disable the select                                                                     |
+| meta                 | false    | object   | Control when to display an error message                                               |

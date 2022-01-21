@@ -18,9 +18,9 @@ import {
 	calculateCursorPosition,
 	isNumeric,
 } from '../helpers';
-import { FieldWithAriaLabelExtensionI18nProps } from 'types/FieldWithAriaLabelExtensionI18nProps';
+import { FieldWithAriaLabelExtensionI18nProps } from '../../types/FieldWithAriaLabelExtensionI18nProps';
 import { FieldWithAriaLabelExtensionProps } from '../../types/FieldWithAriaLabelExtensionProps';
-import { RecursivePartial } from 'types/RecursivePartial';
+import { RecursivePartial } from '../../types/RecursivePartial';
 import AccessibilityHelper from '../accessibilityHelper';
 import elementStyles from '../elements.module.scss';
 

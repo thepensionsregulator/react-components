@@ -1,145 +1,93 @@
 import React from 'react';
-import Downshift, { DownshiftProps } from 'downshift';
-import { UnfoldMore } from '@tpr/icons';
 import { Field, FieldRenderProps } from 'react-final-form';
-import { Flex, classNames } from '@tpr/core';
-import { StyledInputLabel, InputElementHeading } from '../elements';
 import { FieldProps, FieldOptions, FieldExtraProps } from '../../renderFields';
-import { Input } from '../input/input';
-import PopupBox from './popup';
-import AccessibilityHelper from '../accessibilityHelper';
+import govuk from './govuk-frontend.module.scss';
+import { Select as GovUkSelect } from '@tpr/govuk-react-jsx';
 import elementStyles from '../elements.module.scss';
-import styles from './select.module.scss';
+import { classNames } from '@tpr/core';
 
-interface SelectProps extends DownshiftProps<any>, FieldExtraProps {
-	handleNotFoundButtonClick?: Function;
+interface SelectProps extends FieldExtraProps {
 	options?: FieldOptions[];
 	notFoundMessage?: string;
-	showToggleButton?: boolean;
+	addPlaceholderOption?: boolean;
+	optionalFieldLabel?: string;
 }
-
-export const selectStateChangeTypes = Downshift.stateChangeTypes;
 
 export const Select: React.FC<
 	SelectProps & FieldRenderProps<string>
-> = React.forwardRef<HTMLInputElement, SelectProps & FieldRenderProps<string>>(
+> = React.forwardRef<HTMLSelectElement, SelectProps & FieldRenderProps<string>>(
 	(
 		{
 			id,
 			options,
 			label,
+			ariaLabel,
 			required,
 			hint,
 			meta,
-			handleNotFoundButtonClick,
-			notFoundMessage = 'Your search criteria has no match',
-			itemToString,
-			initialSelectedItem,
-			onChange,
+			notFoundMessage,
 			disabled,
 			testId = 'select',
-			showToggleButton = true,
+			addPlaceholderOption,
 			placeholder,
-			readOnly = false,
-			cfg,
+			optionalFieldLabel = '(optional)',
 			...rest
 		},
 		ref,
 	) => {
-		const helper = new AccessibilityHelper(id, !!label, !!hint);
+		if (label && !id) {
+			throw new Error('When specifying a visible label you must specify an id');
+		}
+
+		const buildItemsArray = () => {
+			const initialOption = addPlaceholderOption
+				? [{ children: placeholder || '', value: '' }]
+				: [];
+			if (!options || !options.length) {
+				if (notFoundMessage) {
+					return initialOption.concat([
+						{ children: notFoundMessage, value: '' },
+					]);
+				}
+				return [];
+			} else {
+				return initialOption.concat(
+					options.map((x) => {
+						return { children: x.label, value: JSON.stringify(x.value) };
+					}),
+				);
+			}
+		};
+
 		return (
-			<Downshift
-				onChange={onChange}
-				itemToString={itemToString}
-				initialSelectedItem={initialSelectedItem}
+			<GovUkSelect
+				ref={ref}
+				className={classNames([
+					elementStyles.select,
+					addPlaceholderOption ? elementStyles.selectWithPlaceholder : '',
+				])}
+				govukClassNames={govuk}
+				errorMessage={
+					meta && meta.touched && meta.error
+						? {
+								children: meta.error,
+						  }
+						: undefined
+				}
+				hint={{
+					children: hint,
+				}}
+				id={id}
+				items={buildItemsArray()}
+				aria-label={ariaLabel}
+				label={{
+					children: label + (required ? '' : ' ' + optionalFieldLabel),
+				}}
+				data-testid={testId}
+				disabled={disabled || undefined}
+				required={required || undefined}
 				{...rest}
-			>
-				{({
-					getInputProps,
-					getItemProps,
-					getLabelProps,
-					getMenuProps,
-					getToggleButtonProps,
-					isOpen,
-					highlightedIndex,
-					selectedItem,
-					toggleMenu,
-					inputValue,
-				}) => (
-					<div>
-						<StyledInputLabel
-							element="label"
-							isError={meta && meta.touched && meta.error}
-							cfg={cfg}
-							{...getLabelProps()}
-						>
-							<InputElementHeading
-								label={label}
-								required={required}
-								hint={hint}
-								meta={meta}
-								accessibilityHelper={helper}
-							/>
-							<Flex className={styles.relative + ' ' + elementStyles.select}>
-								<Input
-									ref={ref}
-									autoComplete="off"
-									type="text"
-									testId={testId}
-									label={label}
-									disabled={disabled}
-									placeholder={placeholder}
-									readOnly={readOnly}
-									required={required}
-									onClick={() => toggleMenu()}
-									className={styles.input}
-									accessibilityHelper={helper}
-									onKeyPress={rest.onKeyPress}
-									{...getInputProps()}
-								/>
-								{showToggleButton && (
-									<button
-										type="button"
-										disabled={disabled}
-										aria-label="open-dropdown"
-										data-testid={`${testId}-button`}
-										className={styles.iconButton}
-										onClick={() => toggleMenu()}
-										{...getToggleButtonProps()}
-									>
-										<UnfoldMore />
-									</button>
-								)}
-							</Flex>
-						</StyledInputLabel>
-						<Flex className={styles.relative + ' ' + elementStyles.select}>
-							<div
-								{...getMenuProps({
-									className: classNames([
-										{ [styles['popup-isopen']]: isOpen },
-										styles.popup,
-									]),
-								})}
-							>
-								{isOpen && (
-									<PopupBox
-										searchable={!readOnly}
-										{...{
-											getItemProps,
-											inputValue,
-											options,
-											highlightedIndex,
-											selectedItem,
-											handleNotFoundButtonClick,
-											notFoundMessage,
-										}}
-									/>
-								)}
-							</div>
-						</Flex>
-					</div>
-				)}
-			</Downshift>
+			/>
 		);
 	},
 );
@@ -147,7 +95,7 @@ export const Select: React.FC<
 export const FFSelect: React.FC<
 	FieldProps & Omit<SelectProps, 'children'>
 > = React.forwardRef<
-	HTMLInputElement,
+	HTMLSelectElement,
 	FieldProps & Omit<SelectProps, 'children'>
 >((fieldProps, ref) => {
 	return (
@@ -155,29 +103,8 @@ export const FFSelect: React.FC<
 			{...fieldProps}
 			required={fieldProps.required}
 			ref={ref}
-			render={({
-				input,
-				initialSelectedItem,
-				itemToString = (item: any) => (item ? item.label : ''),
-				onChange,
-				...props
-			}: any) => {
-				return (
-					<Select
-						ref={ref}
-						initialSelectedItem={initialSelectedItem}
-						itemToString={itemToString}
-						onChange={(value, _ctx) => {
-							// override onChange from outside if needed
-							if (value && onChange && typeof onChange === 'function') {
-								return onChange(value, input.onChange);
-							}
-							// otherwise forward
-							return input.onChange(value);
-						}}
-						{...props}
-					/>
-				);
+			render={({ input, initialSelectedItem, ...props }: any) => {
+				return <Select ref={ref} {...props} />;
 			}}
 		/>
 	);

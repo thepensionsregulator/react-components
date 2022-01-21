@@ -29,8 +29,7 @@
 		"copycss": "copyfiles -u 1 \"./src/**/*.{css,scss}\" \"./lib/\" && echo @tpr/layout css files copied.",
 		"bundle": "cross-env-shell \"../../node_modules/.bin/rollup\" -c rollup.config.js",
 		"build": "tsc -b && yarn copycss",
-		"clean": "rimraf lib",
-		"report-coverage": "codecov"
+		"clean": "rimraf lib"
 	},
 	"peerDependencies": {
 		"@tpr/core": "^3.0.0",
@@ -56,10 +55,10 @@
 		"access": "public"
 	},
 	"devDependencies": {
-		"@tpr/core": "^3.0.5",
-		"@tpr/forms": "^4.1.14",
-		"@tpr/icons": "^3.1.15",
-		"@tpr/theming": "^2.4.3",
+		"@tpr/core": "file:../core",
+		"@tpr/forms": "file:../forms",
+		"@tpr/icons": "file:../icons",
+		"@tpr/theming": "file:../theming",
 		"cross-env": "^7.0.3",
 		"node-sass": "^5.0.0",
 		"react": "file:../../node_modules/react",

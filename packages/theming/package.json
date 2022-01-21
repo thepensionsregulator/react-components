@@ -27,8 +27,7 @@
 		"copycss": "copyfiles -u 1 \"./src/**/*.{css,scss,woff2}\" \"./lib/\" && echo @tpr/theming css files copied.",
 		"bundle": "cross-env-shell \"../../node_modules/.bin/rollup\" -c rollup.config.js",
 		"build": "tsc -b && yarn copycss",
-		"clean": "rimraf lib",
-		"report-coverage": "codecov"
+		"clean": "rimraf lib"
 	},
 	"peerDependencies": {
 		"react": "^16.14.0",
@@ -36,7 +35,8 @@
 	},
 	"dependencies": {
 		"normalize.css": "^8.0.1",
-		"tslib": "^2.1.0"
+		"tslib": "^2.1.0",
+		"govuk-frontend": "^3.14.0"
 	},
 	"publishConfig": {
 		"access": "public"

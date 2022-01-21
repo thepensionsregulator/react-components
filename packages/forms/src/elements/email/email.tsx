@@ -2,7 +2,7 @@ import React from 'react';
 import { Field, FieldRenderProps } from 'react-final-form';
 import { StyledInputLabel, InputElementHeading } from '../elements';
 import { FieldExtraProps } from '../../renderFields';
-import { FFInputCommonProps } from 'types/fieldProps';
+import { FFInputCommonProps } from '../../types/fieldProps';
 import { Input } from '../input/input';
 import { isEmailValid } from '../../validators';
 import AccessibilityHelper from '../accessibilityHelper';

@@ -69,6 +69,11 @@ fieldset {
 	max-width: 42em;
 }
 
+.selectWithPlaceholder > option:first-child {
+	background: $white;
+	color: #777;
+}
+
 .currencyInput {
 	max-width: 14em;
 }

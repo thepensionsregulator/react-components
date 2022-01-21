@@ -1,4 +1,4 @@
-import React, { useState, useRef, useEffect } from 'react';
+import React, { useRef, useEffect } from 'react';
 import { useForm } from 'react-final-form';
 import { Button, Flex } from '@tpr/core';
 import { FFInputText } from '../text/text';
@@ -20,25 +20,21 @@ export const PostcodeLookup: React.FC<PostcodeLookupProps> = ({
 	const form = useForm();
 
 	const searchFieldRef = useRef<HTMLInputElement>(null);
-	const [postcodeValid, setPostcodeValid] = useState(false);
 
 	const clickFindAddress = () => {
-		postcodeValid &&
+		if (
+			!postcodeValidator(searchFieldRef.current.value, invalidPostcodeMessage)
+		) {
 			onPostcodeChanged(form.getFieldState('postcodeLookup').value);
+		} else {
+			searchFieldRef.current.focus();
+		}
 	};
 
 	useEffect(() => {
 		searchFieldRef.current.value = null;
 		searchFieldRef.current.focus();
 	}, []);
-
-	const validatePostcode = (value) => {
-		const result = postcodeValidator(value, invalidPostcodeMessage);
-		typeof result === 'undefined'
-			? setPostcodeValid(true)
-			: setPostcodeValid(false);
-		return result;
-	};
 
 	const handleKeyPress = (e: KeyboardEvent) => {
 		if (e.key === 'Enter') {
@@ -56,7 +52,10 @@ export const PostcodeLookup: React.FC<PostcodeLookupProps> = ({
 				value={postcode}
 				label={postcodeLookupLabel}
 				required
-				validate={(value) => searchFieldRef.current && validatePostcode(value)}
+				validate={(value) =>
+					searchFieldRef.current &&
+					postcodeValidator(value, invalidPostcodeMessage)
+				}
 				testId={(testId ? testId + '-' : '') + 'postcode-lookup-edit'}
 				inputClassName={styles.editPostcode}
 				disabled={loading}
@@ -73,7 +72,6 @@ export const PostcodeLookup: React.FC<PostcodeLookupProps> = ({
 					testId={(testId ? testId + '-' : '') + 'postcode-lookup-button'}
 					onClick={clickFindAddress}
 					appearance="secondary"
-					aria-disabled={!postcodeValid}
 				>
 					{postcodeLookupButton}
 				</Button>

@@ -4,7 +4,6 @@ import {
 	ArrowDown,
 	ArrowLeft,
 	ArrowRight,
-	UnfoldMore,
 } from '../components/arrows/arrows';
 import {
 	CheckedCircle,
@@ -55,11 +54,6 @@ describe('Icons', () => {
 		test('Arrow Right', () => {
 			const { getByTestId } = render(<ArrowRight />);
 			expect(getByTestId('arrow-right')).toBeDefined();
-		});
-
-		test('Unfold More', () => {
-			const { getByTestId } = render(<UnfoldMore />);
-			expect(getByTestId('unfold-more')).toBeDefined();
 		});
 	});
 
