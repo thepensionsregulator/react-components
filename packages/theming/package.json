@@ -34,7 +34,7 @@
 		"react-dom": "^16.14.0"
 	},
 	"dependencies": {
-		"govuk-frontend": "^3.14.0",
+		"govuk-frontend": "^4.0.1",
 		"normalize.css": "^8.0.1",
 		"tslib": "^2.1.0"
 	},
