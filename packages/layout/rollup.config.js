@@ -7,6 +7,7 @@ export default rollup({
 		'@tpr/forms',
 		'@tpr/icons',
 		'@tpr/theming',
+		'@tpr/govuk-react-jsx',
 		'@types/lodash.merge',
 		'@xstate/react',
 		'final-form',

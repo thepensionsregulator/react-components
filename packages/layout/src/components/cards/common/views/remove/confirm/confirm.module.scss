@@ -1,33 +1,14 @@
 @import '@tpr/core/lib/components/typography/typography.module.scss';
-// typography.module.scss includes '@tpr/theming/lib/variables.scss'
 
-.confirm {
-	flex-direction: column;
-
-	.paragraph1 {
+div.confirm {
+	p:last-child {
 		@include removeMarginBottom;
 	}
-
-	.paragraph2 {
-		margin-top: $space-3;
-	}
-
-	.actionButtons {
-		.cancelButton {
-			margin: $space-3;
-		}
-	}
+	margin-bottom: $space-3;
 }
 
-@media (max-width: 30rem) {
-	.confirm {
-		.actionButtons {
-			flex-wrap: wrap;
-
-			.cancelButton {
-				margin-top: 0 !important;
-				margin-left: 0 !important;
-			}
-		}
+.actionButtons {
+	.cancelButton {
+		margin: $space-3;
 	}
 }

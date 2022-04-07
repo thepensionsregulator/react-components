@@ -1,0 +1,9 @@
+@import '@tpr/theming/lib/govuk-frontend.module.scss';
+@import '~govuk-frontend/govuk/objects/_all';
+@import '~govuk-frontend/govuk/components/warning-text/_index';
+
+/* if EditorFonts is used as a child component it sets the font-weight on p elements,
+   so we need to override that with the original value from govuk-frontend to get the correct weight by default */
+.warningText p {
+	font-weight: $font-weight-4;
+}

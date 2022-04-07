@@ -3687,7 +3687,7 @@
   version "5.0.0"
   dependencies:
     "@financial-times/accessible-autocomplete" "^2.2.1"
-    "@tpr/govuk-react-jsx" "^6.2.1"
+    "@tpr/govuk-react-jsx" "^7.0.1"
     "@types/lodash.isequal" "^4.5.5"
     "@types/lodash.merge" "^4.6.6"
     "@types/qs" "^6.9.5"
@@ -3700,10 +3700,10 @@
     react-final-form "^6.5.2"
     tslib "^2.1.0"
 
-"@tpr/govuk-react-jsx@^6.2.1":
-  version "6.2.1"
-  resolved "https://registry.yarnpkg.com/@tpr/govuk-react-jsx/-/govuk-react-jsx-6.2.1.tgz#dedd8addf1e9124cf14ec2203ee1dd0bd67a92ab"
-  integrity sha512-98NpAQtjvu48xUeOEZHWBvogmj0c7f0k0hNHENKLgnC5kNlFguOrbMyfqi+bt/UNTyRw+fB/wpporQqWPVhP5g==
+"@tpr/govuk-react-jsx@^7.0.1":
+  version "7.0.1"
+  resolved "https://registry.yarnpkg.com/@tpr/govuk-react-jsx/-/govuk-react-jsx-7.0.1.tgz#a9cb3689e8222ed676fd67411a08060004d2b896"
+  integrity sha512-9jyqPTN9fm02NDjOK+OJGczD46DkBXT5iJz6xsYXN+Nz7i7oz14GU9lXddUk8jG00hlFE7blspSPAPC2/ThV3A==
 
 "@tpr/icons@file:./packages/icons":
   version "4.0.0"
@@ -3714,6 +3714,7 @@
 "@tpr/layout@file:./packages/layout":
   version "5.0.0"
   dependencies:
+    "@tpr/govuk-react-jsx" "^7.0.1"
     "@types/lodash.merge" "^4.6.6"
     "@xstate/react" "^1.2.2"
     date-fns "^2.17.0"

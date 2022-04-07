@@ -59,6 +59,7 @@ export const ConfirmRemove: React.FC = () => {
 			removeMessage2={i18n.remove.confirm.dialog.message2}
 			removeBtnTitle={i18n.remove.confirm.buttons.remove}
 			cancelBtnTitle={i18n.remove.confirm.buttons.cancel}
+			iconFallbackText={i18n.remove.confirm.iconFallbackText}
 			handleRemove={handleRemove}
 			handleCancel={() => send('CANCEL')}
 			loading={loading}

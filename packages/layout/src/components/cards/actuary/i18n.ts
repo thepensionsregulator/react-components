@@ -90,6 +90,7 @@ export const i18n: ActuaryI18nProps = {
 				remove: 'Remove actuary',
 				cancel: 'Cancel',
 			},
+			iconFallbackText: 'Warning',
 		},
 		date: {
 			title: 'Remove this actuary',

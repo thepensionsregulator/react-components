@@ -188,6 +188,7 @@ export interface I18nRemoveViewDateAndConfirm {
 			remove: string;
 			cancel: string;
 		};
+		iconFallbackText: string;
 	};
 }
 
@@ -229,6 +230,7 @@ export interface I18nRemoveViewReasonAndConfirm {
 			remove: string;
 			cancel: string;
 		};
+		iconFallbackText: string;
 	};
 }
 
