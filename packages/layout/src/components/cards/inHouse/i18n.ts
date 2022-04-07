@@ -97,6 +97,7 @@ export const i18n: InHouseAdminI18nProps = {
 				remove: 'Remove in house admin',
 				cancel: 'Cancel',
 			},
+			iconFallbackText: 'Warning',
 		},
 		date: {
 			title: 'Remove this in house admin',

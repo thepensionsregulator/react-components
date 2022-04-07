@@ -118,6 +118,7 @@ export const i18n: CorporateGroupI18nProps = {
 				remove: 'Remove Trustee',
 				cancel: 'Cancel',
 			},
+			iconFallbackText: 'Warning',
 		},
 		reason: {
 			title: 'Remove this trustee',

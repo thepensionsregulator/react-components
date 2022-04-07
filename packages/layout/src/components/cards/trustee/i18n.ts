@@ -121,6 +121,7 @@ export const i18n: TrusteeI18nProps = {
 				remove: 'Remove this trustee',
 				cancel: 'Cancel',
 			},
+			iconFallbackText: 'Warning',
 		},
 		reason: {
 			title: 'Remove this trustee',

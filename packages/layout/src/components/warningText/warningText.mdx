@@ -1,0 +1,63 @@
+---
+name: Warning text
+menu: Layout
+route: /layout/warningText
+---
+
+import { Props } from 'docz';
+import { Playground } from '@playground';
+import { WarningText } from './warningText';
+import { useState } from 'react';
+import { Button } from '@tpr/core';
+
+# Warning text
+
+Warning text for TPR apps
+
+## Basic usage
+
+```js
+import { WarningText } from '@tpr/layout';
+```
+
+
+<Playground>
+	<WarningText iconFallbackText="Warning">
+		Lorem ipsum dolor sit, amet consectetur adipisicing elit. Molestias
+		voluptatibus quaerat consequatur deleniti nobis explicabo eius.
+	</WarningText>
+</Playground>
+
+## Accessibility
+
+If you show or hide the warning text dynamically, surround it with a `<div role="alert">` that is never hidden. When the warning text is toggled into view then assistive technology will immediately alert the user of its presence.
+
+```js
+import { WarningText } from '@tpr/layout';
+```
+
+<Playground>
+	{() => {
+		const [toggleWarning, setToggleWarning] = useState(false);
+		
+		return (
+			<>
+			<Button
+				onClick={() => setToggleWarning(!toggleWarning)}>
+				Toggle warning
+			</Button>
+			{(toggleWarning && <WarningText iconFallbackText="Warning">
+			Lorem ipsum dolor sit, amet consectetur adipisicing elit. Molestias
+			voluptatibus quaerat consequatur deleniti nobis explicabo eius.
+		</WarningText>)}
+		</>)
+	}}
+</Playground>
+
+
+## Props
+
+| Property         | Required | Type    | Description                                                                                                  |
+| ---------------- | -------- | ------- | ------------------------------------------------------------------------------------------------------------ |
+| className        | false    | string  | Adds an additional CSS class to customise the component                                                      |
+| iconFallbackText | true     | boolean | Sets the alternative text for the exclamation mark image                                                     |

@@ -1,19 +1,19 @@
 import React from 'react';
 import { render } from '@testing-library/react';
 import { P } from '@tpr/core';
-import { WarningBox } from '../warning/warning';
+import { WarningText } from '../warningText/warningText';
 
-describe('WarningBox', () => {
+describe('WarningText', () => {
 	test('Renders with expected text and role', () => {
 		// Arrange
 		const warningBoxText = 'This is the warning text';
-		const warningLabelText = 'warning-label-text';
+		const iconFallbackText = 'Icon fallback text';
 
 		// Act
 		const { getByRole, getByTitle } = render(
-			<WarningBox warningLabel={warningLabelText}>
+			<WarningText iconFallbackText={iconFallbackText}>
 				<P>{warningBoxText}</P>
-			</WarningBox>,
+			</WarningText>,
 		);
 
 		let warningBox = getByRole('alert');
@@ -21,6 +21,6 @@ describe('WarningBox', () => {
 		// Assert
 		expect(warningBox).toBeDefined();
 		expect(warningBox).toHaveTextContent(warningBoxText);
-		expect(getByTitle(warningLabelText)).toBeDefined();
+		expect(getByTitle(iconFallbackText)).toBeDefined();
 	});
 });

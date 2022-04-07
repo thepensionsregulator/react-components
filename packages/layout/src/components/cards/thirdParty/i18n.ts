@@ -73,6 +73,7 @@ export const i18n: ThirdPartyI18nProps = {
 				remove: 'Remove third party admin',
 				cancel: 'Cancel',
 			},
+			iconFallbackText: 'Warning',
 		},
 		date: {
 			title: 'Remove this third party admin',

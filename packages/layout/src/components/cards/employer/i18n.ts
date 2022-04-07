@@ -135,6 +135,7 @@ export const i18n: EmployerI18nProps = {
 				remove: 'Remove employer',
 				cancel: 'Cancel',
 			},
+			iconFallbackText: 'Warning',
 		},
 		date: {
 			title: 'Remove this employer',

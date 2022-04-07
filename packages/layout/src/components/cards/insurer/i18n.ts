@@ -76,6 +76,7 @@ export const i18n: InsurerI18nProps = {
 				remove: 'Remove insurer',
 				cancel: 'Cancel',
 			},
+			iconFallbackText: 'Warning',
 		},
 		date: {
 			title: 'Remove this insurer',

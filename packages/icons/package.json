@@ -32,8 +32,8 @@
 		"clean": "rimraf lib"
 	},
 	"peerDependencies": {
-		"@tpr/core": "^3.0.0",
-		"@tpr/theming": "^2.4.0",
+		"@tpr/core": "^4.0.0",
+		"@tpr/theming": "^3.0.0",
 		"react": "^16.14.0",
 		"react-dom": "^16.14.0"
 	},

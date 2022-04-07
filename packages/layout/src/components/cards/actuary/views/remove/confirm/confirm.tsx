@@ -58,6 +58,7 @@ export const ConfirmRemove = () => {
 			removeMessage1={i18n.remove.confirm.dialog.message1}
 			removeBtnTitle={i18n.remove.confirm.buttons.remove}
 			cancelBtnTitle={i18n.remove.confirm.buttons.cancel}
+			iconFallbackText={i18n.remove.confirm.iconFallbackText}
 			handleRemove={handleRemove}
 			handleCancel={() => send('CANCEL')}
 			loading={loading}

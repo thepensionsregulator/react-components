@@ -5,11 +5,7 @@ import {
 	ArrowLeft,
 	ArrowRight,
 } from '../components/arrows/arrows';
-import {
-	CheckedCircle,
-	ErrorCircle,
-	WarningCircle,
-} from '../components/circle/circle';
+import { CheckedCircle, ErrorCircle } from '../components/circle/circle';
 import { Cross } from '../components/cross/cross';
 import {
 	CheckboxChecked,
@@ -99,29 +95,6 @@ describe('Icons', () => {
 				<ErrorCircle alternativeText="Test label" />,
 			);
 			const icon = getByTestId('error-circle');
-			const title = getByText('Test label');
-			expect(icon).toContainElement(title);
-			expect(icon).not.toHaveAttribute('aria-hidden');
-		});
-
-		test('Warning Circle to render without error', () => {
-			const { getByTestId } = render(<WarningCircle />);
-			expect(getByTestId('warning-circle')).toBeDefined();
-		});
-
-		test('Warning Circle to be aria-hidden by default', () => {
-			const { getByTestId } = render(<WarningCircle />);
-			expect(getByTestId('warning-circle')).toHaveAttribute(
-				'aria-hidden',
-				'true',
-			);
-		});
-
-		test('Warning Circle to not be aria-hidden if there is alternative text', () => {
-			const { getByTestId, getByText } = render(
-				<WarningCircle alternativeText="Test label" />,
-			);
-			const icon = getByTestId('warning-circle');
 			const title = getByText('Test label');
 			expect(icon).toContainElement(title);
 			expect(icon).not.toHaveAttribute('aria-hidden');
