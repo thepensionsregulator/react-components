@@ -37,7 +37,7 @@
 	"dependencies": {
 		"@xstate/react": "^1.2.2",
 		"final-form": "^4.20.1",
-		"qs": "^6.9.6",
+		"qs": "^6.9.7",
 		"react-final-form": "^6.5.2",
 		"tslib": "^2.1.0",
 		"xstate": "^4.16.2"
