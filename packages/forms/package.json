@@ -48,7 +48,7 @@
 		"govuk-frontend": "^3.14.0",
 		"lodash.isequal": "^4.5.0",
 		"lodash.merge": "^4.6.2",
-		"qs": "^6.9.6",
+		"qs": "^6.9.7",
 		"react-final-form": "^6.5.2",
 		"tslib": "^2.1.0"
 	},
